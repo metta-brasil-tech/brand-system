@@ -1,0 +1,6 @@
+<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon">
+<path d="M17 1C18.1046 1 19 1.88316 19 2.9726L19 17.0274C19 18.1168 18.1046 19 17 19H14C12.8954 19 12 18.1168 12 17.0274L12 2.9726C12 1.88316 12.8954 1 14 1L17 1Z" stroke="var(--stroke-0, black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 1C1.89543 1 1 1.88316 1 2.9726L1 17.0274C1 18.1168 1.89543 19 3 19H6C7.10457 19 8 18.1168 8 17.0274L8 2.9726C8 1.88316 7.10457 1 6 1L3 1Z" stroke="var(--stroke-0, black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

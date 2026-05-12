@@ -1,0 +1,4 @@
+# Quer mais lucro?
+# URL: https://youtube.com/watch?v=BzZ5F-zTVWU
+
+Eu entendo, eu entendo. Você como empresário, a dependência da equipe só aumenta cada dia. Eles não conseguem avançar sem você. O que deveria ser o crescimento se torna uma prisão. Eu tô ligado, eu sei como é que é. A pergunta é: você é um dono de negócio ou apenas mais um integrante da equipe? Porque quando o seu tempo tá só para pagar incêndio, meu amigo, teu lucro desaparece. Nós aqui já ajudamos a retomar o controle de diversas empresas. Só para você ter uma ideia, nos últimos 12 meses nós geramos R 8,2 bilhões deais em empresas com mais de 200.000 de faturamento. Se você quer realmente ser livre, se você quer ter autonomia de volta, siga esse perfil que nós falamos todos os dias sobre como gerar resultado sendo um dono de empresa, mas sem ser um empresário. Tá na hora da transformação. Bora bater meta. Então, aí aqui a gente

@@ -1,0 +1,6010 @@
+{
+  "generatedAt": "2026-05-09T14:54:33.845Z",
+  "fileKey": "dNVyxGVNxNbE6sA1F7OOXL",
+  "totalIcons": 839,
+  "sections": [
+    {
+      "id": "arrows",
+      "label": "Setas & Navegação",
+      "count": 66,
+      "nodeId": "1266:5645"
+    },
+    {
+      "id": "ui",
+      "label": "Interface Geral",
+      "count": 117,
+      "nodeId": "1266:5863"
+    },
+    {
+      "id": "finance",
+      "label": "Finanças",
+      "count": 64,
+      "nodeId": "1266:6249"
+    },
+    {
+      "id": "devices",
+      "label": "Dispositivos & Mídia",
+      "count": 67,
+      "nodeId": "1266:6449"
+    },
+    {
+      "id": "alerts",
+      "label": "Alertas",
+      "count": 17,
+      "nodeId": "1266:6661"
+    },
+    {
+      "id": "security",
+      "label": "Segurança",
+      "count": 28,
+      "nodeId": "1266:6720"
+    },
+    {
+      "id": "image-camera",
+      "label": "Imagem & Câmera",
+      "count": 22,
+      "nodeId": "1266:6812"
+    },
+    {
+      "id": "files",
+      "label": "Arquivos & Pastas",
+      "count": 53,
+      "nodeId": "1266:6886"
+    },
+    {
+      "id": "weather",
+      "label": "Clima",
+      "count": 30,
+      "nodeId": "1266:7053"
+    },
+    {
+      "id": "maps-travel",
+      "label": "Mapas & Viagem",
+      "count": 32,
+      "nodeId": "1266:7151"
+    },
+    {
+      "id": "charts",
+      "label": "Gráficos & Dados",
+      "count": 33,
+      "nodeId": "1266:7261"
+    },
+    {
+      "id": "users",
+      "label": "Pessoas & Avatares",
+      "count": 31,
+      "nodeId": "1266:7383"
+    },
+    {
+      "id": "layout",
+      "label": "Layout",
+      "count": 61,
+      "nodeId": "1266:7490"
+    },
+    {
+      "id": "dev-code",
+      "label": "Dev & Código",
+      "count": 38,
+      "nodeId": "1266:7681"
+    },
+    {
+      "id": "communication",
+      "label": "Comunicação",
+      "count": 46,
+      "nodeId": "1266:7809"
+    },
+    {
+      "id": "time",
+      "label": "Tempo",
+      "count": 35,
+      "nodeId": "1266:7955"
+    },
+    {
+      "id": "editor-text",
+      "label": "Editor & Texto",
+      "count": 76,
+      "nodeId": "1266:8068"
+    },
+    {
+      "id": "shapes",
+      "label": "Formas",
+      "count": 9,
+      "nodeId": "1266:8310"
+    },
+    {
+      "id": "education",
+      "label": "Educação",
+      "count": 14,
+      "nodeId": "1266:8345"
+    }
+  ],
+  "icons": [
+    {
+      "id": "alerts/alert-circle",
+      "section": "alerts",
+      "name": "alert-circle",
+      "nodeId": "1266:1868",
+      "src": "assets/icons/alerts/alert-circle.svg"
+    },
+    {
+      "id": "alerts/alert-square",
+      "section": "alerts",
+      "name": "alert-square",
+      "nodeId": "1266:1873",
+      "src": "assets/icons/alerts/alert-square.svg"
+    },
+    {
+      "id": "alerts/alert-triangle",
+      "section": "alerts",
+      "name": "alert-triangle",
+      "nodeId": "1266:1878",
+      "src": "assets/icons/alerts/alert-triangle.svg"
+    },
+    {
+      "id": "alerts/bell-01",
+      "section": "alerts",
+      "name": "bell-01",
+      "nodeId": "1266:1883",
+      "src": "assets/icons/alerts/bell-01.svg"
+    },
+    {
+      "id": "alerts/bell-02",
+      "section": "alerts",
+      "name": "bell-02",
+      "nodeId": "1266:1889",
+      "src": "assets/icons/alerts/bell-02.svg"
+    },
+    {
+      "id": "alerts/bell-03",
+      "section": "alerts",
+      "name": "bell-03",
+      "nodeId": "1266:1894",
+      "src": "assets/icons/alerts/bell-03.svg"
+    },
+    {
+      "id": "alerts/bell-04",
+      "section": "alerts",
+      "name": "bell-04",
+      "nodeId": "1266:1899",
+      "src": "assets/icons/alerts/bell-04.svg"
+    },
+    {
+      "id": "alerts/bell-off-01",
+      "section": "alerts",
+      "name": "bell-off-01",
+      "nodeId": "1266:1904",
+      "src": "assets/icons/alerts/bell-off-01.svg"
+    },
+    {
+      "id": "alerts/bell-off-02",
+      "section": "alerts",
+      "name": "bell-off-02",
+      "nodeId": "1266:1910",
+      "src": "assets/icons/alerts/bell-off-02.svg"
+    },
+    {
+      "id": "alerts/bell-ringing-01",
+      "section": "alerts",
+      "name": "bell-ringing-01",
+      "nodeId": "1266:1915",
+      "src": "assets/icons/alerts/bell-ringing-01.svg"
+    },
+    {
+      "id": "alerts/bell-ringing-02",
+      "section": "alerts",
+      "name": "bell-ringing-02",
+      "nodeId": "1266:1920",
+      "src": "assets/icons/alerts/bell-ringing-02.svg"
+    },
+    {
+      "id": "alerts/bell-ringing-03",
+      "section": "alerts",
+      "name": "bell-ringing-03",
+      "nodeId": "1266:1925",
+      "src": "assets/icons/alerts/bell-ringing-03.svg"
+    },
+    {
+      "id": "alerts/bell-ringing-04",
+      "section": "alerts",
+      "name": "bell-ringing-04",
+      "nodeId": "1266:1931",
+      "src": "assets/icons/alerts/bell-ringing-04.svg"
+    },
+    {
+      "id": "alerts/notification-box",
+      "section": "alerts",
+      "name": "notification-box",
+      "nodeId": "1266:1936",
+      "src": "assets/icons/alerts/notification-box.svg"
+    },
+    {
+      "id": "alerts/notification-bubble",
+      "section": "alerts",
+      "name": "notification-bubble",
+      "nodeId": "1266:1941",
+      "src": "assets/icons/alerts/notification-bubble.svg"
+    },
+    {
+      "id": "alerts/notification-square-01",
+      "section": "alerts",
+      "name": "notification-square-01",
+      "nodeId": "1266:1946",
+      "src": "assets/icons/alerts/notification-square-01.svg"
+    },
+    {
+      "id": "alerts/notification-square-02",
+      "section": "alerts",
+      "name": "notification-square-02",
+      "nodeId": "1266:1952",
+      "src": "assets/icons/alerts/notification-square-02.svg"
+    },
+    {
+      "id": "arrows/arrow-curve-left-down",
+      "section": "arrows",
+      "name": "arrow-curve-left-down",
+      "nodeId": "1266:196",
+      "src": "assets/icons/arrows/arrow-curve-left-down.svg"
+    },
+    {
+      "id": "arrows/arrow-curve-left-up",
+      "section": "arrows",
+      "name": "arrow-curve-left-up",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/arrow-curve-left-down.svg",
+      "transform": "scaleY(-1)"
+    },
+    {
+      "id": "arrows/arrow-curve-right-down",
+      "section": "arrows",
+      "name": "arrow-curve-right-down",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/arrow-curve-left-down.svg",
+      "transform": "scaleX(-1)"
+    },
+    {
+      "id": "arrows/arrow-curve-right-up",
+      "section": "arrows",
+      "name": "arrow-curve-right-up",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/arrow-curve-left-down.svg",
+      "transform": "scale(-1, -1)"
+    },
+    {
+      "id": "arrows/arrow-down",
+      "section": "arrows",
+      "name": "arrow-down",
+      "nodeId": "1266:363-virtual",
+      "src": "assets/icons/arrows/arrow-up.svg",
+      "transform": "rotate(180deg)"
+    },
+    {
+      "id": "arrows/arrow-down-contained-01",
+      "section": "arrows",
+      "name": "arrow-down-contained-01",
+      "nodeId": "1266:322",
+      "src": "assets/icons/arrows/arrow-down-contained-01.svg"
+    },
+    {
+      "id": "arrows/arrow-down-contained-02",
+      "section": "arrows",
+      "name": "arrow-down-contained-02",
+      "nodeId": "1266:302",
+      "src": "assets/icons/arrows/arrow-down-contained-02.svg"
+    },
+    {
+      "id": "arrows/arrow-down-left",
+      "section": "arrows",
+      "name": "arrow-down-left",
+      "nodeId": "1266:378",
+      "src": "assets/icons/arrows/arrow-down-left.svg"
+    },
+    {
+      "id": "arrows/arrow-down-left-contained",
+      "section": "arrows",
+      "name": "arrow-down-left-contained",
+      "nodeId": "1266:277",
+      "src": "assets/icons/arrows/arrow-down-left-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-down-left-sm",
+      "section": "arrows",
+      "name": "arrow-down-left-sm",
+      "nodeId": "1266:540",
+      "src": "assets/icons/arrows/arrow-down-left-sm.svg"
+    },
+    {
+      "id": "arrows/arrow-down-left-square-contained",
+      "section": "arrows",
+      "name": "arrow-down-left-square-contained",
+      "nodeId": "1266:246",
+      "src": "assets/icons/arrows/arrow-down-left-square-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-down-right-2",
+      "section": "arrows",
+      "name": "arrow-down-right-2",
+      "nodeId": "1266:373",
+      "src": "assets/icons/arrows/arrow-down-right-2.svg"
+    },
+    {
+      "id": "arrows/arrow-down-right-contained",
+      "section": "arrows",
+      "name": "arrow-down-right-contained",
+      "nodeId": "1266:282",
+      "src": "assets/icons/arrows/arrow-down-right-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-down-right-sm",
+      "section": "arrows",
+      "name": "arrow-down-right-sm",
+      "nodeId": "1266:535",
+      "src": "assets/icons/arrows/arrow-down-right-sm.svg"
+    },
+    {
+      "id": "arrows/arrow-down-right-square-contained",
+      "section": "arrows",
+      "name": "arrow-down-right-square-contained",
+      "nodeId": "1266:256",
+      "src": "assets/icons/arrows/arrow-down-right-square-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-down-sm",
+      "section": "arrows",
+      "name": "arrow-down-sm",
+      "nodeId": "1266:525-virtual",
+      "src": "assets/icons/arrows/arrow-up-sm.svg",
+      "transform": "rotate(180deg)"
+    },
+    {
+      "id": "arrows/arrow-down-square-contained",
+      "section": "arrows",
+      "name": "arrow-down-square-contained",
+      "nodeId": "1266:241",
+      "src": "assets/icons/arrows/arrow-down-square-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-expand-01",
+      "section": "arrows",
+      "name": "arrow-expand-01",
+      "nodeId": "1266:327",
+      "src": "assets/icons/arrows/arrow-expand-01.svg"
+    },
+    {
+      "id": "arrows/arrow-expand-02",
+      "section": "arrows",
+      "name": "arrow-expand-02",
+      "nodeId": "1266:332",
+      "src": "assets/icons/arrows/arrow-expand-02.svg"
+    },
+    {
+      "id": "arrows/arrow-expand-03",
+      "section": "arrows",
+      "name": "arrow-expand-03",
+      "nodeId": "1266:338",
+      "src": "assets/icons/arrows/arrow-expand-03.svg"
+    },
+    {
+      "id": "arrows/arrow-expand-04",
+      "section": "arrows",
+      "name": "arrow-expand-04",
+      "nodeId": "1266:343",
+      "src": "assets/icons/arrows/arrow-expand-04.svg"
+    },
+    {
+      "id": "arrows/arrow-left",
+      "section": "arrows",
+      "name": "arrow-left",
+      "nodeId": "1266:363",
+      "src": "assets/icons/arrows/arrow-left.svg"
+    },
+    {
+      "id": "arrows/arrow-left-contained-01",
+      "section": "arrows",
+      "name": "arrow-left-contained-01",
+      "nodeId": "1266:307",
+      "src": "assets/icons/arrows/arrow-left-contained-01.svg"
+    },
+    {
+      "id": "arrows/arrow-left-contained-02",
+      "section": "arrows",
+      "name": "arrow-left-contained-02",
+      "nodeId": "1266:267",
+      "src": "assets/icons/arrows/arrow-left-contained-02.svg"
+    },
+    {
+      "id": "arrows/arrow-left-sm",
+      "section": "arrows",
+      "name": "arrow-left-sm",
+      "nodeId": "1266:525",
+      "src": "assets/icons/arrows/arrow-left-sm.svg"
+    },
+    {
+      "id": "arrows/arrow-left-square-contained",
+      "section": "arrows",
+      "name": "arrow-left-square-contained",
+      "nodeId": "1266:226",
+      "src": "assets/icons/arrows/arrow-left-square-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-refresh-01",
+      "section": "arrows",
+      "name": "arrow-refresh-01",
+      "nodeId": "1266:409",
+      "src": "assets/icons/arrows/arrow-refresh-01.svg"
+    },
+    {
+      "id": "arrows/arrow-refresh-02",
+      "section": "arrows",
+      "name": "arrow-refresh-02",
+      "nodeId": "1266:414",
+      "src": "assets/icons/arrows/arrow-refresh-02.svg"
+    },
+    {
+      "id": "arrows/arrow-refresh-03",
+      "section": "arrows",
+      "name": "arrow-refresh-03",
+      "nodeId": "1266:419",
+      "src": "assets/icons/arrows/arrow-refresh-03.svg"
+    },
+    {
+      "id": "arrows/arrow-refresh-04",
+      "section": "arrows",
+      "name": "arrow-refresh-04",
+      "nodeId": "1266:424",
+      "src": "assets/icons/arrows/arrow-refresh-04.svg"
+    },
+    {
+      "id": "arrows/arrow-refresh-05",
+      "section": "arrows",
+      "name": "arrow-refresh-05",
+      "nodeId": "1266:429",
+      "src": "assets/icons/arrows/arrow-refresh-05.svg"
+    },
+    {
+      "id": "arrows/arrow-refresh-06",
+      "section": "arrows",
+      "name": "arrow-refresh-06",
+      "nodeId": "1266:434",
+      "src": "assets/icons/arrows/arrow-refresh-06.svg"
+    },
+    {
+      "id": "arrows/arrow-right",
+      "section": "arrows",
+      "name": "arrow-right",
+      "nodeId": "1266:358",
+      "src": "assets/icons/arrows/arrow-right.svg"
+    },
+    {
+      "id": "arrows/arrow-right-contained-01",
+      "section": "arrows",
+      "name": "arrow-right-contained-01",
+      "nodeId": "1266:317",
+      "src": "assets/icons/arrows/arrow-right-contained-01.svg"
+    },
+    {
+      "id": "arrows/arrow-right-contained-02",
+      "section": "arrows",
+      "name": "arrow-right-contained-02",
+      "nodeId": "1266:292",
+      "src": "assets/icons/arrows/arrow-right-contained-02.svg"
+    },
+    {
+      "id": "arrows/arrow-right-sm",
+      "section": "arrows",
+      "name": "arrow-right-sm",
+      "nodeId": "1266:520",
+      "src": "assets/icons/arrows/arrow-right-sm.svg"
+    },
+    {
+      "id": "arrows/arrow-right-square-contained",
+      "section": "arrows",
+      "name": "arrow-right-square-contained",
+      "nodeId": "1266:231",
+      "src": "assets/icons/arrows/arrow-right-square-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-rotate-left-01",
+      "section": "arrows",
+      "name": "arrow-rotate-left-01",
+      "nodeId": "1266:439",
+      "src": "assets/icons/arrows/arrow-rotate-left-01.svg"
+    },
+    {
+      "id": "arrows/arrow-rotate-left-02",
+      "section": "arrows",
+      "name": "arrow-rotate-left-02",
+      "nodeId": "1266:444",
+      "src": "assets/icons/arrows/arrow-rotate-left-02.svg"
+    },
+    {
+      "id": "arrows/arrow-rotate-right-02",
+      "section": "arrows",
+      "name": "arrow-rotate-right-02",
+      "nodeId": "1266:454",
+      "src": "assets/icons/arrows/arrow-rotate-right-02.svg"
+    },
+    {
+      "id": "arrows/arrow-switch-horizontal",
+      "section": "arrows",
+      "name": "arrow-switch-horizontal",
+      "nodeId": "1266:403",
+      "src": "assets/icons/arrows/arrow-switch-horizontal.svg"
+    },
+    {
+      "id": "arrows/arrow-switch-horizontal-2",
+      "section": "arrows",
+      "name": "arrow-switch-horizontal-2",
+      "nodeId": "1266:398",
+      "src": "assets/icons/arrows/arrow-switch-horizontal-2.svg"
+    },
+    {
+      "id": "arrows/arrow-up",
+      "section": "arrows",
+      "name": "arrow-up",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/arrow-up.svg"
+    },
+    {
+      "id": "arrows/arrow-up-contained-01",
+      "section": "arrows",
+      "name": "arrow-up-contained-01",
+      "nodeId": "1266:312",
+      "src": "assets/icons/arrows/arrow-up-contained-01.svg"
+    },
+    {
+      "id": "arrows/arrow-up-contained-02",
+      "section": "arrows",
+      "name": "arrow-up-contained-02",
+      "nodeId": "1266:297",
+      "src": "assets/icons/arrows/arrow-up-contained-02.svg"
+    },
+    {
+      "id": "arrows/arrow-up-left",
+      "section": "arrows",
+      "name": "arrow-up-left",
+      "nodeId": "1266:368",
+      "src": "assets/icons/arrows/arrow-up-left.svg"
+    },
+    {
+      "id": "arrows/arrow-up-left-contained",
+      "section": "arrows",
+      "name": "arrow-up-left-contained",
+      "nodeId": "1266:272",
+      "src": "assets/icons/arrows/arrow-up-left-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-up-left-sm",
+      "section": "arrows",
+      "name": "arrow-up-left-sm",
+      "nodeId": "1266:530",
+      "src": "assets/icons/arrows/arrow-up-left-sm.svg"
+    },
+    {
+      "id": "arrows/arrow-up-left-square-contained",
+      "section": "arrows",
+      "name": "arrow-up-left-square-contained",
+      "nodeId": "1266:261",
+      "src": "assets/icons/arrows/arrow-up-left-square-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-up-right",
+      "section": "arrows",
+      "name": "arrow-up-right",
+      "nodeId": "1266:383",
+      "src": "assets/icons/arrows/arrow-up-right.svg"
+    },
+    {
+      "id": "arrows/arrow-up-right-contained",
+      "section": "arrows",
+      "name": "arrow-up-right-contained",
+      "nodeId": "1266:287",
+      "src": "assets/icons/arrows/arrow-up-right-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-up-right-sm",
+      "section": "arrows",
+      "name": "arrow-up-right-sm",
+      "nodeId": "1266:545",
+      "src": "assets/icons/arrows/arrow-up-right-sm.svg"
+    },
+    {
+      "id": "arrows/arrow-up-right-square-contained",
+      "section": "arrows",
+      "name": "arrow-up-right-square-contained",
+      "nodeId": "1266:251",
+      "src": "assets/icons/arrows/arrow-up-right-square-contained.svg"
+    },
+    {
+      "id": "arrows/arrow-up-sm",
+      "section": "arrows",
+      "name": "arrow-up-sm",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/arrow-up-sm.svg"
+    },
+    {
+      "id": "arrows/arrow-up-square-contained",
+      "section": "arrows",
+      "name": "arrow-up-square-contained",
+      "nodeId": "1266:236",
+      "src": "assets/icons/arrows/arrow-up-square-contained.svg"
+    },
+    {
+      "id": "arrows/chevron-double-down",
+      "section": "arrows",
+      "name": "chevron-double-down",
+      "nodeId": "1266:459",
+      "src": "assets/icons/arrows/chevron-double-down.svg"
+    },
+    {
+      "id": "arrows/chevron-double-left",
+      "section": "arrows",
+      "name": "chevron-double-left",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/chevron-double-down.svg",
+      "transform": "rotate(90deg)"
+    },
+    {
+      "id": "arrows/chevron-double-right",
+      "section": "arrows",
+      "name": "chevron-double-right",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/chevron-double-down.svg",
+      "transform": "rotate(-90deg)"
+    },
+    {
+      "id": "arrows/chevron-double-up",
+      "section": "arrows",
+      "name": "chevron-double-up",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/chevron-double-down.svg",
+      "transform": "rotate(180deg)"
+    },
+    {
+      "id": "arrows/chevron-down",
+      "section": "arrows",
+      "name": "chevron-down",
+      "nodeId": "1266:485-virtual",
+      "src": "assets/icons/arrows/chevron-up.svg",
+      "transform": "rotate(180deg)"
+    },
+    {
+      "id": "arrows/chevron-left",
+      "section": "arrows",
+      "name": "chevron-left",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/chevron-up.svg",
+      "transform": "rotate(-90deg)"
+    },
+    {
+      "id": "arrows/chevron-right",
+      "section": "arrows",
+      "name": "chevron-right",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/chevron-up.svg",
+      "transform": "rotate(90deg)"
+    },
+    {
+      "id": "arrows/chevron-up",
+      "section": "arrows",
+      "name": "chevron-up",
+      "nodeId": "virtual",
+      "src": "assets/icons/arrows/chevron-up.svg"
+    },
+    {
+      "id": "arrows/down-arrow",
+      "section": "arrows",
+      "name": "down-arrow",
+      "nodeId": "1266:353",
+      "src": "assets/icons/arrows/down-arrow.svg"
+    },
+    {
+      "id": "arrows/down-arrow-sm",
+      "section": "arrows",
+      "name": "down-arrow-sm",
+      "nodeId": "1266:515",
+      "src": "assets/icons/arrows/down-arrow-sm.svg"
+    },
+    {
+      "id": "arrows/flip-left",
+      "section": "arrows",
+      "name": "flip-left",
+      "nodeId": "1266:500",
+      "src": "assets/icons/arrows/flip-left.svg"
+    },
+    {
+      "id": "charts/bar-chart-01",
+      "section": "charts",
+      "name": "bar-chart-01",
+      "nodeId": "1266:2836",
+      "src": "assets/icons/charts/bar-chart-01.svg"
+    },
+    {
+      "id": "charts/bar-chart-03",
+      "section": "charts",
+      "name": "bar-chart-03",
+      "nodeId": "1266:2846",
+      "src": "assets/icons/charts/bar-chart-03.svg"
+    },
+    {
+      "id": "charts/bar-chart-04",
+      "section": "charts",
+      "name": "bar-chart-04",
+      "nodeId": "1266:2851",
+      "src": "assets/icons/charts/bar-chart-04.svg"
+    },
+    {
+      "id": "charts/bar-chart-square-01",
+      "section": "charts",
+      "name": "bar-chart-square-01",
+      "nodeId": "1266:2861",
+      "src": "assets/icons/charts/bar-chart-square-01.svg"
+    },
+    {
+      "id": "charts/bar-chart-square-02",
+      "section": "charts",
+      "name": "bar-chart-square-02",
+      "nodeId": "1266:2866",
+      "src": "assets/icons/charts/bar-chart-square-02.svg"
+    },
+    {
+      "id": "charts/bar-chart-square-03",
+      "section": "charts",
+      "name": "bar-chart-square-03",
+      "nodeId": "1266:2871",
+      "src": "assets/icons/charts/bar-chart-square-03.svg"
+    },
+    {
+      "id": "charts/bar-chart-square-down-01",
+      "section": "charts",
+      "name": "bar-chart-square-down-01",
+      "nodeId": "1266:2877",
+      "src": "assets/icons/charts/bar-chart-square-down-01.svg"
+    },
+    {
+      "id": "charts/bar-chart-square-down-02",
+      "section": "charts",
+      "name": "bar-chart-square-down-02",
+      "nodeId": "1266:2882",
+      "src": "assets/icons/charts/bar-chart-square-down-02.svg"
+    },
+    {
+      "id": "charts/bar-chart-square-up-01",
+      "section": "charts",
+      "name": "bar-chart-square-up-01",
+      "nodeId": "1266:2892",
+      "src": "assets/icons/charts/bar-chart-square-up-01.svg"
+    },
+    {
+      "id": "charts/bar-chart-square-up-01-2",
+      "section": "charts",
+      "name": "bar-chart-square-up-01-2",
+      "nodeId": "1266:2887",
+      "src": "assets/icons/charts/bar-chart-square-up-01-2.svg"
+    },
+    {
+      "id": "charts/bar-group-01",
+      "section": "charts",
+      "name": "bar-group-01",
+      "nodeId": "1266:2897",
+      "src": "assets/icons/charts/bar-group-01.svg"
+    },
+    {
+      "id": "charts/bar-group-03",
+      "section": "charts",
+      "name": "bar-group-03",
+      "nodeId": "1266:2907",
+      "src": "assets/icons/charts/bar-group-03.svg"
+    },
+    {
+      "id": "charts/calculator-02",
+      "section": "charts",
+      "name": "calculator-02",
+      "nodeId": "1266:2923",
+      "src": "assets/icons/charts/calculator-02.svg"
+    },
+    {
+      "id": "charts/chart-breakout-circle",
+      "section": "charts",
+      "name": "chart-breakout-circle",
+      "nodeId": "1266:2912",
+      "src": "assets/icons/charts/chart-breakout-circle.svg"
+    },
+    {
+      "id": "charts/chart-breakout-square",
+      "section": "charts",
+      "name": "chart-breakout-square",
+      "nodeId": "1266:2918",
+      "src": "assets/icons/charts/chart-breakout-square.svg"
+    },
+    {
+      "id": "charts/compass",
+      "section": "charts",
+      "name": "compass",
+      "nodeId": "1266:2928",
+      "src": "assets/icons/charts/compass.svg"
+    },
+    {
+      "id": "charts/glasses-01",
+      "section": "charts",
+      "name": "glasses-01",
+      "nodeId": "1266:2933",
+      "src": "assets/icons/charts/glasses-01.svg"
+    },
+    {
+      "id": "charts/horizontal-chart-01",
+      "section": "charts",
+      "name": "horizontal-chart-01",
+      "nodeId": "1266:2943",
+      "src": "assets/icons/charts/horizontal-chart-01.svg"
+    },
+    {
+      "id": "charts/horizontal-chart-02",
+      "section": "charts",
+      "name": "horizontal-chart-02",
+      "nodeId": "1266:2948",
+      "src": "assets/icons/charts/horizontal-chart-02.svg"
+    },
+    {
+      "id": "charts/horizontal-chart-03",
+      "section": "charts",
+      "name": "horizontal-chart-03",
+      "nodeId": "1266:2953",
+      "src": "assets/icons/charts/horizontal-chart-03.svg"
+    },
+    {
+      "id": "charts/line-chart-down-01",
+      "section": "charts",
+      "name": "line-chart-down-01",
+      "nodeId": "1266:2959",
+      "src": "assets/icons/charts/line-chart-down-01.svg"
+    },
+    {
+      "id": "charts/line-chart-down-02",
+      "section": "charts",
+      "name": "line-chart-down-02",
+      "nodeId": "1266:2964",
+      "src": "assets/icons/charts/line-chart-down-02.svg"
+    },
+    {
+      "id": "charts/line-chart-up-01",
+      "section": "charts",
+      "name": "line-chart-up-01",
+      "nodeId": "1266:2969",
+      "src": "assets/icons/charts/line-chart-up-01.svg"
+    },
+    {
+      "id": "charts/line-chart-up-02",
+      "section": "charts",
+      "name": "line-chart-up-02",
+      "nodeId": "1266:2974",
+      "src": "assets/icons/charts/line-chart-up-02.svg"
+    },
+    {
+      "id": "charts/pie-chart-01",
+      "section": "charts",
+      "name": "pie-chart-01",
+      "nodeId": "1266:2979",
+      "src": "assets/icons/charts/pie-chart-01.svg"
+    },
+    {
+      "id": "charts/pie-chart-02",
+      "section": "charts",
+      "name": "pie-chart-02",
+      "nodeId": "1266:2984",
+      "src": "assets/icons/charts/pie-chart-02.svg"
+    },
+    {
+      "id": "charts/pie-chart-03",
+      "section": "charts",
+      "name": "pie-chart-03",
+      "nodeId": "1266:2989",
+      "src": "assets/icons/charts/pie-chart-03.svg"
+    },
+    {
+      "id": "charts/presentation-01",
+      "section": "charts",
+      "name": "presentation-01",
+      "nodeId": "1266:2994",
+      "src": "assets/icons/charts/presentation-01.svg"
+    },
+    {
+      "id": "charts/presentation-02",
+      "section": "charts",
+      "name": "presentation-02",
+      "nodeId": "1266:3000",
+      "src": "assets/icons/charts/presentation-02.svg"
+    },
+    {
+      "id": "charts/presentation-03",
+      "section": "charts",
+      "name": "presentation-03",
+      "nodeId": "1266:3005",
+      "src": "assets/icons/charts/presentation-03.svg"
+    },
+    {
+      "id": "charts/trend-down-01",
+      "section": "charts",
+      "name": "trend-down-01",
+      "nodeId": "1266:3010",
+      "src": "assets/icons/charts/trend-down-01.svg"
+    },
+    {
+      "id": "charts/trend-down-02",
+      "section": "charts",
+      "name": "trend-down-02",
+      "nodeId": "1266:3015",
+      "src": "assets/icons/charts/trend-down-02.svg"
+    },
+    {
+      "id": "charts/trend-up-02",
+      "section": "charts",
+      "name": "trend-up-02",
+      "nodeId": "1266:3025",
+      "src": "assets/icons/charts/trend-up-02.svg"
+    },
+    {
+      "id": "communication/annotation",
+      "section": "communication",
+      "name": "annotation",
+      "nodeId": "1266:3738",
+      "src": "assets/icons/communication/annotation.svg"
+    },
+    {
+      "id": "communication/annotation-alert",
+      "section": "communication",
+      "name": "annotation-alert",
+      "nodeId": "1266:3743",
+      "src": "assets/icons/communication/annotation-alert.svg"
+    },
+    {
+      "id": "communication/annotation-check",
+      "section": "communication",
+      "name": "annotation-check",
+      "nodeId": "1266:3748",
+      "src": "assets/icons/communication/annotation-check.svg"
+    },
+    {
+      "id": "communication/annotation-information",
+      "section": "communication",
+      "name": "annotation-information",
+      "nodeId": "1266:3753",
+      "src": "assets/icons/communication/annotation-information.svg"
+    },
+    {
+      "id": "communication/annotation-plus",
+      "section": "communication",
+      "name": "annotation-plus",
+      "nodeId": "1266:3728",
+      "src": "assets/icons/communication/annotation-plus.svg"
+    },
+    {
+      "id": "communication/annotation-typing",
+      "section": "communication",
+      "name": "annotation-typing",
+      "nodeId": "1266:3733",
+      "src": "assets/icons/communication/annotation-typing.svg"
+    },
+    {
+      "id": "communication/annotation-x",
+      "section": "communication",
+      "name": "annotation-x",
+      "nodeId": "1266:3758",
+      "src": "assets/icons/communication/annotation-x.svg"
+    },
+    {
+      "id": "communication/inbox-01",
+      "section": "communication",
+      "name": "inbox-01",
+      "nodeId": "1266:3763",
+      "src": "assets/icons/communication/inbox-01.svg"
+    },
+    {
+      "id": "communication/inbox-02",
+      "section": "communication",
+      "name": "inbox-02",
+      "nodeId": "1266:3768",
+      "src": "assets/icons/communication/inbox-02.svg"
+    },
+    {
+      "id": "communication/mail-01",
+      "section": "communication",
+      "name": "mail-01",
+      "nodeId": "1266:3773",
+      "src": "assets/icons/communication/mail-01.svg"
+    },
+    {
+      "id": "communication/mail-02",
+      "section": "communication",
+      "name": "mail-02",
+      "nodeId": "1266:3779",
+      "src": "assets/icons/communication/mail-02.svg"
+    },
+    {
+      "id": "communication/mail-03",
+      "section": "communication",
+      "name": "mail-03",
+      "nodeId": "1266:3784",
+      "src": "assets/icons/communication/mail-03.svg"
+    },
+    {
+      "id": "communication/mail-04",
+      "section": "communication",
+      "name": "mail-04",
+      "nodeId": "1266:3789",
+      "src": "assets/icons/communication/mail-04.svg"
+    },
+    {
+      "id": "communication/mail-05",
+      "section": "communication",
+      "name": "mail-05",
+      "nodeId": "1266:3794",
+      "src": "assets/icons/communication/mail-05.svg"
+    },
+    {
+      "id": "communication/message-alert-circle",
+      "section": "communication",
+      "name": "message-alert-circle",
+      "nodeId": "1266:3799",
+      "src": "assets/icons/communication/message-alert-circle.svg"
+    },
+    {
+      "id": "communication/message-alert-plus",
+      "section": "communication",
+      "name": "message-alert-plus",
+      "nodeId": "1266:3804",
+      "src": "assets/icons/communication/message-alert-plus.svg"
+    },
+    {
+      "id": "communication/message-chat-01",
+      "section": "communication",
+      "name": "message-chat-01",
+      "nodeId": "1266:3814",
+      "src": "assets/icons/communication/message-chat-01.svg"
+    },
+    {
+      "id": "communication/message-chat-01-2",
+      "section": "communication",
+      "name": "message-chat-01-2",
+      "nodeId": "1266:3809",
+      "src": "assets/icons/communication/message-chat-01-2.svg"
+    },
+    {
+      "id": "communication/message-circle",
+      "section": "communication",
+      "name": "message-circle",
+      "nodeId": "1266:3819",
+      "src": "assets/icons/communication/message-circle.svg"
+    },
+    {
+      "id": "communication/message-notify-circle",
+      "section": "communication",
+      "name": "message-notify-circle",
+      "nodeId": "1266:3835",
+      "src": "assets/icons/communication/message-notify-circle.svg"
+    },
+    {
+      "id": "communication/message-notify-square",
+      "section": "communication",
+      "name": "message-notify-square",
+      "nodeId": "1266:3840",
+      "src": "assets/icons/communication/message-notify-square.svg"
+    },
+    {
+      "id": "communication/message-square",
+      "section": "communication",
+      "name": "message-square",
+      "nodeId": "1266:3845",
+      "src": "assets/icons/communication/message-square.svg"
+    },
+    {
+      "id": "communication/message-square-alert",
+      "section": "communication",
+      "name": "message-square-alert",
+      "nodeId": "1266:3850",
+      "src": "assets/icons/communication/message-square-alert.svg"
+    },
+    {
+      "id": "communication/message-square-information",
+      "section": "communication",
+      "name": "message-square-information",
+      "nodeId": "1266:3855",
+      "src": "assets/icons/communication/message-square-information.svg"
+    },
+    {
+      "id": "communication/message-square-plus",
+      "section": "communication",
+      "name": "message-square-plus",
+      "nodeId": "1266:3865",
+      "src": "assets/icons/communication/message-square-plus.svg"
+    },
+    {
+      "id": "communication/message-square-plus-2",
+      "section": "communication",
+      "name": "message-square-plus-2",
+      "nodeId": "1266:3860",
+      "src": "assets/icons/communication/message-square-plus-2.svg"
+    },
+    {
+      "id": "communication/message-square-typing",
+      "section": "communication",
+      "name": "message-square-typing",
+      "nodeId": "1266:3870",
+      "src": "assets/icons/communication/message-square-typing.svg"
+    },
+    {
+      "id": "communication/message-square-x",
+      "section": "communication",
+      "name": "message-square-x",
+      "nodeId": "1266:3875",
+      "src": "assets/icons/communication/message-square-x.svg"
+    },
+    {
+      "id": "communication/message-text-01",
+      "section": "communication",
+      "name": "message-text-01",
+      "nodeId": "1266:3881",
+      "src": "assets/icons/communication/message-text-01.svg"
+    },
+    {
+      "id": "communication/message-text-02",
+      "section": "communication",
+      "name": "message-text-02",
+      "nodeId": "1266:3886",
+      "src": "assets/icons/communication/message-text-02.svg"
+    },
+    {
+      "id": "communication/message-typing",
+      "section": "communication",
+      "name": "message-typing",
+      "nodeId": "1266:3824",
+      "src": "assets/icons/communication/message-typing.svg"
+    },
+    {
+      "id": "communication/message-x",
+      "section": "communication",
+      "name": "message-x",
+      "nodeId": "1266:3830",
+      "src": "assets/icons/communication/message-x.svg"
+    },
+    {
+      "id": "communication/phone",
+      "section": "communication",
+      "name": "phone",
+      "nodeId": "1266:3891",
+      "src": "assets/icons/communication/phone.svg"
+    },
+    {
+      "id": "communication/phone-call-01",
+      "section": "communication",
+      "name": "phone-call-01",
+      "nodeId": "1266:3896",
+      "src": "assets/icons/communication/phone-call-01.svg"
+    },
+    {
+      "id": "communication/phone-call-02",
+      "section": "communication",
+      "name": "phone-call-02",
+      "nodeId": "1266:3901",
+      "src": "assets/icons/communication/phone-call-02.svg"
+    },
+    {
+      "id": "communication/phone-down",
+      "section": "communication",
+      "name": "phone-down",
+      "nodeId": "1266:3906",
+      "src": "assets/icons/communication/phone-down.svg"
+    },
+    {
+      "id": "communication/phone-incoming-01",
+      "section": "communication",
+      "name": "phone-incoming-01",
+      "nodeId": "1266:3911",
+      "src": "assets/icons/communication/phone-incoming-01.svg"
+    },
+    {
+      "id": "communication/phone-incoming-02",
+      "section": "communication",
+      "name": "phone-incoming-02",
+      "nodeId": "1266:3916",
+      "src": "assets/icons/communication/phone-incoming-02.svg"
+    },
+    {
+      "id": "communication/phone-off",
+      "section": "communication",
+      "name": "phone-off",
+      "nodeId": "1266:3921",
+      "src": "assets/icons/communication/phone-off.svg"
+    },
+    {
+      "id": "communication/phone-outgoing-01",
+      "section": "communication",
+      "name": "phone-outgoing-01",
+      "nodeId": "1266:3926",
+      "src": "assets/icons/communication/phone-outgoing-01.svg"
+    },
+    {
+      "id": "communication/phone-outgoing-02",
+      "section": "communication",
+      "name": "phone-outgoing-02",
+      "nodeId": "1266:3932",
+      "src": "assets/icons/communication/phone-outgoing-02.svg"
+    },
+    {
+      "id": "communication/phone-up",
+      "section": "communication",
+      "name": "phone-up",
+      "nodeId": "1266:3937",
+      "src": "assets/icons/communication/phone-up.svg"
+    },
+    {
+      "id": "communication/phone-x",
+      "section": "communication",
+      "name": "phone-x",
+      "nodeId": "1266:3942",
+      "src": "assets/icons/communication/phone-x.svg"
+    },
+    {
+      "id": "communication/send-01",
+      "section": "communication",
+      "name": "send-01",
+      "nodeId": "1266:3947",
+      "src": "assets/icons/communication/send-01.svg"
+    },
+    {
+      "id": "communication/send-02",
+      "section": "communication",
+      "name": "send-02",
+      "nodeId": "1266:3952",
+      "src": "assets/icons/communication/send-02.svg"
+    },
+    {
+      "id": "communication/send-03",
+      "section": "communication",
+      "name": "send-03",
+      "nodeId": "1266:3957",
+      "src": "assets/icons/communication/send-03.svg"
+    },
+    {
+      "id": "dev-code/brackets",
+      "section": "dev-code",
+      "name": "brackets",
+      "nodeId": "1266:3520",
+      "src": "assets/icons/dev-code/brackets.svg"
+    },
+    {
+      "id": "dev-code/brackets-check",
+      "section": "dev-code",
+      "name": "brackets-check",
+      "nodeId": "1266:3525",
+      "src": "assets/icons/dev-code/brackets-check.svg"
+    },
+    {
+      "id": "dev-code/brackets-minus",
+      "section": "dev-code",
+      "name": "brackets-minus",
+      "nodeId": "1266:3530",
+      "src": "assets/icons/dev-code/brackets-minus.svg"
+    },
+    {
+      "id": "dev-code/brackets-plus",
+      "section": "dev-code",
+      "name": "brackets-plus",
+      "nodeId": "1266:3535",
+      "src": "assets/icons/dev-code/brackets-plus.svg"
+    },
+    {
+      "id": "dev-code/brackets-slash",
+      "section": "dev-code",
+      "name": "brackets-slash",
+      "nodeId": "1266:3540",
+      "src": "assets/icons/dev-code/brackets-slash.svg"
+    },
+    {
+      "id": "dev-code/brackets-typing",
+      "section": "dev-code",
+      "name": "brackets-typing",
+      "nodeId": "1266:3545",
+      "src": "assets/icons/dev-code/brackets-typing.svg"
+    },
+    {
+      "id": "dev-code/brackets-x",
+      "section": "dev-code",
+      "name": "brackets-x",
+      "nodeId": "1266:3550",
+      "src": "assets/icons/dev-code/brackets-x.svg"
+    },
+    {
+      "id": "dev-code/browser",
+      "section": "dev-code",
+      "name": "browser",
+      "nodeId": "1266:3555",
+      "src": "assets/icons/dev-code/browser.svg"
+    },
+    {
+      "id": "dev-code/browser-code",
+      "section": "dev-code",
+      "name": "browser-code",
+      "nodeId": "1266:3561",
+      "src": "assets/icons/dev-code/browser-code.svg"
+    },
+    {
+      "id": "dev-code/code-01",
+      "section": "dev-code",
+      "name": "code-01",
+      "nodeId": "1266:3566",
+      "src": "assets/icons/dev-code/code-01.svg"
+    },
+    {
+      "id": "dev-code/code-02",
+      "section": "dev-code",
+      "name": "code-02",
+      "nodeId": "1266:3571",
+      "src": "assets/icons/dev-code/code-02.svg"
+    },
+    {
+      "id": "dev-code/code-03",
+      "section": "dev-code",
+      "name": "code-03",
+      "nodeId": "1266:3576",
+      "src": "assets/icons/dev-code/code-03.svg"
+    },
+    {
+      "id": "dev-code/data-01",
+      "section": "dev-code",
+      "name": "data-01",
+      "nodeId": "1266:3586",
+      "src": "assets/icons/dev-code/data-01.svg"
+    },
+    {
+      "id": "dev-code/data-02",
+      "section": "dev-code",
+      "name": "data-02",
+      "nodeId": "1266:3591",
+      "src": "assets/icons/dev-code/data-02.svg"
+    },
+    {
+      "id": "dev-code/data-03",
+      "section": "dev-code",
+      "name": "data-03",
+      "nodeId": "1266:3596",
+      "src": "assets/icons/dev-code/data-03.svg"
+    },
+    {
+      "id": "dev-code/data-04",
+      "section": "dev-code",
+      "name": "data-04",
+      "nodeId": "1266:3602",
+      "src": "assets/icons/dev-code/data-04.svg"
+    },
+    {
+      "id": "dev-code/file-code",
+      "section": "dev-code",
+      "name": "file-code",
+      "nodeId": "1266:3607",
+      "src": "assets/icons/dev-code/file-code.svg"
+    },
+    {
+      "id": "dev-code/folder-code",
+      "section": "dev-code",
+      "name": "folder-code",
+      "nodeId": "1266:3612",
+      "src": "assets/icons/dev-code/folder-code.svg"
+    },
+    {
+      "id": "dev-code/git-branch-01",
+      "section": "dev-code",
+      "name": "git-branch-01",
+      "nodeId": "1266:3617",
+      "src": "assets/icons/dev-code/git-branch-01.svg"
+    },
+    {
+      "id": "dev-code/git-branch-02",
+      "section": "dev-code",
+      "name": "git-branch-02",
+      "nodeId": "1266:3622",
+      "src": "assets/icons/dev-code/git-branch-02.svg"
+    },
+    {
+      "id": "dev-code/git-branch-03",
+      "section": "dev-code",
+      "name": "git-branch-03",
+      "nodeId": "1266:3627",
+      "src": "assets/icons/dev-code/git-branch-03.svg"
+    },
+    {
+      "id": "dev-code/git-branch-04",
+      "section": "dev-code",
+      "name": "git-branch-04",
+      "nodeId": "1266:3632",
+      "src": "assets/icons/dev-code/git-branch-04.svg"
+    },
+    {
+      "id": "dev-code/git-branch-05",
+      "section": "dev-code",
+      "name": "git-branch-05",
+      "nodeId": "1266:3637",
+      "src": "assets/icons/dev-code/git-branch-05.svg"
+    },
+    {
+      "id": "dev-code/package-01",
+      "section": "dev-code",
+      "name": "package-01",
+      "nodeId": "1266:3643",
+      "src": "assets/icons/dev-code/package-01.svg"
+    },
+    {
+      "id": "dev-code/package-02",
+      "section": "dev-code",
+      "name": "package-02",
+      "nodeId": "1266:3648",
+      "src": "assets/icons/dev-code/package-02.svg"
+    },
+    {
+      "id": "dev-code/package-check",
+      "section": "dev-code",
+      "name": "package-check",
+      "nodeId": "1266:3653",
+      "src": "assets/icons/dev-code/package-check.svg"
+    },
+    {
+      "id": "dev-code/package-minus",
+      "section": "dev-code",
+      "name": "package-minus",
+      "nodeId": "1266:3658",
+      "src": "assets/icons/dev-code/package-minus.svg"
+    },
+    {
+      "id": "dev-code/package-plus",
+      "section": "dev-code",
+      "name": "package-plus",
+      "nodeId": "1266:3663",
+      "src": "assets/icons/dev-code/package-plus.svg"
+    },
+    {
+      "id": "dev-code/package-x",
+      "section": "dev-code",
+      "name": "package-x",
+      "nodeId": "1266:3668",
+      "src": "assets/icons/dev-code/package-x.svg"
+    },
+    {
+      "id": "dev-code/plug-01",
+      "section": "dev-code",
+      "name": "plug-01",
+      "nodeId": "1266:3719",
+      "src": "assets/icons/dev-code/plug-01.svg"
+    },
+    {
+      "id": "dev-code/server-01",
+      "section": "dev-code",
+      "name": "server-01",
+      "nodeId": "1266:3673",
+      "src": "assets/icons/dev-code/server-01.svg"
+    },
+    {
+      "id": "dev-code/server-02",
+      "section": "dev-code",
+      "name": "server-02",
+      "nodeId": "1266:3678",
+      "src": "assets/icons/dev-code/server-02.svg"
+    },
+    {
+      "id": "dev-code/server-03",
+      "section": "dev-code",
+      "name": "server-03",
+      "nodeId": "1266:3684",
+      "src": "assets/icons/dev-code/server-03.svg"
+    },
+    {
+      "id": "dev-code/server-05",
+      "section": "dev-code",
+      "name": "server-05",
+      "nodeId": "1266:3694",
+      "src": "assets/icons/dev-code/server-05.svg"
+    },
+    {
+      "id": "dev-code/server-06",
+      "section": "dev-code",
+      "name": "server-06",
+      "nodeId": "1266:3699",
+      "src": "assets/icons/dev-code/server-06.svg"
+    },
+    {
+      "id": "dev-code/server-down",
+      "section": "dev-code",
+      "name": "server-down",
+      "nodeId": "1266:3704",
+      "src": "assets/icons/dev-code/server-down.svg"
+    },
+    {
+      "id": "dev-code/server-up",
+      "section": "dev-code",
+      "name": "server-up",
+      "nodeId": "1266:3709",
+      "src": "assets/icons/dev-code/server-up.svg"
+    },
+    {
+      "id": "dev-code/terminal",
+      "section": "dev-code",
+      "name": "terminal",
+      "nodeId": "1266:3714",
+      "src": "assets/icons/dev-code/terminal.svg"
+    },
+    {
+      "id": "devices/audio-settings-01",
+      "section": "devices",
+      "name": "audio-settings-01",
+      "nodeId": "1266:1520",
+      "src": "assets/icons/devices/audio-settings-01.svg"
+    },
+    {
+      "id": "devices/audio-settings-02",
+      "section": "devices",
+      "name": "audio-settings-02",
+      "nodeId": "1266:1525",
+      "src": "assets/icons/devices/audio-settings-02.svg"
+    },
+    {
+      "id": "devices/battery-01",
+      "section": "devices",
+      "name": "battery-01",
+      "nodeId": "1266:1530",
+      "src": "assets/icons/devices/battery-01.svg"
+    },
+    {
+      "id": "devices/battery-02",
+      "section": "devices",
+      "name": "battery-02",
+      "nodeId": "1266:1535",
+      "src": "assets/icons/devices/battery-02.svg"
+    },
+    {
+      "id": "devices/battery-03",
+      "section": "devices",
+      "name": "battery-03",
+      "nodeId": "1266:1540",
+      "src": "assets/icons/devices/battery-03.svg"
+    },
+    {
+      "id": "devices/battery-04",
+      "section": "devices",
+      "name": "battery-04",
+      "nodeId": "1266:1545",
+      "src": "assets/icons/devices/battery-04.svg"
+    },
+    {
+      "id": "devices/battery-empty",
+      "section": "devices",
+      "name": "battery-empty",
+      "nodeId": "1266:1565",
+      "src": "assets/icons/devices/battery-empty.svg"
+    },
+    {
+      "id": "devices/battery-fill-01",
+      "section": "devices",
+      "name": "battery-fill-01",
+      "nodeId": "1266:1550",
+      "src": "assets/icons/devices/battery-fill-01.svg"
+    },
+    {
+      "id": "devices/battery-fill-02",
+      "section": "devices",
+      "name": "battery-fill-02",
+      "nodeId": "1266:1555",
+      "src": "assets/icons/devices/battery-fill-02.svg"
+    },
+    {
+      "id": "devices/battery-fill-04",
+      "section": "devices",
+      "name": "battery-fill-04",
+      "nodeId": "1266:1560",
+      "src": "assets/icons/devices/battery-fill-04.svg"
+    },
+    {
+      "id": "devices/bluetooth-01",
+      "section": "devices",
+      "name": "bluetooth-01",
+      "nodeId": "1266:1839",
+      "src": "assets/icons/devices/bluetooth-01.svg"
+    },
+    {
+      "id": "devices/bluetooth-02",
+      "section": "devices",
+      "name": "bluetooth-02",
+      "nodeId": "1266:1844",
+      "src": "assets/icons/devices/bluetooth-02.svg"
+    },
+    {
+      "id": "devices/chromecast",
+      "section": "devices",
+      "name": "chromecast",
+      "nodeId": "1266:1570",
+      "src": "assets/icons/devices/chromecast.svg"
+    },
+    {
+      "id": "devices/component",
+      "section": "devices",
+      "name": "component",
+      "nodeId": "1266:1601",
+      "src": "assets/icons/devices/component.svg"
+    },
+    {
+      "id": "devices/computer",
+      "section": "devices",
+      "name": "computer",
+      "nodeId": "1266:1575",
+      "src": "assets/icons/devices/computer.svg"
+    },
+    {
+      "id": "devices/disc",
+      "section": "devices",
+      "name": "disc",
+      "nodeId": "1266:1580",
+      "src": "assets/icons/devices/disc.svg"
+    },
+    {
+      "id": "devices/fast-backward",
+      "section": "devices",
+      "name": "fast-backward",
+      "nodeId": "1266:1585",
+      "src": "assets/icons/devices/fast-backward.svg"
+    },
+    {
+      "id": "devices/fast-forward",
+      "section": "devices",
+      "name": "fast-forward",
+      "nodeId": "1266:1591",
+      "src": "assets/icons/devices/fast-forward.svg"
+    },
+    {
+      "id": "devices/headphones",
+      "section": "devices",
+      "name": "headphones",
+      "nodeId": "1266:1596",
+      "src": "assets/icons/devices/headphones.svg"
+    },
+    {
+      "id": "devices/iphone-02",
+      "section": "devices",
+      "name": "iphone-02",
+      "nodeId": "1266:1606",
+      "src": "assets/icons/devices/iphone-02.svg"
+    },
+    {
+      "id": "devices/keyboard",
+      "section": "devices",
+      "name": "keyboard",
+      "nodeId": "1266:1611",
+      "src": "assets/icons/devices/keyboard.svg"
+    },
+    {
+      "id": "devices/laptop-01",
+      "section": "devices",
+      "name": "laptop-01",
+      "nodeId": "1266:1616",
+      "src": "assets/icons/devices/laptop-01.svg"
+    },
+    {
+      "id": "devices/laptop-02",
+      "section": "devices",
+      "name": "laptop-02",
+      "nodeId": "1266:1621",
+      "src": "assets/icons/devices/laptop-02.svg"
+    },
+    {
+      "id": "devices/lightbulb-01",
+      "section": "devices",
+      "name": "lightbulb-01",
+      "nodeId": "1266:1626",
+      "src": "assets/icons/devices/lightbulb-01.svg"
+    },
+    {
+      "id": "devices/lightbulb-02",
+      "section": "devices",
+      "name": "lightbulb-02",
+      "nodeId": "1266:1631",
+      "src": "assets/icons/devices/lightbulb-02.svg"
+    },
+    {
+      "id": "devices/lightbulb-03",
+      "section": "devices",
+      "name": "lightbulb-03",
+      "nodeId": "1266:1636",
+      "src": "assets/icons/devices/lightbulb-03.svg"
+    },
+    {
+      "id": "devices/media-strip-01",
+      "section": "devices",
+      "name": "media-strip-01",
+      "nodeId": "1266:1641",
+      "src": "assets/icons/devices/media-strip-01.svg"
+    },
+    {
+      "id": "devices/microphone-01",
+      "section": "devices",
+      "name": "microphone-01",
+      "nodeId": "1266:1651",
+      "src": "assets/icons/devices/microphone-01.svg"
+    },
+    {
+      "id": "devices/microphone-02",
+      "section": "devices",
+      "name": "microphone-02",
+      "nodeId": "1266:1656",
+      "src": "assets/icons/devices/microphone-02.svg"
+    },
+    {
+      "id": "devices/microphone-off-01",
+      "section": "devices",
+      "name": "microphone-off-01",
+      "nodeId": "1266:1662",
+      "src": "assets/icons/devices/microphone-off-01.svg"
+    },
+    {
+      "id": "devices/microphone-off-02",
+      "section": "devices",
+      "name": "microphone-off-02",
+      "nodeId": "1266:1667",
+      "src": "assets/icons/devices/microphone-off-02.svg"
+    },
+    {
+      "id": "devices/mouse",
+      "section": "devices",
+      "name": "mouse",
+      "nodeId": "1266:1672",
+      "src": "assets/icons/devices/mouse.svg"
+    },
+    {
+      "id": "devices/note-01",
+      "section": "devices",
+      "name": "note-01",
+      "nodeId": "1266:1677",
+      "src": "assets/icons/devices/note-01.svg"
+    },
+    {
+      "id": "devices/note-02",
+      "section": "devices",
+      "name": "note-02",
+      "nodeId": "1266:1682",
+      "src": "assets/icons/devices/note-02.svg"
+    },
+    {
+      "id": "devices/pause-01",
+      "section": "devices",
+      "name": "pause-01",
+      "nodeId": "1266:1687",
+      "src": "assets/icons/devices/pause-01.svg"
+    },
+    {
+      "id": "devices/pause-02",
+      "section": "devices",
+      "name": "pause-02",
+      "nodeId": "1266:1692",
+      "src": "assets/icons/devices/pause-02.svg"
+    },
+    {
+      "id": "devices/pause-03",
+      "section": "devices",
+      "name": "pause-03",
+      "nodeId": "1266:1697",
+      "src": "assets/icons/devices/pause-03.svg"
+    },
+    {
+      "id": "devices/play-01",
+      "section": "devices",
+      "name": "play-01",
+      "nodeId": "1266:1702",
+      "src": "assets/icons/devices/play-01.svg"
+    },
+    {
+      "id": "devices/play-02",
+      "section": "devices",
+      "name": "play-02",
+      "nodeId": "1266:1707",
+      "src": "assets/icons/devices/play-02.svg"
+    },
+    {
+      "id": "devices/play-03",
+      "section": "devices",
+      "name": "play-03",
+      "nodeId": "1266:1712",
+      "src": "assets/icons/devices/play-03.svg"
+    },
+    {
+      "id": "devices/power",
+      "section": "devices",
+      "name": "power",
+      "nodeId": "1266:1717",
+      "src": "assets/icons/devices/power.svg"
+    },
+    {
+      "id": "devices/refresh-01",
+      "section": "devices",
+      "name": "refresh-01",
+      "nodeId": "1266:1727",
+      "src": "assets/icons/devices/refresh-01.svg"
+    },
+    {
+      "id": "devices/refresh-01-2",
+      "section": "devices",
+      "name": "refresh-01-2",
+      "nodeId": "1266:1722",
+      "src": "assets/icons/devices/refresh-01-2.svg"
+    },
+    {
+      "id": "devices/rss",
+      "section": "devices",
+      "name": "rss",
+      "nodeId": "1266:1733",
+      "src": "assets/icons/devices/rss.svg"
+    },
+    {
+      "id": "devices/shuffle",
+      "section": "devices",
+      "name": "shuffle",
+      "nodeId": "1266:1738",
+      "src": "assets/icons/devices/shuffle.svg"
+    },
+    {
+      "id": "devices/signal",
+      "section": "devices",
+      "name": "signal",
+      "nodeId": "1266:1743",
+      "src": "assets/icons/devices/signal.svg"
+    },
+    {
+      "id": "devices/skip-back",
+      "section": "devices",
+      "name": "skip-back",
+      "nodeId": "1266:1748",
+      "src": "assets/icons/devices/skip-back.svg"
+    },
+    {
+      "id": "devices/skip-forward",
+      "section": "devices",
+      "name": "skip-forward",
+      "nodeId": "1266:1753",
+      "src": "assets/icons/devices/skip-forward.svg"
+    },
+    {
+      "id": "devices/speaker",
+      "section": "devices",
+      "name": "speaker",
+      "nodeId": "1266:1758",
+      "src": "assets/icons/devices/speaker.svg"
+    },
+    {
+      "id": "devices/stop-01",
+      "section": "devices",
+      "name": "stop-01",
+      "nodeId": "1266:1768",
+      "src": "assets/icons/devices/stop-01.svg"
+    },
+    {
+      "id": "devices/stop-02",
+      "section": "devices",
+      "name": "stop-02",
+      "nodeId": "1266:1773",
+      "src": "assets/icons/devices/stop-02.svg"
+    },
+    {
+      "id": "devices/stop-circle-contained",
+      "section": "devices",
+      "name": "stop-circle-contained",
+      "nodeId": "1266:1763",
+      "src": "assets/icons/devices/stop-circle-contained.svg"
+    },
+    {
+      "id": "devices/tv",
+      "section": "devices",
+      "name": "tv",
+      "nodeId": "1266:1778",
+      "src": "assets/icons/devices/tv.svg"
+    },
+    {
+      "id": "devices/video-off",
+      "section": "devices",
+      "name": "video-off",
+      "nodeId": "1266:1783",
+      "src": "assets/icons/devices/video-off.svg"
+    },
+    {
+      "id": "devices/video-on",
+      "section": "devices",
+      "name": "video-on",
+      "nodeId": "1266:1788",
+      "src": "assets/icons/devices/video-on.svg"
+    },
+    {
+      "id": "devices/volume-01",
+      "section": "devices",
+      "name": "volume-01",
+      "nodeId": "1266:1793",
+      "src": "assets/icons/devices/volume-01.svg"
+    },
+    {
+      "id": "devices/volume-02",
+      "section": "devices",
+      "name": "volume-02",
+      "nodeId": "1266:1798",
+      "src": "assets/icons/devices/volume-02.svg"
+    },
+    {
+      "id": "devices/volume-03",
+      "section": "devices",
+      "name": "volume-03",
+      "nodeId": "1266:1804",
+      "src": "assets/icons/devices/volume-03.svg"
+    },
+    {
+      "id": "devices/volume-04",
+      "section": "devices",
+      "name": "volume-04",
+      "nodeId": "1266:1809",
+      "src": "assets/icons/devices/volume-04.svg"
+    },
+    {
+      "id": "devices/volume-05",
+      "section": "devices",
+      "name": "volume-05",
+      "nodeId": "1266:1814",
+      "src": "assets/icons/devices/volume-05.svg"
+    },
+    {
+      "id": "devices/volume-06",
+      "section": "devices",
+      "name": "volume-06",
+      "nodeId": "1266:1819",
+      "src": "assets/icons/devices/volume-06.svg"
+    },
+    {
+      "id": "devices/volume-07",
+      "section": "devices",
+      "name": "volume-07",
+      "nodeId": "1266:1824",
+      "src": "assets/icons/devices/volume-07.svg"
+    },
+    {
+      "id": "devices/waveform",
+      "section": "devices",
+      "name": "waveform",
+      "nodeId": "1266:1829",
+      "src": "assets/icons/devices/waveform.svg"
+    },
+    {
+      "id": "devices/webcam",
+      "section": "devices",
+      "name": "webcam",
+      "nodeId": "1266:1834",
+      "src": "assets/icons/devices/webcam.svg"
+    },
+    {
+      "id": "devices/wifi-off",
+      "section": "devices",
+      "name": "wifi-off",
+      "nodeId": "1266:1849",
+      "src": "assets/icons/devices/wifi-off.svg"
+    },
+    {
+      "id": "devices/wifi-on",
+      "section": "devices",
+      "name": "wifi-on",
+      "nodeId": "1266:1854",
+      "src": "assets/icons/devices/wifi-on.svg"
+    },
+    {
+      "id": "devices/youtube",
+      "section": "devices",
+      "name": "youtube",
+      "nodeId": "1266:1859",
+      "src": "assets/icons/devices/youtube.svg"
+    },
+    {
+      "id": "editor-text/align-center",
+      "section": "editor-text",
+      "name": "align-center",
+      "nodeId": "1266:4149",
+      "src": "assets/icons/editor-text/align-center.svg"
+    },
+    {
+      "id": "editor-text/align-justify",
+      "section": "editor-text",
+      "name": "align-justify",
+      "nodeId": "1266:4154",
+      "src": "assets/icons/editor-text/align-justify.svg"
+    },
+    {
+      "id": "editor-text/align-left",
+      "section": "editor-text",
+      "name": "align-left",
+      "nodeId": "1266:4159",
+      "src": "assets/icons/editor-text/align-left.svg"
+    },
+    {
+      "id": "editor-text/align-right",
+      "section": "editor-text",
+      "name": "align-right",
+      "nodeId": "1266:4164",
+      "src": "assets/icons/editor-text/align-right.svg"
+    },
+    {
+      "id": "editor-text/attatchment-01",
+      "section": "editor-text",
+      "name": "attatchment-01",
+      "nodeId": "1266:4169",
+      "src": "assets/icons/editor-text/attatchment-01.svg"
+    },
+    {
+      "id": "editor-text/bezier-01",
+      "section": "editor-text",
+      "name": "bezier-01",
+      "nodeId": "1266:4179",
+      "src": "assets/icons/editor-text/bezier-01.svg"
+    },
+    {
+      "id": "editor-text/bezier-02",
+      "section": "editor-text",
+      "name": "bezier-02",
+      "nodeId": "1266:4184",
+      "src": "assets/icons/editor-text/bezier-02.svg"
+    },
+    {
+      "id": "editor-text/bold-01",
+      "section": "editor-text",
+      "name": "bold-01",
+      "nodeId": "1266:4189",
+      "src": "assets/icons/editor-text/bold-01.svg"
+    },
+    {
+      "id": "editor-text/bold-02",
+      "section": "editor-text",
+      "name": "bold-02",
+      "nodeId": "1266:4194",
+      "src": "assets/icons/editor-text/bold-02.svg"
+    },
+    {
+      "id": "editor-text/color-picker",
+      "section": "editor-text",
+      "name": "color-picker",
+      "nodeId": "1266:4199",
+      "src": "assets/icons/editor-text/color-picker.svg"
+    },
+    {
+      "id": "editor-text/color-swatch-01",
+      "section": "editor-text",
+      "name": "color-swatch-01",
+      "nodeId": "1266:4204",
+      "src": "assets/icons/editor-text/color-swatch-01.svg"
+    },
+    {
+      "id": "editor-text/color-swatch-02",
+      "section": "editor-text",
+      "name": "color-swatch-02",
+      "nodeId": "1266:4209",
+      "src": "assets/icons/editor-text/color-swatch-02.svg"
+    },
+    {
+      "id": "editor-text/contrast",
+      "section": "editor-text",
+      "name": "contrast",
+      "nodeId": "1266:4214",
+      "src": "assets/icons/editor-text/contrast.svg"
+    },
+    {
+      "id": "editor-text/crop-01",
+      "section": "editor-text",
+      "name": "crop-01",
+      "nodeId": "1266:4219",
+      "src": "assets/icons/editor-text/crop-01.svg"
+    },
+    {
+      "id": "editor-text/crop-02",
+      "section": "editor-text",
+      "name": "crop-02",
+      "nodeId": "1266:4224",
+      "src": "assets/icons/editor-text/crop-02.svg"
+    },
+    {
+      "id": "editor-text/cursor-01",
+      "section": "editor-text",
+      "name": "cursor-01",
+      "nodeId": "1266:4230",
+      "src": "assets/icons/editor-text/cursor-01.svg"
+    },
+    {
+      "id": "editor-text/cursor-02",
+      "section": "editor-text",
+      "name": "cursor-02",
+      "nodeId": "1266:4235",
+      "src": "assets/icons/editor-text/cursor-02.svg"
+    },
+    {
+      "id": "editor-text/cursor-03",
+      "section": "editor-text",
+      "name": "cursor-03",
+      "nodeId": "1266:4240",
+      "src": "assets/icons/editor-text/cursor-03.svg"
+    },
+    {
+      "id": "editor-text/cursor-04",
+      "section": "editor-text",
+      "name": "cursor-04",
+      "nodeId": "1266:4245",
+      "src": "assets/icons/editor-text/cursor-04.svg"
+    },
+    {
+      "id": "editor-text/cursor-05",
+      "section": "editor-text",
+      "name": "cursor-05",
+      "nodeId": "1266:4250",
+      "src": "assets/icons/editor-text/cursor-05.svg"
+    },
+    {
+      "id": "editor-text/cursor-06",
+      "section": "editor-text",
+      "name": "cursor-06",
+      "nodeId": "1266:4255",
+      "src": "assets/icons/editor-text/cursor-06.svg"
+    },
+    {
+      "id": "editor-text/delete",
+      "section": "editor-text",
+      "name": "delete",
+      "nodeId": "1266:4260",
+      "src": "assets/icons/editor-text/delete.svg"
+    },
+    {
+      "id": "editor-text/eraser-01",
+      "section": "editor-text",
+      "name": "eraser-01",
+      "nodeId": "1266:4265",
+      "src": "assets/icons/editor-text/eraser-01.svg"
+    },
+    {
+      "id": "editor-text/eraser-02",
+      "section": "editor-text",
+      "name": "eraser-02",
+      "nodeId": "1266:4270",
+      "src": "assets/icons/editor-text/eraser-02.svg"
+    },
+    {
+      "id": "editor-text/feather-01",
+      "section": "editor-text",
+      "name": "feather-01",
+      "nodeId": "1266:4275",
+      "src": "assets/icons/editor-text/feather-01.svg"
+    },
+    {
+      "id": "editor-text/feather-02",
+      "section": "editor-text",
+      "name": "feather-02",
+      "nodeId": "1266:4280",
+      "src": "assets/icons/editor-text/feather-02.svg"
+    },
+    {
+      "id": "editor-text/flip-01",
+      "section": "editor-text",
+      "name": "flip-01",
+      "nodeId": "1266:4285",
+      "src": "assets/icons/editor-text/flip-01.svg"
+    },
+    {
+      "id": "editor-text/flip-02",
+      "section": "editor-text",
+      "name": "flip-02",
+      "nodeId": "1266:4290",
+      "src": "assets/icons/editor-text/flip-02.svg"
+    },
+    {
+      "id": "editor-text/header-01",
+      "section": "editor-text",
+      "name": "header-01",
+      "nodeId": "1266:4295",
+      "src": "assets/icons/editor-text/header-01.svg"
+    },
+    {
+      "id": "editor-text/header-02",
+      "section": "editor-text",
+      "name": "header-02",
+      "nodeId": "1266:4300",
+      "src": "assets/icons/editor-text/header-02.svg"
+    },
+    {
+      "id": "editor-text/image-indent-left",
+      "section": "editor-text",
+      "name": "image-indent-left",
+      "nodeId": "1266:4305",
+      "src": "assets/icons/editor-text/image-indent-left.svg"
+    },
+    {
+      "id": "editor-text/indent-decrease",
+      "section": "editor-text",
+      "name": "indent-decrease",
+      "nodeId": "1266:4316",
+      "src": "assets/icons/editor-text/indent-decrease.svg"
+    },
+    {
+      "id": "editor-text/indent-increase",
+      "section": "editor-text",
+      "name": "indent-increase",
+      "nodeId": "1266:4321",
+      "src": "assets/icons/editor-text/indent-increase.svg"
+    },
+    {
+      "id": "editor-text/indent-left",
+      "section": "editor-text",
+      "name": "indent-left",
+      "nodeId": "1266:4331",
+      "src": "assets/icons/editor-text/indent-left.svg"
+    },
+    {
+      "id": "editor-text/indent-right",
+      "section": "editor-text",
+      "name": "indent-right",
+      "nodeId": "1266:4326",
+      "src": "assets/icons/editor-text/indent-right.svg"
+    },
+    {
+      "id": "editor-text/italics-01",
+      "section": "editor-text",
+      "name": "italics-01",
+      "nodeId": "1266:4336",
+      "src": "assets/icons/editor-text/italics-01.svg"
+    },
+    {
+      "id": "editor-text/italics-02",
+      "section": "editor-text",
+      "name": "italics-02",
+      "nodeId": "1266:4341",
+      "src": "assets/icons/editor-text/italics-02.svg"
+    },
+    {
+      "id": "editor-text/letter-spacing-01",
+      "section": "editor-text",
+      "name": "letter-spacing-01",
+      "nodeId": "1266:4346",
+      "src": "assets/icons/editor-text/letter-spacing-01.svg"
+    },
+    {
+      "id": "editor-text/letter-spacing-02",
+      "section": "editor-text",
+      "name": "letter-spacing-02",
+      "nodeId": "1266:4351",
+      "src": "assets/icons/editor-text/letter-spacing-02.svg"
+    },
+    {
+      "id": "editor-text/letter-spacing-03",
+      "section": "editor-text",
+      "name": "letter-spacing-03",
+      "nodeId": "1266:4356",
+      "src": "assets/icons/editor-text/letter-spacing-03.svg"
+    },
+    {
+      "id": "editor-text/line-height",
+      "section": "editor-text",
+      "name": "line-height",
+      "nodeId": "1266:4361",
+      "src": "assets/icons/editor-text/line-height.svg"
+    },
+    {
+      "id": "editor-text/list",
+      "section": "editor-text",
+      "name": "list",
+      "nodeId": "1266:4366",
+      "src": "assets/icons/editor-text/list.svg"
+    },
+    {
+      "id": "editor-text/list-numbers",
+      "section": "editor-text",
+      "name": "list-numbers",
+      "nodeId": "1266:4371",
+      "src": "assets/icons/editor-text/list-numbers.svg"
+    },
+    {
+      "id": "editor-text/move",
+      "section": "editor-text",
+      "name": "move",
+      "nodeId": "1266:4376",
+      "src": "assets/icons/editor-text/move.svg"
+    },
+    {
+      "id": "editor-text/paint-bucket-01",
+      "section": "editor-text",
+      "name": "paint-bucket-01",
+      "nodeId": "1266:4381",
+      "src": "assets/icons/editor-text/paint-bucket-01.svg"
+    },
+    {
+      "id": "editor-text/paint-bucket-02",
+      "section": "editor-text",
+      "name": "paint-bucket-02",
+      "nodeId": "1266:4386",
+      "src": "assets/icons/editor-text/paint-bucket-02.svg"
+    },
+    {
+      "id": "editor-text/palette",
+      "section": "editor-text",
+      "name": "palette",
+      "nodeId": "1266:4392",
+      "src": "assets/icons/editor-text/palette.svg"
+    },
+    {
+      "id": "editor-text/pen-tool-01",
+      "section": "editor-text",
+      "name": "pen-tool-01",
+      "nodeId": "1266:4397",
+      "src": "assets/icons/editor-text/pen-tool-01.svg"
+    },
+    {
+      "id": "editor-text/pen-tool-02",
+      "section": "editor-text",
+      "name": "pen-tool-02",
+      "nodeId": "1266:4402",
+      "src": "assets/icons/editor-text/pen-tool-02.svg"
+    },
+    {
+      "id": "editor-text/pen-tool-03",
+      "section": "editor-text",
+      "name": "pen-tool-03",
+      "nodeId": "1266:4407",
+      "src": "assets/icons/editor-text/pen-tool-03.svg"
+    },
+    {
+      "id": "editor-text/pen-tool-04",
+      "section": "editor-text",
+      "name": "pen-tool-04",
+      "nodeId": "1266:4412",
+      "src": "assets/icons/editor-text/pen-tool-04.svg"
+    },
+    {
+      "id": "editor-text/pencil-01",
+      "section": "editor-text",
+      "name": "pencil-01",
+      "nodeId": "1266:4417",
+      "src": "assets/icons/editor-text/pencil-01.svg"
+    },
+    {
+      "id": "editor-text/pencil-02",
+      "section": "editor-text",
+      "name": "pencil-02",
+      "nodeId": "1266:4422",
+      "src": "assets/icons/editor-text/pencil-02.svg"
+    },
+    {
+      "id": "editor-text/pencil-03",
+      "section": "editor-text",
+      "name": "pencil-03",
+      "nodeId": "1266:4427",
+      "src": "assets/icons/editor-text/pencil-03.svg"
+    },
+    {
+      "id": "editor-text/perspective",
+      "section": "editor-text",
+      "name": "perspective",
+      "nodeId": "1266:4432",
+      "src": "assets/icons/editor-text/perspective.svg"
+    },
+    {
+      "id": "editor-text/scale-01",
+      "section": "editor-text",
+      "name": "scale-01",
+      "nodeId": "1266:4437",
+      "src": "assets/icons/editor-text/scale-01.svg"
+    },
+    {
+      "id": "editor-text/scale-02",
+      "section": "editor-text",
+      "name": "scale-02",
+      "nodeId": "1266:4442",
+      "src": "assets/icons/editor-text/scale-02.svg"
+    },
+    {
+      "id": "editor-text/scale-03",
+      "section": "editor-text",
+      "name": "scale-03",
+      "nodeId": "1266:4447",
+      "src": "assets/icons/editor-text/scale-03.svg"
+    },
+    {
+      "id": "editor-text/scissors-01",
+      "section": "editor-text",
+      "name": "scissors-01",
+      "nodeId": "1266:4452",
+      "src": "assets/icons/editor-text/scissors-01.svg"
+    },
+    {
+      "id": "editor-text/scissors-02",
+      "section": "editor-text",
+      "name": "scissors-02",
+      "nodeId": "1266:4457",
+      "src": "assets/icons/editor-text/scissors-02.svg"
+    },
+    {
+      "id": "editor-text/scissors-03",
+      "section": "editor-text",
+      "name": "scissors-03",
+      "nodeId": "1266:4462",
+      "src": "assets/icons/editor-text/scissors-03.svg"
+    },
+    {
+      "id": "editor-text/scissors-04",
+      "section": "editor-text",
+      "name": "scissors-04",
+      "nodeId": "1266:4467",
+      "src": "assets/icons/editor-text/scissors-04.svg"
+    },
+    {
+      "id": "editor-text/skew",
+      "section": "editor-text",
+      "name": "skew",
+      "nodeId": "1266:4473",
+      "src": "assets/icons/editor-text/skew.svg"
+    },
+    {
+      "id": "editor-text/superscript",
+      "section": "editor-text",
+      "name": "superscript",
+      "nodeId": "1266:4478",
+      "src": "assets/icons/editor-text/superscript.svg"
+    },
+    {
+      "id": "editor-text/text-input-01",
+      "section": "editor-text",
+      "name": "text-input-01",
+      "nodeId": "1266:4483",
+      "src": "assets/icons/editor-text/text-input-01.svg"
+    },
+    {
+      "id": "editor-text/text-input-02",
+      "section": "editor-text",
+      "name": "text-input-02",
+      "nodeId": "1266:4489",
+      "src": "assets/icons/editor-text/text-input-02.svg"
+    },
+    {
+      "id": "editor-text/transform",
+      "section": "editor-text",
+      "name": "transform",
+      "nodeId": "1266:4494",
+      "src": "assets/icons/editor-text/transform.svg"
+    },
+    {
+      "id": "editor-text/type-01",
+      "section": "editor-text",
+      "name": "type-01",
+      "nodeId": "1266:4499",
+      "src": "assets/icons/editor-text/type-01.svg"
+    },
+    {
+      "id": "editor-text/type-02",
+      "section": "editor-text",
+      "name": "type-02",
+      "nodeId": "1266:4504",
+      "src": "assets/icons/editor-text/type-02.svg"
+    },
+    {
+      "id": "editor-text/type-03",
+      "section": "editor-text",
+      "name": "type-03",
+      "nodeId": "1266:4509",
+      "src": "assets/icons/editor-text/type-03.svg"
+    },
+    {
+      "id": "editor-text/type-strike-01",
+      "section": "editor-text",
+      "name": "type-strike-01",
+      "nodeId": "1266:4514",
+      "src": "assets/icons/editor-text/type-strike-01.svg"
+    },
+    {
+      "id": "editor-text/type-strike-02",
+      "section": "editor-text",
+      "name": "type-strike-02",
+      "nodeId": "1266:4519",
+      "src": "assets/icons/editor-text/type-strike-02.svg"
+    },
+    {
+      "id": "editor-text/underline-01",
+      "section": "editor-text",
+      "name": "underline-01",
+      "nodeId": "1266:4524",
+      "src": "assets/icons/editor-text/underline-01.svg"
+    },
+    {
+      "id": "editor-text/underline-02",
+      "section": "editor-text",
+      "name": "underline-02",
+      "nodeId": "1266:4529",
+      "src": "assets/icons/editor-text/underline-02.svg"
+    },
+    {
+      "id": "editor-text/zoom-in",
+      "section": "editor-text",
+      "name": "zoom-in",
+      "nodeId": "1266:4534",
+      "src": "assets/icons/editor-text/zoom-in.svg"
+    },
+    {
+      "id": "editor-text/zoom-out",
+      "section": "editor-text",
+      "name": "zoom-out",
+      "nodeId": "1266:4539",
+      "src": "assets/icons/editor-text/zoom-out.svg"
+    },
+    {
+      "id": "education/atom",
+      "section": "education",
+      "name": "atom",
+      "nodeId": "1266:4601",
+      "src": "assets/icons/education/atom.svg"
+    },
+    {
+      "id": "education/book-01",
+      "section": "education",
+      "name": "book-01",
+      "nodeId": "1266:4606",
+      "src": "assets/icons/education/book-01.svg"
+    },
+    {
+      "id": "education/book-02",
+      "section": "education",
+      "name": "book-02",
+      "nodeId": "1266:4611",
+      "src": "assets/icons/education/book-02.svg"
+    },
+    {
+      "id": "education/book-03",
+      "section": "education",
+      "name": "book-03",
+      "nodeId": "1266:4616",
+      "src": "assets/icons/education/book-03.svg"
+    },
+    {
+      "id": "education/book-04",
+      "section": "education",
+      "name": "book-04",
+      "nodeId": "1266:4622",
+      "src": "assets/icons/education/book-04.svg"
+    },
+    {
+      "id": "education/book-05",
+      "section": "education",
+      "name": "book-05",
+      "nodeId": "1266:4627",
+      "src": "assets/icons/education/book-05.svg"
+    },
+    {
+      "id": "education/book-06",
+      "section": "education",
+      "name": "book-06",
+      "nodeId": "1266:4632",
+      "src": "assets/icons/education/book-06.svg"
+    },
+    {
+      "id": "education/calculator-01",
+      "section": "education",
+      "name": "calculator-01",
+      "nodeId": "1266:4637",
+      "src": "assets/icons/education/calculator-01.svg"
+    },
+    {
+      "id": "education/glasses-01-2",
+      "section": "education",
+      "name": "glasses-01-2",
+      "nodeId": "1266:4653",
+      "src": "assets/icons/education/glasses-01-2.svg"
+    },
+    {
+      "id": "education/globe-01",
+      "section": "education",
+      "name": "globe-01",
+      "nodeId": "1266:4664",
+      "src": "assets/icons/education/globe-01.svg"
+    },
+    {
+      "id": "education/globe-02",
+      "section": "education",
+      "name": "globe-02",
+      "nodeId": "1266:4669",
+      "src": "assets/icons/education/globe-02.svg"
+    },
+    {
+      "id": "education/graduation-cap-01",
+      "section": "education",
+      "name": "graduation-cap-01",
+      "nodeId": "1266:4674",
+      "src": "assets/icons/education/graduation-cap-01.svg"
+    },
+    {
+      "id": "education/graduation-cap-02",
+      "section": "education",
+      "name": "graduation-cap-02",
+      "nodeId": "1266:4679",
+      "src": "assets/icons/education/graduation-cap-02.svg"
+    },
+    {
+      "id": "education/ruler",
+      "section": "education",
+      "name": "ruler",
+      "nodeId": "1266:4685",
+      "src": "assets/icons/education/ruler.svg"
+    },
+    {
+      "id": "files/-",
+      "section": "files",
+      "name": "-",
+      "nodeId": "1266:2395",
+      "src": "assets/icons/files/-.svg"
+    },
+    {
+      "id": "files/file-01",
+      "section": "files",
+      "name": "file-01",
+      "nodeId": "1266:2242",
+      "src": "assets/icons/files/file-01.svg"
+    },
+    {
+      "id": "files/file-02",
+      "section": "files",
+      "name": "file-02",
+      "nodeId": "1266:2247",
+      "src": "assets/icons/files/file-02.svg"
+    },
+    {
+      "id": "files/file-03",
+      "section": "files",
+      "name": "file-03",
+      "nodeId": "1266:2252",
+      "src": "assets/icons/files/file-03.svg"
+    },
+    {
+      "id": "files/file-04",
+      "section": "files",
+      "name": "file-04",
+      "nodeId": "1266:2257",
+      "src": "assets/icons/files/file-04.svg"
+    },
+    {
+      "id": "files/file-05",
+      "section": "files",
+      "name": "file-05",
+      "nodeId": "1266:2262",
+      "src": "assets/icons/files/file-05.svg"
+    },
+    {
+      "id": "files/file-06",
+      "section": "files",
+      "name": "file-06",
+      "nodeId": "1266:2267",
+      "src": "assets/icons/files/file-06.svg"
+    },
+    {
+      "id": "files/file-attach-01",
+      "section": "files",
+      "name": "file-attach-01",
+      "nodeId": "1266:2227",
+      "src": "assets/icons/files/file-attach-01.svg"
+    },
+    {
+      "id": "files/file-attach-02",
+      "section": "files",
+      "name": "file-attach-02",
+      "nodeId": "1266:2232",
+      "src": "assets/icons/files/file-attach-02.svg"
+    },
+    {
+      "id": "files/file-attach-03",
+      "section": "files",
+      "name": "file-attach-03",
+      "nodeId": "1266:2237",
+      "src": "assets/icons/files/file-attach-03.svg"
+    },
+    {
+      "id": "files/file-branch",
+      "section": "files",
+      "name": "file-branch",
+      "nodeId": "1266:2272",
+      "src": "assets/icons/files/file-branch.svg"
+    },
+    {
+      "id": "files/file-check-01",
+      "section": "files",
+      "name": "file-check-01",
+      "nodeId": "1266:2277",
+      "src": "assets/icons/files/file-check-01.svg"
+    },
+    {
+      "id": "files/file-check-02",
+      "section": "files",
+      "name": "file-check-02",
+      "nodeId": "1266:2283",
+      "src": "assets/icons/files/file-check-02.svg"
+    },
+    {
+      "id": "files/file-down-01",
+      "section": "files",
+      "name": "file-down-01",
+      "nodeId": "1266:2288",
+      "src": "assets/icons/files/file-down-01.svg"
+    },
+    {
+      "id": "files/file-down-02",
+      "section": "files",
+      "name": "file-down-02",
+      "nodeId": "1266:2293",
+      "src": "assets/icons/files/file-down-02.svg"
+    },
+    {
+      "id": "files/file-edit-01",
+      "section": "files",
+      "name": "file-edit-01",
+      "nodeId": "1266:2298",
+      "src": "assets/icons/files/file-edit-01.svg"
+    },
+    {
+      "id": "files/file-edit-02",
+      "section": "files",
+      "name": "file-edit-02",
+      "nodeId": "1266:2303",
+      "src": "assets/icons/files/file-edit-02.svg"
+    },
+    {
+      "id": "files/file-eye-01",
+      "section": "files",
+      "name": "file-eye-01",
+      "nodeId": "1266:2308",
+      "src": "assets/icons/files/file-eye-01.svg"
+    },
+    {
+      "id": "files/file-eye-02",
+      "section": "files",
+      "name": "file-eye-02",
+      "nodeId": "1266:2313",
+      "src": "assets/icons/files/file-eye-02.svg"
+    },
+    {
+      "id": "files/file-minus-01",
+      "section": "files",
+      "name": "file-minus-01",
+      "nodeId": "1266:2318",
+      "src": "assets/icons/files/file-minus-01.svg"
+    },
+    {
+      "id": "files/file-minus-02",
+      "section": "files",
+      "name": "file-minus-02",
+      "nodeId": "1266:2323",
+      "src": "assets/icons/files/file-minus-02.svg"
+    },
+    {
+      "id": "files/file-multiple",
+      "section": "files",
+      "name": "file-multiple",
+      "nodeId": "1266:2328",
+      "src": "assets/icons/files/file-multiple.svg"
+    },
+    {
+      "id": "files/file-none",
+      "section": "files",
+      "name": "file-none",
+      "nodeId": "1266:2333",
+      "src": "assets/icons/files/file-none.svg"
+    },
+    {
+      "id": "files/file-plus-01",
+      "section": "files",
+      "name": "file-plus-01",
+      "nodeId": "1266:2339",
+      "src": "assets/icons/files/file-plus-01.svg"
+    },
+    {
+      "id": "files/file-plus-02",
+      "section": "files",
+      "name": "file-plus-02",
+      "nodeId": "1266:2344",
+      "src": "assets/icons/files/file-plus-02.svg"
+    },
+    {
+      "id": "files/file-question-01",
+      "section": "files",
+      "name": "file-question-01",
+      "nodeId": "1266:2349",
+      "src": "assets/icons/files/file-question-01.svg"
+    },
+    {
+      "id": "files/file-question-02",
+      "section": "files",
+      "name": "file-question-02",
+      "nodeId": "1266:2354",
+      "src": "assets/icons/files/file-question-02.svg"
+    },
+    {
+      "id": "files/file-return-01",
+      "section": "files",
+      "name": "file-return-01",
+      "nodeId": "1266:2359",
+      "src": "assets/icons/files/file-return-01.svg"
+    },
+    {
+      "id": "files/file-return-02",
+      "section": "files",
+      "name": "file-return-02",
+      "nodeId": "1266:2364",
+      "src": "assets/icons/files/file-return-02.svg"
+    },
+    {
+      "id": "files/file-search-01",
+      "section": "files",
+      "name": "file-search-01",
+      "nodeId": "1266:2369",
+      "src": "assets/icons/files/file-search-01.svg"
+    },
+    {
+      "id": "files/file-search-02",
+      "section": "files",
+      "name": "file-search-02",
+      "nodeId": "1266:2374",
+      "src": "assets/icons/files/file-search-02.svg"
+    },
+    {
+      "id": "files/file-shred",
+      "section": "files",
+      "name": "file-shred",
+      "nodeId": "1266:2379",
+      "src": "assets/icons/files/file-shred.svg"
+    },
+    {
+      "id": "files/file-up-01",
+      "section": "files",
+      "name": "file-up-01",
+      "nodeId": "1266:2384",
+      "src": "assets/icons/files/file-up-01.svg"
+    },
+    {
+      "id": "files/file-up-02",
+      "section": "files",
+      "name": "file-up-02",
+      "nodeId": "1266:2389",
+      "src": "assets/icons/files/file-up-02.svg"
+    },
+    {
+      "id": "files/file-x-02",
+      "section": "files",
+      "name": "file-x-02",
+      "nodeId": "1266:2400",
+      "src": "assets/icons/files/file-x-02.svg"
+    },
+    {
+      "id": "files/folder",
+      "section": "files",
+      "name": "folder",
+      "nodeId": "1266:2405",
+      "src": "assets/icons/files/folder.svg"
+    },
+    {
+      "id": "files/folder-down-01",
+      "section": "files",
+      "name": "folder-down-01",
+      "nodeId": "1266:2410",
+      "src": "assets/icons/files/folder-down-01.svg"
+    },
+    {
+      "id": "files/folder-down-02",
+      "section": "files",
+      "name": "folder-down-02",
+      "nodeId": "1266:2415",
+      "src": "assets/icons/files/folder-down-02.svg"
+    },
+    {
+      "id": "files/folder-minus-01",
+      "section": "files",
+      "name": "folder-minus-01",
+      "nodeId": "1266:2425",
+      "src": "assets/icons/files/folder-minus-01.svg"
+    },
+    {
+      "id": "files/folder-minus-01-2",
+      "section": "files",
+      "name": "folder-minus-01-2",
+      "nodeId": "1266:2420",
+      "src": "assets/icons/files/folder-minus-01-2.svg"
+    },
+    {
+      "id": "files/folder-open-01",
+      "section": "files",
+      "name": "folder-open-01",
+      "nodeId": "1266:2430",
+      "src": "assets/icons/files/folder-open-01.svg"
+    },
+    {
+      "id": "files/folder-open-02",
+      "section": "files",
+      "name": "folder-open-02",
+      "nodeId": "1266:2435",
+      "src": "assets/icons/files/folder-open-02.svg"
+    },
+    {
+      "id": "files/folder-open-03",
+      "section": "files",
+      "name": "folder-open-03",
+      "nodeId": "1266:2440",
+      "src": "assets/icons/files/folder-open-03.svg"
+    },
+    {
+      "id": "files/folder-plus-01",
+      "section": "files",
+      "name": "folder-plus-01",
+      "nodeId": "1266:2445",
+      "src": "assets/icons/files/folder-plus-01.svg"
+    },
+    {
+      "id": "files/folder-plus-02",
+      "section": "files",
+      "name": "folder-plus-02",
+      "nodeId": "1266:2451",
+      "src": "assets/icons/files/folder-plus-02.svg"
+    },
+    {
+      "id": "files/folder-search-01",
+      "section": "files",
+      "name": "folder-search-01",
+      "nodeId": "1266:2456",
+      "src": "assets/icons/files/folder-search-01.svg"
+    },
+    {
+      "id": "files/folder-search-02",
+      "section": "files",
+      "name": "folder-search-02",
+      "nodeId": "1266:2461",
+      "src": "assets/icons/files/folder-search-02.svg"
+    },
+    {
+      "id": "files/folder-up-01",
+      "section": "files",
+      "name": "folder-up-01",
+      "nodeId": "1266:2466",
+      "src": "assets/icons/files/folder-up-01.svg"
+    },
+    {
+      "id": "files/folder-up-02",
+      "section": "files",
+      "name": "folder-up-02",
+      "nodeId": "1266:2471",
+      "src": "assets/icons/files/folder-up-02.svg"
+    },
+    {
+      "id": "files/folder-x-01",
+      "section": "files",
+      "name": "folder-x-01",
+      "nodeId": "1266:2476",
+      "src": "assets/icons/files/folder-x-01.svg"
+    },
+    {
+      "id": "files/folder-x-02",
+      "section": "files",
+      "name": "folder-x-02",
+      "nodeId": "1266:2481",
+      "src": "assets/icons/files/folder-x-02.svg"
+    },
+    {
+      "id": "files/paperclip-01",
+      "section": "files",
+      "name": "paperclip-01",
+      "nodeId": "1266:2486",
+      "src": "assets/icons/files/paperclip-01.svg"
+    },
+    {
+      "id": "files/paperclip-02",
+      "section": "files",
+      "name": "paperclip-02",
+      "nodeId": "1266:2491",
+      "src": "assets/icons/files/paperclip-02.svg"
+    },
+    {
+      "id": "finance/bag-01",
+      "section": "finance",
+      "name": "bag-01",
+      "nodeId": "1266:1197",
+      "src": "assets/icons/finance/bag-01.svg"
+    },
+    {
+      "id": "finance/bag-02",
+      "section": "finance",
+      "name": "bag-02",
+      "nodeId": "1266:1202",
+      "src": "assets/icons/finance/bag-02.svg"
+    },
+    {
+      "id": "finance/bag-03",
+      "section": "finance",
+      "name": "bag-03",
+      "nodeId": "1266:1207",
+      "src": "assets/icons/finance/bag-03.svg"
+    },
+    {
+      "id": "finance/bag-04",
+      "section": "finance",
+      "name": "bag-04",
+      "nodeId": "1266:1212",
+      "src": "assets/icons/finance/bag-04.svg"
+    },
+    {
+      "id": "finance/bag-05",
+      "section": "finance",
+      "name": "bag-05",
+      "nodeId": "1266:1217",
+      "src": "assets/icons/finance/bag-05.svg"
+    },
+    {
+      "id": "finance/bank",
+      "section": "finance",
+      "name": "bank",
+      "nodeId": "1266:1222",
+      "src": "assets/icons/finance/bank.svg"
+    },
+    {
+      "id": "finance/bank-note-01",
+      "section": "finance",
+      "name": "bank-note-01",
+      "nodeId": "1266:1227",
+      "src": "assets/icons/finance/bank-note-01.svg"
+    },
+    {
+      "id": "finance/bank-note-02",
+      "section": "finance",
+      "name": "bank-note-02",
+      "nodeId": "1266:1232",
+      "src": "assets/icons/finance/bank-note-02.svg"
+    },
+    {
+      "id": "finance/bank-note-03",
+      "section": "finance",
+      "name": "bank-note-03",
+      "nodeId": "1266:1237",
+      "src": "assets/icons/finance/bank-note-03.svg"
+    },
+    {
+      "id": "finance/bank-note-04",
+      "section": "finance",
+      "name": "bank-note-04",
+      "nodeId": "1266:1242",
+      "src": "assets/icons/finance/bank-note-04.svg"
+    },
+    {
+      "id": "finance/bank-note-05",
+      "section": "finance",
+      "name": "bank-note-05",
+      "nodeId": "1266:1247",
+      "src": "assets/icons/finance/bank-note-05.svg"
+    },
+    {
+      "id": "finance/bank-note-06",
+      "section": "finance",
+      "name": "bank-note-06",
+      "nodeId": "1266:1252",
+      "src": "assets/icons/finance/bank-note-06.svg"
+    },
+    {
+      "id": "finance/card-01",
+      "section": "finance",
+      "name": "card-01",
+      "nodeId": "1266:1258",
+      "src": "assets/icons/finance/card-01.svg"
+    },
+    {
+      "id": "finance/card-02",
+      "section": "finance",
+      "name": "card-02",
+      "nodeId": "1266:1263",
+      "src": "assets/icons/finance/card-02.svg"
+    },
+    {
+      "id": "finance/card-add",
+      "section": "finance",
+      "name": "card-add",
+      "nodeId": "1266:1268",
+      "src": "assets/icons/finance/card-add.svg"
+    },
+    {
+      "id": "finance/card-check",
+      "section": "finance",
+      "name": "card-check",
+      "nodeId": "1266:1273",
+      "src": "assets/icons/finance/card-check.svg"
+    },
+    {
+      "id": "finance/card-down",
+      "section": "finance",
+      "name": "card-down",
+      "nodeId": "1266:1278",
+      "src": "assets/icons/finance/card-down.svg"
+    },
+    {
+      "id": "finance/card-edit",
+      "section": "finance",
+      "name": "card-edit",
+      "nodeId": "1266:1283",
+      "src": "assets/icons/finance/card-edit.svg"
+    },
+    {
+      "id": "finance/card-lock",
+      "section": "finance",
+      "name": "card-lock",
+      "nodeId": "1266:1288",
+      "src": "assets/icons/finance/card-lock.svg"
+    },
+    {
+      "id": "finance/card-minus",
+      "section": "finance",
+      "name": "card-minus",
+      "nodeId": "1266:1293",
+      "src": "assets/icons/finance/card-minus.svg"
+    },
+    {
+      "id": "finance/card-number",
+      "section": "finance",
+      "name": "card-number",
+      "nodeId": "1266:1298",
+      "src": "assets/icons/finance/card-number.svg"
+    },
+    {
+      "id": "finance/card-shield",
+      "section": "finance",
+      "name": "card-shield",
+      "nodeId": "1266:1303",
+      "src": "assets/icons/finance/card-shield.svg"
+    },
+    {
+      "id": "finance/card-up",
+      "section": "finance",
+      "name": "card-up",
+      "nodeId": "1266:1308",
+      "src": "assets/icons/finance/card-up.svg"
+    },
+    {
+      "id": "finance/card-x",
+      "section": "finance",
+      "name": "card-x",
+      "nodeId": "1266:1313",
+      "src": "assets/icons/finance/card-x.svg"
+    },
+    {
+      "id": "finance/cart",
+      "section": "finance",
+      "name": "cart",
+      "nodeId": "1266:1318",
+      "src": "assets/icons/finance/cart.svg"
+    },
+    {
+      "id": "finance/coin-broken",
+      "section": "finance",
+      "name": "coin-broken",
+      "nodeId": "1266:1329",
+      "src": "assets/icons/finance/coin-broken.svg"
+    },
+    {
+      "id": "finance/coin-hand",
+      "section": "finance",
+      "name": "coin-hand",
+      "nodeId": "1266:1334",
+      "src": "assets/icons/finance/coin-hand.svg"
+    },
+    {
+      "id": "finance/coin-number",
+      "section": "finance",
+      "name": "coin-number",
+      "nodeId": "1266:1339",
+      "src": "assets/icons/finance/coin-number.svg"
+    },
+    {
+      "id": "finance/coin-unbroken",
+      "section": "finance",
+      "name": "coin-unbroken",
+      "nodeId": "1266:1344",
+      "src": "assets/icons/finance/coin-unbroken.svg"
+    },
+    {
+      "id": "finance/coins",
+      "section": "finance",
+      "name": "coins",
+      "nodeId": "1266:1324",
+      "src": "assets/icons/finance/coins.svg"
+    },
+    {
+      "id": "finance/coins-rotate",
+      "section": "finance",
+      "name": "coins-rotate",
+      "nodeId": "1266:1192",
+      "src": "assets/icons/finance/coins-rotate.svg"
+    },
+    {
+      "id": "finance/currency-bath",
+      "section": "finance",
+      "name": "currency-bath",
+      "nodeId": "1266:1349",
+      "src": "assets/icons/finance/currency-bath.svg"
+    },
+    {
+      "id": "finance/currency-bitcoin",
+      "section": "finance",
+      "name": "currency-bitcoin",
+      "nodeId": "1266:1354",
+      "src": "assets/icons/finance/currency-bitcoin.svg"
+    },
+    {
+      "id": "finance/currency-cent",
+      "section": "finance",
+      "name": "currency-cent",
+      "nodeId": "1266:1359",
+      "src": "assets/icons/finance/currency-cent.svg"
+    },
+    {
+      "id": "finance/currency-coin-bath",
+      "section": "finance",
+      "name": "currency-coin-bath",
+      "nodeId": "1266:1364",
+      "src": "assets/icons/finance/currency-coin-bath.svg"
+    },
+    {
+      "id": "finance/currency-coin-bitcoin",
+      "section": "finance",
+      "name": "currency-coin-bitcoin",
+      "nodeId": "1266:1369",
+      "src": "assets/icons/finance/currency-coin-bitcoin.svg"
+    },
+    {
+      "id": "finance/currency-coin-cent",
+      "section": "finance",
+      "name": "currency-coin-cent",
+      "nodeId": "1266:1374",
+      "src": "assets/icons/finance/currency-coin-cent.svg"
+    },
+    {
+      "id": "finance/currency-coin-dollar",
+      "section": "finance",
+      "name": "currency-coin-dollar",
+      "nodeId": "1266:1379",
+      "src": "assets/icons/finance/currency-coin-dollar.svg"
+    },
+    {
+      "id": "finance/currency-coin-euro",
+      "section": "finance",
+      "name": "currency-coin-euro",
+      "nodeId": "1266:1384",
+      "src": "assets/icons/finance/currency-coin-euro.svg"
+    },
+    {
+      "id": "finance/currency-coin-pound",
+      "section": "finance",
+      "name": "currency-coin-pound",
+      "nodeId": "1266:1390",
+      "src": "assets/icons/finance/currency-coin-pound.svg"
+    },
+    {
+      "id": "finance/currency-coin-rubel",
+      "section": "finance",
+      "name": "currency-coin-rubel",
+      "nodeId": "1266:1395",
+      "src": "assets/icons/finance/currency-coin-rubel.svg"
+    },
+    {
+      "id": "finance/currency-coin-rupee",
+      "section": "finance",
+      "name": "currency-coin-rupee",
+      "nodeId": "1266:1400",
+      "src": "assets/icons/finance/currency-coin-rupee.svg"
+    },
+    {
+      "id": "finance/currency-coin-yen",
+      "section": "finance",
+      "name": "currency-coin-yen",
+      "nodeId": "1266:1405",
+      "src": "assets/icons/finance/currency-coin-yen.svg"
+    },
+    {
+      "id": "finance/currency-dollar",
+      "section": "finance",
+      "name": "currency-dollar",
+      "nodeId": "1266:1410",
+      "src": "assets/icons/finance/currency-dollar.svg"
+    },
+    {
+      "id": "finance/currency-euro",
+      "section": "finance",
+      "name": "currency-euro",
+      "nodeId": "1266:1415",
+      "src": "assets/icons/finance/currency-euro.svg"
+    },
+    {
+      "id": "finance/currency-pound",
+      "section": "finance",
+      "name": "currency-pound",
+      "nodeId": "1266:1420",
+      "src": "assets/icons/finance/currency-pound.svg"
+    },
+    {
+      "id": "finance/currency-rubel",
+      "section": "finance",
+      "name": "currency-rubel",
+      "nodeId": "1266:1425",
+      "src": "assets/icons/finance/currency-rubel.svg"
+    },
+    {
+      "id": "finance/currency-rupee",
+      "section": "finance",
+      "name": "currency-rupee",
+      "nodeId": "1266:1430",
+      "src": "assets/icons/finance/currency-rupee.svg"
+    },
+    {
+      "id": "finance/currency-yen",
+      "section": "finance",
+      "name": "currency-yen",
+      "nodeId": "1266:1435",
+      "src": "assets/icons/finance/currency-yen.svg"
+    },
+    {
+      "id": "finance/diamond",
+      "section": "finance",
+      "name": "diamond",
+      "nodeId": "1266:1440",
+      "src": "assets/icons/finance/diamond.svg"
+    },
+    {
+      "id": "finance/discount-circle",
+      "section": "finance",
+      "name": "discount-circle",
+      "nodeId": "1266:1445",
+      "src": "assets/icons/finance/discount-circle.svg"
+    },
+    {
+      "id": "finance/discount-square",
+      "section": "finance",
+      "name": "discount-square",
+      "nodeId": "1266:1450",
+      "src": "assets/icons/finance/discount-square.svg"
+    },
+    {
+      "id": "finance/discount-star-01",
+      "section": "finance",
+      "name": "discount-star-01",
+      "nodeId": "1266:1456",
+      "src": "assets/icons/finance/discount-star-01.svg"
+    },
+    {
+      "id": "finance/discount-star-02",
+      "section": "finance",
+      "name": "discount-star-02",
+      "nodeId": "1266:1461",
+      "src": "assets/icons/finance/discount-star-02.svg"
+    },
+    {
+      "id": "finance/discount-star-03",
+      "section": "finance",
+      "name": "discount-star-03",
+      "nodeId": "1266:1466",
+      "src": "assets/icons/finance/discount-star-03.svg"
+    },
+    {
+      "id": "finance/gift-01",
+      "section": "finance",
+      "name": "gift-01",
+      "nodeId": "1266:1471",
+      "src": "assets/icons/finance/gift-01.svg"
+    },
+    {
+      "id": "finance/gift-02",
+      "section": "finance",
+      "name": "gift-02",
+      "nodeId": "1266:1476",
+      "src": "assets/icons/finance/gift-02.svg"
+    },
+    {
+      "id": "finance/receipt",
+      "section": "finance",
+      "name": "receipt",
+      "nodeId": "1266:1481",
+      "src": "assets/icons/finance/receipt.svg"
+    },
+    {
+      "id": "finance/receipt-lines",
+      "section": "finance",
+      "name": "receipt-lines",
+      "nodeId": "1266:1486",
+      "src": "assets/icons/finance/receipt-lines.svg"
+    },
+    {
+      "id": "finance/tag",
+      "section": "finance",
+      "name": "tag",
+      "nodeId": "1266:1491",
+      "src": "assets/icons/finance/tag.svg"
+    },
+    {
+      "id": "finance/wallert-04",
+      "section": "finance",
+      "name": "wallert-04",
+      "nodeId": "1266:1511",
+      "src": "assets/icons/finance/wallert-04.svg"
+    },
+    {
+      "id": "finance/wallet-01",
+      "section": "finance",
+      "name": "wallet-01",
+      "nodeId": "1266:1496",
+      "src": "assets/icons/finance/wallet-01.svg"
+    },
+    {
+      "id": "finance/wallet-02",
+      "section": "finance",
+      "name": "wallet-02",
+      "nodeId": "1266:1501",
+      "src": "assets/icons/finance/wallet-02.svg"
+    },
+    {
+      "id": "finance/wallet-03",
+      "section": "finance",
+      "name": "wallet-03",
+      "nodeId": "1266:1506",
+      "src": "assets/icons/finance/wallet-03.svg"
+    },
+    {
+      "id": "image-camera/camera-01",
+      "section": "image-camera",
+      "name": "camera-01",
+      "nodeId": "1266:2109",
+      "src": "assets/icons/image-camera/camera-01.svg"
+    },
+    {
+      "id": "image-camera/camera-02",
+      "section": "image-camera",
+      "name": "camera-02",
+      "nodeId": "1266:2114",
+      "src": "assets/icons/image-camera/camera-02.svg"
+    },
+    {
+      "id": "image-camera/camera-lens",
+      "section": "image-camera",
+      "name": "camera-lens",
+      "nodeId": "1266:2119",
+      "src": "assets/icons/image-camera/camera-lens.svg"
+    },
+    {
+      "id": "image-camera/camera-off",
+      "section": "image-camera",
+      "name": "camera-off",
+      "nodeId": "1266:2124",
+      "src": "assets/icons/image-camera/camera-off.svg"
+    },
+    {
+      "id": "image-camera/colors-01",
+      "section": "image-camera",
+      "name": "colors-01",
+      "nodeId": "1266:2129",
+      "src": "assets/icons/image-camera/colors-01.svg"
+    },
+    {
+      "id": "image-camera/colors-02",
+      "section": "image-camera",
+      "name": "colors-02",
+      "nodeId": "1266:2135",
+      "src": "assets/icons/image-camera/colors-02.svg"
+    },
+    {
+      "id": "image-camera/flash-off",
+      "section": "image-camera",
+      "name": "flash-off",
+      "nodeId": "1266:2140",
+      "src": "assets/icons/image-camera/flash-off.svg"
+    },
+    {
+      "id": "image-camera/flash-on",
+      "section": "image-camera",
+      "name": "flash-on",
+      "nodeId": "1266:2145",
+      "src": "assets/icons/image-camera/flash-on.svg"
+    },
+    {
+      "id": "image-camera/image-01",
+      "section": "image-camera",
+      "name": "image-01",
+      "nodeId": "1266:2150",
+      "src": "assets/icons/image-camera/image-01.svg"
+    },
+    {
+      "id": "image-camera/image-02",
+      "section": "image-camera",
+      "name": "image-02",
+      "nodeId": "1266:2155",
+      "src": "assets/icons/image-camera/image-02.svg"
+    },
+    {
+      "id": "image-camera/image-03",
+      "section": "image-camera",
+      "name": "image-03",
+      "nodeId": "1266:2161",
+      "src": "assets/icons/image-camera/image-03.svg"
+    },
+    {
+      "id": "image-camera/image-04",
+      "section": "image-camera",
+      "name": "image-04",
+      "nodeId": "1266:2166",
+      "src": "assets/icons/image-camera/image-04.svg"
+    },
+    {
+      "id": "image-camera/image-add",
+      "section": "image-camera",
+      "name": "image-add",
+      "nodeId": "1266:2171",
+      "src": "assets/icons/image-camera/image-add.svg"
+    },
+    {
+      "id": "image-camera/image-avatar",
+      "section": "image-camera",
+      "name": "image-avatar",
+      "nodeId": "1266:2176",
+      "src": "assets/icons/image-camera/image-avatar.svg"
+    },
+    {
+      "id": "image-camera/image-check",
+      "section": "image-camera",
+      "name": "image-check",
+      "nodeId": "1266:2181",
+      "src": "assets/icons/image-camera/image-check.svg"
+    },
+    {
+      "id": "image-camera/image-down",
+      "section": "image-camera",
+      "name": "image-down",
+      "nodeId": "1266:2187",
+      "src": "assets/icons/image-camera/image-down.svg"
+    },
+    {
+      "id": "image-camera/image-focus",
+      "section": "image-camera",
+      "name": "image-focus",
+      "nodeId": "1266:2192",
+      "src": "assets/icons/image-camera/image-focus.svg"
+    },
+    {
+      "id": "image-camera/image-minus",
+      "section": "image-camera",
+      "name": "image-minus",
+      "nodeId": "1266:2197",
+      "src": "assets/icons/image-camera/image-minus.svg"
+    },
+    {
+      "id": "image-camera/image-no-borders",
+      "section": "image-camera",
+      "name": "image-no-borders",
+      "nodeId": "1266:2202",
+      "src": "assets/icons/image-camera/image-no-borders.svg"
+    },
+    {
+      "id": "image-camera/image-question",
+      "section": "image-camera",
+      "name": "image-question",
+      "nodeId": "1266:2207",
+      "src": "assets/icons/image-camera/image-question.svg"
+    },
+    {
+      "id": "image-camera/image-up",
+      "section": "image-camera",
+      "name": "image-up",
+      "nodeId": "1266:2213",
+      "src": "assets/icons/image-camera/image-up.svg"
+    },
+    {
+      "id": "image-camera/image-x",
+      "section": "image-camera",
+      "name": "image-x",
+      "nodeId": "1266:2218",
+      "src": "assets/icons/image-camera/image-x.svg"
+    },
+    {
+      "id": "layout/align-down-01",
+      "section": "layout",
+      "name": "align-down-01",
+      "nodeId": "1266:3207",
+      "src": "assets/icons/layout/align-down-01.svg"
+    },
+    {
+      "id": "layout/align-down-02",
+      "section": "layout",
+      "name": "align-down-02",
+      "nodeId": "1266:3212",
+      "src": "assets/icons/layout/align-down-02.svg"
+    },
+    {
+      "id": "layout/align-horizontal-center-01",
+      "section": "layout",
+      "name": "align-horizontal-center-01",
+      "nodeId": "1266:3217",
+      "src": "assets/icons/layout/align-horizontal-center-01.svg"
+    },
+    {
+      "id": "layout/align-horizontal-center-02",
+      "section": "layout",
+      "name": "align-horizontal-center-02",
+      "nodeId": "1266:3222",
+      "src": "assets/icons/layout/align-horizontal-center-02.svg"
+    },
+    {
+      "id": "layout/align-horizontal-center-03",
+      "section": "layout",
+      "name": "align-horizontal-center-03",
+      "nodeId": "1266:3227",
+      "src": "assets/icons/layout/align-horizontal-center-03.svg"
+    },
+    {
+      "id": "layout/align-left-01",
+      "section": "layout",
+      "name": "align-left-01",
+      "nodeId": "1266:3232",
+      "src": "assets/icons/layout/align-left-01.svg"
+    },
+    {
+      "id": "layout/align-left-02",
+      "section": "layout",
+      "name": "align-left-02",
+      "nodeId": "1266:3237",
+      "src": "assets/icons/layout/align-left-02.svg"
+    },
+    {
+      "id": "layout/align-right-01",
+      "section": "layout",
+      "name": "align-right-01",
+      "nodeId": "1266:3242",
+      "src": "assets/icons/layout/align-right-01.svg"
+    },
+    {
+      "id": "layout/align-right-02",
+      "section": "layout",
+      "name": "align-right-02",
+      "nodeId": "1266:3247",
+      "src": "assets/icons/layout/align-right-02.svg"
+    },
+    {
+      "id": "layout/align-up-01",
+      "section": "layout",
+      "name": "align-up-01",
+      "nodeId": "1266:3252",
+      "src": "assets/icons/layout/align-up-01.svg"
+    },
+    {
+      "id": "layout/align-up-02",
+      "section": "layout",
+      "name": "align-up-02",
+      "nodeId": "1266:3257",
+      "src": "assets/icons/layout/align-up-02.svg"
+    },
+    {
+      "id": "layout/align-vertical-center-01",
+      "section": "layout",
+      "name": "align-vertical-center-01",
+      "nodeId": "1266:3262",
+      "src": "assets/icons/layout/align-vertical-center-01.svg"
+    },
+    {
+      "id": "layout/align-vertical-center-02",
+      "section": "layout",
+      "name": "align-vertical-center-02",
+      "nodeId": "1266:3267",
+      "src": "assets/icons/layout/align-vertical-center-02.svg"
+    },
+    {
+      "id": "layout/align-vertical-center-03",
+      "section": "layout",
+      "name": "align-vertical-center-03",
+      "nodeId": "1266:3273",
+      "src": "assets/icons/layout/align-vertical-center-03.svg"
+    },
+    {
+      "id": "layout/center",
+      "section": "layout",
+      "name": "center",
+      "nodeId": "1266:3278",
+      "src": "assets/icons/layout/center.svg"
+    },
+    {
+      "id": "layout/column-horizontal-01",
+      "section": "layout",
+      "name": "column-horizontal-01",
+      "nodeId": "1266:3283",
+      "src": "assets/icons/layout/column-horizontal-01.svg"
+    },
+    {
+      "id": "layout/column-horizontal-02",
+      "section": "layout",
+      "name": "column-horizontal-02",
+      "nodeId": "1266:3288",
+      "src": "assets/icons/layout/column-horizontal-02.svg"
+    },
+    {
+      "id": "layout/column-horizontal-03",
+      "section": "layout",
+      "name": "column-horizontal-03",
+      "nodeId": "1266:3293",
+      "src": "assets/icons/layout/column-horizontal-03.svg"
+    },
+    {
+      "id": "layout/column-vertical-01",
+      "section": "layout",
+      "name": "column-vertical-01",
+      "nodeId": "1266:3298",
+      "src": "assets/icons/layout/column-vertical-01.svg"
+    },
+    {
+      "id": "layout/column-vertical-02",
+      "section": "layout",
+      "name": "column-vertical-02",
+      "nodeId": "1266:3303",
+      "src": "assets/icons/layout/column-vertical-02.svg"
+    },
+    {
+      "id": "layout/column-vertical-03",
+      "section": "layout",
+      "name": "column-vertical-03",
+      "nodeId": "1266:3308",
+      "src": "assets/icons/layout/column-vertical-03.svg"
+    },
+    {
+      "id": "layout/divider",
+      "section": "layout",
+      "name": "divider",
+      "nodeId": "1266:3313",
+      "src": "assets/icons/layout/divider.svg"
+    },
+    {
+      "id": "layout/flex-align-bottom-01",
+      "section": "layout",
+      "name": "flex-align-bottom-01",
+      "nodeId": "1266:3318",
+      "src": "assets/icons/layout/flex-align-bottom-01.svg"
+    },
+    {
+      "id": "layout/flex-align-center-01",
+      "section": "layout",
+      "name": "flex-align-center-01",
+      "nodeId": "1266:3323",
+      "src": "assets/icons/layout/flex-align-center-01.svg"
+    },
+    {
+      "id": "layout/flex-align-left-01",
+      "section": "layout",
+      "name": "flex-align-left-01",
+      "nodeId": "1266:3328",
+      "src": "assets/icons/layout/flex-align-left-01.svg"
+    },
+    {
+      "id": "layout/flex-align-right-01",
+      "section": "layout",
+      "name": "flex-align-right-01",
+      "nodeId": "1266:3333",
+      "src": "assets/icons/layout/flex-align-right-01.svg"
+    },
+    {
+      "id": "layout/flex-align-spaced-01",
+      "section": "layout",
+      "name": "flex-align-spaced-01",
+      "nodeId": "1266:3339",
+      "src": "assets/icons/layout/flex-align-spaced-01.svg"
+    },
+    {
+      "id": "layout/flex-align-top-01",
+      "section": "layout",
+      "name": "flex-align-top-01",
+      "nodeId": "1266:3344",
+      "src": "assets/icons/layout/flex-align-top-01.svg"
+    },
+    {
+      "id": "layout/flex-columns",
+      "section": "layout",
+      "name": "flex-columns",
+      "nodeId": "1266:3349",
+      "src": "assets/icons/layout/flex-columns.svg"
+    },
+    {
+      "id": "layout/flex-rows",
+      "section": "layout",
+      "name": "flex-rows",
+      "nodeId": "1266:3354",
+      "src": "assets/icons/layout/flex-rows.svg"
+    },
+    {
+      "id": "layout/grid-01",
+      "section": "layout",
+      "name": "grid-01",
+      "nodeId": "1266:3359",
+      "src": "assets/icons/layout/grid-01.svg"
+    },
+    {
+      "id": "layout/grid-02",
+      "section": "layout",
+      "name": "grid-02",
+      "nodeId": "1266:3364",
+      "src": "assets/icons/layout/grid-02.svg"
+    },
+    {
+      "id": "layout/grid-03",
+      "section": "layout",
+      "name": "grid-03",
+      "nodeId": "1266:3369",
+      "src": "assets/icons/layout/grid-03.svg"
+    },
+    {
+      "id": "layout/grid-04-filled",
+      "section": "layout",
+      "name": "grid-04-filled",
+      "nodeId": "1266:3374",
+      "src": "assets/icons/layout/grid-04-filled.svg"
+    },
+    {
+      "id": "layout/intersect",
+      "section": "layout",
+      "name": "intersect",
+      "nodeId": "1266:3379",
+      "src": "assets/icons/layout/intersect.svg"
+    },
+    {
+      "id": "layout/layers-01",
+      "section": "layout",
+      "name": "layers-01",
+      "nodeId": "1266:3384",
+      "src": "assets/icons/layout/layers-01.svg"
+    },
+    {
+      "id": "layout/layers-02",
+      "section": "layout",
+      "name": "layers-02",
+      "nodeId": "1266:3389",
+      "src": "assets/icons/layout/layers-02.svg"
+    },
+    {
+      "id": "layout/layers-03",
+      "section": "layout",
+      "name": "layers-03",
+      "nodeId": "1266:3394",
+      "src": "assets/icons/layout/layers-03.svg"
+    },
+    {
+      "id": "layout/layers-04",
+      "section": "layout",
+      "name": "layers-04",
+      "nodeId": "1266:3399",
+      "src": "assets/icons/layout/layers-04.svg"
+    },
+    {
+      "id": "layout/layers-05",
+      "section": "layout",
+      "name": "layers-05",
+      "nodeId": "1266:3405",
+      "src": "assets/icons/layout/layers-05.svg"
+    },
+    {
+      "id": "layout/layout-01",
+      "section": "layout",
+      "name": "layout-01",
+      "nodeId": "1266:3410",
+      "src": "assets/icons/layout/layout-01.svg"
+    },
+    {
+      "id": "layout/layout-02",
+      "section": "layout",
+      "name": "layout-02",
+      "nodeId": "1266:3415",
+      "src": "assets/icons/layout/layout-02.svg"
+    },
+    {
+      "id": "layout/layout-03",
+      "section": "layout",
+      "name": "layout-03",
+      "nodeId": "1266:3420",
+      "src": "assets/icons/layout/layout-03.svg"
+    },
+    {
+      "id": "layout/layout-04",
+      "section": "layout",
+      "name": "layout-04",
+      "nodeId": "1266:3425",
+      "src": "assets/icons/layout/layout-04.svg"
+    },
+    {
+      "id": "layout/layout-bottom",
+      "section": "layout",
+      "name": "layout-bottom",
+      "nodeId": "1266:3430",
+      "src": "assets/icons/layout/layout-bottom.svg"
+    },
+    {
+      "id": "layout/layout-grid-01",
+      "section": "layout",
+      "name": "layout-grid-01",
+      "nodeId": "1266:3435",
+      "src": "assets/icons/layout/layout-grid-01.svg"
+    },
+    {
+      "id": "layout/layout-left",
+      "section": "layout",
+      "name": "layout-left",
+      "nodeId": "1266:3445",
+      "src": "assets/icons/layout/layout-left.svg"
+    },
+    {
+      "id": "layout/layout-right",
+      "section": "layout",
+      "name": "layout-right",
+      "nodeId": "1266:3440",
+      "src": "assets/icons/layout/layout-right.svg"
+    },
+    {
+      "id": "layout/layout-scale",
+      "section": "layout",
+      "name": "layout-scale",
+      "nodeId": "1266:3450",
+      "src": "assets/icons/layout/layout-scale.svg"
+    },
+    {
+      "id": "layout/layout-top",
+      "section": "layout",
+      "name": "layout-top",
+      "nodeId": "1266:3455",
+      "src": "assets/icons/layout/layout-top.svg"
+    },
+    {
+      "id": "layout/maximise-01",
+      "section": "layout",
+      "name": "maximise-01",
+      "nodeId": "1266:3460",
+      "src": "assets/icons/layout/maximise-01.svg"
+    },
+    {
+      "id": "layout/maximise-02",
+      "section": "layout",
+      "name": "maximise-02",
+      "nodeId": "1266:3465",
+      "src": "assets/icons/layout/maximise-02.svg"
+    },
+    {
+      "id": "layout/minimise-01",
+      "section": "layout",
+      "name": "minimise-01",
+      "nodeId": "1266:3471",
+      "src": "assets/icons/layout/minimise-01.svg"
+    },
+    {
+      "id": "layout/minimise-02",
+      "section": "layout",
+      "name": "minimise-02",
+      "nodeId": "1266:3476",
+      "src": "assets/icons/layout/minimise-02.svg"
+    },
+    {
+      "id": "layout/overlap",
+      "section": "layout",
+      "name": "overlap",
+      "nodeId": "1266:3481",
+      "src": "assets/icons/layout/overlap.svg"
+    },
+    {
+      "id": "layout/space-height",
+      "section": "layout",
+      "name": "space-height",
+      "nodeId": "1266:3486",
+      "src": "assets/icons/layout/space-height.svg"
+    },
+    {
+      "id": "layout/space-horizontal",
+      "section": "layout",
+      "name": "space-horizontal",
+      "nodeId": "1266:3491",
+      "src": "assets/icons/layout/space-horizontal.svg"
+    },
+    {
+      "id": "layout/space-vertical",
+      "section": "layout",
+      "name": "space-vertical",
+      "nodeId": "1266:3496",
+      "src": "assets/icons/layout/space-vertical.svg"
+    },
+    {
+      "id": "layout/space-width",
+      "section": "layout",
+      "name": "space-width",
+      "nodeId": "1266:3501",
+      "src": "assets/icons/layout/space-width.svg"
+    },
+    {
+      "id": "layout/table",
+      "section": "layout",
+      "name": "table",
+      "nodeId": "1266:3506",
+      "src": "assets/icons/layout/table.svg"
+    },
+    {
+      "id": "layout/union",
+      "section": "layout",
+      "name": "union",
+      "nodeId": "1266:3511",
+      "src": "assets/icons/layout/union.svg"
+    },
+    {
+      "id": "maps-travel/box",
+      "section": "maps-travel",
+      "name": "box",
+      "nodeId": "1266:2658",
+      "src": "assets/icons/maps-travel/box.svg"
+    },
+    {
+      "id": "maps-travel/car",
+      "section": "maps-travel",
+      "name": "car",
+      "nodeId": "1266:2822",
+      "src": "assets/icons/maps-travel/car.svg"
+    },
+    {
+      "id": "maps-travel/compass",
+      "section": "maps-travel",
+      "name": "compass",
+      "nodeId": "1266:2802",
+      "src": "assets/icons/maps-travel/compass.svg"
+    },
+    {
+      "id": "maps-travel/globe-01",
+      "section": "maps-travel",
+      "name": "globe-01",
+      "nodeId": "1266:2663",
+      "src": "assets/icons/maps-travel/globe-01.svg"
+    },
+    {
+      "id": "maps-travel/globe-02",
+      "section": "maps-travel",
+      "name": "globe-02",
+      "nodeId": "1266:2668",
+      "src": "assets/icons/maps-travel/globe-02.svg"
+    },
+    {
+      "id": "maps-travel/globe-03",
+      "section": "maps-travel",
+      "name": "globe-03",
+      "nodeId": "1266:2673",
+      "src": "assets/icons/maps-travel/globe-03.svg"
+    },
+    {
+      "id": "maps-travel/globe-04",
+      "section": "maps-travel",
+      "name": "globe-04",
+      "nodeId": "1266:2678",
+      "src": "assets/icons/maps-travel/globe-04.svg"
+    },
+    {
+      "id": "maps-travel/globe-05",
+      "section": "maps-travel",
+      "name": "globe-05",
+      "nodeId": "1266:2683",
+      "src": "assets/icons/maps-travel/globe-05.svg"
+    },
+    {
+      "id": "maps-travel/luggage-01",
+      "section": "maps-travel",
+      "name": "luggage-01",
+      "nodeId": "1266:2688",
+      "src": "assets/icons/maps-travel/luggage-01.svg"
+    },
+    {
+      "id": "maps-travel/luggage-02",
+      "section": "maps-travel",
+      "name": "luggage-02",
+      "nodeId": "1266:2694",
+      "src": "assets/icons/maps-travel/luggage-02.svg"
+    },
+    {
+      "id": "maps-travel/luggage-03",
+      "section": "maps-travel",
+      "name": "luggage-03",
+      "nodeId": "1266:2699",
+      "src": "assets/icons/maps-travel/luggage-03.svg"
+    },
+    {
+      "id": "maps-travel/luggage-04",
+      "section": "maps-travel",
+      "name": "luggage-04",
+      "nodeId": "1266:2704",
+      "src": "assets/icons/maps-travel/luggage-04.svg"
+    },
+    {
+      "id": "maps-travel/map-01",
+      "section": "maps-travel",
+      "name": "map-01",
+      "nodeId": "1266:2714",
+      "src": "assets/icons/maps-travel/map-01.svg"
+    },
+    {
+      "id": "maps-travel/map-01-2",
+      "section": "maps-travel",
+      "name": "map-01-2",
+      "nodeId": "1266:2709",
+      "src": "assets/icons/maps-travel/map-01-2.svg"
+    },
+    {
+      "id": "maps-travel/map-02",
+      "section": "maps-travel",
+      "name": "map-02",
+      "nodeId": "1266:2719",
+      "src": "assets/icons/maps-travel/map-02.svg"
+    },
+    {
+      "id": "maps-travel/map-03",
+      "section": "maps-travel",
+      "name": "map-03",
+      "nodeId": "1266:2724",
+      "src": "assets/icons/maps-travel/map-03.svg"
+    },
+    {
+      "id": "maps-travel/map-04",
+      "section": "maps-travel",
+      "name": "map-04",
+      "nodeId": "1266:2730",
+      "src": "assets/icons/maps-travel/map-04.svg"
+    },
+    {
+      "id": "maps-travel/marker-01",
+      "section": "maps-travel",
+      "name": "marker-01",
+      "nodeId": "1266:2735",
+      "src": "assets/icons/maps-travel/marker-01.svg"
+    },
+    {
+      "id": "maps-travel/marker-02",
+      "section": "maps-travel",
+      "name": "marker-02",
+      "nodeId": "1266:2740",
+      "src": "assets/icons/maps-travel/marker-02.svg"
+    },
+    {
+      "id": "maps-travel/marker-03",
+      "section": "maps-travel",
+      "name": "marker-03",
+      "nodeId": "1266:2745",
+      "src": "assets/icons/maps-travel/marker-03.svg"
+    },
+    {
+      "id": "maps-travel/marker-04",
+      "section": "maps-travel",
+      "name": "marker-04",
+      "nodeId": "1266:2750",
+      "src": "assets/icons/maps-travel/marker-04.svg"
+    },
+    {
+      "id": "maps-travel/marker-05",
+      "section": "maps-travel",
+      "name": "marker-05",
+      "nodeId": "1266:2755",
+      "src": "assets/icons/maps-travel/marker-05.svg"
+    },
+    {
+      "id": "maps-travel/marker-06",
+      "section": "maps-travel",
+      "name": "marker-06",
+      "nodeId": "1266:2760",
+      "src": "assets/icons/maps-travel/marker-06.svg"
+    },
+    {
+      "id": "maps-travel/passport",
+      "section": "maps-travel",
+      "name": "passport",
+      "nodeId": "1266:2766",
+      "src": "assets/icons/maps-travel/passport.svg"
+    },
+    {
+      "id": "maps-travel/plane",
+      "section": "maps-travel",
+      "name": "plane",
+      "nodeId": "1266:2771",
+      "src": "assets/icons/maps-travel/plane.svg"
+    },
+    {
+      "id": "maps-travel/pointer-01",
+      "section": "maps-travel",
+      "name": "pointer-01",
+      "nodeId": "1266:2776",
+      "src": "assets/icons/maps-travel/pointer-01.svg"
+    },
+    {
+      "id": "maps-travel/pointer-02",
+      "section": "maps-travel",
+      "name": "pointer-02",
+      "nodeId": "1266:2781",
+      "src": "assets/icons/maps-travel/pointer-02.svg"
+    },
+    {
+      "id": "maps-travel/ticket-01",
+      "section": "maps-travel",
+      "name": "ticket-01",
+      "nodeId": "1266:2796",
+      "src": "assets/icons/maps-travel/ticket-01.svg"
+    },
+    {
+      "id": "maps-travel/ticket-02",
+      "section": "maps-travel",
+      "name": "ticket-02",
+      "nodeId": "1266:2807",
+      "src": "assets/icons/maps-travel/ticket-02.svg"
+    },
+    {
+      "id": "maps-travel/train",
+      "section": "maps-travel",
+      "name": "train",
+      "nodeId": "1266:2812",
+      "src": "assets/icons/maps-travel/train.svg"
+    },
+    {
+      "id": "maps-travel/truck",
+      "section": "maps-travel",
+      "name": "truck",
+      "nodeId": "1266:2817",
+      "src": "assets/icons/maps-travel/truck.svg"
+    },
+    {
+      "id": "maps-travel/umbrella",
+      "section": "maps-travel",
+      "name": "umbrella",
+      "nodeId": "1266:2827",
+      "src": "assets/icons/maps-travel/umbrella.svg"
+    },
+    {
+      "id": "security/face-id-01",
+      "section": "security",
+      "name": "face-id-01",
+      "nodeId": "1266:1961",
+      "src": "assets/icons/security/face-id-01.svg"
+    },
+    {
+      "id": "security/face-id-02",
+      "section": "security",
+      "name": "face-id-02",
+      "nodeId": "1266:1966",
+      "src": "assets/icons/security/face-id-02.svg"
+    },
+    {
+      "id": "security/file-lock-01",
+      "section": "security",
+      "name": "file-lock-01",
+      "nodeId": "1266:1971",
+      "src": "assets/icons/security/file-lock-01.svg"
+    },
+    {
+      "id": "security/file-lock-02",
+      "section": "security",
+      "name": "file-lock-02",
+      "nodeId": "1266:1976",
+      "src": "assets/icons/security/file-lock-02.svg"
+    },
+    {
+      "id": "security/file-lock-03",
+      "section": "security",
+      "name": "file-lock-03",
+      "nodeId": "1266:1981",
+      "src": "assets/icons/security/file-lock-03.svg"
+    },
+    {
+      "id": "security/file-shield-01",
+      "section": "security",
+      "name": "file-shield-01",
+      "nodeId": "1266:1986",
+      "src": "assets/icons/security/file-shield-01.svg"
+    },
+    {
+      "id": "security/file-shield-02",
+      "section": "security",
+      "name": "file-shield-02",
+      "nodeId": "1266:1992",
+      "src": "assets/icons/security/file-shield-02.svg"
+    },
+    {
+      "id": "security/file-shield-03",
+      "section": "security",
+      "name": "file-shield-03",
+      "nodeId": "1266:1997",
+      "src": "assets/icons/security/file-shield-03.svg"
+    },
+    {
+      "id": "security/fingerpint-01",
+      "section": "security",
+      "name": "fingerpint-01",
+      "nodeId": "1266:2002",
+      "src": "assets/icons/security/fingerpint-01.svg"
+    },
+    {
+      "id": "security/fingerpint-02",
+      "section": "security",
+      "name": "fingerpint-02",
+      "nodeId": "1266:2007",
+      "src": "assets/icons/security/fingerpint-02.svg"
+    },
+    {
+      "id": "security/folder-shield",
+      "section": "security",
+      "name": "folder-shield",
+      "nodeId": "1266:2012",
+      "src": "assets/icons/security/folder-shield.svg"
+    },
+    {
+      "id": "security/key-01",
+      "section": "security",
+      "name": "key-01",
+      "nodeId": "1266:2017",
+      "src": "assets/icons/security/key-01.svg"
+    },
+    {
+      "id": "security/key-02",
+      "section": "security",
+      "name": "key-02",
+      "nodeId": "1266:2023",
+      "src": "assets/icons/security/key-02.svg"
+    },
+    {
+      "id": "security/lock-01",
+      "section": "security",
+      "name": "lock-01",
+      "nodeId": "1266:2028",
+      "src": "assets/icons/security/lock-01.svg"
+    },
+    {
+      "id": "security/lock-02",
+      "section": "security",
+      "name": "lock-02",
+      "nodeId": "1266:2033",
+      "src": "assets/icons/security/lock-02.svg"
+    },
+    {
+      "id": "security/lock-03",
+      "section": "security",
+      "name": "lock-03",
+      "nodeId": "1266:2038",
+      "src": "assets/icons/security/lock-03.svg"
+    },
+    {
+      "id": "security/lock-04",
+      "section": "security",
+      "name": "lock-04",
+      "nodeId": "1266:2043",
+      "src": "assets/icons/security/lock-04.svg"
+    },
+    {
+      "id": "security/lock-open-01",
+      "section": "security",
+      "name": "lock-open-01",
+      "nodeId": "1266:2048",
+      "src": "assets/icons/security/lock-open-01.svg"
+    },
+    {
+      "id": "security/lock-open-02",
+      "section": "security",
+      "name": "lock-open-02",
+      "nodeId": "1266:2054",
+      "src": "assets/icons/security/lock-open-02.svg"
+    },
+    {
+      "id": "security/lock-open-03",
+      "section": "security",
+      "name": "lock-open-03",
+      "nodeId": "1266:2059",
+      "src": "assets/icons/security/lock-open-03.svg"
+    },
+    {
+      "id": "security/lock-open-04",
+      "section": "security",
+      "name": "lock-open-04",
+      "nodeId": "1266:2064",
+      "src": "assets/icons/security/lock-open-04.svg"
+    },
+    {
+      "id": "security/password-01",
+      "section": "security",
+      "name": "password-01",
+      "nodeId": "1266:2069",
+      "src": "assets/icons/security/password-01.svg"
+    },
+    {
+      "id": "security/password-02",
+      "section": "security",
+      "name": "password-02",
+      "nodeId": "1266:2074",
+      "src": "assets/icons/security/password-02.svg"
+    },
+    {
+      "id": "security/scan",
+      "section": "security",
+      "name": "scan",
+      "nodeId": "1266:2079",
+      "src": "assets/icons/security/scan.svg"
+    },
+    {
+      "id": "security/shield-01",
+      "section": "security",
+      "name": "shield-01",
+      "nodeId": "1266:2085",
+      "src": "assets/icons/security/shield-01.svg"
+    },
+    {
+      "id": "security/shield-02",
+      "section": "security",
+      "name": "shield-02",
+      "nodeId": "1266:2090",
+      "src": "assets/icons/security/shield-02.svg"
+    },
+    {
+      "id": "security/shield-check",
+      "section": "security",
+      "name": "shield-check",
+      "nodeId": "1266:2095",
+      "src": "assets/icons/security/shield-check.svg"
+    },
+    {
+      "id": "security/shield-plus",
+      "section": "security",
+      "name": "shield-plus",
+      "nodeId": "1266:2100",
+      "src": "assets/icons/security/shield-plus.svg"
+    },
+    {
+      "id": "shapes/circle",
+      "section": "shapes",
+      "name": "circle",
+      "nodeId": "1266:4548",
+      "src": "assets/icons/shapes/circle.svg"
+    },
+    {
+      "id": "shapes/diamond",
+      "section": "shapes",
+      "name": "diamond",
+      "nodeId": "1266:4553",
+      "src": "assets/icons/shapes/diamond.svg"
+    },
+    {
+      "id": "shapes/hexagon",
+      "section": "shapes",
+      "name": "hexagon",
+      "nodeId": "1266:4559",
+      "src": "assets/icons/shapes/hexagon.svg"
+    },
+    {
+      "id": "shapes/octagon",
+      "section": "shapes",
+      "name": "octagon",
+      "nodeId": "1266:4564",
+      "src": "assets/icons/shapes/octagon.svg"
+    },
+    {
+      "id": "shapes/pentagon",
+      "section": "shapes",
+      "name": "pentagon",
+      "nodeId": "1266:4570",
+      "src": "assets/icons/shapes/pentagon.svg"
+    },
+    {
+      "id": "shapes/square",
+      "section": "shapes",
+      "name": "square",
+      "nodeId": "1266:4575",
+      "src": "assets/icons/shapes/square.svg"
+    },
+    {
+      "id": "shapes/star-01",
+      "section": "shapes",
+      "name": "star-01",
+      "nodeId": "1266:4581",
+      "src": "assets/icons/shapes/star-01.svg"
+    },
+    {
+      "id": "shapes/star-02",
+      "section": "shapes",
+      "name": "star-02",
+      "nodeId": "1266:4592",
+      "src": "assets/icons/shapes/star-02.svg"
+    },
+    {
+      "id": "shapes/triangle",
+      "section": "shapes",
+      "name": "triangle",
+      "nodeId": "1266:4586",
+      "src": "assets/icons/shapes/triangle.svg"
+    },
+    {
+      "id": "time/alarm-01",
+      "section": "time",
+      "name": "alarm-01",
+      "nodeId": "1266:3966",
+      "src": "assets/icons/time/alarm-01.svg"
+    },
+    {
+      "id": "time/alarm-02",
+      "section": "time",
+      "name": "alarm-02",
+      "nodeId": "1266:3971",
+      "src": "assets/icons/time/alarm-02.svg"
+    },
+    {
+      "id": "time/alarm-03",
+      "section": "time",
+      "name": "alarm-03",
+      "nodeId": "1266:3976",
+      "src": "assets/icons/time/alarm-03.svg"
+    },
+    {
+      "id": "time/alarm-04",
+      "section": "time",
+      "name": "alarm-04",
+      "nodeId": "1266:3981",
+      "src": "assets/icons/time/alarm-04.svg"
+    },
+    {
+      "id": "time/alarm-05",
+      "section": "time",
+      "name": "alarm-05",
+      "nodeId": "1266:3986",
+      "src": "assets/icons/time/alarm-05.svg"
+    },
+    {
+      "id": "time/alarm-06",
+      "section": "time",
+      "name": "alarm-06",
+      "nodeId": "1266:3991",
+      "src": "assets/icons/time/alarm-06.svg"
+    },
+    {
+      "id": "time/alarm-check",
+      "section": "time",
+      "name": "alarm-check",
+      "nodeId": "1266:3996",
+      "src": "assets/icons/time/alarm-check.svg"
+    },
+    {
+      "id": "time/alarm-minus",
+      "section": "time",
+      "name": "alarm-minus",
+      "nodeId": "1266:4002",
+      "src": "assets/icons/time/alarm-minus.svg"
+    },
+    {
+      "id": "time/alarm-off",
+      "section": "time",
+      "name": "alarm-off",
+      "nodeId": "1266:4007",
+      "src": "assets/icons/time/alarm-off.svg"
+    },
+    {
+      "id": "time/alarm-plus",
+      "section": "time",
+      "name": "alarm-plus",
+      "nodeId": "1266:4012",
+      "src": "assets/icons/time/alarm-plus.svg"
+    },
+    {
+      "id": "time/calendar-01",
+      "section": "time",
+      "name": "calendar-01",
+      "nodeId": "1266:4017",
+      "src": "assets/icons/time/calendar-01.svg"
+    },
+    {
+      "id": "time/calendar-02",
+      "section": "time",
+      "name": "calendar-02",
+      "nodeId": "1266:4022",
+      "src": "assets/icons/time/calendar-02.svg"
+    },
+    {
+      "id": "time/calendar-03",
+      "section": "time",
+      "name": "calendar-03",
+      "nodeId": "1266:4027",
+      "src": "assets/icons/time/calendar-03.svg"
+    },
+    {
+      "id": "time/calendar-04",
+      "section": "time",
+      "name": "calendar-04",
+      "nodeId": "1266:4032",
+      "src": "assets/icons/time/calendar-04.svg"
+    },
+    {
+      "id": "time/calendar-check",
+      "section": "time",
+      "name": "calendar-check",
+      "nodeId": "1266:4038",
+      "src": "assets/icons/time/calendar-check.svg"
+    },
+    {
+      "id": "time/calendar-minus",
+      "section": "time",
+      "name": "calendar-minus",
+      "nodeId": "1266:4043",
+      "src": "assets/icons/time/calendar-minus.svg"
+    },
+    {
+      "id": "time/calendar-number",
+      "section": "time",
+      "name": "calendar-number",
+      "nodeId": "1266:4048",
+      "src": "assets/icons/time/calendar-number.svg"
+    },
+    {
+      "id": "time/calendar-plus",
+      "section": "time",
+      "name": "calendar-plus",
+      "nodeId": "1266:4053",
+      "src": "assets/icons/time/calendar-plus.svg"
+    },
+    {
+      "id": "time/clock-01",
+      "section": "time",
+      "name": "clock-01",
+      "nodeId": "1266:4058",
+      "src": "assets/icons/time/clock-01.svg"
+    },
+    {
+      "id": "time/clock-backward",
+      "section": "time",
+      "name": "clock-backward",
+      "nodeId": "1266:4063",
+      "src": "assets/icons/time/clock-backward.svg"
+    },
+    {
+      "id": "time/clock-check",
+      "section": "time",
+      "name": "clock-check",
+      "nodeId": "1266:4068",
+      "src": "assets/icons/time/clock-check.svg"
+    },
+    {
+      "id": "time/clock-forward",
+      "section": "time",
+      "name": "clock-forward",
+      "nodeId": "1266:4074",
+      "src": "assets/icons/time/clock-forward.svg"
+    },
+    {
+      "id": "time/clock-plus",
+      "section": "time",
+      "name": "clock-plus",
+      "nodeId": "1266:4079",
+      "src": "assets/icons/time/clock-plus.svg"
+    },
+    {
+      "id": "time/hourglass-01",
+      "section": "time",
+      "name": "hourglass-01",
+      "nodeId": "1266:4084",
+      "src": "assets/icons/time/hourglass-01.svg"
+    },
+    {
+      "id": "time/hourglass-02",
+      "section": "time",
+      "name": "hourglass-02",
+      "nodeId": "1266:4089",
+      "src": "assets/icons/time/hourglass-02.svg"
+    },
+    {
+      "id": "time/hourglass-03",
+      "section": "time",
+      "name": "hourglass-03",
+      "nodeId": "1266:4094",
+      "src": "assets/icons/time/hourglass-03.svg"
+    },
+    {
+      "id": "time/stopwatch-01",
+      "section": "time",
+      "name": "stopwatch-01",
+      "nodeId": "1266:4099",
+      "src": "assets/icons/time/stopwatch-01.svg"
+    },
+    {
+      "id": "time/stopwatch-02",
+      "section": "time",
+      "name": "stopwatch-02",
+      "nodeId": "1266:4104",
+      "src": "assets/icons/time/stopwatch-02.svg"
+    },
+    {
+      "id": "time/stopwatch-03",
+      "section": "time",
+      "name": "stopwatch-03",
+      "nodeId": "1266:4110",
+      "src": "assets/icons/time/stopwatch-03.svg"
+    },
+    {
+      "id": "time/stopwatch-04",
+      "section": "time",
+      "name": "stopwatch-04",
+      "nodeId": "1266:4115",
+      "src": "assets/icons/time/stopwatch-04.svg"
+    },
+    {
+      "id": "time/stopwatch-05",
+      "section": "time",
+      "name": "stopwatch-05",
+      "nodeId": "1266:4120",
+      "src": "assets/icons/time/stopwatch-05.svg"
+    },
+    {
+      "id": "time/stopwatch-off",
+      "section": "time",
+      "name": "stopwatch-off",
+      "nodeId": "1266:4130",
+      "src": "assets/icons/time/stopwatch-off.svg"
+    },
+    {
+      "id": "time/stopwatch-snooze",
+      "section": "time",
+      "name": "stopwatch-snooze",
+      "nodeId": "1266:4125",
+      "src": "assets/icons/time/stopwatch-snooze.svg"
+    },
+    {
+      "id": "time/watch-01",
+      "section": "time",
+      "name": "watch-01",
+      "nodeId": "1266:4135",
+      "src": "assets/icons/time/watch-01.svg"
+    },
+    {
+      "id": "time/watch-02",
+      "section": "time",
+      "name": "watch-02",
+      "nodeId": "1266:4140",
+      "src": "assets/icons/time/watch-02.svg"
+    },
+    {
+      "id": "ui/activity",
+      "section": "ui",
+      "name": "activity",
+      "nodeId": "1266:554",
+      "src": "assets/icons/ui/activity.svg"
+    },
+    {
+      "id": "ui/add-square-01",
+      "section": "ui",
+      "name": "add-square-01",
+      "nodeId": "1266:559",
+      "src": "assets/icons/ui/add-square-01.svg"
+    },
+    {
+      "id": "ui/add-square-02",
+      "section": "ui",
+      "name": "add-square-02",
+      "nodeId": "1266:564",
+      "src": "assets/icons/ui/add-square-02.svg"
+    },
+    {
+      "id": "ui/add-square-03",
+      "section": "ui",
+      "name": "add-square-03",
+      "nodeId": "1266:569",
+      "src": "assets/icons/ui/add-square-03.svg"
+    },
+    {
+      "id": "ui/add-square-04",
+      "section": "ui",
+      "name": "add-square-04",
+      "nodeId": "1266:574",
+      "src": "assets/icons/ui/add-square-04.svg"
+    },
+    {
+      "id": "ui/calendar-05",
+      "section": "ui",
+      "name": "calendar-05",
+      "nodeId": "1266:579",
+      "src": "assets/icons/ui/calendar-05.svg"
+    },
+    {
+      "id": "ui/calendar-06",
+      "section": "ui",
+      "name": "calendar-06",
+      "nodeId": "1266:584",
+      "src": "assets/icons/ui/calendar-06.svg"
+    },
+    {
+      "id": "ui/calendar-07",
+      "section": "ui",
+      "name": "calendar-07",
+      "nodeId": "1266:589",
+      "src": "assets/icons/ui/calendar-07.svg"
+    },
+    {
+      "id": "ui/cancel-left",
+      "section": "ui",
+      "name": "cancel-left",
+      "nodeId": "1266:594",
+      "src": "assets/icons/ui/cancel-left.svg"
+    },
+    {
+      "id": "ui/check-01",
+      "section": "ui",
+      "name": "check-01",
+      "nodeId": "1266:604",
+      "src": "assets/icons/ui/check-01.svg"
+    },
+    {
+      "id": "ui/check-02",
+      "section": "ui",
+      "name": "check-02",
+      "nodeId": "1266:609",
+      "src": "assets/icons/ui/check-02.svg"
+    },
+    {
+      "id": "ui/check-broken",
+      "section": "ui",
+      "name": "check-broken",
+      "nodeId": "1266:614",
+      "src": "assets/icons/ui/check-broken.svg"
+    },
+    {
+      "id": "ui/check-contained",
+      "section": "ui",
+      "name": "check-contained",
+      "nodeId": "1266:619",
+      "src": "assets/icons/ui/check-contained.svg"
+    },
+    {
+      "id": "ui/check-square-broken",
+      "section": "ui",
+      "name": "check-square-broken",
+      "nodeId": "1266:624",
+      "src": "assets/icons/ui/check-square-broken.svg"
+    },
+    {
+      "id": "ui/check-square-contained",
+      "section": "ui",
+      "name": "check-square-contained",
+      "nodeId": "1266:629",
+      "src": "assets/icons/ui/check-square-contained.svg"
+    },
+    {
+      "id": "ui/compare",
+      "section": "ui",
+      "name": "compare",
+      "nodeId": "1266:649",
+      "src": "assets/icons/ui/compare.svg"
+    },
+    {
+      "id": "ui/component",
+      "section": "ui",
+      "name": "component",
+      "nodeId": "1266:644",
+      "src": "assets/icons/ui/component.svg"
+    },
+    {
+      "id": "ui/dash",
+      "section": "ui",
+      "name": "dash",
+      "nodeId": "1266:654",
+      "src": "assets/icons/ui/dash.svg"
+    },
+    {
+      "id": "ui/delivery",
+      "section": "ui",
+      "name": "delivery",
+      "nodeId": "1266:659",
+      "src": "assets/icons/ui/delivery.svg"
+    },
+    {
+      "id": "ui/dot-horizontal",
+      "section": "ui",
+      "name": "dot-horizontal",
+      "nodeId": "1266:679",
+      "src": "assets/icons/ui/dot-horizontal.svg"
+    },
+    {
+      "id": "ui/dot-vertical",
+      "section": "ui",
+      "name": "dot-vertical",
+      "nodeId": "1266:684",
+      "src": "assets/icons/ui/dot-vertical.svg"
+    },
+    {
+      "id": "ui/download",
+      "section": "ui",
+      "name": "download",
+      "nodeId": "1266:664",
+      "src": "assets/icons/ui/download.svg"
+    },
+    {
+      "id": "ui/download-01",
+      "section": "ui",
+      "name": "download-01",
+      "nodeId": "1266:669",
+      "src": "assets/icons/ui/download-01.svg"
+    },
+    {
+      "id": "ui/download-02",
+      "section": "ui",
+      "name": "download-02",
+      "nodeId": "1266:674",
+      "src": "assets/icons/ui/download-02.svg"
+    },
+    {
+      "id": "ui/edit-01",
+      "section": "ui",
+      "name": "edit-01",
+      "nodeId": "1266:690",
+      "src": "assets/icons/ui/edit-01.svg"
+    },
+    {
+      "id": "ui/edit-02",
+      "section": "ui",
+      "name": "edit-02",
+      "nodeId": "1266:695",
+      "src": "assets/icons/ui/edit-02.svg"
+    },
+    {
+      "id": "ui/edit-03",
+      "section": "ui",
+      "name": "edit-03",
+      "nodeId": "1266:700",
+      "src": "assets/icons/ui/edit-03.svg"
+    },
+    {
+      "id": "ui/edit-04",
+      "section": "ui",
+      "name": "edit-04",
+      "nodeId": "1266:705",
+      "src": "assets/icons/ui/edit-04.svg"
+    },
+    {
+      "id": "ui/edit-contained",
+      "section": "ui",
+      "name": "edit-contained",
+      "nodeId": "1266:710",
+      "src": "assets/icons/ui/edit-contained.svg"
+    },
+    {
+      "id": "ui/email",
+      "section": "ui",
+      "name": "email",
+      "nodeId": "1266:715",
+      "src": "assets/icons/ui/email.svg"
+    },
+    {
+      "id": "ui/embed",
+      "section": "ui",
+      "name": "embed",
+      "nodeId": "1266:720",
+      "src": "assets/icons/ui/embed.svg"
+    },
+    {
+      "id": "ui/equals",
+      "section": "ui",
+      "name": "equals",
+      "nodeId": "1266:735",
+      "src": "assets/icons/ui/equals.svg"
+    },
+    {
+      "id": "ui/equals-not",
+      "section": "ui",
+      "name": "equals-not",
+      "nodeId": "1266:740",
+      "src": "assets/icons/ui/equals-not.svg"
+    },
+    {
+      "id": "ui/expand",
+      "section": "ui",
+      "name": "expand",
+      "nodeId": "1266:745",
+      "src": "assets/icons/ui/expand.svg"
+    },
+    {
+      "id": "ui/expand-02",
+      "section": "ui",
+      "name": "expand-02",
+      "nodeId": "1266:750",
+      "src": "assets/icons/ui/expand-02.svg"
+    },
+    {
+      "id": "ui/eye-closed",
+      "section": "ui",
+      "name": "eye-closed",
+      "nodeId": "1266:730",
+      "src": "assets/icons/ui/eye-closed.svg"
+    },
+    {
+      "id": "ui/eye-open",
+      "section": "ui",
+      "name": "eye-open",
+      "nodeId": "1266:725",
+      "src": "assets/icons/ui/eye-open.svg"
+    },
+    {
+      "id": "ui/favourite",
+      "section": "ui",
+      "name": "favourite",
+      "nodeId": "1266:755",
+      "src": "assets/icons/ui/favourite.svg"
+    },
+    {
+      "id": "ui/file",
+      "section": "ui",
+      "name": "file",
+      "nodeId": "1266:760",
+      "src": "assets/icons/ui/file.svg"
+    },
+    {
+      "id": "ui/filter",
+      "section": "ui",
+      "name": "filter",
+      "nodeId": "1266:765",
+      "src": "assets/icons/ui/filter.svg"
+    },
+    {
+      "id": "ui/gear",
+      "section": "ui",
+      "name": "gear",
+      "nodeId": "1266:770",
+      "src": "assets/icons/ui/gear.svg"
+    },
+    {
+      "id": "ui/globe",
+      "section": "ui",
+      "name": "globe",
+      "nodeId": "1266:775",
+      "src": "assets/icons/ui/globe.svg"
+    },
+    {
+      "id": "ui/hash-01",
+      "section": "ui",
+      "name": "hash-01",
+      "nodeId": "1266:780",
+      "src": "assets/icons/ui/hash-01.svg"
+    },
+    {
+      "id": "ui/hash-02",
+      "section": "ui",
+      "name": "hash-02",
+      "nodeId": "1266:785",
+      "src": "assets/icons/ui/hash-02.svg"
+    },
+    {
+      "id": "ui/heart",
+      "section": "ui",
+      "name": "heart",
+      "nodeId": "1266:790",
+      "src": "assets/icons/ui/heart.svg"
+    },
+    {
+      "id": "ui/help",
+      "section": "ui",
+      "name": "help",
+      "nodeId": "1266:795",
+      "src": "assets/icons/ui/help.svg"
+    },
+    {
+      "id": "ui/help-circle-contained",
+      "section": "ui",
+      "name": "help-circle-contained",
+      "nodeId": "1266:800",
+      "src": "assets/icons/ui/help-circle-contained.svg"
+    },
+    {
+      "id": "ui/help-square-contained",
+      "section": "ui",
+      "name": "help-square-contained",
+      "nodeId": "1266:805",
+      "src": "assets/icons/ui/help-square-contained.svg"
+    },
+    {
+      "id": "ui/home-01",
+      "section": "ui",
+      "name": "home-01",
+      "nodeId": "1266:810",
+      "src": "assets/icons/ui/home-01.svg"
+    },
+    {
+      "id": "ui/home-02",
+      "section": "ui",
+      "name": "home-02",
+      "nodeId": "1266:815",
+      "src": "assets/icons/ui/home-02.svg"
+    },
+    {
+      "id": "ui/home-03",
+      "section": "ui",
+      "name": "home-03",
+      "nodeId": "1266:820",
+      "src": "assets/icons/ui/home-03.svg"
+    },
+    {
+      "id": "ui/home-04",
+      "section": "ui",
+      "name": "home-04",
+      "nodeId": "1266:826",
+      "src": "assets/icons/ui/home-04.svg"
+    },
+    {
+      "id": "ui/home-05",
+      "section": "ui",
+      "name": "home-05",
+      "nodeId": "1266:831",
+      "src": "assets/icons/ui/home-05.svg"
+    },
+    {
+      "id": "ui/image",
+      "section": "ui",
+      "name": "image",
+      "nodeId": "1266:836",
+      "src": "assets/icons/ui/image.svg"
+    },
+    {
+      "id": "ui/info-square-01-contained",
+      "section": "ui",
+      "name": "info-square-01-contained",
+      "nodeId": "1266:846",
+      "src": "assets/icons/ui/info-square-01-contained.svg"
+    },
+    {
+      "id": "ui/info-square-02-contained-filled",
+      "section": "ui",
+      "name": "info-square-02-contained-filled",
+      "nodeId": "1266:851",
+      "src": "assets/icons/ui/info-square-02-contained-filled.svg"
+    },
+    {
+      "id": "ui/information-circle-contained",
+      "section": "ui",
+      "name": "information-circle-contained",
+      "nodeId": "1266:841",
+      "src": "assets/icons/ui/information-circle-contained.svg"
+    },
+    {
+      "id": "ui/lightning-circle-contained",
+      "section": "ui",
+      "name": "lightning-circle-contained",
+      "nodeId": "1266:856",
+      "src": "assets/icons/ui/lightning-circle-contained.svg"
+    },
+    {
+      "id": "ui/lightning-filled",
+      "section": "ui",
+      "name": "lightning-filled",
+      "nodeId": "1266:861",
+      "src": "assets/icons/ui/lightning-filled.svg"
+    },
+    {
+      "id": "ui/lightning-square-contained",
+      "section": "ui",
+      "name": "lightning-square-contained",
+      "nodeId": "1266:866",
+      "src": "assets/icons/ui/lightning-square-contained.svg"
+    },
+    {
+      "id": "ui/link",
+      "section": "ui",
+      "name": "link",
+      "nodeId": "1266:871",
+      "src": "assets/icons/ui/link.svg"
+    },
+    {
+      "id": "ui/link-angled",
+      "section": "ui",
+      "name": "link-angled",
+      "nodeId": "1266:876",
+      "src": "assets/icons/ui/link-angled.svg"
+    },
+    {
+      "id": "ui/link-broken",
+      "section": "ui",
+      "name": "link-broken",
+      "nodeId": "1266:881",
+      "src": "assets/icons/ui/link-broken.svg"
+    },
+    {
+      "id": "ui/link-external",
+      "section": "ui",
+      "name": "link-external",
+      "nodeId": "1266:886",
+      "src": "assets/icons/ui/link-external.svg"
+    },
+    {
+      "id": "ui/loader-01",
+      "section": "ui",
+      "name": "loader-01",
+      "nodeId": "1266:891",
+      "src": "assets/icons/ui/loader-01.svg"
+    },
+    {
+      "id": "ui/loader-02",
+      "section": "ui",
+      "name": "loader-02",
+      "nodeId": "1266:896",
+      "src": "assets/icons/ui/loader-02.svg"
+    },
+    {
+      "id": "ui/logout-01",
+      "section": "ui",
+      "name": "logout-01",
+      "nodeId": "1266:901",
+      "src": "assets/icons/ui/logout-01.svg"
+    },
+    {
+      "id": "ui/logout-03",
+      "section": "ui",
+      "name": "logout-03",
+      "nodeId": "1266:911",
+      "src": "assets/icons/ui/logout-03.svg"
+    },
+    {
+      "id": "ui/logout-04",
+      "section": "ui",
+      "name": "logout-04",
+      "nodeId": "1266:916",
+      "src": "assets/icons/ui/logout-04.svg"
+    },
+    {
+      "id": "ui/menu-01",
+      "section": "ui",
+      "name": "menu-01",
+      "nodeId": "1266:921",
+      "src": "assets/icons/ui/menu-01.svg"
+    },
+    {
+      "id": "ui/menu-02",
+      "section": "ui",
+      "name": "menu-02",
+      "nodeId": "1266:926",
+      "src": "assets/icons/ui/menu-02.svg"
+    },
+    {
+      "id": "ui/menu-03",
+      "section": "ui",
+      "name": "menu-03",
+      "nodeId": "1266:931",
+      "src": "assets/icons/ui/menu-03.svg"
+    },
+    {
+      "id": "ui/menu-04",
+      "section": "ui",
+      "name": "menu-04",
+      "nodeId": "1266:936",
+      "src": "assets/icons/ui/menu-04.svg"
+    },
+    {
+      "id": "ui/menu-05",
+      "section": "ui",
+      "name": "menu-05",
+      "nodeId": "1266:941",
+      "src": "assets/icons/ui/menu-05.svg"
+    },
+    {
+      "id": "ui/minus-circle-contained",
+      "section": "ui",
+      "name": "minus-circle-contained",
+      "nodeId": "1266:946",
+      "src": "assets/icons/ui/minus-circle-contained.svg"
+    },
+    {
+      "id": "ui/minus-square-contained",
+      "section": "ui",
+      "name": "minus-square-contained",
+      "nodeId": "1266:951",
+      "src": "assets/icons/ui/minus-square-contained.svg"
+    },
+    {
+      "id": "ui/paperclip",
+      "section": "ui",
+      "name": "paperclip",
+      "nodeId": "1266:987",
+      "src": "assets/icons/ui/paperclip.svg"
+    },
+    {
+      "id": "ui/percent-01",
+      "section": "ui",
+      "name": "percent-01",
+      "nodeId": "1266:957",
+      "src": "assets/icons/ui/percent-01.svg"
+    },
+    {
+      "id": "ui/percent-02",
+      "section": "ui",
+      "name": "percent-02",
+      "nodeId": "1266:962",
+      "src": "assets/icons/ui/percent-02.svg"
+    },
+    {
+      "id": "ui/percent-03",
+      "section": "ui",
+      "name": "percent-03",
+      "nodeId": "1266:967",
+      "src": "assets/icons/ui/percent-03.svg"
+    },
+    {
+      "id": "ui/plus-01",
+      "section": "ui",
+      "name": "plus-01",
+      "nodeId": "1266:972",
+      "src": "assets/icons/ui/plus-01.svg"
+    },
+    {
+      "id": "ui/plus-02",
+      "section": "ui",
+      "name": "plus-02",
+      "nodeId": "1266:977",
+      "src": "assets/icons/ui/plus-02.svg"
+    },
+    {
+      "id": "ui/plus-03",
+      "section": "ui",
+      "name": "plus-03",
+      "nodeId": "1266:982",
+      "src": "assets/icons/ui/plus-03.svg"
+    },
+    {
+      "id": "ui/progress",
+      "section": "ui",
+      "name": "progress",
+      "nodeId": "1266:992",
+      "src": "assets/icons/ui/progress.svg"
+    },
+    {
+      "id": "ui/quote",
+      "section": "ui",
+      "name": "quote",
+      "nodeId": "1266:997",
+      "src": "assets/icons/ui/quote.svg"
+    },
+    {
+      "id": "ui/save-01",
+      "section": "ui",
+      "name": "save-01",
+      "nodeId": "1266:1002",
+      "src": "assets/icons/ui/save-01.svg"
+    },
+    {
+      "id": "ui/save-02",
+      "section": "ui",
+      "name": "save-02",
+      "nodeId": "1266:1007",
+      "src": "assets/icons/ui/save-02.svg"
+    },
+    {
+      "id": "ui/search-01",
+      "section": "ui",
+      "name": "search-01",
+      "nodeId": "1266:1012",
+      "src": "assets/icons/ui/search-01.svg"
+    },
+    {
+      "id": "ui/search-02",
+      "section": "ui",
+      "name": "search-02",
+      "nodeId": "1266:1017",
+      "src": "assets/icons/ui/search-02.svg"
+    },
+    {
+      "id": "ui/settings",
+      "section": "ui",
+      "name": "settings",
+      "nodeId": "1266:1022",
+      "src": "assets/icons/ui/settings.svg"
+    },
+    {
+      "id": "ui/share",
+      "section": "ui",
+      "name": "share",
+      "nodeId": "1266:1032",
+      "src": "assets/icons/ui/share.svg"
+    },
+    {
+      "id": "ui/share-2",
+      "section": "ui",
+      "name": "share-2",
+      "nodeId": "1266:1027",
+      "src": "assets/icons/ui/share-2.svg"
+    },
+    {
+      "id": "ui/slash-01-backward",
+      "section": "ui",
+      "name": "slash-01-backward",
+      "nodeId": "1266:1037",
+      "src": "assets/icons/ui/slash-01-backward.svg"
+    },
+    {
+      "id": "ui/slash-02-forward",
+      "section": "ui",
+      "name": "slash-02-forward",
+      "nodeId": "1266:1052",
+      "src": "assets/icons/ui/slash-02-forward.svg"
+    },
+    {
+      "id": "ui/sort-horizontal",
+      "section": "ui",
+      "name": "sort-horizontal",
+      "nodeId": "1266:1057",
+      "src": "assets/icons/ui/sort-horizontal.svg"
+    },
+    {
+      "id": "ui/sort-vertical-01",
+      "section": "ui",
+      "name": "sort-vertical-01",
+      "nodeId": "1266:1062",
+      "src": "assets/icons/ui/sort-vertical-01.svg"
+    },
+    {
+      "id": "ui/sort-vertical-02",
+      "section": "ui",
+      "name": "sort-vertical-02",
+      "nodeId": "1266:1067",
+      "src": "assets/icons/ui/sort-vertical-02.svg"
+    },
+    {
+      "id": "ui/target-01",
+      "section": "ui",
+      "name": "target-01",
+      "nodeId": "1266:1072",
+      "src": "assets/icons/ui/target-01.svg"
+    },
+    {
+      "id": "ui/target-02",
+      "section": "ui",
+      "name": "target-02",
+      "nodeId": "1266:1077",
+      "src": "assets/icons/ui/target-02.svg"
+    },
+    {
+      "id": "ui/target-03",
+      "section": "ui",
+      "name": "target-03",
+      "nodeId": "1266:1082",
+      "src": "assets/icons/ui/target-03.svg"
+    },
+    {
+      "id": "ui/target-04",
+      "section": "ui",
+      "name": "target-04",
+      "nodeId": "1266:1088",
+      "src": "assets/icons/ui/target-04.svg"
+    },
+    {
+      "id": "ui/toggle-right",
+      "section": "ui",
+      "name": "toggle-right",
+      "nodeId": "1266:1093",
+      "src": "assets/icons/ui/toggle-right.svg"
+    },
+    {
+      "id": "ui/toogle-left",
+      "section": "ui",
+      "name": "toogle-left",
+      "nodeId": "1266:1098",
+      "src": "assets/icons/ui/toogle-left.svg"
+    },
+    {
+      "id": "ui/trash-01",
+      "section": "ui",
+      "name": "trash-01",
+      "nodeId": "1266:1103",
+      "src": "assets/icons/ui/trash-01.svg"
+    },
+    {
+      "id": "ui/trash-02",
+      "section": "ui",
+      "name": "trash-02",
+      "nodeId": "1266:1108",
+      "src": "assets/icons/ui/trash-02.svg"
+    },
+    {
+      "id": "ui/trash-03",
+      "section": "ui",
+      "name": "trash-03",
+      "nodeId": "1266:1113",
+      "src": "assets/icons/ui/trash-03.svg"
+    },
+    {
+      "id": "ui/trash-04",
+      "section": "ui",
+      "name": "trash-04",
+      "nodeId": "1266:1118",
+      "src": "assets/icons/ui/trash-04.svg"
+    },
+    {
+      "id": "ui/upload-01",
+      "section": "ui",
+      "name": "upload-01",
+      "nodeId": "1266:1123",
+      "src": "assets/icons/ui/upload-01.svg"
+    },
+    {
+      "id": "ui/upload-02",
+      "section": "ui",
+      "name": "upload-02",
+      "nodeId": "1266:1128",
+      "src": "assets/icons/ui/upload-02.svg"
+    },
+    {
+      "id": "ui/upload-03",
+      "section": "ui",
+      "name": "upload-03",
+      "nodeId": "1266:1133",
+      "src": "assets/icons/ui/upload-03.svg"
+    },
+    {
+      "id": "ui/upload-04",
+      "section": "ui",
+      "name": "upload-04",
+      "nodeId": "1266:1138",
+      "src": "assets/icons/ui/upload-04.svg"
+    },
+    {
+      "id": "ui/variant",
+      "section": "ui",
+      "name": "variant",
+      "nodeId": "1266:1143",
+      "src": "assets/icons/ui/variant.svg"
+    },
+    {
+      "id": "ui/x-01",
+      "section": "ui",
+      "name": "x-01",
+      "nodeId": "1266:1148",
+      "src": "assets/icons/ui/x-01.svg"
+    },
+    {
+      "id": "ui/x-02",
+      "section": "ui",
+      "name": "x-02",
+      "nodeId": "1266:1153",
+      "src": "assets/icons/ui/x-02.svg"
+    },
+    {
+      "id": "ui/x-03",
+      "section": "ui",
+      "name": "x-03",
+      "nodeId": "1266:1158",
+      "src": "assets/icons/ui/x-03.svg"
+    },
+    {
+      "id": "ui/x-circle-contained",
+      "section": "ui",
+      "name": "x-circle-contained",
+      "nodeId": "1266:1163",
+      "src": "assets/icons/ui/x-circle-contained.svg"
+    },
+    {
+      "id": "ui/x-square-contained",
+      "section": "ui",
+      "name": "x-square-contained",
+      "nodeId": "1266:1168",
+      "src": "assets/icons/ui/x-square-contained.svg"
+    },
+    {
+      "id": "users/smiley-happy",
+      "section": "users",
+      "name": "smiley-happy",
+      "nodeId": "1266:3034",
+      "src": "assets/icons/users/smiley-happy.svg"
+    },
+    {
+      "id": "users/smiley-happy-plus",
+      "section": "users",
+      "name": "smiley-happy-plus",
+      "nodeId": "1266:3039",
+      "src": "assets/icons/users/smiley-happy-plus.svg"
+    },
+    {
+      "id": "users/smiley-neutral",
+      "section": "users",
+      "name": "smiley-neutral",
+      "nodeId": "1266:3044",
+      "src": "assets/icons/users/smiley-neutral.svg"
+    },
+    {
+      "id": "users/smiley-sad",
+      "section": "users",
+      "name": "smiley-sad",
+      "nodeId": "1266:3049",
+      "src": "assets/icons/users/smiley-sad.svg"
+    },
+    {
+      "id": "users/smiley-wink",
+      "section": "users",
+      "name": "smiley-wink",
+      "nodeId": "1266:3054",
+      "src": "assets/icons/users/smiley-wink.svg"
+    },
+    {
+      "id": "users/user-profile-01",
+      "section": "users",
+      "name": "user-profile-01",
+      "nodeId": "1266:3059",
+      "src": "assets/icons/users/user-profile-01.svg"
+    },
+    {
+      "id": "users/user-profile-02",
+      "section": "users",
+      "name": "user-profile-02",
+      "nodeId": "1266:3064",
+      "src": "assets/icons/users/user-profile-02.svg"
+    },
+    {
+      "id": "users/user-profile-03",
+      "section": "users",
+      "name": "user-profile-03",
+      "nodeId": "1266:3183",
+      "src": "assets/icons/users/user-profile-03.svg"
+    },
+    {
+      "id": "users/user-profile-03-2",
+      "section": "users",
+      "name": "user-profile-03-2",
+      "nodeId": "1266:3070",
+      "src": "assets/icons/users/user-profile-03-2.svg"
+    },
+    {
+      "id": "users/user-profile-add-01",
+      "section": "users",
+      "name": "user-profile-add-01",
+      "nodeId": "1266:3075",
+      "src": "assets/icons/users/user-profile-add-01.svg"
+    },
+    {
+      "id": "users/user-profile-add-02",
+      "section": "users",
+      "name": "user-profile-add-02",
+      "nodeId": "1266:3188",
+      "src": "assets/icons/users/user-profile-add-02.svg"
+    },
+    {
+      "id": "users/user-profile-check",
+      "section": "users",
+      "name": "user-profile-check",
+      "nodeId": "1266:3080",
+      "src": "assets/icons/users/user-profile-check.svg"
+    },
+    {
+      "id": "users/user-profile-circle",
+      "section": "users",
+      "name": "user-profile-circle",
+      "nodeId": "1266:3085",
+      "src": "assets/icons/users/user-profile-circle.svg"
+    },
+    {
+      "id": "users/user-profile-down",
+      "section": "users",
+      "name": "user-profile-down",
+      "nodeId": "1266:3090",
+      "src": "assets/icons/users/user-profile-down.svg"
+    },
+    {
+      "id": "users/user-profile-left",
+      "section": "users",
+      "name": "user-profile-left",
+      "nodeId": "1266:3095",
+      "src": "assets/icons/users/user-profile-left.svg"
+    },
+    {
+      "id": "users/user-profile-minus",
+      "section": "users",
+      "name": "user-profile-minus",
+      "nodeId": "1266:3100",
+      "src": "assets/icons/users/user-profile-minus.svg"
+    },
+    {
+      "id": "users/user-profile-right",
+      "section": "users",
+      "name": "user-profile-right",
+      "nodeId": "1266:3106",
+      "src": "assets/icons/users/user-profile-right.svg"
+    },
+    {
+      "id": "users/user-profile-square",
+      "section": "users",
+      "name": "user-profile-square",
+      "nodeId": "1266:3111",
+      "src": "assets/icons/users/user-profile-square.svg"
+    },
+    {
+      "id": "users/user-profile-star",
+      "section": "users",
+      "name": "user-profile-star",
+      "nodeId": "1266:3193",
+      "src": "assets/icons/users/user-profile-star.svg"
+    },
+    {
+      "id": "users/user-profile-up",
+      "section": "users",
+      "name": "user-profile-up",
+      "nodeId": "1266:3116",
+      "src": "assets/icons/users/user-profile-up.svg"
+    },
+    {
+      "id": "users/user-profile-x",
+      "section": "users",
+      "name": "user-profile-x",
+      "nodeId": "1266:3121",
+      "src": "assets/icons/users/user-profile-x.svg"
+    },
+    {
+      "id": "users/users-profiles-01",
+      "section": "users",
+      "name": "users-profiles-01",
+      "nodeId": "1266:3126",
+      "src": "assets/icons/users/users-profiles-01.svg"
+    },
+    {
+      "id": "users/users-profiles-02",
+      "section": "users",
+      "name": "users-profiles-02",
+      "nodeId": "1266:3131",
+      "src": "assets/icons/users/users-profiles-02.svg"
+    },
+    {
+      "id": "users/users-profiles-03",
+      "section": "users",
+      "name": "users-profiles-03",
+      "nodeId": "1266:3136",
+      "src": "assets/icons/users/users-profiles-03.svg"
+    },
+    {
+      "id": "users/users-profiles-check",
+      "section": "users",
+      "name": "users-profiles-check",
+      "nodeId": "1266:3142",
+      "src": "assets/icons/users/users-profiles-check.svg"
+    },
+    {
+      "id": "users/users-profiles-down",
+      "section": "users",
+      "name": "users-profiles-down",
+      "nodeId": "1266:3147",
+      "src": "assets/icons/users/users-profiles-down.svg"
+    },
+    {
+      "id": "users/users-profiles-left",
+      "section": "users",
+      "name": "users-profiles-left",
+      "nodeId": "1266:3152",
+      "src": "assets/icons/users/users-profiles-left.svg"
+    },
+    {
+      "id": "users/users-profiles-minus",
+      "section": "users",
+      "name": "users-profiles-minus",
+      "nodeId": "1266:3157",
+      "src": "assets/icons/users/users-profiles-minus.svg"
+    },
+    {
+      "id": "users/users-profiles-plus",
+      "section": "users",
+      "name": "users-profiles-plus",
+      "nodeId": "1266:3162",
+      "src": "assets/icons/users/users-profiles-plus.svg"
+    },
+    {
+      "id": "users/users-profiles-right",
+      "section": "users",
+      "name": "users-profiles-right",
+      "nodeId": "1266:3167",
+      "src": "assets/icons/users/users-profiles-right.svg"
+    },
+    {
+      "id": "users/users-profiles-up",
+      "section": "users",
+      "name": "users-profiles-up",
+      "nodeId": "1266:3172",
+      "src": "assets/icons/users/users-profiles-up.svg"
+    },
+    {
+      "id": "weather/cloud-01",
+      "section": "weather",
+      "name": "cloud-01",
+      "nodeId": "1266:2500",
+      "src": "assets/icons/weather/cloud-01.svg"
+    },
+    {
+      "id": "weather/cloud-02",
+      "section": "weather",
+      "name": "cloud-02",
+      "nodeId": "1266:2505",
+      "src": "assets/icons/weather/cloud-02.svg"
+    },
+    {
+      "id": "weather/cloud-03",
+      "section": "weather",
+      "name": "cloud-03",
+      "nodeId": "1266:2510",
+      "src": "assets/icons/weather/cloud-03.svg"
+    },
+    {
+      "id": "weather/cloud-04",
+      "section": "weather",
+      "name": "cloud-04",
+      "nodeId": "1266:2515",
+      "src": "assets/icons/weather/cloud-04.svg"
+    },
+    {
+      "id": "weather/cloud-lightning",
+      "section": "weather",
+      "name": "cloud-lightning",
+      "nodeId": "1266:2520",
+      "src": "assets/icons/weather/cloud-lightning.svg"
+    },
+    {
+      "id": "weather/cloud-rain",
+      "section": "weather",
+      "name": "cloud-rain",
+      "nodeId": "1266:2525",
+      "src": "assets/icons/weather/cloud-rain.svg"
+    },
+    {
+      "id": "weather/cloud-snow",
+      "section": "weather",
+      "name": "cloud-snow",
+      "nodeId": "1266:2531",
+      "src": "assets/icons/weather/cloud-snow.svg"
+    },
+    {
+      "id": "weather/cloud-sun",
+      "section": "weather",
+      "name": "cloud-sun",
+      "nodeId": "1266:2536",
+      "src": "assets/icons/weather/cloud-sun.svg"
+    },
+    {
+      "id": "weather/drop",
+      "section": "weather",
+      "name": "drop",
+      "nodeId": "1266:2541",
+      "src": "assets/icons/weather/drop.svg"
+    },
+    {
+      "id": "weather/flame-01",
+      "section": "weather",
+      "name": "flame-01",
+      "nodeId": "1266:2546",
+      "src": "assets/icons/weather/flame-01.svg"
+    },
+    {
+      "id": "weather/lightning-01",
+      "section": "weather",
+      "name": "lightning-01",
+      "nodeId": "1266:2551",
+      "src": "assets/icons/weather/lightning-01.svg"
+    },
+    {
+      "id": "weather/lightning-02",
+      "section": "weather",
+      "name": "lightning-02",
+      "nodeId": "1266:2556",
+      "src": "assets/icons/weather/lightning-02.svg"
+    },
+    {
+      "id": "weather/moon-01",
+      "section": "weather",
+      "name": "moon-01",
+      "nodeId": "1266:2562",
+      "src": "assets/icons/weather/moon-01.svg"
+    },
+    {
+      "id": "weather/moon-02",
+      "section": "weather",
+      "name": "moon-02",
+      "nodeId": "1266:2567",
+      "src": "assets/icons/weather/moon-02.svg"
+    },
+    {
+      "id": "weather/snowflake",
+      "section": "weather",
+      "name": "snowflake",
+      "nodeId": "1266:2572",
+      "src": "assets/icons/weather/snowflake.svg"
+    },
+    {
+      "id": "weather/stars",
+      "section": "weather",
+      "name": "stars",
+      "nodeId": "1266:2577",
+      "src": "assets/icons/weather/stars.svg"
+    },
+    {
+      "id": "weather/sun-01",
+      "section": "weather",
+      "name": "sun-01",
+      "nodeId": "1266:2582",
+      "src": "assets/icons/weather/sun-01.svg"
+    },
+    {
+      "id": "weather/sun-02",
+      "section": "weather",
+      "name": "sun-02",
+      "nodeId": "1266:2587",
+      "src": "assets/icons/weather/sun-02.svg"
+    },
+    {
+      "id": "weather/sun-03",
+      "section": "weather",
+      "name": "sun-03",
+      "nodeId": "1266:2593",
+      "src": "assets/icons/weather/sun-03.svg"
+    },
+    {
+      "id": "weather/sun-down",
+      "section": "weather",
+      "name": "sun-down",
+      "nodeId": "1266:2598",
+      "src": "assets/icons/weather/sun-down.svg"
+    },
+    {
+      "id": "weather/sun-up",
+      "section": "weather",
+      "name": "sun-up",
+      "nodeId": "1266:2603",
+      "src": "assets/icons/weather/sun-up.svg"
+    },
+    {
+      "id": "weather/temperature-01",
+      "section": "weather",
+      "name": "temperature-01",
+      "nodeId": "1266:2608",
+      "src": "assets/icons/weather/temperature-01.svg"
+    },
+    {
+      "id": "weather/temperature-02",
+      "section": "weather",
+      "name": "temperature-02",
+      "nodeId": "1266:2613",
+      "src": "assets/icons/weather/temperature-02.svg"
+    },
+    {
+      "id": "weather/temperature-03",
+      "section": "weather",
+      "name": "temperature-03",
+      "nodeId": "1266:2618",
+      "src": "assets/icons/weather/temperature-03.svg"
+    },
+    {
+      "id": "weather/temperature-04",
+      "section": "weather",
+      "name": "temperature-04",
+      "nodeId": "1266:2624",
+      "src": "assets/icons/weather/temperature-04.svg"
+    },
+    {
+      "id": "weather/umbrella-01",
+      "section": "weather",
+      "name": "umbrella-01",
+      "nodeId": "1266:2629",
+      "src": "assets/icons/weather/umbrella-01.svg"
+    },
+    {
+      "id": "weather/umbrella-02",
+      "section": "weather",
+      "name": "umbrella-02",
+      "nodeId": "1266:2634",
+      "src": "assets/icons/weather/umbrella-02.svg"
+    },
+    {
+      "id": "weather/wind-01",
+      "section": "weather",
+      "name": "wind-01",
+      "nodeId": "1266:2639",
+      "src": "assets/icons/weather/wind-01.svg"
+    },
+    {
+      "id": "weather/wind-02",
+      "section": "weather",
+      "name": "wind-02",
+      "nodeId": "1266:2644",
+      "src": "assets/icons/weather/wind-02.svg"
+    },
+    {
+      "id": "weather/wind-03",
+      "section": "weather",
+      "name": "wind-03",
+      "nodeId": "1266:2649",
+      "src": "assets/icons/weather/wind-03.svg"
+    }
+  ],
+  "normalizedAt": "2026-05-09T15:30:50.562Z",
+  "duplicateGroups": 8,
+  "virtualIcons": 4
+}

@@ -1,0 +1,113 @@
+<h1 id="formas-e-espacamento">Formas e Espaçamento</h1>
+<p>Dois sistemas estruturais que governam toda a geometria da Metta: <strong>arredondamento de cantos</strong> (formas) e <strong>escala de espaçamento</strong>. Ambos seguem progressão fixa — nada de raio arbitrário entre escalas, nada de espaço improvisado. A regra editorial: <strong>geometria precisa comunica autoridade técnica</strong>, geometria solta comunica improviso.</p>
+<h2 id="formas-raio-de-canto">Formas — raio de canto</h2>
+<p>8 valores oficiais. <strong>Raio arbitrário entre 40 e 150px é proibido</strong> — gera o &quot;efeito balão&quot; que descaracteriza a marca. Se você precisa de algo entre <code>2xl</code> (32px) e <code>full</code> (pill), reconsidere o componente, não invente um raio intermediário.</p>
+<div class="shape-grid">
+  <div class="shape-item">
+    <div class="shape-box" style="border-radius:0px"></div>
+    <div class="shape-meta"><strong>none</strong><code>0px</code><span>proibido em uso normal</span></div>
+  </div>
+  <div class="shape-item">
+    <div class="shape-box" style="border-radius:4px"></div>
+    <div class="shape-meta"><strong>xs</strong><code>4px</code><span>chips, tags inline, code pill</span></div>
+  </div>
+  <div class="shape-item">
+    <div class="shape-box" style="border-radius:8px"></div>
+    <div class="shape-meta"><strong>sm</strong><code>8px</code><span>inputs, controles pequenos</span></div>
+  </div>
+  <div class="shape-item">
+    <div class="shape-box" style="border-radius:12px"></div>
+    <div class="shape-meta"><strong>md</strong><code>12px</code><span>card padrão (default)</span></div>
+  </div>
+  <div class="shape-item">
+    <div class="shape-box" style="border-radius:20px"></div>
+    <div class="shape-meta"><strong>lg</strong><code>20px</code><span>seções, blocos editoriais</span></div>
+  </div>
+  <div class="shape-item">
+    <div class="shape-box" style="border-radius:24px"></div>
+    <div class="shape-meta"><strong>xl</strong><code>24px</code><span>card elevated, hero</span></div>
+  </div>
+  <div class="shape-item">
+    <div class="shape-box" style="border-radius:32px"></div>
+    <div class="shape-meta"><strong>2xl</strong><code>32px</code><span>espaço de respiro, callout</span></div>
+  </div>
+  <div class="shape-item">
+    <div class="shape-box" style="border-radius:999px"></div>
+    <div class="shape-meta"><strong>full</strong><code>999px</code><span>pills, CTA, badges</span></div>
+  </div>
+</div>
+
+<h3 id="regras">Regras</h3>
+<ul>
+<li><strong>Card padrão</strong> sempre <code>md</code> (12px). Card destacado/hero sempre <code>xl</code> (24px).</li>
+<li><strong>Botões CTA</strong> sempre <code>full</code> (pill). Inputs sempre <code>sm</code> (8px).</li>
+<li><strong>Containers de seção</strong> entre <code>lg</code> (20px) e <code>2xl</code> (32px) conforme densidade visual.</li>
+<li><strong>Tags e badges</strong> sempre <code>full</code> em peças editoriais; <code>xs</code> apenas em UI técnica densa.</li>
+<li><strong>Nunca misturar 3+ raios diferentes</strong> na mesma peça — escolha uma família visual e mantenha.</li>
+</ul>
+<h2 id="espacamento-escala-de-8-pontos-estendida">Espaçamento — escala de 8 pontos estendida</h2>
+<p>10 valores oficiais. Grade base de 8 pontos com extensão pra densidades editoriais maiores (96px e 128px). <strong>Nunca espaçamento arbitrário</strong> — se nenhum dos 10 funciona, a estrutura do componente está errada.</p>
+<div class="spacing-list">
+  <div class="spacing-row"><span class="name">spacing-1</span><span class="value">4px</span><div class="bar" style="width:3%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-2</span><span class="value">8px</span><div class="bar" style="width:6%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-3</span><span class="value">12px</span><div class="bar" style="width:9%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-4</span><span class="value">16px</span><div class="bar" style="width:12%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-5</span><span class="value">24px</span><div class="bar" style="width:19%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-6</span><span class="value">32px</span><div class="bar" style="width:25%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-7</span><span class="value">48px</span><div class="bar" style="width:38%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-8</span><span class="value">64px</span><div class="bar" style="width:50%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-9</span><span class="value">96px</span><div class="bar" style="width:75%"></div></div>
+  <div class="spacing-row"><span class="name">spacing-10</span><span class="value">128px</span><div class="bar" style="width:100%"></div></div>
+</div>
+
+<h3 id="aplicacao-tipica">Aplicação típica</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Faixa</th>
+<th>Token</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Densidade alta (UI/inline)</strong></td>
+<td><code>1</code> a <code>3</code> (4–12px)</td>
+<td>Gap entre ícone e texto, padding interno de chip/tag, gap em listas inline</td>
+</tr>
+<tr>
+<td><strong>Densidade média (cards/forms)</strong></td>
+<td><code>3</code> a <code>5</code> (12–24px)</td>
+<td>Padding interno de card, gap entre campos de form, espaço entre H3 e parágrafo</td>
+</tr>
+<tr>
+<td><strong>Densidade média-alta (blocos)</strong></td>
+<td><code>5</code> a <code>6</code> (24–32px)</td>
+<td>Padding lateral de card destacado, gap entre cards no grid, espaço entre H2 e parágrafo</td>
+</tr>
+<tr>
+<td><strong>Densidade baixa (sections)</strong></td>
+<td><code>7</code> a <code>8</code> (48–64px)</td>
+<td>Padding vertical interno de section, gap entre blocos de section</td>
+</tr>
+<tr>
+<td><strong>Densidade muito baixa (peça)</strong></td>
+<td><code>9</code> a <code>10</code> (96–128px)</td>
+<td>Espaço vertical entre sections em peça longa, padding hero</td>
+</tr>
+</tbody></table></div>
+<h3 id="regras">Regras</h3>
+<ul>
+<li><strong>Mesmo gap = mesma família</strong>. Em grid de cards, todos os gaps iguais. Misturar <code>spacing-4</code> e <code>spacing-5</code> no mesmo grid quebra ritmo.</li>
+<li><strong>Padding lateral consistente</strong> em peça inteira. Se a section abre em <code>spacing-8</code>, todas as outras devem abrir em <code>spacing-8</code> também (ou em outro valor único da mesma faixa).</li>
+<li><strong>Espaço acima de H2 sempre maior que abaixo.</strong> O espaço separa do bloco anterior; o espaço abaixo conecta com o conteúdo da seção.</li>
+</ul>
+<h2 id="geometria-precisa-alinhamento-rigoroso">Geometria precisa, alinhamento rigoroso</h2>
+<p>Princípio editorial que sustenta os dois sistemas: <strong>cada elemento ancorado no grid, nada solto, nada flutuante</strong>. O grid pode não ser visível (não usamos linhas de grade exibidas em peças finais), mas precisa estar implícito em qualquer composição.</p>
+<ul>
+<li>Headline alinhada ao mesmo eixo vertical do parágrafo.</li>
+<li>Cards no mesmo grid horizontal compartilham mesma altura (ou usam a mesma escala de altura).</li>
+<li>Margens externas de peça respeitam grid (geralmente múltiplo de <code>spacing-7</code> ou <code>spacing-8</code>).</li>
+<li>Imagens crop respeitam aspect ratios definidos (4:5, 1:1, 9:16, 16:9 — ver Direção de Arte).</li>
+</ul>
+<h2 id="para-implementacao-tecnica">Para implementação técnica</h2>
+<p>Tokens completos como CSS variables, Figma styles e mapeamento Plugin API ficam no <strong>catálogo técnico do Design System</strong>. Esta página cobre o que governa o uso editorial.</p>

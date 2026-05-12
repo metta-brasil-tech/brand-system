@@ -1,0 +1,250 @@
+/* ============================================================
+   METTA BRAND SYSTEM — TOKENS
+   3-tier architecture (ref/sys/comp)
+   Extraído de design-system-2.0.html v2.0
+============================================================ */
+
+@font-face {
+  font-family: 'SF Pro';
+  src: local('SF Pro'), local('SF Pro Display'),
+       url('../../SF-Pro-Variable-Official.ttf') format('truetype-variations'),
+       url('../../SF-Pro-Variable-Official.ttf') format('truetype');
+  font-weight: 1 1000;
+  font-stretch: 30% 150%;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Zalando Sans Expanded — fallback oficial pra PPTX/Google Slides/Canva
+   Variable font OFL, eixos compatíveis com SF Pro Expanded (wght 200-900, wdth Condensed→Expanded)
+   Substitui Roboto Flex (deprecated em 2026-05-12) */
+@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+
+/* TIER 1 — REFERENCE TOKENS */
+:root {
+  /* Yellow tonal */
+  --metta-ref-palette-yellow-30: #B38400;  --metta-ref-palette-yellow-40: #D9A100;
+  --metta-ref-palette-yellow-50: #FFBE18;  --metta-ref-palette-yellow-55: #FFB618;
+  --metta-ref-palette-yellow-60: #FFC531;  --metta-ref-palette-yellow-70: #FFCE50;
+  --metta-ref-palette-yellow-80: #FFD66D;  --metta-ref-palette-yellow-90: #FFE3A6;
+  --metta-ref-palette-yellow-95: #FFE4A1;  --metta-ref-palette-yellow-99: #FFFAEC;
+
+  /* Night tonal */
+  --metta-ref-palette-night-5:   #0A1013;  --metta-ref-palette-night-10:  #0C161B;
+  --metta-ref-palette-night-15:  #131F25;  --metta-ref-palette-night-20:  #1A2A35;
+  --metta-ref-palette-night-25:  #1E2D36;  --metta-ref-palette-night-30:  #2E3E47;
+  --metta-ref-palette-night-40:  #435965;  --metta-ref-palette-night-50:  #688594;
+  --metta-ref-palette-night-60:  #75919F;  --metta-ref-palette-night-70:  #94B5C8;
+  --metta-ref-palette-night-80:  #A8B3B9;  --metta-ref-palette-night-85:  #B0CAD8;
+  --metta-ref-palette-night-90:  #C9DAE3;  --metta-ref-palette-night-95:  #EBF3F7;
+  --metta-ref-palette-night-97:  #EFF3F5;  --metta-ref-palette-night-99:  #FAFCFD;
+  --metta-ref-palette-night-100: #FFFFFF;
+
+  --metta-ref-palette-neutral-pure-black:   #000000;
+  --metta-ref-palette-neutral-overlay-navy: #020F15;
+
+  /* Opacity */
+  --metta-ref-opacity-state-hover:   0.08;
+  --metta-ref-opacity-state-focus:   0.12;
+  --metta-ref-opacity-state-pressed: 0.16;
+
+  /* Typeface — primária SF Pro Variable · fallback Zalando Sans Expanded (PPTX/Google Slides/Canva)
+     Roboto Flex foi deprecated em 2026-05-12 — Zalando Sans Expanded é a fonte de fallback oficial */
+  --metta-ref-typeface-brand:    'SF Pro';
+  --metta-ref-typeface-fallback: 'Zalando Sans Expanded';
+  --metta-ref-typeface-mono:     ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Axes raw */
+  --metta-ref-axis-wdth-regular:  100;     --metta-ref-axis-wdth-expanded: 132;
+  --metta-ref-axis-wght-light:    270;     --metta-ref-axis-wght-regular:  400;
+  --metta-ref-axis-wght-medium:   510;     --metta-ref-axis-wght-medium-p: 590;
+  --metta-ref-axis-wght-semibold: 650;     --metta-ref-axis-wght-bold:     700;
+  --metta-ref-axis-wght-heavy:    870;
+
+  /* Duration / easing raw */
+  --metta-ref-duration-50:  50ms;   --metta-ref-duration-100: 100ms;
+  --metta-ref-duration-200: 200ms;  --metta-ref-duration-300: 300ms;
+  --metta-ref-duration-500: 500ms;  --metta-ref-duration-700: 700ms;
+
+  --metta-ref-easing-linear:     linear;
+  --metta-ref-easing-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+  --metta-ref-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --metta-ref-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --metta-ref-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* TIER 2 — SYSTEM TOKENS — LIGHT (default) */
+:root, [data-theme="light"] {
+  --metta-sys-color-primary:               var(--metta-ref-palette-yellow-50);
+  --metta-sys-color-on-primary:            var(--metta-ref-palette-night-10);
+  --metta-sys-color-primary-hover:         var(--metta-ref-palette-yellow-60);
+  --metta-sys-color-primary-pressed:       var(--metta-ref-palette-yellow-55);
+  --metta-sys-color-primary-container:     var(--metta-ref-palette-yellow-95);
+  --metta-sys-color-on-primary-container:  var(--metta-ref-palette-night-10);
+
+  --metta-sys-color-surface:                  var(--metta-ref-palette-night-100);
+  --metta-sys-color-surface-bright:           var(--metta-ref-palette-night-100);
+  --metta-sys-color-surface-dim:              var(--metta-ref-palette-night-95);
+  --metta-sys-color-surface-container-lowest: var(--metta-ref-palette-night-100);
+  --metta-sys-color-surface-container-low:    var(--metta-ref-palette-night-99);
+  --metta-sys-color-surface-container:        var(--metta-ref-palette-night-97);
+  --metta-sys-color-surface-container-high:   var(--metta-ref-palette-night-95);
+  --metta-sys-color-surface-container-highest: #E0E6E9;
+  --metta-sys-color-on-surface:               var(--metta-ref-palette-night-10);
+  --metta-sys-color-on-surface-variant:       var(--metta-ref-palette-night-40);
+
+  --metta-sys-color-outline:           var(--metta-ref-palette-night-97);
+  --metta-sys-color-outline-variant:   rgba(202, 217, 224, 0.87);
+
+  --metta-sys-color-background:        var(--metta-sys-color-surface);
+  --metta-sys-color-on-background:     var(--metta-sys-color-on-surface);
+
+  --metta-sys-color-inverse-surface:    var(--metta-ref-palette-night-10);
+  --metta-sys-color-inverse-on-surface: var(--metta-ref-palette-night-99);
+  --metta-sys-color-inverse-primary:    var(--metta-ref-palette-yellow-80);
+
+  /* Shape */
+  --metta-sys-shape-corner-none: 0px;     --metta-sys-shape-corner-xs:  4px;
+  --metta-sys-shape-corner-sm:   8px;     --metta-sys-shape-corner-md:  12px;
+  --metta-sys-shape-corner-lg:   20px;    --metta-sys-shape-corner-xl:  24px;
+  --metta-sys-shape-corner-2xl:  32px;    --metta-sys-shape-corner-full: 999px;
+
+  /* Spacing */
+  --metta-sys-spacing-1:  4px;   --metta-sys-spacing-2:  8px;
+  --metta-sys-spacing-3:  12px;  --metta-sys-spacing-4:  16px;
+  --metta-sys-spacing-5:  24px;  --metta-sys-spacing-6:  32px;
+  --metta-sys-spacing-7:  48px;  --metta-sys-spacing-8:  64px;
+  --metta-sys-spacing-9:  96px;  --metta-sys-spacing-10: 128px;
+
+  /* Elevation */
+  --metta-sys-elevation-0: none;
+  --metta-sys-elevation-1: 0 1px 2px rgba(12, 22, 27, 0.05);
+  --metta-sys-elevation-2: 0 5px 14px rgba(12, 22, 27, 0.06);
+  --metta-sys-elevation-3: 0 12px 28px rgba(12, 22, 27, 0.08);
+  --metta-sys-elevation-4: 0 18px 40px rgba(12, 22, 27, 0.11);
+  --metta-sys-elevation-5: 0 28px 60px rgba(12, 22, 27, 0.14);
+
+  /* Motion */
+  --metta-sys-motion-duration-instant: var(--metta-ref-duration-50);
+  --metta-sys-motion-duration-short:   var(--metta-ref-duration-200);
+  --metta-sys-motion-duration-medium:  var(--metta-ref-duration-300);
+  --metta-sys-motion-duration-long:    var(--metta-ref-duration-500);
+  --metta-sys-motion-duration-x-long:  var(--metta-ref-duration-700);
+  --metta-sys-motion-easing-standard:   var(--metta-ref-easing-standard);
+  --metta-sys-motion-easing-emphasized: var(--metta-ref-easing-emphasized);
+  --metta-sys-motion-easing-enter:      var(--metta-ref-easing-decelerate);
+  --metta-sys-motion-easing-exit:       var(--metta-ref-easing-accelerate);
+
+  /* State */
+  --metta-sys-state-hover-opacity:   var(--metta-ref-opacity-state-hover);
+  --metta-sys-state-focus-opacity:   var(--metta-ref-opacity-state-focus);
+  --metta-sys-state-pressed-opacity: var(--metta-ref-opacity-state-pressed);
+
+  /* Typescale */
+  --metta-sys-typescale-display-large-size:       clamp(56px, 8vw, 99px);
+  --metta-sys-typescale-display-large-weight:     650;
+  --metta-sys-typescale-display-large-stretch:    132%;
+  --metta-sys-typescale-display-large-line-height: 0.90;
+  --metta-sys-typescale-display-medium-size:      clamp(40px, 6vw, 75px);
+  --metta-sys-typescale-display-medium-weight:    650;
+  --metta-sys-typescale-display-medium-stretch:   132%;
+  --metta-sys-typescale-headline-large-size:      clamp(36px, 4.5vw, 51px);
+  --metta-sys-typescale-headline-large-weight:    870;
+  --metta-sys-typescale-headline-large-stretch:   132%;
+  --metta-sys-typescale-headline-medium-size:     clamp(28px, 4vw, 44px);
+  --metta-sys-typescale-headline-medium-weight:   650;
+  --metta-sys-typescale-headline-medium-stretch:  132%;
+  --metta-sys-typescale-headline-small-size:      clamp(22px, 2.8vw, 32px);
+  --metta-sys-typescale-headline-small-weight:    590;
+  /* Title Large — Expanded Heavy · H1 de section, abertura de bloco */
+  --metta-sys-typescale-title-large-size:           clamp(64px, 7vw, 80px);
+  --metta-sys-typescale-title-large-weight:         870;
+  --metta-sys-typescale-title-large-stretch:        132%;
+  --metta-sys-typescale-title-large-line-height:    0.94;
+  --metta-sys-typescale-title-large-letter-spacing: -0.02em;
+  --metta-sys-typescale-title-medium-size:        clamp(22px, 2.2vw, 26px);
+  --metta-sys-typescale-title-medium-weight:      600;
+  --metta-sys-typescale-title-medium-stretch:     100%;
+  --metta-sys-typescale-title-medium-line-height: 1.2;
+  --metta-sys-typescale-title-small-size:         18px;
+  --metta-sys-typescale-title-small-weight:       600;
+  --metta-sys-typescale-title-small-stretch:      100%;
+  --metta-sys-typescale-title-small-line-height:  1.3;
+  --metta-sys-typescale-body-large-size:          clamp(18px, 1.8vw, 22px);
+  --metta-sys-typescale-body-medium-size:         16px;
+  --metta-sys-typescale-body-small-size:          14px;
+  --metta-sys-typescale-label-large-size:         14px;
+  --metta-sys-typescale-label-medium-size:        12px;
+  --metta-sys-typescale-label-editorial-size:     11px;
+
+  /* Gradients */
+  --metta-sys-gradient-golden-linear:
+    linear-gradient(135deg, var(--metta-ref-palette-yellow-50) 0%, var(--metta-ref-palette-yellow-80) 50%, var(--metta-ref-palette-yellow-90) 100%);
+  --metta-sys-gradient-night-linear:
+    linear-gradient(135deg, var(--metta-ref-palette-night-10) 0%, var(--metta-ref-palette-night-25) 60%, var(--metta-ref-palette-night-40) 100%);
+  --metta-sys-gradient-light-linear:
+    linear-gradient(135deg, var(--metta-ref-palette-night-100) 0%, #E0E6E9 100%);
+  --metta-sys-gradient-yellow-soft:
+    linear-gradient(226deg, #FFC443 10%, var(--metta-ref-palette-yellow-55) 97%);
+}
+
+/* TIER 2 — DARK */
+[data-theme="dark"] {
+  --metta-sys-color-primary:               var(--metta-ref-palette-yellow-50);
+  --metta-sys-color-on-primary:            var(--metta-ref-palette-night-10);
+  --metta-sys-color-primary-hover:         var(--metta-ref-palette-yellow-60);
+  --metta-sys-color-primary-pressed:       var(--metta-ref-palette-yellow-55);
+  --metta-sys-color-primary-container:     var(--metta-ref-palette-night-20);
+  --metta-sys-color-on-primary-container:  var(--metta-ref-palette-yellow-90);
+
+  --metta-sys-color-surface:                  var(--metta-ref-palette-night-10);
+  --metta-sys-color-surface-bright:           var(--metta-ref-palette-night-25);
+  --metta-sys-color-surface-dim:              var(--metta-ref-palette-night-5);
+  --metta-sys-color-surface-container-lowest: var(--metta-ref-palette-night-5);
+  --metta-sys-color-surface-container-low:    var(--metta-ref-palette-night-10);
+  --metta-sys-color-surface-container:        var(--metta-ref-palette-night-15);
+  --metta-sys-color-surface-container-high:   var(--metta-ref-palette-night-20);
+  --metta-sys-color-surface-container-highest: var(--metta-ref-palette-night-25);
+  --metta-sys-color-on-surface:               var(--metta-ref-palette-night-100);
+  --metta-sys-color-on-surface-variant:       var(--metta-ref-palette-night-85);
+
+  --metta-sys-color-outline:           rgba(255, 255, 255, 0.20);
+  --metta-sys-color-outline-variant:   rgba(58, 109, 137, 0.28);
+
+  --metta-sys-color-inverse-surface:    var(--metta-ref-palette-night-99);
+  --metta-sys-color-inverse-on-surface: var(--metta-ref-palette-night-10);
+  --metta-sys-color-inverse-primary:    var(--metta-ref-palette-yellow-30);
+}
+
+/* TIER 3 — COMPONENT */
+:root {
+  --metta-comp-cta-yellow-container-color:           var(--metta-sys-color-primary);
+  --metta-comp-cta-yellow-container-color-hover:     var(--metta-sys-color-primary-hover);
+  --metta-comp-cta-yellow-container-color-pressed:   var(--metta-sys-color-primary-pressed);
+  --metta-comp-cta-yellow-label-color:               var(--metta-sys-color-on-primary);
+  --metta-comp-cta-yellow-container-shape:           var(--metta-sys-shape-corner-full);
+  --metta-comp-cta-yellow-container-padding-x:       var(--metta-sys-spacing-6);
+  --metta-comp-cta-yellow-container-padding-y:       var(--metta-sys-spacing-4);
+  --metta-comp-cta-yellow-pressed-scale:             0.97;
+
+  --metta-comp-cta-dark-container-color:             var(--metta-ref-palette-night-10);
+  --metta-comp-cta-dark-container-color-hover:       var(--metta-ref-palette-night-20);
+  --metta-comp-cta-dark-label-color:                 var(--metta-ref-palette-night-100);
+
+  --metta-comp-cta-light-container-color:            var(--metta-ref-palette-night-100);
+  --metta-comp-cta-light-container-color-hover:      var(--metta-ref-palette-night-95);
+  --metta-comp-cta-light-label-color:                var(--metta-ref-palette-night-10);
+  --metta-comp-cta-light-container-shape:            var(--metta-sys-shape-corner-full);
+
+  --metta-comp-card-container-color:                 var(--metta-sys-color-surface-container-low);
+  --metta-comp-card-container-shape:                 var(--metta-sys-shape-corner-md);
+  --metta-comp-card-container-padding:               var(--metta-sys-spacing-5);
+  --metta-comp-card-elevation:                       var(--metta-sys-elevation-1);
+
+  --metta-comp-card-elevated-container-color:        var(--metta-sys-color-surface-container-high);
+  --metta-comp-card-elevated-container-shape:        var(--metta-sys-shape-corner-xl);
+  --metta-comp-card-elevated-elevation:              var(--metta-sys-elevation-3);
+
+  --metta-comp-yellow-band-color:                    var(--metta-sys-color-primary);
+  --metta-comp-yellow-band-height:                   6px;
+}

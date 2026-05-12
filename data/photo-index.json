@@ -1,0 +1,730 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-05-09T01:25:29.215Z",
+  "metta_dna": "Brazilian corporate context. Editorial photography style: high craft, intentional, never staged-stock-photo feeling. Lighting: natural directional light preferred (window light, golden hour interior), with soft falloff and visible volumetric quality. Palette: anchored on neutrals (charcoal, oak wood, cream walls, slate grey) with disciplined yellow accents (Metta yellow #FFBE18) appearing as one selective focal point per scene — never decorative. Composition: deliberate negative space, no busy backgrounds, rule of thirds with strong eye-line lock when subjects are present. Camera feel: 35mm or 50mm equivalent, mid-to-shallow depth of field (f/2.8–f/4), no fisheye/wide-angle distortion. Mood: composed, analytical, decision-grade — never euphoric, never anxious, never theatrical. Post: mid contrast, subtle film grain, neutral white balance with slightly warm shadows, no aggressive color grading or HDR. Aspect: respect 4:5 (carousel), 1:1 (feed), 9:16 (story), 16:9 (LP hero) — final framing decided per use case.",
+  "archetypes": [
+    {
+      "id": "executivo-em-decisao",
+      "label": "Executivo em decisão",
+      "category": "lideranca",
+      "description": "Empresário sozinho em momento analítico — pensando, lendo dado, sustentando peso da escolha.",
+      "promptTemplate": "Editorial portrait of a brazilian executive (40-55) in a moment of analytical decision, alone at a desk or modern office. Composed expression — no smile, no theatrics; the face shows the weight of choice. Side window light from the left, warm afternoon tone falling across the shoulder and document. Subject occupies right third, with significant negative space holding context. 50mm equivalent, f/2.8, focus on the eyes. Palette: charcoal suit, oak desk surface, cream wall, single yellow accent (mug, notebook, or backlit paper). Mid contrast, subtle film grain, no HDR. Documentary feel, no posed corporate-stock energy.",
+      "tags": {
+        "mood": "analitico",
+        "composition": "medium-close",
+        "subject": "executivo-individual",
+        "lighting": "natural-lateral"
+      },
+      "count": 0
+    },
+    {
+      "id": "mentoria-1-on-1",
+      "label": "Mentoria 1-on-1",
+      "category": "lideranca",
+      "description": "Dois empresários em conversa de orientação — mentor e mentorado, conselho, transferência de método.",
+      "promptTemplate": "Editorial scene of a 1-on-1 mentoring conversation between two brazilian executives across a wood table. The mentor (left, 50+) leans forward calmly with one hand resting on a document; the mentee (right, 30-45) listens with intent, slightly tilted forward. No smiles — the mood is honest counsel, not pep-talk. Natural light from a tall window behind, soft rim on shoulders. 35mm equivalent, f/3.5, focus split between both subjects. Palette: oak table, white shirt, charcoal blazer, subtle yellow accent on a notebook or pen. Mid contrast, slight grain. Documentary tone, no eye-contact-with-camera, no clichéd handshake.",
+      "tags": {
+        "mood": "analitico",
+        "composition": "medium",
+        "subject": "dupla-mentor-mentorado",
+        "lighting": "natural-traseira"
+      },
+      "count": 2
+    },
+    {
+      "id": "reuniao-mesa-decisao",
+      "label": "Reunião de mesa — decisão",
+      "category": "lideranca",
+      "description": "Time pequeno em torno da mesa, líder no comando, conversa direta e estratégica.",
+      "promptTemplate": "Boardroom scene with 4-6 brazilian executives around an oak conference table. Leader stands at the head, hand on the table, mid-explanation; the others lean in or take notes. Natural light from large window on the right, casting long warm shadows across documents. 35mm equivalent, f/4, depth-of-field keeps the leader and one listener in focus. Palette: dark suits, oak table, off-white walls, single yellow on a folder cover or pen. Mood: strategic alignment, no excessive smiling, no fake laughter. Mid contrast, subtle grain, documentary framing — slightly off-axis, never perfectly centered.",
+      "tags": {
+        "mood": "estrategico",
+        "composition": "wide-medium",
+        "subject": "time-em-mesa",
+        "lighting": "natural-lateral"
+      },
+      "count": 0
+    },
+    {
+      "id": "lider-apresentando-time",
+      "label": "Líder apresentando ao time",
+      "category": "lideranca",
+      "description": "Líder em pé explicando estratégia ao time sentado — método sendo transmitido.",
+      "promptTemplate": "Scene of a brazilian leader standing at the front of a meeting room, gesturing while explaining strategy to 3-5 colleagues seated at the table. The leader is in profile or 3/4 turned to the listeners, not posing. A whiteboard with sparse handwritten notes is visible behind. Natural light from windows on the left, soft and even. 35mm equivalent, f/4. Palette: warm wood floor, charcoal furniture, white walls, single yellow marker or accent in foreground. Mid contrast, light grain. Mood: deliberate transfer of knowledge, intent listening from the team, no theatrical presentation gestures.",
+      "tags": {
+        "mood": "didatico",
+        "composition": "wide",
+        "subject": "lider-em-pe-time-sentado",
+        "lighting": "natural-lateral"
+      },
+      "count": 0
+    },
+    {
+      "id": "palco-evento",
+      "label": "Palco / evento",
+      "category": "lideranca",
+      "description": "Conferência ou apresentação em palco — autoridade pública, mensagem ampla.",
+      "promptTemplate": "Conference stage scene with a brazilian speaker in mid-presentation, addressing a packed audience visible in soft focus background. Speaker stands confidently at center-left, holding a clicker, looking out into the room — not posing for camera. Stage lighting: warm key light, cool rim from behind. 50mm equivalent, f/2.8, sharp on speaker, audience blurred. Palette: deep navy stage, accent yellow on speaker's tie or pin, projected slide visible behind with restrained typography. Mid-to-high contrast, cinematic feel without being theatrical. Capture the authority of public expertise, not the spectacle of a TED-talk-clone.",
+      "tags": {
+        "mood": "autoridade",
+        "composition": "medium",
+        "subject": "palestrante-palco",
+        "lighting": "palco-controlado"
+      },
+      "count": 0
+    },
+    {
+      "id": "time-colaborando-laptops",
+      "label": "Time colaborando com laptops",
+      "category": "pessoas",
+      "description": "Equipe trabalhando junto em laptops — execução cotidiana, sintonia operacional.",
+      "promptTemplate": "Modern open-plan office scene: 3-4 brazilian professionals collaborating around laptops at a shared wood table. Conversation is engaged but quiet — leaning toward screens, occasional pointing. Natural light from large windows on the side, soft and diffused. 35mm equivalent, f/3.5, group composition with one figure slightly closer and in focus. Palette: oak table, white laptop, charcoal/navy clothing, plants in background, one yellow accent (notebook, mug). Mid contrast, restrained grain. Documentary candid quality — no one looking at camera, no fake laughter.",
+      "tags": {
+        "mood": "execucao",
+        "composition": "wide-medium",
+        "subject": "time-3-4-pessoas",
+        "lighting": "natural-difusa"
+      },
+      "count": 2
+    },
+    {
+      "id": "retrato-individual-confiante",
+      "label": "Retrato individual — confiante",
+      "category": "pessoas",
+      "description": "Retrato editorial de um empresário/executiva — composto, sem sorriso forçado.",
+      "promptTemplate": "Editorial business portrait of a single brazilian professional (30-55), 3/4 turn to camera, composed neutral expression — small confident half-smile or fully neutral. Studio or office backdrop in soft gradient charcoal. Key light from upper-left, fill from right, subtle rim from behind. 85mm equivalent, f/2.8, eyes tack-sharp. Palette: dark suit or sharp business-casual, charcoal background, single yellow accent (tie, pin, scarf, notebook in hand). Mid contrast, very slight grain. Posture: shoulders square, slight forward lean. Avoid: cheesy stock smiles, arms crossed defensively, hand-on-chin clichés.",
+      "tags": {
+        "mood": "confiante",
+        "composition": "close-portrait",
+        "subject": "retrato-individual",
+        "lighting": "estudio-3-pontos"
+      },
+      "count": 4
+    },
+    {
+      "id": "aperto-de-maos-fechamento",
+      "label": "Aperto de mãos — fechamento",
+      "category": "pessoas",
+      "description": "Selo de acordo formal — handshake editorial, não cliché stock.",
+      "promptTemplate": "Editorial close-up of a brazilian business handshake at the moment of closure. Frame focuses on the hands and forearms, faces partially out of frame or in soft blur — the handshake itself carries the meaning. Natural light from a side window, warm tone on the skin. 50mm equivalent, f/2.8, sharp on the hands. Palette: charcoal suit cuffs, white shirt cuffs, oak table edge underneath, single yellow tie or pen visible at the edge. Documentary moment — slight motion blur is acceptable. Avoid: corny full-smile two-people-staring-at-each-other handshakes, generic stock framing.",
+      "tags": {
+        "mood": "fechamento",
+        "composition": "close-detail",
+        "subject": "maos-handshake",
+        "lighting": "natural-lateral"
+      },
+      "count": 1
+    },
+    {
+      "id": "time-celebrando-resultado",
+      "label": "Time celebrando resultado",
+      "category": "resultados",
+      "description": "Comemoração de meta batida — energia controlada, não euforia stock.",
+      "promptTemplate": "Brazilian business team (4-6 people) celebrating a milestone in a modern office. Energy is genuine — high-fives, quiet smiles, hands raised — but never euphoric or cheesy. Natural light from windows. 35mm equivalent, f/3.5, capture mid-action with slight motion. Palette: charcoal/navy clothing, oak table, white walls, dashboard screen with charts visible in background, yellow accent on a single object (banner, pin, paper). Mid contrast, slight grain. Documentary mood — looks like a real team, not a stock shoot. Avoid: throw-papers-in-air clichés, exaggerated cheering.",
+      "tags": {
+        "mood": "comemoracao-controlada",
+        "composition": "wide-medium",
+        "subject": "time-comemorando",
+        "lighting": "natural-difusa"
+      },
+      "count": 1
+    },
+    {
+      "id": "analise-dados-tela",
+      "label": "Análise de dados na tela",
+      "category": "resultados",
+      "description": "Empresário ou time olhando gráficos em tela — cabeça analítica, não decorativa.",
+      "promptTemplate": "Brazilian executive at a desk analyzing dashboard charts on a large monitor. Subject leans forward slightly, hand on chin or pen-in-hand mid-thought, eyes locked on the screen. Natural light from window on the left, screen glow on the face. 35mm equivalent, f/2.8, focus on the subject; charts are legible but secondary. Palette: charcoal suit, oak desk, dark screen with restrained typography (numbers and lines, no rainbow), single yellow accent in the chart highlight or on a sticky note. Mid contrast, slight grain. Mood: real analytical work, not posed-with-laptop stock cliché.",
+      "tags": {
+        "mood": "analitico-dado",
+        "composition": "medium",
+        "subject": "individual-com-dado",
+        "lighting": "natural-tela-glow"
+      },
+      "count": 1
+    },
+    {
+      "id": "apresentacao-graficos",
+      "label": "Apresentação de gráficos",
+      "category": "resultados",
+      "description": "Time olhando gráficos juntos — leitura coletiva de resultado.",
+      "promptTemplate": "Conference room scene: brazilian team gathered around a large screen showing a dashboard with charts and KPIs. The presenter (off-frame or partial) gestures toward a specific data point; 3-4 listeners study the chart with focused expressions. Natural light from windows, augmented by ambient screen glow. 35mm equivalent, f/4. Palette: dark navy/charcoal furniture, oak table, screen with restrained chart typography, yellow accent in one highlighted KPI on screen. Mid contrast, light grain. Mood: collective interpretation of result, no fake awe, no over-celebration.",
+      "tags": {
+        "mood": "leitura-resultado",
+        "composition": "wide",
+        "subject": "time-com-tela",
+        "lighting": "natural-tela-glow"
+      },
+      "count": 0
+    },
+    {
+      "id": "sala-reuniao-vazia",
+      "label": "Sala de reunião vazia",
+      "category": "escritorio",
+      "description": "Boardroom vazio — promessa, expectativa, palco da decisão.",
+      "promptTemplate": "Empty modern brazilian boardroom shot from a corner angle. Long oak conference table, leather/fabric chairs aligned, large window with city skyline (muted, soft focus). Late afternoon golden light spills across the table surface. 24mm equivalent, f/8 for full sharpness. Palette: oak wood, charcoal upholstery, off-white walls, blue-grey skyline, single yellow accent (a folder or marker forgotten on the table). High craft, low contrast in shadows, mid contrast in highlights. Mood: charged emptiness — a room that is about to host a decision. Avoid: harsh fluorescents, cluttered desks, generic stock office sterility.",
+      "tags": {
+        "mood": "expectativa",
+        "composition": "wide-arquitetura",
+        "subject": "sala-vazia",
+        "lighting": "natural-golden-hour"
+      },
+      "count": 1
+    },
+    {
+      "id": "escritorio-moderno-interior",
+      "label": "Escritório moderno — interior",
+      "category": "escritorio",
+      "description": "Ambiente de trabalho moderno, organizado, com luz natural.",
+      "promptTemplate": "Wide interior shot of a modern brazilian corporate office space. Open layout with workstations, plants, modular furniture, and floor-to-ceiling windows letting in natural daylight. Some figures in soft focus background going about their work. 24mm equivalent, f/5.6. Palette: light wood floors, white walls, charcoal furniture, green plants, single yellow chair or wall element as focal accent. Mid contrast, no HDR. Architectural-editorial mood — clean but lived-in, not sterile.",
+      "tags": {
+        "mood": "ambiente",
+        "composition": "wide-arquitetura",
+        "subject": "interior-escritorio",
+        "lighting": "natural-difusa"
+      },
+      "count": 1
+    },
+    {
+      "id": "home-office",
+      "label": "Home office",
+      "category": "escritorio",
+      "description": "Escritório residencial composto e profissional — não bagunça caseira.",
+      "promptTemplate": "Editorial shot of a curated brazilian home office: oak desk facing a window, ergonomic chair, single laptop, organized notebook, one plant, framed art on the wall behind. Natural morning light from the window. 35mm equivalent, f/4. Palette: warm wood, white walls, charcoal computer, single yellow accent (notebook, mug, lamp shade). Mid contrast, light grain. Mood: professional discipline at home, not casual lifestyle clutter. Aspect: vertical for story, horizontal for LP.",
+      "tags": {
+        "mood": "foco-individual",
+        "composition": "medium",
+        "subject": "home-office-vazio-ou-sutil",
+        "lighting": "natural-manha"
+      },
+      "count": 4
+    },
+    {
+      "id": "mockup-papelaria-madeira",
+      "label": "Mockup papelaria — madeira",
+      "category": "branding",
+      "description": "Cartões e papelaria em mesa de madeira — cenário de marca.",
+      "promptTemplate": "Top-down or 3/4 angle shot of branded stationery (business cards, envelope, notebook, pen) on a warm oak surface. Composition: rule-of-thirds, with a single yellow element (logo accent, paperclip, brand mark) as the visual anchor. Natural side light, soft shadows. 50mm equivalent, f/4. Palette: oak grain, off-white paper, deep charcoal type, Metta yellow #FFBE18 accent. Mid contrast, subtle grain. Editorial product-photography quality. Avoid: harsh top-light, perfectly symmetric flatlay clichés.",
+      "tags": {
+        "mood": "marca-estatica",
+        "composition": "flatlay-3-4",
+        "subject": "papelaria-mockup",
+        "lighting": "natural-lateral-suave"
+      },
+      "count": 1
+    },
+    {
+      "id": "mockup-papelaria-escura",
+      "label": "Mockup papelaria — escura",
+      "category": "branding",
+      "description": "Mockup em fundo escuro — premium, contraste alto, marca destacada.",
+      "promptTemplate": "Top-down shot of branded stationery on a dark slate or charcoal textured surface. Single yellow accent (logo, edge, paperclip) as the only color in the frame, creating sharp visual hierarchy. Soft directional light from the upper-left. 50mm equivalent, f/5.6. Palette: deep charcoal background, off-white paper, single yellow element. High contrast, subtle texture in the background. Editorial premium feel. Avoid: cluttered flatlays, multiple competing colors.",
+      "tags": {
+        "mood": "premium-escuro",
+        "composition": "flatlay",
+        "subject": "papelaria-mockup",
+        "lighting": "controlada-direcional"
+      },
+      "count": 0
+    },
+    {
+      "id": "objeto-conceitual-escuro",
+      "label": "Objeto conceitual em fundo escuro",
+      "category": "branding",
+      "description": "Objeto isolado (relógio, copo, chave) com função simbólica em fundo escuro.",
+      "promptTemplate": "Editorial product shot of a single symbolic object (clock, glass, key, pen) isolated on a deep charcoal/black background with significant negative space. One side light from upper-right creating directional shadow. 85mm equivalent, f/4. Palette: charcoal background, object in metal/glass tones, single yellow accent (light glow, reflection, label). Mid-high contrast. Mood: concept-led, the object stands as metaphor. Avoid: stock-photo lifestyle clutter, multiple objects.",
+      "tags": {
+        "mood": "conceitual-isolado",
+        "composition": "objeto-isolado",
+        "subject": "objeto-simbolico",
+        "lighting": "controlada-direcional"
+      },
+      "count": 0
+    },
+    {
+      "id": "textura-gold-on-black",
+      "label": "Textura — dourado em preto",
+      "category": "texturas",
+      "description": "Padrão abstrato amarelo/dourado sobre preto — fundo de marca premium.",
+      "promptTemplate": "Abstract texture: golden yellow (#FFBE18 or warmer) particles, brushstrokes, or geometric patterns on a deep charcoal or pure-black ground. Subtle depth and grain. Suitable as background for headlines or as accent layer. No literal objects. Editorial poster feel. Avoid: glitter clichés, rainbow gradients.",
+      "tags": {
+        "mood": "fundo-premium",
+        "composition": "fundo-abstrato",
+        "subject": "textura-marca",
+        "lighting": "n-a"
+      },
+      "count": 0
+    },
+    {
+      "id": "textura-luz-raio",
+      "label": "Textura — raios de luz",
+      "category": "texturas",
+      "description": "Raios de luz volumétricos — atmosfera, profundidade, drama controlado.",
+      "promptTemplate": "Volumetric light rays cutting across a dark space, soft particle-in-light feel. Color palette anchored in cool blue-grey OR warm amber, with one channel dominant. Mood: atmospheric, suggests revelation or insight. Suitable as overlay or hero background. No human figures. Restrained — avoid clichéd \"god rays\" overcooked dramatic feel.",
+      "tags": {
+        "mood": "atmosferico",
+        "composition": "fundo-abstrato",
+        "subject": "raios-luz",
+        "lighting": "volumetrica"
+      },
+      "count": 0
+    },
+    {
+      "id": "textura-gradiente-grain",
+      "label": "Textura — gradiente granulado",
+      "category": "texturas",
+      "description": "Gradiente suave com granulação — fundo neutro com profundidade.",
+      "promptTemplate": "Smooth gradient background with subtle film grain. Two-tone: one corner deeper, opposite corner lighter. Palette options: charcoal-to-night-blue, cream-to-warm-grey, or yellow-to-amber. Suitable as section background or behind text. Mood: calm depth, no aggressive light bursts. Editorial publication feel.",
+      "tags": {
+        "mood": "fundo-calmo",
+        "composition": "fundo-abstrato",
+        "subject": "gradiente",
+        "lighting": "n-a"
+      },
+      "count": 0
+    },
+    {
+      "id": "textura-arquitetura-ambiente",
+      "label": "Textura — ambiente arquitetônico",
+      "category": "texturas",
+      "description": "Recorte de ambiente (parede, lounge) usado como pano de fundo de marca.",
+      "promptTemplate": "Close architectural detail of a modern lounge or wall: dark stone or wood panels, soft directional light from the side creating depth via shadow. No people. Slight haze in the air. 50mm equivalent, f/4. Palette: charcoal stone, walnut wood, single yellow accent (a lamp glow, a pillow, a small brass detail). Suitable as cover background. Mood: refined materiality, no gaudy luxury cliché.",
+      "tags": {
+        "mood": "arquitetura-detalhe",
+        "composition": "detalhe-ambiente",
+        "subject": "ambiente-recorte",
+        "lighting": "natural-lateral"
+      },
+      "count": 0
+    },
+    {
+      "id": "feminina-lider-apresentando",
+      "label": "Liderança feminina apresentando",
+      "category": "pessoas",
+      "description": "Executiva mulher conduzindo apresentação — autoridade composta.",
+      "promptTemplate": "Brazilian female executive (30-50) standing in a modern meeting room, mid-explanation, gesturing with one hand toward a chart or whiteboard. 3-4 colleagues visible in soft focus listening. Natural light from windows. 50mm equivalent, f/3.5, focus on her face and engaged expression. Palette: charcoal or navy blazer, cream blouse, warm wood floor, single yellow accent (necklace, pen, chart highlight). Mid contrast, light grain. Mood: composed authority, real expertise — not \"smiling-female-in-suit\" stock cliché.",
+      "tags": {
+        "mood": "autoridade-feminina",
+        "composition": "medium",
+        "subject": "mulher-em-pe-explicando",
+        "lighting": "natural-lateral"
+      },
+      "count": 0
+    },
+    {
+      "id": "businessman-thinking-laptop",
+      "label": "Empresário pensando — laptop",
+      "category": "lideranca",
+      "description": "Empresário sozinho com laptop em ambiente quente — pausa para pensar.",
+      "promptTemplate": "Brazilian executive (30-55) seated alone at a desk with a laptop in a warm-toned office (brick wall or wood panels visible). Subject leans back slightly, hand at chin or temple, eyes in middle-distance focus — mid-thought, not staring at screen. Natural warm light from a side lamp or window, golden tone. 50mm equivalent, f/2.8. Palette: dark blazer, white shirt, single yellow tie or pen, oak desk, brick/wood backdrop. Mid-warm contrast, light grain. Mood: real cognitive pause, no fake-thinking pose.",
+      "tags": {
+        "mood": "pausa-pensamento",
+        "composition": "medium",
+        "subject": "individual-pensando",
+        "lighting": "quente-pontual"
+      },
+      "count": 3
+    }
+  ],
+  "categories": {
+    "branding": "Branding",
+    "escritorio": "Escritório",
+    "lideranca": "Liderança",
+    "pessoas": "Pessoas",
+    "resultados": "Resultados",
+    "texturas": "Texturas"
+  },
+  "photos": [
+    {
+      "id": "esc-001",
+      "archetype": "sala-reuniao-vazia",
+      "archetypeLabel": "Sala de reunião vazia",
+      "category": "escritorio",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/esc-001.webp",
+        "mid": "assets/fotografia/mid/esc-001.webp"
+      },
+      "tags": {
+        "mood": "composto",
+        "composition": "wide",
+        "subject": "sala-vazia",
+        "lighting": "natural-blinds"
+      },
+      "prompt": "Editorial wide-angle photograph of an empty mid-century brazilian boardroom at golden hour. Long oak conference table in foreground with linear shadow patterns from venetian blinds slanting across the surface. Six leather executive chairs (Eames-style) arranged around the table, partially silhouetted. Far wall: floor-to-ceiling windows revealing a brick-and-glass office building in soft natural daylight. Linear ceiling LED tubes overhead, parallel to table. Composition: low angle, deliberate depth, deep negative space, no people. Palette: deep walnut wood, dark slate blue, warm cream walls, single restrained yellow tone in window reflection. 35mm equivalent, f/4, natural light only — no fill. Mid contrast, subtle film grain, no HDR. Mood: prepared stage, decision space about to be inhabited. Aspect 16:9."
+    },
+    {
+      "id": "esc-002",
+      "archetype": "home-office",
+      "archetypeLabel": "Home office",
+      "category": "escritorio",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/esc-002.webp",
+        "mid": "assets/fotografia/mid/esc-002.webp"
+      },
+      "tags": {
+        "mood": "introspectivo",
+        "composition": "close-up",
+        "subject": "maos-laptop",
+        "lighting": "natural-soft"
+      },
+      "prompt": "Editorial close-up of a brazilian professional's hands typing on a silver laptop, photographed from over-the-shoulder behind. Hands wear a single stack of thin gold bracelets on the right wrist. Wearing a textured mustard-yellow knit sweater, the only intentional color in the frame. Surface: solid dark walnut desk, with a hardbound dark green book partially visible left. Soft directional window light from camera-right, warm afternoon tone. 50mm equivalent, f/2.0, focus locked on the typing hand, sweater texture rendered in soft falloff. Palette: walnut, mustard yellow accent (Metta yellow #FFBE18 family), deep neutral background. Mid contrast, subtle film grain. Mood: quiet focus, intentional craft. Aspect 3:2."
+    },
+    {
+      "id": "esc-003",
+      "archetype": "home-office",
+      "archetypeLabel": "Home office",
+      "category": "escritorio",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/esc-003.webp",
+        "mid": "assets/fotografia/mid/esc-003.webp"
+      },
+      "tags": {
+        "mood": "analitico",
+        "composition": "medium-flat",
+        "subject": "workspace-objeto",
+        "lighting": "natural-lateral"
+      },
+      "prompt": "Editorial flat-lay-style photograph of a focused brazilian workspace at mid-morning. Open silver MacBook center, white ceramic coffee cup steaming on the left, leather-bound notebook with rolled paper note clipped to it on the right, smartphone face-down at the edge. All resting on a worn dark walnut desk surface. Behind, a soft-focus dark window frame and concrete wall. 35mm equivalent, f/3.5, slightly elevated angle. Palette: walnut wood, off-white ceramic, charcoal phone, cream paper — no aggressive accent colors. Mid contrast, subtle film grain. Mood: ready-to-think, before-the-meeting calm. Aspect 3:2."
+    },
+    {
+      "id": "esc-004",
+      "archetype": "escritorio-moderno-interior",
+      "archetypeLabel": "Escritório moderno — interior",
+      "category": "escritorio",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/esc-004.webp",
+        "mid": "assets/fotografia/mid/esc-004.webp"
+      },
+      "tags": {
+        "mood": "organizado",
+        "composition": "vertical-portrait",
+        "subject": "home-office-completo",
+        "lighting": "natural-traseira"
+      },
+      "prompt": "Editorial vertical photograph of a complete designer home office workstation. Long blonde-oak desk against a tall window letting in soft daylight; potted dracaena and small plants arranged left, large iMac monitor center-back, MacBook open in front, magazines and a small camera scattered around mouse and notebook. Dark glossy floor reflecting window light below. 35mm equivalent, f/4, slightly oblique angle to show full desk depth. Palette: blonde oak, white walls, charcoal screens, single touch of greenery, no decorative color. Mid contrast, subtle grain. Mood: organized creative practice. Aspect 4:5."
+    },
+    {
+      "id": "esc-005",
+      "archetype": "time-colaborando-laptops",
+      "archetypeLabel": "Time colaborando com laptops",
+      "category": "pessoas",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/esc-005.webp",
+        "mid": "assets/fotografia/mid/esc-005.webp"
+      },
+      "tags": {
+        "mood": "colaborativo",
+        "composition": "over-shoulder",
+        "subject": "dupla-laptop",
+        "lighting": "natural-ambiente"
+      },
+      "prompt": "Editorial scene of two brazilian professionals collaborating around a black-glass conference table. Foreground: a man in a light blue chambray shirt with an Apple Watch points his index finger directly at the screen of an open MacBook Air, mid-explanation. His colleague (red-and-black plaid shirt, hands clasped) sits across, listening with a second laptop closed in front. A white iPhone rests on the table edge. Soft natural ambient light from above, no harsh shadows. 50mm equivalent, f/2.8, focus on the pointing hand and screen edge. Palette: black glass surface, charcoal aluminum laptops, chambray blue, plaid texture. Mid contrast, subtle grain. Mood: explaining the data, not selling — quiet pedagogy. Aspect 3:4."
+    },
+    {
+      "id": "esc-006",
+      "archetype": "mockup-papelaria-madeira",
+      "archetypeLabel": "Mockup papelaria — madeira",
+      "category": "branding",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/esc-006.webp",
+        "mid": "assets/fotografia/mid/esc-006.webp"
+      },
+      "tags": {
+        "mood": "preparado",
+        "composition": "close-up-flat",
+        "subject": "objetos-mesa",
+        "lighting": "natural-suave"
+      },
+      "prompt": "Editorial close-up flat composition on a rich walnut desk surface. Apple Magic Keyboard placed top-right, bound notebook bottom-left with a turquoise post-it note clipped to the page edge, blue ballpoint pen resting diagonally across. Soft directional light from upper-left, no harsh shadows. 50mm equivalent, f/2.2, ultra-shallow focus on the post-it edge with the keyboard going slightly soft. Palette: deep walnut wood, off-white keyboard, single turquoise accent. Mid contrast, fine film grain. Mood: ready-to-write, before-the-decision quiet. Aspect 3:2."
+    },
+    {
+      "id": "pes-001",
+      "archetype": "mentoria-1-on-1",
+      "archetypeLabel": "Mentoria 1-on-1",
+      "category": "lideranca",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-001.webp",
+        "mid": "assets/fotografia/mid/pes-001.webp"
+      },
+      "tags": {
+        "mood": "didatico",
+        "composition": "medium",
+        "subject": "mentor-mentorada",
+        "lighting": "natural-direcional"
+      },
+      "prompt": "Editorial scene of a 1-on-1 mentoring moment in a minimal brazilian office. A man (40s, grey-flecked beard, glasses, beige cardigan over dark t-shirt) stands beside a seated woman (30s, blonde shoulder-length hair, beige overshirt over cream tee), both looking together at her iMac screen. He points at the screen with his right hand, mid-explanation; she follows the gesture, hand on keyboard. On the desk: blush-pink notebook, white round mouse, pair of round eyeglasses. Quiet directional light from camera-right; the rest of the room recedes into soft warm shadow. 50mm equivalent, f/2.8, focus split between his pointing hand and her screen-eye line. Palette: warm beige knits, blonde wood desk, charcoal iMac, single muted blush accent. Mid contrast, subtle film grain. Mood: honest counsel — no smiles for the camera, only for the work. Aspect 3:2."
+    },
+    {
+      "id": "pes-002",
+      "archetype": "retrato-individual-confiante",
+      "archetypeLabel": "Retrato individual — confiante",
+      "category": "pessoas",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-002.webp",
+        "mid": "assets/fotografia/mid/pes-002.webp"
+      },
+      "tags": {
+        "mood": "confiante",
+        "composition": "medium-close",
+        "subject": "executivo-individual",
+        "lighting": "natural-blue-hour"
+      },
+      "prompt": "Editorial portrait of a brazilian businessman (35-45) photographed at urban dusk. Light camel-brown V-neck sweater layered over a sky-blue button-up, arms crossed across chest, head turned slightly camera-left, soft confident half-smile, eyes locked just past lens. Background: out-of-focus modern building facade with warm sodium-yellow ambient lights from inside, deep blue evening sky. 85mm equivalent, f/2.0, sharp on eyes, background dissolved into bokeh. Palette: camel knit, dusty blue shirt, warm sodium accents in background. Mid contrast, subtle film grain. Mood: settled authority, no theatrics. Aspect 3:2."
+    },
+    {
+      "id": "pes-003",
+      "archetype": "time-celebrando-resultado",
+      "archetypeLabel": "Time celebrando resultado",
+      "category": "resultados",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-003.webp",
+        "mid": "assets/fotografia/mid/pes-003.webp"
+      },
+      "tags": {
+        "mood": "celebrativo",
+        "composition": "group-tight",
+        "subject": "time-evento",
+        "lighting": "evento-misto"
+      },
+      "prompt": "Editorial group portrait of eight diverse brazilian professionals (mixed gender, ethnicities, ages 28-55) clustered shoulder-to-shoulder for a candid team photo at a corporate event. Each wears a dark blue conference lanyard over neutral business attire (charcoal blazers, white shirts, beige jackets). All visibly happy — natural laughter and smiles, looking toward camera but unposed. Behind them: soft-focus modern conference space with warm interior lights and parking visible through far window. Mixed natural and event lighting, soft and even on faces. 35mm equivalent, f/4, group sharp, background dissolved. Palette: charcoal/beige professional wear, dark navy lanyards, warm-cool background mix. Mid contrast, subtle grain. Mood: real cohesion, not staged stock-photo cheer. Aspect 3:2."
+    },
+    {
+      "id": "pes-004",
+      "archetype": "aperto-de-maos-fechamento",
+      "archetypeLabel": "Aperto de mãos — fechamento",
+      "category": "pessoas",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-004.webp",
+        "mid": "assets/fotografia/mid/pes-004.webp"
+      },
+      "tags": {
+        "mood": "fechamento",
+        "composition": "medium-tight",
+        "subject": "trio-contrato",
+        "lighting": "natural-clara"
+      },
+      "prompt": "Editorial scene of three brazilian professionals reviewing a printed proposal together in a modern showroom. Center: a woman (30s, brunette, light grey button-up) signs a clipboard, focused. Left: a man in a dark grey polo shirt observes the document, half-smiling. Right: a man in a navy pinstripe suit and patterned tie holds the clipboard steady, smiling at the woman. All three lean toward the document with shared attention. Bright daylight from large window behind, evenly soft on faces. 50mm equivalent, f/2.8, focus on the document edge and the woman's hand mid-signature. Palette: charcoal grey, navy, white shirt, no decorative color. Mid contrast, fine grain. Mood: closing alignment, mutual conviction — never theatrical. Aspect 3:2."
+    },
+    {
+      "id": "pes-005",
+      "archetype": "businessman-thinking-laptop",
+      "archetypeLabel": "Empresário pensando — laptop",
+      "category": "lideranca",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-005.webp",
+        "mid": "assets/fotografia/mid/pes-005.webp"
+      },
+      "tags": {
+        "mood": "multitask",
+        "composition": "medium",
+        "subject": "individual-trabalhando",
+        "lighting": "natural-cafe"
+      },
+      "prompt": "Editorial scene of a brazilian black professional (30-40, short hair, well-trimmed beard) seated at a wooden cafe table, taking a phone call on his right ear while writing notes in an open leather notebook with his left hand. Wears a navy-blue polka-dot button-up shirt. Open dark grey laptop to his right, partially visible. Soft natural side-light from a tall window behind, branches softly visible outside. Genuine half-smile while listening. 50mm equivalent, f/2.4, focus on his eyes and the writing hand. Palette: navy polka-dot shirt, warm walnut wood table, charcoal laptop, neutral ambient. Mid contrast, subtle grain. Mood: simultaneous presence — listening and capturing at once. Aspect 3:2."
+    },
+    {
+      "id": "pes-006",
+      "archetype": "retrato-individual-confiante",
+      "archetypeLabel": "Retrato individual — confiante",
+      "category": "pessoas",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-006.webp",
+        "mid": "assets/fotografia/mid/pes-006.webp"
+      },
+      "tags": {
+        "mood": "genuino",
+        "composition": "medium-close",
+        "subject": "retrato-feminino",
+        "lighting": "natural-janela"
+      },
+      "prompt": "Editorial portrait of a brazilian afro-latina woman (28-35, shoulder-length curly dark hair) in a relaxed cream-colored silk blouse with a delicate gold pendant necklace, standing near a tall office window. Genuine open laughter — eyes squinted slightly, white teeth showing, no posed smile. Soft natural daylight from camera-right window, background recedes into cool grey office space with subtle furniture silhouettes. 85mm equivalent, f/2.2, sharp on eyes, background dissolved. Palette: cream silk, soft cool grey background, warm skin tone, single gold accent. Mid contrast, fine film grain. Mood: candid joy mid-conversation, not staged. Aspect 16:9."
+    },
+    {
+      "id": "pes-007",
+      "archetype": "time-colaborando-laptops",
+      "archetypeLabel": "Time colaborando com laptops",
+      "category": "pessoas",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-007.webp",
+        "mid": "assets/fotografia/mid/pes-007.webp"
+      },
+      "tags": {
+        "mood": "concentrado",
+        "composition": "medium-vertical",
+        "subject": "dupla-mentor-mentorada",
+        "lighting": "natural-janela"
+      },
+      "prompt": "Editorial vertical photograph of two young brazilian professionals working together at a single computer screen near a tall office window. The man (left, 28-35, light-blue chambray shirt, holds a metal pen, gentle focused expression) sits closer to camera; the woman (right, dark curly hair pulled back, white blouse) leans in from the right side, observing the screen, her hand resting near the keyboard. Bright soft window light from behind, urban building visible outside. Forest-green binders stacked at desk edge in foreground. 50mm equivalent, f/2.8, focus on his eye line and the screen edge. Palette: chambray blue, white, forest green binders, neutral office. Mid contrast, subtle grain. Mood: shared concentration, peer learning, no posed gestures. Aspect 4:5."
+    },
+    {
+      "id": "pes-008",
+      "archetype": "analise-dados-tela",
+      "archetypeLabel": "Análise de dados na tela",
+      "category": "resultados",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-008.webp",
+        "mid": "assets/fotografia/mid/pes-008.webp"
+      },
+      "tags": {
+        "mood": "analitico",
+        "composition": "over-shoulder-vertical",
+        "subject": "duas-mulheres-documento",
+        "lighting": "natural-ambiente"
+      },
+      "prompt": "Editorial over-the-shoulder photograph of two brazilian women reviewing a printed planning grid on a single sheet of paper. Foreground: a woman with shoulder-length blonde hair (back-of-head visible), black sleeveless top, holds the sheet at angle for the other to read. Second woman across the table (out of focus, dark hair, black blouse, visible tattoo on inner forearm) studies the document. A silver MacBook half-open in foreground, dark stone-textured table surface. Soft directional natural light from camera-left. 50mm equivalent, f/2.8, focus locked on the document grid lines. Palette: muted neutrals, black tops, warm skin tones, slate stone surface. Mid contrast, fine grain. Mood: analyzing the plan together, no eye contact, full attention on data. Aspect 4:5."
+    },
+    {
+      "id": "pes-009",
+      "archetype": "mentoria-1-on-1",
+      "archetypeLabel": "Mentoria 1-on-1",
+      "category": "lideranca",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-009.webp",
+        "mid": "assets/fotografia/mid/pes-009.webp"
+      },
+      "tags": {
+        "mood": "cordial",
+        "composition": "medium",
+        "subject": "duas-mulheres-conversa",
+        "lighting": "natural-traseira"
+      },
+      "prompt": "Editorial scene of two brazilian women in candid one-on-one conversation across a modern conference table. Left: a woman (30s, straight dark hair, beige and white striped longsleeve) leans on her hands, smiling warmly toward her colleague. Right: a black woman (30s, long box braids, glasses, cream turtleneck), smiling back, hand resting on the table. A clear glass of water and out-of-focus laptop in foreground. Soft backlight through frosted glass partition behind, even warm ambient light on faces. 50mm equivalent, f/2.8, focus split between both women's eye lines. Palette: warm beige, cream, neutral office grey. Mid contrast, subtle grain. Mood: trusted dialog, real warmth — not networking-event smile. Aspect 3:2."
+    },
+    {
+      "id": "pes-010",
+      "archetype": "home-office",
+      "archetypeLabel": "Home office",
+      "category": "escritorio",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-010.webp",
+        "mid": "assets/fotografia/mid/pes-010.webp"
+      },
+      "tags": {
+        "mood": "leve",
+        "composition": "over-shoulder",
+        "subject": "dupla-cafe-casa",
+        "lighting": "natural-manha"
+      },
+      "prompt": "Editorial scene of two brazilian colleagues working from a sunlit kitchen-office at a wood breakfast bar. Left: a man (early 30s, dark beard, white tee) leaning over an open MacBook, mid-explanation. Right (foreground, blurred): a woman with afro-textured hair pulled into a high curly ponytail, wearing a green ribbed top, listens with chin resting on her hand. On the wood counter: a sage-green French press, two ceramic mugs, scattered notes. Soft morning light through open patio doors behind, hint of garden visible. 35mm equivalent, f/3.2, focus on the man's face and laptop screen. Palette: pale wood, sage green, white tee, warm morning light. Mid contrast, subtle grain. Mood: easy collaboration outside the corporate frame. Aspect 3:2."
+    },
+    {
+      "id": "pes-011",
+      "archetype": "retrato-individual-confiante",
+      "archetypeLabel": "Retrato individual — confiante",
+      "category": "pessoas",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-011.webp",
+        "mid": "assets/fotografia/mid/pes-011.webp"
+      },
+      "tags": {
+        "mood": "cordial-autoridade",
+        "composition": "medium",
+        "subject": "executivo-escritorio",
+        "lighting": "mista-escritorio"
+      },
+      "prompt": "Editorial environmental portrait of a brazilian executive (35-45, dark hair, well-trimmed beard, black square-frame glasses) seated at a light wood desk in a modern open-plan office. Wears a navy slim-fit blazer over a thin-striped pale blue shirt, hands clasped together resting on the desk in front of an open silver laptop. Genuine smile, looking just past the camera. Behind: soft-focus warm-toned office floor with linear ceiling lights, large monstera plant left, glass partitions blurred. 50mm equivalent, f/2.8, sharp on his face, background bokeh. Palette: navy blazer, warm gold ambient lights, deep green plant, charcoal laptop. Mid contrast, subtle grain. Mood: approachable authority — leader who explains, not commands. Aspect 3:2."
+    },
+    {
+      "id": "pes-012",
+      "archetype": "retrato-individual-confiante",
+      "archetypeLabel": "Retrato individual — confiante",
+      "category": "pessoas",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-012.webp",
+        "mid": "assets/fotografia/mid/pes-012.webp"
+      },
+      "tags": {
+        "mood": "leve",
+        "composition": "medium-wide",
+        "subject": "profissional-cafe",
+        "lighting": "natural-clara"
+      },
+      "prompt": "Editorial candid portrait of a brazilian woman (28-35, shoulder-length brunette hair with subtle highlights) seated at a long wood meeting table beside a glass partition. Wears a relaxed black silk button-up. Holds a take-away coffee cup in her right hand, mid-laugh, looking off to the right at someone unseen. Soft natural daylight from large window behind. A red modern chair partially visible left, small plant right. 50mm equivalent, f/2.5, sharp on her face, glass partition adds gentle reflection layer in foreground. Palette: black silk, warm wood, soft grey backdrop, takeaway coffee brown. Mid contrast, subtle grain. Mood: pause-between-meetings, real laugh, no camera-awareness. Aspect 16:9."
+    },
+    {
+      "id": "pes-013",
+      "archetype": "home-office",
+      "archetypeLabel": "Home office",
+      "category": "escritorio",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-013.webp",
+        "mid": "assets/fotografia/mid/pes-013.webp"
+      },
+      "tags": {
+        "mood": "introspectivo",
+        "composition": "medium-wide",
+        "subject": "individual-de-costas",
+        "lighting": "natural-janela"
+      },
+      "prompt": "Editorial wide photograph from behind of a brazilian man (30s, short dark hair, white linen shirt) seated at a wide wood home-office desk facing a tall window with a view of a residential neighborhood at golden hour. Two large monitors display documents. To the left: a vibrant potted plant. To the right: a glass desk lamp and smaller plant. The chair is leather, visible from behind. 35mm equivalent, f/4, focus on the back of his head and the screens. Palette: warm wood, white walls, deep green plants, golden window light. Mid contrast, subtle grain. Mood: solitary deep work, pre-decision concentration. Aspect 3:2."
+    },
+    {
+      "id": "pes-015",
+      "archetype": "businessman-thinking-laptop",
+      "archetypeLabel": "Empresário pensando — laptop",
+      "category": "lideranca",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-015.webp",
+        "mid": "assets/fotografia/mid/pes-015.webp"
+      },
+      "tags": {
+        "mood": "concentrado",
+        "composition": "medium-side",
+        "subject": "individual-podcast",
+        "lighting": "natural-suave"
+      },
+      "prompt": "Editorial profile photograph of a brazilian man (30-40, short dark hair, full beard, white button-up shirt) typing focused on a laptop in a quiet recording room. A gold-mesh podcast microphone is visible foreground-left in soft focus. He wears a leather-strap watch, no smile, full concentration on screen. Soft diffused natural daylight from a sheer-curtain window behind, even and clean. A book lies on the white desk in front of him. 50mm equivalent, f/2.8, focus on the side of his face and his hands. Palette: white shirt, white desk, charcoal laptop, gold mic accent. Mid contrast, fine grain. Mood: prepared craft, recording before broadcasting. Aspect 4:5."
+    },
+    {
+      "id": "pes-017",
+      "archetype": "businessman-thinking-laptop",
+      "archetypeLabel": "Empresário pensando — laptop",
+      "category": "lideranca",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-017.webp",
+        "mid": "assets/fotografia/mid/pes-017.webp"
+      },
+      "tags": {
+        "mood": "foco",
+        "composition": "medium",
+        "subject": "profissional-laptop",
+        "lighting": "natural-clara"
+      },
+      "prompt": "Editorial photograph of a brazilian black professional (35-45, short hair, well-trimmed beard, cream cotton crewneck sweater, gold ring on right hand) typing on a silver MacBook in a bright modern office. Calm focused expression, looking at the screen. Behind, slightly out of focus, an older male colleague (white, grey hair, glasses, light-blue shirt) works at the next desk. Soft cool daylight from large window left. 50mm equivalent, f/3.2, sharp on the foreground subject. Palette: cream knit, white desk, charcoal laptop, neutral cool office. Mid contrast, subtle grain. Mood: deep focus, mature professional flow. Aspect 3:2."
+    },
+    {
+      "id": "pes-018",
+      "archetype": "retrato-individual-confiante",
+      "archetypeLabel": "Retrato individual — confiante",
+      "category": "pessoas",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/pes-018.webp",
+        "mid": "assets/fotografia/mid/pes-018.webp"
+      },
+      "tags": {
+        "mood": "leve",
+        "composition": "medium-wide",
+        "subject": "profissional-cafe",
+        "lighting": "natural-clara"
+      },
+      "prompt": "Editorial candid portrait of a brazilian woman (28-35, shoulder-length brunette hair with subtle highlights) seated at a long wood meeting table beside a glass partition. Wears a relaxed black silk button-up. Holds a take-away coffee cup in her right hand, mid-laugh, looking off to the right at someone unseen. Soft natural daylight from large window behind. A red modern chair partially visible left, small plant right. 50mm equivalent, f/2.5, sharp on her face, glass partition adds gentle reflection layer in foreground. Palette: black silk, warm wood, soft grey backdrop, takeaway coffee brown. Mid contrast, subtle grain. Mood: pause-between-meetings, real laugh, no camera-awareness. Aspect 16:9."
+    },
+    {
+      "id": "esc-007",
+      "archetype": "sala-reuniao-vazia",
+      "archetypeLabel": "Sala de reunião vazia",
+      "category": "escritorio",
+      "src": {
+        "thumb": "assets/fotografia/thumbs/esc-007.webp",
+        "mid": "assets/fotografia/mid/esc-007.webp"
+      },
+      "tags": {
+        "mood": "composto",
+        "composition": "wide",
+        "subject": "sala-vazia",
+        "lighting": "natural-blinds"
+      },
+      "prompt": "Editorial wide-angle photograph of an empty mid-century brazilian boardroom at golden hour. Long oak conference table in foreground with linear shadow patterns from venetian blinds slanting across the surface. Six leather executive chairs (Eames-style) arranged around the table, partially silhouetted. Far wall: floor-to-ceiling windows revealing a brick-and-glass office building in soft natural daylight. Linear ceiling LED tubes overhead, parallel to table. Composition: low angle, deliberate depth, deep negative space, no people. Palette: deep walnut wood, dark slate blue, warm cream walls, single restrained yellow tone in window reflection. 35mm equivalent, f/4, natural light only — no fill. Mid contrast, subtle film grain, no HDR. Mood: prepared stage, decision space about to be inhabited. Aspect 16:9."
+    }
+  ]
+}

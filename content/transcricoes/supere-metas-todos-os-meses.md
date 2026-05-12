@@ -1,0 +1,4 @@
+# Supere metas todos os meses!
+# URL: https://youtube.com/watch?v=XNbN0X8IwQ8
+
+é que aí ou você diminui a meta ou aumenta o treinamento, não tem o que fazer. O teu time já tá fazendo no máximo que ele consegue, não ganha variável, fixo baixo. Você acha que esse cara vai pra tua empresa porque ele não vai vender, porque ele não quer? Não, hoje eu vou fazer o resultado ruim, hoje eu quero fazer um regaço. >> Claro que não. Se o cara não tá conseguindo fazer resultado agora, porque ele não sabe fazer. Ou você aumenta o treinamento ou diminui a meta, não tem choro nem. Eu sou Thiago Alves, especialista em estratégias de gestão para superar a meta. Eu ajudo empresários a escalarem suas vendas e seus lucros, devolvendo a liberdade para suas vidas. Se você quer conteúdos práticos, diretos voltados a estratégias comerciais para que possa aumentar resultado, siga o meu perfil e acompanhe nossos conteúdos diários. M.

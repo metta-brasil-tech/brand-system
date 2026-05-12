@@ -1,0 +1,154 @@
+<h1 id="elevacao-estados-e-gradientes">Elevação, Estados e Gradientes</h1>
+<p>Três sistemas auxiliares que dão <strong>profundidade controlada</strong> à composição: elevação (sombras suaves), estados de interação (overlays) e gradientes (transições oficiais). A Metta opera com paleta restrita nesses três — <em>editorial, não Material 3D</em>. Sombras pesadas, glows neon e gradientes coloridos não pertencem ao sistema.</p>
+<h2 id="elevacao">Elevação</h2>
+<p>6 níveis de elevação (0 a 5). Sombras <strong>discretas</strong> que criam hierarquia sem peso visual.</p>
+<div class="elevation-grid">
+  <div class="elev-tile" style="box-shadow:none"><div><strong>Level 0</strong><code>none</code></div></div>
+  <div class="elev-tile" style="box-shadow:0 1px 2px rgba(12,22,27,0.05)"><div><strong>Level 1</strong><code>0 1px 2px / .05</code></div></div>
+  <div class="elev-tile" style="box-shadow:0 5px 14px rgba(12,22,27,0.06)"><div><strong>Level 2</strong><code>0 5px 14px / .06</code></div></div>
+  <div class="elev-tile" style="box-shadow:0 12px 28px rgba(12,22,27,0.08)"><div><strong>Level 3</strong><code>0 12px 28px / .08</code></div></div>
+  <div class="elev-tile" style="box-shadow:0 18px 40px rgba(12,22,27,0.11)"><div><strong>Level 4</strong><code>0 18px 40px / .11</code></div></div>
+  <div class="elev-tile" style="box-shadow:0 28px 60px rgba(12,22,27,0.14)"><div><strong>Level 5</strong><code>0 28px 60px / .14</code></div></div>
+</div>
+
+<h3 id="aplicacao">Aplicação</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Onde usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>0</strong></td>
+<td>Fundo padrão sem destaque, blocos editoriais flat, peças de leitura</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>Card padrão (default do sistema)</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Card em hover, dropdown/menu</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Card elevated, modal, popover</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Hero card, callout máximo</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Sticky header em scroll, alerta crítico</td>
+</tr>
+</tbody></table></div>
+<h3 id="regras">Regras</h3>
+<ul>
+<li><strong>Level 1</strong> é o default — qualquer card que não pede destaque adicional usa Level 1.</li>
+<li><strong>Salto de elevação tem propósito</strong>. Subir de Level 1 pra Level 3 sinaliza importância. Pular pra Level 5 sem motivo é ruído.</li>
+<li><strong>Nunca shadow custom</strong>. Os 6 níveis cobrem 100% dos casos.</li>
+<li><strong>Em fundo escuro</strong>, sombras perdem efeito visual. Use bordas (<code>outline-variant</code>) ou troca de superfície (<code>surface-container-high</code>) pra criar hierarquia.</li>
+</ul>
+<h2 id="estados-de-interacao">Estados de interação</h2>
+<p>Sobreposição <strong>semitransparente de cor inversa</strong> indica estado. Mesmo padrão pra todo elemento interativo (botão, card clicável, chip selecionável).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Opacity</th>
+<th>Quando aparece</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Hover</strong></td>
+<td>8%</td>
+<td>Mouse sobre o elemento</td>
+</tr>
+<tr>
+<td><strong>Focus</strong></td>
+<td>12%</td>
+<td>Elemento focado via teclado (acessibilidade)</td>
+</tr>
+<tr>
+<td><strong>Pressed</strong></td>
+<td>16%</td>
+<td>Mouse/touch pressionado, click ativo</td>
+</tr>
+</tbody></table></div>
+<h3 id="demonstracao">Demonstração</h3>
+<div class="state-demo-list">
+  <div class="state-demo-item">
+    <div class="state-pill"><span>Padrão</span></div>
+    <div class="state-info">Sem overlay. Background original do componente.</div>
+  </div>
+  <div class="state-demo-item">
+    <div class="state-pill state-hover"><span>Hover · 8%</span></div>
+    <div class="state-info">Overlay sutil que indica interatividade ao passar o mouse.</div>
+  </div>
+  <div class="state-demo-item">
+    <div class="state-pill state-pressed"><span>Pressionado · 16%</span></div>
+    <div class="state-info">Overlay mais denso confirma o feedback do clique.</div>
+  </div>
+</div>
+
+<h3 id="regras">Regras</h3>
+<ul>
+<li><strong>Cor do overlay segue o elemento</strong> — em CTA amarelo, overlay é tom escuro; em CTA escuro, overlay é tom claro.</li>
+<li><strong>Foco SEMPRE visível</strong> quando navegado por teclado. Acessibilidade não é opcional.</li>
+<li><strong>Transição de estado</strong> sempre via <code>motion-duration-short</code> (200ms) com <code>motion-easing-standard</code>. Sem snap brusco, sem fade longo.</li>
+</ul>
+<h2 id="gradientes">Gradientes</h2>
+<p><strong>4 gradientes oficiais</strong>, todos lineares pra controle previsível em qualquer composição. <strong>Roxo, neon e amarelado decorativo são proibidos.</strong> Gradiente é elemento estrutural, não ornamento.</p>
+<div class="grad-grid">
+  <div class="grad-tile" style="background: linear-gradient(135deg, #FFBE18 0%, #FFD66D 50%, #FFE3A6 100%)">
+    <span class="grad-label"><strong>Golden Linear</strong><code>--metta-sys-gradient-golden-linear</code></span>
+  </div>
+  <div class="grad-tile" style="background: linear-gradient(135deg, #0C161B 0%, #1E2D36 60%, #435965 100%); color: #fff">
+    <span class="grad-label"><strong>Night Linear</strong><code>--metta-sys-gradient-night-linear</code></span>
+  </div>
+  <div class="grad-tile" style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E6E9 100%); color: #0C161B">
+    <span class="grad-label"><strong>Light Linear</strong><code>--metta-sys-gradient-light-linear</code></span>
+  </div>
+  <div class="grad-tile" style="background: linear-gradient(226deg, #FFC443 10%, #FFB618 97%)">
+    <span class="grad-label"><strong>Yellow Soft</strong><code>--metta-sys-gradient-yellow-soft</code></span>
+  </div>
+</div>
+
+<h3 id="aplicacao">Aplicação</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Gradiente</th>
+<th>Onde usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Golden Linear</strong></td>
+<td>Hero institucional de alta voltagem, capa de manifesto, frame final de vídeo</td>
+</tr>
+<tr>
+<td><strong>Night Linear</strong></td>
+<td>Background de seção dramática, abertura de slide escura, frame de transição</td>
+</tr>
+<tr>
+<td><strong>Light Linear</strong></td>
+<td>Fundo neutro com profundidade sutil, hero de peça editorial leve</td>
+</tr>
+<tr>
+<td><strong>Yellow Soft</strong></td>
+<td>CTA de destaque máximo, badge premium, faixa de oferta especial</td>
+</tr>
+</tbody></table></div>
+<h3 id="regras">Regras</h3>
+<ul>
+<li><strong>Gradiente é fundo</strong>, não ornamento. Não use gradiente em ícone, logo, separator ou texto pequeno.</li>
+<li><strong>Apenas 1 gradiente por peça</strong>. Misturar Golden + Night na mesma peça quebra a hierarquia.</li>
+<li><strong>Texto sobre gradiente</strong> sempre validado em contraste contra os dois extremos do gradiente, não só o ponto médio.</li>
+<li><strong>Direção 135°</strong> é o padrão (Golden, Night, Light). Yellow Soft usa 226° por exceção (capa específica).</li>
+</ul>
+<h2 id="principio-editorial-comum">Princípio editorial comum</h2>
+<p>Os três sistemas têm o mesmo princípio: <strong>profundidade visual controlada</strong>. A Metta não opera com efeitos 3D pesados, drop shadows agressivas ou gradientes coloridos saturados. <strong>Editorial &gt; decorativo</strong>. Quando em dúvida entre uma versão &quot;mais bonita&quot; e uma versão &quot;mais sóbria&quot;, escolha a mais sóbria. Marca pesa pela hierarquia, não pelo enfeite.</p>
+<h2 id="para-implementacao-tecnica">Para implementação técnica</h2>
+<p>Tokens completos, mapeamento Figma e snippets de código ficam no <strong>catálogo técnico do Design System</strong>.</p>

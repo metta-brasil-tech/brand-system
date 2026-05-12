@@ -1,0 +1,256 @@
+/* ============================================================
+   METTA BRAND SYSTEM — PROSE STYLES
+   Aplicado em conteúdo md→HTML renderizado (CP3)
+============================================================ */
+
+.prose {
+  max-width: 760px;
+  font-size: var(--metta-sys-typescale-body-large-size);
+  line-height: 1.65;
+  color: var(--metta-sys-color-on-surface);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: var(--metta-sys-color-on-surface);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  font-stretch: 132%;
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+}
+.prose h1 {
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 870;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.94;
+  margin-top: 0;
+}
+.prose h2 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 650;
+  margin-top: 1.6em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+}
+.prose h3 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 650;
+}
+.prose h4 {
+  font-size: 14px;
+  font-weight: 540;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+.prose p {
+  margin: 0 0 1em 0;
+}
+
+.prose a {
+  color: var(--metta-sys-color-on-surface);
+  text-decoration: underline;
+  text-decoration-color: var(--metta-sys-color-primary);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.prose a:hover {
+  text-decoration-color: var(--metta-sys-color-on-surface);
+}
+
+.prose strong {
+  font-weight: 650;
+  color: var(--metta-sys-color-on-surface);
+}
+.prose em {
+  font-style: italic;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+.prose blockquote {
+  margin: 24px 0;
+  padding: 20px 28px;
+  border-left: 4px solid var(--metta-sys-color-primary);
+  background: var(--metta-sys-color-surface-container-low);
+  border-radius: 0 var(--metta-sys-shape-corner-md) var(--metta-sys-shape-corner-md) 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.prose blockquote p:last-child { margin-bottom: 0; }
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+  margin: 0 0 1em 0;
+}
+.prose li { margin-bottom: 0.4em; }
+.prose li::marker { color: var(--metta-sys-color-on-surface-variant); }
+
+.prose code {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 0.9em;
+  background: var(--metta-sys-color-surface-container);
+  padding: 2px 6px;
+  border-radius: var(--metta-sys-shape-corner-xs);
+  color: var(--metta-sys-color-on-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.prose pre {
+  background: var(--metta-sys-color-surface-container);
+  padding: 20px 24px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  overflow-x: auto;
+  margin: 24px 0;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.prose pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.prose hr {
+  margin: 48px 0;
+  border: none;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 24px 0;
+  font-size: 14px;
+}
+.prose th,
+.prose td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  vertical-align: top;
+}
+.prose th {
+  font-weight: 650;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--metta-sys-color-on-surface-variant);
+  border-bottom: 2px solid var(--metta-sys-color-outline);
+}
+.prose tr:hover td { background: var(--metta-sys-color-surface-container-low); }
+
+.prose img {
+  max-width: 100%;
+  border-radius: var(--metta-sys-shape-corner-md);
+  margin: 24px 0;
+}
+
+/* TL;DR / callout boxes (caso o md tenha) */
+.prose .tldr {
+  margin: 24px 0;
+  padding: 20px 24px;
+  background: var(--metta-sys-color-primary-container);
+  color: var(--metta-sys-color-on-primary-container);
+  border-radius: var(--metta-sys-shape-corner-md);
+}
+.prose .tldr h4 {
+  margin: 0 0 8px;
+  color: var(--metta-sys-color-on-primary-container);
+}
+
+/* Frontmatter card (collapsible) */
+.prose .frontmatter-card {
+  margin: 0 0 40px;
+  padding: 0;
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-sm);
+  font-size: 12px;
+  font-family: var(--metta-ref-typeface-mono);
+}
+.prose .frontmatter-card summary {
+  padding: 8px 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 540;
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), sans-serif;
+  font-stretch: 132%;
+  color: var(--metta-sys-color-on-surface-variant);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.prose .frontmatter-card summary::-webkit-details-marker { display: none; }
+.prose .frontmatter-card summary::before {
+  content: '';
+  width: 0; height: 0;
+  border-left: 4px solid var(--metta-sys-color-on-surface-variant);
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  transition: transform var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.prose .frontmatter-card[open] summary::before {
+  transform: rotate(90deg);
+}
+.prose .fm-grid {
+  padding: 0 14px 12px;
+  display: grid;
+  gap: 4px;
+}
+.prose .fm-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.prose .fm-key {
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--metta-sys-color-on-surface-variant);
+  opacity: 0.7;
+}
+.prose .fm-val {
+  color: var(--metta-sys-color-on-surface);
+  word-break: break-word;
+}
+
+/* Wikilinks (não-clicáveis até CP futuro resolver alvos internos) */
+.prose .wikilink {
+  color: var(--metta-sys-color-on-surface);
+  border-bottom: 1px dashed var(--metta-sys-color-primary);
+  padding-bottom: 1px;
+  cursor: help;
+}
+
+/* Block-anchor markers (invisíveis, só ancoram URL) */
+.prose .block-anchor {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  scroll-margin-top: 100px;
+}
+
+/* Table-wrap para responsivo */
+.prose .table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+}
+.prose .table-wrap table {
+  margin: 0;
+}

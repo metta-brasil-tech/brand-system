@@ -1,0 +1,6 @@
+<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon">
+<path d="M15.625 10C15.625 12.767 13.6271 15.0674 10.9952 15.5372C10.4515 15.6343 10 15.1773 10 14.625V5.375C10 4.82272 10.4515 4.3657 10.9952 4.46277C13.6271 4.93265 15.625 7.23301 15.625 10Z" stroke="var(--stroke-0, black)" stroke-width="2"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="var(--stroke-0, black)" stroke-width="2"/>
+</g>
+</svg>

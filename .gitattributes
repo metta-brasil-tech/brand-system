@@ -1,0 +1,17 @@
+# Normaliza line endings — sem isso o Windows polui diffs com CRLF
+* text=auto eol=lf
+
+# Binários explícitos
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.mp4 binary
+
+# SVG como texto (mantém diff legível)
+*.svg text eol=lf

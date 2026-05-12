@@ -1,0 +1,4 @@
+# Clone seu melhor vendedor
+# URL: https://youtube.com/watch?v=n0UeUtMbSSA
+
+thago como é que faz pros vendedores bater em meta todo mês clonando seu melhor vendedor e tem como tem Pensa bem o seu melhor vendedor é um Geno Indomável incopiável ou é um cara mais dedicado com um pouquinho mais de habilidade é só um pouco mais dedicado e com mais habilidade pois é o problema é que ninguém mapeia o que esse cara faz muito menos treina as pessoas para ser igual a ele e aí tem dificuldade no resultado e como é que faz isso é exatamente o que eu vou ensinar numa aula gratuita para empresários e gestores comerciais sobre como clonar sobre como fazer os vendedores bater menta todo mês basta clicar aqui em saiba mais

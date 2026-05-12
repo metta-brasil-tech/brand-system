@@ -1,0 +1,1124 @@
+{
+  "generatedAt": "2026-05-09T13:59:21.982Z",
+  "categories": [
+    {
+      "id": "depoimentos-anuncios",
+      "label": "Depoimentos & Anúncios",
+      "icon": "quote",
+      "description": "Cases de alunos, anúncios e masterclasses.",
+      "count": 4
+    },
+    {
+      "id": "estrategia-mensal",
+      "label": "Estratégia Mensal",
+      "icon": "calendar",
+      "description": "Como bater meta em cada mês — janeiro a dezembro, datas-chave e semanas finais.",
+      "count": 13
+    },
+    {
+      "id": "lideranca",
+      "label": "Liderança & Gestão",
+      "icon": "compass",
+      "description": "Líder, gerente, gestor — atitude, motivação, liberar tempo e persuasão.",
+      "count": 16
+    },
+    {
+      "id": "pilares-metodo",
+      "label": "Pilares & Método",
+      "icon": "package",
+      "description": "Pilares da Meta Batida, CHA, 50 em 5h, diagnóstico e princípios.",
+      "count": 20
+    },
+    {
+      "id": "equipe-engajamento",
+      "label": "Equipe & Engajamento",
+      "icon": "users",
+      "description": "Engajamento, motivar o time, recuperar desmotivados e dono no funcionário.",
+      "count": 12
+    },
+    {
+      "id": "vendedores",
+      "label": "Vendedores",
+      "icon": "target",
+      "description": "Clonar o melhor vendedor, contratar, demitir, performance e preço.",
+      "count": 15
+    },
+    {
+      "id": "lucro",
+      "label": "Lucro & Resultado",
+      "icon": "trending-up",
+      "description": "Lucro, escala e jogo do lucro — como o resultado se constrói.",
+      "count": 7
+    },
+    {
+      "id": "empresario-cultura",
+      "label": "Empresário & Cultura",
+      "icon": "briefcase",
+      "description": "Mindset do dono, erros, cobrança, atendimento e perfis a seguir.",
+      "count": 8
+    }
+  ],
+  "transcriptions": {
+    "depoimentos-anuncios": [
+      {
+        "id": "anuncio-perp-diagnostico",
+        "label": "Anúncio · PERP - DIAGNÓSTICO",
+        "shortLabel": "Anúncio · PERP - DIAGNÓSTICO",
+        "episode": null,
+        "file": "aLDm58w94ZY - [ANÚNCIO - PERP - DIAGNÓSTICO].md",
+        "ytId": "aLDm58w94ZY",
+        "ytUrl": "https://youtube.com/watch?v=aLDm58w94ZY",
+        "wordCount": 205,
+        "readingMin": 1
+      },
+      {
+        "id": "depoimento-alime-unidep",
+        "label": "Depoimento · ALIME - (UNIDEP)",
+        "shortLabel": "Depoimento · ALIME - (UNIDEP)",
+        "episode": null,
+        "file": "myBLYKxc_IA - DEPOIMENTO - ALIME - ACADÊMICA - UNIDEP.md",
+        "ytId": "myBLYKxc_IA",
+        "ytUrl": "https://youtube.com/watch?v=myBLYKxc_IA",
+        "wordCount": 369,
+        "readingMin": 2
+      },
+      {
+        "id": "depoimento-ananda-unidep",
+        "label": "Depoimento · ANANDA - (UNIDEP)",
+        "shortLabel": "Depoimento · ANANDA - (UNIDEP)",
+        "episode": null,
+        "file": "B2Dc0uJdrZ4 - DEPOIMENTO - ANANDA - ACADÊMICA - UNIDEP.md",
+        "ytId": "B2Dc0uJdrZ4",
+        "ytUrl": "https://youtube.com/watch?v=B2Dc0uJdrZ4",
+        "wordCount": 462,
+        "readingMin": 3
+      },
+      {
+        "id": "masterclass",
+        "label": "masterclass",
+        "shortLabel": "masterclass",
+        "episode": null,
+        "file": "eLxQJEx_3r4 - masterclass.md",
+        "ytId": "eLxQJEx_3r4",
+        "ytUrl": "https://youtube.com/watch?v=eLxQJEx_3r4",
+        "wordCount": 127,
+        "readingMin": 1
+      }
+    ],
+    "estrategia-mensal": [
+      {
+        "id": "ep-18-como-bater-meta-no-dia-das-mae",
+        "label": "#18 · Como bater meta no dia das mães?",
+        "shortLabel": "Como bater meta no dia das mães?",
+        "episode": 18,
+        "file": "RvBo1TQEpA8 - #18 - Como bater meta no dia das mães-.md",
+        "ytId": "RvBo1TQEpA8",
+        "ytUrl": "https://youtube.com/watch?v=RvBo1TQEpA8",
+        "wordCount": 7071,
+        "readingMin": 39
+      },
+      {
+        "id": "bata-a-meta-no-mes-de-maio-como-superar-o-faturame",
+        "label": "Bata a meta no mês de maio: como superar o faturamento com foco e estratégia",
+        "shortLabel": "Bata a meta no mês de maio: como superar o faturamento com foco e estratégia",
+        "episode": null,
+        "file": "5d9ZcaNUXkY - Bata a meta no mês de maio- como superar o faturamento com foco e estratégia.md",
+        "ytId": "5d9ZcaNUXkY",
+        "ytUrl": "https://youtube.com/watch?v=5d9ZcaNUXkY",
+        "wordCount": 6045,
+        "readingMin": 34
+      },
+      {
+        "id": "bata-meta-na-ultima-semana-uma-estrategia-para-eng",
+        "label": "Bata meta na última semana: uma estratégia para engajar e motivar seus vendedores.",
+        "shortLabel": "Bata meta na última semana: uma estratégia para engajar e motivar seus vendedores.",
+        "episode": null,
+        "file": "zsweCGzo-zY - Bata meta na última semana- uma estratégia para engajar e motivar seus vendedores.md",
+        "ytId": "zsweCGzo-zY",
+        "ytUrl": "https://youtube.com/watch?v=zsweCGzo-zY",
+        "wordCount": 10816,
+        "readingMin": 60
+      },
+      {
+        "id": "como-aumentar-o-lucro-da-sua-empresa-em-junho",
+        "label": "Como aumentar o lucro da sua empresa em junho",
+        "shortLabel": "Como aumentar o lucro da sua empresa em junho",
+        "episode": null,
+        "file": "30J0iht54HI - Como aumentar o lucro da sua empresa em junho.md",
+        "ytId": "30J0iht54HI",
+        "ytUrl": "https://youtube.com/watch?v=30J0iht54HI",
+        "wordCount": 7408,
+        "readingMin": 41
+      },
+      {
+        "id": "como-bater-a-meta-na-ultima-semana-do-mes",
+        "label": "COMO BATER A META NA ÚLTIMA SEMANA DO MÊS",
+        "shortLabel": "COMO BATER A META NA ÚLTIMA SEMANA DO MÊS",
+        "episode": null,
+        "file": "xCKiO35yAyE - COMO BATER A META NA ÚLTIMA SEMANA DO MÊS.md",
+        "ytId": "xCKiO35yAyE",
+        "ytUrl": "https://youtube.com/watch?v=xCKiO35yAyE",
+        "wordCount": 6626,
+        "readingMin": 37
+      },
+      {
+        "id": "como-bater-meta-em-abril-uma-estrategia-para-vende",
+        "label": "Como bater meta em abril: uma estratégia para vender na primeira semana do mês",
+        "shortLabel": "Como bater meta em abril: uma estratégia para vender na primeira semana do mês",
+        "episode": null,
+        "file": "CE_wj39V1yU - Como bater meta em abril- uma estratégia para vender na primeira semana do mês.md",
+        "ytId": "CE_wj39V1yU",
+        "ytUrl": "https://youtube.com/watch?v=CE_wj39V1yU",
+        "wordCount": 6469,
+        "readingMin": 36
+      },
+      {
+        "id": "como-bater-meta-em-dezembro",
+        "label": "Como Bater Meta em Dezembro",
+        "shortLabel": "Como Bater Meta em Dezembro",
+        "episode": null,
+        "file": "45kbACdO8bg - Como Bater Meta em Dezembro.md",
+        "ytId": "45kbACdO8bg",
+        "ytUrl": "https://youtube.com/watch?v=45kbACdO8bg",
+        "wordCount": 8046,
+        "readingMin": 45
+      },
+      {
+        "id": "como-bater-meta-em-novembro",
+        "label": "Como bater meta em Novembro?",
+        "shortLabel": "Como bater meta em Novembro?",
+        "episode": null,
+        "file": "oYEnsFTossY - Como bater meta em Novembro-.md",
+        "ytId": "oYEnsFTossY",
+        "ytUrl": "https://youtube.com/watch?v=oYEnsFTossY",
+        "wordCount": 8757,
+        "readingMin": 49
+      },
+      {
+        "id": "como-bater-meta-em-outubro",
+        "label": "Como bater meta em Outubro",
+        "shortLabel": "Como bater meta em Outubro",
+        "episode": null,
+        "file": "eBh7gVFsRb8 - Como bater meta em Outubro.md",
+        "ytId": "eBh7gVFsRb8",
+        "ytUrl": "https://youtube.com/watch?v=eBh7gVFsRb8",
+        "wordCount": 8159,
+        "readingMin": 45
+      },
+      {
+        "id": "como-bater-metas-no-mes-de-julho",
+        "label": "Como bater metas no mês de julho",
+        "shortLabel": "Como bater metas no mês de julho",
+        "episode": null,
+        "file": "KAnRB05bvtk - Como bater metas no mês de julho.md",
+        "ytId": "KAnRB05bvtk",
+        "ytUrl": "https://youtube.com/watch?v=KAnRB05bvtk",
+        "wordCount": 8689,
+        "readingMin": 48
+      },
+      {
+        "id": "como-motivar-seu-time-para-a-black-friday",
+        "label": "Como motivar seu time para a Black Friday",
+        "shortLabel": "Como motivar seu time para a Black Friday",
+        "episode": null,
+        "file": "VlClkJiMBWM - Como motivar seu time para a Black Friday.md",
+        "ytId": "VlClkJiMBWM",
+        "ytUrl": "https://youtube.com/watch?v=VlClkJiMBWM",
+        "wordCount": 9226,
+        "readingMin": 51
+      },
+      {
+        "id": "esteja-armado-para-a-meta-de-setembro",
+        "label": "Esteja armado para a meta de Setembro!",
+        "shortLabel": "Esteja armado para a meta de Setembro!",
+        "episode": null,
+        "file": "pYSoYh7MR3M - Esteja armado para a meta de Setembro!.md",
+        "ytId": "pYSoYh7MR3M",
+        "ytUrl": "https://youtube.com/watch?v=pYSoYh7MR3M",
+        "wordCount": 5454,
+        "readingMin": 30
+      },
+      {
+        "id": "faltam-2-dias",
+        "label": "Faltam 2 dias",
+        "shortLabel": "Faltam 2 dias",
+        "episode": null,
+        "file": "OKLew0ZJjQk - Faltam 2 dias.md",
+        "ytId": "OKLew0ZJjQk",
+        "ytUrl": "https://youtube.com/watch?v=OKLew0ZJjQk",
+        "wordCount": 93,
+        "readingMin": 1
+      }
+    ],
+    "lideranca": [
+      {
+        "id": "ep-05-lideranca-inteligente",
+        "label": "#05 · Liderança Inteligente",
+        "shortLabel": "Liderança Inteligente",
+        "episode": 5,
+        "file": "_fvXrgW1T18 - #05 - Liderança Inteligente.md",
+        "ytId": "_fvXrgW1T18",
+        "ytUrl": "https://youtube.com/watch?v=_fvXrgW1T18",
+        "wordCount": 7132,
+        "readingMin": 40
+      },
+      {
+        "id": "ep-07-como-ser-um-lider-de-vendas-al",
+        "label": "#07 · Como ser um líder de vendas altamente remunerado e reconhecido?",
+        "shortLabel": "Como ser um líder de vendas altamente remunerado e reconhecido?",
+        "episode": 7,
+        "file": "XbHaJkuCshA - #07 - Como ser um líder de vendas altamente remunerado e reconhecido-.md",
+        "ytId": "XbHaJkuCshA",
+        "ytUrl": "https://youtube.com/watch?v=XbHaJkuCshA",
+        "wordCount": 9226,
+        "readingMin": 51
+      },
+      {
+        "id": "ep-09-sua-atitude-define-sua-altitud",
+        "label": "#09 · Sua Atitude define sua Altitude",
+        "shortLabel": "Sua Atitude define sua Altitude",
+        "episode": 9,
+        "file": "_YO2KS1G_Ls - Sua Atitude define sua Altitude - #09.md",
+        "ytId": "_YO2KS1G_Ls",
+        "ytUrl": "https://youtube.com/watch?v=_YO2KS1G_Ls",
+        "wordCount": 10585,
+        "readingMin": 59
+      },
+      {
+        "id": "ep-19-por-que-ex-vendedores-fracassa",
+        "label": "#19 · Por que ex-vendedores fracassam quando assumem a gerência?",
+        "shortLabel": "Por que ex-vendedores fracassam quando assumem a gerência?",
+        "episode": 19,
+        "file": "llOrgAEuYlc - #19 - Por que ex-vendedores fracassam quando assumem a gerência-.md",
+        "ytId": "llOrgAEuYlc",
+        "ytUrl": "https://youtube.com/watch?v=llOrgAEuYlc",
+        "wordCount": 9157,
+        "readingMin": 51
+      },
+      {
+        "id": "ep-20-lideranca-persuasiva-como-conv",
+        "label": "#20 · Liderança persuasiva: como convencer seu time a bater a meta",
+        "shortLabel": "Liderança persuasiva: como convencer seu time a bater a meta",
+        "episode": 20,
+        "file": "RUu9-DdwDSo - #20 - Liderança persuasiva- como convencer seu time a bater a meta.md",
+        "ytId": "RUu9-DdwDSo",
+        "ytUrl": "https://youtube.com/watch?v=RUu9-DdwDSo",
+        "wordCount": 9196,
+        "readingMin": 51
+      },
+      {
+        "id": "ep-23-torne-se-o-lider-mais-reconhec",
+        "label": "#23 · Torne-se o líder mais reconhecido da sua empresa!",
+        "shortLabel": "Torne-se o líder mais reconhecido da sua empresa!",
+        "episode": 23,
+        "file": "nDCSwoe5rWk - #23 - Torne-se o líder mais reconhecido da sua empresa!.md",
+        "ytId": "nDCSwoe5rWk",
+        "ytUrl": "https://youtube.com/watch?v=nDCSwoe5rWk",
+        "wordCount": 4294,
+        "readingMin": 24
+      },
+      {
+        "id": "a-atitude-do-lider-que-bate-meta",
+        "label": "A atitude do líder que bate meta.",
+        "shortLabel": "A atitude do líder que bate meta.",
+        "episode": null,
+        "file": "mXN5WtOVBhE - A atitude do líder que bate meta.md",
+        "ytId": "mXN5WtOVBhE",
+        "ytUrl": "https://youtube.com/watch?v=mXN5WtOVBhE",
+        "wordCount": 5846,
+        "readingMin": 32
+      },
+      {
+        "id": "como-ser-gestor-de-vendas-e-garantir-previsibilida",
+        "label": "Como ser gestor de vendas e garantir previsibilidade nas comissões",
+        "shortLabel": "Como ser gestor de vendas e garantir previsibilidade nas comissões",
+        "episode": null,
+        "file": "lfOM79fOaJ8 - Como ser gestor de vendas e garantir previsibilidade nas comissões.md",
+        "ytId": "lfOM79fOaJ8",
+        "ytUrl": "https://youtube.com/watch?v=lfOM79fOaJ8",
+        "wordCount": 4503,
+        "readingMin": 25
+      },
+      {
+        "id": "liberando-tempo-na-agenda-de-um-lider-de-vendas-pa",
+        "label": "Liberando tempo na agenda de um líder de vendas para bater meta",
+        "shortLabel": "Liberando tempo na agenda de um líder de vendas para bater meta",
+        "episode": null,
+        "file": "C3GaJ_tguyA - Liberando tempo na agenda de um líder de vendas para bater meta.md",
+        "ytId": "C3GaJ_tguyA",
+        "ytUrl": "https://youtube.com/watch?v=C3GaJ_tguyA",
+        "wordCount": 7688,
+        "readingMin": 43
+      },
+      {
+        "id": "liberando-tempo-para-bater-meta",
+        "label": "Liberando tempo para bater meta",
+        "shortLabel": "Liberando tempo para bater meta",
+        "episode": null,
+        "file": "Transcrição - Liberando Tempo para Bater Meta.md",
+        "ytId": null,
+        "ytUrl": null,
+        "wordCount": 8023,
+        "readingMin": 45
+      },
+      {
+        "id": "liberando-tempo-para-bater-meta-2",
+        "label": "Liberando Tempo para Bater Meta",
+        "shortLabel": "Liberando Tempo para Bater Meta",
+        "episode": null,
+        "file": "fdjfGssRGkY - Liberando Tempo para Bater Meta.md",
+        "ytId": "fdjfGssRGkY",
+        "ytUrl": "https://youtube.com/watch?v=fdjfGssRGkY",
+        "wordCount": 7834,
+        "readingMin": 44
+      },
+      {
+        "id": "lideranca-estrategica-comportamentos-para-deixar-e",
+        "label": "Liderança estratégica: comportamentos para deixar em 2024 e superar todas as metas em 2025",
+        "shortLabel": "Liderança estratégica: comportamentos para deixar em 2024 e superar todas as metas em 2025",
+        "episode": null,
+        "file": "4DyErPXnX2s - Liderança estratégica- comportamentos para deixar em 2024 e superar todas as metas em 2025.md",
+        "ytId": "4DyErPXnX2s",
+        "ytUrl": "https://youtube.com/watch?v=4DyErPXnX2s",
+        "wordCount": 7178,
+        "readingMin": 40
+      },
+      {
+        "id": "resgatando-sua-motivacao-como-lider",
+        "label": "Resgatando sua Motivação como Lider.",
+        "shortLabel": "Resgatando sua Motivação como Lider.",
+        "episode": null,
+        "file": "Sf6bRz13xxw - Resgatando sua Motivação como Lider.md",
+        "ytId": "Sf6bRz13xxw",
+        "ytUrl": "https://youtube.com/watch?v=Sf6bRz13xxw",
+        "wordCount": 3445,
+        "readingMin": 19
+      },
+      {
+        "id": "seu-gerente-sabe",
+        "label": "Seu gerente sabe?",
+        "shortLabel": "Seu gerente sabe?",
+        "episode": null,
+        "file": "MKLRj6w-QRw - Seu gerente sabe-.md",
+        "ytId": "MKLRj6w-QRw",
+        "ytUrl": "https://youtube.com/watch?v=MKLRj6w-QRw",
+        "wordCount": 273,
+        "readingMin": 2
+      },
+      {
+        "id": "seu-gestor-sabe",
+        "label": "Seu gestor sabe?",
+        "shortLabel": "Seu gestor sabe?",
+        "episode": null,
+        "file": "D9FuhpDRekg - Seu gestor sabe-.md",
+        "ytId": "D9FuhpDRekg",
+        "ytUrl": "https://youtube.com/watch?v=D9FuhpDRekg",
+        "wordCount": 246,
+        "readingMin": 1
+      },
+      {
+        "id": "torne-se-o-lider-mais-reconhecido",
+        "label": "Torne-se o líder mais reconhecido",
+        "shortLabel": "Torne-se o líder mais reconhecido",
+        "episode": null,
+        "file": "Transcrição - Torne-se o líder mais reconhecido da sua empresa.md",
+        "ytId": null,
+        "ytUrl": null,
+        "wordCount": 4441,
+        "readingMin": 25
+      }
+    ],
+    "pilares-metodo": [
+      {
+        "id": "ep-04-como-superar-as-metas-do-mes",
+        "label": "#04 · Como superar as metas do mês",
+        "shortLabel": "Como superar as metas do mês",
+        "episode": 4,
+        "file": "UPu5lcBk1Zk - #04 - Como superar as metas do mês.md",
+        "ytId": "UPu5lcBk1Zk",
+        "ytUrl": "https://youtube.com/watch?v=UPu5lcBk1Zk",
+        "wordCount": 8155,
+        "readingMin": 45
+      },
+      {
+        "id": "ep-11-baixo-fluxo-de-clientes-manual",
+        "label": "#11 · Baixo fluxo de clientes: manual para bater metas!",
+        "shortLabel": "Baixo fluxo de clientes: manual para bater metas!",
+        "episode": 11,
+        "file": "pCv1RnlQZeg - #11 - Baixo fluxo de clientes- manual para bater metas!.md",
+        "ytId": "pCv1RnlQZeg",
+        "ytUrl": "https://youtube.com/watch?v=pCv1RnlQZeg",
+        "wordCount": 8365,
+        "readingMin": 46
+      },
+      {
+        "id": "ep-12-como-aumentar-30-de-vendas-em-",
+        "label": "#12 · Como aumentar 30% de vendas em 30 dias",
+        "shortLabel": "Como aumentar 30% de vendas em 30 dias",
+        "episode": 12,
+        "file": "xTCHQRzBgEQ - #12 - Como aumentar 30_ de vendas em 30 dias.md",
+        "ytId": "xTCHQRzBgEQ",
+        "ytUrl": "https://youtube.com/watch?v=xTCHQRzBgEQ",
+        "wordCount": 10133,
+        "readingMin": 56
+      },
+      {
+        "id": "ep-13-pilares-da-meta-batida",
+        "label": "#13 · Pilares da Meta Batida!",
+        "shortLabel": "Pilares da Meta Batida!",
+        "episode": 13,
+        "file": "72yhkcQUBoU - #13 - Pilares da Meta Batida!.md",
+        "ytId": "72yhkcQUBoU",
+        "ytUrl": "https://youtube.com/watch?v=72yhkcQUBoU",
+        "wordCount": 10894,
+        "readingMin": 61
+      },
+      {
+        "id": "ep-13-como-definir-metas-de-vendas",
+        "label": "#13 · Como definir metas de vendas",
+        "shortLabel": "Como definir metas de vendas",
+        "episode": 13,
+        "file": "HnpF7QgKCHs - #13 - Como definir metas de vendas.md",
+        "ytId": "HnpF7QgKCHs",
+        "ytUrl": "https://youtube.com/watch?v=HnpF7QgKCHs",
+        "wordCount": 8323,
+        "readingMin": 46
+      },
+      {
+        "id": "ep-14-como-utilizar-a-inteligencia-a",
+        "label": "#14 · Como utilizar a inteligência artificial para bater metas!",
+        "shortLabel": "Como utilizar a inteligência artificial para bater metas!",
+        "episode": 14,
+        "file": "VoR1IER6_yw - #14 - Como utilizar a inteligência artificial para bater metas!.md",
+        "ytId": "VoR1IER6_yw",
+        "ytUrl": "https://youtube.com/watch?v=VoR1IER6_yw",
+        "wordCount": 10202,
+        "readingMin": 57
+      },
+      {
+        "id": "50-em-5h",
+        "label": "50 em 5h",
+        "shortLabel": "50 em 5h",
+        "episode": null,
+        "file": "g0MAGC3ZbBU - 50 em 5h.md",
+        "ytId": "g0MAGC3ZbBU",
+        "ytUrl": "https://youtube.com/watch?v=g0MAGC3ZbBU",
+        "wordCount": 110,
+        "readingMin": 1
+      },
+      {
+        "id": "50-em-5h-2",
+        "label": "50 em 5h",
+        "shortLabel": "50 em 5h",
+        "episode": null,
+        "file": "n80D4KAJS1g - 50 em 5h.md",
+        "ytId": "n80D4KAJS1g",
+        "ytUrl": "https://youtube.com/watch?v=n80D4KAJS1g",
+        "wordCount": 178,
+        "readingMin": 1
+      },
+      {
+        "id": "50-em-5h-3",
+        "label": "50% em 5h",
+        "shortLabel": "50% em 5h",
+        "episode": null,
+        "file": "M2QwA3_JtEo - 50_ em 5h.md",
+        "ytId": "M2QwA3_JtEo",
+        "ytUrl": "https://youtube.com/watch?v=M2QwA3_JtEo",
+        "wordCount": 148,
+        "readingMin": 1
+      },
+      {
+        "id": "bater-meta",
+        "label": "Bater meta",
+        "shortLabel": "Bater meta",
+        "episode": null,
+        "file": "iU8W2Lsmm7w - Bater meta.md",
+        "ytId": "iU8W2Lsmm7w",
+        "ytUrl": "https://youtube.com/watch?v=iU8W2Lsmm7w",
+        "wordCount": 300,
+        "readingMin": 2
+      },
+      {
+        "id": "diagnostico",
+        "label": "DIAGNÓSTICO",
+        "shortLabel": "DIAGNÓSTICO",
+        "episode": null,
+        "file": "5st-J2R4C5I - DIAGNÓSTICO.md",
+        "ytId": "5st-J2R4C5I",
+        "ytUrl": "https://youtube.com/watch?v=5st-J2R4C5I",
+        "wordCount": 176,
+        "readingMin": 1
+      },
+      {
+        "id": "diagnostico-gratuito",
+        "label": "DIAGNÓSTICO GRATUITO",
+        "shortLabel": "DIAGNÓSTICO GRATUITO",
+        "episode": null,
+        "file": "qgjdn48az4I - DIAGNÓSTICO GRATUITO.md",
+        "ytId": "qgjdn48az4I",
+        "ytUrl": "https://youtube.com/watch?v=qgjdn48az4I",
+        "wordCount": 176,
+        "readingMin": 1
+      },
+      {
+        "id": "qual-a-frequencia-ideal-de-treinamento",
+        "label": "Qual a frequência ideal de treinamento?",
+        "shortLabel": "Qual a frequência ideal de treinamento?",
+        "episode": null,
+        "file": "yWrxaOvPXOE - Qual a frequência ideal de treinamento-.md",
+        "ytId": "yWrxaOvPXOE",
+        "ytUrl": "https://youtube.com/watch?v=yWrxaOvPXOE",
+        "wordCount": 279,
+        "readingMin": 2
+      },
+      {
+        "id": "receita-de-sucesso",
+        "label": "Receita de Sucesso",
+        "shortLabel": "Receita de Sucesso",
+        "episode": null,
+        "file": "jaM1IhdSZmE - Receita de Sucesso.md",
+        "ytId": "jaM1IhdSZmE",
+        "ytUrl": "https://youtube.com/watch?v=jaM1IhdSZmE",
+        "wordCount": 277,
+        "readingMin": 2
+      },
+      {
+        "id": "seu-negocio-esta-superando-metas",
+        "label": "Seu negócio está superando metas?",
+        "shortLabel": "Seu negócio está superando metas?",
+        "episode": null,
+        "file": "UXEu77g_lus - Seu negócio está superando metas-.md",
+        "ytId": "UXEu77g_lus",
+        "ytUrl": "https://youtube.com/watch?v=UXEu77g_lus",
+        "wordCount": 256,
+        "readingMin": 1
+      },
+      {
+        "id": "sua-equipe-bate-meta-todo-mes",
+        "label": "sua equipe bate meta todo mes?",
+        "shortLabel": "sua equipe bate meta todo mes?",
+        "episode": null,
+        "file": "NU-uDSRTcMA - sua equipe bate meta todo mes-.md",
+        "ytId": "NU-uDSRTcMA",
+        "ytUrl": "https://youtube.com/watch?v=NU-uDSRTcMA",
+        "wordCount": 185,
+        "readingMin": 1
+      },
+      {
+        "id": "supere-meta-todo-mes",
+        "label": "Supere meta todo mes",
+        "shortLabel": "Supere meta todo mes",
+        "episode": null,
+        "file": "G9EIK2gVhrI - Supere meta todo mes.md",
+        "ytId": "G9EIK2gVhrI",
+        "ytUrl": "https://youtube.com/watch?v=G9EIK2gVhrI",
+        "wordCount": 320,
+        "readingMin": 2
+      },
+      {
+        "id": "supere-metas-todos-os-meses",
+        "label": "Supere metas todos os meses!",
+        "shortLabel": "Supere metas todos os meses!",
+        "episode": null,
+        "file": "XNbN0X8IwQ8 - Supere metas todos os meses!.md",
+        "ytId": "XNbN0X8IwQ8",
+        "ytUrl": "https://youtube.com/watch?v=XNbN0X8IwQ8",
+        "wordCount": 159,
+        "readingMin": 1
+      },
+      {
+        "id": "treine-o-cha",
+        "label": "Treine o CHA",
+        "shortLabel": "Treine o CHA",
+        "episode": null,
+        "file": "Qc_hlOs98Og - Treine o CHA.md",
+        "ytId": "Qc_hlOs98Og",
+        "ytUrl": "https://youtube.com/watch?v=Qc_hlOs98Og",
+        "wordCount": 57,
+        "readingMin": 1
+      },
+      {
+        "id": "venda-mais-com-as-5-emocoes-de-divertida-mente",
+        "label": "Venda mais com as 5 Emoções de Divertida Mente!",
+        "shortLabel": "Venda mais com as 5 Emoções de Divertida Mente!",
+        "episode": null,
+        "file": "PcHP_aPYIoY - Venda mais com as 5 Emoções de Divertida Mente!.md",
+        "ytId": "PcHP_aPYIoY",
+        "ytUrl": "https://youtube.com/watch?v=PcHP_aPYIoY",
+        "wordCount": 6606,
+        "readingMin": 37
+      }
+    ],
+    "equipe-engajamento": [
+      {
+        "id": "ep-02-engajamento-100-como-ter-um-ti",
+        "label": "#02 · Engajamento 100%: Como ter um time totalmente focado na meta!",
+        "shortLabel": "Engajamento 100%: Como ter um time totalmente focado na meta!",
+        "episode": 2,
+        "file": "Pq7VVKgHPN4 - #02 - Engajamento 100_- Como ter um time totalmente focado na meta!.md",
+        "ytId": "Pq7VVKgHPN4",
+        "ytUrl": "https://youtube.com/watch?v=Pq7VVKgHPN4",
+        "wordCount": 7002,
+        "readingMin": 39
+      },
+      {
+        "id": "ep-06-como-motivar-o-seu-time",
+        "label": "#06 · Como motivar o seu time?",
+        "shortLabel": "Como motivar o seu time?",
+        "episode": 6,
+        "file": "GxQdQRfaVh8 - #06 - Como motivar o seu time-.md",
+        "ytId": "GxQdQRfaVh8",
+        "ytUrl": "https://youtube.com/watch?v=GxQdQRfaVh8",
+        "wordCount": 9701,
+        "readingMin": 54
+      },
+      {
+        "id": "ep-21-aumente-a-performance-do-seu-t",
+        "label": "#21 · Aumente a performance do seu time sem aumentar a pressão!",
+        "shortLabel": "Aumente a performance do seu time sem aumentar a pressão!",
+        "episode": 21,
+        "file": "Qmbk-pwHoQA - #21 - Aumente a performance do seu time sem aumentar a pressão!.md",
+        "ytId": "Qmbk-pwHoQA",
+        "ytUrl": "https://youtube.com/watch?v=Qmbk-pwHoQA",
+        "wordCount": 6399,
+        "readingMin": 36
+      },
+      {
+        "id": "ep-22-como-recuperar-um-time-desmoti",
+        "label": "#22 · Como recuperar um time desmotivado?",
+        "shortLabel": "Como recuperar um time desmotivado?",
+        "episode": 22,
+        "file": "Weh9LuzdFzg - #22 - Como recuperar um time desmotivado-.md",
+        "ytId": "Weh9LuzdFzg",
+        "ytUrl": "https://youtube.com/watch?v=Weh9LuzdFzg",
+        "wordCount": 7397,
+        "readingMin": 41
+      },
+      {
+        "id": "colaboradores-competentes",
+        "label": "Colaboradores competentes",
+        "shortLabel": "Colaboradores competentes",
+        "episode": null,
+        "file": "3n22mX8FJYU - Colaboradores competentes.md",
+        "ytId": "3n22mX8FJYU",
+        "ytUrl": "https://youtube.com/watch?v=3n22mX8FJYU",
+        "wordCount": 302,
+        "readingMin": 2
+      },
+      {
+        "id": "como-fazer-o-seu-time-acreditar-na-meta",
+        "label": "Como fazer o seu time acreditar na Meta",
+        "shortLabel": "Como fazer o seu time acreditar na Meta",
+        "episode": null,
+        "file": "ZN9VTussDQI - Como fazer o seu time acreditar na Meta.md",
+        "ytId": "ZN9VTussDQI",
+        "ytUrl": "https://youtube.com/watch?v=ZN9VTussDQI",
+        "wordCount": 4460,
+        "readingMin": 25
+      },
+      {
+        "id": "como-fazer-seu-time-bater-meta-sem-depender-de-voc",
+        "label": "Como fazer seu time bater meta sem depender de você",
+        "shortLabel": "Como fazer seu time bater meta sem depender de você",
+        "episode": null,
+        "file": "QtOCdgqgB0U - Como fazer seu time bater meta sem depender de você.md",
+        "ytId": "QtOCdgqgB0U",
+        "ytUrl": "https://youtube.com/watch?v=QtOCdgqgB0U",
+        "wordCount": 5686,
+        "readingMin": 32
+      },
+      {
+        "id": "engajamento-de-equipe",
+        "label": "Engajamento de equipe",
+        "shortLabel": "Engajamento de equipe",
+        "episode": null,
+        "file": "fQMBR_6ojLo - Engajamento de equipe.md",
+        "ytId": "fQMBR_6ojLo",
+        "ytUrl": "https://youtube.com/watch?v=fQMBR_6ojLo",
+        "wordCount": 132,
+        "readingMin": 1
+      },
+      {
+        "id": "engajamento-verdadeiro",
+        "label": "ENGAJAMENTO VERDADEIRO",
+        "shortLabel": "ENGAJAMENTO VERDADEIRO",
+        "episode": null,
+        "file": "2pLDZDJ0JX4 - ENGAJAMENTO VERDADEIRO.md",
+        "ytId": "2pLDZDJ0JX4",
+        "ytUrl": "https://youtube.com/watch?v=2pLDZDJ0JX4",
+        "wordCount": 229,
+        "readingMin": 1
+      },
+      {
+        "id": "faca-essas-perguntas-ao-seu-gerente",
+        "label": "Faça essas perguntas ao seu gerente",
+        "shortLabel": "Faça essas perguntas ao seu gerente",
+        "episode": null,
+        "file": "kYstu4pweRk - Faça essas perguntas ao seu gerente.md",
+        "ytId": "kYstu4pweRk",
+        "ytUrl": "https://youtube.com/watch?v=kYstu4pweRk",
+        "wordCount": 276,
+        "readingMin": 2
+      },
+      {
+        "id": "funcionario-do-mequi-pensa-como-dono",
+        "label": "Funcionário do MÉQUI pensa como dono?",
+        "shortLabel": "Funcionário do MÉQUI pensa como dono?",
+        "episode": null,
+        "file": "G0otvELAFH0 - Funcionário do MÉQUI pensa como dono-.md",
+        "ytId": "G0otvELAFH0",
+        "ytUrl": "https://youtube.com/watch?v=G0otvELAFH0",
+        "wordCount": 219,
+        "readingMin": 1
+      },
+      {
+        "id": "time-bate-meta-sem-depender-de-voce",
+        "label": "Time bate meta sem depender de você",
+        "shortLabel": "Time bate meta sem depender de você",
+        "episode": null,
+        "file": "Transcrição - Como fazer seu time bater meta sem depender de você.md",
+        "ytId": null,
+        "ytUrl": null,
+        "wordCount": 5841,
+        "readingMin": 32
+      }
+    ],
+    "vendedores": [
+      {
+        "id": "ep-05-pare-de-perder-vendas-por-caus",
+        "label": "#05 · Pare de perder vendas por causa de preço!",
+        "shortLabel": "Pare de perder vendas por causa de preço!",
+        "episode": 5,
+        "file": "y08EYvyKN-k - #05 - Pare de perder vendas por causa de preço!.md",
+        "ytId": "y08EYvyKN-k",
+        "ytUrl": "https://youtube.com/watch?v=y08EYvyKN-k",
+        "wordCount": 9102,
+        "readingMin": 51
+      },
+      {
+        "id": "ep-08-como-contratar-bons-vendedores",
+        "label": "#08 · Como contratar bons vendedores e reter talentos?",
+        "shortLabel": "Como contratar bons vendedores e reter talentos?",
+        "episode": 8,
+        "file": "xMfCC0XaIIU - #08 - Como contratar bons vendedores e reter talentos-.md",
+        "ytId": "xMfCC0XaIIU",
+        "ytUrl": "https://youtube.com/watch?v=xMfCC0XaIIU",
+        "wordCount": 10316,
+        "readingMin": 57
+      },
+      {
+        "id": "ep-10-como-acelerar-a-performance-do",
+        "label": "#10 · Como acelerar a performance dos novos vendedores",
+        "shortLabel": "Como acelerar a performance dos novos vendedores",
+        "episode": 10,
+        "file": "tEsSmGQX6EE - #10 - Como acelerar a performance dos novos vendedores.md",
+        "ytId": "tEsSmGQX6EE",
+        "ytUrl": "https://youtube.com/watch?v=tEsSmGQX6EE",
+        "wordCount": 6519,
+        "readingMin": 36
+      },
+      {
+        "id": "clone",
+        "label": "clone",
+        "shortLabel": "clone",
+        "episode": null,
+        "file": "WmftUO1KUf4 - clone.md",
+        "ytId": "WmftUO1KUf4",
+        "ytUrl": "https://youtube.com/watch?v=WmftUO1KUf4",
+        "wordCount": 147,
+        "readingMin": 1
+      },
+      {
+        "id": "clone-2",
+        "label": "CLONE",
+        "shortLabel": "CLONE",
+        "episode": null,
+        "file": "XCczg86SE7A - CLONE.md",
+        "ytId": "XCczg86SE7A",
+        "ytUrl": "https://youtube.com/watch?v=XCczg86SE7A",
+        "wordCount": 111,
+        "readingMin": 1
+      },
+      {
+        "id": "clone-o-seu-melhor-vendedor-sem-gastar-r-1-real",
+        "label": "CLONE O SEU MELHOR VENDEDOR SEM GASTAR R$ 1 REAL!",
+        "shortLabel": "CLONE O SEU MELHOR VENDEDOR SEM GASTAR R$ 1 REAL!",
+        "episode": null,
+        "file": "GveYkwsrswo - CLONE O SEU MELHOR VENDEDOR SEM GASTAR R$ 1 REAL!.md",
+        "ytId": "GveYkwsrswo",
+        "ytUrl": "https://youtube.com/watch?v=GveYkwsrswo",
+        "wordCount": 7222,
+        "readingMin": 40
+      },
+      {
+        "id": "clone-o-seu-melhor-vendedor-sem-gastar-r1",
+        "label": "Clone o seu melhor vendedor sem gastar R$1",
+        "shortLabel": "Clone o seu melhor vendedor sem gastar R$1",
+        "episode": null,
+        "file": "Transcrição - CLONE O SEU MELHOR VENDEDOR SEM GASTAR R 1 REAL.md",
+        "ytId": null,
+        "ytUrl": null,
+        "wordCount": 7400,
+        "readingMin": 41
+      },
+      {
+        "id": "clone-o-seu-melhor-vendedor",
+        "label": "Clone o seu melhor vendedor!",
+        "shortLabel": "Clone o seu melhor vendedor!",
+        "episode": null,
+        "file": "QiX5HB12yLE - Clone o seu melhor vendedor!.md",
+        "ytId": "QiX5HB12yLE",
+        "ytUrl": "https://youtube.com/watch?v=QiX5HB12yLE",
+        "wordCount": 202,
+        "readingMin": 1
+      },
+      {
+        "id": "clone-seu-melhor-vendedor",
+        "label": "Clone seu melhor vendedor",
+        "shortLabel": "Clone seu melhor vendedor",
+        "episode": null,
+        "file": "n0UeUtMbSSA - Clone seu melhor vendedor.md",
+        "ytId": "n0UeUtMbSSA",
+        "ytUrl": "https://youtube.com/watch?v=n0UeUtMbSSA",
+        "wordCount": 129,
+        "readingMin": 1
+      },
+      {
+        "id": "como-fazer-diferentes-tipos-de-vendedores-baterem-",
+        "label": "Como fazer diferentes tipos de vendedores baterem meta",
+        "shortLabel": "Como fazer diferentes tipos de vendedores baterem meta",
+        "episode": null,
+        "file": "H9U6a_gCHSY - Como fazer diferentes tipos de vendedores baterem meta.md",
+        "ytId": "H9U6a_gCHSY",
+        "ytUrl": "https://youtube.com/watch?v=H9U6a_gCHSY",
+        "wordCount": 7297,
+        "readingMin": 41
+      },
+      {
+        "id": "como-selecionar-vendedores-que-batem-meta",
+        "label": "Como Selecionar Vendedores que Batem Meta",
+        "shortLabel": "Como Selecionar Vendedores que Batem Meta",
+        "episode": null,
+        "file": "Y4Ind5wWlHg - Como Selecionar Vendedores que Batem Meta.md",
+        "ytId": "Y4Ind5wWlHg",
+        "ytUrl": "https://youtube.com/watch?v=Y4Ind5wWlHg",
+        "wordCount": 13031,
+        "readingMin": 72
+      },
+      {
+        "id": "domine-o-atendimento-e-dispare-suas-vendas",
+        "label": "Domine o Atendimento e Dispare suas Vendas!",
+        "shortLabel": "Domine o Atendimento e Dispare suas Vendas!",
+        "episode": null,
+        "file": "_2qPcw29K1w - Domine o Atendimento e Dispare suas Vendas!.md",
+        "ytId": "_2qPcw29K1w",
+        "ytUrl": "https://youtube.com/watch?v=_2qPcw29K1w",
+        "wordCount": 5337,
+        "readingMin": 30
+      },
+      {
+        "id": "laranja-podre-na-equipe",
+        "label": "Laranja podre na equipe",
+        "shortLabel": "Laranja podre na equipe",
+        "episode": null,
+        "file": "E4QD6lFOduQ - Laranja podre na equipe.md",
+        "ytId": "E4QD6lFOduQ",
+        "ytUrl": "https://youtube.com/watch?v=E4QD6lFOduQ",
+        "wordCount": 180,
+        "readingMin": 1
+      },
+      {
+        "id": "quando-demitir-um-vendedor",
+        "label": "Quando demitir um vendedor?",
+        "shortLabel": "Quando demitir um vendedor?",
+        "episode": null,
+        "file": "WzCCZWk3hLs - Quando demitir um vendedor-.md",
+        "ytId": "WzCCZWk3hLs",
+        "ytUrl": "https://youtube.com/watch?v=WzCCZWk3hLs",
+        "wordCount": 7586,
+        "readingMin": 42
+      },
+      {
+        "id": "vendedor-viciado-em-desconto",
+        "label": "Vendedor viciado em desconto...",
+        "shortLabel": "Vendedor viciado em desconto...",
+        "episode": null,
+        "file": "VBZvriSkCSo - Vendedor viciado em desconto.md",
+        "ytId": "VBZvriSkCSo",
+        "ytUrl": "https://youtube.com/watch?v=VBZvriSkCSo",
+        "wordCount": 231,
+        "readingMin": 1
+      }
+    ],
+    "lucro": [
+      {
+        "id": "isso-rouba-21-do-seu-lucro",
+        "label": "Isso rouba 21% do seu lucro",
+        "shortLabel": "Isso rouba 21% do seu lucro",
+        "episode": null,
+        "file": "9ybDZIFCTRg - Isso rouba 21_ do seu lucro.md",
+        "ytId": "9ybDZIFCTRg",
+        "ytUrl": "https://youtube.com/watch?v=9ybDZIFCTRg",
+        "wordCount": 262,
+        "readingMin": 1
+      },
+      {
+        "id": "lucro",
+        "label": "lucro",
+        "shortLabel": "lucro",
+        "episode": null,
+        "file": "xGVW57h669A - lucro.md",
+        "ytId": "xGVW57h669A",
+        "ytUrl": "https://youtube.com/watch?v=xGVW57h669A",
+        "wordCount": 99,
+        "readingMin": 1
+      },
+      {
+        "id": "lucro-de-verdade",
+        "label": "LUCRO DE VERDADE",
+        "shortLabel": "LUCRO DE VERDADE",
+        "episode": null,
+        "file": "VBKcCFCiNb4 - LUCRO DE VERDADE.md",
+        "ytId": "VBKcCFCiNb4",
+        "ytUrl": "https://youtube.com/watch?v=VBKcCFCiNb4",
+        "wordCount": 212,
+        "readingMin": 1
+      },
+      {
+        "id": "lucro-e-escala-se-constroi-assim",
+        "label": "Lucro e escala se constrói assim!",
+        "shortLabel": "Lucro e escala se constrói assim!",
+        "episode": null,
+        "file": "0qH90kSFFKw - Lucro e escala se constrói assim!.md",
+        "ytId": "0qH90kSFFKw",
+        "ytUrl": "https://youtube.com/watch?v=0qH90kSFFKw",
+        "wordCount": 277,
+        "readingMin": 2
+      },
+      {
+        "id": "lucro-na-veia",
+        "label": "Lucro na veia",
+        "shortLabel": "Lucro na veia",
+        "episode": null,
+        "file": "rWYUtkKeoPU - Lucro na veia.md",
+        "ytId": "rWYUtkKeoPU",
+        "ytUrl": "https://youtube.com/watch?v=rWYUtkKeoPU",
+        "wordCount": 266,
+        "readingMin": 1
+      },
+      {
+        "id": "o-jogo-do-lucro",
+        "label": "o jogo do lucro",
+        "shortLabel": "o jogo do lucro",
+        "episode": null,
+        "file": "u6hsUnIqeY4 - o jogo do lucro.md",
+        "ytId": "u6hsUnIqeY4",
+        "ytUrl": "https://youtube.com/watch?v=u6hsUnIqeY4",
+        "wordCount": 96,
+        "readingMin": 1
+      },
+      {
+        "id": "quer-mais-lucro",
+        "label": "Quer mais lucro?",
+        "shortLabel": "Quer mais lucro?",
+        "episode": null,
+        "file": "BzZ5F-zTVWU - Quer mais lucro-.md",
+        "ytId": "BzZ5F-zTVWU",
+        "ytUrl": "https://youtube.com/watch?v=BzZ5F-zTVWU",
+        "wordCount": 162,
+        "readingMin": 1
+      }
+    ],
+    "empresario-cultura": [
+      {
+        "id": "coach",
+        "label": "COACH?",
+        "shortLabel": "COACH?",
+        "episode": null,
+        "file": "bYftJ6nqbpA - COACH-.md",
+        "ytId": "bYftJ6nqbpA",
+        "ytUrl": "https://youtube.com/watch?v=bYftJ6nqbpA",
+        "wordCount": 185,
+        "readingMin": 1
+      },
+      {
+        "id": "culpa-e-do-dono",
+        "label": "Culpa é do dono",
+        "shortLabel": "Culpa é do dono",
+        "episode": null,
+        "file": "w2YQTqP5r7U - Culpa é do dono.md",
+        "ytId": "w2YQTqP5r7U",
+        "ytUrl": "https://youtube.com/watch?v=w2YQTqP5r7U",
+        "wordCount": 128,
+        "readingMin": 1
+      },
+      {
+        "id": "empresario-preso",
+        "label": "Empresario preso?",
+        "shortLabel": "Empresario preso?",
+        "episode": null,
+        "file": "6tQlu_BxJDY - Empresario preso-.md",
+        "ytId": "6tQlu_BxJDY",
+        "ytUrl": "https://youtube.com/watch?v=6tQlu_BxJDY",
+        "wordCount": 267,
+        "readingMin": 1
+      },
+      {
+        "id": "empresario-seu-problema-nunca-foram-as-vendas",
+        "label": "Empresário seu problema nunca foram as vendas...",
+        "shortLabel": "Empresário seu problema nunca foram as vendas...",
+        "episode": null,
+        "file": "eyUvRrDMdlw - Empresário seu problema nunca foram as vendas.md",
+        "ytId": "eyUvRrDMdlw",
+        "ytUrl": "https://youtube.com/watch?v=eyUvRrDMdlw",
+        "wordCount": 230,
+        "readingMin": 1
+      },
+      {
+        "id": "erros-na-empresa",
+        "label": "ERROS NA EMPRESA",
+        "shortLabel": "ERROS NA EMPRESA",
+        "episode": null,
+        "file": "3YzLodP7UNo - ERROS NA EMPRESA.md",
+        "ytId": "3YzLodP7UNo",
+        "ytUrl": "https://youtube.com/watch?v=3YzLodP7UNo",
+        "wordCount": 222,
+        "readingMin": 1
+      },
+      {
+        "id": "siga-este-perfil",
+        "label": "siga este perfil",
+        "shortLabel": "siga este perfil",
+        "episode": null,
+        "file": "Xo9M6YG3mlM - siga este perfil.md",
+        "ytId": "Xo9M6YG3mlM",
+        "ytUrl": "https://youtube.com/watch?v=Xo9M6YG3mlM",
+        "wordCount": 81,
+        "readingMin": 1
+      },
+      {
+        "id": "siga-este-perfil-2",
+        "label": "SIGA ESTE PERFIL",
+        "shortLabel": "SIGA ESTE PERFIL",
+        "episode": null,
+        "file": "5HEq-aQpGg4 - SIGA ESTE PERFIL.md",
+        "ytId": "5HEq-aQpGg4",
+        "ytUrl": "https://youtube.com/watch?v=5HEq-aQpGg4",
+        "wordCount": 75,
+        "readingMin": 1
+      },
+      {
+        "id": "so-pode-cobrar-quem-ensina",
+        "label": "SÓ PODE COBRAR, QUEM ENSINA!",
+        "shortLabel": "SÓ PODE COBRAR, QUEM ENSINA!",
+        "episode": null,
+        "file": "hLzp8fj95hA - SÓ PODE COBRAR, QUEM ENSINA!.md",
+        "ytId": "hLzp8fj95hA",
+        "ytUrl": "https://youtube.com/watch?v=hLzp8fj95hA",
+        "wordCount": 228,
+        "readingMin": 1
+      }
+    ]
+  }
+}

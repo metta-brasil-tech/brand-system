@@ -1,0 +1,198 @@
+<h1 id="metta-componentes-visuais-recorrentes">Metta — Componentes Visuais Recorrentes</h1>
+<blockquote>
+<p><strong>Status:</strong> NORMATIVO. Componentes validados em uso. Atenção aos itens marcados [DEPRECATED].
+<strong>Tokens canônicos:</strong> ver <span class="wikilink" data-target="metta-tokens">metta-tokens</span>.</p>
+</blockquote>
+<hr>
+<h2 id="1-botao-cta-call-to-action">1. Botão CTA (Call to Action)</h2>
+<pre><code class="language-css">/* CTA Pill Padrão (amarelo) — preferido */
+.cta-pill {
+  background: #FFBE18;
+  color: #0C161B;
+  border-radius: 82-126px; /* full rounded */
+  padding: 27-41px 50-77px;
+  font-weight: 700;
+  font-stretch: 132%; /* Expanded Bold */
+  font-size: 34-42px;
+  letter-spacing: 1%;
+  text-transform: uppercase;
+}
+
+/* CTA Retangular (carousel/cards) */
+.cta-rect {
+  background: #FFBE18;
+  border-radius: 12-14px;
+  padding: 17px 50px;
+}
+
+/* CTA Branco (variante) */
+.cta-white {
+  background: #FFFFFF;
+  color: #0C161B;
+  border-radius: 72px;
+}
+
+/* CTA Escuro (sobre fundo dourado) */
+.cta-dark {
+  background: #0C161B;
+  color: #FFFFFF;
+  border-radius: 72px;
+}
+</code></pre>
+<blockquote>
+<p>❌ <strong>DEPRECATED:</strong> <code>cta-glow</code> com <code>box-shadow: 0px 45px 108px rgba(255, 190, 24, 0.19)</code> — viola PRD §6.4.</p>
+</blockquote>
+<hr>
+<h2 id="2-separadores">2. Separadores</h2>
+<pre><code class="language-css">/* Sobre fundo escuro */
+.divider-light { width: 100%; height: 1px; background: rgba(255,255,255,0.2); }
+
+/* Sobre fundo claro */
+.divider-dark { width: 100%; height: 1px; background: rgba(12,22,27,0.12); }
+</code></pre>
+<hr>
+<h2 id="3-efeitos-de-blurglow-deprecated-prd-64">3. <del>Efeitos de Blur/Glow</del> [DEPRECATED — PRD 6.4]</h2>
+<p>Todos os efeitos abaixo foram <strong>proibidos</strong> pelo PRD §6.4. Documentados aqui apenas pra referência histórica:</p>
+<ul>
+<li><code>blur-shadow</code> (filter: blur(157px))</li>
+<li><code>glass-card</code> (backdrop-filter: blur(43.5px))</li>
+<li><code>teal-glow</code> (filter: blur(198px))</li>
+<li><code>dark-vignette</code> (filter: blur(199px))</li>
+<li><code>soft-glow</code> (filter: blur(534px))</li>
+</ul>
+<p><strong>Substituições aceitas:</strong></p>
+<ul>
+<li>Atmosfera escura → fundo <code>#0C161B</code> sólido + tipografia hierárquica</li>
+<li>Glassmorphism → card <code>#0C161B</code> com border <code>rgba(255,255,255,0.12)</code></li>
+<li>Glow → contraste de cor + escala tipográfica</li>
+</ul>
+<hr>
+<h2 id="4-overlays-sobre-fotos-apenas-funcionais-sem-blur">4. Overlays sobre Fotos (apenas funcionais, sem blur)</h2>
+<pre><code class="language-css">/* Overlay escuro sólido */
+.overlay-heavy { background: rgba(0,0,0,0.6); }
+
+/* Overlay médio */
+.overlay-medium { background: rgba(0,0,0,0.4); }
+
+/* Gradiente fade-to-black (TÉCNICA APROVADA) */
+.fade-to-black {
+  background: linear-gradient(180deg, transparent 55%, rgba(13,12,12,0.52) 69%, rgba(13,12,12,1) 100%);
+}
+
+/* Vinheta radial */
+.vignette {
+  background: radial-gradient(circle at 50% 31%, rgba(4,11,15,0) 25%, rgba(4,11,15,1) 100%);
+}
+</code></pre>
+<blockquote>
+<p>❌ <strong>DEPRECATED:</strong> <code>overlay-frost</code> com <code>filter: blur(157px)</code>.</p>
+</blockquote>
+<hr>
+<h2 id="5-elipses-decorativas-geometricas-deprecated-prd-64">5. <del>Elipses Decorativas Geométricas</del> [DEPRECATED — PRD 6.4]</h2>
+<p>Anéis decorativos <code>border: 6385px solid</code> foram removidos. Substituir por composição editorial pura.</p>
+<hr>
+<h2 id="6-watermark-tipografico">6. Watermark Tipográfico</h2>
+<pre><code class="language-css">/* Texto gigante como pattern de fundo */
+.typo-watermark {
+  font-size: 295px;
+  font-weight: 650; /* Expanded Semibold */
+  font-stretch: 132%;
+  color: #0C161B;
+  line-height: 0.87em;
+  letter-spacing: -1%;
+  overflow: hidden;
+  /* Posicionado com offset negativo pra ficar parcialmente visível */
+}
+</code></pre>
+<hr>
+<h2 id="7-ghost-watermark-quotmettaquot">7. Ghost Watermark &quot;metta&quot;</h2>
+<pre><code class="language-css">.ghost-watermark {
+  font-size: 200px;
+  font-weight: 870; /* Expanded Heavy */
+  font-stretch: 132%;
+  color: #1A2A35; /* dark on dark, baixa opacidade */
+  position: absolute;
+  bottom: -20px;
+  letter-spacing: -2%;
+  text-transform: lowercase;
+  overflow: hidden;
+  opacity: 0.15;
+}
+</code></pre>
+<blockquote>
+<p>⚠️ Aplicar SOMENTE no wordmark &quot;metta&quot; textual (não no logo oficial). Logo oficial NUNCA recebe ghost (PRD §6.4).</p>
+</blockquote>
+<hr>
+<h2 id="8-wordmark-fragment-partial-crop">8. Wordmark Fragment (Partial Crop)</h2>
+<p>Large &quot;metta&quot;, &quot;me&quot;, or &quot;etta&quot; em <code>#FFBE18</code> bleeding off bottom edge of frame. Brand-recall device em closing slides. Tamanho: 180-250px, Expanded Heavy (870), lowercase.</p>
+<hr>
+<h2 id="9-circular-image-frame">9. Circular Image Frame</h2>
+<pre><code class="language-css">.circular-photo-frame {
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  right: -5%;
+}
+</code></pre>
+<hr>
+<h2 id="10-concentric-arc-rings-deprecated-prd-64">10. <del>Concentric Arc Rings</del> [DEPRECATED — PRD 6.4]</h2>
+<p>Anéis concêntricos low-opacity foram removidos. Substituir por gradient sutil.</p>
+<hr>
+<h2 id="11-organic-yellow-blob">11. Organic Yellow Blob</h2>
+<pre><code class="language-css">.yellow-blob {
+  background: radial-gradient(ellipse at 40% 30%, #FFC531, #FFBE18, #F5A623);
+  border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+  width: 45%;
+  height: 80%;
+  position: absolute;
+  right: 0;
+}
+</code></pre>
+<hr>
+<h2 id="12-torn-paper-edge">12. Torn Paper Edge</h2>
+<p>Ripped/torn paper texture em carousel slide edges. White tear on dark bg, dark tear on yellow bg. Transition device entre carousel slides.</p>
+<hr>
+<h2 id="13-yellow-transition-band">13. Yellow Transition Band</h2>
+<p>Horizontal yellow (<code>#FFBE18</code>) band (~8-10px ou ~40-60px) spanning full width. Contém logo + label. Separa photo zone de text zone.</p>
+<hr>
+<h2 id="14-tickerpattern-header">14. Ticker/Pattern Header</h2>
+<p>Horizontal strip com repeated &quot;metta | 22/30 | metta&quot; pattern. Regular Book (400), ~13px. Pra series content.</p>
+<hr>
+<h2 id="15-navigation-arrow-circle">15. Navigation Arrow Circle</h2>
+<pre><code class="language-css">.nav-arrow {
+  width: 32px;
+  height: 32px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</code></pre>
+<p>Carousel next-slide indicator. Bottom-right position.</p>
+<hr>
+<h2 id="16-chat-ui-mockup">16. Chat UI Mockup</h2>
+<p>Simulated WhatsApp/iMessage interface: speech bubble + input bar com Metta avatar + &quot;escrevendo...&quot; indicator. Pra conversational framing.</p>
+<hr>
+<h2 id="17-pill-tags-servicesnavigation">17. Pill Tags (Services/Navigation)</h2>
+<pre><code class="language-css">.pill-tag {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  font-size: 11px;
+  font-weight: 540; /* Expanded Medium */
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+</code></pre>
+<p>Pra: &quot;LIVROS&quot;, &quot;TREINAMENTOS&quot;, &quot;FORMAÇÕES&quot;, &quot;MENTORIA&quot;, &quot;CONSULTORIA&quot;</p>
+<hr>
+<h2 id="relacionados">🔗 Relacionados</h2>
+<ul>
+<li><span class="wikilink" data-target="metta-tokens">metta-tokens</span> — cores, tipografia</li>
+<li><span class="wikilink" data-target="Metta - PRD Identidade Visual">Metta - PRD Identidade Visual</span> — §6.4 efeitos proibidos (regras absolutas)</li>
+<li><span class="wikilink" data-target="figma-plugin-api">figma-plugin-api</span> — versões dos componentes em Plugin API</li>
+</ul>

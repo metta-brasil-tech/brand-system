@@ -1,0 +1,962 @@
+<h1 id="metta-design-tokens-v20">Metta — Design Tokens v2.0</h1>
+<blockquote>
+<p><strong>Status:</strong> NORMATIVO. Fonte canônica de cores, tipografia, espaçamento, shape, elevation e motion. PRD, skills (<code>design-metta</code>) e código que aplicar a marca <strong>leem</strong> deste arquivo. Em conflito: este vence.</p>
+<p><strong>Arquitetura:</strong> 3-tier (ref/sys/comp) seguindo Material Design 3 do Google. Cada tier tem responsabilidade clara, naming consistente, retrocompatibilidade preservada via aliases bridge.</p>
+<p><strong>CSS canônico:</strong> <code>system-source/colors_and_type.css</code> é a tradução desta documentação em CSS importável.</p>
+</blockquote>
+<hr>
+<h2 id="tldr-consulta-rapida">TL;DR (consulta rápida)</h2>
+<pre><code class="language-css">/* COR */
+background: var(--metta-sys-color-primary);          /* #FFBE18 */
+color:      var(--metta-sys-color-on-primary);       /* #0C161B */
+background: var(--metta-sys-color-surface);          /* tema-aware */
+color:      var(--metta-sys-color-on-surface);
+
+/* SHAPE */
+border-radius: var(--metta-sys-shape-corner-md);     /* 12px */
+
+/* SPACING */
+padding: var(--metta-sys-spacing-5);                 /* 24px */
+
+/* ELEVATION (suave) */
+box-shadow: var(--metta-sys-elevation-2);
+
+/* MOTION */
+transition: all var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+</code></pre>
+<hr>
+<h2 id="1-arquitetura-3-tiers">1. Arquitetura — 3 tiers</h2>
+<pre><code>TIER 3 — COMPONENT (--metta-comp-*)        tokens específicos por componente (CTA, card, label-pill)
+                       ↑ aponta pra
+TIER 2 — SYSTEM    (--metta-sys-*)         roles semânticos (primary, surface, typescale, shape, motion)
+                       ↑ aponta pra
+TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typeface, durations puras)
+</code></pre>
+<p><strong>Regra de ouro:</strong></p>
+<ul>
+<li>Código de produto (LP, ad, slide) → usa <strong>comp</strong> preferencialmente, <strong>sys</strong> se comp não existe</li>
+<li>Nunca importar <strong>ref</strong> direto em código de produto (exceto raríssimas exceções documentadas)</li>
+<li>Designer/dev: nova cor/tom → adiciona em <strong>ref</strong>, mapeia em <strong>sys</strong>, expõe em <strong>comp</strong></li>
+</ul>
+<hr>
+<h2 id="2-tier-1-reference-tokens">2. TIER 1 — Reference Tokens</h2>
+<h3 id="21-paleta-yellow-primary-brand-escala-tonal">2.1 Paleta Yellow (primary brand) — escala tonal</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>HEX</th>
+<th>Uso típico</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--metta-ref-palette-yellow-30</code></td>
+<td><code>#B38400</code></td>
+<td>Darker — text on yellow surface</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-40</code></td>
+<td><code>#D9A100</code></td>
+<td>Inverse-primary em dark theme</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-50</code></td>
+<td><code>#FFBE18</code></td>
+<td>★ default brand yellow</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-55</code></td>
+<td><code>#FFB618</code></td>
+<td>Solid variant — pressed state</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-60</code></td>
+<td><code>#FFC531</code></td>
+<td>Hover state</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-70</code></td>
+<td><code>#FFCE50</code></td>
+<td>Aux backgrounds</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-80</code></td>
+<td><code>#FFD66D</code></td>
+<td>Gradient mid</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-90</code></td>
+<td><code>#FFE3A6</code></td>
+<td>Gradient soft / on-primary-container dark</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-95</code></td>
+<td><code>#FFE4A1</code></td>
+<td>Soft fills — primary-container light</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-yellow-99</code></td>
+<td><code>#FFFAEC</code></td>
+<td>Whisper tint</td>
+</tr>
+</tbody></table></div>
+<h3 id="22-paleta-night-neutral-escala-tonal">2.2 Paleta Night (neutral) — escala tonal</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>HEX</th>
+<th>Uso típico</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--metta-ref-palette-night-5</code></td>
+<td><code>#0A1013</code></td>
+<td>Deepest dark</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-10</code></td>
+<td><code>#0C161B</code></td>
+<td>★ core dark — surface dark</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-15</code></td>
+<td><code>#131F25</code></td>
+<td>Surface container dark</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-20</code></td>
+<td><code>#1A2A35</code></td>
+<td>Elevated card dark</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-25</code></td>
+<td><code>#1E2D36</code></td>
+<td>Surface bright dark / container highest</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-30</code></td>
+<td><code>#2E3E47</code></td>
+<td>Slate panels</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-40</code></td>
+<td><code>#435965</code></td>
+<td>Bluegray default — on-surface-variant light</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-50</code></td>
+<td><code>#688594</code></td>
+<td>Bluegray light</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-60</code></td>
+<td><code>#75919F</code></td>
+<td>Bluegray soft</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-70</code></td>
+<td><code>#94B5C8</code></td>
+<td>On-dark muted</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-80</code></td>
+<td><code>#A8B3B9</code></td>
+<td>Dividers</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-85</code></td>
+<td><code>#B0CAD8</code></td>
+<td>Steel — on-surface-variant dark</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-90</code></td>
+<td><code>#C9DAE3</code></td>
+<td>Border de pills</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-95</code></td>
+<td><code>#EBF3F7</code></td>
+<td>Container high light / ice-blue</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-97</code></td>
+<td><code>#EFF3F5</code></td>
+<td>Container light / outline default</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-99</code></td>
+<td><code>#FAFCFD</code></td>
+<td>Container low light / ice</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-night-100</code></td>
+<td><code>#FFFFFF</code></td>
+<td>Surface light / on-primary</td>
+</tr>
+</tbody></table></div>
+<h3 id="23-utilitarios-especificos-nao-tonais">2.3 Utilitários específicos não-tonais</h3>
+<p>Pra casos que a paleta night não cobre. Use só quando absolutamente necessário.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>HEX</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--metta-ref-palette-neutral-pure-black</code></td>
+<td><code>#000000</code></td>
+<td>Preto absoluto pra ads que pedem máximo contraste</td>
+</tr>
+<tr>
+<td><code>--metta-ref-palette-neutral-overlay-navy</code></td>
+<td><code>#020F15</code></td>
+<td>Overlay sobre fotos com tinge específico</td>
+</tr>
+</tbody></table></div>
+<h3 id="24-opacity-state-layers-dividers">2.4 Opacity — state layers + dividers</h3>
+<pre><code class="language-css">--metta-ref-opacity-state-hover:    0.08;
+--metta-ref-opacity-state-focus:    0.12;
+--metta-ref-opacity-state-pressed:  0.16;
+--metta-ref-opacity-divider-dark:   0.20;   /* white sobre fundo escuro */
+--metta-ref-opacity-yellow-subtle:  0.10;
+</code></pre>
+<h3 id="25-typeface">2.5 Typeface</h3>
+<pre><code class="language-css">--metta-ref-typeface-brand:    &#39;SF Pro&#39;;
+--metta-ref-typeface-fallback: &#39;Zalando Sans Expanded&#39;;  /* OFL, Google Fonts — use em PPTX/Google Slides/Canva. Roboto Flex deprecated em 2026-05-12 */
+--metta-ref-typeface-mono:     ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace;
+</code></pre>
+<h3 id="26-type-axes-raw">2.6 Type axes (raw)</h3>
+<pre><code class="language-css">--metta-ref-axis-wdth-regular:  100;   /* font-stretch normal */
+--metta-ref-axis-wdth-expanded: 132;   /* font-stretch expanded */
+
+--metta-ref-axis-wght-light:    270;
+--metta-ref-axis-wght-regular:  400;
+--metta-ref-axis-wght-medium:   510;
+--metta-ref-axis-wght-medium-p: 590;
+--metta-ref-axis-wght-semibold: 650;
+--metta-ref-axis-wght-bold:     700;
+--metta-ref-axis-wght-heavy:    870;
+</code></pre>
+<h3 id="27-duration-easing-raw">2.7 Duration / easing (raw)</h3>
+<pre><code class="language-css">--metta-ref-duration-50:    50ms;
+--metta-ref-duration-200:  200ms;
+--metta-ref-duration-300:  300ms;
+--metta-ref-duration-500:  500ms;
+--metta-ref-duration-700:  700ms;
+
+--metta-ref-easing-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+--metta-ref-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+--metta-ref-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+--metta-ref-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+</code></pre>
+<hr>
+<h2 id="3-tier-2-system-tokens-light-theme-default">3. TIER 2 — System Tokens (light theme default)</h2>
+<h3 id="31-color-roles-brand">3.1 Color roles — Brand</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Aponta pra</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--metta-sys-color-primary</code></td>
+<td><code>yellow-50</code> (#FFBE18)</td>
+<td>Primary brand, CTAs, accents</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-on-primary</code></td>
+<td><code>night-10</code></td>
+<td>Texto sobre primary</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-primary-hover</code></td>
+<td><code>yellow-60</code></td>
+<td>Hover do primary</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-primary-pressed</code></td>
+<td><code>yellow-55</code></td>
+<td>Pressed do primary</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-primary-container</code></td>
+<td><code>yellow-95</code></td>
+<td>Background sutil amarelo</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-on-primary-container</code></td>
+<td><code>night-10</code></td>
+<td>Texto sobre primary-container</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p><strong>Não há roles <code>secondary</code> nem <code>tertiary</code></strong> — a Metta institucional opera com paleta dual (Yellow + Night). Marca pessoal Tiago Alves tem seu próprio DS separado com Steel e Coral.</p>
+</blockquote>
+<h3 id="32-color-roles-surface-hierarquia">3.2 Color roles — Surface (hierarquia)</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Light</th>
+<th>Dark</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--metta-sys-color-surface</code></td>
+<td><code>night-100</code></td>
+<td><code>night-10</code></td>
+<td>Background base da página</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-surface-bright</code></td>
+<td><code>night-100</code></td>
+<td><code>night-25</code></td>
+<td>Highest tone</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-surface-dim</code></td>
+<td><code>night-95</code></td>
+<td><code>night-5</code></td>
+<td>Lowest tone</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-surface-container-lowest</code></td>
+<td><code>night-100</code></td>
+<td><code>night-5</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-surface-container-low</code></td>
+<td><code>night-99</code></td>
+<td><code>night-10</code></td>
+<td>Cards padrão</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-surface-container</code></td>
+<td><code>night-97</code></td>
+<td><code>night-15</code></td>
+<td>Sections, tags</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-surface-container-high</code></td>
+<td><code>night-95</code></td>
+<td><code>night-20</code></td>
+<td>Cards elevated, hover states</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-surface-container-highest</code></td>
+<td><code>#E0E6E9</code></td>
+<td><code>night-25</code></td>
+<td>Active state, card filled</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-on-surface</code></td>
+<td><code>night-10</code></td>
+<td><code>night-100</code></td>
+<td>Texto principal</td>
+</tr>
+<tr>
+<td><code>--metta-sys-color-on-surface-variant</code></td>
+<td><code>night-40</code></td>
+<td><code>night-85</code></td>
+<td>Texto secundário</td>
+</tr>
+</tbody></table></div>
+<h3 id="33-color-roles-outline-e-inverse">3.3 Color roles — Outline e Inverse</h3>
+<pre><code class="language-css">--metta-sys-color-outline:           var(--metta-ref-palette-night-97);  /* #EFF3F5 */
+--metta-sys-color-outline-variant:   rgba(202, 217, 224, 0.87);
+
+--metta-sys-color-background:        var(--metta-sys-color-surface);
+--metta-sys-color-on-background:     var(--metta-sys-color-on-surface);
+
+--metta-sys-color-inverse-surface:    night-10 (light) / night-99 (dark);
+--metta-sys-color-inverse-on-surface: night-99 (light) / night-10 (dark);
+--metta-sys-color-inverse-primary:    yellow-80 (light) / yellow-30 (dark);
+</code></pre>
+<h3 id="34-typescale">3.4 Typescale</h3>
+<p>Cada role tem 5 sub-tokens: <code>font</code>, <code>size</code>, <code>weight</code>, <code>stretch</code>, <code>line-height</code>. Naming inspirado no M3.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Size</th>
+<th>Weight</th>
+<th>Stretch</th>
+<th>LH</th>
+<th>Case</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>display-hero</code></td>
+<td>100-142px</td>
+<td>870 (Heavy)</td>
+<td>132%</td>
+<td>0.88</td>
+<td>UPPER</td>
+<td>Headline máximo impacto</td>
+</tr>
+<tr>
+<td><code>display-large</code></td>
+<td>78-99px</td>
+<td>650 (Semibold)</td>
+<td>132%</td>
+<td>0.90</td>
+<td>sentence</td>
+<td>Hero secundário, posters</td>
+</tr>
+<tr>
+<td><code>display-medium</code></td>
+<td>60-75px</td>
+<td>650</td>
+<td>132%</td>
+<td>0.90</td>
+<td>sentence</td>
+<td>Statement walls</td>
+</tr>
+<tr>
+<td><code>headline-large</code></td>
+<td>44-51px</td>
+<td>870</td>
+<td>132%</td>
+<td>0.82</td>
+<td>UPPER</td>
+<td>Section openers</td>
+</tr>
+<tr>
+<td><code>headline-medium</code></td>
+<td>40-44px</td>
+<td>650</td>
+<td>132%</td>
+<td>0.95</td>
+<td>sentence</td>
+<td>Subseções, callouts</td>
+</tr>
+<tr>
+<td><code>headline-small</code></td>
+<td>28-32px</td>
+<td>590</td>
+<td>100%</td>
+<td>1.05</td>
+<td>sentence</td>
+<td>Sub-headlines, perguntas</td>
+</tr>
+<tr>
+<td><code>body-large</code></td>
+<td>36-42px</td>
+<td>590</td>
+<td>100%</td>
+<td>1.17</td>
+<td>sentence</td>
+<td>Body em ad/story</td>
+</tr>
+<tr>
+<td><code>body-medium</code></td>
+<td>30-35px</td>
+<td>590</td>
+<td>100%</td>
+<td>1.20</td>
+<td>sentence</td>
+<td>Pain points, listas</td>
+</tr>
+<tr>
+<td><code>body-small</code></td>
+<td>24-30px</td>
+<td>400</td>
+<td>100%</td>
+<td>1.17</td>
+<td>sentence</td>
+<td>Captions, metadata</td>
+</tr>
+<tr>
+<td><code>label-large</code></td>
+<td>26-28px</td>
+<td>540</td>
+<td>132%</td>
+<td>1.0</td>
+<td>UPPER +10% ls</td>
+<td>Tags, eyebrows large</td>
+</tr>
+<tr>
+<td><code>label-medium</code></td>
+<td>24px</td>
+<td>540</td>
+<td>132%</td>
+<td>1.0</td>
+<td>UPPER +12% ls</td>
+<td>Pills (Premium, Elite)</td>
+</tr>
+<tr>
+<td><code>label-editorial</code></td>
+<td>9-11px</td>
+<td>270</td>
+<td>132%</td>
+<td>1.0</td>
+<td>UPPER +28% ls</td>
+<td>Editorial markers</td>
+</tr>
+</tbody></table></div>
+<h3 id="35-shape">3.5 Shape</h3>
+<pre><code class="language-css">--metta-sys-shape-corner-none:  0px;     /* PROIBIDO em uso normal */
+--metta-sys-shape-corner-xs:    4px;     /* chips, badges */
+--metta-sys-shape-corner-sm:    8px;     /* inputs, ícones */
+--metta-sys-shape-corner-md:    12px;    /* cards padrão */
+--metta-sys-shape-corner-lg:    20px;    /* cards grandes, modal */
+--metta-sys-shape-corner-xl:    24px;    /* hero cards, breathing room */
+--metta-sys-shape-corner-2xl:   32px;    /* área de respiro central */
+--metta-sys-shape-corner-full:  999px;   /* CTAs pill, badges */
+</code></pre>
+<h3 id="36-spacing-8pt-grid">3.6 Spacing — 8pt grid</h3>
+<pre><code class="language-css">--metta-sys-spacing-1:  4px;    --metta-sys-spacing-2:  8px;
+--metta-sys-spacing-3:  12px;   --metta-sys-spacing-4:  16px;
+--metta-sys-spacing-5:  24px;   --metta-sys-spacing-6:  32px;
+--metta-sys-spacing-7:  48px;   --metta-sys-spacing-8:  64px;
+--metta-sys-spacing-9:  96px;   --metta-sys-spacing-10: 128px;
+</code></pre>
+<h3 id="37-elevation-suaves-mood-editorial-nao-3d">3.7 Elevation (suaves — mood editorial, não 3D)</h3>
+<pre><code class="language-css">--metta-sys-elevation-0: none;
+--metta-sys-elevation-1: 0 1px 2px rgba(12, 22, 27, 0.05);
+--metta-sys-elevation-2: 0 5px 14px rgba(12, 22, 27, 0.06);
+--metta-sys-elevation-3: 0 12px 28px rgba(12, 22, 27, 0.08);
+--metta-sys-elevation-4: 0 18px 40px rgba(12, 22, 27, 0.11);
+--metta-sys-elevation-5: 0 28px 60px rgba(12, 22, 27, 0.14);
+</code></pre>
+<blockquote>
+<p>Glow ambient (yellow/teal) <strong>REMOVIDO</strong> em mai/2026. Metta é editorial, não atmosférico.</p>
+</blockquote>
+<h3 id="38-motion">3.8 Motion</h3>
+<pre><code class="language-css">--metta-sys-motion-duration-instant: 50ms;
+--metta-sys-motion-duration-short:   200ms;
+--metta-sys-motion-duration-medium:  300ms;
+--metta-sys-motion-duration-long:    500ms;
+--metta-sys-motion-duration-x-long:  700ms;
+
+--metta-sys-motion-easing-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+--metta-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+--metta-sys-motion-easing-enter:      cubic-bezier(0, 0, 0.2, 1);
+--metta-sys-motion-easing-exit:       cubic-bezier(0.4, 0, 1, 1);
+</code></pre>
+<blockquote>
+<p>❌ <strong>PROIBIDO:</strong> bouncy/spring/overshoot, scale &gt; 1.02 em hover, color inversion no press, gradient-shift no hover.</p>
+</blockquote>
+<h3 id="39-state-layers">3.9 State layers</h3>
+<pre><code class="language-css">--metta-sys-state-hover-opacity:   0.08;
+--metta-sys-state-focus-opacity:   0.12;
+--metta-sys-state-pressed-opacity: 0.16;
+</code></pre>
+<h3 id="310-layout-safe-zones">3.10 Layout — safe zones</h3>
+<pre><code class="language-css">/* Story 1080×1920 */
+--metta-sys-layout-story-safe-x:           51px;
+--metta-sys-layout-story-safe-y-top:      308px;
+--metta-sys-layout-story-safe-width:      978px;
+--metta-sys-layout-story-safe-height:    1303px;
+
+/* Reels */
+--metta-sys-layout-reels-safe-y-top:      226px;
+--metta-sys-layout-reels-bottom-risk:     618px;
+--metta-sys-layout-reels-safe-height:    1076px;
+
+/* Page */
+--metta-sys-layout-page-padding-x:       10%;
+--metta-sys-layout-page-padding-x-mobile: 6%;
+--metta-sys-layout-section-padding-y:    100px;
+--metta-sys-layout-content-max-width:    900px;
+--metta-sys-layout-grid-gap:             24px;
+</code></pre>
+<h3 id="311-gradients-todos-lineares">3.11 Gradients — todos lineares</h3>
+<pre><code class="language-css">--metta-sys-gradient-golden-linear:
+  linear-gradient(135deg, var(--metta-ref-palette-yellow-50) 0%, var(--metta-ref-palette-yellow-80) 50%, var(--metta-ref-palette-yellow-90) 100%);
+
+--metta-sys-gradient-night-linear:
+  linear-gradient(135deg, var(--metta-ref-palette-night-10) 0%, var(--metta-ref-palette-night-25) 60%, var(--metta-ref-palette-night-40) 100%);
+
+--metta-sys-gradient-light-linear:
+  linear-gradient(135deg, var(--metta-ref-palette-night-100) 0%, #E0E6E9 100%);
+
+--metta-sys-gradient-yellow-soft:
+  linear-gradient(226deg, #FFC443 10%, var(--metta-ref-palette-yellow-55) 97%);
+</code></pre>
+<blockquote>
+<p>❌ <strong>REMOVIDOS:</strong> gradients cônicos (golden-conic, night-conic) e radial-yellow (tom amarromzado). Usar só lineares — controle previsível em qualquer composição.</p>
+</blockquote>
+<hr>
+<h2 id="4-tier-3-component-tokens">4. TIER 3 — Component Tokens</h2>
+<h3 id="41-cta-yellow-primario">4.1 CTA Yellow (primário)</h3>
+<pre><code class="language-css">--metta-comp-cta-yellow-container-color:           var(--metta-sys-color-primary);
+--metta-comp-cta-yellow-container-color-hover:     var(--metta-sys-color-primary-hover);
+--metta-comp-cta-yellow-container-color-pressed:   var(--metta-sys-color-primary-pressed);
+--metta-comp-cta-yellow-label-color:               var(--metta-sys-color-on-primary);
+--metta-comp-cta-yellow-container-shape:           var(--metta-sys-shape-corner-full);
+--metta-comp-cta-yellow-container-padding-x:       var(--metta-sys-spacing-6);
+--metta-comp-cta-yellow-container-padding-y:       var(--metta-sys-spacing-4);
+--metta-comp-cta-yellow-pressed-scale:             0.97;
+</code></pre>
+<p><strong>Estados:</strong></p>
+<ul>
+<li>Default: yellow-50</li>
+<li>Hover: yellow-60 (clareia)</li>
+<li>Pressed: yellow-55 + scale(0.97)</li>
+<li>Focus-visible: ring sutil <code>box-shadow: 0 0 0 2px surface, 0 0 0 4px on-surface-variant</code> (NÃO outline yellow grosso)</li>
+</ul>
+<h3 id="42-cta-dark-secundario">4.2 CTA Dark (secundário)</h3>
+<pre><code class="language-css">--metta-comp-cta-dark-container-color:             var(--metta-ref-palette-night-10);
+--metta-comp-cta-dark-container-color-hover:       var(--metta-ref-palette-night-20);
+--metta-comp-cta-dark-label-color:                 var(--metta-ref-palette-night-100);
+--metta-comp-cta-dark-container-shape:             var(--metta-sys-shape-corner-full);
+</code></pre>
+<h3 id="43-cta-light-sobre-fundo-escuro">4.3 CTA Light (sobre fundo escuro)</h3>
+<pre><code class="language-css">--metta-comp-cta-light-container-color:            var(--metta-ref-palette-night-100);
+--metta-comp-cta-light-container-color-hover:      var(--metta-ref-palette-night-95);
+--metta-comp-cta-light-label-color:                var(--metta-ref-palette-night-10);
+--metta-comp-cta-light-container-shape:            var(--metta-sys-shape-corner-full);
+</code></pre>
+<h3 id="44-card-padrao">4.4 Card padrão</h3>
+<pre><code class="language-css">--metta-comp-card-container-color:                 var(--metta-sys-color-surface-container-low);
+--metta-comp-card-container-shape:                 var(--metta-sys-shape-corner-md);
+--metta-comp-card-container-padding:               var(--metta-sys-spacing-5);
+--metta-comp-card-elevation:                       var(--metta-sys-elevation-1);
+</code></pre>
+<h3 id="45-card-elevated">4.5 Card elevated</h3>
+<pre><code class="language-css">--metta-comp-card-elevated-container-color:        var(--metta-sys-color-surface-container-high);
+--metta-comp-card-elevated-container-shape:        var(--metta-sys-shape-corner-xl);
+--metta-comp-card-elevated-elevation:              var(--metta-sys-elevation-3);
+</code></pre>
+<h3 id="46-variacoes-de-card">4.6 Variações de card</h3>
+<p>5 variações no DS final (card-accent, card-horizontal e outras especulações foram removidas):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variação</th>
+<th>Função</th>
+<th>Background</th>
+<th>Border</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Card padrão</strong></td>
+<td>Listas, grids neutros</td>
+<td><code>surface-container-low</code></td>
+<td><code>outline-variant</code></td>
+<td>Default</td>
+</tr>
+<tr>
+<td><strong>Card elevated</strong></td>
+<td>Hero, featured</td>
+<td><code>surface-container-high</code></td>
+<td>none</td>
+<td>Elevation 3</td>
+</tr>
+<tr>
+<td><strong>Card stat</strong></td>
+<td>Métricas, números</td>
+<td><code>surface-container-low</code></td>
+<td><code>outline-variant</code></td>
+<td>Number 56px yellow primary heavy</td>
+</tr>
+<tr>
+<td><strong>Card icon</strong></td>
+<td>Features, capacidades</td>
+<td><code>surface-container-low</code></td>
+<td><code>outline-variant</code></td>
+<td>Icon container 44×44 surface-container-high</td>
+</tr>
+<tr>
+<td><strong>Card filled</strong></td>
+<td>Callout máximo</td>
+<td><code>surface-container-highest</code> (tema-aware)</td>
+<td><code>outline-variant</code></td>
+<td>Em dark theme vira <code>night-25</code> automaticamente</td>
+</tr>
+</tbody></table></div>
+<p>Todos com <code>min-height: 220px</code>, <code>padding: 28px</code>, <code>gap: 16px</code>, <code>corner-md</code>.</p>
+<h3 id="47-label-pill">4.7 Label pill</h3>
+<pre><code class="language-css">--metta-comp-label-pill-container-color:           transparent;
+--metta-comp-label-pill-container-shape:           var(--metta-sys-shape-corner-full);
+--metta-comp-label-pill-outline-color:             var(--metta-ref-palette-night-90);
+--metta-comp-label-pill-outline-width:             1px;
+--metta-comp-label-pill-padding-x:                 14px;
+--metta-comp-label-pill-padding-y:                 8px;
+--metta-comp-label-pill-label-color:               var(--metta-sys-color-on-surface-variant);
+--metta-comp-label-pill-label-font-weight:         540;
+--metta-comp-label-pill-label-font-stretch:        132%;
+--metta-comp-label-pill-label-letter-spacing:      0.12em;
+--metta-comp-label-pill-label-transform:           uppercase;
+</code></pre>
+<p>Variante filled: background <code>primary</code>, text <code>on-primary</code>, sem border.</p>
+<h3 id="48-headline-display-5-variacoes">4.8 Headline display — 5 variações</h3>
+<ol>
+<li><strong>Uppercase + accent yellow</strong> (canônico) — peso 870, palavra-chave em primary</li>
+<li><strong>Sentence case + accent yellow</strong> — peso 650, sentence case, palavra-chave em primary</li>
+<li><strong>Mixed weight (Heavy + Light)</strong> — heavy 870 + algumas palavras em light 270, mesma cor</li>
+<li><strong>Italic accent (sem cor)</strong> — palavra-chave em itálico heavy, sem mudar cor</li>
+<li><strong>Background marker (yellow highlight)</strong> — palavra-chave com bg primary + on-primary inline</li>
+</ol>
+<h3 id="49-yellow-band-divider">4.9 Yellow band divider</h3>
+<pre><code class="language-css">--metta-comp-yellow-band-color:                    var(--metta-sys-color-primary);
+--metta-comp-yellow-band-height:                   6px;
+</code></pre>
+<hr>
+<h2 id="5-sys-color-roles-dark-theme">5. SYS Color Roles — Dark theme</h2>
+<pre><code class="language-css">[data-theme=&quot;dark&quot;] {
+  --metta-sys-color-primary:               var(--metta-ref-palette-yellow-50);
+  --metta-sys-color-on-primary:            var(--metta-ref-palette-night-10);
+  --metta-sys-color-primary-hover:         var(--metta-ref-palette-yellow-60);
+  --metta-sys-color-primary-pressed:       var(--metta-ref-palette-yellow-55);
+  --metta-sys-color-primary-container:     var(--metta-ref-palette-night-20);
+  --metta-sys-color-on-primary-container:  var(--metta-ref-palette-yellow-90);
+
+  --metta-sys-color-surface:                  var(--metta-ref-palette-night-10);
+  --metta-sys-color-surface-bright:           var(--metta-ref-palette-night-25);
+  --metta-sys-color-surface-dim:              var(--metta-ref-palette-night-5);
+  --metta-sys-color-surface-container-lowest: var(--metta-ref-palette-night-5);
+  --metta-sys-color-surface-container-low:    var(--metta-ref-palette-night-10);
+  --metta-sys-color-surface-container:        var(--metta-ref-palette-night-15);
+  --metta-sys-color-surface-container-high:   var(--metta-ref-palette-night-20);
+  --metta-sys-color-surface-container-highest:var(--metta-ref-palette-night-25);
+  --metta-sys-color-on-surface:               var(--metta-ref-palette-night-100);
+  --metta-sys-color-on-surface-variant:       var(--metta-ref-palette-night-85);
+
+  --metta-sys-color-outline:                  rgba(255, 255, 255, 0.20);
+  --metta-sys-color-outline-variant:          rgba(58, 109, 137, 0.28);
+
+  --metta-sys-color-inverse-surface:    var(--metta-ref-palette-night-99);
+  --metta-sys-color-inverse-on-surface: var(--metta-ref-palette-night-10);
+  --metta-sys-color-inverse-primary:    var(--metta-ref-palette-yellow-30);
+}
+</code></pre>
+<hr>
+<h2 id="6-aliases-bridge-retrocompatibilidade">6. Aliases bridge — retrocompatibilidade</h2>
+<p>Tokens v1 mantidos ativos via aliases pra não quebrar código legado. <strong>Em código novo, prefira sys/comp.</strong></p>
+<pre><code class="language-css">/* Brand v1 */
+--metta-yellow:        var(--metta-sys-color-primary);
+--metta-yellow-alt:    var(--metta-ref-palette-yellow-55);
+--metta-yellow-light:  var(--metta-ref-palette-yellow-60);
+--metta-yellow-soft:   var(--metta-ref-palette-yellow-95);
+--metta-blue-night:    var(--metta-ref-palette-night-10);
+--metta-blue-deep:     var(--metta-ref-palette-night-5);
+--metta-white:         var(--metta-ref-palette-night-100);
+--metta-ice:           var(--metta-ref-palette-night-99);
+--metta-ice-blue:      var(--metta-ref-palette-night-95);
+--metta-bluegray:      var(--metta-ref-palette-night-40);
+
+/* Markdown v1 names */
+--yellow-primary:    var(--metta-sys-color-primary);
+--blue-night:        var(--metta-ref-palette-night-10);
+--white:             var(--metta-ref-palette-night-100);
+--ice:               var(--metta-ref-palette-night-99);
+--blue-gray:         var(--metta-ref-palette-night-40);
+
+/* Semantic v1 */
+--fg-1:              var(--metta-sys-color-on-surface);
+--fg-2:              var(--metta-ref-palette-night-40);
+--bg-1:              var(--metta-sys-color-surface);
+--bg-2:              var(--metta-sys-color-surface-container-low);
+--accent:            var(--metta-sys-color-primary);
+
+/* Radii v1 */
+--radius-md:    var(--metta-sys-shape-corner-md);
+--radius-pill:  var(--metta-sys-shape-corner-full);
+
+/* Spacing v1 */
+--space-5: var(--metta-sys-spacing-5);
+
+/* Shadows v1 */
+--shadow-sm:    var(--metta-sys-elevation-1);
+--shadow-md:    var(--metta-sys-elevation-2);
+--shadow-lg:    var(--metta-sys-elevation-3);
+</code></pre>
+<hr>
+<h2 id="7-regras-duras-prd-64">7. REGRAS DURAS (PRD 6.4)</h2>
+<p>❌ <strong>PROIBIDO em qualquer aplicação:</strong></p>
+<ul>
+<li>Glow no logo (<code>box-shadow</code>, <code>inset shadow</code>, <code>filter: drop-shadow</code> com glow amarelo)</li>
+<li>Blur pesado em fotos (&gt;20px)</li>
+<li>Sombras no logo</li>
+<li>Outline/ghost no logo</li>
+<li>Recriar/redesenhar o logo em SVG/CSS — <strong>sempre baixar do Drive</strong></li>
+<li>Fonte que não seja SF Pro Variable (primária) ou Zalando Sans Expanded (fallback oficial pra PPTX/Google Slides desde 2026-05-12 — Roboto Flex deprecated)</li>
+<li>Tagline &quot;INTELIGÊNCIA COMERCIAL&quot; sem tracking de 9%+ em UPPERCASE</li>
+<li>Tier badges (ELITE/EXCLUSIVE/PREMIUM) sem pill com border + tracking 12%</li>
+<li>Gradients cônicos ou radial amarromzado</li>
+<li>Bouncy/spring motion</li>
+<li>Glow ambient atmosférico (atmosférico não é Metta)</li>
+</ul>
+<hr>
+<h2 id="8-mudancas-vs-v1">8. Mudanças vs v1</h2>
+<h3 id="estrutural">Estrutural</h3>
+<ul>
+<li>Reorganização em 3 tiers (ref/sys/comp) seguindo M3</li>
+<li>Naming consistente com tier prefix</li>
+<li>Tema dark explícito via <code>[data-theme=&quot;dark&quot;]</code></li>
+</ul>
+<h3 id="adicionado">Adicionado</h3>
+<ul>
+<li>Paleta tonal completa Yellow (10 tons) e Night (17 tons)</li>
+<li>Roles inversos <code>on-*</code> (on-primary, on-surface, etc.)</li>
+<li>Surface containers escalonados (lowest/low/medium/high/highest)</li>
+<li>Typescale com 5 sub-tokens cada</li>
+<li>Elevation 0-5 com valores suaves</li>
+<li>Motion como tokens</li>
+<li>State layer opacity tokens</li>
+<li>Component tokens pra CTA Yellow/Dark/Light, Card padrão/elevated/stat/icon/filled, label-pill, headline display, breathing-room, yellow-band</li>
+</ul>
+<h3 id="removido-escopo-metta-institucional-apenas">Removido (escopo Metta institucional apenas)</h3>
+<ul>
+<li>Paletas Steel e Coral (ficam no DS Tiago Alves separado)</li>
+<li>Roles <code>secondary</code> e <code>tertiary</code> (sem cores secondary/tertiary na Metta)</li>
+<li>Neutrals específicos: near-black, teal-dark, teal-mid, overlay-gray, twitter-dark, dark-content, light-bg, body-gray (substituídos pela paleta night)</li>
+<li>Gradients cônicos (golden-conic, night-conic) → linear</li>
+<li>Gradient yellow-radial (tom amarromzado) → removido</li>
+<li>Glow ambient (yellow + teal) → removido (atmosférico não é Metta)</li>
+<li>Card border-accent variation</li>
+<li>Headline outline text variation</li>
+<li>Headline underline yellow accent variation</li>
+</ul>
+<h3 id="compatibilidade">Compatibilidade</h3>
+<ul>
+<li>100% dos tokens v1 essenciais funcionando via §6 aliases bridge</li>
+</ul>
+<hr>
+<h2 id="10-motion-patterns-reveal-magnetic-counter-kenburns">10. Motion patterns — reveal, magnetic, counter, kenburns</h2>
+<blockquote>
+<p>Adicionado em 2.1 (2026-05-03). Patterns consagrados na LP Aplicação SMTM v5, agora ready-to-use no DS.</p>
+</blockquote>
+<h3 id="101-setup-1-por-pagina">10.1 Setup (1× por página)</h3>
+<pre><code class="language-html">&lt;!-- No &lt;head&gt;: --&gt;
+&lt;script&gt;document.documentElement.classList.add(&#39;js&#39;);&lt;/script&gt;
+
+&lt;!-- Antes do &lt;/body&gt;: --&gt;
+&lt;script src=&quot;path/to/system-source/motion.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p><code>motion.js</code> auto-inicializa todos os patterns abaixo via <code>data-*</code> attributes.</p>
+<h3 id="102-block-reveal-data-reveal">10.2 Block reveal (<code>data-reveal</code>)</h3>
+<p>Aparição cinematográfica — fade + slide(40px) + blur(10px) → 0 em 1100ms easing emphasized.</p>
+<pre><code class="language-html">&lt;div data-reveal&gt;
+  &lt;h2&gt;Meu título&lt;/h2&gt;
+  &lt;p&gt;Conteúdo do bloco&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p><strong>Variant soft</strong> (sem blur, slide menor 20px, 850ms — pra parágrafos longos onde blur prejudica leitura):</p>
+<pre><code class="language-html">&lt;p data-reveal=&quot;soft&quot;&gt;Texto longo que precisa ser legível durante o reveal...&lt;/p&gt;
+</code></pre>
+<p><strong>Stagger entre múltiplos elementos:</strong></p>
+<pre><code class="language-html">&lt;div data-reveal style=&quot;--reveal-delay: 0ms&quot;&gt;Primeiro&lt;/div&gt;
+&lt;div data-reveal style=&quot;--reveal-delay: 80ms&quot;&gt;Segundo&lt;/div&gt;
+&lt;div data-reveal style=&quot;--reveal-delay: 160ms&quot;&gt;Terceiro&lt;/div&gt;
+</code></pre>
+<p>Ou via CSS com <code>nth-child</code>:</p>
+<pre><code class="language-css">.cards-grid &gt; [data-reveal]:nth-child(2) { --reveal-delay: 80ms; }
+.cards-grid &gt; [data-reveal]:nth-child(3) { --reveal-delay: 160ms; }
+</code></pre>
+<h3 id="103-magnetic-cta-data-magnetic">10.3 Magnetic CTA (<code>data-magnetic</code>)</h3>
+<p>Mouse atrai botão até 18% do delta. Funciona em qualquer elemento — recomendado em CTAs primários.</p>
+<pre><code class="language-html">&lt;a class=&quot;cta-yellow&quot; data-magnetic href=&quot;#&quot;&gt;Aplicar&lt;/a&gt;
+</code></pre>
+<p>Auto-desativado em touch devices (<code>pointer: coarse</code>) e <code>prefers-reduced-motion</code>.</p>
+<h3 id="104-counter-animation-data-counter">10.4 Counter animation (<code>data-counter</code>)</h3>
+<p>Anima de 0 ao valor final em 1.8s easing decelerate, dispara quando 50% do elemento entra na viewport.</p>
+<pre><code class="language-html">&lt;span data-counter=&quot;47&quot; data-prefix=&quot;+&quot; data-suffix=&quot;%&quot;&gt;+0%&lt;/span&gt;
+&lt;span data-counter=&quot;23&quot; data-decimal=&quot;1&quot; data-suffix=&quot;×&quot;&gt;0×&lt;/span&gt;
+&lt;span data-counter=&quot;5&quot; data-prefix=&quot;R$ &quot; data-suffix=&quot; bi+&quot;&gt;R$ 0 bi+&lt;/span&gt;
+</code></pre>
+<p><strong>Atributos:</strong></p>
+<ul>
+<li><code>data-counter</code> — valor final (obrigatório)</li>
+<li><code>data-prefix</code> — antes do número (opcional)</li>
+<li><code>data-suffix</code> — depois do número (opcional)</li>
+<li><code>data-decimal</code> — casas decimais (default 0)</li>
+<li><code>data-duration</code> — ms (default 1800)</li>
+</ul>
+<h3 id="105-comp-tokens">10.5 Comp tokens</h3>
+<pre><code class="language-css">--metta-comp-reveal-duration:        1100ms;  /* block reveal */
+--metta-comp-reveal-duration-soft:    850ms;  /* soft variant */
+--metta-comp-reveal-distance:          40px;  /* translateY block */
+--metta-comp-reveal-distance-soft:     20px;  /* translateY soft */
+--metta-comp-reveal-blur:              10px;  /* filter blur block */
+</code></pre>
+<p>Override por componente substituindo o token localmente.</p>
+<h3 id="106-keyframes">10.6 Keyframes</h3>
+<pre><code class="language-css">@keyframes metta-reveal-rise        { /* fade + slide + blur */ }
+@keyframes metta-reveal-rise-soft   { /* fade + slide */ }
+@keyframes metta-kenburns           { /* zoom + pan loop pra hero photos */ }
+</code></pre>
+<h3 id="107-a11y">10.7 A11y</h3>
+<p><code>@media (prefers-reduced-motion: reduce)</code> desativa todas as animações automaticamente. Magnetic e counter respeitam via JS. <strong>Sempre incluído no comportamento default</strong> — boa prática obrigatória.</p>
+<h3 id="108-quando-usar-cada-pattern">10.8 Quando usar cada pattern</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Block reveal</strong></td>
+<td>Cards, headlines, blocos visuais com peso</td>
+</tr>
+<tr>
+<td><strong>Soft reveal</strong></td>
+<td>Parágrafos longos, ledes, textos onde blur prejudica leitura</td>
+</tr>
+<tr>
+<td><strong>Magnetic CTA</strong></td>
+<td>Botões primários (1-2 por página) — não em links secundários</td>
+</tr>
+<tr>
+<td><strong>Counter</strong></td>
+<td>Estatísticas-âncora (1-3 por página) — não exagerar</td>
+</tr>
+<tr>
+<td><strong>Kenburns</strong></td>
+<td>Foto hero único — não em múltiplas imagens (cansativo)</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="11-changelog">11. Changelog</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Mudança</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026-05-03</td>
+<td><strong>2.1</strong></td>
+<td>Motion patterns adicionados ao DS — reveal, magnetic, counter, kenburns. Helper <code>motion.js</code> auto-init via <code>data-*</code>. Comp tokens <code>--metta-comp-reveal-*</code></td>
+</tr>
+<tr>
+<td>2026-05-03</td>
+<td><strong>2.0 normativo</strong></td>
+<td>Promovido após curadoria — escopo só Metta, gradients lineares, elevation suave, sem glow, +CTA Light, 5 variações de card, 5 variações de headline</td>
+</tr>
+<tr>
+<td>2026-05-03</td>
+<td>2.0-rc1</td>
+<td>Refator 3-tier proposto</td>
+</tr>
+<tr>
+<td>2026-04-28</td>
+<td>1.0</td>
+<td>Single-tier flat (legacy)</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="documentos-relacionados">🔗 Documentos relacionados</h2>
+<ul>
+<li><span class="wikilink" data-target="Metta - PRD Identidade Visual">Metta - PRD Identidade Visual</span> — regras de aplicação, hierarquia</li>
+<li><span class="wikilink" data-target="lp-patterns-modernos">lp-patterns-modernos</span> — curadoria UI/UX premium pra LPs</li>
+<li><span class="wikilink" data-target="Skill - Agente de Design">Skill - Agente de Design</span> — doc humana navegável da skill</li>
+<li>Skill executável: <code>.claude/commands/design-metta.md</code></li>
+<li>CSS canônico: <code>system-source/colors_and_type.css</code></li>
+<li>Site preview interativo: <code>Branding Metta 2.0/output/design-system-v2/index.html</code></li>
+<li>v1 arquivado: <code>_archive/refactor-2026-05-03-v2/metta-tokens-v1.md.bak</code></li>
+</ul>

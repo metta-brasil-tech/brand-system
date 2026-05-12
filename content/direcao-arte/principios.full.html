@@ -1,0 +1,355 @@
+<h1 id="direcao-fotografica-metta">Direção Fotográfica — Metta</h1>
+<blockquote>
+<p>A fotografia da Metta não é &quot;stock corporativo bonito&quot;. É <strong>editorial documental</strong> — cabeça analítica, luz natural deliberada, paleta neutra com amarelo cirúrgico. Esta direção governa toda imagem Metta: ads, LPs, carrosséis, slides, e — principalmente — toda imagem GERADA via IA pela skill <code>/marca-metta</code>.</p>
+</blockquote>
+<h2 id="tldr">TL;DR <span id="tldr" class="block-anchor"></span></h2>
+<ul>
+<li><strong>DNA em 7 elementos:</strong> subject · composition · light · mood · palette · camera · post</li>
+<li><strong>21 arquétipos editoriais</strong> com prompt template em inglês pra cada (alimenta gpt-image-1 via Codex CLI)</li>
+<li><strong>Não é stock photo:</strong> documental, deliberado, sem sorrisos forçados, sem clichê de high-five</li>
+<li><strong>Amarelo é cirúrgico:</strong> 1 ponto focal por cena, nunca decorativo, nunca disperso</li>
+<li><strong>Galeria ativa:</strong> 156 fotos curadas com archetype + prompt em <code>output/brand-system/data/photo-index.json</code></li>
+</ul>
+<h2 id="quando-consultar">Quando consultar <span id="quando-consultar" class="block-anchor"></span></h2>
+<ul>
+<li>Antes de gerar QUALQUER imagem nova com IA pra Metta</li>
+<li>Quando alguém pedir &quot;uma foto pra esse carrossel&quot; — primeiro identifica arquétipo, depois usa o prompt</li>
+<li>Em briefing pra fotógrafo externo: este doc é o &quot;manual da marca em fotografia&quot;</li>
+<li>Pra calibrar peças que parecem &quot;fora da marca&quot; — quase sempre é um dos 7 elementos do DNA quebrado</li>
+<li>Antes de aprovar nova foto pro banco — comparar contra o DNA e os arquétipos</li>
+</ul>
+<hr>
+<h2 id="1-dna-visual-os-7-elementos">1. DNA Visual — os 7 elementos <span id="dna" class="block-anchor"></span></h2>
+<p>Toda imagem Metta passa por 7 dimensões. Não é checklist sequencial — é como mecânico abrindo o carro: você verifica todas, em qualquer ordem.</p>
+<h3 id="11-subject-o-que-esta-na-cena">1.1 Subject — o que está na cena <span id="subject" class="block-anchor"></span></h3>
+<p>Tipos válidos:</p>
+<ul>
+<li><strong>Empresário sozinho</strong> em momento analítico (decidindo, lendo dado, em pausa de pensamento)</li>
+<li><strong>Dupla</strong> em mentoria 1-on-1 (mentor + mentorado)</li>
+<li><strong>Time pequeno</strong> (3-6 pessoas) em reunião de mesa, colaboração ou apresentação</li>
+<li><strong>Mãos / detalhes</strong> (handshake fechando acordo, caneta sobre dado, dedo em gráfico)</li>
+<li><strong>Ambiente vazio</strong> (sala de reunião pronta, escritório curado)</li>
+<li><strong>Objeto simbólico</strong> (relógio, chave, copo) com função metafórica</li>
+<li><strong>Textura</strong> (gradiente, luz volumétrica, dourado em preto) como pano de fundo</li>
+</ul>
+<p>Tipos PROIBIDOS:</p>
+<ul>
+<li>Pessoa olhando direto pra câmera com sorriso largo</li>
+<li>Mulher executiva com braços cruzados defensivamente em pose</li>
+<li>Time fazendo high-five exagerado com papéis voando</li>
+<li>Mão segurando lâmpada acesa &quot;tendo ideia&quot;</li>
+<li>Empresário pulando de alegria</li>
+<li>Aperto de mão visto de frente com dois rostos sorrindo</li>
+</ul>
+<h3 id="12-composition-como-enquadra">1.2 Composition — como enquadra <span id="composition" class="block-anchor"></span></h3>
+<ul>
+<li><strong>Regra dos terços</strong> — sujeito raramente no centro</li>
+<li><strong>Negative space deliberado</strong> — vazio que respira, contexto que sustenta</li>
+<li><strong>Eye-line lock</strong> — quando há pessoa, olhar conduz o frame (mas não pra câmera)</li>
+<li><strong>Off-axis</strong> — boardroom shots ligeiramente diagonais, nunca perfeitamente frontais</li>
+<li><strong>Profundidade construída</strong> — primeiro plano + médio + fundo, com pelo menos 2 planos em foco diferenciado</li>
+</ul>
+<h3 id="13-light-qualidade-da-luz">1.3 Light — qualidade da luz <span id="light" class="block-anchor"></span></h3>
+<ul>
+<li><strong>Natural lateral</strong> é o padrão (janela alta, manhã ou tarde dourada)</li>
+<li><strong>Soft falloff</strong> — sombras que decaem suave, nunca duras de meio-dia</li>
+<li><strong>Volumétrica controlada</strong> — raios visíveis quando justifica narrativa, nunca &quot;god rays&quot; turísticos</li>
+<li><strong>Quente em ambiente, neutra em estúdio</strong> — nunca azul-frio dramático</li>
+<li><strong>Screen glow</strong> quando alguém olha tela — luz clara no rosto, mantém naturalidade</li>
+</ul>
+<p>Proibido: flash direto, fluorescente puro, HDR, &quot;cinematic teal-and-orange&quot; exagerado.</p>
+<h3 id="14-mood-sentimento-dominante">1.4 Mood — sentimento dominante <span id="mood" class="block-anchor"></span></h3>
+<p>A escala Metta: composto · analítico · decisão. Nunca:</p>
+<ul>
+<li>Eufórico (estilo &quot;vendemos motivacional&quot;)</li>
+<li>Ansioso (estilo &quot;olha o caos do gestor&quot;)</li>
+<li>Teatral (estilo &quot;pose pra revista de aeroporto&quot;)</li>
+<li>Inocente (estilo &quot;estou aprendendo, sou júnior&quot;)</li>
+</ul>
+<p>A foto deve transmitir <strong>peso da escolha sustentada com calma</strong>. Se o sujeito está sorrindo, é meio-sorriso de quem sabe — não sorriso de stock.</p>
+<h3 id="15-palette-cores">1.5 Palette — cores <span id="palette" class="block-anchor"></span></h3>
+<p>Anchored em neutros:</p>
+<ul>
+<li>Carvão (charcoal) — <code>#2E3E47</code> a <code>#0C161B</code></li>
+<li>Carvalho (oak wood) — tons quentes médios</li>
+<li>Creme/off-white — paredes, papel, camisas</li>
+<li>Slate grey — tecidos, fundos arquitetônicos</li>
+</ul>
+<p><strong>Amarelo Metta <code>#FFBE18</code></strong> entra como <strong>um único acento focal por cena</strong>:</p>
+<ul>
+<li>Capa de caderno</li>
+<li>Detalhe de gravata ou pin</li>
+<li>Highlight em gráfico</li>
+<li>Reflexo em copo/lâmpada</li>
+</ul>
+<p>NUNCA: paleta arco-íris, múltiplos acentos competindo, amarelo decorativo (parede inteira, fundo).</p>
+<h3 id="16-camera-feel-da-lente">1.6 Camera — feel da lente <span id="camera" class="block-anchor"></span></h3>
+<ul>
+<li><strong>35mm equivalente</strong> pra cenas amplas (boardroom, time, ambiente)</li>
+<li><strong>50mm equivalente</strong> pra cenas médias (apresentação, mentoria)</li>
+<li><strong>85mm equivalente</strong> pra retratos individuais</li>
+<li><strong>f/2.8 a f/4</strong> — profundidade média a rasa, isola sujeito mas mantém contexto legível</li>
+<li><strong>NUNCA</strong> wide-angle distorcido (24mm ou menos), nunca fisheye</li>
+<li><strong>NUNCA</strong> macro extremo</li>
+</ul>
+<h3 id="17-post-pos-producao">1.7 Post — pós-produção <span id="post" class="block-anchor"></span></h3>
+<ul>
+<li><strong>Mid contrast</strong> — preserva tons médios, não esmaga shadow nem queima highlight</li>
+<li><strong>Subtle film grain</strong> — leve granulação que sugere captura real, nunca digital limpo demais</li>
+<li><strong>White balance neutro com warm shadow</strong> — base neutra, sombra ligeiramente quente</li>
+<li><strong>NÃO</strong>: HDR, color grading agressivo, saturação inflada, vinheta heavy, oversharp</li>
+</ul>
+<hr>
+<h2 id="2-arquetipos-editoriais">2. Arquétipos editoriais <span id="arquetipos" class="block-anchor"></span></h2>
+<p>Os arquétipos são <strong>lentes de leitura</strong>: dado um briefing, você identifica qual arquétipo serve, pega o prompt template, ajusta o briefing específico, alimenta o gpt-image-1. Isso garante que toda imagem nova respeite o DNA Metta.</p>
+<blockquote>
+<p><strong>Onde está o catálogo vivo:</strong> <code>output/brand-system/data/photo-index.json</code> — 156 fotos curadas, cada uma classificada num dos 21 arquétipos abaixo, com prompt completo. A galeria do mini-app permite copiar o prompt direto pra Codex CLI.</p>
+</blockquote>
+<h3 id="21-lideranca">2.1 Liderança <span id="arquetipos-lideranca" class="block-anchor"></span></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>executivo-em-decisao</code></td>
+<td>Executivo em decisão</td>
+<td>Sujeito sozinho em momento analítico</td>
+</tr>
+<tr>
+<td><code>mentoria-1-on-1</code></td>
+<td>Mentoria 1-on-1</td>
+<td>Conselho, transferência de método entre dois</td>
+</tr>
+<tr>
+<td><code>reuniao-mesa-decisao</code></td>
+<td>Reunião de mesa — decisão</td>
+<td>Time em mesa com líder no comando</td>
+</tr>
+<tr>
+<td><code>lider-apresentando-time</code></td>
+<td>Líder apresentando ao time</td>
+<td>Em pé, explicando, time sentado</td>
+</tr>
+<tr>
+<td><code>palco-evento</code></td>
+<td>Palco / evento</td>
+<td>Conferência, autoridade pública</td>
+</tr>
+<tr>
+<td><code>feminina-lider-apresentando</code></td>
+<td>Liderança feminina apresentando</td>
+<td>Executiva conduzindo apresentação</td>
+</tr>
+<tr>
+<td><code>businessman-thinking-laptop</code></td>
+<td>Empresário pensando — laptop</td>
+<td>Pausa de pensamento em ambiente quente</td>
+</tr>
+</tbody></table></div>
+<h3 id="22-pessoas">2.2 Pessoas <span id="arquetipos-pessoas" class="block-anchor"></span></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>retrato-individual-confiante</code></td>
+<td>Retrato individual — confiante</td>
+<td>Foto de perfil/about/case nominal</td>
+</tr>
+<tr>
+<td><code>aperto-de-maos-fechamento</code></td>
+<td>Aperto de mãos — fechamento</td>
+<td>Selo de acordo, contrato</td>
+</tr>
+<tr>
+<td><code>time-colaborando-laptops</code></td>
+<td>Time colaborando com laptops</td>
+<td>Execução cotidiana, sintonia operacional</td>
+</tr>
+<tr>
+<td><code>time-celebrando-resultado</code></td>
+<td>Time celebrando resultado</td>
+<td>Comemoração controlada de meta batida</td>
+</tr>
+</tbody></table></div>
+<h3 id="23-resultados">2.3 Resultados <span id="arquetipos-resultados" class="block-anchor"></span></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>analise-dados-tela</code></td>
+<td>Análise de dados na tela</td>
+<td>Sujeito olhando dashboard, pensando</td>
+</tr>
+<tr>
+<td><code>apresentacao-graficos</code></td>
+<td>Apresentação de gráficos</td>
+<td>Time lendo resultado coletivamente</td>
+</tr>
+</tbody></table></div>
+<h3 id="24-escritorio-ambiente">2.4 Escritório / Ambiente <span id="arquetipos-ambiente" class="block-anchor"></span></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sala-reuniao-vazia</code></td>
+<td>Sala de reunião vazia</td>
+<td>Promessa, expectativa, palco da decisão</td>
+</tr>
+<tr>
+<td><code>escritorio-moderno-interior</code></td>
+<td>Escritório moderno — interior</td>
+<td>Ambiente de trabalho organizado</td>
+</tr>
+<tr>
+<td><code>home-office</code></td>
+<td>Home office</td>
+<td>Disciplina profissional em casa</td>
+</tr>
+</tbody></table></div>
+<h3 id="25-branding-mockups">2.5 Branding / Mockups <span id="arquetipos-branding" class="block-anchor"></span></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mockup-papelaria-madeira</code></td>
+<td>Mockup papelaria — madeira</td>
+<td>Cartões/papelaria em mesa de carvalho</td>
+</tr>
+<tr>
+<td><code>mockup-papelaria-escura</code></td>
+<td>Mockup papelaria — escura</td>
+<td>Versão premium, fundo escuro</td>
+</tr>
+<tr>
+<td><code>objeto-conceitual-escuro</code></td>
+<td>Objeto conceitual escuro</td>
+<td>Símbolo isolado (relógio, chave)</td>
+</tr>
+</tbody></table></div>
+<h3 id="26-texturas-backgrounds">2.6 Texturas / Backgrounds <span id="arquetipos-texturas" class="block-anchor"></span></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>textura-gold-on-black</code></td>
+<td>Textura — dourado em preto</td>
+<td>Fundo premium para headlines</td>
+</tr>
+<tr>
+<td><code>textura-luz-raio</code></td>
+<td>Textura — raios de luz</td>
+<td>Atmosfera, profundidade, drama controlado</td>
+</tr>
+<tr>
+<td><code>textura-gradiente-grain</code></td>
+<td>Textura — gradiente granulado</td>
+<td>Fundo neutro com profundidade</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="3-estrutura-do-prompt-receita-de-7-partes">3. Estrutura do prompt — receita de 7 partes <span id="estrutura-prompt" class="block-anchor"></span></h2>
+<p>Todo prompt no <code>photo-index.json</code> segue a mesma estrutura. Quando for adaptar pra um briefing específico, mantenha as 7 seções:</p>
+<pre><code>1. SUBJECT      — o que está na cena (sujeito + ação)
+2. COMPOSITION  — enquadramento, regra dos terços, planos
+3. LIGHT        — tipo, direção, qualidade, temperatura
+4. MOOD         — sentimento dominante (composto, analítico, decisão)
+5. PALETTE      — cores dominantes + acento amarelo Metta
+6. CAMERA       — focal length, f-stop, foco
+7. POST         — contraste, grain, white balance, NO HDR
+</code></pre>
+<p><strong>Exemplo (arquétipo <code>executivo-em-decisao</code>):</strong></p>
+<blockquote>
+<p>Editorial portrait of a brazilian executive (40-55) in a moment of analytical decision, alone at a desk or modern office. Composed expression — no smile, no theatrics; the face shows the weight of choice. Side window light from the left, warm afternoon tone falling across the shoulder and document. Subject occupies right third, with significant negative space holding context. 50mm equivalent, f/2.8, focus on the eyes. Palette: charcoal suit, oak desk surface, cream wall, single yellow accent (mug, notebook, or backlit paper). Mid contrast, subtle film grain, no HDR. Documentary feel, no posed corporate-stock energy.</p>
+</blockquote>
+<h3 id="31-como-adaptar-pra-briefing-especifico">3.1 Como adaptar pra briefing específico <span id="adaptacao" class="block-anchor"></span></h3>
+<p>Mantém a base do template, adiciona instrução específica no início:</p>
+<pre><code>[BRIEF: este executivo é fundador de marmoraria, 50+, momento de virada de gestão]
++
+[TEMPLATE executivo-em-decisao]
++
+[AJUSTE: ambiente é showroom de mármore com peças brancas e veias cinza, ao invés de office padrão]
+</code></pre>
+<p>A skill <code>/marca-metta</code> (CP6) faz essa fusão automaticamente.</p>
+<hr>
+<h2 id="4-do-don39t">4. Do / Don&#39;t <span id="do-dont" class="block-anchor"></span></h2>
+<h3 id="do">Do <span id="do" class="block-anchor"></span></h3>
+<ul>
+<li>Buscar <strong>luz natural</strong> sempre que possível</li>
+<li>Compor com <strong>negative space</strong> que sustenta narrativa</li>
+<li>Usar <strong>um amarelo focal</strong> como acento cirúrgico</li>
+<li>Capturar <strong>sujeito mid-thought</strong>, mid-action — nunca pose congelada</li>
+<li>Documentar como se a câmera não estivesse lá</li>
+<li>Misturar etnias e gêneros com naturalidade — Brasil corporativo é diverso</li>
+<li>Manter <strong>mid contrast</strong> + <strong>subtle grain</strong> no pós</li>
+</ul>
+<h3 id="don39t">Don&#39;t <span id="dont" class="block-anchor"></span></h3>
+<ul>
+<li>❌ <strong>Sorrisos largos olhando pra câmera</strong> — vira stock-photo na hora</li>
+<li>❌ <strong>High-five com papéis voando</strong> — euforia falsa</li>
+<li>❌ <strong>Pose &quot;ideia!&quot; com dedo na têmpora ou lâmpada na mão</strong></li>
+<li>❌ <strong>Wide-angle distorcido</strong> ou fisheye em cena de pessoa</li>
+<li>❌ <strong>Múltiplas cores acessórias competindo com amarelo</strong></li>
+<li>❌ <strong>HDR, color grading &quot;cinemático&quot; exagerado, saturação inflada</strong></li>
+<li>❌ <strong>Sala de reunião perfeitamente alinhada e vazia de personalidade</strong> — boardroom Metta tem alma</li>
+<li>❌ <strong>Foto de homem branco de gravata sozinho como default genérico</strong> — diversidade é regra, não exceção</li>
+</ul>
+<hr>
+<h2 id="5-pipeline-de-geracao-via-ia">5. Pipeline de geração via IA <span id="pipeline-ia" class="block-anchor"></span></h2>
+<p>A skill <code>/marca-metta</code> (CP6) opera assim:</p>
+<pre><code>USUÁRIO: &quot;preciso de uma foto pra um carrossel sobre liderança feminina decidindo
+          virada de método em uma indústria de bens de consumo&quot;
+
+SKILL:
+  1. Identifica arquétipo: feminina-lider-apresentando
+  2. Carrega prompt template do photo-index.json
+  3. Adiciona briefing: &quot;industrial setting&quot;, &quot;consumer goods context&quot;
+  4. Adiciona ajuste de cena: &quot;executiva 45+, ambiente fabril ao fundo desfocado&quot;
+  5. Roda: codex exec --dangerously-bypass-approvals-and-sandbox
+     &quot;gpt-image-1 generate: {prompt fundido}&quot;
+  6. Salva em output/{slug}/ + retorna preview
+</code></pre>
+<p>A integração técnica vai no <code>output/brand-system/scripts/generate-image.mjs</code> (CP6).</p>
+<hr>
+<h2 id="6-manutencao">6. Manutenção <span id="manutencao" class="block-anchor"></span></h2>
+<ul>
+<li><strong>Quando adicionar foto nova ao banco:</strong> rodar <code>node scripts/photo-curator.mjs</code> que reprocessa tudo. Adicionar entrada no <code>KEYWORD_MAP</code> se filename for novo padrão.</li>
+<li><strong>Quando criar arquétipo novo:</strong> adicionar em <code>ARCHETYPES</code> no <code>photo-curator.mjs</code>, escrever template, atualizar este doc na seção §2.</li>
+<li><strong>Quando ajustar tom geral:</strong> mudar a constante <code>METTA_DNA</code> no <code>photo-curator.mjs</code> e regenerar — afeta todos os prompts.</li>
+</ul>
+<hr>
+<h2 id="7-referencias">7. Referências <span id="referencias" class="block-anchor"></span></h2>
+<ul>
+<li><span class="wikilink" data-target="brand-system-spec">brand-system-spec</span> — onde este doc se encaixa no Brand System</li>
+<li><span class="wikilink" data-target="Metta - PRD Identidade Visual">Metta - PRD Identidade Visual</span> — base do DS técnico</li>
+<li><span class="wikilink" data-target="manual-de-marca">manual-de-marca</span> — síntese editorial</li>
+<li><span class="wikilink" data-target="Metta - Plataforma de Marca">Metta - Plataforma de Marca</span> — onde o tom de voz se conecta com tom visual</li>
+</ul>

@@ -1,0 +1,748 @@
+---
+title: "Transcrição — Torne-se o líder mais reconhecido"
+aliases:
+  - "Líder mais reconhecido"
+tags:
+  - marca/tiago
+  - status/arquivo
+  - tema/lideranca
+  - tipo/aula-ao-vivo
+  - tipo/transcricao
+summary: "Transcrição de live #23: reconhecimento via resultados, CHA, distância de performance."
+created: 2026-04-10
+updated: 2026-04-10
+---
+
+<!-- Página 1 -->
+Transcript Generated for Free by youtranscripts.com
+==========================================================
+Title: #23 - Torne-se o líder mais reconhecido da sua empresa!
+==============================================================
+Generated on: 12/03/2026, 05:48:13
+sejam todos muito bem-vindos meus jovens
+como é que vocês estão mais uma aula
+segunda e nós estamos com tudo hoje o
+tema é maravilhoso como se tornar um
+líder mais reconhecido na sua empresa e
+eu prometo para você que é o final dessa
+aula você vai ter uma clareza tão grande
+sobre como que você faz para se destacar
+e ter uma Independência tão grande tão
+forte que você pode ter a remuneração
+que você desejar Você pode ter
+a liberdade de trabalhar onde que você
+quiser você pode ser reconhecido por
+quem você quiser porque o mercado gente
+é muito muito oportuno para as pessoas
+que possuem técnicas para pessoas que
+querem fazer a coisa acontecer quando
+você tem
+inteligência na estratégia da sua vida
+você consegue ter muito mais facilidade
+para gerar resultado
+então dá um boa noite aqui para mim quem
+é que está aqui estou vendo aqui e ig
+Rezende boa noite vamos para cima
+pessoal que tá no Instagram coloca ali
+hashtag é
+reconhecido para que você possa ter
+o link da aula do YouTube E aí você cair
+para dentro tá bom sejam todos muito
+bem-vindos então vamos lá começando
+então lá boa noite Cipriano deu boa
+noite Júlia sejam todos muito bem-vindos
+vamos começar então pela nossa aula onde
+a gente chega a seguinte questão como é
+que você pode ser
+de fato reconhecido
+e eu vou te abrir hoje o que o segredo
+né dos gestores que tem uma alta
+remuneração e ele se destaca em vendas
+eles fazem algumas coisas específicas
+que eu vou te mostrar aqui Nesta aula tá
+bom a lá eles Rezende eu nome é Ana tudo
+bem Ana Fico feliz por você estar aqui
+seja muito bem-vinda a Fran chegou a
+Tatiana também então seja todos muito
+bem-vindos viu muito bem então como é
+que você faz para ser reconhecido bem
+
+<!-- Página 2 -->
+uma coisa que é extremamente importante
+você entender coloca isso na sua cabeça
+dá um print agora nessa tela que você tá
+vendo aí
+e me marca nos Stories porque é isso
+daqui que você precisa saber
+tudo gira em torno da Meta tudo gira em
+torno da Meta quando você entende este
+raciocínio quando você entende que se
+você se torna um especialista em meta a
+sua vida muda Você domina o jogo da Meta
+batida porque
+pensem comigo o que que gera
+uma pessoa
+é o que que gera medo de uma pessoa de
+vendas a meta
+o que que gera mais satisfação em uma
+pessoa de vendas a meta batida o que faz
+com que uma empresa inteira se mobilize
+para encontrar caminhos inovações
+melhoria contínua
+a meta Qual é a maior razão para o
+desligamento de um colaborador a meta
+atingida não atingida o que geralmente
+destaca o colaborador a ponto de fazê-lo
+ser promovido
+como indicador se uma empresa irá
+quebrar ou se ela vai triunfar quanto
+que elas performam em relação a meta
+ou seja
+o que sempre esteve estará presente nas
+empresas a meta certo quando você saca
+isto que quando você saca esta questão
+fica muito fácil você entender que o que
+gira realmente o que faz a coisa
+acontecer é você ser um especialista em
+fazer pessoas bater em meta
+porque gostando ou não o pré-requisito
+para você ser reconhecido é batimento a
+todos os meses quem faz isso tem a
+melhor remuneração tem a melhor
+qualidade de vida tem a maior liberdade
+de escolha de trabalho de onde morar o
+que fazer
+tem a melhor história de vida porque
+você tem melhores viagens você consegue
+dar a melhor educação para os seus
+filhos você tem mais momentos felizes e
+tem a melhor saúde ou seja é fundamental
+você dominar
+ser especialista em bater meta quanto
+mais você entender esta regra do jogo
+que quanto mais você é especialista em
+
+<!-- Página 3 -->
+fazer pessoas baterem meta Mas você vai
+ser reconhecido porque no final do dia é
+isso que importa no final do dia é isto
+que manda no final do dia é isto que faz
+as coisas acontecerem é assim que se
+paga boleto quando você saca isto você
+muda completamente sua forma de tocar o
+seu dia a dia porque
+não é de qualquer jeito que se chega no
+resultado não é de qualquer forma que
+você chega ao resultado
+é fundamental você
+ter um caminho Por quê você já deve ter
+conhecido gestores que tem bons
+indicadores mas todos sabem que a forma
+como que eles chegam no resultado não é
+nada inspiradora certo zero inspiração
+porque o jeito que alguns chegam no
+resultado é na base da pressão da
+correria do desgaste do estresse de
+vendendo no lugar dos outros vendedores
+esse tipo de líder que bate meta assim
+ele não cresce ele fica na empresa
+enquanto não há ninguém melhor mas
+dificilmente se for empresário será com
+outras unidades não tem como crescer
+porque isso não é replicável as pessoas
+não vão ficar quanto mais pessoas
+estiverem pior fica
+e se você não é empreendedor você é um
+gestor coordenador supervisor regional
+não conseguirá crescer na sua carreira
+tá fazendo sentido para vocês coloca
+aqui nos comentários que eu quero saber
+se está fazendo sentido para você que
+este daqui não é o melhor caminho para
+você de fato gerar o seu reconhecimento
+comentem aqui por favor
+quero saber se tá fazendo sentido para
+vocês esse jeito não é o melhor caminho
+certo pois bem então qual seria o melhor
+caminho
+o melhor caminho é a sua equipe lhe
+reconhecer para você ser
+reconhecido tá pessoal que tá no
+Instagram olha coloca aqui hashtag
+reconhecido e você vai receber
+é uma um link para ir lá para o YouTube
+Hoje eu tô apresentando materiais uma
+série de coisas aqui ó tá se vocês
+olharem aqui ó tem tô passando material
+e tem essa galera aqui já comentando já
+participando da aula então se liga Venha
+para o YouTube Então pessoal para você
+
+<!-- Página 4 -->
+ser reconhecido
+as pessoas têm que te reconhecer ou seja
+Tem que olhar para você de uma maneira
+diferente não como elas lhe veem hoje
+não como elas ele vem agora
+elas precisam entender que você mudou
+porque muita gente tá querendo ser
+reconhecido na empresa só que tá igual
+tá exatamente a mesma pessoa e aí
+como funciona
+não encontrou uma nova pessoa então o
+que que você precisa entender que é qual
+é o seu plano para ser reconhecido pelo
+seu time se você não tem
+um plano
+você não tem clareza sobre quem você
+precisa ser que líder você tem que se
+aprimorar como é que você tem que
+evoluir como é que você vai ser
+reconhecido pelas pessoas
+O que você vai fazer diferente para que
+você seja reconhecido por isso que você
+tudo que você faz agora você não é
+reconhecido
+você Mantendo as coisas que você faz
+agora não vai gerar reconhecimento não
+já estaria reconhecido e o que que você
+vai fazer de novo que você vai ajudar as
+pessoas de maneira diferente para poder
+bater a meta O que que você vai de fato
+contribuir com as pessoas para gerar
+resultado
+Olha que legal o depoimento aqui no
+YouTube O Adriano falou boa noite Tiago
+tem uma pergunta bem importante para ele
+fazer comecei a aplicar algumas técnicas
+dos seus ensinos comecei a ser
+reconhecido como líder treinador porém
+despertou inveja de um vendedor o mesmo
+já está fazendo algumas coisas para não
+dar certo nosso Programa de Treinamento
+como lidar
+bem Vamos por partes se esse vendedor
+ele tem baixo desempenho e é reativo
+você provavelmente ele não vai
+sobreviver muito tempo mas vai dar
+trabalho se ele é de Alto desempenho
+Você vai precisar envolvê-lo por isso
+Adriano que eu te recomendo a fazer a
+gestão da mudança que é uma é a primeira
+das seis questões da Meta batida que
+inclusive nós estamos agora com vagas
+abertas para turma 6 para que possa
+
+<!-- Página 5 -->
+entrar o pessoal da Meta vai deixar o
+link aqui porque nós respondemos
+Exatamente isso nas nossas formações
+Exatamente isso tem inclusive um
+capítulo só sobre vendedores resistentes
+que procuram
+não fazer o treinamento da maneira
+adequado não ajudar querer voltar para
+trás então lá no capítulo de gestão da
+mudança
+vendedora e mudança você vai ter
+exatamente a resposta para isso por isso
+que é fundamental você ter formação
+porque se você não tem informação você
+tenta implementar os treinamentos mas só
+que você começa a ter resistência das
+pessoas tem técnica para não ter
+resistência tá bom e seguindo Então como
+que você vai deixar claro o que que você
+vai mudar bem é fundamental Dizer para
+vocês que
+a intenção
+sem ação
+é ilusão
+intenção sem ação é ilusão
+ala Adriano
+a gente não sabe o seu celular né não
+sei se você vai querer deixar aqui no
+Direct aqui no YouTube mas se você
+quiser deixar lá no meu no meu Instagram
+pode mandar lá que depois a equipe vai
+ligar para você sem dúvida nenhuma tá
+bom muito bem por que que a intenção sem
+ação é ilusão porque às vezes você quer
+ser reconhecido tem a intenção de ser
+reconhecido mas não tem nenhuma ação
+então é muito difícil muito difícil você
+conseguir gerar resultado Porque você só
+fica na base da intenção agora você não
+tem um plano você não se desenvolve
+não gera resultado E aí
+para você ter reconhecimento real é
+preciso ter resultados impossíveis de
+ignorar porque se você tá querendo
+intenção Sem resultado você só é um
+carente
+só
+só
+se você quer reconhecimento Sem
+resultado você é uma pessoa carente você
+é uma pessoa mimada apenas mimada tá E
+como que você faz isso o líder treinador
+tem times engajados o cara que se
+
+<!-- Página 6 -->
+desenvolve que está dentro das injeções
+da Meta batida que tá que é aluno da
+Meta ele tem time engajado motivado e
+batedores de meta o reconhecimento é só
+uma Consequência Do Jeito Que Você Faz
+gestão Porque você quer saber como é que
+se chega a um patamar diferente segue a
+linha de raciocínio
+existe distância de performance entre os
+vendedores diga aqui nos comentários se
+você tem vendedores que vendem muito
+mais do que os outros coloca aqui no
+comentário você tem vendedores que
+vendem muito mais do que os outros
+comente aqui para mim tá comente aqui
+sim ou não você tem vendedores
+que
+vendem muito mais do que os outros
+se Sim provavelmente você tem a seguinte
+realidade que esses vendedores tem
+distâncias de performance porque falta
+neles conhecimento habilidade ou atitude
+agora se você chega perto desse vendedor
+de alta performance provavelmente ele
+não é um ET ele não é um cara assim
+nossa como ele é extremamente diferente
+dos demais ele é diferente mas ele não é
+tão diferente assim nada do que ele faça
+é tão diferente que não possa ser
+treinado e copiado nas pessoas
+provavelmente ele tem um pouco mais de
+atitude provavelmente ele conhece mais
+de produto provavelmente ele tem mais
+experiência provavelmente Ele atende de
+maneira diferente Ou seja a boa notícia
+que se ele chegou na alta performance
+desse jeito é possível copiar é possível
+fazer com que os demais chegam assim mas
+por que que isso acontece é porque esta
+pessoa ela é mais competente do que
+outras pessoas e o que que é competência
+competência é a soma de saber de querer
+e de fazer
+quando uma pessoa sabe que era e faz ela
+é altamente competente
+contudo o que que é o conhecimento é a
+soma de você querer saber
+que que é habilidade é você saber fazer
+você consegue colocar uma técnica em
+prática você consegue colocar um
+conhecimento de produto em prática o que
+que é querer fazer é a atitude ou seja
+aquele cara que é diferente ele tem um
+pouco mais de conhecimento um pouco mais
+
+<!-- Página 7 -->
+de habilidade ou um pouco mais de
+atitude do que as outras pessoas você
+vai ficar esperando que a natureza
+atue sobre essa pessoa
+ou você vai desenvolver conhecimento e
+desenvolver a habilidade e desenvolver
+atitude neles para que você possa bater
+meta regularmente para que você possa
+ser reconhecido para que você possa
+ganhar variável para que você possa ter
+tranquilidade
+certo então quando você tem esta visão
+quando você tem esta atuação você começa
+a entender o porquê que as pessoas têm
+diferenças de performance porque você
+vai reparar que muitas vezes não tem
+clareza no passo a passo para vender aí
+tem distâncias vai gerar distância o
+líder não é preparado para ser o
+treinador vai gerar distância o
+experiente e talentoso não tem didática
+nem tempo vendedor muito talentoso e que
+gera bons resultados não tem nem vontade
+nem tempo para treinar os demais vai
+continuar mantendo a distância
+sem formação intensiva na entrada do
+colaborador faz com que a distância se
+permaneça sem processo de
+desenvolvimento no período experiência
+também
+pressão para bater a meta também aí o
+que gera gera abaixo de resultado baixo
+e remuneração muita rotatividade Qual é
+a consequência de tudo isso as pessoas
+vão ter desperdício do potencial
+desgaste para superar a meta
+rotatividade muito grande de vendedores
+dificuldade para expandir isso é
+sustentável como que as empresas
+tradicionalmente tentam resolver isso
+dando treinamento pontual uma palestra
+Um curso uma algo muito rápido muito
+Raso para tentar resolver só que qual é
+o problema as pessoas esquecem
+de acordo com arte com após uma semana
+você esquece 90% do que você aprendeu no
+treinamento Então como é que eu resolvo
+isso você resolve através da sugestões
+da Meta batida onde você
+onde você
+aprende a como ser um treinador para sua
+equipe de vendas que dá treinamentos
+diários que aumenta o treinamento de
+
+<!-- Página 8 -->
+maneira muito rápida no começo do turno
+no meio do turno no feedback em qualquer
+momento você faz de acordo com a
+necessidade do time porque não adianta
+ficar dando treinamento
+genérico para as pessoas
+se elas não sabem é as suas
+especificidades tem gente que precisa
+mais de negociação tem gente que precisa
+mais é de saber vender valor agregado
+cada um tem um jeito então você tem que
+treinar Cada Um Na Sua Maneira
+você tem que fazer focado nos
+indicadores
+porque vendedores odeiam que você treine
+coisas que não tem nada a ver com os
+números que ele precisa atingir
+voltado para a realidade deles e
+conduzido por você ou seja em outras
+palavras é você transformar a sua
+empresa seu time sua loja sua
+concessionária ela é venda sei lá o que
+for em uma universidade das vendas
+quando você tem treinamentos rotineiros
+de maneira muito prática o resultado
+certamente vai vir e as sugestões se
+torna o caminho para que você possa
+gerar resultado
+este passo a passo
+que já tá muito claro se você quiser
+bater meta todos os meses tá muito fácil
+de resolver
+nós estamos com as vagas abertas que
+inclusive Hoje é um dia extremamente
+promocional onde você tem mais de mil
+reais de desconto na formação se você
+ainda não faz parte das injeções da Meta
+batida a nossa formação o link está aqui
+tá para você basta você colocar se você
+tiver no YouTube tem um link aqui
+embaixo nesse na descrição desse vídeo
+se você está
+é na no Instagram coloca hashtag turma 6
+ou
+que você é atendido e você vai ter
+todas as informações necessárias então
+gente aproveitem esta oportunidade
+porque o caminho o caminho é muito fácil
+para você chegar ao resultado só que
+você não vai conseguir ser reconhecido
+sem informação e eu te mostro o que que
+essa ingestões responde que quando você
+sabe das respostas você aumenta suas
+
+<!-- Página 9 -->
+vendas com muita facilidade primeiro
+gestão da mudança
+100% da equipe
+como você mantém a sua equipe envolvida
+Como que você faz com que os vendedores
+executem as mudanças que eles precisam
+para bater meta todos os meses
+como se automotivar para motivar outras
+pessoas
+como se manter motivado diante das
+adversidades
+Como que você tem um time com atitude
+tudo isso é possível se desenvolver tudo
+isso é possível aprender tudo isso é
+possível aplicar basta você entender que
+existe né passo a passo para você poder
+fazer isso
+basta você entender isso que existe
+métodos existe passo a passo quando você
+entende isso tudo muda né na gestão do
+método que a terceira gestão
+como formar um time em alta performance
+um time que transforma atendimento em
+vendas que converte resultado
+Como que você faz para aumentar as
+vendas nesse momento tão desafiador do
+mercado como que você faz para vender
+pela internet redes sociais marketplaces
+WhatsApp sem que fique dependendo do
+fluxo
+Como que você faz para ter um time que
+vende caro de forma fácil através da
+gestão do conhecimento através da
+formação das pessoas sobre o que você
+vende
+Como ter um time que não perde vendas
+por causa do preço
+a Vanessa falando aqui no instagram a
+gente Gente vocês não tem noção em uma
+semana eu aprendi o conhecimento que se
+equivale a uma mina de tesouro Fico
+feliz por isso viu como ter vendedores
+especialistas você teve vendedores que
+dominam as características dos
+benefícios do que você mente estão na
+meta como não precisar tem que cobrar as
+pessoas para bater a meta Como que você
+faz para ter uma estratégia vencedora
+para cada indicador que seja o ideal né
+Qual que é o ideal você ter um Framework
+muito fácil de reação
+que que eu faço
+desconto tá alto que eu faço ticket meta
+abaixo o que que eu faço
+
+<!-- Página 10 -->
+entende
+entende esta é a estratégia Este é o
+passo a passo você tem que ter isso na
+sua clareia com muita clareia se você
+quer ser reconhecido como conduzir as
+vendas ao invés do mercado ele conduzir
+na gestão do tempo como é que você
+garante operacionalmente
+as coisas acontecerem sem você ter que
+executar como está
+como estar é ter tempo para ficar no
+comercial e ajudar seu time bater meta
+como ter tempo para ter uma tática do
+seu negócio e vencer o campeonato da
+Meta batida é impossível gente
+extremamente impossível você não ser
+reconhecido praticando as sugestões é
+impossível
+E aí como é que você faz
+Como que você
+executa para que você possa ser
+diferente para que você possa bater meta
+para que você possa realmente gerar
+Grandes Negócios e ser diferente pela
+sua capacidade de gerar número volta a
+repetir se você quer gerar resultado
+se você quer ser reconhecido sem gerar
+resultado você apenas é um mimado
+é fundamental você vincularem
+reconhecimento financeiro emocional seu
+nome ser repetido quando você tem a
+capacidade
+de gerar vendas gerar desenvolvimento na
+sua equipe e quando você faz isso você
+tem esse tipo de resultado
+depois que a gente começou a fazer o EAD
+né mentoria
+[Música]
+esse dezembro foi o nosso recorde né
+batemos as metas de captação para o
+primeiro semestre e tivemos um êxito
+Fantástico e estamos preparados para
+repetir esse sucesso nesse mundo
+semestre 2018 o investimento Vale super
+a pena porque você tem retorno você tá
+aprendendo Você aprende com quem
+realmente faz então você vê resultado e
+por isso realmente vale super a pena o
+investimento
+[Música]
+muito bem
+quem aqui Quer ter resultados
+a Drica perguntou quando começa a turma
+
+<!-- Página 11 -->
+de mentoria a gente vai começar a vender
+a mentoria só semana que vem Drica por
+hora a gente tá na formação das
+rejeições da Meta batida que é o curso
+né da gestão e se você tiver interesse
+Drica manda uma mensagem lá para mim que
+a gente te atende tá bom
+muito bem quem aqui Quer ter esse nível
+de conteúdo de estratégia de tudo mais
+ah lá
+a Fran falou eu eu quero eu quero
+eu sou uma bate meta falou ótimo E é
+mesmo Fran Agora pergunto para vocês
+mesmo falou eu quero Então veja aqui
+é possível é possível Sem dúvida nenhuma
+que é possível você fazer só que se você
+tá falando eu quero e ainda não faz
+parte da formação a intenção é só uma
+ação é só uma sua intenção é uma ilusão
+você tem que querer e você tem que ir ao
+encontro disso você tem que estar dentro
+do seu desenvolvimento caso contrário
+não vai acontecer então tem muita gente
+aqui que tá falando eu quero e está na
+formação vai se tornar realidade agora
+você que quer mas ainda não entrou
+reforço o convite para você tem o link
+aqui e você tem tudo que você precisa
+nessa formação você tem método de vendas
+para treinar a equipe Você tem planos de
+ação você tem plano de ação para
+aumentar o resultado de 60 dias você tem
+plano de ação para aumentar resultado
+já fiz minha inscrição Bora quem mais já
+fez sua inscrição fala aqui para mim que
+eu quero saber
+você tem informação de técnicas de
+vendas para sua equipe de vendas você
+tem informação para redes sociais para o
+WhatsApp você tem informação sobre Como
+recrutar selecionar vendedores você tem
+informação para
+tantas tantas tantas coisas
+para cada coisa você tem ferramenta para
+saber neutralizar a objeção
+a Tatiane tá falando eu quero E aí tá
+dizendo se você tá dentro da formação ou
+não se não tiver
+vai lá e clica aqui ó no link aqui
+embaixo
+a Fran falou eu já fiz a inscrição acho
+que eu fui a primeira ansiosa pelo
+conhecimento ótimo já deve estar lá teu
+
+<!-- Página 12 -->
+login e tua senha lá no teu e-mail para
+você já degustar de estudar tudo então
+gente você tem um ano de acompanhamento
+você tem um ano de poder tirar dúvidas a
+equipe Você tem uma uma garantia de um
+ano que se você fizer tudo que a gente
+orientou e não gerar resultado
+Você
+tem dinheiro de volta você pode acessar
+agora a plataforma fazer comprar esse em
+15 dias porventura você achar que não
+faz sentido
+você tem seu dinheiro de volta
+a gente resolveu tudo para você tudo
+inclusive né Essa questão de 15 dias que
+você pode ter Cara você não tem risco
+nenhum você vai passar lá não gostei
+pede reembolso e volta
+Putz um ano de garantia cara se você não
+gerar resultado a gente devolve o
+dinheiro
+e
+a coisa mais louca que nós fizemos nós
+Nunca fizemos isso se você não entrar
+Aliás se você entrar até as 23:49 hoje
+você vai a gente vai considerar vocês o
+programa acelera que é o treinamento do
+seu time seis vezes no ano se você fosse
+contratar uma palestra de algum
+consultor aqui da Meta para treinar o
+seu time é entre 10 a 15 mil reais um
+treinamento de duas três horas
+você vai ganhar seis
+tem gente aqui que já tá com o time
+garantido para fazer parte de um ano de
+desenvolvimento e é isso que você tem
+que tá ligado Então aproveite gente você
+tem tudo isso
+tudo isso
+significa um cafezinho a mais por dia
+porque hoje quem tá entrando hoje amanhã
+depois das 23:59 já muda o valor de
+investimento e nós não vamos recusar Não
+vamos não vamos recuar vai ser Realmente
+esse valor
+hoje você leva em desenvolvimento de r$
+3000
+que é esse valor de investimento você
+vai levar por 12 de 183
+[Música]
+da 5 e pouco por dia
+a melhor das oportunidades olha lá o
+Jorge falou que tá dentro a Fran falou
+que tá dentro da Gabriela falou que tá
+
+<!-- Página 13 -->
+dentro da Tatiane tá querendo
+a Vivi já falou que já fez sua inscrição
+a gismari a Sueli então gente tem muita
+gente aqui que já tá dentro já tá se
+desenvolvendo tá aqui comigo né
+comemorando tudo isso para poder ir para
+o próximo nível né então eu sugiro que
+você faça o seguinte
+análise desse jeito aqui que eu tô te
+sugerindo quanto que você deixa na mesa
+dinheiro por não bater a meta
+quanto que você precisa para bater a
+meta para pegar o seu investimento
+análise isso
+quanto tempo você precisa para tirar o
+teu plano de ação em ação
+você tem um plano real concreto que vai
+te levar para o próximo nível se você
+não tem isso vai ser só uma intenção se
+você entrou na formação Você tem certeza
+que o plano você tem e agora você vai
+executar Então esta tranquilidade que
+você precisa ter para você gerar
+resultado para você ganhar o que você
+quer para você ser reconhecido está à
+sua disposição e por um preço
+extremamente justo promocional que não
+voltará que a gente tá liberando para
+você até as 23:59 de hoje
+Faça a sua parte a única coisa que eu
+não consigo fazer para você é fazer a
+sua parte faça sua parte a minha eu fiz
+Dei tudo que eu puder fazer pelo menor
+preço possível para que você se
+desenvolva Então tá na hora de você
+fazer a sua parte e a gente juntos vamos
+bater meta vamos detonar então se você
+tem alguma dúvida por favor mande lá no
+Direct no meu Instagram no Instagram da
+Meta para a gente poder te auxiliar mas
+não fique fora dessa é até hoje 23:59 a
+partir de amanhã você pode entrar também
+só que é por um valor maior e porque a
+gente quer premiar quem tá decidido Tá
+bom então vamos e vamos Bora bater meta
+estamos juntos a gente se vê turma 6
+bora começar
+==========================================================
+Generated by youtranscripts.com - Free YouTube Transcript Tool
+
+---
+
+<!-- AUTO-RELATED-START -->
+## 🔗 Documentos Relacionados
+
+**Conceitos discutidos:**
+- [[Metta - Gestão da Ativação]]
+- [[Metta - Gestão do Método]]
+- [[Metta - As 6 Gestões da Meta Batida]]
+
+**Transcrições relacionadas:**
+- [[sessions/Transcrição - CLONE O SEU MELHOR VENDEDOR SEM GASTAR R 1 REAL]]
+- [[sessions/Transcrição - Como fazer seu time bater meta sem depender de você]]
+- [[sessions/Transcrição - Liberando Tempo para Bater Meta]]
+
+**Hub:**
+- [[👤 MOC - Marca Pessoal Tiago]]
+
+<!-- AUTO-RELATED-END -->

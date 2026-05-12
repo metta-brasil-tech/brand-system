@@ -1,0 +1,4 @@
+# Faltam 2 dias
+# URL: https://youtube.com/watch?v=OKLew0ZJjQk
+
+Eu quero apostar dinheiro com você. Tenho certeza que nas últimas 5 horas você não estava pensando em uma estratégia de aumentar lucro, nem nas últimas 50, nem nas últimas 500 horas, porque a operação nos engole e você tem que ter um tempo para pensar de maneira estruturada como aumentar receita sem aumentar despesa. É exatamente o que eu vou fazer com você ao vivo online no 50 em c. Como aumentar 50% do lucro em apenas 5 horas. Clique saba mais e venha fazer

@@ -1,0 +1,4 @@
+# CLONE
+# URL: https://youtube.com/watch?v=XCczg86SE7A
+
+rapaz se eu pudesse clonar aquele melhor vendedor meu eu batia meta todo mês você já parou para pensar nisso que o seu melhor vendedor não é um gên Indomável ele só é um cara mais dedicado que tem mais habilidade Mas se você tivesse um caminho Claro sobre como os outros vendedores pudessem fazer igual a ele faz você bateria a meta todo mês venha participar do nosso treinamento chamado como clonar os seus melhores vendedores e treinar os demais paraar resultado será agora dia 18/02 19:30 clica e saiba mais Bora bater meta é para você empresário gestor que quer ter resultado todo mês

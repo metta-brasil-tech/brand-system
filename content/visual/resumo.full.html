@@ -1,0 +1,2173 @@
+<h1 id="prd-identidade-visual-metta">PRD - Identidade Visual Metta</h1>
+<h2 id="product-requirements-document-para-agente-de-design">Product Requirements Document para Agente de Design</h2>
+<hr>
+<h2 id="0-como-ler-este-documento">0. Como ler este documento</h2>
+<blockquote>
+<p>⚠️ Este PRD é a <strong>fonte de verdade absoluta</strong> do design system Metta. Em conflito com qualquer outro documento (skills, memórias, catálogos), o PRD vence.</p>
+</blockquote>
+<h3 id="hierarquia-interna-do-mais-forte-ao-mais-fraco">Hierarquia interna (do mais forte ao mais fraco)</h3>
+<ol>
+<li><strong>§6.4 Efeitos proibidos</strong> — REGRA ABSOLUTA, nunca quebrar (glow, blur pesado, glassmorphism, anéis, ghost no logo)</li>
+<li><strong>§2 Logotipo + §6 Elementos gráficos</strong> — NORMATIVO, regras de aplicação obrigatórias</li>
+<li><strong>§3 Paleta + §4 Tipografia</strong> — NORMATIVO, ver tokens canônicos em <span class="wikilink" data-target="metta-tokens">metta-tokens</span></li>
+<li><strong>§5 Arquitetura de marca + §7 Fotografia + §8 Aplicações + §9 Consistência</strong> — NORMATIVO, padrões a seguir</li>
+<li><strong>§10 Tokens</strong> — REFERENCE (consolidados em <span class="wikilink" data-target="metta-tokens">metta-tokens</span>)</li>
+<li><strong>§11 Checklist</strong> — NORMATIVE (validação obrigatória)</li>
+<li><strong>§12 Biblioteca de Assets</strong> — REFERENCE (catálogo Drive, ver <span class="wikilink" data-target="metta-logos">metta-logos</span>)</li>
+<li><strong>§13 Composições editoriais</strong> — REFERENCE (descreve a fonte/figma — não cria regra nova; conflita com §6.4? §6.4 vence)</li>
+</ol>
+<h3 id="em-conflito-interno">Em conflito interno</h3>
+<ul>
+<li>Regra mais alta na hierarquia vence</li>
+<li>§13 (REFERENCE) descreve o que <strong>existe</strong> na fonte; §6.4 (NORMATIVE) descreve o que <strong>deve existir</strong>. Se §13 documenta um efeito proibido por §6.4, §13 está descrevendo design legado a ser remediado, não autorizando.</li>
+</ul>
+<h3 id="documentos-relacionados">Documentos relacionados</h3>
+<ul>
+<li><span class="wikilink" data-target="metta-tokens">metta-tokens</span> — tokens consolidados (cores, tipografia, radii, spacing, shadows, semantic)</li>
+<li><span class="wikilink" data-target="metta-ui-kit">metta-ui-kit</span> — componentes editoriais JSX (Header, SectionOpener, QuoteBlock, etc.)</li>
+<li><span class="wikilink" data-target="metta-components">metta-components</span> — componentes CSS atômicos (CTAs, watermarks, blobs)</li>
+<li><span class="wikilink" data-target="metta-logos">metta-logos</span> — IDs Drive + mapeamento local SVG</li>
+<li><span class="wikilink" data-target="figma-plugin-api">figma-plugin-api</span> — snippets de execução</li>
+<li><span class="wikilink" data-target="Skill - Agente de Design">Skill - Agente de Design</span> — doc humana da skill executável</li>
+<li>Skill executável: <code>.claude/commands/design-metta.md</code></li>
+<li><strong>Source canônico:</strong> <code>system-source/</code> — assets, CSS, fonts, ui_kit JSX, previews (importado do Metta Design System.zip Apr/2026)</li>
+</ul>
+<h3 id="convencao-de-tags">Convenção de tags</h3>
+<ul>
+<li><code>[NORMATIVE]</code> — regra a seguir; conflito = peça rejeitada</li>
+<li><code>[REFERENCE]</code> — descritivo; usar como guia, não como regra</li>
+<li><code>[DEPRECATED]</code> — descontinuado; não aplicar; substituir per remediação documentada</li>
+</ul>
+<hr>
+<h2 id="1-sobre-a-marca-normative">1. Sobre a Marca [NORMATIVE]</h2>
+<h3 id="missao">Missao</h3>
+<p><strong>&quot;Profissionalizar o mercado de gestao comercial no Brasil.&quot;</strong>
+Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e bater meta no Brasil.</p>
+<h3 id="posicionamento">Posicionamento</h3>
+<p><strong>&quot;O ecossistema de inteligencia comercial para empresarios.&quot;</strong></p>
+<h3 id="proposta-de-valor">Proposta de Valor</h3>
+<p>Solucoes para pessoas e empresas baterem metas de forma mais leve, facil e sustentavel.</p>
+<h3 id="tagline-do-logo">Tagline do Logo</h3>
+<p><strong>INTELIGENCIA COMERCIAL</strong> (sempre acompanha o logotipo em versoes completas)</p>
+<hr>
+<h2 id="2-logotipo-normative">2. Logotipo [NORMATIVE]</h2>
+<h3 id="21-estrutura-do-logo">2.1 Estrutura do Logo</h3>
+<p>O logotipo Metta e composto por:</p>
+<ul>
+<li><strong>Simbolo (Icone)</strong>: Elemento geometrico formado por arcos concentricos e circulos, nas cores amarela (#FFBE18) e variantes. Composto por sub-elementos: &quot;C Menor&quot;, &quot;C Maior&quot;, &quot;Arco Menor&quot; e &quot;Arco Maior&quot;.</li>
+<li><strong>Wordmark</strong>: Tipografia customizada &quot;METTA&quot; baseada na fonte SF Pro, com ajustes especificos:<ul>
+<li><strong>Cantos arredondados</strong> nas letras</li>
+<li><strong>Adaptacao da letra T</strong> (design custom)</li>
+<li><strong>Ajuste de kerning</strong> entre caracteres</li>
+</ul>
+</li>
+<li><strong>Tagline</strong>: &quot;INTELIGENCIA COMERCIAL&quot; posicionada ao lado ou abaixo do wordmark, separada por uma linha vertical</li>
+</ul>
+<h3 id="22-versoes-do-logo">2.2 Versoes do Logo</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Versao</th>
+<th>Uso</th>
+<th>Fundo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logo completo (simbolo + wordmark + tagline)</td>
+<td>Uso principal</td>
+<td>Fundo escuro (#0C161B) ou claro (#FFFFFF)</td>
+</tr>
+<tr>
+<td>Logo horizontal (simbolo + wordmark)</td>
+<td>Uso secundario</td>
+<td>Ambos</td>
+</tr>
+<tr>
+<td>Simbolo isolado</td>
+<td>Favicon, icones, espacos reduzidos</td>
+<td>Ambos</td>
+</tr>
+<tr>
+<td>Wordmark isolado</td>
+<td>Aplicacoes especificas</td>
+<td>Ambos</td>
+</tr>
+</tbody></table></div>
+<h3 id="23-versoes-por-tamanho">2.3 Versoes por Tamanho</h3>
+<ul>
+<li><strong>Grande</strong>: Logo completo com todos os elementos (sem sombra/glow — apenas o arquivo oficial do Drive)</li>
+<li><strong>Medio</strong>: Simbolo + wordmark + tagline em linha</li>
+<li><strong>Pequeno</strong>: Simbolo + wordmark compacto</li>
+<li><strong>Minimo</strong>: Apenas simbolo</li>
+</ul>
+<h3 id="24-cores-do-logo">2.4 Cores do Logo</h3>
+<ul>
+<li><strong>Sobre fundo escuro (#0C161B)</strong>: Simbolo em amarelo (#FFBE18/#FFB618), wordmark em branco (#FFFFFF)</li>
+<li><strong>Sobre fundo claro (#FFFFFF)</strong>: Simbolo em amarelo (#FFBE18), wordmark em azul noite (#0C161B)</li>
+<li><strong>Sobre fundo amarelo (#FFBE18)</strong>: Wordmark em azul noite (#0C161B)</li>
+</ul>
+<h3 id="25-efeitos-do-logo-removido">2.5 <del>Efeitos do Logo</del> [REMOVIDO]</h3>
+<p><del>Versao com glow: <code>box-shadow: inset 0px 0px 43px 0px rgba(255, 190, 24, 0.24)</code></del> <strong>PROIBIDO</strong> — glow/shadow no logo está banido pela regra absoluta de efeitos (ver seção &quot;⚠️ REGRA ABSOLUTA — EFEITOS PROIBIDOS&quot; na seção 6). Usar sempre o arquivo oficial do logo do Drive sem nenhum efeito adicional.</p>
+<p>A versão ghost/outline também foi descontinuada. Se precisar de tratamento sutil do logo (ex: watermark de fundo), usar apenas o arquivo oficial em opacity baixa (15-25%) — sem stroke tracejado, sem fill ghost, sem box-shadow.</p>
+<h3 id="26-area-de-protecao-e-grid">2.6 Area de Protecao e Grid</h3>
+<p>O logo foi construido sobre um grid tipografico preciso, com linhas de referencia para alinhamento vertical e horizontal. Manter area de protecao equivalente a altura do simbolo ao redor de todo o logo.</p>
+<hr>
+<h2 id="3-paleta-de-cores-normative">3. Paleta de Cores [NORMATIVE]</h2>
+<blockquote>
+<p>Tokens canônicos consolidados em <span class="wikilink" data-target="metta-tokens">metta-tokens</span> §1. Esta seção mantém valores de referência semiótica.</p>
+</blockquote>
+<h3 id="31-cores-primarias">3.1 Cores Primarias</h3>
+<h4 id="amarelo-cor-principal-da-marca">Amarelo (Cor Principal da Marca)</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variacao</th>
+<th>HEX</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Amarelo Principal</td>
+<td><code>#FFBE18</code></td>
+<td>Cor primaria, CTAs, simbolo, destaques</td>
+</tr>
+<tr>
+<td>Amarelo Claro</td>
+<td><code>#FFC531</code></td>
+<td>Strokes, elementos secundarios</td>
+</tr>
+<tr>
+<td>Amarelo Medio</td>
+<td><code>#FFCE50</code></td>
+<td>Backgrounds auxiliares, gradientes</td>
+</tr>
+<tr>
+<td>Amarelo Suave</td>
+<td><code>#FFE4A1</code></td>
+<td>Backgrounds leves, hover states</td>
+</tr>
+</tbody></table></div>
+<p><strong>Associacoes semioticas</strong>: Sol, Luz, Calor, Ouro, Prosperidade, Otimismo, Energia, Criatividade, Inteligencia, Atencao</p>
+<h4 id="azul-noite-cor-base">Azul Noite (Cor Base)</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variacao</th>
+<th>HEX</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Azul Noite</td>
+<td><code>#0C161B</code></td>
+<td>Backgrounds escuros, textos sobre fundo claro</td>
+</tr>
+<tr>
+<td>Azul Noite Profundo</td>
+<td><code>#0A1013</code></td>
+<td>Backgrounds muito escuros</td>
+</tr>
+</tbody></table></div>
+<p><strong>Associacoes semioticas</strong>: Seriedade, Autoridade, Confianca, Estabilidade, Inteligencia, Calma, Profundidade</p>
+<h3 id="32-cores-secundarias">3.2 Cores Secundarias</h3>
+<h4 id="branco-gelo">Branco Gelo</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variacao</th>
+<th>HEX</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Branco Puro</td>
+<td><code>#FFFFFF</code></td>
+<td>Backgrounds claros, textos sobre fundo escuro</td>
+</tr>
+<tr>
+<td>Branco Gelo</td>
+<td><code>#FAFCFD</code></td>
+<td>Backgrounds neutros, cards</td>
+</tr>
+<tr>
+<td>Gelo Azulado</td>
+<td><code>#EBF3F7</code></td>
+<td>Backgrounds secundarios</td>
+</tr>
+<tr>
+<td>Cinza Muito Claro</td>
+<td><code>#EFF3F5</code></td>
+<td>Backgrounds de secoes</td>
+</tr>
+<tr>
+<td>Cinza Claro</td>
+<td><code>#F0F0F0</code></td>
+<td>Backgrounds, divisores</td>
+</tr>
+<tr>
+<td>Cinza</td>
+<td><code>#EDEDED</code></td>
+<td>Backgrounds de contraste</td>
+</tr>
+</tbody></table></div>
+<p><strong>Associacoes semioticas</strong>: Leveza, Amplitude, Neutralidade, Sofisticacao, Claridade, Frescor, Calma, Serenidade</p>
+<h4 id="azul-acinzentado">Azul Acinzentado</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variacao</th>
+<th>HEX</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Azul Acinzentado</td>
+<td><code>#435965</code></td>
+<td>Textos secundarios, labels, elementos de suporte</td>
+</tr>
+<tr>
+<td>Azul Acinzentado Claro</td>
+<td><code>#688594</code></td>
+<td>Textos terciarios, detalhes</td>
+</tr>
+<tr>
+<td>Azul Acinzentado Suave</td>
+<td><code>#75919F</code></td>
+<td>Tags, labels, metadata</td>
+</tr>
+<tr>
+<td>Azul Acinzentado Muito Claro</td>
+<td><code>#A8B3B9</code></td>
+<td>Linhas de grid, divisores sutis</td>
+</tr>
+</tbody></table></div>
+<p><strong>Associacoes semioticas</strong>: Solidez, Confianca, Neutralidade, Pragmatismo, Modernidade, Resistencia, Elegancia, Intelectual</p>
+<h3 id="33-gradientes">3.3 Gradientes</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nome</th>
+<th>CSS</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Gradiente Radial Claro</td>
+<td><code>radial-gradient(circle at 73% 2%, #FFFFFF 36%, #E0E6E9 100%)</code></td>
+<td>Backgrounds de destaque claro</td>
+</tr>
+<tr>
+<td>Gradiente Radial Escuro</td>
+<td><code>radial-gradient(circle at 50% 41%, #0C161B 0%, #0C161B 100%)</code></td>
+<td>Backgrounds escuros com profundidade</td>
+</tr>
+<tr>
+<td>Gradiente Amarelo</td>
+<td><code>radial-gradient(circle at 82% 10%, #FFBE18 59%)</code></td>
+<td>Highlights, fundos especiais</td>
+</tr>
+<tr>
+<td>Gradiente Angular</td>
+<td><code>conic-gradient(from 78deg at 33% 75%, #0C161B 5%, #435965 62%, #1E2D36 82%)</code></td>
+<td>Backgrounds premium/sofisticados</td>
+</tr>
+<tr>
+<td>Gradiente Linear Amarelo</td>
+<td><code>linear-gradient(226deg, #FFC443 10%, #FFB618 97%)</code></td>
+<td>Elementos decorativos, formas</td>
+</tr>
+</tbody></table></div>
+<h3 id="34-cores-com-opacidade-uso-recorrente">3.4 Cores com Opacidade (Uso Recorrente)</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Cor</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>rgba(12, 22, 27, 0.2)</code></td>
+<td>Separadores, divisores sobre fundo claro</td>
+</tr>
+<tr>
+<td><code>rgba(12, 22, 27, 0.6)</code></td>
+<td>Textos secundarios sobre fundo claro</td>
+</tr>
+<tr>
+<td><code>rgba(255, 255, 255, 0.2)</code></td>
+<td>Separadores, divisores sobre fundo escuro</td>
+</tr>
+<tr>
+<td><code>rgba(255, 190, 24, 0.1)</code></td>
+<td>Background sutil amarelo</td>
+</tr>
+<tr>
+<td><del><code>rgba(255, 190, 24, 0.24)</code> — Glow/sombra do logo</del></td>
+<td><strong>REMOVIDO</strong> — glow no logo proibido</td>
+</tr>
+<tr>
+<td><code>rgba(58, 109, 137, 0.28)</code></td>
+<td>Linhas de grid sobre fundo escuro</td>
+</tr>
+<tr>
+<td><code>rgba(67, 89, 101, 0.08)</code></td>
+<td>Fills ghost/fantasma</td>
+</tr>
+<tr>
+<td><code>rgba(202, 217, 224, 0.87)</code></td>
+<td>Strokes de outline</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="4-tipografia-normative">4. Tipografia [NORMATIVE]</h2>
+<blockquote>
+<p>Tokens canônicos consolidados em <span class="wikilink" data-target="metta-tokens">metta-tokens</span> §2. Esta seção mantém regras de aplicação por contexto.</p>
+</blockquote>
+<h3 id="41-familia-tipografica-unica-sf-pro-variable">4.1 Família Tipográfica Única — SF Pro Variable</h3>
+<p><strong>SF Pro</strong> é a única família tipográfica da marca. Arquivo oficial: <code>SF-Pro-Variable-Official.ttf</code> (Drive ID <code>1SDXY_sNrpM9wMxQ5F2_IHq_boVz8jXoB</code>).</p>
+<p><strong>&quot;SF Pro&quot; e &quot;SF Pro Expanded&quot; NÃO são fontes separadas.</strong> Ambas vêm do mesmo arquivo variável. O que muda é o eixo de largura (<code>wdth</code>), controlado via <code>font-stretch</code> em CSS.</p>
+<h4 id="eixos-da-fonte-variavel">Eixos da fonte variável</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Eixo</th>
+<th>Tag</th>
+<th>Min</th>
+<th>Default</th>
+<th>Max</th>
+<th>Controle CSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Peso</td>
+<td><code>wght</code></td>
+<td>1</td>
+<td>400</td>
+<td>1000</td>
+<td><code>font-weight</code></td>
+</tr>
+<tr>
+<td>Largura</td>
+<td><code>wdth</code></td>
+<td>30</td>
+<td>100</td>
+<td>150</td>
+<td><code>font-stretch</code></td>
+</tr>
+<tr>
+<td>Optical Size</td>
+<td><code>opsz</code></td>
+<td>17</td>
+<td>28</td>
+<td>28</td>
+<td><code>font-optical-sizing: auto</code></td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>Largura padrão (SF Pro)</strong>: <code>font-stretch: 100%</code> → textos, body, labels, sub-headlines</li>
+<li><strong>Largura expandida (SF Pro Expanded)</strong>: <code>font-stretch: 132%</code> → headlines, display, CTAs, destaques de impacto</li>
+</ul>
+<blockquote>
+<p><strong>Correção técnica:</strong> o valor correto do eixo <code>wdth</code> para &quot;Expanded&quot; é <strong>132</strong> (não 130). No Figma o estilo nomeado &quot;SF Pro / Expanded *&quot; já embute wdth 132. Em CSS, <code>font-stretch: 132%</code> replica exatamente.</p>
+</blockquote>
+<h3 id="42-variacoes-nomeadas-caracteristicas-especificas">4.2 Variações Nomeadas — Características Específicas</h3>
+<p>Cada variação é uma combinação precisa de <code>font-weight</code> + <code>font-stretch</code>. Ao escolher uma variação, aplique os dois valores juntos.</p>
+<h4 id="familia-expanded-font-stretch-132-headlines-e-destaques">Família Expanded (<code>font-stretch: 132%</code>) — headlines e destaques</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variação</th>
+<th><code>font-weight</code></th>
+<th>Figma style</th>
+<th>Caracteres visuais</th>
+<th>Uso dominante</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Expanded Heavy</strong></td>
+<td>870</td>
+<td>SF Pro / Expanded Heavy</td>
+<td>Máxima presença, traços grossos, letras largas e sólidas</td>
+<td>Display hero, nomes em destaque, H1 de máximo impacto, watermarks tipográficos</td>
+</tr>
+<tr>
+<td><strong>Expanded Bold</strong></td>
+<td>700</td>
+<td>SF Pro / Expanded Bold</td>
+<td>Forte mas ainda legível em tamanho médio</td>
+<td>CTAs pill padrão (&quot;SAIBA MAIS&quot;, &quot;QUERO PARTICIPAR&quot;)</td>
+</tr>
+<tr>
+<td><strong>Expanded Semibold</strong></td>
+<td>650</td>
+<td>SF Pro / Expanded Semibold</td>
+<td>Peso editorial equilibrado, ideal para frases longas em escala grande</td>
+<td>Headlines de poster (74-142px), display de slide institucional, titulos de seção em conversão</td>
+</tr>
+<tr>
+<td><strong>Expanded Medium</strong></td>
+<td>540</td>
+<td>SF Pro / Expanded Medium</td>
+<td>Peso limpo para tracking largo em caixa alta</td>
+<td>Labels/tags uppercase (ELITE, PREMIUM, MENTORIA), breadcrumbs com tracking 9-12%</td>
+</tr>
+<tr>
+<td><strong>Expanded Regular</strong></td>
+<td>410</td>
+<td>SF Pro / Expanded Regular</td>
+<td>Traço fino em largura expandida — leveza com escala</td>
+<td>Setup de mixed-weight headlines (parte &quot;leve&quot; antes da parte em Heavy)</td>
+</tr>
+<tr>
+<td><strong>Expanded Light</strong></td>
+<td>270</td>
+<td>SF Pro / Expanded Light</td>
+<td>Ultrafino, delicado em largura expandida</td>
+<td>Taglines sutis, frases ultralight em stories (modelo M2), sub-captions decorativas</td>
+</tr>
+</tbody></table></div>
+<h4 id="familia-regular-font-stretch-100-textos-e-body">Família Regular (<code>font-stretch: 100%</code>) — textos e body</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Variação</th>
+<th><code>font-weight</code></th>
+<th>Figma style</th>
+<th>Caracteres visuais</th>
+<th>Uso dominante</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Regular Semibold</strong></td>
+<td>650</td>
+<td>SF Pro / Semibold</td>
+<td>Sub-headline sólida sem pesar</td>
+<td>Sub-headlines, destaques inline, ênfase secundária</td>
+</tr>
+<tr>
+<td><strong>Regular Medium+</strong></td>
+<td>590</td>
+<td>SF Pro / Medium+</td>
+<td>Body &quot;com presença&quot;, mantém leitura confortável</td>
+<td>Body principal em peças com hierarquia forte (anúncios, stories)</td>
+</tr>
+<tr>
+<td><strong>Regular Medium</strong></td>
+<td>510</td>
+<td>SF Pro / Medium</td>
+<td>Peso equilibrado para body em tamanho generoso</td>
+<td>Body large, descrições em cards, pain points</td>
+</tr>
+<tr>
+<td><strong>Regular Book</strong></td>
+<td>400</td>
+<td>SF Pro / Regular</td>
+<td>Leitura neutra padrão</td>
+<td>Body corrido, legendas, descrições, manifesto (justified)</td>
+</tr>
+<tr>
+<td><strong>Regular Light</strong></td>
+<td>270</td>
+<td>SF Pro / Light</td>
+<td>Tom suave, palavras delicadas</td>
+<td>Body sutil, taglines (&quot;mentoria&quot;, &quot;estratégia&quot;), textos complementares</td>
+</tr>
+</tbody></table></div>
+<h3 id="43-fallback-roboto-flex-mesma-logica">4.3 Fallback — Zalando Sans Expanded (atualizado 2026-05-12)</h3>
+<p>Quando a plataforma não suporta SF Pro (Google Slides, Canva, editores web sem @font-face custom), usar <strong>Zalando Sans Expanded</strong> (Roboto Flex deprecated 2026-05-12) — também fonte variável compatível, eixos equivalentes.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Eixo Zalando Sans Expanded</th>
+<th>Range</th>
+<th>Equivalência com SF Pro</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>wght</code></td>
+<td>100-1000</td>
+<td>Mesmos valores (270, 400, 410, 510, 540, 590, 650, 700, 870)</td>
+</tr>
+<tr>
+<td><code>wdth</code></td>
+<td>25-151</td>
+<td>Usar <strong>132</strong> para Expanded, <strong>100</strong> para Regular</td>
+</tr>
+<tr>
+<td><code>opsz</code></td>
+<td>8-144</td>
+<td>Usar <code>auto</code></td>
+</tr>
+</tbody></table></div>
+<p><strong>Mapeamento direto:</strong></p>
+<ul>
+<li>&quot;SF Pro Expanded Heavy&quot; → Zalando Sans Expanded <code>wght: 870, wdth: 132</code></li>
+<li>&quot;SF Pro Expanded Semibold&quot; → Zalando Sans Expanded <code>wght: 650, wdth: 132</code></li>
+<li>&quot;SF Pro Regular Book&quot; → Zalando Sans Expanded <code>wght: 400, wdth: 100</code></li>
+<li>...todas as 11 variações mapeiam 1:1.</li>
+</ul>
+<p><strong>CSS fallback stack:</strong></p>
+<pre><code class="language-css">font-family: &#39;SF Pro&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
+</code></pre>
+<p><strong>Fontes PROIBIDAS como fallback</strong>: Inter, Arial, Helvetica, Open Sans, qualquer outra. Apenas SF Pro Variable (primária) e Zalando Sans Expanded (fallback).</p>
+<h3 id="44-escala-tipografica-base-1080px-de-largura">4.4 Escala Tipográfica (base 1080px de largura)</h3>
+<h4 id="regra-de-tamanho-minimo-para-instagram">Regra de tamanho mínimo para Instagram</h4>
+<ul>
+<li><strong>Texto legível</strong> (body, features, CTAs): mínimo <strong>36px</strong></li>
+<li><strong>Texto decorativo</strong> (labels, tags, metadata): mínimo <strong>24px</strong></li>
+<li>Abaixo de 24px apenas em impressos A4+ ou landing pages desktop</li>
+</ul>
+<h4 id="display-headlines-use-expanded-132">Display / Headlines (use Expanded 132%)</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Tamanho</th>
+<th>Variação recomendada</th>
+<th>Line-height</th>
+<th>Letter-spacing</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Display Hero</td>
+<td>120-142px</td>
+<td>Expanded Heavy (870)</td>
+<td>0.82-0.90em</td>
+<td>-1% a -4%</td>
+<td>Headline impactante, frase hero</td>
+</tr>
+<tr>
+<td>Display XL</td>
+<td>100-121px</td>
+<td>Expanded Heavy (870)</td>
+<td>0.82-0.95em</td>
+<td>-1%</td>
+<td>Headlines de anúncio</td>
+</tr>
+<tr>
+<td>Display L</td>
+<td>78-99px</td>
+<td>Expanded Semibold (650)</td>
+<td>0.90em</td>
+<td>-1%</td>
+<td>Headlines editoriais, posters</td>
+</tr>
+<tr>
+<td>Display M</td>
+<td>60-75px</td>
+<td>Expanded Semibold (650)</td>
+<td>0.90em</td>
+<td>-1%</td>
+<td>Headlines de modelo/story</td>
+</tr>
+<tr>
+<td>Display S</td>
+<td>52-57px</td>
+<td>Expanded Heavy (870)</td>
+<td>0.95em</td>
+<td>-1%</td>
+<td>Headlines menores</td>
+</tr>
+</tbody></table></div>
+<h4 id="titulos-de-secao">Títulos de seção</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Tamanho</th>
+<th>Variação</th>
+<th>Line-height</th>
+<th>Letter-spacing</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>H1</td>
+<td>44-51px</td>
+<td>Expanded Heavy (870)</td>
+<td>0.82em</td>
+<td>-1%</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>40-44px</td>
+<td>Expanded Semibold (650)</td>
+<td>0.90em</td>
+<td>-1%</td>
+</tr>
+<tr>
+<td>H3</td>
+<td>32-40px</td>
+<td>Regular Medium+ (590)</td>
+<td>0.90em</td>
+<td>-1%</td>
+</tr>
+<tr>
+<td>H4</td>
+<td>28-32px</td>
+<td>Regular Medium+ (590)</td>
+<td>0.90em</td>
+<td>-1%</td>
+</tr>
+</tbody></table></div>
+<h4 id="body-corpo">Body / Corpo</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Tamanho</th>
+<th>Variação</th>
+<th>Line-height</th>
+<th>Letter-spacing</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Body L</td>
+<td>36-42px</td>
+<td>Regular Medium+ (590)</td>
+<td>1.17em</td>
+<td>-1%</td>
+</tr>
+<tr>
+<td>Body M</td>
+<td>30-35px</td>
+<td>Regular Medium+ (590)</td>
+<td>1.20em</td>
+<td>-1%</td>
+</tr>
+<tr>
+<td>Body S</td>
+<td>24-30px</td>
+<td>Regular Book (400)</td>
+<td>1.17em</td>
+<td>-1%</td>
+</tr>
+<tr>
+<td>Body Light</td>
+<td>24-52px</td>
+<td>Regular Light (270) / Expanded Light (270)</td>
+<td>1.17em</td>
+<td>-1%</td>
+</tr>
+</tbody></table></div>
+<h4 id="labels-tags-use-expanded-medium-132-ou-regular-medium-100">Labels / Tags (use Expanded Medium 132% ou Regular Medium 100%)</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Tamanho</th>
+<th>Variação</th>
+<th>Letter-spacing</th>
+<th>Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label L</td>
+<td>26-28px</td>
+<td>Expanded Medium (540)</td>
+<td>+9-12%</td>
+<td>UPPERCASE</td>
+</tr>
+<tr>
+<td>Label S</td>
+<td>24px</td>
+<td>Expanded Medium (540)</td>
+<td>+12%</td>
+<td>UPPERCASE</td>
+</tr>
+<tr>
+<td>Label Editorial</td>
+<td>9-11px</td>
+<td>Expanded Light (270)</td>
+<td>+200-300%</td>
+<td>UPPERCASE</td>
+</tr>
+</tbody></table></div>
+<h3 id="45-regras-tipograficas-por-contexto">4.5 Regras Tipográficas por Contexto</h3>
+<h4 id="modo-conversao-anuncios-a-l-ctas-diretos">Modo Conversão (Anúncios A-L, CTAs diretos)</h4>
+<ul>
+<li>Headlines: <strong>Expanded Heavy (870) + 132%</strong>, UPPERCASE, letter-spacing -1%, line-height 0.82-0.95em</li>
+<li>Body: <strong>Regular Medium+ (590)</strong>, sentence case, letter-spacing -1%, line-height 1.17-1.20em</li>
+<li>Labels: <strong>Expanded Medium (540)</strong>, UPPERCASE, letter-spacing +9-12%</li>
+<li>CTAs: <strong>Expanded Bold (700) + 132%</strong>, UPPERCASE, letter-spacing +1%</li>
+</ul>
+<h4 id="modo-editorial-institucional-posters-slides-landing-pages">Modo Editorial / Institucional (Posters, Slides, Landing Pages)</h4>
+<ul>
+<li>Headlines: <strong>Expanded Semibold (650) + 132%</strong>, Sentence case, letter-spacing -1%, line-height 1.0-1.1em</li>
+<li>Mixed-weight headlines: <strong>Expanded Regular (410)</strong> no setup + <strong>Expanded Heavy (870)</strong> no impacto</li>
+<li>Color highlighting: palavras-chave em <code>#FFBE18</code> dentro de headline branco</li>
+<li>Labels: <strong>Expanded Light (270)</strong>, UPPERCASE, letter-spacing +200-300%, 9-11px</li>
+</ul>
+<h4 id="modo-marca-pessoal-tiago-alves">Modo Marca Pessoal (Tiago Alves)</h4>
+<ul>
+<li>Headlines: <strong>Expanded Heavy (870) + 132%</strong>, ALL-CAPS, tight leading (~0.90-0.95)</li>
+<li>Accent de ênfase: steel blue <code>#4A7FA5</code> em palavras-chave (não em CTAs)</li>
+<li>Body: <strong>Regular Book (400)</strong>, com <strong>Regular Semibold (650)</strong> para bold inline</li>
+<li>Breadcrumbs: <strong>Expanded Medium (540)</strong> UPPERCASE letter-spacing +12%, nos cantos superiores</li>
+<li>Exceção lowercase: frases de intimidade (&quot;já tentou / de tudo&quot;) — <strong>Expanded Heavy (870)</strong> lowercase</li>
+</ul>
+<h4 id="regra-universal">Regra universal</h4>
+<ul>
+<li><strong>Headlines e destaques</strong>: SEMPRE família Expanded (<code>font-stretch: 132%</code>)</li>
+<li><strong>Body, labels, descrições</strong>: família Regular (<code>font-stretch: 100%</code>)</li>
+<li><strong>Light (270)</strong>: palavras suaves, taglines, textos decorativos</li>
+<li><strong>Heavy (870)</strong>: máxima ênfase em headlines de impacto</li>
+</ul>
+<h3 id="46-implementacao-css-de-referencia">4.6 Implementação CSS de Referência</h3>
+<pre><code class="language-css">/* Registra a fonte variável com todo o range de eixos */
+@font-face {
+  font-family: &#39;SF Pro&#39;;
+  src: url(&#39;SF-Pro-Variable-Official.ttf&#39;) format(&#39;truetype-variations&#39;);
+  font-weight: 1 1000;
+  font-stretch: 30% 150%;
+  font-display: swap;
+}
+
+/* Stack base */
+body {
+  font-family: &#39;SF Pro&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+/* Variações Expanded (headlines/destaques) */
+.expanded-heavy    { font-weight: 870; font-stretch: 132%; }
+.expanded-bold     { font-weight: 700; font-stretch: 132%; }
+.expanded-semibold { font-weight: 650; font-stretch: 132%; }
+.expanded-medium   { font-weight: 540; font-stretch: 132%; }
+.expanded-regular  { font-weight: 410; font-stretch: 132%; }
+.expanded-light    { font-weight: 270; font-stretch: 132%; }
+
+/* Variações Regular (body/textos) */
+.regular-semibold  { font-weight: 650; font-stretch: 100%; }
+.regular-medium-p  { font-weight: 590; font-stretch: 100%; }
+.regular-medium    { font-weight: 510; font-stretch: 100%; }
+.regular-book      { font-weight: 400; font-stretch: 100%; }
+.regular-light     { font-weight: 270; font-stretch: 100%; }
+
+/* Headlines default (modo conversão) */
+h1, h2, .headline {
+  font-weight: 870;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
+}
+
+/* CTA pill */
+.cta {
+  font-weight: 700;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+</code></pre>
+<blockquote>
+<p><strong>AVISO TÉCNICO:</strong> NÃO usar <code>font-variation-settings: &#39;wdth&#39; 132</code> quando também declarar <code>font-stretch</code>. A especificação CSS determina que <code>font-weight</code> e <code>font-stretch</code> sobrepõem os eixos correspondentes em <code>font-variation-settings</code>. Use sempre as propriedades CSS diretas.</p>
+</blockquote>
+<hr>
+<h2 id="5-arquitetura-de-marca-sub-marcas-normative">5. Arquitetura de Marca (Sub-marcas) [NORMATIVE]</h2>
+<h3 id="51-hierarquia-de-produtos">5.1 Hierarquia de Produtos</h3>
+<pre><code>METTA (marca mae)
+|
+|-- Mentorias
+|   |-- ELITE (tier mais exclusivo)
+|   |-- EXCLUSIVE (tier intermediario)
+|   |-- PREMIUM (tier de entrada premium)
+|
+|-- SMTM - &quot;Supere a Meta Todo Mês&quot;
+|   |-- ELITE
+|   |-- EXCLUSIVE
+|   |-- PREMIUM
+</code></pre>
+<h3 id="52-sistema-de-logos-de-produto">5.2 Sistema de Logos de Produto</h3>
+<p>Cada sub-marca segue o padrao:</p>
+<ul>
+<li><strong>Simbolo Metta</strong> (icone) + <strong>Nome do produto/tier</strong> + <strong>Badge de tier</strong></li>
+<li>Badges de tier sao pills/capsulas com borda branca e texto em caixa alta com tracking 12%</li>
+<li>Layout pode ser:<ul>
+<li>Horizontal: simbolo | wordmark | badge</li>
+<li>Vertical/empilhado: simbolo em cima, wordmark + badge embaixo</li>
+<li>Compacto: simbolo + sigla (SMTM)</li>
+</ul>
+</li>
+</ul>
+<h3 id="53-formatacao-dos-nomes">5.3 Formatacao dos Nomes</h3>
+<ul>
+<li><strong>&quot;SUPERE A META TODO MES&quot;</strong>: SF Pro, weight 870, ~25px, letter-spacing -3%</li>
+<li><strong>&quot;MENTORIA&quot;</strong>: SF Pro, weight 540, ~12px, letter-spacing 12%, caixa alta</li>
+<li><strong>Tier badges</strong> (ELITE, EXCLUSIVE, PREMIUM): SF Pro, weight 540, ~13px, letter-spacing 12%, dentro de pill com border-radius ~33px</li>
+</ul>
+<hr>
+<h2 id="6-elementos-graficos-normative">6. Elementos Gráficos [NORMATIVE]</h2>
+<h3 id="61-simbolo-icone">6.1 Simbolo / Icone</h3>
+<p>O simbolo da Metta e composto por arcos concentricos que formam uma figura geometrica:</p>
+<ul>
+<li><strong>Arco Maior</strong>: Circulo externo com abertura</li>
+<li><strong>Arco Menor</strong>: Circulo interno com abertura</li>
+<li><strong>C Maior</strong>: Forma de &quot;C&quot; externa</li>
+<li><strong>C Menor</strong>: Forma de &quot;C&quot; interna</li>
+<li>Cores: Amarelo (#FFBE18) sobre fundos escuros, Azul noite (#0C161B) sobre fundos claros</li>
+</ul>
+<h3 id="62-formas-decorativas">6.2 Formas Decorativas</h3>
+<ul>
+<li>Uso de shapes organicos/curvilineos com gradientes em amarelo</li>
+<li>Linhas divisorias finas (1px) com opacidade reduzida</li>
+<li>Grids de construcao visiveis em apresentacoes tecnicas (linhas em cor F0F0F0 ou rgba com opacidade)</li>
+</ul>
+<h3 id="63-cantos-arredondados">6.3 Cantos Arredondados</h3>
+<ul>
+<li><strong>Cards e containers</strong>: border-radius ~12px</li>
+<li><strong>Badges/Pills</strong>: border-radius ~33-48px (full rounded)</li>
+<li><strong>Stroke em badges</strong>: ~1.4px em branco</li>
+</ul>
+<h3 id="64-regra-absoluta-efeitos-proibidos">⚠️ 6.4 REGRA ABSOLUTA — EFEITOS PROIBIDOS</h3>
+<p><strong>Nunca usar em nenhuma peça Metta:</strong></p>
+<ul>
+<li><strong>Glow effects</strong> — radial gradients como &quot;luz emanante&quot;, box-shadows coloridos em CTAs/botões, drop-shadows, text-shadows em headlines, inset box-shadows em logos, teal glow atmosférico, gold glow, soft glow, dark vignette por blur</li>
+<li><strong>Anéis e elipses decorativas</strong> — concentric rings, stroked ellipses como textura de fundo, rings yellow-on-yellow, decorative arcs low-opacity</li>
+<li><strong>Blur atmosférico decorativo</strong> — <code>filter: blur()</code> como efeito estético, <code>backdrop-filter: blur()</code> glassmorphism, blur como sombra difusa atrás de pessoas</li>
+<li><strong>Sombras coloridas</strong> — <code>--shadow-logo-glow</code>, <code>--shadow-image-blur</code>, qualquer box-shadow com cor de marca</li>
+</ul>
+<p><strong>O que CONTINUA permitido</strong> (não são glow/rings):</p>
+<ul>
+<li><strong>Gradient backgrounds funcionais</strong> — conic, linear, radial como surface color do frame</li>
+<li><strong>Dark overlay gradient sobre fotos</strong> — gradiente linear <code>rgba()</code> crescente para legibilidade do texto (SEM <code>filter: blur()</code>, SEM <code>backdrop-filter</code>)</li>
+<li><strong>Circular photo masks</strong> — foto redonda como avatar (componente funcional, não decoração)</li>
+<li><strong>Nav arrow circles simples</strong> — stroke 1-2px, sem glow (UI funcional)</li>
+</ul>
+<p><strong>Por quê:</strong> a identidade Metta é direta, limpa, sem efeitos especiais. A hierarquia é construída com <strong>tipografia + cor + espaço</strong>. Qualquer glow/ring enfraquece o posicionamento &quot;inteligência comercial&quot; (método, ciência, processo).</p>
+<p><strong>Em caso de dúvida:</strong> NÃO usar o efeito. Reforçar tipografia ou contraste de cor em vez de adicionar brilho/sombra.</p>
+<h3 id="65-sombras-e-efeitos-removido">6.5 <del>Sombras e Efeitos</del> [REMOVIDO]</h3>
+<p><del><strong>Blur de fundo</strong>: blur(111px) para sombras difusas de imagem</del>
+<del><strong>Glow do logo</strong>: inset box-shadow com amarelo em opacidade baixa</del>
+<del><strong>Blur em imagens de fundo</strong>: blur(31px) para efeito de profundidade</del></p>
+<p><strong>Todos removidos</strong> por conformidade com a regra absoluta em 6.4.</p>
+<hr>
+<h2 id="7-fotografia-e-imagens-normative">7. Fotografia e Imagens [NORMATIVE]</h2>
+<h3 id="71-estilo-fotografico">7.1 Estilo Fotografico</h3>
+<ul>
+<li>Fotografias profissionais de alta qualidade</li>
+<li>Retratos da equipe com iluminacao controlada</li>
+<li>Ambientacao corporativa mas moderna</li>
+</ul>
+<h3 id="72-composicao-de-cards-pessoais">7.2 Composicao de Cards Pessoais</h3>
+<p>Cada membro da equipe tem um card visual com:</p>
+<ul>
+<li>Foto profissional recortada em shape organico (arcos concentricos da marca)</li>
+<li>Gradiente de sobreposicao (amarelo para a CEO/Head, escuro para gestores)</li>
+<li>Nome em <strong>SF Pro Expanded Heavy (870 + 132%)</strong>, ~44px</li>
+<li>Cargo em <strong>SF Pro Regular Book (400 + 100%)</strong>, ~20-23px</li>
+<li>Logo Metta no canto</li>
+<li>Tagline &quot;Inteligencia comercial para empresarios&quot; em <strong>SF Pro Expanded Heavy (870 + 132%)</strong>, ~20px</li>
+<li>Selo/badge de cor ao fundo</li>
+</ul>
+<h3 id="73-equipe-identificada">7.3 Equipe Identificada</h3>
+<ul>
+<li><strong>Tiago Alves</strong> - CEO</li>
+<li><strong>Vanessa Bilovus</strong> - Head de Produto</li>
+<li><strong>Kevin Santos</strong> - Gestor de Projetos</li>
+</ul>
+<h3 id="74-o-que-evitar-referencia-da-marca-antiga">7.4 O que Evitar (Referencia da marca antiga)</h3>
+<ul>
+<li>Formato arredondado excessivo (tipografia muito &quot;fofa&quot;)</li>
+<li>Imagens genericas (banco de imagem obvio)</li>
+<li>Estilo amigavel / simpatico em excesso</li>
+<li>Falta de hierarquia visual</li>
+<li>Falta de consistencia visual</li>
+</ul>
+<hr>
+<h2 id="8-aplicacoes-normative">8. Aplicações [NORMATIVE]</h2>
+<h3 id="81-formato-base">8.1 Formato Base</h3>
+<ul>
+<li><strong>Slides/Apresentacoes</strong>: 1920 x 1080px</li>
+<li>Backgrounds alternam entre escuro (#0C161B), claro (#FFFFFF), amarelo (#FFBE18) e cinzas</li>
+</ul>
+<h3 id="82-aplicacao-digital">8.2 Aplicacao Digital</h3>
+<ul>
+<li>Mockups de celular (iPhone) com interface da marca</li>
+<li>Redes sociais: posts com tipografia bold, contrastes fortes</li>
+<li>Tagline &quot;O ecossistema de inteligencia comercial para empresarios&quot; sempre presente</li>
+</ul>
+<h3 id="83-aplicacao-fisica">8.3 Aplicacao Fisica</h3>
+<ul>
+<li>Totem de logo para recepcao/eventos</li>
+<li>Sinalizacao e impressos</li>
+</ul>
+<h3 id="84-redes-sociais">8.4 Redes Sociais</h3>
+<ul>
+<li>Badge &quot;REDES SOCIAIS&quot; em pill amarela com texto escuro</li>
+<li>Posts com imagens reais (nao genericas)</li>
+<li>Headlines em <strong>SF Pro Expanded Heavy (870 + 132%)</strong></li>
+<li>Corpo em <strong>SF Pro Regular Book (400 + 100%)</strong></li>
+</ul>
+<hr>
+<h2 id="9-regras-de-consistencia-normative">9. Regras de Consistência [NORMATIVE]</h2>
+<h3 id="91-hierarquia-visual">9.1 Hierarquia Visual</h3>
+<ol>
+<li><strong>Título principal</strong>: Expanded Heavy (870) ou Expanded Semibold (650), <code>font-stretch: 132%</code>, 63-142px, letter-spacing -1% a -4%</li>
+<li><strong>Subtítulo/Complemento</strong>: Regular Medium+ (590) ou Expanded Light (270), 24-52px</li>
+<li><strong>Labels/Categorias</strong>: Expanded Medium (540) + 132%, UPPERCASE, 24-28px, tracking +9-12%</li>
+<li><strong>Corpo de texto</strong>: Regular Book (400) + 100%, 24-42px, line-height 1.17-1.20em</li>
+</ol>
+<h3 id="92-contraste">9.2 Contraste</h3>
+<ul>
+<li><strong>Fundo escuro</strong>: Texto branco (#FFFFFF) + destaques amarelo (#FFBE18)</li>
+<li><strong>Fundo claro</strong>: Texto azul noite (#0C161B) + destaques amarelo (#FFBE18)</li>
+<li><strong>Fundo amarelo</strong>: Texto azul noite (#0C161B)</li>
+</ul>
+<h3 id="93-espacamento">9.3 Espacamento</h3>
+<ul>
+<li>Padding em badges: ~11px vertical, 9-20px horizontal</li>
+<li>Gap entre elementos inline: ~13-18px</li>
+<li>Linhas separadoras: 1px, cor com 20% opacidade</li>
+</ul>
+<hr>
+<h2 id="10-tokens-de-design-referencia-rapida-reference">10. Tokens de Design (Referência Rápida) [REFERENCE]</h2>
+<blockquote>
+<p>⚠️ Tokens canônicos agora vivem em <span class="wikilink" data-target="metta-tokens">metta-tokens</span>. Esta seção é mantida como snapshot pra leitura rápida; em conflito, <span class="wikilink" data-target="metta-tokens">metta-tokens</span> vence.</p>
+</blockquote>
+<pre><code class="language-css">/* Cores Primarias */
+--color-yellow-primary: #FFBE18;
+--color-yellow-light: #FFC531;
+--color-yellow-medium: #FFCE50;
+--color-yellow-soft: #FFE4A1;
+--color-blue-night: #0C161B;
+--color-blue-deep: #0A1013;
+
+/* Cores Secundarias */
+--color-white: #FFFFFF;
+--color-ice: #FAFCFD;
+--color-ice-blue: #EBF3F7;
+--color-gray-100: #EFF3F5;
+--color-gray-200: #F0F0F0;
+--color-gray-300: #EDEDED;
+--color-blue-gray: #435965;
+--color-blue-gray-light: #688594;
+--color-blue-gray-muted: #75919F;
+--color-blue-gray-subtle: #A8B3B9;
+
+/* Tipografia — SF Pro Variable (ver Secao 4) */
+--font-family: &#39;SF Pro&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
+--font-weight-light: 270;
+--font-weight-regular: 400;
+--font-weight-expanded-regular: 410;
+--font-weight-medium: 510;
+--font-weight-label: 540;
+--font-weight-medium-plus: 590;
+--font-weight-semibold: 650;
+--font-weight-bold: 700;
+--font-weight-heavy: 870;
+--font-stretch-regular: 100%;
+--font-stretch-expanded: 132%;
+
+/* Espacamento */
+--radius-card: 12px;
+--radius-pill: 33px;
+--radius-full: 48px;
+
+/* Sombras — REMOVIDAS por regra absoluta (ver 6.4). Não declarar shadow tokens. */
+/* ~~--shadow-logo-glow: inset 0px 0px 43px 0px rgba(255, 190, 24, 0.24);~~ */
+/* ~~--shadow-image-blur: blur(111px);~~ */
+</code></pre>
+<hr>
+<h2 id="11-checklist-para-o-agente-de-design-normative">11. Checklist para o Agente de Design [NORMATIVE]</h2>
+<p>Ao criar qualquer material visual para a Metta, verificar:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Assets obtidos do Google Drive (Secao 12) - nunca usar arquivos locais</li>
+<li><input disabled="" type="checkbox"> Logo correto selecionado conforme guia de selecao (Secao 12.6)</li>
+<li><input disabled="" type="checkbox"> Background correto selecionado conforme guia de selecao (Secao 12.6)</li>
+<li><input disabled="" type="checkbox"> Fonte SF Pro Variable em uso, com variacao nomeada correta (Secao 4.2) + fallback Zalando Sans Expanded com mesma logica (Secao 4.3) — obrigatorio em PPTX/Google Slides</li>
+<li><input disabled="" type="checkbox"> Paleta de cores respeitada (amarelo, azul noite, branco gelo, azul acinzentado)</li>
+<li><input disabled="" type="checkbox"> Logo na versao correta para o fundo utilizado</li>
+<li><input disabled="" type="checkbox"> Hierarquia tipografica clara (display &gt; heading &gt; body &gt; label)</li>
+<li><input disabled="" type="checkbox"> Letter-spacing negativo em headlines, positivo em labels</li>
+<li><input disabled="" type="checkbox"> Sem imagens genericas de banco</li>
+<li><input disabled="" type="checkbox"> Cantos arredondados consistentes (~12px cards, ~33px pills)</li>
+<li><input disabled="" type="checkbox"> Contraste adequado (texto legivel sobre qualquer fundo)</li>
+<li><input disabled="" type="checkbox"> Tagline &quot;INTELIGENCIA COMERCIAL&quot; com tracking 9%+ em caixa alta</li>
+<li><input disabled="" type="checkbox"> Badges de tier (ELITE/EXCLUSIVE/PREMIUM) em pills com borda e tracking 12%</li>
+<li><input disabled="" type="checkbox"> Sem estilo &quot;fofo&quot; ou excessivamente amigavel - manter tom profissional e autoritativo</li>
+<li><input disabled="" type="checkbox"> Gradientes seguem os padroes definidos (radial, angular, linear com as cores da paleta)</li>
+<li><input disabled="" type="checkbox"> Preferir SVG para logos/backgrounds; PNG para templates de reels</li>
+</ul>
+<hr>
+<h2 id="12-biblioteca-de-assets-google-drive-reference">12. Biblioteca de Assets (Google Drive) [REFERENCE]</h2>
+<blockquote>
+<p>Catálogo completo (Drive IDs por logo, background, modelo de reels) consolidado em <span class="wikilink" data-target="metta-logos">metta-logos</span>.</p>
+</blockquote>
+<blockquote>
+<p><strong>Pasta raiz</strong>: <a href="https://drive.google.com/drive/folders/1I7W7fYQw1NK4iVhMEkgnWIBjeZZtTQ7u">Identidade Visual Metta</a></p>
+<p>Todos os assets oficiais da marca estao centralizados no Google Drive. O agente de design deve buscar os arquivos diretamente do Drive usando os IDs abaixo. <strong>Nunca usar arquivos locais.</strong></p>
+</blockquote>
+<hr>
+<h3 id="121-background">12.1 Background</h3>
+<p><strong>Pasta</strong>: <a href="https://drive.google.com/drive/folders/12iw_vXsVD7PeqjKvz6O3uNLzhOAbtjYf">Background</a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>Formato</th>
+<th>ID do Drive</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bg_gradiente_amarelo_1</td>
+<td>PNG</td>
+<td><code>1GrKUEC_kWb6Aamkj4FPfKHUi1Lr1at7F</code></td>
+<td>Fundo com gradiente amarelo</td>
+</tr>
+<tr>
+<td>bg_gradiente_amarelo_1</td>
+<td>SVG</td>
+<td><code>1_cFZ4mh0-OcTntrV7iYqbVbQDp2rUYjN</code></td>
+<td>Fundo com gradiente amarelo (vetorial)</td>
+</tr>
+<tr>
+<td>bg_gradiente_escuro_1</td>
+<td>PNG</td>
+<td><code>1pbu8JYrEm8DLvbtMbyZfNrpy8fiSX1v6</code></td>
+<td>Fundo com gradiente escuro</td>
+</tr>
+<tr>
+<td>bg_gradiente_escuro_1</td>
+<td>SVG</td>
+<td><code>1iIOhDXHw39SEeS-a5zBe41eq8ChSdiSo</code></td>
+<td>Fundo com gradiente escuro (vetorial)</td>
+</tr>
+<tr>
+<td>bg_liso_amarelo_1</td>
+<td>PNG</td>
+<td><code>1VyOcpC4kQDRZqVtk88WWuVNLDmhDlQoj</code></td>
+<td>Fundo liso amarelo variante 1</td>
+</tr>
+<tr>
+<td>bg_liso_amarelo_1</td>
+<td>SVG</td>
+<td><code>19WM0kTzLS69ga9mqRLNsG9LfeHvwkOXh</code></td>
+<td>Fundo liso amarelo variante 1 (vetorial)</td>
+</tr>
+<tr>
+<td>bg_liso_amarelo_2</td>
+<td>PNG</td>
+<td><code>1k0wvNtRLRzX_IkKUq3WeXCqpsKZpeBHB</code></td>
+<td>Fundo liso amarelo variante 2</td>
+</tr>
+<tr>
+<td>bg_liso_amarelo_2</td>
+<td>SVG</td>
+<td><code>1SC-ssWO9ifWXttwv_sFf1IZrL_Nk3FFc</code></td>
+<td>Fundo liso amarelo variante 2 (vetorial)</td>
+</tr>
+<tr>
+<td>bg_liso_amarelo_3</td>
+<td>PNG</td>
+<td><code>1m4W_iOIHMkTpzn3V-mF9xRVeXfGyrmnR</code></td>
+<td>Fundo liso amarelo variante 3</td>
+</tr>
+<tr>
+<td>bg_liso_amarelo_3</td>
+<td>SVG</td>
+<td><code>1_VnqAwB0xcsl_g0H2NntE_qzZPTmXCr5</code></td>
+<td>Fundo liso amarelo variante 3 (vetorial)</td>
+</tr>
+<tr>
+<td>bg_liso_azul_1</td>
+<td>PNG</td>
+<td><code>1O6AWbrs_oUJcNuusLi_uemXDBV8EQfsk</code></td>
+<td>Fundo liso azul noite variante 1</td>
+</tr>
+<tr>
+<td>bg_liso_azul_1</td>
+<td>SVG</td>
+<td><code>17layZE3m4AW4oEaFR-daGG5L2Hy50nvN</code></td>
+<td>Fundo liso azul noite variante 1 (vetorial)</td>
+</tr>
+<tr>
+<td>bg_liso_azul_2</td>
+<td>PNG</td>
+<td><code>1tKZxrP53s3R2wZ2M5LJ1j9rNzUEkeIqd</code></td>
+<td>Fundo liso azul noite variante 2</td>
+</tr>
+<tr>
+<td>bg_liso_azul_2</td>
+<td>SVG</td>
+<td><code>1j_4mFdzj6Dtd7EgYfxzpGrzOSdXdIHHz</code></td>
+<td>Fundo liso azul noite variante 2 (vetorial)</td>
+</tr>
+<tr>
+<td>bg_liso_branco_gelo_1</td>
+<td>PNG</td>
+<td><code>1DJnhIyFCL94s7fuJI9ZHhwRXHe31MXsV</code></td>
+<td>Fundo liso branco gelo</td>
+</tr>
+<tr>
+<td>bg_liso_branco_gelo_1</td>
+<td>SVG</td>
+<td><code>1N3AMODpJsZ7f1MpvWUmcUbf5ILRkRQnC</code></td>
+<td>Fundo liso branco gelo (vetorial)</td>
+</tr>
+<tr>
+<td>bg_liso_cinza_1</td>
+<td>PNG</td>
+<td><code>19soa2bWk0OM9gt9vbiqOBcxnOaAwmKut</code></td>
+<td>Fundo liso cinza</td>
+</tr>
+<tr>
+<td>bg_liso_cinza_1</td>
+<td>SVG</td>
+<td><code>1ZAIgmME7pqneLeCPqKdOxemgL4mWBf8P</code></td>
+<td>Fundo liso cinza (vetorial)</td>
+</tr>
+<tr>
+<td>bg_liso_cinza_gelo_1</td>
+<td>PNG</td>
+<td><code>1PKsAsdWGmPKJObxn5g8XfXBgoAINNu_j</code></td>
+<td>Fundo liso cinza gelo</td>
+</tr>
+<tr>
+<td>bg_liso_cinza_gelo_1</td>
+<td>SVG</td>
+<td><code>1m0bOiiaw-0mmswBofoLSxSfZViWU8c-S</code></td>
+<td>Fundo liso cinza gelo (vetorial)</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="122-logo-metta">12.2 Logo Metta</h3>
+<p><strong>Pasta</strong>: <a href="https://drive.google.com/drive/folders/1ut9l5T_ozyUbUjIqBDFPERRMIiEi6LuZ">Logo Metta</a></p>
+<h4 id="simbolos-icone-isolado">Simbolos (Icone isolado)</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>Formato</th>
+<th>ID do Drive</th>
+<th>Cor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Simbolo_metta_amarelo</td>
+<td>PNG</td>
+<td><code>1L6yJ0gmxqKOsbGFg7MI3sc8JJZ-jdqzC</code></td>
+<td>Amarelo (#FFBE18)</td>
+</tr>
+<tr>
+<td>Simbolo_metta_amarelo</td>
+<td>SVG</td>
+<td><code>1dwPSsS49LZWJR7hd3HoaNnvgLkWquJs4</code></td>
+<td>Amarelo (#FFBE18)</td>
+</tr>
+<tr>
+<td>Simbolo_metta_azul</td>
+<td>PNG</td>
+<td><code>1Bnn6DVkar-nNVh6AWsi_Vktj3dViJtsv</code></td>
+<td>Azul noite (#0C161B)</td>
+</tr>
+<tr>
+<td>Simbolo_metta_azul</td>
+<td>SVG</td>
+<td><code>1HDDsK0WPyINzOk_ogxRBlaX00yp9dYjP</code></td>
+<td>Azul noite (#0C161B)</td>
+</tr>
+<tr>
+<td>Simbolo_metta_azul2</td>
+<td>PNG</td>
+<td><code>1VBOJm_p8Yc2dc13DaTySh3sFORKMDP45</code></td>
+<td>Azul secundario</td>
+</tr>
+<tr>
+<td>Simbolo_metta_azul2</td>
+<td>SVG</td>
+<td><code>1wvZxTOkZbfeRbuLju17XH6RQ2XL95SYk</code></td>
+<td>Azul secundario</td>
+</tr>
+<tr>
+<td>Simbolo_metta_branco</td>
+<td>PNG</td>
+<td><code>1b3tKx-ueGbHaAva3qVojXNlfiyK74Bbl</code></td>
+<td>Branco (#FFFFFF)</td>
+</tr>
+<tr>
+<td>Simbolo_metta_branco</td>
+<td>SVG</td>
+<td><code>1y2E3_xpZAAtsp6-CgGYfP4AftaMIVu2s</code></td>
+<td>Branco (#FFFFFF)</td>
+</tr>
+<tr>
+<td>Simbolo_metta_cinza</td>
+<td>PNG</td>
+<td><code>1it2DjVaJl5aVCFvyMU9pQdEEPyaXpmkU</code></td>
+<td>Cinza</td>
+</tr>
+<tr>
+<td>Simbolo_metta_cinza</td>
+<td>SVG</td>
+<td><code>1ZV9SAmeMdRUq89iKWu-YRLaXuohWtn-U</code></td>
+<td>Cinza</td>
+</tr>
+</tbody></table></div>
+<h4 id="logo-completo-simbolo-wordmark-horizontal-h-e-vertical-v">Logo Completo (Simbolo + Wordmark) - Horizontal (_h) e Vertical (_v)</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>Formato</th>
+<th>ID do Drive</th>
+<th>Cor</th>
+<th>Orientacao</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logo_metta_colorido_h</td>
+<td>PNG</td>
+<td><code>1zdIiaQedxsWH0IJqmGKUSJPZ8lb16siY</code></td>
+<td>Colorido (amarelo + branco)</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_colorido_h</td>
+<td>SVG</td>
+<td><code>1KJ4uiqHdX49Uhp2wg3E9HkzqawE7bYMQ</code></td>
+<td>Colorido (amarelo + branco)</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_colorido_v</td>
+<td>PNG</td>
+<td><code>1TAOMF6zc41fK4zGSzbf3WsjUl08b30Np</code></td>
+<td>Colorido (amarelo + branco)</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_colorido_v</td>
+<td>SVG</td>
+<td><code>1-McHsQ1dT3RX5rGLWQv2cFL8TJOXidjB</code></td>
+<td>Colorido (amarelo + branco)</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_colorido_escuro_h</td>
+<td>PNG</td>
+<td><code>1xXwyI40wfLmg7euILl1eoUzElCm7G_Kp</code></td>
+<td>Colorido escuro (amarelo + azul)</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_colorido_escuro_h</td>
+<td>SVG</td>
+<td><code>1OoU3dGAEPR8S8g10ZuR-vlSyqEv3YDOi</code></td>
+<td>Colorido escuro (amarelo + azul)</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_colorido_escuro_v</td>
+<td>PNG</td>
+<td><code>1WF7is4MRzYUBz144eVGFl70SKGzW8g6Z</code></td>
+<td>Colorido escuro (amarelo + azul)</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_colorido_escuro_v</td>
+<td>SVG</td>
+<td><code>1XBx0a3Zi0Gjf8in1Mk-_ynxCYsM834B_</code></td>
+<td>Colorido escuro (amarelo + azul)</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_branco_h</td>
+<td>PNG</td>
+<td><code>1dUkDiVqLASKO9b52rnVzlzXkG4LmP09F</code></td>
+<td>Branco monocromatico</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_branco_h</td>
+<td>SVG</td>
+<td><code>1UAttnww1716VzMNZtGWkyEEuEepmVeR4</code></td>
+<td>Branco monocromatico</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_branco_v</td>
+<td>PNG</td>
+<td><code>1726eRnBpslYqMi0DsVpm3NxcWGFvfND4</code></td>
+<td>Branco monocromatico</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_branco_v</td>
+<td>SVG</td>
+<td><code>14bfXYU44-Vi_GUzt2h9K93u-mQ4tM4km</code></td>
+<td>Branco monocromatico</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_azul_h</td>
+<td>PNG</td>
+<td><code>1DMqb6w8EMcsY7W8vja2unUkAJC_Oablm</code></td>
+<td>Azul noite monocromatico</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_azul_h</td>
+<td>SVG</td>
+<td><code>13Dz57SxqWTj8bpUcyr8P7N88k3atp8wN</code></td>
+<td>Azul noite monocromatico</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_azul_v</td>
+<td>PNG</td>
+<td><code>1pwxckpUPu_Wbvi2IPt6Cu_eJ06HvrT8E</code></td>
+<td>Azul noite monocromatico</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_azul_v</td>
+<td>SVG</td>
+<td><code>1ON4zqLTBqlDSvU9M_tsAskCQXQH0FL9i</code></td>
+<td>Azul noite monocromatico</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_azul2_h</td>
+<td>PNG</td>
+<td><code>1hbYDE0jvuksEdcI0Y8aU8AF80bPCsLrr</code></td>
+<td>Azul secundario monocromatico</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_azul2_h</td>
+<td>SVG</td>
+<td><code>17g9sUtqsLwV1Pgi6aQD5o72v6WRV4tck</code></td>
+<td>Azul secundario monocromatico</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_azul2_v</td>
+<td>PNG</td>
+<td><code>11t337xMRuUF2J8__dfxHgO9sXN4qHpr4</code></td>
+<td>Azul secundario monocromatico</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_azul2_v</td>
+<td>SVG</td>
+<td><code>1waBE3chmyV58bibddkSbWJMTqK7baBUi</code></td>
+<td>Azul secundario monocromatico</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_cinza_h</td>
+<td>PNG</td>
+<td><code>1KyPV4XPyPPGrrd3mLAQhvlZlz7pQUqhy</code></td>
+<td>Cinza monocromatico</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_cinza_h</td>
+<td>SVG</td>
+<td><code>1hjaZujL9UExoBb7YH8xHd68kTHa3pm3Z</code></td>
+<td>Cinza monocromatico</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Logo_metta_cinza_v</td>
+<td>PNG</td>
+<td><code>1N3yDA9CA8QonLnGwDKLcAXUYwtU-MWAz</code></td>
+<td>Cinza monocromatico</td>
+<td>Vertical</td>
+</tr>
+<tr>
+<td>Logo_metta_cinza_v</td>
+<td>SVG</td>
+<td><code>1qHpKB3NXwtLBN3LNhKEKnISw3lfQM4d1</code></td>
+<td>Cinza monocromatico</td>
+<td>Vertical</td>
+</tr>
+</tbody></table></div>
+<h4 id="logo-com-tagline">Logo com Tagline</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>Formato</th>
+<th>ID do Drive</th>
+<th>Descricao</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logo_metta_tagline_colorida_h</td>
+<td>SVG</td>
+<td><code>1ml7q5kY5hR_JBThjk11Q53kunxccGKSE</code></td>
+<td>Logo horizontal com tagline &quot;Inteligencia Comercial&quot;</td>
+</tr>
+</tbody></table></div>
+<h4 id="assinaturas-logo-compacto-para-rodapes-e-aplicacoes-reduzidas">Assinaturas (Logo compacto para rodapes e aplicacoes reduzidas)</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>Formato</th>
+<th>ID do Drive</th>
+<th>Cor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>assinatura_metta_amarelo</td>
+<td>PNG</td>
+<td><code>1g2-Wb27NSAv7xyhqHK22vVnoBOGr8fdj</code></td>
+<td>Amarelo</td>
+</tr>
+<tr>
+<td>assinatura_metta_amarelo</td>
+<td>SVG</td>
+<td><code>1O2ZBlXo1xkpEoo2fmwpP1Fo37RElRBlf</code></td>
+<td>Amarelo</td>
+</tr>
+<tr>
+<td>assinatura_metta_azul</td>
+<td>PNG</td>
+<td><code>1Wv9qMgK7MXFfiRIyNjPKlmhsuGHBr6YP</code></td>
+<td>Azul noite</td>
+</tr>
+<tr>
+<td>assinatura_metta_azul</td>
+<td>SVG</td>
+<td><code>1cwtzuv_pbdUXoZWQMeXOrsRXQcdtee7H</code></td>
+<td>Azul noite</td>
+</tr>
+<tr>
+<td>assinatura_metta_azul2</td>
+<td>PNG</td>
+<td><code>1C2R_m-JpLW0UaK3ToW0xa_O7Idyp8N_P</code></td>
+<td>Azul secundario</td>
+</tr>
+<tr>
+<td>assinatura_metta_azul2</td>
+<td>SVG</td>
+<td><code>1nfG03x-L8o3aXw6jVOVqesXJCNObiJ1d</code></td>
+<td>Azul secundario</td>
+</tr>
+<tr>
+<td>assinatura_metta_branco</td>
+<td>PNG</td>
+<td><code>16t01tM7AQnwHHt2w2sCKl5OuDN0cZeaT</code></td>
+<td>Branco</td>
+</tr>
+<tr>
+<td>assinatura_metta_branco</td>
+<td>SVG</td>
+<td><code>1UDca83ltIA640gTyzeFFkrCitf3nj_cq</code></td>
+<td>Branco</td>
+</tr>
+<tr>
+<td>assinatura_metta_cinza</td>
+<td>PNG</td>
+<td><code>1CA4M3Jk0-Lg0vfaMM9f3Utl5ldLCerY4</code></td>
+<td>Cinza</td>
+</tr>
+<tr>
+<td>assinatura_metta_cinza</td>
+<td>SVG</td>
+<td><code>1om5L1Gr-OUmP1lv55zWeRd69W4zLuDxa</code></td>
+<td>Cinza</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="123-logo-protocolo-metta">12.3 Logo Protocolo Metta</h3>
+<p><strong>Pasta</strong>: <a href="https://drive.google.com/drive/folders/1MMSc1AwL8A7sGznoSZ93ZfNb6IOh6Jmm">Logo Protocolo Metta</a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>Formato</th>
+<th>ID do Drive</th>
+<th>Cor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logo Protocolo - Amarelo</td>
+<td>PNG</td>
+<td><code>1TL1HWQJpN9xI8u51R7okcaO8QwEGAK2A</code></td>
+<td>Amarelo (#FFBE18)</td>
+</tr>
+<tr>
+<td>Logo Protocolo - Branco</td>
+<td>PNG</td>
+<td><code>1LX8sHyeQLRflCz8YfHgA4SKZmegaaSVW</code></td>
+<td>Branco (#FFFFFF)</td>
+</tr>
+<tr>
+<td>Logo Protocolo - Cinza claro</td>
+<td>PNG</td>
+<td><code>1UHfDdPN5K22ztb1vDK5eYAwHBW59_94Z</code></td>
+<td>Cinza claro</td>
+</tr>
+<tr>
+<td>Logo Protocolo - Cinza Escuro</td>
+<td>PNG</td>
+<td><code>1sKpln5cKSUWp1Mp-hWhh1xflF2GXDIad</code></td>
+<td>Cinza escuro</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="124-modelos-reels">12.4 Modelos Reels</h3>
+<p><strong>Pasta</strong>: <a href="https://drive.google.com/drive/folders/19YMuk58uDSZeyf4jdsRkUYbpcRMESRja">Modelos Reels</a></p>
+<p>Templates visuais para reels numerados de 1 a 16:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>ID do Drive</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.png</td>
+<td><code>1aQGMUUrBcUuO9EjcaziF6w-PL3AXSfKy</code></td>
+</tr>
+<tr>
+<td>2.png</td>
+<td><code>1jpWzEGomVy3IHXOiaTW08RIIQpSLJBxh</code></td>
+</tr>
+<tr>
+<td>3.png</td>
+<td><code>1JD9Wlx53YfCmWYp4t-ehjUU9FHwmU0s4</code></td>
+</tr>
+<tr>
+<td>4.png</td>
+<td><code>1UaeIYFGJqr_7XgCXbMSkCOJBGfRbE67v</code></td>
+</tr>
+<tr>
+<td>5.png</td>
+<td><code>1w4kqQJ6lwSOOFHCe_8Q5GG6vefn9OAKX</code></td>
+</tr>
+<tr>
+<td>6.png</td>
+<td><code>1-FOeSSowAqMd9oBYWLF3j2qnGFVDG7iz</code></td>
+</tr>
+<tr>
+<td>7.png</td>
+<td><code>1wJE1Qp62CErh_Ubuyl7GaiwtnEujnZ8l</code></td>
+</tr>
+<tr>
+<td>8.png</td>
+<td><code>1khaVtZlDxA1TQQmyyktcPXQGhBQuinWq</code></td>
+</tr>
+<tr>
+<td>9.png</td>
+<td><code>1hFPvKnBpG_wme7znd2BUN9zLPKK9bCaB</code></td>
+</tr>
+<tr>
+<td>10.png</td>
+<td><code>1HWiSeE4nNIYGpGxaNuIwrfepgNkPJpkd</code></td>
+</tr>
+<tr>
+<td>11.png</td>
+<td><code>1XkeRQK-aSOUzzTTcr-7PgX-5ojSKbbm_</code></td>
+</tr>
+<tr>
+<td>12.png</td>
+<td><code>1rVlr90QlEqkp72KZthqllDuEZW-Hwhh0</code></td>
+</tr>
+<tr>
+<td>13.png</td>
+<td><code>1_YyxJ2pmcVnU8CsYUNO-DTMOOTf2WGRk</code></td>
+</tr>
+<tr>
+<td>14.png</td>
+<td><code>1oTm-6DmBWipbP8tNe04BZqTCVDYzgEYA</code></td>
+</tr>
+<tr>
+<td>15.png</td>
+<td><code>1G6RYfsq4g1DcWZttXcwN8CDN2wPxoeYW</code></td>
+</tr>
+<tr>
+<td>16.png</td>
+<td><code>1seKK7_x7_wkxPfOEAoy_GjRNvw0M-uLT</code></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="125-tipografia">12.5 Tipografia</h3>
+<p><strong>Pasta</strong>: <a href="https://drive.google.com/drive/folders/1XQ2Sw51ZPxmNkArZDTp4Egt7P8Drhyrk">Tipografia</a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>ID do Drive</th>
+<th>Descricao</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SF-Pro-Variable-Official.ttf</td>
+<td><code>1SDXY_sNrpM9wMxQ5F2_IHq_boVz8jXoB</code></td>
+<td>Fonte SF Pro Variable (regular)</td>
+</tr>
+<tr>
+<td>SF-Pro-Italic-Variable-Official.ttf</td>
+<td><code>1wuCfL7hwMpOvGJgZwxSyr-NPXMDfxaaL</code></td>
+<td>Fonte SF Pro Variable (italico)</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="126-guia-de-selecao-de-assets">12.6 Guia de Selecao de Assets</h3>
+<h4 id="qual-logo-usar">Qual logo usar?</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Situacao</th>
+<th>Asset recomendado</th>
+<th>Fundo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Uso principal (destaque)</td>
+<td>Logo_metta_colorido_h ou _v</td>
+<td>Fundo escuro (#0C161B)</td>
+</tr>
+<tr>
+<td>Uso sobre fundo claro</td>
+<td>Logo_metta_colorido_escuro_h ou _v</td>
+<td>Fundo claro (#FFFFFF)</td>
+</tr>
+<tr>
+<td>Monocromatico sobre escuro</td>
+<td>Logo_metta_branco_h ou _v</td>
+<td>Fundo escuro</td>
+</tr>
+<tr>
+<td>Monocromatico sobre claro</td>
+<td>Logo_metta_azul_h ou _v</td>
+<td>Fundo claro</td>
+</tr>
+<tr>
+<td>Favicon, icone, espaco reduzido</td>
+<td>Simbolo_metta_amarelo ou _branco</td>
+<td>Qualquer</td>
+</tr>
+<tr>
+<td>Rodape, assinatura compacta</td>
+<td>assinatura_metta_*</td>
+<td>Conforme fundo</td>
+</tr>
+<tr>
+<td>Com tagline completa</td>
+<td>Logo_metta_tagline_colorida_h</td>
+<td>Fundo escuro</td>
+</tr>
+</tbody></table></div>
+<h4 id="qual-background-usar">Qual background usar?</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Situacao</th>
+<th>Asset recomendado</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fundo com profundidade premium</td>
+<td>bg_gradiente_escuro_1</td>
+</tr>
+<tr>
+<td>Fundo amarelo vibrante</td>
+<td>bg_gradiente_amarelo_1</td>
+</tr>
+<tr>
+<td>Fundo solido amarelo</td>
+<td>bg_liso_amarelo_1, _2 ou _3</td>
+</tr>
+<tr>
+<td>Fundo solido escuro</td>
+<td>bg_liso_azul_1 ou _2</td>
+</tr>
+<tr>
+<td>Fundo neutro claro</td>
+<td>bg_liso_branco_gelo_1 ou bg_liso_cinza_gelo_1</td>
+</tr>
+<tr>
+<td>Fundo cinza intermediario</td>
+<td>bg_liso_cinza_1</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="127-instrucoes-para-o-agente">12.7 Instrucoes para o Agente</h3>
+<ol>
+<li><strong>Buscar assets do Drive</strong>: Sempre usar os IDs do Google Drive listados acima para baixar/referenciar arquivos. Nunca usar caminhos locais.</li>
+<li><strong>Preferir SVG</strong>: Para logos e backgrounds, preferir SVG quando disponivel (melhor qualidade em qualquer escala). Usar PNG quando SVG nao for suportado.</li>
+<li><strong>Preferir PNG</strong>: Para modelos de reels (pasta 12.4), usar os PNGs como base/template.</li>
+<li><strong>Atualizacao</strong>: Esta secao deve ser atualizada sempre que novos arquivos forem adicionados a pasta do Drive.</li>
+</ol>
+<hr>
+<h2 id="13-composicoes-editoriais-analise-da-fonte-rebranding-reference">13. Composições Editoriais — Análise da Fonte (Rebranding) [REFERENCE]</h2>
+<blockquote>
+<p>Descreve o que <strong>existe</strong> na fonte Figma. Não autoriza efeitos proibidos por §6.4 — quando §13 menciona blur/glow/shadow, está documentando design legado a ser remediado.</p>
+</blockquote>
+<blockquote>
+<p><strong>Nota:</strong> as orientacoes de cores (secao 3) e tipografia (secao 4) permanecem inalteradas. Esta secao adiciona os padroes de COMPOSICAO e LAYOUT extraidos da analise direta dos frames das paginas &quot;01. Playground&quot; e &quot;04.1 Metta&quot; do arquivo Figma <code>Rebranding</code> — complementando o catalogo de estilos existente com especificacoes tecnicas de montagem.</p>
+<p>Fonte: <a href="https://www.figma.com/design/dNVyxGVNxNbE6sA1F7OOXL/Rebranding">Figma — Rebranding</a> · paginas <code>01. Playground</code> (6:2) e <code>04.1 Metta</code> (427:81)</p>
+</blockquote>
+<h3 id="131-formatos-de-canvas-usados-na-fonte">13.1 Formatos de Canvas Usados na Fonte</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Formato</th>
+<th>Dimensoes</th>
+<th>Uso documentado na fonte</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Slide 16:9</td>
+<td>1920x1080</td>
+<td>Apresentacoes comerciais, statements de valor, aplicacoes mockup</td>
+</tr>
+<tr>
+<td>Poster editorial</td>
+<td>2035x1414</td>
+<td>Posters institucionais print-scale (A5/A4)</td>
+</tr>
+<tr>
+<td>Feed Instagram</td>
+<td>1080x1350</td>
+<td>Anuncios feed (ja documentado)</td>
+</tr>
+<tr>
+<td>Story Instagram</td>
+<td>1080x1920</td>
+<td>Stories e reels cover (ja documentado)</td>
+</tr>
+</tbody></table></div>
+<p><strong>Nota:</strong> o poster editorial 2035x1414 e uma escala nao documentada no catalogo anterior. E o canvas usado para os posters 4-8 do Playground.</p>
+<h3 id="132-sf-pro-no-figma-nomes-reais-dos-estilos">13.2 SF Pro no Figma — Nomes Reais dos Estilos</h3>
+<p>O arquivo Rebranding referencia SF Pro atraves de <strong>estilos nomeados</strong> (instancias do variable font) em vez de ajustar o eixo de largura manualmente. Os nomes exatos a usar no painel de texto do Figma (e na API) sao:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Estilo no Figma</th>
+<th>Peso (wght)</th>
+<th>Width axis (wdth)</th>
+<th>Uso dominante na fonte</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SF Pro / Expanded Heavy</code></td>
+<td>870</td>
+<td>132</td>
+<td>Nomes em footer, display hero</td>
+</tr>
+<tr>
+<td><code>SF Pro / Expanded Semibold</code></td>
+<td>650</td>
+<td>132</td>
+<td>Headlines de poster e slide (74-142px)</td>
+</tr>
+<tr>
+<td><code>SF Pro / Expanded Medium</code></td>
+<td>540</td>
+<td>132</td>
+<td>Labels uppercase, pill tags, body em escala</td>
+</tr>
+<tr>
+<td><code>SF Pro / Expanded Regular</code></td>
+<td>410</td>
+<td>132</td>
+<td>Display hero de slide com mixed-weight inline</td>
+</tr>
+<tr>
+<td><code>SF Pro / Expanded Light</code></td>
+<td>270</td>
+<td>132</td>
+<td>Texto sutil, sub-captions</td>
+</tr>
+<tr>
+<td><code>SF Pro / Regular</code></td>
+<td>400</td>
+<td>100</td>
+<td>Role/cargo em credits (16-20px)</td>
+</tr>
+<tr>
+<td><code>SF Pro / Medium</code></td>
+<td>510</td>
+<td>100</td>
+<td>URL, micro-text de footer</td>
+</tr>
+</tbody></table></div>
+<p><strong>Correcao tecnica importante:</strong> a largura real da fonte Expanded usada na fonte e <code>font-variation-settings: &#39;wdth&#39; 132</code> — nao 130 como documentado em alguns trechos anteriores. Em CSS isso equivale a <code>font-stretch: 132%</code>. No Figma, basta usar o estilo nomeado &quot;Expanded X&quot; diretamente que o eixo wdth 132 ja vem embutido.</p>
+<h3 id="133-padrao-editorial-poster">13.3 Padrao Editorial Poster</h3>
+<p>Padrao observado nos frames <code>poster 5</code> (221:402) e <code>poster 6</code> (222:809) do Playground. Layout de impacto editorial print-scale para aplicacoes institucionais.</p>
+<p><strong>Canvas:</strong> 2035x1414
+<strong>Backgrounds validados:</strong> <code>#0C161B</code> (azul noite) ou <code>#435965</code> (steel-blue como bg primario)</p>
+<p><strong>Camadas (bottom to top):</strong></p>
+<ol>
+<li><strong>Background solido</strong> — cor do token</li>
+<li><strong>Wordmark rotado signature</strong> — &quot;metta&quot; lowercase gigante, rotacao 90°, width = altura do canvas (~1415px), flush bleed na borda esquerda, cor em baixo contraste com o bg</li>
+<li><strong>Foto dominante</strong> — rounded rectangle mask (~52px radius), ocupando 60-85% do canvas, rotacionada 90° quando o design pedir</li>
+<li><strong>Headline central</strong> — SF Pro Expanded Semibold 650, <strong>74-137px</strong>, sentence case, cor <code>#FFFFFF</code> ou <code>#EBF3F7</code>, letter-spacing -5%, line-height 0.9</li>
+<li><strong>Sub-caption</strong> (opcional) — SF Pro Expanded Semibold 650 em escala menor (~47px), cor <code>#435965</code> em bg claro ou card overlay</li>
+<li><strong>Pill tag list</strong> — fileira horizontal de servicos (detalhe em 13.5)</li>
+<li><strong>Yellow brand band</strong> — faixa horizontal amarela em uma borda do canvas (detalhe em 13.6)</li>
+<li><strong>Logo stack compacto</strong> — simbolo + wordmark, canto oposto a brand band (ex: top-right quando band esta bottom)</li>
+<li><strong>URL footer</strong> — <code>METTABRASIL.COM.BR</code> em SF Pro Medium 510, 18px, color <code>#435965</code></li>
+</ol>
+<p><strong>Quando usar:</strong> posters institucionais de evento, pecas de feira, material impresso premium, capas de apresentacao.</p>
+<h3 id="134-padrao-slide-statement">13.4 Padrao Slide Statement</h3>
+<p>Padrao observado no frame <code>slide 3</code> (251:3723) do Playground. Layout de statement de valor comercial com footer de autoria persistente.</p>
+<p><strong>Canvas:</strong> 1920x1080
+<strong>Background:</strong> <code>#0C161B</code></p>
+<p><strong>Area principal (y: 0-900):</strong></p>
+<ul>
+<li>Headline centralizado horizontalmente em x=965 (center)</li>
+<li>Tipografia: <strong>SF Pro Expanded Regular 410 a 142.5px</strong>, color <code>#EBF3F7</code> (ice-blue)</li>
+<li>Mixed-weight inline: palavras enfaticas trocam para <strong>Expanded Semibold 650</strong> (ex: &quot;parceria&quot;, &quot;aumentar o lucro&quot;)</li>
+<li>Mixed-color inline: palavras-chave coloridas em <code>#FFBE18</code> (amarelo) para destaque semantico</li>
+<li>Line-height 0.82, letter-spacing -1%</li>
+<li>Sentence case — NAO uppercase (ao contrario dos estilos de anuncio conversao A-L)</li>
+</ul>
+<p><strong>Divider (y: 910):</strong></p>
+<ul>
+<li>Linha horizontal 1810x2px</li>
+<li>Cor <code>#435965</code> (steel)</li>
+<li>Margem lateral: 48px</li>
+</ul>
+<p><strong>Footer persistente (y: 940-1018) — 4 colunas:</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Col</th>
+<th>Posicao</th>
+<th>Conteudo</th>
+<th>Especificacao</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>x=48</td>
+<td>Avatar + Name Stack</td>
+<td>Ver 13.8</td>
+</tr>
+<tr>
+<td>2</td>
+<td>x=580</td>
+<td>Tagline da marca</td>
+<td>&quot;Performance em vendas pode ser mais leve.&quot; — SF Pro Expanded Medium 540, 19.9px, <code>#435965</code>, max-width ~314px</td>
+</tr>
+<tr>
+<td>3</td>
+<td>x=1094</td>
+<td>Brand lockup pill</td>
+<td>Ver 13.9</td>
+</tr>
+<tr>
+<td>4</td>
+<td>x=1809</td>
+<td>Arrow navigation</td>
+<td>Circle 48.6x48.6, icon → (proximo slide)</td>
+</tr>
+</tbody></table></div>
+<p><strong>Quando usar:</strong> apresentacoes comerciais, slides de abertura de capitulo, statements de valor com atribuicao de autor.</p>
+<h3 id="135-pill-tag-list-componente-reusavel">13.5 Pill Tag List (Componente Reusavel)</h3>
+<p>Componente de tags horizontais para listar servicos/categorias. Encontrado em posters e cards.</p>
+<p><strong>Especificacao do container (cada tag):</strong></p>
+<ul>
+<li>Shape: rounded pill, radius <code>23.4px</code></li>
+<li>Background: cor do token (ex: <code>#435965</code> sobre bg <code>#0C161B</code>)</li>
+<li>Border: <code>0.98px solid</code> mesma cor do background</li>
+<li>Padding: <code>14.3px</code> horizontal x <code>7.7px</code> vertical</li>
+</ul>
+<p><strong>Especificacao do texto:</strong></p>
+<ul>
+<li>Font: <strong>SF Pro Expanded Medium 540</strong></li>
+<li>Size: 9-11px (poster) ou escalar proporcional ao canvas</li>
+<li>Color: contrastante com o bg da pill (ex: <code>#0C161B</code> sobre <code>#435965</code>)</li>
+<li>Letter-spacing: <code>+12%</code> (0.12em)</li>
+<li>Text-transform: UPPERCASE</li>
+</ul>
+<p><strong>Lista oficial de servicos (encontrada em poster 6):</strong></p>
+<ol>
+<li><code>LIVROS</code></li>
+<li><code>TREINAMENTOS</code></li>
+<li><code>FORMACOES</code></li>
+<li><code>MBA</code></li>
+<li><code>MENTORIA</code></li>
+<li><code>CONSULTORIA</code></li>
+</ol>
+<p><strong>Layout:</strong> horizontal, <code>inline-flex</code>, gap 0 ou sem gap entre pills adjacentes.</p>
+<p><strong>Quando usar:</strong> representar o ecossistema de servicos Metta, navegacao por categorias, badges de area em posters/cards.</p>
+<h3 id="136-yellow-brand-band-componente-reusavel">13.6 Yellow Brand Band (Componente Reusavel)</h3>
+<p>Faixa horizontal full-width em <code>#FFBE18</code> que funciona como &quot;assinatura de marca&quot; em posters e layouts institucionais.</p>
+<p><strong>Especificacao:</strong></p>
+<ul>
+<li>Altura: ~138px (proporcional ao canvas)</li>
+<li>Largura: full width do canvas</li>
+<li>Background: <code>#FFBE18</code></li>
+<li>Padding: 162px horizontal, 35px vertical</li>
+<li>Layout: <code>flex justify-between items-center</code></li>
+</ul>
+<p><strong>Conteudo interno:</strong></p>
+<ul>
+<li><strong>Left:</strong> brand lockup stack vertical (simbolo 72x68 + wordmark &quot;metta&quot; 173x68)</li>
+<li><strong>Right:</strong> label <code>INTELIGÊNCIA COMERCIAL</code> em SF Pro Expanded Regular 410, 23.4px, color <code>#0C161B</code>, letter-spacing -1%</li>
+</ul>
+<p><strong>Variante vertical:</strong> rotacionar 90° para criar um spine na borda lateral do canvas (visto em Poster 6 rodando verticalmente com o logo lockup).</p>
+<p><strong>Quando usar:</strong> ancora de marca em posters editoriais, separador entre areas de conteudo em slides, footer de impacto em material institucional.</p>
+<h3 id="137-vertical-rotated-wordmark-fragment-componente-reusavel">13.7 Vertical Rotated Wordmark Fragment (Componente Reusavel)</h3>
+<p>Padrao signature da marca Metta: wordmark &quot;metta&quot; rotacionado 90° e com crop/bleed na borda do canvas.</p>
+<p><strong>Especificacao:</strong></p>
+<ul>
+<li>Texto: wordmark &quot;metta&quot; (lowercase, SF Pro style) — usar SVG oficial do Drive quando possivel</li>
+<li>Rotacao: exatamente 90° (vertical, leitura bottom-up)</li>
+<li>Dimensao: width ~265-280px x height = altura do canvas (ex: 1414px em poster A4)</li>
+<li>Posicao: flush bleed na borda <strong>esquerda</strong> do canvas (ou direita em variantes)</li>
+<li>Cor: low-contrast sobre o background<ul>
+<li>Sobre <code>#0C161B</code>: branco com opacity 80-100% (quando dominante) OR <code>#435965</code> (quando como textura)</li>
+<li>Sobre <code>#FFBE18</code>: <code>#0C161B</code></li>
+<li>Sobre <code>#FFFFFF</code>: light gray #EBF3F7 ou azul #0C161B low opacity</li>
+</ul>
+</li>
+<li>Z-order: camada de fundo, atras do conteudo principal mas acima do background color</li>
+</ul>
+<p><strong>Quando usar:</strong> posters editoriais, aplicacoes print, slides de statement onde o wordmark vira textura de fundo e ancora de marca.</p>
+<h3 id="138-avatar-name-stack-componente-reusavel">13.8 Avatar + Name Stack (Componente Reusavel)</h3>
+<p>Padrao de atribuicao/credito usado em slides de statement, business cards e lanyards de evento.</p>
+<p><strong>Especificacao:</strong></p>
+<ul>
+<li><strong>Avatar:</strong> circular mask 72x72, foto da pessoa cropada e centralizada</li>
+<li><strong>Stack textual ao lado direito:</strong><ul>
+<li>Nome: <strong>SF Pro Expanded Heavy 870</strong>, 32.6px, color <code>#435965</code> (em slide claro) ou <code>#FFFFFF</code> (em dark), letter-spacing -1%, line-height 0.82</li>
+<li>Role/cargo: <strong>SF Pro Regular 400</strong>, 16.9px, mesma cor do nome, line-height 0.82</li>
+</ul>
+</li>
+<li>Gap entre avatar e texto: ~16px</li>
+<li>Alinhamento: avatar esquerda, textos verticalmente centrados (align-items: center)</li>
+</ul>
+<p><strong>Exemplos de uso na fonte:</strong></p>
+<ul>
+<li>Footer de slides de statement (autor do insight)</li>
+<li>Business cards (poster 4 tipo &quot;card 1&quot;)</li>
+<li>Lanyards/crachas de evento (slide &quot;7&quot; mostra 3 exemplos)</li>
+</ul>
+<h3 id="139-brand-lockup-pill-componente-reusavel">13.9 Brand Lockup Pill (Componente Reusavel)</h3>
+<p>Lockup compacto da marca em formato pill horizontal, usado como ancora de brand em footers de slide e material institucional.</p>
+<p><strong>Estrutura interna:</strong></p>
+<pre><code>[simbolo 43x41] [wordmark &quot;metta&quot; 93x18] [divider vertical 1x22] [label &quot;INTELIGÊNCIA COMERCIAL&quot;]
+</code></pre>
+<p><strong>Especificacao do container:</strong></p>
+<ul>
+<li>Shape: rounded pill, radius <code>46.8px</code></li>
+<li>Padding: 16px horizontal, 13px vertical</li>
+<li>Gap interno entre elementos: ~14px</li>
+</ul>
+<p><strong>Elementos:</strong></p>
+<ul>
+<li><strong>Simbolo:</strong> icon Metta (imagem do Drive)</li>
+<li><strong>Wordmark:</strong> &quot;metta&quot; lowercase (imagem ou texto em SF Pro)</li>
+<li><strong>Divider:</strong> linha vertical 1x22px, color branco ou <code>#435965</code></li>
+<li><strong>Label:</strong> <code>INTELIGÊNCIA COMERCIAL</code> — SF Pro Expanded Regular 410, 17px, white (em dark) ou <code>#0C161B</code> (em light), letter-spacing +12%, uppercase</li>
+</ul>
+<p><strong>Quando usar:</strong> footer de slides, assinaturas de email signature, cards de credencial, watermarks institucionais, pop-ups de confirmacao.</p>
+<h3 id="1310-tokens-de-layout-confirmados-na-fonte">13.10 Tokens de Layout Confirmados na Fonte</h3>
+<p>Coordenadas e medidas extraidas diretamente dos frames analisados. Usar como grid de referencia quando montar pecas novas na mesma linha visual.</p>
+<p><strong>Slide 1920x1080 — grid padrao:</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>X</th>
+<th>Y</th>
+<th>W</th>
+<th>H</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Margem lateral</td>
+<td>48</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Headline area</td>
+<td>965 (center)</td>
+<td>314</td>
+<td>1611</td>
+<td>auto</td>
+</tr>
+<tr>
+<td>Divider horizontal</td>
+<td>48</td>
+<td>910</td>
+<td>1810</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Avatar</td>
+<td>48</td>
+<td>946</td>
+<td>72</td>
+<td>72</td>
+</tr>
+<tr>
+<td>Tagline column</td>
+<td>580</td>
+<td>959</td>
+<td>314</td>
+<td>auto</td>
+</tr>
+<tr>
+<td>Brand lockup pill</td>
+<td>1094</td>
+<td>942</td>
+<td>auto</td>
+<td>74</td>
+</tr>
+<tr>
+<td>Arrow circle</td>
+<td>1809</td>
+<td>955</td>
+<td>48.6</td>
+<td>48.6</td>
+</tr>
+</tbody></table></div>
+<p><strong>Poster 2035x1414 — grid padrao:</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>X</th>
+<th>Y</th>
+<th>W</th>
+<th>H</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Margem superior</td>
+<td>0</td>
+<td>26.5</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Wordmark vertical (left bleed)</td>
+<td>0.17</td>
+<td>-0.79</td>
+<td>280.8</td>
+<td>1414.8</td>
+</tr>
+<tr>
+<td>Logo stack compacto (top-right)</td>
+<td>1933</td>
+<td>66</td>
+<td>49</td>
+<td>138</td>
+</tr>
+<tr>
+<td>Headline area (center)</td>
+<td>751</td>
+<td>204</td>
+<td>335</td>
+<td>986</td>
+</tr>
+<tr>
+<td>Photo mask (dominant)</td>
+<td>1313</td>
+<td>0</td>
+<td>858</td>
+<td>1816</td>
+</tr>
+<tr>
+<td>URL footer</td>
+<td>350</td>
+<td>1274</td>
+<td>auto</td>
+<td>auto</td>
+</tr>
+<tr>
+<td>Yellow brand band (top ou bottom)</td>
+<td>—</td>
+<td>—</td>
+<td>full</td>
+<td>138</td>
+</tr>
+</tbody></table></div>
+<h3 id="1311-escala-de-headline-por-canvas">13.11 Escala de Headline por Canvas</h3>
+<p>Tamanhos observados na fonte, usar como referencia de Display Hero:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Canvas</th>
+<th>Display Hero</th>
+<th>Weight</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1920x1080 (slide)</td>
+<td><strong>142.5px</strong></td>
+<td>Exp Regular 410 + Semibold 650 inline</td>
+<td>tracking -1%, line-height 0.82</td>
+</tr>
+<tr>
+<td>2035x1414 (poster)</td>
+<td>74-137px</td>
+<td>Exp Semibold 650</td>
+<td>depende da area disponivel</td>
+</tr>
+<tr>
+<td>1080x1350 (feed)</td>
+<td>96-120px</td>
+<td>Exp Heavy 870</td>
+<td>ja documentado</td>
+</tr>
+<tr>
+<td>1080x1920 (story)</td>
+<td>100-240px</td>
+<td>Exp Heavy 870</td>
+<td>ja documentado</td>
+</tr>
+</tbody></table></div>
+<p><strong>Correcao vs documentacao anterior:</strong> slides 16:9 usam headlines ate 142.5px (nao 120-136 como citado em algumas tabelas). Posters editoriais podem chegar a 137px em headlines compactos.</p>
+<h3 id="1312-observacoes-finais-e-diferencas-vs-documentacao-anterior">13.12 Observacoes Finais e Diferencas vs Documentacao Anterior</h3>
+<p><strong>Confirmacoes (alinhado com PRD existente):</strong></p>
+<ul>
+<li>Paleta de cores primarias (#0C161B, #FFBE18, #FFFFFF, #EBF3F7, #435965)</li>
+<li>SF Pro como familia tipografica unica</li>
+<li>Wordmark como textura/decoracao</li>
+<li>Footer de slide com 4 colunas</li>
+<li>Pills como navegacao de categoria</li>
+<li>Yellow accent sobre dark</li>
+</ul>
+<p><strong>Novas descobertas (adicionar ao repertorio):</strong></p>
+<ul>
+<li>Canvas editorial poster 2035x1414 (nao documentado antes)</li>
+<li>SF Pro Expanded usa <code>wdth 132</code>, nao 130</li>
+<li>Steel <code>#435965</code> como background PRIMARIO (nao apenas texto secundario)</li>
+<li>Tagline fixa: &quot;Performance em vendas pode ser mais leve.&quot;</li>
+<li>Lista oficial de 6 servicos em pill tags (LIVROS, TREINAMENTOS, FORMACOES, MBA, MENTORIA, CONSULTORIA)</li>
+<li>Avatar + Name Stack como componente sistematico</li>
+<li>Slide headline chega a 142.5px (maior que documentado)</li>
+<li>Brand lockup pill tem estrutura exata: simbolo + wordmark + divider vertical + label</li>
+<li>Yellow brand band tem altura exata ~138px com padding 162/35</li>
+</ul>
+<p><strong>Para o fluxo de criacao dentro do Figma via MCP (use_figma), consultar a secao 19 do <code>Skill - Agente de Design</code> — contem especificacoes tecnicas de Plugin API, nomes corretos de fontes, padroes de codigo e pitfalls conhecidos.</strong></p>
+<hr>
+<p><em>Documento gerado a partir da analise do arquivo Figma &quot;Rebranding&quot;, pagina &quot;04.1 Metta&quot;.</em>
+<em>Fonte: <a href="https://www.figma.com/design/dNVyxGVNxNbE6sA1F7OOXL/Rebranding">https://www.figma.com/design/dNVyxGVNxNbE6sA1F7OOXL/Rebranding</a></em>
+<em>Assets: <a href="https://drive.google.com/drive/folders/1I7W7fYQw1NK4iVhMEkgnWIBjeZZtTQ7u">https://drive.google.com/drive/folders/1I7W7fYQw1NK4iVhMEkgnWIBjeZZtTQ7u</a></em></p>
+<hr>
+<!-- AUTO-RELATED-START -->
+<h2 id="documentos-relacionados">🔗 Documentos Relacionados</h2>
+<p><strong>Skill que implementa:</strong></p>
+<ul>
+<li><span class="wikilink" data-target="Skill - Agente de Design">Skill - Agente de Design</span></li>
+</ul>
+<p><strong>Compilação:</strong></p>
+<ul>
+<li><span class="wikilink" data-target="Metta - Brandbook">Metta - Brandbook</span></li>
+</ul>
+<p><strong>Hub:</strong></p>
+<ul>
+<li><span class="wikilink" data-target="🏢 MOC - Ecossistema Metta">🏢 MOC - Ecossistema Metta</span></li>
+</ul>
+<!-- AUTO-RELATED-END -->

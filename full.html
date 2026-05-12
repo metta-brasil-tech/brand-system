@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documentação completa · Metta Brand System</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/shell.css">
+<link rel="stylesheet" href="styles/prose.css">
+
+<style>
+  body { background: var(--metta-sys-color-background); }
+  .full-shell {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 32px 128px;
+  }
+  .full-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--metta-sys-color-background) 88%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .full-topbar .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 590;
+    letter-spacing: -0.01em;
+    color: var(--metta-sys-color-on-surface);
+    background: transparent;
+    border: 1px solid var(--metta-sys-color-outline);
+    border-radius: var(--metta-sys-shape-corner-full);
+    text-decoration: none;
+    transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+  }
+  .full-topbar .back-link:hover {
+    background: var(--metta-sys-color-surface-container-high);
+  }
+  .full-topbar .crumb {
+    flex: 1;
+    font-size: 12px;
+    font-weight: 540;
+    font-stretch: 132%;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--metta-sys-color-on-surface-variant);
+  }
+  .full-topbar .crumb .current {
+    color: var(--metta-sys-color-on-surface);
+  }
+  .full-topbar .download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 590;
+    letter-spacing: -0.01em;
+    background: var(--metta-sys-color-primary);
+    color: var(--metta-sys-color-on-primary);
+    border-radius: var(--metta-sys-shape-corner-full);
+    text-decoration: none;
+    transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+  }
+  .full-topbar .download:hover { background: var(--metta-sys-color-on-surface); }
+  .full-shell .doc-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  }
+  .full-shell .doc-header .yellow-band {
+    height: 6px;
+    background: var(--metta-comp-yellow-band-color);
+    width: 64px;
+    margin-bottom: 18px;
+  }
+  .full-shell .doc-header h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 870;
+    font-stretch: 132%;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin: 0 0 8px;
+  }
+  .full-shell .doc-header .doc-tab {
+    font-size: 12px;
+    font-weight: 540;
+    font-stretch: 132%;
+    text-transform: uppercase;
+    letter-spacing: 0.20em;
+    color: var(--metta-sys-color-on-surface-variant);
+  }
+  #full-content {
+    min-height: 200px;
+  }
+</style>
+</head>
+<body>
+
+<div class="full-topbar">
+  <a class="back-link" href="javascript:window.close();" id="back-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+    </svg>
+    <span>Fechar</span>
+  </a>
+  <div class="crumb" id="crumb">Carregando…</div>
+  <a class="download" id="download-btn" href="#" download>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    <span>Baixar .md</span>
+  </a>
+</div>
+
+<div class="full-shell">
+  <header class="doc-header">
+    <div class="yellow-band"></div>
+    <div class="doc-tab" id="doc-tab"></div>
+    <h1 id="doc-title">Documentação</h1>
+  </header>
+  <article class="prose" id="full-content"></article>
+</div>
+
+<script>
+(async function () {
+  function parseHash() {
+    const h = location.hash.replace(/^#\/?/, '').split('?')[0];
+    const [tabId, sectionId] = h.split('/');
+    return { tabId, sectionId };
+  }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+  // Sincroniza tema com app principal
+  try {
+    const saved = localStorage.getItem('brand-theme') || 'light';
+    setTheme(saved);
+  } catch (e) {}
+
+  const { tabId, sectionId } = parseHash();
+  if (!tabId || !sectionId) {
+    document.getElementById('full-content').innerHTML = '<p>URL inválida. Volte e tente novamente.</p>';
+    return;
+  }
+
+  // Resolve labels via nav.json
+  let tabLabel = tabId, secLabel = sectionId;
+  try {
+    const navRes = await fetch('data/nav.json');
+    const nav = await navRes.json();
+    const tab = nav.tabs.find(t => t.id === tabId);
+    if (tab) {
+      tabLabel = tab.label;
+      const sec = tab.sections.find(s => s.id === sectionId);
+      if (sec) secLabel = sec.label;
+    }
+  } catch (e) {}
+
+  document.getElementById('doc-tab').textContent = tabLabel;
+  document.getElementById('doc-title').textContent = secLabel;
+  document.getElementById('crumb').innerHTML =
+    `<span>${tabLabel}</span> · <span class="current">${secLabel}</span>`;
+  document.title = `${secLabel} · ${tabLabel} · Metta Brand System`;
+  document.getElementById('download-btn').href = `content/${tabId}/${sectionId}.md`;
+
+  // Carrega o conteúdo completo
+  try {
+    const res = await fetch(`content/${tabId}/${sectionId}.full.html`);
+    if (res.ok) {
+      const html = await res.text();
+      document.getElementById('full-content').innerHTML = html;
+    } else {
+      // fallback: tenta o .html resumido
+      const fallback = await fetch(`content/${tabId}/${sectionId}.html`);
+      if (fallback.ok) {
+        const html = await fallback.text();
+        document.getElementById('full-content').innerHTML = html;
+      } else {
+        document.getElementById('full-content').innerHTML =
+          '<p>Documentação não encontrada.</p>';
+      }
+    }
+  } catch (e) {
+    document.getElementById('full-content').innerHTML =
+      `<p>Erro ao carregar: ${e.message}</p>`;
+  }
+
+  // Se a janela não pode ser fechada (não foi aberta com window.open), oferece "Voltar"
+  document.getElementById('back-link').addEventListener('click', (e) => {
+    if (window.opener) return; // deixa o javascript:window.close() rodar
+    e.preventDefault();
+    if (history.length > 1) history.back();
+    else location.href = 'index.html';
+  });
+})();
+</script>
+
+</body>
+</html>

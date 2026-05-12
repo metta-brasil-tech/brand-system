@@ -1,0 +1,4631 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-05-09T21:12:55.250872+00:00",
+  "types": {
+    "ad": "Ads (anúncios)",
+    "carrossel": "Carrosséis",
+    "slide": "Slides (apresentações)",
+    "tela": "Telas Conceito (posters, banners, editoriais)",
+    "lp": "LPs (landing pages)",
+    "poster": "Posters editoriais"
+  },
+  "intents": {
+    "autoridade": "Autoridade",
+    "oferta": "Oferta",
+    "prova": "Prova",
+    "conversao": "Conversão direta"
+  },
+  "brands": {
+    "metta": "Metta",
+    "tiago": "Tiago Alves"
+  },
+  "icps": {
+    "acelera": "Acelera",
+    "elite": "Elite",
+    "premium": "Premium",
+    "exclusive": "Exclusive"
+  },
+  "moods": [
+    "confronto",
+    "provocacao",
+    "autoridade",
+    "aspiracional",
+    "analitico",
+    "acolhedor",
+    "urgencia"
+  ],
+  "applications": [
+    {
+      "id": "carrossel-37-empresarios-em-burnout",
+      "type": "carrossel",
+      "style": null,
+      "format": "carrossel-1080x1350",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "37% dos empresários estão em burnout",
+      "tese": "Burnout do empresário não é falta de meditação — é falta de método. Empresa autônoma resolve.",
+      "mood": "confronto-editorial",
+      "src": {
+        "thumb": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/_thumb.webp",
+        "mid": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-1.webp"
+      },
+      "slot_count": 9,
+      "slots": [
+        {
+          "n": 1,
+          "function": "capa-hook-dado",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-1.webp"
+        },
+        {
+          "n": 2,
+          "function": "pesquisa-empilhada",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-2.webp"
+        },
+        {
+          "n": 3,
+          "function": "desenvolvimento",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-3.webp"
+        },
+        {
+          "n": 4,
+          "function": "desenvolvimento",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-4.webp"
+        },
+        {
+          "n": 5,
+          "function": "reframe-editorial",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-5.webp"
+        },
+        {
+          "n": 6,
+          "function": "metodo",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-6.webp"
+        },
+        {
+          "n": 7,
+          "function": "metodo",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-7.webp"
+        },
+        {
+          "n": 8,
+          "function": "punchline-reframe",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-8.webp"
+        },
+        {
+          "n": 9,
+          "function": "fechamento-prova-cta",
+          "src": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/slide-9.webp"
+        }
+      ],
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Funis/01. Social/Metta/37% dos empresarios estao em burnout",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-dark-blue",
+        "yellow-50-sotaque",
+        "title-large-display",
+        "expanded-heavy",
+        "imagem-conceitual"
+      ],
+      "archetype_foto": "imagem-conceitual-editorial",
+      "notes": "Carrossel editorial Metta de prova-pesada. Estrutura: hook com dado externo (37% Gallup) → pesquisa empilhada → reframe editorial via metáforas (vaca, lâmpada na cabeça) → punchline → fechamento com prova interna (72% clientes Metta) + CTA. Estilo cinematográfico com imagens conceituais. Paleta charcoal/dark-blue + amarelo + claro nos slides de prova. Top of funnel pra empresário no limite.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "carrossel-prova-pesada",
+      "serie_id": null,
+      "densidade_texto": "alta"
+    },
+    {
+      "id": "carrossel-gestao-da-mudanca-time-3-vezes",
+      "type": "carrossel",
+      "style": null,
+      "format": "carrossel-1080x1350",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "elite"
+      ],
+      "title": "Você já trocou o time 3 vezes",
+      "tese": "O problema não está no time — está na ausência de gestão da mudança. Uma das 6 Gestões.",
+      "mood": "provocacao-editorial",
+      "src": {
+        "thumb": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/_thumb.webp",
+        "mid": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-1.webp"
+      },
+      "slot_count": 10,
+      "slots": [
+        {
+          "n": 1,
+          "function": "capa-provocacao",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-1.webp"
+        },
+        {
+          "n": 2,
+          "function": "desenvolvimento",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-2.webp"
+        },
+        {
+          "n": 3,
+          "function": "desenvolvimento",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-3.webp"
+        },
+        {
+          "n": 4,
+          "function": "diagnostico",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-4.webp"
+        },
+        {
+          "n": 5,
+          "function": "reframe",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-5.webp"
+        },
+        {
+          "n": 6,
+          "function": "metodo-6-gestoes",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-6.webp"
+        },
+        {
+          "n": 7,
+          "function": "metodo",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-7.webp"
+        },
+        {
+          "n": 8,
+          "function": "metodo",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-8.webp"
+        },
+        {
+          "n": 9,
+          "function": "prova",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-9.webp"
+        },
+        {
+          "n": 10,
+          "function": "fechamento-cta",
+          "src": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/slide-10.webp"
+        }
+      ],
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Funis/01. Social/Metta/Gestão da Mudança",
+      "date": "2026-04-29",
+      "status": "canonical",
+      "tokens_used": [
+        "bege-papelao",
+        "charcoal-base",
+        "red-tag-mudanca",
+        "title-medium",
+        "expanded-heavy",
+        "imagem-conceitual"
+      ],
+      "archetype_foto": "imagem-conceitual-editorial",
+      "notes": "Carrossel da série \"AS 6 GESTÕES\" — pilar editorial Metta. Foco na Gestão da Mudança. Capa cinematográfica com cabeça peeking entre caixas/cubos bege simboliza \"estar perdido no labirinto da gestão\". Tags topo \"AS 6 GESTÕES\" + \"MUDANÇA\" (vermelho destaque). Reframe editorial: trocar time não resolve, é gestão. Funil: provocação → diagnóstico → método (6 Gestões da Meta Batida).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "carrossel-6-gestoes",
+      "serie_id": null,
+      "densidade_texto": "alta"
+    },
+    {
+      "id": "carrossel-post-fca-case-78-meta",
+      "type": "carrossel",
+      "style": null,
+      "format": "carrossel-1080x1350",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Case FCA — gestor saiu de 62% pra 78% da meta em 7 dias",
+      "tese": "Com FCA (Ferramenta de Comportamento e Atitude), 15 min/dia bastam pra virar performance — sem demitir, sem contratar.",
+      "mood": "prova-acolhedora",
+      "src": {
+        "thumb": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/_thumb.webp",
+        "mid": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-1.webp"
+      },
+      "slot_count": 10,
+      "slots": [
+        {
+          "n": 1,
+          "function": "capa-case-numero",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-1.webp"
+        },
+        {
+          "n": 2,
+          "function": "contexto-empresa",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-2.webp"
+        },
+        {
+          "n": 3,
+          "function": "sintoma-diagnostico",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-3.webp"
+        },
+        {
+          "n": 4,
+          "function": "metodo-fca",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-4.webp"
+        },
+        {
+          "n": 5,
+          "function": "metodo-fca",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-5.webp"
+        },
+        {
+          "n": 6,
+          "function": "aplicacao-pratica",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-6.webp"
+        },
+        {
+          "n": 7,
+          "function": "resultado",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-7.webp"
+        },
+        {
+          "n": 8,
+          "function": "resultado-detalhado",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-8.webp"
+        },
+        {
+          "n": 9,
+          "function": "reframe",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-9.webp"
+        },
+        {
+          "n": 10,
+          "function": "fechamento-cta",
+          "src": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/slide-10.webp"
+        }
+      ],
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Funis/01. Social/Metta/Post FCA",
+      "date": "2026-04-12",
+      "status": "canonical",
+      "tokens_used": [
+        "light-base",
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-medium",
+        "expanded-heavy",
+        "foto-pessoa-real"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "Case real do banco com método FCA. Capa: número da virada (62→78%) + foto gestor + tag CASES. Body: 7 dias, sem demitir, sem contratar, \"uma ferramenta, 15 minutos por dia\" — promessa de simplicidade. Estilo Metta de prova nominal acolhedora — não mostra confronto, mostra resultado e leveza do método. Bottom funnel pra ICP que já reconhece dor e está buscando solução.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "carrossel-case",
+      "serie_id": null,
+      "densidade_texto": "alta"
+    },
+    {
+      "id": "ad-a-cliente-na-loja-nao-fecha",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Cliente na loja nao fecha",
+      "tese": "Cliente entra na loja e nao fecha — o problema e operacao, nao trafego",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-cliente-na-loja-nao-fecha.webp",
+        "mid": "assets/applications/ads/mid/ad-a-cliente-na-loja-nao-fecha.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-cliente-na-loja-nao-fecha.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Hook abrindo no confronto direto com a rotina de varejo. Estilo A canonico: tipografia Expanded Heavy massiva sobre preto + foto pessoa direita + amarelo so no CTA. Top of funnel quando o ICP ainda culpa o trafego e nao percebeu o gap operacional.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-diagnostico-1h-gratuito",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Diagnostico 1h gratuito",
+      "tese": "Em 1 hora gratuita, mapeamos o gargalo operacional do negocio",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-diagnostico-1h-gratuito.webp",
+        "mid": "assets/applications/ads/mid/ad-a-diagnostico-1h-gratuito.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-diagnostico-1h-gratuito.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "cta-pill-yellow",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Estilo A virado pra oferta de baixo atrito (diagnostico gratuito). Funciona em meio de funil quando ICP ja se reconheceu no problema. Headline carrega a entrega + CTA pill amarelo fecha. Boa referencia pra ads de qualificacao com isca de tempo curto.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-empresario-multiplique-seu-resultado",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Empresário, multiplique seu resultado",
+      "tese": "Promessa de multiplicação de resultado via método Metta — sem aumentar esforço",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-empresario-multiplique-seu-resultado.webp",
+        "mid": "assets/applications/ads/mid/ad-a-empresario-multiplique-seu-resultado.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-971-Capt-FB-EST-1-A-EMPRESARIO-MULTIPLIQUE-O-SEU-RESULTADO.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com promessa numérica direta. Tom mais aspiracional que de confronto. Mid funnel — ICP que já reconhece dor e busca solução clara.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-empresario-pare-de-apagar-incendio",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Empresário, pare de apagar incêndio",
+      "tese": "Empresário virou bombeiro do próprio negócio — apaga incêndio em vez de gerir método",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-empresario-pare-de-apagar-incendio.webp",
+        "mid": "assets/applications/ads/mid/ad-a-empresario-pare-de-apagar-incendio.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-969-Capt-FB-EST-1-A-EMPRESARIO-PARA-PARAR-DE-APAGAR.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A canônico de captação Facebook (PP-SE = Padrão Pago - Sessão Estratégica). Hook editorial: rotina apaga-incêndio = problema operacional. Top of funnel — ICP ainda não enxerga gap entre operação reativa e método sustentável.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-empresario-pare-de-vigiar",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Empresário, pare de vigiar",
+      "tese": "Vigilância sobre time = ausência de método autônomo. Solução é confiar via processo.",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-empresario-pare-de-vigiar.webp",
+        "mid": "assets/applications/ads/mid/ad-a-empresario-pare-de-vigiar.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-979-Capt-FB-EST-1-A-EMPRESARIO-PARE-DE-VIGIAR.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com confronto sobre micromanagement. Empresário-como-solução: a vigilância é sintoma de gap de método, não defeito do dono. Convite a substituir controle direto por método autônomo. Top of funnel.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-empresario-se-a-sua-rotina",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Empresário, se a sua rotina...",
+      "tese": "Diagnóstico de rotina sufocante — checklist mental pro empresário se reconhecer",
+      "mood": "diagnostico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-empresario-se-a-sua-rotina.webp",
+        "mid": "assets/applications/ads/mid/ad-a-empresario-se-a-sua-rotina.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-970-Capt-FB-EST-1-A-EMPRESARIO-SE-A-SUA-ROTINA.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com tom de auto-diagnóstico — convite à reflexão sobre rotina pessoal vs operacional. Top of funnel pra ICP que sente cansaço mas ainda atribui ao mercado/team em vez de método.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-empresario-voce-esta-satisfeito",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Empresário, você está satisfeito?",
+      "tese": "Provocação satisfação vs ambição — empresário acomodado deixa lucro na mesa",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-empresario-voce-esta-satisfeito.webp",
+        "mid": "assets/applications/ads/mid/ad-a-empresario-voce-esta-satisfeito.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-974-Capt-FB-EST-1-A-EMPRESARIO-VOCE-ESTA-SATISFEITO.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "Estilo A pergunta diagnóstica. Provocação amigável que faz ICP refletir. Não é shock-headline — é questionamento estratégico do tipo 'tá bom ou tem mais?'. Top of funnel.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-empresario-voce-fatura-200-mil",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Empresário, você fatura 200 mil",
+      "tese": "Targeting de faturamento (200K) — segmento Acelera específico, próximo passo é método",
+      "mood": "diagnostico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-empresario-voce-fatura-200-mil.svg",
+        "mid": "assets/applications/ads/mid/ad-a-empresario-voce-fatura-200-mil.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-972-Capt-FB-EST-1-A-EMPRESARIO-VOCE-FATURA-200MIL.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com TARGETING numérico explícito (200K/mês). Filtragem de ICP cirúrgica — fala só com Acelera (faixa de faturamento média). Direto pro segmento, evita dispersar verba em ICP fora da capacidade de pagamento da mentoria.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-eu-quero-voce-fora",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "elite"
+      ],
+      "title": "Eu quero você fora",
+      "tese": "Empresário deve sair da operação diária — quem fica preso na engrenagem não escala",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-eu-quero-voce-fora.webp",
+        "mid": "assets/applications/ads/mid/ad-a-eu-quero-voce-fora.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-976-Capt-FB-EST-1-A-EU-QUERO-VOCE-FORA.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com headline provocativa de alto impacto. Frase ambígua que prende atenção (parece ataque, é convite). Empresário-como-solução: sair da operação é objetivo, não punição. Top of funnel — alta retenção. ICP Premium/Elite que ainda se mantém preso por ego de 'controle'.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-extraia-o-potencial-maximo",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Extraia o potencial máximo",
+      "tese": "Equipe tem mais potencial do que está entregando — falta destravar via método",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-extraia-o-potencial-maximo.webp",
+        "mid": "assets/applications/ads/mid/ad-a-extraia-o-potencial-maximo.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-978-Capt-FB-EST-1-A-EXTRAIA-O-POTENCIAL-MAXIMO.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "time-colaborando-laptops",
+      "notes": "Estilo A com tom aspiracional sobre potencial latente do time. Não acusa o time — mostra que está abaixo do possível por falta de framework. ICP que valoriza pessoas mas precisa de método pra extrair entrega.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-gerindo-ou-esperando",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Gerindo ou esperando",
+      "tese": "Voce esta gerindo o negocio ou esperando o mes acabar?",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-gerindo-ou-esperando.webp",
+        "mid": "assets/applications/ads/mid/ad-a-gerindo-ou-esperando.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-gerindo-ou-esperando.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Pergunta diagnostica seca, dois estados opostos numa linha (gerindo vs esperando). Estilo A canonico — modelo `1:704` listado no banco. Headline carrega o ad sozinha; foto serve como ancora humana. Topo emocional, antes do ICP confessar exaustao.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-me-de-60-minutos",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Me dê 60 minutos",
+      "tese": "Convite ao diagnóstico de 60 min com Metta — promessa de virada concreta",
+      "mood": "convite",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-me-de-60-minutos.webp",
+        "mid": "assets/applications/ads/mid/ad-a-me-de-60-minutos.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-975-Capt-FB-EST-1-A-ME-DE-60-MINUTOS-PARA.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "mentoria-1-on-1",
+      "notes": "Estilo A com oferta direta de tempo (60 min). Tom de convite cirúrgico — mostra autoridade ao prometer transformação em janela curta. CTA implícito: agendar diagnóstico/sessão estratégica. Mid-bottom funnel.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-o-segredo-para-dobrar-sua-conversao",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "O segredo para dobrar sua conversão",
+      "tese": "Conversão dobra com método de vendas estruturado — não com mais leads ou esforço",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-o-segredo-para-dobrar-sua-conversao.webp",
+        "mid": "assets/applications/ads/mid/ad-a-o-segredo-para-dobrar-sua-conversao.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-981-Capt-FB-EST-1-A-O-SEGREDO-PARA-DOBRAR-SUA-CONVERSAO.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com promessa numérica forte (dobrar = +100%). Hook clickbait moderado — 'segredo' pega atenção mas Metta entrega substância. Mid funnel — ICP que já busca solução de vendas e está medindo conversão.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-operacao-funciona-sem-voce",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Operacao funciona sem voce",
+      "tese": "Sua operacao funciona quando voce sai por 7 dias?",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-operacao-funciona-sem-voce.webp",
+        "mid": "assets/applications/ads/mid/ad-a-operacao-funciona-sem-voce.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-operacao-funciona-sem-voce.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Tese identitaria do ICP v3.0 — saida pessoal da operacao. Estilo A com headline de 4-5 linhas explora dor central. Boa pra retargeting MOFU; ICP ja confessou ser gargalo, ad valida e oferece saida.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-pare-de-agir-como-um-paramedico",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Pare de agir como um paramédico",
+      "tese": "Empresário paramédico só apaga emergência — falta atuar como cirurgião do método",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-pare-de-agir-como-um-paramedico.webp",
+        "mid": "assets/applications/ads/mid/ad-a-pare-de-agir-como-um-paramedico.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-982-Capt-FB-EST-1-A-PARE-DE-AGIR-COMO-UM-PARAMEDICO.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com metáfora médica forte (paramédico vs cirurgião). Variante mais elaborada do tema 'pare de apagar incêndio'. Empresário-como-solução: a metáfora não acusa — convida ao papel estratégico. Top of funnel.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-sem-meta-rotina-processo",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Sem meta rotina processo",
+      "tese": "Sem meta, sem rotina, sem processo — nao e empresa, e improviso",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-sem-meta-rotina-processo.webp",
+        "mid": "assets/applications/ads/mid/ad-a-sem-meta-rotina-processo.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-sem-meta-rotina-processo.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Triade Metta (meta + rotina + processo) destilada em headline-stack. Estilo A entrega o frame analitico sem ornamento. Pilar Cortes de Funil — educa o ICP sobre o que falta no negocio dele. Inferencia por nome — validar visualmente: confirmar se foto bate com mood analitico.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-sem-processo-fica-pra-tras",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Sem processo fica pra tras",
+      "tese": "Empresa sem processo nao acompanha quem tem",
+      "mood": "urgencia",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-sem-processo-fica-pra-tras.webp",
+        "mid": "assets/applications/ads/mid/ad-a-sem-processo-fica-pra-tras.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-sem-processo-fica-pra-tras.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Tese de urgencia competitiva (FOMO de mercado). Estilo A canonico, headline confronta o status quo. Boa referencia pra ads que falam pra quem vive o dilema 'meu negocio e diferente' — crenca limitante #3 do ICP v3.0.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-servicos-300-milmes",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Servicos 300 mil/mes",
+      "tese": "Empresas de servico de R$300k/mes tem teto operacional especifico",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-servicos-300-milmes.webp",
+        "mid": "assets/applications/ads/mid/ad-a-servicos-300-milmes.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-servicos-300-mil-mes.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Qualifier numerico no headline — modelo `1:1216` listado no banco. Estilo A entrega prova quantitativa segmentada (servico). Boa pra ads de fundo de funil que precisam filtrar audiencia por porte e segmento. Acelera/Premium combina com a faixa.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-servicos-vender-30-mais",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Servicos vender 30 mais",
+      "tese": "Empresas de servico crescem 30%+ com inteligencia comercial",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-servicos-vender-30-mais.webp",
+        "mid": "assets/applications/ads/mid/ad-a-servicos-vender-30-mais.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-servicos-vender-30-mais.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Promessa numerica + segmentacao por servico. Estilo A com numero como ancora. Funciona em retargeting MOFU pra audiencia ja qualificada por segmento. Validar se 30% tem fonte explicita no ad — regra de dado-com-referencia.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-sua-operacao-comercial-nao-precisa",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Sua operação comercial não precisa",
+      "tese": "Reframe: operação comercial não precisa de mais esforço, precisa de método",
+      "mood": "reframe",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-sua-operacao-comercial-nao-precisa.webp",
+        "mid": "assets/applications/ads/mid/ad-a-sua-operacao-comercial-nao-precisa.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-980-Capt-FB-EST-1-A-A-SUA-OPERACAO-COMERCIAL-NAO-PRECISA.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com reframe direto. Headline cliffhanger que abre curiosidade — 'não precisa do quê?'. Bom hook pra retenção. Top of funnel — ICP que ainda atribui falta de resultado a falta de esforço.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-talento-ou-prisao-de-cnpj",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Talento ou prisao de CNPJ",
+      "tese": "Seu talento virou prisao do CNPJ — voce so funciona se voce estiver dentro",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-talento-ou-prisao-de-cnpj.webp",
+        "mid": "assets/applications/ads/mid/ad-a-talento-ou-prisao-de-cnpj.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-A-STORY-talento-prisao-cnpj.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Modelo `1:1204` do banco — headline-stack 4 linhas + foto bleed. Tese identitaria forte (CNPJ patrocina CPF, do vocabulario Tiago). Estilo A canonico pra MOFU empresario que ja se reconhece como gargalo. Mood: confronto editorial sem agressao.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-transforme-o-desempenho-do-seu-time",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Transforme o desempenho do seu time",
+      "tese": "Time não chega no resultado por falta de método — transformação via Metta",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-transforme-o-desempenho-do-seu-time.webp",
+        "mid": "assets/applications/ads/mid/ad-a-transforme-o-desempenho-do-seu-time.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-977-Capt-FB-EST-1-A-TRANSFORME-O-DESEMPENHO-DO-SEU.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "time-colaborando-laptops",
+      "notes": "Estilo A com promessa de transformação de desempenho. Mid funnel — ICP que já identificou gap no time mas ainda não associou a método. Convite a ver Metta como solução estrutural.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-a-voce-paga-o-salario-de-um-time",
+      "type": "ad",
+      "style": "A",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Você paga o salário de um time",
+      "tese": "Você paga time inteiro mas o time não entrega — gap de gestão, não de pessoas",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-a-voce-paga-o-salario-de-um-time.webp",
+        "mid": "assets/applications/ads/mid/ad-a-voce-paga-o-salario-de-um-time.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/PP-SE-973-Capt-FB-EST-1-A-VOCE-PAGA-O-SALARIO-DE-UM-TIME.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo A com confronto financeiro direto. Empresário-como-solução: a empresa investe em time mas falta método pra extrair retorno. Não acusa o dono — mostra que o gap está no método de gestão. Top of funnel.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "captacao-fb",
+      "serie_id": "pp-se-captacao-fb",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-60-min-pra-tirar-do-balcao",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "60 min pra tirar do balcao",
+      "tese": "Em 60 minutos mostramos o caminho de saida do balcao",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-60-min-pra-tirar-do-balcao.webp",
+        "mid": "assets/applications/ads/mid/ad-b-60-min-pra-tirar-do-balcao.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-60-min-tirar-do-balcao.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "cta-pill-yellow"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Estilo B — foto top abre cenario emocional, headline embaixo entrega oferta de tempo curto. Hibrido prova+oferta: ICP de varejo identifica a cena (balcao) e ve saida concreta (60 min). MOFU. Inferencia por nome — validar arquetipo da foto top.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-convite-loja-nas-costas",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Convite — loja nas costas",
+      "tese": "Convite pra empresarios que carregam a loja nas costas",
+      "mood": "acolhedor",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-convite-loja-nas-costas.webp",
+        "mid": "assets/applications/ads/mid/ad-b-convite-loja-nas-costas.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-convite-loja-nas-costas.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "cta-pill-yellow"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo B com tom de convite (nao venda). Foto top ancora a metafora 'loja nas costas' — dor identitaria visualizavel. Boa referencia pra eventos/sessoes estrategicas onde o gancho e validar a dor antes de oferecer o caminho.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-funcionario-do-proprio-negocio",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Funcionario do proprio negocio",
+      "tese": "Empresario que so tira pedido virou funcionario do proprio CNPJ",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-funcionario-do-proprio-negocio.webp",
+        "mid": "assets/applications/ads/mid/ad-b-funcionario-do-proprio-negocio.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-funcionario-do-proprio-negocio.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "title-large"
+      ],
+      "archetype_foto": "executivo-cansado",
+      "notes": "Reframe identitario classico Tiago — voce achou que era empresario, e empregado. Estilo B com foto top mostra a cena (empresario atendendo balcao), headline desmonta o mantra. MOFU emocional, alta retencao em story.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-limite-da-exaustao",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Limite da exaustao",
+      "tese": "Voce bateu no limite da capacidade pessoal",
+      "mood": "acolhedor",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-limite-da-exaustao.webp",
+        "mid": "assets/applications/ads/mid/ad-b-limite-da-exaustao.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-limite-da-exaustao.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "title-large"
+      ],
+      "archetype_foto": "executivo-cansado",
+      "notes": "Modelo `1:566` no banco — foto Tiago pensativo top. Estilo B em modo dor pessoal/exaustao (camada emocional do ICP v3.0). Tom acolhedor, nao confronto — empresario ja sabe que esta exausto. Linha editorial pilar Bastidores Tiago + Cortes Funil.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-maquina-que-bate-meta-todo-mes",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive"
+      ],
+      "title": "Maquina que bate meta todo mes",
+      "tese": "SMTM e a maquina que faz o time bater meta todo mes",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-maquina-que-bate-meta-todo-mes.webp",
+        "mid": "assets/applications/ads/mid/ad-b-maquina-que-bate-meta-todo-mes.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-maquina-bate-meta-todo-mes.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "cta-pill-yellow"
+      ],
+      "archetype_foto": "time-em-acao",
+      "notes": "Promessa central da metodologia SMTM. Estilo B com foto top mostra time em acao (estado desejado), headline nomeia o produto. Boa pra topo de funil que ainda nao conhece o nome do programa. Mood aspiracional — antes/depois do ICP v3.0.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-mesmo-metodo-grandes-redes",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Mesmo metodo — grandes redes",
+      "tese": "Mesmo metodo que grandes redes usam, escalado pro empresario medio",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-mesmo-metodo-grandes-redes.webp",
+        "mid": "assets/applications/ads/mid/ad-b-mesmo-metodo-grandes-redes.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-mesmo-metodo-grandes-redes.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "title-large"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Prova social agregada (sem nominacao de cliente). Estilo B carrega o reframe 'metodo de grande nao e exclusivo de grande'. Combate crenca limitante #3 do ICP ('meu negocio e diferente'). MOFU empresario hesitante por porte.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-refem-operacional-ha-12-meses",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Refem operacional ha 12 meses",
+      "tese": "Voce esta refem da operacao ha 12 meses sem perceber",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-refem-operacional-ha-12-meses.webp",
+        "mid": "assets/applications/ads/mid/ad-b-refem-operacional-ha-12-meses.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-refem-operacional-12-meses.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "title-large"
+      ],
+      "archetype_foto": "executivo-cansado",
+      "notes": "Modelo `1:229` flagship do banco — homem deitado no sofa com saco na cabeca. Estilo B canonico em modo dor visualizavel. Tese identitaria do ICP v3.0 (saida da operacao). Funciona em qualquer ponto do funil — alta retencao por reconhecimento da cena.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-tirador-de-pedido",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Tirador de pedido",
+      "tese": "Sua equipe e tiradora de pedido, nao vendedora",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-tirador-de-pedido.webp",
+        "mid": "assets/applications/ads/mid/ad-b-tirador-de-pedido.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-tirador-de-pedido.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "title-large"
+      ],
+      "archetype_foto": "vendedor-passivo",
+      "notes": "Modelo `1:865` no banco — provocacao direta ao ICP que ja sente o problema mas nao sabe nomear. Estilo B com foto da cena (vendedor passivo no balcao) + headline que renomeia. Pilar Inteligencia Comercial Tiago. Linguagem oficial do ICP v3.0.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-b-ultimas-vagas-sessao",
+      "type": "ad",
+      "style": "B",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Ultimas vagas — sessao",
+      "tese": "Ultimas vagas pra sessao estrategica deste mes",
+      "mood": "urgencia",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-b-ultimas-vagas-sessao.webp",
+        "mid": "assets/applications/ads/mid/ad-b-ultimas-vagas-sessao.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-B-STORY-ultimas-vagas-sessao.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-sotaque",
+        "cta-pill-yellow",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Urgencia fundamentada por capacidade trimestral (linha editorial — urgencia fabricada e anti-padrao). Estilo B com foto Tiago top + headline de oferta. BOFU conversao direta. Validar que '~ultimas vagas' tem lastro real (sessao com data definida).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-c-apaga-incendio-ha-6-meses",
+      "type": "ad",
+      "style": "C",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Apaga incendio ha 6 meses",
+      "tese": "Voce apaga incendio ha 6 meses sem mexer no que importa",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-c-apaga-incendio-ha-6-meses.webp",
+        "mid": "assets/applications/ads/mid/ad-c-apaga-incendio-ha-6-meses.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-C-STORY-apaga-incendio-6-meses.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Modelo `1:421` no banco — pergunta diagnostica que paralisa. Estilo C tipografia pura sobre escuro: copy E o ad. Bandeira B2 (CEO Bombeiro) literal. MOFU pra ICP que ja sente exaustao mas justifica como 'fase'. Sem foto — copy carrega sozinha.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-c-aumentar-lucro-em-50",
+      "type": "ad",
+      "style": "C",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Aumentar lucro em 50%",
+      "tese": "Aumentar o lucro em ate 50% sem contratar mais ninguem",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-c-aumentar-lucro-em-50.webp",
+        "mid": "assets/applications/ads/mid/ad-c-aumentar-lucro-em-50.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-C-STORY-aumentar-lucro-50-num.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-display",
+        "expanded-heavy"
+      ],
+      "archetype_foto": null,
+      "notes": "Modelo `1:116` flagship do estilo C — numero amarelo destacado dentro da headline (mixed-weight). Promessa numerica forte + frame contra-intuitivo (sem contratar). Funciona em todo funil. Validar fonte do 50% no ad — regra dado-com-referencia.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-c-metta-lucro-tipo-gigante",
+      "type": "ad",
+      "style": "C",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Metta — lucro tipo gigante",
+      "tese": "Metta entrega lucro de empresa gigante pra empresario medio",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-c-metta-lucro-tipo-gigante.webp",
+        "mid": "assets/applications/ads/mid/ad-c-metta-lucro-tipo-gigante.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-C-STORY-metta-lucro-tipo-gigante.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-display",
+        "expanded-heavy"
+      ],
+      "archetype_foto": null,
+      "notes": "Modelo `1:1168` no banco — branding-led, statement institucional. Estilo C sem foto, headline ocupa quase tudo. Pilar Opinioes Fortes Metta. Boa referencia pra ads de marca pura (top of funnel onde audiencia ja conhece o nome Metta).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-c-time-bater-meta-em-3-meses",
+      "type": "ad",
+      "style": "C",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Time bater meta em 3 meses",
+      "tese": "Time bate meta em 3 meses com inteligencia comercial",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-c-time-bater-meta-em-3-meses.webp",
+        "mid": "assets/applications/ads/mid/ad-c-time-bater-meta-em-3-meses.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-C-STORY-time-bater-meta-3-meses.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Promessa numerica de tempo (3 meses). Estilo C tipografica pura — numero ancora a leitura. Pilar Numeros & Dados Metta. Funciona em meio de funil quando ICP precisa de prova de cadencia. Validar se '3 meses' tem case nominal de respaldo.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-d-engenharia-reversa-do-melhor-vendedor",
+      "type": "ad",
+      "style": "D",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Engenharia reversa do melhor vendedor",
+      "tese": "Engenharia reversa do top-performer pra replicar no time todo",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-d-engenharia-reversa-do-melhor-vendedor.webp",
+        "mid": "assets/applications/ads/mid/ad-d-engenharia-reversa-do-melhor-vendedor.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-D-STORY-engenharia-reversa-melhor-vendedor.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-bold",
+        "headline-yellow"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Estilo D — foto full-bleed + overlay escuro + headline amarela. Tese tecnica forte (engenharia reversa). Pilar Inteligencia Comercial Tiago, modo hiperzoom tecnico. MOFU. Linguagem do ICP que ja tem top-performer e nao sabe replicar.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-d-metodo-replicavel-em-60-min",
+      "type": "ad",
+      "style": "D",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Metodo replicavel em 60 min",
+      "tese": "Metodo que se replica no time em 60 minutos por vendedor",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-d-metodo-replicavel-em-60-min.webp",
+        "mid": "assets/applications/ads/mid/ad-d-metodo-replicavel-em-60-min.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-D-STORY-metodo-60-min-replicavel.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "headline-yellow",
+        "expanded-bold"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Promessa de tempo curto + replicabilidade. Estilo D moody — foto full-bleed ancora autoridade do metodo. Funciona em meio/fundo de funil. Inferencia por nome — validar que foto e Tiago ou cliente serio (nao stock sorridente, anti-padrao do D).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-d-metodo-tira-a-loja-das-costas",
+      "type": "ad",
+      "style": "D",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Metodo tira a loja das costas",
+      "tese": "Metodo que tira a loja das costas do empresario",
+      "mood": "acolhedor",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-d-metodo-tira-a-loja-das-costas.webp",
+        "mid": "assets/applications/ads/mid/ad-d-metodo-tira-a-loja-das-costas.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-D-STORY-metodo-tira-loja-costas.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "headline-yellow",
+        "expanded-bold"
+      ],
+      "archetype_foto": "executivo-cansado",
+      "notes": "Modelo `1:1159` no banco. Estilo D em modo dor pessoal — foto full-bleed cinematica + overlay + headline amarela emocional. Tese identitaria central do ICP v3.0 (saida pessoal). Tom acolhedor, conselheiro — nao acusatorio. Lovebrand.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-d-palestras-nao-batem-meta",
+      "type": "ad",
+      "style": "D",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive"
+      ],
+      "title": "Palestras nao batem meta",
+      "tese": "Palestra motivacional nao bate meta — implementacao bate",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-d-palestras-nao-batem-meta.webp",
+        "mid": "assets/applications/ads/mid/ad-d-palestras-nao-batem-meta.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-D-STORY-palestras-nao-batem-meta.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "headline-yellow"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Bandeira B1 (Demita o Achismo) literal — provocacao ao mercado de gurus motivacionais. Estilo D ancora a critica com peso editorial. Pilar Opinioes Fortes Metta. ICP v3.0 ja gastou com 'mentoria que nao entregou' — contraposicao funciona.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-d-prisao-do-so-funciona-comigo",
+      "type": "ad",
+      "style": "D",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Prisao do 'so funciona comigo'",
+      "tese": "Voce esta preso na crenca de que so funciona com voce dentro",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-d-prisao-do-so-funciona-comigo.svg",
+        "mid": "assets/applications/ads/mid/ad-d-prisao-do-so-funciona-comigo.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-D-STORY-prisao-so-funciona-comigo.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "headline-yellow"
+      ],
+      "archetype_foto": "executivo-cansado",
+      "notes": "Modelo `1:487` flagship do estilo D — homem refem da operacao em foto cinematica. Combate crenca limitante #1 do ICP v3.0 ('so eu sei fazer direito'). Reframe identitario forte. MOFU emocional alta retencao.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-d-risco-100-nosso",
+      "type": "ad",
+      "style": "D",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Risco 100% nosso",
+      "tese": "O risco e 100% nosso — garantia contratual de devolucao",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-d-risco-100-nosso.webp",
+        "mid": "assets/applications/ads/mid/ad-d-risco-100-nosso.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-D-STORY-risco-100-nosso.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "headline-yellow"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Bandeira B3 (Garantia) — gatilho de fechamento #2 do ICP v3.0 (clausula contratual irrevogavel). Estilo D confere peso ao compromisso. BOFU. Boa referencia pra ads de quebra de objecao 'ja gastei com mentoria que nao entregou'.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-dark-carta-convite-sistema-pra-poucos-empresarios",
+      "type": "ad",
+      "style": "DARK-CARTA",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "exclusive",
+        "elite"
+      ],
+      "title": "Convite — sistema pra poucos empresarios",
+      "tese": "Convite formal pra um sistema que cabe em poucos empresarios",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-dark-carta-convite-sistema-pra-poucos-empresarios.webp",
+        "mid": "assets/applications/ads/mid/ad-dark-carta-convite-sistema-pra-poucos-empresarios.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-DARK-CARTA-STORY-convite-sistema-poucos-empresarios.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-bold",
+        "card-elevated"
+      ],
+      "archetype_foto": null,
+      "notes": "Modelo `1:1043` no banco — mockup de carta/contrato em angulo + selo M. Estilo DARK-CARTA para convite Elite (capacity-limited real). Tom 'carta selada' — exclusividade fundamentada, nao fake-scarcity. BOFU pra plano premium/exclusive.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "convite-formal",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "alta"
+    },
+    {
+      "id": "ad-dark-colagem-craque-de-vendas-quebra-cabeca",
+      "type": "ad",
+      "style": "DARK-COLAGEM",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive"
+      ],
+      "title": "Craque de vendas — quebra-cabeca",
+      "tese": "Craque de vendas e peca que so encaixa no sistema certo",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-dark-colagem-craque-de-vendas-quebra-cabeca.webp",
+        "mid": "assets/applications/ads/mid/ad-dark-colagem-craque-de-vendas-quebra-cabeca.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-DARK-COLAGEM-STORY-craque-de-vendas-quebra-cabeca.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "metafora-conceitual",
+      "notes": "Modelo `1:947` no banco — mao com peca de quebra-cabeca + bonequinho. Metafora visual de 'encaixe'. Estilo DARK-COLAGEM editorial moody. Pilar Inteligencia Comercial Tiago. Funciona pra reframe de 'preciso de craque' pra 'preciso de sistema'.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-dark-objeto-multiplique-o-melhor-vendedor-domino",
+      "type": "ad",
+      "style": "DARK-OBJETO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Multiplique o melhor vendedor — domino",
+      "tese": "Multiplicar o melhor vendedor e efeito cascata, nao copia",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-dark-objeto-multiplique-o-melhor-vendedor-domino.webp",
+        "mid": "assets/applications/ads/mid/ad-dark-objeto-multiplique-o-melhor-vendedor-domino.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-DARK-OBJETO-STORY-multiplique-melhor-vendedor-domino.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "objeto-conceitual",
+      "notes": "Modelo `1:1076` no banco — peca de domino dourada como objeto-conceito. Metafora fisica do metodo (efeito cascata). Estilo DARK-OBJETO ancora protocolo de replicacao do top-performer. Cortes de Funil Metta. MOFU empresario com top-1 e cauda fraca.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-dark-objeto-queime-o-script",
+      "type": "ad",
+      "style": "DARK-OBJETO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Queime o script",
+      "tese": "Script de vendas obsoleto — método novo manda queimar e refazer",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-dark-objeto-queime-o-script.webp",
+        "mid": "assets/applications/ads/mid/ad-dark-objeto-queime-o-script.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/AD12 · DARK-OBJETO · queime-script.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy",
+        "imagem-conceitual"
+      ],
+      "archetype_foto": "objeto-conceitual-escuro",
+      "notes": "DARK-OBJETO clássico — fundo escuro, objeto-conceito 3D em destaque (provavelmente roteiro/papel queimando) ancora a tese metafórica. Provocação editorial: o que você usa não serve mais. Top of funnel pra empresário que ainda confia em script ultrapassado.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-h-perde-vendas-todo-dia",
+      "type": "ad",
+      "style": "H",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Perde vendas todo dia",
+      "tese": "Voce perde vendas todo dia pra falta de processo, nao pra concorrencia",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-h-perde-vendas-todo-dia.webp",
+        "mid": "assets/applications/ads/mid/ad-h-perde-vendas-todo-dia.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-H-STORY-perde-vendas-todo-dia.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "ice",
+        "yellow-50-sotaque",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "objeto-conceitual",
+      "notes": "Modelo `1:158` (unico no banco do estilo H). Fundo branco com headline gigante preta — alto contraste em feed escuro. Estilo H raro mas eficaz. Inferencia: provavel cedulas em anzois ou objeto-conceito. Pilar Cortes de Funil. Validar visualmente.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-i-anos-tentando-1-hora-ouvindo",
+      "type": "ad",
+      "style": "I",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Anos tentando — 1 hora ouvindo",
+      "tese": "Anos tentando sozinho — 1 hora ouvindo o metodo certo",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-i-anos-tentando-1-hora-ouvindo.svg",
+        "mid": "assets/applications/ads/mid/ad-i-anos-tentando-1-hora-ouvindo.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-I-STORY-anos-tentativa-1-hora.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large"
+      ],
+      "archetype_foto": "tiago-retrato-pb",
+      "notes": "Estilo I — retrato editorial PB + logo badge. Modelos `1:212` `1:679` no banco. Autoridade founder-led com gravidade. Reframe temporal forte (anos vs 1 hora). Bom em retargeting MOFU pra empresarios com fadiga de tentativa. Tom 'imprensa de negocios'.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-i-varejo-que-conhece-o-cliente",
+      "type": "ad",
+      "style": "I",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Varejo que conhece o cliente",
+      "tese": "Varejo que conhece o cliente vende sem dependencia do dono",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-i-varejo-que-conhece-o-cliente.webp",
+        "mid": "assets/applications/ads/mid/ad-i-varejo-que-conhece-o-cliente.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-I-STORY-varejo-conhece-cliente.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large"
+      ],
+      "archetype_foto": "tiago-retrato-pb",
+      "notes": "Estilo I segmentado pra varejo. Retrato editorial PB confere autoridade ao tema (conhecer cliente = inteligencia comercial aplicada). Pilar IC Tiago. Inferencia por nome — validar se headline cita dado de pesquisa de varejo (regra dado-com-fonte).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-k-convite-reservado-plano-b",
+      "type": "ad",
+      "style": "K",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "exclusive",
+        "elite"
+      ],
+      "title": "Convite reservado — plano B",
+      "tese": "Convite reservado pra empresarios que ainda nao tem plano B",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-k-convite-reservado-plano-b.webp",
+        "mid": "assets/applications/ads/mid/ad-k-convite-reservado-plano-b.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-K-STORY-convite-reservado-plano-b.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy"
+      ],
+      "archetype_foto": null,
+      "notes": "Modelo `1:596` (unico do estilo K). Bold dourado / urgencia elegante. Convite exclusivo com escassez REAL (capacity-limited). BOFU Elite. Linha amarela divisoria + headline LEFT-aligned massivo. 'Plano B' joga com identidade aspiracional do ICP v3.0.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "convite-formal",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-light-surreal-jantar-com-filhos-vs-reuniao",
+      "type": "ad",
+      "style": "LIGHT-SURREAL",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Jantar com filhos vs reuniao",
+      "tese": "Empresario que perde jantar com filhos pra reuniao perdeu o sentido",
+      "mood": "acolhedor",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-light-surreal-jantar-com-filhos-vs-reuniao.webp",
+        "mid": "assets/applications/ads/mid/ad-light-surreal-jantar-com-filhos-vs-reuniao.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-LIGHT-SURREAL-STORY-jantar-filhos-reuniao.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "ice",
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "blue-gray"
+      ],
+      "archetype_foto": "metafora-conceitual",
+      "notes": "Modelo `1:220` flagship do LIGHT-SURREAL — homem-pedra no computador. Metafora visual da dor identitaria (vou morrer trabalhando). Tom editorial intelectual (HBR-like). Pilar Liderança/Bastidores Tiago modo provocacao. Audiencia em ponto de inflexao.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "provocacao-editorial",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-light-surreal-negocio-saude-familia",
+      "type": "ad",
+      "style": "LIGHT-SURREAL",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Negocio, saude, familia",
+      "tese": "Quando negocio cresce, saude e familia nao podem encolher",
+      "mood": "acolhedor",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-light-surreal-negocio-saude-familia.webp",
+        "mid": "assets/applications/ads/mid/ad-light-surreal-negocio-saude-familia.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-LIGHT-SURREAL-STORY-negocio-saude-familia.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "ice",
+        "yellow-50-sotaque",
+        "expanded-semibold",
+        "blue-gray"
+      ],
+      "archetype_foto": "metafora-conceitual",
+      "notes": "Modelo `1:477` no banco — colagem familiar surreal. Tom editorial de diagnostico, nao bronca. Triade clasica do empresario maduro (negocio-saude-familia). Camada identitaria do ICP v3.0. Lovebrand pilar Insights Tiago.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "provocacao-editorial",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-light-surreal-processo-morre-em-30-dias",
+      "type": "ad",
+      "style": "LIGHT-SURREAL",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Processo morre em 30 dias",
+      "tese": "Processo sem dono e sem ritual morre em 30 dias",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-light-surreal-processo-morre-em-30-dias.webp",
+        "mid": "assets/applications/ads/mid/ad-light-surreal-processo-morre-em-30-dias.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-LIGHT-SURREAL-STORY-processo-morre-30-dias.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "ice",
+        "yellow-50-sotaque",
+        "expanded-semibold"
+      ],
+      "archetype_foto": "metafora-conceitual",
+      "notes": "Tese tecnica forte sobre falha de implementacao. Estilo LIGHT-SURREAL com colagem editorial — provavel objeto que decai/dissolve. Tom HBR. Pilar Cortes de Funil Metta. Combate crenca 'ja tentei tudo' (#5) com diagnostico do porque falhou.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "provocacao-editorial",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-light-surreal-varejistas-que-dobram-de-tamanho",
+      "type": "ad",
+      "style": "LIGHT-SURREAL",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Varejistas que dobram de tamanho",
+      "tese": "Varejistas que dobram de tamanho fazem o oposto do esperado",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-light-surreal-varejistas-que-dobram-de-tamanho.webp",
+        "mid": "assets/applications/ads/mid/ad-light-surreal-varejistas-que-dobram-de-tamanho.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-LIGHT-SURREAL-STORY-varejistas-dobram-tamanho.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "ice",
+        "yellow-50-sotaque",
+        "expanded-semibold"
+      ],
+      "archetype_foto": "metafora-conceitual",
+      "notes": "Modelo `1:1151` no banco — metafora de crescimento. Estilo LIGHT-SURREAL editorial. Statement contra-intuitivo (axioma persuasao). Pilar Numeros & Dados Metta segmentado pra varejo. Top of funnel pra ICP que ainda compara desempenho.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "provocacao-editorial",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-light-tipo-faturamento-e-ego-lucro-e-liberdade",
+      "type": "ad",
+      "style": "LIGHT-TIPO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Faturamento e ego — lucro e liberdade",
+      "tese": "Faturamento e ego. Lucro e liberdade.",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.webp",
+        "mid": "assets/applications/ads/mid/ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-LIGHT-TIPO-STORY-faturamento-ego-lucro-liberdade.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "ice",
+        "yellow-50-sotaque",
+        "title-display",
+        "expanded-heavy"
+      ],
+      "archetype_foto": null,
+      "notes": "Modelo `1:883` (unico LIGHT-TIPO). Statement filosofico Lovebrand — par de conceitos opostos. Layout fragil (bleed negativo, palavras transbordam canvas). Pilar Provocacao Tiago. Lovebrand-tier. Reframe identitario potente para o ICP em ponto de inflexao.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "provocacao-editorial",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-logo-wall-1000-empresas-r85bi",
+      "type": "ad",
+      "style": "LOGO-WALL",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "+1.000 empresas — R$8,5bi",
+      "tese": "+1.000 empresas e R$8,5bi em metas batidas",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-logo-wall-1000-empresas-r85bi.webp",
+        "mid": "assets/applications/ads/mid/ad-logo-wall-1000-empresas-r85bi.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-LOGO-WALL-STORY-mil-empresas-8-5-bi.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-display",
+        "logo-bar"
+      ],
+      "archetype_foto": "logos-clientes",
+      "notes": "Modelo `1:444` (unico do estilo). Prova social agregada por volume. Grade 3x3 de logos top + numero gigante. BOFU credibilidade pura — alto valor em retargeting. Combate ceticismo do ICP que 'ja viu mentoria de tudo quanto e tipo'. Pilar Numeros Metta.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "prova-social-ad",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "ad-news-card-risco-zero-varejo",
+      "type": "ad",
+      "style": "NEWS-CARD",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Risco zero — varejo",
+      "tese": "Varejistas crescem com risco contratual zero",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-news-card-risco-zero-varejo.webp",
+        "mid": "assets/applications/ads/mid/ad-news-card-risco-zero-varejo.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-NEWS-CARD-STORY-risco-zero-varejo.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "card-elevated"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Modelo `1:296` (unico NEWS-CARD). Layout manchete jornalistica (Exame/Forbes-like). Bandeira B3 (Garantia) com peso de imprensa. Posicionamento institucional alto. Validar se tem tag #VAREJO + dado/manchete real (nao apenas estetica jornalistica).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-bloco-aumentar-lucro-em-50",
+      "type": "ad",
+      "style": "YELLOW-BLOCO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Aumentar lucro em 50%",
+      "tese": "Aumentar lucro em 50% — convite com bullets de como",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-bloco-aumentar-lucro-em-50.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-bloco-aumentar-lucro-em-50.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-BLOCO-STORY-aumentar-lucro-50.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "expanded-heavy",
+        "logo-bar"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Modelo `1:78` flagship YELLOW-BLOCO — versao com Sicredi/Vivo/PanVel/Korin no logo bar. Convite institucional com bullets concretos do como. Boa pra ads de evento/sessao estrategica. Combina prova social agregada + oferta numerica.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "prova-social-ad",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-bloco-equipe-precisa-de-sistema",
+      "type": "ad",
+      "style": "YELLOW-BLOCO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Equipe precisa de sistema",
+      "tese": "Equipe nao precisa de motivacao — precisa de sistema",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-bloco-equipe-precisa-de-sistema.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-bloco-equipe-precisa-de-sistema.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-BLOCO-STORY-equipe-precisa-de-sistema.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Modelo `1:1021` no banco — variacao institucional. Reframe contra-cultura (motivacao vs sistema). Bullets concretos do que e 'sistema'. Pilar Inteligencia Comercial Tiago + Cases Metta. Combate crenca 'palestra resolve' do mercado.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "prova-social-ad",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-bloco-inteligencia-comercial-checklist",
+      "type": "ad",
+      "style": "YELLOW-BLOCO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Inteligencia comercial — checklist",
+      "tese": "Inteligencia comercial em 5 itens praticos",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-bloco-inteligencia-comercial-checklist.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-bloco-inteligencia-comercial-checklist.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-BLOCO-STORY-inteligencia-comercial-checklist.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Tese didatica destrinchada em bullets do bloco amarelo. Estilo YELLOW-BLOCO comporta lista nativamente. Pilar Cortes de Funil Metta. Boa referencia pra carrossel-ad ou single de captura (oferta de checklist gratuito).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "prova-social-ad",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-bloco-mentoria-metodologia-lucro",
+      "type": "ad",
+      "style": "YELLOW-BLOCO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Metodologia de vendas que constrói lucro na sua operação",
+      "tese": "Mentoria SMTM com método testado em escala destrava lucro na operação do empresário",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-bloco-mentoria-metodologia-lucro.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-bloco-mentoria-metodologia-lucro.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Documents/Claude/Projects/Branding Metta 2.0/output/ad-yellow-bloco-mentoria-metodologia-lucro.html",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy",
+        "expanded-bold-cta"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "YELLOW-BLOCO no Padrão A (foto BG full + card overlay). Foto pes-011 (executivo brasileiro 35-45, mood approachable authority). Headline com palavra \"lucro\" destacada via underline-marker. Logo bar de clientes carrega prova social agregada (+1000). CTA pill preto com seta amarela. Quando brilha: convite de mentoria pra ICP que já tem operação ativa mas estagnou — combina prova institucional + oferta sem dor pessoal.",
+      "copy": {
+        "headline": "Metodologia de vendas que constrói lucro na sua operação.",
+        "subheadline": "Faça parte da mentoria que escalou +1.000 operações comerciais no Brasil.",
+        "cta": "Aplicar para mentoria"
+      },
+      "formato_canonico": "prova-social-ad",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-bloco-nao-consegue-sair-da-operacao",
+      "type": "ad",
+      "style": "YELLOW-BLOCO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Nao consegue sair da operacao",
+      "tese": "Convite pra empresarios que ja tentaram sair da operacao e nao conseguiram",
+      "mood": "acolhedor",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-bloco-nao-consegue-sair-da-operacao.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-bloco-nao-consegue-sair-da-operacao.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-BLOCO-STORY-nao-consegue-sair-operacao.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Modelo `1:987` no banco — convite com bullets. Tese identitaria central do ICP v3.0 (saida pessoal). Tom acolhedor, conselheiro. Bullets entregam o como. MOFU/BOFU. Boa pra ads de captura pra sessao estrategica.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "prova-social-ad",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-bloco-troque-motivacao-por-processo",
+      "type": "ad",
+      "style": "YELLOW-BLOCO",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Troque motivacao por processo",
+      "tese": "Troque motivacao por processo — bullets do como",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-bloco-troque-motivacao-por-processo.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-bloco-troque-motivacao-por-processo.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-BLOCO-STORY-troque-motivacao-por-processo.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Bandeira B1 (Demita o Achismo) — provocacao a cultura motivacional do mercado de mentoria. Estilo YELLOW-BLOCO entrega o reframe + 3-5 bullets concretos do processo. Pilar Opinioes Fortes Metta. Top de funil empresario fadigado de palestra.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "prova-social-ad",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-draw-pressao-modo-sobrevivencia",
+      "type": "ad",
+      "style": "YELLOW-DRAW",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Pressao — modo sobrevivencia",
+      "tese": "Empresario em modo sobrevivencia perde a capacidade de pensar a frente",
+      "mood": "acolhedor",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-draw-pressao-modo-sobrevivencia.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-draw-pressao-modo-sobrevivencia.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-DRAW-STORY-pressao-modo-sobrevivencia.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "ilustracao-editorial",
+      "notes": "Modelo `1:624` (unico YELLOW-DRAW). Fundo amarelo + ilustracao desenhada (provavel grafico/seta editorial). Conceito visual simples ('modo sobrevivencia'). Camada emocional do ICP v3.0. Tom de descontracao com substancia, sem cartoon.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-editorial-r85bi-mesmo-time",
+      "type": "ad",
+      "style": "YELLOW-EDITORIAL",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "R$8,5bi — mesmo time",
+      "tese": "R$8,5 bi em metas batidas com o time que ja existia",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-editorial-r85bi-mesmo-time.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-editorial-r85bi-mesmo-time.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-EDITORIAL-STORY-8-5-bi-mesmo-time.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "title-display",
+        "colagem-pb"
+      ],
+      "archetype_foto": "executivos-pb-blurred",
+      "notes": "Modelo `1:957` (unico YELLOW-EDITORIAL). Fundo amarelo + colagem PB de executivos blurred + numero R$8,5bi gigante. Prova de mercado agregada com peso editorial. BOFU credibilidade. Combate crenca 'preciso contratar mais' do ICP — mesmo time, outro sistema.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "prova-social-ad",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-frame-servicos-aguenta-12-meses",
+      "type": "ad",
+      "style": "YELLOW-FRAME",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Servicos — aguenta 12 meses?",
+      "tese": "Sua empresa de servico aguenta mais 12 meses no modelo atual?",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-frame-servicos-aguenta-12-meses.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-frame-servicos-aguenta-12-meses.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-FRAME-STORY-servicos-aguenta-12-meses.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "card-elevated",
+        "headline-yellow"
+      ],
+      "archetype_foto": "executivo-cansado",
+      "notes": "Modelo `1:139` ou `1:370` no banco. Estilo YELLOW-FRAME: fundo amarelo total + card escuro central como tela de TV. Pergunta diagnostica direcionada (servicos). Mood confronto — urgencia fundamentada. MOFU pra empresarios em fadiga operacional.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-frame-servicos-comercial-de-gente-grande",
+      "type": "ad",
+      "style": "YELLOW-FRAME",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Servicos — comercial de gente grande",
+      "tese": "Empresa de servico precisa de comercial de gente grande pra crescer",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-frame-servicos-comercial-de-gente-grande.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-frame-servicos-comercial-de-gente-grande.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-FRAME-STORY-servicos-comercial-gente-grande.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "card-elevated"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Modelo `1:398` no banco. Estilo YELLOW-FRAME segmentado pra servicos. Reframe institucional ('gente grande' = sistema profissional). Pilar Inteligencia Comercial Tiago. Combate crenca #3 ('meu negocio e diferente') aplicada a servicos.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-frame-vendas-dependem-de-voce",
+      "type": "ad",
+      "style": "YELLOW-FRAME",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Vendas dependem de voce",
+      "tese": "Suas vendas ainda dependem de voce estar dentro?",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-frame-vendas-dependem-de-voce.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-frame-vendas-dependem-de-voce.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-FRAME-STORY-vendas-dependem-voce.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "card-elevated"
+      ],
+      "archetype_foto": "executivo-cansado",
+      "notes": "Pergunta direta sobre dependencia operacional. Estilo YELLOW-FRAME entrega card escuro central tipo TV — alta atracao em feed amarelo competitivo. Tese identitaria do ICP v3.0. MOFU empresario que ainda nao confessou ser o sistema.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "ad-yellow-split-chave-da-liberdade-balcao",
+      "type": "ad",
+      "style": "YELLOW-SPLIT",
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "premium",
+        "exclusive"
+      ],
+      "title": "Chave da liberdade — balcao",
+      "tese": "A chave da liberdade nao esta no balcao — esta no sistema",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/ads/thumbs/ad-yellow-split-chave-da-liberdade-balcao.webp",
+        "mid": "assets/applications/ads/mid/ad-yellow-split-chave-da-liberdade-balcao.svg"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Modelos de ADS/BANCO-AD-YELLOW-SPLIT-STORY-chave-liberdade-balcao.svg",
+      "date": "2026-05-09",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-90-bloco",
+        "charcoal-base",
+        "expanded-heavy"
+      ],
+      "archetype_foto": "metafora-conceitual",
+      "notes": "Modelo `1:1142` (unico YELLOW-SPLIT). Split horizontal preto+amarelo: top dramatico (retrato + ilustracao chave), bottom amarelo com CTA preto. Statement hibrido cinema+oferta. Lovebrand. Pilar Insights Tiago + CTA Metta.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "anuncio-modelado",
+      "serie_id": "banco-ads-modelados",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "slide-capa-superar-as-metas",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1456x819",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Capa — superar as metas",
+      "tese": "Capa institucional Metta — superar as metas como bandeira",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-capa-superar-as-metas.webp",
+        "mid": "assets/applications/slides/mid/slide-capa-superar-as-metas.webp"
+      },
+      "dimensions": {
+        "w": 1456,
+        "h": 819
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/01. Capa — superar as metas.png",
+      "date": "2026-05-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-display",
+        "expanded-heavy"
+      ],
+      "archetype_foto": null,
+      "notes": "Slide de abertura de apresentacao institucional. Tom corporativo Metta (formal, dado-orientado). Funcao: estabelecer autoridade e bandeira (superar a meta = SMTM). Boa referencia pra abertura de pitch B2B ou apresentacao de squad em sessao estrategica.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "capa-deck",
+      "serie_id": "deck-institucional-numerado",
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "slide-metta-e-especialista",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1456x819",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Metta e especialista",
+      "tese": "Metta e especialista em inteligencia comercial — nao generalista",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-metta-e-especialista.webp",
+        "mid": "assets/applications/slides/mid/slide-metta-e-especialista.webp"
+      },
+      "dimensions": {
+        "w": 1456,
+        "h": 819
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/05. Metta é especialista.png",
+      "date": "2026-05-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy"
+      ],
+      "archetype_foto": null,
+      "notes": "Slide de diferenciacao — especialista vs generalista. Combate o mercado pulverizado de mentoria/consultoria genericas. Pilar Opinioes Fortes Metta aplicado a posicionamento. Bom em pitch contra alternativas (G4, Endeavor).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-pitch",
+      "serie_id": "deck-institucional-numerado",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "slide-nossa-bandeira-e-clara",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1456x819",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Nossa bandeira e clara",
+      "tese": "Bandeira Metta — meta batida todo mes, sem achismo",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-nossa-bandeira-e-clara.webp",
+        "mid": "assets/applications/slides/mid/slide-nossa-bandeira-e-clara.webp"
+      },
+      "dimensions": {
+        "w": 1456,
+        "h": 819
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/07. Nossa bandeira é clara.png",
+      "date": "2026-05-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Slide de declaracao de bandeira institucional — cruza B1 (Demita o Achismo) e a tese SMTM. Linha editorial §5 (3 bandeiras Q2). Funcao narrativa: ponto-virada do pitch (depois de quem-somos, antes de como-fazemos).",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-manifesto",
+      "serie_id": "deck-institucional-numerado",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "slide-quem-somos",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1456x819",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Quem somos",
+      "tese": "Quem somos — posicionamento institucional Metta",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-quem-somos.webp",
+        "mid": "assets/applications/slides/mid/slide-quem-somos.webp"
+      },
+      "dimensions": {
+        "w": 1456,
+        "h": 819
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/02. Quem somos.png",
+      "date": "2026-05-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "expanded-heavy",
+        "blue-gray"
+      ],
+      "archetype_foto": "time-em-acao",
+      "notes": "Slide de posicionamento — define a Metta como ecossistema de inteligencia comercial. Linha editorial §1.1: tom racional, dado-orientado, protagonista e a Metta. Boa referencia pra posicionamento institucional que precede prova ou cases.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-pitch",
+      "serie_id": "deck-institucional-numerado",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "slide-r82bi-em-metas-batidas",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1456x819",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "R$8,2bi em metas batidas",
+      "tese": "R$8,2bi em metas batidas pelas empresas atendidas",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-r82bi-em-metas-batidas.webp",
+        "mid": "assets/applications/slides/mid/slide-r82bi-em-metas-batidas.webp"
+      },
+      "dimensions": {
+        "w": 1456,
+        "h": 819
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/09. R$ 8,2bi metas batidas.png",
+      "date": "2026-05-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-display",
+        "expanded-heavy"
+      ],
+      "archetype_foto": null,
+      "notes": "Slide flagship de prova institucional — big number agregado. Mesmo numero do ad LOGO-WALL (atualizado pra R$8,5bi nos ads mais recentes — validar versao vigente). Pilar Numeros & Dados. BOFU credibilidade pura em apresentacao.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-prova-numero",
+      "serie_id": "deck-institucional-numerado",
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "slide-slide-1-capa-avulsa",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Capa de diagnóstico — Quanto dinheiro seu time está deixando na mesa",
+      "tese": "Diagnóstico comercial gratuito de 60 minutos posicionado como conversa estruturada com especialista, não pitch.",
+      "mood": "diagnostico",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-slide-1-capa-avulsa.webp",
+        "mid": "assets/applications/slides/mid/slide-slide-1-capa-avulsa.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/slide 1.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-base",
+        "yellow-50-acento",
+        "title-display",
+        "ring-marca-decorativa"
+      ],
+      "archetype_foto": null,
+      "notes": "Capa 16:9 com fundo midnight e anel concêntrico do brand mark à direita. Headline-pergunta enorme em SF Pro Expanded branca. Subtítulo eyebrow azul-acinzentado. Footer cream com promessa do formato (sem achismo, sem pitch). Modelo de capa para isca de diagnóstico — usar quando a oferta é a conversa, não o produto.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "capa-deck",
+      "serie_id": "deck-performance-leve",
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "slide-slide-2-avulso",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Capa de apresentação comercial — bipartida amarelo + branco",
+      "tese": "Consultoria especializada em vendas com assinatura de speaker e tagline 'Performance em vendas pode ser mais leve'.",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-slide-2-avulso.webp",
+        "mid": "assets/applications/slides/mid/slide-slide-2-avulso.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/slide 2.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "white-base",
+        "yellow-50-meio-campo",
+        "midnight-tipografia",
+        "ring-marca-decorativa",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Layout bipartido vertical: 60% branco com headline em três linhas e subtítulo 'Apresentação comercial', 40% amarelo com anel da marca em transparência. Footer cinza com cartão do speaker (Gabriel Fernandes) + duas mensagens-chave. Modelo de capa de pitch presencial — fica entre institucional e comercial.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "capa-deck",
+      "serie_id": "deck-performance-leve",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "slide-slide-3-avulso",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Slide-manifesto — O foco dessa parceria é aumentar o lucro",
+      "tese": "Posicionamento direto: a parceria existe pra aumentar lucro, não pra entregar relatório bonito.",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-slide-3-avulso.webp",
+        "mid": "assets/applications/slides/mid/slide-slide-3-avulso.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/slide 3.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-base",
+        "yellow-50-grifo-keyword",
+        "white-tipografia",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Slide de quebra com fundo midnight e tipo display branco em três linhas. 'aumentar' e 'o lucro' grifadas em amarelo — destaque cirúrgico de palavra-chave, não decoração. Footer com speaker, tagline, logo e CTA arrow. Use como divisor de bloco em pitch quando precisa nomear sem ambiguidade pra que o cliente tá pagando.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-manifesto",
+      "serie_id": "deck-performance-leve",
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "slide-slide-4-avulso",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Capa co-branded Metta + Grupo Orletti — Superar as metas",
+      "tese": "Apresentação comercial sob medida pra cliente concessionária, com cobranding e foto do produto do cliente.",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-slide-4-avulso.webp",
+        "mid": "assets/applications/slides/mid/slide-slide-4-avulso.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/slide 4.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-header-band",
+        "white-base",
+        "midnight-tipografia",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Faixa amarela top com logo Metta + 'Inteligência Comercial'. Bipartido: esquerda branca com headline 'Superar as metas' + logo cliente Orletti + data; direita ocupada por foto do produto do cliente (Amarok azul em paisagem). Modelo de capa de pitch white-label — herda visual Metta e abre espaço pro produto do contratante.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-cobranded",
+      "serie_id": "deck-performance-leve",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "slide-slide-5-avulso",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Hero co-branded escuro — Superar as metas com Orletti",
+      "tese": "Versão dark da capa Orletti, com palavra-chave 'metas' destacada em amarelo e foto do veículo recortada em moldura circular.",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-slide-5-avulso.webp",
+        "mid": "assets/applications/slides/mid/slide-slide-5-avulso.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/slide 5.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-base",
+        "yellow-50-grifo-keyword",
+        "white-tipografia",
+        "ring-marca-decorativa",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Variação noturna do slide 4: fundo midnight, headline 'Superar | as metas' com segunda linha em amarelo. Lockup horizontal Metta + Orletti embaixo. Foto da Amarok recortada num círculo grande à direita, ancorada no anel da marca. Use como abertura de evento ou videoconferência onde se quer mais drama que a versão clara.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-cobranded",
+      "serie_id": "deck-performance-leve",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "slide-slide-6-avulso",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Slide-manifesto — Aumentar vendas é desenvolver pessoas",
+      "tese": "Reframe pedagógico: vendas não cresce por hack, cresce por método aplicado a vendedor desenvolvido.",
+      "mood": "reframe",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-slide-6-avulso.webp",
+        "mid": "assets/applications/slides/mid/slide-slide-6-avulso.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/slide 6.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "white-base",
+        "ink-tipografia",
+        "title-display",
+        "rule-divisor"
+      ],
+      "archetype_foto": null,
+      "notes": "Slide all-white com tipo expanded slate em quatro linhas centradas. Footer cinza com speaker + tagline + logo + arrow CTA. Modelo de slide-tese — usar quando precisa frear a apresentação e cravar uma definição que orienta o resto do deck. Voz didática, não slogan.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-manifesto",
+      "serie_id": "deck-performance-leve",
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "slide-slide-7-avulso",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Capa amarela cheia — Consultoria especializada em vendas",
+      "tese": "Variação alto-impacto da capa de pitch comercial, com bloco de cor saturada e foto de speaker pequena.",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-slide-7-avulso.webp",
+        "mid": "assets/applications/slides/mid/slide-slide-7-avulso.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/slide 7.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-base-cheia",
+        "midnight-tipografia",
+        "ring-marca-decorativa",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Capa monocromática amarela com headline em três linhas slate e dois anéis da marca em transparência clara. Subtítulo 'Apresentação comercial' + data. Footer branco com cartão de speaker (Ilivelton Rodrigues, Diretor de Consultoria) + duas mensagens. Use quando o evento precisa de presença visual forte sem foto de cena.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "capa-deck",
+      "serie_id": "deck-performance-leve",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "slide-somos-lider",
+      "type": "slide",
+      "style": null,
+      "format": "slide-1456x819",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "premium",
+        "exclusive",
+        "elite"
+      ],
+      "title": "Somos lider",
+      "tese": "Posicionamento de lideranca de mercado Metta",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/slides/thumbs/slide-somos-lider.webp",
+        "mid": "assets/applications/slides/mid/slide-somos-lider.webp"
+      },
+      "dimensions": {
+        "w": 1456,
+        "h": 819
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Slides/04. Somos líder.png",
+      "date": "2026-05-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Slide de claim de lideranca — prova de posicionamento competitivo. Tom institucional Metta. Validar lastro do claim 'somos lider' (fonte: ranking/pesquisa) — regra de dado-com-referencia. Pilar Numeros & Dados. BOFU em apresentacao comercial.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "slide-prova-nominal",
+      "serie_id": "deck-institucional-numerado",
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "tela-tela-conceito-1-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "conversao",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Hero LP escuro com retrato — Diagnóstico comercial de ponta a ponta",
+      "tese": "Diagnóstico identifica gargalos e a inteligência da Metta implementa em velocidade — promessa dupla diagnóstico+execução.",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-1-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-1-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 1.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-overlay",
+        "yellow-50-faixa-rodape",
+        "white-tipografia",
+        "title-display"
+      ],
+      "archetype_foto": "mentoria-1-on-1",
+      "notes": "Hero 16:9: foto de mentoria 1-on-1 (mentor de frente, mentorado de costas) com gradient escuro à esquerda. Headline branca em três linhas + subhead. Faixa amarela inferior com tagline 'O ecossistema de inteligência comercial para empresários' e CTA black 'Saiba mais'. Modelo padrão de hero institucional Metta com cena humana documental.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "hero-lp",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "tela-tela-conceito-2-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Mockup mobile da home Metta — em ambiente real",
+      "tese": "Demonstração da home page mobile com primeiro fold amarelo, prova social (logos de cliente) e pivot pra pilar editorial.",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-2-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-2-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 2.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-fold-mobile",
+        "midnight-cta-button",
+        "white-base",
+        "ring-marca-decorativa"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Mockup de iPhone segurado por mão, em ambiente externo com bokeh azul-acinzentado. Tela mostra hero amarelo com 'O ecossistema de inteligência comercial para empresários' + CTA 'Nossas soluções' + foto de cliente + faixa de logos (Sicredi, Vivo, PanVel) + segundo fold com 'Lideramos o mercado de gestão comercial no Brasil'. Use como caso de uso da identidade aplicada em produto.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "mockup-mobile",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "tela-tela-conceito-3-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Mockup de pôster duplo amarelo + escuro — sistema de marca aplicado",
+      "tese": "Demonstração do flagship poster da Metta em duas variantes (amarelo cheio e midnight) com tagline e marca-de-massa.",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-3-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-3-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 3.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-poster",
+        "midnight-poster",
+        "ring-marca-decorativa",
+        "logo-cheio-massa"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Mockup de dois pôsteres em ambiente real com fundo de loft desfocado. Eyebrow tripla 'Especialistas em resultados | Gestão comercial inteligente | Experiência de mercado aplicada'. Tagline central + logo Metta tipográfico de massa em baseline. Use como entrega de aplicação do sistema em peças físicas premium.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "mockup-outdoor",
+      "serie_id": null,
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "tela-tela-conceito-4-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "oferta",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Painel LED de evento — Mentoria Elite com trio fundador",
+      "tese": "Apresentação do programa Elite de mentoria especializada em gestão comercial, ancorada nos três rostos do trio fundador.",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-4-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-4-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 4.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-base",
+        "yellow-50-bloco-marca",
+        "white-tipografia",
+        "logo-cheio-massa"
+      ],
+      "archetype_foto": "palco-evento",
+      "notes": "Mockup de painel LED de palco com bipartido midnight + amarelo. Esquerda: logo + selo 'Supere a meta todo mês ELITE' + headline 'Mentoria especializada em gestão comercial' + tags. Centro: trio fundador com fundo amarelo recortado. Direita: tagline + bullets 'livros, treinamentos, formações, MBA, mentoria, consultoria' + logo de massa. Use como mockup de ativação de evento para comunicar oferta principal.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "mockup-outdoor",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "tela-tela-conceito-5-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium",
+        "elite",
+        "exclusive"
+      ],
+      "title": "Outdoor institucional — ecossistema Metta com 3 sócios",
+      "tese": "Mockup de outdoor cinematográfico — Metta como ecossistema de inteligência comercial pra empresários, com 3 sócios em retrato editorial.",
+      "mood": "institucional-cinematografico",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-5-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-5-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 5.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-sotaque",
+        "title-large",
+        "expanded-heavy",
+        "lockup-oficial"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "Mockup ambient (outdoor/painel) que mostra como peças Metta funcionam em escala. Composição split: esquerda dark com headline 'Mentoria especializada em gestão comercial' + tags vendas/gestão/RH/estratégia + retratos dos 3 sócios. Direita amarela com tagline 'O ecossistema de inteligência comercial pra empresários' + lockup metta XL. Stage com silhuetas em frente — comunica escala de marca. Não é LP, é mockup institucional pra apresentar campanha em context.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "mockup-outdoor",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "tela-tela-conceito-6-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Hero LP institucional - retrato cinematografico + tags de produto",
+      "tese": "Hero institucional Metta com retrato decision-grade + tags de oferta (livros/treinamentos/formacoes/MBA/mentoria/consultoria) + lockup oficial.",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-6-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-6-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 6.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-selo",
+        "yellow-50-selo",
+        "logo-cheio-massa",
+        "white-tipografia"
+      ],
+      "archetype_foto": "time-celebrando-resultado",
+      "notes": "Variacao do hero-lp institucional (mesmo padrao das telas 5 e 9). Composicao: header bar topo com QUEM SOMOS + tags de produto + ano. Headline esquerda 'O ecossistema de inteligencia comercial para empresarios'. Foto bleed direita com retrato cinematografico (mood quieto-confiante). Bottom-left: tagline 'equilibrio sem sacrificar vida pessoal'. Top of funnel pra ICP que descobre Metta pela primeira vez.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "hero-lp",
+      "serie_id": null,
+      "densidade_texto": "baixa"
+    },
+    {
+      "id": "tela-tela-conceito-7-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Moodboard do sistema — collage de aplicações ads/posters",
+      "tese": "Visão de sistema: a marca aplicada em múltiplos formatos (story, dado, manifesto, prova, retrato) cria coerência editorial.",
+      "mood": "analitico",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-7-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-7-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 7.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-canvas",
+        "yellow-50-blocos",
+        "white-tipografia",
+        "logo-cheio-massa"
+      ],
+      "archetype_foto": "tiago-conselheiro",
+      "notes": "Apresentação tipo moodboard sobre canvas midnight: várias peças do sistema dispostas em grade orgânica — '67% dos empresários sem previsibilidade', card de manifesto, '+1000 empresas confiam', selo metta, 'bater meta é desenvolver pessoas', 'Lideramos a profissionalização'. Use como visão de hero de design system, não peça de campanha.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "moodboard",
+      "serie_id": null,
+      "densidade_texto": "alta"
+    },
+    {
+      "id": "tela-tela-conceito-8-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "conversao",
+      "icp_target": [
+        "premium",
+        "elite"
+      ],
+      "title": "Hero LP com archetype de dor — Crescer à custa da vida pessoal é insustentável",
+      "tese": "Confronto editorial com dor central do ICP: o empresário que rouba sono pra puxar a empresa não tem modelo sustentável.",
+      "mood": "confronto",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-8-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-8-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 8.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-base",
+        "yellow-50-tipografia-grande",
+        "title-display"
+      ],
+      "archetype_foto": "businessman-thinking-laptop",
+      "notes": "Hero 16:9 com cena noturna: empresário branco grisalho de óculos, em cama, olhando celular tarde da noite. Headline em quatro linhas amarelas grandes 'Crescer a empresa à custa da vida pessoal é insustentável'. Footer com promessa institucional + lockup. Modelo de hero dor-confronto pra trilha lifestyle (SMTM) — empresário não como problema, mas como vítima do modelo antigo.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "hero-dor",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "tela-tela-conceito-9-lp",
+      "type": "tela",
+      "style": null,
+      "format": "slide-1920x1080",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "premium",
+        "elite",
+        "exclusive"
+      ],
+      "title": "Hero dor noturna — crescer à custa da vida pessoal",
+      "tese": "Headline editorial sobre dor latente do empresário: crescimento à custa da vida pessoal é insustentável.",
+      "mood": "confronto-acolhedor",
+      "src": {
+        "thumb": "assets/applications/telas/thumbs/tela-tela-conceito-9-lp.webp",
+        "mid": "assets/applications/telas/mid/tela-tela-conceito-9-lp.webp"
+      },
+      "dimensions": {
+        "w": 1920,
+        "h": 1080
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Telas Conceito/tela conceito 9.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "charcoal-base",
+        "yellow-50-headline-massiva",
+        "title-display",
+        "expanded-heavy",
+        "lockup-oficial"
+      ],
+      "archetype_foto": "executivo-em-decisao",
+      "notes": "Hero editorial cinematográfico ambient noturno. Empresário 50+ deitado na cama lendo celular (luz fria do device sobre o rosto, mood de exaustão silenciosa). Headline GIGANTE amarela ocupando metade esquerda do canvas — 'Crescer a empresa à custa da vida pessoal é insustentável'. Tag bottom: 'Soluções pra pessoas e empresas baterem metas de forma mais leve, fácil e sustentável' + lockup metta | INTELIGÊNCIA COMERCIAL. Top of funnel pra ICP Premium/Elite/Exclusive — empresário sucesso financeiro com vida pessoal sufocada.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "hero-dor",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "poster-poster-1-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-921x1299",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster manifesto fundador — Tiago Alves sobre fundo amarelo",
+      "tese": "Manifesto institucional: a marca nasceu do incômodo de ver empresas e pessoas não alcançarem o potencial que poderiam.",
+      "mood": "manifesto",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-1-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-1-institucional.webp"
+      },
+      "dimensions": {
+        "w": 921,
+        "h": 1299
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 1.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-base-cheia",
+        "midnight-tipografia",
+        "ring-marca-decorativa",
+        "title-display"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "Pôster vertical 4:5 com fundo amarelo saturado, retrato editorial centralizado de Tiago Alves (camisa branca, olhar de frente, half-smile composto), círculo midnight do brand mark atrás da cabeça como halo. Headline em três linhas no topo. Bloco de manifesto institucional na base. Pôster-âncora da identidade — voz fundador, posicionamento puro.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-manifesto",
+      "serie_id": "posters-manifesto-fundador",
+      "densidade_texto": "alta"
+    },
+    {
+      "id": "poster-poster-10-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-723x982",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster bipartido — Desenvolvimento humano, método e crescimento ao seu alcance",
+      "tese": "Síntese institucional: a equação Metta = desenvolvimento humano + método + crescimento, em formato manifesto longo.",
+      "mood": "manifesto",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-10-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-10-institucional.webp"
+      },
+      "dimensions": {
+        "w": 723,
+        "h": 982
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 10.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-overlay",
+        "smoke-base",
+        "white-tipografia",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Pôster vertical bipartido. Topo: foto desfocada de mãos segurando documento sobre laptop com overlay midnight, headline branca 'A metta é inteligência comercial para empresários.'. Base: bloco cinza-azulado com segunda headline 'Desenvolvimento humano, método e crescimento ao seu alcance.' + parágrafo de manifesto longo no rodapé. Pôster-síntese — densidade textual maior que os outros.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-manifesto",
+      "serie_id": "posters-manifesto-fundador",
+      "densidade_texto": "alta"
+    },
+    {
+      "id": "poster-poster-11-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-1080x1576",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster vitrine de aplicações — sistema metta em larga escala",
+      "tese": "Demonstração do logotipo Metta como assinatura de massa, com mockup de hero LP embutido como prova do sistema vivo.",
+      "mood": "aspiracional",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-11-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-11-institucional.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1576
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 11.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-base-cheia",
+        "midnight-tipografia",
+        "logo-cheio-massa",
+        "title-display"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "Pôster vertical com fundo amarelo saturado. Topo: linha de lockups Metta + selo '2026' alternados. Centro: headline em três linhas 'Inteligência comercial para empresários'. Centro-baixo: mockup embutido de hero LP escuro com retrato e bullets de produto. Base: 'metta' em escala de massa em midnight. Pôster-vitrine pra apresentar o DS aplicado.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-vitrine",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "poster-poster-2-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-921x1299",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster manifesto — A tecnologia evoluiu, menos a forma de bater meta",
+      "tese": "Provocação editorial: stack moderno + processo do anos 80 = empresa que não bate meta. A forma de vender envelheceu.",
+      "mood": "provocacao",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-2-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-2-institucional.webp"
+      },
+      "dimensions": {
+        "w": 921,
+        "h": 1299
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 2.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-base-cheia",
+        "midnight-tipografia",
+        "ring-marca-decorativa",
+        "title-display"
+      ],
+      "archetype_foto": null,
+      "notes": "Pôster 4:5 amarelo com headline em duas alturas (cinza médio + slate forte). Centro: telefone fixo Intelbras preto sobre anel midnight da marca — metáfora visual do processo defasado. Footer com manifesto institucional. Use quando precisa colocar o mercado contra o muro sem culpar o empresário.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-provocacao",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "poster-poster-3-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-921x1299",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster prova de método — Script de vendas como artefato",
+      "tese": "Prova material: a Metta entrega script comercial de verdade, não slide. Método fica num papel impresso, não em PDF de relatório.",
+      "mood": "diagnostico",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-3-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-3-institucional.webp"
+      },
+      "dimensions": {
+        "w": 921,
+        "h": 1299
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 3.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "white-base",
+        "midnight-tipografia",
+        "yellow-50-objeto-acento",
+        "ring-marca-decorativa"
+      ],
+      "archetype_foto": null,
+      "notes": "Pôster 4:5 fundo branco. Headline 'O ecossistema de inteligência comercial para empresários' no topo. Centro: composição de papel diagonal 'Script de vendas' com lápis amarelo Acrilex sobre anel midnight. Roteiro de 5 etapas (Abertura, Diagnóstico, Solução, Prova Social, Fechamento) visível no documento. Footer manifesto. Use quando a prova é o método físico, não o testimonial.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-vitrine",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "poster-poster-4-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-1414x2035",
+      "brand": "metta",
+      "intent": "conversao",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster ad-style — retrato + balão amarelo com tagline e CTA",
+      "tese": "Variação ad-friendly: retrato editorial em fundo de janela + bloco amarelo arredondado com tagline e botão 'Saiba mais'.",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-4-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-4-institucional.webp"
+      },
+      "dimensions": {
+        "w": 1414,
+        "h": 2035
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 4.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-cta-button",
+        "yellow-50-bloco-cta",
+        "smoke-base",
+        "title-display"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "Pôster 4:5 com retrato editorial de empresário (suéter preto, óculos pretos, camisa estampada, braços cruzados, half-smile) em frente a janela com bokeh urbano. Topo: lockup + 'Inteligência comercial'. Base: bloco amarelo arredondado com tagline 'O ecossistema de inteligência comercial | para empresários' + CTA black 'Saiba mais'. Modelo de ad/feed Metta — única peça da série com botão de ação.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-ad-cta",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "poster-poster-5-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-1414x2035",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster diferenciação — Metta faz junto, não some depois do relatório",
+      "tese": "Posicionamento de mercado: enquanto consultoria média entrega PDF e desaparece, Metta opera junto até o resultado.",
+      "mood": "reframe",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-5-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-5-institucional.webp"
+      },
+      "dimensions": {
+        "w": 1414,
+        "h": 2035
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 5.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-overlay",
+        "yellow-50-logo-massa",
+        "white-tipografia",
+        "title-display"
+      ],
+      "archetype_foto": "analise-dados-tela",
+      "notes": "Pôster 4:5 com foto desaturada de mão segurando planilha impressa sobre laptop, com overlay midnight pesado. Headline branca em cinco linhas explicando diferenciação. Eyebrow tripla 'Ciência nas vendas | Customização de método | Garantia contratual'. Logo Metta em massa amarela ocupando rodapé inteiro. Pôster-âncora da diferenciação competitiva.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-manifesto",
+      "serie_id": "posters-manifesto-fundador",
+      "densidade_texto": "alta"
+    },
+    {
+      "id": "poster-poster-6-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-1414x2035",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster manifesto — Bater meta é questão de método",
+      "tese": "Reframe central da Metta: bater meta não é talento, sorte ou esforço. É método aplicado consistentemente.",
+      "mood": "reframe",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-6-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-6-institucional.webp"
+      },
+      "dimensions": {
+        "w": 1414,
+        "h": 2035
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 6.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "midnight-base",
+        "yellow-50-faixa-marca",
+        "white-tipografia",
+        "logo-cheio-massa",
+        "title-display"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "Pôster 4:5 dividido em três bandas: topo com retrato editorial cinematográfico de mulher rindo em ambiente corporativo, faixa amarela com lockup Metta + 'Inteligência Comercial', e bloco midnight ocupando 60% inferior com headline 'Acreditamos | que bater meta | é questão de | método'. Watermark 'metta' em massa atrás. Use como manifesto-tese da casa.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-manifesto",
+      "serie_id": "posters-manifesto-fundador",
+      "densidade_texto": "media"
+    },
+    {
+      "id": "poster-poster-7-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-1414x2035",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster pitch comercial — Ilivelton Rodrigues, Diretor de Consultoria",
+      "tese": "Apresentação comercial individual com âncora no diretor de consultoria, gradiente amarelo radial atrás do retrato.",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-7-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-7-institucional.webp"
+      },
+      "dimensions": {
+        "w": 1414,
+        "h": 2035
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 7.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "white-base",
+        "yellow-50-gradiente-radial",
+        "midnight-tipografia",
+        "title-display",
+        "ring-marca-decorativa"
+      ],
+      "archetype_foto": "retrato-individual-confiante",
+      "notes": "Pôster 4:5 bipartido: esquerda branca com lockup, headline 'Consultoria especializada em vendas', subtítulo 'Apresentação comercial' + data, anel da marca em transparência. Direita: retrato editorial de Ilivelton (camisa branca, óculos, barba, half-smile) sobre gradiente amarelo radial. Footer midnight com lockup discreto + cartão do speaker + duas mensagens. Modelo de pitch slide individual.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-pitch-individual",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "poster-poster-8-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-722x982",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster celebração — Bater meta é desenvolver pessoas",
+      "tese": "Reframe humano: bater meta tem valor não pelo número, mas pelo potencial liberado em cada vendedor que desenvolve.",
+      "mood": "acolhedor",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-8-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-8-institucional.webp"
+      },
+      "dimensions": {
+        "w": 722,
+        "h": 982
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 8.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-bloco-cta",
+        "white-tipografia",
+        "midnight-tipografia-bloco",
+        "title-display"
+      ],
+      "archetype_foto": "time-celebrando-resultado",
+      "notes": "Pôster 4:5 ocupado por foto de duas profissionais sorrindo lado a lado em evento corporativo (mulher loira esquerda, mulher de cabelo cacheado à direita). Headline branca 'bater meta é' sobre as fotos, completada por bloco amarelo arredondado 'Desenvolver pessoas | e acreditar no potencial que cada um pode alcançar'. Use como peça de celebração de marca pra eventos internos.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-celebracao",
+      "serie_id": null,
+      "densidade_texto": "media"
+    },
+    {
+      "id": "poster-poster-9-institucional",
+      "type": "poster",
+      "style": null,
+      "format": "portrait-679x982",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera"
+      ],
+      "title": "Poster autoridade de mercado — Lideramos a profissionalização do mercado de gestão comercial",
+      "tese": "Claim de autoridade de mercado: Metta lidera a profissionalização da gestão comercial brasileira, com bandeira BR explícita.",
+      "mood": "autoridade",
+      "src": {
+        "thumb": "assets/applications/posters/thumbs/poster-poster-9-institucional.webp",
+        "mid": "assets/applications/posters/mid/poster-poster-9-institucional.webp"
+      },
+      "dimensions": {
+        "w": 679,
+        "h": 982
+      },
+      "sourcePath": "C:/Users/Usuario/Desktop/Renan/Clientes/Metta/Rebranding/01. Assets de Marca/Referências Design/Posters/poster 9.png",
+      "date": "2026-04-08",
+      "status": "canonical",
+      "tokens_used": [
+        "yellow-50-base-cheia",
+        "midnight-tipografia",
+        "title-display"
+      ],
+      "archetype_foto": "mentoria-1-on-1",
+      "notes": "Pôster 4:5 bipartido vertical: topo amarelo cheio com headline em cinco linhas slate 'Lideramos a profissionalização do mercado de gestão comercial no Brasil' + bandeira BR como ícone selo. Footer com tagline lifestyle. Base: foto de cena de mentoria 1-on-1 (mentor à direita falando, mentorado de costas à esquerda). Use quando precisa cravar autoridade nacional.",
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
+      "formato_canonico": "poster-manifesto",
+      "serie_id": "posters-manifesto-fundador",
+      "densidade_texto": "alta"
+    }
+  ],
+  "totalApplications": 105,
+  "formato_canonico_values": {
+    "ad": [
+      "captacao-fb",
+      "hero-ad",
+      "anuncio-modelado",
+      "prova-social-ad",
+      "convite-formal",
+      "provocacao-editorial"
+    ],
+    "slide": [
+      "capa-deck",
+      "slide-pitch",
+      "slide-prova-numero",
+      "slide-manifesto",
+      "slide-prova-nominal",
+      "slide-cobranded"
+    ],
+    "tela": [
+      "hero-lp",
+      "hero-dor",
+      "mockup-mobile",
+      "mockup-sistema",
+      "mockup-outdoor",
+      "moodboard",
+      "pitch-conceito"
+    ],
+    "poster": [
+      "poster-manifesto",
+      "poster-prova-material",
+      "poster-provocacao",
+      "poster-ad-cta",
+      "poster-celebracao",
+      "poster-vitrine",
+      "poster-pitch-individual"
+    ],
+    "carrossel": [
+      "carrossel-prova-pesada",
+      "carrossel-case",
+      "carrossel-6-gestoes"
+    ],
+    "lp": [
+      "lp-conversao",
+      "lp-captura"
+    ]
+  },
+  "densidade_texto_values": [
+    "baixa",
+    "media",
+    "alta"
+  ]
+}

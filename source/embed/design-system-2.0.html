@@ -1,0 +1,3428 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Metta Design System v2.0 — Tokens & Components</title>
+
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   METTA TOKENS v2 — INLINE FOR STANDALONE PREVIEW
+   3-tier architecture (ref/sys/comp) + v1 aliases bridge
+============================================================ */
+
+@font-face {
+  font-family: 'SF Pro';
+  src: local('SF Pro'), local('SF Pro Display'),
+       url('../SF-Pro-Variable-Official.ttf') format('truetype-variations'),
+       url('../SF-Pro-Variable-Official.ttf') format('truetype');
+  font-weight: 1 1000;
+  font-stretch: 30% 150%;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* TIER 1 — REFERENCE TOKENS */
+:root {
+  /* Yellow tonal */
+  --metta-ref-palette-yellow-30: #B38400;  --metta-ref-palette-yellow-40: #D9A100;
+  --metta-ref-palette-yellow-50: #FFBE18;  --metta-ref-palette-yellow-55: #FFB618;
+  --metta-ref-palette-yellow-60: #FFC531;  --metta-ref-palette-yellow-70: #FFCE50;
+  --metta-ref-palette-yellow-80: #FFD66D;  --metta-ref-palette-yellow-90: #FFE3A6;
+  --metta-ref-palette-yellow-95: #FFE4A1;  --metta-ref-palette-yellow-99: #FFFAEC;
+
+  /* Night tonal */
+  --metta-ref-palette-night-5:   #0A1013;  --metta-ref-palette-night-10:  #0C161B;
+  --metta-ref-palette-night-15:  #131F25;  --metta-ref-palette-night-20:  #1A2A35;
+  --metta-ref-palette-night-25:  #1E2D36;  --metta-ref-palette-night-30:  #2E3E47;
+  --metta-ref-palette-night-40:  #435965;  --metta-ref-palette-night-50:  #688594;
+  --metta-ref-palette-night-60:  #75919F;  --metta-ref-palette-night-70:  #94B5C8;
+  --metta-ref-palette-night-80:  #A8B3B9;  --metta-ref-palette-night-85:  #B0CAD8;
+  --metta-ref-palette-night-90:  #C9DAE3;  --metta-ref-palette-night-95:  #EBF3F7;
+  --metta-ref-palette-night-97:  #EFF3F5;  --metta-ref-palette-night-99:  #FAFCFD;
+  --metta-ref-palette-night-100: #FFFFFF;
+
+  /* Utilitários específicos não-tonais — pra casos que a paleta night não cobre */
+  --metta-ref-palette-neutral-pure-black:   #000000;   /* preto absoluto pra ads que pedem máximo contraste */
+  --metta-ref-palette-neutral-overlay-navy: #020F15;   /* photo overlay com tinge específico */
+
+  /* Opacity */
+  --metta-ref-opacity-state-hover:   0.08;
+  --metta-ref-opacity-state-focus:   0.12;
+  --metta-ref-opacity-state-pressed: 0.16;
+
+  /* Typeface */
+  --metta-ref-typeface-brand:    'SF Pro';
+  --metta-ref-typeface-fallback: 'Roboto Flex';
+  --metta-ref-typeface-mono:     ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+
+  /* Axes raw */
+  --metta-ref-axis-wdth-regular:  100;     --metta-ref-axis-wdth-expanded: 132;
+  --metta-ref-axis-wght-light:    270;     --metta-ref-axis-wght-regular:  400;
+  --metta-ref-axis-wght-medium:   510;     --metta-ref-axis-wght-medium-p: 590;
+  --metta-ref-axis-wght-semibold: 650;     --metta-ref-axis-wght-bold:     700;
+  --metta-ref-axis-wght-heavy:    870;
+
+  /* Duration / easing raw */
+  --metta-ref-duration-50:  50ms;   --metta-ref-duration-100: 100ms;
+  --metta-ref-duration-200: 200ms;  --metta-ref-duration-300: 300ms;
+  --metta-ref-duration-500: 500ms;  --metta-ref-duration-700: 700ms;
+
+  --metta-ref-easing-linear:     linear;
+  --metta-ref-easing-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+  --metta-ref-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --metta-ref-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --metta-ref-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* TIER 2 — SYSTEM TOKENS — LIGHT (default) */
+:root, [data-theme="light"] {
+  --metta-sys-color-primary:               var(--metta-ref-palette-yellow-50);
+  --metta-sys-color-on-primary:            var(--metta-ref-palette-night-10);
+  --metta-sys-color-primary-hover:         var(--metta-ref-palette-yellow-60);
+  --metta-sys-color-primary-pressed:       var(--metta-ref-palette-yellow-55);
+  --metta-sys-color-primary-container:     var(--metta-ref-palette-yellow-95);
+  --metta-sys-color-on-primary-container:  var(--metta-ref-palette-night-10);
+
+  --metta-sys-color-surface:                  var(--metta-ref-palette-night-100);
+  --metta-sys-color-surface-bright:           var(--metta-ref-palette-night-100);
+  --metta-sys-color-surface-dim:              var(--metta-ref-palette-night-95);
+  --metta-sys-color-surface-container-lowest: var(--metta-ref-palette-night-100);
+  --metta-sys-color-surface-container-low:    var(--metta-ref-palette-night-99);
+  --metta-sys-color-surface-container:        var(--metta-ref-palette-night-97);
+  --metta-sys-color-surface-container-high:   var(--metta-ref-palette-night-95);
+  --metta-sys-color-surface-container-highest:#E0E6E9;
+  --metta-sys-color-on-surface:               var(--metta-ref-palette-night-10);
+  --metta-sys-color-on-surface-variant:       var(--metta-ref-palette-night-40);
+
+  --metta-sys-color-outline:           var(--metta-ref-palette-night-97); /* #EFF3F5 */
+  --metta-sys-color-outline-variant:   rgba(202, 217, 224, 0.87);
+
+  --metta-sys-color-background:        var(--metta-sys-color-surface);
+  --metta-sys-color-on-background:     var(--metta-sys-color-on-surface);
+
+  --metta-sys-color-inverse-surface:    var(--metta-ref-palette-night-10);
+  --metta-sys-color-inverse-on-surface: var(--metta-ref-palette-night-99);
+  --metta-sys-color-inverse-primary:    var(--metta-ref-palette-yellow-80);
+
+  /* Shape */
+  --metta-sys-shape-corner-none: 0px;     --metta-sys-shape-corner-xs:  4px;
+  --metta-sys-shape-corner-sm:   8px;     --metta-sys-shape-corner-md:  12px;
+  --metta-sys-shape-corner-lg:   20px;    --metta-sys-shape-corner-xl:  24px;
+  --metta-sys-shape-corner-2xl:  32px;    --metta-sys-shape-corner-full:999px;
+
+  /* Spacing */
+  --metta-sys-spacing-1:  4px;   --metta-sys-spacing-2:  8px;
+  --metta-sys-spacing-3:  12px;  --metta-sys-spacing-4:  16px;
+  --metta-sys-spacing-5:  24px;  --metta-sys-spacing-6:  32px;
+  --metta-sys-spacing-7:  48px;  --metta-sys-spacing-8:  64px;
+  --metta-sys-spacing-9:  96px;  --metta-sys-spacing-10:128px;
+
+  /* Elevation */
+  --metta-sys-elevation-0: none;
+  --metta-sys-elevation-1: 0 1px 2px rgba(12, 22, 27, 0.05);
+  --metta-sys-elevation-2: 0 5px 14px rgba(12, 22, 27, 0.06);
+  --metta-sys-elevation-3: 0 12px 28px rgba(12, 22, 27, 0.08);
+  --metta-sys-elevation-4: 0 18px 40px rgba(12, 22, 27, 0.11);
+  --metta-sys-elevation-5: 0 28px 60px rgba(12, 22, 27, 0.14);
+
+  /* Motion */
+  --metta-sys-motion-duration-instant: var(--metta-ref-duration-50);
+  --metta-sys-motion-duration-short:   var(--metta-ref-duration-200);
+  --metta-sys-motion-duration-medium:  var(--metta-ref-duration-300);
+  --metta-sys-motion-duration-long:    var(--metta-ref-duration-500);
+  --metta-sys-motion-duration-x-long:  var(--metta-ref-duration-700);
+  --metta-sys-motion-easing-standard:   var(--metta-ref-easing-standard);
+  --metta-sys-motion-easing-emphasized: var(--metta-ref-easing-emphasized);
+  --metta-sys-motion-easing-enter:      var(--metta-ref-easing-decelerate);
+  --metta-sys-motion-easing-exit:       var(--metta-ref-easing-accelerate);
+
+  /* State */
+  --metta-sys-state-hover-opacity:   var(--metta-ref-opacity-state-hover);
+  --metta-sys-state-focus-opacity:   var(--metta-ref-opacity-state-focus);
+  --metta-sys-state-pressed-opacity: var(--metta-ref-opacity-state-pressed);
+
+  /* Typescale */
+  --metta-sys-typescale-display-large-size:       clamp(56px, 8vw, 99px);
+  --metta-sys-typescale-display-large-weight:     650;
+  --metta-sys-typescale-display-large-stretch:    132%;
+  --metta-sys-typescale-display-large-line-height:0.90;
+  --metta-sys-typescale-display-medium-size:      clamp(40px, 6vw, 75px);
+  --metta-sys-typescale-display-medium-weight:    650;
+  --metta-sys-typescale-display-medium-stretch:   132%;
+  --metta-sys-typescale-headline-large-size:      clamp(36px, 4.5vw, 51px);
+  --metta-sys-typescale-headline-large-weight:    870;
+  --metta-sys-typescale-headline-large-stretch:   132%;
+  --metta-sys-typescale-headline-medium-size:     clamp(28px, 4vw, 44px);
+  --metta-sys-typescale-headline-medium-weight:   650;
+  --metta-sys-typescale-headline-medium-stretch:  132%;
+  --metta-sys-typescale-headline-small-size:      clamp(22px, 2.8vw, 32px);
+  --metta-sys-typescale-headline-small-weight:    590;
+  --metta-sys-typescale-body-large-size:          clamp(18px, 1.8vw, 22px);
+  --metta-sys-typescale-body-medium-size:         16px;
+  --metta-sys-typescale-body-small-size:          14px;
+  --metta-sys-typescale-label-large-size:         14px;
+  --metta-sys-typescale-label-medium-size:        12px;
+  --metta-sys-typescale-label-editorial-size:     11px;
+
+  --metta-sys-gradient-golden-linear:
+    linear-gradient(135deg, var(--metta-ref-palette-yellow-50) 0%, var(--metta-ref-palette-yellow-80) 50%, var(--metta-ref-palette-yellow-90) 100%);
+  --metta-sys-gradient-night-linear:
+    linear-gradient(135deg, var(--metta-ref-palette-night-10) 0%, var(--metta-ref-palette-night-25) 60%, var(--metta-ref-palette-night-40) 100%);
+  --metta-sys-gradient-light-linear:
+    linear-gradient(135deg, var(--metta-ref-palette-night-100) 0%, #E0E6E9 100%);
+  --metta-sys-gradient-yellow-soft:
+    linear-gradient(226deg, #FFC443 10%, var(--metta-ref-palette-yellow-55) 97%);
+}
+
+/* TIER 2 — DARK */
+[data-theme="dark"] {
+  --metta-sys-color-primary:               var(--metta-ref-palette-yellow-50);
+  --metta-sys-color-on-primary:            var(--metta-ref-palette-night-10);
+  --metta-sys-color-primary-hover:         var(--metta-ref-palette-yellow-60);
+  --metta-sys-color-primary-pressed:       var(--metta-ref-palette-yellow-55);
+  --metta-sys-color-primary-container:     var(--metta-ref-palette-night-20);
+  --metta-sys-color-on-primary-container:  var(--metta-ref-palette-yellow-90);
+  --metta-sys-color-surface:                  var(--metta-ref-palette-night-10);
+  --metta-sys-color-surface-bright:           var(--metta-ref-palette-night-25);
+  --metta-sys-color-surface-dim:              var(--metta-ref-palette-night-5);
+  --metta-sys-color-surface-container-lowest: var(--metta-ref-palette-night-5);
+  --metta-sys-color-surface-container-low:    var(--metta-ref-palette-night-10);
+  --metta-sys-color-surface-container:        var(--metta-ref-palette-night-15);
+  --metta-sys-color-surface-container-high:   var(--metta-ref-palette-night-20);
+  --metta-sys-color-surface-container-highest:var(--metta-ref-palette-night-25);
+  --metta-sys-color-on-surface:               var(--metta-ref-palette-night-100);
+  --metta-sys-color-on-surface-variant:       var(--metta-ref-palette-night-85);
+
+  --metta-sys-color-outline:           rgba(255, 255, 255, 0.20);
+  --metta-sys-color-outline-variant:   rgba(58, 109, 137, 0.28);
+
+  --metta-sys-color-inverse-surface:    var(--metta-ref-palette-night-99);
+  --metta-sys-color-inverse-on-surface: var(--metta-ref-palette-night-10);
+  --metta-sys-color-inverse-primary:    var(--metta-ref-palette-yellow-30);
+}
+
+/* TIER 3 — COMPONENT */
+:root {
+  --metta-comp-cta-yellow-container-color:           var(--metta-sys-color-primary);
+  --metta-comp-cta-yellow-container-color-hover:     var(--metta-sys-color-primary-hover);
+  --metta-comp-cta-yellow-container-color-pressed:   var(--metta-sys-color-primary-pressed);
+  --metta-comp-cta-yellow-label-color:               var(--metta-sys-color-on-primary);
+  --metta-comp-cta-yellow-container-shape:           var(--metta-sys-shape-corner-full);
+  --metta-comp-cta-yellow-container-padding-x:       var(--metta-sys-spacing-6);
+  --metta-comp-cta-yellow-container-padding-y:       var(--metta-sys-spacing-4);
+  --metta-comp-cta-yellow-pressed-scale:             0.97;
+
+  --metta-comp-cta-dark-container-color:             var(--metta-ref-palette-night-10);
+  --metta-comp-cta-dark-container-color-hover:       var(--metta-ref-palette-night-20);
+  --metta-comp-cta-dark-label-color:                 var(--metta-ref-palette-night-100);
+
+  --metta-comp-cta-light-container-color:            var(--metta-ref-palette-night-100);
+  --metta-comp-cta-light-container-color-hover:      var(--metta-ref-palette-night-95);
+  --metta-comp-cta-light-label-color:                var(--metta-ref-palette-night-10);
+  --metta-comp-cta-light-container-shape:            var(--metta-sys-shape-corner-full);
+
+  --metta-comp-card-container-color:                 var(--metta-sys-color-surface-container-low);
+  --metta-comp-card-container-shape:                 var(--metta-sys-shape-corner-md);
+  --metta-comp-card-container-padding:               var(--metta-sys-spacing-5);
+  --metta-comp-card-elevation:                       var(--metta-sys-elevation-1);
+
+  --metta-comp-card-elevated-container-color:        var(--metta-sys-color-surface-container-high);
+  --metta-comp-card-elevated-container-shape:        var(--metta-sys-shape-corner-xl);
+  --metta-comp-card-elevated-elevation:              var(--metta-sys-elevation-3);
+
+  --metta-comp-yellow-band-color:                    var(--metta-sys-color-primary);
+  --metta-comp-yellow-band-height:                   6px;
+}
+
+/* ============================================================
+   SITE LAYOUT (próprio site, escrito sobre os tokens)
+============================================================ */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* Scrollbar — neutra, tema-aware (surface-container track + on-surface-variant thumb) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--metta-sys-color-on-surface-variant) var(--metta-sys-color-surface-container);
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--metta-sys-color-surface-container);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--metta-sys-color-on-surface-variant);
+  border-radius: var(--metta-sys-shape-corner-full);
+  border: 3px solid var(--metta-sys-color-surface-container);
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+  opacity: 0.6;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--metta-sys-color-on-surface);
+}
+::-webkit-scrollbar-thumb:active {
+  background: var(--metta-sys-color-on-surface);
+}
+::-webkit-scrollbar-corner {
+  background: var(--metta-sys-color-surface-container);
+}
+
+body {
+  margin: 0;
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+  background: var(--metta-sys-color-background);
+  color: var(--metta-sys-color-on-background);
+  transition: background var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              color var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+}
+
+:root {
+  --topbar-height: 73px;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+aside.nav {
+  background: var(--metta-sys-color-surface-container);
+  border-right: 1px solid var(--metta-sys-color-outline-variant);
+  padding: 0 24px 32px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  transition: background var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+  /* hide scrollbar — keep scroll functional */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+aside.nav::-webkit-scrollbar {
+  display: none;
+}
+aside.nav .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--topbar-height);
+  margin: 0 -24px 24px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  position: sticky;
+  top: 0;
+  background: var(--metta-sys-color-surface-container);
+  z-index: 2;
+}
+aside.nav .brand-symbol {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+}
+aside.nav .brand-symbol svg {
+  width: 100%; height: 100%;
+  display: block;
+}
+aside.nav .brand-name {
+  font-weight: 870; font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 14px;
+}
+aside.nav .brand-version {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 540; font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.20em;
+  color: var(--metta-sys-color-on-surface-variant);
+  padding: 4px 8px;
+  border: 1px solid var(--metta-sys-color-outline);
+  border-radius: var(--metta-sys-shape-corner-full);
+}
+
+aside.nav h3 {
+  font-size: 11px;
+  font-weight: 540; font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin: 24px 0 8px 0;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+aside.nav a {
+  display: block;
+  position: relative;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 510;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  color: var(--metta-sys-color-on-surface-variant);
+  text-decoration: none;
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              padding-left var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+aside.nav a::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  background: var(--metta-sys-color-on-surface);
+  border-radius: var(--metta-sys-shape-corner-full);
+  transform: translateY(-50%);
+  transition: height var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+aside.nav a:hover {
+  background: var(--metta-sys-color-surface-container-high);
+  color: var(--metta-sys-color-on-surface);
+  padding-left: 18px;
+}
+aside.nav a:hover::before {
+  height: 50%;
+  background: var(--metta-sys-color-on-surface-variant);
+}
+aside.nav a.active {
+  background: var(--metta-sys-color-surface-container-highest);
+  color: var(--metta-sys-color-on-surface);
+  padding-left: 18px;
+  font-weight: 590;
+}
+aside.nav a.active::before {
+  height: 60%;
+  background: var(--metta-sys-color-on-surface);
+}
+
+/* Main content */
+main {
+  padding: 0;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--metta-sys-color-background) 80%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  height: var(--topbar-height);
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.search {
+  flex: 1;
+  max-width: 360px;
+  position: relative;
+}
+.search input {
+  width: 100%;
+  padding: 10px 14px 10px 36px;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  background: var(--metta-sys-color-surface-container);
+  border: 1px solid var(--metta-sys-color-outline);
+  border-radius: var(--metta-sys-shape-corner-full);
+  color: var(--metta-sys-color-on-surface);
+  outline: none;
+  transition: border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.search input:focus {
+  border-color: var(--metta-sys-color-primary);
+}
+.search::before {
+  content: '';
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  width: 14px; height: 14px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23435965' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>");
+  background-size: contain;
+  opacity: 0.7;
+}
+
+.theme-toggle {
+  border: 1px solid var(--metta-sys-color-outline);
+  background: var(--metta-sys-color-surface-container);
+  border-radius: var(--metta-sys-shape-corner-full);
+  padding: 6px;
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+}
+.theme-toggle button {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: var(--metta-sys-shape-corner-full);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--metta-sys-color-on-surface-variant);
+  transition: all var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.theme-toggle button.active {
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+}
+
+.content {
+  padding: 64px 64px 128px;
+  max-width: 1280px;
+}
+@media (max-width: 980px) {
+  .app { grid-template-columns: 1fr; }
+  aside.nav { position: relative; height: auto; padding: 24px; overflow: visible; }
+  aside.nav .brand { position: relative; height: auto; padding: 0 0 16px; margin-bottom: 16px; }
+  .content { padding: 48px 24px 96px; }
+  .topbar { padding: 0 24px; }
+}
+
+/* Section style */
+section { margin-bottom: 96px; scroll-margin-top: 100px; }
+section .section-meta {
+  font-size: 11px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-bottom: 12px;
+}
+section h2 {
+  margin: 0 0 12px 0;
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 870; font-stretch: 132%;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+section .lede {
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.5;
+  max-width: 720px;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0 0 48px 0;
+}
+section h3 {
+  margin: 56px 0 16px;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 650; font-stretch: 132%;
+  letter-spacing: -0.01em;
+  line-height: 1.0;
+}
+section h4 {
+  margin: 32px 0 12px;
+  font-size: 14px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+.yellow-band {
+  height: 6px;
+  background: var(--metta-comp-yellow-band-color);
+  width: 64px;
+  margin-bottom: 24px;
+}
+
+/* ============================================================
+   HERO + 3-TIER DIAGRAM
+============================================================ */
+.hero {
+  padding: 80px 0 32px;
+  position: relative;
+}
+.hero h1 {
+  font-size: clamp(48px, 9vw, 120px);
+  font-weight: 870; font-stretch: 132%;
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+  max-width: 14ch;
+}
+.hero .accent { color: var(--metta-sys-color-primary); }
+.hero p {
+  font-size: clamp(16px, 1.6vw, 22px);
+  line-height: 1.5;
+  max-width: 60ch;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+/* Educational cards — "pra leigos" */
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.intro-card {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-xl);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              box-shadow var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              border-color var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+}
+.intro-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--metta-sys-elevation-2);
+  border-color: var(--metta-sys-color-on-surface-variant);
+}
+.intro-card .icon {
+  width: 56px; height: 56px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  background: var(--metta-sys-color-primary-container);
+  color: var(--metta-sys-color-on-primary-container);
+  display: grid; place-items: center;
+  font-weight: 870; font-stretch: 132%;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+}
+.intro-card .icon svg { width: 26px; height: 26px; }
+.intro-card h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 650; font-stretch: 132%;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.intro-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.intro-card p strong {
+  color: var(--metta-sys-color-on-surface);
+  font-weight: 650;
+}
+.intro-card code {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 12px;
+  background: var(--metta-sys-color-surface-container-high);
+  padding: 2px 6px;
+  border-radius: var(--metta-sys-shape-corner-xs);
+  color: var(--metta-sys-color-on-surface);
+}
+
+.analogy {
+  margin-top: 32px;
+  padding: 28px 32px;
+  border-left: 4px solid var(--metta-sys-color-primary);
+  background: var(--metta-sys-color-surface-container-low);
+  border-radius: 0 var(--metta-sys-shape-corner-md) var(--metta-sys-shape-corner-md) 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.analogy strong { color: var(--metta-sys-color-on-surface); font-weight: 650; }
+
+.tier-stack {
+  margin-top: 48px;
+  display: grid;
+  gap: 16px;
+}
+.tier-card {
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-xl);
+  padding: 28px 32px;
+  background: var(--metta-sys-color-surface-container-low);
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
+  gap: 24px;
+  align-items: center;
+  transition: transform var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              box-shadow var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+}
+.tier-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--metta-sys-elevation-2);
+}
+.tier-card .num {
+  font-size: 56px;
+  font-weight: 870; font-stretch: 132%;
+  line-height: 1;
+  color: var(--metta-sys-color-primary);
+  letter-spacing: -0.02em;
+}
+.tier-card .meta { display: flex; flex-direction: column; gap: 6px; }
+.tier-card h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 650; font-stretch: 132%;
+}
+.tier-card .meta p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.tier-card code {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 12px;
+  background: var(--metta-sys-color-surface-container-high);
+  padding: 4px 10px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  color: var(--metta-sys-color-on-surface);
+}
+.tier-card .count {
+  font-size: 13px;
+  font-weight: 540; font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--metta-sys-color-on-surface-variant);
+  text-align: right;
+}
+.tier-card .count strong {
+  display: block;
+  font-size: 32px;
+  font-weight: 870;
+  letter-spacing: -0.01em;
+  color: var(--metta-sys-color-on-surface);
+  text-transform: none;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   COLOR PALETTES
+============================================================ */
+.palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+.swatch {
+  border-radius: var(--metta-sys-shape-corner-md);
+  overflow: hidden;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  cursor: pointer;
+  transition: transform var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.swatch:hover {
+  transform: translateY(-2px);
+}
+.swatch .chip {
+  height: 88px;
+  display: block;
+}
+.swatch .meta {
+  padding: 10px 12px;
+  background: var(--metta-sys-color-surface-container-low);
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.swatch .name {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface);
+  word-break: break-all;
+  line-height: 1.3;
+}
+.swatch .hex {
+  font-family: var(--metta-ref-typeface-mono);
+  color: var(--metta-sys-color-on-surface-variant);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+/* Role pairs (sys color) */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+.role-card {
+  border-radius: var(--metta-sys-shape-corner-md);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  overflow: hidden;
+}
+.role-card .preview {
+  padding: 28px 24px;
+  font-size: 13px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+}
+.role-card .info {
+  padding: 12px 16px;
+  background: var(--metta-sys-color-surface-container-low);
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.role-card .info .role-name {
+  color: var(--metta-sys-color-on-surface);
+  font-size: 12px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ============================================================
+   TABS — pra alternar entre grupos de tipografia
+============================================================ */
+.tabs {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--metta-sys-color-surface-container);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-full);
+  padding: 4px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+.tab-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 22px;
+  border-radius: var(--metta-sys-shape-corner-full);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--metta-sys-color-on-surface-variant);
+  transition: all var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--metta-sys-color-on-surface); }
+.tab-btn.active {
+  background: var(--metta-sys-color-surface);
+  color: var(--metta-sys-color-on-surface);
+  box-shadow: var(--metta-sys-elevation-1);
+}
+.tab-btn .tab-meta {
+  font-weight: 400;
+  font-stretch: 100%;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 8px;
+  color: var(--metta-sys-color-on-surface-variant);
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+}
+.tab-panels { position: relative; }
+.tab-panel { display: none; animation: tabFadeIn 400ms var(--metta-sys-motion-easing-emphasized); }
+.tab-panel.active { display: block; }
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   TYPOGRAPHY — family overview cards
+============================================================ */
+.family-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+@media (max-width: 760px) {
+  .family-cards { grid-template-columns: 1fr; }
+}
+.family-card {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-xl);
+  padding: 32px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.family-tag {
+  font-size: 10px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.20em;
+  color: var(--metta-sys-color-on-surface-variant);
+  padding: 4px 10px;
+  border: 1px solid var(--metta-sys-color-outline);
+  border-radius: var(--metta-sys-shape-corner-full);
+  align-self: flex-start;
+}
+.family-name {
+  margin: 4px 0 0;
+  font-weight: 870;
+  font-stretch: 132%;
+  font-size: clamp(28px, 3.5vw, 40px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.family-card:nth-child(2) .family-name {
+  font-stretch: 100%;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+.family-meta {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.family-meta code {
+  font-family: inherit;
+  background: var(--metta-sys-color-surface-container-high);
+  padding: 3px 8px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+}
+.family-desc {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.family-desc strong { color: var(--metta-sys-color-on-surface); font-weight: 650; }
+
+/* Role mapping table */
+.role-mapping {
+  display: grid;
+  gap: 6px;
+}
+.role-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  gap: 24px;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.role-row:hover {
+  background: var(--metta-sys-color-surface-container);
+}
+.role-row .role-id {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface);
+  line-height: 1.5;
+}
+.role-row .role-id strong {
+  display: block;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--metta-sys-color-on-surface);
+  margin-bottom: 4px;
+}
+.role-row .role-id code {
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+  word-break: break-all;
+}
+.role-row .role-preview {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.role-row .role-source {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  text-align: right;
+  color: var(--metta-sys-color-on-surface-variant);
+  line-height: 1.5;
+}
+.role-row .role-source strong {
+  display: block;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+}
+.role-row .source-expanded strong { color: var(--metta-ref-palette-yellow-40); }
+.role-row .source-regular  strong { color: var(--metta-ref-palette-night-40); }
+[data-theme="dark"] .role-row .source-expanded strong { color: var(--metta-ref-palette-yellow-50); }
+[data-theme="dark"] .role-row .source-regular  strong { color: var(--metta-ref-palette-night-85); }
+
+@media (max-width: 980px) {
+  .role-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .role-row .role-source { text-align: left; }
+}
+
+/* ============================================================
+   TYPOGRAPHY SPECIMEN
+============================================================ */
+.type-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  align-items: baseline;
+}
+.type-row:last-child { border-bottom: none; }
+.type-row .meta {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+  line-height: 1.5;
+}
+.type-row .meta strong {
+  display: block;
+  color: var(--metta-sys-color-on-surface);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  margin-bottom: 8px;
+}
+.specimen-display-large {
+  font-size: var(--metta-sys-typescale-display-large-size);
+  font-weight: var(--metta-sys-typescale-display-large-weight);
+  font-stretch: var(--metta-sys-typescale-display-large-stretch);
+  line-height: var(--metta-sys-typescale-display-large-line-height);
+  letter-spacing: -0.01em;
+}
+.specimen-display-medium {
+  font-size: var(--metta-sys-typescale-display-medium-size);
+  font-weight: var(--metta-sys-typescale-display-medium-weight);
+  font-stretch: var(--metta-sys-typescale-display-medium-stretch);
+  line-height: 0.90;
+  letter-spacing: -0.01em;
+}
+.specimen-headline-large {
+  font-size: var(--metta-sys-typescale-headline-large-size);
+  font-weight: var(--metta-sys-typescale-headline-large-weight);
+  font-stretch: var(--metta-sys-typescale-headline-large-stretch);
+  line-height: 0.82;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.specimen-headline-medium {
+  font-size: var(--metta-sys-typescale-headline-medium-size);
+  font-weight: var(--metta-sys-typescale-headline-medium-weight);
+  font-stretch: var(--metta-sys-typescale-headline-medium-stretch);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+.specimen-headline-small {
+  font-size: var(--metta-sys-typescale-headline-small-size);
+  font-weight: var(--metta-sys-typescale-headline-small-weight);
+  font-stretch: 100%;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.specimen-body-large { font-size: var(--metta-sys-typescale-body-large-size); font-weight: 590; line-height: 1.55; }
+.specimen-body-medium { font-size: var(--metta-sys-typescale-body-medium-size); font-weight: 400; line-height: 1.65; }
+.specimen-body-small { font-size: var(--metta-sys-typescale-body-small-size); font-weight: 400; line-height: 1.55; }
+.specimen-label-large { font-size: var(--metta-sys-typescale-label-large-size); font-weight: 540; font-stretch: 132%; text-transform: uppercase; letter-spacing: 0.10em; }
+.specimen-label-medium { font-size: var(--metta-sys-typescale-label-medium-size); font-weight: 540; font-stretch: 132%; text-transform: uppercase; letter-spacing: 0.12em; }
+.specimen-label-editorial { font-size: var(--metta-sys-typescale-label-editorial-size); font-weight: 270; font-stretch: 132%; text-transform: uppercase; letter-spacing: 0.28em; }
+
+/* ============================================================
+   SHAPE
+============================================================ */
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+.shape-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.shape-tile .demo {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--metta-sys-color-primary-container);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.shape-tile .label {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+  text-align: center;
+  line-height: 1.4;
+}
+.shape-tile .label strong {
+  display: block;
+  color: var(--metta-sys-color-on-surface);
+}
+
+/* ============================================================
+   SPACING
+============================================================ */
+.spacing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.spacing-row {
+  display: grid;
+  grid-template-columns: 200px 80px 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 8px 0;
+}
+.spacing-row .name {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface);
+}
+.spacing-row .value {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.spacing-row .bar {
+  height: 18px;
+  background: var(--metta-sys-color-primary);
+  border-radius: var(--metta-sys-shape-corner-xs);
+}
+
+/* ============================================================
+   ELEVATION
+============================================================ */
+.elevation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 32px 0;
+}
+.elev-tile {
+  background: var(--metta-sys-color-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  aspect-ratio: 1.4;
+  display: grid;
+  place-items: center;
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface-variant);
+  text-align: center;
+  padding: 20px;
+}
+.elev-tile strong {
+  display: block;
+  color: var(--metta-sys-color-on-surface);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  margin-bottom: 6px;
+}
+.elev-0 { box-shadow: var(--metta-sys-elevation-0); }
+.elev-1 { box-shadow: var(--metta-sys-elevation-1); }
+.elev-2 { box-shadow: var(--metta-sys-elevation-2); }
+.elev-3 { box-shadow: var(--metta-sys-elevation-3); }
+.elev-4 { box-shadow: var(--metta-sys-elevation-4); }
+.elev-5 { box-shadow: var(--metta-sys-elevation-5); }
+
+/* ============================================================
+   MOTION
+============================================================ */
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+.motion-tile {
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  padding: 24px;
+  background: var(--metta-sys-color-surface-container-low);
+}
+.motion-tile .label {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.motion-tile .name {
+  display: block;
+  margin-bottom: 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--metta-sys-color-on-surface);
+}
+.motion-track {
+  height: 4px;
+  background: var(--metta-sys-color-surface-container-high);
+  border-radius: var(--metta-sys-shape-corner-full);
+  position: relative;
+  overflow: hidden;
+}
+.motion-dot {
+  position: absolute;
+  top: -4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--metta-sys-color-primary);
+  animation: motionDemo 2s infinite;
+}
+.motion-tile.standard   .motion-dot { animation-duration: 1.6s; animation-timing-function: var(--metta-sys-motion-easing-standard); }
+.motion-tile.emphasized .motion-dot { animation-duration: 1.6s; animation-timing-function: var(--metta-sys-motion-easing-emphasized); }
+.motion-tile.enter      .motion-dot { animation-duration: 1.6s; animation-timing-function: var(--metta-sys-motion-easing-enter); }
+.motion-tile.exit       .motion-dot { animation-duration: 1.6s; animation-timing-function: var(--metta-sys-motion-easing-exit); }
+@keyframes motionDemo {
+  0%,10%   { left: 0%; }
+  50%      { left: calc(100% - 12px); }
+  90%,100% { left: 0%; }
+}
+
+/* ============================================================
+   STATE LAYERS DEMO
+============================================================ */
+.state-demo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.state-pill {
+  position: relative;
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+  padding: 16px 24px;
+  text-align: center;
+  border-radius: var(--metta-sys-shape-corner-full);
+  font-weight: 700;
+  font-stretch: 132%;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 13px;
+  overflow: hidden;
+}
+.state-pill .layer {
+  position: absolute;
+  inset: 0;
+  background: var(--metta-ref-palette-night-10);
+}
+.state-pill.hover .layer   { opacity: var(--metta-sys-state-hover-opacity); }
+.state-pill.focus .layer   { opacity: var(--metta-sys-state-focus-opacity); }
+.state-pill.pressed .layer { opacity: var(--metta-sys-state-pressed-opacity); }
+.state-pill .text { position: relative; z-index: 1; }
+
+/* ============================================================
+   COMPONENTS DEMOS
+============================================================ */
+.demo-stage {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-xl);
+  padding: 56px;
+  display: grid;
+  place-items: center;
+  margin: 16px 0 8px;
+}
+.demo-meta {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-bottom: 32px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.demo-meta span {
+  background: var(--metta-sys-color-surface-container);
+  padding: 4px 10px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+
+/* CTA Yellow real */
+.cta-yellow {
+  background: var(--metta-comp-cta-yellow-container-color);
+  color: var(--metta-comp-cta-yellow-label-color);
+  border: none;
+  font-family: inherit;
+  font-weight: var(--metta-ref-axis-wght-bold);
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: var(--metta-comp-cta-yellow-container-shape);
+  padding: var(--metta-comp-cta-yellow-container-padding-y) var(--metta-comp-cta-yellow-container-padding-x);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              transform var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.cta-yellow:hover  { background: var(--metta-comp-cta-yellow-container-color-hover); }
+.cta-yellow:active { background: var(--metta-comp-cta-yellow-container-color-pressed); transform: scale(var(--metta-comp-cta-yellow-pressed-scale)); }
+.cta-yellow:focus { outline: none; }
+.cta-yellow:focus-visible { box-shadow: 0 0 0 2px var(--metta-sys-color-surface), 0 0 0 4px var(--metta-sys-color-on-surface-variant); }
+
+.cta-dark {
+  background: var(--metta-comp-cta-dark-container-color);
+  color: var(--metta-comp-cta-dark-label-color);
+  border: none;
+  font-family: inherit;
+  font-weight: 700; font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: var(--metta-sys-shape-corner-full);
+  padding: 16px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              transform var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.cta-dark:hover  { background: var(--metta-comp-cta-dark-container-color-hover); }
+.cta-dark:active { transform: scale(0.97); }
+.cta-dark:focus  { outline: none; }
+.cta-dark:focus-visible { box-shadow: 0 0 0 2px var(--metta-sys-color-surface), 0 0 0 4px var(--metta-sys-color-on-surface-variant); }
+
+/* CTA Light — fundo branco com borda, pra fundos escuros */
+.cta-light {
+  background: var(--metta-ref-palette-night-100);
+  color: var(--metta-ref-palette-night-10);
+  border: 1px solid var(--metta-ref-palette-night-100);
+  font-family: inherit;
+  font-weight: 700; font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: var(--metta-sys-shape-corner-full);
+  padding: 16px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              color var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              transform var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.cta-light:hover  { background: var(--metta-ref-palette-night-95); }
+.cta-light:active { transform: scale(0.97); }
+.cta-light:focus  { outline: none; }
+.cta-light:focus-visible { box-shadow: 0 0 0 2px var(--metta-sys-color-surface), 0 0 0 4px var(--metta-sys-color-on-surface-variant); }
+
+.card-demo {
+  background: var(--metta-comp-card-container-color);
+  border-radius: var(--metta-comp-card-container-shape);
+  padding: var(--metta-comp-card-container-padding);
+  box-shadow: var(--metta-comp-card-elevation);
+  width: 280px;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.card-demo h4 { margin: 0 0 8px; color: var(--metta-sys-color-on-surface); }
+.card-demo p { margin: 0; color: var(--metta-sys-color-on-surface-variant); font-size: 14px; }
+
+.card-elevated {
+  background: var(--metta-comp-card-elevated-container-color);
+  border-radius: var(--metta-comp-card-elevated-container-shape);
+  padding: 32px;
+  box-shadow: var(--metta-comp-card-elevated-elevation);
+  width: 320px;
+}
+.card-elevated h4 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 870;
+  font-stretch: 132%;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface);
+}
+
+/* CTA rows — visualização horizontal por categoria */
+.cta-rows {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+}
+.cta-row {
+  display: grid;
+  grid-template-columns: 240px 1fr auto;
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  padding: 28px 8px;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+}
+@media (max-width: 800px) {
+  .cta-row { grid-template-columns: 1fr; gap: 16px; }
+  .cta-row__demo { justify-self: flex-start; }
+}
+.cta-row__name {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cta-row__name h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650; font-stretch: 132%;
+  letter-spacing: -0.01em;
+  color: var(--metta-sys-color-on-surface);
+}
+.cta-row__tag {
+  font-size: 10px;
+  font-weight: 540; font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.cta-row__specs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.cta-row__specs .spec {
+  background: var(--metta-sys-color-surface-container);
+  padding: 4px 10px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  align-self: flex-start;
+  max-width: 100%;
+  word-break: break-all;
+}
+.cta-row__demo { justify-self: flex-end; display: flex; }
+.cta-row__demo--dark {
+  background: var(--metta-ref-palette-night-10);
+  padding: 16px 24px;
+  border-radius: var(--metta-sys-shape-corner-md);
+}
+
+/* ============================================================
+   VARIANT ROWS — visualização horizontal por categoria (igual CTA)
+============================================================ */
+.cards-variations-rows {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+}
+.variant-wrap {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 320px;
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  padding: 28px 8px;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+}
+@media (max-width: 980px) {
+  .variant-wrap { grid-template-columns: 1fr; gap: 16px; }
+}
+.variant-id {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+.variant-name {
+  font-size: 15px;
+  font-weight: 650; font-stretch: 132%;
+  letter-spacing: -0.01em;
+  color: var(--metta-sys-color-on-surface);
+}
+.variant-tag {
+  font-size: 10px;
+  font-weight: 540; font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--metta-sys-color-on-surface-variant);
+  padding: 3px 10px;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-full);
+}
+.variant-note {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0;
+  max-width: 50ch;
+}
+/* Card filho na coluna direita ocupa 100% da column (320px) */
+.variant-wrap > .card-stat,
+.variant-wrap > .card-icon,
+.variant-wrap > .card-filled,
+.variant-wrap > .card-demo,
+.variant-wrap > .card-elevated {
+  width: 100%;
+  min-height: 200px;
+}
+@media (max-width: 980px) {
+  .variant-wrap > .card-stat,
+  .variant-wrap > .card-icon,
+  .variant-wrap > .card-filled,
+  .variant-wrap > .card-demo,
+  .variant-wrap > .card-elevated { width: 100%; max-width: 320px; }
+}
+
+/* Card variations grid */
+.cards-variations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Base shared — todos os cards têm padding, min-height, layout consistentes */
+.card-stat,
+.card-icon,
+.card-filled {
+  padding: 28px;
+  min-height: 220px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
+              border-color var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+}
+
+/* Card stat — número grande + label + descrição */
+.card-stat {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.card-stat:hover { transform: translateY(-2px); border-color: var(--metta-sys-color-on-surface-variant); }
+.card-stat__number {
+  font-weight: 870; font-stretch: 132%;
+  font-size: 56px;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--metta-sys-color-primary);
+}
+.card-stat__label {
+  font-weight: 650; font-stretch: 132%;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--metta-sys-color-on-surface);
+}
+.card-stat__desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-top: auto;
+}
+
+/* Card icon — ícone neutro + título + body */
+.card-icon {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.card-icon:hover { transform: translateY(-2px); border-color: var(--metta-sys-color-on-surface-variant); }
+.card-icon__icon {
+  width: 44px; height: 44px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  background: var(--metta-sys-color-surface-container-high);
+  color: var(--metta-sys-color-on-surface);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.card-icon__icon svg { width: 22px; height: 22px; }
+.card-icon h4 {
+  margin: 0;
+  font-weight: 650; font-stretch: 132%;
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--metta-sys-color-on-surface);
+}
+.card-icon p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-top: auto;
+}
+
+/* Card filled — tom neutro tema-aware (light por padrão, escurece no tema dark) */
+.card-filled {
+  background: var(--metta-sys-color-surface-container-highest);
+  color: var(--metta-sys-color-on-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.card-filled:hover { transform: translateY(-2px); border-color: var(--metta-sys-color-on-surface-variant); }
+.card-filled__eyebrow {
+  font-weight: 540; font-stretch: 132%;
+  font-size: 10px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.card-filled h4 {
+  margin: 0;
+  font-weight: 650; font-stretch: 132%;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.card-filled p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-top: auto;
+}
+
+/* Card padrão (default) e elevated — também min-height 220 pra alinhar */
+.card-demo,
+.card-elevated {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.card-demo > p, .card-elevated > p { margin-top: auto; }
+
+.label-pill {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid var(--metta-ref-palette-night-90);
+  border-radius: var(--metta-sys-shape-corner-full);
+  font-size: 12px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.label-pill.filled {
+  border: none;
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+}
+
+.headline-display-demo {
+  font-weight: 870; font-stretch: 132%;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.headline-display-demo .accent { color: var(--metta-sys-color-primary); }
+
+/* Headline display variations */
+.headlines-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 16px;
+}
+.headline-variant {
+  padding: 32px 36px;
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.headline-variant__label {
+  font-weight: 540; font-stretch: 132%;
+  font-size: 11px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+/* Base shared — todas as variações respeitam escala consistente */
+.headline-v1, .headline-v2, .headline-v3, .headline-v4, .headline-v5, .headline-v7 {
+  margin: 0;
+  font-stretch: 132%;
+  letter-spacing: -0.01em;
+}
+
+/* 1. Caixa alta + destaque amarelo */
+.headline-v1 {
+  font-weight: 870;
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.0;
+  text-transform: uppercase;
+}
+.headline-v1 .accent { color: var(--metta-sys-color-primary); }
+
+/* 2. Caixa baixa + destaque escuro (tom night) */
+.headline-v2 {
+  font-weight: 410;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.15;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.headline-v2 .accent {
+  color: var(--metta-sys-color-on-surface);
+  font-weight: 870;
+}
+
+/* 3. Pesos misturados (Heavy + Light) */
+.headline-v3 {
+  font-weight: 870;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.05;
+}
+.headline-v3 .light {
+  font-weight: 270;
+}
+
+/* 4. Destaque em itálico — sem cor, só itálico */
+.headline-v4 {
+  font-weight: 650;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.15;
+}
+.headline-v4 em {
+  font-style: italic;
+  font-weight: 870;
+}
+
+/* 5. Marca-texto (background highlight) */
+.headline-v7 {
+  font-weight: 650;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.4;
+}
+.headline-v7 .marked {
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+  padding: 0 0.2em;
+  margin: 0 0.05em;
+  border-radius: var(--metta-sys-shape-corner-xs);
+}
+
+.breathing-room {
+  background: var(--metta-sys-color-surface-container);
+  border-radius: var(--metta-sys-shape-corner-2xl);
+  padding: 48px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+.breathing-room h4 { margin: 0 0 12px; font-size: 22px; }
+.breathing-room p { margin: 0; color: var(--metta-sys-color-on-surface-variant); }
+
+/* Gradients */
+.grad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.grad-tile {
+  aspect-ratio: 1.6;
+  border-radius: var(--metta-sys-shape-corner-md);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.grad-tile .label {
+  background: rgba(255,255,255,0.92);
+  padding: 6px 10px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 10px;
+  color: #0C161B;
+}
+.grad-golden  { background: var(--metta-sys-gradient-golden-linear); }
+.grad-night   { background: var(--metta-sys-gradient-night-linear); }
+.grad-light   { background: var(--metta-sys-gradient-light-linear); }
+.grad-yellow-l{ background: var(--metta-sys-gradient-yellow-soft); }
+
+/* ============================================================
+   TOKEN BROWSER
+============================================================ */
+.token-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 12px;
+}
+.token-table thead th {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--metta-sys-color-outline);
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback);
+  font-size: 11px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--metta-sys-color-on-surface-variant);
+  position: sticky;
+  top: 60px;
+  background: var(--metta-sys-color-background);
+  z-index: 5;
+}
+.token-table tbody tr {
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  cursor: pointer;
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.token-table tbody tr:hover {
+  background: var(--metta-sys-color-surface-container-low);
+}
+.token-table td {
+  padding: 8px 16px;
+  vertical-align: middle;
+}
+.token-table .token-name {
+  color: var(--metta-sys-color-on-surface);
+  word-break: break-all;
+  max-width: 380px;
+}
+.token-table .token-value {
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.tier-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--metta-sys-shape-corner-full);
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback);
+  font-size: 9px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.tier-ref  { background: rgba(72, 105, 122, 0.15); color: var(--metta-ref-palette-night-40); }
+.tier-sys  { background: rgba(255, 190, 24, 0.18); color: var(--metta-ref-palette-yellow-40); }
+.tier-comp { background: rgba(67, 89, 101, 0.15); color: var(--metta-ref-palette-night-40); }
+[data-theme="dark"] .tier-ref  { background: rgba(148, 181, 200, 0.15); color: var(--metta-ref-palette-night-85); }
+[data-theme="dark"] .tier-sys  { background: rgba(255, 190, 24, 0.20); color: var(--metta-ref-palette-yellow-50); }
+[data-theme="dark"] .tier-comp { background: rgba(176, 202, 216, 0.18); color: var(--metta-ref-palette-night-85); }
+
+.token-mini-swatch {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--metta-sys-color-inverse-surface);
+  color: var(--metta-sys-color-inverse-on-surface);
+  padding: 12px 24px;
+  border-radius: var(--metta-sys-shape-corner-full);
+  font-size: 13px;
+  font-weight: 510;
+  z-index: 100;
+  opacity: 0;
+  transition: all var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+  pointer-events: none;
+  box-shadow: var(--metta-sys-elevation-3);
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Migration before/after */
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.code-block {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  padding: 20px;
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+.code-block .meta {
+  display: block;
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback);
+  font-size: 11px;
+  font-weight: 540;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-bottom: 12px;
+}
+.code-block.before .meta { color: #B85C5C; }
+.code-block.after  .meta { color: #4A8C5C; }
+.code-block code { color: var(--metta-sys-color-on-surface); }
+.code-block .comment { color: var(--metta-sys-color-on-surface-variant); }
+.code-block .accent  { color: var(--metta-sys-color-primary); }
+
+@media (max-width: 700px) {
+  .before-after { grid-template-columns: 1fr; }
+  .role-grid    { grid-template-columns: 1fr; }
+  .state-demo   { grid-template-columns: 1fr; }
+  .tier-card    { grid-template-columns: 64px 1fr; }
+  .tier-card .count { display: none; }
+  .type-row     { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* ============================================================
+   MOTION PATTERNS — comp tokens + keyframes + utility classes
+   Espelha design/system-source/colors_and_type.css §5
+============================================================ */
+:root {
+  --metta-comp-reveal-duration:        1100ms;
+  --metta-comp-reveal-duration-soft:    850ms;
+  --metta-comp-reveal-distance:          40px;
+  --metta-comp-reveal-distance-soft:     20px;
+  --metta-comp-reveal-blur:              10px;
+}
+
+@keyframes metta-reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--metta-comp-reveal-distance));
+    filter: blur(var(--metta-comp-reveal-blur));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+@keyframes metta-reveal-rise-soft {
+  from {
+    opacity: 0;
+    transform: translateY(var(--metta-comp-reveal-distance-soft));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes metta-kenburns {
+  0%, 100% { background-size: 105%; background-position: 60% 50%; }
+  50%      { background-size: 110%; background-position: 65% 50%; }
+}
+
+html.js .reveal { opacity: 0; }
+html.js .reveal.is-revealed {
+  animation: metta-reveal-rise
+    var(--metta-comp-reveal-duration)
+    var(--metta-sys-motion-easing-emphasized)
+    var(--reveal-delay, 0ms)
+    both;
+}
+html.js .reveal--soft.is-revealed {
+  animation: metta-reveal-rise-soft
+    var(--metta-comp-reveal-duration-soft)
+    var(--metta-sys-motion-easing-emphasized)
+    var(--reveal-delay, 0ms)
+    both;
+}
+
+/* ============================================================
+   MOTION DEMO — section visual
+============================================================ */
+.motion-demo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 16px 0 8px;
+}
+@media (max-width: 900px) {
+  .motion-demo { grid-template-columns: 1fr; }
+}
+.motion-card {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-xl);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 240px;
+}
+.motion-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.motion-card__title {
+  font-weight: 590;
+  font-stretch: 132%;
+  font-size: 18px;
+  letter-spacing: -0.005em;
+  color: var(--metta-sys-color-on-surface);
+  margin: 0;
+}
+.motion-card__attr {
+  font-family: var(--metta-ref-typeface-mono);
+  font-size: 11px;
+  background: var(--metta-sys-color-surface-container);
+  padding: 4px 10px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  color: var(--metta-sys-color-on-surface-variant);
+  white-space: nowrap;
+}
+.motion-card__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  background: var(--metta-sys-color-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-lg);
+  text-align: center;
+}
+.motion-card__caption {
+  font-size: 13px;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0;
+}
+.motion-card__rerun {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  color: var(--metta-sys-color-on-surface);
+  padding: 6px 14px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback);
+  font-size: 12px;
+  font-weight: 510;
+  font-stretch: 132%;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.motion-card__rerun:hover {
+  background: var(--metta-sys-color-surface-container);
+}
+
+/* Demo block content (inside reveal demos) */
+.motion-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.motion-block__title {
+  font-weight: 700;
+  font-stretch: 132%;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.motion-block__sub {
+  font-size: 14px;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+/* Counter demo */
+.motion-counter {
+  font-weight: 700;
+  font-stretch: 132%;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--metta-sys-color-on-surface);
+}
+
+/* Stagger demo bars */
+.motion-stagger {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+.motion-stagger > div {
+  width: 18%;
+  height: 64px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  background: var(--metta-sys-color-surface-container-high);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.motion-stagger > div:nth-child(3) {
+  background: var(--metta-sys-color-primary);
+  border-color: transparent;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="nav">
+    <div class="brand">
+      <div class="brand-symbol" aria-label="Símbolo Metta">
+        <svg viewBox="0 0 133 123" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M88.1027 0.367798C96.743 4.41161 104.504 10.1193 110.939 17.1617C117.373 24.204 122.358 32.4451 125.609 41.4137C128.859 50.3824 130.31 59.9044 129.881 69.4342C129.452 78.964 127.148 88.3166 123.105 96.9567L108.792 90.2574C104.028 100.435 96.3547 108.974 86.7404 114.792C77.1226 120.611 65.9941 123.449 54.7639 122.945C43.5339 122.441 32.705 118.618 23.6477 111.96C14.5901 105.301 7.70904 96.1051 3.87715 85.5367C0.0453871 74.9684 -0.566021 63.4997 2.11934 52.5836C4.80483 41.6677 10.6677 31.7931 18.965 24.2086C21.7264 21.6846 24.718 19.454 27.8879 17.5358C34.2433 13.69 41.322 11.1052 48.7365 9.97327C59.8493 8.277 71.2162 9.91495 81.3986 14.6783L74.8215 28.7379C79.7558 31.0475 84.1851 34.3106 87.8537 38.3385C91.5239 42.3684 94.3608 47.0856 96.2004 52.2164C98.0398 57.3474 98.8462 62.7931 98.5725 68.2369C98.3036 73.5808 96.9957 78.8197 94.7297 83.6647L108.762 90.2291C111.92 83.4768 113.718 76.1682 114.054 68.7213C114.39 61.2698 113.255 53.824 110.714 46.8112C108.173 39.7982 104.274 33.3539 99.2424 27.8473C94.2108 22.3409 88.1436 17.8792 81.3879 14.7174L88.1027 0.367798ZM74.7941 28.775C67.4027 25.3192 59.1523 24.1317 51.0861 25.3629C45.7021 26.1848 40.5613 28.0605 35.9465 30.8531C33.645 32.2459 31.4728 33.8663 29.468 35.6989C23.4433 41.2059 19.1865 48.3764 17.2365 56.3024C15.2867 64.2287 15.7316 72.5563 18.5139 80.2301C21.2962 87.9038 26.2917 94.5809 32.8684 99.4156C39.4451 104.25 47.3087 107.027 55.4631 107.393C63.617 107.759 71.6966 105.699 78.6799 101.473L78.6809 101.472C85.5791 97.2979 91.1001 91.194 94.5676 83.9196L81.01 77.4576C78.8042 82.0873 75.2914 85.9721 70.9016 88.6285C66.5978 91.2328 61.6392 92.5451 56.6174 92.4127L56.132 92.3942L56.1311 92.3951C50.9439 92.1621 45.9416 90.3954 41.758 87.3199C37.5745 84.2444 34.3962 79.9972 32.6262 75.1158C30.8562 70.2343 30.5744 64.9364 31.8146 59.8942C33.0551 54.852 35.7633 50.2901 39.5959 46.7867C43.4286 43.2835 48.2148 40.9961 53.3479 40.2125C58.4787 39.4294 63.7262 40.1844 68.4279 42.3824L74.7941 28.775ZM61.9602 56.2233C59.9937 55.3034 57.7986 54.9865 55.6525 55.3141C53.5066 55.6417 51.5059 56.5986 49.9035 58.0631C48.3012 59.5278 47.1683 61.4355 46.6496 63.5436C46.1311 65.6517 46.2495 67.8669 46.9895 69.9078C47.7295 71.9487 49.0577 73.7255 50.8068 75.0114C52.556 76.2971 54.6479 77.035 56.8166 77.1324C58.9853 77.2298 61.135 76.682 62.9924 75.5582C64.8496 74.4343 66.3321 72.7842 67.2521 70.818L81.0197 77.2584C82.4571 74.1868 83.2867 70.8644 83.4572 67.4762C83.6307 64.0264 83.119 60.5753 81.9533 57.3239C80.7876 54.0725 78.99 51.0836 76.6643 48.5299C74.3394 45.9773 71.5325 43.9086 68.4055 42.4449L61.9602 56.2233Z" fill="#FFB618"></path>
+        </svg>
+      </div>
+      <div class="brand-name">Design System</div>
+      <div class="brand-version">v2.0</div>
+    </div>
+
+    <h3>Visão geral</h3>
+    <a href="#overview" class="active">Design System Metta</a>
+    <a href="#intro">Como funciona</a>
+    <a href="#architecture">Arquitetura em 3 camadas</a>
+
+    <h3>Referência · Camada 1</h3>
+    <a href="#palette-yellow">Paleta Yellow</a>
+    <a href="#palette-night">Paleta Night</a>
+
+    <h3>Sistema · Camada 2</h3>
+    <a href="#sys-color">Funções de cor</a>
+    <a href="#sys-typography">Tipografia</a>
+    <a href="#typography-variations" style="padding-left:28px;font-size:13px;opacity:0.85">↳ Variações</a>
+    <a href="#typography-roles" style="padding-left:28px;font-size:13px;opacity:0.85">↳ Funções tipográficas</a>
+    <a href="#sys-shape">Formas</a>
+    <a href="#sys-spacing">Espaçamento</a>
+    <a href="#sys-elevation">Elevação</a>
+    <a href="#sys-motion">Movimento</a>
+    <a href="#sys-state">Estados de interação</a>
+    <a href="#sys-gradients">Gradientes</a>
+
+    <h3>Componentes · Camada 3</h3>
+    <a href="#comp-cta">Botões CTA</a>
+    <a href="#comp-card">Cards</a>
+    <a href="#comp-pill">Etiquetas pill</a>
+    <a href="#comp-headline">Tipografia de destaque</a>
+    <a href="#comp-breathing">Espaço de respiro</a>
+    <a href="#comp-motion">Padrões de movimento</a>
+
+    <h3>Navegação</h3>
+    <a href="#token-browser">Índice de tokens (376)</a>
+    <a href="#migration">Migração v1 → v2</a>
+  </aside>
+
+  <main>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="search">
+        <input id="search" type="text" placeholder="Buscar token..." aria-label="Buscar token">
+      </div>
+      <div class="theme-toggle" role="group" aria-label="Tema">
+        <button data-theme-btn="light" class="active">Claro</button>
+        <button data-theme-btn="dark">Escuro</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- HERO -->
+      <section id="overview" class="hero">
+        <div class="yellow-band"></div>
+        <div class="section-meta">Design System · v2.0-rc1 · 2026-05-03</div>
+        <h1>Design System<br><span class="accent">Metta.</span></h1>
+        <p>A linguagem visual da Metta documentada, organizada e consultável. Cores, tipografia, formas, espaçamentos e componentes que toda peça da marca compartilha — agora estruturados de forma que time, agências e ferramentas falem a mesma língua.</p>
+      </section>
+
+      <!-- INTRO — explicação pra leigos -->
+      <section id="intro">
+        <div class="section-meta">Para começar</div>
+        <h2>Como funciona, em poucas palavras</h2>
+        <p class="lede">Antes da parte técnica, um resumo sem jargão sobre o que é um design system, o que são tokens e por que isso importa pra qualquer pessoa que cria peças da Metta.</p>
+
+        <div class="intro-grid">
+
+          <div class="intro-card">
+            <div class="icon">DS</div>
+            <h3>O que é um Design System?</h3>
+            <p>É a <strong>biblioteca viva</strong> da identidade visual da marca — cores, fontes, formas, espaçamentos, botões e componentes documentados num lugar só. Garante que um anúncio, uma landing page e um post no Instagram pareçam sempre da mesma família, mesmo feitos por pessoas diferentes em momentos diferentes.</p>
+          </div>
+
+          <div class="intro-card">
+            <div class="icon">{·}</div>
+            <h3>O que são tokens?</h3>
+            <p>São <strong>apelidos pra valores</strong>. Em vez de copiar <code>#FFBE18</code> em 50 lugares, você usa <code>--metta-sys-color-primary</code>. Quando a marca evolui e a cor primária muda, você ajusta uma linha — e <strong>tudo na empresa acompanha</strong> automaticamente. Tokens são o que faz consistência sair de boa intenção e virar mecânica.</p>
+          </div>
+
+          <div class="intro-card">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <h3>Por que organizar em camadas?</h3>
+            <p>Separar em três tiers — <strong>reference</strong> (valor cru), <strong>system</strong> (papel/função) e <strong>component</strong> (uso final) — significa que o time de design controla a paleta, o time de produto consome só o que precisa, e mudança vira <strong>manutenção em um ponto</strong> em vez de retrabalho em dezenas.</p>
+          </div>
+
+          <div class="intro-card">
+            <div class="icon">→</div>
+            <h3>Como ler este site</h3>
+            <p>O <strong>menu à esquerda</strong> agrupa por tipo (cores, tipografia, componentes). A <strong>busca no topo</strong> filtra os 376 tokens em tempo real. <strong>Click em qualquer cor ou nome</strong> copia o token pra área de transferência. O toggle <strong>Light/Dark</strong> mostra como o sistema responde aos dois modos.</p>
+          </div>
+
+        </div>
+
+        <div class="analogy">
+          <strong>Uma analogia rápida:</strong> pense num restaurante. A <strong>despensa</strong> tem ingredientes brutos (sal, ovo, farinha) — esses são os <em>reference tokens</em>. A <strong>cozinha</strong> tem receitas com função (massa de panqueca, molho branco) — esses são os <em>system tokens</em>. E o <strong>cardápio</strong> tem pratos prontos (panqueca da casa, lasanha) — esses são os <em>component tokens</em>. O cliente pede pelo cardápio, não pela despensa. Se um dia o sal mudar de marca, o cardápio nem sabe — só a despensa atualiza.
+        </div>
+      </section>
+
+      <!-- ARCHITECTURE — diagrama técnico 3-tier -->
+      <section id="architecture">
+        <div class="section-meta">Arquitetura</div>
+        <h2>As três camadas, em detalhe</h2>
+        <p class="lede">376 tokens organizados em três camadas hierárquicas seguindo a lógica do Material Design 3 do Google. Cada camada tem responsabilidade clara, nomes consistentes e zero quebra de retrocompatibilidade com o sistema anterior.</p>
+
+        <div class="tier-stack">
+          <div class="tier-card">
+            <div class="num">01</div>
+            <div class="meta">
+              <h3>Camada de referência</h3>
+              <p>Valores crus — paleta tonal completa, fontes, durações e curvas puras. Nunca usados direto em código de produto, só referenciados pelas camadas acima.</p>
+              <code>--metta-ref-*</code>
+            </div>
+            <div class="count"><strong>77</strong>tokens</div>
+          </div>
+
+          <div class="tier-card">
+            <div class="num">02</div>
+            <div class="meta">
+              <h3>Camada de sistema</h3>
+              <p>Funções semânticas — primary, on-primary, contêineres de superfície, escala tipográfica, formas, elevação, movimento e estados. Apontam pra camada de referência. É a camada que troca quando o tema (claro/escuro) muda.</p>
+              <code>--metta-sys-*</code>
+            </div>
+            <div class="count"><strong>144</strong>tokens</div>
+          </div>
+
+          <div class="tier-card">
+            <div class="num">03</div>
+            <div class="meta">
+              <h3>Camada de componentes</h3>
+              <p>Específicos de cada componente — botão amarelo, botão escuro, card, card elevado, etiqueta pill, tipografia de destaque, espaço de respiro. Apontam pra camada de sistema. É o que o código de produto consome.</p>
+              <code>--metta-comp-*</code>
+            </div>
+            <div class="count"><strong>50</strong>tokens</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PALETTE — YELLOW -->
+      <section id="palette-yellow">
+        <div class="section-meta">Camada 1 · Referência</div>
+        <h2>Paleta Yellow</h2>
+        <p class="lede">Escala tonal da cor primária. Tom 50 é a marca (#FFBE18). Tons abaixo de 50 escurecem (texto sobre amarelo); acima de 50 clareiam (fundos, gradientes).</p>
+        <div class="palette" data-palette="yellow"></div>
+      </section>
+
+      <!-- PALETTE — NIGHT -->
+      <section id="palette-night">
+        <div class="section-meta">Camada 1 · Referência</div>
+        <h2>Paleta Night</h2>
+        <p class="lede">Escala tonal neutra baseada em luminância. Tom 10 é o azul-noite Metta (#0C161B). Tons baixos = escuros profundos, tons altos = neutros claros até branco em 100.</p>
+        <div class="palette" data-palette="night"></div>
+      </section>
+
+      <!-- SYS COLOR ROLES -->
+      <section id="sys-color">
+        <div class="section-meta">Camada 2 · Sistema</div>
+        <h2>Funções de cor</h2>
+        <p class="lede">Cada cor de fundo tem seu par <code>on-*</code> garantindo contraste AA+. Ative o tema escuro no topo pra ver as funções trocarem mantendo as relações.</p>
+
+        <h3>Marca</h3>
+        <div class="role-grid" id="roles-brand"></div>
+
+        <h3>Superfícies — hierarquia</h3>
+        <div class="role-grid" id="roles-surface"></div>
+
+        <h3>Contornos · Inverso</h3>
+        <div class="role-grid" id="roles-misc"></div>
+      </section>
+
+      <!-- TYPOGRAPHY -->
+      <section id="sys-typography">
+        <div class="section-meta">Camada 1 · Referência (família) → Camada 2 · Sistema (funções)</div>
+        <h2>Tipografia</h2>
+        <p class="lede">A SF Pro Variable é uma fonte com dois eixos. O eixo de <strong>largura</strong> (<code>wdth</code>) divide a fonte em dois grupos visualmente distintos: <strong>Expanded (132%)</strong> e <strong>Regular (100%)</strong>. Catalogamos primeiro as <strong>11 variações primitivas</strong> dos dois grupos, depois mostramos como elas viram <strong>type roles editoriais</strong> (display, headline, body, label).</p>
+
+        <div class="family-cards">
+          <div class="family-card">
+            <span class="family-tag">Grupo 1</span>
+            <h3 class="family-name">SF Pro Expanded</h3>
+            <div class="family-meta"><code>font-stretch: 132%</code></div>
+            <p class="family-desc">Largura aumentada. Letras esticadas horizontalmente. Sensação de <strong>autoridade</strong>, <strong>amplitude</strong>, <strong>presença</strong>. Uso primário: <strong>headlines, display, CTAs, labels UPPERCASE</strong>. Tem 6 variações de peso.</p>
+          </div>
+          <div class="family-card">
+            <span class="family-tag">Grupo 2</span>
+            <h3 class="family-name">SF Pro Regular</h3>
+            <div class="family-meta"><code>font-stretch: 100%</code></div>
+            <p class="family-desc">Largura natural. Proporções neutras pra leitura conforto. Uso primário: <strong>body text, sub-headlines, descrições, captions</strong>. Tem 5 variações de peso.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VARIAÇÕES — tabs Expanded / Regular -->
+      <section id="typography-variations">
+        <div class="section-meta">Camada 1 · Referência (variações dos grupos)</div>
+        <h2>Variações</h2>
+        <p class="lede">11 variações pré-definidas no Figma — 6 Expanded + 5 Regular. Use as tabs abaixo pra alternar entre os grupos. Padronização: mesmo estilo, varia só peso e tamanho.</p>
+
+        <div class="tabs" role="tablist" aria-label="Grupos de tipografia">
+          <button class="tab-btn active" role="tab" aria-selected="true" data-tab="expanded">
+            Expanded <span class="tab-meta">132%</span>
+          </button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="regular">
+            Regular <span class="tab-meta">100%</span>
+          </button>
+        </div>
+
+        <div class="tab-panels">
+
+          <div class="tab-panel active" data-panel="expanded" role="tabpanel">
+            <div class="type-row">
+              <div class="meta">
+                <strong>Expanded Heavy</strong>
+                <code>weight: 870 · stretch: 132%</code><br>
+                Figma style: <code>Expanded Heavy</code><br>
+                Headline de autoridade, watermarks, máximo impacto
+              </div>
+              <div style="font-weight:870;font-stretch:132%;font-size:56px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Expanded Bold</strong>
+                <code>weight: 700 · stretch: 132%</code><br>
+                Figma style: <code>Expanded Bold</code><br>
+                CTAs pill, botões primários, ações
+              </div>
+              <div style="font-weight:700;font-stretch:132%;font-size:48px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Expanded Semibold</strong>
+                <code>weight: 650 · stretch: 132%</code><br>
+                Figma style: <code>Expanded Semibold</code><br>
+                Headlines de poster, slide editorial
+              </div>
+              <div style="font-weight:650;font-stretch:132%;font-size:40px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Expanded Medium</strong>
+                <code>weight: 540 · stretch: 132%</code><br>
+                Figma style: <code>Expanded Medium</code><br>
+                Labels e tags com tracking, badges (Premium, Elite)
+              </div>
+              <div style="font-weight:540;font-stretch:132%;font-size:32px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Expanded Regular</strong>
+                <code>weight: 410 · stretch: 132%</code><br>
+                Figma style: <code>Expanded Regular</code><br>
+                Setup de mixed-weight, sub-headlines de display
+              </div>
+              <div style="font-weight:410;font-stretch:132%;font-size:28px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Expanded Light</strong>
+                <code>weight: 270 · stretch: 132%</code><br>
+                Figma style: <code>Expanded Light</code><br>
+                Taglines sutis, sub-captions, label editorial
+              </div>
+              <div style="font-weight:270;font-stretch:132%;font-size:24px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-panel="regular" role="tabpanel">
+            <div class="type-row">
+              <div class="meta">
+                <strong>Regular Semibold</strong>
+                <code>weight: 650 · stretch: 100%</code><br>
+                Figma style: <code>Semibold</code><br>
+                Sub-headlines, ênfase inline, destaques secundários
+              </div>
+              <div style="font-weight:650;font-stretch:100%;font-size:32px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Regular Medium+</strong>
+                <code>weight: 590 · stretch: 100%</code><br>
+                Figma style: <code>Medium+</code><br>
+                Body principal em ads/stories, pain points, features
+              </div>
+              <div style="font-weight:590;font-stretch:100%;font-size:28px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Regular Medium</strong>
+                <code>weight: 510 · stretch: 100%</code><br>
+                Figma style: <code>Medium</code><br>
+                Body large, descrições em cards, listas
+              </div>
+              <div style="font-weight:510;font-stretch:100%;font-size:24px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Regular Book</strong>
+                <code>weight: 400 · stretch: 100%</code><br>
+                Figma style: <code>Regular</code><br>
+                Body corrido, parágrafos longos, legendas, manifesto
+              </div>
+              <div style="font-weight:400;font-stretch:100%;font-size:20px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+            </div>
+
+            <div class="type-row">
+              <div class="meta">
+                <strong>Regular Light</strong>
+                <code>weight: 270 · stretch: 100%</code><br>
+                Figma style: <code>Light</code><br>
+                Body sutil, taglines, textos complementares
+              </div>
+              <div style="font-weight:270;font-stretch:100%;font-size:18px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TYPE ROLES -->
+      <section id="typography-roles">
+        <div class="section-meta">Camada 2 · Sistema · Funções tipográficas editoriais</div>
+        <h2>Type roles</h2>
+        <p class="lede">Como as 11 variações viram funções editoriais. Cada role mapeia pra uma <strong>variação específica</strong> do grupo Expanded ou Regular, definindo também tamanho, line-height e letter-spacing. <strong>Os tamanhos abaixo são proposta inicial</strong> — podem ser refinados após validação visual.</p>
+
+        <div class="role-mapping" id="role-mapping"></div>
+      </section>
+
+      <!-- SHAPE -->
+      <section id="sys-shape">
+        <div class="section-meta">Camada 2 · Sistema</div>
+        <h2>Formas</h2>
+        <p class="lede">8 valores de raio de canto — none (proibido em uso normal), xs/sm/md/lg/xl/2xl, full (pills). Raio arbitrário entre 40-150px é proibido (efeito balão).</p>
+        <div class="shape-grid" id="shape-grid"></div>
+      </section>
+
+      <!-- SPACING -->
+      <section id="sys-spacing">
+        <div class="section-meta">Camada 2 · Sistema</div>
+        <h2>Espaçamento</h2>
+        <p class="lede">Grade de 8 pontos estendida. Use os 10 valores; nunca espaçamento arbitrário.</p>
+        <div class="spacing-list" id="spacing-list"></div>
+      </section>
+
+      <!-- ELEVATION -->
+      <section id="sys-elevation">
+        <div class="section-meta">Camada 2 · Sistema</div>
+        <h2>Elevação</h2>
+        <p class="lede">6 níveis suaves de elevação (0-5). Sombras discretas que criam hierarquia sem peso visual — Metta é editorial, não material 3D.</p>
+        <div class="elevation-grid">
+          <div class="elev-tile elev-0"><div><strong>Level 0</strong>none</div></div>
+          <div class="elev-tile elev-1"><div><strong>Level 1</strong>0 1px 2px / .05</div></div>
+          <div class="elev-tile elev-2"><div><strong>Level 2</strong>0 5px 14px / .06</div></div>
+          <div class="elev-tile elev-3"><div><strong>Level 3</strong>0 12px 28px / .08</div></div>
+          <div class="elev-tile elev-4"><div><strong>Level 4</strong>0 18px 40px / .11</div></div>
+          <div class="elev-tile elev-5"><div><strong>Level 5</strong>0 28px 60px / .14</div></div>
+        </div>
+      </section>
+
+      <!-- MOTION -->
+      <section id="sys-motion">
+        <div class="section-meta">Camada 2 · Sistema</div>
+        <h2>Movimento</h2>
+        <p class="lede">5 durações + 4 curvas de aceleração. Tom: sólido, confiante, inevitável. Animações elásticas (bouncy/spring) são proibidas.</p>
+
+        <h4>Curvas de aceleração (animadas)</h4>
+        <div class="motion-grid">
+          <div class="motion-tile standard">
+            <span class="name">Padrão</span>
+            <span class="label">cubic-bezier(0.4,0,0.2,1)</span>
+            <div class="motion-track" style="margin-top:14px"><div class="motion-dot"></div></div>
+          </div>
+          <div class="motion-tile emphasized">
+            <span class="name">Enfatizada</span>
+            <span class="label">cubic-bezier(0.2,0,0,1)</span>
+            <div class="motion-track" style="margin-top:14px"><div class="motion-dot"></div></div>
+          </div>
+          <div class="motion-tile enter">
+            <span class="name">Entrada</span>
+            <span class="label">cubic-bezier(0,0,0.2,1)</span>
+            <div class="motion-track" style="margin-top:14px"><div class="motion-dot"></div></div>
+          </div>
+          <div class="motion-tile exit">
+            <span class="name">Saída</span>
+            <span class="label">cubic-bezier(0.4,0,1,1)</span>
+            <div class="motion-track" style="margin-top:14px"><div class="motion-dot"></div></div>
+          </div>
+        </div>
+
+        <h4>Duração</h4>
+        <div class="spacing-list">
+          <div class="spacing-row"><span class="name">--metta-sys-motion-duration-instant</span><span class="value">50ms</span><div class="bar" style="width:5%"></div></div>
+          <div class="spacing-row"><span class="name">--metta-sys-motion-duration-short</span><span class="value">200ms</span><div class="bar" style="width:20%"></div></div>
+          <div class="spacing-row"><span class="name">--metta-sys-motion-duration-medium</span><span class="value">300ms</span><div class="bar" style="width:30%"></div></div>
+          <div class="spacing-row"><span class="name">--metta-sys-motion-duration-long</span><span class="value">500ms</span><div class="bar" style="width:50%"></div></div>
+          <div class="spacing-row"><span class="name">--metta-sys-motion-duration-x-long</span><span class="value">700ms</span><div class="bar" style="width:70%"></div></div>
+        </div>
+      </section>
+
+      <!-- STATE -->
+      <section id="sys-state">
+        <div class="section-meta">Camada 2 · Sistema</div>
+        <h2>Estados de interação</h2>
+        <p class="lede">Sobreposição semitransparente de cor inversa indicando interação. Hover 8%, Foco 12%, Pressionado 16%.</p>
+        <div class="state-demo">
+          <div class="state-pill"><div class="layer" style="display:none"></div><span class="text">Padrão</span></div>
+          <div class="state-pill hover"><div class="layer"></div><span class="text">Hover · 8%</span></div>
+          <div class="state-pill pressed"><div class="layer"></div><span class="text">Pressionado · 16%</span></div>
+        </div>
+      </section>
+
+      <!-- GRADIENTS -->
+      <section id="sys-gradients">
+        <div class="section-meta">Camada 2 · Sistema</div>
+        <h2>Gradientes</h2>
+        <p class="lede">4 gradientes oficiais, todos lineares pra controle previsível em qualquer composição. Resolvidos a partir de tokens da camada de referência. Roxo, neon e amarelado estão proibidos.</p>
+        <div class="grad-grid">
+          <div class="grad-tile grad-golden"><span class="label">--metta-sys-gradient-golden-linear</span></div>
+          <div class="grad-tile grad-night"><span class="label">--metta-sys-gradient-night-linear</span></div>
+          <div class="grad-tile grad-light"><span class="label">--metta-sys-gradient-light-linear</span></div>
+          <div class="grad-tile grad-yellow-l"><span class="label">--metta-sys-gradient-yellow-soft</span></div>
+        </div>
+      </section>
+
+      <!-- COMPONENTS — CTA -->
+      <section id="comp-cta">
+        <div class="section-meta">Camada 3 · Componentes</div>
+        <h2>Botões CTA</h2>
+        <p class="lede">Botões primários com estados completos. Passa o mouse pra ver o hover, clique pra ver o pressionado, tab pra ver o foco.</p>
+
+        <div class="cta-rows">
+
+          <div class="cta-row">
+            <div class="cta-row__name">
+              <h4>CTA Amarelo</h4>
+              <span class="cta-row__tag">primário · ação principal</span>
+            </div>
+            <div class="cta-row__specs">
+              <span class="spec">--metta-comp-cta-yellow-*</span>
+              <span class="spec">corner-full · weight 700 · stretch 132%</span>
+            </div>
+            <div class="cta-row__demo">
+              <button class="cta-yellow">Quero participar</button>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <div class="cta-row__name">
+              <h4>CTA Escuro</h4>
+              <span class="cta-row__tag">secundário · ação alternativa</span>
+            </div>
+            <div class="cta-row__specs">
+              <span class="spec">--metta-comp-cta-dark-*</span>
+              <span class="spec">hover: night-20</span>
+            </div>
+            <div class="cta-row__demo">
+              <button class="cta-dark">Saiba mais</button>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <div class="cta-row__name">
+              <h4>CTA Claro</h4>
+              <span class="cta-row__tag">sobre fundo escuro</span>
+            </div>
+            <div class="cta-row__specs">
+              <span class="spec">--metta-comp-cta-light-*</span>
+              <span class="spec">hover: night-95</span>
+            </div>
+            <div class="cta-row__demo cta-row__demo--dark">
+              <button class="cta-light">Conheça o método</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- COMPONENTS — CARD -->
+      <section id="comp-card">
+        <div class="section-meta">Camada 3 · Componentes</div>
+        <h2>Cards</h2>
+        <p class="lede">Card padrão (elevação 1, forma md) e card elevado (elevação 3, forma xl) — pra conteúdo em destaque ou hero.</p>
+
+        <div class="cards-variations-rows">
+
+          <div class="variant-wrap">
+            <div class="variant-id">
+              <div class="variant-name">Card padrão</div>
+              <span class="variant-tag">primário</span>
+            </div>
+            <p class="variant-note">Use pra qualquer item de lista, grid de features ou conteúdo neutro. É o card "default" do sistema.</p>
+            <div class="card-demo">
+              <h4>Workshop quinzenal</h4>
+              <p>Diagnóstico estratégico ao vivo, em grupo restrito de empresários no mesmo porte.</p>
+            </div>
+          </div>
+
+          <div class="variant-wrap">
+            <div class="variant-id">
+              <div class="variant-name">Card elevated</div>
+              <span class="variant-tag">hero · featured</span>
+            </div>
+            <p class="variant-note">Use pra featured items, callouts hero ou conteúdo que precisa "saltar" do resto. Mais peso visual.</p>
+            <div class="card-elevated">
+              <h4>Aplicação aberta</h4>
+              <p>Programa SMTM 2026 · vagas limitadas. Análise gratuita em 48h, decisão dos dois lados.</p>
+            </div>
+          </div>
+
+          <div class="variant-wrap">
+            <div class="variant-id">
+              <div class="variant-name">Card stat</div>
+              <span class="variant-tag">métrica</span>
+            </div>
+            <p class="variant-note">Use pra estatísticas, métricas e resultados quantitativos. Número grande puxa o olhar primeiro.</p>
+            <div class="card-stat">
+              <div class="card-stat__number">+47%</div>
+              <div class="card-stat__label">Faturamento mensal</div>
+              <div class="card-stat__desc">Crescimento médio em 8 meses pros clientes que completaram a primeira fase de implementação.</div>
+            </div>
+          </div>
+
+          <div class="variant-wrap">
+            <div class="variant-id">
+              <div class="variant-name">Card icon</div>
+              <span class="variant-tag">feature</span>
+            </div>
+            <p class="variant-note">Use pra apresentar features, capacidades ou items de lista visual onde o ícone reforça o conceito.</p>
+            <div class="card-icon">
+              <div class="card-icon__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h4>Resposta em até 48h</h4>
+              <p>Toda aplicação é avaliada pessoalmente pela equipe. Quem não se encaixa é avisado direto, sem call vazia.</p>
+            </div>
+          </div>
+
+          <div class="variant-wrap">
+            <div class="variant-id">
+              <div class="variant-name">Card filled</div>
+              <span class="variant-tag">callout máximo</span>
+            </div>
+            <p class="variant-note">Use em peças de destaque máximo — garantia, oferta, callout final. Fundo dark contrastante.</p>
+            <div class="card-filled">
+              <span class="card-filled__eyebrow">Garantia contratual</span>
+              <h4>Se não bater, a Metta responde</h4>
+              <p>Cláusula irrevogável no contrato. Compromisso compartilhado pela meta.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- COMPONENTS — PILLS -->
+      <section id="comp-pill">
+        <div class="section-meta">Camada 3 · Componentes</div>
+        <h2>Etiquetas pill</h2>
+        <p class="lede">CAIXA ALTA com espaçamento entre letras. Contorno pra etiquetas neutras (ELITE, PREMIUM); preenchimento amarelo pra destaques.</p>
+        <div class="demo-stage" style="display:flex; flex-wrap:wrap; gap:12px; place-items:center;">
+          <span class="label-pill">Elite</span>
+          <span class="label-pill">Premium</span>
+          <span class="label-pill">Exclusive</span>
+          <span class="label-pill filled">Inteligência comercial</span>
+          <span class="label-pill filled">Mentoria SMTM</span>
+        </div>
+      </section>
+
+      <!-- COMPONENTS — HEADLINE -->
+      <section id="comp-headline">
+        <div class="section-meta">Camada 3 · Componentes</div>
+        <h2>Tipografia de destaque</h2>
+        <p class="lede">Headline canônico + 7 variações alternativas. Use a variação que melhor reforça o tom da peça — uppercase agressivo pra autoridade, sentence case pra editorial, mixed weight pra ritmo, marker/underline pra ênfase tipográfica não-cromática.</p>
+
+        <h4>Canônico — caixa alta + destaque amarelo</h4>
+        <div class="demo-stage" style="background: var(--metta-sys-color-surface)">
+          <h1 class="headline-display-demo">Quem ganha<br>não <span class="accent">improvisa</span><br>o método.</h1>
+        </div>
+
+        <h4>Variações</h4>
+        <div class="headlines-stack">
+
+          <div class="headline-variant">
+            <span class="headline-variant__label">01 · Caixa alta + destaque amarelo</span>
+            <h3 class="headline-v1">Demita o achismo. Construa <span class="accent">método</span>.</h3>
+          </div>
+
+          <div class="headline-variant">
+            <span class="headline-variant__label">02 · Caixa baixa + destaque escuro</span>
+            <h3 class="headline-v2">A inteligência comercial existe. Está <span class="accent">invisível</span> na sua operação.</h3>
+          </div>
+
+          <div class="headline-variant">
+            <span class="headline-variant__label">03 · Pesos misturados (Heavy + Light)</span>
+            <h3 class="headline-v3">Método <span class="light">não é</span> luxo.</h3>
+          </div>
+
+          <div class="headline-variant">
+            <span class="headline-variant__label">04 · Destaque em itálico (sem cor)</span>
+            <h3 class="headline-v4">A única consultoria que <em>responde</em> contratualmente pela meta.</h3>
+          </div>
+
+          <div class="headline-variant">
+            <span class="headline-variant__label">05 · Marca-texto amarelo (highlight)</span>
+            <h3 class="headline-v7">Empresário no seu porte <span class="marked">trava aqui</span>.</h3>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- COMPONENTS — BREATHING ROOM -->
+      <section id="comp-breathing">
+        <div class="section-meta">Camada 3 · Componentes</div>
+        <h2>Espaço de respiro</h2>
+        <p class="lede">Container único central com tom sutil — área de respiro em anúncios e stories. Forma 2xl (32px), preenchimento 7 (48px). Nunca composto por 4 retângulos.</p>
+        <div class="demo-stage">
+          <div class="breathing-room">
+            <h4>Espaço de respiração</h4>
+            <p>Tint sutil sobre o background, corner 32px, padding 48px. CTA fica embedado dentro, headline acima, content abaixo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENTS — MOTION PATTERNS -->
+      <section id="comp-motion">
+        <div class="section-meta">Camada 3 · Componentes</div>
+        <h2>Padrões de movimento</h2>
+        <p class="lede">Animações canônicas pra LPs, hero sections e stories. Auto-iniciam via <code>data-*</code> e respeitam <code>prefers-reduced-motion</code>. Inclua <code>motion.js</code> antes do <code>&lt;/body&gt;</code> e marque os blocos.</p>
+
+        <div class="motion-demo">
+
+          <!-- Block reveal -->
+          <div class="motion-card">
+            <div class="motion-card__head">
+              <h4 class="motion-card__title">Reveal block</h4>
+              <span class="motion-card__attr">data-reveal</span>
+            </div>
+            <div class="motion-card__body">
+              <div class="motion-block" data-reveal data-motion-demo="block">
+                <h5 class="motion-block__title">Headline emerge</h5>
+                <p class="motion-block__sub">Fade + slide 40px + blur 10px · 1100ms · curva enfatizada</p>
+              </div>
+            </div>
+            <button class="motion-card__rerun" data-rerun="block">Replay</button>
+          </div>
+
+          <!-- Soft reveal -->
+          <div class="motion-card">
+            <div class="motion-card__head">
+              <h4 class="motion-card__title">Reveal soft</h4>
+              <span class="motion-card__attr">data-reveal="soft"</span>
+            </div>
+            <div class="motion-card__body">
+              <div class="motion-block" data-reveal="soft" data-motion-demo="soft">
+                <h5 class="motion-block__title">Parágrafo discreto</h5>
+                <p class="motion-block__sub">Fade + slide 20px sem blur · 850ms · preserva legibilidade durante a animação</p>
+              </div>
+            </div>
+            <button class="motion-card__rerun" data-rerun="soft">Replay</button>
+          </div>
+
+          <!-- Stagger -->
+          <div class="motion-card">
+            <div class="motion-card__head">
+              <h4 class="motion-card__title">Stagger</h4>
+              <span class="motion-card__attr">--reveal-delay</span>
+            </div>
+            <div class="motion-card__body">
+              <div class="motion-stagger" data-motion-demo="stagger">
+                <div data-reveal style="--reveal-delay:0ms"></div>
+                <div data-reveal style="--reveal-delay:120ms"></div>
+                <div data-reveal style="--reveal-delay:240ms"></div>
+                <div data-reveal style="--reveal-delay:360ms"></div>
+                <div data-reveal style="--reveal-delay:480ms"></div>
+              </div>
+              <p class="motion-card__caption">Cada bloco entra 120ms depois do anterior. Use inline ou via <code>nth-child</code>.</p>
+            </div>
+            <button class="motion-card__rerun" data-rerun="stagger">Replay</button>
+          </div>
+
+          <!-- Counter -->
+          <div class="motion-card">
+            <div class="motion-card__head">
+              <h4 class="motion-card__title">Counter</h4>
+              <span class="motion-card__attr">data-counter</span>
+            </div>
+            <div class="motion-card__body">
+              <span class="motion-counter" data-counter="47" data-prefix="+" data-suffix="%" data-motion-demo="counter">+0%</span>
+              <p class="motion-card__caption">Cubic ease-out · 1800ms · prefixos e sufixos opcionais.</p>
+            </div>
+            <button class="motion-card__rerun" data-rerun="counter">Replay</button>
+          </div>
+
+          <!-- Magnetic CTA -->
+          <div class="motion-card">
+            <div class="motion-card__head">
+              <h4 class="motion-card__title">Magnetic CTA</h4>
+              <span class="motion-card__attr">data-magnetic</span>
+            </div>
+            <div class="motion-card__body">
+              <button class="cta-yellow" data-magnetic>Passe o mouse</button>
+              <p class="motion-card__caption">Botão acompanha o cursor com fator 0.18. Desativado em pointer coarse e reduced motion.</p>
+            </div>
+          </div>
+
+          <!-- Kenburns -->
+          <div class="motion-card">
+            <div class="motion-card__head">
+              <h4 class="motion-card__title">Kenburns</h4>
+              <span class="motion-card__attr">@keyframes metta-kenburns</span>
+            </div>
+            <div class="motion-card__body" style="padding:0;overflow:hidden;border-radius:var(--metta-sys-shape-corner-lg);min-height:180px;background:linear-gradient(135deg,var(--metta-ref-palette-night-15),var(--metta-ref-palette-night-30));">
+              <div style="width:100%;height:180px;background-image:linear-gradient(135deg,var(--metta-ref-palette-night-15) 0%,var(--metta-ref-palette-night-30) 50%,var(--metta-ref-palette-night-20) 100%);background-size:105%;background-position:60% 50%;animation:metta-kenburns 18s ease-in-out infinite;"></div>
+            </div>
+            <p class="motion-card__caption" style="margin:0">Zoom + pan sutil · 18s loop · pra fotos hero.</p>
+          </div>
+
+        </div>
+
+        <h4 style="margin-top:32px">Tokens de componente</h4>
+        <div class="spacing-list">
+          <div class="spacing-row"><span class="name">--metta-comp-reveal-duration</span><span class="value">1100ms</span><div class="bar" style="width:55%"></div></div>
+          <div class="spacing-row"><span class="name">--metta-comp-reveal-duration-soft</span><span class="value">850ms</span><div class="bar" style="width:42%"></div></div>
+          <div class="spacing-row"><span class="name">--metta-comp-reveal-distance</span><span class="value">40px</span><div class="bar" style="width:40%"></div></div>
+          <div class="spacing-row"><span class="name">--metta-comp-reveal-distance-soft</span><span class="value">20px</span><div class="bar" style="width:20%"></div></div>
+          <div class="spacing-row"><span class="name">--metta-comp-reveal-blur</span><span class="value">10px</span><div class="bar" style="width:10%"></div></div>
+        </div>
+
+        <h4 style="margin-top:32px">Setup mínimo</h4>
+        <div class="before-after">
+          <div class="code-block">
+<span class="meta">no &lt;head&gt;</span>&lt;script&gt;document.documentElement.classList.add('js');&lt;/script&gt;
+&lt;link rel="stylesheet" href="design/system-source/colors_and_type.css"&gt;</div>
+          <div class="code-block">
+<span class="meta">antes do &lt;/body&gt;</span>&lt;script src="design/system-source/motion.js"&gt;&lt;/script&gt;
+
+<span class="comment">// Markup:</span>
+&lt;div data-reveal&gt;...&lt;/div&gt;
+&lt;div data-reveal="soft"&gt;...&lt;/div&gt;
+&lt;a class="cta-yellow" data-magnetic&gt;...&lt;/a&gt;
+&lt;span data-counter="47" data-suffix="%"&gt;0%&lt;/span&gt;</div>
+        </div>
+
+        <h4 style="margin-top:32px">Quando usar cada pattern</h4>
+        <table class="token-table">
+          <thead>
+            <tr>
+              <th style="width:160px">Pattern</th>
+              <th style="width:140px">Atributo</th>
+              <th>Uso recomendado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Reveal block</td><td><code>data-reveal</code></td><td>Headlines, cards, blocos de conteúdo entrando no viewport</td></tr>
+            <tr><td>Reveal soft</td><td><code>data-reveal="soft"</code></td><td>Parágrafos longos e legendas — sem blur pra manter legibilidade</td></tr>
+            <tr><td>Stagger</td><td><code>--reveal-delay</code></td><td>Sequências de cards/itens — incremento de 80–120ms</td></tr>
+            <tr><td>Magnetic</td><td><code>data-magnetic</code></td><td>CTAs primários em desktop · auto-desativa em mobile e reduced motion</td></tr>
+            <tr><td>Counter</td><td><code>data-counter</code></td><td>Estatísticas e números fortes — dispara ao entrar no viewport</td></tr>
+            <tr><td>Kenburns</td><td><code>animation: metta-kenburns</code></td><td>Background fotográfico em hero · pan + zoom sutil em loop</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- TOKEN BROWSER -->
+      <section id="token-browser">
+        <div class="section-meta">Catálogo</div>
+        <h2>Navegador de tokens</h2>
+        <p class="lede">Use a busca no topo pra filtrar os 376 tokens. Clique numa linha pra copiar o nome. Total: 77 referência + 144 sistema + 50 componente + 105 apelidos da v1.</p>
+        <table class="token-table">
+          <thead>
+            <tr>
+              <th style="width:90px">Camada</th>
+              <th>Token</th>
+              <th style="width:280px">Valor resolvido</th>
+            </tr>
+          </thead>
+          <tbody id="token-tbody"></tbody>
+        </table>
+      </section>
+
+      <!-- MIGRATION -->
+      <section id="migration">
+        <div class="section-meta">Migração</div>
+        <h2>v1 → v2</h2>
+        <p class="lede">Apelidos de compatibilidade garantem retrocompatibilidade. Código da v1 funciona idêntico. Em código novo, prefira camadas sistema e componente.</p>
+
+        <h4>Exemplo de botão CTA</h4>
+        <div class="before-after">
+          <div class="code-block before">
+<span class="meta">v1 (legacy — ainda funciona)</span>.cta {
+  background: <span class="accent">var(--metta-yellow)</span>;
+  color: var(--metta-blue-night);
+  border-radius: var(--radius-pill);
+  transition: all 200ms ease-out;
+}
+.cta:hover  { background: var(--yellow-light); }
+.cta:active { background: var(--yellow-alt); }</div>
+
+          <div class="code-block after">
+<span class="meta">v2 (preferido em código novo)</span>.cta {
+  background: <span class="accent">var(--metta-comp-cta-yellow-container-color)</span>;
+  color: var(--metta-comp-cta-yellow-label-color);
+  border-radius: var(--metta-comp-cta-yellow-container-shape);
+  transition: all
+    var(--metta-sys-motion-duration-medium)
+    var(--metta-sys-motion-easing-standard);
+}
+.cta:hover  { background: var(--metta-comp-cta-yellow-container-color-hover); }
+.cta:active { background: var(--metta-comp-cta-yellow-container-color-pressed); }</div>
+        </div>
+
+        <h4>Exemplo de card</h4>
+        <div class="before-after">
+          <div class="code-block before">
+<span class="meta">v1</span>.card {
+  background: var(--ice);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  color: var(--fg-1);
+}</div>
+
+          <div class="code-block after">
+<span class="meta">v2</span>.card {
+  background: <span class="accent">var(--metta-comp-card-container-color)</span>;
+  border-radius: var(--metta-comp-card-container-shape);
+  padding: var(--metta-comp-card-container-padding);
+  box-shadow: var(--metta-comp-card-elevation);
+  color: var(--metta-sys-color-on-surface);
+}</div>
+        </div>
+
+        <h4>Regra de ouro</h4>
+        <div class="code-block">
+<span class="comment">/* Preferência em código novo */</span>
+✅ comp tokens     <span class="comment">// quando existem (CTA, card, label-pill, etc.)</span>
+⚠ sys tokens      <span class="comment">// se comp não cobre o caso</span>
+❌ ref tokens     <span class="comment">// nunca direto em produto</span>
+❌ hex literais   <span class="comment">// nunca</span></div>
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="toast" id="toast">Token copiado</div>
+
+<script>
+/* ============================================================
+   DATA — palettes + roles + shape + spacing + tokens browser
+============================================================ */
+const PALETTES = {
+  yellow: ['30','40','50','55','60','70','80','90','95','99'].map(t => ({ tone: t, name: `--metta-ref-palette-yellow-${t}` })),
+  night: ['5','10','15','20','25','30','40','50','60','70','80','85','90','95','97','99','100'].map(t => ({ tone: t, name: `--metta-ref-palette-night-${t}` }))
+};
+
+const ROLES_BRAND = [
+  { name: '--metta-sys-color-primary',               on: '--metta-sys-color-on-primary',           label: 'PRIMARY' },
+  { name: '--metta-sys-color-primary-hover',         on: '--metta-sys-color-on-primary',           label: 'PRIMARY HOVER' },
+  { name: '--metta-sys-color-primary-pressed',       on: '--metta-sys-color-on-primary',           label: 'PRIMARY PRESSED' },
+  { name: '--metta-sys-color-primary-container',     on: '--metta-sys-color-on-primary-container', label: 'PRIMARY CONTAINER' }
+];
+const ROLES_SURFACE = [
+  { name: '--metta-sys-color-surface',                  on: '--metta-sys-color-on-surface',         label: 'SURFACE' },
+  { name: '--metta-sys-color-surface-bright',           on: '--metta-sys-color-on-surface',         label: 'SURFACE BRIGHT' },
+  { name: '--metta-sys-color-surface-dim',              on: '--metta-sys-color-on-surface',         label: 'SURFACE DIM' },
+  { name: '--metta-sys-color-surface-container-lowest', on: '--metta-sys-color-on-surface',         label: 'CONTAINER LOWEST' },
+  { name: '--metta-sys-color-surface-container-low',    on: '--metta-sys-color-on-surface',         label: 'CONTAINER LOW' },
+  { name: '--metta-sys-color-surface-container',        on: '--metta-sys-color-on-surface',         label: 'CONTAINER' },
+  { name: '--metta-sys-color-surface-container-high',   on: '--metta-sys-color-on-surface',         label: 'CONTAINER HIGH' },
+  { name: '--metta-sys-color-surface-container-highest',on: '--metta-sys-color-on-surface',         label: 'CONTAINER HIGHEST' }
+];
+const ROLES_MISC = [
+  { name: '--metta-sys-color-outline',           on: '--metta-sys-color-on-surface',         label: 'OUTLINE',          asBorder: true },
+  { name: '--metta-sys-color-outline-variant',   on: '--metta-sys-color-on-surface',         label: 'OUTLINE VARIANT',  asBorder: true },
+  { name: '--metta-sys-color-inverse-surface',   on: '--metta-sys-color-inverse-on-surface', label: 'INVERSE SURFACE' },
+  { name: '--metta-sys-color-inverse-primary',   on: '--metta-sys-color-on-primary',         label: 'INVERSE PRIMARY' }
+];
+
+const SHAPE = ['none','xs','sm','md','lg','xl','2xl','full'];
+const SHAPE_VALUES = { none:'0', xs:'4', sm:'8', md:'12', lg:'20', xl:'24', '2xl':'32', full:'999' };
+
+const SPACING = [
+  { n:1, px:4 }, { n:2, px:8 }, { n:3, px:12 }, { n:4, px:16 }, { n:5, px:24 },
+  { n:6, px:32 }, { n:7, px:48 }, { n:8, px:64 }, { n:9, px:96 }, { n:10, px:128 }
+];
+
+/* All tokens for browser table */
+const TOKENS = [
+  // REF — yellow
+  ...PALETTES.yellow.map(p => ({ name: p.name, tier: 'ref', kind: 'color' })),
+  ...PALETTES.night.map(p => ({ name: p.name, tier: 'ref', kind: 'color' })),
+  // REF — opacity
+  { name: '--metta-ref-opacity-state-hover',   tier: 'ref' },
+  { name: '--metta-ref-opacity-state-focus',   tier: 'ref' },
+  { name: '--metta-ref-opacity-state-pressed', tier: 'ref' },
+  // REF — typeface
+  { name: '--metta-ref-typeface-brand', tier: 'ref' },
+  { name: '--metta-ref-typeface-fallback', tier: 'ref' },
+  { name: '--metta-ref-typeface-mono', tier: 'ref' },
+  // REF — axes
+  { name: '--metta-ref-axis-wdth-regular', tier: 'ref' },
+  { name: '--metta-ref-axis-wdth-expanded', tier: 'ref' },
+  { name: '--metta-ref-axis-wght-light', tier: 'ref' },
+  { name: '--metta-ref-axis-wght-regular', tier: 'ref' },
+  { name: '--metta-ref-axis-wght-medium', tier: 'ref' },
+  { name: '--metta-ref-axis-wght-medium-p', tier: 'ref' },
+  { name: '--metta-ref-axis-wght-semibold', tier: 'ref' },
+  { name: '--metta-ref-axis-wght-bold', tier: 'ref' },
+  { name: '--metta-ref-axis-wght-heavy', tier: 'ref' },
+  // REF — duration / easing
+  ...['50','100','200','300','500','700'].map(d => ({ name: `--metta-ref-duration-${d}`, tier: 'ref' })),
+  ...['linear','standard','emphasized','decelerate','accelerate'].map(e => ({ name: `--metta-ref-easing-${e}`, tier: 'ref' })),
+
+  // SYS — color
+  ...ROLES_BRAND.flatMap(r => [{ name: r.name, tier: 'sys', kind: 'color' }, { name: r.on, tier: 'sys', kind: 'color' }]),
+  ...ROLES_SURFACE.map(r => ({ name: r.name, tier: 'sys', kind: 'color' })),
+  { name: '--metta-sys-color-on-surface', tier: 'sys', kind: 'color' },
+  { name: '--metta-sys-color-on-surface-variant', tier: 'sys', kind: 'color' },
+  ...ROLES_MISC.map(r => ({ name: r.name, tier: 'sys', kind: 'color' })),
+  // SYS — typescale
+  ...['display-large','display-medium','headline-large','headline-medium','headline-small','body-large','body-medium','body-small','label-large','label-medium','label-editorial']
+    .flatMap(t => ['size','weight','stretch','line-height']
+      .map(p => ({ name: `--metta-sys-typescale-${t}-${p}`, tier: 'sys' }))),
+  // SYS — shape
+  ...SHAPE.map(s => ({ name: `--metta-sys-shape-corner-${s}`, tier: 'sys' })),
+  // SYS — spacing
+  ...SPACING.map(s => ({ name: `--metta-sys-spacing-${s.n}`, tier: 'sys' })),
+  // SYS — elevation
+  ...['0','1','2','3','4','5'].map(e => ({ name: `--metta-sys-elevation-${e}`, tier: 'sys' })),
+  // SYS — motion
+  ...['instant','short','medium','long','x-long'].map(d => ({ name: `--metta-sys-motion-duration-${d}`, tier: 'sys' })),
+  ...['standard','emphasized','enter','exit'].map(e => ({ name: `--metta-sys-motion-easing-${e}`, tier: 'sys' })),
+  // SYS — state
+  ...['hover','focus','pressed'].map(s => ({ name: `--metta-sys-state-${s}-opacity`, tier: 'sys' })),
+  // SYS — gradients
+  ...['golden-conic','night-conic','yellow-radial','light-radial','yellow-linear','photo-fade','vignette'].map(g => ({ name: `--metta-sys-gradient-${g}`, tier: 'sys' })),
+
+  // COMP
+  ...['container-color','container-color-hover','container-color-pressed','label-color','container-shape','container-padding-x','container-padding-y','pressed-scale']
+    .map(p => ({ name: `--metta-comp-cta-yellow-${p}`, tier: 'comp' })),
+  ...['container-color','container-color-hover','label-color','container-shape']
+    .map(p => ({ name: `--metta-comp-cta-dark-${p}`, tier: 'comp' })),
+  ...['container-color','container-shape','container-padding','elevation','label-color']
+    .map(p => ({ name: `--metta-comp-card-${p}`, tier: 'comp' })),
+  ...['container-color','container-shape','elevation']
+    .map(p => ({ name: `--metta-comp-card-elevated-${p}`, tier: 'comp' })),
+  ...['container-color','container-shape','outline-color','outline-width','padding-x','padding-y','label-color','label-font-weight','label-font-stretch','label-letter-spacing','label-transform']
+    .map(p => ({ name: `--metta-comp-label-pill-${p}`, tier: 'comp' })),
+  { name: '--metta-comp-yellow-band-color', tier: 'comp' },
+  { name: '--metta-comp-yellow-band-height', tier: 'comp' }
+];
+
+/* ============================================================
+   RENDER
+============================================================ */
+function resolved(varName) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  return v;
+}
+
+function makeSwatch(p, paletteName) {
+  const div = document.createElement('div');
+  div.className = 'swatch';
+  div.dataset.token = p.name;
+  div.innerHTML = `
+    <span class="chip" style="background: var(${p.name})"></span>
+    <div class="meta">
+      <span class="name">${p.name.replace('--metta-ref-palette-', '')}</span>
+      <span class="hex" data-resolved></span>
+    </div>`;
+  return div;
+}
+
+function makeRoleCard(r) {
+  const div = document.createElement('div');
+  div.className = 'role-card';
+  div.dataset.token = r.name;
+  if (r.asBorder) {
+    div.innerHTML = `
+      <div class="preview" style="background: var(--metta-sys-color-surface); border: 4px solid var(${r.name}); color: var(${r.on})">${r.label}</div>
+      <div class="info"><span class="role-name">${r.name}</span><span data-resolved></span></div>`;
+  } else {
+    div.innerHTML = `
+      <div class="preview" style="background: var(${r.name}); color: var(${r.on})">${r.label}</div>
+      <div class="info"><span class="role-name">${r.name}</span><span data-resolved></span></div>`;
+  }
+  return div;
+}
+
+function refreshResolved() {
+  document.querySelectorAll('[data-token]').forEach(el => {
+    const tok = el.dataset.token;
+    const target = el.querySelector('[data-resolved]');
+    if (target) target.textContent = resolved(tok) || '—';
+  });
+}
+
+function renderPalettes() {
+  Object.entries(PALETTES).forEach(([key, items]) => {
+    const container = document.querySelector(`[data-palette="${key}"]`);
+    if (!container) return;
+    items.forEach(p => container.appendChild(makeSwatch(p, key)));
+  });
+}
+
+function renderRoles() {
+  const m = { 'roles-brand': ROLES_BRAND, 'roles-surface': ROLES_SURFACE, 'roles-misc': ROLES_MISC };
+  Object.entries(m).forEach(([id, list]) => {
+    const c = document.getElementById(id);
+    list.forEach(r => c.appendChild(makeRoleCard(r)));
+  });
+}
+
+function renderShape() {
+  const c = document.getElementById('shape-grid');
+  SHAPE.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'shape-tile';
+    div.innerHTML = `
+      <div class="demo" style="border-radius: var(--metta-sys-shape-corner-${s})"></div>
+      <div class="label">
+        <strong>corner-${s}</strong>
+        ${SHAPE_VALUES[s]}px
+      </div>`;
+    c.appendChild(div);
+  });
+}
+
+function renderSpacing() {
+  const c = document.getElementById('spacing-list');
+  SPACING.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'spacing-row';
+    div.innerHTML = `
+      <span class="name">--metta-sys-spacing-${s.n}</span>
+      <span class="value">${s.px}px</span>
+      <div class="bar" style="width: ${(s.px / 128) * 100}%"></div>`;
+    c.appendChild(div);
+  });
+}
+
+function renderTokenTable() {
+  const tbody = document.getElementById('token-tbody');
+  const frag = document.createDocumentFragment();
+  TOKENS.forEach(t => {
+    const tr = document.createElement('tr');
+    tr.dataset.search = t.name.toLowerCase();
+    tr.dataset.token = t.name;
+    const swatch = t.kind === 'color' ? `<span class="token-mini-swatch" style="background: var(${t.name})"></span>` : '';
+    tr.innerHTML = `
+      <td><span class="tier-badge tier-${t.tier}">${t.tier === "ref" ? "ref." : t.tier === "sys" ? "sis." : t.tier === "comp" ? "comp." : t.tier}</span></td>
+      <td class="token-name">${swatch}${t.name}</td>
+      <td class="token-value" data-resolved></td>`;
+    frag.appendChild(tr);
+  });
+  tbody.appendChild(frag);
+}
+
+/* ============================================================
+   INTERACTIONS
+============================================================ */
+const toast = document.getElementById('toast');
+let toastTimer;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
+document.addEventListener('click', e => {
+  const tokenEl = e.target.closest('[data-token]');
+  if (!tokenEl) return;
+  const tok = tokenEl.dataset.token;
+  navigator.clipboard.writeText(`var(${tok})`).then(() => {
+    showToast(`var(${tok}) copiado`);
+  }).catch(() => showToast(tok));
+});
+
+/* Theme toggle */
+document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const t = btn.dataset.themeBtn;
+    document.documentElement.dataset.theme = t;
+    document.querySelectorAll('[data-theme-btn]').forEach(b => b.classList.toggle('active', b === btn));
+    setTimeout(refreshResolved, 50);
+  });
+});
+
+/* Search filter — token table */
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  document.querySelectorAll('#token-tbody tr').forEach(tr => {
+    tr.style.display = (!q || tr.dataset.search.includes(q)) ? '' : 'none';
+  });
+  // Auto-scroll para a tabela quando começa a buscar
+  if (q && q.length > 1) {
+    document.getElementById('token-browser').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+
+/* Active nav link via IntersectionObserver */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      document.querySelectorAll('aside.nav a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+
+/* Type roles mapping — 11 roles editoriais → variation source.
+   Forma canônica: cada role mostra como aparece em produção real.
+   - headline-large, labels: uppercase (parte do role).
+   - labels também: tracking elevado (parte do role).
+   - body, sub-headlines: sentence case neutra.
+*/
+const TYPE_ROLES = [
+  { id: 'display-large',    variation: 'Expanded Semibold',  group: 'expanded', previewSize: 26, size: '78-99px',   weight: 650, lh: '0.90', ls: '-0.01em', tx: 'none',      preview: 'Demita o achismo.' },
+  { id: 'display-medium',   variation: 'Expanded Semibold',  group: 'expanded', previewSize: 24, size: '60-75px',   weight: 650, lh: '0.90', ls: '-0.01em', tx: 'none',      preview: 'Demita o achismo.' },
+  { id: 'headline-large',   variation: 'Expanded Heavy',     group: 'expanded', previewSize: 22, size: '44-51px',   weight: 870, lh: '0.82', ls: '-0.01em', tx: 'uppercase', preview: 'Acelerador SMTM' },
+  { id: 'headline-medium',  variation: 'Expanded Semibold',  group: 'expanded', previewSize: 22, size: '40-44px',   weight: 650, lh: '0.95', ls: '-0.01em', tx: 'none',      preview: 'Fundamento e método.' },
+  { id: 'headline-small',   variation: 'Regular Medium+',    group: 'regular',  previewSize: 20, size: '28-32px',   weight: 590, lh: '1.05', ls: '-0.01em', tx: 'none',      preview: 'Quem ganha não improvisa o método.' },
+  { id: 'body-large',       variation: 'Regular Medium+',    group: 'regular',  previewSize: 18, size: '36-42px*',  weight: 590, lh: '1.17', ls: '-0.01em', tx: 'none',      preview: 'Mentoria, método e diagnóstico para empresários.' },
+  { id: 'body-medium',      variation: 'Regular Medium+',    group: 'regular',  previewSize: 16, size: '30-35px',   weight: 590, lh: '1.20', ls: '-0.01em', tx: 'none',      preview: 'Pain points, listas, descrições estruturais.' },
+  { id: 'body-small',       variation: 'Regular Book',       group: 'regular',  previewSize: 14, size: '24-30px',   weight: 400, lh: '1.17', ls: '-0.01em', tx: 'none',      preview: 'Captions, metadados e legendas curtas.' },
+  { id: 'label-large',      variation: 'Expanded Medium',    group: 'expanded', previewSize: 14, size: '26-28px',   weight: 540, lh: '1.0',  ls: '0.10em',  tx: 'uppercase', preview: 'Inteligência comercial' },
+  { id: 'label-medium',     variation: 'Expanded Medium',    group: 'expanded', previewSize: 12, size: '24px',      weight: 540, lh: '1.0',  ls: '0.12em',  tx: 'uppercase', preview: 'Premium · Elite · Exclusive' },
+  { id: 'label-editorial',  variation: 'Expanded Light',     group: 'expanded', previewSize: 11, size: '9-11px',    weight: 270, lh: '1.0',  ls: '0.28em',  tx: 'uppercase', preview: 'Sessão estratégica · Aplicação' }
+];
+
+function renderRoleMapping() {
+  const c = document.getElementById('role-mapping');
+  if (!c) return;
+  TYPE_ROLES.forEach(r => {
+    const div = document.createElement('div');
+    div.className = 'role-row';
+    div.dataset.token = `--metta-sys-typescale-${r.id}`;
+    const stretch = r.group === 'expanded' ? '132%' : '100%';
+    const previewStyle = `font-weight:${r.weight};font-stretch:${stretch};font-size:${r.previewSize}px;line-height:${r.lh};letter-spacing:${r.ls};text-transform:${r.tx}`;
+    // tracking display
+    const lsDisplay = r.ls.startsWith('0.') && parseFloat(r.ls) > 0
+      ? `+${Math.round(parseFloat(r.ls) * 100)}% ls`
+      : 'ls -1%';
+    div.innerHTML = `
+      <div class="role-id">
+        <strong>${r.id}</strong>
+        <code>--metta-sys-typescale-${r.id}-*</code>
+      </div>
+      <div class="role-preview" style="${previewStyle}">${r.preview}</div>
+      <div class="role-source source-${r.group}">
+        <strong>${r.variation}</strong>
+        ${r.size} · ${lsDisplay} · lh ${r.lh}${r.tx === 'uppercase' ? ' · UPPER' : ''}
+      </div>`;
+    c.appendChild(div);
+  });
+}
+
+/* ============================================================
+   TABS — alternar entre grupos de tipografia
+============================================================ */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    const container = btn.closest('section');
+    if (!container) return;
+    container.querySelectorAll('.tab-btn').forEach(b => {
+      const isActive = b === btn;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    container.querySelectorAll('.tab-panel').forEach(p => {
+      p.classList.toggle('active', p.dataset.panel === target);
+    });
+  });
+});
+
+/* INIT */
+renderPalettes();
+renderRoles();
+renderShape();
+renderSpacing();
+renderRoleMapping();
+renderTokenTable();
+refreshResolved();
+
+/* ============================================================
+   MOTION — espelha design/system-source/motion.js
+   Reveal (IO) + Magnetic CTA + Counter + Replay buttons
+============================================================ */
+(function () {
+  var coarse = matchMedia('(pointer: coarse)').matches;
+
+  /* Reveal */
+  if ('IntersectionObserver' in window) {
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-revealed');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          var variant = el.getAttribute('data-reveal');
+          el.classList.add('reveal');
+          if (variant === 'soft') el.classList.add('reveal--soft');
+          revealObs.observe(el);
+        });
+      });
+    });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      el.classList.add('is-revealed');
+    });
+  }
+
+  /* Magnetic */
+  if (!coarse) {
+    document.querySelectorAll('[data-magnetic]').forEach(function (btn) {
+      var raf;
+      btn.addEventListener('mousemove', function (e) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(function () {
+          var rect = btn.getBoundingClientRect();
+          var x = (e.clientX - rect.left - rect.width / 2) * 0.18;
+          var y = (e.clientY - rect.top - rect.height / 2) * 0.18;
+          btn.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+        });
+      });
+      btn.addEventListener('mouseleave', function () {
+        cancelAnimationFrame(raf);
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  /* Counter */
+  function animateCounter(el) {
+    var target  = parseFloat(el.getAttribute('data-counter'));
+    var prefix  = el.getAttribute('data-prefix') || '';
+    var suffix  = el.getAttribute('data-suffix') || '';
+    var duration = parseInt(el.getAttribute('data-duration') || '1800', 10);
+    var start = performance.now();
+    function tick(now) {
+      var t = Math.min(1, (now - start) / duration);
+      var eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = prefix + Math.round(target * eased) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  if ('IntersectionObserver' in window) {
+    var countObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          animateCounter(e.target);
+          countObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-counter]').forEach(function (el) {
+      countObs.observe(el);
+    });
+  }
+
+  /* Replay buttons — re-disparar animação no demo do DS */
+  document.querySelectorAll('[data-rerun]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var kind = btn.getAttribute('data-rerun');
+      if (kind === 'block' || kind === 'soft') {
+        var el = btn.parentElement.querySelector('[data-motion-demo="' + kind + '"]');
+        if (!el) return;
+        el.classList.remove('is-revealed');
+        void el.offsetWidth;
+        el.classList.add('is-revealed');
+      } else if (kind === 'stagger') {
+        var bars = btn.parentElement.querySelectorAll('[data-motion-demo="stagger"] [data-reveal]');
+        bars.forEach(function (b) {
+          b.classList.remove('is-revealed');
+          void b.offsetWidth;
+          b.classList.add('is-revealed');
+        });
+      } else if (kind === 'counter') {
+        var c = btn.parentElement.querySelector('[data-motion-demo="counter"]');
+        if (c) animateCounter(c);
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+# 50% em 5h
+# URL: https://youtube.com/watch?v=M2QwA3_JtEo
+
+Tá vendo essa placa? R$ 100 milhões deais faturados. Ela não é minha, ela é de um cliente meu que faturou através do nosso método. Esse resultado não veio de um milagre, veio de duas situações. Um, ter um processo comercial muito claro desenhado para você. Segundo, ter um líder treinador, um cara faca na caveira, mas que saiba treinar a equipe. Por pressão você já faz, não dá resultado. Se você quer aumentar 50% do seu lucro em apenas 5 horas, eu tenho convite para te fazer. Faremos o treinamento 50 para que você possa ter acesso ao que já gerou mais de R8,2 bilhões deais em metas batidas e sair com o processo altamente claro e sabendo o que orientar sua equipe para que possa superar a meta todo mês. Clique saiba mais ou coloca #50. Bora bater meta.

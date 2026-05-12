@@ -1,0 +1,26 @@
+# dependências
+node_modules/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editores
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Vercel
+.vercel/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env (caso surja v2 com auth)
+.env
+.env.local
+.env*.local

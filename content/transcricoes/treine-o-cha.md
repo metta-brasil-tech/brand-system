@@ -1,0 +1,4 @@
+# Treine o CHA
+# URL: https://youtube.com/watch?v=Qc_hlOs98Og
+
+E aí, quando você tem meta e tem método, a sua equipe não sofre. A sua equipe executa com uma operação fantástica. Ela é produtiva. Você tem um clima organizacional bom, a rotatividade cai. Você não tem que ficar falando tudo de novo pras pessoas, porque você estancou o problema.

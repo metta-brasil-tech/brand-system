@@ -1,0 +1,286 @@
+<h1 id="metta-ui-kit-editorial">Metta — UI Kit Editorial</h1>
+<blockquote>
+<p><strong>Source canônico:</strong> <code>system-source/ui_kits/editorial/components.jsx</code> + <code>index.html</code> (demo).
+<strong>Quando carregar:</strong> briefing pede LP, playbook, página editorial longa, manual de marca, demo interativo.
+<strong>Tokens canônicos:</strong> ver <span class="wikilink" data-target="metta-tokens">metta-tokens</span>.
+<strong>Para ads/stories/posts curtos:</strong> prefira <span class="wikilink" data-target="metta-components">metta-components</span> (snippets CSS atômicos).</p>
+</blockquote>
+<hr>
+<h2 id="0-quando-usar-ui-kit-vs-components">0. Quando usar UI Kit vs Components</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ad Instagram/Stories curto</td>
+<td><span class="wikilink" data-target="metta-components">metta-components</span> (CSS atômico)</td>
+</tr>
+<tr>
+<td>Carrossel social (slides curtos)</td>
+<td><span class="wikilink" data-target="metta-components">metta-components</span> + <span class="wikilink" data-target="catalogo/content-styles">catalogo/content-styles</span></td>
+</tr>
+<tr>
+<td>Landing page institucional</td>
+<td>UI Kit (este doc) — <code>Header</code> + <code>SectionOpener</code> + <code>StrategyTechRow</code> + <code>Footer</code></td>
+</tr>
+<tr>
+<td>Playbook editorial / O Código Metta</td>
+<td>UI Kit — <code>SectionOpener</code> + <code>QuoteBlock</code> + <code>StrategyTechRow</code></td>
+</tr>
+<tr>
+<td>Manual de marca interativo</td>
+<td>UI Kit completo (todos os componentes)</td>
+</tr>
+<tr>
+<td>Pitch deck (slides)</td>
+<td><span class="wikilink" data-target="catalogo/slides">catalogo/slides</span></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="1-componentes-10">1. Componentes (10)</h2>
+<h3 id="11-ltheadergt-header-com-logo-nav-cta">1.1 <code>&lt;Header&gt;</code> — header com logo + nav + CTA</h3>
+<p><strong>Variantes:</strong> <code>tone=&quot;dark&quot;</code> (default) ou <code>tone=&quot;light&quot;</code></p>
+<pre><code class="language-jsx">&lt;Header tone=&quot;dark&quot; /&gt;
+// → Logo (auto-seleciona variante por tone) + nav links + CTAPill primary &quot;Baixar Brand Kit&quot;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Padding: <code>22px 8%</code></li>
+<li>Border bottom: <code>rgba(255,255,255,0.06)</code> (dark) ou <code>rgba(12,22,27,0.06)</code> (light)</li>
+<li>Logo: SVG do <code>system-source/assets/logos/</code> (colorido_h pra dark, colorido_escuro_h pra light)</li>
+<li>Nav items: Expanded Medium 540, 12px, UPPERCASE, ls 0.14em</li>
+<li>CTA: ver <code>&lt;CTAPill variant=&quot;primary&quot;&gt;</code></li>
+</ul>
+<hr>
+<h3 id="12-ltfootergt-footer-institucional">1.2 <code>&lt;Footer&gt;</code> — footer institucional</h3>
+<pre><code class="language-jsx">&lt;Footer /&gt;
+// → Signature SVG + versão do manual + contato em amarelo
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Background: <code>--blue-deep</code> (#0A1013)</li>
+<li>Padding: <code>48px 8%</code></li>
+<li>Signature: <code>system-source/assets/signatures/assinatura_metta_branco.svg</code> (height 34px)</li>
+<li>Texto legal: Expanded Light 270, 11px, UPPERCASE, ls 0.28em</li>
+<li>Email destaque em <code>--yellow-primary</code></li>
+</ul>
+<hr>
+<h3 id="13-ltctapill-variantgt-botao-primario-com-hoverpress">1.3 <code>&lt;CTAPill variant&gt;</code> — botão primário com hover/press</h3>
+<p><strong>Variantes:</strong> <code>primary</code> (yellow) | <code>dark</code> (escuro com border yellow) | <code>ghost</code> (transparent com border white)</p>
+<pre><code class="language-jsx">&lt;CTAPill variant=&quot;primary&quot; onClick={...}&gt;QUERO PARTICIPAR&lt;/CTAPill&gt;
+&lt;CTAPill variant=&quot;dark&quot;&gt;SAIBA MAIS&lt;/CTAPill&gt;
+&lt;CTAPill variant=&quot;ghost&quot;&gt;VOLTAR&lt;/CTAPill&gt;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Padding: <code>14px 28px</code></li>
+<li>Border-radius: <code>999px</code> (pill)</li>
+<li>Tipografia: Expanded Bold 700, 13px, UPPERCASE, ls 0.06em</li>
+<li><strong>Estados:</strong><ul>
+<li>Default → cor da variante</li>
+<li>Hover → primary: <code>#FFC531</code>; dark: <code>#1A2A35</code>; ghost: <code>rgba(255,255,255,0.08)</code></li>
+<li>Pressed → primary vira <code>#FFB618</code> + <code>transform: scale(0.97)</code></li>
+</ul>
+</li>
+<li>Transition: <code>transform .12s ease, background .15s ease</code></li>
+</ul>
+<hr>
+<h3 id="14-ltsectionopenergt-chapter-opener-com-numero-grande">1.4 <code>&lt;SectionOpener&gt;</code> — chapter opener com número grande</h3>
+<p><strong>Variantes:</strong> <code>tone=&quot;dark&quot;</code> (default) | <code>&quot;yellow&quot;</code> | <code>&quot;light&quot;</code></p>
+<pre><code class="language-jsx">&lt;SectionOpener
+  tone=&quot;dark&quot;
+  num=&quot;01&quot;
+  kicker=&quot;CAPÍTULO UM&quot;
+  title=&quot;Bater meta não é arte. É método.&quot;
+  lede=&quot;A diferença entre empresas que crescem e empresas que travam não está em talento — está em sistema. Esse capítulo quebra essa premissa em 6 partes.&quot;
+/&gt;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Grid: <code>120px 1fr</code> com <code>gap: 48px</code>, max-width 1200px</li>
+<li>Padding: <code>120px 8% 100px</code></li>
+<li>Número: Expanded Heavy 870, 96px, lh 0.85, ls -0.02em</li>
+<li>Kicker: Expanded Medium 540, 12px, UPPERCASE, ls 0.18em</li>
+<li>Title: Expanded Heavy 870, clamp(42px, 5.5vw, 72px), lh 0.95</li>
+<li>Lede: Regular Book 400, 20px, lh 1.55, max-width 640px</li>
+<li><strong>Cores por tone:</strong><ul>
+<li>Dark: bg <code>--blue-night</code>, text <code>--white</code>, número <code>--yellow-primary</code>, kicker <code>--yellow-primary</code>, lede <code>--steel-blue</code></li>
+<li>Yellow: bg <code>--yellow-primary</code>, text <code>--blue-night</code>, número <code>--blue-night</code>, kicker <code>rgba(12,22,27,0.55)</code>, lede <code>rgba(12,22,27,0.7)</code></li>
+<li>Light: bg <code>--white</code>, text <code>--blue-night</code>, número <code>--blue-night</code>, kicker <code>--blue-gray</code>, border-top <code>rgba(12,22,27,0.08)</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="15-ltstrategytechrowgt-2-colunas-estrategia-spec">1.5 <code>&lt;StrategyTechRow&gt;</code> — 2 colunas (estratégia + spec)</h3>
+<pre><code class="language-jsx">&lt;StrategyTechRow
+  tone=&quot;light&quot;
+  kicker=&quot;LOGO&quot;
+  title=&quot;Por que o símbolo nunca usa glow&quot;
+  body=&quot;A versão antiga aplicava rgba(255,190,24,0.24) inset — removido em Apr/2026. Glow no logo descarta densidade visual e empurra a marca pra estética genérica de SaaS.&quot;
+  spec={
+    &lt;&gt;
+      &lt;SpecRow label=&quot;Drop shadow&quot; value=&quot;✗ Proibido&quot; /&gt;
+      &lt;SpecRow label=&quot;Inset glow&quot; value=&quot;✗ Removido&quot; /&gt;
+      &lt;SpecRow label=&quot;Outline&quot; value=&quot;✗ Nunca&quot; /&gt;
+      &lt;SpecRow label=&quot;Solid only&quot; value=&quot;✓ Default&quot; /&gt;
+    &lt;/&gt;
+  }
+/&gt;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Grid: <code>1fr 1fr</code> com <code>gap: 80px</code>, max-width 1200px</li>
+<li>Padding: <code>80px 8%</code></li>
+<li>Border-top: 1px (com cor por tone)</li>
+<li><strong>Coluna esquerda:</strong> kicker + h3 (Expanded Semibold 650, 34px) + p (17px, lh 1.7)</li>
+<li><strong>Coluna direita (spec):</strong> card com <code>border-radius: 20px</code>, padding 32px, bg <code>--ice-blue</code> (light) ou <code>--dark-card</code> (dark)</li>
+</ul>
+<hr>
+<h3 id="16-ltspecrowgt-linha-labelvalue-tabular">1.6 <code>&lt;SpecRow&gt;</code> — linha label/value tabular</h3>
+<pre><code class="language-jsx">&lt;SpecRow label=&quot;Yellow primary&quot; value=&quot;#FFBE18&quot; mono /&gt;
+&lt;SpecRow label=&quot;Headline weight&quot; value=&quot;870 (Expanded Heavy)&quot; /&gt;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Display flex space-between, gap 24px</li>
+<li>Padding: <code>12px 0</code></li>
+<li>Border-bottom: <code>1px solid rgba(12,22,27,0.08)</code></li>
+<li>Label: Expanded Medium 540, 11px, UPPERCASE, ls 0.14em, color <code>--blue-gray</code></li>
+<li>Value: 14px, text-align right, <code>font-variant-numeric: tabular-nums</code></li>
+<li><code>mono={true}</code> → <code>font-family: ui-monospace, SF Mono, Menlo, monospace</code></li>
+</ul>
+<hr>
+<h3 id="17-ltcolorswatchgt-display-de-cor-com-hex">1.7 <code>&lt;ColorSwatch&gt;</code> — display de cor com hex</h3>
+<pre><code class="language-jsx">&lt;ColorSwatch hex=&quot;#FFBE18&quot; name=&quot;Yellow Primary&quot; /&gt;
+&lt;ColorSwatch hex=&quot;#0C161B&quot; name=&quot;Blue Night&quot; onDark /&gt;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Layout: 48x48 swatch + nome/hex</li>
+<li>Swatch: <code>border-radius: 12px</code>, border 1px (<code>rgba(255,255,255,0.1)</code> se onDark)</li>
+<li>Nome: Expanded Semibold 650, 13px</li>
+<li>Hex: 11px, ls 0.06em, <code>font-variant-numeric: tabular-nums</code></li>
+</ul>
+<hr>
+<h3 id="18-ltquoteblockgt-citacao-editorial">1.8 <code>&lt;QuoteBlock&gt;</code> — citação editorial</h3>
+<pre><code class="language-jsx">&lt;QuoteBlock cite=&quot;Tiago Alves&quot; tone=&quot;light&quot;&gt;
+  Método substitui improviso. Quem improvisa hoje, paga amanhã.
+&lt;/QuoteBlock&gt;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Max-width: 700px</li>
+<li>Margin: <code>48px 0</code></li>
+<li>Quote text: Regular Light 300, 26px, lh 1.5, italic, ls -0.01em</li>
+<li>Cite: Expanded Medium 540, 11px, UPPERCASE, ls 0.18em, color <code>--blue-gray-light</code></li>
+<li>Cor por tone: dark → text <code>--white</code>; light → text <code>--blue-night</code></li>
+</ul>
+<hr>
+<h3 id="19-ltyellowbandgt-faixa-de-marca">1.9 <code>&lt;YellowBand&gt;</code> — faixa de marca</h3>
+<p><strong>Variantes:</strong> <code>thick={false}</code> (6px decorative) | <code>thick={true}</code> (48px com texto)</p>
+<pre><code class="language-jsx">&lt;YellowBand /&gt;  {/* faixa fina 6px */}
+&lt;YellowBand thick&gt;METTA · INTELIGÊNCIA COMERCIAL · BORA BATER META&lt;/YellowBand&gt;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Width 100%, background <code>--yellow-primary</code></li>
+<li><strong>Thick mode:</strong> height 48px, text Expanded Medium 540, 12px, UPPERCASE, ls 0.22em, color <code>--blue-night</code>, gap 24px</li>
+</ul>
+<hr>
+<h3 id="110-lttransitionbandgt-separator-com-label-numero">1.10 <code>&lt;TransitionBand&gt;</code> — separator com label + número</h3>
+<pre><code class="language-jsx">&lt;TransitionBand tone=&quot;yellow&quot; label=&quot;Capítulo 02 — Identidade Verbal&quot; num=&quot;02&quot; /&gt;
+&lt;TransitionBand tone=&quot;dark&quot; label=&quot;Aplicações&quot; num=&quot;03&quot; /&gt;
+</code></pre>
+<p><strong>Specs:</strong></p>
+<ul>
+<li>Padding: <code>18px 8%</code></li>
+<li>Display: flex space-between</li>
+<li>Tipografia: Expanded Semibold 650, 15px, ls 0.02em</li>
+<li><strong>Yellow:</strong> bg <code>--yellow-primary</code>, text <code>--blue-night</code>, número <code>--blue-night</code> em weight 870</li>
+<li><strong>Dark:</strong> bg <code>--blue-night</code>, text <code>--white</code>, número <code>--yellow-primary</code> em weight 870</li>
+</ul>
+<hr>
+<h2 id="2-composicao-de-uma-pagina-editorial-completa">2. Composição de uma página editorial completa</h2>
+<p>Sequência canônica (vide <code>system-source/ui_kits/editorial/index.html</code>):</p>
+<pre><code>&lt;Header tone=&quot;dark&quot; /&gt;
+&lt;SectionOpener tone=&quot;dark&quot; num=&quot;01&quot; kicker title lede /&gt;
+&lt;StrategyTechRow tone=&quot;light&quot; kicker title body spec /&gt;
+&lt;TransitionBand tone=&quot;yellow&quot; label num /&gt;
+&lt;SectionOpener tone=&quot;yellow&quot; num=&quot;02&quot; ... /&gt;
+&lt;QuoteBlock&gt;...&lt;/QuoteBlock&gt;
+&lt;StrategyTechRow tone=&quot;dark&quot; ... /&gt;
+&lt;YellowBand thick&gt;METTA · INTELIGÊNCIA COMERCIAL&lt;/YellowBand&gt;
+&lt;Footer /&gt;
+</code></pre>
+<p><strong>Ritmo:</strong> Dark → Light → Yellow → Light → Dark → Yellow band → Footer</p>
+<hr>
+<h2 id="3-adaptacao-pra-plugin-api-figma">3. Adaptação pra Plugin API (Figma)</h2>
+<p>Os componentes JSX acima são pra <strong>HTML/CSS</strong>. Pra criar no Figma via <code>mcp__figma-remote__use_figma</code>, traduzir cada componente:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>JSX</th>
+<th>Plugin API equivalent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;CTAPill primary&gt;</code></td>
+<td><code>createCTA(parent, text, { bg: &#39;#FFBE18&#39;, fg: &#39;#0C161B&#39;, radius: 999 })</code> (<span class="wikilink" data-target="figma-plugin-api">figma-plugin-api</span> §4)</td>
+</tr>
+<tr>
+<td><code>&lt;YellowBand thick&gt;</code></td>
+<td><code>figma.createFrame()</code> + auto-layout HORIZONTAL + bg <code>#FFBE18</code> + height 48 + text child</td>
+</tr>
+<tr>
+<td><code>&lt;SectionOpener&gt;</code></td>
+<td><code>figma.createFrame()</code> + grid de 2 colunas com auto-layout VERTICAL + número text + kicker text + headline text + lede text</td>
+</tr>
+<tr>
+<td><code>&lt;StrategyTechRow&gt;</code></td>
+<td>2 frames lado a lado em auto-layout HORIZONTAL</td>
+</tr>
+<tr>
+<td><code>&lt;QuoteBlock&gt;</code></td>
+<td>text node single (italic, light weight 300) + cite text</td>
+</tr>
+<tr>
+<td><code>&lt;Header&gt;</code></td>
+<td>frame HORIZONTAL com logo image + nav frame + CTA frame</td>
+</tr>
+<tr>
+<td><code>&lt;Footer&gt;</code></td>
+<td>frame com signature image + texto + email</td>
+</tr>
+</tbody></table></div>
+<p><strong>Helpers JS pra Plugin API:</strong> ver <span class="wikilink" data-target="figma-plugin-api">figma-plugin-api</span> §6 (<code>hexToRgb</code>).</p>
+<hr>
+<h2 id="4-assets-locais-system-source">4. Assets locais (system-source)</h2>
+<p><strong>SVGs disponíveis</strong> (já no vault, sem precisar baixar do Drive):</p>
+<pre><code>system-source/assets/
+├── logos/         (13 SVGs — horizontal/vertical, 6 variantes de cor)
+├── symbols/       (5 SVGs — apenas o ícone circular)
+├── signatures/    (5 SVGs — &quot;metta | INTELIGÊNCIA COMERCIAL&quot; lockup)
+└── backgrounds/   (10 JPGs — gradientes + flat plates)
+</code></pre>
+<p>Em código novo, <strong>prefira referenciar local</strong> (<code>../system-source/assets/logos/logo_metta_colorido_h.svg</code>) ao invés de baixar do Drive — menos latência, sem dependência de rede.</p>
+<blockquote>
+<p>Ver <span class="wikilink" data-target="metta-logos">metta-logos</span> §1 pra mapeamento entre arquivo local ↔ Drive ID (ambos são fontes válidas).</p>
+</blockquote>
+<hr>
+<h2 id="5-hard-rules-do-system-source-skillmd">5. Hard rules (do system-source SKILL.md)</h2>
+<p>❌ <strong>Cores:</strong> apenas tokens em <code>colors_and_type.css</code>. Yellow <code>#FFBE18</code> é load-bearing — use só pra CTAs, single-word highlights, símbolo fill, accent marks.</p>
+<p>❌ <strong>Tipografia:</strong> apenas SF Pro Variable (ou Zalando Sans Expanded fallback — obrigatório em PPTX/Google Slides desde 2026-05-12). Nunca Inter/Arial/Helvetica/Open Sans. Headlines → Expanded (132%). Body → Regular (100%). Use <code>font-weight</code> e <code>font-stretch</code> direto, não <code>font-variation-settings</code>.</p>
+<p>❌ <strong>Logo:</strong> nunca aplicar glow, shadow ou outer stroke no logo ou símbolo.</p>
+<p>❌ <strong>Copy:</strong> Brazilian Portuguese, &quot;você&quot;, no emoji, no corporate jargon. Direto, founder-voice, confiante.</p>
+<p>❌ <strong>Icons:</strong> no emoji, no SVG micro-kit inventado. Use marcas tipográficas (caracteres em rounded squares), o Símbolo Metta, ou <strong>Material Symbols Rounded</strong> (Google Fonts) se UI affordance icons forem estritamente necessários — flag como substituição.</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot;
+  href=&quot;https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,0,0&quot;&gt;
+
+&lt;span class=&quot;material-symbols-rounded&quot;
+  style=&quot;font-variation-settings: &#39;FILL&#39; 0, &#39;wght&#39; 500, &#39;GRAD&#39; 0, &#39;opsz&#39; 24;&quot;&gt;
+  rocket_launch
+&lt;/span&gt;
+</code></pre>
