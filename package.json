@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "npx --yes serve -p 5173 --no-clipboard -c serve.json .",
-    "build": "node scripts/build.mjs && node scripts/build-docs-manifest.mjs",
+    "build": "node scripts/build.mjs && node scripts/build-manifest.mjs",
     "build:content": "node scripts/build.mjs",
-    "build:manifest": "node scripts/build-docs-manifest.mjs",
-    "build:full": "node scripts/build.mjs --full && node scripts/build-docs-manifest.mjs"
+    "build:manifest": "node scripts/build-manifest.mjs",
+    "build:full": "node scripts/build.mjs --full && node scripts/build-manifest.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

@@ -1,0 +1,244 @@
+#!/usr/bin/env node
+// ============================================================
+// METTA BRAND SYSTEM — BUILD DOWNLOAD MANIFEST (v2)
+// Lê:
+//   - data/nav.json + content/ → grupo "docs"
+//   - assets/ → grupos "galeria", "aplicacoes", "identidade-visual"
+// Escreve data/download-manifest.json com tudo que o modal precisa
+// pra render checkbox tree + size badges.
+// ============================================================
+
+import { readFile, writeFile, stat, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { dirname, resolve, join, relative, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, '..');
+const NAV_PATH = join(ROOT, 'data', 'nav.json');
+const CONTENT_DIR = join(ROOT, 'content');
+const ASSETS_DIR = join(ROOT, 'assets');
+const OUT_PATH = join(ROOT, 'data', 'download-manifest.json');
+
+const VISUAL_SOURCE_RE = /^(embed|gallery|archetypes|scan|transcricoes-gallery|icons-gallery|applications-gallery):/;
+
+const log = {
+  info: (m) => console.log(`  ${m}`),
+  ok:   (m) => console.log(`  \x1b[32m✓\x1b[0m ${m}`),
+  warn: (m) => console.warn(`  \x1b[33m!\x1b[0m ${m}`),
+  group:(m) => console.log(`\n\x1b[1m${m}\x1b[0m`)
+};
+
+async function fileSize(absPath) {
+  try { return (await stat(absPath)).size; } catch { return 0; }
+}
+
+async function walkFiles(dir) {
+  const out = [];
+  let entries;
+  try { entries = await readdir(dir, { withFileTypes: true }); }
+  catch { return out; }
+  for (const e of entries) {
+    const abs = join(dir, e.name);
+    if (e.isDirectory()) out.push(...await walkFiles(abs));
+    else if (e.isFile()) {
+      const size = (await stat(abs)).size;
+      out.push({ name: e.name, path: relative(ROOT, abs).split(sep).join('/'), sizeBytes: size });
+    }
+  }
+  return out;
+}
+
+async function listImmediateSubdirs(dir) {
+  let entries;
+  try { entries = await readdir(dir, { withFileTypes: true }); }
+  catch { return []; }
+  return entries.filter(e => e.isDirectory()).map(e => e.name);
+}
+
+function sumSize(files) { return files.reduce((a, b) => a + b.sizeBytes, 0); }
+
+// ----------- DOCS GROUP -----------
+async function buildDocsGroup() {
+  const nav = JSON.parse(await readFile(NAV_PATH, 'utf8'));
+  const tabs = [];
+
+  for (const tab of nav.tabs) {
+    const sections = [];
+    let totalBytes = 0;
+
+    for (const sec of tab.sections) {
+      if (!sec.source) continue;
+      if (VISUAL_SOURCE_RE.test(sec.source)) continue;
+      const mdPath = join(CONTENT_DIR, tab.id, `${sec.id}.md`);
+      if (!existsSync(mdPath)) continue;
+      const size = await fileSize(mdPath);
+      sections.push({
+        id: sec.id,
+        label: sec.label,
+        files: [{ name: `${sec.id}.md`, path: `content/${tab.id}/${sec.id}.md`, sizeBytes: size }],
+        totalBytes: size,
+        fileCount: 1
+      });
+      totalBytes += size;
+    }
+    if (sections.length === 0) continue;
+
+    tabs.push({
+      id: tab.id,
+      label: tab.label,
+      kind: 'docs',
+      sections,
+      totalBytes,
+      fileCount: sections.length
+    });
+    log.ok(`[docs/${tab.id}] ${tab.label} — ${sections.length} docs, ${(totalBytes/1024).toFixed(1)} KB`);
+  }
+  return { id: 'docs', label: 'Documentação', tabs };
+}
+
+// ----------- ASSET TABS HELPERS -----------
+async function buildAssetTabFromSubfolders(opts) {
+  // Tab cujas sections são as subpastas imediatas de dir
+  const { id, label, dir, sectionLabels } = opts;
+  const subdirs = await listImmediateSubdirs(dir);
+  const sections = [];
+  let totalBytes = 0;
+  let fileCount = 0;
+  for (const sub of subdirs) {
+    const files = await walkFiles(join(dir, sub));
+    if (files.length === 0) continue;
+    const size = sumSize(files);
+    sections.push({
+      id: sub,
+      label: (sectionLabels && sectionLabels[sub]) || sub,
+      files,
+      totalBytes: size,
+      fileCount: files.length
+    });
+    totalBytes += size;
+    fileCount += files.length;
+  }
+  if (sections.length === 0) return null;
+  return { id, label, kind: 'assets', sections, totalBytes, fileCount };
+}
+
+async function buildAssetTabFlat(opts) {
+  // Tab sem subpastas: gera uma única section "tudo"
+  const { id, label, dir } = opts;
+  const files = await walkFiles(dir);
+  if (files.length === 0) return null;
+  return {
+    id, label, kind: 'assets',
+    sections: [{
+      id: 'todos',
+      label: 'Todos',
+      files,
+      totalBytes: sumSize(files),
+      fileCount: files.length
+    }],
+    totalBytes: sumSize(files),
+    fileCount: files.length
+  };
+}
+
+async function buildGroup(id, label, tabSpecs) {
+  const tabs = [];
+  for (const t of tabSpecs) {
+    const tab = await t.builder();
+    if (!tab) { log.info(`[${id}/${t.id}] vazio, pulado`); continue; }
+    tabs.push(tab);
+    log.ok(`[${id}/${tab.id}] ${tab.label} — ${tab.fileCount} arq, ${(tab.totalBytes/1024/1024).toFixed(2)} MB`);
+  }
+  return { id, label, tabs };
+}
+
+// ----------- MAIN -----------
+async function main() {
+  log.group('Metta Brand System — Build Download Manifest v2');
+
+  log.group('Grupo: Documentação');
+  const docsGroup = await buildDocsGroup();
+
+  log.group('Grupo: Galeria');
+  const galeriaGroup = await buildGroup('galeria', 'Galeria', [
+    { id: 'fotografia', builder: () => buildAssetTabFromSubfolders({
+      id: 'fotografia', label: 'Fotografia',
+      dir: join(ASSETS_DIR, 'fotografia'),
+      sectionLabels: { mid: 'HQ (alta resolução)', thumbs: 'Thumbnails (baixa)' }
+    })}
+  ]);
+
+  log.group('Grupo: Catálogo de Aplicações');
+  const appsGroup = await buildGroup('aplicacoes', 'Catálogo de Aplicações', [
+    { id: 'ads', builder: () => buildAssetTabFromSubfolders({
+      id: 'ads', label: 'Anúncios',
+      dir: join(ASSETS_DIR, 'applications', 'ads'),
+      sectionLabels: { mid: 'HQ (mid) — pesado', thumbs: 'Thumbnails' }
+    })},
+    { id: 'carrosseis', builder: () => buildAssetTabFromSubfolders({
+      id: 'carrosseis', label: 'Carrosséis',
+      dir: join(ASSETS_DIR, 'applications', 'carrosseis')
+    })},
+    { id: 'posters', builder: () => buildAssetTabFromSubfolders({
+      id: 'posters', label: 'Posters',
+      dir: join(ASSETS_DIR, 'applications', 'posters'),
+      sectionLabels: { mid: 'HQ (mid)', thumbs: 'Thumbnails' }
+    })},
+    { id: 'slides', builder: () => buildAssetTabFromSubfolders({
+      id: 'slides', label: 'Slides',
+      dir: join(ASSETS_DIR, 'applications', 'slides'),
+      sectionLabels: { mid: 'HQ (mid)', thumbs: 'Thumbnails' }
+    })},
+    { id: 'telas', builder: () => buildAssetTabFromSubfolders({
+      id: 'telas', label: 'Telas / LPs',
+      dir: join(ASSETS_DIR, 'applications', 'telas'),
+      sectionLabels: { mid: 'HQ (mid)', thumbs: 'Thumbnails' }
+    })}
+  ]);
+
+  log.group('Grupo: Identidade Visual');
+  const dsGroup = await buildGroup('identidade-visual', 'Identidade Visual', [
+    { id: 'logos', builder: () => buildAssetTabFlat({
+      id: 'logos', label: 'Logos', dir: join(ASSETS_DIR, 'logos')
+    })},
+    { id: 'symbols', builder: () => buildAssetTabFlat({
+      id: 'symbols', label: 'Símbolos', dir: join(ASSETS_DIR, 'symbols')
+    })},
+    { id: 'signatures', builder: () => buildAssetTabFlat({
+      id: 'signatures', label: 'Assinaturas', dir: join(ASSETS_DIR, 'signatures')
+    })},
+    { id: 'icons', builder: () => buildAssetTabFromSubfolders({
+      id: 'icons', label: 'Ícones', dir: join(ASSETS_DIR, 'icons')
+    })}
+  ]);
+
+  const groups = [docsGroup, galeriaGroup, appsGroup, dsGroup].filter(g => g.tabs.length > 0);
+
+  // Totals globais
+  let totalBytes = 0, totalFiles = 0, totalTabs = 0;
+  for (const g of groups) {
+    for (const t of g.tabs) {
+      totalBytes += t.totalBytes;
+      totalFiles += t.fileCount;
+      totalTabs++;
+    }
+  }
+
+  const manifest = {
+    generatedAt: new Date().toISOString(),
+    grandTotalBytes: totalBytes,
+    grandTotalFiles: totalFiles,
+    grandTotalTabs: totalTabs,
+    groups
+  };
+  await writeFile(OUT_PATH, JSON.stringify(manifest, null, 2), 'utf8');
+
+  console.log('');
+  log.ok(`Manifest: ${relative(ROOT, OUT_PATH)} — ${groups.length} grupos, ${totalTabs} abas, ${totalFiles} arquivos, ${(totalBytes/1024/1024).toFixed(1)} MB total`);
+}
+
+main().catch(err => {
+  console.error('\nFalha ao gerar manifest:', err);
+  process.exit(2);
+});

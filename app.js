@@ -1879,10 +1879,9 @@ const BrandSystem = (() => {
     return `${mb.toFixed(0)} MB`;
   }
 
-  function formatDocCount(n) {
-    if (n === 0) return '0 docs';
-    if (n === 1) return '1 doc';
-    return `${n} docs`;
+  function formatItemCount(n, kind) {
+    if (kind === 'docs') return n === 1 ? '1 doc' : `${n} docs`;
+    return n === 1 ? '1 arquivo' : `${n} arquivos`;
   }
 
   function checkboxSvg() {
@@ -1892,16 +1891,24 @@ const BrandSystem = (() => {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
   }
 
-  let docsManifest = null;
-  let docsSelection = new Map(); // tabId -> Set(sectionIds) | 'all'
+  // Threshold acima do qual marcamos a seleção como "pesada" (browser pode demorar)
+  const HEAVY_BYTES_WARN = 100 * 1024 * 1024; // 100 MB
+
+  let downloadManifest = null;
+  let docsSelection = new Map(); // tabId -> Set(sectionIds)
+  let tabIndex = new Map();      // tabId -> tab (lookup rápido)
   let lastFocusedBeforeModal = null;
 
-  async function loadDocsManifest() {
-    if (docsManifest) return docsManifest;
-    const res = await fetch('data/documents-manifest.json', { cache: 'no-cache' });
-    if (!res.ok) throw new Error('documents-manifest.json não encontrado — rode npm run build:manifest');
-    docsManifest = await res.json();
-    return docsManifest;
+  async function loadDownloadManifest() {
+    if (downloadManifest) return downloadManifest;
+    const res = await fetch('data/download-manifest.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('download-manifest.json não encontrado — rode npm run build:manifest');
+    downloadManifest = await res.json();
+    tabIndex.clear();
+    for (const g of downloadManifest.groups) {
+      for (const t of g.tabs) tabIndex.set(t.id, t);
+    }
+    return downloadManifest;
   }
 
   function getSelectionState(tab) {
@@ -1917,77 +1924,101 @@ const BrandSystem = (() => {
   }
 
   function selectedTotals() {
-    let docs = 0;
+    let items = 0;
     let bytes = 0;
-    if (!docsManifest) return { docs, bytes };
-    for (const tab of docsManifest.tabs) {
-      const sel = docsSelection.get(tab.id);
-      if (!sel) continue;
+    if (!downloadManifest) return { items, bytes };
+    for (const [tabId, sel] of docsSelection.entries()) {
+      const tab = tabIndex.get(tabId);
+      if (!tab) continue;
       for (const sec of tab.sections) {
         if (sel.has(sec.id)) {
-          docs++;
-          bytes += sec.sizeBytes;
+          items += sec.fileCount;
+          bytes += sec.totalBytes;
         }
       }
     }
-    return { docs, bytes };
-  }
-
-  function renderDocsModal() {
-    const body = document.querySelector('[data-modal-body]');
-    if (!body || !docsManifest) return;
-    const expandedSet = new Set(
-      Array.from(body.querySelectorAll('.dlm-tab[data-expanded="true"]')).map(c => c.dataset.tab)
-    );
-    body.innerHTML = '';
-    for (const tab of docsManifest.tabs) {
-      const state = getSelectionState(tab);
-      const expanded = expandedSet.has(tab.id);
-      const card = document.createElement('div');
-      card.className = 'dlm-tab';
-      card.dataset.tab = tab.id;
-      card.dataset.expanded = String(expanded);
-      card.innerHTML = `
-        <div class="dlm-tab-head" data-action="toggle">
-          <div class="dlm-checkbox" data-action="toggle-tab" data-state="${state}" role="checkbox" tabindex="0" aria-checked="${state === 'checked' ? 'true' : state === 'indeterminate' ? 'mixed' : 'false'}">
-            ${state === 'indeterminate' ? dashSvg() : checkboxSvg()}
-          </div>
-          <div class="dlm-tab-info">
-            <div class="dlm-tab-label">${tab.label}</div>
-            <div class="dlm-tab-meta">${formatDocCount(tab.docCount)} · ${formatBytes(tab.totalBytes)}</div>
-          </div>
-          <div class="dlm-tab-size" data-tab-selected-size>${currentTabSelectedSize(tab)}</div>
-          <div class="dlm-tab-toggle" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </div>
-        </div>
-        <div class="dlm-tab-body">
-          ${tab.sections.map(sec => {
-            const checked = isSectionSelected(tab.id, sec.id);
-            const secState = checked ? 'checked' : 'unchecked';
-            return `
-              <div class="dlm-section" data-section="${sec.id}" data-action="toggle-section">
-                <div class="dlm-checkbox" data-state="${secState}" role="checkbox" aria-checked="${checked}">
-                  ${checkboxSvg()}
-                </div>
-                <div class="dlm-section-label">${sec.label}</div>
-                <div class="dlm-section-size">${formatBytes(sec.sizeBytes)}</div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      `;
-      body.appendChild(card);
-    }
-    updateSummary();
+    return { items, bytes };
   }
 
   function currentTabSelectedSize(tab) {
     const sel = docsSelection.get(tab.id);
     if (!sel || sel.size === 0) return '';
     let bytes = 0;
-    for (const sec of tab.sections) if (sel.has(sec.id)) bytes += sec.sizeBytes;
+    for (const sec of tab.sections) if (sel.has(sec.id)) bytes += sec.totalBytes;
     return formatBytes(bytes);
+  }
+
+  function tabMetaLine(tab) {
+    // ex: "6 docs · 187 KB" | "138 arq · 261 MB"
+    return `${formatItemCount(tab.fileCount, tab.kind)} · ${formatBytes(tab.totalBytes)}`;
+  }
+
+  function sectionMetaLine(sec, kind) {
+    if (kind === 'docs') return formatBytes(sec.totalBytes);
+    // Pra assets: "N arq · X MB"
+    return `${formatItemCount(sec.fileCount, 'assets')} · ${formatBytes(sec.totalBytes)}`;
+  }
+
+  function renderModal() {
+    const body = document.querySelector('[data-modal-body]');
+    if (!body || !downloadManifest) return;
+    const expandedSet = new Set(
+      Array.from(body.querySelectorAll('.dlm-tab[data-expanded="true"]')).map(c => c.dataset.tab)
+    );
+    body.innerHTML = '';
+
+    for (const group of downloadManifest.groups) {
+      const groupTotal = group.tabs.reduce((a, t) => a + t.totalBytes, 0);
+      const header = document.createElement('div');
+      header.className = 'dlm-group-header';
+      header.innerHTML = `
+        <span class="dlm-group-label">${group.label}</span>
+        <span class="dlm-group-meta">${formatBytes(groupTotal)}</span>
+      `;
+      body.appendChild(header);
+
+      for (const tab of group.tabs) {
+        const state = getSelectionState(tab);
+        const expanded = expandedSet.has(tab.id);
+        const card = document.createElement('div');
+        card.className = 'dlm-tab';
+        card.dataset.tab = tab.id;
+        card.dataset.kind = tab.kind;
+        card.dataset.expanded = String(expanded);
+        card.innerHTML = `
+          <div class="dlm-tab-head" data-action="toggle">
+            <div class="dlm-checkbox" data-action="toggle-tab" data-state="${state}" role="checkbox" tabindex="0" aria-checked="${state === 'checked' ? 'true' : state === 'indeterminate' ? 'mixed' : 'false'}">
+              ${state === 'indeterminate' ? dashSvg() : checkboxSvg()}
+            </div>
+            <div class="dlm-tab-info">
+              <div class="dlm-tab-label">${tab.label}</div>
+              <div class="dlm-tab-meta">${tabMetaLine(tab)}</div>
+            </div>
+            <div class="dlm-tab-size" data-tab-selected-size>${currentTabSelectedSize(tab)}</div>
+            <div class="dlm-tab-toggle" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="dlm-tab-body">
+            ${tab.sections.map(sec => {
+              const checked = isSectionSelected(tab.id, sec.id);
+              const secState = checked ? 'checked' : 'unchecked';
+              return `
+                <div class="dlm-section" data-section="${sec.id}" data-action="toggle-section">
+                  <div class="dlm-checkbox" data-state="${secState}" role="checkbox" aria-checked="${checked}">
+                    ${checkboxSvg()}
+                  </div>
+                  <div class="dlm-section-label">${sec.label}</div>
+                  <div class="dlm-section-size">${sectionMetaLine(sec, tab.kind)}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+        body.appendChild(card);
+      }
+    }
+    updateSummary();
   }
 
   function updateSummary() {
@@ -1995,16 +2026,20 @@ const BrandSystem = (() => {
     const sizeEl = document.querySelector('[data-summary-size]');
     const submit = document.querySelector('[data-modal-submit]');
     const submitLabel = document.querySelector('[data-submit-label]');
-    const { docs, bytes } = selectedTotals();
-    if (docsEl) docsEl.textContent = formatDocCount(docs);
-    if (sizeEl) sizeEl.textContent = formatBytes(bytes);
-    if (submit) submit.disabled = docs === 0 || submit.dataset.state === 'generating';
-    if (submitLabel && submit && submit.dataset.state !== 'generating') {
-      submitLabel.textContent = docs === 0 ? 'Selecione pelo menos um item' : `Baixar ${formatDocCount(docs)} (.zip)`;
+    const { items, bytes } = selectedTotals();
+    if (docsEl) docsEl.textContent = items === 0 ? '0 itens' : (items === 1 ? '1 item' : `${items} itens`);
+    if (sizeEl) {
+      sizeEl.textContent = formatBytes(bytes);
+      sizeEl.classList.toggle('is-heavy', bytes > HEAVY_BYTES_WARN);
     }
-    // Atualiza só os badges de tamanho por aba (sem re-render completo)
+    if (submit) submit.disabled = items === 0 || submit.dataset.state === 'generating';
+    if (submitLabel && submit && submit.dataset.state !== 'generating') {
+      if (items === 0) submitLabel.textContent = 'Selecione pelo menos um item';
+      else if (bytes > HEAVY_BYTES_WARN) submitLabel.textContent = `Baixar ${formatBytes(bytes)} — pode demorar`;
+      else submitLabel.textContent = `Baixar ${formatBytes(bytes)} (.zip)`;
+    }
     document.querySelectorAll('.dlm-tab').forEach(card => {
-      const tab = docsManifest.tabs.find(t => t.id === card.dataset.tab);
+      const tab = tabIndex.get(card.dataset.tab);
       if (!tab) return;
       const sizeBadge = card.querySelector('[data-tab-selected-size]');
       if (sizeBadge) sizeBadge.textContent = currentTabSelectedSize(tab);
@@ -2019,7 +2054,7 @@ const BrandSystem = (() => {
   }
 
   function toggleTab(tabId) {
-    const tab = docsManifest.tabs.find(t => t.id === tabId);
+    const tab = tabIndex.get(tabId);
     if (!tab) return;
     const state = getSelectionState(tab);
     if (state === 'checked') {
@@ -2027,7 +2062,7 @@ const BrandSystem = (() => {
     } else {
       docsSelection.set(tabId, new Set(tab.sections.map(s => s.id)));
     }
-    renderDocsModal();
+    renderModal();
   }
 
   function toggleSection(tabId, sectionId) {
@@ -2039,17 +2074,24 @@ const BrandSystem = (() => {
     if (sel.has(sectionId)) sel.delete(sectionId);
     else sel.add(sectionId);
     if (sel.size === 0) docsSelection.delete(tabId);
-    renderDocsModal();
+    renderModal();
   }
 
   function bulkSelect(mode) {
     docsSelection.clear();
     if (mode === 'all') {
-      for (const tab of docsManifest.tabs) {
+      for (const tab of tabIndex.values()) {
         docsSelection.set(tab.id, new Set(tab.sections.map(s => s.id)));
       }
+    } else if (mode === 'docs-only') {
+      const group = downloadManifest.groups.find(g => g.id === 'docs');
+      if (group) for (const tab of group.tabs) docsSelection.set(tab.id, new Set(tab.sections.map(s => s.id)));
     }
-    renderDocsModal();
+    renderModal();
+  }
+
+  function isTextPath(p) {
+    return /\.(md|html|json|txt|css|js|csv)$/i.test(p);
   }
 
   async function generateAndDownload() {
@@ -2062,33 +2104,78 @@ const BrandSystem = (() => {
     if (!submit) return;
     submit.dataset.state = 'generating';
     submit.disabled = true;
-    if (submitLabel) submitLabel.textContent = 'Gerando zip…';
+    if (submitLabel) submitLabel.textContent = 'Preparando…';
+
+    const date = new Date().toISOString().slice(0,10);
 
     try {
       const zip = new JSZip();
-      const root = zip.folder('metta-brand-system-docs');
-      const meta = {
+      const root = zip.folder(`metta-brand-system-${date}`);
+      const manifestOut = {
         generatedAt: new Date().toISOString(),
         files: []
       };
 
-      for (const tab of docsManifest.tabs) {
-        const sel = docsSelection.get(tab.id);
-        if (!sel || sel.size === 0) continue;
-        const tabFolder = root.folder(tab.id);
-        for (const sec of tab.sections) {
-          if (!sel.has(sec.id)) continue;
-          const res = await fetch(sec.path, { cache: 'no-cache' });
-          if (!res.ok) throw new Error(`fetch ${sec.path} → ${res.status}`);
-          const text = await res.text();
-          tabFolder.file(`${sec.id}.md`, text);
-          meta.files.push({ tab: tab.id, section: sec.id, path: `${tab.id}/${sec.id}.md`, sizeBytes: sec.sizeBytes });
+      // Conta total de arquivos pra progresso
+      let totalFiles = 0;
+      for (const [tabId, sel] of docsSelection.entries()) {
+        const tab = tabIndex.get(tabId);
+        if (!tab) continue;
+        for (const sec of tab.sections) if (sel.has(sec.id)) totalFiles += sec.fileCount;
+      }
+
+      let done = 0;
+      const updateProgress = () => {
+        if (!submitLabel) return;
+        submitLabel.textContent = `Empacotando ${done}/${totalFiles}…`;
+      };
+
+      for (const group of downloadManifest.groups) {
+        const groupRoot = root.folder(group.id);
+        for (const tab of group.tabs) {
+          const sel = docsSelection.get(tab.id);
+          if (!sel || sel.size === 0) continue;
+          const tabFolder = groupRoot.folder(tab.id);
+          for (const sec of tab.sections) {
+            if (!sel.has(sec.id)) continue;
+            // Achata: docs (1 arquivo por seção) e "todos" (asset flat) não criam subfolder
+            const skipSecFolder = sec.id === 'todos' || (tab.kind === 'docs' && sec.files.length === 1);
+            const sectionFolder = skipSecFolder ? tabFolder : tabFolder.folder(sec.id);
+            for (const file of sec.files) {
+              const res = await fetch(file.path, { cache: 'no-cache' });
+              if (!res.ok) throw new Error(`fetch ${file.path} → ${res.status}`);
+              if (isTextPath(file.path)) {
+                const text = await res.text();
+                sectionFolder.file(file.name, text);
+              } else {
+                const buf = await res.arrayBuffer();
+                sectionFolder.file(file.name, buf);
+              }
+              manifestOut.files.push({
+                group: group.id,
+                tab: tab.id,
+                section: sec.id,
+                name: file.name,
+                sizeBytes: file.sizeBytes
+              });
+              done++;
+              if (done % 5 === 0 || done === totalFiles) updateProgress();
+            }
+          }
         }
       }
-      root.file('manifest.json', JSON.stringify(meta, null, 2));
+      root.file('manifest.json', JSON.stringify(manifestOut, null, 2));
 
-      const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } });
-      const filename = `metta-brand-system-docs-${new Date().toISOString().slice(0,10)}.zip`;
+      if (submitLabel) submitLabel.textContent = 'Comprimindo…';
+      const blob = await zip.generateAsync(
+        { type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } },
+        (meta) => {
+          if (submitLabel && meta.percent != null) {
+            submitLabel.textContent = `Comprimindo… ${Math.round(meta.percent)}%`;
+          }
+        }
+      );
+      const filename = `metta-brand-system-${date}.zip`;
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -2104,7 +2191,7 @@ const BrandSystem = (() => {
         updateSummary();
       }, 1200);
     } catch (err) {
-      console.error('[download docs] falha:', err);
+      console.error('[download] falha:', err);
       if (submitLabel) submitLabel.textContent = 'Erro — tente de novo';
       submit.dataset.state = '';
       setTimeout(updateSummary, 1800);
@@ -2117,13 +2204,12 @@ const BrandSystem = (() => {
     lastFocusedBeforeModal = document.activeElement;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
-    // Pré-seleciona tudo (UX: usuário com pressa baixa logo)
-    if (docsSelection.size === 0 && docsManifest) {
-      for (const tab of docsManifest.tabs) {
-        docsSelection.set(tab.id, new Set(tab.sections.map(s => s.id)));
-      }
+    // Pré-seleção leve: só os docs (não pré-seleciona 261 MB de ads sem o user pedir)
+    if (docsSelection.size === 0 && downloadManifest) {
+      const docs = downloadManifest.groups.find(g => g.id === 'docs');
+      if (docs) for (const tab of docs.tabs) docsSelection.set(tab.id, new Set(tab.sections.map(s => s.id)));
     }
-    renderDocsModal();
+    renderModal();
     const closeBtn = modal.querySelector('.download-modal-close');
     if (closeBtn) closeBtn.focus();
   }
@@ -2178,20 +2264,21 @@ const BrandSystem = (() => {
 
     // Carrega manifest pra preview de meta + preparar modal
     try {
-      await loadDocsManifest();
+      await loadDownloadManifest();
       if (zipMeta) {
-        zipMeta.textContent = `${docsManifest.tabs.length} áreas · escolha o que baixar`;
+        const totalTabs = downloadManifest.grandTotalTabs ?? tabIndex.size;
+        zipMeta.textContent = `${downloadManifest.groups.length} grupos · ${totalTabs} áreas`;
       }
     } catch (err) {
       if (zipMeta) zipMeta.textContent = 'rode npm run build:manifest';
       if (downloadItem) downloadItem.disabled = true;
-      console.warn('[docs manifest]', err.message);
+      console.warn('[download manifest]', err.message);
     }
 
     if (downloadItem) {
       downloadItem.addEventListener('click', () => {
         close();
-        if (docsManifest) openDocsModal();
+        if (downloadManifest) openDocsModal();
       });
     }
   }

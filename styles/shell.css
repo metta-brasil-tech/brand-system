@@ -550,6 +550,31 @@ a.topbar-menu-item,
   color: var(--metta-sys-color-on-surface-variant);
 }
 
+/* --- Group header (Documentação, Galeria, etc.) --- */
+.dlm-group-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 8px 6px;
+  border-bottom: 1px dashed var(--metta-sys-color-outline-variant);
+  margin: 12px 0 2px;
+}
+.dlm-group-header:first-child { margin-top: 4px; }
+.dlm-group-label {
+  font-size: 11px;
+  font-weight: 580;
+  font-stretch: 132%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface);
+}
+.dlm-group-meta {
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+
 /* --- Tab card (linha por aba) --- */
 .dlm-tab {
   border: 1px solid var(--metta-sys-color-outline-variant);
@@ -688,6 +713,9 @@ a.topbar-menu-item,
   color: var(--metta-sys-color-on-surface);
   font-weight: 580;
   font-variant-numeric: tabular-nums;
+}
+.download-modal-summary-value.is-heavy {
+  color: var(--metta-sys-color-error, #C03127);
 }
 .download-modal-submit {
   display: inline-flex;
