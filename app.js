@@ -290,7 +290,7 @@ const BrandSystem = (() => {
         main.innerHTML = renderTranscricoesGallery(tab, catId, idx);
         attachTranscricoesGalleryHandlers(tab, catId, idx);
       } catch (e) {
-        main.innerHTML = `<div class="placeholder"><h2>Biblioteca indisponível</h2><p>${e.message}</p></div>`;
+        main.innerHTML = `<div class="placeholder"><h2>Biblioteca de transcrições indisponível</h2><p>${e.message}</p></div>`;
       }
       return;
     }
@@ -771,10 +771,10 @@ const BrandSystem = (() => {
       audiencia:    'ICP estratégico, MQL, dossiês e banco de provas.',
       verbal:       'Tom, vocabulário, código de conteúdo, linha editorial.',
       visual:       'Resumo da identidade + Design System completo.',
-      'direcao-arte': 'Princípios fotográficos, arquétipos de cena, galeria curada.',
+      'direcao-arte': 'Princípios fotográficos, estilos de cena, galeria curada.',
       metodologia:  '6 Gestões da Meta Batida, aceleradores, FCA e CHA.',
       produtos:     'Mentoria SMTM (5 planos) e consultoria.',
-      aplicacoes:   'Biblioteca viva de ads, carrosséis, slides, telas e posters canônicos.',
+      aplicacoes:   'Catálogo vivo de ads, carrosséis, slides, telas e posters canônicos.',
       transcricoes: '95 transcrições do Tiago classificadas por tema — banco vivo de discurso.'
     }[id] || '';
   }
@@ -869,7 +869,7 @@ const BrandSystem = (() => {
     return `
       <section class="hero">
         <div class="yellow-band"></div>
-        <h1>Biblioteca.</h1>
+        <h1>Catálogo.</h1>
         <p>${all.length} peças canônicas no banco — referência viva pra criar com consistência. Cada peça traz preview, copy quando houver, classificação por tipo/intenção e nota editorial. Filtre por tipo, brand ou intenção, ou busque pelo título.</p>
       </section>
       <div class="gallery-controls">
@@ -1409,13 +1409,13 @@ const BrandSystem = (() => {
 
     const totalPhotos = (data.photos || []).length;
     const introCopy = totalPhotos > 0
-      ? `${data.archetypes.length} arquétipos cobrindo 6 categorias, com ${totalPhotos} fotos curadas. Cada arquétipo traz prompt template em inglês profissional pronto pra alimentar gpt-image-1 via Codex CLI.`
-      : `${data.archetypes.length} arquétipos cobrindo 6 categorias. Banco fotográfico em curadoria — use os prompt templates abaixo pra gerar novas imagens via gpt-image-1 (Codex CLI) e popular a galeria com fotos aprovadas pela direção de arte.`;
+      ? `${data.archetypes.length} estilos cobrindo 6 categorias, com ${totalPhotos} fotos curadas. Cada estilo traz prompt template em inglês profissional pronto pra alimentar gpt-image-1 via Codex CLI.`
+      : `${data.archetypes.length} estilos cobrindo 6 categorias. Banco fotográfico em curadoria — use os prompt templates abaixo pra gerar novas imagens via gpt-image-1 (Codex CLI) e popular a galeria com fotos aprovadas pela direção de arte.`;
 
     return `
       <section class="hero">
         <div class="yellow-band"></div>
-        <h1>Arquétipos<br><span class="accent">editoriais.</span></h1>
+        <h1>Estilos<br><span class="accent">editoriais.</span></h1>
         <p>${introCopy}</p>
       </section>
       ${groupHtml}
@@ -1433,14 +1433,14 @@ const BrandSystem = (() => {
         <section class="hero">
           <div class="yellow-band"></div>
           <h1>Galeria<br><span class="accent">em curadoria.</span></h1>
-          <p>O banco de imagens foi zerado para receber apenas fotos aprovadas pela direção de arte. Os arquétipos editoriais com prompts profissionais continuam disponíveis para gerar novas imagens via gpt-image-1.</p>
+          <p>O banco de imagens foi zerado para receber apenas fotos aprovadas pela direção de arte. Os estilos editoriais com prompts profissionais continuam disponíveis para gerar novas imagens via gpt-image-1.</p>
         </section>
         <div class="placeholder">
           <span class="badge">Galeria vazia</span>
           <h2>Sem fotos no momento</h2>
-          <p>Quando houver imagens validadas, elas aparecerão aqui automaticamente. Por enquanto, consulte os arquétipos para gerar referências fotográficas alinhadas ao DNA Metta.</p>
+          <p>Quando houver imagens validadas, elas aparecerão aqui automaticamente. Por enquanto, consulte os estilos para gerar referências fotográficas alinhadas ao DNA Metta.</p>
           <div class="source-list" style="margin-top:24px;">
-            <a href="#/direcao-arte/arquetipos" class="action-btn action-btn-primary" style="margin-top:8px;">Ver arquétipos</a>
+            <a href="#/direcao-arte/arquetipos" class="action-btn action-btn-primary" style="margin-top:8px;">Ver estilos</a>
           </div>
         </div>
       `;
@@ -1483,7 +1483,7 @@ const BrandSystem = (() => {
             ${catOptions}
           </select>
         </label>
-        <label>Arquétipo
+        <label>Estilo
           <select id="filter-archetype">
             <option value="all" ${filterArchetype === 'all' ? 'selected' : ''}>Todos</option>
             ${archeOptions}

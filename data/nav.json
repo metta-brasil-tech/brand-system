@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-05-13T15:00:08.511Z",
+  "generatedAt": "2026-05-13T15:16:10.625Z",
   "tabs": [
     {
       "id": "overview",
@@ -2560,7 +2560,7 @@
         },
         {
           "id": "arquetipos",
-          "label": "Arquétipos",
+          "label": "Estilos",
           "source": "archetypes:photo-index"
         },
         {
@@ -5147,13 +5147,13 @@
     {
       "id": "aplicacoes",
       "icon": "layers",
-      "label": "Biblioteca",
+      "label": "Catálogo",
       "group": "negócio",
       "description": "Banco vivo de peças canônicas — referência pra criar com consistência.",
       "sections": [
         {
           "id": "biblioteca",
-          "label": "Biblioteca",
+          "label": "Catálogo",
           "source": "applications-gallery:all",
           "description": "Ads, carrosséis, slides, telas e posters classificados por tipo, brand e intenção."
         }
