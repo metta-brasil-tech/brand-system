@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T23:18:52.026Z",
+  "generatedAt": "2026-05-13T23:53:22.721Z",
   "grandTotalBytes": 285723545,
   "grandTotalFiles": 1293,
   "grandTotalTabs": 18,
@@ -3334,79 +3334,189 @@
           "id": "logos",
           "label": "Logos",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
-              "id": "todos",
-              "label": "Todos",
+              "id": "logo_metta_azul2_h",
+              "label": "Azul 2 · Horizontal",
               "files": [
                 {
                   "name": "logo_metta_azul2_h.svg",
                   "path": "assets/logos/logo_metta_azul2_h.svg",
                   "sizeBytes": 9253
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_azul2_h.svg",
+              "totalBytes": 9253,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_azul2_v",
+              "label": "Azul 2 · Vertical",
+              "files": [
                 {
                   "name": "logo_metta_azul2_v.svg",
                   "path": "assets/logos/logo_metta_azul2_v.svg",
                   "sizeBytes": 9225
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_azul2_v.svg",
+              "totalBytes": 9225,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_azul_h",
+              "label": "Azul · Horizontal",
+              "files": [
                 {
                   "name": "logo_metta_azul_h.svg",
                   "path": "assets/logos/logo_metta_azul_h.svg",
                   "sizeBytes": 9258
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_azul_h.svg",
+              "totalBytes": 9258,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_azul_v",
+              "label": "Azul · Vertical",
+              "files": [
                 {
                   "name": "logo_metta_azul_v.svg",
                   "path": "assets/logos/logo_metta_azul_v.svg",
                   "sizeBytes": 9225
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_azul_v.svg",
+              "totalBytes": 9225,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_branco_h",
+              "label": "Branco · Horizontal",
+              "files": [
                 {
                   "name": "logo_metta_branco_h.svg",
                   "path": "assets/logos/logo_metta_branco_h.svg",
                   "sizeBytes": 9258
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_branco_h.svg",
+              "totalBytes": 9258,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_branco_v",
+              "label": "Branco · Vertical",
+              "files": [
                 {
                   "name": "logo_metta_branco_v.svg",
                   "path": "assets/logos/logo_metta_branco_v.svg",
                   "sizeBytes": 9225
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_branco_v.svg",
+              "totalBytes": 9225,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_cinza_h",
+              "label": "Cinza · Horizontal",
+              "files": [
                 {
                   "name": "logo_metta_cinza_h.svg",
                   "path": "assets/logos/logo_metta_cinza_h.svg",
                   "sizeBytes": 9255
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_cinza_h.svg",
+              "totalBytes": 9255,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_cinza_v",
+              "label": "Cinza · Vertical",
+              "files": [
                 {
                   "name": "logo_metta_cinza_v.svg",
                   "path": "assets/logos/logo_metta_cinza_v.svg",
                   "sizeBytes": 9225
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_cinza_v.svg",
+              "totalBytes": 9225,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_colorido_escuro_h",
+              "label": "Colorido Escuro · Horizontal",
+              "files": [
                 {
                   "name": "logo_metta_colorido_escuro_h.svg",
                   "path": "assets/logos/logo_metta_colorido_escuro_h.svg",
                   "sizeBytes": 9253
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_colorido_escuro_h.svg",
+              "totalBytes": 9253,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_colorido_escuro_v",
+              "label": "Colorido Escuro · Vertical",
+              "files": [
                 {
                   "name": "logo_metta_colorido_escuro_v.svg",
                   "path": "assets/logos/logo_metta_colorido_escuro_v.svg",
                   "sizeBytes": 9225
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_colorido_escuro_v.svg",
+              "totalBytes": 9225,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_colorido_h",
+              "label": "Colorido · Horizontal",
+              "files": [
                 {
                   "name": "logo_metta_colorido_h.svg",
                   "path": "assets/logos/logo_metta_colorido_h.svg",
                   "sizeBytes": 9258
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_colorido_h.svg",
+              "totalBytes": 9258,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_colorido_v",
+              "label": "Colorido · Vertical",
+              "files": [
                 {
                   "name": "logo_metta_colorido_v.svg",
                   "path": "assets/logos/logo_metta_colorido_v.svg",
                   "sizeBytes": 9210
-                },
+                }
+              ],
+              "preview": "assets/logos/logo_metta_colorido_v.svg",
+              "totalBytes": 9210,
+              "fileCount": 1
+            },
+            {
+              "id": "logo_metta_tagline_colorida_h",
+              "label": "Tagline Colorida · Horizontal",
+              "files": [
                 {
                   "name": "logo_metta_tagline_colorida_h.svg",
                   "path": "assets/logos/logo_metta_tagline_colorida_h.svg",
                   "sizeBytes": 18177
                 }
               ],
-              "totalBytes": 129047,
-              "fileCount": 13
+              "preview": "assets/logos/logo_metta_tagline_colorida_h.svg",
+              "totalBytes": 18177,
+              "fileCount": 1
             }
           ],
           "totalBytes": 129047,
@@ -3416,39 +3526,77 @@
           "id": "symbols",
           "label": "Símbolos",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
-              "id": "todos",
-              "label": "Todos",
+              "id": "simbolo_metta_amarelo",
+              "label": "Amarelo",
               "files": [
                 {
                   "name": "simbolo_metta_amarelo.svg",
                   "path": "assets/symbols/simbolo_metta_amarelo.svg",
                   "sizeBytes": 2736
-                },
+                }
+              ],
+              "preview": "assets/symbols/simbolo_metta_amarelo.svg",
+              "totalBytes": 2736,
+              "fileCount": 1
+            },
+            {
+              "id": "simbolo_metta_azul",
+              "label": "Azul",
+              "files": [
                 {
                   "name": "simbolo_metta_azul.svg",
                   "path": "assets/symbols/simbolo_metta_azul.svg",
                   "sizeBytes": 2736
-                },
+                }
+              ],
+              "preview": "assets/symbols/simbolo_metta_azul.svg",
+              "totalBytes": 2736,
+              "fileCount": 1
+            },
+            {
+              "id": "simbolo_metta_azul2",
+              "label": "Azul 2",
+              "files": [
                 {
                   "name": "simbolo_metta_azul2.svg",
                   "path": "assets/symbols/simbolo_metta_azul2.svg",
                   "sizeBytes": 2737
-                },
+                }
+              ],
+              "preview": "assets/symbols/simbolo_metta_azul2.svg",
+              "totalBytes": 2737,
+              "fileCount": 1
+            },
+            {
+              "id": "simbolo_metta_branco",
+              "label": "Branco",
+              "files": [
                 {
                   "name": "simbolo_metta_branco.svg",
                   "path": "assets/symbols/simbolo_metta_branco.svg",
                   "sizeBytes": 2736
-                },
+                }
+              ],
+              "preview": "assets/symbols/simbolo_metta_branco.svg",
+              "totalBytes": 2736,
+              "fileCount": 1
+            },
+            {
+              "id": "simbolo_metta_cinza",
+              "label": "Cinza",
+              "files": [
                 {
                   "name": "simbolo_metta_cinza.svg",
                   "path": "assets/symbols/simbolo_metta_cinza.svg",
                   "sizeBytes": 2730
                 }
               ],
-              "totalBytes": 13675,
-              "fileCount": 5
+              "preview": "assets/symbols/simbolo_metta_cinza.svg",
+              "totalBytes": 2730,
+              "fileCount": 1
             }
           ],
           "totalBytes": 13675,
@@ -3458,39 +3606,77 @@
           "id": "signatures",
           "label": "Assinaturas",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
-              "id": "todos",
-              "label": "Todos",
+              "id": "assinatura_metta_amarelo",
+              "label": "Amarelo",
               "files": [
                 {
                   "name": "assinatura_metta_amarelo.svg",
                   "path": "assets/signatures/assinatura_metta_amarelo.svg",
                   "sizeBytes": 6560
-                },
+                }
+              ],
+              "preview": "assets/signatures/assinatura_metta_amarelo.svg",
+              "totalBytes": 6560,
+              "fileCount": 1
+            },
+            {
+              "id": "assinatura_metta_azul",
+              "label": "Azul",
+              "files": [
                 {
                   "name": "assinatura_metta_azul.svg",
                   "path": "assets/signatures/assinatura_metta_azul.svg",
                   "sizeBytes": 6560
-                },
+                }
+              ],
+              "preview": "assets/signatures/assinatura_metta_azul.svg",
+              "totalBytes": 6560,
+              "fileCount": 1
+            },
+            {
+              "id": "assinatura_metta_azul2",
+              "label": "Azul 2",
+              "files": [
                 {
                   "name": "assinatura_metta_azul2.svg",
                   "path": "assets/signatures/assinatura_metta_azul2.svg",
                   "sizeBytes": 6560
-                },
+                }
+              ],
+              "preview": "assets/signatures/assinatura_metta_azul2.svg",
+              "totalBytes": 6560,
+              "fileCount": 1
+            },
+            {
+              "id": "assinatura_metta_branco",
+              "label": "Branco",
+              "files": [
                 {
                   "name": "assinatura_metta_branco.svg",
                   "path": "assets/signatures/assinatura_metta_branco.svg",
                   "sizeBytes": 6560
-                },
+                }
+              ],
+              "preview": "assets/signatures/assinatura_metta_branco.svg",
+              "totalBytes": 6560,
+              "fileCount": 1
+            },
+            {
+              "id": "assinatura_metta_cinza",
+              "label": "Cinza",
+              "files": [
                 {
                   "name": "assinatura_metta_cinza.svg",
                   "path": "assets/signatures/assinatura_metta_cinza.svg",
                   "sizeBytes": 6560
                 }
               ],
-              "totalBytes": 32800,
-              "fileCount": 5
+              "preview": "assets/signatures/assinatura_metta_cinza.svg",
+              "totalBytes": 6560,
+              "fileCount": 1
             }
           ],
           "totalBytes": 32800,

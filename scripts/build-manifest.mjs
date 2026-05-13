@@ -142,6 +142,52 @@ async function buildAssetTabFlat(opts) {
   };
 }
 
+// Cada arquivo = 1 section selecionável (com preview visual no modal)
+async function buildAssetTabPerFile(opts) {
+  const { id, label, dir, labelFn } = opts;
+  const files = await walkFiles(dir);
+  if (files.length === 0) return null;
+  const sections = files.map(f => ({
+    id: f.name.replace(/\.[^.]+$/, ''),
+    label: labelFn ? labelFn(f.name) : f.name,
+    files: [f],
+    preview: f.path,
+    totalBytes: f.sizeBytes,
+    fileCount: 1
+  }));
+  return {
+    id, label, kind: 'assets', displayMode: 'gallery',
+    sections,
+    totalBytes: sumSize(files),
+    fileCount: files.length
+  };
+}
+
+// Label humano a partir do nome do arquivo, por padrão de família
+function logoLabel(filename) {
+  // logo_metta_colorido_escuro_h.svg → "Colorido escuro · Horizontal"
+  const base = filename.replace(/^logo_metta_/, '').replace(/\.[^.]+$/, '');
+  const parts = base.split('_');
+  const last = parts[parts.length - 1];
+  let orient = '';
+  if (last === 'h' || last === 'v') {
+    orient = last === 'h' ? ' · Horizontal' : ' · Vertical';
+    parts.pop();
+  }
+  const color = parts.join(' ')
+    .replace(/([a-zà-ÿ])(\d)/g, '$1 $2') // azul2 → azul 2
+    .replace(/(^|\s)([a-zà-ÿ])/g, (_, s, c) => s + c.toUpperCase());
+  return color + orient;
+}
+function symbolLabel(filename) {
+  const base = filename.replace(/^simbolo_metta_/, '').replace(/\.[^.]+$/, '');
+  return base.charAt(0).toUpperCase() + base.slice(1).replace(/(\d)/, ' $1');
+}
+function signatureLabel(filename) {
+  const base = filename.replace(/^assinatura_metta_/, '').replace(/\.[^.]+$/, '');
+  return base.charAt(0).toUpperCase() + base.slice(1).replace(/(\d)/, ' $1');
+}
+
 async function buildGroup(id, label, tabSpecs) {
   const tabs = [];
   for (const t of tabSpecs) {
@@ -199,14 +245,17 @@ async function main() {
 
   log.group('Grupo: Identidade Visual');
   const dsGroup = await buildGroup('identidade-visual', 'Identidade Visual', [
-    { id: 'logos', builder: () => buildAssetTabFlat({
-      id: 'logos', label: 'Logos', dir: join(ASSETS_DIR, 'logos')
+    { id: 'logos', builder: () => buildAssetTabPerFile({
+      id: 'logos', label: 'Logos', dir: join(ASSETS_DIR, 'logos'),
+      labelFn: logoLabel
     })},
-    { id: 'symbols', builder: () => buildAssetTabFlat({
-      id: 'symbols', label: 'Símbolos', dir: join(ASSETS_DIR, 'symbols')
+    { id: 'symbols', builder: () => buildAssetTabPerFile({
+      id: 'symbols', label: 'Símbolos', dir: join(ASSETS_DIR, 'symbols'),
+      labelFn: symbolLabel
     })},
-    { id: 'signatures', builder: () => buildAssetTabFlat({
-      id: 'signatures', label: 'Assinaturas', dir: join(ASSETS_DIR, 'signatures')
+    { id: 'signatures', builder: () => buildAssetTabPerFile({
+      id: 'signatures', label: 'Assinaturas', dir: join(ASSETS_DIR, 'signatures'),
+      labelFn: signatureLabel
     })},
     { id: 'icons', builder: () => buildAssetTabFromSubfolders({
       id: 'icons', label: 'Ícones', dir: join(ASSETS_DIR, 'icons')

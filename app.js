@@ -1999,10 +1999,28 @@ const BrandSystem = (() => {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
           </div>
-          <div class="dlm-tab-body">
+          <div class="dlm-tab-body" data-display="${tab.displayMode || 'list'}">
             ${tab.sections.map(sec => {
               const checked = isSectionSelected(tab.id, sec.id);
               const secState = checked ? 'checked' : 'unchecked';
+              if (tab.displayMode === 'gallery' && sec.preview) {
+                return `
+                  <div class="dlm-tile" data-section="${sec.id}" data-action="toggle-section" data-selected="${checked}">
+                    <div class="dlm-tile-preview">
+                      <img src="${sec.preview}" alt="${sec.label}" loading="lazy">
+                    </div>
+                    <div class="dlm-tile-foot">
+                      <div class="dlm-checkbox" data-state="${secState}" role="checkbox" aria-checked="${checked}">
+                        ${checkboxSvg()}
+                      </div>
+                      <div class="dlm-tile-info">
+                        <div class="dlm-tile-label">${sec.label}</div>
+                        <div class="dlm-tile-size">${formatBytes(sec.totalBytes)}</div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }
               return `
                 <div class="dlm-section" data-section="${sec.id}" data-action="toggle-section">
                   <div class="dlm-checkbox" data-state="${secState}" role="checkbox" aria-checked="${checked}">
@@ -2313,8 +2331,8 @@ const BrandSystem = (() => {
           toggleTab(tabId);
           return;
         }
-        // Click na seção (linha ou checkbox)
-        const sectionRow = e.target.closest('.dlm-section');
+        // Click na seção (linha ou tile da gallery)
+        const sectionRow = e.target.closest('.dlm-section, .dlm-tile');
         if (sectionRow) {
           e.stopPropagation();
           toggleSection(tabId, sectionRow.dataset.section);
