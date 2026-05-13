@@ -1,7 +1,7 @@
 <h1 id="tipografia">Tipografia</h1>
 <p>A Metta opera com <strong>uma única família tipográfica — SF Pro Variable</strong> — em múltiplas variações de peso e largura. Sem mistura com outras famílias, sem decoração desnecessária, sem fontes alternativas em peças oficiais. A SF Pro Variable tem dois eixos: o eixo de <strong>peso</strong> (<code>weight</code>) e o eixo de <strong>largura</strong> (<code>wdth</code>). É esse segundo eixo que divide a fonte em dois grupos visualmente distintos — Expanded e Regular — e que dá à comunicação Metta a assinatura tipográfica reconhecível.</p>
 <blockquote>
-<p><strong>Fallbacks oficiais por eixo de largura.</strong> A primária é sempre SF Pro Variable — em duas formas: <strong>SF Pro Expanded</strong> (wdth 132%) pra títulos, H1, display, CTAs e labels UPPERCASE; <strong>SF Pro Regular</strong> (wdth 100%) pra body, subtítulos, parágrafos longos e captions. Quando a plataforma não suporta SF Pro (PPTX, Google Slides, Canva, alguns browsers sem <code>@font-face</code>), o fallback é em pares: <strong>Zalando Sans Expanded</strong> assume o eixo Expanded, <strong>Inter</strong> assume o eixo Regular. Detalhes operacionais na seção <a href="#fallbacks--zalando-sans-expanded--inter">Fallbacks · Zalando Sans Expanded + Inter</a> abaixo.</p>
+<p><strong>Fallback oficial — Zalando Sans Expanded.</strong> SF Pro é proprietária da Apple e não pode ser distribuída em arquivos <code>.pptx</code> ou usada nativamente em Google Slides. Pra essas plataformas, a Metta adotou em <strong>2026-05-12</strong> a <strong>Zalando Sans Expanded</strong> (variable font OFL no Google Fonts) como fonte oficial de fallback — visualmente quase idêntica a SF Pro Expanded, com os mesmos eixos de peso e largura. Detalhes operacionais na seção <a href="#fallback-zalando-sans-expanded">Fallback Zalando Sans Expanded</a> abaixo.</p>
 </blockquote>
 <h2 id="os-dois-grupos">Os dois grupos</h2>
 <p>A escolha entre Expanded e Regular não é estética casual. Cada grupo tem função editorial específica.</p>
@@ -120,7 +120,7 @@
 
 <h2 id="type-roles-editoriais">Type roles editoriais</h2>
 <p>As 11 variações primitivas viram <strong>funções editoriais</strong> quando aplicadas em peças. Cada role combina variação + tamanho + line-height + tracking. É essa camada que a maior parte das pessoas vai consultar — quem desenha peça nova escolhe um role, não escolhe peso bruto.</p>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr>
 <th>Role</th>
@@ -131,8 +131,7 @@
 <th>Onde usar</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>Display Hero</strong></td>
 <td>Expanded Heavy</td>
 <td>110–130px</td>
@@ -204,8 +203,7 @@
 <td>0.10em (uppercase)</td>
 <td>Legenda, metadado, fine print</td>
 </tr>
-</tbody>
-</table>
+</tbody></table></div>
 <h2 id="hierarquia-visual-em-peca">Hierarquia visual em peça</h2>
 <p>A hierarquia tipográfica resolve a maioria dos problemas de design. Antes de adicionar elemento decorativo, pergunte se mudar o role já entrega o efeito.</p>
 <h3 id="regra-das-tres-variacoes">Regra das três variações</h3>
@@ -216,7 +214,7 @@
 <li>1 Kicker (tag/label de section)</li>
 </ul>
 <h3 id="mixed-weight-combinacao-expanded-regular">Mixed-weight (combinação Expanded + Regular)</h3>
-<p>Em headlines com 2+ linhas, é comum combinar <strong>Expanded Heavy</strong> (palavra-chave) com <strong>Expanded Regular</strong> ou <strong>Regular Semibold</strong> (palavras-conector). Cria ênfase sem precisar de cor ou underline. Exemplo: <em>"</em><em>Demita</em><em> o achismo, </em><em>bata</em><em> a meta."</em></p>
+<p>Em headlines com 2+ linhas, é comum combinar <strong>Expanded Heavy</strong> (palavra-chave) com <strong>Expanded Regular</strong> ou <strong>Regular Semibold</strong> (palavras-conector). Cria ênfase sem precisar de cor ou underline. Exemplo: <em>&quot;<strong>Demita</strong> o achismo, <strong>bata</strong> a meta.&quot;</em></p>
 <h3 id="tracking-letter-spacing">Tracking (letter-spacing)</h3>
 <ul>
 <li><strong>Display e Title</strong> sempre com tracking negativo (-0.02em a -0.01em). Letras grandes parecem soltas demais com tracking neutro.</li>
@@ -233,7 +231,7 @@
 <p>Texto corrido em peças editoriais respeita <strong>60 caracteres por linha</strong> (cerca de 760px no padrão prose). Acima disso, o olho perde o início da próxima linha. Em peças de UI (cards, sidebars), pode operar em larguras menores — 40 a 50ch.</p>
 <h2 id="regras-inviolaveis">Regras invioláveis</h2>
 <ul>
-<li><strong>Sempre SF Pro</strong> em peças renderizadas pelo designer (HTML, Figma, PDFs com fonte embedada). Em PPTX e Google Slides, usar os fallbacks oficiais em pares: <strong>Zalando Sans Expanded</strong> pra títulos/CTAs (eixo Expanded) e <strong>Inter</strong> pra body/subtítulos (eixo Regular). Ver seção <a href="#fallbacks--zalando-sans-expanded--inter">Fallbacks · Zalando Sans Expanded + Inter</a>. Nunca misturar com outras famílias em peças oficiais.</li>
+<li><strong>Sempre SF Pro</strong> em peças renderizadas pelo designer (HTML, Figma, PDFs com fonte embedada). Em PPTX e Google Slides, usar <strong>Zalando Sans Expanded</strong> — fallback oficial (ver seção abaixo). Nunca misturar com outras famílias em peças oficiais.</li>
 <li><strong>Display em maiúsculas</strong> com tracking negativo.</li>
 <li><strong>Body em caixa mista</strong> com leading aberto.</li>
 <li><strong>Kicker em maiúsculas</strong> com tracking aberto.</li>
@@ -241,128 +239,98 @@
 <li><strong>Itálico só</strong> para citação literal ou ênfase narrativa em peça longa.</li>
 <li><strong>Underline reservado</strong> para hyperlinks. Nunca para ênfase visual.</li>
 </ul>
-<h2 id="fallbacks-zalando-sans-expanded-inter">Fallbacks · Zalando Sans Expanded + Inter</h2>
-<p>A SF Pro é a tipografia primária — usada em todos os entregáveis renderizados pelo time de design (HTML standalone, Figma, PDFs com fonte embedada, ads, LPs). Existe um contexto em que ela não pode ser usada: <strong>apresentações editadas por não-designers em PowerPoint, Google Slides e Canva</strong>. A licença da Apple não permite redistribuição da SF Pro em PPTX, e o Google Slides ignora fontes embedadas — qualquer tentativa de "usar SF Pro mesmo assim" resulta em fallback automático pra Calibri ou Arial.</p>
-<p>A solução oficial adotada pela Metta em <strong>2026-05-13</strong> é um par de fontes secundárias open source, cada uma cobrindo um eixo de largura do DS:</p>
+<h2 id="fallback-zalando-sans-expanded">Fallback Zalando Sans Expanded</h2>
+<p>A SF Pro é a tipografia primária — usada em todos os entregáveis renderizados pelo time de design (HTML standalone, Figma, PDFs com fonte embedada, ads, LPs). Mas existe um contexto em que ela não pode ser usada: <strong>apresentações editadas por não-designers em PowerPoint, Google Slides e Canva</strong>. A licença da Apple não permite redistribuição da SF Pro em PPTX, e o Google Slides ignora fontes embedadas — qualquer tentativa de &quot;usar SF Pro mesmo assim&quot; resulta em fallback automático pra Calibri ou Arial.</p>
+<p>A solução adotada em <strong>2026-05-12</strong> é uma fonte secundária oficial: <strong>Zalando Sans Expanded</strong> — variable font open source (SIL Open Font License 1.1) disponível no Google Fonts. Geometricamente quase idêntica a SF Pro Expanded, com os mesmos três eixos (peso, largura, slant), cobrindo o mesmo range que o DS Metta usa (270 → 870 em peso, 100% → 132% em largura).</p>
 <div class="family-grid">
-  <div class="family-card" style="font-stretch:132%">
-    <div class="family-tag">Fallback do eixo Expanded</div>
-    <div class="family-display" style="font-weight:870">Zalando Sans Expanded</div>
-    <code class="family-meta">SIL OFL · Google Fonts</code>
-    <p><strong>Substitui:</strong> SF Pro Expanded (wdth 132%). <strong>Cobre:</strong> títulos, H1, display, CTAs pill, labels UPPERCASE tracked, watermarks tipográficos. Variable font com 3 eixos (peso, largura, slant) — visualmente quase idêntica a SF Pro Expanded.</p>
+  <div class="family-card">
+    <div class="family-tag">Primária · renderizada</div>
+    <div class="family-display" style="font-weight:870;font-stretch:132%">SF Pro Variable</div>
+    <code class="family-meta">licença Apple · proprietária</code>
+    <p><strong>Onde usar:</strong> HTML standalone, Figma, PDFs com fonte embedada, ads e LPs que o designer entrega prontos. Peças onde o time controla a renderização ponta a ponta.</p>
   </div>
   <div class="family-card">
-    <div class="family-tag">Fallback do eixo Regular</div>
-    <div class="family-display" style="font-weight:700;font-family:Inter,sans-serif">Inter</div>
+    <div class="family-tag">Fallback · edição colaborativa</div>
+    <div class="family-display" style="font-weight:870">Zalando Sans Expanded</div>
     <code class="family-meta">SIL OFL · Google Fonts</code>
-    <p><strong>Substitui:</strong> SF Pro Regular (wdth 100%). <strong>Cobre:</strong> body, subtítulos, parágrafos longos, captions, descrições, texto corrido. Variable font otimizada pra leitura em tela, com x-height grande e curvas neutras.</p>
+    <p><strong>Onde usar:</strong> qualquer arquivo `.pptx`, Google Slides, Canva, Pitch — plataforma onde não-designer do time edita conteúdo. Carrega nativamente do Google Fonts, sem instalação local necessária.</p>
   </div>
 </div>
 
-<blockquote>
-<p><strong>Regra de ouro:</strong> Inter NUNCA aparece em headline/display. A bandeira da hierarquia visual Metta — letra expandida carregando autoridade — só sobrevive com Zalando Sans Expanded no eixo Expanded. Inter em H1 quebra a personalidade. Os dois fallbacks coexistem; cada um no seu papel.</p>
-</blockquote>
-<h3 id="mapeamento-direto-11-variacoes-em-pares">Mapeamento direto · 11 variações em pares</h3>
-<p>Toda variação nomeada do DS tem equivalente exato em um dos dois fallbacks. O mapeamento é puro — sem perda de hierarquia, sem ajuste de tamanho, sem necessidade de redesenhar a peça quando o destino muda.</p>
-<p><strong>Eixo Expanded — fallback Zalando Sans Expanded:</strong></p>
-<table>
+<h3 id="mapeamento-direto-11-variacoes-11">Mapeamento direto · 11 variações 1:1</h3>
+<p>Toda variação nomeada do DS tem equivalente exato em Zalando Sans Expanded. O mapeamento é puro — sem perda de hierarquia, sem ajuste de tamanho, sem necessidade de redesenhar a peça quando o destino muda.</p>
+<div class="table-wrap"><table>
 <thead>
 <tr>
 <th>Variação SF Pro</th>
 <th>Equivalente Zalando Sans Expanded</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Expanded Heavy 870</td>
-<td><code>wght: 870</code></td>
+<td><code>wght: 870, wdth: 132</code></td>
 </tr>
 <tr>
 <td>Expanded Bold 700</td>
-<td><code>wght: 700</code></td>
+<td><code>wght: 700, wdth: 132</code></td>
 </tr>
 <tr>
 <td>Expanded Semibold 650</td>
-<td><code>wght: 650</code></td>
+<td><code>wght: 650, wdth: 132</code></td>
 </tr>
 <tr>
 <td>Expanded Medium 540</td>
-<td><code>wght: 540</code></td>
+<td><code>wght: 540, wdth: 132</code></td>
 </tr>
 <tr>
 <td>Expanded Regular 410</td>
-<td><code>wght: 410</code></td>
+<td><code>wght: 410, wdth: 132</code></td>
 </tr>
 <tr>
 <td>Expanded Light 270</td>
-<td><code>wght: 270</code></td>
+<td><code>wght: 270, wdth: 132</code></td>
 </tr>
-</tbody>
-</table>
-<p><strong>Eixo Regular — fallback Inter:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Variação SF Pro</th>
-<th>Equivalente Inter</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>Regular Semibold 650</td>
-<td><code>wght: 600</code></td>
+<td><code>wght: 650, wdth: 100</code></td>
 </tr>
 <tr>
 <td>Regular Medium+ 590</td>
-<td><code>wght: 600</code></td>
+<td><code>wght: 590, wdth: 100</code></td>
 </tr>
 <tr>
 <td>Regular Medium 510</td>
-<td><code>wght: 500</code></td>
+<td><code>wght: 510, wdth: 100</code></td>
 </tr>
 <tr>
 <td>Regular Book 400</td>
-<td><code>wght: 400</code></td>
+<td><code>wght: 400, wdth: 100</code></td>
 </tr>
 <tr>
 <td>Regular Light 270</td>
-<td><code>wght: 300</code></td>
+<td><code>wght: 270, wdth: 100</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table></div>
 <h3 id="como-aplicar">Como aplicar</h3>
-<p><strong>Em CSS (HTML/web) — dois stacks distintos por eixo:</strong></p>
-<pre><code class="language-css">@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:wght@200..900&amp;family=Inter:wght@100..900&amp;display=swap');
+<p><strong>Em CSS (HTML/web):</strong></p>
+<pre><code class="language-css">@import url(&#39;https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&amp;display=swap&#39;);
 
-/* Body global / texto regular */
 body {
-  font-family: 'SF Pro', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-stretch: 100%;
-}
-
-/* Headlines, display, CTAs, labels UPPERCASE — eixo Expanded */
-h1, h2, .t-display, .cta-pill, .t-label {
-  font-family: 'SF Pro', 'Zalando Sans Expanded', sans-serif;
-  font-stretch: 132%;
+  font-family: &#39;SF Pro&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 </code></pre>
-<blockquote>
-<p><strong>Por que dois stacks?</strong> Se você colocar <code>'SF Pro', 'Zalando Sans Expanded'</code> no <code>body</code> global, todo o texto (incluindo parágrafos longos) vira expandido quando SF Pro não carrega. O resultado quebra a leitura. Stacks separados por eixo garantem que cada elemento cai pro fallback certo.</p>
-</blockquote>
 <p><strong>Em Google Slides:</strong></p>
 <ol>
-<li><strong>Pra títulos, H1, CTAs, labels:</strong> selecionar texto → dropdown de fonte → buscar <strong>Zalando Sans Expanded</strong></li>
-<li><strong>Pra body, subtítulos, parágrafos:</strong> dropdown de fonte → buscar <strong>Inter</strong> (já está no catálogo nativo do Google Slides há anos)</li>
-<li>Se Zalando Sans Expanded não aparecer, clicar em <strong>More fonts</strong> (Mais fontes) → buscar "Zalando Sans Expanded" → adicionar ao catálogo</li>
+<li>Selecionar texto → dropdown de fonte → buscar <strong>Zalando Sans Expanded</strong></li>
+<li>Se não aparecer, clicar em <strong>More fonts</strong> (Mais fontes) → buscar &quot;Zalando Sans Expanded&quot; → adicionar ao catálogo</li>
+<li>A partir daí fica disponível em qualquer projeto da conta Google</li>
 </ol>
 <p><strong>Em PowerPoint:</strong></p>
 <ol>
-<li>Instalar as duas fontes uma vez do Google Fonts:
-   - <a href="https://fonts.google.com/specimen/Zalando+Sans+Expanded">Zalando Sans Expanded</a>
-   - <a href="https://fonts.google.com/specimen/Inter">Inter</a></li>
-<li>Em todo <code>.pptx</code> distribuído pra clientes/parceiros, marcar <strong>File → Options → Save → Embed fonts in the file</strong> pra garantir consistência em quem não tem as fontes instaladas</li>
+<li>Instalar a fonte uma vez do Google Fonts: <a href="https://fonts.google.com/specimen/Zalando+Sans+Expanded">fonts.google.com/specimen/Zalando+Sans+Expanded</a></li>
+<li>Em todo <code>.pptx</code> distribuído pra clientes/parceiros, marcar <strong>File → Options → Save → Embed fonts in the file</strong> pra garantir consistência em quem não tem a fonte instalada</li>
 </ol>
 <h3 id="fontes-proibidas-como-fallback">Fontes proibidas como fallback</h3>
-<p>Apenas <strong>SF Pro Variable</strong> (primária) e os dois fallbacks oficiais — <strong>Zalando Sans Expanded</strong> (eixo Expanded) e <strong>Inter</strong> (eixo Regular) — são aceitas. Roboto Flex foi o fallback único até 2026-05-12, depois Zalando Sans Expanded virou o substituto universal — em 2026-05-13 a lógica foi corrigida pra par Expanded/Regular. <strong>Arial, Helvetica, Open Sans, Roboto, Roboto Flex</strong> seguem proibidas. Inter em headline/display <strong>também é proibida</strong> — Inter só pode aparecer em role de body/Regular.</p>
+<p>Apenas <strong>SF Pro Variable</strong> (primária) e <strong>Zalando Sans Expanded</strong> (fallback) são aceitas. Roboto Flex foi o fallback até 2026-05-12 — agora está deprecated. <strong>Inter, Arial, Helvetica, Open Sans</strong> seguem proibidas em peças oficiais.</p>
 <h2 id="para-implementacao-tecnica">Para implementação técnica</h2>
 <p>Tokens de tipografia como CSS variables, especificação Figma styles, snippets de código e mapeamento Plugin API ficam no <strong>catálogo técnico do Design System</strong>. Esta página cobre a camada institucional — as decisões editoriais que governam o uso. Para a referência exaustiva (todas as font-feature-settings, fallbacks, tokens mobile vs desktop), consulte o catálogo.</p>

@@ -1,0 +1,181 @@
+/* ============================================================
+   LEGAL PAGES (LGPD) — Política de Privacidade + Termos de Uso
+============================================================ */
+
+body.legal-page {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--metta-sys-color-background);
+  font-family: 'SF Pro Expanded', 'Zalando Sans Expanded', 'Inter', sans-serif;
+  color: var(--metta-sys-color-on-surface);
+}
+
+.legal-topbar {
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--metta-sys-color-surface);
+}
+
+.legal-topbar .brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+.legal-topbar .brand-mark svg {
+  width: 26px;
+  height: 24px;
+  color: var(--metta-sys-color-on-surface);
+}
+.legal-topbar .brand-mark-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.legal-topbar a.back-link {
+  font-size: 13px;
+  color: var(--metta-sys-color-on-surface-variant);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--metta-sys-shape-corner-full);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  transition: all 0.15s ease;
+}
+.legal-topbar a.back-link:hover {
+  color: var(--metta-sys-color-on-surface);
+  border-color: var(--metta-sys-color-on-surface-variant);
+}
+
+.legal-shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+
+.legal-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-bottom: 16px;
+}
+
+.legal-shell h1 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.legal-shell .legal-meta {
+  font-size: 13px;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0 0 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+}
+
+.legal-shell h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 48px 0 16px;
+  color: var(--metta-sys-color-on-surface);
+}
+
+.legal-shell h3 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 24px 0 10px;
+  color: var(--metta-sys-color-on-surface);
+}
+
+.legal-shell p,
+.legal-shell li {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--metta-sys-color-on-surface);
+  letter-spacing: -0.005em;
+}
+
+.legal-shell ul {
+  margin: 0 0 16px;
+  padding-left: 22px;
+}
+.legal-shell ul li {
+  margin-bottom: 6px;
+}
+
+.legal-shell .legal-callout {
+  margin: 32px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255, 213, 79, 0.08);
+  border: 1px solid rgba(255, 213, 79, 0.3);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.legal-shell .legal-callout strong { color: var(--metta-sys-color-on-surface); }
+
+.legal-toc {
+  margin: 32px 0 48px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background: var(--metta-sys-color-surface-container);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+.legal-toc-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-bottom: 12px;
+}
+.legal-toc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: toc;
+}
+.legal-toc ol li {
+  counter-increment: toc;
+  font-size: 14px;
+  padding: 4px 0;
+}
+.legal-toc ol li::before {
+  content: counter(toc, decimal-leading-zero) ".  ";
+  color: var(--metta-sys-color-on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+.legal-toc ol li a {
+  color: var(--metta-sys-color-on-surface);
+  text-decoration: none;
+}
+.legal-toc ol li a:hover { text-decoration: underline; }
+
+.legal-footer {
+  padding: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface-variant);
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+}
+.legal-footer a {
+  color: inherit;
+  text-decoration: none;
+  margin: 0 8px;
+}
+.legal-footer a:hover { color: var(--metta-sys-color-on-surface); }

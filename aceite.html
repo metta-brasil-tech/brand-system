@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Primeiro acesso — Metta Brand System</title>
+
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/shell.css">
+
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background: var(--metta-sys-color-background);
+    font-family: 'SF Pro Expanded', 'Zalando Sans Expanded', 'Inter', sans-serif;
+    color: var(--metta-sys-color-on-surface);
+  }
+
+  .accept-card {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .accept-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--metta-sys-color-on-surface-variant);
+    margin-bottom: 16px;
+  }
+
+  .accept-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 16px;
+  }
+
+  .accept-sub {
+    font-size: 15px;
+    color: var(--metta-sys-color-on-surface-variant);
+    margin: 0 0 32px;
+    line-height: 1.6;
+  }
+
+  .accept-box {
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--metta-sys-color-surface-container);
+    border: 1px solid var(--metta-sys-color-outline-variant);
+    margin-bottom: 24px;
+  }
+
+  .accept-checkbox {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+    user-select: none;
+  }
+  .accept-checkbox input {
+    margin: 2px 0 0;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--metta-sys-color-primary, #111);
+    cursor: pointer;
+  }
+  .accept-checkbox span {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--metta-sys-color-on-surface);
+  }
+  .accept-checkbox a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .accept-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    flex: 1;
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--metta-sys-color-on-surface);
+    color: var(--metta-sys-color-surface);
+    border: 1px solid var(--metta-sys-color-on-surface);
+  }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-primary:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--metta-sys-color-on-surface);
+    border: 1px solid var(--metta-sys-color-outline);
+  }
+  .btn-ghost:hover { background: var(--metta-sys-color-surface-container); }
+</style>
+</head>
+<body>
+
+<main class="accept-card">
+  <div class="accept-eyebrow">Primeiro acesso</div>
+  <h1 class="accept-title">Antes de começar.</h1>
+  <p class="accept-sub">Pra usar o Brand System, precisamos do seu aceite à nossa Política de Privacidade e Termos de Uso. Leva 1min.</p>
+
+  <div class="accept-box">
+    <label class="accept-checkbox">
+      <input type="checkbox" id="chk-aceite">
+      <span>Li e aceito a <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e os <a href="/termos.html" target="_blank">Termos de Uso</a> do Metta Brand System.</span>
+    </label>
+  </div>
+
+  <div class="accept-actions">
+    <button type="button" class="btn-ghost" id="btn-sair">Sair</button>
+    <button type="button" class="btn-primary" id="btn-continuar" disabled>Continuar</button>
+  </div>
+</main>
+
+<script>
+  const savedTheme = localStorage.getItem('brand-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  // Bloqueia se não estiver logado
+  const mockUser = JSON.parse(localStorage.getItem('mock-user') || 'null');
+  if (!mockUser) { location.href = '/login.html'; }
+
+  const chk = document.getElementById('chk-aceite');
+  const btnContinuar = document.getElementById('btn-continuar');
+  chk.addEventListener('change', () => {
+    btnContinuar.disabled = !chk.checked;
+  });
+
+  btnContinuar.addEventListener('click', () => {
+    const now = new Date().toISOString();
+    mockUser.acceptedLgpdAt = now;
+    localStorage.setItem('mock-user', JSON.stringify(mockUser));
+    localStorage.setItem('mock-lgpd-accepted-at', now);
+    location.href = '/';
+  });
+
+  document.getElementById('btn-sair').addEventListener('click', () => {
+    localStorage.removeItem('mock-user');
+    location.href = '/login.html';
+  });
+</script>
+
+</body>
+</html>

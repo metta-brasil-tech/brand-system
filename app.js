@@ -1669,6 +1669,68 @@ const BrandSystem = (() => {
   let searchLoading = null;
   let searchSelected = 0;
   let searchResults = [];
+  let searchMode = 'keyword'; // 'keyword' | 'ask'
+
+  // Mock de respostas pra modo "Perguntar" (v2 preview, sem backend real)
+  const ASK_MOCK_ANSWERS = [
+    {
+      keywords: ['icp', 'cliente', 'publico', 'alvo', 'quem', 'empresario'],
+      title: 'Quem é o ICP da Metta',
+      body: `O ICP estratégico da Metta é o <strong>empresário com faturamento mensal a partir de R$200 mil</strong>, líder operacional do próprio negócio (sócio-fundador ou gestor com autonomia decisória), que sente que o crescimento da empresa depende excessivamente da presença dele no dia a dia. Não é gerente, diretor ou coordenador — é o dono que decide, instala e executa a virada.<br><br>Ele tipicamente está em setores de serviço, varejo especializado ou distribuição, e busca métodos que destrabem capacidade do time pra ele sair do operacional sem perder controle.`,
+      citations: [
+        { label: 'ICP Estratégico Mentoria', hash: '#/audiencia/icp' },
+        { label: 'Classificação MQL', hash: '#/audiencia/mql' },
+        { label: 'Manifesto de Marca', hash: '#/marca/manifesto' }
+      ]
+    },
+    {
+      keywords: ['tom', 'voz', 'verbal', 'fala', 'comunic', 'identidade'],
+      title: 'Qual é o tom de voz da Metta',
+      body: `A Metta fala com <strong>arquitetura cognitiva</strong> — voz conselheira, direta, técnica sem ser fria. Não é caça-cliente, não usa gatilhos vazios, não acusa o empresário (ele é a solução, não o problema).<br><br>Ritmo: frases curtas pra ancorar ideias, frases longas pra desdobrar raciocínio. CTA sempre no final, único, sem multiplicar chamadas. Em português direto: "evitar termos em inglês quando há equivalente direto".`,
+      citations: [
+        { label: 'Identidade Verbal', hash: '#/verbal/identidade-verbal' },
+        { label: 'Fundamentos de Copy Persuasivo', hash: '#/verbal/identidade-verbal' }
+      ]
+    },
+    {
+      keywords: ['gest', '6 gest', 'seis gest', 'metodo', 'metodologia'],
+      title: 'Como funcionam as 6 Gestões da Meta Batida',
+      body: `As 6 Gestões são o framework operacional da Metta pra um time bater meta de forma previsível e sem depender do dono. São: <strong>Gestão da Meta, Gestão do Tempo, Gestão do Método, Gestão da Ativação, Gestão do Conhecimento e Gestão da Mudança</strong>.<br><br>Cada uma resolve uma alavanca específica do crescimento — a Meta define o destino, o Tempo cria espaço, o Método padroniza execução, a Ativação engaja o time, o Conhecimento garante competência e a Mudança sustenta a virada.`,
+      citations: [
+        { label: 'As 6 Gestões da Meta Batida', hash: '#/metodologia/seis-gestoes' },
+        { label: 'Gestão da Meta', hash: '#/metodologia/gestao-meta' },
+        { label: 'Gestão do Método', hash: '#/metodologia/gestao-metodo' }
+      ]
+    },
+    {
+      keywords: ['smtm', 'oferta', 'produto', 'mentoria', 'plano', 'preço'],
+      title: 'O que é o programa SMTM',
+      body: `SMTM é o programa principal da Metta — uma <strong>aceleração para empresários</strong> que combina mentoria estratégica, instalação de método e acompanhamento de execução. A oferta consolidada tem três planos com profundidades diferentes de imersão.<br><br>O posicionamento é "programa de aceleração" (não curso, não consultoria pontual) — implica resultado e compromisso de transformação no negócio do mentorado.`,
+      citations: [
+        { label: 'SMTM Oferta Consolidada', hash: '#/produtos/smtm-mentoria' },
+        { label: 'Consultoria B2B', hash: '#/produtos/consultoria' }
+      ]
+    },
+    {
+      keywords: ['cor', 'paleta', 'visual', 'token', 'tipografia', 'fonte', 'design system'],
+      title: 'Quais as cores e tipografia oficiais da Metta',
+      body: `A paleta primária é construída em torno do <strong>amarelo característico</strong> da marca, com neutros escuros (preto-azulado) e variações claras pra superfícies. Todos os tokens estão tier 3-camadas (ref/sys/comp) no Design System técnico.<br><br>Tipografia: <strong>SF Pro Expanded</strong> como família principal (web), com <strong>Zalando Sans Expanded</strong> como fallback OFL em PPTX/Canva/Google Slides — geometricamente equivalente.`,
+      citations: [
+        { label: 'Tokens DS', hash: '#/visual/tokens' },
+        { label: 'Tipografia', hash: '#/visual/ds-tipografia' },
+        { label: 'Manual de Marca', hash: '#/visual/manual-marca' }
+      ]
+    }
+  ];
+
+  function findMockAnswer(query) {
+    const norm = normalizeForSearch(query);
+    for (const answer of ASK_MOCK_ANSWERS) {
+      const matchCount = answer.keywords.filter(k => norm.includes(k)).length;
+      if (matchCount >= 1) return answer;
+    }
+    return null;
+  }
 
   function normalizeForSearch(s) {
     return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -1742,6 +1804,8 @@ const BrandSystem = (() => {
   }
 
   function renderSearchResults(query) {
+    if (searchMode === 'ask') return renderAskResults(query);
+
     const list = document.getElementById('search-results');
     const empty = document.getElementById('search-empty');
     if (!list) return;
@@ -1783,6 +1847,75 @@ const BrandSystem = (() => {
     });
   }
 
+  function renderAskResults(query) {
+    const list = document.getElementById('search-results');
+    const empty = document.getElementById('search-empty');
+    if (!list) return;
+    list.innerHTML = '';
+    if (!query.trim()) {
+      if (empty) {
+        empty.style.display = 'block';
+        empty.innerHTML = `
+          <div class="ask-suggestions">
+            <div class="ask-suggestions-title">Experimente perguntar</div>
+            ${ASK_MOCK_ANSWERS.map(a => `
+              <button class="ask-suggestion-chip" data-query="${escapeHtml(a.title)}">
+                ${escapeHtml(a.title)}
+              </button>
+            `).join('')}
+          </div>
+        `;
+        empty.querySelectorAll('.ask-suggestion-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            const input = document.getElementById('search-input');
+            input.value = chip.dataset.query;
+            renderAskResults(input.value);
+          });
+        });
+      }
+      return;
+    }
+    const answer = findMockAnswer(query);
+    if (answer) {
+      if (empty) empty.style.display = 'none';
+      list.innerHTML = `
+        <div class="ask-answer">
+          <div class="ask-answer-question">${escapeHtml(query)}</div>
+          <div class="ask-answer-body">${answer.body}</div>
+          <div class="ask-answer-citations">
+            <div class="ask-citations-title">Fontes</div>
+            ${answer.citations.map((c, i) => `
+              <a class="ask-citation" href="${c.hash}" data-hash="${c.hash}">
+                <span class="ask-citation-num">${i + 1}</span>
+                <span class="ask-citation-label">${escapeHtml(c.label)}</span>
+                ${svgIcon('external', 12)}
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      list.querySelectorAll('.ask-citation').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          closeSearch();
+          location.hash = el.dataset.hash;
+        });
+      });
+    } else {
+      if (empty) empty.style.display = 'none';
+      list.innerHTML = `
+        <div class="ask-empty">
+          <div class="ask-empty-icon">${svgIcon('quote', 24)}</div>
+          <div class="ask-empty-title">Mock visual sem resposta pra "${escapeHtml(query)}"</div>
+          <div class="ask-empty-text">
+            Esta é uma demonstração da v2 com 5 perguntas pré-respondidas. Versão final responde qualquer pergunta usando busca semântica sobre todos os documentos do Brand System.
+          </div>
+          <div class="ask-empty-hint">Tente uma das sugestões acima ou alterne pro modo Keyword.</div>
+        </div>
+      `;
+    }
+  }
+
   function updateSelected() {
     document.querySelectorAll('.search-result').forEach((el, i) => {
       el.classList.toggle('is-selected', i === searchSelected);
@@ -1800,6 +1933,15 @@ const BrandSystem = (() => {
       overlay.className = 'search-overlay';
       overlay.innerHTML = `
         <div class="search-panel" role="dialog" aria-label="Busca">
+          <div class="search-mode-toggle" role="tablist" aria-label="Modo de busca">
+            <button type="button" class="search-mode-btn active" data-mode="keyword" role="tab">
+              ${svgIcon('search', 13)}<span>Keyword</span>
+            </button>
+            <button type="button" class="search-mode-btn" data-mode="ask" role="tab">
+              ${svgIcon('quote', 13)}<span>Perguntar</span>
+              <span class="search-mode-badge">mock</span>
+            </button>
+          </div>
           <div class="search-input-wrap">
             ${svgIcon('search', 18)}
             <input type="search" id="search-input" placeholder="Buscar manifesto, ICP, tom de voz..." autocomplete="off" spellcheck="false">
@@ -1812,6 +1954,18 @@ const BrandSystem = (() => {
       document.body.appendChild(overlay);
       overlay.addEventListener('click', (e) => {
         if (e.target === overlay) closeSearch();
+      });
+      overlay.querySelectorAll('.search-mode-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          searchMode = btn.dataset.mode;
+          overlay.querySelectorAll('.search-mode-btn').forEach(b => b.classList.toggle('active', b === btn));
+          const input = document.getElementById('search-input');
+          input.placeholder = searchMode === 'ask'
+            ? 'Pergunte: "Quem é o ICP?", "Qual o tom de voz?"...'
+            : 'Buscar manifesto, ICP, tom de voz...';
+          input.focus();
+          renderSearchResults(input.value);
+        });
       });
     }
     overlay.classList.add('is-open');
@@ -1868,8 +2022,96 @@ const BrandSystem = (() => {
     if (trigger) trigger.addEventListener('click', openSearch);
   }
 
+  // ----------- MOCK AUTH (v2 preview) -----------
+  // Redireciona pra /login.html se não houver mock-user no localStorage.
+  // Renderiza avatar + dropdown no topbar quando logado.
+  function getMockUser() {
+    try { return JSON.parse(localStorage.getItem('mock-user') || 'null'); }
+    catch (_) { return null; }
+  }
+
+  function initMockAuth() {
+    const user = getMockUser();
+    if (!user) {
+      window.location.href = '/login.html';
+      return false;
+    }
+    if (!user.acceptedLgpdAt) {
+      window.location.href = '/aceite.html';
+      return false;
+    }
+    renderAvatar(user);
+    return true;
+  }
+
+  function renderAvatar(user) {
+    const slot = document.getElementById('avatar-slot');
+    if (!slot) return;
+    const roleLabel = user.role === 'admin' ? 'Admin' : 'Colaborador';
+    slot.innerHTML = `
+      <button class="avatar-btn" id="avatar-btn" aria-label="Menu do perfil" aria-haspopup="menu" aria-expanded="false">
+        <span class="avatar-circle">${escapeHtml(user.initials || '?')}</span>
+      </button>
+      <div class="avatar-dropdown" id="avatar-dropdown" role="menu" hidden>
+        <div class="avatar-dropdown-header">
+          <span class="avatar-circle large">${escapeHtml(user.initials || '?')}</span>
+          <div class="avatar-meta">
+            <div class="avatar-name">${escapeHtml(user.name)}</div>
+            <div class="avatar-email">${escapeHtml(user.email)}</div>
+            <span class="avatar-role-badge ${user.role}">${roleLabel}</span>
+          </div>
+        </div>
+        <div class="avatar-dropdown-items">
+          <a href="/perfil.html" class="avatar-item" role="menuitem">
+            ${svgIcon('users', 14)}<span>Meu perfil</span>
+          </a>
+          <button type="button" class="avatar-item" role="menuitem" data-action="solicitacoes">
+            ${svgIcon('quote', 14)}<span>Minhas solicitações</span>
+            <span class="badge-soon">em breve</span>
+          </button>
+          <button type="button" class="avatar-item" role="menuitem" data-action="logout">
+            ${svgIcon('external', 14)}<span>Sair</span>
+          </button>
+        </div>
+      </div>
+    `;
+    const btn = slot.querySelector('#avatar-btn');
+    const dropdown = slot.querySelector('#avatar-dropdown');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !dropdown.hasAttribute('hidden');
+      if (isOpen) {
+        dropdown.setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        dropdown.removeAttribute('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (!slot.contains(e.target)) {
+        dropdown.setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+    dropdown.querySelectorAll('[data-action]').forEach(item => {
+      item.addEventListener('click', (e) => {
+        const action = item.dataset.action;
+        if (action === 'logout') {
+          localStorage.removeItem('mock-user');
+          window.location.href = '/login.html';
+        } else if (action === 'solicitacoes') {
+          alert('Mock — em breve. A fila de solicitações vai listar pedidos seus em aberto + status.');
+        }
+      });
+    });
+  }
+
   // ----------- INIT -----------
   async function init() {
+    // Mock auth gate (v2 preview) — redireciona se não logado/sem aceite
+    if (!initMockAuth()) return;
+
     initTheme();
     document.querySelectorAll('.theme-toggle button').forEach(btn => {
       btn.addEventListener('click', () => setTheme(btn.dataset.theme));

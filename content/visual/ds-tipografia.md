@@ -131,9 +131,7 @@ Pra casos que a paleta night não cobre. Use só quando absolutamente necessári
 
 ```css
 --metta-ref-typeface-brand:    'SF Pro';
---metta-ref-typeface-fallback-expanded: 'Zalando Sans Expanded';
---metta-ref-typeface-fallback-regular:  'Inter';
---metta-ref-typeface-fallback:          'Inter'  /* alias retrocompatível pro fallback-regular */;  /* OFL, Google Fonts — use em PPTX/Google Slides/Canva. Roboto Flex deprecated em 2026-05-12 */
+--metta-ref-typeface-fallback: 'Zalando Sans Expanded';  /* OFL, Google Fonts — use em PPTX/Google Slides/Canva. Roboto Flex deprecated em 2026-05-12 */
 --metta-ref-typeface-mono:     ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 ```
 
@@ -527,7 +525,7 @@ Tokens v1 mantidos ativos via aliases pra não quebrar código legado. **Em cód
 - Sombras no logo
 - Outline/ghost no logo
 - Recriar/redesenhar o logo em SVG/CSS — **sempre baixar do Drive**
-- Fonte que não seja SF Pro Variable (primária) ou Zalando Sans Expanded (fallbacks oficiais pra PPTX/Google Slides desde 2026-05-13: Zalando Sans Expanded pra Expanded + Inter pra Regular)
+- Fonte que não seja SF Pro Variable (primária) ou Zalando Sans Expanded (fallback oficial pra PPTX/Google Slides desde 2026-05-12 — Roboto Flex deprecated)
 - Tagline "INTELIGÊNCIA COMERCIAL" sem tracking de 9%+ em UPPERCASE
 - Tier badges (ELITE/EXCLUSIVE/PREMIUM) sem pill com border + tracking 12%
 - Gradients cônicos ou radial amarromzado
