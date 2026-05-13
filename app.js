@@ -31,8 +31,29 @@ const BrandSystem = (() => {
     arrowLeft:'<line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>',
     youtube:  '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>',
     clock:    '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
-    search:   '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>'
+    search:   '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+    link:     '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+    check:    '<polyline points="20 6 9 17 4 12"/>'
   };
+
+  // ----------- DATA UTILS -----------
+  function formatUpdatedAt(iso) {
+    if (!iso) return '';
+    const date = new Date(iso);
+    if (isNaN(date.getTime())) return '';
+    const now = new Date();
+    const diffMs = now - date;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    if (diffDays < 1) return 'atualizado hoje';
+    if (diffDays === 1) return 'atualizado ontem';
+    if (diffDays < 7) return `atualizado há ${diffDays} dias`;
+    if (diffDays < 30) {
+      const w = Math.floor(diffDays / 7);
+      return `atualizado há ${w} ${w === 1 ? 'semana' : 'semanas'}`;
+    }
+    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    return `atualizado em ${date.getDate()} ${meses[date.getMonth()]} ${date.getFullYear()}`;
+  }
 
   function svgIcon(name, size = 18) {
     const inner = ICONS[name] || '';
@@ -326,6 +347,11 @@ const BrandSystem = (() => {
   function renderSectionShell(tab, sec, html) {
     const mdPath = `content/${tab.id}/${sec.id}.md`;
     const fullUrl = `full.html#/${tab.id}/${sec.id}`;
+    const updatedLabel = formatUpdatedAt(sec && sec.updatedAt);
+    const updatedMeta = updatedLabel
+      ? `<span class="updated-at" title="${sec.updatedAt}">${svgIcon('clock', 12)}<span>${updatedLabel}</span></span>`
+      : '';
+    const copyBtn = `<button type="button" class="action-mini ghost copy-link" title="Copiar link desta página">${svgIcon('link', 14)}<span>Copiar link</span></button>`;
 
     // Header customizado pra transcrição (categoria · meta · botão YouTube + voltar à biblioteca)
     if (sec && sec.transcricao) {
@@ -339,11 +365,12 @@ const BrandSystem = (() => {
         <div class="page-with-toc">
           <article class="prose trans-prose">
             <header class="trans-header">
-              <div class="trans-cat">${escapeHtml(tab.label)}</div>
+              <div class="trans-cat">${escapeHtml(tab.label)}${updatedLabel ? ` · ${updatedLabel}` : ''}</div>
               <h1 class="trans-title">${epBadge}${escapeHtml(sec.label)}</h1>
               <div class="trans-meta">
                 ${reading}
                 ${ytBtn}
+                ${copyBtn}
                 <a class="action-mini ghost" href="${mdPath}" download title="Baixar .md original">${svgIcon('download', 12)}<span>.md</span></a>
               </div>
             </header>
@@ -358,6 +385,9 @@ const BrandSystem = (() => {
       <div class="page-with-toc">
         <article class="prose">
           <div class="prose-actions">
+            ${updatedMeta}
+            <span class="prose-actions-spacer"></span>
+            ${copyBtn}
             <a class="action-mini" href="${mdPath}" download title="Baixar .md original">
               ${svgIcon('download', 14)}<span>Baixar .md</span>
             </a>
@@ -377,6 +407,41 @@ const BrandSystem = (() => {
     attachTabGroups();
     attachSwatchCopy();
     attachMotionDemos();
+    attachCopyLink();
+  }
+
+  // ----------- COPY LINK -----------
+  function attachCopyLink() {
+    document.querySelectorAll('.copy-link').forEach(btn => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', async () => {
+        // Se TOC tem item ativo, inclui o anchor; senão copia URL da seção
+        const activeTocItem = document.querySelector('.prose-toc a.toc-item.is-active');
+        const anchor = activeTocItem ? activeTocItem.dataset.target : null;
+        const base = window.location.href.split('#')[0];
+        const hash = `#/${currentTabId}/${currentSectionId}`;
+        const url = `${base}${hash}${anchor ? `?h=${anchor}` : ''}`;
+        try {
+          await navigator.clipboard.writeText(url);
+        } catch (_) {
+          const ta = document.createElement('textarea');
+          ta.value = url;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (_) {}
+          ta.remove();
+        }
+        const original = btn.innerHTML;
+        btn.classList.add('is-copied');
+        btn.innerHTML = `${svgIcon('check', 14)}<span>Copiado</span>`;
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(() => {
+          btn.classList.remove('is-copied');
+          btn.innerHTML = original;
+        }, 1600);
+      });
+    });
   }
 
   // ----------- SWATCH CLICK-TO-COPY -----------
@@ -1599,6 +1664,210 @@ const BrandSystem = (() => {
     });
   }
 
+  // ----------- SEARCH (lazy-loaded index + modal Ctrl+K) -----------
+  let searchIndex = null;
+  let searchLoading = null;
+  let searchSelected = 0;
+  let searchResults = [];
+
+  function normalizeForSearch(s) {
+    return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
+  async function ensureSearchIndex() {
+    if (searchIndex) return searchIndex;
+    if (searchLoading) return searchLoading;
+    searchLoading = fetch('data/search-index.json').then(r => r.json()).then(data => {
+      searchIndex = data.entries || [];
+      return searchIndex;
+    }).catch(err => {
+      console.error('Falha ao carregar search-index:', err);
+      return [];
+    });
+    return searchLoading;
+  }
+
+  function runSearch(query) {
+    if (!searchIndex || !query.trim()) return [];
+    const terms = normalizeForSearch(query).split(/\s+/).filter(Boolean);
+    if (terms.length === 0) return [];
+    const scored = [];
+    for (const entry of searchIndex) {
+      let score = 0;
+      const labelNorm = normalizeForSearch(entry.label);
+      for (const t of terms) {
+        if (labelNorm.includes(t)) score += 10;          // match no título pesa mais
+        const occurrences = entry.textNorm.split(t).length - 1;
+        score += Math.min(occurrences, 8);
+      }
+      if (score > 0) scored.push({ entry, score });
+    }
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, 30).map(x => x.entry);
+  }
+
+  function highlightTerms(text, query) {
+    const terms = query.trim().split(/\s+/).filter(t => t.length > 1);
+    if (!terms.length) return escapeHtml(text);
+    const norm = normalizeForSearch(text);
+    let result = '';
+    let i = 0;
+    while (i < text.length) {
+      let matched = false;
+      for (const t of terms) {
+        const tNorm = normalizeForSearch(t);
+        if (norm.substring(i, i + tNorm.length) === tNorm) {
+          result += `<mark>${escapeHtml(text.substr(i, tNorm.length))}</mark>`;
+          i += tNorm.length;
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) {
+        result += escapeHtml(text[i]);
+        i++;
+      }
+    }
+    return result;
+  }
+
+  function snippetAroundMatch(text, query, len = 160) {
+    const norm = normalizeForSearch(text);
+    const q = normalizeForSearch(query.trim().split(/\s+/)[0] || '');
+    const pos = q ? norm.indexOf(q) : -1;
+    if (pos < 0) return text.slice(0, len) + (text.length > len ? '…' : '');
+    const start = Math.max(0, pos - 40);
+    const end = Math.min(text.length, pos + len - 40);
+    return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+  }
+
+  function renderSearchResults(query) {
+    const list = document.getElementById('search-results');
+    const empty = document.getElementById('search-empty');
+    if (!list) return;
+    searchResults = runSearch(query);
+    searchSelected = 0;
+    if (!query.trim()) {
+      list.innerHTML = '';
+      if (empty) {
+        empty.style.display = 'block';
+        empty.innerHTML = `<div class="search-hint">Digite pra buscar em todo o Brand System (${(searchIndex || []).length} documentos)</div>`;
+      }
+      return;
+    }
+    if (empty) empty.style.display = searchResults.length ? 'none' : 'block';
+    if (!searchResults.length) {
+      if (empty) empty.innerHTML = `<div class="search-hint">Nenhum resultado para "${escapeHtml(query)}".</div>`;
+      list.innerHTML = '';
+      return;
+    }
+    list.innerHTML = searchResults.map((r, idx) => `
+      <button class="search-result" data-idx="${idx}" data-tab="${r.tab}" data-section="${r.sectionId}">
+        <div class="search-result-crumb">${escapeHtml(r.tabLabel)}</div>
+        <div class="search-result-title">${highlightTerms(r.label, query)}</div>
+        <div class="search-result-snippet">${highlightTerms(snippetAroundMatch(r.snippet, query), query)}</div>
+      </button>
+    `).join('');
+    updateSelected();
+    list.querySelectorAll('.search-result').forEach(el => {
+      el.addEventListener('click', () => {
+        const tab = el.dataset.tab;
+        const sec = el.dataset.section;
+        closeSearch();
+        location.hash = `#/${tab}/${sec}`;
+      });
+      el.addEventListener('mouseenter', () => {
+        searchSelected = parseInt(el.dataset.idx, 10);
+        updateSelected();
+      });
+    });
+  }
+
+  function updateSelected() {
+    document.querySelectorAll('.search-result').forEach((el, i) => {
+      el.classList.toggle('is-selected', i === searchSelected);
+      if (i === searchSelected) {
+        el.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  }
+
+  function openSearch() {
+    let overlay = document.getElementById('search-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'search-overlay';
+      overlay.className = 'search-overlay';
+      overlay.innerHTML = `
+        <div class="search-panel" role="dialog" aria-label="Busca">
+          <div class="search-input-wrap">
+            ${svgIcon('search', 18)}
+            <input type="search" id="search-input" placeholder="Buscar manifesto, ICP, tom de voz..." autocomplete="off" spellcheck="false">
+            <kbd class="search-esc">Esc</kbd>
+          </div>
+          <div id="search-empty" class="search-empty"></div>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeSearch();
+      });
+    }
+    overlay.classList.add('is-open');
+    document.body.classList.add('search-open');
+    ensureSearchIndex().then(() => {
+      renderSearchResults(document.getElementById('search-input').value);
+    });
+    const input = document.getElementById('search-input');
+    input.focus();
+    input.addEventListener('input', () => renderSearchResults(input.value));
+  }
+
+  function closeSearch() {
+    const overlay = document.getElementById('search-overlay');
+    if (overlay) overlay.classList.remove('is-open');
+    document.body.classList.remove('search-open');
+  }
+
+  function initSearch() {
+    document.addEventListener('keydown', (e) => {
+      // Ctrl+K / Cmd+K
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openSearch();
+        return;
+      }
+      const overlay = document.getElementById('search-overlay');
+      if (!overlay || !overlay.classList.contains('is-open')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeSearch();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (searchResults.length) {
+          searchSelected = (searchSelected + 1) % searchResults.length;
+          updateSelected();
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (searchResults.length) {
+          searchSelected = (searchSelected - 1 + searchResults.length) % searchResults.length;
+          updateSelected();
+        }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const target = searchResults[searchSelected];
+        if (target) {
+          closeSearch();
+          location.hash = `#/${target.tab}/${target.sectionId}`;
+        }
+      }
+    });
+    const trigger = document.querySelector('.search-trigger');
+    if (trigger) trigger.addEventListener('click', openSearch);
+  }
+
   // ----------- INIT -----------
   async function init() {
     initTheme();
@@ -1607,6 +1876,7 @@ const BrandSystem = (() => {
     });
     await loadNav();
     initSidebar();
+    initSearch();
     window.addEventListener('hashchange', onHashChange);
     onHashChange();
   }

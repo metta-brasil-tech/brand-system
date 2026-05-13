@@ -50,9 +50,14 @@
         <span>Brand System</span>
       </div>
       <div class="topbar-spacer"></div>
-      <div class="search">
-        <input type="search" placeholder="Buscar (em breve)" disabled>
-      </div>
+      <button class="search-trigger" type="button" aria-label="Buscar" title="Buscar (Ctrl+K)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="search-trigger-label">Buscar</span>
+        <kbd class="search-trigger-kbd">Ctrl K</kbd>
+      </button>
       <div class="theme-toggle" role="tablist" aria-label="Tema">
         <button data-theme="light" class="active" role="tab">Light</button>
         <button data-theme="dark" role="tab">Dark</button>

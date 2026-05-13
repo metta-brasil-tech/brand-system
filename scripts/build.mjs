@@ -8,9 +8,10 @@
 ============================================================ */
 
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, statSync } from 'node:fs';
 import { dirname, resolve, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 
@@ -370,6 +371,52 @@ function isTranscricaoSource(src) {
   return typeof src === 'string' && src.startsWith('transcricoes/');
 }
 
+// ----------- TIMESTAMP DA ÚLTIMA ATUALIZAÇÃO -----------
+// Tenta git log primeiro (commit author date); se falhar (arquivo novo, sem git), usa mtime.
+function getUpdatedAt(absPath) {
+  try {
+    const out = execSync(`git log -1 --format=%cI -- "${absPath}"`, {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    }).trim();
+    if (out) return out;
+  } catch (_) { /* fallback */ }
+  try {
+    return statSync(absPath).mtime.toISOString();
+  } catch (_) {
+    return null;
+  }
+}
+
+// ----------- SEARCH INDEX -----------
+function htmlToPlainText(html) {
+  return String(html)
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#\d+;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function makeSnippet(text, maxLen = 200) {
+  const t = text.length > maxLen ? text.slice(0, maxLen).replace(/\s\S*$/, '') + '…' : text;
+  return t;
+}
+
+function normalizeForSearch(s) {
+  return String(s)
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '');
+}
+
 // ----------- BUILD CORE -----------
 async function buildSection(tab, sec) {
   const src = sec.source;
@@ -445,11 +492,22 @@ async function buildSection(tab, sec) {
   const mdPath = join(outDir, `${sec.id}.md`);
   await copyFile(absPath, mdPath);
 
+  // Timestamp da última atualização — prioridade pra blog_source (se existir), senão source
+  const tsPath = sec.blog_source && existsSync(join(VAULT, sec.blog_source))
+    ? join(VAULT, sec.blog_source)
+    : absPath;
+  const updatedAt = getUpdatedAt(tsPath);
+
+  // Plain text pro índice de busca
+  const plainBlog = htmlToPlainText(blogHtml);
+
   const totalBytes = blogHtml.length + fullHtml.length;
   return {
     ok: true,
     bytes: totalBytes,
     h2s,
+    updatedAt,
+    plainBlog,
     outPath: relative(ROOT, blogPath)
   };
 }
@@ -481,6 +539,7 @@ async function main() {
 
   let total = 0, ok = 0, errors = 0, skipped = 0;
   const errorList = [];
+  const searchIndex = [];
 
   for (const tab of nav.tabs) {
     log.group(`[${tab.id}] ${tab.label}`);
@@ -493,6 +552,19 @@ async function main() {
         if (result.h2s.length > 0) {
           sec.h2s = result.h2s;
         }
+        if (result.updatedAt) {
+          sec.updatedAt = result.updatedAt;
+        }
+        // Indexa pra busca global
+        searchIndex.push({
+          tab: tab.id,
+          tabLabel: tab.label,
+          sectionId: sec.id,
+          label: sec.label,
+          snippet: makeSnippet(result.plainBlog),
+          textNorm: normalizeForSearch(`${tab.label} ${sec.label} ${result.plainBlog}`),
+          h2s: (result.h2s || []).map(h => ({ id: h.id, label: h.label }))
+        });
       } else if (result.skipped) {
         skipped++;
         log.info(`${sec.id} — pulado (${result.skipped})`);
@@ -504,9 +576,14 @@ async function main() {
     }
   }
 
-  // Atualiza nav.json com h2s extraídos + timestamp
+  // Atualiza nav.json com h2s extraídos + timestamps + timestamp do build
   nav.generatedAt = new Date().toISOString();
   await writeFile(NAV_PATH, JSON.stringify(nav, null, 2), 'utf8');
+
+  // Salva índice de busca
+  const searchPath = join(ROOT, 'data', 'search-index.json');
+  await writeFile(searchPath, JSON.stringify({ generatedAt: nav.generatedAt, entries: searchIndex }), 'utf8');
+  log.ok(`Índice de busca: ${searchIndex.length} entradas → data/search-index.json`);
 
   console.log('');
   log.group('Resumo');
