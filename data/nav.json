@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-05-13T15:16:10.625Z",
+  "generatedAt": "2026-05-13T22:38:37.574Z",
   "tabs": [
     {
       "id": "overview",
@@ -113,7 +113,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "historia",
@@ -232,7 +232,7 @@
               "depth": 3
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "plataforma",
@@ -366,7 +366,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "estrategia",
@@ -425,7 +425,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "narrativa",
@@ -479,7 +479,7 @@
             }
           ],
           "blog_source": "compartilhado/brand-system-blog/marca/narrativa.md",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "glossario",
@@ -658,7 +658,7 @@
               "depth": 3
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         }
       ]
     },
@@ -895,7 +895,7 @@
               "depth": 3
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "mql",
@@ -1094,7 +1094,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "depoimentos",
@@ -1212,7 +1212,7 @@
               "depth": 3
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         }
       ]
     },
@@ -1429,7 +1429,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         }
       ]
     },
@@ -1816,7 +1816,7 @@
               "depth": 3
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "manual-marca",
@@ -1970,7 +1970,7 @@
             }
           ],
           "blog_source": "compartilhado/brand-system-blog/visual/manual-marca.md",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ds-cores",
@@ -2056,7 +2056,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ds-tipografia",
@@ -2121,8 +2121,8 @@
               "depth": 2
             },
             {
-              "id": "fallbacks-zalando-sans-expanded-inter",
-              "label": "Fallbacks · Zalando Sans Expanded + Inter",
+              "id": "fallback-zalando-sans-expanded",
+              "label": "Fallback Zalando Sans Expanded",
               "depth": 2
             },
             {
@@ -2136,8 +2136,8 @@
               "depth": 3
             },
             {
-              "id": "fallbacks-zalando-sans-expanded-inter",
-              "label": "Fallbacks · Zalando Sans Expanded + Inter",
+              "id": "fontes-proibidas-como-fallback",
+              "label": "Fontes proibidas como fallback",
               "depth": 3
             },
             {
@@ -2146,7 +2146,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ds-formas-espacamento",
@@ -2191,7 +2191,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ds-elevacao-estados",
@@ -2256,7 +2256,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ds-movimento",
@@ -2331,7 +2331,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "logos",
@@ -2406,7 +2406,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ds-componentes",
@@ -2536,7 +2536,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "icones",
@@ -2610,7 +2610,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         }
       ]
     },
@@ -2658,7 +2658,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "gestao-mudanca",
@@ -3002,7 +3002,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "gestao-ativacao",
@@ -3216,7 +3216,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "gestao-metodo",
@@ -3540,7 +3540,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "gestao-conhecimento",
@@ -3844,7 +3844,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "gestao-meta",
@@ -4028,7 +4028,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "gestao-tempo",
@@ -4327,7 +4327,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "aceleradores",
@@ -4372,7 +4372,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "fca",
@@ -4541,7 +4541,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "cha",
@@ -4600,7 +4600,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "a-venda-4-0",
@@ -4854,7 +4854,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         }
       ]
     },
@@ -5036,7 +5036,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "consultoria",
@@ -5140,7 +5140,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         }
       ]
     },
@@ -5202,7 +5202,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "depoimento-alime-unidep",
@@ -5234,7 +5234,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "depoimento-ananda-unidep",
@@ -5266,7 +5266,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "masterclass",
@@ -5281,7 +5281,7 @@
           "wordCount": 127,
           "category": "depoimentos-anuncios",
           "categoryLabel": "Depoimentos & Anúncios",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-18-como-bater-meta-no-dia-das-mae",
@@ -5338,7 +5338,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "bata-a-meta-no-mes-de-maio-como-superar-o-faturame",
@@ -5395,7 +5395,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "bata-meta-na-ultima-semana-uma-estrategia-para-eng",
@@ -5452,7 +5452,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-aumentar-o-lucro-da-sua-empresa-em-junho",
@@ -5509,7 +5509,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-bater-a-meta-na-ultima-semana-do-mes",
@@ -5566,7 +5566,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-bater-meta-em-abril-uma-estrategia-para-vende",
@@ -5623,7 +5623,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-bater-meta-em-dezembro",
@@ -5680,7 +5680,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-bater-meta-em-novembro",
@@ -5737,7 +5737,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-bater-meta-em-outubro",
@@ -5794,7 +5794,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-bater-metas-no-mes-de-julho",
@@ -5851,7 +5851,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-motivar-seu-time-para-a-black-friday",
@@ -5908,7 +5908,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "esteja-armado-para-a-meta-de-setembro",
@@ -5965,7 +5965,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "faltam-2-dias",
@@ -5980,7 +5980,7 @@
           "wordCount": 93,
           "category": "estrategia-mensal",
           "categoryLabel": "Estratégia Mensal",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-05-lideranca-inteligente",
@@ -6037,7 +6037,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-07-como-ser-um-lider-de-vendas-al",
@@ -6094,7 +6094,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-09-sua-atitude-define-sua-altitud",
@@ -6151,7 +6151,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-19-por-que-ex-vendedores-fracassa",
@@ -6208,7 +6208,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-20-lideranca-persuasiva-como-conv",
@@ -6265,7 +6265,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-23-torne-se-o-lider-mais-reconhec",
@@ -6322,7 +6322,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "a-atitude-do-lider-que-bate-meta",
@@ -6379,7 +6379,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-ser-gestor-de-vendas-e-garantir-previsibilida",
@@ -6436,7 +6436,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "liberando-tempo-na-agenda-de-um-lider-de-vendas-pa",
@@ -6493,7 +6493,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "liberando-tempo-para-bater-meta",
@@ -6550,7 +6550,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "liberando-tempo-para-bater-meta-2",
@@ -6607,7 +6607,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "lideranca-estrategica-comportamentos-para-deixar-e",
@@ -6664,7 +6664,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "resgatando-sua-motivacao-como-lider",
@@ -6721,7 +6721,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "seu-gerente-sabe",
@@ -6753,7 +6753,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "seu-gestor-sabe",
@@ -6785,7 +6785,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "torne-se-o-lider-mais-reconhecido",
@@ -6842,7 +6842,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-04-como-superar-as-metas-do-mes",
@@ -6899,7 +6899,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-11-baixo-fluxo-de-clientes-manual",
@@ -6956,7 +6956,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-12-como-aumentar-30-de-vendas-em-",
@@ -7013,7 +7013,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-13-pilares-da-meta-batida",
@@ -7070,7 +7070,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-13-como-definir-metas-de-vendas",
@@ -7127,7 +7127,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-14-como-utilizar-a-inteligencia-a",
@@ -7184,7 +7184,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "50-em-5h",
@@ -7216,7 +7216,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "50-em-5h-2",
@@ -7248,7 +7248,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "50-em-5h-3",
@@ -7280,7 +7280,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "bater-meta",
@@ -7312,7 +7312,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "diagnostico",
@@ -7344,7 +7344,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "diagnostico-gratuito",
@@ -7376,7 +7376,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "qual-a-frequencia-ideal-de-treinamento",
@@ -7408,7 +7408,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "receita-de-sucesso",
@@ -7440,7 +7440,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "seu-negocio-esta-superando-metas",
@@ -7472,7 +7472,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "sua-equipe-bate-meta-todo-mes",
@@ -7487,7 +7487,7 @@
           "wordCount": 185,
           "category": "pilares-metodo",
           "categoryLabel": "Pilares & Método",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "supere-meta-todo-mes",
@@ -7519,7 +7519,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "supere-metas-todos-os-meses",
@@ -7551,7 +7551,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "treine-o-cha",
@@ -7566,7 +7566,7 @@
           "wordCount": 57,
           "category": "pilares-metodo",
           "categoryLabel": "Pilares & Método",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "venda-mais-com-as-5-emocoes-de-divertida-mente",
@@ -7623,7 +7623,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-02-engajamento-100-como-ter-um-ti",
@@ -7680,7 +7680,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-06-como-motivar-o-seu-time",
@@ -7737,7 +7737,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-21-aumente-a-performance-do-seu-t",
@@ -7794,7 +7794,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-22-como-recuperar-um-time-desmoti",
@@ -7851,7 +7851,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "colaboradores-competentes",
@@ -7883,7 +7883,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-fazer-o-seu-time-acreditar-na-meta",
@@ -7940,7 +7940,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-fazer-seu-time-bater-meta-sem-depender-de-voc",
@@ -7997,7 +7997,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "engajamento-de-equipe",
@@ -8012,7 +8012,7 @@
           "wordCount": 132,
           "category": "equipe-engajamento",
           "categoryLabel": "Equipe & Engajamento",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "engajamento-verdadeiro",
@@ -8044,7 +8044,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "faca-essas-perguntas-ao-seu-gerente",
@@ -8076,7 +8076,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "funcionario-do-mequi-pensa-como-dono",
@@ -8108,7 +8108,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "time-bate-meta-sem-depender-de-voce",
@@ -8165,7 +8165,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-05-pare-de-perder-vendas-por-caus",
@@ -8222,7 +8222,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-08-como-contratar-bons-vendedores",
@@ -8279,7 +8279,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ep-10-como-acelerar-a-performance-do",
@@ -8336,7 +8336,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "clone",
@@ -8351,7 +8351,7 @@
           "wordCount": 147,
           "category": "vendedores",
           "categoryLabel": "Vendedores",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "clone-2",
@@ -8366,7 +8366,7 @@
           "wordCount": 111,
           "category": "vendedores",
           "categoryLabel": "Vendedores",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "clone-o-seu-melhor-vendedor-sem-gastar-r-1-real",
@@ -8423,7 +8423,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "clone-o-seu-melhor-vendedor-sem-gastar-r1",
@@ -8480,7 +8480,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "clone-o-seu-melhor-vendedor",
@@ -8495,7 +8495,7 @@
           "wordCount": 202,
           "category": "vendedores",
           "categoryLabel": "Vendedores",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "clone-seu-melhor-vendedor",
@@ -8510,7 +8510,7 @@
           "wordCount": 129,
           "category": "vendedores",
           "categoryLabel": "Vendedores",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-fazer-diferentes-tipos-de-vendedores-baterem-",
@@ -8567,7 +8567,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "como-selecionar-vendedores-que-batem-meta",
@@ -8624,7 +8624,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "domine-o-atendimento-e-dispare-suas-vendas",
@@ -8681,7 +8681,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "laranja-podre-na-equipe",
@@ -8713,7 +8713,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "quando-demitir-um-vendedor",
@@ -8770,7 +8770,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "vendedor-viciado-em-desconto",
@@ -8802,7 +8802,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "isso-rouba-21-do-seu-lucro",
@@ -8834,7 +8834,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "lucro",
@@ -8849,7 +8849,7 @@
           "wordCount": 99,
           "category": "lucro",
           "categoryLabel": "Lucro & Resultado",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "lucro-de-verdade",
@@ -8881,7 +8881,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "lucro-e-escala-se-constroi-assim",
@@ -8913,7 +8913,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "lucro-na-veia",
@@ -8945,7 +8945,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "o-jogo-do-lucro",
@@ -8960,7 +8960,7 @@
           "wordCount": 96,
           "category": "lucro",
           "categoryLabel": "Lucro & Resultado",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "quer-mais-lucro",
@@ -8992,7 +8992,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "coach",
@@ -9024,7 +9024,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "culpa-e-do-dono",
@@ -9056,7 +9056,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "empresario-preso",
@@ -9088,7 +9088,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "empresario-seu-problema-nunca-foram-as-vendas",
@@ -9120,7 +9120,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "erros-na-empresa",
@@ -9152,7 +9152,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "siga-este-perfil",
@@ -9167,7 +9167,7 @@
           "wordCount": 81,
           "category": "empresario-cultura",
           "categoryLabel": "Empresário & Cultura",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "siga-este-perfil-2",
@@ -9182,7 +9182,7 @@
           "wordCount": 75,
           "category": "empresario-cultura",
           "categoryLabel": "Empresário & Cultura",
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "so-pode-cobrar-quem-ensina",
@@ -9214,7 +9214,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-12T20:21:13-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         }
       ]
     }

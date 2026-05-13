@@ -224,12 +224,11 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 --metta-ref-opacity-yellow-subtle:  0.10;
 </code></pre>
 <h3 id="25-typeface">2.5 Typeface</h3>
-<pre><code class="language-css">--metta-ref-typeface-brand:             &#39;SF Pro&#39;;                /* primária */
---metta-ref-typeface-fallback-expanded: &#39;Zalando Sans Expanded&#39;; /* fallback do eixo Expanded — títulos, H1, display, CTAs, labels UPPERCASE */
---metta-ref-typeface-fallback-regular:  &#39;Inter&#39;;                 /* fallback do eixo Regular — body, subtítulos, parágrafos, captions */
---metta-ref-typeface-fallback:          var(--metta-ref-typeface-fallback-regular); /* alias retrocompatível (default = Regular) */
---metta-ref-typeface-mono:              ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace;
-/* Atualizado 2026-05-13. Roboto Flex deprecated em 2026-05-12. */
+<pre><code class="language-css">--metta-ref-typeface-brand:    &#39;SF Pro&#39;;
+--metta-ref-typeface-fallback-expanded: &#39;Zalando Sans Expanded&#39;;
+--metta-ref-typeface-fallback-regular:  &#39;Inter&#39;;
+--metta-ref-typeface-fallback:          &#39;Inter&#39;  /* alias retrocompatível pro fallback-regular */;  /* OFL, Google Fonts — use em PPTX/Google Slides/Canva. Roboto Flex deprecated em 2026-05-12 */
+--metta-ref-typeface-mono:     ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace;
 </code></pre>
 <h3 id="26-type-axes-raw">2.6 Type axes (raw)</h3>
 <pre><code class="language-css">--metta-ref-axis-wdth-regular:  100;   /* font-stretch normal */
