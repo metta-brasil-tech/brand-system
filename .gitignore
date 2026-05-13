@@ -25,6 +25,3 @@ yarn-error.log*
 .env.local
 .env*.local
 
-# build artifact (gerado por scripts/build-zip.mjs no Vercel)
-downloads/
-

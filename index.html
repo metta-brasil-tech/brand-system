@@ -71,7 +71,7 @@
           </svg>
         </button>
         <div class="topbar-menu-dropdown" role="menu" hidden>
-          <a class="topbar-menu-item" role="menuitem" href="downloads/brand-system.zip" download data-menu-item="download-zip">
+          <button class="topbar-menu-item" type="button" role="menuitem" data-menu-item="download-docs">
             <div class="topbar-menu-item-icon" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -80,10 +80,10 @@
               </svg>
             </div>
             <div class="topbar-menu-item-body">
-              <div class="topbar-menu-item-label">Baixar tudo (.zip)</div>
-              <div class="topbar-menu-item-meta" data-menu-meta="zip">Carregando…</div>
+              <div class="topbar-menu-item-label">Baixar documentação (.zip)</div>
+              <div class="topbar-menu-item-meta" data-menu-meta="zip">Escolha o que baixar</div>
             </div>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -101,8 +101,58 @@
 
   <div class="nav-overlay" aria-hidden="true"></div>
 
+  <!-- ============== MODAL: BAIXAR DOCUMENTAÇÃO ============== -->
+  <div class="download-modal" id="download-modal" role="dialog" aria-modal="true" aria-labelledby="download-modal-title" hidden>
+    <div class="download-modal-backdrop" data-modal-close></div>
+    <div class="download-modal-panel" role="document">
+      <header class="download-modal-header">
+        <div>
+          <h2 class="download-modal-title" id="download-modal-title">Baixar documentação</h2>
+          <p class="download-modal-sub">Selecione abas inteiras ou seções específicas. Só documentação (.md). Galerias e assets visuais ficam fora do MVP.</p>
+        </div>
+        <button class="download-modal-close" type="button" aria-label="Fechar" data-modal-close>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      <div class="download-modal-toolbar">
+        <button class="download-modal-bulk" type="button" data-bulk="all">Selecionar tudo</button>
+        <button class="download-modal-bulk" type="button" data-bulk="none">Limpar</button>
+      </div>
+
+      <div class="download-modal-body" data-modal-body>
+        <div class="download-modal-loading">Carregando catálogo…</div>
+      </div>
+
+      <footer class="download-modal-footer">
+        <div class="download-modal-summary">
+          <div class="download-modal-summary-line">
+            <span class="download-modal-summary-label">Selecionado</span>
+            <span class="download-modal-summary-value" data-summary-docs>0 docs</span>
+          </div>
+          <div class="download-modal-summary-line">
+            <span class="download-modal-summary-label">Tamanho real</span>
+            <span class="download-modal-summary-value" data-summary-size>0 KB</span>
+          </div>
+        </div>
+        <button class="download-modal-submit" type="button" data-modal-submit disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span data-submit-label>Selecione pelo menos um item</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+
 </div>
 
+<script src="vendor/jszip.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,839 @@
+{
+  "generatedAt": "2026-05-13T22:38:37.827Z",
+  "grandTotalBytes": 3107997,
+  "grandTotalDocs": 128,
+  "tabs": [
+    {
+      "id": "marca",
+      "label": "Marca",
+      "sections": [
+        {
+          "id": "manifesto",
+          "label": "Manifesto",
+          "path": "content/marca/manifesto.md",
+          "sizeBytes": 17905
+        },
+        {
+          "id": "historia",
+          "label": "História",
+          "path": "content/marca/historia.md",
+          "sizeBytes": 17979
+        },
+        {
+          "id": "plataforma",
+          "label": "Plataforma",
+          "path": "content/marca/plataforma.md",
+          "sizeBytes": 19976
+        },
+        {
+          "id": "estrategia",
+          "label": "Estratégia",
+          "path": "content/marca/estrategia.md",
+          "sizeBytes": 27747
+        },
+        {
+          "id": "narrativa",
+          "label": "Narrativa",
+          "path": "content/marca/narrativa.md",
+          "sizeBytes": 59700
+        },
+        {
+          "id": "glossario",
+          "label": "Glossário",
+          "path": "content/marca/glossario.md",
+          "sizeBytes": 48335
+        }
+      ],
+      "totalBytes": 191642,
+      "docCount": 6
+    },
+    {
+      "id": "audiencia",
+      "label": "Audiência",
+      "sections": [
+        {
+          "id": "icp",
+          "label": "ICP",
+          "path": "content/audiencia/icp.md",
+          "sizeBytes": 51160
+        },
+        {
+          "id": "mql",
+          "label": "MQL",
+          "path": "content/audiencia/mql.md",
+          "sizeBytes": 28685
+        },
+        {
+          "id": "depoimentos",
+          "label": "Depoimentos",
+          "path": "content/audiencia/depoimentos.md",
+          "sizeBytes": 24473
+        }
+      ],
+      "totalBytes": 104318,
+      "docCount": 3
+    },
+    {
+      "id": "verbal",
+      "label": "Identidade Verbal",
+      "sections": [
+        {
+          "id": "identidade-verbal",
+          "label": "Identidade Verbal",
+          "path": "content/verbal/identidade-verbal.md",
+          "sizeBytes": 20259
+        }
+      ],
+      "totalBytes": 20259,
+      "docCount": 1
+    },
+    {
+      "id": "visual",
+      "label": "Identidade Visual",
+      "sections": [
+        {
+          "id": "identidade-marca",
+          "label": "Identidade de Marca",
+          "path": "content/visual/identidade-marca.md",
+          "sizeBytes": 55810
+        },
+        {
+          "id": "manual-marca",
+          "label": "Manual de Marca",
+          "path": "content/visual/manual-marca.md",
+          "sizeBytes": 11420
+        },
+        {
+          "id": "ds-cores",
+          "label": "Cores",
+          "path": "content/visual/ds-cores.md",
+          "sizeBytes": 29185
+        },
+        {
+          "id": "ds-tipografia",
+          "label": "Tipografia",
+          "path": "content/visual/ds-tipografia.md",
+          "sizeBytes": 29185
+        },
+        {
+          "id": "ds-formas-espacamento",
+          "label": "Formas e Espaçamento",
+          "path": "content/visual/ds-formas-espacamento.md",
+          "sizeBytes": 29185
+        },
+        {
+          "id": "ds-elevacao-estados",
+          "label": "Elevação e Estados",
+          "path": "content/visual/ds-elevacao-estados.md",
+          "sizeBytes": 29185
+        },
+        {
+          "id": "ds-movimento",
+          "label": "Movimento",
+          "path": "content/visual/ds-movimento.md",
+          "sizeBytes": 29185
+        },
+        {
+          "id": "logos",
+          "label": "Logos",
+          "path": "content/visual/logos.md",
+          "sizeBytes": 10381
+        },
+        {
+          "id": "ds-componentes",
+          "label": "Componentes",
+          "path": "content/visual/ds-componentes.md",
+          "sizeBytes": 6106
+        }
+      ],
+      "totalBytes": 229642,
+      "docCount": 9
+    },
+    {
+      "id": "direcao-arte",
+      "label": "Direção de Arte",
+      "sections": [
+        {
+          "id": "principios",
+          "label": "Princípios",
+          "path": "content/direcao-arte/principios.md",
+          "sizeBytes": 13753
+        }
+      ],
+      "totalBytes": 13753,
+      "docCount": 1
+    },
+    {
+      "id": "metodologia",
+      "label": "Metodologia",
+      "sections": [
+        {
+          "id": "seis-gestoes",
+          "label": "6 Gestões — Visão Geral",
+          "path": "content/metodologia/seis-gestoes.md",
+          "sizeBytes": 12594
+        },
+        {
+          "id": "gestao-mudanca",
+          "label": "Gestão da Mudança",
+          "path": "content/metodologia/gestao-mudanca.md",
+          "sizeBytes": 47572
+        },
+        {
+          "id": "gestao-ativacao",
+          "label": "Gestão da Ativação",
+          "path": "content/metodologia/gestao-ativacao.md",
+          "sizeBytes": 56201
+        },
+        {
+          "id": "gestao-metodo",
+          "label": "Gestão do Método",
+          "path": "content/metodologia/gestao-metodo.md",
+          "sizeBytes": 52558
+        },
+        {
+          "id": "gestao-conhecimento",
+          "label": "Gestão do Conhecimento",
+          "path": "content/metodologia/gestao-conhecimento.md",
+          "sizeBytes": 50578
+        },
+        {
+          "id": "gestao-meta",
+          "label": "Gestão da Meta",
+          "path": "content/metodologia/gestao-meta.md",
+          "sizeBytes": 41923
+        },
+        {
+          "id": "gestao-tempo",
+          "label": "Gestão do Tempo",
+          "path": "content/metodologia/gestao-tempo.md",
+          "sizeBytes": 39462
+        },
+        {
+          "id": "aceleradores",
+          "label": "Aceleradores da Meta Batida",
+          "path": "content/metodologia/aceleradores.md",
+          "sizeBytes": 4856
+        },
+        {
+          "id": "fca",
+          "label": "FCA",
+          "path": "content/metodologia/fca.md",
+          "sizeBytes": 23197
+        },
+        {
+          "id": "cha",
+          "label": "CHA",
+          "path": "content/metodologia/cha.md",
+          "sizeBytes": 5738
+        },
+        {
+          "id": "a-venda-4-0",
+          "label": "A VENDA 4.0",
+          "path": "content/metodologia/a-venda-4-0.md",
+          "sizeBytes": 21295
+        }
+      ],
+      "totalBytes": 355974,
+      "docCount": 11
+    },
+    {
+      "id": "produtos",
+      "label": "Produtos",
+      "sections": [
+        {
+          "id": "mentoria",
+          "label": "Mentoria",
+          "path": "content/produtos/mentoria.md",
+          "sizeBytes": 20839
+        },
+        {
+          "id": "consultoria",
+          "label": "Consultoria",
+          "path": "content/produtos/consultoria.md",
+          "sizeBytes": 4112
+        }
+      ],
+      "totalBytes": 24951,
+      "docCount": 2
+    },
+    {
+      "id": "transcricoes",
+      "label": "Transcrições",
+      "sections": [
+        {
+          "id": "anuncio-perp-diagnostico",
+          "label": "Anúncio · PERP - DIAGNÓSTICO",
+          "path": "content/transcricoes/anuncio-perp-diagnostico.md",
+          "sizeBytes": 1224
+        },
+        {
+          "id": "depoimento-alime-unidep",
+          "label": "Depoimento · ALIME - (UNIDEP)",
+          "path": "content/transcricoes/depoimento-alime-unidep.md",
+          "sizeBytes": 2093
+        },
+        {
+          "id": "depoimento-ananda-unidep",
+          "label": "Depoimento · ANANDA - (UNIDEP)",
+          "path": "content/transcricoes/depoimento-ananda-unidep.md",
+          "sizeBytes": 2643
+        },
+        {
+          "id": "masterclass",
+          "label": "masterclass",
+          "path": "content/transcricoes/masterclass.md",
+          "sizeBytes": 726
+        },
+        {
+          "id": "ep-18-como-bater-meta-no-dia-das-mae",
+          "label": "Como bater meta no dia das mães?",
+          "path": "content/transcricoes/ep-18-como-bater-meta-no-dia-das-mae.md",
+          "sizeBytes": 38568
+        },
+        {
+          "id": "bata-a-meta-no-mes-de-maio-como-superar-o-faturame",
+          "label": "Bata a meta no mês de maio: como superar o faturamento com foco e estratégia",
+          "path": "content/transcricoes/bata-a-meta-no-mes-de-maio-como-superar-o-faturame.md",
+          "sizeBytes": 35051
+        },
+        {
+          "id": "bata-meta-na-ultima-semana-uma-estrategia-para-eng",
+          "label": "Bata meta na última semana: uma estratégia para engajar e motivar seus vendedores.",
+          "path": "content/transcricoes/bata-meta-na-ultima-semana-uma-estrategia-para-eng.md",
+          "sizeBytes": 60514
+        },
+        {
+          "id": "como-aumentar-o-lucro-da-sua-empresa-em-junho",
+          "label": "Como aumentar o lucro da sua empresa em junho",
+          "path": "content/transcricoes/como-aumentar-o-lucro-da-sua-empresa-em-junho.md",
+          "sizeBytes": 42678
+        },
+        {
+          "id": "como-bater-a-meta-na-ultima-semana-do-mes",
+          "label": "COMO BATER A META NA ÚLTIMA SEMANA DO MÊS",
+          "path": "content/transcricoes/como-bater-a-meta-na-ultima-semana-do-mes.md",
+          "sizeBytes": 36607
+        },
+        {
+          "id": "como-bater-meta-em-abril-uma-estrategia-para-vende",
+          "label": "Como bater meta em abril: uma estratégia para vender na primeira semana do mês",
+          "path": "content/transcricoes/como-bater-meta-em-abril-uma-estrategia-para-vende.md",
+          "sizeBytes": 36761
+        },
+        {
+          "id": "como-bater-meta-em-dezembro",
+          "label": "Como Bater Meta em Dezembro",
+          "path": "content/transcricoes/como-bater-meta-em-dezembro.md",
+          "sizeBytes": 44969
+        },
+        {
+          "id": "como-bater-meta-em-novembro",
+          "label": "Como bater meta em Novembro?",
+          "path": "content/transcricoes/como-bater-meta-em-novembro.md",
+          "sizeBytes": 48854
+        },
+        {
+          "id": "como-bater-meta-em-outubro",
+          "label": "Como bater meta em Outubro",
+          "path": "content/transcricoes/como-bater-meta-em-outubro.md",
+          "sizeBytes": 45292
+        },
+        {
+          "id": "como-bater-metas-no-mes-de-julho",
+          "label": "Como bater metas no mês de julho",
+          "path": "content/transcricoes/como-bater-metas-no-mes-de-julho.md",
+          "sizeBytes": 48577
+        },
+        {
+          "id": "como-motivar-seu-time-para-a-black-friday",
+          "label": "Como motivar seu time para a Black Friday",
+          "path": "content/transcricoes/como-motivar-seu-time-para-a-black-friday.md",
+          "sizeBytes": 49921
+        },
+        {
+          "id": "esteja-armado-para-a-meta-de-setembro",
+          "label": "Esteja armado para a meta de Setembro!",
+          "path": "content/transcricoes/esteja-armado-para-a-meta-de-setembro.md",
+          "sizeBytes": 30252
+        },
+        {
+          "id": "faltam-2-dias",
+          "label": "Faltam 2 dias",
+          "path": "content/transcricoes/faltam-2-dias.md",
+          "sizeBytes": 540
+        },
+        {
+          "id": "ep-05-lideranca-inteligente",
+          "label": "Liderança Inteligente",
+          "path": "content/transcricoes/ep-05-lideranca-inteligente.md",
+          "sizeBytes": 40112
+        },
+        {
+          "id": "ep-07-como-ser-um-lider-de-vendas-al",
+          "label": "Como ser um líder de vendas altamente remunerado e reconhecido?",
+          "path": "content/transcricoes/ep-07-como-ser-um-lider-de-vendas-al.md",
+          "sizeBytes": 51283
+        },
+        {
+          "id": "ep-09-sua-atitude-define-sua-altitud",
+          "label": "Sua Atitude define sua Altitude",
+          "path": "content/transcricoes/ep-09-sua-atitude-define-sua-altitud.md",
+          "sizeBytes": 58982
+        },
+        {
+          "id": "ep-19-por-que-ex-vendedores-fracassa",
+          "label": "Por que ex-vendedores fracassam quando assumem a gerência?",
+          "path": "content/transcricoes/ep-19-por-que-ex-vendedores-fracassa.md",
+          "sizeBytes": 50795
+        },
+        {
+          "id": "ep-20-lideranca-persuasiva-como-conv",
+          "label": "Liderança persuasiva: como convencer seu time a bater a meta",
+          "path": "content/transcricoes/ep-20-lideranca-persuasiva-como-conv.md",
+          "sizeBytes": 52021
+        },
+        {
+          "id": "ep-23-torne-se-o-lider-mais-reconhec",
+          "label": "Torne-se o líder mais reconhecido da sua empresa!",
+          "path": "content/transcricoes/ep-23-torne-se-o-lider-mais-reconhec.md",
+          "sizeBytes": 24363
+        },
+        {
+          "id": "a-atitude-do-lider-que-bate-meta",
+          "label": "A atitude do líder que bate meta.",
+          "path": "content/transcricoes/a-atitude-do-lider-que-bate-meta.md",
+          "sizeBytes": 31972
+        },
+        {
+          "id": "como-ser-gestor-de-vendas-e-garantir-previsibilida",
+          "label": "Como ser gestor de vendas e garantir previsibilidade nas comissões",
+          "path": "content/transcricoes/como-ser-gestor-de-vendas-e-garantir-previsibilida.md",
+          "sizeBytes": 25265
+        },
+        {
+          "id": "liberando-tempo-na-agenda-de-um-lider-de-vendas-pa",
+          "label": "Liberando tempo na agenda de um líder de vendas para bater meta",
+          "path": "content/transcricoes/liberando-tempo-na-agenda-de-um-lider-de-vendas-pa.md",
+          "sizeBytes": 42706
+        },
+        {
+          "id": "liberando-tempo-para-bater-meta",
+          "label": "Liberando tempo para bater meta",
+          "path": "content/transcricoes/liberando-tempo-para-bater-meta.md",
+          "sizeBytes": 45936
+        },
+        {
+          "id": "liberando-tempo-para-bater-meta-2",
+          "label": "Liberando Tempo para Bater Meta",
+          "path": "content/transcricoes/liberando-tempo-para-bater-meta-2.md",
+          "sizeBytes": 44324
+        },
+        {
+          "id": "lideranca-estrategica-comportamentos-para-deixar-e",
+          "label": "Liderança estratégica: comportamentos para deixar em 2024 e superar todas as metas em 2025",
+          "path": "content/transcricoes/lideranca-estrategica-comportamentos-para-deixar-e.md",
+          "sizeBytes": 40086
+        },
+        {
+          "id": "resgatando-sua-motivacao-como-lider",
+          "label": "Resgatando sua Motivação como Lider.",
+          "path": "content/transcricoes/resgatando-sua-motivacao-como-lider.md",
+          "sizeBytes": 19378
+        },
+        {
+          "id": "seu-gerente-sabe",
+          "label": "Seu gerente sabe?",
+          "path": "content/transcricoes/seu-gerente-sabe.md",
+          "sizeBytes": 1605
+        },
+        {
+          "id": "seu-gestor-sabe",
+          "label": "Seu gestor sabe?",
+          "path": "content/transcricoes/seu-gestor-sabe.md",
+          "sizeBytes": 1539
+        },
+        {
+          "id": "torne-se-o-lider-mais-reconhecido",
+          "label": "Torne-se o líder mais reconhecido",
+          "path": "content/transcricoes/torne-se-o-lider-mais-reconhecido.md",
+          "sizeBytes": 25802
+        },
+        {
+          "id": "ep-04-como-superar-as-metas-do-mes",
+          "label": "Como superar as metas do mês",
+          "path": "content/transcricoes/ep-04-como-superar-as-metas-do-mes.md",
+          "sizeBytes": 46075
+        },
+        {
+          "id": "ep-11-baixo-fluxo-de-clientes-manual",
+          "label": "Baixo fluxo de clientes: manual para bater metas!",
+          "path": "content/transcricoes/ep-11-baixo-fluxo-de-clientes-manual.md",
+          "sizeBytes": 47192
+        },
+        {
+          "id": "ep-12-como-aumentar-30-de-vendas-em-",
+          "label": "Como aumentar 30% de vendas em 30 dias",
+          "path": "content/transcricoes/ep-12-como-aumentar-30-de-vendas-em-.md",
+          "sizeBytes": 57180
+        },
+        {
+          "id": "ep-13-pilares-da-meta-batida",
+          "label": "Pilares da Meta Batida!",
+          "path": "content/transcricoes/ep-13-pilares-da-meta-batida.md",
+          "sizeBytes": 63386
+        },
+        {
+          "id": "ep-13-como-definir-metas-de-vendas",
+          "label": "Como definir metas de vendas",
+          "path": "content/transcricoes/ep-13-como-definir-metas-de-vendas.md",
+          "sizeBytes": 46771
+        },
+        {
+          "id": "ep-14-como-utilizar-a-inteligencia-a",
+          "label": "Como utilizar a inteligência artificial para bater metas!",
+          "path": "content/transcricoes/ep-14-como-utilizar-a-inteligencia-a.md",
+          "sizeBytes": 58841
+        },
+        {
+          "id": "50-em-5h",
+          "label": "50 em 5h",
+          "path": "content/transcricoes/50-em-5h.md",
+          "sizeBytes": 593
+        },
+        {
+          "id": "50-em-5h-2",
+          "label": "50 em 5h",
+          "path": "content/transcricoes/50-em-5h-2.md",
+          "sizeBytes": 1040
+        },
+        {
+          "id": "50-em-5h-3",
+          "label": "50% em 5h",
+          "path": "content/transcricoes/50-em-5h-3.md",
+          "sizeBytes": 841
+        },
+        {
+          "id": "bater-meta",
+          "label": "Bater meta",
+          "path": "content/transcricoes/bater-meta.md",
+          "sizeBytes": 1740
+        },
+        {
+          "id": "diagnostico",
+          "label": "DIAGNÓSTICO",
+          "path": "content/transcricoes/diagnostico.md",
+          "sizeBytes": 1057
+        },
+        {
+          "id": "diagnostico-gratuito",
+          "label": "DIAGNÓSTICO GRATUITO",
+          "path": "content/transcricoes/diagnostico-gratuito.md",
+          "sizeBytes": 1065
+        },
+        {
+          "id": "qual-a-frequencia-ideal-de-treinamento",
+          "label": "Qual a frequência ideal de treinamento?",
+          "path": "content/transcricoes/qual-a-frequencia-ideal-de-treinamento.md",
+          "sizeBytes": 1637
+        },
+        {
+          "id": "receita-de-sucesso",
+          "label": "Receita de Sucesso",
+          "path": "content/transcricoes/receita-de-sucesso.md",
+          "sizeBytes": 1577
+        },
+        {
+          "id": "seu-negocio-esta-superando-metas",
+          "label": "Seu negócio está superando metas?",
+          "path": "content/transcricoes/seu-negocio-esta-superando-metas.md",
+          "sizeBytes": 1533
+        },
+        {
+          "id": "sua-equipe-bate-meta-todo-mes",
+          "label": "sua equipe bate meta todo mes?",
+          "path": "content/transcricoes/sua-equipe-bate-meta-todo-mes.md",
+          "sizeBytes": 996
+        },
+        {
+          "id": "supere-meta-todo-mes",
+          "label": "Supere meta todo mes",
+          "path": "content/transcricoes/supere-meta-todo-mes.md",
+          "sizeBytes": 1942
+        },
+        {
+          "id": "supere-metas-todos-os-meses",
+          "label": "Supere metas todos os meses!",
+          "path": "content/transcricoes/supere-metas-todos-os-meses.md",
+          "sizeBytes": 949
+        },
+        {
+          "id": "treine-o-cha",
+          "label": "Treine o CHA",
+          "path": "content/transcricoes/treine-o-cha.md",
+          "sizeBytes": 355
+        },
+        {
+          "id": "venda-mais-com-as-5-emocoes-de-divertida-mente",
+          "label": "Venda mais com as 5 Emoções de Divertida Mente!",
+          "path": "content/transcricoes/venda-mais-com-as-5-emocoes-de-divertida-mente.md",
+          "sizeBytes": 37283
+        },
+        {
+          "id": "ep-02-engajamento-100-como-ter-um-ti",
+          "label": "Engajamento 100%: Como ter um time totalmente focado na meta!",
+          "path": "content/transcricoes/ep-02-engajamento-100-como-ter-um-ti.md",
+          "sizeBytes": 39823
+        },
+        {
+          "id": "ep-06-como-motivar-o-seu-time",
+          "label": "Como motivar o seu time?",
+          "path": "content/transcricoes/ep-06-como-motivar-o-seu-time.md",
+          "sizeBytes": 56505
+        },
+        {
+          "id": "ep-21-aumente-a-performance-do-seu-t",
+          "label": "Aumente a performance do seu time sem aumentar a pressão!",
+          "path": "content/transcricoes/ep-21-aumente-a-performance-do-seu-t.md",
+          "sizeBytes": 36194
+        },
+        {
+          "id": "ep-22-como-recuperar-um-time-desmoti",
+          "label": "Como recuperar um time desmotivado?",
+          "path": "content/transcricoes/ep-22-como-recuperar-um-time-desmoti.md",
+          "sizeBytes": 41565
+        },
+        {
+          "id": "colaboradores-competentes",
+          "label": "Colaboradores competentes",
+          "path": "content/transcricoes/colaboradores-competentes.md",
+          "sizeBytes": 1764
+        },
+        {
+          "id": "como-fazer-o-seu-time-acreditar-na-meta",
+          "label": "Como fazer o seu time acreditar na Meta",
+          "path": "content/transcricoes/como-fazer-o-seu-time-acreditar-na-meta.md",
+          "sizeBytes": 25486
+        },
+        {
+          "id": "como-fazer-seu-time-bater-meta-sem-depender-de-voc",
+          "label": "Como fazer seu time bater meta sem depender de você",
+          "path": "content/transcricoes/como-fazer-seu-time-bater-meta-sem-depender-de-voc.md",
+          "sizeBytes": 32162
+        },
+        {
+          "id": "engajamento-de-equipe",
+          "label": "Engajamento de equipe",
+          "path": "content/transcricoes/engajamento-de-equipe.md",
+          "sizeBytes": 774
+        },
+        {
+          "id": "engajamento-verdadeiro",
+          "label": "ENGAJAMENTO VERDADEIRO",
+          "path": "content/transcricoes/engajamento-verdadeiro.md",
+          "sizeBytes": 1302
+        },
+        {
+          "id": "faca-essas-perguntas-ao-seu-gerente",
+          "label": "Faça essas perguntas ao seu gerente",
+          "path": "content/transcricoes/faca-essas-perguntas-ao-seu-gerente.md",
+          "sizeBytes": 1624
+        },
+        {
+          "id": "funcionario-do-mequi-pensa-como-dono",
+          "label": "Funcionário do MÉQUI pensa como dono?",
+          "path": "content/transcricoes/funcionario-do-mequi-pensa-como-dono.md",
+          "sizeBytes": 1327
+        },
+        {
+          "id": "time-bate-meta-sem-depender-de-voce",
+          "label": "Time bate meta sem depender de você",
+          "path": "content/transcricoes/time-bate-meta-sem-depender-de-voce.md",
+          "sizeBytes": 33697
+        },
+        {
+          "id": "ep-05-pare-de-perder-vendas-por-caus",
+          "label": "Pare de perder vendas por causa de preço!",
+          "path": "content/transcricoes/ep-05-pare-de-perder-vendas-por-caus.md",
+          "sizeBytes": 52635
+        },
+        {
+          "id": "ep-08-como-contratar-bons-vendedores",
+          "label": "Como contratar bons vendedores e reter talentos?",
+          "path": "content/transcricoes/ep-08-como-contratar-bons-vendedores.md",
+          "sizeBytes": 59889
+        },
+        {
+          "id": "ep-10-como-acelerar-a-performance-do",
+          "label": "Como acelerar a performance dos novos vendedores",
+          "path": "content/transcricoes/ep-10-como-acelerar-a-performance-do.md",
+          "sizeBytes": 36618
+        },
+        {
+          "id": "clone",
+          "label": "clone",
+          "path": "content/transcricoes/clone.md",
+          "sizeBytes": 873
+        },
+        {
+          "id": "clone-2",
+          "label": "CLONE",
+          "path": "content/transcricoes/clone-2.md",
+          "sizeBytes": 661
+        },
+        {
+          "id": "clone-o-seu-melhor-vendedor-sem-gastar-r-1-real",
+          "label": "CLONE O SEU MELHOR VENDEDOR SEM GASTAR R$ 1 REAL!",
+          "path": "content/transcricoes/clone-o-seu-melhor-vendedor-sem-gastar-r-1-real.md",
+          "sizeBytes": 41106
+        },
+        {
+          "id": "clone-o-seu-melhor-vendedor-sem-gastar-r1",
+          "label": "Clone o seu melhor vendedor sem gastar R$1",
+          "path": "content/transcricoes/clone-o-seu-melhor-vendedor-sem-gastar-r1.md",
+          "sizeBytes": 42741
+        },
+        {
+          "id": "clone-o-seu-melhor-vendedor",
+          "label": "Clone o seu melhor vendedor!",
+          "path": "content/transcricoes/clone-o-seu-melhor-vendedor.md",
+          "sizeBytes": 1151
+        },
+        {
+          "id": "clone-seu-melhor-vendedor",
+          "label": "Clone seu melhor vendedor",
+          "path": "content/transcricoes/clone-seu-melhor-vendedor.md",
+          "sizeBytes": 731
+        },
+        {
+          "id": "como-fazer-diferentes-tipos-de-vendedores-baterem-",
+          "label": "Como fazer diferentes tipos de vendedores baterem meta",
+          "path": "content/transcricoes/como-fazer-diferentes-tipos-de-vendedores-baterem-.md",
+          "sizeBytes": 40970
+        },
+        {
+          "id": "como-selecionar-vendedores-que-batem-meta",
+          "label": "Como Selecionar Vendedores que Batem Meta",
+          "path": "content/transcricoes/como-selecionar-vendedores-que-batem-meta.md",
+          "sizeBytes": 72167
+        },
+        {
+          "id": "domine-o-atendimento-e-dispare-suas-vendas",
+          "label": "Domine o Atendimento e Dispare suas Vendas!",
+          "path": "content/transcricoes/domine-o-atendimento-e-dispare-suas-vendas.md",
+          "sizeBytes": 30193
+        },
+        {
+          "id": "laranja-podre-na-equipe",
+          "label": "Laranja podre na equipe",
+          "path": "content/transcricoes/laranja-podre-na-equipe.md",
+          "sizeBytes": 1067
+        },
+        {
+          "id": "quando-demitir-um-vendedor",
+          "label": "Quando demitir um vendedor?",
+          "path": "content/transcricoes/quando-demitir-um-vendedor.md",
+          "sizeBytes": 42908
+        },
+        {
+          "id": "vendedor-viciado-em-desconto",
+          "label": "Vendedor viciado em desconto...",
+          "path": "content/transcricoes/vendedor-viciado-em-desconto.md",
+          "sizeBytes": 1383
+        },
+        {
+          "id": "isso-rouba-21-do-seu-lucro",
+          "label": "Isso rouba 21% do seu lucro",
+          "path": "content/transcricoes/isso-rouba-21-do-seu-lucro.md",
+          "sizeBytes": 1616
+        },
+        {
+          "id": "lucro",
+          "label": "lucro",
+          "path": "content/transcricoes/lucro.md",
+          "sizeBytes": 611
+        },
+        {
+          "id": "lucro-de-verdade",
+          "label": "LUCRO DE VERDADE",
+          "path": "content/transcricoes/lucro-de-verdade.md",
+          "sizeBytes": 1223
+        },
+        {
+          "id": "lucro-e-escala-se-constroi-assim",
+          "label": "Lucro e escala se constrói assim!",
+          "path": "content/transcricoes/lucro-e-escala-se-constroi-assim.md",
+          "sizeBytes": 1739
+        },
+        {
+          "id": "lucro-na-veia",
+          "label": "Lucro na veia",
+          "path": "content/transcricoes/lucro-na-veia.md",
+          "sizeBytes": 1500
+        },
+        {
+          "id": "o-jogo-do-lucro",
+          "label": "o jogo do lucro",
+          "path": "content/transcricoes/o-jogo-do-lucro.md",
+          "sizeBytes": 574
+        },
+        {
+          "id": "quer-mais-lucro",
+          "label": "Quer mais lucro?",
+          "path": "content/transcricoes/quer-mais-lucro.md",
+          "sizeBytes": 942
+        },
+        {
+          "id": "coach",
+          "label": "COACH?",
+          "path": "content/transcricoes/coach.md",
+          "sizeBytes": 1053
+        },
+        {
+          "id": "culpa-e-do-dono",
+          "label": "Culpa é do dono",
+          "path": "content/transcricoes/culpa-e-do-dono.md",
+          "sizeBytes": 797
+        },
+        {
+          "id": "empresario-preso",
+          "label": "Empresario preso?",
+          "path": "content/transcricoes/empresario-preso.md",
+          "sizeBytes": 1556
+        },
+        {
+          "id": "empresario-seu-problema-nunca-foram-as-vendas",
+          "label": "Empresário seu problema nunca foram as vendas...",
+          "path": "content/transcricoes/empresario-seu-problema-nunca-foram-as-vendas.md",
+          "sizeBytes": 1345
+        },
+        {
+          "id": "erros-na-empresa",
+          "label": "ERROS NA EMPRESA",
+          "path": "content/transcricoes/erros-na-empresa.md",
+          "sizeBytes": 1318
+        },
+        {
+          "id": "siga-este-perfil",
+          "label": "siga este perfil",
+          "path": "content/transcricoes/siga-este-perfil.md",
+          "sizeBytes": 494
+        },
+        {
+          "id": "siga-este-perfil-2",
+          "label": "SIGA ESTE PERFIL",
+          "path": "content/transcricoes/siga-este-perfil-2.md",
+          "sizeBytes": 482
+        },
+        {
+          "id": "so-pode-cobrar-quem-ensina",
+          "label": "SÓ PODE COBRAR, QUEM ENSINA!",
+          "path": "content/transcricoes/so-pode-cobrar-quem-ensina.md",
+          "sizeBytes": 1400
+        }
+      ],
+      "totalBytes": 2167458,
+      "docCount": 95
+    }
+  ]
+}
