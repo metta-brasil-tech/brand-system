@@ -62,6 +62,30 @@
         <button data-theme="light" class="active" role="tab">Light</button>
         <button data-theme="dark" role="tab">Dark</button>
       </div>
+      <div class="topbar-menu" data-state="closed">
+        <button class="topbar-menu-trigger" type="button" aria-label="Mais opções" aria-haspopup="menu" aria-expanded="false" title="Mais">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="5" r="1"></circle>
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="12" cy="19" r="1"></circle>
+          </svg>
+        </button>
+        <div class="topbar-menu-dropdown" role="menu" hidden>
+          <a class="topbar-menu-item" role="menuitem" href="downloads/brand-system.zip" download data-menu-item="download-zip">
+            <div class="topbar-menu-item-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <div class="topbar-menu-item-body">
+              <div class="topbar-menu-item-label">Baixar tudo (.zip)</div>
+              <div class="topbar-menu-item-meta" data-menu-meta="zip">Carregando…</div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
 
     <div class="content" id="content" data-loading="false">

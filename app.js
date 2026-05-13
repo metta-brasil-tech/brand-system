@@ -1868,6 +1868,90 @@ const BrandSystem = (() => {
     if (trigger) trigger.addEventListener('click', openSearch);
   }
 
+  // ----------- TOPBAR MENU (dropdown compacto) -----------
+  function formatZipSize(bytes) {
+    if (!Number.isFinite(bytes) || bytes <= 0) return null;
+    const mb = bytes / 1024 / 1024;
+    if (mb >= 100) return `${mb.toFixed(0)} MB`;
+    if (mb >= 10)  return `${mb.toFixed(1)} MB`;
+    return `${mb.toFixed(2)} MB`;
+  }
+
+  function formatZipDate(iso) {
+    if (!iso) return null;
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return null;
+    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    return `atualizado ${d.getDate()} ${meses[d.getMonth()]}`;
+  }
+
+  async function initTopbarMenu() {
+    const menu = document.querySelector('.topbar-menu');
+    if (!menu) return;
+    const trigger = menu.querySelector('.topbar-menu-trigger');
+    const dropdown = menu.querySelector('.topbar-menu-dropdown');
+    const zipMeta = menu.querySelector('[data-menu-meta="zip"]');
+    const zipLink = menu.querySelector('[data-menu-item="download-zip"]');
+    if (!trigger || !dropdown) return;
+
+    function open() {
+      menu.dataset.state = 'open';
+      dropdown.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+    function close() {
+      menu.dataset.state = 'closed';
+      dropdown.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+    function toggle() {
+      if (menu.dataset.state === 'open') close();
+      else open();
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle();
+    });
+    document.addEventListener('click', (e) => {
+      if (menu.dataset.state !== 'open') return;
+      if (!menu.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.dataset.state === 'open') {
+        close();
+        trigger.focus();
+      }
+    });
+    dropdown.addEventListener('click', (e) => {
+      const item = e.target.closest('.topbar-menu-item');
+      if (item) close();
+    });
+
+    // Manifest pra mostrar tamanho + data do zip
+    try {
+      const res = await fetch('downloads/manifest.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('manifest 404');
+      const m = await res.json();
+      const size = formatZipSize(m.sizeBytes);
+      const date = formatZipDate(m.generatedAt);
+      if (zipMeta) {
+        const parts = [size, date].filter(Boolean);
+        zipMeta.textContent = parts.length ? parts.join(' · ') : 'pacote completo';
+      }
+    } catch (_) {
+      if (zipMeta) zipMeta.textContent = 'pacote completo';
+      // Se o manifest não existe ainda (dev sem build:zip), esconde o link
+      if (zipLink) {
+        zipLink.setAttribute('aria-disabled', 'true');
+        zipLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (zipMeta) zipMeta.textContent = 'rode npm run build:zip primeiro';
+        });
+      }
+    }
+  }
+
   // ----------- INIT -----------
   async function init() {
     initTheme();
@@ -1877,6 +1961,7 @@ const BrandSystem = (() => {
     await loadNav();
     initSidebar();
     initSearch();
+    initTopbarMenu();
     window.addEventListener('hashchange', onHashChange);
     onHashChange();
   }
