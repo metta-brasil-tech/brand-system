@@ -174,6 +174,17 @@ const BrandSystem = (() => {
 
   function onHashChange() {
     let { tabId, sectionId } = parseHash();
+
+    // Rotas internas especiais (sem ser tab do nav.json)
+    if (tabId === 'perfil') {
+      currentTabId = 'perfil';
+      currentSectionId = null;
+      updateActiveStates();
+      updateInternalBreadcrumb('Meu perfil', 'users');
+      renderProfilePage();
+      return;
+    }
+
     if (!tabId) {
       tabId = nav.tabs[0].id;
       sectionId = (nav.tabs[0].sections.find(s => !s.hidden) || nav.tabs[0].sections[0])?.id || null;
@@ -187,6 +198,17 @@ const BrandSystem = (() => {
     updateActiveStates();
     updateBreadcrumb(tab, sectionId);
     loadSection(tab, sectionId);
+  }
+
+  function updateInternalBreadcrumb(label, iconName) {
+    const el = document.getElementById('breadcrumb');
+    if (!el) return;
+    el.innerHTML = `
+      <span class="breadcrumb-icon">${svgIcon(iconName || 'home', 14)}</span>
+      <span>Brand System</span>
+      <span class="sep">/</span>
+      <span class="current">${escapeHtml(label)}</span>
+    `;
   }
 
   function updateActiveStates() {
@@ -2022,6 +2044,105 @@ const BrandSystem = (() => {
     if (trigger) trigger.addEventListener('click', openSearch);
   }
 
+  // ----------- INTERNAL PAGE: PERFIL (v2 mock, dentro do shell) -----------
+  function renderProfilePage() {
+    const main = document.getElementById('content');
+    if (!main) return;
+    main.dataset.loading = 'false';
+    const user = getMockUser();
+    if (!user) { window.location.href = '/login.html'; return; }
+    const roleLabel = user.role === 'admin' ? 'Admin' : 'Colaborador';
+    const memberSince = user.loggedInAt
+      ? new Date(user.loggedInAt).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })
+      : '—';
+    const lgpdLabel = user.acceptedLgpdAt
+      ? 'Aceito em ' + new Date(user.acceptedLgpdAt).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })
+      : 'Pendente';
+
+    main.innerHTML = `
+      <article class="prose profile-prose">
+        <header class="profile-prose-header">
+          <div class="profile-prose-avatar">${escapeHtml(user.initials || '?')}</div>
+          <div>
+            <h1 class="profile-prose-name">${escapeHtml(user.name)}</h1>
+            <div class="profile-prose-email">${escapeHtml(user.email)}</div>
+            <span class="profile-prose-role ${user.role}">${roleLabel}</span>
+          </div>
+        </header>
+
+        <div class="profile-mock-banner">
+          <strong>Mock visual.</strong> Esta é a tela de perfil da v2. Edições não persistem além desta sessão. Versão final salva dados no Supabase via API.
+        </div>
+
+        <section class="profile-section">
+          <h2 class="profile-section-title">Informações pessoais</h2>
+          <div class="profile-row">
+            <div class="profile-field">
+              <label for="f-name">Nome</label>
+              <input type="text" id="f-name" value="${escapeHtml(user.name)}">
+            </div>
+            <div class="profile-field">
+              <label for="f-email">E-mail corporativo</label>
+              <input type="email" id="f-email" value="${escapeHtml(user.email)}" disabled>
+              <div class="hint">Vinculado à conta Google. Não editável.</div>
+            </div>
+          </div>
+          <div class="profile-row">
+            <div class="profile-field">
+              <label for="f-role">Papel</label>
+              <input type="text" id="f-role" value="${escapeHtml(roleLabel)}" disabled>
+              <div class="hint">Definido pelo Admin no momento do convite.</div>
+            </div>
+            <div class="profile-field">
+              <label for="f-since">Membro desde</label>
+              <input type="text" id="f-since" value="${escapeHtml(memberSince)}" disabled>
+            </div>
+          </div>
+          <div class="profile-actions">
+            <button type="button" class="btn-primary" id="btn-save">Salvar alterações</button>
+            <button type="button" class="btn-ghost" id="btn-cancel">Cancelar</button>
+          </div>
+        </section>
+
+        <section class="profile-section">
+          <h2 class="profile-section-title">Privacidade</h2>
+          <div class="profile-field">
+            <label>Aceite LGPD</label>
+            <input type="text" value="${escapeHtml(lgpdLabel)}" disabled>
+            <div class="hint">Você aceitou nossa <a href="/privacidade.html" target="_blank">Política de Privacidade</a> e <a href="/termos.html" target="_blank">Termos de Uso</a>.</div>
+          </div>
+        </section>
+
+        <section class="danger-zone">
+          <h2 class="danger-zone-title">Excluir conta</h2>
+          <p class="danger-zone-text">Remove sua conta e todos os dados pessoais associados (histórico de buscas, preferências). Esta ação é irreversível.</p>
+          <button type="button" class="btn-danger" id="btn-delete-account">Excluir minha conta</button>
+        </section>
+      </article>
+    `;
+
+    document.getElementById('btn-save').addEventListener('click', () => {
+      const newName = document.getElementById('f-name').value.trim();
+      if (!newName) return;
+      user.name = newName;
+      user.initials = newName.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+      localStorage.setItem('mock-user', JSON.stringify(user));
+      renderAvatar(user);
+      alert('Mock — salvo localmente.');
+    });
+    document.getElementById('btn-cancel').addEventListener('click', () => {
+      window.location.hash = '';
+    });
+    document.getElementById('btn-delete-account').addEventListener('click', () => {
+      if (!confirm('Tem certeza? Esta ação remove todos os seus dados (mock — só limpa o localStorage local).')) return;
+      if (!confirm('Confirmar definitivamente?')) return;
+      localStorage.removeItem('mock-user');
+      localStorage.removeItem('mock-lgpd-accepted-at');
+      alert('Conta removida (mock).');
+      window.location.href = '/login.html';
+    });
+  }
+
   // ----------- MOCK AUTH (v2 preview) -----------
   // Redireciona pra /login.html se não houver mock-user no localStorage.
   // Renderiza avatar + dropdown no topbar quando logado.
@@ -2062,7 +2183,7 @@ const BrandSystem = (() => {
           </div>
         </div>
         <div class="avatar-dropdown-items">
-          <a href="/perfil.html" class="avatar-item" role="menuitem">
+          <a href="#/perfil" class="avatar-item" role="menuitem">
             ${svgIcon('users', 14)}<span>Meu perfil</span>
           </a>
           <button type="button" class="avatar-item" role="menuitem" data-action="solicitacoes">

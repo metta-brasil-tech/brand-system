@@ -7,196 +7,80 @@
 
 <link rel="stylesheet" href="styles/tokens.css">
 <link rel="stylesheet" href="styles/shell.css">
-
-<style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(255, 213, 79, 0.06), transparent 60%),
-      radial-gradient(circle at 80% 80%, rgba(12, 22, 27, 0.04), transparent 60%),
-      var(--metta-sys-color-background);
-    font-family: 'SF Pro Expanded', 'Zalando Sans Expanded', 'Inter', sans-serif;
-    color: var(--metta-sys-color-on-surface);
-  }
-  [data-theme="dark"] body {
-    background:
-      radial-gradient(circle at 20% 20%, rgba(255, 213, 79, 0.04), transparent 60%),
-      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02), transparent 60%),
-      var(--metta-sys-color-background);
-  }
-
-  .auth-shell {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 24px;
-  }
-
-  .auth-card {
-    width: 100%;
-    max-width: 440px;
-    text-align: center;
-  }
-
-  .auth-symbol {
-    width: 56px;
-    height: 52px;
-    margin: 0 auto 32px;
-    color: var(--metta-sys-color-on-surface);
-  }
-
-  .auth-eyebrow {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--metta-sys-color-on-surface-variant);
-    margin-bottom: 12px;
-  }
-
-  .auth-title {
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin: 0 0 16px;
-    color: var(--metta-sys-color-on-surface);
-  }
-
-  .auth-sub {
-    font-size: 15px;
-    color: var(--metta-sys-color-on-surface-variant);
-    margin: 0 0 36px;
-    line-height: 1.55;
-    letter-spacing: -0.005em;
-  }
-
-  .btn-google {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-    padding: 14px 20px;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.005em;
-    border-radius: 12px;
-    background: var(--metta-sys-color-surface, #fff);
-    color: var(--metta-sys-color-on-surface);
-    border: 1px solid var(--metta-sys-color-outline);
-    cursor: pointer;
-    transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
-  }
-  .btn-google:hover {
-    border-color: var(--metta-sys-color-on-surface-variant);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  }
-  .btn-google:active { transform: translateY(1px); }
-  .btn-google svg { flex-shrink: 0; }
-
-  .auth-hint {
-    font-size: 12px;
-    color: var(--metta-sys-color-on-surface-variant);
-    margin: 20px 0 0;
-    letter-spacing: 0;
-  }
-  .auth-hint strong {
-    color: var(--metta-sys-color-on-surface);
-    font-weight: 600;
-  }
-
-  .auth-mock-banner {
-    margin-top: 32px;
-    padding: 12px 16px;
-    border-radius: 10px;
-    background: rgba(255, 213, 79, 0.12);
-    border: 1px solid rgba(255, 213, 79, 0.4);
-    font-size: 12px;
-    color: var(--metta-sys-color-on-surface-variant);
-    text-align: left;
-    line-height: 1.55;
-  }
-  .auth-mock-banner strong { color: var(--metta-sys-color-on-surface); }
-
-  .auth-footer {
-    padding: 24px;
-    text-align: center;
-    font-size: 12px;
-    color: var(--metta-sys-color-on-surface-variant);
-    letter-spacing: 0;
-  }
-  .auth-footer a {
-    color: inherit;
-    text-decoration: none;
-    margin: 0 8px;
-    transition: color 0.15s ease;
-  }
-  .auth-footer a:hover {
-    color: var(--metta-sys-color-on-surface);
-  }
-  .auth-footer .sep { opacity: 0.4; }
-</style>
+<link rel="stylesheet" href="styles/auth.css">
 </head>
-<body>
+<body class="auth-page">
 
-<main class="auth-shell">
-  <div class="auth-card">
-    <div class="auth-symbol">
-      <svg viewBox="0 0 133 123" fill="none" xmlns="http://www.w3.org/2000/svg">
+<div class="auth-grid">
+
+  <!-- ============== LEFT — login form ============== -->
+  <section class="auth-left">
+    <header class="auth-left-top">
+      <svg viewBox="0 0 133 123" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M88.1027 0.367798C96.743 4.41161 104.504 10.1193 110.939 17.1617C117.373 24.204 122.358 32.4451 125.609 41.4137C128.859 50.3824 130.31 59.9044 129.881 69.4342C129.452 78.964 127.148 88.3166 123.105 96.9567L108.792 90.2574C104.028 100.435 96.3547 108.974 86.7404 114.792C77.1226 120.611 65.9941 123.449 54.7639 122.945C43.5339 122.441 32.705 118.618 23.6477 111.96C14.5901 105.301 7.70904 96.1051 3.87715 85.5367C0.0453871 74.9684 -0.566021 63.4997 2.11934 52.5836C4.80483 41.6677 10.6677 31.7931 18.965 24.2086C21.7264 21.6846 24.718 19.454 27.8879 17.5358C34.2433 13.69 41.322 11.1052 48.7365 9.97327C59.8493 8.277 71.2162 9.91495 81.3986 14.6783L74.8215 28.7379C79.7558 31.0475 84.1851 34.3106 87.8537 38.3385C91.5239 42.3684 94.3608 47.0856 96.2004 52.2164C98.0398 57.3474 98.8462 62.7931 98.5725 68.2369C98.3036 73.5808 96.9957 78.8197 94.7297 83.6647L108.762 90.2291C111.92 83.4768 113.718 76.1682 114.054 68.7213C114.39 61.2698 113.255 53.824 110.714 46.8112C108.173 39.7982 104.274 33.3539 99.2424 27.8473C94.2108 22.3409 88.1436 17.8792 81.3879 14.7174L88.1027 0.367798ZM74.7941 28.775C67.4027 25.3192 59.1523 24.1317 51.0861 25.3629C45.7021 26.1848 40.5613 28.0605 35.9465 30.8531C33.645 32.2459 31.4728 33.8663 29.468 35.6989C23.4433 41.2059 19.1865 48.3764 17.2365 56.3024C15.2867 64.2287 15.7316 72.5563 18.5139 80.2301C21.2962 87.9038 26.2917 94.5809 32.8684 99.4156C39.4451 104.25 47.3087 107.027 55.4631 107.393C63.617 107.759 71.6966 105.699 78.6799 101.473C85.5791 97.2979 91.1001 91.194 94.5676 83.9196L81.01 77.4576C78.8042 82.0873 75.2914 85.9721 70.9016 88.6285C66.5978 91.2328 61.6392 92.5451 56.6174 92.4127L56.132 92.3942L56.1311 92.3951C50.9439 92.1621 45.9416 90.3954 41.758 87.3199C37.5745 84.2444 34.3962 79.9972 32.6262 75.1158C30.8562 70.2343 30.5744 64.9364 31.8146 59.8942C33.0551 54.852 35.7633 50.2901 39.5959 46.7867C43.4286 43.2835 48.2148 40.9961 53.3479 40.2125C58.4787 39.4294 63.7262 40.1844 68.4279 42.3824L74.7941 28.775ZM61.9602 56.2233C59.9937 55.3034 57.7986 54.9865 55.6525 55.3141C53.5066 55.6417 51.5059 56.5986 49.9035 58.0631C48.3012 59.5278 47.1683 61.4355 46.6496 63.5436C46.1311 65.6517 46.2495 67.8669 46.9895 69.9078C47.7295 71.9487 49.0577 73.7255 50.8068 75.0114C52.556 76.2971 54.6479 77.035 56.8166 77.1324C58.9853 77.2298 61.135 76.682 62.9924 75.5582C64.8496 74.4343 66.3321 72.7842 67.2521 70.818L81.0197 77.2584C82.4571 74.1868 83.2867 70.8644 83.4572 67.4762C83.6307 64.0264 83.119 60.5753 81.9533 57.3239C80.7876 54.0725 78.99 51.0836 76.6643 48.5299C74.3394 45.9773 71.5325 43.9086 68.4055 42.4449L61.9602 56.2233Z" fill="currentColor"/>
       </svg>
+      <span class="auth-left-top-text">Metta Brand System</span>
+    </header>
+
+    <div class="auth-left-content">
+      <div class="auth-eyebrow">Acesso restrito</div>
+      <h1 class="auth-title">Bem-vindo<br>à Metta.</h1>
+      <p class="auth-sub">Acesse com a conta corporativa pra consultar e construir materiais alinhados com a nossa marca.</p>
+
+      <button type="button" class="btn-google" id="btn-google">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <span>Continuar com Google</span>
+      </button>
+
+      <p class="auth-hint">Apenas e-mails <strong>@mettabrasil.com.br</strong> têm acesso.</p>
+
+      <p class="auth-divider-text">Ao continuar, você concorda com nossos <a href="/termos.html">Termos de Uso</a> e <a href="/privacidade.html">Política de Privacidade</a>.</p>
+
+      <div class="auth-mock-banner">
+        <strong>Mock visual.</strong> Clicar em "Continuar com Google" simula o login com um usuário fictício. Versão final integra Google OAuth real via Supabase.
+      </div>
     </div>
 
-    <div class="auth-eyebrow">Brand System</div>
-    <h1 class="auth-title">Bem-vindo à casa<br>da marca Metta.</h1>
-    <p class="auth-sub">Acesse com a conta corporativa pra consultar e construir materiais alinhados ao DNA da marca.</p>
+    <footer class="auth-left-footer">
+      <a href="/privacidade.html">Privacidade</a>
+      <span class="sep">·</span>
+      <a href="/termos.html">Termos</a>
+      <span class="sep">·</span>
+      <span>© 2026 Metta</span>
+    </footer>
+  </section>
 
-    <button type="button" class="btn-google" id="btn-google">
-      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+  <!-- ============== RIGHT — brand panel ============== -->
+  <aside class="auth-right" aria-hidden="true">
+    <div class="auth-right-center">
+      <svg class="auth-symbol-xl" viewBox="0 0 133 123" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M88.1027 0.367798C96.743 4.41161 104.504 10.1193 110.939 17.1617C117.373 24.204 122.358 32.4451 125.609 41.4137C128.859 50.3824 130.31 59.9044 129.881 69.4342C129.452 78.964 127.148 88.3166 123.105 96.9567L108.792 90.2574C104.028 100.435 96.3547 108.974 86.7404 114.792C77.1226 120.611 65.9941 123.449 54.7639 122.945C43.5339 122.441 32.705 118.618 23.6477 111.96C14.5901 105.301 7.70904 96.1051 3.87715 85.5367C0.0453871 74.9684 -0.566021 63.4997 2.11934 52.5836C4.80483 41.6677 10.6677 31.7931 18.965 24.2086C21.7264 21.6846 24.718 19.454 27.8879 17.5358C34.2433 13.69 41.322 11.1052 48.7365 9.97327C59.8493 8.277 71.2162 9.91495 81.3986 14.6783L74.8215 28.7379C79.7558 31.0475 84.1851 34.3106 87.8537 38.3385C91.5239 42.3684 94.3608 47.0856 96.2004 52.2164C98.0398 57.3474 98.8462 62.7931 98.5725 68.2369C98.3036 73.5808 96.9957 78.8197 94.7297 83.6647L108.762 90.2291C111.92 83.4768 113.718 76.1682 114.054 68.7213C114.39 61.2698 113.255 53.824 110.714 46.8112C108.173 39.7982 104.274 33.3539 99.2424 27.8473C94.2108 22.3409 88.1436 17.8792 81.3879 14.7174L88.1027 0.367798ZM74.7941 28.775C67.4027 25.3192 59.1523 24.1317 51.0861 25.3629C45.7021 26.1848 40.5613 28.0605 35.9465 30.8531C33.645 32.2459 31.4728 33.8663 29.468 35.6989C23.4433 41.2059 19.1865 48.3764 17.2365 56.3024C15.2867 64.2287 15.7316 72.5563 18.5139 80.2301C21.2962 87.9038 26.2917 94.5809 32.8684 99.4156C39.4451 104.25 47.3087 107.027 55.4631 107.393C63.617 107.759 71.6966 105.699 78.6799 101.473C85.5791 97.2979 91.1001 91.194 94.5676 83.9196L81.01 77.4576C78.8042 82.0873 75.2914 85.9721 70.9016 88.6285C66.5978 91.2328 61.6392 92.5451 56.6174 92.4127L56.132 92.3942L56.1311 92.3951C50.9439 92.1621 45.9416 90.3954 41.758 87.3199C37.5745 84.2444 34.3962 79.9972 32.6262 75.1158C30.8562 70.2343 30.5744 64.9364 31.8146 59.8942C33.0551 54.852 35.7633 50.2901 39.5959 46.7867C43.4286 43.2835 48.2148 40.9961 53.3479 40.2125C58.4787 39.4294 63.7262 40.1844 68.4279 42.3824L74.7941 28.775ZM61.9602 56.2233C59.9937 55.3034 57.7986 54.9865 55.6525 55.3141C53.5066 55.6417 51.5059 56.5986 49.9035 58.0631C48.3012 59.5278 47.1683 61.4355 46.6496 63.5436C46.1311 65.6517 46.2495 67.8669 46.9895 69.9078C47.7295 71.9487 49.0577 73.7255 50.8068 75.0114C52.556 76.2971 54.6479 77.035 56.8166 77.1324C58.9853 77.2298 61.135 76.682 62.9924 75.5582C64.8496 74.4343 66.3321 72.7842 67.2521 70.818L81.0197 77.2584C82.4571 74.1868 83.2867 70.8644 83.4572 67.4762C83.6307 64.0264 83.119 60.5753 81.9533 57.3239C80.7876 54.0725 78.99 51.0836 76.6643 48.5299C74.3394 45.9773 71.5325 43.9086 68.4055 42.4449L61.9602 56.2233Z" fill="currentColor"/>
       </svg>
-      <span>Entrar com Google</span>
-    </button>
 
-    <p class="auth-hint">Apenas e-mails <strong>@metta.com.br</strong> ou <strong>@mettabrasil.com.br</strong> têm acesso.</p>
-
-    <div class="auth-mock-banner">
-      <strong>Mock visual.</strong> Esta é uma demonstração da v2 — clicar em "Entrar" simula o login com um usuário fictício. Versão final integra Google OAuth real via Supabase.
+      <h1 class="auth-quote-h1">A casa única da marca Metta.</h1>
+      <p class="auth-quote-sub">Estratégia, voz, visual, documentos em um só lugar.</p>
     </div>
-  </div>
-</main>
+  </aside>
 
-<footer class="auth-footer">
-  <a href="/privacidade.html">Política de Privacidade</a>
-  <span class="sep">·</span>
-  <a href="/termos.html">Termos de Uso</a>
-  <span class="sep">·</span>
-  <span>© 2026 Metta</span>
-</footer>
+</div>
 
 <script>
-  // Tema persistido entre páginas
   const savedTheme = localStorage.getItem('brand-theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
 
-  // Mock auth: simula login com prompt simples
   document.getElementById('btn-google').addEventListener('click', () => {
     const name = prompt('Mock — qual o seu nome?', 'Luiz Felipe');
     if (!name) return;
-    const email = prompt('Mock — qual o seu e-mail @metta.com.br ou @mettabrasil.com.br?', 'luiz@mettabrasil.com.br');
+    const email = prompt('Mock — qual o seu e-mail @mettabrasil.com.br?', 'luiz@mettabrasil.com.br');
     if (!email) return;
-    const validDomain = /@(metta\.com\.br|mettabrasil\.com\.br)$/i.test(email.trim());
+    const validDomain = /@mettabrasil\.com\.br$/i.test(email.trim());
     if (!validDomain) {
-      alert('Acesso restrito a e-mails @metta.com.br ou @mettabrasil.com.br.');
+      alert('Acesso restrito a e-mails @mettabrasil.com.br.');
       return;
     }
     const initials = name.trim().split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
@@ -209,7 +93,6 @@
       loggedInAt: new Date().toISOString()
     };
     localStorage.setItem('mock-user', JSON.stringify(user));
-    // Se ainda não aceitou LGPD, vai pra aceite. Senão, home.
     if (!user.acceptedLgpdAt) {
       location.href = '/aceite.html';
     } else {
