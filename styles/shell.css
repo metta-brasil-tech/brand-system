@@ -378,9 +378,15 @@ main { padding: 0; }
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
   padding: 10px 12px;
+  border: none;
+  background: transparent;
   border-radius: var(--metta-sys-shape-corner-sm, 8px);
   text-decoration: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
   color: var(--metta-sys-color-on-surface);
   cursor: pointer;
   transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
