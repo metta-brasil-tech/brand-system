@@ -15,10 +15,11 @@
   font-display: swap;
 }
 
-/* Zalando Sans Expanded — fallback oficial pra PPTX/Google Slides/Canva
-   Variable font OFL, eixos compatíveis com SF Pro Expanded (wght 200-900, wdth Condensed→Expanded)
-   Substitui Roboto Flex (deprecated em 2026-05-12) */
-@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+/* Fallbacks oficiais (PPTX/Google Slides/Canva e plataformas sem SF Pro) — lógica de pares:
+     · Zalando Sans Expanded → fallback de SF Pro Expanded (títulos, H1, display, CTAs, labels UPPERCASE)
+     · Inter                 → fallback de SF Pro Regular (body, subtítulos, parágrafos, captions)
+   Roboto Flex deprecated em 2026-05-12. Atualizado 2026-05-13. */
+@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&family=Inter:wght@100..900&display=swap');
 
 /* TIER 1 — REFERENCE TOKENS */
 :root {
@@ -48,11 +49,18 @@
   --metta-ref-opacity-state-focus:   0.12;
   --metta-ref-opacity-state-pressed: 0.16;
 
-  /* Typeface — primária SF Pro Variable · fallback Zalando Sans Expanded (PPTX/Google Slides/Canva)
-     Roboto Flex foi deprecated em 2026-05-12 — Zalando Sans Expanded é a fonte de fallback oficial */
-  --metta-ref-typeface-brand:    'SF Pro';
-  --metta-ref-typeface-fallback: 'Zalando Sans Expanded';
-  --metta-ref-typeface-mono:     ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* Typeface — lógica de pares (atualizada 2026-05-13)
+     Primária: SF Pro Variable (cobre Expanded wdth 132% e Regular wdth 100%)
+     Fallbacks distintos por eixo:
+       · Expanded (títulos/CTAs/labels) → Zalando Sans Expanded
+       · Regular  (body/subtítulos)     → Inter
+     Roboto Flex deprecated em 2026-05-12. */
+  --metta-ref-typeface-brand:             'SF Pro';
+  --metta-ref-typeface-fallback-expanded: 'Zalando Sans Expanded';
+  --metta-ref-typeface-fallback-regular:  'Inter';
+  /* Alias retrocompatível — aponta pra fallback-regular (uso default em body) */
+  --metta-ref-typeface-fallback:          var(--metta-ref-typeface-fallback-regular);
+  --metta-ref-typeface-mono:              ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Axes raw */
   --metta-ref-axis-wdth-regular:  100;     --metta-ref-axis-wdth-expanded: 132;
