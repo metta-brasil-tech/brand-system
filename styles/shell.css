@@ -684,8 +684,8 @@ a.topbar-menu-item,
 /* --- Gallery tiles (logos, símbolos, assinaturas) --- */
 .dlm-tab-body[data-display="gallery"] {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 6px;
   padding: 8px;
 }
 .dlm-tile {
@@ -712,7 +712,7 @@ a.topbar-menu-item,
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 10px;
   /* Xadrez sutil pra deixar logos brancos visíveis */
   background-color: var(--metta-sys-color-surface);
   background-image:
@@ -731,11 +731,18 @@ a.topbar-menu-item,
 .dlm-tile-foot {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
+  gap: 8px;
+  padding: 6px 8px;
   border-top: 1px solid var(--metta-sys-color-outline-variant);
   background: var(--metta-sys-color-surface);
 }
+.dlm-tile-foot .dlm-checkbox {
+  width: 14px;
+  height: 14px;
+  border-width: 1.4px;
+  border-radius: 4px;
+}
+.dlm-tile-foot .dlm-checkbox svg { width: 10px; height: 10px; }
 .dlm-tile-info {
   flex: 1;
   display: flex;
@@ -744,23 +751,24 @@ a.topbar-menu-item,
   min-width: 0;
 }
 .dlm-tile-label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 540;
   letter-spacing: -0.005em;
+  line-height: 1.25;
   color: var(--metta-sys-color-on-surface);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .dlm-tile-size {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--metta-sys-color-on-surface-variant);
   font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 640px) {
   .dlm-tab-body[data-display="gallery"] {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
   }
 }
 
