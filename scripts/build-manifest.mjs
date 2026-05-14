@@ -183,7 +183,7 @@ async function buildAssetTabPerFileMatched(opts) {
     for (const f of previewFiles) previewByName[f.name] = f.path;
   }
   const sections = primaryFiles
-    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }))
     .map(f => ({
       id: f.name.replace(/\.[^.]+$/, ''),
       label: labelFn ? labelFn(f.name) : f.name.replace(/\.[^.]+$/, ''),
@@ -198,6 +198,19 @@ async function buildAssetTabPerFileMatched(opts) {
     totalBytes: sumSize(primaryFiles),
     fileCount: primaryFiles.length
   };
+}
+
+// Label humano genérico: remove prefixo conhecido, troca hífens, capitaliza
+function makePieceLabel(filename, stripPrefixes = []) {
+  let base = filename.replace(/\.[^.]+$/, '');
+  for (const p of stripPrefixes) {
+    const re = new RegExp(`^${p}-`, 'i');
+    while (re.test(base)) base = base.replace(re, '');
+  }
+  // "ad-a-cliente-na-loja" → "ad a cliente na loja" → "Cliente na loja" (após strip)
+  base = base.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+  // Capitaliza primeira letra
+  return base.charAt(0).toUpperCase() + base.slice(1);
 }
 
 // Cada arquivo = 1 section selecionável (com preview visual no modal)
@@ -276,34 +289,34 @@ async function main() {
 
   log.group('Grupo: Catálogo de Aplicações');
   const appsGroup = await buildGroup('aplicacoes', 'Catálogo de Aplicações', [
-    { id: 'ads', builder: () => buildAssetTabFromSubfolders({
+    { id: 'ads', builder: () => buildAssetTabPerFileMatched({
       id: 'ads', label: 'Anúncios',
       dir: join(ASSETS_DIR, 'applications', 'ads'),
-      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
-      gallery: true, previewFrom: 'thumbs-sibling'
+      primarySubdir: 'mid', previewSubdir: 'thumbs',
+      labelFn: (n) => makePieceLabel(n, ['ad-a', 'ad-b', 'ad-c', 'ad-d', 'ad-e', 'ad-f', 'ad-g', 'ad-h', 'ad-i', 'ad-j', 'ad'])
     })},
     { id: 'carrosseis', builder: () => buildAssetTabFromSubfolders({
       id: 'carrosseis', label: 'Carrosséis',
       dir: join(ASSETS_DIR, 'applications', 'carrosseis'),
       gallery: true, humanize: true
     })},
-    { id: 'posters', builder: () => buildAssetTabFromSubfolders({
+    { id: 'posters', builder: () => buildAssetTabPerFileMatched({
       id: 'posters', label: 'Posters',
       dir: join(ASSETS_DIR, 'applications', 'posters'),
-      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
-      gallery: true, previewFrom: 'thumbs-sibling'
+      primarySubdir: 'mid', previewSubdir: 'thumbs',
+      labelFn: (n) => makePieceLabel(n, ['poster-poster', 'poster'])
     })},
-    { id: 'slides', builder: () => buildAssetTabFromSubfolders({
+    { id: 'slides', builder: () => buildAssetTabPerFileMatched({
       id: 'slides', label: 'Slides',
       dir: join(ASSETS_DIR, 'applications', 'slides'),
-      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
-      gallery: true, previewFrom: 'thumbs-sibling'
+      primarySubdir: 'mid', previewSubdir: 'thumbs',
+      labelFn: (n) => makePieceLabel(n, ['slide-slide', 'slide'])
     })},
-    { id: 'telas', builder: () => buildAssetTabFromSubfolders({
+    { id: 'telas', builder: () => buildAssetTabPerFileMatched({
       id: 'telas', label: 'Telas / LPs',
       dir: join(ASSETS_DIR, 'applications', 'telas'),
-      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
-      gallery: true, previewFrom: 'thumbs-sibling'
+      primarySubdir: 'mid', previewSubdir: 'thumbs',
+      labelFn: (n) => makePieceLabel(n, ['tela-tela', 'tela'])
     })}
   ]);
 

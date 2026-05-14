@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-14T00:56:08.819Z",
-  "grandTotalBytes": 285416719,
-  "grandTotalFiles": 1270,
+  "generatedAt": "2026-05-14T01:07:49.599Z",
+  "grandTotalBytes": 247059676,
+  "grandTotalFiles": 1168,
   "grandTotalTabs": 18,
   "groups": [
     {
@@ -2095,716 +2095,974 @@
           "displayMode": "gallery",
           "sections": [
             {
-              "id": "mid",
-              "label": "HQ",
+              "id": "ad-a-cliente-na-loja-nao-fecha",
+              "label": "Cliente na loja nao fecha",
               "files": [
                 {
                   "name": "ad-a-cliente-na-loja-nao-fecha.svg",
                   "path": "assets/applications/ads/mid/ad-a-cliente-na-loja-nao-fecha.svg",
                   "sizeBytes": 3734099
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-cliente-na-loja-nao-fecha.svg",
+              "totalBytes": 3734099,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-diagnostico-1h-gratuito",
+              "label": "Diagnostico 1h gratuito",
+              "files": [
                 {
                   "name": "ad-a-diagnostico-1h-gratuito.svg",
                   "path": "assets/applications/ads/mid/ad-a-diagnostico-1h-gratuito.svg",
                   "sizeBytes": 6174440
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-diagnostico-1h-gratuito.svg",
+              "totalBytes": 6174440,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-empresario-multiplique-seu-resultado",
+              "label": "Empresario multiplique seu resultado",
+              "files": [
                 {
                   "name": "ad-a-empresario-multiplique-seu-resultado.svg",
                   "path": "assets/applications/ads/mid/ad-a-empresario-multiplique-seu-resultado.svg",
                   "sizeBytes": 693151
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-empresario-multiplique-seu-resultado.svg",
+              "totalBytes": 693151,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-empresario-pare-de-apagar-incendio",
+              "label": "Empresario pare de apagar incendio",
+              "files": [
                 {
                   "name": "ad-a-empresario-pare-de-apagar-incendio.svg",
                   "path": "assets/applications/ads/mid/ad-a-empresario-pare-de-apagar-incendio.svg",
                   "sizeBytes": 631886
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-empresario-pare-de-apagar-incendio.svg",
+              "totalBytes": 631886,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-empresario-pare-de-vigiar",
+              "label": "Empresario pare de vigiar",
+              "files": [
                 {
                   "name": "ad-a-empresario-pare-de-vigiar.svg",
                   "path": "assets/applications/ads/mid/ad-a-empresario-pare-de-vigiar.svg",
                   "sizeBytes": 447648
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-empresario-pare-de-vigiar.svg",
+              "totalBytes": 447648,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-empresario-se-a-sua-rotina",
+              "label": "Empresario se a sua rotina",
+              "files": [
                 {
                   "name": "ad-a-empresario-se-a-sua-rotina.svg",
                   "path": "assets/applications/ads/mid/ad-a-empresario-se-a-sua-rotina.svg",
                   "sizeBytes": 3288223
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-empresario-se-a-sua-rotina.svg",
+              "totalBytes": 3288223,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-empresario-voce-esta-satisfeito",
+              "label": "Empresario voce esta satisfeito",
+              "files": [
                 {
                   "name": "ad-a-empresario-voce-esta-satisfeito.svg",
                   "path": "assets/applications/ads/mid/ad-a-empresario-voce-esta-satisfeito.svg",
                   "sizeBytes": 2552396
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-empresario-voce-esta-satisfeito.svg",
+              "totalBytes": 2552396,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-empresario-voce-fatura-200-mil",
+              "label": "Empresario voce fatura 200 mil",
+              "files": [
                 {
                   "name": "ad-a-empresario-voce-fatura-200-mil.svg",
                   "path": "assets/applications/ads/mid/ad-a-empresario-voce-fatura-200-mil.svg",
                   "sizeBytes": 12948272
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/thumbs/ad-a-empresario-voce-fatura-200-mil.svg",
+              "totalBytes": 12948272,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-eu-quero-voce-fora",
+              "label": "Eu quero voce fora",
+              "files": [
                 {
                   "name": "ad-a-eu-quero-voce-fora.svg",
                   "path": "assets/applications/ads/mid/ad-a-eu-quero-voce-fora.svg",
                   "sizeBytes": 755788
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-eu-quero-voce-fora.svg",
+              "totalBytes": 755788,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-extraia-o-potencial-maximo",
+              "label": "Extraia o potencial maximo",
+              "files": [
                 {
                   "name": "ad-a-extraia-o-potencial-maximo.svg",
                   "path": "assets/applications/ads/mid/ad-a-extraia-o-potencial-maximo.svg",
                   "sizeBytes": 945093
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-extraia-o-potencial-maximo.svg",
+              "totalBytes": 945093,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-gerindo-ou-esperando",
+              "label": "Gerindo ou esperando",
+              "files": [
                 {
                   "name": "ad-a-gerindo-ou-esperando.svg",
                   "path": "assets/applications/ads/mid/ad-a-gerindo-ou-esperando.svg",
                   "sizeBytes": 8444638
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-gerindo-ou-esperando.svg",
+              "totalBytes": 8444638,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-me-de-60-minutos",
+              "label": "Me de 60 minutos",
+              "files": [
                 {
                   "name": "ad-a-me-de-60-minutos.svg",
                   "path": "assets/applications/ads/mid/ad-a-me-de-60-minutos.svg",
                   "sizeBytes": 2665832
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-me-de-60-minutos.svg",
+              "totalBytes": 2665832,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-o-segredo-para-dobrar-sua-conversao",
+              "label": "O segredo para dobrar sua conversao",
+              "files": [
                 {
                   "name": "ad-a-o-segredo-para-dobrar-sua-conversao.svg",
                   "path": "assets/applications/ads/mid/ad-a-o-segredo-para-dobrar-sua-conversao.svg",
                   "sizeBytes": 918528
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-o-segredo-para-dobrar-sua-conversao.svg",
+              "totalBytes": 918528,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-operacao-funciona-sem-voce",
+              "label": "Operacao funciona sem voce",
+              "files": [
                 {
                   "name": "ad-a-operacao-funciona-sem-voce.svg",
                   "path": "assets/applications/ads/mid/ad-a-operacao-funciona-sem-voce.svg",
                   "sizeBytes": 10449069
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-operacao-funciona-sem-voce.svg",
+              "totalBytes": 10449069,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-pare-de-agir-como-um-paramedico",
+              "label": "Pare de agir como um paramedico",
+              "files": [
                 {
                   "name": "ad-a-pare-de-agir-como-um-paramedico.svg",
                   "path": "assets/applications/ads/mid/ad-a-pare-de-agir-como-um-paramedico.svg",
                   "sizeBytes": 187676
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-pare-de-agir-como-um-paramedico.svg",
+              "totalBytes": 187676,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-sem-meta-rotina-processo",
+              "label": "Sem meta rotina processo",
+              "files": [
                 {
                   "name": "ad-a-sem-meta-rotina-processo.svg",
                   "path": "assets/applications/ads/mid/ad-a-sem-meta-rotina-processo.svg",
                   "sizeBytes": 4074384
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-sem-meta-rotina-processo.svg",
+              "totalBytes": 4074384,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-sem-processo-fica-pra-tras",
+              "label": "Sem processo fica pra tras",
+              "files": [
                 {
                   "name": "ad-a-sem-processo-fica-pra-tras.svg",
                   "path": "assets/applications/ads/mid/ad-a-sem-processo-fica-pra-tras.svg",
                   "sizeBytes": 3218568
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-sem-processo-fica-pra-tras.svg",
+              "totalBytes": 3218568,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-servicos-300-milmes",
+              "label": "Servicos 300 milmes",
+              "files": [
                 {
                   "name": "ad-a-servicos-300-milmes.svg",
                   "path": "assets/applications/ads/mid/ad-a-servicos-300-milmes.svg",
                   "sizeBytes": 3061222
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-servicos-300-milmes.svg",
+              "totalBytes": 3061222,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-servicos-vender-30-mais",
+              "label": "Servicos vender 30 mais",
+              "files": [
                 {
                   "name": "ad-a-servicos-vender-30-mais.svg",
                   "path": "assets/applications/ads/mid/ad-a-servicos-vender-30-mais.svg",
                   "sizeBytes": 2220826
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-servicos-vender-30-mais.svg",
+              "totalBytes": 2220826,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-sua-operacao-comercial-nao-precisa",
+              "label": "Sua operacao comercial nao precisa",
+              "files": [
                 {
                   "name": "ad-a-sua-operacao-comercial-nao-precisa.svg",
                   "path": "assets/applications/ads/mid/ad-a-sua-operacao-comercial-nao-precisa.svg",
                   "sizeBytes": 1609840
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-sua-operacao-comercial-nao-precisa.svg",
+              "totalBytes": 1609840,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-talento-ou-prisao-de-cnpj",
+              "label": "Talento ou prisao de cnpj",
+              "files": [
                 {
                   "name": "ad-a-talento-ou-prisao-de-cnpj.svg",
                   "path": "assets/applications/ads/mid/ad-a-talento-ou-prisao-de-cnpj.svg",
                   "sizeBytes": 1982328
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-talento-ou-prisao-de-cnpj.svg",
+              "totalBytes": 1982328,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-transforme-o-desempenho-do-seu-time",
+              "label": "Transforme o desempenho do seu time",
+              "files": [
                 {
                   "name": "ad-a-transforme-o-desempenho-do-seu-time.svg",
                   "path": "assets/applications/ads/mid/ad-a-transforme-o-desempenho-do-seu-time.svg",
                   "sizeBytes": 6386183
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-transforme-o-desempenho-do-seu-time.svg",
+              "totalBytes": 6386183,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-a-voce-paga-o-salario-de-um-time",
+              "label": "Voce paga o salario de um time",
+              "files": [
                 {
                   "name": "ad-a-voce-paga-o-salario-de-um-time.svg",
                   "path": "assets/applications/ads/mid/ad-a-voce-paga-o-salario-de-um-time.svg",
                   "sizeBytes": 3872444
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-a-voce-paga-o-salario-de-um-time.svg",
+              "totalBytes": 3872444,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-60-min-pra-tirar-do-balcao",
+              "label": "60 min pra tirar do balcao",
+              "files": [
                 {
                   "name": "ad-b-60-min-pra-tirar-do-balcao.svg",
                   "path": "assets/applications/ads/mid/ad-b-60-min-pra-tirar-do-balcao.svg",
                   "sizeBytes": 1125224
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-60-min-pra-tirar-do-balcao.svg",
+              "totalBytes": 1125224,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-convite-loja-nas-costas",
+              "label": "Convite loja nas costas",
+              "files": [
                 {
                   "name": "ad-b-convite-loja-nas-costas.svg",
                   "path": "assets/applications/ads/mid/ad-b-convite-loja-nas-costas.svg",
                   "sizeBytes": 2161664
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-convite-loja-nas-costas.svg",
+              "totalBytes": 2161664,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-funcionario-do-proprio-negocio",
+              "label": "Funcionario do proprio negocio",
+              "files": [
                 {
                   "name": "ad-b-funcionario-do-proprio-negocio.svg",
                   "path": "assets/applications/ads/mid/ad-b-funcionario-do-proprio-negocio.svg",
                   "sizeBytes": 7432879
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-funcionario-do-proprio-negocio.svg",
+              "totalBytes": 7432879,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-limite-da-exaustao",
+              "label": "Limite da exaustao",
+              "files": [
                 {
                   "name": "ad-b-limite-da-exaustao.svg",
                   "path": "assets/applications/ads/mid/ad-b-limite-da-exaustao.svg",
                   "sizeBytes": 8118172
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-limite-da-exaustao.svg",
+              "totalBytes": 8118172,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-maquina-que-bate-meta-todo-mes",
+              "label": "Maquina que bate meta todo mes",
+              "files": [
                 {
                   "name": "ad-b-maquina-que-bate-meta-todo-mes.svg",
                   "path": "assets/applications/ads/mid/ad-b-maquina-que-bate-meta-todo-mes.svg",
                   "sizeBytes": 9849569
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-maquina-que-bate-meta-todo-mes.svg",
+              "totalBytes": 9849569,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-mesmo-metodo-grandes-redes",
+              "label": "Mesmo metodo grandes redes",
+              "files": [
                 {
                   "name": "ad-b-mesmo-metodo-grandes-redes.svg",
                   "path": "assets/applications/ads/mid/ad-b-mesmo-metodo-grandes-redes.svg",
                   "sizeBytes": 4770807
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-mesmo-metodo-grandes-redes.svg",
+              "totalBytes": 4770807,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-refem-operacional-ha-12-meses",
+              "label": "Refem operacional ha 12 meses",
+              "files": [
                 {
                   "name": "ad-b-refem-operacional-ha-12-meses.svg",
                   "path": "assets/applications/ads/mid/ad-b-refem-operacional-ha-12-meses.svg",
                   "sizeBytes": 4169079
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-refem-operacional-ha-12-meses.svg",
+              "totalBytes": 4169079,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-tirador-de-pedido",
+              "label": "Tirador de pedido",
+              "files": [
                 {
                   "name": "ad-b-tirador-de-pedido.svg",
                   "path": "assets/applications/ads/mid/ad-b-tirador-de-pedido.svg",
                   "sizeBytes": 2179241
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-tirador-de-pedido.svg",
+              "totalBytes": 2179241,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-b-ultimas-vagas-sessao",
+              "label": "Ultimas vagas sessao",
+              "files": [
                 {
                   "name": "ad-b-ultimas-vagas-sessao.svg",
                   "path": "assets/applications/ads/mid/ad-b-ultimas-vagas-sessao.svg",
                   "sizeBytes": 5135043
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-b-ultimas-vagas-sessao.svg",
+              "totalBytes": 5135043,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-c-apaga-incendio-ha-6-meses",
+              "label": "Apaga incendio ha 6 meses",
+              "files": [
                 {
                   "name": "ad-c-apaga-incendio-ha-6-meses.svg",
                   "path": "assets/applications/ads/mid/ad-c-apaga-incendio-ha-6-meses.svg",
                   "sizeBytes": 201907
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-c-apaga-incendio-ha-6-meses.svg",
+              "totalBytes": 201907,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-c-aumentar-lucro-em-50",
+              "label": "Aumentar lucro em 50",
+              "files": [
                 {
                   "name": "ad-c-aumentar-lucro-em-50.svg",
                   "path": "assets/applications/ads/mid/ad-c-aumentar-lucro-em-50.svg",
                   "sizeBytes": 189631
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-c-aumentar-lucro-em-50.svg",
+              "totalBytes": 189631,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-c-metta-lucro-tipo-gigante",
+              "label": "Metta lucro tipo gigante",
+              "files": [
                 {
                   "name": "ad-c-metta-lucro-tipo-gigante.svg",
                   "path": "assets/applications/ads/mid/ad-c-metta-lucro-tipo-gigante.svg",
                   "sizeBytes": 7457194
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-c-metta-lucro-tipo-gigante.svg",
+              "totalBytes": 7457194,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-c-time-bater-meta-em-3-meses",
+              "label": "Time bater meta em 3 meses",
+              "files": [
                 {
                   "name": "ad-c-time-bater-meta-em-3-meses.svg",
                   "path": "assets/applications/ads/mid/ad-c-time-bater-meta-em-3-meses.svg",
                   "sizeBytes": 2405111
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-c-time-bater-meta-em-3-meses.svg",
+              "totalBytes": 2405111,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-d-engenharia-reversa-do-melhor-vendedor",
+              "label": "Engenharia reversa do melhor vendedor",
+              "files": [
                 {
                   "name": "ad-d-engenharia-reversa-do-melhor-vendedor.svg",
                   "path": "assets/applications/ads/mid/ad-d-engenharia-reversa-do-melhor-vendedor.svg",
                   "sizeBytes": 2650293
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-d-engenharia-reversa-do-melhor-vendedor.svg",
+              "totalBytes": 2650293,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-d-metodo-replicavel-em-60-min",
+              "label": "Metodo replicavel em 60 min",
+              "files": [
                 {
                   "name": "ad-d-metodo-replicavel-em-60-min.svg",
                   "path": "assets/applications/ads/mid/ad-d-metodo-replicavel-em-60-min.svg",
                   "sizeBytes": 1566935
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-d-metodo-replicavel-em-60-min.svg",
+              "totalBytes": 1566935,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-d-metodo-tira-a-loja-das-costas",
+              "label": "Metodo tira a loja das costas",
+              "files": [
                 {
                   "name": "ad-d-metodo-tira-a-loja-das-costas.svg",
                   "path": "assets/applications/ads/mid/ad-d-metodo-tira-a-loja-das-costas.svg",
                   "sizeBytes": 662291
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-d-metodo-tira-a-loja-das-costas.svg",
+              "totalBytes": 662291,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-d-palestras-nao-batem-meta",
+              "label": "Palestras nao batem meta",
+              "files": [
                 {
                   "name": "ad-d-palestras-nao-batem-meta.svg",
                   "path": "assets/applications/ads/mid/ad-d-palestras-nao-batem-meta.svg",
                   "sizeBytes": 2525916
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-d-palestras-nao-batem-meta.svg",
+              "totalBytes": 2525916,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-d-prisao-do-so-funciona-comigo",
+              "label": "Prisao do so funciona comigo",
+              "files": [
                 {
                   "name": "ad-d-prisao-do-so-funciona-comigo.svg",
                   "path": "assets/applications/ads/mid/ad-d-prisao-do-so-funciona-comigo.svg",
                   "sizeBytes": 10517667
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/thumbs/ad-d-prisao-do-so-funciona-comigo.svg",
+              "totalBytes": 10517667,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-d-risco-100-nosso",
+              "label": "Risco 100 nosso",
+              "files": [
                 {
                   "name": "ad-d-risco-100-nosso.svg",
                   "path": "assets/applications/ads/mid/ad-d-risco-100-nosso.svg",
                   "sizeBytes": 3760997
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-d-risco-100-nosso.svg",
+              "totalBytes": 3760997,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-dark-carta-convite-sistema-pra-poucos-empresarios",
+              "label": "Dark carta convite sistema pra poucos empresarios",
+              "files": [
                 {
                   "name": "ad-dark-carta-convite-sistema-pra-poucos-empresarios.svg",
                   "path": "assets/applications/ads/mid/ad-dark-carta-convite-sistema-pra-poucos-empresarios.svg",
                   "sizeBytes": 462269
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-dark-carta-convite-sistema-pra-poucos-empresarios.svg",
+              "totalBytes": 462269,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-dark-colagem-craque-de-vendas-quebra-cabeca",
+              "label": "Dark colagem craque de vendas quebra cabeca",
+              "files": [
                 {
                   "name": "ad-dark-colagem-craque-de-vendas-quebra-cabeca.svg",
                   "path": "assets/applications/ads/mid/ad-dark-colagem-craque-de-vendas-quebra-cabeca.svg",
                   "sizeBytes": 1219417
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-dark-colagem-craque-de-vendas-quebra-cabeca.svg",
+              "totalBytes": 1219417,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-dark-objeto-multiplique-o-melhor-vendedor-domino",
+              "label": "Dark objeto multiplique o melhor vendedor domino",
+              "files": [
                 {
                   "name": "ad-dark-objeto-multiplique-o-melhor-vendedor-domino.svg",
                   "path": "assets/applications/ads/mid/ad-dark-objeto-multiplique-o-melhor-vendedor-domino.svg",
                   "sizeBytes": 233852
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-dark-objeto-multiplique-o-melhor-vendedor-domino.svg",
+              "totalBytes": 233852,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-dark-objeto-queime-o-script",
+              "label": "Dark objeto queime o script",
+              "files": [
                 {
                   "name": "ad-dark-objeto-queime-o-script.svg",
                   "path": "assets/applications/ads/mid/ad-dark-objeto-queime-o-script.svg",
                   "sizeBytes": 523033
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-dark-objeto-queime-o-script.svg",
+              "totalBytes": 523033,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-h-perde-vendas-todo-dia",
+              "label": "Perde vendas todo dia",
+              "files": [
                 {
                   "name": "ad-h-perde-vendas-todo-dia.svg",
                   "path": "assets/applications/ads/mid/ad-h-perde-vendas-todo-dia.svg",
                   "sizeBytes": 3636864
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-h-perde-vendas-todo-dia.svg",
+              "totalBytes": 3636864,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-i-anos-tentando-1-hora-ouvindo",
+              "label": "Anos tentando 1 hora ouvindo",
+              "files": [
                 {
                   "name": "ad-i-anos-tentando-1-hora-ouvindo.svg",
                   "path": "assets/applications/ads/mid/ad-i-anos-tentando-1-hora-ouvindo.svg",
                   "sizeBytes": 11899936
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/thumbs/ad-i-anos-tentando-1-hora-ouvindo.svg",
+              "totalBytes": 11899936,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-i-varejo-que-conhece-o-cliente",
+              "label": "Varejo que conhece o cliente",
+              "files": [
                 {
                   "name": "ad-i-varejo-que-conhece-o-cliente.svg",
                   "path": "assets/applications/ads/mid/ad-i-varejo-que-conhece-o-cliente.svg",
                   "sizeBytes": 2524702
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-i-varejo-que-conhece-o-cliente.svg",
+              "totalBytes": 2524702,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-k-convite-reservado-plano-b",
+              "label": "K convite reservado plano b",
+              "files": [
                 {
                   "name": "ad-k-convite-reservado-plano-b.svg",
                   "path": "assets/applications/ads/mid/ad-k-convite-reservado-plano-b.svg",
                   "sizeBytes": 2688820
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-k-convite-reservado-plano-b.svg",
+              "totalBytes": 2688820,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-light-surreal-jantar-com-filhos-vs-reuniao",
+              "label": "Light surreal jantar com filhos vs reuniao",
+              "files": [
                 {
                   "name": "ad-light-surreal-jantar-com-filhos-vs-reuniao.svg",
                   "path": "assets/applications/ads/mid/ad-light-surreal-jantar-com-filhos-vs-reuniao.svg",
                   "sizeBytes": 3862913
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-light-surreal-jantar-com-filhos-vs-reuniao.svg",
+              "totalBytes": 3862913,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-light-surreal-negocio-saude-familia",
+              "label": "Light surreal negocio saude familia",
+              "files": [
                 {
                   "name": "ad-light-surreal-negocio-saude-familia.svg",
                   "path": "assets/applications/ads/mid/ad-light-surreal-negocio-saude-familia.svg",
                   "sizeBytes": 3783368
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-light-surreal-negocio-saude-familia.svg",
+              "totalBytes": 3783368,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-light-surreal-processo-morre-em-30-dias",
+              "label": "Light surreal processo morre em 30 dias",
+              "files": [
                 {
                   "name": "ad-light-surreal-processo-morre-em-30-dias.svg",
                   "path": "assets/applications/ads/mid/ad-light-surreal-processo-morre-em-30-dias.svg",
                   "sizeBytes": 4407883
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-light-surreal-processo-morre-em-30-dias.svg",
+              "totalBytes": 4407883,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-light-surreal-varejistas-que-dobram-de-tamanho",
+              "label": "Light surreal varejistas que dobram de tamanho",
+              "files": [
                 {
                   "name": "ad-light-surreal-varejistas-que-dobram-de-tamanho.svg",
                   "path": "assets/applications/ads/mid/ad-light-surreal-varejistas-que-dobram-de-tamanho.svg",
                   "sizeBytes": 1730817
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-light-surreal-varejistas-que-dobram-de-tamanho.svg",
+              "totalBytes": 1730817,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-light-tipo-faturamento-e-ego-lucro-e-liberdade",
+              "label": "Light tipo faturamento e ego lucro e liberdade",
+              "files": [
                 {
                   "name": "ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.svg",
                   "path": "assets/applications/ads/mid/ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.svg",
                   "sizeBytes": 162840
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.svg",
+              "totalBytes": 162840,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-logo-wall-1000-empresas-r85bi",
+              "label": "Logo wall 1000 empresas r85bi",
+              "files": [
                 {
                   "name": "ad-logo-wall-1000-empresas-r85bi.svg",
                   "path": "assets/applications/ads/mid/ad-logo-wall-1000-empresas-r85bi.svg",
                   "sizeBytes": 1960999
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-logo-wall-1000-empresas-r85bi.svg",
+              "totalBytes": 1960999,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-news-card-risco-zero-varejo",
+              "label": "News card risco zero varejo",
+              "files": [
                 {
                   "name": "ad-news-card-risco-zero-varejo.svg",
                   "path": "assets/applications/ads/mid/ad-news-card-risco-zero-varejo.svg",
                   "sizeBytes": 2500582
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-news-card-risco-zero-varejo.svg",
+              "totalBytes": 2500582,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-bloco-aumentar-lucro-em-50",
+              "label": "Yellow bloco aumentar lucro em 50",
+              "files": [
                 {
                   "name": "ad-yellow-bloco-aumentar-lucro-em-50.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-bloco-aumentar-lucro-em-50.svg",
                   "sizeBytes": 3589123
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-bloco-aumentar-lucro-em-50.svg",
+              "totalBytes": 3589123,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-bloco-equipe-precisa-de-sistema",
+              "label": "Yellow bloco equipe precisa de sistema",
+              "files": [
                 {
                   "name": "ad-yellow-bloco-equipe-precisa-de-sistema.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-bloco-equipe-precisa-de-sistema.svg",
                   "sizeBytes": 3739297
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-bloco-equipe-precisa-de-sistema.svg",
+              "totalBytes": 3739297,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-bloco-inteligencia-comercial-checklist",
+              "label": "Yellow bloco inteligencia comercial checklist",
+              "files": [
                 {
                   "name": "ad-yellow-bloco-inteligencia-comercial-checklist.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-bloco-inteligencia-comercial-checklist.svg",
                   "sizeBytes": 2509652
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-bloco-inteligencia-comercial-checklist.svg",
+              "totalBytes": 2509652,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-bloco-mentoria-metodologia-lucro",
+              "label": "Yellow bloco mentoria metodologia lucro",
+              "files": [
                 {
                   "name": "ad-yellow-bloco-mentoria-metodologia-lucro.webp",
                   "path": "assets/applications/ads/mid/ad-yellow-bloco-mentoria-metodologia-lucro.webp",
                   "sizeBytes": 152522
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/thumbs/ad-yellow-bloco-mentoria-metodologia-lucro.webp",
+              "totalBytes": 152522,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-bloco-nao-consegue-sair-da-operacao",
+              "label": "Yellow bloco nao consegue sair da operacao",
+              "files": [
                 {
                   "name": "ad-yellow-bloco-nao-consegue-sair-da-operacao.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-bloco-nao-consegue-sair-da-operacao.svg",
                   "sizeBytes": 7482260
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-bloco-nao-consegue-sair-da-operacao.svg",
+              "totalBytes": 7482260,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-bloco-troque-motivacao-por-processo",
+              "label": "Yellow bloco troque motivacao por processo",
+              "files": [
                 {
                   "name": "ad-yellow-bloco-troque-motivacao-por-processo.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-bloco-troque-motivacao-por-processo.svg",
                   "sizeBytes": 2251800
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-bloco-troque-motivacao-por-processo.svg",
+              "totalBytes": 2251800,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-draw-pressao-modo-sobrevivencia",
+              "label": "Yellow draw pressao modo sobrevivencia",
+              "files": [
                 {
                   "name": "ad-yellow-draw-pressao-modo-sobrevivencia.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-draw-pressao-modo-sobrevivencia.svg",
                   "sizeBytes": 1557040
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-draw-pressao-modo-sobrevivencia.svg",
+              "totalBytes": 1557040,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-editorial-r85bi-mesmo-time",
+              "label": "Yellow editorial r85bi mesmo time",
+              "files": [
                 {
                   "name": "ad-yellow-editorial-r85bi-mesmo-time.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-editorial-r85bi-mesmo-time.svg",
                   "sizeBytes": 1076287
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-editorial-r85bi-mesmo-time.svg",
+              "totalBytes": 1076287,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-frame-servicos-aguenta-12-meses",
+              "label": "Yellow frame servicos aguenta 12 meses",
+              "files": [
                 {
                   "name": "ad-yellow-frame-servicos-aguenta-12-meses.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-frame-servicos-aguenta-12-meses.svg",
                   "sizeBytes": 1333508
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-frame-servicos-aguenta-12-meses.svg",
+              "totalBytes": 1333508,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-frame-servicos-comercial-de-gente-grande",
+              "label": "Yellow frame servicos comercial de gente grande",
+              "files": [
                 {
                   "name": "ad-yellow-frame-servicos-comercial-de-gente-grande.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-frame-servicos-comercial-de-gente-grande.svg",
                   "sizeBytes": 4690875
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-frame-servicos-comercial-de-gente-grande.svg",
+              "totalBytes": 4690875,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-frame-vendas-dependem-de-voce",
+              "label": "Yellow frame vendas dependem de voce",
+              "files": [
                 {
                   "name": "ad-yellow-frame-vendas-dependem-de-voce.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-frame-vendas-dependem-de-voce.svg",
                   "sizeBytes": 1209289
-                },
+                }
+              ],
+              "preview": "assets/applications/ads/mid/ad-yellow-frame-vendas-dependem-de-voce.svg",
+              "totalBytes": 1209289,
+              "fileCount": 1
+            },
+            {
+              "id": "ad-yellow-split-chave-da-liberdade-balcao",
+              "label": "Yellow split chave da liberdade balcao",
+              "files": [
                 {
                   "name": "ad-yellow-split-chave-da-liberdade-balcao.svg",
                   "path": "assets/applications/ads/mid/ad-yellow-split-chave-da-liberdade-balcao.svg",
                   "sizeBytes": 6851190
                 }
               ],
-              "totalBytes": 236183292,
-              "fileCount": 69,
-              "preview": "assets/applications/ads/thumbs/ad-a-cliente-na-loja-nao-fecha.webp"
-            },
-            {
-              "id": "thumbs",
-              "label": "Thumbs",
-              "files": [
-                {
-                  "name": "ad-a-cliente-na-loja-nao-fecha.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-cliente-na-loja-nao-fecha.webp",
-                  "sizeBytes": 38432
-                },
-                {
-                  "name": "ad-a-diagnostico-1h-gratuito.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-diagnostico-1h-gratuito.webp",
-                  "sizeBytes": 35580
-                },
-                {
-                  "name": "ad-a-empresario-multiplique-seu-resultado.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-empresario-multiplique-seu-resultado.webp",
-                  "sizeBytes": 32864
-                },
-                {
-                  "name": "ad-a-empresario-pare-de-apagar-incendio.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-empresario-pare-de-apagar-incendio.webp",
-                  "sizeBytes": 32170
-                },
-                {
-                  "name": "ad-a-empresario-pare-de-vigiar.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-empresario-pare-de-vigiar.webp",
-                  "sizeBytes": 23044
-                },
-                {
-                  "name": "ad-a-empresario-se-a-sua-rotina.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-empresario-se-a-sua-rotina.webp",
-                  "sizeBytes": 37156
-                },
-                {
-                  "name": "ad-a-empresario-voce-esta-satisfeito.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-empresario-voce-esta-satisfeito.webp",
-                  "sizeBytes": 49520
-                },
-                {
-                  "name": "ad-a-empresario-voce-fatura-200-mil.svg",
-                  "path": "assets/applications/ads/thumbs/ad-a-empresario-voce-fatura-200-mil.svg",
-                  "sizeBytes": 12948272
-                },
-                {
-                  "name": "ad-a-eu-quero-voce-fora.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-eu-quero-voce-fora.webp",
-                  "sizeBytes": 40478
-                },
-                {
-                  "name": "ad-a-extraia-o-potencial-maximo.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-extraia-o-potencial-maximo.webp",
-                  "sizeBytes": 64672
-                },
-                {
-                  "name": "ad-a-gerindo-ou-esperando.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-gerindo-ou-esperando.webp",
-                  "sizeBytes": 29050
-                },
-                {
-                  "name": "ad-a-me-de-60-minutos.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-me-de-60-minutos.webp",
-                  "sizeBytes": 32720
-                },
-                {
-                  "name": "ad-a-o-segredo-para-dobrar-sua-conversao.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-o-segredo-para-dobrar-sua-conversao.webp",
-                  "sizeBytes": 25058
-                },
-                {
-                  "name": "ad-a-operacao-funciona-sem-voce.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-operacao-funciona-sem-voce.webp",
-                  "sizeBytes": 40312
-                },
-                {
-                  "name": "ad-a-pare-de-agir-como-um-paramedico.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-pare-de-agir-como-um-paramedico.webp",
-                  "sizeBytes": 14812
-                },
-                {
-                  "name": "ad-a-sem-meta-rotina-processo.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-sem-meta-rotina-processo.webp",
-                  "sizeBytes": 27974
-                },
-                {
-                  "name": "ad-a-sem-processo-fica-pra-tras.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-sem-processo-fica-pra-tras.webp",
-                  "sizeBytes": 46050
-                },
-                {
-                  "name": "ad-a-servicos-300-milmes.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-servicos-300-milmes.webp",
-                  "sizeBytes": 36112
-                },
-                {
-                  "name": "ad-a-servicos-vender-30-mais.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-servicos-vender-30-mais.webp",
-                  "sizeBytes": 48644
-                },
-                {
-                  "name": "ad-a-sua-operacao-comercial-nao-precisa.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-sua-operacao-comercial-nao-precisa.webp",
-                  "sizeBytes": 24236
-                },
-                {
-                  "name": "ad-a-talento-ou-prisao-de-cnpj.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-talento-ou-prisao-de-cnpj.webp",
-                  "sizeBytes": 38866
-                },
-                {
-                  "name": "ad-a-transforme-o-desempenho-do-seu-time.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-transforme-o-desempenho-do-seu-time.webp",
-                  "sizeBytes": 35202
-                },
-                {
-                  "name": "ad-a-voce-paga-o-salario-de-um-time.webp",
-                  "path": "assets/applications/ads/thumbs/ad-a-voce-paga-o-salario-de-um-time.webp",
-                  "sizeBytes": 37372
-                },
-                {
-                  "name": "ad-b-60-min-pra-tirar-do-balcao.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-60-min-pra-tirar-do-balcao.webp",
-                  "sizeBytes": 48450
-                },
-                {
-                  "name": "ad-b-convite-loja-nas-costas.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-convite-loja-nas-costas.webp",
-                  "sizeBytes": 29880
-                },
-                {
-                  "name": "ad-b-funcionario-do-proprio-negocio.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-funcionario-do-proprio-negocio.webp",
-                  "sizeBytes": 32640
-                },
-                {
-                  "name": "ad-b-limite-da-exaustao.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-limite-da-exaustao.webp",
-                  "sizeBytes": 39860
-                },
-                {
-                  "name": "ad-b-maquina-que-bate-meta-todo-mes.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-maquina-que-bate-meta-todo-mes.webp",
-                  "sizeBytes": 34774
-                },
-                {
-                  "name": "ad-b-mesmo-metodo-grandes-redes.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-mesmo-metodo-grandes-redes.webp",
-                  "sizeBytes": 31734
-                },
-                {
-                  "name": "ad-b-refem-operacional-ha-12-meses.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-refem-operacional-ha-12-meses.webp",
-                  "sizeBytes": 36138
-                },
-                {
-                  "name": "ad-b-tirador-de-pedido.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-tirador-de-pedido.webp",
-                  "sizeBytes": 76876
-                },
-                {
-                  "name": "ad-b-ultimas-vagas-sessao.webp",
-                  "path": "assets/applications/ads/thumbs/ad-b-ultimas-vagas-sessao.webp",
-                  "sizeBytes": 33550
-                },
-                {
-                  "name": "ad-c-apaga-incendio-ha-6-meses.webp",
-                  "path": "assets/applications/ads/thumbs/ad-c-apaga-incendio-ha-6-meses.webp",
-                  "sizeBytes": 30972
-                },
-                {
-                  "name": "ad-c-aumentar-lucro-em-50.webp",
-                  "path": "assets/applications/ads/thumbs/ad-c-aumentar-lucro-em-50.webp",
-                  "sizeBytes": 24080
-                },
-                {
-                  "name": "ad-c-metta-lucro-tipo-gigante.webp",
-                  "path": "assets/applications/ads/thumbs/ad-c-metta-lucro-tipo-gigante.webp",
-                  "sizeBytes": 18724
-                },
-                {
-                  "name": "ad-c-time-bater-meta-em-3-meses.webp",
-                  "path": "assets/applications/ads/thumbs/ad-c-time-bater-meta-em-3-meses.webp",
-                  "sizeBytes": 39040
-                },
-                {
-                  "name": "ad-d-engenharia-reversa-do-melhor-vendedor.webp",
-                  "path": "assets/applications/ads/thumbs/ad-d-engenharia-reversa-do-melhor-vendedor.webp",
-                  "sizeBytes": 29124
-                },
-                {
-                  "name": "ad-d-metodo-replicavel-em-60-min.webp",
-                  "path": "assets/applications/ads/thumbs/ad-d-metodo-replicavel-em-60-min.webp",
-                  "sizeBytes": 37508
-                },
-                {
-                  "name": "ad-d-metodo-tira-a-loja-das-costas.webp",
-                  "path": "assets/applications/ads/thumbs/ad-d-metodo-tira-a-loja-das-costas.webp",
-                  "sizeBytes": 60300
-                },
-                {
-                  "name": "ad-d-palestras-nao-batem-meta.webp",
-                  "path": "assets/applications/ads/thumbs/ad-d-palestras-nao-batem-meta.webp",
-                  "sizeBytes": 77574
-                },
-                {
-                  "name": "ad-d-prisao-do-so-funciona-comigo.svg",
-                  "path": "assets/applications/ads/thumbs/ad-d-prisao-do-so-funciona-comigo.svg",
-                  "sizeBytes": 10517667
-                },
-                {
-                  "name": "ad-d-risco-100-nosso.webp",
-                  "path": "assets/applications/ads/thumbs/ad-d-risco-100-nosso.webp",
-                  "sizeBytes": 29678
-                },
-                {
-                  "name": "ad-dark-carta-convite-sistema-pra-poucos-empresarios.webp",
-                  "path": "assets/applications/ads/thumbs/ad-dark-carta-convite-sistema-pra-poucos-empresarios.webp",
-                  "sizeBytes": 29600
-                },
-                {
-                  "name": "ad-dark-colagem-craque-de-vendas-quebra-cabeca.webp",
-                  "path": "assets/applications/ads/thumbs/ad-dark-colagem-craque-de-vendas-quebra-cabeca.webp",
-                  "sizeBytes": 49498
-                },
-                {
-                  "name": "ad-dark-objeto-multiplique-o-melhor-vendedor-domino.webp",
-                  "path": "assets/applications/ads/thumbs/ad-dark-objeto-multiplique-o-melhor-vendedor-domino.webp",
-                  "sizeBytes": 23332
-                },
-                {
-                  "name": "ad-dark-objeto-queime-o-script.webp",
-                  "path": "assets/applications/ads/thumbs/ad-dark-objeto-queime-o-script.webp",
-                  "sizeBytes": 31176
-                },
-                {
-                  "name": "ad-h-perde-vendas-todo-dia.webp",
-                  "path": "assets/applications/ads/thumbs/ad-h-perde-vendas-todo-dia.webp",
-                  "sizeBytes": 27864
-                },
-                {
-                  "name": "ad-i-anos-tentando-1-hora-ouvindo.svg",
-                  "path": "assets/applications/ads/thumbs/ad-i-anos-tentando-1-hora-ouvindo.svg",
-                  "sizeBytes": 11899936
-                },
-                {
-                  "name": "ad-i-varejo-que-conhece-o-cliente.webp",
-                  "path": "assets/applications/ads/thumbs/ad-i-varejo-que-conhece-o-cliente.webp",
-                  "sizeBytes": 43648
-                },
-                {
-                  "name": "ad-k-convite-reservado-plano-b.webp",
-                  "path": "assets/applications/ads/thumbs/ad-k-convite-reservado-plano-b.webp",
-                  "sizeBytes": 34720
-                },
-                {
-                  "name": "ad-light-surreal-jantar-com-filhos-vs-reuniao.webp",
-                  "path": "assets/applications/ads/thumbs/ad-light-surreal-jantar-com-filhos-vs-reuniao.webp",
-                  "sizeBytes": 27218
-                },
-                {
-                  "name": "ad-light-surreal-negocio-saude-familia.webp",
-                  "path": "assets/applications/ads/thumbs/ad-light-surreal-negocio-saude-familia.webp",
-                  "sizeBytes": 36416
-                },
-                {
-                  "name": "ad-light-surreal-processo-morre-em-30-dias.webp",
-                  "path": "assets/applications/ads/thumbs/ad-light-surreal-processo-morre-em-30-dias.webp",
-                  "sizeBytes": 28242
-                },
-                {
-                  "name": "ad-light-surreal-varejistas-que-dobram-de-tamanho.webp",
-                  "path": "assets/applications/ads/thumbs/ad-light-surreal-varejistas-que-dobram-de-tamanho.webp",
-                  "sizeBytes": 24148
-                },
-                {
-                  "name": "ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.webp",
-                  "path": "assets/applications/ads/thumbs/ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.webp",
-                  "sizeBytes": 23040
-                },
-                {
-                  "name": "ad-logo-wall-1000-empresas-r85bi.webp",
-                  "path": "assets/applications/ads/thumbs/ad-logo-wall-1000-empresas-r85bi.webp",
-                  "sizeBytes": 25784
-                },
-                {
-                  "name": "ad-news-card-risco-zero-varejo.webp",
-                  "path": "assets/applications/ads/thumbs/ad-news-card-risco-zero-varejo.webp",
-                  "sizeBytes": 40868
-                },
-                {
-                  "name": "ad-yellow-bloco-aumentar-lucro-em-50.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-bloco-aumentar-lucro-em-50.webp",
-                  "sizeBytes": 34770
-                },
-                {
-                  "name": "ad-yellow-bloco-equipe-precisa-de-sistema.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-bloco-equipe-precisa-de-sistema.webp",
-                  "sizeBytes": 30748
-                },
-                {
-                  "name": "ad-yellow-bloco-inteligencia-comercial-checklist.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-bloco-inteligencia-comercial-checklist.webp",
-                  "sizeBytes": 42826
-                },
-                {
-                  "name": "ad-yellow-bloco-mentoria-metodologia-lucro.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-bloco-mentoria-metodologia-lucro.webp",
-                  "sizeBytes": 36856
-                },
-                {
-                  "name": "ad-yellow-bloco-nao-consegue-sair-da-operacao.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-bloco-nao-consegue-sair-da-operacao.webp",
-                  "sizeBytes": 38532
-                },
-                {
-                  "name": "ad-yellow-bloco-troque-motivacao-por-processo.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-bloco-troque-motivacao-por-processo.webp",
-                  "sizeBytes": 37860
-                },
-                {
-                  "name": "ad-yellow-draw-pressao-modo-sobrevivencia.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-draw-pressao-modo-sobrevivencia.webp",
-                  "sizeBytes": 27726
-                },
-                {
-                  "name": "ad-yellow-editorial-r85bi-mesmo-time.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-editorial-r85bi-mesmo-time.webp",
-                  "sizeBytes": 44926
-                },
-                {
-                  "name": "ad-yellow-frame-servicos-aguenta-12-meses.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-frame-servicos-aguenta-12-meses.webp",
-                  "sizeBytes": 37202
-                },
-                {
-                  "name": "ad-yellow-frame-servicos-comercial-de-gente-grande.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-frame-servicos-comercial-de-gente-grande.webp",
-                  "sizeBytes": 38650
-                },
-                {
-                  "name": "ad-yellow-frame-vendas-dependem-de-voce.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-frame-vendas-dependem-de-voce.webp",
-                  "sizeBytes": 37992
-                },
-                {
-                  "name": "ad-yellow-split-chave-da-liberdade-balcao.webp",
-                  "path": "assets/applications/ads/thumbs/ad-yellow-split-chave-da-liberdade-balcao.webp",
-                  "sizeBytes": 26630
-                }
-              ],
-              "totalBytes": 37747373,
-              "fileCount": 69,
-              "preview": "assets/applications/ads/thumbs/ad-a-cliente-na-loja-nao-fecha.webp"
+              "preview": "assets/applications/ads/mid/ad-yellow-split-chave-da-liberdade-balcao.svg",
+              "totalBytes": 6851190,
+              "fileCount": 1
             }
           ],
-          "totalBytes": 273930665,
-          "fileCount": 138
+          "totalBytes": 236183292,
+          "fileCount": 69
         },
         {
           "id": "carrosseis",
@@ -3010,136 +3268,162 @@
           "displayMode": "gallery",
           "sections": [
             {
-              "id": "mid",
-              "label": "HQ",
+              "id": "poster-poster-1-institucional",
+              "label": "1 institucional",
               "files": [
                 {
                   "name": "poster-poster-1-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-1-institucional.webp",
                   "sizeBytes": 102500
-                },
-                {
-                  "name": "poster-poster-10-institucional.webp",
-                  "path": "assets/applications/posters/mid/poster-poster-10-institucional.webp",
-                  "sizeBytes": 52338
-                },
-                {
-                  "name": "poster-poster-11-institucional.webp",
-                  "path": "assets/applications/posters/mid/poster-poster-11-institucional.webp",
-                  "sizeBytes": 111792
-                },
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-1-institucional.webp",
+              "totalBytes": 102500,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-2-institucional",
+              "label": "2 institucional",
+              "files": [
                 {
                   "name": "poster-poster-2-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-2-institucional.webp",
                   "sizeBytes": 83016
-                },
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-2-institucional.webp",
+              "totalBytes": 83016,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-3-institucional",
+              "label": "3 institucional",
+              "files": [
                 {
                   "name": "poster-poster-3-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-3-institucional.webp",
                   "sizeBytes": 105386
-                },
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-3-institucional.webp",
+              "totalBytes": 105386,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-4-institucional",
+              "label": "4 institucional",
+              "files": [
                 {
                   "name": "poster-poster-4-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-4-institucional.webp",
                   "sizeBytes": 131864
-                },
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-4-institucional.webp",
+              "totalBytes": 131864,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-5-institucional",
+              "label": "5 institucional",
+              "files": [
                 {
                   "name": "poster-poster-5-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-5-institucional.webp",
                   "sizeBytes": 92746
-                },
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-5-institucional.webp",
+              "totalBytes": 92746,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-6-institucional",
+              "label": "6 institucional",
+              "files": [
                 {
                   "name": "poster-poster-6-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-6-institucional.webp",
                   "sizeBytes": 80804
-                },
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-6-institucional.webp",
+              "totalBytes": 80804,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-7-institucional",
+              "label": "7 institucional",
+              "files": [
                 {
                   "name": "poster-poster-7-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-7-institucional.webp",
                   "sizeBytes": 111598
-                },
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-7-institucional.webp",
+              "totalBytes": 111598,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-8-institucional",
+              "label": "8 institucional",
+              "files": [
                 {
                   "name": "poster-poster-8-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-8-institucional.webp",
                   "sizeBytes": 79484
-                },
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-8-institucional.webp",
+              "totalBytes": 79484,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-9-institucional",
+              "label": "9 institucional",
+              "files": [
                 {
                   "name": "poster-poster-9-institucional.webp",
                   "path": "assets/applications/posters/mid/poster-poster-9-institucional.webp",
                   "sizeBytes": 54146
                 }
               ],
-              "totalBytes": 1005674,
-              "fileCount": 11,
-              "preview": "assets/applications/posters/thumbs/poster-poster-1-institucional.webp"
+              "preview": "assets/applications/posters/thumbs/poster-poster-9-institucional.webp",
+              "totalBytes": 54146,
+              "fileCount": 1
             },
             {
-              "id": "thumbs",
-              "label": "Thumbs",
+              "id": "poster-poster-10-institucional",
+              "label": "10 institucional",
               "files": [
                 {
-                  "name": "poster-poster-1-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-1-institucional.webp",
-                  "sizeBytes": 36976
-                },
-                {
                   "name": "poster-poster-10-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-10-institucional.webp",
-                  "sizeBytes": 28986
-                },
-                {
-                  "name": "poster-poster-11-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-11-institucional.webp",
-                  "sizeBytes": 30752
-                },
-                {
-                  "name": "poster-poster-2-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-2-institucional.webp",
-                  "sizeBytes": 32174
-                },
-                {
-                  "name": "poster-poster-3-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-3-institucional.webp",
-                  "sizeBytes": 35060
-                },
-                {
-                  "name": "poster-poster-4-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-4-institucional.webp",
-                  "sizeBytes": 27652
-                },
-                {
-                  "name": "poster-poster-5-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-5-institucional.webp",
-                  "sizeBytes": 27096
-                },
-                {
-                  "name": "poster-poster-6-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-6-institucional.webp",
-                  "sizeBytes": 22624
-                },
-                {
-                  "name": "poster-poster-7-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-7-institucional.webp",
-                  "sizeBytes": 24444
-                },
-                {
-                  "name": "poster-poster-8-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-8-institucional.webp",
-                  "sizeBytes": 37028
-                },
-                {
-                  "name": "poster-poster-9-institucional.webp",
-                  "path": "assets/applications/posters/thumbs/poster-poster-9-institucional.webp",
-                  "sizeBytes": 31294
+                  "path": "assets/applications/posters/mid/poster-poster-10-institucional.webp",
+                  "sizeBytes": 52338
                 }
               ],
-              "totalBytes": 334086,
-              "fileCount": 11,
-              "preview": "assets/applications/posters/thumbs/poster-poster-1-institucional.webp"
+              "preview": "assets/applications/posters/thumbs/poster-poster-10-institucional.webp",
+              "totalBytes": 52338,
+              "fileCount": 1
+            },
+            {
+              "id": "poster-poster-11-institucional",
+              "label": "11 institucional",
+              "files": [
+                {
+                  "name": "poster-poster-11-institucional.webp",
+                  "path": "assets/applications/posters/mid/poster-poster-11-institucional.webp",
+                  "sizeBytes": 111792
+                }
+              ],
+              "preview": "assets/applications/posters/thumbs/poster-poster-11-institucional.webp",
+              "totalBytes": 111792,
+              "fileCount": 1
             }
           ],
-          "totalBytes": 1339760,
-          "fileCount": 22
+          "totalBytes": 1005674,
+          "fileCount": 11
         },
         {
           "id": "slides",
@@ -3148,156 +3432,190 @@
           "displayMode": "gallery",
           "sections": [
             {
-              "id": "mid",
-              "label": "HQ",
+              "id": "slide-capa-superar-as-metas",
+              "label": "Capa superar as metas",
               "files": [
                 {
                   "name": "slide-capa-superar-as-metas.webp",
                   "path": "assets/applications/slides/mid/slide-capa-superar-as-metas.webp",
                   "sizeBytes": 11168
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-capa-superar-as-metas.webp",
+              "totalBytes": 11168,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-metta-e-especialista",
+              "label": "Metta e especialista",
+              "files": [
                 {
                   "name": "slide-metta-e-especialista.webp",
                   "path": "assets/applications/slides/mid/slide-metta-e-especialista.webp",
                   "sizeBytes": 111944
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-metta-e-especialista.webp",
+              "totalBytes": 111944,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-nossa-bandeira-e-clara",
+              "label": "Nossa bandeira e clara",
+              "files": [
                 {
                   "name": "slide-nossa-bandeira-e-clara.webp",
                   "path": "assets/applications/slides/mid/slide-nossa-bandeira-e-clara.webp",
                   "sizeBytes": 67750
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-nossa-bandeira-e-clara.webp",
+              "totalBytes": 67750,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-quem-somos",
+              "label": "Quem somos",
+              "files": [
                 {
                   "name": "slide-quem-somos.webp",
                   "path": "assets/applications/slides/mid/slide-quem-somos.webp",
                   "sizeBytes": 88636
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-quem-somos.webp",
+              "totalBytes": 88636,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-r82bi-em-metas-batidas",
+              "label": "R82bi em metas batidas",
+              "files": [
                 {
                   "name": "slide-r82bi-em-metas-batidas.webp",
                   "path": "assets/applications/slides/mid/slide-r82bi-em-metas-batidas.webp",
                   "sizeBytes": 50668
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-r82bi-em-metas-batidas.webp",
+              "totalBytes": 50668,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-slide-1-capa-avulsa",
+              "label": "1 capa avulsa",
+              "files": [
                 {
                   "name": "slide-slide-1-capa-avulsa.webp",
                   "path": "assets/applications/slides/mid/slide-slide-1-capa-avulsa.webp",
                   "sizeBytes": 82372
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-slide-1-capa-avulsa.webp",
+              "totalBytes": 82372,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-slide-2-avulso",
+              "label": "2 avulso",
+              "files": [
                 {
                   "name": "slide-slide-2-avulso.webp",
                   "path": "assets/applications/slides/mid/slide-slide-2-avulso.webp",
                   "sizeBytes": 33598
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-slide-2-avulso.webp",
+              "totalBytes": 33598,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-slide-3-avulso",
+              "label": "3 avulso",
+              "files": [
                 {
                   "name": "slide-slide-3-avulso.webp",
                   "path": "assets/applications/slides/mid/slide-slide-3-avulso.webp",
                   "sizeBytes": 34230
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-slide-3-avulso.webp",
+              "totalBytes": 34230,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-slide-4-avulso",
+              "label": "4 avulso",
+              "files": [
                 {
                   "name": "slide-slide-4-avulso.webp",
                   "path": "assets/applications/slides/mid/slide-slide-4-avulso.webp",
                   "sizeBytes": 91290
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-slide-4-avulso.webp",
+              "totalBytes": 91290,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-slide-5-avulso",
+              "label": "5 avulso",
+              "files": [
                 {
                   "name": "slide-slide-5-avulso.webp",
                   "path": "assets/applications/slides/mid/slide-slide-5-avulso.webp",
                   "sizeBytes": 62140
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-slide-5-avulso.webp",
+              "totalBytes": 62140,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-slide-6-avulso",
+              "label": "6 avulso",
+              "files": [
                 {
                   "name": "slide-slide-6-avulso.webp",
                   "path": "assets/applications/slides/mid/slide-slide-6-avulso.webp",
                   "sizeBytes": 31050
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-slide-6-avulso.webp",
+              "totalBytes": 31050,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-slide-7-avulso",
+              "label": "7 avulso",
+              "files": [
                 {
                   "name": "slide-slide-7-avulso.webp",
                   "path": "assets/applications/slides/mid/slide-slide-7-avulso.webp",
                   "sizeBytes": 41990
-                },
+                }
+              ],
+              "preview": "assets/applications/slides/thumbs/slide-slide-7-avulso.webp",
+              "totalBytes": 41990,
+              "fileCount": 1
+            },
+            {
+              "id": "slide-somos-lider",
+              "label": "Somos lider",
+              "files": [
                 {
                   "name": "slide-somos-lider.webp",
                   "path": "assets/applications/slides/mid/slide-somos-lider.webp",
                   "sizeBytes": 34066
                 }
               ],
-              "totalBytes": 740902,
-              "fileCount": 13,
-              "preview": "assets/applications/slides/thumbs/slide-capa-superar-as-metas.webp"
-            },
-            {
-              "id": "thumbs",
-              "label": "Thumbs",
-              "files": [
-                {
-                  "name": "slide-capa-superar-as-metas.webp",
-                  "path": "assets/applications/slides/thumbs/slide-capa-superar-as-metas.webp",
-                  "sizeBytes": 2900
-                },
-                {
-                  "name": "slide-metta-e-especialista.webp",
-                  "path": "assets/applications/slides/thumbs/slide-metta-e-especialista.webp",
-                  "sizeBytes": 14930
-                },
-                {
-                  "name": "slide-nossa-bandeira-e-clara.webp",
-                  "path": "assets/applications/slides/thumbs/slide-nossa-bandeira-e-clara.webp",
-                  "sizeBytes": 12662
-                },
-                {
-                  "name": "slide-quem-somos.webp",
-                  "path": "assets/applications/slides/thumbs/slide-quem-somos.webp",
-                  "sizeBytes": 18118
-                },
-                {
-                  "name": "slide-r82bi-em-metas-batidas.webp",
-                  "path": "assets/applications/slides/thumbs/slide-r82bi-em-metas-batidas.webp",
-                  "sizeBytes": 12706
-                },
-                {
-                  "name": "slide-slide-1-capa-avulsa.webp",
-                  "path": "assets/applications/slides/thumbs/slide-slide-1-capa-avulsa.webp",
-                  "sizeBytes": 9308
-                },
-                {
-                  "name": "slide-slide-2-avulso.webp",
-                  "path": "assets/applications/slides/thumbs/slide-slide-2-avulso.webp",
-                  "sizeBytes": 7846
-                },
-                {
-                  "name": "slide-slide-3-avulso.webp",
-                  "path": "assets/applications/slides/thumbs/slide-slide-3-avulso.webp",
-                  "sizeBytes": 10040
-                },
-                {
-                  "name": "slide-slide-4-avulso.webp",
-                  "path": "assets/applications/slides/thumbs/slide-slide-4-avulso.webp",
-                  "sizeBytes": 17950
-                },
-                {
-                  "name": "slide-slide-5-avulso.webp",
-                  "path": "assets/applications/slides/thumbs/slide-slide-5-avulso.webp",
-                  "sizeBytes": 14310
-                },
-                {
-                  "name": "slide-slide-6-avulso.webp",
-                  "path": "assets/applications/slides/thumbs/slide-slide-6-avulso.webp",
-                  "sizeBytes": 8376
-                },
-                {
-                  "name": "slide-slide-7-avulso.webp",
-                  "path": "assets/applications/slides/thumbs/slide-slide-7-avulso.webp",
-                  "sizeBytes": 10124
-                },
-                {
-                  "name": "slide-somos-lider.webp",
-                  "path": "assets/applications/slides/thumbs/slide-somos-lider.webp",
-                  "sizeBytes": 9164
-                }
-              ],
-              "totalBytes": 148434,
-              "fileCount": 13,
-              "preview": "assets/applications/slides/thumbs/slide-capa-superar-as-metas.webp"
+              "preview": "assets/applications/slides/thumbs/slide-somos-lider.webp",
+              "totalBytes": 34066,
+              "fileCount": 1
             }
           ],
-          "totalBytes": 889336,
-          "fileCount": 26
+          "totalBytes": 740902,
+          "fileCount": 13
         },
         {
           "id": "telas",
@@ -3306,116 +3624,134 @@
           "displayMode": "gallery",
           "sections": [
             {
-              "id": "mid",
-              "label": "HQ",
+              "id": "tela-tela-conceito-1-lp",
+              "label": "Conceito 1 lp",
               "files": [
                 {
                   "name": "tela-tela-conceito-1-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-1-lp.webp",
                   "sizeBytes": 80158
-                },
+                }
+              ],
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-1-lp.webp",
+              "totalBytes": 80158,
+              "fileCount": 1
+            },
+            {
+              "id": "tela-tela-conceito-2-lp",
+              "label": "Conceito 2 lp",
+              "files": [
                 {
                   "name": "tela-tela-conceito-2-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-2-lp.webp",
                   "sizeBytes": 70982
-                },
+                }
+              ],
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-2-lp.webp",
+              "totalBytes": 70982,
+              "fileCount": 1
+            },
+            {
+              "id": "tela-tela-conceito-3-lp",
+              "label": "Conceito 3 lp",
+              "files": [
                 {
                   "name": "tela-tela-conceito-3-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-3-lp.webp",
                   "sizeBytes": 47538
-                },
+                }
+              ],
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-3-lp.webp",
+              "totalBytes": 47538,
+              "fileCount": 1
+            },
+            {
+              "id": "tela-tela-conceito-4-lp",
+              "label": "Conceito 4 lp",
+              "files": [
                 {
                   "name": "tela-tela-conceito-4-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-4-lp.webp",
                   "sizeBytes": 74324
-                },
+                }
+              ],
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-4-lp.webp",
+              "totalBytes": 74324,
+              "fileCount": 1
+            },
+            {
+              "id": "tela-tela-conceito-5-lp",
+              "label": "Conceito 5 lp",
+              "files": [
                 {
                   "name": "tela-tela-conceito-5-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-5-lp.webp",
                   "sizeBytes": 60520
-                },
+                }
+              ],
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-5-lp.webp",
+              "totalBytes": 60520,
+              "fileCount": 1
+            },
+            {
+              "id": "tela-tela-conceito-6-lp",
+              "label": "Conceito 6 lp",
+              "files": [
                 {
                   "name": "tela-tela-conceito-6-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-6-lp.webp",
                   "sizeBytes": 61170
-                },
+                }
+              ],
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-6-lp.webp",
+              "totalBytes": 61170,
+              "fileCount": 1
+            },
+            {
+              "id": "tela-tela-conceito-7-lp",
+              "label": "Conceito 7 lp",
+              "files": [
                 {
                   "name": "tela-tela-conceito-7-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-7-lp.webp",
                   "sizeBytes": 142546
-                },
+                }
+              ],
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-7-lp.webp",
+              "totalBytes": 142546,
+              "fileCount": 1
+            },
+            {
+              "id": "tela-tela-conceito-8-lp",
+              "label": "Conceito 8 lp",
+              "files": [
                 {
                   "name": "tela-tela-conceito-8-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-8-lp.webp",
                   "sizeBytes": 123382
-                },
+                }
+              ],
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-8-lp.webp",
+              "totalBytes": 123382,
+              "fileCount": 1
+            },
+            {
+              "id": "tela-tela-conceito-9-lp",
+              "label": "Conceito 9 lp",
+              "files": [
                 {
                   "name": "tela-tela-conceito-9-lp.webp",
                   "path": "assets/applications/telas/mid/tela-tela-conceito-9-lp.webp",
                   "sizeBytes": 54630
                 }
               ],
-              "totalBytes": 715250,
-              "fileCount": 9,
-              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-1-lp.webp"
-            },
-            {
-              "id": "thumbs",
-              "label": "Thumbs",
-              "files": [
-                {
-                  "name": "tela-tela-conceito-1-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-1-lp.webp",
-                  "sizeBytes": 5686
-                },
-                {
-                  "name": "tela-tela-conceito-2-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-2-lp.webp",
-                  "sizeBytes": 16482
-                },
-                {
-                  "name": "tela-tela-conceito-3-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-3-lp.webp",
-                  "sizeBytes": 9854
-                },
-                {
-                  "name": "tela-tela-conceito-4-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-4-lp.webp",
-                  "sizeBytes": 7806
-                },
-                {
-                  "name": "tela-tela-conceito-5-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-5-lp.webp",
-                  "sizeBytes": 14118
-                },
-                {
-                  "name": "tela-tela-conceito-6-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-6-lp.webp",
-                  "sizeBytes": 12454
-                },
-                {
-                  "name": "tela-tela-conceito-7-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-7-lp.webp",
-                  "sizeBytes": 19334
-                },
-                {
-                  "name": "tela-tela-conceito-8-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-8-lp.webp",
-                  "sizeBytes": 26616
-                },
-                {
-                  "name": "tela-tela-conceito-9-lp.webp",
-                  "path": "assets/applications/telas/thumbs/tela-tela-conceito-9-lp.webp",
-                  "sizeBytes": 14800
-                }
-              ],
-              "totalBytes": 127150,
-              "fileCount": 9,
-              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-1-lp.webp"
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-9-lp.webp",
+              "totalBytes": 54630,
+              "fileCount": 1
             }
           ],
-          "totalBytes": 842400,
-          "fileCount": 18
+          "totalBytes": 715250,
+          "fileCount": 9
         }
       ]
     },
