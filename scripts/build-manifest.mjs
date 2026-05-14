@@ -170,6 +170,36 @@ async function buildAssetTabFlat(opts) {
   };
 }
 
+// Cada arquivo de `primarySubdir` = 1 section selecionável. Preview usa o
+// arquivo correspondente em `previewSubdir` (mesmo nome), pra performance.
+// Download SEMPRE do primarySubdir (resolução original).
+async function buildAssetTabPerFileMatched(opts) {
+  const { id, label, dir, primarySubdir, previewSubdir, labelFn } = opts;
+  const primaryFiles = await walkFiles(join(dir, primarySubdir));
+  if (primaryFiles.length === 0) return null;
+  const previewByName = {};
+  if (previewSubdir) {
+    const previewFiles = await walkFiles(join(dir, previewSubdir));
+    for (const f of previewFiles) previewByName[f.name] = f.path;
+  }
+  const sections = primaryFiles
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(f => ({
+      id: f.name.replace(/\.[^.]+$/, ''),
+      label: labelFn ? labelFn(f.name) : f.name.replace(/\.[^.]+$/, ''),
+      files: [f],
+      preview: previewByName[f.name] || f.path,
+      totalBytes: f.sizeBytes,
+      fileCount: 1
+    }));
+  return {
+    id, label, kind: 'assets', displayMode: 'gallery',
+    sections,
+    totalBytes: sumSize(primaryFiles),
+    fileCount: primaryFiles.length
+  };
+}
+
 // Cada arquivo = 1 section selecionável (com preview visual no modal)
 async function buildAssetTabPerFile(opts) {
   const { id, label, dir, labelFn } = opts;
@@ -236,11 +266,11 @@ async function main() {
 
   log.group('Grupo: Galeria');
   const galeriaGroup = await buildGroup('galeria', 'Galeria', [
-    { id: 'fotografia', builder: () => buildAssetTabFromSubfolders({
+    { id: 'fotografia', builder: () => buildAssetTabPerFileMatched({
       id: 'fotografia', label: 'Fotografia',
       dir: join(ASSETS_DIR, 'fotografia'),
-      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
-      gallery: true, previewFrom: 'thumbs-sibling'
+      primarySubdir: 'mid',
+      previewSubdir: 'thumbs'
     })}
   ]);
 

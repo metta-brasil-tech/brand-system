@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-14T00:37:01.946Z",
-  "grandTotalBytes": 285723545,
-  "grandTotalFiles": 1293,
+  "generatedAt": "2026-05-14T00:56:08.819Z",
+  "grandTotalBytes": 285416719,
+  "grandTotalFiles": 1270,
   "grandTotalTabs": 18,
   "groups": [
     {
@@ -1757,256 +1757,330 @@
           "displayMode": "gallery",
           "sections": [
             {
-              "id": "mid",
-              "label": "HQ",
+              "id": "esc-001",
+              "label": "esc-001",
               "files": [
                 {
                   "name": "esc-001.webp",
                   "path": "assets/fotografia/mid/esc-001.webp",
                   "sizeBytes": 72602
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/esc-001.webp",
+              "totalBytes": 72602,
+              "fileCount": 1
+            },
+            {
+              "id": "esc-002",
+              "label": "esc-002",
+              "files": [
                 {
                   "name": "esc-002.webp",
                   "path": "assets/fotografia/mid/esc-002.webp",
                   "sizeBytes": 48654
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/esc-002.webp",
+              "totalBytes": 48654,
+              "fileCount": 1
+            },
+            {
+              "id": "esc-003",
+              "label": "esc-003",
+              "files": [
                 {
                   "name": "esc-003.webp",
                   "path": "assets/fotografia/mid/esc-003.webp",
                   "sizeBytes": 45934
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/esc-003.webp",
+              "totalBytes": 45934,
+              "fileCount": 1
+            },
+            {
+              "id": "esc-004",
+              "label": "esc-004",
+              "files": [
                 {
                   "name": "esc-004.webp",
                   "path": "assets/fotografia/mid/esc-004.webp",
                   "sizeBytes": 176446
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/esc-004.webp",
+              "totalBytes": 176446,
+              "fileCount": 1
+            },
+            {
+              "id": "esc-005",
+              "label": "esc-005",
+              "files": [
                 {
                   "name": "esc-005.webp",
                   "path": "assets/fotografia/mid/esc-005.webp",
                   "sizeBytes": 69838
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/esc-005.webp",
+              "totalBytes": 69838,
+              "fileCount": 1
+            },
+            {
+              "id": "esc-006",
+              "label": "esc-006",
+              "files": [
                 {
                   "name": "esc-006.webp",
                   "path": "assets/fotografia/mid/esc-006.webp",
                   "sizeBytes": 26062
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/esc-006.webp",
+              "totalBytes": 26062,
+              "fileCount": 1
+            },
+            {
+              "id": "esc-007",
+              "label": "esc-007",
+              "files": [
                 {
                   "name": "esc-007.webp",
                   "path": "assets/fotografia/mid/esc-007.webp",
                   "sizeBytes": 122018
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/esc-007.webp",
+              "totalBytes": 122018,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-001",
+              "label": "pes-001",
+              "files": [
                 {
                   "name": "pes-001.webp",
                   "path": "assets/fotografia/mid/pes-001.webp",
                   "sizeBytes": 35394
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-001.webp",
+              "totalBytes": 35394,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-002",
+              "label": "pes-002",
+              "files": [
                 {
                   "name": "pes-002.webp",
                   "path": "assets/fotografia/mid/pes-002.webp",
                   "sizeBytes": 19492
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-002.webp",
+              "totalBytes": 19492,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-003",
+              "label": "pes-003",
+              "files": [
                 {
                   "name": "pes-003.webp",
                   "path": "assets/fotografia/mid/pes-003.webp",
                   "sizeBytes": 65126
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-003.webp",
+              "totalBytes": 65126,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-004",
+              "label": "pes-004",
+              "files": [
                 {
                   "name": "pes-004.webp",
                   "path": "assets/fotografia/mid/pes-004.webp",
                   "sizeBytes": 44894
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-004.webp",
+              "totalBytes": 44894,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-005",
+              "label": "pes-005",
+              "files": [
                 {
                   "name": "pes-005.webp",
                   "path": "assets/fotografia/mid/pes-005.webp",
                   "sizeBytes": 54988
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-005.webp",
+              "totalBytes": 54988,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-006",
+              "label": "pes-006",
+              "files": [
                 {
                   "name": "pes-006.webp",
                   "path": "assets/fotografia/mid/pes-006.webp",
                   "sizeBytes": 28876
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-006.webp",
+              "totalBytes": 28876,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-007",
+              "label": "pes-007",
+              "files": [
                 {
                   "name": "pes-007.webp",
                   "path": "assets/fotografia/mid/pes-007.webp",
                   "sizeBytes": 133012
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-007.webp",
+              "totalBytes": 133012,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-008",
+              "label": "pes-008",
+              "files": [
                 {
                   "name": "pes-008.webp",
                   "path": "assets/fotografia/mid/pes-008.webp",
                   "sizeBytes": 49430
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-008.webp",
+              "totalBytes": 49430,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-009",
+              "label": "pes-009",
+              "files": [
                 {
                   "name": "pes-009.webp",
                   "path": "assets/fotografia/mid/pes-009.webp",
                   "sizeBytes": 68002
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-009.webp",
+              "totalBytes": 68002,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-010",
+              "label": "pes-010",
+              "files": [
                 {
                   "name": "pes-010.webp",
                   "path": "assets/fotografia/mid/pes-010.webp",
                   "sizeBytes": 55738
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-010.webp",
+              "totalBytes": 55738,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-011",
+              "label": "pes-011",
+              "files": [
                 {
                   "name": "pes-011.webp",
                   "path": "assets/fotografia/mid/pes-011.webp",
                   "sizeBytes": 49720
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-011.webp",
+              "totalBytes": 49720,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-012",
+              "label": "pes-012",
+              "files": [
                 {
                   "name": "pes-012.webp",
                   "path": "assets/fotografia/mid/pes-012.webp",
                   "sizeBytes": 32052
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-012.webp",
+              "totalBytes": 32052,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-013",
+              "label": "pes-013",
+              "files": [
                 {
                   "name": "pes-013.webp",
                   "path": "assets/fotografia/mid/pes-013.webp",
                   "sizeBytes": 46690
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-013.webp",
+              "totalBytes": 46690,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-015",
+              "label": "pes-015",
+              "files": [
                 {
                   "name": "pes-015.webp",
                   "path": "assets/fotografia/mid/pes-015.webp",
                   "sizeBytes": 52528
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-015.webp",
+              "totalBytes": 52528,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-017",
+              "label": "pes-017",
+              "files": [
                 {
                   "name": "pes-017.webp",
                   "path": "assets/fotografia/mid/pes-017.webp",
                   "sizeBytes": 49488
-                },
+                }
+              ],
+              "preview": "assets/fotografia/thumbs/pes-017.webp",
+              "totalBytes": 49488,
+              "fileCount": 1
+            },
+            {
+              "id": "pes-018",
+              "label": "pes-018",
+              "files": [
                 {
                   "name": "pes-018.webp",
                   "path": "assets/fotografia/mid/pes-018.webp",
                   "sizeBytes": 69420
                 }
               ],
-              "totalBytes": 1416404,
-              "fileCount": 23,
-              "preview": "assets/fotografia/thumbs/esc-001.webp"
-            },
-            {
-              "id": "thumbs",
-              "label": "Thumbs",
-              "files": [
-                {
-                  "name": "esc-001.webp",
-                  "path": "assets/fotografia/thumbs/esc-001.webp",
-                  "sizeBytes": 16920
-                },
-                {
-                  "name": "esc-002.webp",
-                  "path": "assets/fotografia/thumbs/esc-002.webp",
-                  "sizeBytes": 11564
-                },
-                {
-                  "name": "esc-003.webp",
-                  "path": "assets/fotografia/thumbs/esc-003.webp",
-                  "sizeBytes": 9780
-                },
-                {
-                  "name": "esc-004.webp",
-                  "path": "assets/fotografia/thumbs/esc-004.webp",
-                  "sizeBytes": 26916
-                },
-                {
-                  "name": "esc-005.webp",
-                  "path": "assets/fotografia/thumbs/esc-005.webp",
-                  "sizeBytes": 15704
-                },
-                {
-                  "name": "esc-006.webp",
-                  "path": "assets/fotografia/thumbs/esc-006.webp",
-                  "sizeBytes": 7240
-                },
-                {
-                  "name": "esc-007.webp",
-                  "path": "assets/fotografia/thumbs/esc-007.webp",
-                  "sizeBytes": 19400
-                },
-                {
-                  "name": "pes-001.webp",
-                  "path": "assets/fotografia/thumbs/pes-001.webp",
-                  "sizeBytes": 9786
-                },
-                {
-                  "name": "pes-002.webp",
-                  "path": "assets/fotografia/thumbs/pes-002.webp",
-                  "sizeBytes": 4932
-                },
-                {
-                  "name": "pes-003.webp",
-                  "path": "assets/fotografia/thumbs/pes-003.webp",
-                  "sizeBytes": 15462
-                },
-                {
-                  "name": "pes-004.webp",
-                  "path": "assets/fotografia/thumbs/pes-004.webp",
-                  "sizeBytes": 13218
-                },
-                {
-                  "name": "pes-005.webp",
-                  "path": "assets/fotografia/thumbs/pes-005.webp",
-                  "sizeBytes": 13654
-                },
-                {
-                  "name": "pes-006.webp",
-                  "path": "assets/fotografia/thumbs/pes-006.webp",
-                  "sizeBytes": 6228
-                },
-                {
-                  "name": "pes-007.webp",
-                  "path": "assets/fotografia/thumbs/pes-007.webp",
-                  "sizeBytes": 23410
-                },
-                {
-                  "name": "pes-008.webp",
-                  "path": "assets/fotografia/thumbs/pes-008.webp",
-                  "sizeBytes": 13072
-                },
-                {
-                  "name": "pes-009.webp",
-                  "path": "assets/fotografia/thumbs/pes-009.webp",
-                  "sizeBytes": 13500
-                },
-                {
-                  "name": "pes-010.webp",
-                  "path": "assets/fotografia/thumbs/pes-010.webp",
-                  "sizeBytes": 13026
-                },
-                {
-                  "name": "pes-011.webp",
-                  "path": "assets/fotografia/thumbs/pes-011.webp",
-                  "sizeBytes": 12502
-                },
-                {
-                  "name": "pes-012.webp",
-                  "path": "assets/fotografia/thumbs/pes-012.webp",
-                  "sizeBytes": 9658
-                },
-                {
-                  "name": "pes-013.webp",
-                  "path": "assets/fotografia/thumbs/pes-013.webp",
-                  "sizeBytes": 12352
-                },
-                {
-                  "name": "pes-015.webp",
-                  "path": "assets/fotografia/thumbs/pes-015.webp",
-                  "sizeBytes": 12250
-                },
-                {
-                  "name": "pes-017.webp",
-                  "path": "assets/fotografia/thumbs/pes-017.webp",
-                  "sizeBytes": 9968
-                },
-                {
-                  "name": "pes-018.webp",
-                  "path": "assets/fotografia/thumbs/pes-018.webp",
-                  "sizeBytes": 16284
-                }
-              ],
-              "totalBytes": 306826,
-              "fileCount": 23,
-              "preview": "assets/fotografia/thumbs/esc-001.webp"
+              "preview": "assets/fotografia/thumbs/pes-018.webp",
+              "totalBytes": 69420,
+              "fileCount": 1
             }
           ],
-          "totalBytes": 1723230,
-          "fileCount": 46
+          "totalBytes": 1416404,
+          "fileCount": 23
         }
       ]
     },
