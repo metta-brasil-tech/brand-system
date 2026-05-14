@@ -98,20 +98,33 @@ async function buildDocsGroup() {
 }
 
 // ----------- ASSET TABS HELPERS -----------
+function humanizeSlug(slug) {
+  // carrossel-37-empresarios-em-burnout → "37 empresários em burnout"
+  // carrossel-post-fca-case-78-meta → "Post FCA case 78 meta"
+  return slug
+    .replace(/^(carrossel|carrocel|poster|slide|tela|ad)-/i, '')
+    .replace(/-/g, ' ')
+    .replace(/^\s*([a-zà-ÿ])/, (_, c) => c.toUpperCase());
+}
+
 async function buildAssetTabFromSubfolders(opts) {
   // Tab cujas sections são as subpastas imediatas de dir
-  const { id, label, dir, sectionLabels } = opts;
+  const { id, label, dir, sectionLabels, gallery, previewFrom, humanize } = opts;
+  // previewFrom: 'self' | 'thumbs-sibling' — pra HQ/mid usa thumb correspondente
   const subdirs = await listImmediateSubdirs(dir);
   const sections = [];
+  const firstFileBySubdir = {};
   let totalBytes = 0;
   let fileCount = 0;
   for (const sub of subdirs) {
     const files = await walkFiles(join(dir, sub));
     if (files.length === 0) continue;
+    const sorted = [...files].sort((a, b) => a.name.localeCompare(b.name));
+    firstFileBySubdir[sub] = sorted[0];
     const size = sumSize(files);
     sections.push({
       id: sub,
-      label: (sectionLabels && sectionLabels[sub]) || sub,
+      label: (sectionLabels && sectionLabels[sub]) || (humanize ? humanizeSlug(sub) : sub),
       files,
       totalBytes: size,
       fileCount: files.length
@@ -120,7 +133,22 @@ async function buildAssetTabFromSubfolders(opts) {
     fileCount += files.length;
   }
   if (sections.length === 0) return null;
-  return { id, label, kind: 'assets', sections, totalBytes, fileCount };
+
+  if (gallery) {
+    for (const section of sections) {
+      let preview = firstFileBySubdir[section.id];
+      if (previewFrom === 'thumbs-sibling' && (section.id === 'mid' || section.id === 'hq')) {
+        if (firstFileBySubdir['thumbs']) preview = firstFileBySubdir['thumbs'];
+      }
+      if (preview) section.preview = preview.path;
+    }
+  }
+
+  return {
+    id, label, kind: 'assets',
+    displayMode: gallery ? 'gallery' : undefined,
+    sections, totalBytes, fileCount
+  };
 }
 
 async function buildAssetTabFlat(opts) {
@@ -211,7 +239,8 @@ async function main() {
     { id: 'fotografia', builder: () => buildAssetTabFromSubfolders({
       id: 'fotografia', label: 'Fotografia',
       dir: join(ASSETS_DIR, 'fotografia'),
-      sectionLabels: { mid: 'HQ (alta resolução)', thumbs: 'Thumbnails (baixa)' }
+      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
+      gallery: true, previewFrom: 'thumbs-sibling'
     })}
   ]);
 
@@ -220,26 +249,31 @@ async function main() {
     { id: 'ads', builder: () => buildAssetTabFromSubfolders({
       id: 'ads', label: 'Anúncios',
       dir: join(ASSETS_DIR, 'applications', 'ads'),
-      sectionLabels: { mid: 'HQ (mid) — pesado', thumbs: 'Thumbnails' }
+      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
+      gallery: true, previewFrom: 'thumbs-sibling'
     })},
     { id: 'carrosseis', builder: () => buildAssetTabFromSubfolders({
       id: 'carrosseis', label: 'Carrosséis',
-      dir: join(ASSETS_DIR, 'applications', 'carrosseis')
+      dir: join(ASSETS_DIR, 'applications', 'carrosseis'),
+      gallery: true, humanize: true
     })},
     { id: 'posters', builder: () => buildAssetTabFromSubfolders({
       id: 'posters', label: 'Posters',
       dir: join(ASSETS_DIR, 'applications', 'posters'),
-      sectionLabels: { mid: 'HQ (mid)', thumbs: 'Thumbnails' }
+      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
+      gallery: true, previewFrom: 'thumbs-sibling'
     })},
     { id: 'slides', builder: () => buildAssetTabFromSubfolders({
       id: 'slides', label: 'Slides',
       dir: join(ASSETS_DIR, 'applications', 'slides'),
-      sectionLabels: { mid: 'HQ (mid)', thumbs: 'Thumbnails' }
+      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
+      gallery: true, previewFrom: 'thumbs-sibling'
     })},
     { id: 'telas', builder: () => buildAssetTabFromSubfolders({
       id: 'telas', label: 'Telas / LPs',
       dir: join(ASSETS_DIR, 'applications', 'telas'),
-      sectionLabels: { mid: 'HQ (mid)', thumbs: 'Thumbnails' }
+      sectionLabels: { mid: 'HQ', thumbs: 'Thumbs' },
+      gallery: true, previewFrom: 'thumbs-sibling'
     })}
   ]);
 

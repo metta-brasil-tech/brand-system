@@ -517,8 +517,62 @@ a.topbar-menu-item,
 }
 .download-modal-toolbar {
   display: flex;
+  align-items: center;
   gap: 8px;
   padding: 12px 24px;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  background: var(--metta-sys-color-surface-container);
+}
+.download-modal-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--metta-sys-color-outline);
+  border-radius: var(--metta-sys-shape-corner-full);
+  background: var(--metta-sys-color-surface);
+  color: var(--metta-sys-color-on-surface-variant);
+  transition: border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.download-modal-search:focus-within {
+  border-color: var(--metta-sys-color-primary);
+}
+.download-modal-search input {
+  flex: 1;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--metta-sys-color-on-surface);
+}
+.download-modal-search input::placeholder {
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.download-modal-search input::-webkit-search-cancel-button { display: none; }
+.download-modal-search-clear {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--metta-sys-color-on-surface-variant);
+  cursor: pointer;
+  border-radius: var(--metta-sys-shape-corner-full);
+}
+.download-modal-search-clear:hover {
+  background: var(--metta-sys-color-surface-container);
+  color: var(--metta-sys-color-on-surface);
+}
+.download-modal-search-meta {
+  padding: 6px 24px;
+  font-size: 11px;
+  color: var(--metta-sys-color-on-surface-variant);
   border-bottom: 1px solid var(--metta-sys-color-outline-variant);
   background: var(--metta-sys-color-surface-container);
 }
@@ -534,10 +588,17 @@ a.topbar-menu-item,
   border-radius: var(--metta-sys-shape-corner-full);
   color: var(--metta-sys-color-on-surface-variant);
   cursor: pointer;
+  flex-shrink: 0;
 }
 .download-modal-bulk:hover {
   border-color: var(--metta-sys-color-on-surface-variant);
   color: var(--metta-sys-color-on-surface);
+}
+
+@media (max-width: 640px) {
+  .download-modal-toolbar { flex-wrap: wrap; }
+  .download-modal-search { order: 0; flex: 1 1 100%; }
+  .download-modal-bulk { flex: 1 1 auto; text-align: center; }
 }
 .download-modal-body {
   flex: 1;

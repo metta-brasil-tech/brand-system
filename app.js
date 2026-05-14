@@ -1898,6 +1898,23 @@ const BrandSystem = (() => {
   let docsSelection = new Map(); // tabId -> Set(sectionIds)
   let tabIndex = new Map();      // tabId -> tab (lookup rápido)
   let lastFocusedBeforeModal = null;
+  let searchQuery = '';
+
+  function normalizeForSearch(s) {
+    return String(s || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '');
+  }
+
+  function matchesSearch(text) {
+    if (!searchQuery) return true;
+    // Match por início de palavra pra evitar false positive (ex: "logo" matchando "catálogo")
+    const norm = normalizeForSearch(text);
+    if (norm.startsWith(searchQuery)) return true;
+    // Cada palavra do texto: começa com a query?
+    return norm.split(/[\s·\-_/]+/).some(w => w.startsWith(searchQuery));
+  }
 
   async function loadDownloadManifest() {
     if (downloadManifest) return downloadManifest;
@@ -1967,8 +1984,20 @@ const BrandSystem = (() => {
     );
     body.innerHTML = '';
 
+    let visibleGroups = 0;
+    let visibleTabs = 0;
+    let visibleSections = 0;
     for (const group of downloadManifest.groups) {
-      const groupTotal = group.tabs.reduce((a, t) => a + t.totalBytes, 0);
+      const groupMatches = matchesSearch(group.label);
+      // Tabs visíveis nesse grupo
+      const tabsVisible = group.tabs.filter(t => {
+        if (groupMatches) return true;
+        if (matchesSearch(t.label)) return true;
+        return t.sections.some(s => matchesSearch(s.label));
+      });
+      if (tabsVisible.length === 0) continue;
+      visibleGroups++;
+      const groupTotal = tabsVisible.reduce((a, t) => a + t.totalBytes, 0);
       const header = document.createElement('div');
       header.className = 'dlm-group-header';
       header.innerHTML = `
@@ -1977,7 +2006,14 @@ const BrandSystem = (() => {
       `;
       body.appendChild(header);
 
-      for (const tab of group.tabs) {
+      for (const tab of tabsVisible) {
+        visibleTabs++;
+        const tabMatches = matchesSearch(tab.label) || groupMatches;
+        // Sections visíveis nessa tab (filtra se busca está ativa e tab não match direto)
+        const sectionsVisible = (searchQuery && !tabMatches)
+          ? tab.sections.filter(s => matchesSearch(s.label))
+          : tab.sections;
+        visibleSections += sectionsVisible.length;
         const state = getSelectionState(tab);
         const expanded = expandedSet.has(tab.id);
         const card = document.createElement('div');
@@ -2000,7 +2036,7 @@ const BrandSystem = (() => {
             </div>
           </div>
           <div class="dlm-tab-body" data-display="${tab.displayMode || 'list'}">
-            ${tab.sections.map(sec => {
+            ${sectionsVisible.map(sec => {
               const checked = isSectionSelected(tab.id, sec.id);
               const secState = checked ? 'checked' : 'unchecked';
               if (tab.displayMode === 'gallery' && sec.preview) {
@@ -2033,7 +2069,23 @@ const BrandSystem = (() => {
             }).join('')}
           </div>
         `;
+        // Auto-expande quando busca está ativa pra mostrar matches
+        if (searchQuery) card.dataset.expanded = 'true';
         body.appendChild(card);
+      }
+    }
+    // Empty state + meta de busca
+    const searchMeta = document.querySelector('[data-search-meta]');
+    if (searchMeta) {
+      if (searchQuery) {
+        if (visibleTabs === 0) {
+          searchMeta.textContent = `Nenhum resultado pra "${searchQuery}"`;
+        } else {
+          searchMeta.textContent = `${visibleTabs} ${visibleTabs === 1 ? 'área' : 'áreas'} · ${visibleSections} ${visibleSections === 1 ? 'seção' : 'seções'} encontradas`;
+        }
+        searchMeta.hidden = false;
+      } else {
+        searchMeta.hidden = true;
       }
     }
     updateSummary();
@@ -2236,6 +2288,12 @@ const BrandSystem = (() => {
     if (!modal) return;
     modal.hidden = true;
     document.body.style.overflow = '';
+    // Reset busca pra próxima abertura abrir limpa
+    const searchInput = modal.querySelector('[data-modal-search]');
+    const searchClear = modal.querySelector('[data-modal-search-clear]');
+    if (searchInput) searchInput.value = '';
+    if (searchClear) searchClear.hidden = true;
+    searchQuery = '';
     if (lastFocusedBeforeModal) {
       try { lastFocusedBeforeModal.focus(); } catch {}
     }
@@ -2317,6 +2375,39 @@ const BrandSystem = (() => {
     modal.querySelectorAll('.download-modal-bulk').forEach(btn => {
       btn.addEventListener('click', () => bulkSelect(btn.dataset.bulk));
     });
+
+    // Search filter
+    const searchInput = modal.querySelector('[data-modal-search]');
+    const searchClear = modal.querySelector('[data-modal-search-clear]');
+    if (searchInput) {
+      let debounceTimer = null;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          searchQuery = normalizeForSearch(searchInput.value.trim());
+          if (searchClear) searchClear.hidden = !searchQuery;
+          renderModal();
+        }, 90);
+      });
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchInput.value) {
+          e.stopPropagation();
+          searchInput.value = '';
+          searchQuery = '';
+          if (searchClear) searchClear.hidden = true;
+          renderModal();
+        }
+      });
+    }
+    if (searchClear) {
+      searchClear.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        searchQuery = '';
+        searchClear.hidden = true;
+        renderModal();
+        if (searchInput) searchInput.focus();
+      });
+    }
 
     // Body — clicks via delegation
     const body = modal.querySelector('[data-modal-body]');

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T23:53:22.721Z",
+  "generatedAt": "2026-05-14T00:37:01.946Z",
   "grandTotalBytes": 285723545,
   "grandTotalFiles": 1293,
   "grandTotalTabs": 18,
@@ -1754,10 +1754,11 @@
           "id": "fotografia",
           "label": "Fotografia",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
               "id": "mid",
-              "label": "HQ (alta resolução)",
+              "label": "HQ",
               "files": [
                 {
                   "name": "esc-001.webp",
@@ -1876,11 +1877,12 @@
                 }
               ],
               "totalBytes": 1416404,
-              "fileCount": 23
+              "fileCount": 23,
+              "preview": "assets/fotografia/thumbs/esc-001.webp"
             },
             {
               "id": "thumbs",
-              "label": "Thumbnails (baixa)",
+              "label": "Thumbs",
               "files": [
                 {
                   "name": "esc-001.webp",
@@ -1999,7 +2001,8 @@
                 }
               ],
               "totalBytes": 306826,
-              "fileCount": 23
+              "fileCount": 23,
+              "preview": "assets/fotografia/thumbs/esc-001.webp"
             }
           ],
           "totalBytes": 1723230,
@@ -2015,10 +2018,11 @@
           "id": "ads",
           "label": "Anúncios",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
               "id": "mid",
-              "label": "HQ (mid) — pesado",
+              "label": "HQ",
               "files": [
                 {
                   "name": "ad-a-cliente-na-loja-nao-fecha.svg",
@@ -2367,11 +2371,12 @@
                 }
               ],
               "totalBytes": 236183292,
-              "fileCount": 69
+              "fileCount": 69,
+              "preview": "assets/applications/ads/thumbs/ad-a-cliente-na-loja-nao-fecha.webp"
             },
             {
               "id": "thumbs",
-              "label": "Thumbnails",
+              "label": "Thumbs",
               "files": [
                 {
                   "name": "ad-a-cliente-na-loja-nao-fecha.webp",
@@ -2720,7 +2725,8 @@
                 }
               ],
               "totalBytes": 37747373,
-              "fileCount": 69
+              "fileCount": 69,
+              "preview": "assets/applications/ads/thumbs/ad-a-cliente-na-loja-nao-fecha.webp"
             }
           ],
           "totalBytes": 273930665,
@@ -2730,10 +2736,11 @@
           "id": "carrosseis",
           "label": "Carrosséis",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
               "id": "carrossel-37-empresarios-em-burnout",
-              "label": "carrossel-37-empresarios-em-burnout",
+              "label": "37 empresarios em burnout",
               "files": [
                 {
                   "name": "slide-1.webp",
@@ -2787,11 +2794,12 @@
                 }
               ],
               "totalBytes": 813522,
-              "fileCount": 10
+              "fileCount": 10,
+              "preview": "assets/applications/carrosseis/carrossel-37-empresarios-em-burnout/_thumb.webp"
             },
             {
               "id": "carrossel-gestao-da-mudanca-time-3-vezes",
-              "label": "carrossel-gestao-da-mudanca-time-3-vezes",
+              "label": "Gestao da mudanca time 3 vezes",
               "files": [
                 {
                   "name": "slide-1.webp",
@@ -2850,11 +2858,12 @@
                 }
               ],
               "totalBytes": 1173908,
-              "fileCount": 11
+              "fileCount": 11,
+              "preview": "assets/applications/carrosseis/carrossel-gestao-da-mudanca-time-3-vezes/_thumb.webp"
             },
             {
               "id": "carrossel-post-fca-case-78-meta",
-              "label": "carrossel-post-fca-case-78-meta",
+              "label": "Post fca case 78 meta",
               "files": [
                 {
                   "name": "slide-1.webp",
@@ -2913,7 +2922,8 @@
                 }
               ],
               "totalBytes": 990772,
-              "fileCount": 11
+              "fileCount": 11,
+              "preview": "assets/applications/carrosseis/carrossel-post-fca-case-78-meta/_thumb.webp"
             }
           ],
           "totalBytes": 2978202,
@@ -2923,10 +2933,11 @@
           "id": "posters",
           "label": "Posters",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
               "id": "mid",
-              "label": "HQ (mid)",
+              "label": "HQ",
               "files": [
                 {
                   "name": "poster-poster-1-institucional.webp",
@@ -2985,11 +2996,12 @@
                 }
               ],
               "totalBytes": 1005674,
-              "fileCount": 11
+              "fileCount": 11,
+              "preview": "assets/applications/posters/thumbs/poster-poster-1-institucional.webp"
             },
             {
               "id": "thumbs",
-              "label": "Thumbnails",
+              "label": "Thumbs",
               "files": [
                 {
                   "name": "poster-poster-1-institucional.webp",
@@ -3048,7 +3060,8 @@
                 }
               ],
               "totalBytes": 334086,
-              "fileCount": 11
+              "fileCount": 11,
+              "preview": "assets/applications/posters/thumbs/poster-poster-1-institucional.webp"
             }
           ],
           "totalBytes": 1339760,
@@ -3058,10 +3071,11 @@
           "id": "slides",
           "label": "Slides",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
               "id": "mid",
-              "label": "HQ (mid)",
+              "label": "HQ",
               "files": [
                 {
                   "name": "slide-capa-superar-as-metas.webp",
@@ -3130,11 +3144,12 @@
                 }
               ],
               "totalBytes": 740902,
-              "fileCount": 13
+              "fileCount": 13,
+              "preview": "assets/applications/slides/thumbs/slide-capa-superar-as-metas.webp"
             },
             {
               "id": "thumbs",
-              "label": "Thumbnails",
+              "label": "Thumbs",
               "files": [
                 {
                   "name": "slide-capa-superar-as-metas.webp",
@@ -3203,7 +3218,8 @@
                 }
               ],
               "totalBytes": 148434,
-              "fileCount": 13
+              "fileCount": 13,
+              "preview": "assets/applications/slides/thumbs/slide-capa-superar-as-metas.webp"
             }
           ],
           "totalBytes": 889336,
@@ -3213,10 +3229,11 @@
           "id": "telas",
           "label": "Telas / LPs",
           "kind": "assets",
+          "displayMode": "gallery",
           "sections": [
             {
               "id": "mid",
-              "label": "HQ (mid)",
+              "label": "HQ",
               "files": [
                 {
                   "name": "tela-tela-conceito-1-lp.webp",
@@ -3265,11 +3282,12 @@
                 }
               ],
               "totalBytes": 715250,
-              "fileCount": 9
+              "fileCount": 9,
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-1-lp.webp"
             },
             {
               "id": "thumbs",
-              "label": "Thumbnails",
+              "label": "Thumbs",
               "files": [
                 {
                   "name": "tela-tela-conceito-1-lp.webp",
@@ -3318,7 +3336,8 @@
                 }
               ],
               "totalBytes": 127150,
-              "fileCount": 9
+              "fileCount": 9,
+              "preview": "assets/applications/telas/thumbs/tela-tela-conceito-1-lp.webp"
             }
           ],
           "totalBytes": 842400,
