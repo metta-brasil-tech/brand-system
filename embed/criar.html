@@ -807,6 +807,9 @@ const STATE = {
   // Resultado da engine real
   run_id: null,         // ID retornado pelo /generate
   png_b64: null,        // PNG inline base64 (Vercel function retorna assim)
+  model_id: null,       // ID do modelo escolhido pelo pipeline (deveria casar com STATE.style)
+  diagnostics: [],      // log do pipeline (lista de strings) — pra debug visual
+  warnings: [],         // avisos do assembler
   error: null           // mensagem de erro (quando step === 'error')
 };
 
@@ -1226,11 +1229,23 @@ function tplError() {
 
 function tplResult() {
   const brandLabel = STATE.brand === 'metta' ? 'Metta' : 'Tiago Alves';
-  // Engine local (Docker do dev) retorna run_id + png_path → fetch via /image/:id.
-  // Vercel function (prod) retorna png_b64 → data URL inline.
   const imageSrc = STATE.png_b64
     ? `data:image/png;base64,${STATE.png_b64}`
     : (STATE.run_id ? `${ENGINE_URL}/image/${STATE.run_id}` : '');
+
+  // Detecta mismatch entre estilo escolhido e modelo que o pipeline usou
+  const styleMismatch = STATE.style && STATE.model_id && STATE.style !== STATE.model_id;
+  // Detecta se image-gen falhou em algum slot (sintoma: peça sai com fundo branco)
+  const imageGenFailures = (STATE.diagnostics || []).filter(d => /04-image-gen: FALHOU/.test(d));
+
+  const diagItems = (STATE.diagnostics || []).map(d => {
+    const isFail = /FALHOU/i.test(d);
+    return `<li style="color:${isFail ? '#B91C1C' : 'var(--metta-sys-color-on-surface-variant)'}; font-family: var(--metta-ref-typeface-mono); font-size: 11px; line-height: 1.5; margin-bottom: 4px;">${escapeHtml(d)}</li>`;
+  }).join('');
+
+  const warnItems = (STATE.warnings || []).map(w =>
+    `<li style="color:#92400E; font-size: 12px; line-height: 1.4; margin-bottom: 4px;">${escapeHtml(String(w))}</li>`
+  ).join('');
 
   return `
     <header class="step-head">
@@ -1250,9 +1265,49 @@ function tplResult() {
             <h4 class="result-card-title">Detalhes do briefing</h4>
             <div class="qa-row"><span>Marca</span><span>${brandLabel}</span></div>
             <div class="qa-row"><span>Formato</span><span>${(FORMATS.find(f => f.id === STATE.format) || {}).label || '—'}</span></div>
-            <div class="qa-row"><span>Estilo</span><span>${STATE.style || '—'}</span></div>
+            <div class="qa-row">
+              <span>Estilo escolhido</span>
+              <span style="font-family: var(--metta-ref-typeface-mono); font-size: 12px;">${escapeHtml(STATE.style || '—')}</span>
+            </div>
+            <div class="qa-row">
+              <span>Modelo usado</span>
+              <span style="font-family: var(--metta-ref-typeface-mono); font-size: 12px; color: ${styleMismatch ? '#B91C1C' : 'inherit'};">
+                ${escapeHtml(STATE.model_id || '—')}${styleMismatch ? ' ⚠️' : ''}
+              </span>
+            </div>
             <div class="qa-row"><span>Modo</span><span>${STATE.mode === 'audio' ? 'Áudio/texto livre' : 'Wizard'}</span></div>
           </div>
+          ${styleMismatch ? `
+            <div class="result-card" style="border-left: 3px solid #B91C1C;">
+              <h4 class="result-card-title" style="color:#B91C1C;">Estilo divergente</h4>
+              <p style="font-size: 13px; line-height: 1.45; margin: 0;">
+                O pipeline usou <code>${escapeHtml(STATE.model_id)}</code> em vez do <code>${escapeHtml(STATE.style)}</code> que você escolheu.
+                Isso indica que <code>model_id</code> não foi forçado na chamada (regressão ou modo áudio).
+              </p>
+            </div>
+          ` : ''}
+          ${imageGenFailures.length > 0 ? `
+            <div class="result-card" style="border-left: 3px solid #B91C1C;">
+              <h4 class="result-card-title" style="color:#B91C1C;">Imagem não foi gerada</h4>
+              <p style="font-size: 13px; line-height: 1.45; margin: 0;">
+                A image-gen falhou em ${imageGenFailures.length} slot(s). A peça saiu sem foto — só texto sobre fundo. Veja Diagnóstico abaixo pro erro específico.
+              </p>
+            </div>
+          ` : ''}
+          ${warnItems ? `
+            <div class="result-card">
+              <h4 class="result-card-title">Avisos do assembler</h4>
+              <ul style="margin: 0; padding-left: 18px;">${warnItems}</ul>
+            </div>
+          ` : ''}
+          ${diagItems ? `
+            <details class="result-card" ${(styleMismatch || imageGenFailures.length > 0) ? 'open' : ''}>
+              <summary style="cursor: pointer; margin-bottom: 12px;">
+                <span class="result-card-title" style="display: inline;">Diagnóstico do pipeline</span>
+              </summary>
+              <ul style="margin: 0; padding-left: 18px;">${diagItems}</ul>
+            </details>
+          ` : ''}
           <div class="actions-stack">
             <button class="btn btn-primary" data-action="download-png">${icon('download', 16)} Baixar PNG</button>
             <button class="btn btn-outlined" data-action="regenerate">${icon('refresh', 16)} Gerar outra variação</button>
@@ -1433,6 +1488,9 @@ function onAction(e) {
       });
       STATE.run_id = null;
       STATE.png_b64 = null;
+      STATE.model_id = null;
+      STATE.diagnostics = [];
+      STATE.warnings = [];
       STATE.error = null;
       currentStep = 'brand';
       render();
@@ -1478,7 +1536,12 @@ async function generateReal(briefing) {
     const response = await fetch(`${ENGINE_URL}/generate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ briefing, mock: false }),
+      body: JSON.stringify({
+        briefing,
+        mock: false,
+        // Quando o wizard mandou estilo explícito, força no backend (pula skill 02)
+        ...(STATE.style ? { model_id: STATE.style } : {})
+      }),
       signal: controller.signal
     });
     if (!response.ok) {
@@ -1525,6 +1588,9 @@ function runGenerationReal() {
       stepEls.forEach(el => { el.classList.remove('active'); el.classList.add('done'); });
       STATE.run_id = result.run_id || null;
       STATE.png_b64 = result.png_b64 || null;
+      STATE.model_id = result.model_id || null;
+      STATE.diagnostics = Array.isArray(result.diagnostics) ? result.diagnostics : [];
+      STATE.warnings = Array.isArray(result.warnings) ? result.warnings : [];
       STATE.error = null;
       setTimeout(() => goto('result'), 350);
     })
