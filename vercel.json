@@ -11,6 +11,10 @@
       "maxDuration": 60,
       "includeFiles": "engine/**",
       "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public}/**"
+    },
+    "api/image-search.py": {
+      "maxDuration": 15,
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public,engine}/**"
     }
   }
 }

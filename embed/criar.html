@@ -217,6 +217,70 @@ button.stepper-item.done:hover {
 
 .choice-icon svg { width: 24px; height: 24px; }
 
+/* Preview de estilo — imagem real do exemplar canônico */
+.choice.with-preview { padding: 0; overflow: hidden; }
+.choice-preview {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 0;
+  background: var(--metta-sys-color-surface-container);
+  display: block;
+}
+.choice-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px 20px;
+}
+.choice-body .choice-title { font-size: 16px; line-height: 1.2; }
+.choice-body .choice-desc  { font-size: 13px; line-height: 1.4; }
+.choice-body .choice-tag   { align-self: flex-start; margin-top: 4px; }
+
+/* Galeria de imagens da busca web (fase B) */
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.search-result {
+  appearance: none;
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1.5px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 180ms var(--metta-ref-easing-standard);
+}
+.search-result:hover {
+  border-color: var(--metta-sys-color-on-surface-variant);
+  transform: translateY(-2px);
+  box-shadow: var(--metta-sys-elevation-2);
+}
+.search-result.selected {
+  background: var(--metta-sys-color-surface-container-low);
+  border-color: var(--metta-sys-color-on-surface-variant);
+  border-width: 2px;
+}
+.search-result img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+.search-empty, .search-loading {
+  padding: 32px;
+  text-align: center;
+  color: var(--metta-sys-color-on-surface-variant);
+  font-size: 14px;
+  background: var(--metta-sys-color-surface-container-low);
+  border-radius: var(--metta-sys-shape-corner-md);
+  margin-top: 16px;
+}
+
 .choice-title {
   font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback-expanded), sans-serif;
   font-weight: 650;
@@ -800,6 +864,9 @@ const STATE = {
   format: null,         // 'post' | 'carrossel' | 'ad-single' | 'ad-story'
   style: null,          // ID do estilo do banco
   copyMode: 'gerar',    // 'tenho' | 'gerar'
+  imageSource: null,    // 'generate' (IA) | 'search' (busca web) | 'none' — definido em wiz-imagem
+  searchQuery: '',      // termo de busca quando imageSource='search'
+  selectedImageUrl: '', // URL escolhida na galeria de busca
   copy: '',             // texto da copy
   cta: '',
   audioTranscript: '',
@@ -821,35 +888,43 @@ const IS_LOCAL_DEV = typeof location !== 'undefined'
 const ENGINE_URL = IS_LOCAL_DEV ? 'http://localhost:8000' : '/api';
 const ENGINE_TIMEOUT_MS = IS_LOCAL_DEV ? 300_000 : 60_000;  // local 5min, Vercel Hobby 60s
 
-const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
+const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
 const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
+// wiz-imagem só aparece se o estilo selecionado usa imagem.
+// wiz-search só aparece se imageSource === 'search'.
 // Steps terminais (loading, result, error) não aparecem como done-clicáveis no stepper
 
 let currentStep = 'brand';
 
-/* ----------- DATA: estilos por marca ----------- */
+/* ----------- DATA: estilos por marca -----------
+ * `id`         — bate com o YAML em engine/brand-knowledge/models/{marca}/
+ * `label`      — nome PT-BR visível no card (decidido com Head de Design 2026-05-15)
+ * `desc`       — descrição curta no card
+ * `previewSrc` — imagem de referência mostrada no card (opcional)
+ * `usaImagem`  — se true, pipeline gera/busca uma imagem; se false, é tipográfico puro
+ */
 const STYLES_METTA = [
-  { id: 'A',           label: 'YELLOW-BLOCO',      desc: 'Bloco amarelo grande com headline em SF Pro Expanded heavy. Alta atenção.' },
-  { id: 'B',           label: 'DARK-EDITORIAL',    desc: 'Fundo escuro, headline grande, peça de prova editorial.' },
-  { id: 'C',           label: 'LIGHT-CLEAN',       desc: 'Fundo claro, foto + headline, sensação de respeito ao leitor.' },
-  { id: 'D',           label: 'NUMBER-PROOF',      desc: 'Número grande dominante + contexto curto embaixo. Prova social.' },
-  { id: 'E',           label: 'CASE-EDITORIAL',    desc: 'Estilo conteúdo: logo do case + headline insight + corpo destrinchando.' },
-  { id: 'F',           label: 'LIGHT-SURREAL',     desc: 'Surrealista controlado: fotografia + composição inesperada.' }
+  { id: 'A',           label: 'Bloco amarelo + headline',  desc: 'Bloco amarelo grande com headline em peso heavy. Alta atenção.',         usaImagem: false },
+  { id: 'B',           label: 'Editorial escuro',          desc: 'Fundo escuro, headline grande, peça de prova editorial.',                 usaImagem: true  },
+  { id: 'C',           label: 'Claro e limpo',             desc: 'Fundo claro, foto + headline, sensação de respeito ao leitor.',           usaImagem: true  },
+  { id: 'D',           label: 'Número de prova',           desc: 'Número grande dominante + contexto curto embaixo. Prova social.',         usaImagem: false },
+  { id: 'E',           label: 'Case editorial',            desc: 'Logo do case + headline insight + corpo destrinchando o método.',         usaImagem: true  },
+  { id: 'F',           label: 'Light surreal',             desc: 'Surrealista controlado: fotografia + composição inesperada.',             usaImagem: true  }
 ];
 
 const STYLES_TIAGO = [
-  { id: 'TIAGO-TWITTER-CARD',           label: 'TWITTER-CARD',         desc: 'Mock feed Twitter — header com avatar + verified azul + tweet headline. Bom pra statement provocativo curto.' },
-  { id: 'TIAGO-EDITORIAL-HERO',         label: 'EDITORIAL HERO',       desc: 'Capa cinema editorial. Headline GIGANTE + colagem surreal (corpo decapitado, peixe-tubarão, partes pintadas de amarelo). Mood noir revista premium.' },
-  { id: 'TIAGO-EDITORIAL-CARD',         label: 'EDITORIAL CARD',       desc: 'Slide meio de carrossel editorial. Big stat ou lista de sintomas/sub-dores. Cinema editorial em formato intermediário.' },
-  { id: 'TIAGO-EDITORIAL-DARK',         label: 'EDITORIAL DARK',       desc: 'Slide noir investigativo. Tese psicológica/comportamental (medo, exaustão). Reframe diagnóstico heavy.' },
-  { id: 'TIAGO-EDITORIAL-CTA',          label: 'EDITORIAL CTA',        desc: 'Slide de fechamento de carrossel. 3 variantes: pergunta engajamento, qualificação "pra quem é", ou reveal de protocolo.' },
-  { id: 'TIAGO-STORY-COVER-HERO',       label: 'STORY COVER HERO',     desc: 'Story 9:16. Foto lo-fi do Tiago em contexto real (palestra, casa, viagem) + headline branco + assinatura + ARRASTA PRO LADO.' },
-  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'STORY YELLOW BLOCK',   desc: 'Story 9:16. Foto de ambiente lo-fi (sala, academia, mesa) + bloco amarelo overlay central com pergunta ou checklist.' },
-  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'STORY MINIMAL',        desc: 'Story 9:16. Foto contemplativa + texto branco leve SEM caixa. Reflexão de baixo volume.' },
-  { id: 'TIAGO-NOTES-MOCKUP',           label: 'NOTES MOCKUP',         desc: 'Mock iPhone Notes — status bar 9:41, H1 com marker amarelo, lista numerada. Storytelling em formato de anotação.' },
-  { id: 'TIAGO-TYPO-PURE',              label: 'TIPOGRÁFICO PURO',     desc: 'Fundo claro + headline gigante SF Pro Condensed Semibold com palavra-chave colorida + @handle. Frase de impacto isolada.' },
-  { id: 'TIAGO-DARK-SURREAL',           label: 'DARK SURREAL',         desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.' },
-  { id: 'TIAGO-PHOTO-RAW',              label: 'PHOTO RAW',            desc: 'Foto crua sem texto, sem edição. Bastidor de vida real (treino, viagem, comunidade). Humanização alta.' }
+  { id: 'TIAGO-TWITTER-CARD',           label: 'Tweet',                              desc: 'Texto sobre fundo branco estilo X/Twitter. Bom pra statement provocativo curto.',                  usaImagem: false, previewSrc: 'assets/style-previews/tiago/twitter-card.png' },
+  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  previewSrc: 'assets/style-previews/tiago/story-cover-hero.png' },
+  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  previewSrc: 'assets/style-previews/tiago/story-yellow-block.png' },
+  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  previewSrc: 'assets/style-previews/tiago/story-minimal.png' },
+  { id: 'TIAGO-NOTES-MOCKUP',           label: 'Tela de Notas do iPhone',            desc: 'Mock do app Notas com status bar, marker amarelo no H1 e lista numerada. Storytelling em formato de anotação.', usaImagem: false, previewSrc: 'assets/style-previews/tiago/notes-mockup.png' },
+  { id: 'TIAGO-TYPO-PURE',              label: 'Frase grande',                       desc: 'Tipografia pura sobre fundo claro com palavra-chave colorida. Frase de impacto isolada.',         usaImagem: false, previewSrc: 'assets/style-previews/tiago/typo-pure.png' },
+  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  previewSrc: 'assets/style-previews/tiago/dark-surreal.png' },
+  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  previewSrc: 'assets/style-previews/tiago/photo-raw.png' },
+  { id: 'TIAGO-EDITORIAL-HERO',         label: 'Capa estilo revista',                desc: 'Manchete gigante + colagem cinema editorial (B&W com selective yellow). Capa de carrossel premium.', usaImagem: true,  previewSrc: 'assets/style-previews/tiago/editorial-hero.png' },
+  { id: 'TIAGO-EDITORIAL-CARD',         label: 'Slide editorial com estatística',    desc: 'Big stat ou lista de sintomas. Slide intermediário de carrossel editorial cinema.',                usaImagem: true,  previewSrc: 'assets/style-previews/tiago/editorial-card.png' },
+  { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  previewSrc: 'assets/style-previews/tiago/editorial-dark.png' },
+  { id: 'TIAGO-EDITORIAL-CTA',          label: 'Slide de fechamento de carrossel',   desc: '3 variantes: pergunta de engajamento, qualificação "pra quem é", ou reveal de protocolo.',         usaImagem: true,  previewSrc: 'assets/style-previews/tiago/editorial-cta.png' }
 ];
 
 /* ----------- DATA: formatos ----------- */
@@ -890,12 +965,23 @@ function icon(name, size) {
    STEPPER
 ============================================================ */
 function renderStepper() {
-  const stepsToShow = STATE.mode === 'audio' ? STEPS_AUDIO : (STATE.mode === 'wizard' ? STEPS_WIZARD : ['brand', 'mode', '...']);
+  let stepsToShow = STATE.mode === 'audio' ? STEPS_AUDIO : (STATE.mode === 'wizard' ? STEPS_WIZARD : ['brand', 'mode', '...']);
+  // Filtros condicionais: wiz-imagem só se estilo usa imagem; wiz-search só se escolheu buscar
+  const styleObj = (STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style);
+  const usaImagem = styleObj && styleObj.usaImagem;
+  stepsToShow = stepsToShow.filter(s => {
+    if (s === 'wiz-imagem') return usaImagem;
+    if (s === 'wiz-search') return usaImagem && STATE.imageSource === 'search';
+    return true;
+  });
+
   const labels = {
     'brand':         'Marca',
     'mode':          'Modo',
     'wiz-format':    'Formato',
     'wiz-style':     'Estilo',
+    'wiz-imagem':    'Imagem',
+    'wiz-search':    'Busca',
     'wiz-copy':      'Copy',
     'wiz-cta':       'CTA',
     'wiz-confirm':   'Revisão',
@@ -1006,22 +1092,83 @@ function tplWizStyle() {
   return renderStepper() + `
     <header class="step-head">
       <p class="step-eyebrow">Wizard · Estilo visual</p>
-      <h1 class="step-title">Qual estilo do banco a gente usa de referência?</h1>
-      <p class="step-sub">Cada estilo tem um DNA visual: layout, hierarquia tipográfica, papel da imagem. A engine cria do zero adaptando à copy — não clona o template.</p>
+      <h1 class="step-title">Que tipo de peça você quer criar?</h1>
+      <p class="step-sub">Clique no preview que mais se parece com o resultado desejado. A engine cria do zero adaptando à copy — não clona o template.</p>
     </header>
     <div class="step-body">
       <div class="choice-grid">
         ${styles.map(s => `
-          <button class="choice ${STATE.style === s.id ? 'selected' : ''}" data-action="pick-style" data-value="${s.id}">
-            <span class="choice-tag">${s.id}</span>
-            <h3 class="choice-title">${s.label}</h3>
-            <p class="choice-desc">${s.desc}</p>
+          <button class="choice ${s.previewSrc ? 'with-preview' : ''} ${STATE.style === s.id ? 'selected' : ''}" data-action="pick-style" data-value="${s.id}">
+            ${s.previewSrc
+              ? `<img class="choice-preview" src="${s.previewSrc}" alt="${escapeHtml(s.label)}" loading="lazy">`
+              : ''}
+            <div class="${s.previewSrc ? 'choice-body' : ''}" ${s.previewSrc ? '' : 'style="display:contents"'}>
+              <h3 class="choice-title">${escapeHtml(s.label)}</h3>
+              <p class="choice-desc">${escapeHtml(s.desc)}</p>
+              <span class="choice-tag">${s.usaImagem ? 'com imagem' : 'só texto'}</span>
+            </div>
           </button>
         `).join('')}
       </div>
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+    </div>
+  `;
+}
+
+function tplWizImagem() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Imagem</p>
+      <h1 class="step-title">Como obter a imagem da peça?</h1>
+      <p class="step-sub">O estilo escolhido tem espaço pra uma foto/imagem. Você pode gerar uma com IA (mood/cena descritos), ou buscar uma imagem real na web (ex: foto de pessoa pública, marca conhecida).</p>
+    </header>
+    <div class="step-body">
+      <div class="choice-grid cols-2">
+        <button class="choice ${STATE.imageSource === 'generate' ? 'selected' : ''}" data-action="pick-image-source" data-value="generate">
+          <div class="choice-icon">${icon('sparkles', 24)}</div>
+          <h3 class="choice-title">Gerar com IA</h3>
+          <p class="choice-desc">A engine cria uma imagem original via gpt-image-1 (OpenAI) baseada no estilo + briefing. Bom pra cena/mood abstrato (mesa de trabalho, ambiente urbano, etc.).</p>
+          <span class="choice-tag">~$0,19 por imagem</span>
+        </button>
+        <button class="choice ${STATE.imageSource === 'search' ? 'selected' : ''}" data-action="pick-image-source" data-value="search">
+          <div class="choice-icon">${icon('search', 24)}</div>
+          <h3 class="choice-title">Buscar na web</h3>
+          <p class="choice-desc">Busca real de imagens via Google. Bom pra pessoa pública (Michael Jordan), produto específico, marca conhecida — onde gerar IA não faz sentido.</p>
+          <span class="choice-tag">Grátis · 100 buscas/dia</span>
+        </button>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+    </div>
+  `;
+}
+
+function tplWizSearch() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Busca de imagem</p>
+      <h1 class="step-title">Que imagem você quer encontrar?</h1>
+      <p class="step-sub">Digite um termo de busca. Resultados vêm do Google Images.</p>
+    </header>
+    <div class="step-body">
+      <div class="field">
+        <label class="field-label" for="search-input">Termo de busca</label>
+        <div class="row">
+          <input type="text" class="input" id="search-input" placeholder="ex: Michael Jordan camisa Bulls vintage" value="${escapeHtml(STATE.searchQuery)}" style="flex:1">
+          <button class="btn btn-outlined" data-action="run-search">${icon('search', 16)} Buscar</button>
+        </div>
+        <p class="field-hint">Quanto mais específico, melhor o resultado. Inclua estilo (vintage, p&b), contexto (no Bulls, em jogo), enquadramento (retrato, ação).</p>
+      </div>
+      <div id="search-results"></div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="confirm-search-pick" ${STATE.selectedImageUrl ? '' : 'disabled'}>
+        Usar essa imagem ${icon('arrowRight', 16)}
+      </button>
     </div>
   `;
 }
@@ -1337,6 +1484,8 @@ const templates = {
   'mode':          tplMode,
   'wiz-format':    tplWizFormat,
   'wiz-style':     tplWizStyle,
+  'wiz-imagem':    tplWizImagem,
+  'wiz-search':    tplWizSearch,
   'wiz-copy':      tplWizCopy,
   'wiz-cta':       tplWizCta,
   'wiz-confirm':   tplWizConfirm,
@@ -1372,11 +1521,23 @@ function back() {
 }
 
 function nextFromCurrent() {
+  // wiz-style → wiz-imagem (se usa imagem) ou wiz-copy direto
+  if (currentStep === 'wiz-style') {
+    const styles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
+    const styleObj = styles.find(s => s.id === STATE.style);
+    if (styleObj && styleObj.usaImagem) return goto('wiz-imagem');
+    STATE.imageSource = 'none';
+    return goto('wiz-copy');
+  }
+  // wiz-imagem → wiz-search (se busca) ou wiz-copy
+  if (currentStep === 'wiz-imagem') {
+    if (STATE.imageSource === 'search') return goto('wiz-search');
+    return goto('wiz-copy');
+  }
   const map = {
     'brand':         'mode',
     'mode':          STATE.mode === 'audio' ? 'audio-record' : 'wiz-format',
     'wiz-format':    'wiz-style',
-    'wiz-style':     'wiz-copy',
     'wiz-cta':       'wiz-confirm',
     'audio-record':  'audio-confirm'
   };
@@ -1428,8 +1589,38 @@ function onAction(e) {
       break;
     case 'pick-style':
       STATE.style = value;
+      // Limpa escolhas de imagem ao trocar estilo
+      STATE.imageSource = null;
+      STATE.searchQuery = '';
+      STATE.selectedImageUrl = '';
       render();
       setTimeout(nextFromCurrent, 220);
+      break;
+    case 'pick-image-source':
+      STATE.imageSource = value;
+      render();
+      setTimeout(nextFromCurrent, 220);
+      break;
+    case 'run-search': {
+      const inp = document.getElementById('search-input');
+      STATE.searchQuery = inp ? inp.value.trim() : STATE.searchQuery;
+      if (!STATE.searchQuery) {
+        alert('Digite um termo de busca antes.');
+        return;
+      }
+      runImageSearch(STATE.searchQuery);
+      break;
+    }
+    case 'pick-search-result':
+      STATE.selectedImageUrl = value;
+      document.querySelectorAll('.search-result').forEach(b => b.classList.toggle('selected', b.dataset.value === value));
+      // Habilita botão "Usar essa imagem"
+      const confirmBtn = document.querySelector('[data-action="confirm-search-pick"]');
+      if (confirmBtn) confirmBtn.removeAttribute('disabled');
+      break;
+    case 'confirm-search-pick':
+      if (!STATE.selectedImageUrl) return;
+      goto('wiz-copy');
       break;
     case 'set-copy-mode':
       STATE.copyMode = value;
@@ -1491,6 +1682,9 @@ function onAction(e) {
       STATE.model_id = null;
       STATE.diagnostics = [];
       STATE.warnings = [];
+      STATE.imageSource = null;
+      STATE.searchQuery = '';
+      STATE.selectedImageUrl = '';
       STATE.error = null;
       currentStep = 'brand';
       render();
@@ -1498,6 +1692,41 @@ function onAction(e) {
     case 'download-png':
       downloadMockPng();
       break;
+  }
+}
+
+/* ============================================================
+   IMAGE SEARCH — busca via Google Custom Search (fase B)
+============================================================ */
+async function runImageSearch(query) {
+  const container = document.getElementById('search-results');
+  if (!container) return;
+  container.innerHTML = '<div class="search-loading">Buscando imagens…</div>';
+  try {
+    const url = `${ENGINE_URL}/image-search?q=${encodeURIComponent(query)}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({ detail: res.statusText }));
+      container.innerHTML = `<div class="search-empty">Erro: ${escapeHtml(data.detail || 'falha na busca')}</div>`;
+      return;
+    }
+    const data = await res.json();
+    const items = data.results || [];
+    if (!items.length) {
+      container.innerHTML = '<div class="search-empty">Nada encontrado. Tenta refinar o termo.</div>';
+      return;
+    }
+    container.innerHTML = `<div class="search-grid">${items.map(it => `
+      <button class="search-result ${STATE.selectedImageUrl === it.url ? 'selected' : ''}"
+              data-action="pick-search-result" data-value="${escapeHtml(it.url)}"
+              title="${escapeHtml(it.title || '')}">
+        <img src="${escapeHtml(it.thumbnail || it.url)}" alt="${escapeHtml(it.title || '')}" loading="lazy">
+      </button>
+    `).join('')}</div>`;
+    // Reata handlers nos botões novos
+    container.querySelectorAll('[data-action]').forEach(el => el.addEventListener('click', onAction));
+  } catch (err) {
+    container.innerHTML = `<div class="search-empty">Erro de rede: ${escapeHtml(err.message)}</div>`;
   }
 }
 
@@ -1540,7 +1769,10 @@ async function generateReal(briefing) {
         briefing,
         mock: false,
         // Quando o wizard mandou estilo explícito, força no backend (pula skill 02)
-        ...(STATE.style ? { model_id: STATE.style } : {})
+        ...(STATE.style ? { model_id: STATE.style } : {}),
+        // Origem da imagem: gerar com IA (default), buscar URL pronta, ou sem imagem
+        ...(STATE.imageSource ? { image_source: STATE.imageSource } : {}),
+        ...(STATE.selectedImageUrl ? { image_url: STATE.selectedImageUrl } : {})
       }),
       signal: controller.signal
     });

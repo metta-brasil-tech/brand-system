@@ -39,7 +39,13 @@ os.environ.setdefault("ARTIFACTS_DIR", "/tmp/artifacts")
 # Pipeline runner — espelha engine/api.py::_run_pipeline mas pulando skill 06
 # e retornando PNG em bytes (não path) pra encodar em base64.
 # ----------------------------------------------------------------------------
-def _run_pipeline_inline(briefing_text: str, mock: bool = False, forced_model_id: str | None = None) -> dict:
+def _run_pipeline_inline(
+    briefing_text: str,
+    mock: bool = False,
+    forced_model_id: str | None = None,
+    image_source: str | None = None,   # 'generate' | 'search' | 'none' | None
+    image_url: str | None = None,      # URL pronta vinda da busca (quando image_source='search')
+) -> dict:
     from skills_runner import SkillRunner
     from adapters.llm import LLMAdapter, MockLLMAdapter
     from adapters.image_gen import ImageGenAdapter
@@ -108,9 +114,23 @@ def _run_pipeline_inline(briefing_text: str, mock: bool = False, forced_model_id
     diagnostics.append(f"03-layout-composer: {len(layout_spec.get('elements', []))} elementos")
 
     # Skill 04 — image prompt engineer + image-gen
+    # 3 caminhos:
+    #   (a) image_source='search' + image_url presente → injeta URL direta em TODOS os slots (pula skill 04)
+    #   (b) image_source='none' → pula skill 04 (sem imagem mesmo que o layout tenha slot)
+    #   (c) image_source='generate' (default) → roda skill 04 + image-gen normal
     image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
     image_urls: dict[str, str] = {}
-    if image_slots:
+    if not image_slots:
+        diagnostics.append("04-image-prompt-engineer: layout não tem image_slot — sem foto")
+    elif image_source == "search" and image_url:
+        # Caminho da busca web: usa URL escolhida pelo user pra todos os slots
+        for slot in image_slots:
+            image_urls[slot.get("slot_name", "main")] = image_url
+        diagnostics.append(f"04-image-gen: PULADO — usando URL escolhida na busca web ({len(image_slots)} slot(s))")
+    elif image_source == "none":
+        diagnostics.append("04-image-gen: PULADO — user escolheu peça sem imagem")
+    else:
+        # Caminho generate (default): skill 04 + image-gen
         prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": image_slots}
         r = runner.run("04-image-prompt-engineer", prompt_input)
         if not r.ok:
@@ -118,7 +138,7 @@ def _run_pipeline_inline(briefing_text: str, mock: bool = False, forced_model_id
         image_spec = r.output
         write_artifact(run_id, "04-image-prompt", image_spec, artifacts_dir)
         if image_spec.get("skip"):
-            diagnostics.append(f"04-image-prompt-engineer: SKIP (estilo não usa foto)")
+            diagnostics.append("04-image-prompt-engineer: SKIP (estilo não usa foto)")
         else:
             image_gen = ImageGenAdapter()
             for p in image_spec.get("prompts", []):
@@ -135,8 +155,6 @@ def _run_pipeline_inline(briefing_text: str, mock: bool = False, forced_model_id
                     msg = f"04-image-gen: FALHOU slot={p['slot_name']} — {e.__class__.__name__}: {e}"
                     diagnostics.append(msg)
                     print(f"[image_gen warn] {msg}", file=sys.stderr)
-    else:
-        diagnostics.append("04-image-prompt-engineer: layout não tem image_slot — sem foto")
 
     # Skill 05 — assembler (PNG via Pillow)
     asm_result = AssemblerAdapter().assemble(layout_spec, image_urls)
@@ -169,12 +187,20 @@ class handler(BaseHTTPRequestHandler):
             data = json.loads(raw) if raw else {}
             briefing = data.get("briefing", "")
             mock = bool(data.get("mock", False))
-            forced_model_id = data.get("model_id") or None  # opcional — vem do wizard
+            forced_model_id = data.get("model_id") or None
+            image_source = data.get("image_source") or None      # 'generate' | 'search' | 'none'
+            image_url = data.get("image_url") or None             # URL da imagem escolhida (busca)
 
             if not isinstance(briefing, str) or not briefing.strip():
                 return self._json(400, {"detail": "Body precisa de { briefing: string não-vazio }"})
 
-            result = _run_pipeline_inline(briefing, mock=mock, forced_model_id=forced_model_id)
+            result = _run_pipeline_inline(
+                briefing,
+                mock=mock,
+                forced_model_id=forced_model_id,
+                image_source=image_source,
+                image_url=image_url,
+            )
             if not result.get("ok"):
                 return self._json(500, {"detail": result.get("error", "erro desconhecido"),
                                         "run_id": result.get("run_id")})
