@@ -10,10 +10,6 @@
     "api/generate.py": {
       "maxDuration": 60,
       "includeFiles": "engine/**"
-    },
-    "api/image/[run_id].py": {
-      "maxDuration": 30,
-      "includeFiles": "engine/**"
     }
   }
 }
