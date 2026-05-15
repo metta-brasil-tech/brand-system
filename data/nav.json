@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-05-14T01:55:31.272Z",
+  "generatedAt": "2026-05-15T20:47:47.769Z",
   "tabs": [
     {
       "id": "overview",
@@ -12,6 +12,19 @@
           "id": "intro",
           "label": "Bem-vindo",
           "source": null
+        }
+      ]
+    },
+    {
+      "id": "criar",
+      "icon": "sparkles",
+      "label": "Criar",
+      "group": "ferramentas",
+      "sections": [
+        {
+          "id": "novo",
+          "label": "Novo conteúdo",
+          "source": "embed:criar.html"
         }
       ]
     },

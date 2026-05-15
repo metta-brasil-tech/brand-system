@@ -33,7 +33,8 @@ const BrandSystem = (() => {
     clock:    '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
     search:   '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
     link:     '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
-    check:    '<polyline points="20 6 9 17 4 12"/>'
+    check:    '<polyline points="20 6 9 17 4 12"/>',
+    sparkles: '<path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6L12 3z"/><path d="M19 14l.9 2.6L22 17.5l-2.1.9L19 21l-.9-2.6L16 17.5l2.1-.9L19 14z"/>'
   };
 
   // ----------- DATA UTILS -----------
@@ -210,9 +211,13 @@ const BrandSystem = (() => {
     if (!el) return;
     const subgroup = sec?.subgroupLabel || (sec?.subgroup && tab.sections.find(s => s.subgroup === sec.subgroup && s.subgroupLabel)?.subgroupLabel);
     const subgroupHtml = subgroup ? `<span class="sep">/</span><span>${subgroup}</span>` : '';
+    const firstSec = tab.sections.find(s => !s.hidden) || tab.sections[0];
+    const tabHref = `#/${tab.id}${firstSec ? '/' + firstSec.id : ''}`;
     el.innerHTML = `
-      <span class="breadcrumb-icon">${svgIcon(tab.icon, 14)}</span>
-      <span>${tab.label}</span>
+      <a class="breadcrumb-link" href="${tabHref}">
+        <span class="breadcrumb-icon">${svgIcon(tab.icon, 12)}</span>
+        <span>${tab.label}</span>
+      </a>
       ${subgroupHtml}
       ${sec ? `<span class="sep">/</span><span class="current">${sec.label}</span>` : ''}
     `;

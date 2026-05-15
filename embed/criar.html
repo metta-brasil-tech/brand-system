@@ -1,0 +1,1660 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Criar — Metta Brand System</title>
+
+<link rel="stylesheet" href="../styles/tokens.css">
+
+<style>
+/* ============================================================
+   CRIAR — UI do gerador de anúncio/carrossel/post
+   Mini-app rodando dentro do iframe `embed:criar.html`.
+   Estado em memória. Mock de geração (engine real entra na fase 2).
+============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--metta-sys-color-surface);
+  color: var(--metta-sys-color-on-surface);
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback-regular), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------------------- *
+ * STAGE — container que troca de step       *
+ * ----------------------------------------- */
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px clamp(20px, 4vw, 56px) 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ----------------------------------------- *
+ * STEPPER                                   *
+ * ----------------------------------------- */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.stepper-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 10.5px;
+  font-weight: 590;
+  font-stretch: 132%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 180ms var(--metta-ref-easing-standard);
+  cursor: default;
+}
+
+button.stepper-item { cursor: pointer; }
+
+.stepper-item.active {
+  color: var(--metta-sys-color-on-primary);
+  background: var(--metta-sys-color-primary);
+  border-color: var(--metta-sys-color-primary);
+}
+
+.stepper-item.done {
+  color: var(--metta-sys-color-on-surface-variant);
+  background: transparent;
+  border-color: var(--metta-sys-color-outline-variant);
+}
+
+button.stepper-item.done:hover {
+  background: var(--metta-sys-color-surface-container);
+  border-color: var(--metta-sys-color-on-surface-variant);
+  color: var(--metta-sys-color-on-surface);
+}
+
+.stepper-arrow {
+  color: var(--metta-sys-color-on-surface-variant);
+  opacity: 0.4;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* ----------------------------------------- *
+ * HEADER do step (título + subtítulo)       *
+ * ----------------------------------------- */
+.step-head {
+  margin-bottom: 32px;
+}
+
+.step-eyebrow {
+  font-size: 11px;
+  font-weight: 590;
+  font-stretch: 132%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0 0 12px;
+}
+
+.step-title {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback-expanded), sans-serif;
+  font-weight: 650;
+  font-stretch: 132%;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  color: var(--metta-sys-color-on-surface);
+}
+
+.step-sub {
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--metta-sys-color-on-surface-variant);
+  max-width: 56ch;
+  margin: 0;
+}
+
+/* ----------------------------------------- *
+ * BODY (conteúdo do step)                   *
+ * ----------------------------------------- */
+.step-body {
+  flex: 1;
+}
+
+/* ----------------------------------------- *
+ * GRID de cards (escolha)                   *
+ * ----------------------------------------- */
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.choice-grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 720px; }
+
+.choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px;
+  border-radius: var(--metta-sys-shape-corner-lg);
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1.5px solid var(--metta-sys-color-outline-variant);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  transition: all 200ms var(--metta-ref-easing-standard);
+  overflow: hidden;
+}
+
+.choice::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--metta-sys-color-primary);
+  opacity: 0;
+  transition: opacity 200ms;
+  pointer-events: none;
+}
+
+.choice > * { position: relative; z-index: 1; }
+
+.choice:hover {
+  border-color: var(--metta-sys-color-on-surface-variant);
+  transform: translateY(-2px);
+  box-shadow: var(--metta-sys-elevation-2);
+}
+
+.choice:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--metta-sys-color-surface), 0 0 0 4px var(--metta-sys-color-on-surface-variant);
+}
+
+.choice.selected {
+  background: var(--metta-sys-color-surface-container-low);
+  border-color: var(--metta-sys-color-on-surface-variant);
+}
+
+.choice-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  background: var(--metta-sys-color-surface-container);
+  color: var(--metta-sys-color-on-surface);
+}
+
+.choice-icon svg { width: 24px; height: 24px; }
+
+.choice-title {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback-expanded), sans-serif;
+  font-weight: 650;
+  font-stretch: 132%;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.choice-desc {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+.choice-tag {
+  font-size: 11px;
+  font-weight: 590;
+  font-stretch: 132%;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  background: var(--metta-sys-color-surface-container);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* Brand cards — única exceção: ícone reproduz a paleta da PRÓPRIA marca (símbolo). */
+.choice.brand-metta .choice-icon { background: var(--metta-sys-color-primary); color: var(--metta-sys-color-on-primary); }
+.choice.brand-tiago .choice-icon { background: var(--metta-ref-palette-night-10); color: var(--metta-sys-color-primary); }
+
+/* ----------------------------------------- *
+ * FORM CONTROLS                             *
+ * ----------------------------------------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 590;
+  font-stretch: 132%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+.field-hint {
+  font-size: 13px;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  border: 1.5px solid var(--metta-sys-color-outline-variant);
+  background: var(--metta-sys-color-surface);
+  color: var(--metta-sys-color-on-surface);
+  font: inherit;
+  font-size: 16px;
+  transition: border-color 200ms, box-shadow 200ms;
+  resize: vertical;
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--metta-sys-color-on-surface-variant);
+}
+
+.textarea { min-height: 160px; font-family: inherit; line-height: 1.5; }
+
+.toggle-group {
+  display: inline-flex;
+  background: var(--metta-sys-color-surface-container);
+  padding: 4px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  gap: 4px;
+}
+
+.toggle-group button {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 510;
+  color: var(--metta-sys-color-on-surface-variant);
+  padding: 8px 16px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  cursor: pointer;
+  transition: all 150ms;
+}
+
+.toggle-group button.active {
+  background: var(--metta-sys-color-surface);
+  color: var(--metta-sys-color-on-surface);
+  box-shadow: var(--metta-sys-elevation-1);
+}
+
+/* ----------------------------------------- *
+ * SUMMARY (confirmação)                     *
+ * ----------------------------------------- */
+.summary {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.summary-row {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  align-items: start;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+}
+
+.summary-row:last-child { border-bottom: none; }
+
+.summary-key {
+  font-size: 11px;
+  font-weight: 590;
+  font-stretch: 132%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  padding-top: 2px;
+}
+
+.summary-val {
+  font-size: 16px;
+  color: var(--metta-sys-color-on-surface);
+  line-height: 1.45;
+}
+
+.summary-edit {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface-variant);
+  cursor: pointer;
+  transition: all 150ms;
+}
+
+.summary-edit:hover {
+  border-color: var(--metta-sys-color-on-surface-variant);
+  color: var(--metta-sys-color-on-surface);
+}
+
+/* ----------------------------------------- *
+ * FOOTER (navegação)                        *
+ * ----------------------------------------- */
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 24px;
+  margin-top: auto;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+}
+
+.btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 590;
+  cursor: pointer;
+  transition: all 150ms;
+  border: 1.5px solid transparent;
+}
+
+.btn-primary {
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--metta-sys-color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--metta-sys-elevation-2);
+}
+
+.btn-primary:disabled {
+  background: var(--metta-sys-color-surface-container);
+  color: var(--metta-sys-color-on-surface-variant);
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+.btn-ghost:hover {
+  background: var(--metta-sys-color-surface-container);
+  color: var(--metta-sys-color-on-surface);
+}
+
+.btn-outlined {
+  background: transparent;
+  border-color: var(--metta-sys-color-outline-variant);
+  color: var(--metta-sys-color-on-surface);
+}
+
+.btn-outlined:hover {
+  border-color: var(--metta-sys-color-on-surface);
+}
+
+.btn svg { width: 16px; height: 16px; }
+
+/* ----------------------------------------- *
+ * AUDIO MODE                                *
+ * ----------------------------------------- */
+.audio-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-xl);
+  margin-bottom: 24px;
+}
+
+.mic-btn {
+  appearance: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms;
+  box-shadow: var(--metta-sys-elevation-3);
+}
+
+.mic-btn:hover { transform: scale(1.05); box-shadow: var(--metta-sys-elevation-4); }
+.mic-btn svg { width: 40px; height: 40px; }
+
+.mic-btn.recording {
+  background: #DC2626;
+  animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4), var(--metta-sys-elevation-3); }
+  50% { box-shadow: 0 0 0 16px rgba(220, 38, 38, 0), var(--metta-sys-elevation-3); }
+}
+
+.mic-state {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--metta-sys-color-on-surface-variant);
+  text-align: center;
+}
+
+.transcript {
+  width: 100%;
+  margin-top: 24px;
+  padding: 16px;
+  background: var(--metta-sys-color-surface);
+  border-radius: var(--metta-sys-shape-corner-md);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: 60px;
+  color: var(--metta-sys-color-on-surface);
+}
+
+.transcript:empty::before {
+  content: 'A transcrição vai aparecer aqui enquanto você fala.';
+  color: var(--metta-sys-color-on-surface-variant);
+  font-style: italic;
+}
+
+/* ----------------------------------------- *
+ * LOADING                                   *
+ * ----------------------------------------- */
+.loading-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.loading-logo {
+  width: 96px;
+  height: 96px;
+  color: var(--metta-sys-color-primary);
+  margin-bottom: 32px;
+  animation: spin 4s var(--metta-ref-easing-standard) infinite;
+}
+
+.loading-logo svg { width: 100%; height: 100%; }
+
+@keyframes spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.loading-title {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback-expanded), sans-serif;
+  font-weight: 650;
+  font-stretch: 132%;
+  font-size: 28px;
+  margin: 0 0 8px;
+}
+
+.loading-sub {
+  font-size: 15px;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0 0 32px;
+}
+
+.loading-log {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 360px;
+  width: 100%;
+}
+
+.loading-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  font-size: 14px;
+  color: var(--metta-sys-color-on-surface-variant);
+  background: var(--metta-sys-color-surface-container-low);
+  opacity: 0.4;
+  transition: all 300ms;
+  text-align: left;
+}
+
+.loading-step.active {
+  opacity: 1;
+  background: var(--metta-sys-color-primary-container);
+  color: var(--metta-sys-color-on-primary-container);
+}
+
+.loading-step.done {
+  opacity: 1;
+  background: var(--metta-sys-color-surface-container);
+  color: var(--metta-sys-color-on-surface);
+}
+
+.loading-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.loading-step.active .loading-step-dot {
+  animation: dot-pulse 0.8s infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+/* ----------------------------------------- *
+ * RESULT                                    *
+ * ----------------------------------------- */
+.result-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 880px) {
+  .result-layout { grid-template-columns: 1fr; }
+}
+
+.result-preview {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-xl);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+}
+
+.result-preview img,
+.result-preview svg {
+  max-width: 100%;
+  max-height: 600px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  box-shadow: var(--metta-sys-elevation-3);
+}
+
+.result-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result-card {
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-lg);
+  padding: 20px;
+}
+
+.result-card-title {
+  font-size: 11px;
+  font-weight: 590;
+  font-stretch: 132%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0 0 12px;
+}
+
+.qa-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+}
+
+.qa-row:last-child { border-bottom: none; }
+
+.qa-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 590;
+}
+
+.qa-badge.ok { background: #DCFCE7; color: #166534; }
+.qa-badge.warn { background: #FEF3C7; color: #92400E; }
+
+.actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.actions-stack .btn {
+  justify-content: center;
+  width: 100%;
+}
+
+/* Placeholder do mock — gradient + símbolo Metta */
+.mock-preview {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-width: 480px;
+  border-radius: var(--metta-sys-shape-corner-md);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--metta-sys-elevation-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 32px;
+  text-align: center;
+  color: var(--metta-sys-color-on-primary);
+}
+
+.mock-preview[data-brand="metta"] {
+  background: var(--metta-sys-gradient-golden-linear);
+}
+
+.mock-preview[data-brand="tiago"] {
+  background: var(--metta-sys-gradient-night-linear);
+  color: var(--metta-sys-color-primary);
+}
+
+.mock-symbol { width: 80px; height: 80px; margin-bottom: 16px; }
+
+.mock-headline {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback-expanded), sans-serif;
+  font-weight: 870;
+  font-stretch: 132%;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  max-width: 14ch;
+}
+
+.mock-watermark {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  font-size: 10px;
+  font-weight: 590;
+  font-stretch: 132%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* ----------------------------------------- *
+ * MOTION (entrada de step)                  *
+ * ----------------------------------------- */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stage > * {
+  animation: slideIn 300ms var(--metta-ref-easing-decelerate) both;
+}
+
+/* ----------------------------------------- *
+ * UTILS                                     *
+ * ----------------------------------------- */
+.hidden { display: none !important; }
+
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.row-end { justify-content: flex-end; }
+
+/* ----------------------------------------- *
+ * RESPONSIVE                                *
+ * ----------------------------------------- */
+@media (max-width: 640px) {
+  .stage { padding: 20px 16px 32px; }
+  .step-title { font-size: 28px; }
+  .summary-row { grid-template-columns: 1fr; gap: 4px; }
+  .summary-key { padding-top: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <!-- Renderizado por JS -->
+</div>
+
+<script>
+/* ============================================================
+   STATE MACHINE — /criar
+============================================================ */
+
+const STATE = {
+  brand: null,          // 'metta' | 'tiago'
+  mode: null,           // 'wizard' | 'audio'
+  format: null,         // 'post' | 'carrossel' | 'ad-single' | 'ad-story'
+  style: null,          // ID do estilo do banco
+  copyMode: 'gerar',    // 'tenho' | 'gerar'
+  copy: '',             // texto da copy
+  cta: '',
+  audioTranscript: '',
+  history: [],
+  // Resultado da engine real
+  run_id: null,         // ID retornado pelo /generate
+  error: null           // mensagem de erro (quando step === 'error')
+};
+
+const ENGINE_URL = 'http://localhost:8000';
+const ENGINE_TIMEOUT_MS = 300_000;  // 5 min — pipeline real demora 1-2 min em live mode
+
+const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
+const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
+// Steps terminais (loading, result, error) não aparecem como done-clicáveis no stepper
+
+let currentStep = 'brand';
+
+/* ----------- DATA: estilos por marca ----------- */
+const STYLES_METTA = [
+  { id: 'A',           label: 'YELLOW-BLOCO',      desc: 'Bloco amarelo grande com headline em SF Pro Expanded heavy. Alta atenção.' },
+  { id: 'B',           label: 'DARK-EDITORIAL',    desc: 'Fundo escuro, headline grande, peça de prova editorial.' },
+  { id: 'C',           label: 'LIGHT-CLEAN',       desc: 'Fundo claro, foto + headline, sensação de respeito ao leitor.' },
+  { id: 'D',           label: 'NUMBER-PROOF',      desc: 'Número grande dominante + contexto curto embaixo. Prova social.' },
+  { id: 'E',           label: 'CASE-EDITORIAL',    desc: 'Estilo conteúdo: logo do case + headline insight + corpo destrinchando.' },
+  { id: 'F',           label: 'LIGHT-SURREAL',     desc: 'Surrealista controlado: fotografia + composição inesperada.' }
+];
+
+const STYLES_TIAGO = [
+  { id: 'TIAGO-TWITTER-CARD',           label: 'TWITTER-CARD',         desc: 'Mock feed Twitter — header com avatar + verified azul + tweet headline. Bom pra statement provocativo curto.' },
+  { id: 'TIAGO-EDITORIAL-HERO',         label: 'EDITORIAL HERO',       desc: 'Capa cinema editorial. Headline GIGANTE + colagem surreal (corpo decapitado, peixe-tubarão, partes pintadas de amarelo). Mood noir revista premium.' },
+  { id: 'TIAGO-EDITORIAL-CARD',         label: 'EDITORIAL CARD',       desc: 'Slide meio de carrossel editorial. Big stat ou lista de sintomas/sub-dores. Cinema editorial em formato intermediário.' },
+  { id: 'TIAGO-EDITORIAL-DARK',         label: 'EDITORIAL DARK',       desc: 'Slide noir investigativo. Tese psicológica/comportamental (medo, exaustão). Reframe diagnóstico heavy.' },
+  { id: 'TIAGO-EDITORIAL-CTA',          label: 'EDITORIAL CTA',        desc: 'Slide de fechamento de carrossel. 3 variantes: pergunta engajamento, qualificação "pra quem é", ou reveal de protocolo.' },
+  { id: 'TIAGO-STORY-COVER-HERO',       label: 'STORY COVER HERO',     desc: 'Story 9:16. Foto lo-fi do Tiago em contexto real (palestra, casa, viagem) + headline branco + assinatura + ARRASTA PRO LADO.' },
+  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'STORY YELLOW BLOCK',   desc: 'Story 9:16. Foto de ambiente lo-fi (sala, academia, mesa) + bloco amarelo overlay central com pergunta ou checklist.' },
+  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'STORY MINIMAL',        desc: 'Story 9:16. Foto contemplativa + texto branco leve SEM caixa. Reflexão de baixo volume.' },
+  { id: 'TIAGO-NOTES-MOCKUP',           label: 'NOTES MOCKUP',         desc: 'Mock iPhone Notes — status bar 9:41, H1 com marker amarelo, lista numerada. Storytelling em formato de anotação.' },
+  { id: 'TIAGO-TYPO-PURE',              label: 'TIPOGRÁFICO PURO',     desc: 'Fundo claro + headline gigante SF Pro Condensed Semibold com palavra-chave colorida + @handle. Frase de impacto isolada.' },
+  { id: 'TIAGO-DARK-SURREAL',           label: 'DARK SURREAL',         desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.' },
+  { id: 'TIAGO-PHOTO-RAW',              label: 'PHOTO RAW',            desc: 'Foto crua sem texto, sem edição. Bastidor de vida real (treino, viagem, comunidade). Humanização alta.' }
+];
+
+/* ----------- DATA: formatos ----------- */
+const FORMATS = [
+  { id: 'post',      label: 'Post simples',  desc: '1 imagem 1080×1350 (4:5).',                  icon: 'square'  },
+  { id: 'carrossel', label: 'Carrossel',     desc: '5 a 10 cards 1080×1350 com fluxo narrativo.', icon: 'layers'  },
+  { id: 'ad-single', label: 'Ad single',     desc: 'Anúncio Meta — 1 imagem 1:1 ou 4:5.',         icon: 'target'  },
+  { id: 'ad-story',  label: 'Ad story',      desc: 'Anúncio story 9:16 (1080×1920).',             icon: 'phone'   }
+];
+
+/* ----------- ICONS ----------- */
+const ICONS = {
+  arrowLeft: '<path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/>',
+  arrowRight:'<path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/>',
+  check:     '<polyline points="20 6 9 17 4 12"/>',
+  mic:       '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/>',
+  stop:      '<rect x="6" y="6" width="12" height="12" rx="2"/>',
+  download:  '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+  refresh:   '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
+  edit:      '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+  square:    '<rect x="3" y="3" width="18" height="18" rx="2"/>',
+  layers:    '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+  target:    '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+  phone:     '<rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/>',
+  sparkles:  '<path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6L12 3z"/><path d="M19 14l.9 2.6L22 17.5l-2.1.9L19 21l-.9-2.6L16 17.5l2.1-.9L19 14z"/>',
+  metta:     '<path d="M88.1027 0.367798C96.743 4.41161 104.504 10.1193 110.939 17.1617C117.373 24.204 122.358 32.4451 125.609 41.4137C128.859 50.3824 130.31 59.9044 129.881 69.4342C129.452 78.964 127.148 88.3166 123.105 96.9567L108.792 90.2574C104.028 100.435 96.3547 108.974 86.7404 114.792C77.1226 120.611 65.9941 123.449 54.7639 122.945C43.5339 122.441 32.705 118.618 23.6477 111.96C14.5901 105.301 7.70904 96.1051 3.87715 85.5367C0.0453871 74.9684 -0.566021 63.4997 2.11934 52.5836C4.80483 41.6677 10.6677 31.7931 18.965 24.2086C21.7264 21.6846 24.718 19.454 27.8879 17.5358C34.2433 13.69 41.322 11.1052 48.7365 9.97327C59.8493 8.277 71.2162 9.91495 81.3986 14.6783L74.8215 28.7379C79.7558 31.0475 84.1851 34.3106 87.8537 38.3385C91.5239 42.3684 94.3608 47.0856 96.2004 52.2164C98.0398 57.3474 98.8462 62.7931 98.5725 68.2369C98.3036 73.5808 96.9957 78.8197 94.7297 83.6647L108.762 90.2291C111.92 83.4768 113.718 76.1682 114.054 68.7213C114.39 61.2698 113.255 53.824 110.714 46.8112C108.173 39.7982 104.274 33.3539 99.2424 27.8473C94.2108 22.3409 88.1436 17.8792 81.3879 14.7174L88.1027 0.367798ZM74.7941 28.775C67.4027 25.3192 59.1523 24.1317 51.0861 25.3629C45.7021 26.1848 40.5613 28.0605 35.9465 30.8531C33.645 32.2459 31.4728 33.8663 29.468 35.6989C23.4433 41.2059 19.1865 48.3764 17.2365 56.3024C15.2867 64.2287 15.7316 72.5563 18.5139 80.2301C21.2962 87.9038 26.2917 94.5809 32.8684 99.4156C39.4451 104.25 47.3087 107.027 55.4631 107.393C63.617 107.759 71.6966 105.699 78.6799 101.473C85.5791 97.2979 91.1001 91.194 94.5676 83.9196L81.01 77.4576C78.8042 82.0873 75.2914 85.9721 70.9016 88.6285C66.5978 91.2328 61.6392 92.5451 56.6174 92.4127L56.132 92.3942L56.1311 92.3951C50.9439 92.1621 45.9416 90.3954 41.758 87.3199C37.5745 84.2444 34.3962 79.9972 32.6262 75.1158C30.8562 70.2343 30.5744 64.9364 31.8146 59.8942C33.0551 54.852 35.7633 50.2901 39.5959 46.7867C43.4286 43.2835 48.2148 40.9961 53.3479 40.2125C58.4787 39.4294 63.7262 40.1844 68.4279 42.3824L74.7941 28.775ZM61.9602 56.2233C59.9937 55.3034 57.7986 54.9865 55.6525 55.3141C53.5066 55.6417 51.5059 56.5986 49.9035 58.0631C48.3012 59.5278 47.1683 61.4355 46.6496 63.5436C46.1311 65.6517 46.2495 67.8669 46.9895 69.9078C47.7295 71.9487 49.0577 73.7255 50.8068 75.0114C52.556 76.2971 54.6479 77.035 56.8166 77.1324C58.9853 77.2298 61.135 76.682 62.9924 75.5582C64.8496 74.4343 66.3321 72.7842 67.2521 70.818L81.0197 77.2584C82.4571 74.1868 83.2867 70.8644 83.4572 67.4762C83.6307 64.0264 83.119 60.5753 81.9533 57.3239C80.7876 54.0725 78.99 51.0836 76.6643 48.5299C74.3394 45.9773 71.5325 43.9086 68.4055 42.4449L61.9602 56.2233Z"/>'
+};
+
+function icon(name, size) {
+  const inner = ICONS[name] || '';
+  const vb = name === 'metta' ? '0 0 133 123' : '0 0 24 24';
+  const fill = name === 'metta' ? 'currentColor' : 'none';
+  const stroke = name === 'metta' ? 'none' : 'currentColor';
+  return `<svg width="${size || 18}" height="${size || 18}" viewBox="${vb}" fill="${fill}" stroke="${stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+}
+
+/* ============================================================
+   STEPPER
+============================================================ */
+function renderStepper() {
+  const stepsToShow = STATE.mode === 'audio' ? STEPS_AUDIO : (STATE.mode === 'wizard' ? STEPS_WIZARD : ['brand', 'mode', '...']);
+  const labels = {
+    'brand':         'Marca',
+    'mode':          'Modo',
+    'wiz-format':    'Formato',
+    'wiz-style':     'Estilo',
+    'wiz-copy':      'Copy',
+    'wiz-cta':       'CTA',
+    'wiz-confirm':   'Revisão',
+    'audio-record':  'Briefing',
+    'audio-confirm': 'Revisão',
+    'loading':       'Gerando',
+    'result':        'Pronto'
+  };
+
+  const currentIdx = stepsToShow.indexOf(currentStep);
+  // Resumimos pra mostrar só steps macro
+  const macro = stepsToShow.filter(s => s !== '...');
+  return `<div class="stepper">${macro.map((s, i) => {
+    const isCurrent = s === currentStep;
+    const isDone = !isCurrent && i < currentIdx;
+    const cls = isCurrent ? 'active' : (isDone ? 'done' : '');
+    const item = isDone
+      ? `<button class="stepper-item ${cls}" data-action="jump" data-value="${s}">${labels[s] || s}</button>`
+      : `<span class="stepper-item ${cls}">${labels[s] || s}</span>`;
+    return item + (i < macro.length - 1 ? '<span class="stepper-arrow">›</span>' : '');
+  }).join('')}</div>`;
+}
+
+/* ============================================================
+   TEMPLATES (cada step retorna HTML)
+============================================================ */
+function tplBrand() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Passo 1 de N</p>
+      <h1 class="step-title">Pra qual marca a gente está criando?</h1>
+      <p class="step-sub">A marca define o tom de voz, os estilos disponíveis, a paleta visual e o ICP do conteúdo.</p>
+    </header>
+    <div class="step-body">
+      <div class="choice-grid cols-2">
+        <button class="choice brand-metta ${STATE.brand === 'metta' ? 'selected' : ''}" data-action="pick-brand" data-value="metta">
+          <div class="choice-icon">${icon('metta', 28)}</div>
+          <h3 class="choice-title">Metta</h3>
+          <p class="choice-desc">Marca institucional. Voz de conselheiro técnico. Pilares: gestão, lucro, performance comercial.</p>
+          <span class="choice-tag">Para empresários ICP</span>
+        </button>
+        <button class="choice brand-tiago ${STATE.brand === 'tiago' ? 'selected' : ''}" data-action="pick-brand" data-value="tiago">
+          <div class="choice-icon">${icon('sparkles', 28)}</div>
+          <h3 class="choice-title">Tiago Alves</h3>
+          <p class="choice-desc">Marca pessoal. Voz direta de mentor. Princípios de gestão, bastidor de operação, casos práticos.</p>
+          <span class="choice-tag">Para o feed pessoal</span>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function tplMode() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Passo 2 — Como você quer criar?</p>
+      <h1 class="step-title">Guiado por etapas ou descrição livre?</h1>
+      <p class="step-sub">Os dois caminhos chegam no mesmo lugar. Use o guiado se quiser controle fino. Use o áudio/texto livre se já tiver clareza do que quer.</p>
+    </header>
+    <div class="step-body">
+      <div class="choice-grid cols-2">
+        <button class="choice ${STATE.mode === 'wizard' ? 'selected' : ''}" data-action="pick-mode" data-value="wizard">
+          <div class="choice-icon">${icon('layers', 24)}</div>
+          <h3 class="choice-title">Guiado</h3>
+          <p class="choice-desc">A gente passa por formato, estilo, copy e CTA, um campo de cada vez. Bom pra primeira vez.</p>
+          <span class="choice-tag">~5 perguntas</span>
+        </button>
+        <button class="choice ${STATE.mode === 'audio' ? 'selected' : ''}" data-action="pick-mode" data-value="audio">
+          <div class="choice-icon">${icon('mic', 24)}</div>
+          <h3 class="choice-title">Áudio ou texto livre</h3>
+          <p class="choice-desc">Você grava ou digita o briefing solto. A gente extrai os campos e mostra um resumo antes de gerar.</p>
+          <span class="choice-tag">Mais rápido</span>
+        </button>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+    </div>
+  `;
+}
+
+function tplWizFormat() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Formato</p>
+      <h1 class="step-title">Qual o formato da peça?</h1>
+      <p class="step-sub">O formato define proporção, quantidade de cards e estrutura editorial (gancho-corpo-CTA muda em vídeo, headline-subheadline-corpo-CTA em estático).</p>
+    </header>
+    <div class="step-body">
+      <div class="choice-grid">
+        ${FORMATS.map(f => `
+          <button class="choice ${STATE.format === f.id ? 'selected' : ''}" data-action="pick-format" data-value="${f.id}">
+            <div class="choice-icon">${icon(f.icon, 24)}</div>
+            <h3 class="choice-title">${f.label}</h3>
+            <p class="choice-desc">${f.desc}</p>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+    </div>
+  `;
+}
+
+function tplWizStyle() {
+  const styles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Estilo visual</p>
+      <h1 class="step-title">Qual estilo do banco a gente usa de referência?</h1>
+      <p class="step-sub">Cada estilo tem um DNA visual: layout, hierarquia tipográfica, papel da imagem. A engine cria do zero adaptando à copy — não clona o template.</p>
+    </header>
+    <div class="step-body">
+      <div class="choice-grid">
+        ${styles.map(s => `
+          <button class="choice ${STATE.style === s.id ? 'selected' : ''}" data-action="pick-style" data-value="${s.id}">
+            <span class="choice-tag">${s.id}</span>
+            <h3 class="choice-title">${s.label}</h3>
+            <p class="choice-desc">${s.desc}</p>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+    </div>
+  `;
+}
+
+function tplWizCopy() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Copy</p>
+      <h1 class="step-title">A copy já está pronta?</h1>
+      <p class="step-sub">Se já tem o texto, é só colar. Senão, descreva o que a peça precisa comunicar e a engine escreve baseado no tom de voz da marca.</p>
+    </header>
+    <div class="step-body">
+      <div class="field">
+        <label class="field-label">Como você quer fazer?</label>
+        <div class="toggle-group">
+          <button data-action="set-copy-mode" data-value="tenho" class="${STATE.copyMode === 'tenho' ? 'active' : ''}">Já tenho a copy</button>
+          <button data-action="set-copy-mode" data-value="gerar" class="${STATE.copyMode === 'gerar' ? 'active' : ''}">Gerar pra mim</button>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="copy-input">${STATE.copyMode === 'tenho' ? 'Cole a copy aqui (headline + corpo + CTA)' : 'Descreva o tema, a tensão e a virada que a peça precisa entregar'}</label>
+        <textarea class="textarea" id="copy-input" placeholder="${STATE.copyMode === 'tenho' ? 'Ex: \\n\\nHEADLINE: Para de demitir.\\nCORPO: O problema raramente é a pessoa. Em 70% dos casos, o sistema produz o resultado.\\nCTA: Diagnostique antes de cortar.' : 'Ex: Sobre como o empresário confunde execução ruim com pessoa errada. Quero mostrar que o sistema gera o resultado, não o talento individual. Quero terminar provocando: \"diagnostica antes de cortar\".'}">${STATE.copy || ''}</textarea>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="next-from-copy">Continuar ${icon('arrowRight', 16)}</button>
+    </div>
+  `;
+}
+
+function tplWizCta() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · CTA</p>
+      <h1 class="step-title">Qual o CTA da peça?</h1>
+      <p class="step-sub">${STATE.brand === 'metta' ? 'CTA Metta vem no fim, é convite — não caça-cliente. Ex: \"Diagnostica antes de demitir\", \"Olha pra dentro do sistema antes da pessoa\".' : 'CTA Tiago é direto, em primeira pessoa. Ex: \"Comenta aqui o que você faria\", \"Salva pra revisitar quando precisar\".'}</p>
+    </header>
+    <div class="step-body">
+      <div class="field">
+        <label class="field-label" for="cta-input">CTA</label>
+        <input type="text" class="input" id="cta-input" placeholder="${STATE.brand === 'metta' ? 'Diagnostica antes de demitir.' : 'Comenta aqui se você concorda.'}" value="${STATE.cta || ''}">
+        <p class="field-hint">Uma única frase. Sem call-to-action genérico (\"clica no link\", \"agenda agora\").</p>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="next-from-cta">Continuar ${icon('arrowRight', 16)}</button>
+    </div>
+  `;
+}
+
+function tplWizConfirm() {
+  const brandLabel  = STATE.brand === 'metta' ? 'Metta' : 'Tiago Alves';
+  const formatLabel = (FORMATS.find(f => f.id === STATE.format) || {}).label || '—';
+  const styleList   = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
+  const styleLabel  = (styleList.find(s => s.id === STATE.style) || {}).label || '—';
+  const copyPreview = STATE.copyMode === 'tenho' ? (STATE.copy || '—') : `Será gerada: \"${(STATE.copy || '').slice(0, 80)}…\"`;
+
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Revisão</p>
+      <h1 class="step-title">Confirma o briefing pra gerar?</h1>
+      <p class="step-sub">Última chance de ajustar antes da engine rodar. Você pode clicar em editar qualquer linha.</p>
+    </header>
+    <div class="step-body">
+      <div class="summary">
+        ${summaryRow('Marca', brandLabel, 'brand')}
+        ${summaryRow('Formato', formatLabel, 'wiz-format')}
+        ${summaryRow('Estilo', styleLabel, 'wiz-style')}
+        ${summaryRow('Copy', copyPreview, 'wiz-copy')}
+        ${summaryRow('CTA', STATE.cta || '—', 'wiz-cta')}
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="generate">${icon('sparkles', 16)} Gerar peça</button>
+    </div>
+  `;
+}
+
+function summaryRow(key, val, editStep) {
+  return `
+    <div class="summary-row">
+      <div class="summary-key">${key}</div>
+      <div class="summary-val">${escapeHtml(val)}</div>
+      <button class="summary-edit" data-action="jump" data-value="${editStep}">${icon('edit', 12)} Editar</button>
+    </div>
+  `;
+}
+
+function tplAudioRecord() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Modo livre · Briefing</p>
+      <h1 class="step-title">Descreva a peça falando ou escrevendo</h1>
+      <p class="step-sub">Conte o tema, o formato, o estilo aproximado, a copy se já tiver, e o CTA. A engine extrai os campos e mostra um resumo antes de gerar.</p>
+    </header>
+    <div class="step-body">
+      <div class="audio-stage">
+        <button class="mic-btn" id="mic-btn" data-action="toggle-mic">
+          ${icon('mic', 40)}
+        </button>
+        <p class="mic-state" id="mic-state">Clique no microfone pra começar.</p>
+        <div class="transcript" id="transcript">${escapeHtml(STATE.audioTranscript)}</div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="audio-text">Ou escreva direto aqui</label>
+        <textarea class="textarea" id="audio-text" placeholder="Ex: Quero um ad story pra Metta sobre o erro de demitir antes de diagnosticar. Estilo dark editorial. Headline forte. CTA tipo 'diagnostica antes de cortar'.">${escapeHtml(STATE.audioTranscript)}</textarea>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="next-from-audio">Continuar ${icon('arrowRight', 16)}</button>
+    </div>
+  `;
+}
+
+function tplAudioConfirm() {
+  const t = STATE.audioTranscript || '';
+  const guessFormat = /story/i.test(t) ? 'ad-story' : (/carrossel/i.test(t) ? 'carrossel' : (/ad|an[uú]ncio/i.test(t) ? 'ad-single' : 'post'));
+  const formatLabel = (FORMATS.find(f => f.id === guessFormat) || {}).label || 'Post simples';
+
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Modo livre · Revisão</p>
+      <h1 class="step-title">É isso aqui?</h1>
+      <p class="step-sub">A engine extraiu os campos do seu briefing. Confirma pra gerar ou volta e ajusta o texto.</p>
+    </header>
+    <div class="step-body">
+      <div class="summary">
+        ${summaryRow('Marca', STATE.brand === 'metta' ? 'Metta' : 'Tiago Alves', 'brand')}
+        ${summaryRow('Formato (detectado)', formatLabel, 'audio-record')}
+        ${summaryRow('Briefing', t.length > 200 ? t.slice(0, 200) + '…' : (t || '—'), 'audio-record')}
+      </div>
+      <p class="field-hint">Pra ter mais controle nos campos, volta no passo 2 e troca pro modo guiado.</p>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="generate">${icon('sparkles', 16)} Gerar peça</button>
+    </div>
+  `;
+}
+
+function tplLoading() {
+  const steps = [
+    'Lendo briefing',
+    'Selecionando estilo do banco',
+    'Escrevendo copy no tom da marca',
+    'Compondo layout',
+    'Gerando imagem',
+    'Validando QA'
+  ];
+  return `
+    <div class="loading-stage">
+      <div class="loading-logo">${icon('metta', 96)}</div>
+      <h2 class="loading-title">Criando sua peça…</h2>
+      <p class="loading-sub">Pode levar 1 a 2 minutos — a engine está gerando imagem real via IA.</p>
+      <div class="loading-log" id="loading-log">
+        ${steps.map((s, i) => `
+          <div class="loading-step" data-step="${i}">
+            <span class="loading-step-dot"></span>
+            <span>${s}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function tplError() {
+  const err = STATE.error || 'Erro desconhecido.';
+  const isOffline = /Failed to fetch|NetworkError|ERR_CONNECTION/i.test(err);
+  const isTimeout = /timeout|aborted/i.test(err);
+  const isClarifying = /Preciso de mais detalhes/i.test(err);
+
+  let title, body;
+  if (isOffline) {
+    title = 'Engine offline';
+    body = 'Não consegui falar com a engine em <code>http://localhost:8000</code>. Verifique se o ad-generator está rodando (<code>docker compose up</code> na pasta do repo).';
+  } else if (isTimeout) {
+    title = 'Geração demorou demais';
+    body = 'A geração passou de 5 minutos sem responder. Provavelmente a imagem travou ou a API caiu. Tente de novo.';
+  } else if (isClarifying) {
+    title = 'Briefing precisa de mais detalhes';
+    body = `A engine pediu mais info: <em>${escapeHtml(err.replace('Preciso de mais detalhes:', '').trim())}</em>. Volta e amplia o briefing ou a copy.`;
+  } else {
+    title = 'Erro na geração';
+    body = `<code>${escapeHtml(err)}</code>`;
+  }
+
+  return `
+    <header class="step-head">
+      <p class="step-eyebrow">Algo travou</p>
+      <h1 class="step-title">${title}</h1>
+      <p class="step-sub">${body}</p>
+    </header>
+    <div class="step-body"></div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar e editar</button>
+      <button class="btn btn-primary" data-action="generate">${icon('refresh', 16)} Tentar de novo</button>
+    </div>
+  `;
+}
+
+function tplResult() {
+  const brandLabel = STATE.brand === 'metta' ? 'Metta' : 'Tiago Alves';
+  const imageUrl = STATE.run_id ? `${ENGINE_URL}/image/${STATE.run_id}` : '';
+
+  return `
+    <header class="step-head">
+      <p class="step-eyebrow">Pronto</p>
+      <h1 class="step-title">Sua peça foi gerada</h1>
+      <p class="step-sub">Run ID: <code>${escapeHtml(STATE.run_id || '—')}</code></p>
+    </header>
+    <div class="step-body">
+      <div class="result-layout">
+        <div class="result-preview">
+          ${imageUrl
+            ? `<img src="${imageUrl}" alt="Peça gerada" id="result-img">`
+            : '<p style="color:var(--metta-sys-color-on-surface-variant)">Imagem não disponível.</p>'}
+        </div>
+        <aside class="result-side">
+          <div class="result-card">
+            <h4 class="result-card-title">Detalhes do briefing</h4>
+            <div class="qa-row"><span>Marca</span><span>${brandLabel}</span></div>
+            <div class="qa-row"><span>Formato</span><span>${(FORMATS.find(f => f.id === STATE.format) || {}).label || '—'}</span></div>
+            <div class="qa-row"><span>Estilo</span><span>${STATE.style || '—'}</span></div>
+            <div class="qa-row"><span>Modo</span><span>${STATE.mode === 'audio' ? 'Áudio/texto livre' : 'Wizard'}</span></div>
+          </div>
+          <div class="actions-stack">
+            <button class="btn btn-primary" data-action="download-png">${icon('download', 16)} Baixar PNG</button>
+            <button class="btn btn-outlined" data-action="regenerate">${icon('refresh', 16)} Gerar outra variação</button>
+            <button class="btn btn-ghost" data-action="restart">Criar peça nova</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  `;
+}
+
+function generateMockHeadline() {
+  const src = STATE.copyMode === 'tenho' ? STATE.copy : (STATE.copy || STATE.audioTranscript || 'Para de demitir antes de diagnosticar');
+  // Pega primeira frase curta
+  const sentences = src.split(/[.!?\n]/).filter(s => s.trim().length > 0);
+  let h = sentences[0] || 'Para de demitir antes de diagnosticar';
+  h = h.replace(/^(HEADLINE:|TITULO:)\s*/i, '').trim();
+  if (h.length > 64) h = h.slice(0, 64).trim() + '…';
+  return h;
+}
+
+/* ============================================================
+   RENDER + ROUTING
+============================================================ */
+const templates = {
+  'brand':         tplBrand,
+  'mode':          tplMode,
+  'wiz-format':    tplWizFormat,
+  'wiz-style':     tplWizStyle,
+  'wiz-copy':      tplWizCopy,
+  'wiz-cta':       tplWizCta,
+  'wiz-confirm':   tplWizConfirm,
+  'audio-record':  tplAudioRecord,
+  'audio-confirm': tplAudioConfirm,
+  'loading':       tplLoading,
+  'result':        tplResult,
+  'error':         tplError
+};
+
+function render() {
+  const stage = document.getElementById('stage');
+  if (!stage) return;
+  stage.innerHTML = (templates[currentStep] || tplBrand)();
+  attachStepHandlers();
+  // Disparar lógica específica do step
+  if (currentStep === 'loading')      runGenerationReal();
+  if (currentStep === 'audio-record') initSpeechRecognition();
+  // Notifica parent pra ajustar altura do iframe
+  notifyHeight();
+}
+
+function goto(step) {
+  STATE.history.push(currentStep);
+  currentStep = step;
+  render();
+}
+
+function back() {
+  if (STATE.history.length === 0) return;
+  currentStep = STATE.history.pop();
+  render();
+}
+
+function nextFromCurrent() {
+  const map = {
+    'brand':         'mode',
+    'mode':          STATE.mode === 'audio' ? 'audio-record' : 'wiz-format',
+    'wiz-format':    'wiz-style',
+    'wiz-style':     'wiz-copy',
+    'wiz-cta':       'wiz-confirm',
+    'audio-record':  'audio-confirm'
+  };
+  const next = map[currentStep];
+  if (next) goto(next);
+}
+
+/* ============================================================
+   HANDLERS
+============================================================ */
+function attachStepHandlers() {
+  document.querySelectorAll('[data-action]').forEach(el => {
+    el.addEventListener('click', onAction);
+  });
+  // Inputs livres
+  const copyInput = document.getElementById('copy-input');
+  if (copyInput) copyInput.addEventListener('input', () => STATE.copy = copyInput.value);
+  const ctaInput = document.getElementById('cta-input');
+  if (ctaInput) ctaInput.addEventListener('input', () => STATE.cta = ctaInput.value);
+  const audioText = document.getElementById('audio-text');
+  if (audioText) audioText.addEventListener('input', () => {
+    STATE.audioTranscript = audioText.value;
+    const t = document.getElementById('transcript');
+    if (t) t.textContent = audioText.value;
+  });
+}
+
+function onAction(e) {
+  const el = e.currentTarget;
+  const action = el.dataset.action;
+  const value = el.dataset.value;
+  e.preventDefault();
+
+  switch (action) {
+    case 'pick-brand':
+      STATE.brand = value;
+      render();
+      setTimeout(nextFromCurrent, 220);
+      break;
+    case 'pick-mode':
+      STATE.mode = value;
+      render();
+      setTimeout(nextFromCurrent, 220);
+      break;
+    case 'pick-format':
+      STATE.format = value;
+      render();
+      setTimeout(nextFromCurrent, 220);
+      break;
+    case 'pick-style':
+      STATE.style = value;
+      render();
+      setTimeout(nextFromCurrent, 220);
+      break;
+    case 'set-copy-mode':
+      STATE.copyMode = value;
+      render();
+      break;
+    case 'next':
+      nextFromCurrent();
+      break;
+    case 'back':
+      back();
+      break;
+    case 'jump': {
+      // Volta pra step já visitado (via stepper ou via summary)
+      const idx = STATE.history.indexOf(value);
+      if (idx >= 0) STATE.history = STATE.history.slice(0, idx);
+      currentStep = value;
+      render();
+      break;
+    }
+    case 'next-from-copy': {
+      const ta = document.getElementById('copy-input');
+      STATE.copy = ta ? ta.value : '';
+      goto('wiz-cta');
+      break;
+    }
+    case 'next-from-cta': {
+      const inp = document.getElementById('cta-input');
+      STATE.cta = inp ? inp.value : '';
+      goto('wiz-confirm');
+      break;
+    }
+    case 'next-from-audio': {
+      const ta = document.getElementById('audio-text');
+      if (ta) STATE.audioTranscript = ta.value;
+      if (!STATE.audioTranscript.trim()) {
+        alert('Grava ou escreve o briefing antes de continuar.');
+        return;
+      }
+      goto('audio-confirm');
+      break;
+    }
+    case 'generate':
+      goto('loading');
+      break;
+    case 'toggle-mic':
+      toggleMic();
+      break;
+    case 'regenerate':
+      goto('loading');
+      break;
+    case 'restart':
+      Object.keys(STATE).forEach(k => {
+        if (k === 'history') STATE[k] = [];
+        else if (k === 'copyMode') STATE[k] = 'gerar';
+        else STATE[k] = (typeof STATE[k] === 'string') ? '' : null;
+      });
+      STATE.run_id = null;
+      STATE.error = null;
+      currentStep = 'brand';
+      render();
+      break;
+    case 'download-png':
+      downloadMockPng();
+      break;
+  }
+}
+
+/* ============================================================
+   GENERATION REAL — chama POST /generate da engine
+============================================================ */
+function serializeBriefing() {
+  if (STATE.mode === 'audio') {
+    const marca = STATE.brand === 'metta' ? 'Metta (institucional)' : 'Tiago Alves (marca pessoal)';
+    return `Marca: ${marca}.\n\nBriefing livre:\n${STATE.audioTranscript}`;
+  }
+  // Wizard estruturado → texto livre formato esperado pela skill 01
+  const marca = STATE.brand === 'metta' ? 'Metta (institucional)' : 'Tiago Alves (marca pessoal)';
+  const formatLabel = (FORMATS.find(f => f.id === STATE.format) || {}).label || STATE.format || '—';
+  const styleList = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
+  const styleInfo = styleList.find(s => s.id === STATE.style) || {};
+  const styleDesc = styleInfo.id ? `${styleInfo.id} (${styleInfo.label}) — ${styleInfo.desc}` : '—';
+
+  const copyBlock = STATE.copyMode === 'tenho'
+    ? `Copy pronta:\n${STATE.copy || '(vazio)'}`
+    : `Descrição pra gerar copy:\n${STATE.copy || '(vazio)'}`;
+
+  return [
+    `Marca: ${marca}.`,
+    `Formato: ${formatLabel}.`,
+    `Estilo visual recomendado: ${styleDesc}.`,
+    copyBlock,
+    `CTA: ${STATE.cta || '(usar default da marca)'}.`
+  ].join('\n\n');
+}
+
+async function generateReal(briefing) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), ENGINE_TIMEOUT_MS);
+  try {
+    const response = await fetch(`${ENGINE_URL}/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ briefing, mock: false }),
+      signal: controller.signal
+    });
+    if (!response.ok) {
+      let detail = response.statusText;
+      try {
+        const data = await response.json();
+        detail = data.detail || detail;
+      } catch (_) {}
+      throw new Error(detail);
+    }
+    return await response.json();   // { run_id, ok, png_path }
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+function runGenerationReal() {
+  const stepEls = document.querySelectorAll('.loading-step');
+  if (!stepEls.length) return;
+
+  // Anima steps progressivamente em ~15s/cada (cobre os primeiros 5 com folga).
+  // O último ("Validando QA") fica em 'active' até a request resolver.
+  let i = 0;
+  const advance = () => {
+    if (i > 0) {
+      stepEls[i - 1].classList.remove('active');
+      stepEls[i - 1].classList.add('done');
+    }
+    if (i < stepEls.length) {
+      stepEls[i].classList.add('active');
+      i++;
+    }
+  };
+  advance();
+  const stepInterval = setInterval(() => {
+    if (i < stepEls.length) advance();
+    else clearInterval(stepInterval);
+  }, 15000);
+
+  // Faz a chamada real
+  generateReal(serializeBriefing())
+    .then(result => {
+      clearInterval(stepInterval);
+      stepEls.forEach(el => { el.classList.remove('active'); el.classList.add('done'); });
+      STATE.run_id = result.run_id;
+      STATE.error = null;
+      setTimeout(() => goto('result'), 350);
+    })
+    .catch(err => {
+      clearInterval(stepInterval);
+      STATE.error = err.name === 'AbortError' ? 'Request timeout após 5 min' : (err.message || String(err));
+      goto('error');
+    });
+}
+
+/* ============================================================
+   WEB SPEECH API (pt-BR)
+============================================================ */
+let recognition = null;
+let recognizing = false;
+
+function initSpeechRecognition() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    const state = document.getElementById('mic-state');
+    if (state) state.textContent = 'Áudio não suportado neste browser. Use o campo de texto abaixo.';
+    const btn = document.getElementById('mic-btn');
+    if (btn) btn.disabled = true;
+    return;
+  }
+  recognition = new SR();
+  recognition.lang = 'pt-BR';
+  recognition.interimResults = true;
+  recognition.continuous = true;
+
+  let finalText = STATE.audioTranscript || '';
+
+  recognition.onresult = (event) => {
+    let interim = '';
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const transcript = event.results[i][0].transcript;
+      if (event.results[i].isFinal) finalText += transcript + ' ';
+      else interim += transcript;
+    }
+    STATE.audioTranscript = (finalText + interim).trim();
+    const t = document.getElementById('transcript');
+    if (t) t.textContent = STATE.audioTranscript;
+    const ta = document.getElementById('audio-text');
+    if (ta) ta.value = STATE.audioTranscript;
+  };
+
+  recognition.onend = () => {
+    recognizing = false;
+    const btn = document.getElementById('mic-btn');
+    const state = document.getElementById('mic-state');
+    if (btn) btn.classList.remove('recording');
+    if (btn) btn.innerHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${ICONS.mic}</svg>`;
+    if (state) state.textContent = STATE.audioTranscript ? 'Pausado. Clique no microfone pra continuar.' : 'Clique no microfone pra começar.';
+  };
+
+  recognition.onerror = (e) => {
+    console.warn('SpeechRecognition error', e);
+    const state = document.getElementById('mic-state');
+    if (state) state.textContent = `Erro: ${e.error}. Use o campo de texto abaixo.`;
+  };
+}
+
+function toggleMic() {
+  if (!recognition) return;
+  const btn = document.getElementById('mic-btn');
+  const state = document.getElementById('mic-state');
+  if (recognizing) {
+    recognition.stop();
+  } else {
+    try {
+      recognition.start();
+      recognizing = true;
+      if (btn) btn.classList.add('recording');
+      if (btn) btn.innerHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${ICONS.stop}</svg>`;
+      if (state) state.textContent = 'Ouvindo… fale o que você quer criar.';
+    } catch (err) {
+      console.warn(err);
+    }
+  }
+}
+
+/* ============================================================
+   DOWNLOAD PNG REAL
+============================================================ */
+async function downloadMockPng() {
+  if (!STATE.run_id) return;
+  const url = `${ENGINE_URL}/image/${STATE.run_id}`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const blob = await res.blob();
+    const objUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = objUrl;
+    a.download = `${STATE.brand}-${STATE.run_id}.png`;
+    a.click();
+    URL.revokeObjectURL(objUrl);
+  } catch (err) {
+    alert(`Erro ao baixar: ${err.message}`);
+  }
+}
+
+/* ============================================================
+   HELPERS
+============================================================ */
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function notifyHeight() {
+  // Sincroniza com app.js parent — o iframe usa ResizeObserver mas mandar postMessage como fallback
+  try {
+    const h = document.documentElement.scrollHeight;
+    parent.postMessage({ type: 'iframe-height', height: h }, '*');
+  } catch (_) {}
+}
+
+/* ============================================================
+   BOOT
+============================================================ */
+document.addEventListener('DOMContentLoaded', render);
+
+// Sincroniza tema com parent (light/dark)
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'theme-change') {
+    document.documentElement.setAttribute('data-theme', e.data.theme);
+  }
+});
+
+// Tema inicial — herda do parent se possível
+try {
+  if (parent && parent.document) {
+    const parentTheme = parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) document.documentElement.setAttribute('data-theme', parentTheme);
+  }
+} catch (_) {}
+</script>
+
+</body>
+</html>

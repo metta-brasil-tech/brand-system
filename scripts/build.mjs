@@ -526,6 +526,19 @@ async function copyDsEmbed() {
   log.ok(`DS técnico copiado para embed/design-system-2.0.html (${dsRaw.length} bytes)`);
 }
 
+async function copyCriarEmbed() {
+  const criarSrc = resolve(VAULT, 'embed', 'criar.html');
+  if (!existsSync(criarSrc)) {
+    log.warn(`Criar source não encontrado em ${criarSrc} — pulando embed`);
+    return;
+  }
+  const criarRaw = await readFile(criarSrc, 'utf8');
+  const criarOut = join(ROOT, 'embed', 'criar.html');
+  await mkdir(dirname(criarOut), { recursive: true });
+  await writeFile(criarOut, criarRaw, 'utf8');
+  log.ok(`Criar UI copiado para embed/criar.html (${criarRaw.length} bytes)`);
+}
+
 async function main() {
   log.group('Metta Brand System — Build Pipeline v2');
   log.info(`Vault: ${VAULT}`);
@@ -533,6 +546,7 @@ async function main() {
 
   log.group('Embed');
   await copyDsEmbed();
+  await copyCriarEmbed();
 
   const navRaw = await readFile(NAV_PATH, 'utf8');
   const nav = JSON.parse(navRaw);
