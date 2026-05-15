@@ -1,0 +1,24 @@
+# Não sobe pro deploy Vercel — pesa bundle e não é runtime.
+node_modules
+.venv
+.venv-indexer
+__pycache__
+*.pyc
+
+# Engine submodule — só rastreia o que importa pra runtime
+engine/.git
+engine/.venv
+engine/__pycache__
+engine/artifacts
+engine/tests
+engine/scripts
+engine/brand-knowledge/exemplars
+engine/Dockerfile
+engine/docker-compose.yml
+engine/telegram_bot.py
+engine/demo.py
+engine/indexer.py
+
+# Source markdown do brand-system não precisa subir (já foi pra HTML)
+source/transcricoes
+source/metta/metodologia

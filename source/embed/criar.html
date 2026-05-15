@@ -806,11 +806,17 @@ const STATE = {
   history: [],
   // Resultado da engine real
   run_id: null,         // ID retornado pelo /generate
+  png_b64: null,        // PNG inline base64 (Vercel function retorna assim)
   error: null           // mensagem de erro (quando step === 'error')
 };
 
-const ENGINE_URL = 'http://localhost:8000';
-const ENGINE_TIMEOUT_MS = 300_000;  // 5 min — pipeline real demora 1-2 min em live mode
+// Em produção (Vercel), chama as serverless functions /api/* que adicionam o token
+// e fazem proxy pro HF Space. Local dev (sem Vercel) fallback pra http://localhost:8000.
+// Detecção: se host é localhost:5173 (npm start do brand-system), usa engine local direto.
+const IS_LOCAL_DEV = typeof location !== 'undefined'
+  && /^(localhost|127\.0\.0\.1):5173$/.test(location.host || '');
+const ENGINE_URL = IS_LOCAL_DEV ? 'http://localhost:8000' : '/api';
+const ENGINE_TIMEOUT_MS = IS_LOCAL_DEV ? 300_000 : 60_000;  // local 5min, Vercel Hobby 60s
 
 const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
 const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
@@ -1220,7 +1226,11 @@ function tplError() {
 
 function tplResult() {
   const brandLabel = STATE.brand === 'metta' ? 'Metta' : 'Tiago Alves';
-  const imageUrl = STATE.run_id ? `${ENGINE_URL}/image/${STATE.run_id}` : '';
+  // Engine local (Docker do dev) retorna run_id + png_path → fetch via /image/:id.
+  // Vercel function (prod) retorna png_b64 → data URL inline.
+  const imageSrc = STATE.png_b64
+    ? `data:image/png;base64,${STATE.png_b64}`
+    : (STATE.run_id ? `${ENGINE_URL}/image/${STATE.run_id}` : '');
 
   return `
     <header class="step-head">
@@ -1231,8 +1241,8 @@ function tplResult() {
     <div class="step-body">
       <div class="result-layout">
         <div class="result-preview">
-          ${imageUrl
-            ? `<img src="${imageUrl}" alt="Peça gerada" id="result-img">`
+          ${imageSrc
+            ? `<img src="${imageSrc}" alt="Peça gerada" id="result-img">`
             : '<p style="color:var(--metta-sys-color-on-surface-variant)">Imagem não disponível.</p>'}
         </div>
         <aside class="result-side">
@@ -1422,6 +1432,7 @@ function onAction(e) {
         else STATE[k] = (typeof STATE[k] === 'string') ? '' : null;
       });
       STATE.run_id = null;
+      STATE.png_b64 = null;
       STATE.error = null;
       currentStep = 'brand';
       render();
@@ -1512,7 +1523,8 @@ function runGenerationReal() {
     .then(result => {
       clearInterval(stepInterval);
       stepEls.forEach(el => { el.classList.remove('active'); el.classList.add('done'); });
-      STATE.run_id = result.run_id;
+      STATE.run_id = result.run_id || null;
+      STATE.png_b64 = result.png_b64 || null;
       STATE.error = null;
       setTimeout(() => goto('result'), 350);
     })
@@ -1598,16 +1610,28 @@ function toggleMic() {
    DOWNLOAD PNG REAL
 ============================================================ */
 async function downloadMockPng() {
-  if (!STATE.run_id) return;
-  const url = `${ENGINE_URL}/image/${STATE.run_id}`;
+  const fname = `${STATE.brand}-${STATE.run_id || Date.now()}.png`;
   try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const blob = await res.blob();
+    let blob;
+    if (STATE.png_b64) {
+      // base64 inline → blob
+      const bin = atob(STATE.png_b64);
+      const len = bin.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+      blob = new Blob([bytes], { type: 'image/png' });
+    } else if (STATE.run_id) {
+      // engine local — busca via /image/:run_id
+      const res = await fetch(`${ENGINE_URL}/image/${STATE.run_id}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      blob = await res.blob();
+    } else {
+      throw new Error('Nada pra baixar.');
+    }
     const objUrl = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = objUrl;
-    a.download = `${STATE.brand}-${STATE.run_id}.png`;
+    a.download = fname;
     a.click();
     URL.revokeObjectURL(objUrl);
   } catch (err) {

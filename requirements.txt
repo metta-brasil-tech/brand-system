@@ -1,0 +1,13 @@
+# Deps Python pras Vercel serverless functions em api/*.py.
+# Versão TRIM do requirements.txt original do ad-generator — só o essencial pra runtime.
+# Removidos: click/rich (CLI), fastapi/uvicorn (Vercel não usa servidor), qdrant-client
+# (sem Qdrant, skill 02 cai em fallback textual), python-telegram-bot (pertence ao bot do dev).
+
+litellm>=1.50.0
+openai>=1.50.0
+Pillow>=10.4.0
+pyyaml>=6.0
+jsonschema>=4.23.0
+pydantic>=2.9.0
+python-dotenv>=1.0.0
+httpx>=0.27.0
