@@ -45,6 +45,7 @@ def _run_pipeline_inline(
     forced_model_id: str | None = None,
     image_source: str | None = None,   # 'generate' | 'search' | 'none' | None
     image_url: str | None = None,      # URL pronta vinda da busca (quando image_source='search')
+    briefing_image_text: str | None = None,  # descrição da imagem desejada (extra_context skill 04)
 ) -> dict:
     from skills_runner import SkillRunner
     from adapters.llm import LLMAdapter, MockLLMAdapter
@@ -111,37 +112,53 @@ def _run_pipeline_inline(
     except Exception as e:
         diagnostics.append(f"layout-enforcer: pulado ({e.__class__.__name__})")
     write_artifact(run_id, "03-layout-spec", layout_spec, artifacts_dir)
-    diagnostics.append(f"03-layout-composer: {len(layout_spec.get('elements', []))} elementos")
+    total_elements = len(layout_spec.get("elements", []))
+    image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
+    slot_names = [s.get("slot_name", "?") for s in image_slots]
+    diagnostics.append(
+        f"03-layout-composer: {total_elements} elementos · {len(image_slots)} image_slot(s) "
+        f"{('= ' + ', '.join(slot_names)) if slot_names else ''}"
+    )
 
     # Skill 04 — image prompt engineer + image-gen
     # 3 caminhos:
     #   (a) image_source='search' + image_url presente → injeta URL direta em TODOS os slots (pula skill 04)
     #   (b) image_source='none' → pula skill 04 (sem imagem mesmo que o layout tenha slot)
     #   (c) image_source='generate' (default) → roda skill 04 + image-gen normal
-    image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
     image_urls: dict[str, str] = {}
     if not image_slots:
-        diagnostics.append("04-image-prompt-engineer: layout não tem image_slot — sem foto")
+        diagnostics.append("04-image-prompt-engineer: PULADO — layout não tem image_slot")
     elif image_source == "search" and image_url:
-        # Caminho da busca web: usa URL escolhida pelo user pra todos os slots
         for slot in image_slots:
             image_urls[slot.get("slot_name", "main")] = image_url
-        diagnostics.append(f"04-image-gen: PULADO — usando URL escolhida na busca web ({len(image_slots)} slot(s))")
+        diagnostics.append(
+            f"04-image-gen: PULADO — usando URL da busca web em {len(image_slots)} slot(s): {image_url[:80]}"
+        )
     elif image_source == "none":
         diagnostics.append("04-image-gen: PULADO — user escolheu peça sem imagem")
     else:
         # Caminho generate (default): skill 04 + image-gen
         prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": image_slots}
-        r = runner.run("04-image-prompt-engineer", prompt_input)
+        skill_extra = None
+        if briefing_image_text and briefing_image_text.strip():
+            skill_extra = f"User-provided image direction (use literally in the prompt):\n{briefing_image_text.strip()}"
+        r = runner.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
         if not r.ok:
             return {"ok": False, "error": f"image-prompt-engineer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
         image_spec = r.output
         write_artifact(run_id, "04-image-prompt", image_spec, artifacts_dir)
-        if image_spec.get("skip"):
-            diagnostics.append("04-image-prompt-engineer: SKIP (estilo não usa foto)")
+        skip_flag = image_spec.get("skip", False)
+        prompt_count = len(image_spec.get("prompts", []))
+        diagnostics.append(
+            f"04-image-prompt-engineer: skip={skip_flag} · prompts={prompt_count} · "
+            f"skip_reason={image_spec.get('skip_reason', '')[:120]}"
+        )
+        if skip_flag:
+            diagnostics.append("04-image-gen: NÃO rodou — skill 04 marcou skip=true")
         else:
             image_gen = ImageGenAdapter()
-            for p in image_spec.get("prompts", []):
+            for idx, p in enumerate(image_spec.get("prompts", [])):
+                slot = p.get("slot_name", f"slot_{idx}")
                 try:
                     ig = image_gen.generate(
                         prompt=p["prompt"],
@@ -149,17 +166,27 @@ def _run_pipeline_inline(
                         aspect_ratio=p.get("aspect_ratio", "9:16"),
                         reference_images=p.get("reference_images", []),
                     )
-                    image_urls[p["slot_name"]] = ig.url
-                    diagnostics.append(f"04-image-gen: OK slot={p['slot_name']} provider={ig.provider}")
+                    image_urls[slot] = ig.url
+                    diagnostics.append(
+                        f"04-image-gen: OK slot={slot} provider={ig.provider} "
+                        f"model={ig.model} t={ig.elapsed_ms}ms url={(ig.url or '')[:60]}"
+                    )
                 except Exception as e:
-                    msg = f"04-image-gen: FALHOU slot={p['slot_name']} — {e.__class__.__name__}: {e}"
+                    msg = f"04-image-gen: FALHOU slot={slot} — {e.__class__.__name__}: {str(e)[:200]}"
                     diagnostics.append(msg)
                     print(f"[image_gen warn] {msg}", file=sys.stderr)
 
     # Skill 05 — assembler (PNG via Pillow)
+    diagnostics.append(
+        f"05-assembler: entrada → {len(image_urls)} url(s) pra {len(image_slots)} slot(s) do layout. "
+        f"Match: {'OK' if set(image_urls.keys()) >= set(slot_names) else 'INCOMPLETO — slot_names esperados não bateram com chaves de image_urls'}"
+    )
     asm_result = AssemblerAdapter().assemble(layout_spec, image_urls)
     if not asm_result.png_path:
         return {"ok": False, "error": "assembler did not produce a PNG", "run_id": run_id, "diagnostics": diagnostics}
+    if asm_result.warnings:
+        for w in asm_result.warnings:
+            diagnostics.append(f"05-assembler: warning → {w}")
     diagnostics.append(f"05-assembler: PNG gerado ({len(image_urls)} imagens injetadas)")
 
     # Skill 06 — qa-validator PULADO pra caber em 60s.
@@ -190,6 +217,7 @@ class handler(BaseHTTPRequestHandler):
             forced_model_id = data.get("model_id") or None
             image_source = data.get("image_source") or None      # 'generate' | 'search' | 'none'
             image_url = data.get("image_url") or None             # URL da imagem escolhida (busca)
+            briefing_image = data.get("briefing_image") or None   # texto livre — direção da imagem
 
             if not isinstance(briefing, str) or not briefing.strip():
                 return self._json(400, {"detail": "Body precisa de { briefing: string não-vazio }"})
@@ -200,6 +228,7 @@ class handler(BaseHTTPRequestHandler):
                 forced_model_id=forced_model_id,
                 image_source=image_source,
                 image_url=image_url,
+                briefing_image_text=briefing_image,
             )
             if not result.get("ok"):
                 return self._json(500, {"detail": result.get("error", "erro desconhecido"),

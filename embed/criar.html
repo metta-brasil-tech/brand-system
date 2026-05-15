@@ -865,6 +865,7 @@ const STATE = {
   style: null,          // ID do estilo do banco
   copyMode: 'gerar',    // 'tenho' | 'gerar'
   imageSource: null,    // 'generate' (IA) | 'search' (busca web) | 'none' — definido em wiz-imagem
+  briefingImage: '',    // direção visual da imagem (cena/mood/cores) — só relevante quando imageSource='generate'
   searchQuery: '',      // termo de busca quando imageSource='search'
   selectedImageUrl: '', // URL escolhida na galeria de busca
   copy: '',             // texto da copy
@@ -888,7 +889,7 @@ const IS_LOCAL_DEV = typeof location !== 'undefined'
 const ENGINE_URL = IS_LOCAL_DEV ? 'http://localhost:8000' : '/api';
 const ENGINE_TIMEOUT_MS = IS_LOCAL_DEV ? 300_000 : 60_000;  // local 5min, Vercel Hobby 60s
 
-const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
+const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-imagem-briefing', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
 const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
 // wiz-imagem só aparece se o estilo selecionado usa imagem.
 // wiz-search só aparece se imageSource === 'search'.
@@ -971,6 +972,7 @@ function renderStepper() {
   const usaImagem = styleObj && styleObj.usaImagem;
   stepsToShow = stepsToShow.filter(s => {
     if (s === 'wiz-imagem') return usaImagem;
+    if (s === 'wiz-imagem-briefing') return usaImagem && STATE.imageSource === 'generate';
     if (s === 'wiz-search') return usaImagem && STATE.imageSource === 'search';
     return true;
   });
@@ -981,6 +983,7 @@ function renderStepper() {
     'wiz-format':    'Formato',
     'wiz-style':     'Estilo',
     'wiz-imagem':    'Imagem',
+    'wiz-imagem-briefing': 'Briefing imagem',
     'wiz-search':    'Busca',
     'wiz-copy':      'Copy',
     'wiz-cta':       'CTA',
@@ -1142,6 +1145,27 @@ function tplWizImagem() {
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+    </div>
+  `;
+}
+
+function tplWizImagemBriefing() {
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Briefing da imagem</p>
+      <h1 class="step-title">Descreva a imagem que você quer</h1>
+      <p class="step-sub">Detalha a cena, mood, paleta, enquadramento, personagens. A engine usa isso como direção pra gerar via gpt-image-1. Quanto mais específico, mais previsível o resultado.</p>
+    </header>
+    <div class="step-body">
+      <div class="field">
+        <label class="field-label" for="briefing-image-input">Direção visual</label>
+        <textarea class="textarea" id="briefing-image-input" placeholder="Ex: Foto documental lo-fi de empresário em sua mesa de escritório à noite, luminária acesa, laptop, ambiente cozy. Paleta marrom + amber. Vista vertical 9:16. Sem rosto direto na câmera. Mood contemplativo.">${escapeHtml(STATE.briefingImage)}</textarea>
+        <p class="field-hint">Opcional, mas recomendado. Se deixar vazio, a engine inventa baseado no estilo + copy.</p>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="next-from-imagem-briefing">Continuar ${icon('arrowRight', 16)}</button>
     </div>
   `;
 }
@@ -1485,6 +1509,7 @@ const templates = {
   'wiz-format':    tplWizFormat,
   'wiz-style':     tplWizStyle,
   'wiz-imagem':    tplWizImagem,
+  'wiz-imagem-briefing': tplWizImagemBriefing,
   'wiz-search':    tplWizSearch,
   'wiz-copy':      tplWizCopy,
   'wiz-cta':       tplWizCta,
@@ -1529,9 +1554,10 @@ function nextFromCurrent() {
     STATE.imageSource = 'none';
     return goto('wiz-copy');
   }
-  // wiz-imagem → wiz-search (se busca) ou wiz-copy
+  // wiz-imagem → wiz-search (busca) | wiz-imagem-briefing (gerar) | wiz-copy (none)
   if (currentStep === 'wiz-imagem') {
     if (STATE.imageSource === 'search') return goto('wiz-search');
+    if (STATE.imageSource === 'generate') return goto('wiz-imagem-briefing');
     return goto('wiz-copy');
   }
   const map = {
@@ -1640,6 +1666,12 @@ function onAction(e) {
       render();
       break;
     }
+    case 'next-from-imagem-briefing': {
+      const ta = document.getElementById('briefing-image-input');
+      STATE.briefingImage = ta ? ta.value : '';
+      goto('wiz-copy');
+      break;
+    }
     case 'next-from-copy': {
       const ta = document.getElementById('copy-input');
       STATE.copy = ta ? ta.value : '';
@@ -1683,6 +1715,7 @@ function onAction(e) {
       STATE.diagnostics = [];
       STATE.warnings = [];
       STATE.imageSource = null;
+      STATE.briefingImage = '';
       STATE.searchQuery = '';
       STATE.selectedImageUrl = '';
       STATE.error = null;
@@ -1772,7 +1805,9 @@ async function generateReal(briefing) {
         ...(STATE.style ? { model_id: STATE.style } : {}),
         // Origem da imagem: gerar com IA (default), buscar URL pronta, ou sem imagem
         ...(STATE.imageSource ? { image_source: STATE.imageSource } : {}),
-        ...(STATE.selectedImageUrl ? { image_url: STATE.selectedImageUrl } : {})
+        ...(STATE.selectedImageUrl ? { image_url: STATE.selectedImageUrl } : {}),
+        // Direção visual livre pra skill 04 (opcional)
+        ...(STATE.briefingImage && STATE.briefingImage.trim() ? { briefing_image: STATE.briefingImage.trim() } : {})
       }),
       signal: controller.signal
     });
