@@ -9,7 +9,8 @@
   "functions": {
     "api/generate.py": {
       "maxDuration": 60,
-      "includeFiles": "engine/**"
+      "includeFiles": "engine/**",
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public}/**"
     }
   }
 }
