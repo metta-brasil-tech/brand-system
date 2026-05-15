@@ -19,6 +19,5 @@ engine/telegram_bot.py
 engine/demo.py
 engine/indexer.py
 
-# Source markdown do brand-system não precisa subir (já foi pra HTML)
-source/transcricoes
-source/metta/metodologia
+# NÃO excluir source/ — build.mjs lê os .md de source/ no momento do build Vercel
+# pra gerar os HTMLs em content/<tab>/<sec>.html. Excluir = build quebra.
