@@ -88,7 +88,7 @@ def _extract_copy(copy_text: str | None, cta_text: str | None, briefing_text: st
 
 SIGNATURE_MODELS = {
     # Capas de carrossel (1º slide)
-    "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "bottom-left",  "size": "medio"},
+    "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "bottom-center", "size": "medio"},
     "TIAGO-EDITORIAL-HERO":         {"color": "amarelo", "position": "top-center",   "size": "grande"},
     # Posts únicos (standalone, sem carrossel)
     "TIAGO-TYPO-PURE":              {"color": "escuro",  "position": "bottom-right", "size": "medio"},

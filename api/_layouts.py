@@ -58,13 +58,18 @@ def build_tiago_story_cover_hero(briefing: dict, copy: dict, image_url: str | No
     subhead = copy.get("subhead", "").strip()
     cta_text = (copy.get("cta", "").strip() or "Saiba mais").upper()
 
+    # Hierarquia adaptativa: agrupa headline + subhead + CTA num bloco vertical
+    # centralizado em y=1100 (ligeiramente abaixo do meio). Quando há foto, o
+    # bloco fica visualmente "respirando" sobre ela. Sem foto, evita CTA órfão
+    # lá no bottom enquanto o texto fica no meio.
+    block_top = 720
+
     # 2) Headline — centralizada, grande, SF Pro Condensed Semibold
-    # Tamanho: 90px caber em ~3 linhas de até 30 chars cada
     elements.append({
         "type": "text",
         "slot_name": "headline",
         "text": headline,
-        "x": 80, "y": 700, "width": W - 160, "height": "auto",
+        "x": 80, "y": block_top, "width": W - 160, "height": "auto",
         "font": {
             "family": "SF Pro Condensed",
             "style": "Semibold",
@@ -79,19 +84,25 @@ def build_tiago_story_cover_hero(briefing: dict, copy: dict, image_url: str | No
         "align": "center",
     })
 
-    # 3) Subhead opcional — abaixo do headline, SF Pro Light, ~40% do tamanho
+    # Estima quantas linhas do headline (cada linha ~95px de altura com line-height 100%)
+    # 90px size × 1.0 line-height. ~32 chars/linha em 920px width.
+    headline_lines = max(1, (len(headline) // 32) + 1)
+    headline_height_est = headline_lines * 95
+    cursor_y = block_top + headline_height_est + 40
+
+    # 3) Subhead opcional — logo abaixo do headline, SF Pro Light
     if subhead:
         elements.append({
             "type": "text",
             "slot_name": "subhead",
             "text": subhead,
-            "x": 120, "y": 1200, "width": W - 240, "height": "auto",
+            "x": 120, "y": cursor_y, "width": W - 240, "height": "auto",
             "font": {
                 "family": "SF Pro",
                 "style": "Light",
                 "weight": 300,
                 "stretch_pct": 100,
-                "size": 38,
+                "size": 40,
                 "line_height_pct": 130,
                 "letter_spacing_pct": 0,
                 "text_case": "sentence",
@@ -99,15 +110,18 @@ def build_tiago_story_cover_hero(briefing: dict, copy: dict, image_url: str | No
             "color": "#E5E5E5",
             "align": "center",
         })
+        subhead_lines = max(1, (len(subhead) // 40) + 1)
+        cursor_y += subhead_lines * 52 + 56
+    else:
+        cursor_y += 32
 
-    # 4) CTA pill amarelo bottom-center
-    # Calcular largura aproximada pra centralizar (estimativa: 18px por char + padding)
+    # 4) CTA pill amarelo — LOGO ABAIXO do bloco de texto (não no bottom da peça)
     cta_width_est = min(700, max(280, len(cta_text) * 18 + 56))
     elements.append({
         "type": "pill_cta",
         "slot_name": "cta",
         "text": cta_text,
-        "x": (W - cta_width_est) // 2, "y": H - 220, "width": cta_width_est, "height": 80,
+        "x": (W - cta_width_est) // 2, "y": cursor_y, "width": cta_width_est, "height": 80,
         "padding_x": 28, "padding_y": 24,
         "background": "#FFCC00",
         "text_color": "#0F1419",
