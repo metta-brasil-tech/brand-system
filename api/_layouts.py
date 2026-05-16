@@ -35,24 +35,18 @@ def build_tiago_story_cover_hero(briefing: dict, copy: dict, image_url: str | No
     W, H = 1080, 1920
     elements: list[dict] = []
 
-    # 1) Foto bleed full (quando há image_url)
-    if image_url:
-        elements.append({
-            "type": "image_slot",
-            "slot_name": "foto_bleed",
-            "x": 0, "y": 0, "width": W, "height": H,
-            "image_prompt_ref": "image-prompts/tiago/style-story-cover-hero.md",
-            "url_placeholder": "pending",
-            # Gradient overlay top→bottom escurece pros textos ficarem legíveis
-            "overlay": "gradient-fade-to-black-bottom-60%",
-        })
-    else:
-        elements.append({
-            "type": "rect",
-            "slot_name": "bg_fallback",
-            "x": 0, "y": 0, "width": W, "height": H,
-            "fill": "#0C161B",
-        })
+    # 1) Foto bleed full — SEMPRE inclui image_slot (skill 04 gera a foto DEPOIS,
+    # template não recebe url ainda). Quando image_source='none' a skill 04 pula
+    # e o assembler desenha placeholder. Frame.background cobre vazio.
+    elements.append({
+        "type": "image_slot",
+        "slot_name": "foto_bleed",
+        "x": 0, "y": 0, "width": W, "height": H,
+        "image_prompt_ref": "image-prompts/tiago/style-story-cover-hero.md",
+        "url_placeholder": "pending",
+        # Gradient overlay escurece a base pros textos ficarem legíveis
+        "overlay": "gradient-fade-to-black-bottom-60%",
+    })
 
     headline = copy.get("headline", "").strip() or "Sua tese aqui"
     subhead = copy.get("subhead", "").strip()
