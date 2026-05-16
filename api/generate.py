@@ -93,16 +93,39 @@ def _run_pipeline_inline(
         diagnostics.append(f"02-style-selector: escolheu {chosen_model_id} (ranking textual, sem Qdrant)")
 
     # Skill 03 — layout composer
+    # IMPORTANTE: a skill 03 manda "Lê o YAML do modelo em models/marca/X.yaml" mas o LLM
+    # não pode ler filesystem. Carregamos o YAML aqui e injetamos como extra_context.
+    # Sem isso, o LLM inventa layout sem image_slot mesmo quando model.image.required=true.
+    marca = briefing.get("marca", "metta")
+    model_yaml_path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / "models" / marca / f"{chosen_model_id}.yaml"
+    model_yaml_content = ""
+    if model_yaml_path.exists():
+        model_yaml_content = model_yaml_path.read_text(encoding="utf-8")
+        diagnostics.append(f"03-yaml: {chosen_model_id}.yaml carregado ({len(model_yaml_content)} chars)")
+    else:
+        diagnostics.append(f"03-yaml: FALTANDO {model_yaml_path} — LLM vai improvisar")
+
     layout_input = {
         "briefing": briefing,
         "model_id": chosen_model_id,
         "copy": {"_note": "MVP — generate copy inside layout composer"},
     }
-    r = runner.run(
-        "03-layout-composer",
-        layout_input,
-        extra_context="Generate copy yourself. Use model slot constraints.",
+
+    extra_03 = (
+        f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n"
+        f"```yaml\n{model_yaml_content}\n```\n\n"
+        f"INSTRUÇÕES OBRIGATÓRIAS:\n"
+        f"1. Use os campos `slots`, `image`, `typography`, `colors`, `composicao` LITERALMENTE deste YAML.\n"
+        f"2. Se `image.required == true` no YAML acima, você DEVE adicionar um element do tipo "
+        f"`image_slot` no array `elements` do output. NÃO PULE. O slot_name vem dos `slots` do YAML "
+        f"(procure o slot cuja `role` indica imagem — ex: 'background_principal', 'ambiente_contexto', "
+        f"'metafora_visual_isolada', 'foto_bleed', 'collage_image', 'foto_raw').\n"
+        f"3. Posicione o image_slot conforme `image.placement` do YAML: 'full-bleed' = ocupa 1080x1920 "
+        f"do canvas (x=0, y=0); 'right-bleed' = metade direita; 'center-bottom' = centro abaixo.\n"
+        f"4. Use tokens da marca {marca} (cores/fontes do YAML).\n"
+        f"5. Gere a copy você mesmo respeitando max_chars/max_lines de cada slot do YAML.\n"
     )
+    r = runner.run("03-layout-composer", layout_input, extra_context=extra_03)
     if not r.ok:
         return {"ok": False, "error": f"layout-composer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
     layout_spec = r.output
@@ -138,10 +161,39 @@ def _run_pipeline_inline(
         diagnostics.append("04-image-gen: PULADO — user escolheu peça sem imagem")
     else:
         # Caminho generate (default): skill 04 + image-gen
+        # Injeta YAML do modelo + template de prompt do estilo (mesma razão da skill 03 —
+        # LLM não pode ler filesystem). Sem isso, prompt sai genérico.
         prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": image_slots}
-        skill_extra = None
+
+        # Tenta achar o image-prompt template do estilo:
+        # alguns YAMLs definem `image.prompt_template_ref: "image-prompts/marca/style-X.md"`
+        import re as _re
+        ref_match = _re.search(r"prompt_template_ref:\s*['\"]?([^'\"\n]+)['\"]?", model_yaml_content)
+        image_prompt_template = ""
+        if ref_match:
+            tpl_path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / ref_match.group(1).strip()
+            if tpl_path.exists():
+                image_prompt_template = tpl_path.read_text(encoding="utf-8")
+                diagnostics.append(f"04-template: {tpl_path.name} carregado ({len(image_prompt_template)} chars)")
+            else:
+                diagnostics.append(f"04-template: FALTANDO {tpl_path}")
+        else:
+            diagnostics.append(f"04-template: YAML não tem prompt_template_ref — usando default da skill")
+
+        parts = []
+        parts.append(f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n```yaml\n{model_yaml_content}\n```")
+        if image_prompt_template:
+            parts.append(f"=== TEMPLATE DE PROMPT DO ESTILO ===\n{image_prompt_template}")
         if briefing_image_text and briefing_image_text.strip():
-            skill_extra = f"User-provided image direction (use literally in the prompt):\n{briefing_image_text.strip()}"
+            parts.append(f"=== DIREÇÃO VISUAL DO USER (use literal no prompt) ===\n{briefing_image_text.strip()}")
+        parts.append(
+            "INSTRUÇÕES OBRIGATÓRIAS:\n"
+            "1. Para CADA image_slot do layout, gere uma entry em `prompts[]`.\n"
+            "2. O `slot_name` em cada prompt DEVE bater exatamente com o `slot_name` do image_slot no layout_spec.\n"
+            "3. Use o template do estilo acima como base do prompt (incluindo aspect ratio).\n"
+            "4. Se um image_slot existe, NÃO retorne `skip: true`. Skip só se layout NÃO tem image_slot algum."
+        )
+        skill_extra = "\n\n".join(parts)
         r = runner.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
         if not r.ok:
             return {"ok": False, "error": f"image-prompt-engineer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
