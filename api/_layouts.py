@@ -272,11 +272,17 @@ def _twitter_header_elements() -> list[dict]:
     mas funcional.
     """
     if _TWITTER_HEADER_ASSET.exists():
+        # width < canvas_w pra evitar auto_fullbleed do _draw_image.
+        # PNG asset é ~1080×303 (proporção do SVG do user). Ajusta pra
+        # 952px (mesma safe margin x=64 do canvas Twitter) e altura proporcional.
+        asset_w = 952
+        asset_h = int(asset_w * 303 / 1080)  # ~267
         return [{
             "type": "image_slot",
             "slot_name": "twitter_header",
-            "x": 0, "y": 60, "width": 1080, "height": 280,
+            "x": 64, "y": 80, "width": asset_w, "height": asset_h,
             "static_asset": f"file://{_TWITTER_HEADER_ASSET}",
+            "fullbleed": False,
         }]
     # Fallback: primitivos quando o asset não foi commitado ainda
     return [
