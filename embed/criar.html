@@ -395,6 +395,35 @@ button.stepper-item.done:hover {
   box-shadow: var(--metta-sys-elevation-1);
 }
 
+/* CTA chips — sugestões clicáveis */
+.cta-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cta-chip {
+  appearance: none;
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1.5px solid var(--metta-sys-color-outline-variant);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 510;
+  color: var(--metta-sys-color-on-surface);
+  cursor: pointer;
+  transition: all 150ms;
+}
+.cta-chip:hover {
+  background: var(--metta-sys-color-surface-container);
+  border-color: var(--metta-sys-color-on-surface-variant);
+}
+.cta-chip.active {
+  background: var(--metta-sys-color-surface-container-low);
+  border-color: var(--metta-sys-color-on-surface-variant);
+  font-weight: 590;
+}
+
 /* ----------------------------------------- *
  * SUMMARY (confirmação)                     *
  * ----------------------------------------- */
@@ -892,7 +921,10 @@ const STATE = {
   briefingImage: '',    // direção visual da imagem (cena/mood/cores) — só relevante quando imageSource='generate'
   searchQuery: '',      // termo de busca quando imageSource='search'
   selectedImageUrl: '', // URL escolhida na galeria de busca
-  copy: '',             // texto da copy
+  copy: '',             // texto livre (modo 'gerar' OU fallback do modo 'tenho')
+  copyHeadline: '',     // modo 'tenho': headline separada
+  copySubhead: '',      // modo 'tenho': subheadline
+  copyBody: '',         // modo 'tenho': texto/corpo
   cta: '',
   audioTranscript: '',
   history: [],
@@ -1232,24 +1264,43 @@ function tplWizSearch() {
 }
 
 function tplWizCopy() {
+  const isTenho = STATE.copyMode === 'tenho';
   return renderStepper() + `
     <header class="step-head">
       <p class="step-eyebrow">Wizard · Copy</p>
       <h1 class="step-title">A copy já está pronta?</h1>
-      <p class="step-sub">Se já tem o texto, é só colar. Senão, descreva o que a peça precisa comunicar e a engine escreve baseado no tom de voz da marca.</p>
+      <p class="step-sub">Se já tem, preencha cada campo separado (headline, sub, texto). Senão, descreva o tema e a engine escreve no tom da marca.</p>
     </header>
     <div class="step-body">
       <div class="field">
         <label class="field-label">Como você quer fazer?</label>
         <div class="toggle-group">
-          <button data-action="set-copy-mode" data-value="tenho" class="${STATE.copyMode === 'tenho' ? 'active' : ''}">Já tenho a copy</button>
-          <button data-action="set-copy-mode" data-value="gerar" class="${STATE.copyMode === 'gerar' ? 'active' : ''}">Gerar pra mim</button>
+          <button data-action="set-copy-mode" data-value="tenho" class="${isTenho ? 'active' : ''}">Já tenho a copy</button>
+          <button data-action="set-copy-mode" data-value="gerar" class="${!isTenho ? 'active' : ''}">Gerar pra mim</button>
         </div>
       </div>
-      <div class="field">
-        <label class="field-label" for="copy-input">${STATE.copyMode === 'tenho' ? 'Cole a copy aqui (headline + corpo + CTA)' : 'Descreva o tema, a tensão e a virada que a peça precisa entregar'}</label>
-        <textarea class="textarea" id="copy-input" placeholder="${STATE.copyMode === 'tenho' ? 'Ex: \\n\\nHEADLINE: Para de demitir.\\nCORPO: O problema raramente é a pessoa. Em 70% dos casos, o sistema produz o resultado.\\nCTA: Diagnostique antes de cortar.' : 'Ex: Sobre como o empresário confunde execução ruim com pessoa errada. Quero mostrar que o sistema gera o resultado, não o talento individual. Quero terminar provocando: \"diagnostica antes de cortar\".'}">${STATE.copy || ''}</textarea>
-      </div>
+      ${isTenho ? `
+        <div class="field">
+          <label class="field-label" for="copy-headline-input">Headline</label>
+          <textarea class="textarea" id="copy-headline-input" rows="2" placeholder="Ex: Para de demitir antes de diagnosticar.">${escapeHtml(STATE.copyHeadline)}</textarea>
+          <p class="field-hint">Frase de impacto principal. 1 sentença, sentence case.</p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="copy-subhead-input">Subheadline (opcional)</label>
+          <textarea class="textarea" id="copy-subhead-input" rows="2" placeholder="Ex: Em 70% dos casos, o problema é o sistema, não a pessoa.">${escapeHtml(STATE.copySubhead)}</textarea>
+          <p class="field-hint">Linha de apoio abaixo da headline.</p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="copy-body-input">Texto / corpo (opcional)</label>
+          <textarea class="textarea" id="copy-body-input" rows="4" placeholder="Ex: Mais detalhes, dado de prova, ou desenvolvimento da tese.">${escapeHtml(STATE.copyBody)}</textarea>
+          <p class="field-hint">Texto adicional. Pode ficar vazio se headline + sub já bastam.</p>
+        </div>
+      ` : `
+        <div class="field">
+          <label class="field-label" for="copy-input">Descreva o tema, a tensão e a virada que a peça precisa entregar</label>
+          <textarea class="textarea" id="copy-input" rows="6" placeholder="Ex: Sobre como o empresário confunde execução ruim com pessoa errada. Quero mostrar que o sistema gera o resultado, não o talento individual. Quero terminar provocando: 'diagnostica antes de cortar'.">${escapeHtml(STATE.copy)}</textarea>
+        </div>
+      `}
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
@@ -1258,18 +1309,49 @@ function tplWizCopy() {
   `;
 }
 
+// CTAs sugeridos por marca — clica e preenche o input
+const CTA_SUGGESTIONS = {
+  metta: [
+    'Saiba mais',
+    'Diagnostica antes de demitir',
+    'Olha pra dentro do sistema',
+    'Marque um diagnóstico',
+    'Acompanhe Metta',
+  ],
+  tiago: [
+    'Saiba mais',
+    'Comenta aqui',
+    'Leia a legenda',
+    'Salve o post',
+    'Compartilhe',
+    'Arrasta pro lado',
+    'Marca alguém',
+  ],
+};
+
 function tplWizCta() {
+  const suggestions = CTA_SUGGESTIONS[STATE.brand] || CTA_SUGGESTIONS.tiago;
   return renderStepper() + `
     <header class="step-head">
       <p class="step-eyebrow">Wizard · CTA</p>
       <h1 class="step-title">Qual o CTA da peça?</h1>
-      <p class="step-sub">${STATE.brand === 'metta' ? 'CTA Metta vem no fim, é convite — não caça-cliente. Ex: \"Diagnostica antes de demitir\", \"Olha pra dentro do sistema antes da pessoa\".' : 'CTA Tiago é direto, em primeira pessoa. Ex: \"Comenta aqui o que você faria\", \"Salva pra revisitar quando precisar\".'}</p>
+      <p class="step-sub">${STATE.brand === 'metta' ? 'CTA Metta é convite, não caça-cliente. Use a sugestão ou escreva próprio.' : 'CTA Tiago é direto, primeira pessoa. Use sugestão ou escreva próprio.'}</p>
     </header>
     <div class="step-body">
       <div class="field">
-        <label class="field-label" for="cta-input">CTA</label>
-        <input type="text" class="input" id="cta-input" placeholder="${STATE.brand === 'metta' ? 'Diagnostica antes de demitir.' : 'Comenta aqui se você concorda.'}" value="${STATE.cta || ''}">
-        <p class="field-hint">Uma única frase. Sem call-to-action genérico (\"clica no link\", \"agenda agora\").</p>
+        <label class="field-label">Sugestões rápidas</label>
+        <div class="cta-chips">
+          ${suggestions.map(s => `
+            <button class="cta-chip ${STATE.cta === s ? 'active' : ''}" data-action="pick-cta-suggestion" data-value="${escapeHtml(s)}">
+              ${escapeHtml(s)}
+            </button>
+          `).join('')}
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="cta-input">Ou escreva seu próprio CTA</label>
+        <input type="text" class="input" id="cta-input" placeholder="${STATE.brand === 'metta' ? 'Diagnostica antes de demitir.' : 'Comenta aqui se você concorda.'}" value="${escapeHtml(STATE.cta)}">
+        <p class="field-hint">Uma única frase. Sem call-to-action genérico ("clica no link", "agenda agora").</p>
       </div>
     </div>
     <div class="foot">
@@ -1744,11 +1826,26 @@ function onAction(e) {
       break;
     }
     case 'next-from-copy': {
-      const ta = document.getElementById('copy-input');
-      STATE.copy = ta ? ta.value : '';
+      if (STATE.copyMode === 'tenho') {
+        const h = document.getElementById('copy-headline-input');
+        const s = document.getElementById('copy-subhead-input');
+        const b = document.getElementById('copy-body-input');
+        STATE.copyHeadline = h ? h.value : '';
+        STATE.copySubhead = s ? s.value : '';
+        STATE.copyBody = b ? b.value : '';
+        // Compõe copy unificada pra retrocompat (backend lê primeira linha = headline)
+        STATE.copy = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n');
+      } else {
+        const ta = document.getElementById('copy-input');
+        STATE.copy = ta ? ta.value : '';
+      }
       goto('wiz-cta');
       break;
     }
+    case 'pick-cta-suggestion':
+      STATE.cta = value;
+      render();
+      break;
     case 'next-from-cta': {
       const inp = document.getElementById('cta-input');
       STATE.cta = inp ? inp.value : '';
@@ -1789,6 +1886,9 @@ function onAction(e) {
       STATE.briefingImage = '';
       STATE.searchQuery = '';
       STATE.selectedImageUrl = '';
+      STATE.copyHeadline = '';
+      STATE.copySubhead = '';
+      STATE.copyBody = '';
       STATE.error = null;
       currentStep = 'brand';
       render();
@@ -1879,7 +1979,10 @@ async function generateReal(briefing) {
         ...(STATE.selectedImageUrl ? { image_url: STATE.selectedImageUrl } : {}),
         // Direção visual livre pra skill 04 (opcional)
         ...(STATE.briefingImage && STATE.briefingImage.trim() ? { briefing_image: STATE.briefingImage.trim() } : {}),
-        // Copy e CTA estruturados (primeira linha do copy_text = headline, resto = subhead)
+        // Copy estruturada: campos separados (modo 'tenho') OU copy_text único (modo 'gerar')
+        ...(STATE.copyHeadline && STATE.copyHeadline.trim() ? { copy_headline: STATE.copyHeadline.trim() } : {}),
+        ...(STATE.copySubhead && STATE.copySubhead.trim() ? { copy_subhead: STATE.copySubhead.trim() } : {}),
+        ...(STATE.copyBody && STATE.copyBody.trim() ? { copy_body: STATE.copyBody.trim() } : {}),
         ...(STATE.copy && STATE.copy.trim() ? { copy_text: STATE.copy.trim() } : {}),
         ...(STATE.cta && STATE.cta.trim() ? { cta_text: STATE.cta.trim() } : {})
       }),

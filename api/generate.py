@@ -514,11 +514,18 @@ class handler(BaseHTTPRequestHandler):
             image_source = data.get("image_source") or None      # 'generate' | 'search' | 'none'
             image_url = data.get("image_url") or None             # URL da imagem escolhida (busca)
             briefing_image = data.get("briefing_image") or None   # texto livre — direção da imagem
-            copy_text = data.get("copy_text") or None             # copy estruturado (headline + subhead)
-            cta_text = data.get("cta_text") or None               # CTA digitado
+            copy_text = data.get("copy_text") or None             # modo 'gerar' — texto livre
+            copy_headline = data.get("copy_headline") or None     # modo 'tenho' — campo separado
+            copy_subhead = data.get("copy_subhead") or None
+            copy_body = data.get("copy_body") or None
+            cta_text = data.get("cta_text") or None               # CTA digitado/escolhido
 
             if not isinstance(briefing, str) or not briefing.strip():
                 return self._json(400, {"detail": "Body precisa de { briefing: string não-vazio }"})
+
+            # Quando campos estruturados vêm, monta copy_text composto pra retrocompat
+            if copy_headline or copy_subhead or copy_body:
+                copy_text = "\n".join(filter(None, [copy_headline, copy_subhead, copy_body]))
 
             result = _run_pipeline_inline(
                 briefing,
