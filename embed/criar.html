@@ -27,8 +27,15 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* App-mode: altura fixa, scroll INTERNO no .stage.
+   App.js (parent) força iframe height: calc(100vh - topbar) e .stage controla próprio scroll
+   pra footer sticky funcionar de verdade. */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -38,9 +45,11 @@ body {
  * ----------------------------------------- */
 .stage {
   flex: 1;
+  min-height: 0;            /* permite que flex-child encolha e overflow funcione */
+  overflow-y: auto;         /* scroll interno — footer sticky bottom ancora aqui */
   display: flex;
   flex-direction: column;
-  padding: 32px clamp(20px, 4vw, 56px) 0;  /* footer fica sticky, sem padding-bottom aqui */
+  padding: 32px clamp(20px, 4vw, 56px) 0;
   max-width: 1100px;
   margin: 0 auto;
   width: 100%;

@@ -243,13 +243,24 @@ const BrandSystem = (() => {
       const file = sec.source.replace('embed:', '');
       const anchor = sec.anchor ? `#${sec.anchor}` : '';
       main.dataset.loading = 'false';
-      // Iframe sem moldura — parece conteúdo nativo. Hash garante scroll pro anchor.
-      // Usa key+timestamp pra forçar reload e respeitar a mudança de hash entre sub-abas
+      // App-mode iframes (ex: criar.html) querem altura FIXA pra ter scroll interno
+      // próprio + footer sticky funcional. DS técnico continua auto-grow conforme conteúdo.
+      const isAppMode = /^(criar)\.html$/i.test(file);
+      const styleAttr = isAppMode
+        ? 'style="height: calc(100vh - var(--topbar-height) - 16px); border: none; width: 100%; display: block;"'
+        : '';
       main.innerHTML = `
-        <iframe class="ds-frame" src="embed/${file}${anchor}" title="${sec.label}" loading="eager"></iframe>
+        <iframe class="ds-frame" src="embed/${file}${anchor}" title="${sec.label}" loading="eager" ${styleAttr}></iframe>
       `;
-      // Auto-resize: ajusta altura do iframe ao conteúdo (postMessage pelo DS ou observer)
       const frame = main.querySelector('.ds-frame');
+
+      if (isAppMode) {
+        // Altura fixa = viewport - topbar. Iframe controla seu próprio scroll.
+        // Nada de ResizeObserver — senão volta o problema do footer fora do viewport.
+        return;
+      }
+
+      // DS técnico / outros embeds: auto-grow tradicional.
       frame.addEventListener('load', () => {
         try {
           const adjust = () => {
@@ -257,13 +268,11 @@ const BrandSystem = (() => {
             if (docEl) frame.style.height = docEl.scrollHeight + 'px';
           };
           adjust();
-          // Re-ajusta após mudanças (theme toggle, etc.)
           if (frame.contentDocument) {
             const ro = new ResizeObserver(adjust);
             ro.observe(frame.contentDocument.documentElement);
           }
         } catch (e) {
-          // Cross-origin não rola — usa altura fixa de fallback
           frame.style.height = 'calc(100vh - var(--topbar-height) - 64px)';
         }
       });
