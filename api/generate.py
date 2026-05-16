@@ -89,7 +89,8 @@ def _extract_copy(copy_text: str | None, cta_text: str | None, briefing_text: st
 SIGNATURE_MODELS = {
     # Capas de carrossel (1º slide)
     "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "bottom-center", "size": "medio"},
-    "TIAGO-EDITORIAL-HERO":         {"color": "amarelo", "position": "top-center",   "size": "grande"},
+    # EDITORIAL-HERO: bg #EDEEEE claro → escura. Posição entre eyebrows (top-center, y custom).
+    "TIAGO-EDITORIAL-HERO":         {"color": "escuro",  "position": "top-center",   "size": "medio", "y_override": 30},
     # Posts únicos (standalone, sem carrossel)
     "TIAGO-TYPO-PURE":              {"color": "escuro",  "position": "bottom-right", "size": "medio"},
     "TIAGO-STORY-YELLOW-BLOCK":     {"color": "escuro",  "position": "top-right",    "size": "medio"},
@@ -387,6 +388,9 @@ def _run_pipeline_inline(
                     "bottom-center": ((base.width - target_w) // 2, base.height - target_h - margin),
                 }
                 pos = positions.get(cfg["position"], positions["top-right"])
+                # Override de Y específico do modelo (útil pra EDITORIAL-HERO entre eyebrows)
+                if "y_override" in cfg:
+                    pos = (pos[0], int(cfg["y_override"]))
                 base.paste(sig_resized, pos, mask=sig_resized)
                 base.save(asm_result.png_path)
                 diagnostics.append(

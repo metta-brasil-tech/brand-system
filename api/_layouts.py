@@ -138,10 +138,124 @@ def build_tiago_story_cover_hero(briefing: dict, copy: dict, image_url: str | No
 
 
 # ============================================================
+# TIAGO — FEED 1080x1350 EDITORIAL HERO
+# ============================================================
+
+def build_tiago_editorial_hero(briefing: dict, copy: dict, image_url: str | None) -> dict:
+    """Capa editorial Tiago tipo-revista — feed 4:5, bg claro com foto bleed atrás.
+
+    Camadas (z-order do assembler):
+    1. Foto bleed full (image_slot collage_main) — sempre presente
+    2. Gradient overlay top→middle pra legibilidade do header e headline
+    3. Eyebrows top-left/right (UPPER tracked)
+    4. Assinatura Tiago entre eyebrows (post-processing via SIGNATURE_MODELS, cor escura)
+    5. Headline GIGANTE Bold sentence ~y=580 (centro vertical), width 920 (não full)
+    6. CTA pill amarelo bottom-left com texto do user
+    """
+    W, H = 1080, 1350
+    elements: list[dict] = []
+
+    # 1) Foto bleed FULL — image_slot pra skill 04 + image-gen preencher
+    elements.append({
+        "type": "image_slot",
+        "slot_name": "collage_main",
+        "x": 0, "y": 0, "width": W, "height": H,
+        "image_prompt_ref": "image-prompts/tiago/style-editorial-collage.md",
+        "url_placeholder": "pending",
+        # Gradient escurece top + bottom pra legibilidade do header e CTA
+        "overlay": "gradient-fade-to-white-top-25%",
+    })
+
+    headline = copy.get("headline", "").strip() or "Sua manchete editorial"
+    cta_text = (copy.get("cta", "").strip() or "Arrasta pro lado").upper()
+
+    # 2-3) Eyebrows top-left e top-right (fixos, identidade editorial)
+    eyebrow_font = {
+        "family": "SF Pro",
+        "style": "Bold",
+        "weight": 700,
+        "stretch_pct": 100,
+        "size": 22,
+        "line_height_pct": 110,
+        "letter_spacing_pct": 8,
+        "text_case": "UPPER",
+    }
+    elements.append({
+        "type": "text",
+        "slot_name": "header_eyebrow_left",
+        "text": "ESTRATÉGIAS DE GESTÃO DE VENDAS",
+        "x": 64, "y": 56, "width": 480, "height": "auto",
+        "font": eyebrow_font,
+        "color": "#0F1419",
+        "align": "left",
+    })
+    elements.append({
+        "type": "text",
+        "slot_name": "header_eyebrow_right",
+        "text": "VENDAS É CIÊNCIA",
+        "x": W - 64 - 320, "y": 56, "width": 320, "height": "auto",
+        "font": eyebrow_font,
+        "color": "#0F1419",
+        "align": "right",
+    })
+
+    # (A assinatura header é aplicada pelo post-processing 06-signature
+    # — config SIGNATURE_MODELS no api/generate.py: cor escura, top-center, y=40)
+
+    # 4) Headline GIGANTE sentence case, centro vertical, largura controlada
+    elements.append({
+        "type": "text",
+        "slot_name": "headline",
+        "text": headline,
+        "x": 80, "y": 560, "width": 920, "height": "auto",
+        "font": {
+            "family": "SF Pro",
+            "style": "Bold",
+            "weight": 800,
+            "stretch_pct": 100,
+            "size": 84,
+            "line_height_pct": 95,
+            "letter_spacing_pct": -2,
+            "text_case": "sentence",
+        },
+        "color": "#0F1419",
+        "align": "left",
+    })
+
+    # 5) CTA pill amarelo bottom-left
+    cta_width_est = min(700, max(280, len(cta_text) * 18 + 56))
+    elements.append({
+        "type": "pill_cta",
+        "slot_name": "cta",
+        "text": cta_text,
+        "x": 64, "y": H - 150, "width": cta_width_est, "height": 72,
+        "padding_x": 28, "padding_y": 22,
+        "background": "#FFCC00",
+        "text_color": "#0F1419",
+        "font": {
+            "family": "SF Pro",
+            "style": "Bold",
+            "weight": 700,
+            "stretch_pct": 100,
+            "size": 24,
+            "letter_spacing_pct": 4,
+            "text_case": "UPPER",
+        },
+    })
+
+    return {
+        "model_id": "TIAGO-EDITORIAL-HERO",
+        "frame": {"width": W, "height": H, "background": {"type": "solid", "value": "#EDEEEE"}},
+        "elements": elements,
+    }
+
+
+# ============================================================
 # Registry — modelos com template determinístico
 # ============================================================
 TEMPLATES = {
-    "TIAGO-STORY-COVER-HERO": build_tiago_story_cover_hero,
+    "TIAGO-STORY-COVER-HERO":  build_tiago_story_cover_hero,
+    "TIAGO-EDITORIAL-HERO":    build_tiago_editorial_hero,
     # TODO: adicionar restantes (TIAGO-STORY-YELLOW-BLOCK, TIAGO-STORY-MINIMAL-QUESTION,
     # TIAGO-TYPO-PURE, TIAGO-NOTES-MOCKUP, TIAGO-TWITTER-CARD, TIAGO-EDITORIAL-*, etc.
     # + 6 Metta) — uma função por modelo, calibradas individualmente.
