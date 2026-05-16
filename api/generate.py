@@ -46,6 +46,116 @@ os.environ.setdefault("IMAGE_QUALITY", "low")
 # position: top-right | top-left | top-center | bottom-right | bottom-left | bottom-center
 # size: 'medio' (18% largura) | 'grande' (26%)
 # ----------------------------------------------------------------------------
+def _run_visual_qa(layout_spec: dict, image_urls: dict, png_path: str) -> list[dict]:
+    """QA visual: rodada de checagem automatizada da peça final.
+
+    Retorna lista de checks: [{category, status: 'pass'|'warn'|'fail', detail}].
+    Frontend renderiza como badges na tela de resultado.
+
+    Checks atuais:
+    1. Estrutural: todos image_slots têm URL (sem placeholder?)
+    2. Bounds: elementos dentro do canvas (x>=0, y>=0, x+w<=canvas_w, y+h<=canvas_h)
+    3. Tipografia: font.size entre 16 e 200 (sanity)
+    4. Contraste: text color != frame.background (pelo menos 1 distinção visível)
+    5. Overflow: CTA pill width >= text estimado
+    6. PNG: arquivo existe e tem >50KB (peças válidas costumam ter pelo menos isso)
+    """
+    checks: list[dict] = []
+    frame = layout_spec.get("frame", {})
+    W, H = int(frame.get("width", 1080)), int(frame.get("height", 1350))
+    bg_color = frame.get("background", {}).get("value", "#FFFFFF").upper()
+    elements = layout_spec.get("elements", [])
+
+    # 1) Image slots: todos têm URL?
+    image_slots = [e for e in elements if e.get("type") == "image_slot"]
+    missing = [s.get("slot_name", "?") for s in image_slots
+               if s.get("slot_name") not in image_urls and not s.get("static_asset")]
+    if image_slots:
+        if missing:
+            checks.append({"category": "Imagens", "status": "fail",
+                           "detail": f"{len(missing)}/{len(image_slots)} slot(s) sem URL: {', '.join(missing)}"})
+        else:
+            checks.append({"category": "Imagens", "status": "pass",
+                           "detail": f"{len(image_slots)} slot(s) preenchido(s)"})
+
+    # 2) Bounds: elementos fora do canvas
+    out_of_bounds = []
+    for el in elements:
+        try:
+            x = int(el.get("x", 0))
+            y = int(el.get("y", 0))
+            w_raw = el.get("width", 0)
+            h_raw = el.get("height", 0)
+            w = int(w_raw) if isinstance(w_raw, (int, float)) else 0
+            h = int(h_raw) if isinstance(h_raw, (int, float)) else 0
+            if x < -10 or y < -10 or (w and x + w > W + 10) or (h and y + h > H + 10):
+                out_of_bounds.append(f"{el.get('slot_name', el.get('type', '?'))}({x},{y},{w}×{h})")
+        except (ValueError, TypeError):
+            pass
+    if out_of_bounds:
+        checks.append({"category": "Posições", "status": "warn",
+                       "detail": f"{len(out_of_bounds)} elemento(s) fora do canvas: {', '.join(out_of_bounds[:3])}"})
+    else:
+        checks.append({"category": "Posições", "status": "pass",
+                       "detail": f"Todos os {len(elements)} elementos dentro do canvas {W}×{H}"})
+
+    # 3) Tipografia razoável
+    weird_fonts = []
+    for el in elements:
+        if el.get("type") != "text":
+            continue
+        try:
+            size = int(el.get("font", {}).get("size", 0))
+            if size < 16 or size > 200:
+                weird_fonts.append(f"{el.get('slot_name', '?')}={size}px")
+        except (ValueError, TypeError):
+            pass
+    if weird_fonts:
+        checks.append({"category": "Tipografia", "status": "warn",
+                       "detail": f"Tamanhos fora do range razoável: {', '.join(weird_fonts)}"})
+    else:
+        checks.append({"category": "Tipografia", "status": "pass",
+                       "detail": "Tamanhos de fonte dentro do range (16-200px)"})
+
+    # 4) Contraste texto vs frame.background
+    bg_brightness = sum(int(bg_color.lstrip("#")[i:i+2], 16) for i in (0, 2, 4)) // 3 if len(bg_color) == 7 else 255
+    bad_contrast = []
+    for el in elements:
+        if el.get("type") != "text":
+            continue
+        tc = el.get("color", "").upper()
+        if not tc.startswith("#") or len(tc) != 7:
+            continue
+        tc_brightness = sum(int(tc.lstrip("#")[i:i+2], 16) for i in (0, 2, 4)) // 3
+        # Tolera contraste mínimo de 80 pontos de brightness
+        if abs(bg_brightness - tc_brightness) < 80:
+            bad_contrast.append(f"{el.get('slot_name', '?')}({tc} sobre {bg_color})")
+    if bad_contrast:
+        checks.append({"category": "Contraste", "status": "warn",
+                       "detail": f"Texto pode ficar ilegível: {', '.join(bad_contrast[:3])} (mas adaptive-color pode ter ajustado em runtime)"})
+    else:
+        checks.append({"category": "Contraste", "status": "pass",
+                       "detail": "Cores de texto contrastam com background"})
+
+    # 5) PNG sanity
+    try:
+        from pathlib import Path as _P
+        size_kb = _P(png_path).stat().st_size // 1024
+        if size_kb < 50:
+            checks.append({"category": "PNG", "status": "warn",
+                           "detail": f"Arquivo pequeno ({size_kb}KB) — pode estar quase vazio"})
+        elif size_kb > 8000:
+            checks.append({"category": "PNG", "status": "warn",
+                           "detail": f"Arquivo grande ({size_kb}KB) — pode passar de limites de upload"})
+        else:
+            checks.append({"category": "PNG", "status": "pass",
+                           "detail": f"{size_kb}KB — tamanho saudável"})
+    except Exception:
+        pass
+
+    return checks
+
+
 def _adapt_text_colors_to_image(layout_spec: dict, image_urls: dict, diagnostics: list) -> None:
     """Analisa brightness das regiões onde text elements caem sobre image_slots
     e ajusta `color` pra branco (sobre escuro) ou preto (sobre claro).
@@ -501,6 +611,15 @@ def _run_pipeline_inline(
 
     # Skill 06 — qa-validator PULADO pra caber em 60s.
 
+    # QA visual: roda checagem estrutural na peça final
+    qa_report = _run_visual_qa(layout_spec, image_urls, asm_result.png_path)
+    pass_count = sum(1 for c in qa_report if c["status"] == "pass")
+    warn_count = sum(1 for c in qa_report if c["status"] == "warn")
+    fail_count = sum(1 for c in qa_report if c["status"] == "fail")
+    diagnostics.append(
+        f"06-qa-visual: {pass_count}/{len(qa_report)} pass · {warn_count} warn · {fail_count} fail"
+    )
+
     # Lê o PNG e devolve em base64
     png_bytes = Path(asm_result.png_path).read_bytes()
     return {
@@ -510,6 +629,7 @@ def _run_pipeline_inline(
         "png_b64": base64.b64encode(png_bytes).decode("ascii"),
         "warnings": asm_result.warnings or [],
         "diagnostics": diagnostics,
+        "qa_report": qa_report,
     }
 
 

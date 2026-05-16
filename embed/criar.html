@@ -934,6 +934,7 @@ const STATE = {
   model_id: null,       // ID do modelo escolhido pelo pipeline (deveria casar com STATE.style)
   diagnostics: [],      // log do pipeline (lista de strings) — pra debug visual
   warnings: [],         // avisos do assembler
+  qa_report: [],        // [{category, status, detail}] — checks visuais por modelo
   error: null           // mensagem de erro (quando step === 'error')
 };
 
@@ -1610,6 +1611,25 @@ function tplResult() {
               </p>
             </div>
           ` : ''}
+          ${(STATE.qa_report || []).length > 0 ? `
+            <div class="result-card">
+              <h4 class="result-card-title">QA visual</h4>
+              ${STATE.qa_report.map(c => {
+                const colors = {
+                  pass: { bg: '#DCFCE7', fg: '#166534', label: '✓' },
+                  warn: { bg: '#FEF3C7', fg: '#92400E', label: '!' },
+                  fail: { bg: '#FEE2E2', fg: '#B91C1C', label: '✗' }
+                };
+                const c2 = colors[c.status] || colors.warn;
+                return `
+                  <div class="qa-row" title="${escapeHtml(c.detail || '')}">
+                    <span>${escapeHtml(c.category)}</span>
+                    <span class="qa-badge" style="background:${c2.bg};color:${c2.fg}">${c2.label} ${c.status}</span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          ` : ''}
           ${warnItems ? `
             <div class="result-card">
               <h4 class="result-card-title">Avisos do assembler</h4>
@@ -1882,6 +1902,7 @@ function onAction(e) {
       STATE.model_id = null;
       STATE.diagnostics = [];
       STATE.warnings = [];
+      STATE.qa_report = [];
       STATE.imageSource = null;
       STATE.briefingImage = '';
       STATE.searchQuery = '';
@@ -2035,6 +2056,7 @@ function runGenerationReal() {
       STATE.model_id = result.model_id || null;
       STATE.diagnostics = Array.isArray(result.diagnostics) ? result.diagnostics : [];
       STATE.warnings = Array.isArray(result.warnings) ? result.warnings : [];
+      STATE.qa_report = Array.isArray(result.qa_report) ? result.qa_report : [];
       STATE.error = null;
       setTimeout(() => goto('result'), 350);
     })
