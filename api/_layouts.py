@@ -254,18 +254,34 @@ def build_tiago_editorial_hero(briefing: dict, copy: dict, image_url: str | None
 # TIAGO — TWITTER CARD (mock feed X/Twitter, FEED 1080×1350)
 # ============================================================
 
-def _twitter_header_elements() -> list[dict]:
-    """Header mock fixo: avatar com ring amarelo + nome + verified + handle.
+import os as _os
+from pathlib import Path as _Path
 
-    Construído como primitivos (rect + circle simulado + text) — assembler atual
-    não tem tipo `header_mock` dedicado. Avatar é círculo amarelo com inicial 'T'
-    branca (placeholder enquanto não há foto real do Tiago como asset).
+# Caminho do header mock como asset PNG (commitado no submodule engine/assets/).
+# Quando existe: 1 image_slot com static_asset preenchido (pipeline pula skill 04).
+# Quando NÃO existe: fallback pros 6 elements primitivos (placeholder "T").
+_TWITTER_HEADER_ASSET = _Path(__file__).resolve().parent.parent / "engine" / "assets" / "twitter-header-tiago.png"
+
+
+def _twitter_header_elements() -> list[dict]:
+    """Header mock topo: avatar ring amarelo + foto Tiago + 'Tiago Alves' + verified + handle.
+
+    Se o asset PNG existe em engine/assets/twitter-header-tiago.png, usa ele direto
+    via image_slot com static_asset (renderizado fiel ao SVG do user). Senão, fallback
+    pra primitivos Pillow (círculo amarelo + 'T' central + texto) — visual menos rico
+    mas funcional.
     """
+    if _TWITTER_HEADER_ASSET.exists():
+        return [{
+            "type": "image_slot",
+            "slot_name": "twitter_header",
+            "x": 0, "y": 60, "width": 1080, "height": 280,
+            "static_asset": f"file://{_TWITTER_HEADER_ASSET}",
+        }]
+    # Fallback: primitivos quando o asset não foi commitado ainda
     return [
-        # Ring amarelo do avatar (rect 160×160 radius alto = círculo)
         {"type": "rect", "slot_name": "avatar_ring", "x": 64, "y": 80,
          "width": 160, "height": 160, "fill": "#FFCC00", "corner_radius": 80},
-        # Avatar interior (placeholder cinza claro com inicial)
         {"type": "rect", "slot_name": "avatar_inner", "x": 74, "y": 90,
          "width": 140, "height": 140, "fill": "#0F1419", "corner_radius": 70},
         {"type": "text", "slot_name": "avatar_initial", "text": "T",
@@ -274,14 +290,12 @@ def _twitter_header_elements() -> list[dict]:
                   "stretch_pct": 100, "size": 88, "line_height_pct": 100,
                   "letter_spacing_pct": 0, "text_case": "sentence"},
          "color": "#FFCC00", "align": "center"},
-        # Nome "Tiago Alves" (bold)
         {"type": "text", "slot_name": "header_name", "text": "Tiago Alves",
          "x": 250, "y": 100, "width": 500, "height": "auto",
          "font": {"family": "SF Pro", "style": "Bold", "weight": 700,
                   "stretch_pct": 100, "size": 42, "line_height_pct": 110,
                   "letter_spacing_pct": -0.5, "text_case": "sentence"},
          "color": "#0F1419", "align": "left"},
-        # Verified badge azul (rect 36×36 radius=18 = círculo) + check
         {"type": "rect", "slot_name": "verified_bg", "x": 530, "y": 105,
          "width": 36, "height": 36, "fill": "#1D9BF0", "corner_radius": 18},
         {"type": "text", "slot_name": "verified_check", "text": "✓",
@@ -290,7 +304,6 @@ def _twitter_header_elements() -> list[dict]:
                   "stretch_pct": 100, "size": 26, "line_height_pct": 100,
                   "letter_spacing_pct": 0, "text_case": "sentence"},
          "color": "#FFFFFF", "align": "center"},
-        # Handle "@tiago.alves.oliveira" (cinza)
         {"type": "text", "slot_name": "header_handle",
          "text": "@tiago.alves.oliveira",
          "x": 250, "y": 170, "width": 600, "height": "auto",

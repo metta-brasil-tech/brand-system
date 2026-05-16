@@ -329,21 +329,35 @@ def _run_pipeline_inline(
     #   (b) image_source='none' → pula skill 04 (sem imagem mesmo que o layout tenha slot)
     #   (c) image_source='generate' (default) → roda skill 04 + image-gen normal
     image_urls: dict[str, str] = {}
+    # Pre-fill: image_slots com static_asset (ex: twitter header) usam asset local
+    # diretamente, sem passar por image-gen. Skill 04 só processa slots vazios.
+    static_filled = []
+    for slot in image_slots:
+        sa = slot.get("static_asset")
+        if sa:
+            image_urls[slot.get("slot_name", "main")] = sa
+            static_filled.append(slot.get("slot_name", "main"))
+    if static_filled:
+        diagnostics.append(f"04-static-assets: pre-fill {len(static_filled)} slot(s): {', '.join(static_filled)}")
+    # Slots restantes (sem static_asset) seguem o fluxo normal
+    dynamic_image_slots = [s for s in image_slots if not s.get("static_asset")]
+
     if not image_slots:
         diagnostics.append("04-image-prompt-engineer: PULADO — layout não tem image_slot")
+    elif not dynamic_image_slots:
+        # Todos image_slots foram preenchidos por static_asset — não precisa rodar skill 04
+        diagnostics.append("04-image-prompt-engineer: PULADO — todos image_slots têm static_asset")
     elif image_source == "search" and image_url:
-        for slot in image_slots:
+        for slot in dynamic_image_slots:
             image_urls[slot.get("slot_name", "main")] = image_url
         diagnostics.append(
-            f"04-image-gen: PULADO — usando URL da busca web em {len(image_slots)} slot(s): {image_url[:80]}"
+            f"04-image-gen: PULADO — usando URL da busca web em {len(dynamic_image_slots)} slot(s): {image_url[:80]}"
         )
     elif image_source == "none":
         diagnostics.append("04-image-gen: PULADO — user escolheu peça sem imagem")
     else:
-        # Caminho generate (default): skill 04 + image-gen
-        # Injeta YAML do modelo + template de prompt do estilo (mesma razão da skill 03 —
-        # LLM não pode ler filesystem). Sem isso, prompt sai genérico.
-        prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": image_slots}
+        # Caminho generate (default): skill 04 + image-gen — só pra slots SEM static_asset
+        prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": dynamic_image_slots}
 
         # Tenta achar o image-prompt template do estilo:
         # alguns YAMLs definem `image.prompt_template_ref: "image-prompts/marca/style-X.md"`
