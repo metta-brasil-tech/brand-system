@@ -251,11 +251,159 @@ def build_tiago_editorial_hero(briefing: dict, copy: dict, image_url: str | None
 
 
 # ============================================================
+# TIAGO — TWITTER CARD (mock feed X/Twitter, FEED 1080×1350)
+# ============================================================
+
+def _twitter_header_elements() -> list[dict]:
+    """Header mock fixo: avatar com ring amarelo + nome + verified + handle.
+
+    Construído como primitivos (rect + circle simulado + text) — assembler atual
+    não tem tipo `header_mock` dedicado. Avatar é círculo amarelo com inicial 'T'
+    branca (placeholder enquanto não há foto real do Tiago como asset).
+    """
+    return [
+        # Ring amarelo do avatar (rect 160×160 radius alto = círculo)
+        {"type": "rect", "slot_name": "avatar_ring", "x": 64, "y": 80,
+         "width": 160, "height": 160, "fill": "#FFCC00", "corner_radius": 80},
+        # Avatar interior (placeholder cinza claro com inicial)
+        {"type": "rect", "slot_name": "avatar_inner", "x": 74, "y": 90,
+         "width": 140, "height": 140, "fill": "#0F1419", "corner_radius": 70},
+        {"type": "text", "slot_name": "avatar_initial", "text": "T",
+         "x": 74, "y": 105, "width": 140, "height": "auto",
+         "font": {"family": "SF Pro", "style": "Bold", "weight": 800,
+                  "stretch_pct": 100, "size": 88, "line_height_pct": 100,
+                  "letter_spacing_pct": 0, "text_case": "sentence"},
+         "color": "#FFCC00", "align": "center"},
+        # Nome "Tiago Alves" (bold)
+        {"type": "text", "slot_name": "header_name", "text": "Tiago Alves",
+         "x": 250, "y": 100, "width": 500, "height": "auto",
+         "font": {"family": "SF Pro", "style": "Bold", "weight": 700,
+                  "stretch_pct": 100, "size": 42, "line_height_pct": 110,
+                  "letter_spacing_pct": -0.5, "text_case": "sentence"},
+         "color": "#0F1419", "align": "left"},
+        # Verified badge azul (rect 36×36 radius=18 = círculo) + check
+        {"type": "rect", "slot_name": "verified_bg", "x": 530, "y": 105,
+         "width": 36, "height": 36, "fill": "#1D9BF0", "corner_radius": 18},
+        {"type": "text", "slot_name": "verified_check", "text": "✓",
+         "x": 530, "y": 107, "width": 36, "height": "auto",
+         "font": {"family": "SF Pro", "style": "Bold", "weight": 800,
+                  "stretch_pct": 100, "size": 26, "line_height_pct": 100,
+                  "letter_spacing_pct": 0, "text_case": "sentence"},
+         "color": "#FFFFFF", "align": "center"},
+        # Handle "@tiago.alves.oliveira" (cinza)
+        {"type": "text", "slot_name": "header_handle",
+         "text": "@tiago.alves.oliveira",
+         "x": 250, "y": 170, "width": 600, "height": "auto",
+         "font": {"family": "SF Pro", "style": "Regular", "weight": 400,
+                  "stretch_pct": 100, "size": 30, "line_height_pct": 120,
+                  "letter_spacing_pct": 0, "text_case": "sentence"},
+         "color": "#536471", "align": "left"},
+    ]
+
+
+def build_tiago_twitter_card_text(briefing: dict, copy: dict, image_url: str | None) -> dict:
+    """Twitter Card variant CONTENT — só texto, sem foto. Emoji transition opcional.
+
+    Layout (1080×1350 feed branco):
+    - Header mock topo (y=80..240)
+    - Tweet headline bold sentence (y=320)
+    - Tweet body regular opcional (logo abaixo)
+    - Emoji transition bottom-left ("👉 ARRASTA PRO LADO" ou similar)
+    """
+    W, H = 1080, 1350
+    elements = _twitter_header_elements()
+
+    headline = copy.get("headline", "").strip() or "Sua tese provocativa"
+    body = copy.get("subhead", "").strip()  # subhead = body do tweet
+    cta_text = copy.get("cta", "").strip() or "Arrasta pro lado"
+
+    # Tweet headline — Bold sentence case, NÃO upper (mock-twitter), preto
+    elements.append({
+        "type": "text", "slot_name": "tweet_headline", "text": headline,
+        "x": 64, "y": 320, "width": W - 128, "height": "auto",
+        "font": {"family": "SF Pro", "style": "Bold", "weight": 700,
+                 "stretch_pct": 100, "size": 56, "line_height_pct": 125,
+                 "letter_spacing_pct": -1, "text_case": "sentence"},
+        "color": "#0F1419", "align": "left",
+    })
+
+    # Tweet body — Regular, espaçado abaixo do headline
+    if body:
+        # Estima 4 linhas pra headline ~30 chars/linha
+        head_lines = max(1, (len(headline) // 30) + 1)
+        body_y = 320 + head_lines * 70 + 40
+        elements.append({
+            "type": "text", "slot_name": "tweet_body", "text": body,
+            "x": 64, "y": body_y, "width": W - 128, "height": "auto",
+            "font": {"family": "SF Pro", "style": "Regular", "weight": 400,
+                     "stretch_pct": 100, "size": 44, "line_height_pct": 140,
+                     "letter_spacing_pct": -0.5, "text_case": "sentence"},
+            "color": "#0F1419", "align": "left",
+        })
+
+    # Emoji transition bottom-left (NÃO é pill — só texto inline com 👉)
+    cta_display = f"{cta_text} 👉" if not cta_text.endswith("👉") else cta_text
+    elements.append({
+        "type": "text", "slot_name": "transition", "text": cta_display,
+        "x": 64, "y": H - 100, "width": W - 128, "height": "auto",
+        "font": {"family": "SF Pro", "style": "Regular", "weight": 400,
+                 "stretch_pct": 100, "size": 32, "line_height_pct": 100,
+                 "letter_spacing_pct": 0, "text_case": "sentence"},
+        "color": "#536471", "align": "left",
+    })
+
+    return {
+        "model_id": "TIAGO-TWITTER-CARD",
+        "frame": {"width": W, "height": H, "background": {"type": "solid", "value": "#FFFFFF"}},
+        "elements": elements,
+    }
+
+
+def build_tiago_twitter_card_image(briefing: dict, copy: dict, image_url: str | None) -> dict:
+    """Twitter Card variant COVER — texto curto + foto embed radius 28px na base.
+
+    Header mock topo + tweet headline curto + foto card 952×460 com cantos
+    arredondados ocupando metade inferior. Sem CTA pill — foto é o ancoragem visual.
+    """
+    W, H = 1080, 1350
+    elements = _twitter_header_elements()
+
+    headline = copy.get("headline", "").strip() or "Sua tese provocativa"
+
+    # Tweet headline mais curto (porque foto vai ocupar metade)
+    elements.append({
+        "type": "text", "slot_name": "tweet_headline", "text": headline,
+        "x": 64, "y": 320, "width": W - 128, "height": "auto",
+        "font": {"family": "SF Pro", "style": "Bold", "weight": 700,
+                 "stretch_pct": 100, "size": 52, "line_height_pct": 125,
+                 "letter_spacing_pct": -1, "text_case": "sentence"},
+        "color": "#0F1419", "align": "left",
+    })
+
+    # Foto embed card (radius 28px) — image_slot bottom
+    elements.append({
+        "type": "image_slot", "slot_name": "media_embed",
+        "x": 64, "y": 720, "width": W - 128, "height": 560,
+        "image_prompt_ref": "image-prompts/tiago/style-twitter-card.md",
+        "url_placeholder": "pending",
+        "corner_radius": 28,
+    })
+
+    return {
+        "model_id": "TIAGO-TWITTER-CARD-IMAGE",
+        "frame": {"width": W, "height": H, "background": {"type": "solid", "value": "#FFFFFF"}},
+        "elements": elements,
+    }
+
+
+# ============================================================
 # Registry — modelos com template determinístico
 # ============================================================
 TEMPLATES = {
-    "TIAGO-STORY-COVER-HERO":  build_tiago_story_cover_hero,
-    "TIAGO-EDITORIAL-HERO":    build_tiago_editorial_hero,
+    "TIAGO-STORY-COVER-HERO":     build_tiago_story_cover_hero,
+    "TIAGO-EDITORIAL-HERO":       build_tiago_editorial_hero,
+    "TIAGO-TWITTER-CARD":         build_tiago_twitter_card_text,
+    "TIAGO-TWITTER-CARD-IMAGE":   build_tiago_twitter_card_image,
     # TODO: adicionar restantes (TIAGO-STORY-YELLOW-BLOCK, TIAGO-STORY-MINIMAL-QUESTION,
     # TIAGO-TYPO-PURE, TIAGO-NOTES-MOCKUP, TIAGO-TWITTER-CARD, TIAGO-EDITORIAL-*, etc.
     # + 6 Metta) — uma função por modelo, calibradas individualmente.
