@@ -46,6 +46,68 @@ os.environ.setdefault("IMAGE_QUALITY", "low")
 # position: top-right | top-left | top-center | bottom-right | bottom-left | bottom-center
 # size: 'medio' (18% largura) | 'grande' (26%)
 # ----------------------------------------------------------------------------
+def _adapt_text_colors_to_image(layout_spec: dict, image_urls: dict, diagnostics: list) -> None:
+    """Analisa brightness das regiões onde text elements caem sobre image_slots
+    e ajusta `color` pra branco (sobre escuro) ou preto (sobre claro).
+
+    Roda DEPOIS de image-gen e ANTES de assembler. Modifica layout_spec inplace.
+    """
+    try:
+        from PIL import Image as _Image
+    except Exception:
+        return
+
+    slot_regions = {}
+    for el in layout_spec.get("elements", []):
+        if el.get("type") == "image_slot":
+            sn = el.get("slot_name")
+            url = image_urls.get(sn, "")
+            if isinstance(url, str) and url.startswith("file://"):
+                slot_regions[sn] = {
+                    "path": url.replace("file://", ""),
+                    "x": int(el.get("x", 0)), "y": int(el.get("y", 0)),
+                    "w": int(el.get("width", 0)), "h": int(el.get("height", 0)),
+                }
+    if not slot_regions:
+        return
+
+    for el in layout_spec.get("elements", []):
+        if el.get("type") != "text":
+            continue
+        tx, ty = int(el.get("x", 0)), int(el.get("y", 0))
+        tw = int(el.get("width", 0))
+        font_size = int(el.get("font", {}).get("size", 48))
+        th_est = int(font_size * 1.2 * 3)
+
+        for sn, reg in slot_regions.items():
+            if not (reg["x"] <= tx < reg["x"] + reg["w"] and reg["y"] <= ty < reg["y"] + reg["h"]):
+                continue
+            try:
+                img = _Image.open(reg["path"]).convert("L")
+                scale_x = img.width / max(reg["w"], 1)
+                scale_y = img.height / max(reg["h"], 1)
+                px1 = int((tx - reg["x"]) * scale_x)
+                py1 = int((ty - reg["y"]) * scale_y)
+                px2 = min(img.width, px1 + int(tw * scale_x))
+                py2 = min(img.height, py1 + int(th_est * scale_y))
+                if px2 <= px1 or py2 <= py1:
+                    continue
+                crop = img.crop((px1, py1, px2, py2))
+                pixels = list(crop.getdata())
+                if not pixels:
+                    continue
+                brightness = sum(pixels) / len(pixels)
+                new_color = "#FFFFFF" if brightness < 140 else "#0F1419"
+                if new_color != el.get("color", ""):
+                    diagnostics.append(
+                        f"adaptive-color: '{el.get('slot_name', '?')}' brightness={int(brightness)} → {new_color}"
+                    )
+                    el["color"] = new_color
+            except Exception as e:
+                diagnostics.append(f"adaptive-color: falhou pra '{el.get('slot_name', '?')}' — {e}")
+            break
+
+
 def _extract_copy(copy_text: str | None, cta_text: str | None, briefing_text: str | None) -> dict:
     """Extrai headline/subhead/cta estruturado do input do user.
 
@@ -90,7 +152,7 @@ SIGNATURE_MODELS = {
     # Capas de carrossel (1º slide)
     "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "bottom-center", "size": "medio"},
     # EDITORIAL-HERO: bg #EDEEEE claro → escura. Posição entre eyebrows (top-center, y custom).
-    "TIAGO-EDITORIAL-HERO":         {"color": "escuro",  "position": "top-center",   "size": "medio", "y_override": 30},
+    "TIAGO-EDITORIAL-HERO":         {"color": "escuro",  "position": "top-center",   "size": "medio", "y_override": 30, "x_offset": 80},
     # Posts únicos (standalone, sem carrossel)
     "TIAGO-TYPO-PURE":              {"color": "escuro",  "position": "bottom-right", "size": "medio"},
     "TIAGO-STORY-YELLOW-BLOCK":     {"color": "escuro",  "position": "top-right",    "size": "medio"},
@@ -299,17 +361,26 @@ def _run_pipeline_inline(
             diagnostics.append(f"04-template: YAML não tem prompt_template_ref — usando default da skill")
 
         parts = []
-        parts.append(f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n```yaml\n{model_yaml_content}\n```")
-        if image_prompt_template:
-            parts.append(f"=== TEMPLATE DE PROMPT DO ESTILO ===\n{image_prompt_template}")
+        # Direção do user vem PRIMEIRO e DOMINA quando preenchida
         if briefing_image_text and briefing_image_text.strip():
-            parts.append(f"=== DIREÇÃO VISUAL DO USER (use literal no prompt) ===\n{briefing_image_text.strip()}")
+            parts.append(
+                f"=== DIREÇÃO VISUAL DO USER — PRIORIDADE MÁXIMA, SUJEITO DEFINITIVO ===\n"
+                f'"{briefing_image_text.strip()}"\n\n'
+                f"O SUJEITO PRINCIPAL da imagem vem desta direção do user — NÃO substitua\n"
+                f"por sujeitos diferentes mesmo se o template do estilo abaixo sugere outros.\n"
+                f"Exemplo: user pediu 'homem na montanha' → imagem É homem na montanha.\n"
+                f"O template do estilo serve APENAS pra definir MOOD/TRATAMENTO visual\n"
+                f"(B&W com selective yellow, colagem editorial, etc.) — NUNCA sobrescreve sujeito."
+            )
+        parts.append(f"=== TEMPLATE DE PROMPT DO ESTILO (use só pra mood/tratamento visual) ===\n{image_prompt_template or '(sem template — use defaults)'}")
+        parts.append(f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n```yaml\n{model_yaml_content}\n```")
         parts.append(
             "INSTRUÇÕES OBRIGATÓRIAS:\n"
             "1. Para CADA image_slot do layout, gere uma entry em `prompts[]`.\n"
             "2. O `slot_name` em cada prompt DEVE bater exatamente com o `slot_name` do image_slot no layout_spec.\n"
-            "3. Use o template do estilo acima como base do prompt (incluindo aspect ratio).\n"
-            "4. Se um image_slot existe, NÃO retorne `skip: true`. Skip só se layout NÃO tem image_slot algum."
+            "3. Se houve DIREÇÃO VISUAL DO USER, o subject do prompt VEM DELA. Template do estilo só dá tratamento (mood, lighting, processing).\n"
+            "4. Se NÃO houve direção, use o template do estilo como guideline completa.\n"
+            "5. Se um image_slot existe, NÃO retorne `skip: true`. Skip só se layout NÃO tem image_slot algum."
         )
         skill_extra = "\n\n".join(parts)
         t04 = time.time()
@@ -347,6 +418,9 @@ def _run_pipeline_inline(
                     msg = f"04-image-gen: FALHOU slot={slot} — {e.__class__.__name__}: {str(e)[:200]}"
                     diagnostics.append(msg)
                     print(f"[image_gen warn] {msg}", file=sys.stderr)
+
+    # Adaptive text color: analisa fundo (imagem) e ajusta cor do text pra contraste
+    _adapt_text_colors_to_image(layout_spec, image_urls, diagnostics)
 
     # Skill 05 — assembler (PNG via Pillow)
     diagnostics.append(
@@ -388,9 +462,11 @@ def _run_pipeline_inline(
                     "bottom-center": ((base.width - target_w) // 2, base.height - target_h - margin),
                 }
                 pos = positions.get(cfg["position"], positions["top-right"])
-                # Override de Y específico do modelo (útil pra EDITORIAL-HERO entre eyebrows)
+                # Overrides específicos por modelo (úteis pra ajuste fino)
                 if "y_override" in cfg:
                     pos = (pos[0], int(cfg["y_override"]))
+                if "x_offset" in cfg:
+                    pos = (pos[0] + int(cfg["x_offset"]), pos[1])
                 base.paste(sig_resized, pos, mask=sig_resized)
                 base.save(asm_result.png_path)
                 diagnostics.append(
