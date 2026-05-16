@@ -17,6 +17,7 @@ import base64
 import json
 import os
 import sys
+import time
 import traceback
 import uuid
 from datetime import datetime
@@ -33,6 +34,10 @@ if str(ENGINE_DIR) not in sys.path:
 # Aponta BRAND_KNOWLEDGE_PATH pro submodule antes de importar qualquer skill_runner
 os.environ.setdefault("BRAND_KNOWLEDGE_PATH", str(ENGINE_DIR / "brand-knowledge"))
 os.environ.setdefault("ARTIFACTS_DIR", "/tmp/artifacts")
+# Vercel Hobby tem 60s timeout. gpt-image-1 quality=high leva 35-50s, somado às skills
+# LLM (~15-25s) estoura sempre. Forçamos low (10-15s, custo cai $0.17→$0.04, qualidade
+# visual cai um pouco mas é MVP). User pode override no Vercel env vars se quiser.
+os.environ.setdefault("IMAGE_QUALITY", "low")
 
 
 # ----------------------------------------------------------------------------
@@ -54,6 +59,12 @@ def _run_pipeline_inline(
     from pipeline import MOCK_FIXTURES, write_artifact
 
     diagnostics: list[str] = []   # mensagens visíveis no frontend pra debug
+    timings: dict[str, int] = {}  # ms por etapa
+    t_start = time.time()
+
+    def mark(label: str, t_skill_start: float) -> None:
+        elapsed = int((time.time() - t_skill_start) * 1000)
+        timings[label] = elapsed
 
     artifacts_dir = Path(os.environ["ARTIFACTS_DIR"])
     artifacts_dir.mkdir(parents=True, exist_ok=True)
@@ -63,7 +74,9 @@ def _run_pipeline_inline(
     runner = SkillRunner(llm=llm)
 
     # Skill 01 — briefing parser
+    t01 = time.time()
     r = runner.run("01-briefing-parser", briefing_text)
+    mark("01", t01)
     if not r.ok:
         return {"ok": False, "error": f"briefing-parser: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
     briefing = r.output
@@ -75,7 +88,7 @@ def _run_pipeline_inline(
             "diagnostics": diagnostics,
         }
     write_artifact(run_id, "01-briefing", briefing, artifacts_dir)
-    diagnostics.append(f"01-briefing-parser: marca={briefing.get('marca')} intent={briefing.get('intent')}")
+    diagnostics.append(f"01-briefing-parser ({timings['01']}ms): marca={briefing.get('marca')} intent={briefing.get('intent')}")
 
     # Skill 02 — style selector
     # Quando o user escolheu estilo explícito no wizard, PULA skill 02 e força o modelo dele.
@@ -84,13 +97,15 @@ def _run_pipeline_inline(
         chosen_model_id = forced_model_id
         diagnostics.append(f"02-style-selector: PULADO — model_id forçado pelo wizard: {chosen_model_id}")
     else:
+        t02 = time.time()
         r = runner.run("02-style-selector", briefing)
+        mark("02", t02)
         if not r.ok:
             return {"ok": False, "error": f"style-selector: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
         style_rec = r.output
         write_artifact(run_id, "02-style-recommendation", style_rec, artifacts_dir)
         chosen_model_id = style_rec["recommended"][0]["model_id"]
-        diagnostics.append(f"02-style-selector: escolheu {chosen_model_id} (ranking textual, sem Qdrant)")
+        diagnostics.append(f"02-style-selector ({timings['02']}ms): escolheu {chosen_model_id} (ranking textual, sem Qdrant)")
 
     # Skill 03 — layout composer
     # IMPORTANTE: a skill 03 manda "Lê o YAML do modelo em models/marca/X.yaml" mas o LLM
@@ -125,7 +140,9 @@ def _run_pipeline_inline(
         f"4. Use tokens da marca {marca} (cores/fontes do YAML).\n"
         f"5. Gere a copy você mesmo respeitando max_chars/max_lines de cada slot do YAML.\n"
     )
+    t03 = time.time()
     r = runner.run("03-layout-composer", layout_input, extra_context=extra_03)
+    mark("03", t03)
     if not r.ok:
         return {"ok": False, "error": f"layout-composer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
     layout_spec = r.output
@@ -139,7 +156,7 @@ def _run_pipeline_inline(
     image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
     slot_names = [s.get("slot_name", "?") for s in image_slots]
     diagnostics.append(
-        f"03-layout-composer: {total_elements} elementos · {len(image_slots)} image_slot(s) "
+        f"03-layout-composer ({timings['03']}ms): {total_elements} elementos · {len(image_slots)} image_slot(s) "
         f"{('= ' + ', '.join(slot_names)) if slot_names else ''}"
     )
 
@@ -194,7 +211,9 @@ def _run_pipeline_inline(
             "4. Se um image_slot existe, NÃO retorne `skip: true`. Skip só se layout NÃO tem image_slot algum."
         )
         skill_extra = "\n\n".join(parts)
+        t04 = time.time()
         r = runner.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
+        mark("04-skill", t04)
         if not r.ok:
             return {"ok": False, "error": f"image-prompt-engineer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
         image_spec = r.output
@@ -202,7 +221,7 @@ def _run_pipeline_inline(
         skip_flag = image_spec.get("skip", False)
         prompt_count = len(image_spec.get("prompts", []))
         diagnostics.append(
-            f"04-image-prompt-engineer: skip={skip_flag} · prompts={prompt_count} · "
+            f"04-image-prompt-engineer ({timings.get('04-skill', 0)}ms): skip={skip_flag} · prompts={prompt_count} · "
             f"skip_reason={image_spec.get('skip_reason', '')[:120]}"
         )
         if skip_flag:
@@ -233,13 +252,20 @@ def _run_pipeline_inline(
         f"05-assembler: entrada → {len(image_urls)} url(s) pra {len(image_slots)} slot(s) do layout. "
         f"Match: {'OK' if set(image_urls.keys()) >= set(slot_names) else 'INCOMPLETO — slot_names esperados não bateram com chaves de image_urls'}"
     )
+    t05 = time.time()
     asm_result = AssemblerAdapter().assemble(layout_spec, image_urls)
+    mark("05", t05)
     if not asm_result.png_path:
         return {"ok": False, "error": "assembler did not produce a PNG", "run_id": run_id, "diagnostics": diagnostics}
     if asm_result.warnings:
         for w in asm_result.warnings:
             diagnostics.append(f"05-assembler: warning → {w}")
-    diagnostics.append(f"05-assembler: PNG gerado ({len(image_urls)} imagens injetadas)")
+    diagnostics.append(f"05-assembler ({timings['05']}ms): PNG gerado ({len(image_urls)} imagens injetadas)")
+
+    # Sumário de tempo total — pra diagnosticar timeout 60s do Vercel Hobby
+    total_ms = int((time.time() - t_start) * 1000)
+    diagnostics.append(f"TOTAL: {total_ms}ms ({total_ms/1000:.1f}s) — breakdown: " +
+                       " · ".join(f"{k}={v}ms" for k, v in timings.items()))
 
     # Skill 06 — qa-validator PULADO pra caber em 60s.
 
