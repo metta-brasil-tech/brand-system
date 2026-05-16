@@ -41,6 +41,25 @@ os.environ.setdefault("IMAGE_QUALITY", "low")
 
 
 # ----------------------------------------------------------------------------
+# Assinatura Tiago — overlay aplicado em capas, posts únicos e cards finais.
+# color: 'amarelo' (dark bg) | 'escuro' (light/yellow bg) | 'branco' (yellow/medium) | 'cinza'
+# position: top-right | top-left | top-center | bottom-right | bottom-left | bottom-center
+# size: 'medio' (18% largura) | 'grande' (26%)
+# ----------------------------------------------------------------------------
+SIGNATURE_MODELS = {
+    # Capas de carrossel (1º slide)
+    "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "top-right",    "size": "medio"},
+    "TIAGO-EDITORIAL-HERO":         {"color": "amarelo", "position": "top-center",   "size": "grande"},
+    # Posts únicos (standalone, sem carrossel)
+    "TIAGO-TYPO-PURE":              {"color": "escuro",  "position": "bottom-right", "size": "medio"},
+    "TIAGO-STORY-YELLOW-BLOCK":     {"color": "escuro",  "position": "top-right",    "size": "medio"},
+    "TIAGO-STORY-MINIMAL-QUESTION": {"color": "amarelo", "position": "bottom-right", "size": "medio"},
+    # Cards finais (último de carrossel)
+    "TIAGO-EDITORIAL-CTA":          {"color": "amarelo", "position": "bottom-right", "size": "medio"},
+}
+
+
+# ----------------------------------------------------------------------------
 # Pipeline runner — espelha engine/api.py::_run_pipeline mas pulando skill 06
 # e retornando PNG em bytes (não path) pra encodar em base64.
 # ----------------------------------------------------------------------------
@@ -261,6 +280,44 @@ def _run_pipeline_inline(
         for w in asm_result.warnings:
             diagnostics.append(f"05-assembler: warning → {w}")
     diagnostics.append(f"05-assembler ({timings['05']}ms): PNG gerado ({len(image_urls)} imagens injetadas)")
+
+    # Post-process: overlay da assinatura Tiago em capas/únicos/finais
+    if marca == "tiago" and chosen_model_id in SIGNATURE_MODELS:
+        cfg = SIGNATURE_MODELS[chosen_model_id]
+        sig_path = ENGINE_DIR / "assets" / "signatures-tiago" / f"{cfg['color']}.png"
+        if sig_path.exists():
+            try:
+                from PIL import Image
+                base = Image.open(asm_result.png_path).convert("RGBA")
+                sig = Image.open(sig_path).convert("RGBA")
+                # Escala da assinatura: 'medio' = 18% da largura, 'grande' = 26%
+                pct = 0.26 if cfg.get("size") == "grande" else 0.18
+                target_w = int(base.width * pct)
+                target_h = int(sig.height * (target_w / sig.width))
+                sig_resized = sig.resize((target_w, target_h), Image.LANCZOS)
+                # Posição com margem 5% do canvas
+                margin = int(base.width * 0.05)
+                positions = {
+                    "top-right":     (base.width - target_w - margin, margin),
+                    "top-left":      (margin, margin),
+                    "top-center":    ((base.width - target_w) // 2, margin),
+                    "bottom-right":  (base.width - target_w - margin, base.height - target_h - margin),
+                    "bottom-left":   (margin, base.height - target_h - margin),
+                    "bottom-center": ((base.width - target_w) // 2, base.height - target_h - margin),
+                }
+                pos = positions.get(cfg["position"], positions["top-right"])
+                base.paste(sig_resized, pos, mask=sig_resized)
+                base.save(asm_result.png_path)
+                diagnostics.append(
+                    f"06-signature: {cfg['color']}.png @ {cfg['position']} "
+                    f"({cfg.get('size', 'medio')}, {target_w}×{target_h}px)"
+                )
+            except Exception as e:
+                diagnostics.append(f"06-signature: FALHOU — {e.__class__.__name__}: {e}")
+        else:
+            diagnostics.append(f"06-signature: arquivo não encontrado {sig_path.name}")
+    elif marca == "tiago":
+        diagnostics.append(f"06-signature: PULADO — modelo {chosen_model_id} não está na lista de assinatura")
 
     # Sumário de tempo total — pra diagnosticar timeout 60s do Vercel Hobby
     total_ms = int((time.time() - t_start) * 1000)
