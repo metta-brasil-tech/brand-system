@@ -158,6 +158,23 @@ def _run_pipeline_inline(
         f"do canvas (x=0, y=0); 'right-bleed' = metade direita; 'center-bottom' = centro abaixo.\n"
         f"4. Use tokens da marca {marca} (cores/fontes do YAML).\n"
         f"5. Gere a copy você mesmo respeitando max_chars/max_lines de cada slot do YAML.\n"
+        f"6. CONTAINER SLOTS — quando um slot tem `role` contendo 'container', 'block', 'bloco' OU "
+        f"   o nome do slot tem 'bloco_', 'panel_', 'box_', 'card_', você DEVE criar um element "
+        f"   do tipo `rect` no output com:\n"
+        f"   - x, y, width, height calculados (ex: bloco amarelo central 9:16 → x=120 y=620 width=840 height=680)\n"
+        f"   - fill: hex da cor (do `bg_color_ref` ou `colors.accent` no YAML)\n"
+        f"   - corner_radius: valor do `corner_radius` do slot (geralmente 16)\n"
+        f"7. CHILDREN do container — text elements (headline/subhead) que devem ficar DENTRO de um\n"
+        f"   container rect têm que estar posicionados SOBRE o rect: x_text = rect.x + padding,\n"
+        f"   y_text = rect.y + padding, width_text = rect.width - 2*padding. Ordem do array `elements`\n"
+        f"   importa — rect primeiro, depois text. Assembler renderiza na ordem.\n"
+        f"8. Exemplo concreto pra TIAGO-STORY-YELLOW-BLOCK:\n"
+        f'   [\n'
+        f'     {{"type":"image_slot","slot_name":"foto_bleed","x":0,"y":0,"width":1080,"height":1920,"image_prompt_ref":"..."}},\n'
+        f'     {{"type":"rect","slot_name":"bloco_amarelo","x":120,"y":620,"width":840,"height":680,"fill":"#FFCC00","corner_radius":16}},\n'
+        f'     {{"type":"text","slot_name":"headline","x":160,"y":680,"width":760,"text":"...","font":{{"family":"SF Pro Condensed","style":"Semibold","size":54,...}},"color":"#0F1419"}},\n'
+        f'     {{"type":"text","slot_name":"subhead","x":160,"y":900,"width":760,"text":"...","font":{{"family":"SF Pro Condensed","style":"Light","size":28,...}},"color":"#3B4350"}}\n'
+        f'   ]\n'
     )
     t03 = time.time()
     r = runner.run("03-layout-composer", layout_input, extra_context=extra_03)
