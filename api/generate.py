@@ -46,6 +46,46 @@ os.environ.setdefault("IMAGE_QUALITY", "low")
 # position: top-right | top-left | top-center | bottom-right | bottom-left | bottom-center
 # size: 'medio' (18% largura) | 'grande' (26%)
 # ----------------------------------------------------------------------------
+def _extract_copy(copy_text: str | None, cta_text: str | None, briefing_text: str | None) -> dict:
+    """Extrai headline/subhead/cta estruturado do input do user.
+
+    Frontend wizard manda `copy_text` e `cta_text` separados. Quando ausentes
+    (modo áudio livre), tenta parse simples do briefing original em busca de
+    'CTA: ...' e 'Copy pronta: ...'.
+    """
+    import re as _re
+    headline, subhead, cta = "", "", ""
+
+    if copy_text:
+        lines = [l.strip() for l in copy_text.strip().split("\n") if l.strip()]
+        if lines:
+            headline = lines[0]
+            if len(lines) > 1:
+                subhead = " ".join(lines[1:])
+
+    if cta_text:
+        cta = cta_text.strip().rstrip(".")
+
+    # Fallback: parse do briefing_text se faltam fields
+    if (not headline or not cta) and briefing_text:
+        if not cta:
+            m = _re.search(r"CTA:\s*(.+?)(?:\n|$)", briefing_text)
+            if m:
+                cta = m.group(1).strip().rstrip(".")
+        if not headline:
+            m = _re.search(r"(?:Copy pronta|Descrição pra gerar copy):\s*(.+?)(?:\n\n|$)",
+                           briefing_text, _re.DOTALL)
+            if m:
+                txt = m.group(1).strip()
+                lines = [l.strip() for l in txt.split("\n") if l.strip()]
+                if lines:
+                    headline = lines[0]
+                    if len(lines) > 1:
+                        subhead = " ".join(lines[1:])
+
+    return {"headline": headline, "subhead": subhead, "cta": cta}
+
+
 SIGNATURE_MODELS = {
     # Capas de carrossel (1º slide)
     "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "bottom-left",  "size": "medio"},
@@ -70,6 +110,8 @@ def _run_pipeline_inline(
     image_source: str | None = None,   # 'generate' | 'search' | 'none' | None
     image_url: str | None = None,      # URL pronta vinda da busca (quando image_source='search')
     briefing_image_text: str | None = None,  # descrição da imagem desejada (extra_context skill 04)
+    user_copy_text: str | None = None,       # copy do user (primeira linha = headline, resto = subhead)
+    user_cta_text: str | None = None,        # CTA do user (vira text do pill_cta)
 ) -> dict:
     from skills_runner import SkillRunner
     from adapters.llm import LLMAdapter, MockLLMAdapter
@@ -127,9 +169,10 @@ def _run_pipeline_inline(
         diagnostics.append(f"02-style-selector ({timings['02']}ms): escolheu {chosen_model_id} (ranking textual, sem Qdrant)")
 
     # Skill 03 — layout composer
-    # IMPORTANTE: a skill 03 manda "Lê o YAML do modelo em models/marca/X.yaml" mas o LLM
-    # não pode ler filesystem. Carregamos o YAML aqui e injetamos como extra_context.
-    # Sem isso, o LLM inventa layout sem image_slot mesmo quando model.image.required=true.
+    # ESTRATÉGIA 1 (preferida): se temos layout template determinístico pro modelo,
+    # USA ELE em vez do LLM. Resultado 100% previsível, respeitando hierarquia visual
+    # que o LLM tendia a quebrar (texto fora da imagem, sem overlay, etc.).
+    # ESTRATÉGIA 2 (fallback): LLM com YAML + instruções (comportamento original).
     marca = briefing.get("marca", "metta")
     model_yaml_path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / "models" / marca / f"{chosen_model_id}.yaml"
     model_yaml_content = ""
@@ -139,69 +182,83 @@ def _run_pipeline_inline(
     else:
         diagnostics.append(f"03-yaml: FALTANDO {model_yaml_path} — LLM vai improvisar")
 
-    layout_input = {
-        "briefing": briefing,
-        "model_id": chosen_model_id,
-        "copy": {"_note": "MVP — generate copy inside layout composer"},
-    }
-
-    extra_03 = (
-        f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n"
-        f"```yaml\n{model_yaml_content}\n```\n\n"
-        f"INSTRUÇÕES OBRIGATÓRIAS:\n"
-        f"1. Use os campos `slots`, `image`, `typography`, `colors`, `composicao` LITERALMENTE deste YAML.\n"
-        f"2. Se `image.required == true` no YAML acima, você DEVE adicionar um element do tipo "
-        f"`image_slot` no array `elements` do output. NÃO PULE. O slot_name vem dos `slots` do YAML "
-        f"(procure o slot cuja `role` indica imagem — ex: 'background_principal', 'ambiente_contexto', "
-        f"'metafora_visual_isolada', 'foto_bleed', 'collage_image', 'foto_raw').\n"
-        f"3. Posicione o image_slot conforme `image.placement` do YAML: 'full-bleed' = ocupa 1080x1920 "
-        f"do canvas (x=0, y=0); 'right-bleed' = metade direita; 'center-bottom' = centro abaixo.\n"
-        f"4. Use tokens da marca {marca} (cores/fontes do YAML).\n"
-        f"5. Gere a copy você mesmo respeitando max_chars/max_lines de cada slot do YAML.\n"
-        f"6. CONTAINER SLOTS — quando um slot tem `role` contendo 'container', 'block', 'bloco' OU "
-        f"   o nome do slot tem 'bloco_', 'panel_', 'box_', 'card_', você DEVE criar um element "
-        f"   do tipo `rect` no output com:\n"
-        f"   - x, y, width, height calculados (ex: bloco amarelo central 9:16 → x=120 y=620 width=840 height=680)\n"
-        f"   - fill: hex da cor (do `bg_color_ref` ou `colors.accent` no YAML)\n"
-        f"   - corner_radius: valor do `corner_radius` do slot (geralmente 16)\n"
-        f"7. CHILDREN do container — text elements (headline/subhead) que devem ficar DENTRO de um\n"
-        f"   container rect têm que estar posicionados SOBRE o rect: x_text = rect.x + padding,\n"
-        f"   y_text = rect.y + padding, width_text = rect.width - 2*padding. Ordem do array `elements`\n"
-        f"   importa — rect primeiro, depois text. Assembler renderiza na ordem.\n"
-        f"8. CTA text — REGRA CRÍTICA: o briefing do user contém um CTA digitado\n"
-        f"   (procure no texto: 'CTA: <frase>'). Esse CTA do user DEVE entrar no\n"
-        f"   `text` do element pill_cta. NUNCA use o `text_default` do slot YAML\n"
-        f"   (que é só fallback quando user não digitou nada).\n"
-        f"   Exemplos: user pediu 'Saiba mais' → text='SAIBA MAIS'. User pediu\n"
-        f"   'Comenta aqui' → text='COMENTA AQUI'. Aplique UPPER quando typography.cta\n"
-        f"   tem text_case=UPPER no YAML.\n"
-        f"9. Exemplo concreto pra TIAGO-STORY-YELLOW-BLOCK:\n"
-        f'   [\n'
-        f'     {{"type":"image_slot","slot_name":"foto_bleed","x":0,"y":0,"width":1080,"height":1920,"image_prompt_ref":"..."}},\n'
-        f'     {{"type":"rect","slot_name":"bloco_amarelo","x":120,"y":620,"width":840,"height":680,"fill":"#FFCC00","corner_radius":16}},\n'
-        f'     {{"type":"text","slot_name":"headline","x":160,"y":680,"width":760,"text":"...","font":{{"family":"SF Pro Condensed","style":"Semibold","size":54,...}},"color":"#0F1419"}},\n'
-        f'     {{"type":"text","slot_name":"subhead","x":160,"y":900,"width":760,"text":"...","font":{{"family":"SF Pro Condensed","style":"Light","size":28,...}},"color":"#3B4350"}}\n'
-        f'   ]\n'
-    )
-    t03 = time.time()
-    r = runner.run("03-layout-composer", layout_input, extra_context=extra_03)
-    mark("03", t03)
-    if not r.ok:
-        return {"ok": False, "error": f"layout-composer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
-    layout_spec = r.output
+    # Check se modelo tem template determinístico
     try:
-        from layout_enforcer import enforce
-        layout_spec, _ = enforce(layout_spec, briefing)
-    except Exception as e:
-        diagnostics.append(f"layout-enforcer: pulado ({e.__class__.__name__})")
-    write_artifact(run_id, "03-layout-spec", layout_spec, artifacts_dir)
-    total_elements = len(layout_spec.get("elements", []))
-    image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
-    slot_names = [s.get("slot_name", "?") for s in image_slots]
-    diagnostics.append(
-        f"03-layout-composer ({timings['03']}ms): {total_elements} elementos · {len(image_slots)} image_slot(s) "
-        f"{('= ' + ', '.join(slot_names)) if slot_names else ''}"
-    )
+        from _layouts import has_template, build_layout as build_layout_template
+    except ImportError:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from _layouts import has_template, build_layout as build_layout_template
+
+    if has_template(chosen_model_id):
+        # Template Python determinístico — pula skill 03 LLM
+        copy_data = _extract_copy(user_copy_text, user_cta_text, briefing_text)
+        t03 = time.time()
+        layout_spec = build_layout_template(
+            chosen_model_id,
+            briefing=briefing,
+            copy=copy_data,
+            image_url=None,   # image_url só preenchido na skill 04
+        )
+        mark("03", t03)
+        try:
+            from layout_enforcer import enforce
+            layout_spec, _ = enforce(layout_spec, briefing)
+        except Exception as e:
+            diagnostics.append(f"layout-enforcer: pulado ({e.__class__.__name__})")
+        write_artifact(run_id, "03-layout-spec", layout_spec, artifacts_dir)
+        total_elements = len(layout_spec.get("elements", []))
+        image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
+        slot_names = [s.get("slot_name", "?") for s in image_slots]
+        diagnostics.append(
+            f"03-layout-composer ({timings['03']}ms): TEMPLATE determinístico — "
+            f"{total_elements} elementos · {len(image_slots)} image_slot(s) "
+            f"{('= ' + ', '.join(slot_names)) if slot_names else ''} · "
+            f"copy: headline={len(copy_data.get('headline', ''))}c · subhead={len(copy_data.get('subhead', ''))}c · cta='{copy_data.get('cta', '')[:30]}'"
+        )
+        # Pula bloco LLM abaixo
+        skip_llm_03 = True
+    else:
+        skip_llm_03 = False
+
+    if not skip_llm_03:
+        layout_input = {
+            "briefing": briefing,
+            "model_id": chosen_model_id,
+            "copy": {"_note": "MVP — generate copy inside layout composer"},
+        }
+
+        extra_03 = (
+            f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n"
+            f"```yaml\n{model_yaml_content}\n```\n\n"
+            f"INSTRUÇÕES OBRIGATÓRIAS:\n"
+            f"1. Use os campos `slots`, `image`, `typography`, `colors`, `composicao` LITERALMENTE deste YAML.\n"
+            f"2. Se `image.required == true`, você DEVE adicionar element type='image_slot'.\n"
+            f"3. Posicione o image_slot conforme `image.placement` do YAML.\n"
+            f"4. Use tokens da marca {marca}.\n"
+            f"5. Gere a copy respeitando max_chars/max_lines de cada slot.\n"
+            f"6. CONTAINER SLOTS (role contém 'container'/'block'/'bloco'): crie type='rect' com fill+corner_radius do YAML.\n"
+            f"7. Children do container: text com x=rect.x+padding, y=rect.y+padding. Ordem importa.\n"
+            f"8. CTA text vem do briefing do user (busca 'CTA: ...' no texto), NUNCA do text_default do YAML.\n"
+        )
+        t03 = time.time()
+        r = runner.run("03-layout-composer", layout_input, extra_context=extra_03)
+        mark("03", t03)
+        if not r.ok:
+            return {"ok": False, "error": f"layout-composer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
+        layout_spec = r.output
+        try:
+            from layout_enforcer import enforce
+            layout_spec, _ = enforce(layout_spec, briefing)
+        except Exception as e:
+            diagnostics.append(f"layout-enforcer: pulado ({e.__class__.__name__})")
+        write_artifact(run_id, "03-layout-spec", layout_spec, artifacts_dir)
+        total_elements = len(layout_spec.get("elements", []))
+        image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
+        slot_names = [s.get("slot_name", "?") for s in image_slots]
+        diagnostics.append(
+            f"03-layout-composer ({timings['03']}ms): LLM — {total_elements} elementos · "
+            f"{len(image_slots)} image_slot(s) {('= ' + ', '.join(slot_names)) if slot_names else ''}"
+        )
 
     # Skill 04 — image prompt engineer + image-gen
     # 3 caminhos:
@@ -377,6 +434,8 @@ class handler(BaseHTTPRequestHandler):
             image_source = data.get("image_source") or None      # 'generate' | 'search' | 'none'
             image_url = data.get("image_url") or None             # URL da imagem escolhida (busca)
             briefing_image = data.get("briefing_image") or None   # texto livre — direção da imagem
+            copy_text = data.get("copy_text") or None             # copy estruturado (headline + subhead)
+            cta_text = data.get("cta_text") or None               # CTA digitado
 
             if not isinstance(briefing, str) or not briefing.strip():
                 return self._json(400, {"detail": "Body precisa de { briefing: string não-vazio }"})
@@ -388,6 +447,8 @@ class handler(BaseHTTPRequestHandler):
                 image_source=image_source,
                 image_url=image_url,
                 briefing_image_text=briefing_image,
+                user_copy_text=copy_text,
+                user_cta_text=cta_text,
             )
             if not result.get("ok"):
                 return self._json(500, {"detail": result.get("error", "erro desconhecido"),
