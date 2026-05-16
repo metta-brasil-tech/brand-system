@@ -48,7 +48,7 @@ os.environ.setdefault("IMAGE_QUALITY", "low")
 # ----------------------------------------------------------------------------
 SIGNATURE_MODELS = {
     # Capas de carrossel (1º slide)
-    "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "top-right",    "size": "medio"},
+    "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "bottom-left",  "size": "medio"},
     "TIAGO-EDITORIAL-HERO":         {"color": "amarelo", "position": "top-center",   "size": "grande"},
     # Posts únicos (standalone, sem carrossel)
     "TIAGO-TYPO-PURE":              {"color": "escuro",  "position": "bottom-right", "size": "medio"},
@@ -168,7 +168,14 @@ def _run_pipeline_inline(
         f"   container rect têm que estar posicionados SOBRE o rect: x_text = rect.x + padding,\n"
         f"   y_text = rect.y + padding, width_text = rect.width - 2*padding. Ordem do array `elements`\n"
         f"   importa — rect primeiro, depois text. Assembler renderiza na ordem.\n"
-        f"8. Exemplo concreto pra TIAGO-STORY-YELLOW-BLOCK:\n"
+        f"8. CTA text — REGRA CRÍTICA: o briefing do user contém um CTA digitado\n"
+        f"   (procure no texto: 'CTA: <frase>'). Esse CTA do user DEVE entrar no\n"
+        f"   `text` do element pill_cta. NUNCA use o `text_default` do slot YAML\n"
+        f"   (que é só fallback quando user não digitou nada).\n"
+        f"   Exemplos: user pediu 'Saiba mais' → text='SAIBA MAIS'. User pediu\n"
+        f"   'Comenta aqui' → text='COMENTA AQUI'. Aplique UPPER quando typography.cta\n"
+        f"   tem text_case=UPPER no YAML.\n"
+        f"9. Exemplo concreto pra TIAGO-STORY-YELLOW-BLOCK:\n"
         f'   [\n'
         f'     {{"type":"image_slot","slot_name":"foto_bleed","x":0,"y":0,"width":1080,"height":1920,"image_prompt_ref":"..."}},\n'
         f'     {{"type":"rect","slot_name":"bloco_amarelo","x":120,"y":620,"width":840,"height":680,"fill":"#FFCC00","corner_radius":16}},\n'
