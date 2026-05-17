@@ -283,6 +283,7 @@ def _run_pipeline_inline(
     image_source: str | None = None,   # 'generate' | 'search' | 'none' | None
     image_url: str | None = None,      # URL pronta vinda da busca (quando image_source='search')
     briefing_image_text: str | None = None,  # descrição da imagem desejada (extra_context skill 04)
+    image_style_preset: str | None = None,   # id do preset visual (fotorrealista|bw-yellow|surreal-hbr|cinematic-dark)
     user_copy_text: str | None = None,       # copy do user (primeira linha = headline, resto = subhead)
     user_cta_text: str | None = None,        # CTA do user (vira text do pill_cta)
 ) -> dict:
@@ -521,16 +522,38 @@ def _run_pipeline_inline(
             diagnostics.append(f"04-base: FALTANDO {base_path}")
 
         parts = []
-        # Direção do user vem PRIMEIRO e DOMINA quando preenchida
+        # Direção do user vem PRIMEIRO e DOMINA quando preenchida — TANTO sujeito QUANTO
+        # tratamento visual quando ele especifica explicitamente (ex: "realista", "B&W",
+        # "cores vivas"). User vence sempre.
         if briefing_image_text and briefing_image_text.strip():
             parts.append(
-                f"=== DIREÇÃO VISUAL DO USER — PRIORIDADE MÁXIMA, SUJEITO DEFINITIVO ===\n"
+                f"=== DIREÇÃO VISUAL DO USER — PRIORIDADE MÁXIMA ABSOLUTA ===\n"
                 f'"{briefing_image_text.strip()}"\n\n'
-                f"O SUJEITO PRINCIPAL da imagem vem desta direção do user — NÃO substitua\n"
-                f"por sujeitos diferentes mesmo se o template do estilo abaixo sugere outros.\n"
-                f"Exemplo: user pediu 'homem na montanha' → imagem É homem na montanha.\n"
-                f"O template do estilo serve APENAS pra definir MOOD/TRATAMENTO visual\n"
-                f"(B&W com selective yellow, colagem editorial, etc.) — NUNCA sobrescreve sujeito."
+                f"Essa direção do user controla TANTO o SUJEITO QUANTO o TRATAMENTO da imagem.\n"
+                f"Se user disse 'realista', a foto É realista (sem B&W, sem selective yellow, sem surrealismo).\n"
+                f"Se user disse 'B&W moody com chuva', a foto É B&W moody com chuva.\n"
+                f"O preset escolhido pelo user (próxima seção) e o template do estilo do AD\n"
+                f"SÓ entram pra completar o que a direção do user NÃO especificou. Quando há\n"
+                f"conflito entre direção do user e template, USER VENCE — sempre."
+            )
+
+        # Preset de estilo de foto escolhido pelo user (TRATAMENTO prioritário sobre template do AD)
+        # Vem do wizard novo step 'wiz-imagem-briefing' (cards de preset visual).
+        # Carrega via _image_presets.py — definido no parent api/ pra não poluir engine.
+        try:
+            from _image_presets import get_preset, preset_to_extra_context
+        except ImportError:
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            from _image_presets import get_preset, preset_to_extra_context
+        chosen_preset = get_preset(image_style_preset)
+        if chosen_preset:
+            parts.append(preset_to_extra_context(chosen_preset))
+            diagnostics.append(
+                f"04-preset: '{chosen_preset['id']}' ({chosen_preset['label']}) — tratamento prioritário injetado"
+            )
+        else:
+            diagnostics.append(
+                f"04-preset: nenhum preset escolhido — usando tratamento do template do estilo do AD"
             )
         # Provider-aware: skill 04 deve gerar prompt na seção certa do _base/style
         # template. Se IMAGE_GEN_PROVIDER aponta pra openai/gpt-image-* → SEÇÃO PROD
@@ -801,6 +824,7 @@ class handler(BaseHTTPRequestHandler):
             image_source = data.get("image_source") or None      # 'generate' | 'search' | 'none'
             image_url = data.get("image_url") or None             # URL da imagem escolhida (busca)
             briefing_image = data.get("briefing_image") or None   # texto livre — direção da imagem
+            image_style_preset = data.get("image_style_preset") or None  # id do preset visual (cards do wizard)
             copy_text = data.get("copy_text") or None             # modo 'gerar' — texto livre
             copy_headline = data.get("copy_headline") or None     # modo 'tenho' — campo separado
             copy_subhead = data.get("copy_subhead") or None
@@ -821,6 +845,7 @@ class handler(BaseHTTPRequestHandler):
                 image_source=image_source,
                 image_url=image_url,
                 briefing_image_text=briefing_image,
+                image_style_preset=image_style_preset,
                 user_copy_text=copy_text,
                 user_cta_text=cta_text,
             )

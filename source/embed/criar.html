@@ -890,6 +890,62 @@ button.stepper-item.done:hover {
 .row-end { justify-content: flex-end; }
 
 /* ----------------------------------------- *
+ * PHOTO PRESET CARDS                        *
+ * ----------------------------------------- */
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+.preset-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0;
+  border: 1.5px solid var(--metta-sys-color-outline-variant);
+  border-radius: 12px;
+  background: var(--metta-sys-color-surface);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 120ms ease, transform 120ms ease;
+  font-family: inherit;
+  color: inherit;
+}
+.preset-card:hover {
+  border-color: var(--metta-sys-color-on-surface-variant);
+  transform: translateY(-1px);
+}
+.preset-card.is-selected {
+  border-color: var(--metta-sys-color-on-surface);
+  border-width: 2px;
+}
+.preset-preview {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: 280px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--metta-sys-color-surface-container-low);
+}
+.preset-body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.preset-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--metta-sys-color-on-surface);
+}
+.preset-desc {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+/* ----------------------------------------- *
  * RESPONSIVE                                *
  * ----------------------------------------- */
 @media (max-width: 640px) {
@@ -897,6 +953,8 @@ button.stepper-item.done:hover {
   .step-title { font-size: 28px; }
   .summary-row { grid-template-columns: 1fr; gap: 4px; }
   .summary-key { padding-top: 0; }
+  .preset-grid { grid-template-columns: repeat(2, 1fr); }
+  .preset-preview { max-height: 200px; }
 }
 </style>
 </head>
@@ -918,6 +976,7 @@ const STATE = {
   style: null,          // ID do estilo do banco
   copyMode: 'gerar',    // 'tenho' | 'gerar'
   imageSource: null,    // 'generate' (IA) | 'search' (busca web) | 'none' — definido em wiz-imagem
+  imageStylePreset: 'fotorrealista', // preset visual escolhido nos cards (default seguro)
   briefingImage: '',    // direção visual da imagem (cena/mood/cores) — só relevante quando imageSource='generate'
   searchQuery: '',      // termo de busca quando imageSource='search'
   selectedImageUrl: '', // URL escolhida na galeria de busca
@@ -1227,18 +1286,51 @@ function tplWizImagem() {
   `;
 }
 
+/* ---------- IMAGE STYLE PRESETS ---------- *
+ * 4 cards de estilo de foto. Selecionar muda TRATAMENTO visual da imagem
+ * (cores, mood, lighting). Briefing textual abaixo controla SUJEITO/CENA.
+ * Os dois acumulam: preset + briefing = prompt completo.
+ * IDs batem com api/_image_presets.py (PRESETS dict).
+ */
+const PHOTO_PRESETS = [
+  { id: 'fotorrealista',   label: 'Fotorrealista',     desc: 'Foto natural realista, sem efeito heavy. Default seguro.',           previewSrc: '/assets/photo-presets/fotorrealista.webp' },
+  { id: 'bw-yellow',       label: 'P&B + amarelo',     desc: 'Preto e branco editorial cinema com 1 detalhe amarelo destacado.',  previewSrc: '/assets/photo-presets/bw-yellow.webp' },
+  { id: 'surreal-hbr',     label: 'Surreal HBR',       desc: 'Foto realista com objeto incongruente. Metáfora visual conceitual.', previewSrc: '/assets/photo-presets/surreal-hbr.webp' },
+  { id: 'cinematic-dark',  label: 'Cinematic dark',    desc: 'Foto dark moody chiaroscuro. Bloomberg Businessweek vibe séria.',   previewSrc: '/assets/photo-presets/cinematic-dark.webp' }
+];
+
 function tplWizImagemBriefing() {
+  const activePreset = STATE.imageStylePreset || 'fotorrealista';
+  const presetCards = PHOTO_PRESETS.map(p => `
+    <button type="button"
+            class="preset-card ${p.id === activePreset ? 'is-selected' : ''}"
+            data-action="select-preset"
+            data-preset-id="${p.id}"
+            aria-pressed="${p.id === activePreset}">
+      <div class="preset-preview" style="background-image: url('${p.previewSrc}')"></div>
+      <div class="preset-body">
+        <div class="preset-label">${escapeHtml(p.label)}</div>
+        <div class="preset-desc">${escapeHtml(p.desc)}</div>
+      </div>
+    </button>
+  `).join('');
+
   return renderStepper() + `
     <header class="step-head">
-      <p class="step-eyebrow">Wizard · Briefing da imagem</p>
-      <h1 class="step-title">Descreva a imagem que você quer</h1>
-      <p class="step-sub">Detalha a cena, mood, paleta, enquadramento, personagens. A engine usa isso como direção pra gerar via gpt-image-1. Quanto mais específico, mais previsível o resultado.</p>
+      <p class="step-eyebrow">Wizard · Imagem</p>
+      <h1 class="step-title">Estilo de foto + direção visual</h1>
+      <p class="step-sub">Escolhe o estilo visual nos cards abaixo (controla cores, mood, tratamento). Embaixo, descreve a cena livre se quiser (controla o que aparece). Os dois se complementam.</p>
     </header>
     <div class="step-body">
       <div class="field">
-        <label class="field-label" for="briefing-image-input">Direção visual</label>
-        <textarea class="textarea" id="briefing-image-input" placeholder="Ex: Foto documental lo-fi de empresário em sua mesa de escritório à noite, luminária acesa, laptop, ambiente cozy. Paleta marrom + amber. Vista vertical 9:16. Sem rosto direto na câmera. Mood contemplativo.">${escapeHtml(STATE.briefingImage)}</textarea>
-        <p class="field-hint">Opcional, mas recomendado. Se deixar vazio, a engine inventa baseado no estilo + copy.</p>
+        <label class="field-label">Estilo de foto</label>
+        <div class="preset-grid">${presetCards}</div>
+        <p class="field-hint">Esse preset é o TRATAMENTO visual (cores, mood, lighting). O briefing abaixo controla o sujeito/cena. Default seguro: Fotorrealista.</p>
+      </div>
+      <div class="field" style="margin-top: 28px;">
+        <label class="field-label" for="briefing-image-input">Direção visual (cena, sujeito, ambiente)</label>
+        <textarea class="textarea" id="briefing-image-input" placeholder="Ex: Empresário sentado na sua mesa de escritório olhando pela janela, laptop fechado ao lado, ambiente cozy. Empresário 45 anos, cabelo curto, jaqueta de lã sobre camisa social aberta.">${escapeHtml(STATE.briefingImage)}</textarea>
+        <p class="field-hint">Opcional. Se vazio, a engine inventa baseado no preset + estilo do ad + copy.</p>
       </div>
     </div>
     <div class="foot">
@@ -1850,6 +1942,16 @@ function onAction(e) {
       render();
       break;
     }
+    case 'select-preset': {
+      // Card de preset de foto clicado — atualiza STATE e re-renderiza (preserva texto digitado)
+      const presetId = (el && el.dataset && el.dataset.presetId) || 'fotorrealista';
+      // Salva texto digitado antes de re-render
+      const ta = document.getElementById('briefing-image-input');
+      if (ta) STATE.briefingImage = ta.value;
+      STATE.imageStylePreset = presetId;
+      render();
+      break;
+    }
     case 'next-from-imagem-briefing': {
       const ta = document.getElementById('briefing-image-input');
       STATE.briefingImage = ta ? ta.value : '';
@@ -2011,6 +2113,7 @@ async function generateReal(briefing) {
         ...(STATE.selectedImageUrl ? { image_url: STATE.selectedImageUrl } : {}),
         // Direção visual livre pra skill 04 (opcional)
         ...(STATE.briefingImage && STATE.briefingImage.trim() ? { briefing_image: STATE.briefingImage.trim() } : {}),
+        ...(STATE.imageStylePreset ? { image_style_preset: STATE.imageStylePreset } : {}),
         // Copy estruturada: campos separados (modo 'tenho') OU copy_text único (modo 'gerar')
         ...(STATE.copyHeadline && STATE.copyHeadline.trim() ? { copy_headline: STATE.copyHeadline.trim() } : {}),
         ...(STATE.copySubhead && STATE.copySubhead.trim() ? { copy_subhead: STATE.copySubhead.trim() } : {}),
