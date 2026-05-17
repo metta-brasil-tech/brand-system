@@ -34,11 +34,10 @@ if str(ENGINE_DIR) not in sys.path:
 # Aponta BRAND_KNOWLEDGE_PATH pro submodule antes de importar qualquer skill_runner
 os.environ.setdefault("BRAND_KNOWLEDGE_PATH", str(ENGINE_DIR / "brand-knowledge"))
 os.environ.setdefault("ARTIFACTS_DIR", "/tmp/artifacts")
-# Vercel Hobby tem 60s timeout. gpt-image-1 quality=high leva 35-50s, somado às skills
-# LLM (~15-25s) estoura sempre. Defaultamos 'medium' (18-25s, $0.08) — qualidade
-# visivelmente melhor que 'low' ($0.04) e ainda cabe no timeout combinado.
-# Override via env var no Vercel se quiser 'low' (mais barato) ou 'high' (timeout risk).
-os.environ.setdefault("IMAGE_QUALITY", "medium")
+# Vercel Hobby tem 60s timeout. Medium (18-25s) + skills LLM (~15-25s) + cold start
+# estoura na prática. Default 'low' (10-15s, $0.04) deixa margem confortável.
+# Override via env var no Vercel se quiser 'medium' (risk) ou 'high' (timeout certo).
+os.environ.setdefault("IMAGE_QUALITY", "low")
 
 
 # ----------------------------------------------------------------------------
