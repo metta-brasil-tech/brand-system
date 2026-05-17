@@ -416,16 +416,540 @@ def build_tiago_twitter_card_image(briefing: dict, copy: dict, image_url: str | 
 
 
 # ============================================================
+# METTA — STORY 1080x1920 e FEED 1080x1350
+# ============================================================
+
+def _metta_format_dims(briefing: dict) -> tuple[int, int]:
+    """Resolve dimensões a partir do briefing.formato."""
+    fmt = (briefing.get("formato") or "").lower()
+    if fmt in ("feed", "feed_video"):
+        return 1080, 1350
+    if fmt in ("sqr", "carrossel"):
+        return 1080, 1080
+    return 1080, 1920
+
+
+def build_metta_yellow_bloco(briefing: dict, copy: dict, image_url: str | None) -> dict:
+    """YELLOW-BLOCO — bloco amarelo central com headline + bullets, foto pessoa direita.
+
+    Convite institucional. Bloco amarelo (~65% largura, ~58% altura) à esquerda,
+    foto pessoa bleed canto direito-bottom. CTA pill preto no rodapé.
+    Marca DARK accent → contraste alto.
+    """
+    W, H = _metta_format_dims(briefing)
+    elements: list[dict] = []
+
+    headline = copy.get("headline", "").strip() or "Sua oferta institucional"
+    subhead = copy.get("subhead", "").strip()
+    cta_text = (copy.get("cta", "").strip() or "Saiba mais").upper()
+
+    # 1) Bloco amarelo central — rect grande à esquerda
+    block_x, block_y = 60, int(H * 0.18)
+    block_w = int(W * 0.65)
+    block_h = int(H * 0.58)
+    elements.append({
+        "type": "rect",
+        "role": "yellow_container",
+        "slot_name": "yellow_block",
+        "x": block_x, "y": block_y,
+        "width": block_w, "height": block_h,
+        "fill": "#FFBE18",
+        "corner_radius": 24,
+    })
+
+    # 2) Foto pessoa bleed canto direito-bottom (passa do canvas pra dar bleed)
+    photo_w = int(W * 0.55)
+    photo_h = int(H * 0.55)
+    photo_x = W - int(photo_w * 0.78)  # passa parcialmente do canvas direito
+    photo_y = int(H * 0.42)
+    elements.append({
+        "type": "image_slot",
+        "slot_name": "foto_pessoa",
+        "x": photo_x, "y": photo_y,
+        "width": photo_w, "height": photo_h,
+        "image_prompt_ref": "image-prompts/metta/style-YELLOW-BLOCO.md",
+        "url_placeholder": "pending",
+        "bleed_right": True,
+        "bleed_bottom": True,
+    })
+
+    # 3) Headline dentro do bloco amarelo (UPPER, Expanded Heavy, preto)
+    inner_pad = 56
+    elements.append({
+        "type": "text",
+        "slot_name": "headline",
+        "text": headline,
+        "x": block_x + inner_pad,
+        "y": block_y + inner_pad,
+        "width": block_w - 2 * inner_pad,
+        "height": "auto",
+        "font": {
+            "family": "SF Pro",
+            "style": "Expanded Heavy",
+            "weight": 870,
+            "stretch_pct": 132,
+            "size": 72,
+            "line_height_pct": 95,
+            "letter_spacing_pct": -1,
+            "text_case": "UPPER",
+        },
+        "color": "#0C161B",
+        "align": "left",
+    })
+
+    # 4) Subhead/bullets dentro do bloco (Expanded Regular sentence, preto)
+    if subhead:
+        # Posiciona após headline com base estimada (linhas × line-height)
+        headline_lines = max(1, (len(headline) // 22) + 1)
+        sub_y = block_y + inner_pad + headline_lines * 68 + 32
+        elements.append({
+            "type": "text",
+            "slot_name": "body",
+            "text": subhead,
+            "x": block_x + inner_pad,
+            "y": sub_y,
+            "width": block_w - 2 * inner_pad,
+            "height": "auto",
+            "font": {
+                "family": "SF Pro",
+                "style": "Expanded Regular",
+                "weight": 590,
+                "stretch_pct": 100,
+                "size": 30,
+                "line_height_pct": 130,
+                "letter_spacing_pct": -0.5,
+                "text_case": "sentence",
+            },
+            "color": "#0C161B",
+            "align": "left",
+        })
+
+    # 5) CTA pill preto bottom-left
+    cta_width_est = min(700, max(280, len(cta_text) * 20 + 76))
+    elements.append({
+        "type": "pill_cta",
+        "slot_name": "cta",
+        "text": cta_text,
+        "x": 80, "y": H - 180,
+        "width": cta_width_est, "height": 96,
+        "padding_x": 38, "padding_y": 26,
+        "background": "#0C161B",
+        "text_color": "#FFFFFF",
+        "corner_radius": 999,
+        "font": {
+            "family": "SF Pro",
+            "style": "Expanded Bold",
+            "weight": 700,
+            "stretch_pct": 132,
+            "size": 26,
+            "line_height_pct": 100,
+            "letter_spacing_pct": 0,
+            "text_case": "UPPER",
+        },
+    })
+
+    return {
+        "model_id": "YELLOW-BLOCO",
+        "frame": {"width": W, "height": H, "background": {"type": "solid", "value": "#FFFFFF"}},
+        "elements": elements,
+    }
+
+
+def build_metta_a_headline_foto_dark(briefing: dict, copy: dict, image_url: str | None) -> dict:
+    """A-headline-foto-dark — headline gigante UPPER sobre dark + foto pessoa bleed direita.
+
+    Headline é protagonista. Foto âncora humana à direita (~50% largura, bleed).
+    Body curto + CTA pill amarelo no rodapé.
+    """
+    W, H = _metta_format_dims(briefing)
+    elements: list[dict] = []
+
+    headline = copy.get("headline", "").strip() or "Sua tese de autoridade"
+    subhead = copy.get("subhead", "").strip()
+    cta_text = (copy.get("cta", "").strip() or "Ver método").upper()
+    tag = copy.get("tag", "").strip()
+
+    # 1) Foto pessoa bleed direita-bottom (passa do canvas)
+    photo_w = int(W * 0.58)
+    photo_h = int(H * 0.55)
+    photo_x = W - int(photo_w * 0.82)
+    photo_y = int(H * 0.45)
+    elements.append({
+        "type": "image_slot",
+        "slot_name": "foto_pessoa",
+        "x": photo_x, "y": photo_y,
+        "width": photo_w, "height": photo_h,
+        "image_prompt_ref": "image-prompts/metta/style-A.md",
+        "url_placeholder": "pending",
+        "bleed_right": True,
+        "bleed_bottom": True,
+    })
+
+    # 2) Tag opcional topo
+    if tag:
+        elements.append({
+            "type": "text",
+            "slot_name": "tag",
+            "text": tag,
+            "x": 80, "y": 100, "width": int(W * 0.65), "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Medium",
+                "weight": 540, "stretch_pct": 132, "size": 22,
+                "line_height_pct": 100, "letter_spacing_pct": 11,
+                "text_case": "UPPER",
+            },
+            "color": "#B0CAD8",
+            "align": "left",
+        })
+
+    # 3) Headline massivo UPPER (Expanded Heavy 76px) — left zone ~58% width
+    headline_y = 220 if tag else 160
+    elements.append({
+        "type": "text",
+        "slot_name": "headline",
+        "text": headline,
+        "x": 80, "y": headline_y, "width": int(W * 0.58), "height": "auto",
+        "font": {
+            "family": "SF Pro", "style": "Expanded Heavy",
+            "weight": 870, "stretch_pct": 132, "size": 76,
+            "line_height_pct": 90, "letter_spacing_pct": -1,
+            "text_case": "UPPER",
+        },
+        "color": "#FFFFFF",
+        "align": "left",
+    })
+
+    # 4) Body opcional (sentence case, B0CAD8)
+    if subhead:
+        # Posiciona acima do CTA, na coluna esquerda
+        body_y = H - 340
+        elements.append({
+            "type": "text",
+            "slot_name": "body",
+            "text": subhead,
+            "x": 80, "y": body_y,
+            "width": int(W * 0.55), "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Medium",
+                "weight": 510, "stretch_pct": 100, "size": 28,
+                "line_height_pct": 120, "letter_spacing_pct": -1,
+                "text_case": "sentence",
+            },
+            "color": "#B0CAD8",
+            "align": "left",
+        })
+
+    # 5) CTA pill amarelo bottom-left
+    cta_width_est = min(700, max(280, len(cta_text) * 20 + 76))
+    elements.append({
+        "type": "pill_cta",
+        "slot_name": "cta",
+        "text": cta_text,
+        "x": 80, "y": H - 180,
+        "width": cta_width_est, "height": 96,
+        "padding_x": 38, "padding_y": 26,
+        "background": "#FFBE18",
+        "text_color": "#0C161B",
+        "corner_radius": 999,
+        "font": {
+            "family": "SF Pro", "style": "Expanded Bold",
+            "weight": 700, "stretch_pct": 132, "size": 26,
+            "line_height_pct": 100, "letter_spacing_pct": 0,
+            "text_case": "UPPER",
+        },
+    })
+
+    return {
+        "model_id": "A-headline-foto-dark",
+        "frame": {"width": W, "height": H, "background": {"type": "solid", "value": "#0C161B"}},
+        "elements": elements,
+    }
+
+
+def build_metta_d_fullbleed(briefing: dict, copy: dict, image_url: str | None) -> dict:
+    """D-foto-fullbleed-overlay — foto ocupa canvas inteiro + overlay escuro embaixo.
+
+    Imersivo. Foto fullbleed + gradient bottom escurece pros textos
+    (headline + body + CTA) ficarem legíveis em baixo.
+    """
+    W, H = _metta_format_dims(briefing)
+    elements: list[dict] = []
+
+    headline = copy.get("headline", "").strip() or "Sua tese imersiva"
+    subhead = copy.get("subhead", "").strip()
+    cta_text = (copy.get("cta", "").strip() or "Saiba mais").upper()
+
+    # 1) Foto fullbleed full canvas — overlay gradient bottom 55%
+    elements.append({
+        "type": "image_slot",
+        "slot_name": "foto_fullbleed",
+        "x": 0, "y": 0, "width": W, "height": H,
+        "image_prompt_ref": "image-prompts/metta/style-D.md",
+        "url_placeholder": "pending",
+        "fullbleed": True,
+        "overlay": "gradient-fade-to-black-bottom-55%",
+    })
+
+    # 2) Headline UPPER no terço inferior (Expanded Heavy 72px, branco)
+    elements.append({
+        "type": "text",
+        "slot_name": "headline",
+        "text": headline,
+        "x": 80, "y": int(H * 0.62),
+        "width": W - 160, "height": "auto",
+        "font": {
+            "family": "SF Pro", "style": "Expanded Heavy",
+            "weight": 870, "stretch_pct": 132, "size": 72,
+            "line_height_pct": 92, "letter_spacing_pct": -1,
+            "text_case": "UPPER",
+        },
+        "color": "#FFFFFF",
+        "align": "left",
+    })
+
+    # 3) Body opcional (sentence case)
+    if subhead:
+        elements.append({
+            "type": "text",
+            "slot_name": "body",
+            "text": subhead,
+            "x": 80, "y": int(H * 0.62) + 280,
+            "width": int(W * 0.78), "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Regular",
+                "weight": 510, "stretch_pct": 100, "size": 28,
+                "line_height_pct": 130, "letter_spacing_pct": -1,
+                "text_case": "sentence",
+            },
+            "color": "#EBF3F7",
+            "align": "left",
+        })
+
+    # 4) CTA pill amarelo bottom-left
+    cta_width_est = min(700, max(280, len(cta_text) * 20 + 76))
+    elements.append({
+        "type": "pill_cta",
+        "slot_name": "cta",
+        "text": cta_text,
+        "x": 80, "y": H - 180,
+        "width": cta_width_est, "height": 96,
+        "padding_x": 38, "padding_y": 26,
+        "background": "#FFBE18",
+        "text_color": "#0C161B",
+        "corner_radius": 999,
+        "font": {
+            "family": "SF Pro", "style": "Expanded Bold",
+            "weight": 700, "stretch_pct": 132, "size": 26,
+            "letter_spacing_pct": 0, "text_case": "UPPER",
+        },
+    })
+
+    return {
+        "model_id": "D-foto-fullbleed-overlay",
+        "frame": {"width": W, "height": H, "background": {"type": "solid", "value": "#0C161B"}},
+        "elements": elements,
+    }
+
+
+def build_metta_yellow_editorial(briefing: dict, copy: dict, image_url: str | None) -> dict:
+    """YELLOW-EDITORIAL — número gigante amarelo dominante + contexto curto.
+
+    Headline = número/estatística (ex: "94%", "R$ 8,5 BI"). Posicionado center-top,
+    Expanded Heavy gigantesco em amarelo sobre dark. Body abaixo explicando.
+    """
+    W, H = _metta_format_dims(briefing)
+    elements: list[dict] = []
+
+    big_number = copy.get("headline", "").strip() or "94%"
+    subhead = copy.get("subhead", "").strip() or "dos empresários travam por falta de método."
+    cta_text = (copy.get("cta", "").strip() or "Ver método").upper()
+
+    # Tamanho dinâmico do número — quanto mais curto, maior
+    n_chars = len(big_number)
+    big_size = 320 if n_chars <= 3 else (240 if n_chars <= 5 else 180)
+
+    # 1) Big number — amarelo, center-top, Expanded Heavy
+    elements.append({
+        "type": "text",
+        "slot_name": "headline",
+        "text": big_number,
+        "x": 80, "y": int(H * 0.18),
+        "width": W - 160, "height": "auto",
+        "font": {
+            "family": "SF Pro", "style": "Expanded Heavy",
+            "weight": 900, "stretch_pct": 132, "size": big_size,
+            "line_height_pct": 90, "letter_spacing_pct": -3,
+            "text_case": "UPPER",
+        },
+        "color": "#FFBE18",
+        "align": "center",
+    })
+
+    # 2) Body abaixo — branco sentence
+    elements.append({
+        "type": "text",
+        "slot_name": "body",
+        "text": subhead,
+        "x": 120, "y": int(H * 0.58),
+        "width": W - 240, "height": "auto",
+        "font": {
+            "family": "SF Pro", "style": "Expanded Medium",
+            "weight": 540, "stretch_pct": 100, "size": 36,
+            "line_height_pct": 125, "letter_spacing_pct": -0.5,
+            "text_case": "sentence",
+        },
+        "color": "#FFFFFF",
+        "align": "center",
+    })
+
+    # 3) CTA pill amarelo bottom-center
+    cta_width_est = min(700, max(280, len(cta_text) * 20 + 76))
+    elements.append({
+        "type": "pill_cta",
+        "slot_name": "cta",
+        "text": cta_text,
+        "x": (W - cta_width_est) // 2, "y": H - 200,
+        "width": cta_width_est, "height": 96,
+        "padding_x": 38, "padding_y": 26,
+        "background": "#FFBE18",
+        "text_color": "#0C161B",
+        "corner_radius": 999,
+        "font": {
+            "family": "SF Pro", "style": "Expanded Bold",
+            "weight": 700, "stretch_pct": 132, "size": 26,
+            "letter_spacing_pct": 0, "text_case": "UPPER",
+        },
+    })
+
+    return {
+        "model_id": "YELLOW-EDITORIAL",
+        "frame": {"width": W, "height": H, "background": {"type": "solid", "value": "#0C161B"}},
+        "elements": elements,
+    }
+
+
+def build_metta_news_card(briefing: dict, copy: dict, image_url: str | None) -> dict:
+    """NEWS-CARD — layout estilo headline-news: tag + manchete + foto bottom-bleed.
+
+    Tag UPPER topo (label do tema/anúncio) + manchete grande dark + foto pessoa
+    bleed embaixo. Estética jornalística sóbria. Sobre fundo claro.
+    """
+    W, H = _metta_format_dims(briefing)
+    elements: list[dict] = []
+
+    headline = copy.get("headline", "").strip() or "Sua manchete institucional"
+    subhead = copy.get("subhead", "").strip()
+    cta_text = (copy.get("cta", "").strip() or "Saiba mais").upper()
+    tag = (copy.get("tag", "").strip() or "ANÚNCIO METTA").upper()
+
+    # 1) Foto pessoa bleed bottom (~45% altura inferior, full width)
+    photo_h = int(H * 0.45)
+    photo_y = H - photo_h
+    elements.append({
+        "type": "image_slot",
+        "slot_name": "foto_pessoa",
+        "x": 0, "y": photo_y,
+        "width": W, "height": photo_h,
+        "image_prompt_ref": "image-prompts/metta/style-A.md",
+        "url_placeholder": "pending",
+        "fullbleed": False,
+    })
+
+    # 2) Tag topo (UPPER tracked, amarelo)
+    elements.append({
+        "type": "text",
+        "slot_name": "tag",
+        "text": tag,
+        "x": 80, "y": 100, "width": W - 160, "height": "auto",
+        "font": {
+            "family": "SF Pro", "style": "Expanded Bold",
+            "weight": 700, "stretch_pct": 132, "size": 24,
+            "line_height_pct": 100, "letter_spacing_pct": 12,
+            "text_case": "UPPER",
+        },
+        "color": "#FFBE18",
+        "align": "left",
+    })
+
+    # 3) Manchete dark, Expanded Heavy, ocupa zona acima da foto
+    elements.append({
+        "type": "text",
+        "slot_name": "headline",
+        "text": headline,
+        "x": 80, "y": 180,
+        "width": W - 160, "height": "auto",
+        "font": {
+            "family": "SF Pro", "style": "Expanded Heavy",
+            "weight": 870, "stretch_pct": 132, "size": 64,
+            "line_height_pct": 95, "letter_spacing_pct": -1,
+            "text_case": "UPPER",
+        },
+        "color": "#0C161B",
+        "align": "left",
+    })
+
+    # 4) Subhead opcional (logo abaixo headline)
+    if subhead:
+        elements.append({
+            "type": "text",
+            "slot_name": "body",
+            "text": subhead,
+            "x": 80, "y": int(H * 0.42),
+            "width": int(W * 0.85), "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Medium",
+                "weight": 510, "stretch_pct": 100, "size": 26,
+                "line_height_pct": 130, "letter_spacing_pct": -0.5,
+                "text_case": "sentence",
+            },
+            "color": "#435965",
+            "align": "left",
+        })
+
+    # 5) CTA pill preto top-right da foto (contraste pra ficar visível)
+    cta_width_est = min(600, max(260, len(cta_text) * 18 + 64))
+    elements.append({
+        "type": "pill_cta",
+        "slot_name": "cta",
+        "text": cta_text,
+        "x": W - cta_width_est - 60, "y": photo_y - 60,
+        "width": cta_width_est, "height": 80,
+        "padding_x": 32, "padding_y": 22,
+        "background": "#0C161B",
+        "text_color": "#FFFFFF",
+        "corner_radius": 999,
+        "font": {
+            "family": "SF Pro", "style": "Expanded Bold",
+            "weight": 700, "stretch_pct": 132, "size": 22,
+            "letter_spacing_pct": 0, "text_case": "UPPER",
+        },
+    })
+
+    return {
+        "model_id": "NEWS-CARD",
+        "frame": {"width": W, "height": H, "background": {"type": "solid", "value": "#FFFFFF"}},
+        "elements": elements,
+    }
+
+
+# ============================================================
 # Registry — modelos com template determinístico
 # ============================================================
 TEMPLATES = {
+    # Tiago
     "TIAGO-STORY-COVER-HERO":     build_tiago_story_cover_hero,
     "TIAGO-EDITORIAL-HERO":       build_tiago_editorial_hero,
     "TIAGO-TWITTER-CARD":         build_tiago_twitter_card_text,
     "TIAGO-TWITTER-CARD-IMAGE":   build_tiago_twitter_card_image,
-    # TODO: adicionar restantes (TIAGO-STORY-YELLOW-BLOCK, TIAGO-STORY-MINIMAL-QUESTION,
-    # TIAGO-TYPO-PURE, TIAGO-NOTES-MOCKUP, TIAGO-TWITTER-CARD, TIAGO-EDITORIAL-*, etc.
-    # + 6 Metta) — uma função por modelo, calibradas individualmente.
+    # Metta — top 5 mais usados
+    "YELLOW-BLOCO":               build_metta_yellow_bloco,
+    "A-headline-foto-dark":       build_metta_a_headline_foto_dark,
+    "D-foto-fullbleed-overlay":   build_metta_d_fullbleed,
+    "YELLOW-EDITORIAL":           build_metta_yellow_editorial,
+    "NEWS-CARD":                  build_metta_news_card,
+    # TODO: TIAGO-STORY-YELLOW-BLOCK, TIAGO-STORY-MINIMAL-QUESTION, TIAGO-TYPO-PURE,
+    # TIAGO-NOTES-MOCKUP, TIAGO-EDITORIAL-* + restantes Metta (YELLOW-FRAME,
+    # YELLOW-SPLIT, LIGHT-SURREAL, C-tipografia-pura-dark, etc.)
 }
 
 

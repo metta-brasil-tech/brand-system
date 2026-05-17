@@ -35,9 +35,10 @@ if str(ENGINE_DIR) not in sys.path:
 os.environ.setdefault("BRAND_KNOWLEDGE_PATH", str(ENGINE_DIR / "brand-knowledge"))
 os.environ.setdefault("ARTIFACTS_DIR", "/tmp/artifacts")
 # Vercel Hobby tem 60s timeout. gpt-image-1 quality=high leva 35-50s, somado às skills
-# LLM (~15-25s) estoura sempre. Forçamos low (10-15s, custo cai $0.17→$0.04, qualidade
-# visual cai um pouco mas é MVP). User pode override no Vercel env vars se quiser.
-os.environ.setdefault("IMAGE_QUALITY", "low")
+# LLM (~15-25s) estoura sempre. Defaultamos 'medium' (18-25s, $0.08) — qualidade
+# visivelmente melhor que 'low' ($0.04) e ainda cabe no timeout combinado.
+# Override via env var no Vercel se quiser 'low' (mais barato) ou 'high' (timeout risk).
+os.environ.setdefault("IMAGE_QUALITY", "medium")
 
 
 # ----------------------------------------------------------------------------
@@ -469,6 +470,30 @@ def _run_pipeline_inline(
         # Caminho generate (default): skill 04 + image-gen — só pra slots SEM static_asset
         prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": dynamic_image_slots}
 
+        # Vector search no banco visual: descrições de refs canônicos viram texto
+        # no extra_context da skill 04 (ajuda LLM a aterrissar mood/composição
+        # próximo do banco real). Image refs em si só funcionam em Gemini —
+        # OpenAI ignora e a warning explícita aparece em image_gen.py.
+        ad_refs_list = []
+        try:
+            from vector_search import search_ad_refs, refs_to_prompt_addendum
+            query = (
+                f"{briefing.get('tese_central', '')} {briefing.get('intent', '')} "
+                f"{briefing.get('tom', '')}"
+            ).strip()
+            ad_refs_list, ad_refs_status = search_ad_refs(
+                query, style_filter=chosen_model_id, top_k=3
+            )
+            if ad_refs_list:
+                diagnostics.append(
+                    f"04-banco-refs: {len(ad_refs_list)} ref(s) ({ad_refs_status}) — "
+                    f"top: {ad_refs_list[0].filename[:40]} score={ad_refs_list[0].score:.3f}"
+                )
+            else:
+                diagnostics.append(f"04-banco-refs: 0 refs — {ad_refs_status}")
+        except Exception as e:
+            diagnostics.append(f"04-banco-refs: pulado ({e.__class__.__name__}: {str(e)[:80]})")
+
         # Tenta achar o image-prompt template do estilo:
         # alguns YAMLs definem `image.prompt_template_ref: "image-prompts/marca/style-X.md"`
         import re as _re
@@ -484,6 +509,18 @@ def _run_pipeline_inline(
         else:
             diagnostics.append(f"04-template: YAML não tem prompt_template_ref — usando default da skill")
 
+        # Carrega o _base.md da marca — vocabulário curado (mood/lighting/camera/palette
+        # + negative prompts universais). Skill 04 sem isso improvisa do zero.
+        base_path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / "image-prompts" / marca / (
+            "_base.md" if marca == "metta" else "_base-tiago.md"
+        )
+        base_content = ""
+        if base_path.exists():
+            base_content = base_path.read_text(encoding="utf-8")
+            diagnostics.append(f"04-base: {base_path.name} carregado ({len(base_content)} chars)")
+        else:
+            diagnostics.append(f"04-base: FALTANDO {base_path}")
+
         parts = []
         # Direção do user vem PRIMEIRO e DOMINA quando preenchida
         if briefing_image_text and briefing_image_text.strip():
@@ -496,7 +533,21 @@ def _run_pipeline_inline(
                 f"O template do estilo serve APENAS pra definir MOOD/TRATAMENTO visual\n"
                 f"(B&W com selective yellow, colagem editorial, etc.) — NUNCA sobrescreve sujeito."
             )
-        parts.append(f"=== TEMPLATE DE PROMPT DO ESTILO (use só pra mood/tratamento visual) ===\n{image_prompt_template or '(sem template — use defaults)'}")
+        # _base da marca herda pra TODO prompt — vocabulário controlado + negative universal
+        if base_content:
+            parts.append(
+                f"=== BASE DA MARCA {marca.upper()} (vocabulário sempre herdado — mood/lighting/camera/palette + negative prompts universais) ===\n"
+                f"{base_content}\n\n"
+                f"Use os vocabulários listados acima (mood, iluminação, composição, paleta, câmera) "
+                f"como léxico ativo no prompt final. Acumule os negative prompts universais no negative_prompt da sua resposta."
+            )
+        parts.append(f"=== TEMPLATE DE PROMPT DO ESTILO (use só pra mood/tratamento visual) ===\n{image_prompt_template or '(sem template — use defaults do _base)'}")
+        # Refs do banco como descrição textual (Gemini também consome via imagem, OpenAI só texto)
+        if ad_refs_list:
+            try:
+                parts.append(refs_to_prompt_addendum(ad_refs_list))
+            except Exception:
+                pass
         parts.append(f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n```yaml\n{model_yaml_content}\n```")
         parts.append(
             "INSTRUÇÕES OBRIGATÓRIAS:\n"
@@ -504,7 +555,9 @@ def _run_pipeline_inline(
             "2. O `slot_name` em cada prompt DEVE bater exatamente com o `slot_name` do image_slot no layout_spec.\n"
             "3. Se houve DIREÇÃO VISUAL DO USER, o subject do prompt VEM DELA. Template do estilo só dá tratamento (mood, lighting, processing).\n"
             "4. Se NÃO houve direção, use o template do estilo como guideline completa.\n"
-            "5. Se um image_slot existe, NÃO retorne `skip: true`. Skip só se layout NÃO tem image_slot algum."
+            "5. Se um image_slot existe, NÃO retorne `skip: true`. Skip só se layout NÃO tem image_slot algum.\n"
+            "6. negative_prompt: acumule os anti-padrões do _base da marca + os específicos do estilo. Não omita.\n"
+            "7. Use vocabulário do _base nos campos mood/lighting/composition/palette/camera — não invente."
         )
         skill_extra = "\n\n".join(parts)
         t04 = time.time()
@@ -524,14 +577,23 @@ def _run_pipeline_inline(
             diagnostics.append("04-image-gen: NÃO rodou — skill 04 marcou skip=true")
         else:
             image_gen = ImageGenAdapter()
+            # Adiciona PNGs locais do banco (vector search) na lista de refs — só
+            # têm efeito em provider Gemini, mas custam zero pra passar.
+            banco_ref_paths = [r.png_path for r in ad_refs_list if r.png_path]
             for idx, p in enumerate(image_spec.get("prompts", [])):
                 slot = p.get("slot_name", f"slot_{idx}")
+                # Filtra refs do LLM removendo figma:// e tipos não-resolvíveis
+                llm_refs = [
+                    r for r in (p.get("reference_images") or [])
+                    if isinstance(r, str) and not r.startswith("figma://")
+                ]
+                merged_refs = (llm_refs + banco_ref_paths)[:3]
                 try:
                     ig = image_gen.generate(
                         prompt=p["prompt"],
                         negative_prompt=p.get("negative_prompt", ""),
                         aspect_ratio=p.get("aspect_ratio", "9:16"),
-                        reference_images=p.get("reference_images", []),
+                        reference_images=merged_refs,
                     )
                     image_urls[slot] = ig.url
                     diagnostics.append(
