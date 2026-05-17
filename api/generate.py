@@ -532,15 +532,71 @@ def _run_pipeline_inline(
                 f"O template do estilo serve APENAS pra definir MOOD/TRATAMENTO visual\n"
                 f"(B&W com selective yellow, colagem editorial, etc.) — NUNCA sobrescreve sujeito."
             )
+        # Provider-aware: skill 04 deve gerar prompt na seção certa do _base/style
+        # template. Se IMAGE_GEN_PROVIDER aponta pra openai/gpt-image-* → SEÇÃO PROD
+        # (descritivo visual + negative inline). Se nano-banana/gemini → SEÇÃO LEGACY
+        # (jargão técnico). Default em prod hoje = openai → usar SEÇÃO PROD.
+        active_provider = os.getenv("IMAGE_GEN_PROVIDER", "openai").lower()
+        is_nano_banana = active_provider in ("nano-banana-2", "gemini-nano-banana", "gemini")
+        active_section_label = "Nano Banana 2 / Gemini" if is_nano_banana else "gpt-image-1 / OpenAI"
+        active_section_key = "SEÇÃO LEGACY" if is_nano_banana else "SEÇÃO PROD"
+        diagnostics.append(
+            f"04-provider: ativo={active_provider} → usar '{active_section_key}' "
+            f"dos prompts (target: {active_section_label})"
+        )
+
         # _base da marca herda pra TODO prompt — vocabulário controlado + negative universal
         if base_content:
             parts.append(
                 f"=== BASE DA MARCA {marca.upper()} (vocabulário sempre herdado — mood/lighting/camera/palette + negative prompts universais) ===\n"
                 f"{base_content}\n\n"
-                f"Use os vocabulários listados acima (mood, iluminação, composição, paleta, câmera) "
-                f"como léxico ativo no prompt final. Acumule os negative prompts universais no negative_prompt da sua resposta."
+                f"PROVIDER ATIVO: {active_section_label}. Use a `{active_section_key}` do _base "
+                f"e do template do estilo abaixo (versão descritiva-visual com 'without X' inline pro OpenAI, "
+                f"ou versão jargão técnico fotográfico pro Nano Banana 2)."
             )
-        parts.append(f"=== TEMPLATE DE PROMPT DO ESTILO (use só pra mood/tratamento visual) ===\n{image_prompt_template or '(sem template — use defaults do _base)'}")
+        parts.append(
+            f"=== TEMPLATE DE PROMPT DO ESTILO (use SOMENTE a `{active_section_key}` — ignore a outra) ===\n"
+            f"{image_prompt_template or '(sem template — use defaults do _base)'}"
+        )
+
+        # Injeção da instrução de composição-por-slot — placement do layout vira regra
+        # explícita no prompt, garantindo que a foto encaixe no espaço reservado.
+        placement_hint_lines = []
+        for el in dynamic_image_slots:
+            sn = el.get("slot_name", "?")
+            placement = ""
+            # 1) Tenta ler do YAML do modelo (model.image.placement)
+            try:
+                import re as _re_p
+                m = _re_p.search(r"placement:\s*['\"]?([\w\-]+)['\"]?", model_yaml_content)
+                if m:
+                    placement = m.group(1).lower()
+            except Exception:
+                pass
+            # 2) Fallback: deduz pela posição do element no canvas
+            if not placement:
+                x, y = int(el.get("x", 0) or 0), int(el.get("y", 0) or 0)
+                w, h = int(el.get("width", 0) or 0), int(el.get("height", 0) or 0)
+                # Heurística simples baseada em x/y do slot
+                if el.get("fullbleed") or (w >= 1080 and h >= 1080):
+                    placement = "fullbleed"
+                elif x > 400:
+                    placement = "right-bleed"
+                elif y > 400:
+                    placement = "bottom-bleed"
+                else:
+                    placement = "center"
+            placement_hint_lines.append(f"- slot='{sn}': placement='{placement}'")
+
+        if placement_hint_lines:
+            parts.append(
+                "=== COMPOSIÇÃO-POR-SLOT (INVIOLÁVEL — leia a tabela em _base.md §REGRA INVIOLÁVEL) ===\n"
+                + "\n".join(placement_hint_lines)
+                + "\n\nPara CADA slot acima, INCLUA no prompt a instrução de composição correspondente "
+                "ao placement (consulte a tabela em _base.md §REGRA INVIOLÁVEL). Sem isso, a foto não "
+                "encaixa no layout. Exemplo: placement='right-bleed' → 'subject positioned in the right "
+                "40% of the frame, with the left 60% as empty space for text overlay'."
+            )
         # Refs do banco como descrição textual (Gemini também consome via imagem, OpenAI só texto)
         if ad_refs_list:
             try:
@@ -587,22 +643,58 @@ def _run_pipeline_inline(
                     if isinstance(r, str) and not r.startswith("figma://")
                 ]
                 merged_refs = (llm_refs + banco_ref_paths)[:3]
-                try:
-                    ig = image_gen.generate(
-                        prompt=p["prompt"],
-                        negative_prompt=p.get("negative_prompt", ""),
-                        aspect_ratio=p.get("aspect_ratio", "9:16"),
-                        reference_images=merged_refs,
-                    )
-                    image_urls[slot] = ig.url
+                aspect = p.get("aspect_ratio", "9:16")
+                negative = p.get("negative_prompt", "")
+
+                # Monta cadeia de tentativas: v1 primário + fallbacks do iteration_strategy
+                primary_prompt = p["prompt"]
+                fallback_prompts = (
+                    p.get("iteration_strategy", {}).get("fallback_prompts") or []
+                )
+                attempt_chain = [primary_prompt] + [
+                    fp for fp in fallback_prompts if isinstance(fp, str) and fp.strip()
+                ]
+                # Cap em 2 attempts pra caber no timeout 60s do Vercel
+                # (cada tentativa low-quality ~12s + skills LLM ~15-25s).
+                # Override via env var IMAGE_MAX_ATTEMPTS pra rodar local com mais.
+                max_attempts = int(os.getenv("IMAGE_MAX_ATTEMPTS", "2"))
+                attempt_chain = attempt_chain[:max_attempts]
+
+                last_error: Exception | None = None
+                ig = None
+                for attempt_idx, attempt_prompt in enumerate(attempt_chain, start=1):
+                    try:
+                        ig = image_gen.generate(
+                            prompt=attempt_prompt,
+                            negative_prompt=negative,
+                            aspect_ratio=aspect,
+                            reference_images=merged_refs,
+                        )
+                        # Sucesso — registra qual tentativa funcionou
+                        if attempt_idx > 1:
+                            diagnostics.append(
+                                f"04-image-gen: slot={slot} sucesso na tentativa v{attempt_idx} "
+                                f"(primária falhou: {last_error.__class__.__name__})"
+                            )
+                        image_urls[slot] = ig.url
+                        diagnostics.append(
+                            f"04-image-gen: OK slot={slot} provider={ig.provider} "
+                            f"model={ig.model} t={ig.elapsed_ms}ms attempt=v{attempt_idx}/"
+                            f"{len(attempt_chain)} url={(ig.url or '')[:60]}"
+                        )
+                        break
+                    except Exception as e:
+                        last_error = e
+                        diagnostics.append(
+                            f"04-image-gen: tentativa v{attempt_idx} falhou slot={slot} — "
+                            f"{e.__class__.__name__}: {str(e)[:140]}"
+                        )
+                        print(f"[image_gen v{attempt_idx} warn] {e}", file=sys.stderr)
+                if ig is None and last_error is not None:
                     diagnostics.append(
-                        f"04-image-gen: OK slot={slot} provider={ig.provider} "
-                        f"model={ig.model} t={ig.elapsed_ms}ms url={(ig.url or '')[:60]}"
+                        f"04-image-gen: TODAS as {len(attempt_chain)} tentativas falharam slot={slot} "
+                        f"— último erro: {last_error.__class__.__name__}: {str(last_error)[:200]}"
                     )
-                except Exception as e:
-                    msg = f"04-image-gen: FALHOU slot={slot} — {e.__class__.__name__}: {str(e)[:200]}"
-                    diagnostics.append(msg)
-                    print(f"[image_gen warn] {msg}", file=sys.stderr)
 
     # Adaptive text color: analisa fundo (imagem) e ajusta cor do text pra contraste
     _adapt_text_colors_to_image(layout_spec, image_urls, diagnostics)
