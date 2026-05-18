@@ -441,6 +441,7 @@ def build_metta_yellow_bloco(briefing: dict, copy: dict, image_url: str | None) 
 
     headline = copy.get("headline", "").strip() or "Sua oferta institucional"
     subhead = copy.get("subhead", "").strip()
+    body = copy.get("body", "").strip()
     cta_text = (copy.get("cta", "").strip() or "Saiba mais").upper()
 
     # 1) Bloco amarelo central — rect grande à esquerda
@@ -475,13 +476,15 @@ def build_metta_yellow_bloco(briefing: dict, copy: dict, image_url: str | None) 
 
     # 3) Headline dentro do bloco amarelo (UPPER, Expanded Heavy, preto)
     inner_pad = 56
+    inner_w = block_w - 2 * inner_pad
+    cursor_y = block_y + inner_pad
     elements.append({
         "type": "text",
         "slot_name": "headline",
         "text": headline,
         "x": block_x + inner_pad,
-        "y": block_y + inner_pad,
-        "width": block_w - 2 * inner_pad,
+        "y": cursor_y,
+        "width": inner_w,
         "height": "auto",
         "font": {
             "family": "SF Pro",
@@ -496,26 +499,51 @@ def build_metta_yellow_bloco(briefing: dict, copy: dict, image_url: str | None) 
         "color": "#0C161B",
         "align": "left",
     })
+    headline_lines = max(1, (len(headline) // 22) + 1)
+    cursor_y += headline_lines * 70 + 28
 
-    # 4) Subhead/bullets dentro do bloco (Expanded Regular sentence, preto)
+    # 4) Subheadline — Expanded Semibold 36px, sentence (linha de apoio à headline)
     if subhead:
-        # Posiciona após headline com base estimada (linhas × line-height)
-        headline_lines = max(1, (len(headline) // 22) + 1)
-        sub_y = block_y + inner_pad + headline_lines * 68 + 32
+        elements.append({
+            "type": "text",
+            "slot_name": "subheadline",
+            "text": subhead,
+            "x": block_x + inner_pad,
+            "y": cursor_y,
+            "width": inner_w,
+            "height": "auto",
+            "font": {
+                "family": "SF Pro",
+                "style": "Expanded Semibold",
+                "weight": 650,
+                "stretch_pct": 100,
+                "size": 36,
+                "line_height_pct": 120,
+                "letter_spacing_pct": -0.5,
+                "text_case": "sentence",
+            },
+            "color": "#0C161B",
+            "align": "left",
+        })
+        sub_lines = max(1, (len(subhead) // 30) + 1)
+        cursor_y += sub_lines * 44 + 20
+
+    # 5) Body — Expanded Regular 26px, sentence (texto/desenvolvimento)
+    if body:
         elements.append({
             "type": "text",
             "slot_name": "body",
-            "text": subhead,
+            "text": body,
             "x": block_x + inner_pad,
-            "y": sub_y,
-            "width": block_w - 2 * inner_pad,
+            "y": cursor_y,
+            "width": inner_w,
             "height": "auto",
             "font": {
                 "family": "SF Pro",
                 "style": "Expanded Regular",
-                "weight": 590,
+                "weight": 510,
                 "stretch_pct": 100,
-                "size": 30,
+                "size": 26,
                 "line_height_pct": 130,
                 "letter_spacing_pct": -0.5,
                 "text_case": "sentence",
@@ -566,6 +594,7 @@ def build_metta_a_headline_foto_dark(briefing: dict, copy: dict, image_url: str 
 
     headline = copy.get("headline", "").strip() or "Sua tese de autoridade"
     subhead = copy.get("subhead", "").strip()
+    body = copy.get("body", "").strip()
     cta_text = (copy.get("cta", "").strip() or "Ver método").upper()
     tag = copy.get("tag", "").strip()
 
@@ -619,20 +648,38 @@ def build_metta_a_headline_foto_dark(briefing: dict, copy: dict, image_url: str 
         "align": "left",
     })
 
-    # 4) Body opcional (sentence case, B0CAD8)
+    # 4) Subheadline + body (acima do CTA, coluna esquerda)
+    # Posicionamento bottom-up: começa de baixo (y=H-280) e cresce pra cima
+    text_block_y = H - 340
     if subhead:
-        # Posiciona acima do CTA, na coluna esquerda
-        body_y = H - 340
+        elements.append({
+            "type": "text",
+            "slot_name": "subheadline",
+            "text": subhead,
+            "x": 80, "y": text_block_y,
+            "width": int(W * 0.55), "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Semibold",
+                "weight": 650, "stretch_pct": 100, "size": 30,
+                "line_height_pct": 120, "letter_spacing_pct": -0.5,
+                "text_case": "sentence",
+            },
+            "color": "#FFFFFF",
+            "align": "left",
+        })
+        sub_lines = max(1, (len(subhead) // 30) + 1)
+        text_block_y += sub_lines * 38 + 16
+    if body:
         elements.append({
             "type": "text",
             "slot_name": "body",
-            "text": subhead,
-            "x": 80, "y": body_y,
+            "text": body,
+            "x": 80, "y": text_block_y,
             "width": int(W * 0.55), "height": "auto",
             "font": {
-                "family": "SF Pro", "style": "Expanded Medium",
-                "weight": 510, "stretch_pct": 100, "size": 28,
-                "line_height_pct": 120, "letter_spacing_pct": -1,
+                "family": "SF Pro", "style": "Expanded Regular",
+                "weight": 510, "stretch_pct": 100, "size": 24,
+                "line_height_pct": 130, "letter_spacing_pct": -0.5,
                 "text_case": "sentence",
             },
             "color": "#B0CAD8",
@@ -677,6 +724,7 @@ def build_metta_d_fullbleed(briefing: dict, copy: dict, image_url: str | None) -
 
     headline = copy.get("headline", "").strip() or "Sua tese imersiva"
     subhead = copy.get("subhead", "").strip()
+    body = copy.get("body", "").strip()
     cta_text = (copy.get("cta", "").strip() or "Saiba mais").upper()
 
     # 1) Foto fullbleed full canvas — overlay gradient bottom 55%
@@ -691,11 +739,12 @@ def build_metta_d_fullbleed(briefing: dict, copy: dict, image_url: str | None) -
     })
 
     # 2) Headline UPPER no terço inferior (Expanded Heavy 72px, branco)
+    headline_y = int(H * 0.62)
     elements.append({
         "type": "text",
         "slot_name": "headline",
         "text": headline,
-        "x": 80, "y": int(H * 0.62),
+        "x": 80, "y": headline_y,
         "width": W - 160, "height": "auto",
         "font": {
             "family": "SF Pro", "style": "Expanded Heavy",
@@ -706,19 +755,41 @@ def build_metta_d_fullbleed(briefing: dict, copy: dict, image_url: str | None) -
         "color": "#FFFFFF",
         "align": "left",
     })
+    headline_lines = max(1, (len(headline) // 22) + 1)
+    cursor_y = headline_y + headline_lines * 70 + 24
 
-    # 3) Body opcional (sentence case)
+    # 3) Subheadline — Semibold sentence
     if subhead:
         elements.append({
             "type": "text",
-            "slot_name": "body",
+            "slot_name": "subheadline",
             "text": subhead,
-            "x": 80, "y": int(H * 0.62) + 280,
-            "width": int(W * 0.78), "height": "auto",
+            "x": 80, "y": cursor_y,
+            "width": int(W * 0.85), "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Semibold",
+                "weight": 650, "stretch_pct": 100, "size": 30,
+                "line_height_pct": 120, "letter_spacing_pct": -0.5,
+                "text_case": "sentence",
+            },
+            "color": "#FFFFFF",
+            "align": "left",
+        })
+        sub_lines = max(1, (len(subhead) // 32) + 1)
+        cursor_y += sub_lines * 38 + 16
+
+    # 4) Body — Regular sentence, menor
+    if body:
+        elements.append({
+            "type": "text",
+            "slot_name": "body",
+            "text": body,
+            "x": 80, "y": cursor_y,
+            "width": int(W * 0.85), "height": "auto",
             "font": {
                 "family": "SF Pro", "style": "Expanded Regular",
-                "weight": 510, "stretch_pct": 100, "size": 28,
-                "line_height_pct": 130, "letter_spacing_pct": -1,
+                "weight": 510, "stretch_pct": 100, "size": 24,
+                "line_height_pct": 130, "letter_spacing_pct": -0.5,
                 "text_case": "sentence",
             },
             "color": "#EBF3F7",
@@ -761,7 +832,8 @@ def build_metta_yellow_editorial(briefing: dict, copy: dict, image_url: str | No
     elements: list[dict] = []
 
     big_number = copy.get("headline", "").strip() or "94%"
-    subhead = copy.get("subhead", "").strip() or "dos empresários travam por falta de método."
+    subhead = copy.get("subhead", "").strip()
+    body = copy.get("body", "").strip()
     cta_text = (copy.get("cta", "").strip() or "Ver método").upper()
 
     # Tamanho dinâmico do número — quanto mais curto, maior
@@ -785,22 +857,44 @@ def build_metta_yellow_editorial(briefing: dict, copy: dict, image_url: str | No
         "align": "center",
     })
 
-    # 2) Body abaixo — branco sentence
-    elements.append({
-        "type": "text",
-        "slot_name": "body",
-        "text": subhead,
-        "x": 120, "y": int(H * 0.58),
-        "width": W - 240, "height": "auto",
-        "font": {
-            "family": "SF Pro", "style": "Expanded Medium",
-            "weight": 540, "stretch_pct": 100, "size": 36,
-            "line_height_pct": 125, "letter_spacing_pct": -0.5,
-            "text_case": "sentence",
-        },
-        "color": "#FFFFFF",
-        "align": "center",
-    })
+    # 2) Subheadline — branco bold sentence (linha de contexto principal)
+    cursor_y = int(H * 0.58)
+    if subhead:
+        elements.append({
+            "type": "text",
+            "slot_name": "subheadline",
+            "text": subhead,
+            "x": 120, "y": cursor_y,
+            "width": W - 240, "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Bold",
+                "weight": 700, "stretch_pct": 100, "size": 38,
+                "line_height_pct": 120, "letter_spacing_pct": -0.5,
+                "text_case": "sentence",
+            },
+            "color": "#FFFFFF",
+            "align": "center",
+        })
+        sub_lines = max(1, (len(subhead) // 28) + 1)
+        cursor_y += sub_lines * 48 + 20
+
+    # 3) Body — branco regular sentence (texto/desenvolvimento)
+    if body:
+        elements.append({
+            "type": "text",
+            "slot_name": "body",
+            "text": body,
+            "x": 140, "y": cursor_y,
+            "width": W - 280, "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Regular",
+                "weight": 510, "stretch_pct": 100, "size": 26,
+                "line_height_pct": 135, "letter_spacing_pct": -0.5,
+                "text_case": "sentence",
+            },
+            "color": "#B0CAD8",
+            "align": "center",
+        })
 
     # 3) CTA pill amarelo bottom-center
     cta_width_est = min(700, max(280, len(cta_text) * 20 + 76))
@@ -839,6 +933,7 @@ def build_metta_news_card(briefing: dict, copy: dict, image_url: str | None) -> 
 
     headline = copy.get("headline", "").strip() or "Sua manchete institucional"
     subhead = copy.get("subhead", "").strip()
+    body = copy.get("body", "").strip()
     cta_text = (copy.get("cta", "").strip() or "Saiba mais").upper()
     tag = (copy.get("tag", "").strip() or "ANÚNCIO METTA").upper()
 
@@ -888,17 +983,36 @@ def build_metta_news_card(briefing: dict, copy: dict, image_url: str | None) -> 
         "align": "left",
     })
 
-    # 4) Subhead opcional (logo abaixo headline)
+    # 4) Subheadline + body — entre headline e foto
+    text_zone_y = int(H * 0.40)
     if subhead:
         elements.append({
             "type": "text",
-            "slot_name": "body",
+            "slot_name": "subheadline",
             "text": subhead,
-            "x": 80, "y": int(H * 0.42),
+            "x": 80, "y": text_zone_y,
             "width": int(W * 0.85), "height": "auto",
             "font": {
-                "family": "SF Pro", "style": "Expanded Medium",
-                "weight": 510, "stretch_pct": 100, "size": 26,
+                "family": "SF Pro", "style": "Expanded Semibold",
+                "weight": 650, "stretch_pct": 100, "size": 30,
+                "line_height_pct": 120, "letter_spacing_pct": -0.5,
+                "text_case": "sentence",
+            },
+            "color": "#0C161B",
+            "align": "left",
+        })
+        sub_lines = max(1, (len(subhead) // 32) + 1)
+        text_zone_y += sub_lines * 38 + 16
+    if body:
+        elements.append({
+            "type": "text",
+            "slot_name": "body",
+            "text": body,
+            "x": 80, "y": text_zone_y,
+            "width": int(W * 0.85), "height": "auto",
+            "font": {
+                "family": "SF Pro", "style": "Expanded Regular",
+                "weight": 510, "stretch_pct": 100, "size": 24,
                 "line_height_pct": 130, "letter_spacing_pct": -0.5,
                 "text_case": "sentence",
             },

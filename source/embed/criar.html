@@ -974,16 +974,15 @@ const STATE = {
   mode: null,           // 'wizard' | 'audio'
   format: null,         // 'post' | 'carrossel' | 'ad-single' | 'ad-story'
   style: null,          // ID do estilo do banco
-  copyMode: 'gerar',    // 'tenho' | 'gerar'
   imageSource: null,    // 'generate' (IA) | 'search' (busca web) | 'none' — definido em wiz-imagem
   imageStylePreset: 'fotorrealista', // preset visual escolhido nos cards (default seguro)
   briefingImage: '',    // direção visual da imagem (cena/mood/cores) — só relevante quando imageSource='generate'
   searchQuery: '',      // termo de busca quando imageSource='search'
   selectedImageUrl: '', // URL escolhida na galeria de busca
-  copy: '',             // texto livre (modo 'gerar' OU fallback do modo 'tenho')
-  copyHeadline: '',     // modo 'tenho': headline separada
-  copySubhead: '',      // modo 'tenho': subheadline
-  copyBody: '',         // modo 'tenho': texto/corpo
+  copy: '',             // composição final pra preview/serialização — backend lê os 3 separados
+  copyHeadline: '',     // headline (obrigatória)
+  copySubhead: '',      // subheadline (opcional)
+  copyBody: '',         // texto/corpo (opcional)
   cta: '',
   audioTranscript: '',
   history: [],
@@ -1368,43 +1367,31 @@ function tplWizSearch() {
 }
 
 function tplWizCopy() {
-  const isTenho = STATE.copyMode === 'tenho';
+  // Copy SEMPRE estruturada — modo 'gerar' (LLM escreve sozinho) foi removido.
+  // User SEMPRE fornece headline + subhead + body separados, evitando ambiguidade
+  // entre "texto livre como copy" vs "texto livre como briefing pra gerar copy".
   return renderStepper() + `
     <header class="step-head">
       <p class="step-eyebrow">Wizard · Copy</p>
-      <h1 class="step-title">A copy já está pronta?</h1>
-      <p class="step-sub">Se já tem, preencha cada campo separado (headline, sub, texto). Senão, descreva o tema e a engine escreve no tom da marca.</p>
+      <h1 class="step-title">Qual o texto da peça?</h1>
+      <p class="step-sub">Preenche cada campo separado. Headline é obrigatório; subheadline e corpo são opcionais.</p>
     </header>
     <div class="step-body">
       <div class="field">
-        <label class="field-label">Como você quer fazer?</label>
-        <div class="toggle-group">
-          <button data-action="set-copy-mode" data-value="tenho" class="${isTenho ? 'active' : ''}">Já tenho a copy</button>
-          <button data-action="set-copy-mode" data-value="gerar" class="${!isTenho ? 'active' : ''}">Gerar pra mim</button>
-        </div>
+        <label class="field-label" for="copy-headline-input">Headline</label>
+        <textarea class="textarea" id="copy-headline-input" rows="2" placeholder="Ex: Para de demitir antes de diagnosticar.">${escapeHtml(STATE.copyHeadline)}</textarea>
+        <p class="field-hint">Frase de impacto principal. 1 sentença, sentence case.</p>
       </div>
-      ${isTenho ? `
-        <div class="field">
-          <label class="field-label" for="copy-headline-input">Headline</label>
-          <textarea class="textarea" id="copy-headline-input" rows="2" placeholder="Ex: Para de demitir antes de diagnosticar.">${escapeHtml(STATE.copyHeadline)}</textarea>
-          <p class="field-hint">Frase de impacto principal. 1 sentença, sentence case.</p>
-        </div>
-        <div class="field">
-          <label class="field-label" for="copy-subhead-input">Subheadline (opcional)</label>
-          <textarea class="textarea" id="copy-subhead-input" rows="2" placeholder="Ex: Em 70% dos casos, o problema é o sistema, não a pessoa.">${escapeHtml(STATE.copySubhead)}</textarea>
-          <p class="field-hint">Linha de apoio abaixo da headline.</p>
-        </div>
-        <div class="field">
-          <label class="field-label" for="copy-body-input">Texto / corpo (opcional)</label>
-          <textarea class="textarea" id="copy-body-input" rows="4" placeholder="Ex: Mais detalhes, dado de prova, ou desenvolvimento da tese.">${escapeHtml(STATE.copyBody)}</textarea>
-          <p class="field-hint">Texto adicional. Pode ficar vazio se headline + sub já bastam.</p>
-        </div>
-      ` : `
-        <div class="field">
-          <label class="field-label" for="copy-input">Descreva o tema, a tensão e a virada que a peça precisa entregar</label>
-          <textarea class="textarea" id="copy-input" rows="6" placeholder="Ex: Sobre como o empresário confunde execução ruim com pessoa errada. Quero mostrar que o sistema gera o resultado, não o talento individual. Quero terminar provocando: 'diagnostica antes de cortar'.">${escapeHtml(STATE.copy)}</textarea>
-        </div>
-      `}
+      <div class="field">
+        <label class="field-label" for="copy-subhead-input">Subheadline (opcional)</label>
+        <textarea class="textarea" id="copy-subhead-input" rows="2" placeholder="Ex: Em 70% dos casos, o problema é o sistema, não a pessoa.">${escapeHtml(STATE.copySubhead)}</textarea>
+        <p class="field-hint">Linha de apoio logo abaixo da headline.</p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="copy-body-input">Texto / corpo (opcional)</label>
+        <textarea class="textarea" id="copy-body-input" rows="4" placeholder="Ex: Mais detalhes, dado de prova, ou desenvolvimento da tese.">${escapeHtml(STATE.copyBody)}</textarea>
+        <p class="field-hint">Texto adicional. Pode ficar vazio se headline + sub já bastam.</p>
+      </div>
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
@@ -1470,7 +1457,7 @@ function tplWizConfirm() {
   const formatLabel = (FORMATS.find(f => f.id === STATE.format) || {}).label || '—';
   const styleList   = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
   const styleLabel  = (styleList.find(s => s.id === STATE.style) || {}).label || '—';
-  const copyPreview = STATE.copyMode === 'tenho' ? (STATE.copy || '—') : `Será gerada: \"${(STATE.copy || '').slice(0, 80)}…\"`;
+  const copyPreview = STATE.copy || '—';
 
   return renderStepper() + `
     <header class="step-head">
@@ -1759,7 +1746,7 @@ function tplResult() {
 }
 
 function generateMockHeadline() {
-  const src = STATE.copyMode === 'tenho' ? STATE.copy : (STATE.copy || STATE.audioTranscript || 'Para de demitir antes de diagnosticar');
+  const src = STATE.copy || STATE.audioTranscript || 'Para de demitir antes de diagnosticar';
   // Pega primeira frase curta
   const sentences = src.split(/[.!?\n]/).filter(s => s.trim().length > 0);
   let h = sentences[0] || 'Para de demitir antes de diagnosticar';
@@ -1859,9 +1846,7 @@ function attachStepHandlers() {
   document.querySelectorAll('[data-action]').forEach(el => {
     el.addEventListener('click', onAction);
   });
-  // Inputs livres
-  const copyInput = document.getElementById('copy-input');
-  if (copyInput) copyInput.addEventListener('input', () => STATE.copy = copyInput.value);
+  // Inputs livres (copy-input do modo 'gerar' removido — só CTA e audio aqui)
   const ctaInput = document.getElementById('cta-input');
   if (ctaInput) ctaInput.addEventListener('input', () => STATE.cta = ctaInput.value);
   const audioText = document.getElementById('audio-text');
@@ -1924,10 +1909,6 @@ function onAction(e) {
       if (!STATE.selectedImageUrl) return;
       goto('wiz-copy');
       break;
-    case 'set-copy-mode':
-      STATE.copyMode = value;
-      render();
-      break;
     case 'next':
       nextFromCurrent();
       break;
@@ -1959,19 +1940,15 @@ function onAction(e) {
       break;
     }
     case 'next-from-copy': {
-      if (STATE.copyMode === 'tenho') {
-        const h = document.getElementById('copy-headline-input');
-        const s = document.getElementById('copy-subhead-input');
-        const b = document.getElementById('copy-body-input');
-        STATE.copyHeadline = h ? h.value : '';
-        STATE.copySubhead = s ? s.value : '';
-        STATE.copyBody = b ? b.value : '';
-        // Compõe copy unificada pra retrocompat (backend lê primeira linha = headline)
-        STATE.copy = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n');
-      } else {
-        const ta = document.getElementById('copy-input');
-        STATE.copy = ta ? ta.value : '';
-      }
+      // Copy estruturada: 3 campos separados (modo único agora)
+      const h = document.getElementById('copy-headline-input');
+      const s = document.getElementById('copy-subhead-input');
+      const b = document.getElementById('copy-body-input');
+      STATE.copyHeadline = h ? h.value : '';
+      STATE.copySubhead = s ? s.value : '';
+      STATE.copyBody = b ? b.value : '';
+      // Compõe copy unificada SÓ pra preview de revisão — backend lê os 3 separados
+      STATE.copy = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n');
       goto('wiz-cta');
       break;
     }
@@ -2007,7 +1984,7 @@ function onAction(e) {
     case 'restart':
       Object.keys(STATE).forEach(k => {
         if (k === 'history') STATE[k] = [];
-        else if (k === 'copyMode') STATE[k] = 'gerar';
+        else if (k === 'imageStylePreset') STATE[k] = 'fotorrealista';  // default seguro
         else STATE[k] = (typeof STATE[k] === 'string') ? '' : null;
       });
       STATE.run_id = null;
@@ -2083,9 +2060,7 @@ function serializeBriefing() {
   const styleInfo = styleList.find(s => s.id === STATE.style) || {};
   const styleDesc = styleInfo.id ? `${styleInfo.id} (${styleInfo.label}) — ${styleInfo.desc}` : '—';
 
-  const copyBlock = STATE.copyMode === 'tenho'
-    ? `Copy pronta:\n${STATE.copy || '(vazio)'}`
-    : `Descrição pra gerar copy:\n${STATE.copy || '(vazio)'}`;
+  const copyBlock = `Copy:\n${STATE.copy || '(vazio)'}`;
 
   return [
     `Marca: ${marca}.`,
@@ -2114,11 +2089,10 @@ async function generateReal(briefing) {
         // Direção visual livre pra skill 04 (opcional)
         ...(STATE.briefingImage && STATE.briefingImage.trim() ? { briefing_image: STATE.briefingImage.trim() } : {}),
         ...(STATE.imageStylePreset ? { image_style_preset: STATE.imageStylePreset } : {}),
-        // Copy estruturada: campos separados (modo 'tenho') OU copy_text único (modo 'gerar')
+        // Copy estruturada — backend lê os 3 campos separados (modo único agora)
         ...(STATE.copyHeadline && STATE.copyHeadline.trim() ? { copy_headline: STATE.copyHeadline.trim() } : {}),
         ...(STATE.copySubhead && STATE.copySubhead.trim() ? { copy_subhead: STATE.copySubhead.trim() } : {}),
         ...(STATE.copyBody && STATE.copyBody.trim() ? { copy_body: STATE.copyBody.trim() } : {}),
-        ...(STATE.copy && STATE.copy.trim() ? { copy_text: STATE.copy.trim() } : {}),
         ...(STATE.cta && STATE.cta.trim() ? { cta_text: STATE.cta.trim() } : {})
       }),
       signal: controller.signal

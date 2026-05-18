@@ -218,44 +218,41 @@ def _adapt_text_colors_to_image(layout_spec: dict, image_urls: dict, diagnostics
             break
 
 
-def _extract_copy(copy_text: str | None, cta_text: str | None, briefing_text: str | None) -> dict:
-    """Extrai headline/subhead/cta estruturado do input do user.
+def _extract_copy(
+    headline: str | None,
+    subhead: str | None,
+    body: str | None,
+    cta_text: str | None,
+    briefing_text: str | None,
+) -> dict:
+    """Extrai copy estruturada do input do user.
 
-    Frontend wizard manda `copy_text` e `cta_text` separados. Quando ausentes
-    (modo áudio livre), tenta parse simples do briefing original em busca de
-    'CTA: ...' e 'Copy pronta: ...'.
+    Frontend SEMPRE manda os 3 campos separados (modo único agora — modo 'gerar
+    copy' foi removido pra evitar ambiguidade entre briefing-livre vs copy-final).
+
+    Quando algum campo vier vazio (ex: modo áudio sem wizard), tenta fallback
+    parseando o briefing_text em busca de 'CTA: ...'.
     """
     import re as _re
-    headline, subhead, cta = "", "", ""
 
-    if copy_text:
-        lines = [l.strip() for l in copy_text.strip().split("\n") if l.strip()]
-        if lines:
-            headline = lines[0]
-            if len(lines) > 1:
-                subhead = " ".join(lines[1:])
+    headline = (headline or "").strip()
+    subhead = (subhead or "").strip()
+    body = (body or "").strip()
+    cta = (cta_text or "").strip().rstrip(".")
 
-    if cta_text:
-        cta = cta_text.strip().rstrip(".")
+    # Fallback pro CTA quando vem só do briefing (modo áudio)
+    if not cta and briefing_text:
+        m = _re.search(r"CTA:\s*(.+?)(?:\n|$)", briefing_text)
+        if m:
+            cta = m.group(1).strip().rstrip(".")
 
-    # Fallback: parse do briefing_text se faltam fields
-    if (not headline or not cta) and briefing_text:
-        if not cta:
-            m = _re.search(r"CTA:\s*(.+?)(?:\n|$)", briefing_text)
-            if m:
-                cta = m.group(1).strip().rstrip(".")
-        if not headline:
-            m = _re.search(r"(?:Copy pronta|Descrição pra gerar copy):\s*(.+?)(?:\n\n|$)",
-                           briefing_text, _re.DOTALL)
-            if m:
-                txt = m.group(1).strip()
-                lines = [l.strip() for l in txt.split("\n") if l.strip()]
-                if lines:
-                    headline = lines[0]
-                    if len(lines) > 1:
-                        subhead = " ".join(lines[1:])
+    # Fallback pro headline quando vem só do briefing (modo áudio)
+    if not headline and briefing_text:
+        m = _re.search(r"(?:Headline|Copy pronta):\s*(.+?)(?:\n|$)", briefing_text)
+        if m:
+            headline = m.group(1).strip()
 
-    return {"headline": headline, "subhead": subhead, "cta": cta}
+    return {"headline": headline, "subhead": subhead, "body": body, "cta": cta}
 
 
 SIGNATURE_MODELS = {
@@ -284,7 +281,9 @@ def _run_pipeline_inline(
     image_url: str | None = None,      # URL pronta vinda da busca (quando image_source='search')
     briefing_image_text: str | None = None,  # descrição da imagem desejada (extra_context skill 04)
     image_style_preset: str | None = None,   # id do preset visual (fotorrealista|bw-yellow|surreal-hbr|cinematic-dark)
-    user_copy_text: str | None = None,       # copy do user (primeira linha = headline, resto = subhead)
+    user_headline: str | None = None,        # headline do user (campo separado)
+    user_subhead: str | None = None,         # subheadline do user (campo separado, opcional)
+    user_body: str | None = None,            # body/texto do user (campo separado, opcional)
     user_cta_text: str | None = None,        # CTA do user (vira text do pill_cta)
 ) -> dict:
     from skills_runner import SkillRunner
@@ -363,9 +362,12 @@ def _run_pipeline_inline(
         sys.path.insert(0, str(Path(__file__).resolve().parent))
         from _layouts import has_template, build_layout as build_layout_template
 
+    copy_data = _extract_copy(
+        user_headline, user_subhead, user_body, user_cta_text, briefing_text
+    )
+
     if has_template(chosen_model_id):
         # Template Python determinístico — pula skill 03 LLM
-        copy_data = _extract_copy(user_copy_text, user_cta_text, briefing_text)
         t03 = time.time()
         layout_spec = build_layout_template(
             chosen_model_id,
@@ -387,7 +389,8 @@ def _run_pipeline_inline(
             f"03-layout-composer ({timings['03']}ms): TEMPLATE determinístico — "
             f"{total_elements} elementos · {len(image_slots)} image_slot(s) "
             f"{('= ' + ', '.join(slot_names)) if slot_names else ''} · "
-            f"copy: headline={len(copy_data.get('headline', ''))}c · subhead={len(copy_data.get('subhead', ''))}c · cta='{copy_data.get('cta', '')[:30]}'"
+            f"copy: H={len(copy_data.get('headline', ''))}c · S={len(copy_data.get('subhead', ''))}c · "
+            f"B={len(copy_data.get('body', ''))}c · CTA='{copy_data.get('cta', '')[:30]}'"
         )
         # Pula bloco LLM abaixo
         skip_llm_03 = True
@@ -398,10 +401,23 @@ def _run_pipeline_inline(
         layout_input = {
             "briefing": briefing,
             "model_id": chosen_model_id,
-            "copy": {"_note": "MVP — generate copy inside layout composer"},
+            "copy": {
+                "headline": copy_data.get("headline", ""),
+                "subhead": copy_data.get("subhead", ""),
+                "body": copy_data.get("body", ""),
+                "cta": copy_data.get("cta", ""),
+            },
         }
 
+        copy_block_for_llm = (
+            f"=== COPY DO USER (USAR LITERALMENTE — não reescrever) ===\n"
+            f"headline: \"{copy_data.get('headline', '')}\"\n"
+            f"subhead:  \"{copy_data.get('subhead', '')}\"\n"
+            f"body:     \"{copy_data.get('body', '')}\"\n"
+            f"cta:      \"{copy_data.get('cta', '')}\"\n"
+        )
         extra_03 = (
+            f"{copy_block_for_llm}\n"
             f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n"
             f"```yaml\n{model_yaml_content}\n```\n\n"
             f"INSTRUÇÕES OBRIGATÓRIAS:\n"
@@ -409,10 +425,14 @@ def _run_pipeline_inline(
             f"2. Se `image.required == true`, você DEVE adicionar element type='image_slot'.\n"
             f"3. Posicione o image_slot conforme `image.placement` do YAML.\n"
             f"4. Use tokens da marca {marca}.\n"
-            f"5. Gere a copy respeitando max_chars/max_lines de cada slot.\n"
-            f"6. CONTAINER SLOTS (role contém 'container'/'block'/'bloco'): crie type='rect' com fill+corner_radius do YAML.\n"
-            f"7. Children do container: text com x=rect.x+padding, y=rect.y+padding. Ordem importa.\n"
-            f"8. CTA text vem do briefing do user (busca 'CTA: ...' no texto), NUNCA do text_default do YAML.\n"
+            f"5. NÃO reescreva a copy — use os textos do user LITERALMENTE em cada slot apropriado:\n"
+            f"   • headline → slot headline\n"
+            f"   • subhead → slot subheadline ou body (se YAML não tem subheadline)\n"
+            f"   • body → slot body ou descrição (se houver). Se YAML não tem slot pra body, ADICIONE um text element abaixo da subheadline.\n"
+            f"   • cta → slot cta\n"
+            f"6. Se algum campo da copy vier vazio, omita o slot (não invente texto).\n"
+            f"7. CONTAINER SLOTS (role contém 'container'/'block'/'bloco'): crie type='rect' com fill+corner_radius do YAML.\n"
+            f"8. Children do container: text com x=rect.x+padding, y=rect.y+padding. Ordem importa.\n"
         )
         t03 = time.time()
         r = runner.run("03-layout-composer", layout_input, extra_context=extra_03)
@@ -825,18 +845,14 @@ class handler(BaseHTTPRequestHandler):
             image_url = data.get("image_url") or None             # URL da imagem escolhida (busca)
             briefing_image = data.get("briefing_image") or None   # texto livre — direção da imagem
             image_style_preset = data.get("image_style_preset") or None  # id do preset visual (cards do wizard)
-            copy_text = data.get("copy_text") or None             # modo 'gerar' — texto livre
-            copy_headline = data.get("copy_headline") or None     # modo 'tenho' — campo separado
+            # Copy estruturada: SEMPRE 3 campos separados agora (modo 'gerar copy' removido)
+            copy_headline = data.get("copy_headline") or None
             copy_subhead = data.get("copy_subhead") or None
             copy_body = data.get("copy_body") or None
             cta_text = data.get("cta_text") or None               # CTA digitado/escolhido
 
             if not isinstance(briefing, str) or not briefing.strip():
                 return self._json(400, {"detail": "Body precisa de { briefing: string não-vazio }"})
-
-            # Quando campos estruturados vêm, monta copy_text composto pra retrocompat
-            if copy_headline or copy_subhead or copy_body:
-                copy_text = "\n".join(filter(None, [copy_headline, copy_subhead, copy_body]))
 
             result = _run_pipeline_inline(
                 briefing,
@@ -846,7 +862,9 @@ class handler(BaseHTTPRequestHandler):
                 image_url=image_url,
                 briefing_image_text=briefing_image,
                 image_style_preset=image_style_preset,
-                user_copy_text=copy_text,
+                user_headline=copy_headline,
+                user_subhead=copy_subhead,
+                user_body=copy_body,
                 user_cta_text=cta_text,
             )
             if not result.get("ok"):
