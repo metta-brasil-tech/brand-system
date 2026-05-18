@@ -835,29 +835,31 @@ def build_metta_yellow_editorial(briefing: dict, copy: dict, image_url: str | No
     body = copy.get("body", "").strip()
     cta_text = (copy.get("cta", "").strip() or "Ver método").upper()
 
-    # Tamanho dinâmico do número — quanto mais curto, maior
+    # Tamanho dinâmico do headline no range 48-60px
     n_chars = len(big_number)
-    big_size = 320 if n_chars <= 3 else (240 if n_chars <= 5 else 180)
+    big_size = 60 if n_chars <= 6 else (54 if n_chars <= 14 else 48)
 
-    # 1) Big number — amarelo, center-top, Expanded Heavy
+    # 1) Headline — amarelo, center, Expanded Heavy, começa perto do meio
+    headline_y = int(H * 0.32)
     elements.append({
         "type": "text",
         "slot_name": "headline",
         "text": big_number,
-        "x": 80, "y": int(H * 0.18),
+        "x": 80, "y": headline_y,
         "width": W - 160, "height": "auto",
         "font": {
             "family": "SF Pro", "style": "Expanded Heavy",
             "weight": 900, "stretch_pct": 132, "size": big_size,
-            "line_height_pct": 90, "letter_spacing_pct": -3,
+            "line_height_pct": 100, "letter_spacing_pct": -1,
             "text_case": "UPPER",
         },
         "color": "#FFBE18",
         "align": "center",
     })
+    headline_lines = max(1, (len(big_number) // 28) + 1)
+    cursor_y = headline_y + headline_lines * 62 + 28
 
     # 2) Subheadline — SF Pro Regular sentence (linha de contexto principal)
-    cursor_y = int(H * 0.58)
     if subhead:
         elements.append({
             "type": "text",
