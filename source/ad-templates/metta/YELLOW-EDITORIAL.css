@@ -1,0 +1,58 @@
+/* YELLOW-EDITORIAL — fundo dark, headline amarela centro + corpo branco */
+
+.ad-yellow-editorial {
+  background: var(--metta-night-10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200px 80px 280px;  /* deixa espaço pro CTA absoluto bottom */
+}
+
+.ad-yellow-editorial .ye-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  max-width: 920px;
+  text-align: center;
+}
+
+.ad-yellow-editorial .ye-headline {
+  font-size: 60px;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  color: var(--metta-yellow);
+  text-transform: uppercase;
+  margin: 0;
+  word-break: break-word;
+}
+
+.ad-yellow-editorial .ye-subhead {
+  font-size: 38px;
+  line-height: 1.25;
+  color: var(--metta-night-100);
+  margin: 0;
+}
+
+.ad-yellow-editorial .ye-body {
+  font-size: 26px;
+  line-height: 1.4;
+  color: var(--metta-night-85);
+  margin: 0;
+  max-width: 800px;
+}
+
+.ad-yellow-editorial .ye-cta-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: 140px;
+  transform: translateX(-50%);
+}
+
+/* Headline maior quando texto é curto (números/estatísticas) */
+.ad-yellow-editorial .ye-headline:not(:lang(en)):empty,
+.ad-yellow-editorial .ye-headline {
+  /* CSS clamp pra escalar conforme largura disponível */
+  font-size: clamp(48px, 10vw, 60px);
+}

@@ -1,0 +1,80 @@
+/* A-headline-foto-dark — headline gigante dark + foto pessoa bleed direita */
+
+.ad-a-headline-foto-dark {
+  background: var(--metta-night-10);
+}
+
+.ad-a-headline-foto-dark .afd-photo {
+  position: absolute;
+  right: -100px;
+  top: 200px;
+  width: 720px;
+  height: 1500px;
+  background-size: cover;
+  background-position: center 30%;
+  z-index: 1;
+}
+
+/* Gradient à esquerda da foto pra texto ler bem */
+.ad-a-headline-foto-dark .afd-gradient {
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, var(--metta-night-10) 0%, var(--metta-night-10) 50%, transparent 80%);
+  z-index: 2;
+}
+
+.ad-a-headline-foto-dark .afd-text {
+  position: absolute;
+  left: 80px;
+  top: 140px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 3;
+}
+
+.ad-a-headline-foto-dark .afd-tag {
+  font-size: 22px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--metta-night-85);
+  margin: 0;
+}
+
+.ad-a-headline-foto-dark .afd-headline {
+  font-size: 56px;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  color: var(--metta-night-100);
+  text-transform: uppercase;
+  margin: 0;
+  word-break: break-word;
+}
+
+.ad-a-headline-foto-dark .afd-subhead {
+  font-size: 28px;
+  line-height: 1.3;
+  color: var(--metta-night-100);
+  margin: 0;
+  margin-top: 16px;
+}
+
+.ad-a-headline-foto-dark .afd-body {
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--metta-night-85);
+  margin: 0;
+}
+
+.ad-a-headline-foto-dark .afd-cta-wrap {
+  position: absolute;
+  left: 80px;
+  bottom: 120px;
+  z-index: 4;
+}
+
+/* FEED */
+.ad-a-headline-foto-dark[data-format="feed"] .afd-photo { height: 1100px; top: 100px; }
+.ad-a-headline-foto-dark[data-format="feed"] .afd-text { top: 100px; width: 580px; }
+.ad-a-headline-foto-dark[data-format="feed"] .afd-cta-wrap { bottom: 80px; }

@@ -1,0 +1,20 @@
+<div class="ad-canvas ad-news-card" data-format="{{format}}" data-model="NEWS-CARD">
+
+  <!-- Tag amarela topo (label do anúncio) com default se vier vazio -->
+  <p class="nc-tag ad-text-expanded-bold">{{tag|ANÚNCIO METTA}}</p>
+
+  <!-- Manchete dark, espaço amplo acima da foto -->
+  <h1 class="nc-headline ad-text-expanded-heavy">{{headline}}</h1>
+
+  {{#has_subhead}}<p class="nc-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
+  {{#has_body}}<p class="nc-body ad-text-regular">{{body}}</p>{{/has_body}}
+
+  <!-- Foto pessoa bleed bottom — full width na metade inferior -->
+  <div class="nc-photo" style="background-image: url('{{image_url}}')"></div>
+
+  <!-- CTA pill preto top-right da foto pra contraste -->
+  <div class="nc-cta-wrap">
+    <button class="ad-cta ad-cta--dark">{{cta}}</button>
+  </div>
+
+</div>

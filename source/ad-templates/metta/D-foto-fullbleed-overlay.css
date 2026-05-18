@@ -1,0 +1,68 @@
+/* D-foto-fullbleed-overlay — foto full canvas + gradient escuro bottom + texto sobreposto */
+
+.ad-d-fullbleed {
+  background: var(--metta-night-10);
+}
+
+.ad-d-fullbleed .dfb-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.ad-d-fullbleed .dfb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(12, 22, 27, 0.0) 35%,
+    rgba(12, 22, 27, 0.55) 60%,
+    rgba(12, 22, 27, 0.95) 100%);
+  z-index: 2;
+}
+
+.ad-d-fullbleed .dfb-text {
+  position: absolute;
+  left: 80px;
+  right: 80px;
+  bottom: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 3;
+}
+
+.ad-d-fullbleed .dfb-headline {
+  font-size: 56px;
+  line-height: 1.0;
+  color: var(--metta-night-100);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0;
+  word-break: break-word;
+}
+
+.ad-d-fullbleed .dfb-subhead {
+  font-size: 28px;
+  line-height: 1.3;
+  color: var(--metta-night-100);
+  margin: 0;
+}
+
+.ad-d-fullbleed .dfb-body {
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--metta-night-95);
+  margin: 0;
+}
+
+.ad-d-fullbleed .dfb-cta-wrap {
+  position: absolute;
+  left: 80px;
+  bottom: 120px;
+  z-index: 4;
+}
+
+.ad-d-fullbleed[data-format="feed"] .dfb-text { bottom: 220px; }
+.ad-d-fullbleed[data-format="feed"] .dfb-cta-wrap { bottom: 80px; }

@@ -1,0 +1,29 @@
+<div class="ad-canvas ad-tiago-twitter-img" data-format="{{format}}" data-model="TIAGO-TWITTER-CARD-IMAGE">
+
+  <!-- Header mock idêntico ao card text-only -->
+  <header class="tw-header">
+    <div class="tw-avatar">
+      <span class="tw-avatar-initial ad-text-bold">T</span>
+    </div>
+    <div class="tw-user">
+      <div class="tw-name-row">
+        <span class="tw-name ad-text-bold">Tiago Alves</span>
+        <span class="tw-verified">✓</span>
+      </div>
+      <span class="tw-handle ad-text-regular">@tiago.alves.oliveira</span>
+    </div>
+  </header>
+
+  <!-- Tweet text (mais curto que variante text-only pra ter espaço pra foto) -->
+  <div class="tw-text">
+    <h1 class="tw-headline ad-text-bold">{{headline}}</h1>
+    {{#has_subhead}}<p class="tw-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
+    {{#has_body}}<p class="tw-body ad-text-regular">{{body}}</p>{{/has_body}}
+  </div>
+
+  <!-- Foto embed quadrado-ish, radius 28px (estilo Twitter media embed) -->
+  <div class="tw-embed">
+    <div class="tw-embed-photo" style="background-image: url('{{image_url}}')"></div>
+  </div>
+
+</div>

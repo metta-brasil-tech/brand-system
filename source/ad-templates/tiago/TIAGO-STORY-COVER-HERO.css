@@ -1,0 +1,69 @@
+/* TIAGO-STORY-COVER-HERO — foto bleed + headline gigante centrada */
+
+.ad-tiago-cover-hero {
+  background: var(--tiago-black);
+}
+
+.ad-tiago-cover-hero .tch-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.ad-tiago-cover-hero .tch-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(15, 20, 25, 0.0) 30%,
+    rgba(15, 20, 25, 0.4) 55%,
+    rgba(15, 20, 25, 0.85) 90%);
+  z-index: 2;
+}
+
+.ad-tiago-cover-hero .tch-text {
+  position: absolute;
+  left: 80px;
+  right: 80px;
+  top: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  z-index: 3;
+}
+
+.ad-tiago-cover-hero .tch-headline {
+  font-size: 56px;
+  line-height: 1.1;
+  color: var(--tiago-white);
+  margin: 0;
+  word-break: break-word;
+  text-wrap: balance;
+}
+
+.ad-tiago-cover-hero .tch-subhead {
+  font-size: 30px;
+  line-height: 1.35;
+  color: var(--tiago-white);
+  margin: 0;
+  max-width: 800px;
+}
+
+.ad-tiago-cover-hero .tch-body {
+  font-size: 22px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  max-width: 760px;
+}
+
+.ad-tiago-cover-hero .tch-cta-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: 140px;
+  transform: translateX(-50%);
+  z-index: 4;
+}

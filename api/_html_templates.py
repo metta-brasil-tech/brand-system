@@ -62,15 +62,25 @@ def _hydrate(template: str, ctx: dict) -> str:
         template,
     )
 
-    # 2) Simple vars: {{var}}
+    # 2) Simple vars: {{var}} OR {{var|default}} (default usado quando value falsy)
     def replace_var(match):
-        key = match.group(1).strip()
+        token = match.group(1).strip()
+        if "|" in token:
+            key, default = token.split("|", 1)
+            key = key.strip()
+            default = default.strip()
+        else:
+            key, default = token, ""
         # `image_url` NÃO escapamos porque pode ser data:image/...;base64,...
         # que vira inutilizável se escapado. CSS url() já está em string com aspas.
+        value = ctx.get(key, "")
+        if not value:
+            value = default
         if key in ("image_url", "image_data_uri"):
-            return str(ctx.get(key, ""))
-        return _escape(ctx.get(key, ""))
-    return re.sub(r"\{\{(\w+)\}\}", replace_var, template)
+            return str(value)
+        return _escape(value)
+    # Token regex: \w (var name) + opcional |default sem }} (qualquer char exceto })
+    return re.sub(r"\{\{(\w+(?:\|[^}]+)?)\}\}", replace_var, template)
 
 
 def has_template(marca: str, model_id: str) -> bool:

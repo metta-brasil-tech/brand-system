@@ -1,0 +1,22 @@
+<div class="ad-canvas ad-a-headline-foto-dark" data-format="{{format}}" data-model="A-headline-foto-dark">
+
+  <!-- Foto pessoa bleed canto direito-bottom. Atrás do texto (z-index 1). -->
+  <div class="afd-photo" style="background-image: url('{{image_url}}')"></div>
+
+  <!-- Gradient overlay esquerda (dark→transparent) pra texto legível sobre foto -->
+  <div class="afd-gradient"></div>
+
+  <!-- Bloco de texto coluna esquerda (60% largura), top-aligned -->
+  <div class="afd-text">
+    {{#has_tag}}<p class="afd-tag ad-text-expanded-medium">{{tag}}</p>{{/has_tag}}
+    <h1 class="afd-headline ad-text-expanded-heavy">{{headline}}</h1>
+    {{#has_subhead}}<p class="afd-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
+    {{#has_body}}<p class="afd-body ad-text-regular">{{body}}</p>{{/has_body}}
+  </div>
+
+  <!-- CTA pill amarelo bottom-left -->
+  <div class="afd-cta-wrap">
+    <button class="ad-cta ad-cta--yellow">{{cta}}</button>
+  </div>
+
+</div>

@@ -1,0 +1,21 @@
+<div class="ad-canvas ad-tiago-cover-hero" data-format="{{format}}" data-model="TIAGO-STORY-COVER-HERO">
+
+  <!-- Foto bleed full canvas (background) -->
+  <div class="tch-photo" style="background-image: url('{{image_url}}')"></div>
+
+  <!-- Gradient scrim bottom pra texto legível -->
+  <div class="tch-scrim"></div>
+
+  <!-- Headline gigante center vertical -->
+  <div class="tch-text">
+    <h1 class="tch-headline ad-text-condensed-semibold">{{headline}}</h1>
+    {{#has_subhead}}<p class="tch-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
+    {{#has_body}}<p class="tch-body ad-text-regular">{{body}}</p>{{/has_body}}
+  </div>
+
+  <!-- CTA pill amarelo bottom-center -->
+  <div class="tch-cta-wrap">
+    <button class="ad-cta ad-cta--tiago-yellow">{{cta|Arrasta pro lado}}</button>
+  </div>
+
+</div>
