@@ -1,0 +1,15 @@
+/* TIAGO-TYPO-PURE — tipografia pura sobre fundo claro */
+.ad-tiago-typo {
+  background: var(--tiago-light-bg);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 64px;
+}
+.ad-tiago-typo .tt-text { display: flex; flex-direction: column; gap: 24px; max-width: 880px; }
+.ad-tiago-typo .tt-headline {
+  font-size: 64px; line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--tiago-black); margin: 0; text-wrap: balance;
+}
+.ad-tiago-typo .tt-headline strong { color: var(--tiago-yellow); font-weight: inherit; }
+.ad-tiago-typo .tt-subhead { font-size: 30px; line-height: 1.35; color: var(--tiago-black); margin: 0; }
+.ad-tiago-typo .tt-body { font-size: 22px; line-height: 1.5; color: var(--tiago-grey); margin: 0; max-width: 800px; }
+.ad-tiago-typo .tt-cta { font-size: 24px; color: var(--tiago-grey); margin: 24px 0 0; }

@@ -1,0 +1,35 @@
+/* TIAGO-NOTES-MOCKUP — mock app Notas iPhone (header + nota com marker amarelo) */
+.ad-tiago-notes {
+  background: var(--tiago-white);
+  display: flex; flex-direction: column;
+}
+.ad-tiago-notes .tn-statusbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 40px 8px;
+  font-size: 22px; font-weight: 600; color: var(--tiago-black);
+}
+.ad-tiago-notes .tn-navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 40px;
+  font-size: 22px; color: #FFCC00; /* iOS-yellow Notes */
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.ad-tiago-notes .tn-notes-body {
+  padding: 40px 48px;
+  flex: 1;
+  display: flex; flex-direction: column; gap: 24px;
+}
+.ad-tiago-notes .tn-headline {
+  font-size: 56px; line-height: 1.15; letter-spacing: -0.02em;
+  color: var(--tiago-black); margin: 0;
+  /* Marker amarelo highlight no headline */
+  background: linear-gradient(180deg, transparent 60%, rgba(255,204,0,0.55) 60%);
+  display: inline; padding: 0 4px;
+}
+.ad-tiago-notes .tn-subhead { font-size: 30px; line-height: 1.4; color: var(--tiago-black); margin: 0; }
+.ad-tiago-notes .tn-body {
+  font-size: 26px; line-height: 1.55; color: var(--tiago-black); margin: 0;
+  /* white-space pre-wrap pra preservar lista numerada */
+  white-space: pre-wrap;
+}
+.ad-tiago-notes .tn-cta { font-size: 26px; color: var(--tiago-grey); margin: 24px 48px 40px; }

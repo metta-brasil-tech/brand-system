@@ -1,0 +1,8 @@
+/* TIAGO-DARK-SURREAL — bg preto + imagem surreal B&W isolada (sem texto, intersticial) */
+.ad-tiago-dark-surreal { background: var(--tiago-black); }
+.ad-tiago-dark-surreal .tds-photo {
+  position: absolute; inset: 0;
+  background-size: contain; background-position: center; background-repeat: no-repeat;
+  filter: grayscale(1) contrast(1.15);
+  z-index: 1;
+}

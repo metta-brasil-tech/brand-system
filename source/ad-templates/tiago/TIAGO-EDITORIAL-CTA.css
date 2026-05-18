@@ -1,0 +1,14 @@
+/* TIAGO-EDITORIAL-CTA — slide de fechamento de carrossel (pergunta + CTA) */
+.ad-tiago-ed-cta {
+  background: var(--tiago-light-bg);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 64px 200px;
+}
+.ad-tiago-ed-cta .tecta-text { display: flex; flex-direction: column; gap: 28px; max-width: 880px; }
+.ad-tiago-ed-cta .tecta-headline {
+  font-size: 56px; line-height: 1.15; letter-spacing: -0.02em;
+  color: var(--tiago-black); margin: 0; text-wrap: balance;
+}
+.ad-tiago-ed-cta .tecta-subhead { font-size: 30px; line-height: 1.35; color: var(--tiago-black); margin: 0; }
+.ad-tiago-ed-cta .tecta-body { font-size: 24px; line-height: 1.5; color: var(--tiago-grey); margin: 0; }
+.ad-tiago-ed-cta .tecta-cta-wrap { position: absolute; left: 64px; bottom: 100px; }

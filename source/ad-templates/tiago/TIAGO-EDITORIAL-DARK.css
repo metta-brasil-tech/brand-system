@@ -1,0 +1,24 @@
+/* TIAGO-EDITORIAL-DARK — slide noir investigativo (tese psicológica heavy) */
+.ad-tiago-ed-dark { background: var(--tiago-black); }
+.ad-tiago-ed-dark .ted-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  filter: grayscale(1) contrast(1.2) brightness(0.7);
+  z-index: 1;
+}
+.ad-tiago-ed-dark .ted-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,20,25,0.5) 0%, rgba(15,20,25,0.85) 70%, rgba(15,20,25,0.95) 100%);
+  z-index: 2;
+}
+.ad-tiago-ed-dark .ted-text {
+  position: absolute; left: 64px; right: 64px; bottom: 100px;
+  display: flex; flex-direction: column; gap: 20px;
+  z-index: 3;
+}
+.ad-tiago-ed-dark .ted-headline {
+  font-size: 56px; line-height: 1.15; letter-spacing: -0.02em;
+  color: var(--tiago-white); margin: 0; text-wrap: balance;
+}
+.ad-tiago-ed-dark .ted-subhead { font-size: 28px; line-height: 1.4; color: var(--tiago-white); opacity: 0.85; margin: 0; }
+.ad-tiago-ed-dark .ted-body { font-size: 22px; line-height: 1.5; color: var(--tiago-white); opacity: 0.7; margin: 0; }

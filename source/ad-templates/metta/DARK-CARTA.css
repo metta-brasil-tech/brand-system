@@ -1,0 +1,25 @@
+/* DARK-CARTA — convite formal dark, estética carta/papel */
+.ad-dark-carta {
+  background: var(--metta-night-5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 100px;
+}
+.ad-dark-carta .dc-card {
+  width: 100%; max-width: 880px;
+  border: 2px solid var(--metta-yellow);
+  padding: 80px 64px;
+  display: flex; flex-direction: column; gap: 24px;
+  text-align: center;
+}
+.ad-dark-carta .dc-eyebrow {
+  font-size: 22px; letter-spacing: 0.18em; color: var(--metta-yellow);
+  text-transform: uppercase; margin: 0;
+}
+.ad-dark-carta .dc-divider { width: 80px; height: 2px; background: var(--metta-yellow); margin: 8px auto; }
+.ad-dark-carta .dc-headline {
+  font-size: 52px; line-height: 1.05; color: var(--metta-night-100);
+  text-transform: uppercase; letter-spacing: -0.01em; margin: 0;
+}
+.ad-dark-carta .dc-subhead { font-size: 26px; line-height: 1.35; color: var(--metta-night-100); margin: 0; }
+.ad-dark-carta .dc-body { font-size: 20px; line-height: 1.5; color: var(--metta-night-85); margin: 0; }
+.ad-dark-carta .dc-cta-wrap { margin-top: 16px; }

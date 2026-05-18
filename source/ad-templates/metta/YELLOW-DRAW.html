@@ -1,0 +1,18 @@
+<div class="ad-canvas ad-yellow-draw" data-format="{{format}}" data-model="YELLOW-DRAW">
+  <!-- Setas decorativas SVG estilo "draw" -->
+  <svg class="yd-arrow yd-arrow-tr" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 50 Q 50 10 90 50" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M75 35 L 90 50 L 75 65" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg class="yd-arrow yd-arrow-bl" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M90 50 Q 50 90 10 50" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M25 35 L 10 50 L 25 65" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div class="yd-content">
+    <h1 class="yd-headline ad-text-expanded-heavy">{{headline}}</h1>
+    {{#has_subhead}}<p class="yd-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
+    {{#has_body}}<p class="yd-body ad-text-regular">{{body}}</p>{{/has_body}}
+  </div>
+  <div class="yd-cta-wrap"><button class="ad-cta ad-cta--dark">{{cta}}</button></div>
+</div>

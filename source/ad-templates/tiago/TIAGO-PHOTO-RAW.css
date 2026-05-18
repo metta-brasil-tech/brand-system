@@ -1,0 +1,6 @@
+/* TIAGO-PHOTO-RAW — foto crua sem edição (humanização alta) */
+.ad-tiago-photo-raw { background: var(--tiago-black); }
+.ad-tiago-photo-raw .tpr-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}

@@ -1,0 +1,17 @@
+/* K-bold-dourado-urgencia — convite reservado dark + headline dourada */
+.ad-k-bold-dourado {
+  background: var(--metta-night-10);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 200px 80px 280px;
+}
+.ad-k-bold-dourado .kbd-text { display: flex; flex-direction: column; gap: 24px; max-width: 920px; }
+.ad-k-bold-dourado .kbd-headline {
+  font-size: 60px; line-height: 1.0; color: var(--metta-yellow);
+  text-transform: uppercase; letter-spacing: -0.01em; margin: 0;
+}
+.ad-k-bold-dourado .kbd-divider {
+  width: 120px; height: 6px; background: var(--metta-yellow); border-radius: 3px;
+}
+.ad-k-bold-dourado .kbd-subhead { font-size: 32px; line-height: 1.3; color: var(--metta-night-100); margin: 0; }
+.ad-k-bold-dourado .kbd-body { font-size: 24px; line-height: 1.45; color: var(--metta-night-85); margin: 0; }
+.ad-k-bold-dourado .kbd-cta-wrap { position: absolute; left: 80px; bottom: 140px; }

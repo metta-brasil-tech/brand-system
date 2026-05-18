@@ -1,0 +1,27 @@
+/* TIAGO-STORY-YELLOW-BLOCK — foto ambiente + bloco amarelo central */
+.ad-tiago-yellow-block { background: var(--tiago-light-bg); }
+.ad-tiago-yellow-block .tyb-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  z-index: 1;
+}
+.ad-tiago-yellow-block .tyb-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,20,25,0.4) 0%, rgba(15,20,25,0.2) 50%, rgba(15,20,25,0.4) 100%);
+  z-index: 2;
+}
+.ad-tiago-yellow-block .tyb-block {
+  position: absolute; left: 80px; right: 80px; top: 50%; transform: translateY(-50%);
+  padding: 48px 56px;
+  background: var(--tiago-yellow);
+  border-radius: 24px;
+  display: flex; flex-direction: column; gap: 20px;
+  z-index: 3;
+}
+.ad-tiago-yellow-block .tyb-headline {
+  font-size: 48px; line-height: 1.1; letter-spacing: -0.01em;
+  color: var(--tiago-black); margin: 0; text-wrap: balance;
+}
+.ad-tiago-yellow-block .tyb-subhead { font-size: 28px; line-height: 1.3; color: var(--tiago-black); margin: 0; }
+.ad-tiago-yellow-block .tyb-body { font-size: 22px; line-height: 1.45; color: var(--tiago-black); opacity: 0.8; margin: 0; }
+.ad-tiago-yellow-block .tyb-cta-wrap { position: absolute; left: 50%; transform: translateX(-50%); bottom: 140px; z-index: 4; }

@@ -1,0 +1,26 @@
+/* YELLOW-SPLIT — canvas split: foto top / yellow bottom */
+.ad-yellow-split { background: var(--metta-yellow); }
+.ad-yellow-split .ys-photo {
+  position: absolute; top: 0; left: 0; right: 0; height: 50%;
+  background-size: cover; background-position: center 30%;
+  z-index: 1;
+}
+.ad-yellow-split .ys-yellow-half {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+  background: var(--metta-yellow);
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 80px;
+  z-index: 2;
+}
+.ad-yellow-split .ys-content {
+  display: flex; flex-direction: column; gap: 20px; max-width: 920px;
+}
+.ad-yellow-split .ys-headline {
+  font-size: 56px; line-height: 1.0; color: var(--metta-night-10);
+  text-transform: uppercase; letter-spacing: -0.01em; margin: 0;
+}
+.ad-yellow-split .ys-subhead { font-size: 28px; line-height: 1.3; color: var(--metta-night-10); margin: 0; }
+.ad-yellow-split .ys-body { font-size: 22px; line-height: 1.45; color: var(--metta-night-10); opacity: 0.85; margin: 0; }
+.ad-yellow-split .ys-cta-wrap { margin-top: 12px; }
+.ad-yellow-split[data-format="feed"] .ys-photo { height: 45%; }
+.ad-yellow-split[data-format="feed"] .ys-yellow-half { height: 55%; }

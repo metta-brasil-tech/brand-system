@@ -1,0 +1,18 @@
+/* LIGHT-TIPO — fundo claro + frase de impacto sentence */
+.ad-light-tipo {
+  background: var(--metta-night-95);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 200px 80px 280px;
+}
+.ad-light-tipo .lt-text { display: flex; flex-direction: column; gap: 28px; max-width: 880px; }
+.ad-light-tipo .lt-headline {
+  font-size: 56px; line-height: 1.05; color: var(--metta-night-10);
+  letter-spacing: -0.015em; margin: 0;
+  /* Sentence case — não UPPER pra dar tom contemplativo */
+  word-break: break-word;
+}
+.ad-light-tipo .lt-headline strong,
+.ad-light-tipo .lt-headline em { color: var(--metta-yellow-55); font-style: normal; font-weight: inherit; }
+.ad-light-tipo .lt-subhead { font-size: 30px; line-height: 1.35; color: var(--metta-night-10); margin: 0; }
+.ad-light-tipo .lt-body { font-size: 22px; line-height: 1.5; color: var(--metta-night-40); margin: 0; }
+.ad-light-tipo .lt-cta-wrap { position: absolute; left: 80px; bottom: 140px; }

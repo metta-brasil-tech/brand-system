@@ -1,0 +1,22 @@
+/* TIAGO-STORY-MINIMAL-QUESTION — texto leve sobre foto contemplativa */
+.ad-tiago-minimal { background: var(--tiago-black); }
+.ad-tiago-minimal .tmq-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  z-index: 1;
+}
+.ad-tiago-minimal .tmq-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,20,25,0.3) 0%, rgba(15,20,25,0.5) 60%, rgba(15,20,25,0.8) 100%);
+  z-index: 2;
+}
+.ad-tiago-minimal .tmq-text {
+  position: absolute; left: 80px; right: 80px; bottom: 200px;
+  display: flex; flex-direction: column; gap: 24px;
+  z-index: 3;
+}
+.ad-tiago-minimal .tmq-headline {
+  font-size: 56px; line-height: 1.2; letter-spacing: -0.02em;
+  color: var(--tiago-white); margin: 0; text-wrap: balance;
+}
+.ad-tiago-minimal .tmq-subhead { font-size: 28px; line-height: 1.4; color: var(--tiago-white); opacity: 0.85; margin: 0; }

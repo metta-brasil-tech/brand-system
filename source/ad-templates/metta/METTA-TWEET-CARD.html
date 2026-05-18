@@ -1,0 +1,20 @@
+<div class="ad-canvas ad-metta-tweet" data-format="{{format}}" data-model="METTA-TWEET-CARD">
+  <header class="mt-header">
+    <div class="mt-avatar">M</div>
+    <div class="mt-user">
+      <div class="mt-name-row">
+        <span class="mt-name ad-text-bold">Metta</span>
+        <span class="mt-verified">✓</span>
+      </div>
+      <span class="mt-handle ad-text-regular">@metta.brasil</span>
+    </div>
+  </header>
+
+  <div class="mt-text">
+    <h1 class="mt-headline ad-text-bold">{{headline}}</h1>
+    {{#has_subhead}}<p class="mt-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
+    {{#has_body}}<p class="mt-body ad-text-regular">{{body}}</p>{{/has_body}}
+  </div>
+
+  {{#has_cta}}<p class="mt-cta ad-text-regular">{{cta}} 👉</p>{{/has_cta}}
+</div>

@@ -1,0 +1,24 @@
+/* TIAGO-EDITORIAL-CARD — slide intermediário com stat ou lista de sintomas */
+.ad-tiago-ed-card { background: var(--tiago-light-bg); }
+.ad-tiago-ed-card .tec-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center; opacity: 0.6;
+  filter: grayscale(0.4);
+  z-index: 1;
+}
+.ad-tiago-ed-card .tec-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(237,238,238,0.7) 0%, rgba(237,238,238,0.95) 100%);
+  z-index: 2;
+}
+.ad-tiago-ed-card .tec-text {
+  position: absolute; left: 64px; right: 64px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 28px;
+  z-index: 3;
+}
+.ad-tiago-ed-card .tec-headline {
+  font-size: 60px; line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--tiago-black); margin: 0;
+}
+.ad-tiago-ed-card .tec-subhead { font-size: 32px; line-height: 1.35; color: var(--tiago-black); margin: 0; }
+.ad-tiago-ed-card .tec-body { font-size: 26px; line-height: 1.5; color: var(--tiago-grey); margin: 0; white-space: pre-wrap; }
