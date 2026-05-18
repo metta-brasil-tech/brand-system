@@ -926,6 +926,7 @@ const STATE = {
   copySubhead: '',      // modo 'tenho': subheadline
   copyBody: '',         // modo 'tenho': texto/corpo
   cta: '',
+  publicoAlvo: '',      // segmento do público-alvo (ex: varejo, concessionária)
   audioTranscript: '',
   history: [],
   // Resultado da engine real
@@ -1279,6 +1280,11 @@ function tplWizCopy() {
           <button data-action="set-copy-mode" data-value="tenho" class="${isTenho ? 'active' : ''}">Já tenho a copy</button>
           <button data-action="set-copy-mode" data-value="gerar" class="${!isTenho ? 'active' : ''}">Gerar pra mim</button>
         </div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="publico-alvo-input">Público-alvo / segmento <span style="font-weight:400;opacity:.55">(opcional, mas evita erros)</span></label>
+        <input type="text" class="input" id="publico-alvo-input" placeholder="Ex: gestores de varejo, donos de concessionária, equipes de serviços B2B..." value="${escapeHtml(STATE.publicoAlvo)}">
+        <p class="field-hint">Quanto mais específico, melhor a copy e o tom da peça.</p>
       </div>
       ${isTenho ? `
         <div class="field">
@@ -1846,6 +1852,8 @@ function onAction(e) {
       break;
     }
     case 'next-from-copy': {
+      const paEl = document.getElementById('publico-alvo-input');
+      STATE.publicoAlvo = paEl ? paEl.value : '';
       if (STATE.copyMode === 'tenho') {
         const h = document.getElementById('copy-headline-input');
         const s = document.getElementById('copy-subhead-input');
@@ -1978,9 +1986,12 @@ function serializeBriefing() {
     `Marca: ${marca}.`,
     `Formato: ${formatLabel}.`,
     `Estilo visual recomendado: ${styleDesc}.`,
+    STATE.publicoAlvo && STATE.publicoAlvo.trim()
+      ? `Público-alvo / segmento: ${STATE.publicoAlvo.trim()}.`
+      : null,
     copyBlock,
     `CTA: ${STATE.cta || '(usar default da marca)'}.`
-  ].join('\n\n');
+  ].filter(Boolean).join('\n\n');
 }
 
 async function generateReal(briefing) {
