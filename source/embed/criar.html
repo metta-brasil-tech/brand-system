@@ -956,7 +956,27 @@ button.stepper-item.done:hover {
   .preset-grid { grid-template-columns: repeat(2, 1fr); }
   .preset-preview { max-height: 200px; }
 }
+
+/* ----------------------------------------- *
+ * RESULT PREVIEW (iframe + ad render)        *
+ * ----------------------------------------- */
+.result-preview { position: relative; }
+.ad-preview-frame {
+  width: 100%;
+  max-width: 540px;
+  aspect-ratio: 9 / 16;
+  border: 0;
+  border-radius: 12px;
+  background: #f4f4f4;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+.ad-preview-frame[data-format="feed"] { aspect-ratio: 4 / 5; }
+.ad-preview-frame[data-format="sqr"]  { aspect-ratio: 1 / 1; }
 </style>
+<!-- html2canvas: usado pra exportar PNG do iframe ad-preview pro download -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
 </head>
 <body>
 
@@ -988,7 +1008,8 @@ const STATE = {
   history: [],
   // Resultado da engine real
   run_id: null,         // ID retornado pelo /generate
-  png_b64: null,        // PNG inline base64 (Vercel function retorna assim)
+  ad_html: null,        // Documento HTML completo do ad (renderizado em iframe srcdoc)
+  ad_format: null,      // 'story' | 'feed' | 'sqr' (controla aspect-ratio do iframe)
   model_id: null,       // ID do modelo escolhido pelo pipeline (deveria casar com STATE.style)
   diagnostics: [],      // log do pipeline (lista de strings) — pra debug visual
   warnings: [],         // avisos do assembler
@@ -1636,9 +1657,9 @@ function tplError() {
 
 function tplResult() {
   const brandLabel = STATE.brand === 'metta' ? 'Metta' : 'Tiago Alves';
-  const imageSrc = STATE.png_b64
-    ? `data:image/png;base64,${STATE.png_b64}`
-    : (STATE.run_id ? `${ENGINE_URL}/image/${STATE.run_id}` : '');
+  const hasAd = Boolean(STATE.ad_html);
+  // Iframe srcdoc render — preserva isolamento CSS e permite html2canvas capturar
+  const adFormat = STATE.ad_format || 'story';
 
   // Detecta mismatch entre estilo escolhido e modelo que o pipeline usou
   const styleMismatch = STATE.style && STATE.model_id && STATE.style !== STATE.model_id;
@@ -1663,9 +1684,9 @@ function tplResult() {
     <div class="step-body">
       <div class="result-layout">
         <div class="result-preview">
-          ${imageSrc
-            ? `<img src="${imageSrc}" alt="Peça gerada" id="result-img">`
-            : '<p style="color:var(--metta-sys-color-on-surface-variant)">Imagem não disponível.</p>'}
+          ${hasAd
+            ? `<iframe id="ad-preview" class="ad-preview-frame" data-format="${adFormat}" sandbox="allow-same-origin" title="Preview do ad"></iframe>`
+            : '<p style="color:var(--metta-sys-color-on-surface-variant)">Ad HTML não disponível.</p>'}
         </div>
         <aside class="result-side">
           <div class="result-card">
@@ -1784,8 +1805,18 @@ function render() {
   // Disparar lógica específica do step
   if (currentStep === 'loading')      runGenerationReal();
   if (currentStep === 'audio-record') initSpeechRecognition();
+  if (currentStep === 'result')       hydrateAdPreview();
   // Notifica parent pra ajustar altura do iframe
   notifyHeight();
+}
+
+/* Injeta o documento HTML do ad gerado dentro do <iframe id="ad-preview">.
+   Usa srcdoc (não href) pra zero round-trip e isolamento total de CSS/JS. */
+function hydrateAdPreview() {
+  if (!STATE.ad_html) return;
+  const iframe = document.getElementById('ad-preview');
+  if (!iframe) return;
+  iframe.srcdoc = STATE.ad_html;
 }
 
 function goto(step) {
@@ -1988,7 +2019,8 @@ function onAction(e) {
         else STATE[k] = (typeof STATE[k] === 'string') ? '' : null;
       });
       STATE.run_id = null;
-      STATE.png_b64 = null;
+      STATE.ad_html = null;
+      STATE.ad_format = null;
       STATE.model_id = null;
       STATE.diagnostics = [];
       STATE.warnings = [];
@@ -2140,7 +2172,8 @@ function runGenerationReal() {
       clearInterval(stepInterval);
       stepEls.forEach(el => { el.classList.remove('active'); el.classList.add('done'); });
       STATE.run_id = result.run_id || null;
-      STATE.png_b64 = result.png_b64 || null;
+      STATE.ad_html = result.html || null;
+      STATE.ad_format = result.format || null;
       STATE.model_id = result.model_id || null;
       STATE.diagnostics = Array.isArray(result.diagnostics) ? result.diagnostics : [];
       STATE.warnings = Array.isArray(result.warnings) ? result.warnings : [];
@@ -2227,34 +2260,56 @@ function toggleMic() {
 }
 
 /* ============================================================
-   DOWNLOAD PNG REAL
+   DOWNLOAD PNG REAL — html2canvas captura o iframe ad-preview
 ============================================================ */
 async function downloadMockPng() {
-  const fname = `${STATE.brand}-${STATE.run_id || Date.now()}.png`;
+  const fname = `${STATE.brand}-${STATE.model_id || 'ad'}-${STATE.run_id || Date.now()}.png`;
+  const iframe = document.getElementById('ad-preview');
+  if (!iframe || !iframe.contentDocument) {
+    alert('Preview não disponível pra captura.');
+    return;
+  }
+  if (typeof html2canvas === 'undefined') {
+    alert('Lib html2canvas ainda carregando — tenta de novo em 2s.');
+    return;
+  }
   try {
-    let blob;
-    if (STATE.png_b64) {
-      // base64 inline → blob
-      const bin = atob(STATE.png_b64);
-      const len = bin.length;
-      const bytes = new Uint8Array(len);
-      for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
-      blob = new Blob([bytes], { type: 'image/png' });
-    } else if (STATE.run_id) {
-      // engine local — busca via /image/:run_id
-      const res = await fetch(`${ENGINE_URL}/image/${STATE.run_id}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      blob = await res.blob();
-    } else {
-      throw new Error('Nada pra baixar.');
+    const adRoot = iframe.contentDocument.querySelector('.ad-canvas');
+    if (!adRoot) throw new Error('Elemento .ad-canvas não encontrado no preview.');
+
+    // Espera fontes carregarem ANTES do snapshot (essencial pra SF Pro Variable
+    // não vir com fallback Arial)
+    if (iframe.contentDocument.fonts && iframe.contentDocument.fonts.ready) {
+      await iframe.contentDocument.fonts.ready;
     }
-    const objUrl = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = objUrl;
-    a.download = fname;
-    a.click();
-    URL.revokeObjectURL(objUrl);
+    // Pequeno delay extra pra layout estabilizar pós-font-load
+    await new Promise(r => setTimeout(r, 100));
+
+    // html2canvas — captura em pixel-ratio 1 (canvas é 1080×{1350|1920})
+    const canvas = await html2canvas(adRoot, {
+      backgroundColor: null,         // mantém transparency se houver
+      scale: 1,                      // 1:1 com pixel size do canvas
+      useCORS: true,                 // permite background-image data: ou CORS-OK
+      logging: false,
+      width: adRoot.offsetWidth,
+      height: adRoot.offsetHeight,
+      windowWidth: adRoot.offsetWidth,
+      windowHeight: adRoot.offsetHeight,
+    });
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        alert('Falha ao converter canvas → blob.');
+        return;
+      }
+      const objUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = objUrl;
+      a.download = fname;
+      a.click();
+      URL.revokeObjectURL(objUrl);
+    }, 'image/png', 0.95);
   } catch (err) {
+    console.error(err);
     alert(`Erro ao baixar: ${err.message}`);
   }
 }

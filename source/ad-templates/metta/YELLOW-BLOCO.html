@@ -1,0 +1,20 @@
+<div class="ad-canvas ad-yellow-bloco" data-format="{{format}}" data-model="YELLOW-BLOCO">
+
+  <!-- Foto pessoa bleed canto direito-bottom. Vai atrás do bloco amarelo (z-index 1).
+       background-image evita problemas com html2canvas + permite object-fit equivalente
+       via background-size/position. -->
+  <div class="yb-photo" style="background-image: url('{{image_url}}')"></div>
+
+  <!-- Bloco amarelo central-esquerda — flexbox vertical com gap automático. -->
+  <div class="yb-block">
+    <h1 class="yb-headline ad-text-expanded-heavy">{{headline}}</h1>
+    {{#has_subhead}}<p class="yb-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
+    {{#has_body}}<p class="yb-body ad-text-regular">{{body}}</p>{{/has_body}}
+  </div>
+
+  <!-- CTA pill preto no rodapé esquerdo. -->
+  <div class="yb-cta-wrap">
+    <button class="ad-cta ad-cta--dark">{{cta}}</button>
+  </div>
+
+</div>

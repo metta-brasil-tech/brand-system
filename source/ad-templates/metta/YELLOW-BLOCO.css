@@ -1,0 +1,89 @@
+/* =============================================================================
+ * YELLOW-BLOCO — bloco amarelo central + foto pessoa direita bleed
+ * Frame default 1080×1920 (STORY). Body branco, bloco amarelo flexível.
+ * =============================================================================*/
+
+.ad-yellow-bloco {
+  background: var(--metta-night-100);
+}
+
+/* Foto pessoa — ocupa metade direita, bleed corner-bottom.
+   background-size: cover + position: right bottom mantém sujeito visível mesmo
+   se a imagem retornada do gpt-image-1 for 9:16 ou 4:5. */
+.ad-yellow-bloco .yb-photo {
+  position: absolute;
+  /* Margem: começa 50% da largura, vai até além da borda direita (bleed) */
+  right: -120px;
+  bottom: -80px;
+  width: 760px;
+  height: 1100px;
+  background-size: cover;
+  background-position: center 30%;  /* mostra rosto + torso, não corta cabeça */
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Bloco amarelo — flexbox vertical, conteúdo flui de cima */
+.ad-yellow-bloco .yb-block {
+  position: absolute;
+  top: 240px;
+  left: 60px;
+  width: 700px;
+  min-height: 1080px;
+  padding: 64px 56px;
+  background: var(--metta-yellow);
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  z-index: 2;
+}
+
+.ad-yellow-bloco .yb-headline {
+  font-size: 56px;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  color: var(--metta-night-10);
+  text-transform: uppercase;
+  margin: 0;
+  /* Permite headline de até 6 linhas sem quebrar layout */
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.ad-yellow-bloco .yb-subhead {
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--metta-night-10);
+  margin: 0;
+}
+
+.ad-yellow-bloco .yb-body {
+  font-size: 24px;
+  line-height: 1.35;
+  letter-spacing: -0.003em;
+  color: var(--metta-night-10);
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* CTA pill — bottom-left, fora do bloco amarelo */
+.ad-yellow-bloco .yb-cta-wrap {
+  position: absolute;
+  left: 80px;
+  bottom: 100px;
+  z-index: 3;
+}
+
+/* Variação FEED: canvas mais curto → ajusta zonas */
+.ad-yellow-bloco[data-format="feed"] .yb-block {
+  top: 140px;
+  min-height: 800px;
+}
+.ad-yellow-bloco[data-format="feed"] .yb-photo {
+  height: 800px;
+}
+.ad-yellow-bloco[data-format="feed"] .yb-cta-wrap {
+  bottom: 80px;
+}

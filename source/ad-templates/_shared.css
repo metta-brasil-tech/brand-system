@@ -1,0 +1,148 @@
+/* =============================================================================
+ * AD TEMPLATES — design tokens compartilhados
+ * Carregado em todo template HTML antes do CSS específico do modelo.
+ * Convenção: variáveis por marca + utilitárias. NUNCA hardcoded #FFBE18 no
+ * template — sempre var(--metta-yellow).
+ * =============================================================================*/
+
+/* ---------- FONT FACE ----------
+ * SF Pro Variable: 1 arquivo com axes wdth (30-150), opsz (17-28), wght (1-1000).
+ * Servido por Vercel direto de /assets/fonts/ com Cache-Control infinito.
+ * font-variation-settings ativa axes nos seletores específicos.
+ */
+@font-face {
+  font-family: 'SF Pro';
+  src: url('/assets/fonts/SF-Pro-Variable-Official.ttf') format('truetype-variations'),
+       url('/assets/fonts/SF-Pro-Variable-Official.ttf') format('truetype');
+  font-weight: 1 1000;
+  font-stretch: 30% 150%;
+  font-style: normal;
+  font-display: block;  /* block = espera font carregar antes de renderizar (evita FOUT no html2canvas) */
+}
+
+/* ---------- DESIGN TOKENS ---------- */
+:root {
+  /* Marca Metta — paleta primária */
+  --metta-yellow:        #FFBE18;
+  --metta-yellow-55:     #FFB618;
+  --metta-night-5:       #0A1013;
+  --metta-night-10:      #0C161B;
+  --metta-night-40:      #435965;
+  --metta-night-85:      #B0CAD8;
+  --metta-night-95:      #EBF3F7;
+  --metta-night-100:     #FFFFFF;
+
+  /* Marca Tiago — paleta primária */
+  --tiago-yellow:        #FFCC00;
+  --tiago-black:         #0F1419;
+  --tiago-grey:          #536471;
+  --tiago-light-bg:      #EDEEEE;
+  --tiago-white:         #FFFFFF;
+
+  /* Twitter mock */
+  --twitter-verified:    #1D9BF0;
+
+  /* Fonts (SF Pro Variable é uma family única — variant via font-variation-settings) */
+  --font-stack: 'SF Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Canvas dimensions (referência — cada template define o seu via aspect-ratio) */
+  --canvas-w-story: 1080;  /* sem px pra usar em cálculos */
+  --canvas-h-story: 1920;
+  --canvas-w-feed:  1080;
+  --canvas-h-feed:  1350;
+  --canvas-w-sqr:   1080;
+  --canvas-h-sqr:   1080;
+
+  /* Safe area padrão */
+  --pad-x: 80px;
+  --pad-y-top: 120px;
+  --pad-y-bot: 120px;
+  --gap-block: 32px;
+}
+
+/* ---------- RESET ----------
+ * Reset mínimo (não usamos normalize.css aqui pra evitar conflito com browser).
+ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: transparent; }
+img { display: block; max-width: 100%; }
+button { all: unset; cursor: default; }
+
+/* ---------- CANVAS ----------
+ * .ad-canvas é o ROOT de qualquer template. Define o frame fixo em pixels.
+ * html2canvas captura este elemento. Position: relative pra absolute children.
+ */
+.ad-canvas {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  font-family: var(--font-stack);
+  background: var(--metta-night-100);
+  /* Anti-aliasing consistente */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+.ad-canvas[data-format="feed"]  { height: 1350px; }
+.ad-canvas[data-format="sqr"]   { height: 1080px; }
+.ad-canvas[data-format="story"] { height: 1920px; }
+
+/* ---------- UTILITÁRIAS TIPOGRÁFICAS ----------
+ * Use .ad-text-* nas classes do template pra ativar SF Pro Variable corretamente.
+ * font-variation-settings configura axes wdth (largura) + wght (peso).
+ */
+.ad-text-expanded-heavy {
+  font-variation-settings: 'wdth' 132, 'wght' 870, 'opsz' 28;
+  font-weight: 870;
+  letter-spacing: -0.01em;
+}
+.ad-text-expanded-bold {
+  font-variation-settings: 'wdth' 132, 'wght' 700, 'opsz' 28;
+  font-weight: 700;
+}
+.ad-text-expanded-semibold {
+  font-variation-settings: 'wdth' 132, 'wght' 650, 'opsz' 24;
+  font-weight: 650;
+}
+.ad-text-expanded-medium {
+  font-variation-settings: 'wdth' 132, 'wght' 540, 'opsz' 22;
+  font-weight: 540;
+}
+.ad-text-regular {
+  font-variation-settings: 'wdth' 100, 'wght' 400, 'opsz' 17;
+  font-weight: 400;
+}
+.ad-text-bold {
+  font-variation-settings: 'wdth' 100, 'wght' 700, 'opsz' 28;
+  font-weight: 700;
+}
+.ad-text-semibold {
+  font-variation-settings: 'wdth' 100, 'wght' 650, 'opsz' 24;
+  font-weight: 650;
+}
+.ad-text-condensed-semibold {
+  font-variation-settings: 'wdth' 75, 'wght' 650, 'opsz' 24;
+  font-weight: 650;
+}
+
+/* ---------- COMPONENTES COMUNS ---------- */
+
+/* CTA pill — usado em vários templates */
+.ad-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 26px 38px;
+  border-radius: 999px;
+  font-variation-settings: 'wdth' 132, 'wght' 700, 'opsz' 28;
+  font-weight: 700;
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+.ad-cta--yellow { background: var(--metta-yellow); color: var(--metta-night-10); }
+.ad-cta--dark   { background: var(--metta-night-10); color: var(--metta-night-100); }
+.ad-cta--tiago-yellow { background: var(--tiago-yellow); color: var(--tiago-black); }

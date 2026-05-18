@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ad preview</title>
+<!-- _shared.css = design tokens + @font-face. Inline injetado pelo backend
+     pra evitar 1 round-trip + funcionar dentro de iframe srcdoc. -->
+<style id="ad-shared-css">/*__SHARED_CSS__*/</style>
+<!-- CSS específico do template do modelo. -->
+<style id="ad-model-css">/*__MODEL_CSS__*/</style>
+<style>
+  html, body { background: #f4f4f4; }
+  body { display: flex; justify-content: center; align-items: flex-start; padding: 0; }
+</style>
+</head>
+<body>
+<!-- O backend insere o markup do template aqui. -->
+<!--__AD_HTML__-->
+</body>
+</html>

@@ -1,15 +1,37 @@
-"""Vercel serverless function — roda o pipeline ad-generator inline.
+"""Vercel serverless function — pipeline ad-generator v2 (HTML render).
+
+V2 ARCHITECTURE (2026-05-18):
+  Input → briefing parser → style selector → image gen (OpenAI) → HTML render
+  → frontend renderiza HTML em iframe + html2canvas pra PNG no browser do user.
 
 POST /api/generate
-Body: { "briefing": "<texto livre>", "mock": false }
-Resposta: { "ok": true, "run_id": "...", "png_b64": "iVBORw0KG..." }
+Body: {
+  "briefing": "<texto livre>",
+  "model_id": "<id forçado pelo wizard>",
+  "image_source": "generate" | "search" | "none",
+  "image_url": "<URL quando busca web>",
+  "briefing_image": "<direção visual livre>",
+  "image_style_preset": "fotorrealista" | "bw-yellow" | ...,
+  "copy_headline": "...",
+  "copy_subhead": "...",
+  "copy_body": "...",
+  "cta_text": "..."
+}
 
-PNG vai inline em base64 porque /tmp do Vercel é efêmero entre invocações
-(não dá pra servir o arquivo num segundo request). Frontend usa
-<img src="data:image/png;base64,${png_b64}">.
+Resposta: {
+  "ok": true,
+  "run_id": "...",
+  "model_id": "YELLOW-BLOCO",
+  "marca": "metta",
+  "format": "story",
+  "html": "<full HTML doc pronto pra iframe>",
+  "image_data_uri": "data:image/png;base64,iVBORw...",  // pode estar embutido no html
+  "diagnostics": [...]
+}
 
-Pipeline pula skill 06 (qa-validator) pra caber em 60s do Hobby.
-Skill 02 (style-selector) cai em ranking textual fallback (sem Qdrant).
+Frontend renderiza HTML em <iframe> e usa html2canvas pra exportar PNG.
+
+Substitui v1 (Pillow assembler) — código legado em api/_layouts.py.deprecated.
 """
 from __future__ import annotations
 
@@ -30,280 +52,89 @@ from pathlib import Path
 ENGINE_DIR = Path(__file__).resolve().parent.parent / "engine"
 if str(ENGINE_DIR) not in sys.path:
     sys.path.insert(0, str(ENGINE_DIR))
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-# Aponta BRAND_KNOWLEDGE_PATH pro submodule antes de importar qualquer skill_runner
 os.environ.setdefault("BRAND_KNOWLEDGE_PATH", str(ENGINE_DIR / "brand-knowledge"))
 os.environ.setdefault("ARTIFACTS_DIR", "/tmp/artifacts")
-# Vercel Hobby tem 60s timeout. Medium (18-25s) + skills LLM (~15-25s) + cold start
-# estoura na prática. Default 'low' (10-15s, $0.04) deixa margem confortável.
-# Override via env var no Vercel se quiser 'medium' (risk) ou 'high' (timeout certo).
-os.environ.setdefault("IMAGE_QUALITY", "low")
+# Vercel Hobby tem 60s timeout. Sem render Pillow no servidor agora (HTML→PNG
+# acontece no browser do user via html2canvas), sobra tempo: medium é viável.
+os.environ.setdefault("IMAGE_QUALITY", "medium")
 
 
-# ----------------------------------------------------------------------------
-# Assinatura Tiago — overlay aplicado em capas, posts únicos e cards finais.
-# color: 'amarelo' (dark bg) | 'escuro' (light/yellow bg) | 'branco' (yellow/medium) | 'cinza'
-# position: top-right | top-left | top-center | bottom-right | bottom-left | bottom-center
-# size: 'medio' (18% largura) | 'grande' (26%)
-# ----------------------------------------------------------------------------
-def _run_visual_qa(layout_spec: dict, image_urls: dict, png_path: str) -> list[dict]:
-    """QA visual: rodada de checagem automatizada da peça final.
+# Mapeamento formato → format key dos templates HTML
+def _resolve_format(briefing_formato: str | None, wizard_format: str | None) -> str:
+    """Resolve string de formato → 'story' | 'feed' | 'sqr' pro template HTML."""
+    f = (wizard_format or briefing_formato or "").lower()
+    if f in ("post", "feed", "ad-single"):
+        return "feed"
+    if f in ("ad-story", "story"):
+        return "story"
+    if f in ("carrossel", "sqr"):
+        return "sqr"
+    return "story"  # safe default
 
-    Retorna lista de checks: [{category, status: 'pass'|'warn'|'fail', detail}].
-    Frontend renderiza como badges na tela de resultado.
 
-    Checks atuais:
-    1. Estrutural: todos image_slots têm URL (sem placeholder?)
-    2. Bounds: elementos dentro do canvas (x>=0, y>=0, x+w<=canvas_w, y+h<=canvas_h)
-    3. Tipografia: font.size entre 16 e 200 (sanity)
-    4. Contraste: text color != frame.background (pelo menos 1 distinção visível)
-    5. Overflow: CTA pill width >= text estimado
-    6. PNG: arquivo existe e tem >50KB (peças válidas costumam ter pelo menos isso)
+def _image_to_data_uri(file_url: str) -> str:
+    """Converte file:// URL pra data:image URI pra embed inline no HTML.
+
+    HTML é renderizado no browser do user; file:// só funciona local. Pra
+    Vercel/prod, foto precisa estar inline ou servida via HTTP. Inline é
+    auto-contido + sem cross-origin.
     """
-    checks: list[dict] = []
-    frame = layout_spec.get("frame", {})
-    W, H = int(frame.get("width", 1080)), int(frame.get("height", 1350))
-    bg_color = frame.get("background", {}).get("value", "#FFFFFF").upper()
-    elements = layout_spec.get("elements", [])
-
-    # 1) Image slots: todos têm URL?
-    image_slots = [e for e in elements if e.get("type") == "image_slot"]
-    missing = [s.get("slot_name", "?") for s in image_slots
-               if s.get("slot_name") not in image_urls and not s.get("static_asset")]
-    if image_slots:
-        if missing:
-            checks.append({"category": "Imagens", "status": "fail",
-                           "detail": f"{len(missing)}/{len(image_slots)} slot(s) sem URL: {', '.join(missing)}"})
-        else:
-            checks.append({"category": "Imagens", "status": "pass",
-                           "detail": f"{len(image_slots)} slot(s) preenchido(s)"})
-
-    # 2) Bounds: elementos fora do canvas
-    out_of_bounds = []
-    for el in elements:
+    if not file_url:
+        return ""
+    if file_url.startswith(("http://", "https://", "data:")):
+        return file_url
+    if file_url.startswith("file://"):
+        path = Path(file_url.replace("file://", ""))
+        if not path.exists():
+            return ""
         try:
-            x = int(el.get("x", 0))
-            y = int(el.get("y", 0))
-            w_raw = el.get("width", 0)
-            h_raw = el.get("height", 0)
-            w = int(w_raw) if isinstance(w_raw, (int, float)) else 0
-            h = int(h_raw) if isinstance(h_raw, (int, float)) else 0
-            if x < -10 or y < -10 or (w and x + w > W + 10) or (h and y + h > H + 10):
-                out_of_bounds.append(f"{el.get('slot_name', el.get('type', '?'))}({x},{y},{w}×{h})")
-        except (ValueError, TypeError):
-            pass
-    if out_of_bounds:
-        checks.append({"category": "Posições", "status": "warn",
-                       "detail": f"{len(out_of_bounds)} elemento(s) fora do canvas: {', '.join(out_of_bounds[:3])}"})
-    else:
-        checks.append({"category": "Posições", "status": "pass",
-                       "detail": f"Todos os {len(elements)} elementos dentro do canvas {W}×{H}"})
-
-    # 3) Tipografia razoável
-    weird_fonts = []
-    for el in elements:
-        if el.get("type") != "text":
-            continue
-        try:
-            size = int(el.get("font", {}).get("size", 0))
-            if size < 16 or size > 200:
-                weird_fonts.append(f"{el.get('slot_name', '?')}={size}px")
-        except (ValueError, TypeError):
-            pass
-    if weird_fonts:
-        checks.append({"category": "Tipografia", "status": "warn",
-                       "detail": f"Tamanhos fora do range razoável: {', '.join(weird_fonts)}"})
-    else:
-        checks.append({"category": "Tipografia", "status": "pass",
-                       "detail": "Tamanhos de fonte dentro do range (16-200px)"})
-
-    # 4) Contraste texto vs frame.background
-    bg_brightness = sum(int(bg_color.lstrip("#")[i:i+2], 16) for i in (0, 2, 4)) // 3 if len(bg_color) == 7 else 255
-    bad_contrast = []
-    for el in elements:
-        if el.get("type") != "text":
-            continue
-        tc = el.get("color", "").upper()
-        if not tc.startswith("#") or len(tc) != 7:
-            continue
-        tc_brightness = sum(int(tc.lstrip("#")[i:i+2], 16) for i in (0, 2, 4)) // 3
-        # Tolera contraste mínimo de 80 pontos de brightness
-        if abs(bg_brightness - tc_brightness) < 80:
-            bad_contrast.append(f"{el.get('slot_name', '?')}({tc} sobre {bg_color})")
-    if bad_contrast:
-        checks.append({"category": "Contraste", "status": "warn",
-                       "detail": f"Texto pode ficar ilegível: {', '.join(bad_contrast[:3])} (mas adaptive-color pode ter ajustado em runtime)"})
-    else:
-        checks.append({"category": "Contraste", "status": "pass",
-                       "detail": "Cores de texto contrastam com background"})
-
-    # 5) PNG sanity
+            b = path.read_bytes()
+            ext = path.suffix.lower().lstrip(".") or "png"
+            mime = "image/png" if ext == "png" else f"image/{ext}"
+            return f"data:{mime};base64,{base64.b64encode(b).decode('ascii')}"
+        except Exception:
+            return ""
+    # Path relativo/absoluto sem scheme
     try:
-        from pathlib import Path as _P
-        size_kb = _P(png_path).stat().st_size // 1024
-        if size_kb < 50:
-            checks.append({"category": "PNG", "status": "warn",
-                           "detail": f"Arquivo pequeno ({size_kb}KB) — pode estar quase vazio"})
-        elif size_kb > 8000:
-            checks.append({"category": "PNG", "status": "warn",
-                           "detail": f"Arquivo grande ({size_kb}KB) — pode passar de limites de upload"})
-        else:
-            checks.append({"category": "PNG", "status": "pass",
-                           "detail": f"{size_kb}KB — tamanho saudável"})
+        path = Path(file_url)
+        if path.exists():
+            b = path.read_bytes()
+            return f"data:image/png;base64,{base64.b64encode(b).decode('ascii')}"
     except Exception:
         pass
-
-    return checks
-
-
-def _adapt_text_colors_to_image(layout_spec: dict, image_urls: dict, diagnostics: list) -> None:
-    """Analisa brightness das regiões onde text elements caem sobre image_slots
-    e ajusta `color` pra branco (sobre escuro) ou preto (sobre claro).
-
-    Roda DEPOIS de image-gen e ANTES de assembler. Modifica layout_spec inplace.
-    """
-    try:
-        from PIL import Image as _Image
-    except Exception:
-        return
-
-    slot_regions = {}
-    for el in layout_spec.get("elements", []):
-        if el.get("type") == "image_slot":
-            # SKIP slots com static_asset (header twitter mock, signatures, etc.) —
-            # esses são "decoração de layout", o texto sobre eles deve manter a
-            # cor escolhida pelo template (não é foto-fundo geradora de contraste)
-            if el.get("static_asset"):
-                continue
-            sn = el.get("slot_name")
-            url = image_urls.get(sn, "")
-            if isinstance(url, str) and url.startswith("file://"):
-                slot_regions[sn] = {
-                    "path": url.replace("file://", ""),
-                    "x": int(el.get("x", 0)), "y": int(el.get("y", 0)),
-                    "w": int(el.get("width", 0)), "h": int(el.get("height", 0)),
-                }
-    if not slot_regions:
-        return
-
-    for el in layout_spec.get("elements", []):
-        if el.get("type") != "text":
-            continue
-        tx, ty = int(el.get("x", 0)), int(el.get("y", 0))
-        tw = int(el.get("width", 0))
-        font_size = int(el.get("font", {}).get("size", 48))
-        th_est = int(font_size * 1.2 * 3)
-
-        for sn, reg in slot_regions.items():
-            if not (reg["x"] <= tx < reg["x"] + reg["w"] and reg["y"] <= ty < reg["y"] + reg["h"]):
-                continue
-            try:
-                img = _Image.open(reg["path"]).convert("L")
-                scale_x = img.width / max(reg["w"], 1)
-                scale_y = img.height / max(reg["h"], 1)
-                px1 = int((tx - reg["x"]) * scale_x)
-                py1 = int((ty - reg["y"]) * scale_y)
-                px2 = min(img.width, px1 + int(tw * scale_x))
-                py2 = min(img.height, py1 + int(th_est * scale_y))
-                if px2 <= px1 or py2 <= py1:
-                    continue
-                crop = img.crop((px1, py1, px2, py2))
-                pixels = list(crop.getdata())
-                if not pixels:
-                    continue
-                brightness = sum(pixels) / len(pixels)
-                new_color = "#FFFFFF" if brightness < 140 else "#0F1419"
-                if new_color != el.get("color", ""):
-                    diagnostics.append(
-                        f"adaptive-color: '{el.get('slot_name', '?')}' brightness={int(brightness)} → {new_color}"
-                    )
-                    el["color"] = new_color
-            except Exception as e:
-                diagnostics.append(f"adaptive-color: falhou pra '{el.get('slot_name', '?')}' — {e}")
-            break
+    return ""
 
 
-def _extract_copy(
-    headline: str | None,
-    subhead: str | None,
-    body: str | None,
-    cta_text: str | None,
-    briefing_text: str | None,
-) -> dict:
-    """Extrai copy estruturada do input do user.
-
-    Frontend SEMPRE manda os 3 campos separados (modo único agora — modo 'gerar
-    copy' foi removido pra evitar ambiguidade entre briefing-livre vs copy-final).
-
-    Quando algum campo vier vazio (ex: modo áudio sem wizard), tenta fallback
-    parseando o briefing_text em busca de 'CTA: ...'.
-    """
-    import re as _re
-
-    headline = (headline or "").strip()
-    subhead = (subhead or "").strip()
-    body = (body or "").strip()
-    cta = (cta_text or "").strip().rstrip(".")
-
-    # Fallback pro CTA quando vem só do briefing (modo áudio)
-    if not cta and briefing_text:
-        m = _re.search(r"CTA:\s*(.+?)(?:\n|$)", briefing_text)
-        if m:
-            cta = m.group(1).strip().rstrip(".")
-
-    # Fallback pro headline quando vem só do briefing (modo áudio)
-    if not headline and briefing_text:
-        m = _re.search(r"(?:Headline|Copy pronta):\s*(.+?)(?:\n|$)", briefing_text)
-        if m:
-            headline = m.group(1).strip()
-
-    return {"headline": headline, "subhead": subhead, "body": body, "cta": cta}
-
-
-SIGNATURE_MODELS = {
-    # Capas de carrossel (1º slide)
-    "TIAGO-STORY-COVER-HERO":       {"color": "amarelo", "position": "bottom-center", "size": "medio"},
-    # EDITORIAL-HERO: bg #EDEEEE claro → escura. Posição entre eyebrows (top-center, y custom).
-    "TIAGO-EDITORIAL-HERO":         {"color": "escuro",  "position": "top-center",   "size": "medio", "y_override": 30, "x_offset": 80},
-    # Posts únicos (standalone, sem carrossel)
-    "TIAGO-TYPO-PURE":              {"color": "escuro",  "position": "bottom-right", "size": "medio"},
-    "TIAGO-STORY-YELLOW-BLOCK":     {"color": "escuro",  "position": "top-right",    "size": "medio"},
-    "TIAGO-STORY-MINIMAL-QUESTION": {"color": "amarelo", "position": "bottom-right", "size": "medio"},
-    # Cards finais (último de carrossel)
-    "TIAGO-EDITORIAL-CTA":          {"color": "amarelo", "position": "bottom-right", "size": "medio"},
-}
-
-
-# ----------------------------------------------------------------------------
-# Pipeline runner — espelha engine/api.py::_run_pipeline mas pulando skill 06
-# e retornando PNG em bytes (não path) pra encodar em base64.
-# ----------------------------------------------------------------------------
 def _run_pipeline_inline(
     briefing_text: str,
     mock: bool = False,
     forced_model_id: str | None = None,
-    image_source: str | None = None,   # 'generate' | 'search' | 'none' | None
-    image_url: str | None = None,      # URL pronta vinda da busca (quando image_source='search')
-    briefing_image_text: str | None = None,  # descrição da imagem desejada (extra_context skill 04)
-    image_style_preset: str | None = None,   # id do preset visual (fotorrealista|bw-yellow|surreal-hbr|cinematic-dark)
-    user_headline: str | None = None,        # headline do user (campo separado)
-    user_subhead: str | None = None,         # subheadline do user (campo separado, opcional)
-    user_body: str | None = None,            # body/texto do user (campo separado, opcional)
-    user_cta_text: str | None = None,        # CTA do user (vira text do pill_cta)
+    image_source: str | None = None,
+    image_url: str | None = None,
+    briefing_image_text: str | None = None,
+    image_style_preset: str | None = None,
+    user_headline: str | None = None,
+    user_subhead: str | None = None,
+    user_body: str | None = None,
+    user_cta_text: str | None = None,
+    wizard_format: str | None = None,
 ) -> dict:
+    """Pipeline principal — retorna HTML pronto pra iframe + metadata."""
     from skills_runner import SkillRunner
     from adapters.llm import LLMAdapter, MockLLMAdapter
     from adapters.image_gen import ImageGenAdapter
-    from adapters.assembler import AssemblerAdapter
     from pipeline import MOCK_FIXTURES, write_artifact
+    from _html_templates import has_template, render as render_html
 
-    diagnostics: list[str] = []   # mensagens visíveis no frontend pra debug
-    timings: dict[str, int] = {}  # ms por etapa
+    diagnostics: list[str] = []
+    timings: dict[str, int] = {}
     t_start = time.time()
 
     def mark(label: str, t_skill_start: float) -> None:
-        elapsed = int((time.time() - t_skill_start) * 1000)
-        timings[label] = elapsed
+        timings[label] = int((time.time() - t_skill_start) * 1000)
 
     artifacts_dir = Path(os.environ["ARTIFACTS_DIR"])
     artifacts_dir.mkdir(parents=True, exist_ok=True)
@@ -312,26 +143,29 @@ def _run_pipeline_inline(
     llm = MockLLMAdapter(fixtures=MOCK_FIXTURES) if mock else LLMAdapter()
     runner = SkillRunner(llm=llm)
 
-    # Skill 01 — briefing parser
+    # ============================================================
+    # Skill 01 — Briefing parser (parse texto livre → estrutura)
+    # ============================================================
     t01 = time.time()
     r = runner.run("01-briefing-parser", briefing_text)
     mark("01", t01)
     if not r.ok:
-        return {"ok": False, "error": f"briefing-parser: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
+        return {"ok": False, "error": f"briefing-parser: {r.error}",
+                "run_id": run_id, "diagnostics": diagnostics}
     briefing = r.output
     if briefing.get("clarifying_questions"):
-        return {
-            "ok": False,
-            "error": "Preciso de mais detalhes: " + "; ".join(briefing["clarifying_questions"]),
-            "run_id": run_id,
-            "diagnostics": diagnostics,
-        }
+        return {"ok": False,
+                "error": "Preciso de mais detalhes: " + "; ".join(briefing["clarifying_questions"]),
+                "run_id": run_id, "diagnostics": diagnostics}
     write_artifact(run_id, "01-briefing", briefing, artifacts_dir)
-    diagnostics.append(f"01-briefing-parser ({timings['01']}ms): marca={briefing.get('marca')} intent={briefing.get('intent')}")
+    marca = briefing.get("marca", "metta")
+    diagnostics.append(
+        f"01-briefing-parser ({timings['01']}ms): marca={marca} intent={briefing.get('intent')}"
+    )
 
-    # Skill 02 — style selector
-    # Quando o user escolheu estilo explícito no wizard, PULA skill 02 e força o modelo dele.
-    # Em modo áudio livre (forced_model_id=None), skill 02 ranqueia.
+    # ============================================================
+    # Skill 02 — Style selector (ou usa o forçado pelo wizard)
+    # ============================================================
     if forced_model_id:
         chosen_model_id = forced_model_id
         diagnostics.append(f"02-style-selector: PULADO — model_id forçado pelo wizard: {chosen_model_id}")
@@ -340,187 +174,68 @@ def _run_pipeline_inline(
         r = runner.run("02-style-selector", briefing)
         mark("02", t02)
         if not r.ok:
-            return {"ok": False, "error": f"style-selector: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
+            return {"ok": False, "error": f"style-selector: {r.error}",
+                    "run_id": run_id, "diagnostics": diagnostics}
         style_rec = r.output
         write_artifact(run_id, "02-style-recommendation", style_rec, artifacts_dir)
         chosen_model_id = style_rec["recommended"][0]["model_id"]
-        diagnostics.append(f"02-style-selector ({timings['02']}ms): escolheu {chosen_model_id} (ranking textual, sem Qdrant)")
+        diagnostics.append(f"02-style-selector ({timings['02']}ms): escolheu {chosen_model_id}")
 
-    # Skill 03 — layout composer
-    # ESTRATÉGIA 1 (preferida): se temos layout template determinístico pro modelo,
-    # USA ELE em vez do LLM. Resultado 100% previsível, respeitando hierarquia visual
-    # que o LLM tendia a quebrar (texto fora da imagem, sem overlay, etc.).
-    # ESTRATÉGIA 2 (fallback): LLM com YAML + instruções (comportamento original).
-    marca = briefing.get("marca", "metta")
-    model_yaml_path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / "models" / marca / f"{chosen_model_id}.yaml"
+    # Verifica se template HTML existe pra esse modelo
+    if not has_template(marca, chosen_model_id):
+        return {
+            "ok": False,
+            "error": f"Modelo '{chosen_model_id}' (marca={marca}) ainda não tem template HTML. Use um modelo da lista de disponíveis.",
+            "run_id": run_id,
+            "model_id": chosen_model_id,
+            "diagnostics": diagnostics,
+        }
+
+    # ============================================================
+    # Resolver formato (story / feed / sqr) — afeta template + image aspect
+    # ============================================================
+    format_key = _resolve_format(briefing.get("formato"), wizard_format)
+    diagnostics.append(f"format: {format_key} (wizard={wizard_format} briefing={briefing.get('formato')})")
+
+    # ============================================================
+    # Skill 04 — Image gen (OpenAI gpt-image-1)
+    # Pula quando image_source='none' ou modelo é tipográfico-puro.
+    # ============================================================
+    image_file_url: str = ""
+    image_data_uri: str = ""
+
+    # Carrega YAML do modelo pra checar se image_required
+    marca_models_dir = ENGINE_DIR / "brand-knowledge" / "models" / marca
+    model_yaml_path = marca_models_dir / f"{chosen_model_id}.yaml"
+    model_requires_image = True
     model_yaml_content = ""
     if model_yaml_path.exists():
         model_yaml_content = model_yaml_path.read_text(encoding="utf-8")
-        diagnostics.append(f"03-yaml: {chosen_model_id}.yaml carregado ({len(model_yaml_content)} chars)")
+        if "required:          false" in model_yaml_content or "required: false" in model_yaml_content:
+            model_requires_image = False
+        diagnostics.append(f"03-yaml: {chosen_model_id}.yaml carregado · image_required={model_requires_image}")
     else:
-        diagnostics.append(f"03-yaml: FALTANDO {model_yaml_path} — LLM vai improvisar")
+        diagnostics.append(f"03-yaml: FALTANDO {model_yaml_path}")
 
-    # Check se modelo tem template determinístico
-    try:
-        from _layouts import has_template, build_layout as build_layout_template
-    except ImportError:
-        sys.path.insert(0, str(Path(__file__).resolve().parent))
-        from _layouts import has_template, build_layout as build_layout_template
-
-    copy_data = _extract_copy(
-        user_headline, user_subhead, user_body, user_cta_text, briefing_text
-    )
-
-    if has_template(chosen_model_id):
-        # Template Python determinístico — pula skill 03 LLM
-        t03 = time.time()
-        layout_spec = build_layout_template(
-            chosen_model_id,
-            briefing=briefing,
-            copy=copy_data,
-            image_url=None,   # image_url só preenchido na skill 04
-        )
-        mark("03", t03)
-        try:
-            from layout_enforcer import enforce
-            layout_spec, _ = enforce(layout_spec, briefing)
-        except Exception as e:
-            diagnostics.append(f"layout-enforcer: pulado ({e.__class__.__name__})")
-        write_artifact(run_id, "03-layout-spec", layout_spec, artifacts_dir)
-        total_elements = len(layout_spec.get("elements", []))
-        image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
-        slot_names = [s.get("slot_name", "?") for s in image_slots]
-        diagnostics.append(
-            f"03-layout-composer ({timings['03']}ms): TEMPLATE determinístico — "
-            f"{total_elements} elementos · {len(image_slots)} image_slot(s) "
-            f"{('= ' + ', '.join(slot_names)) if slot_names else ''} · "
-            f"copy: H={len(copy_data.get('headline', ''))}c · S={len(copy_data.get('subhead', ''))}c · "
-            f"B={len(copy_data.get('body', ''))}c · CTA='{copy_data.get('cta', '')[:30]}'"
-        )
-        # Pula bloco LLM abaixo
-        skip_llm_03 = True
-    else:
-        skip_llm_03 = False
-
-    if not skip_llm_03:
-        layout_input = {
-            "briefing": briefing,
-            "model_id": chosen_model_id,
-            "copy": {
-                "headline": copy_data.get("headline", ""),
-                "subhead": copy_data.get("subhead", ""),
-                "body": copy_data.get("body", ""),
-                "cta": copy_data.get("cta", ""),
-            },
-        }
-
-        copy_block_for_llm = (
-            f"=== COPY DO USER (USAR LITERALMENTE — não reescrever) ===\n"
-            f"headline: \"{copy_data.get('headline', '')}\"\n"
-            f"subhead:  \"{copy_data.get('subhead', '')}\"\n"
-            f"body:     \"{copy_data.get('body', '')}\"\n"
-            f"cta:      \"{copy_data.get('cta', '')}\"\n"
-        )
-        extra_03 = (
-            f"{copy_block_for_llm}\n"
-            f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n"
-            f"```yaml\n{model_yaml_content}\n```\n\n"
-            f"INSTRUÇÕES OBRIGATÓRIAS:\n"
-            f"1. Use os campos `slots`, `image`, `typography`, `colors`, `composicao` LITERALMENTE deste YAML.\n"
-            f"2. Se `image.required == true`, você DEVE adicionar element type='image_slot'.\n"
-            f"3. Posicione o image_slot conforme `image.placement` do YAML.\n"
-            f"4. Use tokens da marca {marca}.\n"
-            f"5. NÃO reescreva a copy — use os textos do user LITERALMENTE em cada slot apropriado:\n"
-            f"   • headline → slot headline\n"
-            f"   • subhead → slot subheadline ou body (se YAML não tem subheadline)\n"
-            f"   • body → slot body ou descrição (se houver). Se YAML não tem slot pra body, ADICIONE um text element abaixo da subheadline.\n"
-            f"   • cta → slot cta\n"
-            f"6. Se algum campo da copy vier vazio, omita o slot (não invente texto).\n"
-            f"7. CONTAINER SLOTS (role contém 'container'/'block'/'bloco'): crie type='rect' com fill+corner_radius do YAML.\n"
-            f"8. Children do container: text com x=rect.x+padding, y=rect.y+padding. Ordem importa.\n"
-        )
-        t03 = time.time()
-        r = runner.run("03-layout-composer", layout_input, extra_context=extra_03)
-        mark("03", t03)
-        if not r.ok:
-            return {"ok": False, "error": f"layout-composer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
-        layout_spec = r.output
-        try:
-            from layout_enforcer import enforce
-            layout_spec, _ = enforce(layout_spec, briefing)
-        except Exception as e:
-            diagnostics.append(f"layout-enforcer: pulado ({e.__class__.__name__})")
-        write_artifact(run_id, "03-layout-spec", layout_spec, artifacts_dir)
-        total_elements = len(layout_spec.get("elements", []))
-        image_slots = [e for e in layout_spec.get("elements", []) if e.get("type") == "image_slot"]
-        slot_names = [s.get("slot_name", "?") for s in image_slots]
-        diagnostics.append(
-            f"03-layout-composer ({timings['03']}ms): LLM — {total_elements} elementos · "
-            f"{len(image_slots)} image_slot(s) {('= ' + ', '.join(slot_names)) if slot_names else ''}"
-        )
-
-    # Skill 04 — image prompt engineer + image-gen
-    # 3 caminhos:
-    #   (a) image_source='search' + image_url presente → injeta URL direta em TODOS os slots (pula skill 04)
-    #   (b) image_source='none' → pula skill 04 (sem imagem mesmo que o layout tenha slot)
-    #   (c) image_source='generate' (default) → roda skill 04 + image-gen normal
-    image_urls: dict[str, str] = {}
-    # Pre-fill: image_slots com static_asset (ex: twitter header) usam asset local
-    # diretamente, sem passar por image-gen. Skill 04 só processa slots vazios.
-    static_filled = []
-    for slot in image_slots:
-        sa = slot.get("static_asset")
-        if sa:
-            image_urls[slot.get("slot_name", "main")] = sa
-            static_filled.append(slot.get("slot_name", "main"))
-    if static_filled:
-        diagnostics.append(f"04-static-assets: pre-fill {len(static_filled)} slot(s): {', '.join(static_filled)}")
-    # Slots restantes (sem static_asset) seguem o fluxo normal
-    dynamic_image_slots = [s for s in image_slots if not s.get("static_asset")]
-
-    if not image_slots:
-        diagnostics.append("04-image-prompt-engineer: PULADO — layout não tem image_slot")
-    elif not dynamic_image_slots:
-        # Todos image_slots foram preenchidos por static_asset — não precisa rodar skill 04
-        diagnostics.append("04-image-prompt-engineer: PULADO — todos image_slots têm static_asset")
+    if image_source == "none" or not model_requires_image:
+        diagnostics.append("04-image-gen: PULADO — modelo sem imagem OU user escolheu sem imagem")
     elif image_source == "search" and image_url:
-        for slot in dynamic_image_slots:
-            image_urls[slot.get("slot_name", "main")] = image_url
-        diagnostics.append(
-            f"04-image-gen: PULADO — usando URL da busca web em {len(dynamic_image_slots)} slot(s): {image_url[:80]}"
-        )
-    elif image_source == "none":
-        diagnostics.append("04-image-gen: PULADO — user escolheu peça sem imagem")
+        # URL pronta da busca web — usa direto
+        image_file_url = image_url
+        diagnostics.append(f"04-image-gen: PULADO — usando URL da busca: {image_url[:80]}")
     else:
-        # Caminho generate (default): skill 04 + image-gen — só pra slots SEM static_asset
-        prompt_input = {"layout_spec": layout_spec, "briefing": briefing, "image_slots": dynamic_image_slots}
+        # Caminho generate (default): roda skill 04 + image-gen
+        t04_skill = time.time()
 
-        # Vector search no banco visual: descrições de refs canônicos viram texto
-        # no extra_context da skill 04 (ajuda LLM a aterrissar mood/composição
-        # próximo do banco real). Image refs em si só funcionam em Gemini —
-        # OpenAI ignora e a warning explícita aparece em image_gen.py.
-        ad_refs_list = []
-        try:
-            from vector_search import search_ad_refs, refs_to_prompt_addendum
-            query = (
-                f"{briefing.get('tese_central', '')} {briefing.get('intent', '')} "
-                f"{briefing.get('tom', '')}"
-            ).strip()
-            ad_refs_list, ad_refs_status = search_ad_refs(
-                query, style_filter=chosen_model_id, top_k=3
-            )
-            if ad_refs_list:
-                diagnostics.append(
-                    f"04-banco-refs: {len(ad_refs_list)} ref(s) ({ad_refs_status}) — "
-                    f"top: {ad_refs_list[0].filename[:40]} score={ad_refs_list[0].score:.3f}"
-                )
-            else:
-                diagnostics.append(f"04-banco-refs: 0 refs — {ad_refs_status}")
-        except Exception as e:
-            diagnostics.append(f"04-banco-refs: pulado ({e.__class__.__name__}: {str(e)[:80]})")
+        # Pre-carrega base.md da marca + template-do-estilo + preset
+        base_path = ENGINE_DIR / "brand-knowledge" / "image-prompts" / marca / (
+            "_base.md" if marca == "metta" else "_base-tiago.md"
+        )
+        base_content = base_path.read_text(encoding="utf-8") if base_path.exists() else ""
+        if base_content:
+            diagnostics.append(f"04-base: {base_path.name} carregado ({len(base_content)} chars)")
 
-        # Tenta achar o image-prompt template do estilo:
-        # alguns YAMLs definem `image.prompt_template_ref: "image-prompts/marca/style-X.md"`
+        # prompt_template_ref do YAML
         import re as _re
         ref_match = _re.search(r"prompt_template_ref:\s*['\"]?([^'\"\n]+)['\"]?", model_yaml_content)
         image_prompt_template = ""
@@ -529,42 +244,13 @@ def _run_pipeline_inline(
             if tpl_path.exists():
                 image_prompt_template = tpl_path.read_text(encoding="utf-8")
                 diagnostics.append(f"04-template: {tpl_path.name} carregado ({len(image_prompt_template)} chars)")
-            else:
-                diagnostics.append(f"04-template: FALTANDO {tpl_path}")
-        else:
-            diagnostics.append(f"04-template: YAML não tem prompt_template_ref — usando default da skill")
 
-        # Carrega o _base.md da marca — vocabulário curado (mood/lighting/camera/palette
-        # + negative prompts universais). Skill 04 sem isso improvisa do zero.
-        base_path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / "image-prompts" / marca / (
-            "_base.md" if marca == "metta" else "_base-tiago.md"
+        # Provider awareness + preset
+        active_provider = os.getenv("IMAGE_GEN_PROVIDER", "openai").lower()
+        active_section_key = (
+            "SEÇÃO LEGACY" if active_provider in ("nano-banana-2", "gemini") else "SEÇÃO PROD"
         )
-        base_content = ""
-        if base_path.exists():
-            base_content = base_path.read_text(encoding="utf-8")
-            diagnostics.append(f"04-base: {base_path.name} carregado ({len(base_content)} chars)")
-        else:
-            diagnostics.append(f"04-base: FALTANDO {base_path}")
 
-        parts = []
-        # Direção do user vem PRIMEIRO e DOMINA quando preenchida — TANTO sujeito QUANTO
-        # tratamento visual quando ele especifica explicitamente (ex: "realista", "B&W",
-        # "cores vivas"). User vence sempre.
-        if briefing_image_text and briefing_image_text.strip():
-            parts.append(
-                f"=== DIREÇÃO VISUAL DO USER — PRIORIDADE MÁXIMA ABSOLUTA ===\n"
-                f'"{briefing_image_text.strip()}"\n\n'
-                f"Essa direção do user controla TANTO o SUJEITO QUANTO o TRATAMENTO da imagem.\n"
-                f"Se user disse 'realista', a foto É realista (sem B&W, sem selective yellow, sem surrealismo).\n"
-                f"Se user disse 'B&W moody com chuva', a foto É B&W moody com chuva.\n"
-                f"O preset escolhido pelo user (próxima seção) e o template do estilo do AD\n"
-                f"SÓ entram pra completar o que a direção do user NÃO especificou. Quando há\n"
-                f"conflito entre direção do user e template, USER VENCE — sempre."
-            )
-
-        # Preset de estilo de foto escolhido pelo user (TRATAMENTO prioritário sobre template do AD)
-        # Vem do wizard novo step 'wiz-imagem-briefing' (cards de preset visual).
-        # Carrega via _image_presets.py — definido no parent api/ pra não poluir engine.
         try:
             from _image_presets import get_preset, preset_to_extra_context
         except ImportError:
@@ -572,273 +258,141 @@ def _run_pipeline_inline(
             from _image_presets import get_preset, preset_to_extra_context
         chosen_preset = get_preset(image_style_preset)
         if chosen_preset:
-            parts.append(preset_to_extra_context(chosen_preset))
-            diagnostics.append(
-                f"04-preset: '{chosen_preset['id']}' ({chosen_preset['label']}) — tratamento prioritário injetado"
-            )
-        else:
-            diagnostics.append(
-                f"04-preset: nenhum preset escolhido — usando tratamento do template do estilo do AD"
-            )
-        # Provider-aware: skill 04 deve gerar prompt na seção certa do _base/style
-        # template. Se IMAGE_GEN_PROVIDER aponta pra openai/gpt-image-* → SEÇÃO PROD
-        # (descritivo visual + negative inline). Se nano-banana/gemini → SEÇÃO LEGACY
-        # (jargão técnico). Default em prod hoje = openai → usar SEÇÃO PROD.
-        active_provider = os.getenv("IMAGE_GEN_PROVIDER", "openai").lower()
-        is_nano_banana = active_provider in ("nano-banana-2", "gemini-nano-banana", "gemini")
-        active_section_label = "Nano Banana 2 / Gemini" if is_nano_banana else "gpt-image-1 / OpenAI"
-        active_section_key = "SEÇÃO LEGACY" if is_nano_banana else "SEÇÃO PROD"
-        diagnostics.append(
-            f"04-provider: ativo={active_provider} → usar '{active_section_key}' "
-            f"dos prompts (target: {active_section_label})"
-        )
+            diagnostics.append(f"04-preset: '{chosen_preset['id']}' — tratamento prioritário")
 
-        # _base da marca herda pra TODO prompt — vocabulário controlado + negative universal
+        # Monta extra_context
+        parts = []
+        if briefing_image_text and briefing_image_text.strip():
+            parts.append(
+                f"=== DIREÇÃO VISUAL DO USER — PRIORIDADE MÁXIMA ===\n"
+                f'"{briefing_image_text.strip()}"\n\n'
+                f"Essa direção controla TANTO sujeito QUANTO tratamento. User vence sempre."
+            )
+        if chosen_preset:
+            parts.append(preset_to_extra_context(chosen_preset))
         if base_content:
             parts.append(
-                f"=== BASE DA MARCA {marca.upper()} (vocabulário sempre herdado — mood/lighting/camera/palette + negative prompts universais) ===\n"
-                f"{base_content}\n\n"
-                f"PROVIDER ATIVO: {active_section_label}. Use a `{active_section_key}` do _base "
-                f"e do template do estilo abaixo (versão descritiva-visual com 'without X' inline pro OpenAI, "
-                f"ou versão jargão técnico fotográfico pro Nano Banana 2)."
+                f"=== BASE DA MARCA {marca.upper()} ===\n{base_content}\n\n"
+                f"PROVIDER: {active_provider}. Use {active_section_key}."
             )
         parts.append(
-            f"=== TEMPLATE DE PROMPT DO ESTILO (use SOMENTE a `{active_section_key}` — ignore a outra) ===\n"
+            f"=== TEMPLATE DE PROMPT DO ESTILO (use {active_section_key}) ===\n"
             f"{image_prompt_template or '(sem template — use defaults do _base)'}"
         )
-
-        # Injeção da instrução de composição-por-slot — placement do layout vira regra
-        # explícita no prompt, garantindo que a foto encaixe no espaço reservado.
-        placement_hint_lines = []
-        for el in dynamic_image_slots:
-            sn = el.get("slot_name", "?")
-            placement = ""
-            # 1) Tenta ler do YAML do modelo (model.image.placement)
-            try:
-                import re as _re_p
-                m = _re_p.search(r"placement:\s*['\"]?([\w\-]+)['\"]?", model_yaml_content)
-                if m:
-                    placement = m.group(1).lower()
-            except Exception:
-                pass
-            # 2) Fallback: deduz pela posição do element no canvas
-            if not placement:
-                x, y = int(el.get("x", 0) or 0), int(el.get("y", 0) or 0)
-                w, h = int(el.get("width", 0) or 0), int(el.get("height", 0) or 0)
-                # Heurística simples baseada em x/y do slot
-                if el.get("fullbleed") or (w >= 1080 and h >= 1080):
-                    placement = "fullbleed"
-                elif x > 400:
-                    placement = "right-bleed"
-                elif y > 400:
-                    placement = "bottom-bleed"
-                else:
-                    placement = "center"
-            placement_hint_lines.append(f"- slot='{sn}': placement='{placement}'")
-
-        if placement_hint_lines:
-            parts.append(
-                "=== COMPOSIÇÃO-POR-SLOT (INVIOLÁVEL — leia a tabela em _base.md §REGRA INVIOLÁVEL) ===\n"
-                + "\n".join(placement_hint_lines)
-                + "\n\nPara CADA slot acima, INCLUA no prompt a instrução de composição correspondente "
-                "ao placement (consulte a tabela em _base.md §REGRA INVIOLÁVEL). Sem isso, a foto não "
-                "encaixa no layout. Exemplo: placement='right-bleed' → 'subject positioned in the right "
-                "40% of the frame, with the left 60% as empty space for text overlay'."
-            )
-        # Refs do banco como descrição textual (Gemini também consome via imagem, OpenAI só texto)
-        if ad_refs_list:
-            try:
-                parts.append(refs_to_prompt_addendum(ad_refs_list))
-            except Exception:
-                pass
-        parts.append(f"=== YAML COMPLETO DO MODELO {chosen_model_id} ===\n```yaml\n{model_yaml_content}\n```")
         parts.append(
             "INSTRUÇÕES OBRIGATÓRIAS:\n"
-            "1. Para CADA image_slot do layout, gere uma entry em `prompts[]`.\n"
-            "2. O `slot_name` em cada prompt DEVE bater exatamente com o `slot_name` do image_slot no layout_spec.\n"
-            "3. Se houve DIREÇÃO VISUAL DO USER, o subject do prompt VEM DELA. Template do estilo só dá tratamento (mood, lighting, processing).\n"
-            "4. Se NÃO houve direção, use o template do estilo como guideline completa.\n"
-            "5. Se um image_slot existe, NÃO retorne `skip: true`. Skip só se layout NÃO tem image_slot algum.\n"
-            "6. negative_prompt: acumule os anti-padrões do _base da marca + os específicos do estilo. Não omita.\n"
-            "7. Use vocabulário do _base nos campos mood/lighting/composition/palette/camera — não invente."
+            "1. Gere 1 prompt pro slot principal de imagem.\n"
+            "2. negative_prompt: acumule anti-padrões do _base + preset + estilo.\n"
+            "3. Forneça 1-2 fallback_prompts com variações de persona/mood."
         )
         skill_extra = "\n\n".join(parts)
-        t04 = time.time()
+
+        # Skill 04 — gera prompts
+        prompt_input = {
+            "layout_spec": {"model_id": chosen_model_id, "marca": marca},
+            "briefing": briefing,
+            "image_slots": [{"slot_name": "main", "image_prompt_ref": ""}],
+        }
         r = runner.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
-        mark("04-skill", t04)
+        mark("04-skill", t04_skill)
         if not r.ok:
-            return {"ok": False, "error": f"image-prompt-engineer: {r.error}", "run_id": run_id, "diagnostics": diagnostics}
+            return {"ok": False, "error": f"image-prompt-engineer: {r.error}",
+                    "run_id": run_id, "diagnostics": diagnostics}
         image_spec = r.output
         write_artifact(run_id, "04-image-prompt", image_spec, artifacts_dir)
-        skip_flag = image_spec.get("skip", False)
-        prompt_count = len(image_spec.get("prompts", []))
-        diagnostics.append(
-            f"04-image-prompt-engineer ({timings.get('04-skill', 0)}ms): skip={skip_flag} · prompts={prompt_count} · "
-            f"skip_reason={image_spec.get('skip_reason', '')[:120]}"
-        )
-        if skip_flag:
+        diagnostics.append(f"04-image-prompt-engineer ({timings['04-skill']}ms): prompts={len(image_spec.get('prompts', []))}")
+
+        if image_spec.get("skip"):
             diagnostics.append("04-image-gen: NÃO rodou — skill 04 marcou skip=true")
-        else:
+        elif image_spec.get("prompts"):
+            p = image_spec["prompts"][0]
+            # Aspect ratio resolvido pelo formato — story=9:16, feed=4:5, sqr=1:1
+            aspect_by_format = {"story": "9:16", "feed": "4:5", "sqr": "1:1"}
+            aspect = p.get("aspect_ratio") or aspect_by_format.get(format_key, "9:16")
+            negative = p.get("negative_prompt", "")
+            primary_prompt = p["prompt"]
+            fallback_prompts = p.get("iteration_strategy", {}).get("fallback_prompts") or []
+            attempt_chain = [primary_prompt] + [
+                fp for fp in fallback_prompts if isinstance(fp, str) and fp.strip()
+            ]
+            max_attempts = int(os.getenv("IMAGE_MAX_ATTEMPTS", "2"))
+            attempt_chain = attempt_chain[:max_attempts]
+
             image_gen = ImageGenAdapter()
-            # Adiciona PNGs locais do banco (vector search) na lista de refs — só
-            # têm efeito em provider Gemini, mas custam zero pra passar.
-            banco_ref_paths = [r.png_path for r in ad_refs_list if r.png_path]
-            for idx, p in enumerate(image_spec.get("prompts", [])):
-                slot = p.get("slot_name", f"slot_{idx}")
-                # Filtra refs do LLM removendo figma:// e tipos não-resolvíveis
-                llm_refs = [
-                    r for r in (p.get("reference_images") or [])
-                    if isinstance(r, str) and not r.startswith("figma://")
-                ]
-                merged_refs = (llm_refs + banco_ref_paths)[:3]
-                # aspect_ratio: prioridade = hint do template (slot tem proporção
-                # específica, ex: card embed quadrado) > resposta da skill 04 >
-                # default 9:16. Sem isso, slot 4:5 recebia foto 9:16 e cortava.
-                slot_hint = None
-                for sl in dynamic_image_slots:
-                    if sl.get("slot_name") == slot and sl.get("aspect_ratio_hint"):
-                        slot_hint = sl["aspect_ratio_hint"]
-                        break
-                aspect = slot_hint or p.get("aspect_ratio") or "9:16"
-                negative = p.get("negative_prompt", "")
-
-                # Monta cadeia de tentativas: v1 primário + fallbacks do iteration_strategy
-                primary_prompt = p["prompt"]
-                fallback_prompts = (
-                    p.get("iteration_strategy", {}).get("fallback_prompts") or []
-                )
-                attempt_chain = [primary_prompt] + [
-                    fp for fp in fallback_prompts if isinstance(fp, str) and fp.strip()
-                ]
-                # Cap em 2 attempts pra caber no timeout 60s do Vercel
-                # (cada tentativa low-quality ~12s + skills LLM ~15-25s).
-                # Override via env var IMAGE_MAX_ATTEMPTS pra rodar local com mais.
-                max_attempts = int(os.getenv("IMAGE_MAX_ATTEMPTS", "2"))
-                attempt_chain = attempt_chain[:max_attempts]
-
-                last_error: Exception | None = None
-                ig = None
-                for attempt_idx, attempt_prompt in enumerate(attempt_chain, start=1):
-                    try:
-                        ig = image_gen.generate(
-                            prompt=attempt_prompt,
-                            negative_prompt=negative,
-                            aspect_ratio=aspect,
-                            reference_images=merged_refs,
-                        )
-                        # Sucesso — registra qual tentativa funcionou
-                        if attempt_idx > 1:
-                            diagnostics.append(
-                                f"04-image-gen: slot={slot} sucesso na tentativa v{attempt_idx} "
-                                f"(primária falhou: {last_error.__class__.__name__})"
-                            )
-                        image_urls[slot] = ig.url
-                        diagnostics.append(
-                            f"04-image-gen: OK slot={slot} provider={ig.provider} "
-                            f"model={ig.model} t={ig.elapsed_ms}ms attempt=v{attempt_idx}/"
-                            f"{len(attempt_chain)} url={(ig.url or '')[:60]}"
-                        )
-                        break
-                    except Exception as e:
-                        last_error = e
-                        diagnostics.append(
-                            f"04-image-gen: tentativa v{attempt_idx} falhou slot={slot} — "
-                            f"{e.__class__.__name__}: {str(e)[:140]}"
-                        )
-                        print(f"[image_gen v{attempt_idx} warn] {e}", file=sys.stderr)
-                if ig is None and last_error is not None:
-                    diagnostics.append(
-                        f"04-image-gen: TODAS as {len(attempt_chain)} tentativas falharam slot={slot} "
-                        f"— último erro: {last_error.__class__.__name__}: {str(last_error)[:200]}"
+            last_error = None
+            for i, attempt_prompt in enumerate(attempt_chain, start=1):
+                try:
+                    ig = image_gen.generate(
+                        prompt=attempt_prompt,
+                        negative_prompt=negative,
+                        aspect_ratio=aspect,
+                        reference_images=[],
                     )
+                    image_file_url = ig.url
+                    diagnostics.append(
+                        f"04-image-gen: OK provider={ig.provider} model={ig.model} "
+                        f"t={ig.elapsed_ms}ms attempt=v{i}/{len(attempt_chain)}"
+                    )
+                    break
+                except Exception as e:
+                    last_error = e
+                    diagnostics.append(f"04-image-gen: v{i} falhou — {e.__class__.__name__}: {str(e)[:140]}")
+            if not image_file_url:
+                diagnostics.append(f"04-image-gen: TODAS as tentativas falharam")
 
-    # Adaptive text color: analisa fundo (imagem) e ajusta cor do text pra contraste
-    _adapt_text_colors_to_image(layout_spec, image_urls, diagnostics)
+    # Converte file:// → data:image URI pro HTML
+    if image_file_url:
+        image_data_uri = _image_to_data_uri(image_file_url)
+        diagnostics.append(f"image-uri: data:image embed ({len(image_data_uri) // 1024}KB base64)")
 
-    # Skill 05 — assembler (PNG via Pillow)
-    diagnostics.append(
-        f"05-assembler: entrada → {len(image_urls)} url(s) pra {len(image_slots)} slot(s) do layout. "
-        f"Match: {'OK' if set(image_urls.keys()) >= set(slot_names) else 'INCOMPLETO — slot_names esperados não bateram com chaves de image_urls'}"
+    # ============================================================
+    # Render HTML (substitui assembler Pillow + skill 03 + skill 05)
+    # ============================================================
+    t_render = time.time()
+    copy_dict = {
+        "headline": (user_headline or "").strip(),
+        "subhead": (user_subhead or "").strip(),
+        "body": (user_body or "").strip(),
+        "cta": (user_cta_text or "").strip(),
+    }
+    rendered = render_html(
+        marca=marca,
+        model_id=chosen_model_id,
+        copy=copy_dict,
+        image_url=image_data_uri or image_file_url,
+        format=format_key,
     )
-    t05 = time.time()
-    asm_result = AssemblerAdapter().assemble(layout_spec, image_urls)
-    mark("05", t05)
-    if not asm_result.png_path:
-        return {"ok": False, "error": "assembler did not produce a PNG", "run_id": run_id, "diagnostics": diagnostics}
-    if asm_result.warnings:
-        for w in asm_result.warnings:
-            diagnostics.append(f"05-assembler: warning → {w}")
-    diagnostics.append(f"05-assembler ({timings['05']}ms): PNG gerado ({len(image_urls)} imagens injetadas)")
+    mark("render", t_render)
+    if rendered.get("missing"):
+        return {
+            "ok": False,
+            "error": f"Template HTML não encontrado pra '{chosen_model_id}'",
+            "run_id": run_id, "model_id": chosen_model_id, "diagnostics": diagnostics,
+        }
+    diagnostics.append(
+        f"render-html ({timings['render']}ms): {len(rendered['html'])} chars · "
+        f"copy: H={len(copy_dict['headline'])}c S={len(copy_dict['subhead'])}c "
+        f"B={len(copy_dict['body'])}c CTA='{copy_dict['cta'][:30]}'"
+    )
 
-    # Post-process: overlay da assinatura Tiago em capas/únicos/finais
-    if marca == "tiago" and chosen_model_id in SIGNATURE_MODELS:
-        cfg = SIGNATURE_MODELS[chosen_model_id]
-        sig_path = ENGINE_DIR / "assets" / "signatures-tiago" / f"{cfg['color']}.png"
-        if sig_path.exists():
-            try:
-                from PIL import Image
-                base = Image.open(asm_result.png_path).convert("RGBA")
-                sig = Image.open(sig_path).convert("RGBA")
-                # Escala da assinatura: 'medio' = 18% da largura, 'grande' = 26%
-                pct = 0.26 if cfg.get("size") == "grande" else 0.18
-                target_w = int(base.width * pct)
-                target_h = int(sig.height * (target_w / sig.width))
-                sig_resized = sig.resize((target_w, target_h), Image.LANCZOS)
-                # Posição com margem 5% do canvas
-                margin = int(base.width * 0.05)
-                positions = {
-                    "top-right":     (base.width - target_w - margin, margin),
-                    "top-left":      (margin, margin),
-                    "top-center":    ((base.width - target_w) // 2, margin),
-                    "bottom-right":  (base.width - target_w - margin, base.height - target_h - margin),
-                    "bottom-left":   (margin, base.height - target_h - margin),
-                    "bottom-center": ((base.width - target_w) // 2, base.height - target_h - margin),
-                }
-                pos = positions.get(cfg["position"], positions["top-right"])
-                # Overrides específicos por modelo (úteis pra ajuste fino)
-                if "y_override" in cfg:
-                    pos = (pos[0], int(cfg["y_override"]))
-                if "x_offset" in cfg:
-                    pos = (pos[0] + int(cfg["x_offset"]), pos[1])
-                base.paste(sig_resized, pos, mask=sig_resized)
-                base.save(asm_result.png_path)
-                diagnostics.append(
-                    f"06-signature: {cfg['color']}.png @ {cfg['position']} "
-                    f"({cfg.get('size', 'medio')}, {target_w}×{target_h}px)"
-                )
-            except Exception as e:
-                diagnostics.append(f"06-signature: FALHOU — {e.__class__.__name__}: {e}")
-        else:
-            diagnostics.append(f"06-signature: arquivo não encontrado {sig_path.name}")
-    elif marca == "tiago":
-        diagnostics.append(f"06-signature: PULADO — modelo {chosen_model_id} não está na lista de assinatura")
-
-    # Sumário de tempo total — pra diagnosticar timeout 60s do Vercel Hobby
+    # ============================================================
+    # Sumário + return
+    # ============================================================
     total_ms = int((time.time() - t_start) * 1000)
-    diagnostics.append(f"TOTAL: {total_ms}ms ({total_ms/1000:.1f}s) — breakdown: " +
-                       " · ".join(f"{k}={v}ms" for k, v in timings.items()))
-
-    # Skill 06 — qa-validator PULADO pra caber em 60s.
-
-    # QA visual: roda checagem estrutural na peça final
-    qa_report = _run_visual_qa(layout_spec, image_urls, asm_result.png_path)
-    pass_count = sum(1 for c in qa_report if c["status"] == "pass")
-    warn_count = sum(1 for c in qa_report if c["status"] == "warn")
-    fail_count = sum(1 for c in qa_report if c["status"] == "fail")
     diagnostics.append(
-        f"06-qa-visual: {pass_count}/{len(qa_report)} pass · {warn_count} warn · {fail_count} fail"
+        f"TOTAL: {total_ms}ms ({total_ms/1000:.1f}s) — " +
+        " · ".join(f"{k}={v}ms" for k, v in timings.items())
     )
 
-    # Lê o PNG e devolve em base64
-    png_bytes = Path(asm_result.png_path).read_bytes()
     return {
         "ok": True,
         "run_id": run_id,
         "model_id": chosen_model_id,
-        "png_b64": base64.b64encode(png_bytes).decode("ascii"),
-        "warnings": asm_result.warnings or [],
+        "marca": marca,
+        "format": format_key,
+        "html": rendered["html"],
+        "image_data_uri": image_data_uri,  # opcional — html já tem inline
         "diagnostics": diagnostics,
-        "qa_report": qa_report,
     }
 
 
@@ -851,38 +405,29 @@ class handler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length", 0))
             raw = self.rfile.read(length).decode("utf-8") if length else ""
             data = json.loads(raw) if raw else {}
-            briefing = data.get("briefing", "")
-            mock = bool(data.get("mock", False))
-            forced_model_id = data.get("model_id") or None
-            image_source = data.get("image_source") or None      # 'generate' | 'search' | 'none'
-            image_url = data.get("image_url") or None             # URL da imagem escolhida (busca)
-            briefing_image = data.get("briefing_image") or None   # texto livre — direção da imagem
-            image_style_preset = data.get("image_style_preset") or None  # id do preset visual (cards do wizard)
-            # Copy estruturada: SEMPRE 3 campos separados agora (modo 'gerar copy' removido)
-            copy_headline = data.get("copy_headline") or None
-            copy_subhead = data.get("copy_subhead") or None
-            copy_body = data.get("copy_body") or None
-            cta_text = data.get("cta_text") or None               # CTA digitado/escolhido
 
+            briefing = data.get("briefing", "")
             if not isinstance(briefing, str) or not briefing.strip():
                 return self._json(400, {"detail": "Body precisa de { briefing: string não-vazio }"})
 
             result = _run_pipeline_inline(
                 briefing,
-                mock=mock,
-                forced_model_id=forced_model_id,
-                image_source=image_source,
-                image_url=image_url,
-                briefing_image_text=briefing_image,
-                image_style_preset=image_style_preset,
-                user_headline=copy_headline,
-                user_subhead=copy_subhead,
-                user_body=copy_body,
-                user_cta_text=cta_text,
+                mock=bool(data.get("mock", False)),
+                forced_model_id=data.get("model_id") or None,
+                image_source=data.get("image_source") or None,
+                image_url=data.get("image_url") or None,
+                briefing_image_text=data.get("briefing_image") or None,
+                image_style_preset=data.get("image_style_preset") or None,
+                user_headline=data.get("copy_headline") or None,
+                user_subhead=data.get("copy_subhead") or None,
+                user_body=data.get("copy_body") or None,
+                user_cta_text=data.get("cta_text") or None,
+                wizard_format=data.get("format") or None,
             )
             if not result.get("ok"):
                 return self._json(500, {"detail": result.get("error", "erro desconhecido"),
-                                        "run_id": result.get("run_id")})
+                                        "run_id": result.get("run_id"),
+                                        "diagnostics": result.get("diagnostics", [])})
             return self._json(200, result)
 
         except Exception as exc:
@@ -891,8 +436,8 @@ class handler(BaseHTTPRequestHandler):
             return self._json(500, {"detail": f"Erro interno: {exc.__class__.__name__}: {exc}"})
 
     def do_GET(self):
-        # Health-check rápido
-        return self._json(200, {"status": "ok", "engine_dir": str(ENGINE_DIR)})
+        return self._json(200, {"status": "ok", "engine_dir": str(ENGINE_DIR),
+                                "version": "v2-html-render"})
 
     def _json(self, status: int, data: dict) -> None:
         body = json.dumps(data, ensure_ascii=False).encode("utf-8")
