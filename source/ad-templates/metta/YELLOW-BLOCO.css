@@ -7,18 +7,15 @@
   background: var(--metta-night-100);
 }
 
-/* Foto pessoa — ocupa metade direita, bleed corner-bottom.
-   background-size: cover + position: right bottom mantém sujeito visível mesmo
-   se a imagem retornada do gpt-image-1 for 9:16 ou 4:5. */
+/* Foto pessoa — ocupa metade direita, bleed corner-bottom. */
 .ad-yellow-bloco .yb-photo {
   position: absolute;
-  /* Margem: começa 50% da largura, vai até além da borda direita (bleed) */
   right: -120px;
   bottom: -80px;
   width: 760px;
   height: 1100px;
   background-size: cover;
-  background-position: center 30%;  /* mostra rosto + torso, não corta cabeça */
+  background-position: center 30%;
   background-repeat: no-repeat;
   z-index: 1;
 }
@@ -37,6 +34,7 @@
   flex-direction: column;
   gap: 28px;
   z-index: 2;
+  overflow: hidden; /* garante que texto não vaza além do bloco amarelo */
 }
 
 .ad-yellow-bloco .yb-headline {
@@ -46,8 +44,8 @@
   color: var(--metta-night-10);
   text-transform: uppercase;
   margin: 0;
-  /* Permite headline de até 6 linhas sem quebrar layout */
   word-break: break-word;
+  overflow-wrap: break-word;
   hyphens: auto;
 }
 
@@ -76,14 +74,33 @@
   z-index: 3;
 }
 
-/* Variação FEED: canvas mais curto → ajusta zonas */
+/* =============================================================================
+ * FEED (1080×1350) — layout integrado: bloco amarelo topo + foto embaixo
+ * ============================================================================= */
 .ad-yellow-bloco[data-format="feed"] .yb-block {
-  top: 140px;
-  min-height: 800px;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  min-height: 680px;
+  border-radius: 0 0 48px 48px;
+  padding: 80px 72px 64px;
 }
+
+.ad-yellow-bloco[data-format="feed"] .yb-headline {
+  font-size: 72px;
+}
+
 .ad-yellow-bloco[data-format="feed"] .yb-photo {
-  height: 800px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  top: auto;
+  width: 1080px;
+  height: 680px;
+  background-position: center 20%;
 }
+
 .ad-yellow-bloco[data-format="feed"] .yb-cta-wrap {
-  bottom: 80px;
+  bottom: 700px; /* dentro do bloco amarelo, acima da foto */
+  left: 72px;
 }
