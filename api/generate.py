@@ -57,9 +57,17 @@ if str(Path(__file__).resolve().parent) not in sys.path:
 
 os.environ.setdefault("BRAND_KNOWLEDGE_PATH", str(ENGINE_DIR / "brand-knowledge"))
 os.environ.setdefault("ARTIFACTS_DIR", "/tmp/artifacts")
-# Vercel Hobby tem 60s timeout. Sem render Pillow no servidor agora (HTML→PNG
-# acontece no browser do user via html2canvas), sobra tempo: medium é viável.
-os.environ.setdefault("IMAGE_QUALITY", "medium")
+# Vercel Hobby tem 60s timeout. Breakdown observado em prod:
+#   skill 01 (briefing parser LLM): 3-4s
+#   skill 04 (image-prompt LLM):    3-5s (skip quando preset+briefing visual)
+#   image-gen gpt-image-1 low:      10-15s  (medium = 18-25s, high = 35-50s)
+#   cold start Vercel:              5-10s
+# Default 'low' deixa ~20-30s de margem. User pode subir via Vercel env var.
+os.environ.setdefault("IMAGE_QUALITY", "low")
+# Sem retry automático por default — fallback v2 dobra tempo de image-gen e
+# tipicamente estoura o timeout. User pode subir IMAGE_MAX_ATTEMPTS=2 quando
+# precisar de robustez (custa ~+15s de margem).
+os.environ.setdefault("IMAGE_MAX_ATTEMPTS", "1")
 
 
 # Mapeamento formato → format key dos templates HTML
@@ -270,51 +278,108 @@ def _run_pipeline_inline(
         if chosen_preset:
             diagnostics.append(f"04-preset: '{chosen_preset['id']}' — tratamento prioritário")
 
-        # Monta extra_context
-        parts = []
-        if briefing_image_text and briefing_image_text.strip():
-            parts.append(
-                f"=== DIREÇÃO VISUAL DO USER — PRIORIDADE MÁXIMA ===\n"
-                f'"{briefing_image_text.strip()}"\n\n'
-                f"Essa direção controla TANTO sujeito QUANTO tratamento. User vence sempre."
+        # FAST-PATH determinístico: quando user forneceu preset E briefing
+        # visual, montamos o prompt SEM chamar LLM da skill 04. Economiza
+        # 3-5s. O briefing visual já descreve o sujeito; o preset descreve
+        # o tratamento. _base só fornece anti-padrões inline.
+        user_briefing_present = bool(briefing_image_text and briefing_image_text.strip())
+        fast_path_ok = bool(chosen_preset and user_briefing_present)
+        image_spec: dict = {}
+        if fast_path_ok:
+            t04_fast = time.time()
+            # Anti-padrões universais (negative inline) — extraídos do _base
+            negative_universal = (
+                "without smiling stock pose, without cartoon, without 3D render generic, "
+                "without ring light, without flash, without text or logos in image, "
+                "without fake teeth-bleached smile"
             )
-        if chosen_preset:
-            parts.append(preset_to_extra_context(chosen_preset))
-        if base_content:
-            parts.append(
-                f"=== BASE DA MARCA {marca.upper()} ===\n{base_content}\n\n"
-                f"PROVIDER: {active_provider}. Use {active_section_key}."
+            preset_neg = chosen_preset.get("negative_overlay", "")
+            combined_negative = ", ".join(filter(None, [negative_universal, preset_neg]))
+            # Prompt principal: subject (briefing) + treatment (preset)
+            preset_overlay = chosen_preset.get("prompt_overlay", "")
+            primary_prompt = (
+                f"{briefing_image_text.strip()}. {preset_overlay}"
+            ).strip()
+            image_spec = {
+                "skip": False,
+                "prompts": [{
+                    "slot_name": "main",
+                    "prompt": primary_prompt,
+                    "negative_prompt": combined_negative,
+                    "aspect_ratio": None,  # backend resolve por format_key
+                    "iteration_strategy": {"max_attempts": 1, "fallback_prompts": []},
+                }],
+            }
+            mark("04-skill", t04_fast)
+            diagnostics.append(
+                f"04-skill: FAST-PATH determinístico (preset='{chosen_preset['id']}' + "
+                f"briefing visual presente) — pula LLM, economiza ~3-5s. "
+                f"prompt={len(primary_prompt)}c neg={len(combined_negative)}c"
             )
-        parts.append(
-            f"=== TEMPLATE DE PROMPT DO ESTILO (use {active_section_key}) ===\n"
-            f"{image_prompt_template or '(sem template — use defaults do _base)'}"
-        )
-        parts.append(
-            "INSTRUÇÕES OBRIGATÓRIAS:\n"
-            "1. Gere 1 prompt pro slot principal de imagem.\n"
-            "2. negative_prompt: acumule anti-padrões do _base + preset + estilo.\n"
-            "3. Forneça 1-2 fallback_prompts com variações de persona/mood."
-        )
-        skill_extra = "\n\n".join(parts)
+        else:
+            # Caminho LLM tradicional (necessário quando faltam preset/briefing)
+            parts = []
+            if user_briefing_present:
+                parts.append(
+                    f"=== DIREÇÃO VISUAL DO USER — PRIORIDADE MÁXIMA ===\n"
+                    f'"{briefing_image_text.strip()}"\n\n'
+                    f"Essa direção controla TANTO sujeito QUANTO tratamento. User vence sempre."
+                )
+            if chosen_preset:
+                parts.append(preset_to_extra_context(chosen_preset))
+            if base_content:
+                parts.append(
+                    f"=== BASE DA MARCA {marca.upper()} ===\n{base_content}\n\n"
+                    f"PROVIDER: {active_provider}. Use {active_section_key}."
+                )
+            parts.append(
+                f"=== TEMPLATE DE PROMPT DO ESTILO (use {active_section_key}) ===\n"
+                f"{image_prompt_template or '(sem template — use defaults do _base)'}"
+            )
+            parts.append(
+                "INSTRUÇÕES OBRIGATÓRIAS:\n"
+                "1. Gere 1 prompt pro slot principal de imagem.\n"
+                "2. negative_prompt: acumule anti-padrões do _base + preset + estilo.\n"
+                "3. SEM fallback_prompts — vamos com 1 attempt só pra economizar tempo."
+            )
+            skill_extra = "\n\n".join(parts)
 
-        # Skill 04 — gera prompts
-        prompt_input = {
-            "layout_spec": {"model_id": chosen_model_id, "marca": marca},
-            "briefing": briefing,
-            "image_slots": [{"slot_name": "main", "image_prompt_ref": ""}],
-        }
-        r = runner.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
-        mark("04-skill", t04_skill)
-        if not r.ok:
-            return {"ok": False, "error": f"image-prompt-engineer: {r.error}",
-                    "run_id": run_id, "diagnostics": diagnostics}
-        image_spec = r.output
+            # Skill 04 LLM
+            prompt_input = {
+                "layout_spec": {"model_id": chosen_model_id, "marca": marca},
+                "briefing": briefing,
+                "image_slots": [{"slot_name": "main", "image_prompt_ref": ""}],
+            }
+            r = runner.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
+            mark("04-skill", t04_skill)
+            if not r.ok:
+                return {"ok": False, "error": f"image-prompt-engineer: {r.error}",
+                        "run_id": run_id, "diagnostics": diagnostics}
+            image_spec = r.output
         write_artifact(run_id, "04-image-prompt", image_spec, artifacts_dir)
         diagnostics.append(f"04-image-prompt-engineer ({timings['04-skill']}ms): prompts={len(image_spec.get('prompts', []))}")
 
         if image_spec.get("skip"):
             diagnostics.append("04-image-gen: NÃO rodou — skill 04 marcou skip=true")
         elif image_spec.get("prompts"):
+            # Guard-rail anti-timeout: se já passou 30s antes do image-gen,
+            # image-gen (10-15s low) + render (1s) vai estourar os 60s.
+            # Aborta limpo com erro estruturado ao invés de timeout silencioso.
+            elapsed_pre_image = int((time.time() - t_start) * 1000)
+            if elapsed_pre_image > 30_000:
+                diagnostics.append(
+                    f"abort-timeout-guard: já gastou {elapsed_pre_image}ms antes do "
+                    f"image-gen. Cold start + skills LLM lentas. Tenta de novo (warm)."
+                )
+                return {
+                    "ok": False,
+                    "error": (
+                        f"Pipeline lento demais ({elapsed_pre_image}ms só nas skills). "
+                        f"Cold start do Vercel ou LLM travado. Tenta de novo em 30s."
+                    ),
+                    "run_id": run_id, "model_id": chosen_model_id,
+                    "diagnostics": diagnostics,
+                }
             p = image_spec["prompts"][0]
             # Aspect ratio resolvido pelo formato — story=9:16, feed=4:5, sqr=1:1
             aspect_by_format = {"story": "9:16", "feed": "4:5", "sqr": "1:1"}
@@ -325,7 +390,8 @@ def _run_pipeline_inline(
             attempt_chain = [primary_prompt] + [
                 fp for fp in fallback_prompts if isinstance(fp, str) and fp.strip()
             ]
-            max_attempts = int(os.getenv("IMAGE_MAX_ATTEMPTS", "2"))
+            # Default 1 attempt (sem fallback) pra caber em 60s — override IMAGE_MAX_ATTEMPTS
+            max_attempts = int(os.getenv("IMAGE_MAX_ATTEMPTS", "1"))
             attempt_chain = attempt_chain[:max_attempts]
 
             image_gen = ImageGenAdapter()
