@@ -181,11 +181,21 @@ def _run_pipeline_inline(
         chosen_model_id = style_rec["recommended"][0]["model_id"]
         diagnostics.append(f"02-style-selector ({timings['02']}ms): escolheu {chosen_model_id}")
 
-    # Verifica se template HTML existe pra esse modelo
+    # Verifica se template HTML existe pra esse modelo. Inclui diagnóstico
+    # do path pra facilitar debug de bundle Vercel.
     if not has_template(marca, chosen_model_id):
+        from _html_templates import templates_dir_path, templates_dir_exists, list_templates
+        tpl_dir = templates_dir_path()
+        dir_ok = templates_dir_exists()
+        available = list_templates()
+        diagnostics.append(f"template-debug: dir='{tpl_dir}' exists={dir_ok}")
+        diagnostics.append(f"template-debug: available={available}")
         return {
             "ok": False,
-            "error": f"Modelo '{chosen_model_id}' (marca={marca}) ainda não tem template HTML. Use um modelo da lista de disponíveis.",
+            "error": (
+                f"Modelo '{chosen_model_id}' (marca={marca}) ainda não tem template HTML. "
+                f"Templates disponíveis na marca {marca}: {available.get(marca, [])}"
+            ),
             "run_id": run_id,
             "model_id": chosen_model_id,
             "diagnostics": diagnostics,

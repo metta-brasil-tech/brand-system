@@ -17,11 +17,28 @@ import re
 from pathlib import Path
 
 
-# Diretórios — relativos ao parent do api/ (brand-system root)
+# Diretórios — relativos ao parent do api/ (brand-system root).
+# No Vercel: __file__ = /var/task/api/_html_templates.py → parent.parent = /var/task
+# Templates ficam em /var/task/source/ad-templates/ (incluídos via includeFiles
+# do vercel.json — antes estavam excluídos pelo padrão de excludeFiles).
+import os as _os
 _BRAND_SYSTEM_ROOT = Path(__file__).resolve().parent.parent
 _AD_TEMPLATES_DIR = _BRAND_SYSTEM_ROOT / "source" / "ad-templates"
+# Override via env var pra dev/test
+if _os.getenv("AD_TEMPLATES_DIR"):
+    _AD_TEMPLATES_DIR = Path(_os.getenv("AD_TEMPLATES_DIR"))
 _SHARED_CSS_PATH = _AD_TEMPLATES_DIR / "_shared.css"
 _SHELL_PATH = _AD_TEMPLATES_DIR / "_preview-shell.html"
+
+
+def templates_dir_path() -> str:
+    """Debug helper — retorna o path absoluto onde estamos procurando templates."""
+    return str(_AD_TEMPLATES_DIR)
+
+
+def templates_dir_exists() -> bool:
+    """Verifica se a pasta de templates está acessível no runtime."""
+    return _AD_TEMPLATES_DIR.exists()
 
 
 # Cache em memória — templates não mudam entre invocações na mesma instância

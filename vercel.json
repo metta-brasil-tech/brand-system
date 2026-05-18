@@ -9,8 +9,8 @@
   "functions": {
     "api/generate.py": {
       "maxDuration": 60,
-      "includeFiles": "engine/**",
-      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public}/**"
+      "includeFiles": "{engine/**,source/ad-templates/**}",
+      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public}/**"
     },
     "api/image-search.py": {
       "maxDuration": 15,
