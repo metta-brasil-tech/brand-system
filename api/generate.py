@@ -170,6 +170,11 @@ def _adapt_text_colors_to_image(layout_spec: dict, image_urls: dict, diagnostics
     slot_regions = {}
     for el in layout_spec.get("elements", []):
         if el.get("type") == "image_slot":
+            # SKIP slots com static_asset (header twitter mock, signatures, etc.) —
+            # esses são "decoração de layout", o texto sobre eles deve manter a
+            # cor escolhida pelo template (não é foto-fundo geradora de contraste)
+            if el.get("static_asset"):
+                continue
             sn = el.get("slot_name")
             url = image_urls.get(sn, "")
             if isinstance(url, str) and url.startswith("file://"):
@@ -686,7 +691,15 @@ def _run_pipeline_inline(
                     if isinstance(r, str) and not r.startswith("figma://")
                 ]
                 merged_refs = (llm_refs + banco_ref_paths)[:3]
-                aspect = p.get("aspect_ratio", "9:16")
+                # aspect_ratio: prioridade = hint do template (slot tem proporção
+                # específica, ex: card embed quadrado) > resposta da skill 04 >
+                # default 9:16. Sem isso, slot 4:5 recebia foto 9:16 e cortava.
+                slot_hint = None
+                for sl in dynamic_image_slots:
+                    if sl.get("slot_name") == slot and sl.get("aspect_ratio_hint"):
+                        slot_hint = sl["aspect_ratio_hint"]
+                        break
+                aspect = slot_hint or p.get("aspect_ratio") or "9:16"
                 negative = p.get("negative_prompt", "")
 
                 # Monta cadeia de tentativas: v1 primário + fallbacks do iteration_strategy

@@ -262,6 +262,15 @@ from pathlib import Path as _Path
 # Quando NÃO existe: fallback pros 6 elements primitivos (placeholder "T").
 _TWITTER_HEADER_ASSET = _Path(__file__).resolve().parent.parent / "engine" / "assets" / "twitter-header-tiago.png"
 
+# Header reduzido (era 952×267 ocupando 20% da altura — agora ~12%):
+# w=560 dá ~52% da safe-width, proporção real de perfil Twitter
+_TWITTER_HEADER_W = 560
+_TWITTER_HEADER_H = int(_TWITTER_HEADER_W * 303 / 1080)  # ~157
+_TWITTER_HEADER_X = 64
+_TWITTER_HEADER_Y = 56
+# Y onde o conteúdo do tweet começa (texto + imagem) — após header + spacing
+TWITTER_HEADER_BOTTOM_Y = _TWITTER_HEADER_Y + _TWITTER_HEADER_H + 40  # ~253
+
 
 def _twitter_header_elements() -> list[dict]:
     """Header mock topo: avatar ring amarelo + foto Tiago + 'Tiago Alves' + verified + handle.
@@ -272,92 +281,103 @@ def _twitter_header_elements() -> list[dict]:
     mas funcional.
     """
     if _TWITTER_HEADER_ASSET.exists():
-        # width < canvas_w pra evitar auto_fullbleed do _draw_image.
-        # PNG asset é ~1080×303 (proporção do SVG do user). Ajusta pra
-        # 952px (mesma safe margin x=64 do canvas Twitter) e altura proporcional.
-        asset_w = 952
-        asset_h = int(asset_w * 303 / 1080)  # ~267
         return [{
             "type": "image_slot",
             "slot_name": "twitter_header",
-            "x": 64, "y": 80, "width": asset_w, "height": asset_h,
+            "x": _TWITTER_HEADER_X, "y": _TWITTER_HEADER_Y,
+            "width": _TWITTER_HEADER_W, "height": _TWITTER_HEADER_H,
             "static_asset": f"file://{_TWITTER_HEADER_ASSET}",
             "fullbleed": False,
         }]
-    # Fallback: primitivos quando o asset não foi commitado ainda
+    # Fallback: primitivos quando o asset não foi commitado ainda (scaled-down)
     return [
-        {"type": "rect", "slot_name": "avatar_ring", "x": 64, "y": 80,
-         "width": 160, "height": 160, "fill": "#FFCC00", "corner_radius": 80},
-        {"type": "rect", "slot_name": "avatar_inner", "x": 74, "y": 90,
-         "width": 140, "height": 140, "fill": "#0F1419", "corner_radius": 70},
+        {"type": "rect", "slot_name": "avatar_ring", "x": 64, "y": 56,
+         "width": 96, "height": 96, "fill": "#FFCC00", "corner_radius": 48},
+        {"type": "rect", "slot_name": "avatar_inner", "x": 70, "y": 62,
+         "width": 84, "height": 84, "fill": "#0F1419", "corner_radius": 42},
         {"type": "text", "slot_name": "avatar_initial", "text": "T",
-         "x": 74, "y": 105, "width": 140, "height": "auto",
+         "x": 70, "y": 72, "width": 84, "height": "auto",
          "font": {"family": "SF Pro", "style": "Bold", "weight": 800,
-                  "stretch_pct": 100, "size": 88, "line_height_pct": 100,
+                  "stretch_pct": 100, "size": 52, "line_height_pct": 100,
                   "letter_spacing_pct": 0, "text_case": "sentence"},
          "color": "#FFCC00", "align": "center"},
         {"type": "text", "slot_name": "header_name", "text": "Tiago Alves",
-         "x": 250, "y": 100, "width": 500, "height": "auto",
+         "x": 180, "y": 62, "width": 360, "height": "auto",
          "font": {"family": "SF Pro", "style": "Bold", "weight": 700,
-                  "stretch_pct": 100, "size": 42, "line_height_pct": 110,
+                  "stretch_pct": 100, "size": 28, "line_height_pct": 110,
                   "letter_spacing_pct": -0.5, "text_case": "sentence"},
          "color": "#0F1419", "align": "left"},
-        {"type": "rect", "slot_name": "verified_bg", "x": 530, "y": 105,
-         "width": 36, "height": 36, "fill": "#1D9BF0", "corner_radius": 18},
+        {"type": "rect", "slot_name": "verified_bg", "x": 366, "y": 68,
+         "width": 24, "height": 24, "fill": "#1D9BF0", "corner_radius": 12},
         {"type": "text", "slot_name": "verified_check", "text": "✓",
-         "x": 530, "y": 107, "width": 36, "height": "auto",
+         "x": 366, "y": 70, "width": 24, "height": "auto",
          "font": {"family": "SF Pro", "style": "Bold", "weight": 800,
-                  "stretch_pct": 100, "size": 26, "line_height_pct": 100,
+                  "stretch_pct": 100, "size": 18, "line_height_pct": 100,
                   "letter_spacing_pct": 0, "text_case": "sentence"},
          "color": "#FFFFFF", "align": "center"},
         {"type": "text", "slot_name": "header_handle",
          "text": "@tiago.alves.oliveira",
-         "x": 250, "y": 170, "width": 600, "height": "auto",
+         "x": 180, "y": 108, "width": 400, "height": "auto",
          "font": {"family": "SF Pro", "style": "Regular", "weight": 400,
-                  "stretch_pct": 100, "size": 30, "line_height_pct": 120,
+                  "stretch_pct": 100, "size": 22, "line_height_pct": 120,
                   "letter_spacing_pct": 0, "text_case": "sentence"},
          "color": "#536471", "align": "left"},
     ]
 
 
 def build_tiago_twitter_card_text(briefing: dict, copy: dict, image_url: str | None) -> dict:
-    """Twitter Card variant CONTENT — só texto, sem foto. Emoji transition opcional.
+    """Twitter Card variant TEXT — só texto, sem foto. Emoji transition opcional.
 
     Layout (1080×1350 feed branco):
-    - Header mock topo (y=80..240)
-    - Tweet headline bold sentence (y=320)
-    - Tweet body regular opcional (logo abaixo)
-    - Emoji transition bottom-left ("👉 ARRASTA PRO LADO" ou similar)
+    - Header mock reduzido topo (~253px termina)
+    - Tweet headline bold sentence (y=TWITTER_HEADER_BOTTOM_Y)
+    - Tweet subhead/body regular abaixo
+    - Emoji transition bottom-left ("👉 ARRASTA PRO LADO")
     """
     W, H = 1080, 1350
     elements = _twitter_header_elements()
 
     headline = copy.get("headline", "").strip() or "Sua tese provocativa"
-    body = copy.get("subhead", "").strip()  # subhead = body do tweet
+    subhead = copy.get("subhead", "").strip()
+    body = copy.get("body", "").strip()
     cta_text = copy.get("cta", "").strip() or "Arrasta pro lado"
 
-    # Tweet headline — Bold sentence case, NÃO upper (mock-twitter), preto
+    cursor_y = TWITTER_HEADER_BOTTOM_Y
+
+    # Tweet headline — Bold sentence case (mock-twitter), preto
     elements.append({
         "type": "text", "slot_name": "tweet_headline", "text": headline,
-        "x": 64, "y": 320, "width": W - 128, "height": "auto",
+        "x": 64, "y": cursor_y, "width": W - 128, "height": "auto",
         "font": {"family": "SF Pro", "style": "Bold", "weight": 700,
-                 "stretch_pct": 100, "size": 56, "line_height_pct": 125,
-                 "letter_spacing_pct": -1, "text_case": "sentence"},
+                 "stretch_pct": 100, "size": 52, "line_height_pct": 120,
+                 "letter_spacing_pct": -0.5, "text_case": "sentence"},
         "color": "#0F1419", "align": "left",
     })
+    head_lines = max(1, (len(headline) // 32) + 1)
+    cursor_y += head_lines * 62 + 28
 
-    # Tweet body — Regular, espaçado abaixo do headline
+    # Subheadline — SF Pro Regular menor, cor levemente cinza
+    if subhead:
+        elements.append({
+            "type": "text", "slot_name": "subheadline", "text": subhead,
+            "x": 64, "y": cursor_y, "width": W - 128, "height": "auto",
+            "font": {"family": "SF Pro", "style": "Regular", "weight": 400,
+                     "stretch_pct": 100, "size": 38, "line_height_pct": 135,
+                     "letter_spacing_pct": -0.3, "text_case": "sentence"},
+            "color": "#0F1419", "align": "left",
+        })
+        sub_lines = max(1, (len(subhead) // 42) + 1)
+        cursor_y += sub_lines * 52 + 20
+
+    # Body — ainda menor, cor cinza
     if body:
-        # Estima 4 linhas pra headline ~30 chars/linha
-        head_lines = max(1, (len(headline) // 30) + 1)
-        body_y = 320 + head_lines * 70 + 40
         elements.append({
             "type": "text", "slot_name": "tweet_body", "text": body,
-            "x": 64, "y": body_y, "width": W - 128, "height": "auto",
+            "x": 64, "y": cursor_y, "width": W - 128, "height": "auto",
             "font": {"family": "SF Pro", "style": "Regular", "weight": 400,
-                     "stretch_pct": 100, "size": 44, "line_height_pct": 140,
-                     "letter_spacing_pct": -0.5, "text_case": "sentence"},
-            "color": "#0F1419", "align": "left",
+                     "stretch_pct": 100, "size": 30, "line_height_pct": 145,
+                     "letter_spacing_pct": -0.2, "text_case": "sentence"},
+            "color": "#536471", "align": "left",
         })
 
     # Emoji transition bottom-left (NÃO é pill — só texto inline com 👉)
@@ -379,33 +399,81 @@ def build_tiago_twitter_card_text(briefing: dict, copy: dict, image_url: str | N
 
 
 def build_tiago_twitter_card_image(briefing: dict, copy: dict, image_url: str | None) -> dict:
-    """Twitter Card variant COVER — texto curto + foto embed radius 28px na base.
+    """Twitter Card variant IMAGE — headline + sub + body + foto embed quadrado.
 
-    Header mock topo + tweet headline curto + foto card 952×460 com cantos
-    arredondados ocupando metade inferior. Sem CTA pill — foto é o ancoragem visual.
+    Header reduzido topo + texto (3 níveis) + foto embed quadrado-ish na base.
+    Slot ~4:5 portrait (820×600 area) pra que foto vertical do gpt-image-1 não
+    seja cortada brutalmente. Radius 28px (card embed estilo Twitter).
     """
     W, H = 1080, 1350
     elements = _twitter_header_elements()
 
     headline = copy.get("headline", "").strip() or "Sua tese provocativa"
+    subhead = copy.get("subhead", "").strip()
+    body = copy.get("body", "").strip()
 
-    # Tweet headline mais curto (porque foto vai ocupar metade)
+    cursor_y = TWITTER_HEADER_BOTTOM_Y
+
+    # Tweet headline — Bold (mock-twitter)
     elements.append({
         "type": "text", "slot_name": "tweet_headline", "text": headline,
-        "x": 64, "y": 320, "width": W - 128, "height": "auto",
+        "x": 64, "y": cursor_y, "width": W - 128, "height": "auto",
         "font": {"family": "SF Pro", "style": "Bold", "weight": 700,
-                 "stretch_pct": 100, "size": 52, "line_height_pct": 125,
-                 "letter_spacing_pct": -1, "text_case": "sentence"},
+                 "stretch_pct": 100, "size": 48, "line_height_pct": 120,
+                 "letter_spacing_pct": -0.5, "text_case": "sentence"},
         "color": "#0F1419", "align": "left",
     })
+    head_lines = max(1, (len(headline) // 34) + 1)
+    cursor_y += head_lines * 58 + 22
 
-    # Foto embed card (radius 28px) — image_slot bottom
+    # Subheadline — SF Pro Regular
+    if subhead:
+        elements.append({
+            "type": "text", "slot_name": "subheadline", "text": subhead,
+            "x": 64, "y": cursor_y, "width": W - 128, "height": "auto",
+            "font": {"family": "SF Pro", "style": "Regular", "weight": 400,
+                     "stretch_pct": 100, "size": 32, "line_height_pct": 135,
+                     "letter_spacing_pct": -0.3, "text_case": "sentence"},
+            "color": "#0F1419", "align": "left",
+        })
+        sub_lines = max(1, (len(subhead) // 50) + 1)
+        cursor_y += sub_lines * 44 + 16
+
+    # Body — SF Pro Regular menor, cinza
+    if body:
+        elements.append({
+            "type": "text", "slot_name": "tweet_body", "text": body,
+            "x": 64, "y": cursor_y, "width": W - 128, "height": "auto",
+            "font": {"family": "SF Pro", "style": "Regular", "weight": 400,
+                     "stretch_pct": 100, "size": 26, "line_height_pct": 145,
+                     "letter_spacing_pct": -0.2, "text_case": "sentence"},
+            "color": "#536471", "align": "left",
+        })
+        body_lines = max(1, (len(body) // 58) + 1)
+        cursor_y += body_lines * 38 + 22
+    else:
+        cursor_y += 8
+
+    # Foto embed card — radius 28px, aspect 4:5 (vertical-leaning pra foto pessoa)
+    # Posição adaptativa: começa após o texto, ocupa o resto até H-80
+    embed_top = cursor_y
+    embed_bot = H - 80  # margem inferior
+    embed_h_avail = embed_bot - embed_top
+    embed_w = W - 128  # 952
+    # Aspect-cap em 4:5 (slot mais vertical que horizontal pra evitar cortar foto)
+    embed_h = min(embed_h_avail, int(embed_w * 5 / 4))  # max 1190
+    # Mínimo razoável: 460 (senão fica espremido)
+    if embed_h < 460 and embed_h_avail >= 460:
+        embed_h = 460
     elements.append({
         "type": "image_slot", "slot_name": "media_embed",
-        "x": 64, "y": 720, "width": W - 128, "height": 560,
+        "x": 64, "y": embed_top, "width": embed_w, "height": embed_h,
         "image_prompt_ref": "image-prompts/tiago/style-twitter-card.md",
         "url_placeholder": "pending",
         "corner_radius": 28,
+        # Hint pra image-gen pegar aspect compatível (gpt-image-1 entrega 1024x1536
+        # quando aspect_ratio='4:5' — encaixa bem no slot vertical)
+        "aspect_ratio_hint": "4:5",
     })
 
     return {
