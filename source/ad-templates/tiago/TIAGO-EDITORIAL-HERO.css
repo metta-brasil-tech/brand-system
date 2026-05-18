@@ -12,6 +12,23 @@
   z-index: 1;
 }
 
+/* Scrim — gradient claro no topo e bottom pra dar contraste pro texto preto
+   sobre foto colorida. Sem isso, texto fica ilegível em fotos médias. */
+.ad-tiago-editorial-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(237, 238, 238, 0.92) 0%,
+    rgba(237, 238, 238, 0.55) 18%,
+    rgba(237, 238, 238, 0.0) 42%,
+    rgba(237, 238, 238, 0.0) 58%,
+    rgba(237, 238, 238, 0.75) 86%,
+    rgba(237, 238, 238, 0.95) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
 .ad-tiago-editorial-hero .teh-eyebrows {
   position: absolute;
   top: 60px;
@@ -19,7 +36,7 @@
   right: 64px;
   display: flex;
   justify-content: space-between;
-  z-index: 4;
+  z-index: 5;
 }
 
 .ad-tiago-editorial-hero .teh-eyebrow-left,
@@ -39,7 +56,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  z-index: 3;
+  z-index: 5;
 }
 
 .ad-tiago-editorial-hero .teh-headline {
@@ -71,5 +88,5 @@
   position: absolute;
   left: 64px;
   bottom: 100px;
-  z-index: 4;
+  z-index: 5;
 }

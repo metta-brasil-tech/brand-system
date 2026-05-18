@@ -959,21 +959,24 @@ button.stepper-item.done:hover {
 
 /* ----------------------------------------- *
  * RESULT PREVIEW (iframe + ad render)        *
+ * Dimensões setadas via JS hydrateAdPreview() *
+ * pra refletir canvas real (1080×{1350|1920|1080}) *
  * ----------------------------------------- */
-.result-preview { position: relative; }
+.result-preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* container "wrapper" não tem tamanho fixo — JS define baseado em STATE.ad_format */
+}
 .ad-preview-frame {
-  width: 100%;
-  max-width: 540px;
-  aspect-ratio: 9 / 16;
   border: 0;
   border-radius: 12px;
   background: #f4f4f4;
   display: block;
-  margin: 0 auto;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  /* width / height / transform setados via JS pra match com canvas real */
 }
-.ad-preview-frame[data-format="feed"] { aspect-ratio: 4 / 5; }
-.ad-preview-frame[data-format="sqr"]  { aspect-ratio: 1 / 1; }
 </style>
 <!-- html2canvas: usado pra exportar PNG do iframe ad-preview pro download -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
@@ -1685,7 +1688,7 @@ function tplResult() {
       <div class="result-layout">
         <div class="result-preview">
           ${hasAd
-            ? `<iframe id="ad-preview" class="ad-preview-frame" data-format="${adFormat}" sandbox="allow-same-origin" title="Preview do ad"></iframe>`
+            ? `<div class="ad-preview-wrap"><iframe id="ad-preview" class="ad-preview-frame" data-format="${adFormat}" sandbox="allow-same-origin" title="Preview do ad"></iframe></div>`
             : '<p style="color:var(--metta-sys-color-on-surface-variant)">Ad HTML não disponível.</p>'}
         </div>
         <aside class="result-side">
@@ -1810,12 +1813,39 @@ function render() {
   notifyHeight();
 }
 
-/* Injeta o documento HTML do ad gerado dentro do <iframe id="ad-preview">.
-   Usa srcdoc (não href) pra zero round-trip e isolamento total de CSS/JS. */
+/* Injeta o documento HTML do ad gerado dentro do <iframe id="ad-preview"> +
+   escala o iframe pra preservar a proporção EXATA do canvas (1080×{1350|1920|1080}).
+   Sem isso, CSS aspect-ratio pode dar resultado visual diferente do canvas real. */
 function hydrateAdPreview() {
   if (!STATE.ad_html) return;
   const iframe = document.getElementById('ad-preview');
   if (!iframe) return;
+
+  // Canvas size por formato — bate 1:1 com o que o template HTML usa
+  const CANVAS_SIZES = {
+    story: [1080, 1920],
+    feed:  [1080, 1350],
+    sqr:   [1080, 1080],
+  };
+  const fmt = STATE.ad_format || 'story';
+  const [canvasW, canvasH] = CANVAS_SIZES[fmt] || CANVAS_SIZES.story;
+
+  // Container = .result-preview ou parent direto. Pega largura disponível.
+  const container = iframe.parentElement;
+  const availableW = Math.min(container.clientWidth || 540, 540);
+  const scale = availableW / canvasW;
+
+  // Iframe tem tamanho NATURAL = canvas size. Scale via transform.
+  iframe.style.width = canvasW + 'px';
+  iframe.style.height = canvasH + 'px';
+  iframe.style.transform = `scale(${scale})`;
+  iframe.style.transformOrigin = 'top left';
+  iframe.style.aspectRatio = 'auto';  // sobrescreve regra CSS default
+
+  // Container ocupa o tamanho escalado (não o natural) — evita overflow
+  container.style.width = (canvasW * scale) + 'px';
+  container.style.height = (canvasH * scale) + 'px';
+
   iframe.srcdoc = STATE.ad_html;
 }
 
@@ -2121,6 +2151,10 @@ async function generateReal(briefing) {
         // Direção visual livre pra skill 04 (opcional)
         ...(STATE.briefingImage && STATE.briefingImage.trim() ? { briefing_image: STATE.briefingImage.trim() } : {}),
         ...(STATE.imageStylePreset ? { image_style_preset: STATE.imageStylePreset } : {}),
+        // Formato escolhido pelo wizard (post/carrossel/ad-single/ad-story) — backend
+        // resolve pra story/feed/sqr. Sem isso, backend cai no que skill 01 inferiu
+        // do texto livre, que pode estar errado.
+        ...(STATE.format ? { format: STATE.format } : {}),
         // Copy estruturada — backend lê os 3 campos separados (modo único agora)
         ...(STATE.copyHeadline && STATE.copyHeadline.trim() ? { copy_headline: STATE.copyHeadline.trim() } : {}),
         ...(STATE.copySubhead && STATE.copySubhead.trim() ? { copy_subhead: STATE.copySubhead.trim() } : {}),
