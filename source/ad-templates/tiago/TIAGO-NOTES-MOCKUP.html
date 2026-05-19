@@ -1,22 +1,28 @@
 <div class="ad-canvas ad-tiago-notes" data-format="{{format}}" data-model="TIAGO-NOTES-MOCKUP">
-  <!-- Status bar simulada -->
-  <div class="tn-statusbar">
-    <span class="tn-time">9:41</span>
-    <span class="tn-icons">●●●●● 100%</span>
-  </div>
 
-  <!-- Navbar Notes app -->
-  <div class="tn-navbar">
-    <span class="tn-back">‹ Notas</span>
-    <span class="tn-actions">…</span>
-  </div>
+  <!-- Frame do phone centralizado -->
+  <div class="tn-phone">
 
-  <!-- Conteúdo da "nota" -->
-  <div class="tn-notes-body">
-    <h1 class="tn-headline ad-text-bold">{{headline}}</h1>
-    {{#has_subhead}}<p class="tn-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
-    {{#has_body}}<div class="tn-body ad-text-regular">{{body}}</div>{{/has_body}}
-  </div>
+    <!-- Status bar -->
+    <div class="tn-statusbar">
+      <span class="tn-time">9:41</span>
+      <span class="tn-icons">●●●●● 100%</span>
+    </div>
 
-  {{#has_cta}}<p class="tn-cta ad-text-regular">{{cta}} 👉</p>{{/has_cta}}
+    <!-- Navbar Notes app com botão OK -->
+    <div class="tn-navbar">
+      <span class="tn-back">‹ Notas</span>
+      <span class="tn-actions"><span>…</span><span>OK</span></span>
+    </div>
+
+    <!-- Conteúdo da nota -->
+    <div class="tn-notes-body">
+      <h1 class="tn-headline ad-text-bold">{{headline}}</h1>
+      {{#has_subhead}}<p class="tn-subhead ad-text-regular">{{subhead}}</p>{{/has_subhead}}
+      {{#has_body}}<div class="tn-body ad-text-regular">{{body}}</div>{{/has_body}}
+    </div>
+
+    {{#has_cta}}<p class="tn-cta ad-text-regular">{{cta}} 👉</p>{{/has_cta}}
+
+  </div>
 </div>

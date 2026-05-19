@@ -1,35 +1,94 @@
-/* TIAGO-NOTES-MOCKUP — mock app Notas iPhone (header + nota com marker amarelo) */
+/* TIAGO-NOTES-MOCKUP — mock app Notas iPhone centralizado no canvas feed */
+
 .ad-tiago-notes {
+  background: #E5E5EA; /* fundo cinza iOS fora do phone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Frame do phone — janela estreita centralizada simulando tela iPhone */
+.ad-tiago-notes .tn-phone {
+  width: 620px;
+  min-height: 960px;
   background: var(--tiago-white);
-  display: flex; flex-direction: column;
+  border-radius: 24px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
+
+/* Status bar */
 .ad-tiago-notes .tn-statusbar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 24px 40px 8px;
-  font-size: 22px; font-weight: 600; color: var(--tiago-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 28px 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--tiago-black);
 }
+
+/* Navbar Notes app */
 .ad-tiago-notes .tn-navbar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 40px;
-  font-size: 22px; color: #FFCC00; /* iOS-yellow Notes */
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 28px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.10);
 }
+
+.ad-tiago-notes .tn-back {
+  font-size: 20px;
+  color: var(--tiago-yellow);
+  font-weight: 400;
+}
+
+.ad-tiago-notes .tn-actions {
+  font-size: 20px;
+  color: var(--tiago-yellow);
+  display: flex;
+  gap: 20px;
+}
+
+/* Corpo da nota */
 .ad-tiago-notes .tn-notes-body {
-  padding: 40px 48px;
+  padding: 28px 32px;
   flex: 1;
-  display: flex; flex-direction: column; gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
+
 .ad-tiago-notes .tn-headline {
-  font-size: 56px; line-height: 1.15; letter-spacing: -0.02em;
-  color: var(--tiago-black); margin: 0;
-  /* Marker amarelo highlight no headline */
-  background: linear-gradient(180deg, transparent 60%, rgba(255,204,0,0.55) 60%);
-  display: inline; padding: 0 4px;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--tiago-black);
+  margin: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(255,204,0,0.6) 55%);
+  display: inline;
+  padding: 0 2px;
 }
-.ad-tiago-notes .tn-subhead { font-size: 30px; line-height: 1.4; color: var(--tiago-black); margin: 0; }
+
+.ad-tiago-notes .tn-subhead {
+  font-size: 20px;
+  line-height: 1.45;
+  color: var(--tiago-black);
+  margin: 0;
+}
+
 .ad-tiago-notes .tn-body {
-  font-size: 26px; line-height: 1.55; color: var(--tiago-black); margin: 0;
-  /* white-space pre-wrap pra preservar lista numerada */
-  white-space: pre-wrap;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--tiago-black);
+  margin: 0;
+  white-space: normal;
 }
-.ad-tiago-notes .tn-cta { font-size: 26px; color: var(--tiago-grey); margin: 24px 48px 40px; }
+
+.ad-tiago-notes .tn-cta {
+  font-size: 18px;
+  color: var(--tiago-grey);
+  margin: 8px 32px 24px;
+}
