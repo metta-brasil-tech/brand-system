@@ -95,6 +95,9 @@ def _hydrate(template: str, ctx: dict) -> str:
             value = default
         if key in ("image_url", "image_data_uri"):
             return str(value)
+        if key == "body":
+            # Preserva quebras de linha do usuário como <br> no HTML
+            return html.escape(str(value), quote=True).replace("\n", "<br>")
         return _escape(value)
     # Token regex: \w (var name) + opcional |default sem }} (qualquer char exceto })
     return re.sub(r"\{\{(\w+(?:\|[^}]+)?)\}\}", replace_var, template)

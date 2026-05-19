@@ -84,7 +84,7 @@
   line-height: 1.55;
   color: var(--tiago-black);
   margin: 0;
-  white-space: pre-line; /* preserva \n (quebra de item) mas colapsa espaços múltiplos */
+  white-space: normal;
 }
 
 .ad-tiago-notes .tn-cta {
