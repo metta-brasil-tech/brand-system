@@ -20,6 +20,7 @@
       "icon": "sparkles",
       "label": "Criar",
       "group": "ferramentas",
+      "dev_only": true,
       "sections": [
         {
           "id": "novo",

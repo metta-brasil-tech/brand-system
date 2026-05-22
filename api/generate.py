@@ -475,8 +475,30 @@ def _run_pipeline_inline(
 # ----------------------------------------------------------------------------
 # Vercel handler
 # ----------------------------------------------------------------------------
+def _is_prod_blocked() -> bool:
+    """True quando rodando em prod do Vercel SEM override explícito.
+
+    Vercel popula VERCEL_ENV automaticamente: 'production' | 'preview' | 'development'.
+    Bloqueamos production+preview por default. User pode liberar via env var
+    ALLOW_CREATE_IN_PROD=1 quando estiver pronto pra abrir.
+    """
+    if os.getenv("ALLOW_CREATE_IN_PROD") == "1":
+        return False
+    vercel_env = (os.getenv("VERCEL_ENV") or "").lower()
+    return vercel_env in ("production", "preview")
+
+
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
+        # Guard de produção — bloqueia /api/generate em prod até feature estar pronta.
+        if _is_prod_blocked():
+            return self._json(403, {
+                "detail": "Endpoint /api/generate está desabilitado em produção. "
+                          "Ferramenta em validação interna — disponível apenas em dev local. "
+                          "Pra reabrir, defina ALLOW_CREATE_IN_PROD=1 nas env vars do Vercel.",
+                "env": os.getenv("VERCEL_ENV") or "unknown",
+            })
+
         try:
             length = int(self.headers.get("Content-Length", 0))
             raw = self.rfile.read(length).decode("utf-8") if length else ""
@@ -512,8 +534,14 @@ class handler(BaseHTTPRequestHandler):
             return self._json(500, {"detail": f"Erro interno: {exc.__class__.__name__}: {exc}"})
 
     def do_GET(self):
-        return self._json(200, {"status": "ok", "engine_dir": str(ENGINE_DIR),
-                                "version": "v2-html-render"})
+        return self._json(200, {
+            "status": "ok",
+            "engine_dir": str(ENGINE_DIR),
+            "version": "v2-html-render",
+            "vercel_env": os.getenv("VERCEL_ENV") or "unknown",
+            "prod_blocked": _is_prod_blocked(),
+            "allow_override_present": os.getenv("ALLOW_CREATE_IN_PROD") == "1",
+        })
 
     def _json(self, status: int, data: dict) -> None:
         body = json.dumps(data, ensure_ascii=False).encode("utf-8")

@@ -77,10 +77,26 @@ const BrandSystem = (() => {
     });
   }
 
+  // ----------- ENV DETECTION -----------
+  // Localhost = dev, qualquer outro hostname = prod. Tabs com `dev_only: true`
+  // no nav.json (ex: "criar") são REMOVIDAS da nav em prod. Em dev, ficam visíveis.
+  function isDev() {
+    if (typeof location === 'undefined') return false;
+    const h = (location.hostname || '').toLowerCase();
+    return h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' || h.endsWith('.local');
+  }
+
   // ----------- NAV RENDER -----------
   async function loadNav() {
     const res = await fetch('data/nav.json');
     nav = await res.json();
+    // Filtra tabs marcadas como dev_only quando em produção
+    if (!isDev()) {
+      const before = nav.tabs.length;
+      nav.tabs = nav.tabs.filter(tab => !tab.dev_only);
+      const removed = before - nav.tabs.length;
+      if (removed > 0) console.info(`[nav] hidden ${removed} dev_only tab(s) in prod`);
+    }
     renderSidebar();
   }
 
@@ -179,8 +195,16 @@ const BrandSystem = (() => {
       tabId = nav.tabs[0].id;
       sectionId = (nav.tabs[0].sections.find(s => !s.hidden) || nav.tabs[0].sections[0])?.id || null;
     }
-    const tab = nav.tabs.find(t => t.id === tabId);
-    if (!tab) return;
+    let tab = nav.tabs.find(t => t.id === tabId);
+    // Tab pode ter sido filtrada (ex: dev_only em prod). Redireciona pra primeira disponível.
+    if (!tab) {
+      const fallback = nav.tabs[0];
+      if (!fallback) return;
+      tabId = fallback.id;
+      sectionId = (fallback.sections.find(s => !s.hidden) || fallback.sections[0])?.id || null;
+      tab = fallback;
+      if (location.hash) location.replace('#' + tabId + (sectionId ? '/' + sectionId : ''));
+    }
     if (!sectionId) sectionId = (tab.sections.find(s => !s.hidden) || tab.sections[0])?.id || null;
 
     currentTabId = tabId;
