@@ -81,13 +81,15 @@
   top: 0;
   left: 0;
   width: 1080px;
-  min-height: 680px;
+  min-height: 580px;
+  max-height: 620px;  /* limita bloco para dar mais espaço à foto */
   border-radius: 0 0 48px 48px;
-  padding: 80px 72px 64px;
+  padding: 64px 72px 56px;
+  overflow: hidden;
 }
 
 .ad-yellow-bloco[data-format="feed"] .yb-headline {
-  font-size: 72px;
+  font-size: 68px;
 }
 
 .ad-yellow-bloco[data-format="feed"] .yb-photo {
@@ -96,11 +98,12 @@
   left: 0;
   top: auto;
   width: 1080px;
-  height: 680px;
-  background-position: center 20%;
+  height: 770px;    /* aumentado: 580+770=1350px canvas feed */
+  background-position: center 15%;  /* mostra mais da parte superior da pessoa */
+  background-size: cover;
 }
 
 .ad-yellow-bloco[data-format="feed"] .yb-cta-wrap {
-  bottom: 700px; /* dentro do bloco amarelo, acima da foto */
+  bottom: 790px; /* acima da foto */
   left: 72px;
 }
