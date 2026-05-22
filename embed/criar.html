@@ -322,6 +322,30 @@ button.stepper-item.done:hover {
 .choice.brand-metta .choice-icon { background: var(--metta-sys-color-primary); color: var(--metta-sys-color-on-primary); }
 .choice.brand-tiago .choice-icon { background: var(--metta-ref-palette-night-10); color: var(--metta-sys-color-primary); }
 
+/* Em breve — card desabilitado com badge */
+.choice.coming-soon {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.choice.coming-soon::after {
+  content: 'Em breve';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  font-size: 10px;
+  font-weight: 620;
+  font-stretch: 132%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  background: var(--metta-sys-color-surface-container);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
 /* ----------------------------------------- *
  * FORM CONTROLS                             *
  * ----------------------------------------- */
@@ -959,21 +983,24 @@ button.stepper-item.done:hover {
 
 /* ----------------------------------------- *
  * RESULT PREVIEW (iframe + ad render)        *
+ * Dimensões setadas via JS hydrateAdPreview() *
+ * pra refletir canvas real (1080×{1350|1920|1080}) *
  * ----------------------------------------- */
-.result-preview { position: relative; }
+.result-preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* container "wrapper" não tem tamanho fixo — JS define baseado em STATE.ad_format */
+}
 .ad-preview-frame {
-  width: 100%;
-  max-width: 540px;
-  aspect-ratio: 9 / 16;
   border: 0;
   border-radius: 12px;
   background: #f4f4f4;
   display: block;
-  margin: 0 auto;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  /* width / height / transform setados via JS pra match com canvas real */
 }
-.ad-preview-frame[data-format="feed"] { aspect-ratio: 4 / 5; }
-.ad-preview-frame[data-format="sqr"]  { aspect-ratio: 1 / 1; }
 </style>
 <!-- html2canvas: usado pra exportar PNG do iframe ad-preview pro download -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
@@ -1047,33 +1074,33 @@ const STYLES_METTA = [
   { id: 'YELLOW-BLOCO',                  label: 'Bloco amarelo + foto pessoa',       desc: 'Bloco amarelo central com headline + bullets, foto pessoa direita bleed corner. Convite institucional com prova social via logo bar.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-bloco.webp' },
   { id: 'A-headline-foto-dark',          label: 'Headline + foto pessoa dark',       desc: 'Fundo escuro, headline grande UPPER + foto pessoa âncora à direita. Caso nominal ou prova editorial.',                              usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/a.webp' },
   { id: 'D-foto-fullbleed-overlay',      label: 'Foto fullbleed com overlay',        desc: 'Foto ocupa canvas inteiro + overlay escuro pra legibilidade do headline em baixo. Imersão visual.',                                      usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/d.webp' },
-  { id: 'B-foto-top-headline-mixed',     label: 'Foto topo + headline embaixo',      desc: 'Foto top-bleed ocupa ~50% + headline grande + body curto + CTA. Híbrido foto-tipografia.',                                              usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/b.webp' },
   { id: 'C-tipografia-pura-dark',        label: 'Tipografia pura dark',              desc: 'Fundo escuro, sem imagem. Headline gigante UPPER + accent yellow em palavras-chave. Frase de impacto isolada.',                          usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/c.webp' },
   { id: 'YELLOW-EDITORIAL',              label: 'Número gigante amarelo',            desc: 'Big number em amarelo dominando o canvas + contexto curto. Prova social por estatística.',                                                usaImagem: false, formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-editorial.webp' },
-  { id: 'LIGHT-SURREAL',                 label: 'Editorial claro surreal',           desc: 'Fundo claro + colagem editorial surreal (B&W com toques de cor). Estética HBR. Insights conceituais.',                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/light-surreal.webp' },
-  { id: 'NEWS-CARD',                     label: 'Card de notícia',                   desc: 'Layout estilo headline-news: tag + manchete + foto. Comunicado/anúncio institucional.',                                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/news-card.webp' },
   { id: 'YELLOW-FRAME',                  label: 'Frame amarelo + headline',          desc: 'Borda amarela grossa enquadrando headline central. Convite emoldurado.',                                                                  usaImagem: false, formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-frame.webp' },
-  { id: 'YELLOW-SPLIT',                  label: 'Split amarelo/foto',                desc: 'Canvas dividido — metade amarela com headline, metade foto. Dualidade clara.',                                                            usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-split.webp' },
-  { id: 'H-fundo-branco-headline-gigante', label: 'Headline gigante fundo branco',   desc: 'Branco puro + headline gigante em preto. Manifesto/posicionamento de alta gravidade.',                                                  usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/h.webp' },
-  { id: 'I-retrato-editorial-pb',        label: 'Retrato editorial P&B',             desc: 'Retrato em preto-e-branco editorial + tipografia mínima. Autoridade silenciosa.',                                                        usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/i.webp' },
-  { id: 'LOGO-WALL',                     label: 'Wall de logos clientes',            desc: 'Grade de logos B&W dos clientes (Sicredi, Vivo, etc.) + headline. Prova social agregada.',                                              usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/logo-wall.webp' },
-  { id: 'METTA-TWEET-CARD',              label: 'Mock tweet Metta',                  desc: 'Card estilo Twitter feed com header Metta + tese curta. Sentence sem CTA.',                                                                usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/tweet-card.webp' }
+  { id: 'METTA-TWEET-CARD',              label: 'Mock tweet Metta',                  desc: 'Card estilo Twitter feed com header Metta + tese curta. Sentence sem CTA.',                                                                usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/tweet-card.webp' },
+  { id: 'B-foto-top-headline-mixed',     label: 'Foto topo + headline embaixo',      desc: 'Foto top-bleed ocupa ~50% + headline grande + body curto + CTA. Híbrido foto-tipografia.',                                              usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/b.webp',           comingSoon: true },
+  { id: 'LIGHT-SURREAL',                 label: 'Editorial claro surreal',           desc: 'Fundo claro + colagem editorial surreal (B&W com toques de cor). Estética HBR. Insights conceituais.',                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/light-surreal.webp',   comingSoon: true },
+  { id: 'NEWS-CARD',                     label: 'Card de notícia',                   desc: 'Layout estilo headline-news: tag + manchete + foto. Comunicado/anúncio institucional.',                                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/news-card.webp',       comingSoon: true },
+  { id: 'YELLOW-SPLIT',                  label: 'Split amarelo/foto',                desc: 'Canvas dividido — metade amarela com headline, metade foto. Dualidade clara.',                                                            usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-split.webp',    comingSoon: true },
+  { id: 'H-fundo-branco-headline-gigante', label: 'Headline gigante fundo branco',   desc: 'Branco puro + headline gigante em preto. Manifesto/posicionamento de alta gravidade.',                                                  usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/h.webp',               comingSoon: true },
+  { id: 'I-retrato-editorial-pb',        label: 'Retrato editorial P&B',             desc: 'Retrato em preto-e-branco editorial + tipografia mínima. Autoridade silenciosa.',                                                        usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/i.webp',               comingSoon: true },
+  { id: 'LOGO-WALL',                     label: 'Wall de logos clientes',            desc: 'Grade de logos B&W dos clientes (Sicredi, Vivo, etc.) + headline. Prova social agregada.',                                              usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/logo-wall.webp',       comingSoon: true }
 ];
 
 const STYLES_TIAGO = [
   { id: 'TIAGO-TWITTER-CARD',           label: 'Tweet (só texto)',                   desc: 'Mock feed X/Twitter — header com avatar + verified + tweet bold sentence. Sem foto.',            usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card.webp' },
-  { id: 'TIAGO-TWITTER-CARD-IMAGE',     label: 'Tweet com imagem',                   desc: 'Mesmo mock Twitter mas com foto embed (cantos arredondados) na metade inferior do card.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card.webp' },
-  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp' },
-  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-yellow-block.webp' },
-  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-minimal.webp' },
   { id: 'TIAGO-NOTES-MOCKUP',           label: 'Tela de Notas do iPhone',            desc: 'Mock do app Notas com status bar, marker amarelo no H1 e lista numerada. Storytelling em formato de anotação.', usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/notes-mockup.webp' },
   { id: 'TIAGO-TYPO-PURE',              label: 'Frase grande',                       desc: 'Tipografia pura sobre fundo claro com palavra-chave colorida. Frase de impacto isolada.',         usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/typo-pure.webp' },
-  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/dark-surreal.webp' },
-  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/photo-raw.webp' },
-  { id: 'TIAGO-EDITORIAL-HERO',         label: 'Capa estilo revista',                desc: 'Manchete gigante + colagem cinema editorial (B&W com selective yellow). Capa de carrossel premium.', usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-hero.webp' },
-  { id: 'TIAGO-EDITORIAL-CARD',         label: 'Slide editorial com estatística',    desc: 'Big stat ou lista de sintomas. Slide intermediário de carrossel editorial cinema.',                usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-card.webp' },
-  { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-dark.webp' },
-  { id: 'TIAGO-EDITORIAL-CTA',          label: 'Slide de fechamento de carrossel',   desc: '3 variantes: pergunta de engajamento, qualificação "pra quem é", ou reveal de protocolo.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-cta.webp' }
+  { id: 'TIAGO-EDITORIAL-CTA',          label: 'Slide de fechamento de carrossel',   desc: '3 variantes: pergunta de engajamento, qualificação "pra quem é", ou reveal de protocolo.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-cta.webp' },
+  { id: 'TIAGO-TWITTER-CARD-IMAGE',     label: 'Tweet com imagem',                   desc: 'Mesmo mock Twitter mas com foto embed (cantos arredondados) na metade inferior do card.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card.webp',          comingSoon: true },
+  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp',       comingSoon: true },
+  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-yellow-block.webp',    comingSoon: true },
+  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-minimal.webp',          comingSoon: true },
+  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/dark-surreal.webp',  comingSoon: true },
+  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/photo-raw.webp',      comingSoon: true },
+  { id: 'TIAGO-EDITORIAL-HERO',         label: 'Capa estilo revista',                desc: 'Manchete gigante + colagem cinema editorial (B&W com selective yellow). Capa de carrossel premium.', usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-hero.webp',   comingSoon: true },
+  { id: 'TIAGO-EDITORIAL-CARD',         label: 'Slide editorial com estatística',    desc: 'Big stat ou lista de sintomas. Slide intermediário de carrossel editorial cinema.',                usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-card.webp',   comingSoon: true },
+  { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-dark.webp',   comingSoon: true }
 ];
 
 /* ----------- DATA: formatos ----------- */
@@ -1258,7 +1285,7 @@ function tplWizStyle() {
     <div class="step-body">
       <div class="choice-grid">
         ${styles.map(s => `
-          <button class="choice ${s.previewSrc ? 'with-preview' : ''} ${STATE.style === s.id ? 'selected' : ''}" data-action="pick-style" data-value="${s.id}">
+          <button class="choice ${s.previewSrc ? 'with-preview' : ''} ${STATE.style === s.id ? 'selected' : ''} ${s.comingSoon ? 'coming-soon' : ''}" ${s.comingSoon ? 'disabled aria-disabled="true"' : `data-action="pick-style" data-value="${s.id}"`}>
             ${s.previewSrc
               ? `<img class="choice-preview" src="${s.previewSrc}" alt="${escapeHtml(s.label)}" loading="lazy">`
               : ''}
@@ -1685,7 +1712,7 @@ function tplResult() {
       <div class="result-layout">
         <div class="result-preview">
           ${hasAd
-            ? `<iframe id="ad-preview" class="ad-preview-frame" data-format="${adFormat}" sandbox="allow-same-origin" title="Preview do ad"></iframe>`
+            ? `<div class="ad-preview-wrap"><iframe id="ad-preview" class="ad-preview-frame" data-format="${adFormat}" sandbox="allow-same-origin" title="Preview do ad"></iframe></div>`
             : '<p style="color:var(--metta-sys-color-on-surface-variant)">Ad HTML não disponível.</p>'}
         </div>
         <aside class="result-side">
@@ -1810,12 +1837,39 @@ function render() {
   notifyHeight();
 }
 
-/* Injeta o documento HTML do ad gerado dentro do <iframe id="ad-preview">.
-   Usa srcdoc (não href) pra zero round-trip e isolamento total de CSS/JS. */
+/* Injeta o documento HTML do ad gerado dentro do <iframe id="ad-preview"> +
+   escala o iframe pra preservar a proporção EXATA do canvas (1080×{1350|1920|1080}).
+   Sem isso, CSS aspect-ratio pode dar resultado visual diferente do canvas real. */
 function hydrateAdPreview() {
   if (!STATE.ad_html) return;
   const iframe = document.getElementById('ad-preview');
   if (!iframe) return;
+
+  // Canvas size por formato — bate 1:1 com o que o template HTML usa
+  const CANVAS_SIZES = {
+    story: [1080, 1920],
+    feed:  [1080, 1350],
+    sqr:   [1080, 1080],
+  };
+  const fmt = STATE.ad_format || 'story';
+  const [canvasW, canvasH] = CANVAS_SIZES[fmt] || CANVAS_SIZES.story;
+
+  // Container = .result-preview ou parent direto. Pega largura disponível.
+  const container = iframe.parentElement;
+  const availableW = Math.min(container.clientWidth || 540, 540);
+  const scale = availableW / canvasW;
+
+  // Iframe tem tamanho NATURAL = canvas size. Scale via transform.
+  iframe.style.width = canvasW + 'px';
+  iframe.style.height = canvasH + 'px';
+  iframe.style.transform = `scale(${scale})`;
+  iframe.style.transformOrigin = 'top left';
+  iframe.style.aspectRatio = 'auto';  // sobrescreve regra CSS default
+
+  // Container ocupa o tamanho escalado (não o natural) — evita overflow
+  container.style.width = (canvasW * scale) + 'px';
+  container.style.height = (canvasH * scale) + 'px';
+
   iframe.srcdoc = STATE.ad_html;
 }
 
@@ -2121,6 +2175,10 @@ async function generateReal(briefing) {
         // Direção visual livre pra skill 04 (opcional)
         ...(STATE.briefingImage && STATE.briefingImage.trim() ? { briefing_image: STATE.briefingImage.trim() } : {}),
         ...(STATE.imageStylePreset ? { image_style_preset: STATE.imageStylePreset } : {}),
+        // Formato escolhido pelo wizard (post/carrossel/ad-single/ad-story) — backend
+        // resolve pra story/feed/sqr. Sem isso, backend cai no que skill 01 inferiu
+        // do texto livre, que pode estar errado.
+        ...(STATE.format ? { format: STATE.format } : {}),
         // Copy estruturada — backend lê os 3 campos separados (modo único agora)
         ...(STATE.copyHeadline && STATE.copyHeadline.trim() ? { copy_headline: STATE.copyHeadline.trim() } : {}),
         ...(STATE.copySubhead && STATE.copySubhead.trim() ? { copy_subhead: STATE.copySubhead.trim() } : {}),
