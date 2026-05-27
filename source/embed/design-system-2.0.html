@@ -46,10 +46,12 @@
   --metta-ref-opacity-state-focus:   0.12;
   --metta-ref-opacity-state-pressed: 0.16;
 
-  /* Typeface */
-  --metta-ref-typeface-brand:    'Inter';
-  --metta-ref-typeface-fallback: 'Roboto Flex';
-  --metta-ref-typeface-mono:     ui-monospace,ui-monospace,Menlo,Consolas,monospace;
+  /* Typeface — duas fontes primárias (refator 2026-05-27, SF Pro removida) */
+  --metta-ref-typeface-display:  'Zalando Sans Expanded';  /* títulos, H1, CTAs, labels */
+  --metta-ref-typeface-body:     'Inter';                  /* body, parágrafos, captions */
+  --metta-ref-typeface-brand:    'Zalando Sans Expanded';  /* alias retrocompat = display */
+  --metta-ref-typeface-fallback: 'Inter';                  /* alias retrocompat = body */
+  --metta-ref-typeface-mono:     ui-monospace, Menlo, Consolas, monospace;
 
   /* Axes raw */
   --metta-ref-axis-wdth-regular:  100;     --metta-ref-axis-wdth-expanded: 132;
@@ -267,9 +269,8 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--metta-ref-typeface-body), -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
-  font-stretch: 100%;
   font-optical-sizing: auto;
   letter-spacing: -0.01em;
   background: var(--metta-sys-color-background);

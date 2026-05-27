@@ -8,15 +8,21 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--metta-ref-typeface-body), -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
-  font-stretch: 100%;
   font-optical-sizing: auto;
   letter-spacing: -0.01em;
   background: var(--metta-sys-color-background);
   color: var(--metta-sys-color-on-background);
   transition: background var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard),
               color var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
+}
+
+/* Display — Zalando Sans Expanded só em headings + elementos com .t-display, .cta, .label, .kicker */
+h1, h2, h3, h4, h5, h6,
+.t-display, .t-headline, .t-title, .t-kicker, .t-label,
+.cta, .cta-pill, .btn-primary {
+  font-family: var(--metta-ref-typeface-display), -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 :root { --topbar-height: 73px; }
