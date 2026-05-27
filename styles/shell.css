@@ -2419,7 +2419,7 @@ aside.nav .subnav a.placeholder {
 .app-tag-style {
   background: var(--metta-sys-color-on-surface, #111);
   color: var(--metta-sys-color-surface, #fff);
-  font-family: 'SF Mono', Menlo, monospace;
+  font-family: ui-monospace, Menlo, monospace;
   letter-spacing: 0.04em;
 }
 .app-tag-formato {
@@ -2430,7 +2430,7 @@ aside.nav .subnav a.placeholder {
 .app-tag-serie {
   background: rgba(0, 80, 180, 0.10);
   color: #2c5aa0;
-  font-family: 'SF Mono', Menlo, monospace;
+  font-family: ui-monospace, Menlo, monospace;
   letter-spacing: 0.02em;
 }
 .app-detail-tese {
@@ -2669,7 +2669,7 @@ aside.nav .subnav a.placeholder {
 .app-detail-actions { display: flex; gap: 8px; margin: 16px 0 12px; }
 .app-detail-path {
   font-size: 10px;
-  font-family: 'SF Mono', Menlo, monospace;
+  font-family: ui-monospace, Menlo, monospace;
   color: var(--metta-sys-color-on-surface-variant, #888);
   background: var(--metta-sys-color-surface-container-low, #f4f4f5);
   padding: 8px 10px;
@@ -2839,7 +2839,7 @@ aside.nav .subnav a.placeholder {
   border-radius: 6px;
   margin: 0;
   overflow-x: auto;
-  font-family: 'SF Mono', Menlo, monospace;
+  font-family: ui-monospace, Menlo, monospace;
 }
 
 @media (max-width: 720px) {

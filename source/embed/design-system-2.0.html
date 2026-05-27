@@ -17,17 +17,6 @@
    3-tier architecture (ref/sys/comp) + v1 aliases bridge
 ============================================================ */
 
-@font-face {
-  font-family: 'SF Pro';
-  src: local('SF Pro'), local('SF Pro Display'),
-       url('../SF-Pro-Variable-Official.ttf') format('truetype-variations'),
-       url('../SF-Pro-Variable-Official.ttf') format('truetype');
-  font-weight: 1 1000;
-  font-stretch: 30% 150%;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* TIER 1 — REFERENCE TOKENS */
 :root {
   /* Yellow tonal */
@@ -58,9 +47,9 @@
   --metta-ref-opacity-state-pressed: 0.16;
 
   /* Typeface */
-  --metta-ref-typeface-brand:    'SF Pro';
+  --metta-ref-typeface-brand:    'Inter';
   --metta-ref-typeface-fallback: 'Roboto Flex';
-  --metta-ref-typeface-mono:     ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --metta-ref-typeface-mono:     ui-monospace,ui-monospace,Menlo,Consolas,monospace;
 
   /* Axes raw */
   --metta-ref-axis-wdth-regular:  100;     --metta-ref-axis-wdth-expanded: 132;
@@ -2289,18 +2278,18 @@ html.js .reveal--soft.is-revealed {
       <section id="sys-typography">
         <div class="section-meta">Camada 1 · Referência (família) → Camada 2 · Sistema (funções)</div>
         <h2>Tipografia</h2>
-        <p class="lede">A SF Pro Variable é uma fonte com dois eixos. O eixo de <strong>largura</strong> (<code>wdth</code>) divide a fonte em dois grupos visualmente distintos: <strong>Expanded (132%)</strong> e <strong>Regular (100%)</strong>. Catalogamos primeiro as <strong>11 variações primitivas</strong> dos dois grupos, depois mostramos como elas viram <strong>type roles editoriais</strong> (display, headline, body, label).</p>
+        <p class="lede">A Zalando Sans Expanded é uma fonte com dois eixos. O eixo de <strong>largura</strong> (<code>wdth</code>) divide a fonte em dois grupos visualmente distintos: <strong>Expanded (132%)</strong> e <strong>Regular (100%)</strong>. Catalogamos primeiro as <strong>11 variações primitivas</strong> dos dois grupos, depois mostramos como elas viram <strong>type roles editoriais</strong> (display, headline, body, label).</p>
 
         <div class="family-cards">
           <div class="family-card">
             <span class="family-tag">Grupo 1</span>
-            <h3 class="family-name">SF Pro Expanded</h3>
+            <h3 class="family-name">Zalando Sans Expanded</h3>
             <div class="family-meta"><code>font-stretch: 132%</code></div>
             <p class="family-desc">Largura aumentada. Letras esticadas horizontalmente. Sensação de <strong>autoridade</strong>, <strong>amplitude</strong>, <strong>presença</strong>. Uso primário: <strong>headlines, display, CTAs, labels UPPERCASE</strong>. Tem 6 variações de peso.</p>
           </div>
           <div class="family-card">
             <span class="family-tag">Grupo 2</span>
-            <h3 class="family-name">SF Pro Regular</h3>
+            <h3 class="family-name">Inter</h3>
             <div class="family-meta"><code>font-stretch: 100%</code></div>
             <p class="family-desc">Largura natural. Proporções neutras pra leitura conforto. Uso primário: <strong>body text, sub-headlines, descrições, captions</strong>. Tem 5 variações de peso.</p>
           </div>

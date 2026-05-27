@@ -6,20 +6,10 @@
  * =============================================================================*/
 
 /* ---------- FONT FACE ----------
- * SF Pro Variable: 1 arquivo com axes wdth (30-150), opsz (17-28), wght (1-1000).
+ * Zalando Sans Expanded: 1 arquivo com axes wdth (30-150), opsz (17-28), wght (1-1000).
  * Servido por Vercel direto de /assets/fonts/ com Cache-Control infinito.
  * font-variation-settings ativa axes nos seletores específicos.
  */
-@font-face {
-  font-family: 'SF Pro';
-  src: url('/assets/fonts/SF-Pro-Variable-Official.ttf') format('truetype-variations'),
-       url('/assets/fonts/SF-Pro-Variable-Official.ttf') format('truetype');
-  font-weight: 1 1000;
-  font-stretch: 30% 150%;
-  font-style: normal;
-  font-display: block;  /* block = espera font carregar antes de renderizar (evita FOUT no html2canvas) */
-}
-
 /* ---------- DESIGN TOKENS ---------- */
 :root {
   /* Marca Metta — paleta primária */
@@ -42,8 +32,8 @@
   /* Twitter mock */
   --twitter-verified:    #1D9BF0;
 
-  /* Fonts (SF Pro Variable é uma family única — variant via font-variation-settings) */
-  --font-stack: 'SF Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  /* Fonts (Zalando Sans Expanded é uma family única — variant via font-variation-settings) */
+  --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
   /* Canvas dimensions (referência — cada template define o seu via aspect-ratio) */
   --canvas-w-story: 1080;  /* sem px pra usar em cálculos */
@@ -89,7 +79,7 @@ button { all: unset; cursor: default; }
 .ad-canvas[data-format="story"] { height: 1920px; }
 
 /* ---------- UTILITÁRIAS TIPOGRÁFICAS ----------
- * Use .ad-text-* nas classes do template pra ativar SF Pro Variable corretamente.
+ * Use .ad-text-* nas classes do template pra ativar Zalando Sans Expanded corretamente.
  * font-variation-settings configura axes wdth (largura) + wght (peso).
  */
 .ad-text-expanded-heavy {

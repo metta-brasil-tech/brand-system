@@ -11,7 +11,7 @@ const path = require('path');
 const fs = require('fs');
 
 const ROOT = path.resolve(__dirname, '..');
-const FONT_PATH = path.join(ROOT, 'assets/fonts/SF-Pro-Variable-Official.ttf');
+const FONT_PATH = path.join(ROOT, 'assets/fonts/fonts-legacy-removed-2026-05-27');
 const OUT_DIR = path.join(ROOT, 'assets/style-previews/metta');
 
 // Read CSS files
@@ -20,7 +20,7 @@ const sharedCss = fs.readFileSync(path.join(ROOT, 'source/ad-templates/_shared.c
 function fixFontPath(css) {
   // Replace relative font url with file:// absolute path
   return css.replace(
-    /url\('?\/assets\/fonts\/SF-Pro-Variable-Official\.ttf'?\)/g,
+    /url\('?\/assets\/fonts\/Zalando-Sans-Expanded-Official\.ttf'?\)/g,
     `url('file://${FONT_PATH}')`
   );
 }

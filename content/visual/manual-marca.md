@@ -29,7 +29,7 @@ updated: 2026-05-03
 - **Localização:** Figma · Design System · página `📖 Manual de Marca` (sob seção `───── ESTRATÉGIA ─────`).
 - **File key:** `0zEMoFMq6FlIXbANZs9LCG` · **Page ID:** `429:3` · **Root frame:** `429:4`
 - **Dimensões:** 2040×17162px · vertical scroll · 8 seções
-- **Padrão visual:** alinhado ao DS (BG `#FAFCFD`, padding 80, header SF Pro Expanded Heavy 64 + barra amarela 120×6, fontes SF Pro variants).
+- **Padrão visual:** alinhado ao DS (BG `#FAFCFD`, padding 80, header Zalando Sans Expanded Heavy 64 + barra amarela 120×6, fontes Inter variants).
 - **Conteúdo:** TOC + §1 Essência · §2 Posicionamento · §3 Estratégia · §4 Personalidade · §5 Comunicação · §6 Manifesto · §7 Aplicação.
 - **Fonte de verdade:** docs do vault — esta página é projeção visual, não substitui [[Metta - Plataforma de Marca]], [[Metta - Identidade Verbal]], [[Metta - Manifesto de Marca]].
 
@@ -88,12 +88,12 @@ Toda página segue **o mesmo sistema** dos outros docs do DS:
 - **Cards:** radius 24, padding 40–48, stroke `#E0EBF2` ou `#EBF2F7`
 - **Cards-âncora:** radius 32, padding 64, fill noite ou amarelo
 - **Tipografia:**
-  - Display Hero: SF Pro Expanded Heavy 110–130
-  - Title: SF Pro Expanded Heavy 64
-  - Subtitle: SF Pro Expanded Heavy 36
-  - Card title: SF Pro Expanded Bold 24–28
-  - Body: SF Pro Regular 17–22, line-height 145–155%
-  - Kicker: SF Pro Expanded Medium 13–16, letter-spacing 8–12%
+  - Display Hero: Zalando Sans Expanded Heavy 110–130
+  - Title: Zalando Sans Expanded Heavy 64
+  - Subtitle: Zalando Sans Expanded Heavy 36
+  - Card title: Zalando Sans Expanded Bold 24–28
+  - Body: Inter 17–22, line-height 145–155%
+  - Kicker: Zalando Sans Expanded Medium 13–16, letter-spacing 8–12%
 
 ## §3 Mapeamento conteúdo Figma → docs vault
 

@@ -55,7 +55,7 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 <p>O logotipo Metta e composto por:</p>
 <ul>
 <li><strong>Simbolo (Icone)</strong>: Elemento geometrico formado por arcos concentricos e circulos, nas cores amarela (#FFBE18) e variantes. Composto por sub-elementos: &quot;C Menor&quot;, &quot;C Maior&quot;, &quot;Arco Menor&quot; e &quot;Arco Maior&quot;.</li>
-<li><strong>Wordmark</strong>: Tipografia customizada &quot;METTA&quot; baseada na fonte SF Pro, com ajustes especificos:<ul>
+<li><strong>Wordmark</strong>: Tipografia customizada &quot;METTA&quot; baseada na fonte Inter, com ajustes especificos:<ul>
 <li><strong>Cantos arredondados</strong> nas letras</li>
 <li><strong>Adaptacao da letra T</strong> (design custom)</li>
 <li><strong>Ajuste de kerning</strong> entre caracteres</li>
@@ -323,9 +323,9 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 <blockquote>
 <p>Tokens canônicos consolidados em <span class="wikilink" data-target="metta-tokens">metta-tokens</span> §2. Esta seção mantém regras de aplicação por contexto.</p>
 </blockquote>
-<h3 id="41-familia-tipografica-unica-sf-pro-variable">4.1 Família Tipográfica Única — SF Pro Variable</h3>
-<p><strong>SF Pro</strong> é a única família tipográfica da marca. Arquivo oficial: <code>SF-Pro-Variable-Official.ttf</code> (Drive ID <code>1SDXY_sNrpM9wMxQ5F2_IHq_boVz8jXoB</code>).</p>
-<p><strong>&quot;SF Pro&quot; e &quot;SF Pro Expanded&quot; NÃO são fontes separadas.</strong> Ambas vêm do mesmo arquivo variável. O que muda é o eixo de largura (<code>wdth</code>), controlado via <code>font-stretch</code> em CSS.</p>
+<h3 id="41-familia-tipografica-unica-zalando-sans-expanded">4.1 Família Tipográfica Única — Zalando Sans Expanded</h3>
+<p><strong>Inter</strong> é a única família tipográfica da marca. Arquivo oficial: <code>fonts-legacy-removed-2026-05-27</code> (Drive ID <code>1SDXY_sNrpM9wMxQ5F2_IHq_boVz8jXoB</code>).</p>
+<p><strong>&quot;Inter&quot; e &quot;Zalando Sans Expanded&quot; NÃO são fontes separadas.</strong> Ambas vêm do mesmo arquivo variável. O que muda é o eixo de largura (<code>wdth</code>), controlado via <code>font-stretch</code> em CSS.</p>
 <h4 id="eixos-da-fonte-variavel">Eixos da fonte variável</h4>
 <div class="table-wrap"><table>
 <thead>
@@ -364,11 +364,11 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 </tr>
 </tbody></table></div>
 <ul>
-<li><strong>Largura padrão (SF Pro)</strong>: <code>font-stretch: 100%</code> → textos, body, labels, sub-headlines</li>
-<li><strong>Largura expandida (SF Pro Expanded)</strong>: <code>font-stretch: 132%</code> → headlines, display, CTAs, destaques de impacto</li>
+<li><strong>Largura padrão (Inter)</strong>: <code>font-stretch: 100%</code> → textos, body, labels, sub-headlines</li>
+<li><strong>Largura expandida (Zalando Sans Expanded)</strong>: <code>font-stretch: 132%</code> → headlines, display, CTAs, destaques de impacto</li>
 </ul>
 <blockquote>
-<p><strong>Correção técnica:</strong> o valor correto do eixo <code>wdth</code> para &quot;Expanded&quot; é <strong>132</strong> (não 130). No Figma o estilo nomeado &quot;SF Pro / Expanded *&quot; já embute wdth 132. Em CSS, <code>font-stretch: 132%</code> replica exatamente.</p>
+<p><strong>Correção técnica:</strong> o valor correto do eixo <code>wdth</code> para &quot;Expanded&quot; é <strong>132</strong> (não 130). No Figma o estilo nomeado &quot;Inter / Expanded *&quot; já embute wdth 132. Em CSS, <code>font-stretch: 132%</code> replica exatamente.</p>
 </blockquote>
 <h3 id="42-variacoes-nomeadas-caracteristicas-especificas">4.2 Variações Nomeadas — Características Específicas</h3>
 <p>Cada variação é uma combinação precisa de <code>font-weight</code> + <code>font-stretch</code>. Ao escolher uma variação, aplique os dois valores juntos.</p>
@@ -386,42 +386,42 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 <tbody><tr>
 <td><strong>Expanded Heavy</strong></td>
 <td>870</td>
-<td>SF Pro / Expanded Heavy</td>
+<td>Inter / Expanded Heavy</td>
 <td>Máxima presença, traços grossos, letras largas e sólidas</td>
 <td>Display hero, nomes em destaque, H1 de máximo impacto, watermarks tipográficos</td>
 </tr>
 <tr>
 <td><strong>Expanded Bold</strong></td>
 <td>700</td>
-<td>SF Pro / Expanded Bold</td>
+<td>Inter / Expanded Bold</td>
 <td>Forte mas ainda legível em tamanho médio</td>
 <td>CTAs pill padrão (&quot;SAIBA MAIS&quot;, &quot;QUERO PARTICIPAR&quot;)</td>
 </tr>
 <tr>
 <td><strong>Expanded Semibold</strong></td>
 <td>650</td>
-<td>SF Pro / Expanded Semibold</td>
+<td>Inter / Expanded Semibold</td>
 <td>Peso editorial equilibrado, ideal para frases longas em escala grande</td>
 <td>Headlines de poster (74-142px), display de slide institucional, titulos de seção em conversão</td>
 </tr>
 <tr>
 <td><strong>Expanded Medium</strong></td>
 <td>540</td>
-<td>SF Pro / Expanded Medium</td>
+<td>Inter / Expanded Medium</td>
 <td>Peso limpo para tracking largo em caixa alta</td>
 <td>Labels/tags uppercase (ELITE, PREMIUM, MENTORIA), breadcrumbs com tracking 9-12%</td>
 </tr>
 <tr>
 <td><strong>Expanded Regular</strong></td>
 <td>410</td>
-<td>SF Pro / Expanded Regular</td>
+<td>Inter / Expanded Regular</td>
 <td>Traço fino em largura expandida — leveza com escala</td>
 <td>Setup de mixed-weight headlines (parte &quot;leve&quot; antes da parte em Heavy)</td>
 </tr>
 <tr>
 <td><strong>Expanded Light</strong></td>
 <td>270</td>
-<td>SF Pro / Expanded Light</td>
+<td>Inter / Expanded Light</td>
 <td>Ultrafino, delicado em largura expandida</td>
 <td>Taglines sutis, frases ultralight em stories (modelo M2), sub-captions decorativas</td>
 </tr>
@@ -440,47 +440,47 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 <tbody><tr>
 <td><strong>Regular Semibold</strong></td>
 <td>650</td>
-<td>SF Pro / Semibold</td>
+<td>Inter / Semibold</td>
 <td>Sub-headline sólida sem pesar</td>
 <td>Sub-headlines, destaques inline, ênfase secundária</td>
 </tr>
 <tr>
 <td><strong>Regular Medium+</strong></td>
 <td>590</td>
-<td>SF Pro / Medium+</td>
+<td>Inter / Medium+</td>
 <td>Body &quot;com presença&quot;, mantém leitura confortável</td>
 <td>Body principal em peças com hierarquia forte (anúncios, stories)</td>
 </tr>
 <tr>
 <td><strong>Regular Medium</strong></td>
 <td>510</td>
-<td>SF Pro / Medium</td>
+<td>Inter / Medium</td>
 <td>Peso equilibrado para body em tamanho generoso</td>
 <td>Body large, descrições em cards, pain points</td>
 </tr>
 <tr>
 <td><strong>Regular Book</strong></td>
 <td>400</td>
-<td>SF Pro / Regular</td>
+<td>Inter / Regular</td>
 <td>Leitura neutra padrão</td>
 <td>Body corrido, legendas, descrições, manifesto (justified)</td>
 </tr>
 <tr>
 <td><strong>Regular Light</strong></td>
 <td>270</td>
-<td>SF Pro / Light</td>
+<td>Inter / Light</td>
 <td>Tom suave, palavras delicadas</td>
 <td>Body sutil, taglines (&quot;mentoria&quot;, &quot;estratégia&quot;), textos complementares</td>
 </tr>
 </tbody></table></div>
 <h3 id="43-fallback-roboto-flex-mesma-logica">4.3 Fallback — Zalando Sans Expanded (atualizado 2026-05-12)</h3>
-<p>Quando a plataforma não suporta SF Pro (Google Slides, Canva, editores web sem @font-face custom), usar <strong>Zalando Sans Expanded</strong> (Roboto Flex deprecated 2026-05-12) — também fonte variável compatível, eixos equivalentes.</p>
+<p>Quando a plataforma não suporta Inter (Google Slides, Canva, editores web sem @font-face custom), usar <strong>Zalando Sans Expanded</strong> (Roboto Flex deprecated 2026-05-12) — também fonte variável compatível, eixos equivalentes.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>Eixo Zalando Sans Expanded</th>
 <th>Range</th>
-<th>Equivalência com SF Pro</th>
+<th>Equivalência com Inter</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -501,15 +501,15 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 </tbody></table></div>
 <p><strong>Mapeamento direto:</strong></p>
 <ul>
-<li>&quot;SF Pro Expanded Heavy&quot; → Zalando Sans Expanded <code>wght: 870, wdth: 132</code></li>
-<li>&quot;SF Pro Expanded Semibold&quot; → Zalando Sans Expanded <code>wght: 650, wdth: 132</code></li>
-<li>&quot;SF Pro Regular Book&quot; → Zalando Sans Expanded <code>wght: 400, wdth: 100</code></li>
+<li>&quot;Zalando Sans Expanded Heavy&quot; → Zalando Sans Expanded <code>wght: 870, wdth: 132</code></li>
+<li>&quot;Zalando Sans Expanded Semibold&quot; → Zalando Sans Expanded <code>wght: 650, wdth: 132</code></li>
+<li>&quot;Inter Book&quot; → Zalando Sans Expanded <code>wght: 400, wdth: 100</code></li>
 <li>...todas as 11 variações mapeiam 1:1.</li>
 </ul>
 <p><strong>CSS fallback stack:</strong></p>
-<pre><code class="language-css">font-family: &#39;SF Pro&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
+<pre><code class="language-css">font-family: &#39;Inter&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
 </code></pre>
-<p><strong>Fontes PROIBIDAS como fallback</strong>: Inter, Arial, Helvetica, Open Sans, qualquer outra. Apenas SF Pro Variable (primária) e Zalando Sans Expanded (fallback).</p>
+<p><strong>Fontes PROIBIDAS como fallback</strong>: Inter, Arial, Helvetica, Open Sans, qualquer outra. Apenas Zalando Sans Expanded (primária) e Zalando Sans Expanded (fallback).</p>
 <h3 id="44-escala-tipografica-base-1080px-de-largura">4.4 Escala Tipográfica (base 1080px de largura)</h3>
 <h4 id="regra-de-tamanho-minimo-para-instagram">Regra de tamanho mínimo para Instagram</h4>
 <ul>
@@ -715,17 +715,9 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 </ul>
 <h3 id="46-implementacao-css-de-referencia">4.6 Implementação CSS de Referência</h3>
 <pre><code class="language-css">/* Registra a fonte variável com todo o range de eixos */
-@font-face {
-  font-family: &#39;SF Pro&#39;;
-  src: url(&#39;SF-Pro-Variable-Official.ttf&#39;) format(&#39;truetype-variations&#39;);
-  font-weight: 1 1000;
-  font-stretch: 30% 150%;
-  font-display: swap;
-}
-
 /* Stack base */
 body {
-  font-family: &#39;SF Pro&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: &#39;Inter&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
   font-stretch: 100%;
   font-optical-sizing: auto;
@@ -796,9 +788,9 @@ h1, h2, .headline {
 </ul>
 <h3 id="53-formatacao-dos-nomes">5.3 Formatacao dos Nomes</h3>
 <ul>
-<li><strong>&quot;SUPERE A META TODO MES&quot;</strong>: SF Pro, weight 870, ~25px, letter-spacing -3%</li>
-<li><strong>&quot;MENTORIA&quot;</strong>: SF Pro, weight 540, ~12px, letter-spacing 12%, caixa alta</li>
-<li><strong>Tier badges</strong> (ELITE, EXCLUSIVE, PREMIUM): SF Pro, weight 540, ~13px, letter-spacing 12%, dentro de pill com border-radius ~33px</li>
+<li><strong>&quot;SUPERE A META TODO MES&quot;</strong>: Inter, weight 870, ~25px, letter-spacing -3%</li>
+<li><strong>&quot;MENTORIA&quot;</strong>: Inter, weight 540, ~12px, letter-spacing 12%, caixa alta</li>
+<li><strong>Tier badges</strong> (ELITE, EXCLUSIVE, PREMIUM): Inter, weight 540, ~13px, letter-spacing 12%, dentro de pill com border-radius ~33px</li>
 </ul>
 <hr>
 <h2 id="6-elementos-graficos-normative">6. Elementos Gráficos [NORMATIVE]</h2>
@@ -858,10 +850,10 @@ h1, h2, .headline {
 <ul>
 <li>Foto profissional recortada em shape organico (arcos concentricos da marca)</li>
 <li>Gradiente de sobreposicao (amarelo para a CEO/Head, escuro para gestores)</li>
-<li>Nome em <strong>SF Pro Expanded Heavy (870 + 132%)</strong>, ~44px</li>
-<li>Cargo em <strong>SF Pro Regular Book (400 + 100%)</strong>, ~20-23px</li>
+<li>Nome em <strong>Zalando Sans Expanded Heavy (870 + 132%)</strong>, ~44px</li>
+<li>Cargo em <strong>Inter Book (400 + 100%)</strong>, ~20-23px</li>
 <li>Logo Metta no canto</li>
-<li>Tagline &quot;Inteligencia comercial para empresarios&quot; em <strong>SF Pro Expanded Heavy (870 + 132%)</strong>, ~20px</li>
+<li>Tagline &quot;Inteligencia comercial para empresarios&quot; em <strong>Zalando Sans Expanded Heavy (870 + 132%)</strong>, ~20px</li>
 <li>Selo/badge de cor ao fundo</li>
 </ul>
 <h3 id="73-equipe-identificada">7.3 Equipe Identificada</h3>
@@ -900,8 +892,8 @@ h1, h2, .headline {
 <ul>
 <li>Badge &quot;REDES SOCIAIS&quot; em pill amarela com texto escuro</li>
 <li>Posts com imagens reais (nao genericas)</li>
-<li>Headlines em <strong>SF Pro Expanded Heavy (870 + 132%)</strong></li>
-<li>Corpo em <strong>SF Pro Regular Book (400 + 100%)</strong></li>
+<li>Headlines em <strong>Zalando Sans Expanded Heavy (870 + 132%)</strong></li>
+<li>Corpo em <strong>Inter Book (400 + 100%)</strong></li>
 </ul>
 <hr>
 <h2 id="9-regras-de-consistencia-normative">9. Regras de Consistência [NORMATIVE]</h2>
@@ -949,8 +941,8 @@ h1, h2, .headline {
 --color-blue-gray-muted: #75919F;
 --color-blue-gray-subtle: #A8B3B9;
 
-/* Tipografia — SF Pro Variable (ver Secao 4) */
---font-family: &#39;SF Pro&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
+/* Tipografia — Zalando Sans Expanded (ver Secao 4) */
+--font-family: &#39;Inter&#39;, &#39;Zalando Sans Expanded&#39;, -apple-system, BlinkMacSystemFont, sans-serif;
 --font-weight-light: 270;
 --font-weight-regular: 400;
 --font-weight-expanded-regular: 410;
@@ -979,7 +971,7 @@ h1, h2, .headline {
 <li><input disabled="" type="checkbox"> Assets obtidos do Google Drive (Secao 12) - nunca usar arquivos locais</li>
 <li><input disabled="" type="checkbox"> Logo correto selecionado conforme guia de selecao (Secao 12.6)</li>
 <li><input disabled="" type="checkbox"> Background correto selecionado conforme guia de selecao (Secao 12.6)</li>
-<li><input disabled="" type="checkbox"> Fonte SF Pro Variable em uso, com variacao nomeada correta (Secao 4.2) + fallback Zalando Sans Expanded com mesma logica (Secao 4.3) — obrigatorio em PPTX/Google Slides</li>
+<li><input disabled="" type="checkbox"> Fonte Zalando Sans Expanded em uso, com variacao nomeada correta (Secao 4.2) + fallback Zalando Sans Expanded com mesma logica (Secao 4.3) — obrigatorio em PPTX/Google Slides</li>
 <li><input disabled="" type="checkbox"> Paleta de cores respeitada (amarelo, azul noite, branco gelo, azul acinzentado)</li>
 <li><input disabled="" type="checkbox"> Logo na versao correta para o fundo utilizado</li>
 <li><input disabled="" type="checkbox"> Hierarquia tipografica clara (display &gt; heading &gt; body &gt; label)</li>
@@ -1602,14 +1594,14 @@ h1, h2, .headline {
 </tr>
 </thead>
 <tbody><tr>
-<td>SF-Pro-Variable-Official.ttf</td>
+<td>fonts-legacy-removed-2026-05-27</td>
 <td><code>1SDXY_sNrpM9wMxQ5F2_IHq_boVz8jXoB</code></td>
-<td>Fonte SF Pro Variable (regular)</td>
+<td>Fonte Zalando Sans Expanded (regular)</td>
 </tr>
 <tr>
-<td>SF-Pro-Italic-Variable-Official.ttf</td>
+<td>Inter-Italic-Variable-Official.ttf</td>
 <td><code>1wuCfL7hwMpOvGJgZwxSyr-NPXMDfxaaL</code></td>
-<td>Fonte SF Pro Variable (italico)</td>
+<td>Fonte Zalando Sans Expanded (italico)</td>
 </tr>
 </tbody></table></div>
 <hr>
@@ -1740,8 +1732,8 @@ h1, h2, .headline {
 </tr>
 </tbody></table></div>
 <p><strong>Nota:</strong> o poster editorial 2035x1414 e uma escala nao documentada no catalogo anterior. E o canvas usado para os posters 4-8 do Playground.</p>
-<h3 id="132-sf-pro-no-figma-nomes-reais-dos-estilos">13.2 SF Pro no Figma — Nomes Reais dos Estilos</h3>
-<p>O arquivo Rebranding referencia SF Pro atraves de <strong>estilos nomeados</strong> (instancias do variable font) em vez de ajustar o eixo de largura manualmente. Os nomes exatos a usar no painel de texto do Figma (e na API) sao:</p>
+<h3 id="132-inter-no-figma-nomes-reais-dos-estilos">13.2 Inter no Figma — Nomes Reais dos Estilos</h3>
+<p>O arquivo Rebranding referencia Inter atraves de <strong>estilos nomeados</strong> (instancias do variable font) em vez de ajustar o eixo de largura manualmente. Os nomes exatos a usar no painel de texto do Figma (e na API) sao:</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1752,43 +1744,43 @@ h1, h2, .headline {
 </tr>
 </thead>
 <tbody><tr>
-<td><code>SF Pro / Expanded Heavy</code></td>
+<td><code>Inter / Expanded Heavy</code></td>
 <td>870</td>
 <td>132</td>
 <td>Nomes em footer, display hero</td>
 </tr>
 <tr>
-<td><code>SF Pro / Expanded Semibold</code></td>
+<td><code>Inter / Expanded Semibold</code></td>
 <td>650</td>
 <td>132</td>
 <td>Headlines de poster e slide (74-142px)</td>
 </tr>
 <tr>
-<td><code>SF Pro / Expanded Medium</code></td>
+<td><code>Inter / Expanded Medium</code></td>
 <td>540</td>
 <td>132</td>
 <td>Labels uppercase, pill tags, body em escala</td>
 </tr>
 <tr>
-<td><code>SF Pro / Expanded Regular</code></td>
+<td><code>Inter / Expanded Regular</code></td>
 <td>410</td>
 <td>132</td>
 <td>Display hero de slide com mixed-weight inline</td>
 </tr>
 <tr>
-<td><code>SF Pro / Expanded Light</code></td>
+<td><code>Inter / Expanded Light</code></td>
 <td>270</td>
 <td>132</td>
 <td>Texto sutil, sub-captions</td>
 </tr>
 <tr>
-<td><code>SF Pro / Regular</code></td>
+<td><code>Inter / Regular</code></td>
 <td>400</td>
 <td>100</td>
 <td>Role/cargo em credits (16-20px)</td>
 </tr>
 <tr>
-<td><code>SF Pro / Medium</code></td>
+<td><code>Inter / Medium</code></td>
 <td>510</td>
 <td>100</td>
 <td>URL, micro-text de footer</td>
@@ -1804,12 +1796,12 @@ h1, h2, .headline {
 <li><strong>Background solido</strong> — cor do token</li>
 <li><strong>Wordmark rotado signature</strong> — &quot;metta&quot; lowercase gigante, rotacao 90°, width = altura do canvas (~1415px), flush bleed na borda esquerda, cor em baixo contraste com o bg</li>
 <li><strong>Foto dominante</strong> — rounded rectangle mask (~52px radius), ocupando 60-85% do canvas, rotacionada 90° quando o design pedir</li>
-<li><strong>Headline central</strong> — SF Pro Expanded Semibold 650, <strong>74-137px</strong>, sentence case, cor <code>#FFFFFF</code> ou <code>#EBF3F7</code>, letter-spacing -5%, line-height 0.9</li>
-<li><strong>Sub-caption</strong> (opcional) — SF Pro Expanded Semibold 650 em escala menor (~47px), cor <code>#435965</code> em bg claro ou card overlay</li>
+<li><strong>Headline central</strong> — Zalando Sans Expanded Semibold 650, <strong>74-137px</strong>, sentence case, cor <code>#FFFFFF</code> ou <code>#EBF3F7</code>, letter-spacing -5%, line-height 0.9</li>
+<li><strong>Sub-caption</strong> (opcional) — Zalando Sans Expanded Semibold 650 em escala menor (~47px), cor <code>#435965</code> em bg claro ou card overlay</li>
 <li><strong>Pill tag list</strong> — fileira horizontal de servicos (detalhe em 13.5)</li>
 <li><strong>Yellow brand band</strong> — faixa horizontal amarela em uma borda do canvas (detalhe em 13.6)</li>
 <li><strong>Logo stack compacto</strong> — simbolo + wordmark, canto oposto a brand band (ex: top-right quando band esta bottom)</li>
-<li><strong>URL footer</strong> — <code>METTABRASIL.COM.BR</code> em SF Pro Medium 510, 18px, color <code>#435965</code></li>
+<li><strong>URL footer</strong> — <code>METTABRASIL.COM.BR</code> em Inter Medium 510, 18px, color <code>#435965</code></li>
 </ol>
 <p><strong>Quando usar:</strong> posters institucionais de evento, pecas de feira, material impresso premium, capas de apresentacao.</p>
 <h3 id="134-padrao-slide-statement">13.4 Padrao Slide Statement</h3>
@@ -1819,7 +1811,7 @@ h1, h2, .headline {
 <p><strong>Area principal (y: 0-900):</strong></p>
 <ul>
 <li>Headline centralizado horizontalmente em x=965 (center)</li>
-<li>Tipografia: <strong>SF Pro Expanded Regular 410 a 142.5px</strong>, color <code>#EBF3F7</code> (ice-blue)</li>
+<li>Tipografia: <strong>Zalando Sans Expanded Regular 410 a 142.5px</strong>, color <code>#EBF3F7</code> (ice-blue)</li>
 <li>Mixed-weight inline: palavras enfaticas trocam para <strong>Expanded Semibold 650</strong> (ex: &quot;parceria&quot;, &quot;aumentar o lucro&quot;)</li>
 <li>Mixed-color inline: palavras-chave coloridas em <code>#FFBE18</code> (amarelo) para destaque semantico</li>
 <li>Line-height 0.82, letter-spacing -1%</li>
@@ -1851,7 +1843,7 @@ h1, h2, .headline {
 <td>2</td>
 <td>x=580</td>
 <td>Tagline da marca</td>
-<td>&quot;Performance em vendas pode ser mais leve.&quot; — SF Pro Expanded Medium 540, 19.9px, <code>#435965</code>, max-width ~314px</td>
+<td>&quot;Performance em vendas pode ser mais leve.&quot; — Zalando Sans Expanded Medium 540, 19.9px, <code>#435965</code>, max-width ~314px</td>
 </tr>
 <tr>
 <td>3</td>
@@ -1878,7 +1870,7 @@ h1, h2, .headline {
 </ul>
 <p><strong>Especificacao do texto:</strong></p>
 <ul>
-<li>Font: <strong>SF Pro Expanded Medium 540</strong></li>
+<li>Font: <strong>Zalando Sans Expanded Medium 540</strong></li>
 <li>Size: 9-11px (poster) ou escalar proporcional ao canvas</li>
 <li>Color: contrastante com o bg da pill (ex: <code>#0C161B</code> sobre <code>#435965</code>)</li>
 <li>Letter-spacing: <code>+12%</code> (0.12em)</li>
@@ -1908,7 +1900,7 @@ h1, h2, .headline {
 <p><strong>Conteudo interno:</strong></p>
 <ul>
 <li><strong>Left:</strong> brand lockup stack vertical (simbolo 72x68 + wordmark &quot;metta&quot; 173x68)</li>
-<li><strong>Right:</strong> label <code>INTELIGÊNCIA COMERCIAL</code> em SF Pro Expanded Regular 410, 23.4px, color <code>#0C161B</code>, letter-spacing -1%</li>
+<li><strong>Right:</strong> label <code>INTELIGÊNCIA COMERCIAL</code> em Zalando Sans Expanded Regular 410, 23.4px, color <code>#0C161B</code>, letter-spacing -1%</li>
 </ul>
 <p><strong>Variante vertical:</strong> rotacionar 90° para criar um spine na borda lateral do canvas (visto em Poster 6 rodando verticalmente com o logo lockup).</p>
 <p><strong>Quando usar:</strong> ancora de marca em posters editoriais, separador entre areas de conteudo em slides, footer de impacto em material institucional.</p>
@@ -1916,7 +1908,7 @@ h1, h2, .headline {
 <p>Padrao signature da marca Metta: wordmark &quot;metta&quot; rotacionado 90° e com crop/bleed na borda do canvas.</p>
 <p><strong>Especificacao:</strong></p>
 <ul>
-<li>Texto: wordmark &quot;metta&quot; (lowercase, SF Pro style) — usar SVG oficial do Drive quando possivel</li>
+<li>Texto: wordmark &quot;metta&quot; (lowercase, Inter style) — usar SVG oficial do Drive quando possivel</li>
 <li>Rotacao: exatamente 90° (vertical, leitura bottom-up)</li>
 <li>Dimensao: width ~265-280px x height = altura do canvas (ex: 1414px em poster A4)</li>
 <li>Posicao: flush bleed na borda <strong>esquerda</strong> do canvas (ou direita em variantes)</li>
@@ -1935,8 +1927,8 @@ h1, h2, .headline {
 <ul>
 <li><strong>Avatar:</strong> circular mask 72x72, foto da pessoa cropada e centralizada</li>
 <li><strong>Stack textual ao lado direito:</strong><ul>
-<li>Nome: <strong>SF Pro Expanded Heavy 870</strong>, 32.6px, color <code>#435965</code> (em slide claro) ou <code>#FFFFFF</code> (em dark), letter-spacing -1%, line-height 0.82</li>
-<li>Role/cargo: <strong>SF Pro Regular 400</strong>, 16.9px, mesma cor do nome, line-height 0.82</li>
+<li>Nome: <strong>Zalando Sans Expanded Heavy 870</strong>, 32.6px, color <code>#435965</code> (em slide claro) ou <code>#FFFFFF</code> (em dark), letter-spacing -1%, line-height 0.82</li>
+<li>Role/cargo: <strong>Inter 400</strong>, 16.9px, mesma cor do nome, line-height 0.82</li>
 </ul>
 </li>
 <li>Gap entre avatar e texto: ~16px</li>
@@ -1962,9 +1954,9 @@ h1, h2, .headline {
 <p><strong>Elementos:</strong></p>
 <ul>
 <li><strong>Simbolo:</strong> icon Metta (imagem do Drive)</li>
-<li><strong>Wordmark:</strong> &quot;metta&quot; lowercase (imagem ou texto em SF Pro)</li>
+<li><strong>Wordmark:</strong> &quot;metta&quot; lowercase (imagem ou texto em Inter)</li>
 <li><strong>Divider:</strong> linha vertical 1x22px, color branco ou <code>#435965</code></li>
-<li><strong>Label:</strong> <code>INTELIGÊNCIA COMERCIAL</code> — SF Pro Expanded Regular 410, 17px, white (em dark) ou <code>#0C161B</code> (em light), letter-spacing +12%, uppercase</li>
+<li><strong>Label:</strong> <code>INTELIGÊNCIA COMERCIAL</code> — Zalando Sans Expanded Regular 410, 17px, white (em dark) ou <code>#0C161B</code> (em light), letter-spacing +12%, uppercase</li>
 </ul>
 <p><strong>Quando usar:</strong> footer de slides, assinaturas de email signature, cards de credencial, watermarks institucionais, pop-ups de confirmacao.</p>
 <h3 id="1310-tokens-de-layout-confirmados-na-fonte">13.10 Tokens de Layout Confirmados na Fonte</h3>
@@ -2132,7 +2124,7 @@ h1, h2, .headline {
 <p><strong>Confirmacoes (alinhado com PRD existente):</strong></p>
 <ul>
 <li>Paleta de cores primarias (#0C161B, #FFBE18, #FFFFFF, #EBF3F7, #435965)</li>
-<li>SF Pro como familia tipografica unica</li>
+<li>Inter como familia tipografica unica</li>
 <li>Wordmark como textura/decoracao</li>
 <li>Footer de slide com 4 colunas</li>
 <li>Pills como navegacao de categoria</li>
@@ -2141,7 +2133,7 @@ h1, h2, .headline {
 <p><strong>Novas descobertas (adicionar ao repertorio):</strong></p>
 <ul>
 <li>Canvas editorial poster 2035x1414 (nao documentado antes)</li>
-<li>SF Pro Expanded usa <code>wdth 132</code>, nao 130</li>
+<li>Zalando Sans Expanded usa <code>wdth 132</code>, nao 130</li>
 <li>Steel <code>#435965</code> como background PRIMARIO (nao apenas texto secundario)</li>
 <li>Tagline fixa: &quot;Performance em vendas pode ser mais leve.&quot;</li>
 <li>Lista oficial de 6 servicos em pill tags (LIVROS, TREINAMENTOS, FORMACOES, MBA, MENTORIA, CONSULTORIA)</li>

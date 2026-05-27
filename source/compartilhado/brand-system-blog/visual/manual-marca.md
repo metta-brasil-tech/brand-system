@@ -71,17 +71,19 @@ Margem livre ao redor do logo equivalente à altura do "M" do wordmark. Nunca po
 
 ## Tipografia
 
-A Metta usa uma única família — **SF Pro** — em múltiplos pesos e larguras. Uma família, muitos pesos. Nunca misturar com outras famílias em peças oficiais.
+A Metta usa **duas fontes primárias**, ambas open-source (SIL OFL 1.1): **Zalando Sans Expanded** pra display e **Inter** pra body. Sem mistura com outras famílias em peças oficiais. SF Pro removida em 2026-05-27.
 
 ### Hierarquia
-| Nível | Peso | Largura | Caso de uso |
+| Nível | Fonte | Peso | Caso de uso |
 |---|---|---|---|
-| **Display Hero** | Heavy (870) | Expanded (132%) | Headline principal, manifesto, capa |
-| **Title** | Heavy (870) | Expanded (132%) | H1 de section, abertura de bloco |
-| **Subtitle** | Bold (700) | Expanded (132%) | H2 dentro de section |
-| **Card title** | Bold (700) | Normal (100%) | Título de card, subdivisão |
-| **Kicker** | Medium (540) | Expanded (132%) | Tag de seção, número editorial, label de bandeira (uppercase, tracking 0.18em) |
-| **Body** | Regular (510) | Normal (100%) | Texto corrido, parágrafo (leading 1.6, max 60ch) |
+| **Display Hero** | Zalando Sans Expanded | Black (900) | Headline principal, manifesto, capa, big numbers |
+| **Title** | Zalando Sans Expanded | ExtraBold (800) | H1 de section, abertura de bloco |
+| **Subtitle** | Zalando Sans Expanded | Bold (700) | H2 dentro de section, CTAs pill |
+| **Card title** | Zalando Sans Expanded | SemiBold (650) | Título de card, subdivisão |
+| **Kicker** | Zalando Sans Expanded | Medium (540) | Tag de seção, número editorial, label de bandeira (uppercase, tracking 0.18em) |
+| **Body Large** | Inter | Medium (500) | Lede, primeiro parágrafo, intro |
+| **Body** | Inter | Regular (400) | Texto corrido, parágrafo (leading 1.6, max 60ch) |
+| **Caption** | Inter | Medium (500) | Legenda, metadado, fine print |
 | **Caption** | Regular (510) | Normal (100%) | Legenda, metadado, fine print |
 
 ### Regras

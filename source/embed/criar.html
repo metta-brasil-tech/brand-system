@@ -2364,7 +2364,7 @@ async function downloadMockPng() {
     const adRoot = iframe.contentDocument.querySelector('.ad-canvas');
     if (!adRoot) throw new Error('Elemento .ad-canvas não encontrado no preview.');
 
-    // Espera fontes carregarem ANTES do snapshot (essencial pra SF Pro Variable
+    // Espera fontes carregarem ANTES do snapshot (essencial pra Zalando Sans Expanded
     // não vir com fallback Arial)
     if (iframe.contentDocument.fonts && iframe.contentDocument.fonts.ready) {
       await iframe.contentDocument.fonts.ready;

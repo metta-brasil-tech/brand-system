@@ -74,7 +74,7 @@ JPGs flat plates + gradients. 10 arquivos:
 1. **Desenhar o logo** em SVG/CSS/figma vector — sempre baixar do Drive
 2. **Usar placeholder textual** `[logo] metta`, `<METTA>` — se asset não pode ser baixado, INTERROMPER e reportar
 3. **Aplicar glow/shadow/ghost/outline/blur** no logo — nem em CSS, nem em Figma
-4. **Recriar o wordmark** em texto SF Pro — o "metta" textual NÃO substitui o arquivo oficial
+4. **Recriar o wordmark** em texto Inter — o "metta" textual NÃO substitui o arquivo oficial
 
 ---
 
@@ -195,8 +195,8 @@ JPGs flat plates + gradients. 10 arquivos:
 
 | Arquivo | ID Drive |
 |---|---|
-| `SF-Pro-Variable-Official.ttf` | `1SDXY_sNrpM9wMxQ5F2_IHq_boVz8jXoB` |
-| `SF-Pro-Italic-Variable-Official.ttf` | `1wuCfL7hwMpOvGJgZwxSyr-NPXMDfxaaL` |
+| `fonts-legacy-removed-2026-05-27` | `1SDXY_sNrpM9wMxQ5F2_IHq_boVz8jXoB` |
+| `Inter-Italic-Variable-Official.ttf` | `1wuCfL7hwMpOvGJgZwxSyr-NPXMDfxaaL` |
 
 ---
 

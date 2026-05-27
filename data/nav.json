@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-05-16T04:03:13.401Z",
+  "generatedAt": "2026-05-27T15:46:10.017Z",
   "tabs": [
     {
       "id": "overview",
@@ -1570,18 +1570,23 @@
               "depth": 2
             },
             {
-              "id": "41-familia-tipografica-unica-sf-pro-variable",
-              "label": "4.1 Família Tipográfica Única — SF Pro Variable",
+              "id": "41-duas-fontes-primarias",
+              "label": "4.1 Duas Fontes Primárias",
               "depth": 3
             },
             {
-              "id": "42-variacoes-nomeadas-caracteristicas-especificas",
-              "label": "4.2 Variações Nomeadas — Características Específicas",
+              "id": "42-variacoes-nomeadas-pesos-por-fonte",
+              "label": "4.2 Variações Nomeadas — Pesos por Fonte",
               "depth": 3
             },
             {
-              "id": "43-fallback-zalando-sans-expanded-atualizado-2026-05-12",
-              "label": "4.3 Fallback — Zalando Sans Expanded (atualizado 2026-05-12)",
+              "id": "43-import-e-css",
+              "label": "4.3 Import e CSS",
+              "depth": 3
+            },
+            {
+              "id": "44-regras-inviolaveis",
+              "label": "4.4 Regras Invioláveis",
               "depth": 3
             },
             {
@@ -1775,8 +1780,8 @@
               "depth": 3
             },
             {
-              "id": "132-sf-pro-no-figma-nomes-reais-dos-estilos",
-              "label": "13.2 SF Pro no Figma — Nomes Reais dos Estilos",
+              "id": "132-nomes-reais-dos-estilos-no-figma",
+              "label": "13.2 Nomes Reais dos Estilos no Figma",
               "depth": 3
             },
             {
@@ -1830,7 +1835,7 @@
               "depth": 3
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-27T12:23:18-03:00"
         },
         {
           "id": "manual-marca",
@@ -1984,7 +1989,7 @@
             }
           ],
           "blog_source": "compartilhado/brand-system-blog/visual/manual-marca.md",
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-27T12:23:18-03:00"
         },
         {
           "id": "ds-cores",
@@ -2085,13 +2090,13 @@
               "depth": 2
             },
             {
-              "id": "variacoes-expanded-132",
-              "label": "Variações Expanded (132%)",
+              "id": "variacoes-zalando-sans-expanded-display",
+              "label": "Variações Zalando Sans Expanded (display)",
               "depth": 2
             },
             {
-              "id": "variacoes-regular-100",
-              "label": "Variações Regular (100%)",
+              "id": "variacoes-inter-body",
+              "label": "Variações Inter (body)",
               "depth": 2
             },
             {
@@ -2110,8 +2115,8 @@
               "depth": 3
             },
             {
-              "id": "mixed-weight-combinacao-expanded-regular",
-              "label": "Mixed-weight (combinação Expanded + Regular)",
+              "id": "mixed-weight-combinacao-black-light-dentro-de-zalando",
+              "label": "Mixed-weight (combinação Black + Light dentro de Zalando)",
               "depth": 3
             },
             {
@@ -2135,24 +2140,9 @@
               "depth": 2
             },
             {
-              "id": "fallback-zalando-sans-expanded",
-              "label": "Fallback Zalando Sans Expanded",
-              "depth": 2
-            },
-            {
-              "id": "mapeamento-direto-11-variacoes-11",
-              "label": "Mapeamento direto · 11 variações 1:1",
-              "depth": 3
-            },
-            {
               "id": "como-aplicar",
               "label": "Como aplicar",
-              "depth": 3
-            },
-            {
-              "id": "fontes-proibidas-como-fallback",
-              "label": "Fontes proibidas como fallback",
-              "depth": 3
+              "depth": 2
             },
             {
               "id": "para-implementacao-tecnica",
@@ -2160,7 +2150,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-27T12:23:18-03:00"
         },
         {
           "id": "ds-formas-espacamento",
@@ -2420,7 +2410,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-27T12:23:18-03:00"
         },
         {
           "id": "ds-componentes",
