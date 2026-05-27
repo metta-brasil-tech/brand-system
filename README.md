@@ -70,7 +70,7 @@ Live Server do VS Code, http-server, etc.
 
 - **Auto-contido** — toda fonte versionada no repo. Vercel buildia direto, sem precisar do vault.
 - **DS técnico embarcado** — `embed/design-system-2.0.html` em iframe na aba Identidade Visual.
-- **Estética 100% DS** — tokens, SF Pro Variable, ícones SVG line.
+- **Estética 100% DS** — tokens, Zalando Sans Expanded, ícones SVG line.
 - **Roteamento vanilla** — hash routing, sem framework. URLs como `#/marca/manifesto`.
 - **Tema light/dark** — toggle persistido em `localStorage`.
 - **Sem emojis na UI** — só ícones SVG (line, viewBox 24x24, stroke currentColor 2.2).
@@ -124,7 +124,7 @@ brand-system/
 
 - **Vault é fonte única (readonly)** — build pré-compila `.md` em HTML estático. Edição segue 100% no Obsidian.
 - **DS técnico atual segue intacto** — `output/design-system-v2/design-system-2.0.html` é embarcado em iframe na aba Identidade Visual → DS Técnico.
-- **Estética 100% reaproveitada** — mesmos tokens, mesma tipografia (SF Pro Variable), mesma linguagem visual do DS.
+- **Estética 100% reaproveitada** — mesmos tokens, mesma tipografia (Zalando Sans Expanded), mesma linguagem visual do DS.
 - **Roteamento simples** — hash routing vanilla, sem framework. URLs como `#/marca/manifesto`.
 - **Tema light/dark** — toggle persistido em `localStorage`.
 - **Sem emojis na UI** — apenas ícones SVG no estilo DS (line, viewBox 24x24, stroke currentColor 2.2).

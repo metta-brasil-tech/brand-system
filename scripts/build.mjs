@@ -519,7 +519,7 @@ async function copyDsEmbed() {
     return;
   }
   const dsRaw = await readFile(dsSrc, 'utf8');
-  // Fonte SF-Pro vive na raiz do brand-system; do output em embed/ o caminho relativo é ../SF-Pro-* (já correto no source).
+  // Fonte Inter vive na raiz do brand-system; do output em embed/ o caminho relativo é ../Inter-* (já correto no source).
   const dsOut = join(ROOT, 'embed', 'design-system-2.0.html');
   await mkdir(dirname(dsOut), { recursive: true });
   await writeFile(dsOut, dsRaw, 'utf8');

@@ -1,145 +1,155 @@
 # Tipografia
 
-A Metta opera com **uma única família tipográfica — SF Pro Variable** — em múltiplas variações de peso e largura. Sem mistura com outras famílias, sem decoração desnecessária, sem fontes alternativas em peças oficiais. A SF Pro Variable tem dois eixos: o eixo de **peso** (`weight`) e o eixo de **largura** (`wdth`). É esse segundo eixo que divide a fonte em dois grupos visualmente distintos — Expanded e Regular — e que dá à comunicação Metta a assinatura tipográfica reconhecível.
+A Metta opera com **duas fontes primárias**, ambas open-source (SIL OFL 1.1): **Zalando Sans Expanded** pra display e **Inter** pra body. Sem mistura com outras famílias, sem decoração desnecessária, sem fontes alternativas em peças oficiais.
 
-> **Fallback oficial — Zalando Sans Expanded.** SF Pro é proprietária da Apple e não pode ser distribuída em arquivos `.pptx` ou usada nativamente em Google Slides. Pra essas plataformas, a Metta adotou em **2026-05-12** a **Zalando Sans Expanded** (variable font OFL no Google Fonts) como fonte oficial de fallback — visualmente quase idêntica a SF Pro Expanded, com os mesmos eixos de peso e largura. Detalhes operacionais na seção [Fallback Zalando Sans Expanded](#fallback-zalando-sans-expanded) abaixo.
+> **Refator de 2026-05-27.** SF Pro Variable foi removida do sistema. Antes a marca usava UMA fonte com dois eixos (`wdth` variável). Agora são DUAS famílias separadas — uma pra display, outra pra body. Razões: SF Pro era proprietária Apple (só renderiza fiel em macOS, virava Arial em Windows), não distribuível em PPTX, e a lógica de fallback complicava manutenção em 4 sistemas. Zalando Sans Expanded + Inter resolvem tudo isso e ainda têm licença livre.
 
 ## Os dois grupos
 
-A escolha entre Expanded e Regular não é estética casual. Cada grupo tem função editorial específica.
+A escolha entre Zalando Sans Expanded e Inter não é estética casual. Cada uma tem função editorial específica e os papéis não se misturam.
 
 <div class="family-grid">
   <div class="family-card" style="font-stretch:132%">
-    <div class="family-tag">Grupo 1</div>
-    <div class="family-display" style="font-weight:870;font-stretch:132%">SF Pro Expanded</div>
-    <code class="family-meta">font-stretch: 132%</code>
-    <p>Largura aumentada. Letras esticadas horizontalmente. Sensação de <strong>autoridade</strong>, <strong>amplitude</strong>, <strong>presença</strong>. Uso primário: <strong>headlines, display, CTAs, labels uppercase</strong>. 6 variações de peso.</p>
+    <div class="family-tag">Display</div>
+    <div class="family-display" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:900">Zalando Sans Expanded</div>
+    <code class="family-meta">SIL OFL · Google Fonts</code>
+    <p>Letras largas, traços densos. Sensação de <strong>autoridade</strong>, <strong>amplitude</strong>, <strong>presença</strong>. Uso primário: <strong>headlines, H1, CTAs, labels UPPERCASE, big numbers</strong>. 8 pesos disponíveis (200-900) + italic.</p>
   </div>
   <div class="family-card">
-    <div class="family-tag">Grupo 2</div>
-    <div class="family-display" style="font-weight:700;font-stretch:100%">SF Pro Regular</div>
-    <code class="family-meta">font-stretch: 100%</code>
-    <p>Largura natural. Proporções neutras pra leitura confortável. Uso primário: <strong>body text, sub-headlines, descrições, captions</strong>. 5 variações de peso.</p>
+    <div class="family-tag">Body</div>
+    <div class="family-display" style="font-family:'Inter',sans-serif;font-weight:700">Inter</div>
+    <code class="family-meta">SIL OFL · Google Fonts</code>
+    <p>Proporções neutras, x-height grande, otimizada pra leitura em tela. Uso primário: <strong>body text, sub-headlines, descrições, captions, parágrafos longos</strong>. 8 pesos disponíveis (100-900) + italic.</p>
   </div>
 </div>
 
-## Variações Expanded (132%)
+## Variações Zalando Sans Expanded (display)
 
-Seis pesos disponíveis no grupo Expanded. Mesma largura horizontal, varia só peso e tamanho. Use quando a peça precisa **comunicar autoridade** — manifesto, headline de capa, abertura de slide, CTA.
+Oito pesos disponíveis. Use quando a peça precisa **comunicar autoridade** — manifesto, headline de capa, abertura de slide, CTA, label UPPERCASE.
 
 <div class="type-specimen-list">
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Expanded Heavy</strong>
-      <code>weight 870 · stretch 132%</code>
-      <span class="type-use">Display hero, máximo impacto, watermarks</span>
+      <strong>Black</strong>
+      <code>weight 900</code>
+      <span class="type-use">Display hero, big numbers, watermarks tipográficos</span>
     </div>
-    <div class="type-sample" style="font-weight:870;font-stretch:132%;font-size:48px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+    <div class="type-sample" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:900;font-size:48px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
   </div>
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Expanded Bold</strong>
-      <code>weight 700 · stretch 132%</code>
-      <span class="type-use">CTAs pill, botões primários, ações</span>
+      <strong>ExtraBold</strong>
+      <code>weight 800</code>
+      <span class="type-use">H1 de máximo impacto, divider title</span>
     </div>
-    <div class="type-sample" style="font-weight:700;font-stretch:132%;font-size:42px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+    <div class="type-sample" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:800;font-size:46px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
   </div>
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Expanded Semibold</strong>
-      <code>weight 650 · stretch 132%</code>
-      <span class="type-use">Headlines de poster, slide editorial</span>
+      <strong>Bold</strong>
+      <code>weight 700</code>
+      <span class="type-use">CTAs pill, headlines padrão, ações</span>
     </div>
-    <div class="type-sample" style="font-weight:650;font-stretch:132%;font-size:36px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+    <div class="type-sample" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:700;font-size:42px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
   </div>
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Expanded Medium</strong>
-      <code>weight 540 · stretch 132%</code>
-      <span class="type-use">Labels e tags com tracking, badges (Premium, Elite)</span>
+      <strong>SemiBold</strong>
+      <code>weight 650</code>
+      <span class="type-use">Headlines de poster (74-142px), display institucional</span>
     </div>
-    <div class="type-sample" style="font-weight:540;font-stretch:132%;font-size:30px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+    <div class="type-sample" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:650;font-size:36px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
   </div>
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Expanded Regular</strong>
-      <code>weight 410 · stretch 132%</code>
+      <strong>Medium</strong>
+      <code>weight 540</code>
+      <span class="type-use">Labels UPPERCASE (ELITE, PREMIUM, MENTORIA), badges, tracking 9-12%</span>
+    </div>
+    <div class="type-sample" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:540;font-size:30px;line-height:1.0;letter-spacing:0.10em;text-transform:uppercase">Mentoria SMTM</div>
+  </div>
+  <div class="type-specimen">
+    <div class="type-meta">
+      <strong>Regular</strong>
+      <code>weight 410</code>
       <span class="type-use">Setup mixed-weight, sub-headlines de display</span>
     </div>
-    <div class="type-sample" style="font-weight:410;font-stretch:132%;font-size:28px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+    <div class="type-sample" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:410;font-size:28px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
   </div>
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Expanded Light</strong>
-      <code>weight 270 · stretch 132%</code>
+      <strong>Light</strong>
+      <code>weight 270</code>
       <span class="type-use">Taglines sutis, sub-captions, label editorial</span>
     </div>
-    <div class="type-sample" style="font-weight:270;font-stretch:132%;font-size:26px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+    <div class="type-sample" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:270;font-size:26px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
+  </div>
+  <div class="type-specimen">
+    <div class="type-meta">
+      <strong>ExtraLight</strong>
+      <code>weight 200</code>
+      <span class="type-use">Uso raro · marcação decorativa fina</span>
+    </div>
+    <div class="type-sample" style="font-family:'Zalando Sans Expanded',sans-serif;font-weight:200;font-size:24px;line-height:1.0;letter-spacing:-0.01em">Demita o achismo.</div>
   </div>
 </div>
 
-## Variações Regular (100%)
+## Variações Inter (body)
 
-Cinco pesos no grupo Regular. Largura natural otimizada para leitura. Use em **corpo de texto, descrições, parágrafos longos, manifesto narrativo**.
+Oito pesos no grupo body. Largura natural otimizada pra leitura. Use em **corpo de texto, descrições, parágrafos longos, manifesto narrativo, captions**.
 
 <div class="type-specimen-list">
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Regular Semibold</strong>
-      <code>weight 650 · stretch 100%</code>
+      <strong>SemiBold</strong>
+      <code>weight 600</code>
       <span class="type-use">Sub-headlines, ênfase inline, destaques secundários</span>
     </div>
-    <div class="type-sample" style="font-weight:650;font-stretch:100%;font-size:30px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+    <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:600;font-size:30px;line-height:1.2">Mentoria, método e diagnóstico.</div>
   </div>
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Regular Medium+</strong>
-      <code>weight 590 · stretch 100%</code>
-      <span class="type-use">Body principal em ads/stories, pain points, features</span>
+      <strong>Medium</strong>
+      <code>weight 500</code>
+      <span class="type-use">Body large, descrições em cards, pain points</span>
     </div>
-    <div class="type-sample" style="font-weight:590;font-stretch:100%;font-size:26px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+    <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:500;font-size:24px;line-height:1.2">Mentoria, método e diagnóstico.</div>
   </div>
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Regular Medium</strong>
-      <code>weight 510 · stretch 100%</code>
-      <span class="type-use">Body large, descrições em cards, listas</span>
-    </div>
-    <div class="type-sample" style="font-weight:510;font-stretch:100%;font-size:22px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
-  </div>
-  <div class="type-specimen">
-    <div class="type-meta">
-      <strong>Regular Book</strong>
-      <code>weight 400 · stretch 100%</code>
+      <strong>Regular</strong>
+      <code>weight 400</code>
       <span class="type-use">Body corrido, parágrafos longos, legendas, manifesto</span>
     </div>
-    <div class="type-sample" style="font-weight:400;font-stretch:100%;font-size:20px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+    <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:400;font-size:20px;line-height:1.5">Mentoria, método e diagnóstico.</div>
   </div>
   <div class="type-specimen">
     <div class="type-meta">
-      <strong>Regular Light</strong>
-      <code>weight 270 · stretch 100%</code>
+      <strong>Light</strong>
+      <code>weight 300</code>
       <span class="type-use">Body sutil, taglines, textos complementares</span>
     </div>
-    <div class="type-sample" style="font-weight:270;font-stretch:100%;font-size:18px;line-height:1.2;letter-spacing:-0.01em">Mentoria, método e diagnóstico.</div>
+    <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:300;font-size:18px;line-height:1.5">Mentoria, método e diagnóstico.</div>
   </div>
 </div>
+
+> Pesos extras (Bold 700, ExtraBold 800, Black 900, Thin 100) também disponíveis em Inter, mas com uso restrito — ênfase inline pontual ou captions decorativas. Não fazer body em peso 700+.
 
 ## Type roles editoriais
 
-As 11 variações primitivas viram **funções editoriais** quando aplicadas em peças. Cada role combina variação + tamanho + line-height + tracking. É essa camada que a maior parte das pessoas vai consultar — quem desenha peça nova escolhe um role, não escolhe peso bruto.
+As variações primitivas viram **funções editoriais** quando aplicadas em peças. Cada role combina fonte + peso + tamanho + line-height + tracking. É essa camada que a maior parte das pessoas vai consultar — quem desenha peça nova escolhe um role, não escolhe peso bruto.
 
-| Role | Variação base | Tamanho | Line-height | Tracking | Onde usar |
+| Role | Fonte / Peso | Tamanho | Line-height | Tracking | Onde usar |
 |------|--------------|---------|-------------|----------|-----------|
-| **Display Hero** | Expanded Heavy | 110–130px | 0.86 | -0.02em | Capa, abertura, manifesto, headline principal |
-| **Title** | Expanded Heavy | 64–80px | 0.94 | -0.02em | H1 de section, abertura de bloco |
-| **Subtitle** | Expanded Bold | 36–48px | 1.1 | -0.02em | H2 dentro de section |
-| **Card title** | Expanded Bold ou Semibold | 24–32px | 1.2 | -0.01em | Título de card, subdivisão |
-| **Kicker** | Expanded Medium | 13–16px | 1.1 | 0.18em (uppercase) | Tag de seção, número editorial, label de bandeira |
-| **Body Large** | Regular Medium | 20–24px | 1.5 | -0.01em | Lede, primeiro parágrafo, intro |
-| **Body** | Regular Book | 16–18px | 1.6 | 0 | Texto corrido padrão (max 60ch) |
-| **Body Small** | Regular Book | 14–15px | 1.55 | 0 | Notas, descrições secundárias |
-| **Caption / Meta** | Regular Medium | 12–13px | 1.4 | 0.10em (uppercase) | Legenda, metadado, fine print |
+| **Display Hero** | Zalando Sans Expanded Black 900 | 110-130px | 0.86 | -0.02em | Capa, abertura, manifesto, headline principal |
+| **Title** | Zalando Sans Expanded ExtraBold 800 | 64-80px | 0.94 | -0.02em | H1 de section, abertura de bloco |
+| **Subtitle** | Zalando Sans Expanded Bold 700 | 36-48px | 1.1 | -0.02em | H2 dentro de section |
+| **Card title** | Zalando Sans Expanded Bold 700 ou SemiBold 650 | 24-32px | 1.2 | -0.01em | Título de card, subdivisão |
+| **Kicker** | Zalando Sans Expanded Medium 540 | 13-16px | 1.1 | 0.18em (uppercase) | Tag de seção, número editorial, label de bandeira |
+| **Body Large** | Inter Medium 500 | 20-24px | 1.5 | -0.01em | Lede, primeiro parágrafo, intro |
+| **Body** | Inter Regular 400 | 16-18px | 1.6 | 0 | Texto corrido padrão (max 60ch) |
+| **Body Small** | Inter Regular 400 | 14-15px | 1.55 | 0 | Notas, descrições secundárias |
+| **Caption / Meta** | Inter Medium 500 | 12-13px | 1.4 | 0.10em (uppercase) | Legenda, metadado, fine print |
 
 ## Hierarquia visual em peça
 
@@ -148,21 +158,21 @@ A hierarquia tipográfica resolve a maioria dos problemas de design. Antes de ad
 ### Regra das três variações
 Em peça única, use no máximo **3 variações tipográficas distintas**. Mais que isso, hierarquia vira ruído. Exemplo padrão de slide editorial:
 
-- 1 Display Hero (headline)
-- 1 Body Large (lede ou explicação)
-- 1 Kicker (tag/label de section)
+- 1 Display Hero (headline em Zalando Sans Expanded Black)
+- 1 Body Large (lede em Inter Medium)
+- 1 Kicker (tag/label em Zalando Sans Expanded Medium)
 
-### Mixed-weight (combinação Expanded + Regular)
-Em headlines com 2+ linhas, é comum combinar **Expanded Heavy** (palavra-chave) com **Expanded Regular** ou **Regular Semibold** (palavras-conector). Cria ênfase sem precisar de cor ou underline. Exemplo: *"**Demita** o achismo, **bata** a meta."*
+### Mixed-weight (combinação Black + Light dentro de Zalando)
+Em headlines com 2+ linhas, é comum combinar **Zalando Sans Expanded Black** (palavra-chave) com **Zalando Sans Expanded Regular** ou **Light** (palavras-conector). Cria ênfase sem precisar de cor ou underline. Exemplo: *"**Demita** o achismo, **bata** a meta."*
 
 ### Tracking (letter-spacing)
-- **Display e Title** sempre com tracking negativo (-0.02em a -0.01em). Letras grandes parecem soltas demais com tracking neutro.
-- **Body** sempre com tracking neutro (0).
-- **Kicker e Caption uppercase** sempre com tracking aberto (0.10em a 0.18em). Maiúsculas precisam respiro.
+- **Display e Title** (Zalando) sempre com tracking negativo (-0.02em a -0.01em). Letras grandes parecem soltas demais com tracking neutro.
+- **Body** (Inter) sempre com tracking neutro (0).
+- **Kicker e Caption uppercase** (Zalando Medium) sempre com tracking aberto (0.10em a 0.18em). Maiúsculas precisam respiro.
 
 ### Line-height
 - **Display e Title** comprimidos (0.86 a 1.1). Densidade vertical reforça impacto.
-- **Body** abertos (1.5 a 1.65). Leitura confortável em parágrafo longo.
+- **Body** (Inter) abertos (1.5 a 1.65). Leitura confortável em parágrafo longo.
 - **Caption** intermediário (1.4).
 
 ## Largura máxima de leitura
@@ -171,78 +181,47 @@ Texto corrido em peças editoriais respeita **60 caracteres por linha** (cerca d
 
 ## Regras invioláveis
 
-- **Sempre SF Pro** em peças renderizadas pelo designer (HTML, Figma, PDFs com fonte embedada). Em PPTX e Google Slides, usar **Zalando Sans Expanded** — fallback oficial (ver seção abaixo). Nunca misturar com outras famílias em peças oficiais.
-- **Display em maiúsculas** com tracking negativo.
+- **Display SEMPRE em Zalando Sans Expanded.** Inter em headline/display quebra a personalidade Metta — Inter é geometricamente neutra, não tem o peso editorial expandido.
+- **Body SEMPRE em Inter.** Zalando Sans Expanded em parágrafo longo cansa leitura.
+- **Display em maiúsculas** com tracking negativo (display) ou positivo (kicker).
 - **Body em caixa mista** com leading aberto.
-- **Kicker em maiúsculas** com tracking aberto.
 - **Nunca usar peso Light (<400)** em peças oficiais — falta presença, exceto em casos editoriais específicos (taglines sutis).
 - **Itálico só** para citação literal ou ênfase narrativa em peça longa.
 - **Underline reservado** para hyperlinks. Nunca para ênfase visual.
+- **SF Pro proibida.** Removida em 2026-05-27.
+- **Arial / Helvetica / Open Sans / Roboto / Roboto Flex proibidas.** Sem exceção.
 
-## Fallback Zalando Sans Expanded
-
-A SF Pro é a tipografia primária — usada em todos os entregáveis renderizados pelo time de design (HTML standalone, Figma, PDFs com fonte embedada, ads, LPs). Mas existe um contexto em que ela não pode ser usada: **apresentações editadas por não-designers em PowerPoint, Google Slides e Canva**. A licença da Apple não permite redistribuição da SF Pro em PPTX, e o Google Slides ignora fontes embedadas — qualquer tentativa de "usar SF Pro mesmo assim" resulta em fallback automático pra Calibri ou Arial.
-
-A solução adotada em **2026-05-12** é uma fonte secundária oficial: **Zalando Sans Expanded** — variable font open source (SIL Open Font License 1.1) disponível no Google Fonts. Geometricamente quase idêntica a SF Pro Expanded, com os mesmos três eixos (peso, largura, slant), cobrindo o mesmo range que o DS Metta usa (270 → 870 em peso, 100% → 132% em largura).
-
-<div class="family-grid">
-  <div class="family-card">
-    <div class="family-tag">Primária · renderizada</div>
-    <div class="family-display" style="font-weight:870;font-stretch:132%">SF Pro Variable</div>
-    <code class="family-meta">licença Apple · proprietária</code>
-    <p><strong>Onde usar:</strong> HTML standalone, Figma, PDFs com fonte embedada, ads e LPs que o designer entrega prontos. Peças onde o time controla a renderização ponta a ponta.</p>
-  </div>
-  <div class="family-card">
-    <div class="family-tag">Fallback · edição colaborativa</div>
-    <div class="family-display" style="font-weight:870">Zalando Sans Expanded</div>
-    <code class="family-meta">SIL OFL · Google Fonts</code>
-    <p><strong>Onde usar:</strong> qualquer arquivo `.pptx`, Google Slides, Canva, Pitch — plataforma onde não-designer do time edita conteúdo. Carrega nativamente do Google Fonts, sem instalação local necessária.</p>
-  </div>
-</div>
-
-### Mapeamento direto · 11 variações 1:1
-
-Toda variação nomeada do DS tem equivalente exato em Zalando Sans Expanded. O mapeamento é puro — sem perda de hierarquia, sem ajuste de tamanho, sem necessidade de redesenhar a peça quando o destino muda.
-
-| Variação SF Pro | Equivalente Zalando Sans Expanded |
-|---|---|
-| Expanded Heavy 870 | `wght: 870, wdth: 132` |
-| Expanded Bold 700 | `wght: 700, wdth: 132` |
-| Expanded Semibold 650 | `wght: 650, wdth: 132` |
-| Expanded Medium 540 | `wght: 540, wdth: 132` |
-| Expanded Regular 410 | `wght: 410, wdth: 132` |
-| Expanded Light 270 | `wght: 270, wdth: 132` |
-| Regular Semibold 650 | `wght: 650, wdth: 100` |
-| Regular Medium+ 590 | `wght: 590, wdth: 100` |
-| Regular Medium 510 | `wght: 510, wdth: 100` |
-| Regular Book 400 | `wght: 400, wdth: 100` |
-| Regular Light 270 | `wght: 270, wdth: 100` |
-
-### Como aplicar
+## Como aplicar
 
 **Em CSS (HTML/web):**
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&family=Inter:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* Body global / texto regular */
 body {
-  font-family: 'SF Pro', 'Zalando Sans Expanded', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Headlines, display, CTAs, labels UPPERCASE */
+h1, h2, .t-display, .cta-pill, .t-label {
+  font-family: 'Zalando Sans Expanded', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 ```
 
 **Em Google Slides:**
-1. Selecionar texto → dropdown de fonte → buscar **Zalando Sans Expanded**
-2. Se não aparecer, clicar em **More fonts** (Mais fontes) → buscar "Zalando Sans Expanded" → adicionar ao catálogo
-3. A partir daí fica disponível em qualquer projeto da conta Google
 
-**Em PowerPoint:**
-1. Instalar a fonte uma vez do Google Fonts: [fonts.google.com/specimen/Zalando+Sans+Expanded](https://fonts.google.com/specimen/Zalando+Sans+Expanded)
-2. Em todo `.pptx` distribuído pra clientes/parceiros, marcar **File → Options → Save → Embed fonts in the file** pra garantir consistência em quem não tem a fonte instalada
+1. **Pra títulos, H1, CTAs, labels:** selecionar texto → dropdown de fonte → buscar **Zalando Sans Expanded**
+2. **Pra body, subtítulos, parágrafos:** dropdown de fonte → buscar **Inter** (já está no catálogo nativo)
+3. Se Zalando Sans Expanded não aparecer, clicar em **More fonts** → buscar "Zalando Sans Expanded" → adicionar ao catálogo
 
-### Fontes proibidas como fallback
+**Em PowerPoint / Keynote:**
 
-Apenas **SF Pro Variable** (primária) e **Zalando Sans Expanded** (fallback) são aceitas. Roboto Flex foi o fallback até 2026-05-12 — agora está deprecated. **Inter, Arial, Helvetica, Open Sans** seguem proibidas em peças oficiais.
+1. Instalar localmente uma vez:
+   - [Zalando Sans Expanded](https://fonts.google.com/specimen/Zalando+Sans+Expanded) (ou github.com/zalando/typefaces)
+   - [Inter](https://fonts.google.com/specimen/Inter) (ou github.com/rsms/inter)
+2. Em todo `.pptx` distribuído pra clientes/parceiros, marcar **File → Options → Save → Embed fonts in the file** pra garantir consistência em quem não tem as fontes instaladas
 
 ## Para implementação técnica
 
-Tokens de tipografia como CSS variables, especificação Figma styles, snippets de código e mapeamento Plugin API ficam no **catálogo técnico do Design System**. Esta página cobre a camada institucional — as decisões editoriais que governam o uso. Para a referência exaustiva (todas as font-feature-settings, fallbacks, tokens mobile vs desktop), consulte o catálogo.
+Tokens de tipografia como CSS variables, especificação Figma styles, snippets de código e mapeamento Plugin API ficam no **catálogo técnico do Design System** (`design/metta-tokens.md`). Esta página cobre a camada institucional — as decisões editoriais que governam o uso.

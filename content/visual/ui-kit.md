@@ -157,7 +157,7 @@ updated: 2026-04-28
 - Border-bottom: `1px solid rgba(12,22,27,0.08)`
 - Label: Expanded Medium 540, 11px, UPPERCASE, ls 0.14em, color `--blue-gray`
 - Value: 14px, text-align right, `font-variant-numeric: tabular-nums`
-- `mono={true}` → `font-family: ui-monospace, SF Mono, Menlo, monospace`
+- `mono={true}` → `font-family: ui-monospace, ui-monospace, Menlo, monospace`
 
 ---
 
@@ -284,7 +284,7 @@ Em código novo, **prefira referenciar local** (`../system-source/assets/logos/l
 
 ❌ **Cores:** apenas tokens em `colors_and_type.css`. Yellow `#FFBE18` é load-bearing — use só pra CTAs, single-word highlights, símbolo fill, accent marks.
 
-❌ **Tipografia:** apenas SF Pro Variable (ou Zalando Sans Expanded fallback — obrigatório em PPTX/Google Slides desde 2026-05-12; Roboto Flex deprecated). Nunca Inter/Arial/Helvetica/Open Sans. Headlines → Expanded (132%). Body → Regular (100%). Use `font-weight` e `font-stretch` direto, não `font-variation-settings`.
+❌ **Tipografia:** apenas Zalando Sans Expanded (ou Zalando Sans Expanded fallback — obrigatório em PPTX/Google Slides desde 2026-05-12; Roboto Flex deprecated). Nunca Inter/Arial/Helvetica/Open Sans. Headlines → Expanded (132%). Body → Regular (100%). Use `font-weight` e `font-stretch` direto, não `font-variation-settings`.
 
 ❌ **Logo:** nunca aplicar glow, shadow ou outer stroke no logo ou símbolo.
 

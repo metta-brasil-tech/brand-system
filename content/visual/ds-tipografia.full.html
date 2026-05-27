@@ -224,11 +224,15 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 --metta-ref-opacity-yellow-subtle:  0.10;
 </code></pre>
 <h3 id="25-typeface">2.5 Typeface</h3>
-<pre><code class="language-css">--metta-ref-typeface-brand:    &#39;SF Pro&#39;;
+<pre><code class="language-css">--metta-ref-typeface-display:           &#39;Zalando Sans Expanded&#39;; /* display — títulos, H1, headlines, CTAs, labels UPPERCASE */
+--metta-ref-typeface-body:              &#39;Inter&#39;;                 /* body — parágrafos, subtítulos, captions */
+--metta-ref-typeface-mono:              ui-monospace, Menlo, Consolas, monospace;
+/* Aliases retrocompatíveis (mesma fonte como antes) */
+--metta-ref-typeface-brand:             &#39;Zalando Sans Expanded&#39;;
 --metta-ref-typeface-fallback-expanded: &#39;Zalando Sans Expanded&#39;;
 --metta-ref-typeface-fallback-regular:  &#39;Inter&#39;;
---metta-ref-typeface-fallback:          &#39;Inter&#39;  /* alias retrocompatível pro fallback-regular */;  /* OFL, Google Fonts — use em PPTX/Google Slides/Canva. Roboto Flex deprecated em 2026-05-12 */
---metta-ref-typeface-mono:     ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace;
+--metta-ref-typeface-fallback:          var(--metta-ref-typeface-body);
+/* SF Pro removida em 2026-05-27 (proprietária Apple, quebrava em Windows, não distribuível em PPTX). Roboto Flex deprecated em 2026-05-12. */
 </code></pre>
 <h3 id="26-type-axes-raw">2.6 Type axes (raw)</h3>
 <pre><code class="language-css">--metta-ref-axis-wdth-regular:  100;   /* font-stretch normal */
@@ -783,7 +787,7 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 <li>Sombras no logo</li>
 <li>Outline/ghost no logo</li>
 <li>Recriar/redesenhar o logo em SVG/CSS — <strong>sempre baixar do Drive</strong></li>
-<li>Fonte que não seja SF Pro Variable (primária) ou Zalando Sans Expanded (fallbacks oficiais pra PPTX/Google Slides desde 2026-05-13: Zalando Sans Expanded pra Expanded + Inter pra Regular)</li>
+<li>Fonte que não seja Zalando Sans Expanded (display) ou Inter (body) — primárias oficiais desde 2026-05-27. SF Pro removida (proprietária, quebrava em Windows, não distribuível em PPTX).</li>
 <li>Tagline &quot;INTELIGÊNCIA COMERCIAL&quot; sem tracking de 9%+ em UPPERCASE</li>
 <li>Tier badges (ELITE/EXCLUSIVE/PREMIUM) sem pill com border + tracking 12%</li>
 <li>Gradients cônicos ou radial amarromzado</li>

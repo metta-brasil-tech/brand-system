@@ -1011,6 +1011,35 @@ button.stepper-item.done:hover {
   <!-- Renderizado por JS -->
 </div>
 
+<!-- ENV GUARD — bloqueia render em produção (apenas dev local).
+     Mesma lógica do app.js. Em prod, mostra mensagem amigável e ABORTA o script
+     principal antes de carregar STATE/eventos/etc. Reverter: comente o throw. -->
+<script>
+(function envGuard() {
+  const h = (location.hostname || '').toLowerCase();
+  const isDev = h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' || h.endsWith('.local');
+  if (isDev) return;
+  const stage = document.getElementById('stage');
+  if (stage) {
+    stage.innerHTML = `
+      <div style="max-width: 540px; margin: 80px auto; padding: 40px; text-align: center;
+                  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+                  color: var(--metta-sys-color-on-surface, #0C161B);">
+        <h1 style="font-size: 32px; margin: 0 0 16px; line-height: 1.2;">Criar está em beta</h1>
+        <p style="font-size: 17px; line-height: 1.5; color: var(--metta-sys-color-on-surface-variant, #435965); margin: 0 0 24px;">
+          A ferramenta de geração de peças ainda está em validação interna —
+          disponível por enquanto só no ambiente local de desenvolvimento.
+        </p>
+        <p style="font-size: 14px; color: var(--metta-sys-color-on-surface-variant, #435965); margin: 0;">
+          Em breve, sem aviso prévio.
+        </p>
+      </div>`;
+  }
+  // Para qualquer script subsequente — STATE, listeners, fetch /api/generate, etc.
+  throw new Error('criar.html: disabled in production (hostname=' + h + ')');
+})();
+</script>
+
 <script>
 /* ============================================================
    STATE MACHINE — /criar
@@ -2335,7 +2364,7 @@ async function downloadMockPng() {
     const adRoot = iframe.contentDocument.querySelector('.ad-canvas');
     if (!adRoot) throw new Error('Elemento .ad-canvas não encontrado no preview.');
 
-    // Espera fontes carregarem ANTES do snapshot (essencial pra SF Pro Variable
+    // Espera fontes carregarem ANTES do snapshot (essencial pra Zalando Sans Expanded
     // não vir com fallback Arial)
     if (iframe.contentDocument.fonts && iframe.contentDocument.fonts.ready) {
       await iframe.contentDocument.fonts.ready;
