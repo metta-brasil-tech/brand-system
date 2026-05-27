@@ -311,7 +311,7 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 <h2 id="4-tipografia-normative">4. Tipografia [NORMATIVE]</h2>
 <blockquote>
 <p>Tokens canônicos consolidados em <span class="wikilink" data-target="metta-tokens">metta-tokens</span> §2. Esta seção mantém regras de aplicação por contexto.
-<strong>Refator de 2026-05-27:</strong> SF Pro removida. Sistema agora opera com <strong>duas fontes primárias open-source</strong>: Zalando Sans Expanded (display) + Inter (body). Documentação anterior (SF Pro Variable + dois eixos no mesmo arquivo) está arquivada em <code>_archive/</code>.</p>
+<strong>Refator de 2026-05-27:</strong> Inter removida. Sistema agora opera com <strong>duas fontes primárias open-source</strong>: Zalando Sans Expanded (display) + Inter (body). Documentação anterior (Zalando Sans Expanded + dois eixos no mesmo arquivo) está arquivada em <code>_archive/</code>.</p>
 </blockquote>
 <h3 id="41-duas-fontes-primarias">4.1 Duas Fontes Primárias</h3>
 <p>A marca opera com <strong>duas fontes</strong>, ambas SIL OFL 1.1, instaladas e distribuídas livremente. Cada uma tem uma função editorial separada:</p>
@@ -336,7 +336,7 @@ Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e b
 </tbody></table></div>
 <p><strong>Não há mais &quot;eixo de largura&quot; via <code>font-stretch</code>.</strong> As duas larguras editoriais (display expandido + body neutro) vêm de <strong>famílias diferentes</strong>, não do mesmo arquivo variável. Essa simplificação:</p>
 <ul>
-<li>Elimina dependência de fonte proprietária (SF Pro era Apple-only).</li>
+<li>Elimina dependência de fonte proprietária (Inter era Apple-only).</li>
 <li>Garante renderização idêntica em macOS, Windows, Linux, Google Slides, PowerPoint, Canva.</li>
 <li>Permite distribuir em PPTX/Keynote sem restrição de licença.</li>
 </ul>
@@ -485,8 +485,8 @@ h1, h2, .t-display, .cta-pill, .t-label {
 <ul>
 <li><strong>Inter NUNCA em headline ou display.</strong> Inter é geometricamente neutra, não tem o peso editorial expandido. Display = Zalando Sans Expanded, sempre.</li>
 <li><strong>Zalando Sans Expanded NUNCA em body longo.</strong> Foi pensada pra display — cansa leitura em parágrafos.</li>
-<li><strong>SF Pro NUNCA em lugar nenhum.</strong> Removida do sistema em 2026-05-27.</li>
-<li><strong>Fontes PROIBIDAS:</strong> Arial, Helvetica, Open Sans, Roboto, Roboto Flex (deprecated em 2026-05-12), SF Pro (removida 2026-05-27), qualquer outra fora do par Zalando + Inter.</li>
+<li><strong>Inter NUNCA em lugar nenhum.</strong> Removida do sistema em 2026-05-27.</li>
+<li><strong>Fontes PROIBIDAS:</strong> Arial, Helvetica, Open Sans, Roboto, Roboto Flex (deprecated em 2026-05-12), Inter (removida 2026-05-27), qualquer outra fora do par Zalando + Inter.</li>
 </ul>
 <p><strong>Single exception (legado):</strong> <code>Metta - Blackbook Empresários.pdf</code> ainda usa Nordique Pro (pré-refator). Refazer na próxima atualização de conteúdo.</p>
 <h3 id="44-escala-tipografica-base-1080px-de-largura">4.4 Escala Tipográfica (base 1080px de largura)</h3>
@@ -1786,7 +1786,7 @@ h1, h2, .headline {
 <td>Body sutil, taglines</td>
 </tr>
 </tbody></table></div>
-<p><strong>Refator de 2026-05-27:</strong> os estilos antigos <code>Inter / Expanded *</code> (e antes deles <code>SF Pro / Expanded *</code>) foram substituídos por <code>Zalando Sans Expanded / *</code> no Figma. A lógica de &quot;1 fonte com dois eixos de largura via <code>font-stretch</code>&quot; foi descontinuada — agora são duas famílias separadas, uma pra display, outra pra body. Em CSS basta <code>font-family: &#39;Zalando Sans Expanded&#39;</code> ou <code>&#39;Inter&#39;</code>, sem ajuste de <code>font-stretch</code>.</p>
+<p><strong>Refator de 2026-05-27:</strong> os estilos antigos <code>Inter / Expanded *</code> (e antes deles <code>Inter / Expanded *</code>) foram substituídos por <code>Zalando Sans Expanded / *</code> no Figma. A lógica de &quot;1 fonte com dois eixos de largura via <code>font-stretch</code>&quot; foi descontinuada — agora são duas famílias separadas, uma pra display, outra pra body. Em CSS basta <code>font-family: &#39;Zalando Sans Expanded&#39;</code> ou <code>&#39;Inter&#39;</code>, sem ajuste de <code>font-stretch</code>.</p>
 <h3 id="133-padrao-editorial-poster">13.3 Padrao Editorial Poster</h3>
 <p>Padrao observado nos frames <code>poster 5</code> (221:402) e <code>poster 6</code> (222:809) do Playground. Layout de impacto editorial print-scale para aplicacoes institucionais.</p>
 <p><strong>Canvas:</strong> 2035x1414

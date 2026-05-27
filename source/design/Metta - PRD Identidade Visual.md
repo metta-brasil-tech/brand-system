@@ -187,7 +187,7 @@ O logo foi construido sobre um grid tipografico preciso, com linhas de referenci
 
 ## 4. Tipografia [NORMATIVE]
 > Tokens canônicos consolidados em [[metta-tokens]] §2. Esta seção mantém regras de aplicação por contexto.
-> **Refator de 2026-05-27:** SF Pro removida. Sistema agora opera com **duas fontes primárias open-source**: Zalando Sans Expanded (display) + Inter (body). Documentação anterior (SF Pro Variable + dois eixos no mesmo arquivo) está arquivada em `_archive/`.
+> **Refator de 2026-05-27:** Inter removida. Sistema agora opera com **duas fontes primárias open-source**: Zalando Sans Expanded (display) + Inter (body). Documentação anterior (SF Pro Variable + dois eixos no mesmo arquivo) está arquivada em `_archive/`.
 
 ### 4.1 Duas Fontes Primárias
 
@@ -846,7 +846,7 @@ O arquivo Rebranding referencia as duas fontes através de **estilos nomeados** 
 | `Inter / Regular` | 400 | Body corrido, role/cargo em credits (16-20px) |
 | `Inter / Light` | 300 | Body sutil, taglines |
 
-**Refator de 2026-05-27:** os estilos antigos `Inter / Expanded *` (e antes deles `SF Pro / Expanded *`) foram substituídos por `Zalando Sans Expanded / *` no Figma. A lógica de "1 fonte com dois eixos de largura via `font-stretch`" foi descontinuada — agora são duas famílias separadas, uma pra display, outra pra body. Em CSS basta `font-family: 'Zalando Sans Expanded'` ou `'Inter'`, sem ajuste de `font-stretch`.
+**Refator de 2026-05-27:** os estilos antigos `Inter / Expanded *` (e antes deles `Inter / Expanded *`) foram substituídos por `Zalando Sans Expanded / *` no Figma. A lógica de "1 fonte com dois eixos de largura via `font-stretch`" foi descontinuada — agora são duas famílias separadas, uma pra display, outra pra body. Em CSS basta `font-family: 'Zalando Sans Expanded'` ou `'Inter'`, sem ajuste de `font-stretch`.
 
 ### 13.3 Padrao Editorial Poster
 
