@@ -116,6 +116,104 @@ def _image_to_data_uri(file_url: str) -> str:
     return ""
 
 
+_TOKEN_SYNONYMS = {
+    "tipografia": "tipo", "tipografica": "tipo", "typo": "tipo", "tipo": "tipo",
+    "foto": "foto", "photo": "foto", "fotografia": "foto", "retrato": "foto", "portrait": "foto",
+    "headline": "headline", "manchete": "headline",
+    "pura": "pura", "puro": "pura",
+    "dark": "dark", "escuro": "dark", "preto": "dark", "noturno": "dark",
+    "light": "light", "claro": "light", "branco": "light", "white": "light",
+    "amarelo": "yellow", "yellow": "yellow", "dourado": "yellow", "gold": "yellow",
+    "bloco": "bloco", "block": "bloco",
+    "editorial": "editorial", "carta": "carta", "objeto": "objeto", "colagem": "colagem",
+    "surreal": "surreal", "frame": "frame", "moldura": "frame", "split": "split",
+    "gigante": "gigante", "giant": "gigante", "news": "news", "logo": "logo", "wall": "wall",
+    "tweet": "tweet", "card": "card", "fullbleed": "full", "full": "full", "bleed": "bleed",
+    "overlay": "overlay", "pill": "pill", "casual": "casual", "urgencia": "urgencia",
+    "bold": "bold", "mixed": "mixed", "top": "top",
+}
+
+
+def _tokenize(model_id: str) -> list[str]:
+    import re as _re
+    raw = [t for t in _re.split(r"[^a-z0-9]+", (model_id or "").lower()) if t]
+    return [_TOKEN_SYNONYMS.get(t, t) for t in raw]
+
+
+def _resolve_catalog(model_id: str, catalog: list[str]) -> str | None:
+    """Ancora um model_id (possivelmente alucinado) ao ID real mais próximo do
+    catálogo, pontuando por tokens+sinônimos. Tie-break por difflib."""
+    import difflib
+    q = _tokenize(model_id)
+    qset, qfirst = set(q), (q[0] if q else "")
+    best, best_score = None, 0.0
+    for cand in catalog:
+        c = _tokenize(cand)
+        shared = len(qset & set(c))
+        score = shared + (2 if qfirst and c and qfirst == c[0] else 0)
+        if score > best_score:
+            best, best_score = cand, score
+    if best_score >= 1:
+        return best
+    m = difflib.get_close_matches(model_id, catalog, n=1, cutoff=0.3)
+    return m[0] if m else None
+
+
+def _blueprint_placement(fm: dict) -> str:
+    """Deriva o placement do slot de imagem a partir do front-matter do blueprint
+    (archetype + params.photo) — pra alimentar a composição-por-slot do skill 04."""
+    arch = (fm or {}).get("archetype", "")
+    photo = ((fm or {}).get("params") or {}).get("photo", "")
+    if arch == "photo-side":
+        return "left-bleed" if photo == "left-bleed" else "right-bleed"
+    if arch == "photo-full":
+        return "fullbleed"
+    if arch == "photo-band":
+        return "bottom-bleed" if photo == "bottom" else "top-bleed"
+    if arch == "object-center":
+        return "object-center"
+    if arch == "split":
+        return "left-bleed"
+    return ""
+
+
+_PLACEMENT_INSTRUCTION = {
+    "right-bleed": "subject positioned in the RIGHT 40% of the frame; the LEFT 60% must be softly blurred neutral background space (it will be covered by a text overlay). Do not center the subject.",
+    "left-bleed": "subject positioned in the LEFT 45% of the frame; the RIGHT 55% must be softly blurred neutral background space (it will be covered by a text overlay).",
+    "top-bleed": "subject positioned in the UPPER 50% of the frame; the LOWER half must be softly blurred environmental space (it will be covered by a text overlay).",
+    "bottom-bleed": "subject positioned in the LOWER 50% of the frame; the UPPER half must be softly blurred environmental space (it will be covered by a text overlay).",
+    "fullbleed": "subject CENTERED, mid-shot from chest up, ample breathing space; background slightly out of focus so dark text overlaid on the lower third stays readable.",
+    "object-center": "a single symbolic OBJECT centered on a clean dark background, dramatic lighting, generous negative space above and below for text overlay. No human subject.",
+}
+
+
+def _art_direction_photo(directives: dict) -> str:
+    """Traduz as diretivas do Diretor de Arte em instrução de foto (gaze + crop)."""
+    if not directives:
+        return ""
+    gaze = (directives.get("gaze_direction") or "").lower()
+    crop = (directives.get("crop_focus") or "").lower()
+    bits = []
+    gaze_map = {
+        "left": "subject's gaze directed to the left, leading the eye toward the text",
+        "right": "subject's gaze directed to the right, leading the eye toward the text",
+        "down": "subject looking downward, reflective",
+        "away": "subject looking away from camera, contemplative",
+        "camera": "subject looking directly at camera, confident",
+    }
+    crop_map = {
+        "face": "tight editorial portrait, face and shoulders",
+        "chest-up": "editorial mid-shot from the chest up",
+        "waist-up": "editorial three-quarter shot from the waist up",
+        "environment": "wider environmental shot, subject within the scene",
+    }
+    if gaze in gaze_map:
+        bits.append(gaze_map[gaze])
+    if crop in crop_map:
+        bits.append(crop_map[crop])
+    return ". ".join(bits) + ("." if bits else "")
+
+
 def _run_pipeline_inline(
     briefing_text: str,
     mock: bool = False,
@@ -129,13 +227,29 @@ def _run_pipeline_inline(
     user_body: str | None = None,
     user_cta_text: str | None = None,
     wizard_format: str | None = None,
+    render_png: bool = False,
+    art_director: bool = True,
 ) -> dict:
     """Pipeline principal — retorna HTML pronto pra iframe + metadata."""
     from skills_runner import SkillRunner
     from adapters.llm import LLMAdapter, MockLLMAdapter
     from adapters.image_gen import ImageGenAdapter
     from pipeline import MOCK_FIXTURES, write_artifact
-    from _html_templates import has_template, render as render_html
+    import difflib
+    import re
+    # Render v3 (blueprint-driven, cria-não-clona) com fallback pro v2 (template estático)
+    from _html_templates import has_template as _has_tpl, render as _render_tpl, list_templates
+    from _blueprint_render import (has_blueprint, render as _render_bp, list_blueprints,
+                                   _parse_front_matter as _bp_fm, _read as _bp_read,
+                                   _blueprint_path as _bp_path)
+
+    def has_template(marca, mid):
+        return has_blueprint(marca, mid) or _has_tpl(marca, mid)
+
+    def render_html(**kw):
+        if has_blueprint(kw.get("marca"), kw.get("model_id")):
+            return _render_bp(**kw)
+        return _render_tpl(**kw)
 
     diagnostics: list[str] = []
     timings: dict[str, int] = {}
@@ -152,24 +266,36 @@ def _run_pipeline_inline(
     runner = SkillRunner(llm=llm)
 
     # ============================================================
-    # Skill 01 — Briefing parser (parse texto livre → estrutura)
+    # Skill 01 — Briefing parser
+    # MODO WIZARD (forced_model_id + copy do user): NÃO roda o LLM. A marca
+    # vem do blueprint do modelo escolhido, e nunca abortamos por clarifying
+    # questions (era a causa de falhas tipo I-retrato). O briefing-parser só
+    # roda quando NÃO há modelo forçado (modo livre, precisa inferir estilo).
     # ============================================================
-    t01 = time.time()
-    r = runner.run("01-briefing-parser", briefing_text)
-    mark("01", t01)
-    if not r.ok:
-        return {"ok": False, "error": f"briefing-parser: {r.error}",
-                "run_id": run_id, "diagnostics": diagnostics}
-    briefing = r.output
-    if briefing.get("clarifying_questions"):
-        return {"ok": False,
-                "error": "Preciso de mais detalhes: " + "; ".join(briefing["clarifying_questions"]),
-                "run_id": run_id, "diagnostics": diagnostics}
-    write_artifact(run_id, "01-briefing", briefing, artifacts_dir)
-    marca = briefing.get("marca", "metta")
-    diagnostics.append(
-        f"01-briefing-parser ({timings['01']}ms): marca={marca} intent={briefing.get('intent')}"
-    )
+    wizard_mode = bool(forced_model_id)
+    if wizard_mode:
+        marca = "tiago" if has_blueprint("tiago", forced_model_id) else "metta"
+        briefing = {"marca": marca, "formato": wizard_format, "raw_request": briefing_text or "",
+                    "intent": "wizard", "clarifying_questions": []}
+        diagnostics.append(f"01-briefing-parser: PULADO (modo wizard) — marca={marca} do blueprint")
+    else:
+        t01 = time.time()
+        r = runner.run("01-briefing-parser", briefing_text)
+        mark("01", t01)
+        if not r.ok:
+            return {"ok": False, "error": f"briefing-parser: {r.error}",
+                    "run_id": run_id, "diagnostics": diagnostics}
+        briefing = r.output
+        if briefing.get("clarifying_questions"):
+            return {"ok": False, "needs_input": True,
+                    "clarifying_questions": briefing["clarifying_questions"],
+                    "error": "Preciso de mais detalhes: " + "; ".join(briefing["clarifying_questions"]),
+                    "run_id": run_id, "diagnostics": diagnostics}
+        write_artifact(run_id, "01-briefing", briefing, artifacts_dir)
+        marca = briefing.get("marca", "metta")
+        diagnostics.append(
+            f"01-briefing-parser ({timings['01']}ms): marca={marca} intent={briefing.get('intent')}"
+        )
 
     # ============================================================
     # Skill 02 — Style selector (ou usa o forçado pelo wizard)
@@ -178,8 +304,29 @@ def _run_pipeline_inline(
         chosen_model_id = forced_model_id
         diagnostics.append(f"02-style-selector: PULADO — model_id forçado pelo wizard: {chosen_model_id}")
     else:
+        # P4/P5: o CATÁLOGO de blueprints é a fonte autoritativa. Monta um resumo
+        # (id + archetype + display_name + "quando brilha") e exige que o selector
+        # escolha SÓ desses ids — corrige a alucinação na origem (não só no guard).
+        _cat_lines = []
+        for _id in (list_blueprints().get(marca) or []):
+            try:
+                _src = _bp_read(_bp_path(marca, _id))
+                _fm = _bp_fm(_src)
+                _dn = _fm.get("display_name", _id)
+                _ar = _fm.get("archetype", "")
+                _m = re.search(r"##\s*Quando brilha\s*(.+?)(?:\n##|\Z)", _src, re.DOTALL)
+                _qb = " ".join(_m.group(1).split())[:160] if _m else ""
+                _cat_lines.append(f"- {_id} [{_ar}] — {_dn}. Brilha: {_qb}")
+            except Exception:
+                _cat_lines.append(f"- {_id}")
+        _sel_extra = (
+            "=== CATÁLOGO AUTORITATIVO — escolha SOMENTE destes model_id ===\n"
+            + "\n".join(_cat_lines)
+            + "\n\nO campo model_id DEVE ser EXATAMENTE um id da lista acima "
+              "(copie literalmente). NÃO invente, traduza ou parafraseie ids."
+        )
         t02 = time.time()
-        r = runner.run("02-style-selector", briefing)
+        r = runner.run("02-style-selector", briefing, extra_context=_sel_extra)
         mark("02", t02)
         if not r.ok:
             return {"ok": False, "error": f"style-selector: {r.error}",
@@ -189,7 +336,21 @@ def _run_pipeline_inline(
         chosen_model_id = style_rec["recommended"][0]["model_id"]
         diagnostics.append(f"02-style-selector ({timings['02']}ms): escolheu {chosen_model_id}")
 
-    # Verifica se template HTML existe pra esse modelo. Inclui diagnóstico
+    # Ancora o ID escolhido ao catálogo REAL (corrige hallucination do selector:
+    # ele às vezes devolve IDs inexistentes tipo 'C-headline-dark-tipo'). Em vez
+    # de difflib de string (que casa por letras e erra o sentido), pontua por
+    # TOKENS + sinônimos do vocabulário visual.
+    if not forced_model_id:
+        _catalog = (list_blueprints().get(marca) or [])
+        if chosen_model_id not in _catalog and _catalog:
+            _best = _resolve_catalog(chosen_model_id, _catalog)
+            if _best:
+                diagnostics.append(f"02-normalize: '{chosen_model_id}' -> '{_best}' (ancorado por tokens)")
+                chosen_model_id = _best
+            else:
+                diagnostics.append(f"02-normalize: '{chosen_model_id}' sem match no catálogo {_catalog}")
+
+    # Verifica se template/blueprint existe pra esse modelo. Inclui diagnóstico
     # do path pra facilitar debug de bundle Vercel.
     if not has_template(marca, chosen_model_id):
         from _html_templates import templates_dir_path, templates_dir_exists, list_templates
@@ -222,18 +383,71 @@ def _run_pipeline_inline(
     image_file_url: str = ""
     image_data_uri: str = ""
 
-    # Carrega YAML do modelo pra checar se image_required
-    marca_models_dir = ENGINE_DIR / "brand-knowledge" / "models" / marca
-    model_yaml_path = marca_models_dir / f"{chosen_model_id}.yaml"
+    # FONTE DE VERDADE: se há blueprint, ele governa imagem (required, treatment,
+    # placement, prompt_ref) e o YAML NÃO é lido. YAML/style-X só sobrevivem como
+    # fallback pra modelos sem blueprint (ex: Tiago, ainda no v2).
+    has_bp = has_blueprint(marca, chosen_model_id)
     model_requires_image = True
     model_yaml_content = ""
-    if model_yaml_path.exists():
-        model_yaml_content = model_yaml_path.read_text(encoding="utf-8")
-        if "required:          false" in model_yaml_content or "required: false" in model_yaml_content:
-            model_requires_image = False
-        diagnostics.append(f"03-yaml: {chosen_model_id}.yaml carregado · image_required={model_requires_image}")
+    bp_fm_full: dict = {}
+    bp_placement: str = ""
+    bp_treatment: str = ""
+    bp_prompt_ref: str = ""
+
+    if has_bp:
+        try:
+            bp_fm_full = _bp_fm(_bp_read(_bp_path(marca, chosen_model_id)))
+            _img_cfg = (bp_fm_full.get("image") or {})
+            if "required" in _img_cfg:
+                model_requires_image = _img_cfg.get("required") in (True, "true", "True", "yes")
+            bp_treatment = str(_img_cfg.get("treatment") or "")
+            bp_prompt_ref = str(_img_cfg.get("prompt_ref") or "")
+            bp_placement = _blueprint_placement(bp_fm_full)
+            diagnostics.append(
+                f"03-blueprint: image.required={model_requires_image} placement={bp_placement or '-'} "
+                f"(fonte única; YAML ignorado)"
+            )
+        except Exception as _e:
+            diagnostics.append(f"03-blueprint: falha lendo blueprint — {_e.__class__.__name__}")
     else:
-        diagnostics.append(f"03-yaml: FALTANDO {model_yaml_path}")
+        # Fallback YAML (modelo sem blueprint)
+        model_yaml_path = ENGINE_DIR / "brand-knowledge" / "models" / marca / f"{chosen_model_id}.yaml"
+        if model_yaml_path.exists():
+            model_yaml_content = model_yaml_path.read_text(encoding="utf-8")
+            if "required:          false" in model_yaml_content or "required: false" in model_yaml_content:
+                model_requires_image = False
+            diagnostics.append(f"03-yaml (fallback): {chosen_model_id}.yaml · image_required={model_requires_image}")
+        else:
+            diagnostics.append(f"03-yaml (fallback): FALTANDO {model_yaml_path}")
+
+    # ============================================================
+    # DIRETOR DE ARTE — decisões de composição por peça (quebras + accent +
+    # direção da foto). Eleva de "template preenchido" pra "composição".
+    # ============================================================
+    ad_directives: dict = {}
+    if art_director and not mock and (user_headline or "").strip():
+        try:
+            t_ad = time.time()
+            from _art_director import direct as _ad_direct
+            _arch = (bp_fm_full.get("archetype") if bp_fm_full else "") or ""
+            _theme = ((bp_fm_full.get("params") or {}).get("theme") if bp_fm_full else "dark") or "dark"
+            ad_directives = _ad_direct(
+                copy={"headline": user_headline, "subhead": user_subhead,
+                      "body": user_body, "cta": user_cta_text},
+                archetype=_arch, theme=_theme, marca=marca,
+                brief=briefing_text or "", llm=llm, placement=bp_placement)
+            mark("art-director", t_ad)
+            _hm = ad_directives.get("headline_marked")
+            if _hm:
+                user_headline = _hm  # aplica quebras de linha + accent do DA
+            diagnostics.append(
+                f"art-director ({timings.get('art-director',0)}ms): emphasis={ad_directives.get('emphasis','-')} "
+                f"gaze={ad_directives.get('gaze_direction','-')} crop={ad_directives.get('crop_focus','-')}"
+                + (" · headline recomposta" if _hm else "")
+                + (" · headline rejeitada (palavras divergiram)" if ad_directives.get('_headline_rejected') else "")
+            )
+        except Exception as _e:
+            diagnostics.append(f"art-director: PULADO ({_e.__class__.__name__}: {str(_e)[:90]})")
 
     if image_source == "none" or not model_requires_image:
         diagnostics.append("04-image-gen: PULADO — modelo sem imagem OU user escolheu sem imagem")
@@ -253,15 +467,19 @@ def _run_pipeline_inline(
         if base_content:
             diagnostics.append(f"04-base: {base_path.name} carregado ({len(base_content)} chars)")
 
-        # prompt_template_ref do YAML
-        import re as _re
-        ref_match = _re.search(r"prompt_template_ref:\s*['\"]?([^'\"\n]+)['\"]?", model_yaml_content)
+        # Template de prompt do estilo (OPCIONAL): vem do blueprint (image.prompt_ref)
+        # quando há; senão do YAML (fallback). Com blueprint sem prompt_ref, o prompt
+        # se sustenta em _base + preset + placement + treatment (sem style-X.md).
         image_prompt_template = ""
-        if ref_match:
-            tpl_path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / ref_match.group(1).strip()
+        _ref = bp_prompt_ref or ""
+        if not _ref and model_yaml_content:
+            _m = re.search(r"prompt_template_ref:\s*['\"]?([^'\"\n]+)['\"]?", model_yaml_content)
+            _ref = _m.group(1).strip() if _m else ""
+        if _ref:
+            tpl_path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / _ref
             if tpl_path.exists():
                 image_prompt_template = tpl_path.read_text(encoding="utf-8")
-                diagnostics.append(f"04-template: {tpl_path.name} carregado ({len(image_prompt_template)} chars)")
+                diagnostics.append(f"04-template: {tpl_path.name} ({len(image_prompt_template)} chars)")
 
         # Provider awareness + preset
         active_provider = os.getenv("IMAGE_GEN_PROVIDER", "openai").lower()
@@ -283,7 +501,12 @@ def _run_pipeline_inline(
         # 3-5s. O briefing visual já descreve o sujeito; o preset descreve
         # o tratamento. _base só fornece anti-padrões inline.
         user_briefing_present = bool(briefing_image_text and briefing_image_text.strip())
-        fast_path_ok = bool(chosen_preset and user_briefing_present)
+        # DEFAULT: roda o engenheiro de prompt (skill 04) — ele aplica identidade
+        # da marca + composição-por-slot E respeita a direção do user como
+        # prioridade máxima. O fast-path (concatenação simples, sem slot/base) só
+        # liga sob flag explícita (ex: pressão de timeout). Antes era o contrário.
+        _fastpath_enabled = os.getenv("IMAGE_PROMPT_FASTPATH", "0") == "1"
+        fast_path_ok = bool(chosen_preset and user_briefing_present and _fastpath_enabled)
         image_spec: dict = {}
         if fast_path_ok:
             t04_fast = time.time()
@@ -297,8 +520,12 @@ def _run_pipeline_inline(
             combined_negative = ", ".join(filter(None, [negative_universal, preset_neg]))
             # Prompt principal: subject (briefing) + treatment (preset)
             preset_overlay = chosen_preset.get("prompt_overlay", "")
+            _placement_txt = _PLACEMENT_INSTRUCTION.get(bp_placement, "")
+            _ad_photo = _art_direction_photo(ad_directives)
             primary_prompt = (
                 f"{briefing_image_text.strip()}. {preset_overlay}"
+                + (f" Composition: {_placement_txt}" if _placement_txt else "")
+                + (f" {_ad_photo}" if _ad_photo else "")
             ).strip()
             image_spec = {
                 "skip": False,
@@ -327,15 +554,27 @@ def _run_pipeline_inline(
                 )
             if chosen_preset:
                 parts.append(preset_to_extra_context(chosen_preset))
+            # Composição-por-slot vinda do BLUEPRINT (não do style-X.md) — garante
+            # que o sujeito encaixe no slot real do layout v3.
+            if bp_placement and bp_placement in _PLACEMENT_INSTRUCTION:
+                parts.append(
+                    f"=== COMPOSIÇÃO-POR-SLOT (placement={bp_placement}) — OBRIGATÓRIO ===\n"
+                    f"{_PLACEMENT_INSTRUCTION[bp_placement]}"
+                    + (f"\nTratamento do modelo: {bp_treatment}" if bp_treatment else "")
+                )
+            _ad_photo = _art_direction_photo(ad_directives)
+            if _ad_photo:
+                parts.append(f"=== DIREÇÃO DE ARTE DA FOTO (Diretor de Arte) ===\n{_ad_photo}")
             if base_content:
                 parts.append(
                     f"=== BASE DA MARCA {marca.upper()} ===\n{base_content}\n\n"
                     f"PROVIDER: {active_provider}. Use {active_section_key}."
                 )
-            parts.append(
-                f"=== TEMPLATE DE PROMPT DO ESTILO (use {active_section_key}) ===\n"
-                f"{image_prompt_template or '(sem template — use defaults do _base)'}"
-            )
+            if image_prompt_template:
+                parts.append(
+                    f"=== TEMPLATE DE PROMPT DO ESTILO (use {active_section_key}) ===\n"
+                    f"{image_prompt_template}"
+                )
             parts.append(
                 "INSTRUÇÕES OBRIGATÓRIAS:\n"
                 "1. Gere 1 prompt pro slot principal de imagem.\n"
@@ -452,6 +691,39 @@ def _run_pipeline_inline(
     )
 
     # ============================================================
+    # QA — valida o render contra o blueprint (dimensões, tokens, fonte,
+    # slots, overflow flag). Não bloqueia; reporta status + warnings.
+    # ============================================================
+    qa_result = {"status": "SKIPPED", "issues": [], "warnings": []}
+    try:
+        from _qa import qa as _qa_check
+        qa_result = _qa_check(bp_fm_full, copy_dict, image_data_uri or image_file_url, rendered["html"])
+        diagnostics.append(
+            f"qa: {qa_result['status']} · issues={len(qa_result['issues'])} "
+            f"warnings={len(qa_result['warnings'])}"
+            + (f" · {qa_result['issues']}" if qa_result['issues'] else "")
+        )
+    except Exception as _e:
+        diagnostics.append(f"qa: falhou — {_e.__class__.__name__}: {_e}")
+
+    # ============================================================
+    # Export PNG server-side (Chromium real @2× — substitui html2canvas).
+    # Opt-in: requer Chromium no runtime. Em serverless sem Chromium, pula limpo
+    # e o front cai no preview HTML (ou html2canvas legado).
+    # ============================================================
+    png_data_uri = ""
+    if render_png:
+        try:
+            t_png = time.time()
+            from _render_png import render_format
+            _png = render_format(rendered["html"], format_key, scale=2, downscale=True)
+            png_data_uri = "data:image/png;base64," + base64.b64encode(_png).decode("ascii")
+            mark("png", t_png)
+            diagnostics.append(f"export-png ({timings['png']}ms): {len(_png)//1024}KB @2x->1x server-side")
+        except Exception as _e:
+            diagnostics.append(f"export-png: PULADO ({_e.__class__.__name__}: {str(_e)[:80]})")
+
+    # ============================================================
     # Sumário + return
     # ============================================================
     total_ms = int((time.time() - t_start) * 1000)
@@ -468,6 +740,8 @@ def _run_pipeline_inline(
         "format": format_key,
         "html": rendered["html"],
         "image_data_uri": image_data_uri,  # opcional — html já tem inline
+        "png_data_uri": png_data_uri,      # export server-side @2× (quando render_png)
+        "qa": qa_result,
         "diagnostics": diagnostics,
     }
 
@@ -521,6 +795,8 @@ class handler(BaseHTTPRequestHandler):
                 user_body=data.get("copy_body") or None,
                 user_cta_text=data.get("cta_text") or None,
                 wizard_format=data.get("format") or None,
+                render_png=bool(data.get("render_png", False)),
+                art_director=bool(data.get("art_director", True)),
             )
             if not result.get("ok"):
                 return self._json(500, {"detail": result.get("error", "erro desconhecido"),

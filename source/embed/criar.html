@@ -2212,7 +2212,9 @@ async function generateReal(briefing) {
         ...(STATE.copyHeadline && STATE.copyHeadline.trim() ? { copy_headline: STATE.copyHeadline.trim() } : {}),
         ...(STATE.copySubhead && STATE.copySubhead.trim() ? { copy_subhead: STATE.copySubhead.trim() } : {}),
         ...(STATE.copyBody && STATE.copyBody.trim() ? { copy_body: STATE.copyBody.trim() } : {}),
-        ...(STATE.cta && STATE.cta.trim() ? { cta_text: STATE.cta.trim() } : {})
+        ...(STATE.cta && STATE.cta.trim() ? { cta_text: STATE.cta.trim() } : {}),
+        // Diretor de Arte: decide composição (quebras + accent) + direção da foto
+        art_director: true
       }),
       signal: controller.signal
     });
@@ -2351,6 +2353,34 @@ function toggleMic() {
 ============================================================ */
 async function downloadMockPng() {
   const fname = `${STATE.brand}-${STATE.model_id || 'ad'}-${STATE.run_id || Date.now()}.png`;
+
+  // CAMINHO PRIMÁRIO: render server-side (Chromium real @2×) — nítido e
+  // determinístico. Substitui o html2canvas (reimplementação parcial de CSS,
+  // texto mole, depende do browser do user).
+  if (STATE.ad_html) {
+    try {
+      const r = await fetch(`${ENGINE_URL}/render`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ html: STATE.ad_html, format: STATE.ad_format || 'feed' }),
+      });
+      if (r.ok) {
+        const blob = await r.blob();
+        if (blob && blob.size > 0) {
+          const objUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = objUrl; a.download = fname; a.click();
+          URL.revokeObjectURL(objUrl);
+          return;
+        }
+      }
+      console.warn('render server-side falhou, caindo pro html2canvas', r.status);
+    } catch (err) {
+      console.warn('render server-side indisponível, fallback html2canvas', err);
+    }
+  }
+
+  // FALLBACK: html2canvas no browser (menos fiel — só se o /api/render falhar).
   const iframe = document.getElementById('ad-preview');
   if (!iframe || !iframe.contentDocument) {
     alert('Preview não disponível pra captura.');
