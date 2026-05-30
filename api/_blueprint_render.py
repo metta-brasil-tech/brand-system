@@ -135,12 +135,15 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         name = params.get("name", "Metta")
         handle = params.get("handle", "@metta.brasil")
         avatar = (name or "M")[0].upper()
-        body = _esc(copy.get("body", "")).replace("\n", "<br>")
+        # Tweet mock NÃO tem palavra colorida nem quebra forçada — remove os
+        # marcadores de accent (*) e quebras do Diretor de Arte (texto corre natural).
+        head_plain = _esc(copy.get("headline", "").replace("*", "").replace("\n", " "))
+        body = _esc(copy.get("body", "").replace("*", "")).replace("\n", "<br>")
         cta_line = f'<p class="t-body" style="color:#1D9BF0">{_esc(copy["cta"])} →</p>' if copy.get("cta") else ""
         return (f'<div class="card"><div class="mock-head"><div class="avatar">{avatar}</div>'
                 f'<div class="who"><span class="name">{_esc(name)} <span class="verified">✔</span></span>'
                 f'<span class="handle">{_esc(handle)}</span></div></div>'
-                f'<h1 class="t-head">{_esc(copy.get("headline",""))}</h1>'
+                f'<h1 class="t-head">{head_plain}</h1>'
                 f'{f"<p class=t-body>{body}</p>" if body else ""}{cta_line}</div>')
 
     if arch == "logo-wall":
