@@ -64,6 +64,10 @@ os.environ.setdefault("ARTIFACTS_DIR", "/tmp/artifacts")
 #   cold start Vercel:              5-10s
 # Default 'low' deixa ~20-30s de margem. User pode subir via Vercel env var.
 os.environ.setdefault("IMAGE_QUALITY", "low")
+# Modelo de imagem FIXO no gpt-image-1 (o que foi validado). Sem isso o adapter
+# cairia no default "openai" -> gpt-image-2 (não validado / pode não estar na conta).
+# Continua model-agnostic: setar IMAGE_GEN_PROVIDER no Vercel troca (nano-banana-2, etc).
+os.environ.setdefault("IMAGE_GEN_PROVIDER", "gpt-image-1")
 # Sem retry automático por default — fallback v2 dobra tempo de image-gen e
 # tipicamente estoura o timeout. User pode subir IMAGE_MAX_ATTEMPTS=2 quando
 # precisar de robustez (custa ~+15s de margem).
