@@ -204,11 +204,13 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}"'
     )
 
+    fonts_css = _read(_BLUEPRINTS_DIR / "_fonts.css")
     css = _read(_BLUEPRINTS_DIR / "_engine.css")
     js = _read(_BLUEPRINTS_DIR / "_engine.js")
 
     doc = f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <title>{_esc(model_id)}</title>
+<style>{fonts_css}</style>
 <style>{css}</style>
 <style>body{{display:flex;justify-content:center;align-items:flex-start;}}</style>
 </head><body>

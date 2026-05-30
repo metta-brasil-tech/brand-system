@@ -8,11 +8,12 @@
  * Tokens NUNCA hardcoded — sempre var(--m-*).
  * =============================================================================*/
 
-/* ---------- FONTES (de verdade) ----------
+/* ---------- FONTES (de verdade, self-hosted) ----------
  * Zalando Sans Expanded = display/headline/tag/CTA. Inter = body/subhead.
- * Importadas do Google Fonts (ambas SIL OFL). No Vercel pode-se trocar por
- * @font-face self-hosted apontando pra /assets/fonts/ — a family não muda. */
-@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700&display=swap');
+ * Os @font-face (variáveis, latin+latin-ext) vêm EMBUTIDOS em data-URI no
+ * `_fonts.css`, injetado antes deste CSS pelo renderer. Sem @import / sem rede
+ * = determinístico no preview, no _render_png (Playwright) e no render.js (Vercel).
+ * Regenerar: tmp/metta-ads/fetch_fonts.py. */
 
 /* ---------- TOKENS ---------- */
 :root {
