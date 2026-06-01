@@ -70,6 +70,10 @@ button { all: unset; }
 }
 .t-head .hi { color: var(--accent); }
 .ad[data-head="accent"] .t-head { color: var(--accent); }
+/* sentence-case (LIGHT-SURREAL, NEWS-CARD pedem caixa-baixa editorial, não UPPER) */
+.ad[data-case="sentence"] .t-head { text-transform: none; letter-spacing: -.02em; }
+/* divisor amarelo horizontal — assinatura do K (separa headline do body) */
+.t-divider { width: 132px; height: 7px; background: var(--m-yellow); border-radius: 2px; }
 .t-sub  { font-family: var(--m-text); font-weight: 500; font-size: 30px; line-height: 1.25; color: var(--fg); }
 .t-body { font-family: var(--m-text); font-weight: 400; font-size: 23px; line-height: 1.45; color: var(--muted); }
 
@@ -166,7 +170,13 @@ button { all: unset; }
 
 /* (4) photo-band — faixa de foto (top|bottom) + faixa de texto */
 .ad[data-arch="photo-band"] { display: flex; flex-direction: column; }
-.ad[data-arch="photo-band"] .photo { width: 100%; height: 46%; flex: none; background-size: cover; background-position: center; }
+.ad[data-arch="photo-band"] .photo { position: relative; width: 100%; height: 46%; flex: none; background-size: cover; background-position: center; }
+/* fade-to-bg na borda foto↔texto (assinatura do B; suaviza a costura) */
+.ad[data-arch="photo-band"] .photo::after { content: ''; position: absolute; left: 0; right: 0; height: 30%; pointer-events: none; }
+.ad[data-arch="photo-band"][data-photo="top"] .photo::after { bottom: 0; background: linear-gradient(0deg, var(--m-night-10) 0%, transparent 100%); }
+.ad[data-arch="photo-band"][data-photo="bottom"] .photo::after { top: 0; background: linear-gradient(180deg, var(--m-night-10) 0%, transparent 100%); }
+.ad[data-arch="photo-band"][data-photo="bottom"][data-theme="light"] .photo::after { background: linear-gradient(180deg, var(--m-night-95) 0%, transparent 100%); }
+.ad[data-arch="photo-band"][data-photo="top"][data-theme="light"] .photo::after { background: linear-gradient(0deg, var(--m-night-95) 0%, transparent 100%); }
 .ad[data-arch="photo-band"] .layer { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: var(--pad-y) var(--pad-x); gap: var(--gap); }
 .ad[data-arch="photo-band"][data-photo="top"]    { flex-direction: column; }
 .ad[data-arch="photo-band"][data-photo="bottom"] { flex-direction: column-reverse; }

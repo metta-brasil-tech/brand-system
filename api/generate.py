@@ -231,6 +231,7 @@ def _run_pipeline_inline(
     user_subhead: str | None = None,
     user_body: str | None = None,
     user_cta_text: str | None = None,
+    user_tag: str | None = None,
     wizard_format: str | None = None,
     render_png: bool = False,
     art_director: bool = True,
@@ -674,6 +675,7 @@ def _run_pipeline_inline(
         "subhead": (user_subhead or "").strip(),
         "body": (user_body or "").strip(),
         "cta": (user_cta_text or "").strip(),
+        "tag": (user_tag or "").strip(),
     }
     rendered = render_html(
         marca=marca,
@@ -799,6 +801,7 @@ class handler(BaseHTTPRequestHandler):
                 user_subhead=data.get("copy_subhead") or None,
                 user_body=data.get("copy_body") or None,
                 user_cta_text=data.get("cta_text") or None,
+                user_tag=data.get("copy_tag") or None,
                 wizard_format=data.get("format") or None,
                 render_png=bool(data.get("render_png", False)),
                 art_director=bool(data.get("art_director", True)),

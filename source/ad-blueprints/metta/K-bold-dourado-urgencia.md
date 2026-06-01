@@ -3,7 +3,7 @@ id: K-bold-dourado-urgencia
 display_name: "Bold dourado / urgência fundamentada"
 marca: metta
 archetype: typo
-params: { theme: dark, align: center, head: accent, cta: yellow }
+params: { theme: dark, align: left, divider: yellow, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
 image: { required: false }
 formato_nativo: [story, feed]

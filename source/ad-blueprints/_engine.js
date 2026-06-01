@@ -20,8 +20,23 @@
       return box.scrollHeight > box.clientHeight + 2 ||
              head.scrollWidth > head.clientWidth + 2;
     }
+    // 1) encolhe se transbordar (copy longa)
     while (over() && size > floor && guard < 90) {
       size -= 2; head.style.fontSize = size + 'px'; guard++;
+    }
+    // 2) CRESCE até dominar (só typo) — tipografia É o ad; copy curta tem que
+    //    encher a tela (DNA do C/H/K). Cresce até a coluna de texto ocupar ~64%
+    //    do canvas ou quase transbordar.
+    var ad = head.closest('.ad');
+    if (ad && ad.getAttribute('data-arch') === 'typo') {
+      var stack = box.querySelector('.stack') || box;
+      var cap = (ad.getAttribute('data-scale') === 'giant') ? 210 : 150;
+      var target = box.clientHeight * 0.64;
+      var g = 0;
+      while (stack.offsetHeight < target && !over() && size < cap && g < 140) {
+        size += 3; head.style.fontSize = size + 'px'; g++;
+      }
+      if (over()) { size -= 4; head.style.fontSize = size + 'px'; }
     }
     return size;
   }

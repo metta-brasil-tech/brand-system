@@ -81,12 +81,14 @@ def _accent(text: str) -> str:
 # ---------------------------------------------------------------------------
 # Markup por archetype — recebe (copy, params) e devolve o innerHTML do .ad
 # ---------------------------------------------------------------------------
-def _txt_blocks(copy: dict, head_accent=True) -> str:
+def _txt_blocks(copy: dict, head_accent=True, divider=False) -> str:
     head = _accent(copy.get("headline", "")) if head_accent else _esc(copy.get("headline", ""))
     parts = []
     if copy.get("tag"):
         parts.append(f'<p class="t-tag">{_esc(copy["tag"])}</p>')
     parts.append(f'<h1 class="t-head">{head}</h1>')
+    if divider:  # divisor amarelo (assinatura do K) — depois da headline
+        parts.append('<div class="t-divider"></div>')
     if copy.get("subhead"):
         parts.append(f'<p class="t-sub">{_esc(copy["subhead"])}</p>')
     if copy.get("body"):
@@ -111,7 +113,8 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
     cta_cls = "cta--dark" if params.get("cta") == "dark" else ("cta--outline" if params.get("cta") == "outline" else "")
 
     if arch == "typo":
-        return f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div></div>{_cta(copy, cta_cls)}'
+        _div = bool(params.get("divider"))
+        return f'<div class="layer"><div class="stack">{_txt_blocks(copy, divider=_div)}</div></div>{_cta(copy, cta_cls)}'
 
     if arch == "photo-side":
         block = params.get("block", "none")
@@ -198,7 +201,9 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     inner = _markup(arch, copy_clean, params, image_url or "")
 
     head_style = params.get("head", "")
+    case = params.get("case", "upper")
     data_attrs = (
+        f'data-case="{_esc(case)}" '
         f'data-arch="{_esc(arch)}" data-theme="{_esc(theme)}" data-format="{_esc(format)}" '
         f'data-align="{_esc(align)}" data-scale="{_esc(scale)}" data-photo="{_esc(photo)}" '
         f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}"'

@@ -3,7 +3,7 @@ id: YELLOW-BLOCO
 display_name: "Bloco amarelo + foto pessoa direita + bullets"
 marca: metta
 archetype: photo-side
-params: { theme: dark, photo: right-bleed, block: yellow, align: left, cta: dark }
+params: { theme: light, photo: right-bleed, block: yellow, align: left, cta: dark }
 slots: [tag, headline, subhead, body, cta]
 image: { prompt_ref: image-prompts/metta/style-YELLOW-BLOCO.md, required: true, treatment: "foto pessoa bleed direita, atrás do bloco amarelo" }
 formato_nativo: [story, feed]

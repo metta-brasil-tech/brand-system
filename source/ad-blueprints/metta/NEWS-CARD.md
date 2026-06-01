@@ -3,7 +3,7 @@ id: NEWS-CARD
 display_name: "Manchete jornalística + foto na faixa inferior"
 marca: metta
 archetype: photo-band
-params: { theme: light, photo: bottom, align: left, cta: dark }
+params: { theme: light, photo: bottom, align: left, case: sentence, cta: dark }
 slots: [tag, headline, subhead, body, cta]
 image: { required: true, treatment: "foto pessoa na faixa inferior" }
 formato_nativo: [story, feed]
