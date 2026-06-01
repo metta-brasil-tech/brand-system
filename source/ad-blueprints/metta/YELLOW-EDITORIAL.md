@@ -2,10 +2,10 @@
 id: YELLOW-EDITORIAL
 display_name: "Editorial tipográfico — headline amarela sobre dark"
 marca: metta
-archetype: typo
-params: { theme: dark, align: left, scale: normal, head: accent, cta: yellow }
+archetype: number-hero
+params: { theme: yellow, cta: dark }
 slots: [tag, headline, subhead, body, cta]
-image: { required: false }
+image: { required: true, treatment: "colagem preto-e-branco de executivos brasileiros desfocada, contexto institucional editorial" }
 formato_nativo: [story, feed]
 dna_ref: "design/banco-ads-figma.md#§5.6"
 status: ativo

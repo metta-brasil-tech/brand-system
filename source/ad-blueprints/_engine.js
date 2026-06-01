@@ -28,10 +28,12 @@
     //    encher a tela (DNA do C/H/K). Cresce até a coluna de texto ocupar ~64%
     //    do canvas ou quase transbordar.
     var ad = head.closest('.ad');
-    if (ad && ad.getAttribute('data-arch') === 'typo') {
+    var _arch = ad && ad.getAttribute('data-arch');
+    if (_arch === 'typo' || _arch === 'number-hero') {
       var stack = box.querySelector('.stack') || box;
-      var cap = (ad.getAttribute('data-scale') === 'giant') ? 210 : 150;
-      var target = box.clientHeight * 0.64;
+      var cap = _arch === 'number-hero' ? 300
+                : (ad.getAttribute('data-scale') === 'giant' ? 210 : 150);
+      var target = box.clientHeight * (_arch === 'number-hero' ? 0.72 : 0.64);
       var g = 0;
       while (stack.offsetHeight < target && !over() && size < cap && g < 140) {
         size += 3; head.style.fontSize = size + 'px'; g++;

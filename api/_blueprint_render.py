@@ -138,9 +138,12 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         name = params.get("name", "Metta")
         handle = params.get("handle", "@metta.brasil")
         avatar = (name or "M")[0].upper()
-        # Tweet mock NÃO tem palavra colorida nem quebra forçada — remove os
-        # marcadores de accent (*) e quebras do Diretor de Arte (texto corre natural).
-        head_plain = _esc(copy.get("headline", "").replace("*", "").replace("\n", " "))
+        # Card DARK (DNA Metta) tem palavra-accent amarela; card light (Twitter)
+        # corre texto sem cor. Quebras (\n) sempre viram espaço (texto fluido).
+        if params.get("theme") == "dark":
+            head_plain = _accent(copy.get("headline", "").replace("\n", " "))
+        else:
+            head_plain = _esc(copy.get("headline", "").replace("*", "").replace("\n", " "))
         body = _esc(copy.get("body", "").replace("*", "")).replace("\n", "<br>")
         cta_line = f'<p class="t-body" style="color:#1D9BF0">{_esc(copy["cta"])} →</p>' if copy.get("cta") else ""
         return (f'<div class="card"><div class="mock-head"><div class="avatar">{avatar}</div>'
@@ -161,6 +164,11 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         media = f'<div class="half-media" style="background-image:url(\'{image_url}\')"></div>' if image_url else '<div class="half-media"></div>'
         return (f'{media}<div class="half-text"><div class="stack">{_txt_blocks(copy)}</div>'
                 f'{_cta(copy, cta_cls)}</div>')
+
+    if arch == "number-hero":
+        # colagem PB no topo (opcional) + número gigante + sub/body + CTA
+        return (f'{_photo(image_url)}'
+                f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div>{_cta(copy, cta_cls)}</div>')
 
     # fallback
     return f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div></div>{_cta(copy, cta_cls)}'

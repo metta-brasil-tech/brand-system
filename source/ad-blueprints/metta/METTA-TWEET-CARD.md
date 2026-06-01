@@ -3,7 +3,7 @@ id: METTA-TWEET-CARD
 display_name: "Tweet-card brandado — statement curto + avatar Metta"
 marca: metta
 archetype: card-mock
-params: { theme: light, name: Metta, handle: "@metta.brasil" }
+params: { theme: dark, name: Metta, handle: "@metta.brasil" }
 slots: [tag, headline, subhead, body, cta]
 image: { required: false }
 formato_nativo: [story, feed]

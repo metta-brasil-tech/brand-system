@@ -199,7 +199,17 @@ button { all: unset; }
 .ad[data-arch="card-mock"] .who .handle { font-family: var(--m-text); font-size: 28px; color: var(--m-night-40); }
 .ad[data-arch="card-mock"] .verified { color: #1D9BF0; font-size: 30px; }
 .ad[data-arch="card-mock"] .t-head { font-family: var(--m-text); font-weight: 700; font-size: 56px; line-height: 1.12; text-transform: none; letter-spacing: -.02em; color: var(--m-night-10); }
+.ad[data-arch="card-mock"] .t-head .hi { color: #B8860B; }
 .ad[data-arch="card-mock"] .t-body { font-size: 30px; color: var(--m-night-40); }
+/* variante DARK = card Metta escuro (DNA): card #141F26 sobre fundo night-10,
+   statement branco com accent amarelo, handle/credencial cinza */
+.ad[data-arch="card-mock"][data-theme="dark"] { background: var(--m-night-10); }
+.ad[data-arch="card-mock"][data-theme="dark"] .card { background: #141F26; box-shadow: inset 0 0 0 1px rgba(176,202,216,.14); }
+.ad[data-arch="card-mock"][data-theme="dark"] .who .name { color: var(--m-white); }
+.ad[data-arch="card-mock"][data-theme="dark"] .who .handle { color: var(--m-night-85); }
+.ad[data-arch="card-mock"][data-theme="dark"] .t-head { color: var(--m-white); }
+.ad[data-arch="card-mock"][data-theme="dark"] .t-head .hi { color: var(--m-yellow); }
+.ad[data-arch="card-mock"][data-theme="dark"] .t-body { color: var(--m-night-85); }
 
 /* (7) logo-wall — grade de logos + headline */
 .ad[data-arch="logo-wall"] .layer { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: var(--pad-y) var(--pad-x); gap: 48px; }
@@ -215,3 +225,16 @@ button { all: unset; }
 .ad[data-arch="split"] { display: flex; }
 .ad[data-arch="split"] .half-media { width: 50%; background-size: cover; background-position: center; background-color: var(--m-yellow); }
 .ad[data-arch="split"] .half-text  { width: 50%; display: flex; flex-direction: column; justify-content: center; padding: var(--pad-y) 64px; gap: var(--gap); }
+
+/* (10) number-hero — número GIGANTE preto sobre amarelo + colagem PB no topo
+   (YELLOW-EDITORIAL §5.6). O "número" é a headline; grow-to-fit deixa gigante. */
+.ad[data-arch="number-hero"] { display: flex; flex-direction: column; background: var(--m-yellow); }
+.ad[data-arch="number-hero"] .photo { width: 100%; height: 36%; flex: none; background-size: cover; background-position: center 30%; filter: grayscale(1) contrast(1.05); }
+.ad[data-arch="number-hero"] .photo::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: linear-gradient(0deg, var(--m-yellow) 0%, transparent 100%); }
+.ad[data-arch="number-hero"] .photo { position: relative; }
+.ad[data-arch="number-hero"] .layer { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 8px var(--pad-x) var(--pad-y); gap: 16px; }
+.ad[data-arch="number-hero"] .t-head { color: var(--m-night-10); font-size: 200px; line-height: .84; letter-spacing: -.03em; }
+.ad[data-arch="number-hero"] .t-head .hi { color: var(--m-night-10); }
+.ad[data-arch="number-hero"] .t-sub  { color: var(--m-night-10); font-weight: 600; }
+.ad[data-arch="number-hero"] .t-body { color: var(--m-night-10); opacity: .82; }
+.ad[data-arch="number-hero"] .cta-wrap { margin-top: 8px; }
