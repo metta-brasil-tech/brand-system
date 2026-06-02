@@ -427,25 +427,42 @@ def _run_pipeline_inline(
             diagnostics.append(f"03-yaml (fallback): FALTANDO {model_yaml_path}")
 
     # ============================================================
-    # DIRETOR DE ARTE — decisões de composição por peça (quebras + accent +
-    # direção da foto). Eleva de "template preenchido" pra "composição".
+    # DIRETOR DE ARTE + VISUAL — composição (quebras + accent + gaze/crop) E,
+    # quando a peça usa foto E o user não deu direção visual própria, um CONCEITO
+    # de cena VARIADO (lê a mensagem da copy, evita repetir cenas/pessoas recentes
+    # via memória). Resolve a monotonia das imagens (sempre o mesmo empresário).
     # ============================================================
     ad_directives: dict = {}
+    # precisa de conceito visual? só se vai gerar imagem E o user não ditou cena.
+    _user_has_visual = bool(briefing_image_text and briefing_image_text.strip())
+    _needs_concept = (image_source not in ("none", "search")) and model_requires_image and not _user_has_visual
     if art_director and not mock and (user_headline or "").strip():
         try:
             t_ad = time.time()
             from _art_director import direct as _ad_direct
+            import _concept_memory as _cmem
             _arch = (bp_fm_full.get("archetype") if bp_fm_full else "") or ""
             _theme = ((bp_fm_full.get("params") or {}).get("theme") if bp_fm_full else "dark") or "dark"
+            _recent = _cmem.read_recent(12) if _needs_concept else []
             ad_directives = _ad_direct(
                 copy={"headline": user_headline, "subhead": user_subhead,
                       "body": user_body, "cta": user_cta_text},
                 archetype=_arch, theme=_theme, marca=marca,
-                brief=briefing_text or "", llm=llm, placement=bp_placement)
+                brief=briefing_text or "", llm=llm, placement=bp_placement,
+                needs_image=_needs_concept, treatment=bp_treatment, recent_concepts=_recent)
             mark("art-director", t_ad)
             _hm = ad_directives.get("headline_marked")
             if _hm:
                 user_headline = _hm  # aplica quebras de linha + accent do DA
+            # Conceito visual vira a direção de cena pro engenheiro de prompt
+            _concept = ad_directives.get("image_concept") or {}
+            if _needs_concept and isinstance(_concept, dict) and _concept.get("brief"):
+                briefing_image_text = _concept["brief"]
+                _cmem.remember(_concept)
+                diagnostics.append(
+                    f"diretor-visual: cena='{_concept.get('scene_type','?')}' "
+                    f"({_concept.get('subject_note','')[:60]}) — evitou {len(_recent)} recentes"
+                )
             diagnostics.append(
                 f"art-director ({timings.get('art-director',0)}ms): emphasis={ad_directives.get('emphasis','-')} "
                 f"gaze={ad_directives.get('gaze_direction','-')} crop={ad_directives.get('crop_focus','-')}"
