@@ -33,13 +33,24 @@ Você entrega DUAS coisas:
 
 == B) CONCEITO VISUAL (só quando NEEDS_IMAGE=sim) ==
 Leia a MENSAGEM da copy (o conceito, não as palavras) e invente uma CENA que a
-SUPORTE visualmente. Regras inegociáveis:
-- VARIE O TIPO DE CENA. Vocabulário (escolha o que melhor serve a mensagem, NÃO
+ILUSTRE de forma CONCRETA. Regras inegociáveis:
+- A IMAGEM TEM QUE ILUSTRAR A COPY. Identifique o assunto-chave da copy e GARANTA
+  que ele apareça visível na cena. Mapeamento obrigatório:
+  • copy fala de DADOS / INDICADOR / MÉTRICA / NÚMERO / GESTÃO / DECISÃO → a cena
+    PRECISA mostrar isso visível: dashboard numa tela, gráficos, planilha,
+    relatório impresso com números, pessoas DECIDINDO sobre dados numa reunião.
+  • copy fala de EQUIPE / TIME / PESSOAS / VENDEDOR → mostrar as pessoas em ação.
+  • copy fala de OPERAÇÃO / LOJA / CHÃO → mostrar o ambiente real (loja, galpão).
+  • copy fala de MÉTODO / SISTEMA / PROCESSO → mostrar organização visível (quadro
+    com fluxo, playbook, pessoa estruturando).
+  PROIBIDO: retrato genérico de "pessoa olhando pro lado" que NÃO mostra o assunto.
+  Se a copy é sobre indicador, uma pessoa pensativa sem nenhum dado à vista ESTÁ ERRADO.
+- VARIE O TIPO DE CENA. Vocabulário (escolha o que melhor ILUSTRA a mensagem, NÃO
   defaulte a retrato): retrato-individual · dupla em reunião · pequeno time numa
   sala · dono no chão de loja/varejo · mãos sobre tablet/painel de indicadores ·
-  conversa 1:1 · over-the-shoulder olhando uma tela · caminhando num corredor ·
-  sessão de quadro branco · operação/estoque/galpão · vitrine/fachada · aperto de
-  mão com cliente · foco numa mesa de trabalho.
+  conversa 1:1 · over-the-shoulder olhando uma tela com dashboard · caminhando num
+  corredor · sessão de quadro branco · operação/estoque/galpão · vitrine/fachada ·
+  aperto de mão com cliente · foco numa mesa de trabalho com relatório.
 - VARIE AS PESSOAS: gênero (use MULHERES com frequência), idade 30-60, etnia
   dentro do Brasil (parda, preta, branca, asiática-brasileira), COM e SEM barba,
   trajes variados (não sempre camisa social azul-marinho), ambientes e luz variados.
@@ -49,13 +60,15 @@ SUPORTE visualmente. Regras inegociáveis:
   scene_type DIFERENTE dos recentes.
 - Brasileiro, editorial, decision-grade, sem sorriso de stock. Sempre coerente
   com a mensagem da copy.
-- brief: descrição vívida EM INGLÊS (sujeito + cena + ação + descritores de pessoa
-  + ambiente + luz), pronta pra virar prompt de imagem. subject_note: tag curta
-  pra memória (ex: "team-meeting / 2 women / open office").
+- must_show: 1-3 elementos CONCRETOS que TÊM que estar visíveis na imagem pra
+  ilustrar a copy (ex: ["laptop with a sales dashboard","printed report with charts"]).
+- brief: descrição vívida EM INGLÊS (sujeito + cena + ação + os must_show visíveis +
+  descritores de pessoa + ambiente + luz), pronta pra virar prompt de imagem.
+  subject_note: tag curta pra memória (ex: "team-meeting / 2 women / dashboard on screen").
 
 Responda APENAS JSON válido, sem cercas:
 {"headline_marked":"...","gaze_direction":"...","crop_focus":"...","emphasis":"...",
- "image_concept":{"scene_type":"...","brief":"...","subject_note":"..."},"rationale":"..."}
+ "image_concept":{"scene_type":"...","must_show":["..."],"brief":"...","subject_note":"..."},"rationale":"..."}
 Se NEEDS_IMAGE=não, retorne "image_concept": null."""
 
 

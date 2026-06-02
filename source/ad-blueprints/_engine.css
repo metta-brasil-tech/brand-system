@@ -126,7 +126,10 @@ button { all: unset; }
 }
 .ad[data-arch="photo-side"][data-photo="left-bleed"] .layer { right: 0; left: auto; align-items: flex-end; text-align: right; }
 .ad[data-arch="photo-side"] .cta-wrap { position: absolute; left: var(--pad-x); bottom: var(--pad-y); z-index: 4; }
-/* variante bloco amarelo (YELLOW-BLOCO) */
+/* variante bloco amarelo (YELLOW-BLOCO): foto FULL-BLEED (sem corte duro de
+   fundo) + bloco opaco por cima da esquerda. Sujeito fica à direita (placement),
+   o bloco cobre a área limpa. Resolve o "fundo morto / foto espremida no canto". */
+.ad[data-arch="photo-side"][data-block="yellow"] .photo { width: 100%; left: 0; right: 0; }
 .ad[data-arch="photo-side"][data-block="yellow"] .layer {
   inset: auto auto 50% var(--pad-x); transform: translateY(50%); width: 56%;
   max-height: calc(100% - 200px); overflow: hidden;

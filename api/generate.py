@@ -183,12 +183,12 @@ def _blueprint_placement(fm: dict) -> str:
 
 
 _PLACEMENT_INSTRUCTION = {
-    "right-bleed": "subject positioned in the RIGHT 40% of the frame; the LEFT 60% must be softly blurred neutral background space (it will be covered by a text overlay). Do not center the subject.",
-    "left-bleed": "subject positioned in the LEFT 45% of the frame; the RIGHT 55% must be softly blurred neutral background space (it will be covered by a text overlay).",
-    "top-bleed": "subject positioned in the UPPER 50% of the frame; the LOWER half must be softly blurred environmental space (it will be covered by a text overlay).",
-    "bottom-bleed": "subject positioned in the LOWER 50% of the frame; the UPPER half must be softly blurred environmental space (it will be covered by a text overlay).",
-    "fullbleed": "subject CENTERED, mid-shot from chest up, ample breathing space; background slightly out of focus so dark text overlaid on the lower third stays readable.",
-    "object-center": "a single symbolic OBJECT centered on a clean dark background, dramatic lighting, generous negative space above and below for text overlay. No human subject.",
+    "right-bleed": "subject fully within the frame, NOT cropped at the edges, positioned in the RIGHT 42% of the frame; the LEFT 58% must be clean, softly blurred neutral background space (a text/colored panel sits there). The subject must NOT extend into that left zone.",
+    "left-bleed": "subject fully within the frame, NOT cropped at the edges, positioned in the LEFT 45% of the frame; the RIGHT 55% must be clean, softly blurred neutral background space (a text panel sits there). The subject must NOT extend into that right zone.",
+    "top-bleed": "subject fully within the frame, NOT cropped, positioned in the UPPER 50%; the LOWER half is clean, softly blurred environmental space (text sits there).",
+    "bottom-bleed": "subject fully within the frame, NOT cropped, positioned in the LOWER 55%; the UPPER half is clean, softly blurred environmental space (text sits there).",
+    "fullbleed": "subject fully within the frame, mid-shot from the waist or chest up, well composed and NOT cropped awkwardly; ample headroom; lower third slightly darker/out-of-focus so text overlaid there stays readable. Intentional editorial framing only.",
+    "object-center": "a single symbolic OBJECT centered on a clean dark background, fully visible and not cropped, dramatic lighting, generous negative space above and below for text. No human subject.",
 }
 
 
@@ -235,6 +235,7 @@ def _run_pipeline_inline(
     wizard_format: str | None = None,
     render_png: bool = False,
     art_director: bool = True,
+    vision_qa: bool = True,
 ) -> dict:
     """Pipeline principal — retorna HTML pronto pra iframe + metadata."""
     from skills_runner import SkillRunner
@@ -748,6 +749,62 @@ def _run_pipeline_inline(
             diagnostics.append(f"export-png: PULADO ({_e.__class__.__name__}: {str(_e)[:80]})")
 
     # ============================================================
+    # CHECAGEM FINAL POR VISÃO — a imagem ILUSTRA a copy? o layout NÃO mutila?
+    # Reprova e REGENERA (cena nova) até VISION_QA_MAX tentativas. Precisa do PNG
+    # (só no caminho render_png + Chromium). Só pra peças com foto gerada.
+    # ============================================================
+    vision_result: dict = {}
+    _vqa_on = (vision_qa and os.getenv("VISION_QA", "1") == "1" and render_png
+               and bool(png_data_uri) and image_source == "generate"
+               and bool(image_data_uri or image_file_url))
+    if _vqa_on:
+        try:
+            from _vision_qa import check as _vqa_check
+            from _render_png import render_format as _rfmt
+            from _art_director import direct as _ad_direct2
+            _aspect = {"story": "9:16", "feed": "4:5", "sqr": "1:1"}.get(format_key, "4:5")
+            _preset_ov = (chosen_preset or {}).get("prompt_overlay", "") if "chosen_preset" in locals() and chosen_preset else ""
+            _vmax = int(os.getenv("VISION_QA_MAX", "2"))
+            for _va in range(1, _vmax + 1):
+                vision_result = _vqa_check(_png, copy_dict)
+                diagnostics.append(
+                    f"vision-qa (try {_va}/{_vmax}): {vision_result.get('verdict')} "
+                    f"rel={vision_result.get('relevance')} integ={vision_result.get('integrity')} — "
+                    f"{str(vision_result.get('reason',''))[:80]}")
+                if vision_result.get("verdict") != "FAIL" or _va == _vmax:
+                    break
+                # REGENERA: conceito novo (evita o reprovado + memória) → imagem → render → png
+                _newdir = _ad_direct2(
+                    copy={"headline": user_headline, "subhead": user_subhead,
+                          "body": user_body, "cta": user_cta_text},
+                    archetype=(bp_fm_full.get("archetype") or "") if bp_fm_full else "",
+                    theme=((bp_fm_full.get("params") or {}).get("theme") or "dark") if bp_fm_full else "dark",
+                    marca=marca, brief=(briefing_text or "") + f" | A tentativa anterior falhou: {vision_result.get('reason','')}. Corrija.",
+                    llm=llm, placement=bp_placement, needs_image=True, treatment=bp_treatment,
+                    recent_concepts=_cmem.read_recent(12))
+                _nc = _newdir.get("image_concept") or {}
+                if not _nc.get("brief"):
+                    break
+                _cmem.remember(_nc)
+                _pl = _PLACEMENT_INSTRUCTION.get(bp_placement, "")
+                _adp = _art_direction_photo(ad_directives)
+                _regen_prompt = (f"{_nc['brief']}. {_preset_ov}"
+                                 + (f" Composition: {_pl}" if _pl else "")
+                                 + (f" {_adp}" if _adp else "")).strip()
+                _ig = ImageGenAdapter().generate(
+                    prompt=_regen_prompt,
+                    negative_prompt="no smiling stock pose, no cartoon, no text or logos in image, subject not cropped awkwardly",
+                    aspect_ratio=_aspect, reference_images=[])
+                image_data_uri = _image_to_data_uri(_ig.url)
+                rendered = render_html(marca=marca, model_id=chosen_model_id, copy=copy_dict,
+                                       image_url=image_data_uri or _ig.url, format=format_key)
+                _png = _rfmt(rendered["html"], format_key, scale=2, downscale=True)
+                png_data_uri = "data:image/png;base64," + base64.b64encode(_png).decode("ascii")
+                diagnostics.append(f"vision-qa: REGENEROU imagem (cena='{_nc.get('scene_type','?')}')")
+        except Exception as _e:
+            diagnostics.append(f"vision-qa: PULADO ({_e.__class__.__name__}: {str(_e)[:90]})")
+
+    # ============================================================
     # Sumário + return
     # ============================================================
     total_ms = int((time.time() - t_start) * 1000)
@@ -766,6 +823,7 @@ def _run_pipeline_inline(
         "image_data_uri": image_data_uri,  # opcional — html já tem inline
         "png_data_uri": png_data_uri,      # export server-side @2× (quando render_png)
         "qa": qa_result,
+        "vision_qa": vision_result,        # checagem final (relevância copy↔imagem + integridade)
         "diagnostics": diagnostics,
     }
 
@@ -822,6 +880,7 @@ class handler(BaseHTTPRequestHandler):
                 wizard_format=data.get("format") or None,
                 render_png=bool(data.get("render_png", False)),
                 art_director=bool(data.get("art_director", True)),
+                vision_qa=bool(data.get("vision_qa", True)),
             )
             if not result.get("ok"):
                 return self._json(500, {"detail": result.get("error", "erro desconhecido"),
