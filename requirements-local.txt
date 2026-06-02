@@ -1,0 +1,6 @@
+# Deps EXTRAS só pra rodar/testar localmente (NÃO vão pro Vercel).
+# Render do PNG @2x via Chromium headless. Depois de instalar, rode:
+#   python -m playwright install chromium
+# (Se você já tem o Google Chrome instalado, o render cai num fallback via
+#  subprocess e o Playwright fica opcional.)
+playwright>=1.40.0

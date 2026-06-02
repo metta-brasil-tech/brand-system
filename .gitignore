@@ -30,3 +30,8 @@ yarn-error.log*
 __pycache__/
 *.pyc
 *.pyo
+
+# Ad generator CLI — saídas locais
+/out/
+/artifacts/
+.venv/
