@@ -118,8 +118,21 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
 
     if arch == "photo-side":
         block = params.get("block", "none")
-        inner = f'{_photo(image_url)}<div class="grad"></div>' if block != "yellow" else _photo(image_url)
-        return (f'{inner}'
+        if block == "yellow":
+            # DNA §4.5: bloco amarelo = headline + BULLETS (3-5). Body com várias
+            # linhas (\n) vira lista de bullets; uma linha só vira parágrafo.
+            parts = [f'<h1 class="t-head">{_accent(copy.get("headline",""))}</h1>']
+            if copy.get("subhead"):
+                parts.append(f'<p class="t-sub">{_esc(copy["subhead"])}</p>')
+            _lines = [l.strip() for l in (copy.get("body","") or "").split("\n") if l.strip()]
+            if len(_lines) > 1:
+                parts.append('<ul class="bullets">' + "".join(f'<li>{_esc(l)}</li>' for l in _lines) + '</ul>')
+            elif _lines:
+                parts.append(f'<p class="t-body">{_esc(_lines[0])}</p>')
+            return (f'{_photo(image_url)}'
+                    f'<div class="layer"><div class="stack">{chr(10).join(parts)}</div></div>'
+                    f'{_cta(copy, cta_cls)}')
+        return (f'{_photo(image_url)}<div class="grad"></div>'
                 f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div></div>'
                 f'{_cta(copy, cta_cls)}')
 
@@ -210,8 +223,9 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
 
     head_style = params.get("head", "")
     case = params.get("case", "upper")
+    orient = params.get("orient", "vertical")
     data_attrs = (
-        f'data-case="{_esc(case)}" '
+        f'data-case="{_esc(case)}" data-orient="{_esc(orient)}" '
         f'data-arch="{_esc(arch)}" data-theme="{_esc(theme)}" data-format="{_esc(format)}" '
         f'data-align="{_esc(align)}" data-scale="{_esc(scale)}" data-photo="{_esc(photo)}" '
         f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}"'

@@ -3,7 +3,7 @@ id: YELLOW-SPLIT
 display_name: "Split horizontal preto + amarelo"
 marca: metta
 archetype: split
-params: { theme: dark }
+params: { theme: dark, orient: horizontal, align: left, cta: dark }
 slots: [tag, headline, subhead, body, cta]
 image: { required: true, treatment: "foto na metade da peça" }
 formato_nativo: [story, feed]

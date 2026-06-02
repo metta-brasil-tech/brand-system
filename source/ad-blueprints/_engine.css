@@ -70,6 +70,13 @@ button { all: unset; }
 }
 .t-head .hi { color: var(--accent); }
 .ad[data-head="accent"] .t-head { color: var(--accent); }
+/* em tema CLARO a palavra-accent amarela some no fundo → vira BLOCO de destaque
+   amarelo com texto escuro (DNA do LIGHT-TIPO §5.8). box-decoration-break clona
+   o fundo em cada linha quebrada. */
+.ad[data-theme="light"] .t-head .hi {
+  background: var(--m-yellow); color: var(--m-night-10);
+  padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+}
 /* sentence-case (LIGHT-SURREAL, NEWS-CARD pedem caixa-baixa editorial, não UPPER) */
 .ad[data-case="sentence"] .t-head { text-transform: none; letter-spacing: -.02em; }
 /* divisor amarelo horizontal — assinatura do K (separa headline do body) */
@@ -144,6 +151,10 @@ button { all: unset; }
 .ad[data-arch="photo-side"][data-block="yellow"] .t-head .hi { color: var(--m-night-10); text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 6px; }
 .ad[data-arch="photo-side"][data-block="yellow"] .t-sub  { font-size: 25px; }
 .ad[data-arch="photo-side"][data-block="yellow"] .t-body { font-size: 20px; }
+/* bullets do bloco amarelo (DNA §4.5: 3-5 itens concretos) */
+.ad[data-arch="photo-side"][data-block="yellow"] .bullets { list-style: none; display: flex; flex-direction: column; gap: 13px; margin-top: 4px; }
+.ad[data-arch="photo-side"][data-block="yellow"] .bullets li { position: relative; padding-left: 36px; font-family: var(--m-text); font-weight: 500; font-size: 23px; line-height: 1.22; color: var(--m-night-10); }
+.ad[data-arch="photo-side"][data-block="yellow"] .bullets li::before { content: '→'; position: absolute; left: 0; top: 0; font-weight: 800; }
 
 /* (3) photo-full — foto/ilustração fullbleed + overlay + texto ancorado */
 .ad[data-arch="photo-full"] .photo {
@@ -228,6 +239,14 @@ button { all: unset; }
 .ad[data-arch="split"] { display: flex; }
 .ad[data-arch="split"] .half-media { width: 50%; background-size: cover; background-position: center; background-color: var(--m-yellow); }
 .ad[data-arch="split"] .half-text  { width: 50%; display: flex; flex-direction: column; justify-content: center; padding: var(--pad-y) 64px; gap: var(--gap); }
+/* HORIZONTAL (YELLOW-SPLIT §5.7): top metade foto escura / bottom amarelo + CTA preto */
+.ad[data-arch="split"][data-orient="horizontal"] { flex-direction: column; }
+.ad[data-arch="split"][data-orient="horizontal"] .half-media { width: 100%; height: 54%; background-color: var(--m-night-10); }
+.ad[data-arch="split"][data-orient="horizontal"] .half-text { width: 100%; height: 46%; background: var(--m-yellow); padding: 56px 64px; justify-content: center; }
+.ad[data-arch="split"][data-orient="horizontal"] .half-text .t-head,
+.ad[data-arch="split"][data-orient="horizontal"] .half-text .t-sub { color: var(--m-night-10); }
+.ad[data-arch="split"][data-orient="horizontal"] .half-text .t-head .hi { color: var(--m-night-10); background: none; }
+.ad[data-arch="split"][data-orient="horizontal"] .cta { background: var(--m-night-10); color: var(--m-white); }
 
 /* (10) number-hero — número GIGANTE preto sobre amarelo + colagem PB no topo
    (YELLOW-EDITORIAL §5.6). O "número" é a headline; grow-to-fit deixa gigante. */
