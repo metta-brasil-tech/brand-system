@@ -259,6 +259,41 @@ function signatureLabel(filename) {
   return base.charAt(0).toUpperCase() + base.slice(1).replace(/(\d)/, ' $1');
 }
 
+// ----------- MODELOS DE DOCUMENTOS (.docx editáveis) -----------
+const MODELO_LABELS = {
+  'Metta-Proposta-Comercial.docx': 'Proposta Comercial',
+  'Metta-Orcamento.docx': 'Orçamento',
+  'Metta-Contrato-Prestacao-Servicos.docx': 'Contrato de Prestação de Serviços',
+  'Metta-Carta-Comercial.docx': 'Carta Comercial',
+  'Metta-Status-Report-Projeto.docx': 'Status Report de Projeto',
+  'Metta-Ata-Reuniao.docx': 'Ata de Reunião',
+  'Metta-Relatorio-Diagnostico.docx': 'Relatório de Diagnóstico',
+  'Metta-Plano-de-Acao-5W2H.docx': 'Plano de Ação (5W2H)',
+  'Metta-POP-Procedimento-Operacional.docx': 'POP — Procedimento Operacional',
+  'Metta-Politica-Interna.docx': 'Política Interna',
+  'Metta-Briefing-Projeto.docx': 'Briefing de Projeto',
+  'Metta-PDI-Desenvolvimento-Individual.docx': 'PDI — Desenvolvimento Individual',
+  'Metta-Manual-Onboarding.docx': 'Manual de Onboarding'
+};
+async function buildModelosTab() {
+  const dir = join(ASSETS_DIR, 'modelos-documentos');
+  const files = await walkFiles(dir);
+  if (files.length === 0) return null;
+  const sections = files
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }))
+    .map(f => ({
+      id: f.name.replace(/\.[^.]+$/, ''),
+      label: MODELO_LABELS[f.name] || f.name.replace(/\.docx$/, '').replace(/^Metta-/, '').replace(/-/g, ' '),
+      files: [f],
+      totalBytes: f.sizeBytes,
+      fileCount: 1
+    }));
+  return {
+    id: 'documentos', label: 'Documentos editáveis (.docx)', kind: 'assets',
+    sections, totalBytes: sumSize(files), fileCount: files.length
+  };
+}
+
 async function buildGroup(id, label, tabSpecs) {
   const tabs = [];
   for (const t of tabSpecs) {
@@ -339,7 +374,12 @@ async function main() {
     })}
   ]);
 
-  const groups = [docsGroup, galeriaGroup, appsGroup, dsGroup].filter(g => g.tabs.length > 0);
+  log.group('Grupo: Modelos de Documentos');
+  const modelosGroup = await buildGroup('modelos', 'Modelos de Documentos', [
+    { id: 'documentos', builder: () => buildModelosTab() }
+  ]);
+
+  const groups = [docsGroup, modelosGroup, galeriaGroup, appsGroup, dsGroup].filter(g => g.tabs.length > 0);
 
   // Totals globais
   let totalBytes = 0, totalFiles = 0, totalTabs = 0;

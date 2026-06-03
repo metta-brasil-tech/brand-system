@@ -15,3 +15,6 @@
 
 # SVG como texto (mantém diff legível)
 *.svg text eol=lf
+*.docx binary
+*.pptx binary
+*.xlsx binary
