@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-03T09:54:35.291Z",
+  "generatedAt": "2026-06-03T13:47:56.959Z",
   "grandTotalBytes": 247613762,
   "grandTotalFiles": 1181,
   "grandTotalTabs": 19,
@@ -1756,34 +1756,10 @@
           "kind": "assets",
           "sections": [
             {
-              "id": "Metta-Ata-Reuniao",
-              "label": "Ata de Reunião",
-              "files": [
-                {
-                  "name": "Metta-Ata-Reuniao.docx",
-                  "path": "assets/modelos-documentos/Metta-Ata-Reuniao.docx",
-                  "sizeBytes": 42725
-                }
-              ],
-              "totalBytes": 42725,
-              "fileCount": 1
-            },
-            {
-              "id": "Metta-Briefing-Projeto",
-              "label": "Briefing de Projeto",
-              "files": [
-                {
-                  "name": "Metta-Briefing-Projeto.docx",
-                  "path": "assets/modelos-documentos/Metta-Briefing-Projeto.docx",
-                  "sizeBytes": 42434
-                }
-              ],
-              "totalBytes": 42434,
-              "fileCount": 1
-            },
-            {
               "id": "Metta-Carta-Comercial",
               "label": "Carta Comercial",
+              "category": "Comercial",
+              "description": "Carta formal de apresentação, comunicação ou cobrança institucional.",
               "files": [
                 {
                   "name": "Metta-Carta-Comercial.docx",
@@ -1797,6 +1773,8 @@
             {
               "id": "Metta-Contrato-Prestacao-Servicos",
               "label": "Contrato de Prestação de Serviços",
+              "category": "Comercial",
+              "description": "Contrato padrão com cláusulas de escopo, prazos, confidencialidade e rescisão.",
               "files": [
                 {
                   "name": "Metta-Contrato-Prestacao-Servicos.docx",
@@ -1808,21 +1786,10 @@
               "fileCount": 1
             },
             {
-              "id": "Metta-Manual-Onboarding",
-              "label": "Manual de Onboarding",
-              "files": [
-                {
-                  "name": "Metta-Manual-Onboarding.docx",
-                  "path": "assets/modelos-documentos/Metta-Manual-Onboarding.docx",
-                  "sizeBytes": 42719
-                }
-              ],
-              "totalBytes": 42719,
-              "fileCount": 1
-            },
-            {
               "id": "Metta-Orcamento",
               "label": "Orçamento",
+              "category": "Comercial",
+              "description": "Orçamento itemizado com valores, prazos e condições de pagamento.",
               "files": [
                 {
                   "name": "Metta-Orcamento.docx",
@@ -1834,60 +1801,10 @@
               "fileCount": 1
             },
             {
-              "id": "Metta-PDI-Desenvolvimento-Individual",
-              "label": "PDI — Desenvolvimento Individual",
-              "files": [
-                {
-                  "name": "Metta-PDI-Desenvolvimento-Individual.docx",
-                  "path": "assets/modelos-documentos/Metta-PDI-Desenvolvimento-Individual.docx",
-                  "sizeBytes": 42689
-                }
-              ],
-              "totalBytes": 42689,
-              "fileCount": 1
-            },
-            {
-              "id": "Metta-Plano-de-Acao-5W2H",
-              "label": "Plano de Ação (5W2H)",
-              "files": [
-                {
-                  "name": "Metta-Plano-de-Acao-5W2H.docx",
-                  "path": "assets/modelos-documentos/Metta-Plano-de-Acao-5W2H.docx",
-                  "sizeBytes": 42462
-                }
-              ],
-              "totalBytes": 42462,
-              "fileCount": 1
-            },
-            {
-              "id": "Metta-Politica-Interna",
-              "label": "Política Interna",
-              "files": [
-                {
-                  "name": "Metta-Politica-Interna.docx",
-                  "path": "assets/modelos-documentos/Metta-Politica-Interna.docx",
-                  "sizeBytes": 42443
-                }
-              ],
-              "totalBytes": 42443,
-              "fileCount": 1
-            },
-            {
-              "id": "Metta-POP-Procedimento-Operacional",
-              "label": "POP — Procedimento Operacional",
-              "files": [
-                {
-                  "name": "Metta-POP-Procedimento-Operacional.docx",
-                  "path": "assets/modelos-documentos/Metta-POP-Procedimento-Operacional.docx",
-                  "sizeBytes": 42487
-                }
-              ],
-              "totalBytes": 42487,
-              "fileCount": 1
-            },
-            {
               "id": "Metta-Proposta-Comercial",
               "label": "Proposta Comercial",
+              "category": "Comercial",
+              "description": "Proposta de prestação de serviços com escopo, entregáveis e investimento.",
               "files": [
                 {
                   "name": "Metta-Proposta-Comercial.docx",
@@ -1899,8 +1816,55 @@
               "fileCount": 1
             },
             {
+              "id": "Metta-Ata-Reuniao",
+              "label": "Ata de Reunião",
+              "category": "Projetos",
+              "description": "Registro de pauta, decisões e encaminhamentos de reunião.",
+              "files": [
+                {
+                  "name": "Metta-Ata-Reuniao.docx",
+                  "path": "assets/modelos-documentos/Metta-Ata-Reuniao.docx",
+                  "sizeBytes": 42725
+                }
+              ],
+              "totalBytes": 42725,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Briefing-Projeto",
+              "label": "Briefing de Projeto",
+              "category": "Projetos",
+              "description": "Briefing inicial: objetivo, contexto, escopo e critérios de sucesso.",
+              "files": [
+                {
+                  "name": "Metta-Briefing-Projeto.docx",
+                  "path": "assets/modelos-documentos/Metta-Briefing-Projeto.docx",
+                  "sizeBytes": 42434
+                }
+              ],
+              "totalBytes": 42434,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Plano-de-Acao-5W2H",
+              "label": "Plano de Ação (5W2H)",
+              "category": "Projetos",
+              "description": "Plano de ação no formato 5W2H — o quê, por quê, quem, quando, onde, como e quanto.",
+              "files": [
+                {
+                  "name": "Metta-Plano-de-Acao-5W2H.docx",
+                  "path": "assets/modelos-documentos/Metta-Plano-de-Acao-5W2H.docx",
+                  "sizeBytes": 42462
+                }
+              ],
+              "totalBytes": 42462,
+              "fileCount": 1
+            },
+            {
               "id": "Metta-Relatorio-Diagnostico",
               "label": "Relatório de Diagnóstico",
+              "category": "Projetos",
+              "description": "Diagnóstico estruturado com achados, análise e recomendações.",
               "files": [
                 {
                   "name": "Metta-Relatorio-Diagnostico.docx",
@@ -1914,6 +1878,8 @@
             {
               "id": "Metta-Status-Report-Projeto",
               "label": "Status Report de Projeto",
+              "category": "Projetos",
+              "description": "Acompanhamento periódico: progresso, riscos e próximos passos.",
               "files": [
                 {
                   "name": "Metta-Status-Report-Projeto.docx",
@@ -1922,6 +1888,66 @@
                 }
               ],
               "totalBytes": 42974,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Manual-Onboarding",
+              "label": "Manual de Onboarding",
+              "category": "Pessoas",
+              "description": "Guia de integração de novos colaboradores à Metta.",
+              "files": [
+                {
+                  "name": "Metta-Manual-Onboarding.docx",
+                  "path": "assets/modelos-documentos/Metta-Manual-Onboarding.docx",
+                  "sizeBytes": 42719
+                }
+              ],
+              "totalBytes": 42719,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-PDI-Desenvolvimento-Individual",
+              "label": "PDI — Desenvolvimento Individual",
+              "category": "Pessoas",
+              "description": "Plano de desenvolvimento individual com metas, ações e prazos.",
+              "files": [
+                {
+                  "name": "Metta-PDI-Desenvolvimento-Individual.docx",
+                  "path": "assets/modelos-documentos/Metta-PDI-Desenvolvimento-Individual.docx",
+                  "sizeBytes": 42689
+                }
+              ],
+              "totalBytes": 42689,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Politica-Interna",
+              "label": "Política Interna",
+              "category": "Pessoas",
+              "description": "Norma ou política interna com regras, escopo e responsabilidades.",
+              "files": [
+                {
+                  "name": "Metta-Politica-Interna.docx",
+                  "path": "assets/modelos-documentos/Metta-Politica-Interna.docx",
+                  "sizeBytes": 42443
+                }
+              ],
+              "totalBytes": 42443,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-POP-Procedimento-Operacional",
+              "label": "POP — Procedimento Operacional",
+              "category": "Operação",
+              "description": "Procedimento operacional padrão passo a passo pra padronizar a execução.",
+              "files": [
+                {
+                  "name": "Metta-POP-Procedimento-Operacional.docx",
+                  "path": "assets/modelos-documentos/Metta-POP-Procedimento-Operacional.docx",
+                  "sizeBytes": 42487
+                }
+              ],
+              "totalBytes": 42487,
               "fileCount": 1
             }
           ],

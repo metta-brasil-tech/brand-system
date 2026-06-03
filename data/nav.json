@@ -5164,6 +5164,21 @@
       ]
     },
     {
+      "id": "modelos",
+      "icon": "fileText",
+      "label": "Modelos de Documentos",
+      "group": "negócio",
+      "description": "Documentos .docx editáveis com a identidade Metta — comercial, projetos, pessoas e operação.",
+      "sections": [
+        {
+          "id": "documentos",
+          "label": "Documentos editáveis",
+          "source": "downloads-gallery:modelos",
+          "description": "Modelos em Word prontos pra abrir, personalizar e usar."
+        }
+      ]
+    },
+    {
       "id": "transcricoes",
       "icon": "mic",
       "label": "Transcrições",

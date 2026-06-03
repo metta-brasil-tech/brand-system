@@ -260,34 +260,51 @@ function signatureLabel(filename) {
 }
 
 // ----------- MODELOS DE DOCUMENTOS (.docx editáveis) -----------
-const MODELO_LABELS = {
-  'Metta-Proposta-Comercial.docx': 'Proposta Comercial',
-  'Metta-Orcamento.docx': 'Orçamento',
-  'Metta-Contrato-Prestacao-Servicos.docx': 'Contrato de Prestação de Serviços',
-  'Metta-Carta-Comercial.docx': 'Carta Comercial',
-  'Metta-Status-Report-Projeto.docx': 'Status Report de Projeto',
-  'Metta-Ata-Reuniao.docx': 'Ata de Reunião',
-  'Metta-Relatorio-Diagnostico.docx': 'Relatório de Diagnóstico',
-  'Metta-Plano-de-Acao-5W2H.docx': 'Plano de Ação (5W2H)',
-  'Metta-POP-Procedimento-Operacional.docx': 'POP — Procedimento Operacional',
-  'Metta-Politica-Interna.docx': 'Política Interna',
-  'Metta-Briefing-Projeto.docx': 'Briefing de Projeto',
-  'Metta-PDI-Desenvolvimento-Individual.docx': 'PDI — Desenvolvimento Individual',
-  'Metta-Manual-Onboarding.docx': 'Manual de Onboarding'
+// label/category/description alimentam tanto o modal de download quanto a seção navegável
+// "Modelos de Documentos" (source: downloads-gallery:modelos). Ordem das categorias na UI
+// é controlada por MODELO_CATEGORIES.
+const MODELO_CATEGORIES = ['Comercial', 'Projetos', 'Pessoas', 'Operação'];
+const MODELO_META = {
+  'Metta-Proposta-Comercial.docx':             { label: 'Proposta Comercial',              category: 'Comercial', description: 'Proposta de prestação de serviços com escopo, entregáveis e investimento.' },
+  'Metta-Orcamento.docx':                       { label: 'Orçamento',                       category: 'Comercial', description: 'Orçamento itemizado com valores, prazos e condições de pagamento.' },
+  'Metta-Contrato-Prestacao-Servicos.docx':     { label: 'Contrato de Prestação de Serviços', category: 'Comercial', description: 'Contrato padrão com cláusulas de escopo, prazos, confidencialidade e rescisão.' },
+  'Metta-Carta-Comercial.docx':                 { label: 'Carta Comercial',                 category: 'Comercial', description: 'Carta formal de apresentação, comunicação ou cobrança institucional.' },
+  'Metta-Briefing-Projeto.docx':                { label: 'Briefing de Projeto',             category: 'Projetos',  description: 'Briefing inicial: objetivo, contexto, escopo e critérios de sucesso.' },
+  'Metta-Status-Report-Projeto.docx':           { label: 'Status Report de Projeto',        category: 'Projetos',  description: 'Acompanhamento periódico: progresso, riscos e próximos passos.' },
+  'Metta-Ata-Reuniao.docx':                     { label: 'Ata de Reunião',                  category: 'Projetos',  description: 'Registro de pauta, decisões e encaminhamentos de reunião.' },
+  'Metta-Plano-de-Acao-5W2H.docx':              { label: 'Plano de Ação (5W2H)',            category: 'Projetos',  description: 'Plano de ação no formato 5W2H — o quê, por quê, quem, quando, onde, como e quanto.' },
+  'Metta-Relatorio-Diagnostico.docx':           { label: 'Relatório de Diagnóstico',        category: 'Projetos',  description: 'Diagnóstico estruturado com achados, análise e recomendações.' },
+  'Metta-Manual-Onboarding.docx':               { label: 'Manual de Onboarding',            category: 'Pessoas',   description: 'Guia de integração de novos colaboradores à Metta.' },
+  'Metta-PDI-Desenvolvimento-Individual.docx':  { label: 'PDI — Desenvolvimento Individual', category: 'Pessoas',  description: 'Plano de desenvolvimento individual com metas, ações e prazos.' },
+  'Metta-Politica-Interna.docx':                { label: 'Política Interna',                category: 'Pessoas',   description: 'Norma ou política interna com regras, escopo e responsabilidades.' },
+  'Metta-POP-Procedimento-Operacional.docx':    { label: 'POP — Procedimento Operacional',  category: 'Operação',  description: 'Procedimento operacional padrão passo a passo pra padronizar a execução.' }
 };
+function modeloCategoryRank(cat) {
+  const i = MODELO_CATEGORIES.indexOf(cat);
+  return i < 0 ? MODELO_CATEGORIES.length : i;
+}
 async function buildModelosTab() {
   const dir = join(ASSETS_DIR, 'modelos-documentos');
   const files = await walkFiles(dir);
   if (files.length === 0) return null;
   const sections = files
-    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }))
-    .map(f => ({
-      id: f.name.replace(/\.[^.]+$/, ''),
-      label: MODELO_LABELS[f.name] || f.name.replace(/\.docx$/, '').replace(/^Metta-/, '').replace(/-/g, ' '),
-      files: [f],
-      totalBytes: f.sizeBytes,
-      fileCount: 1
-    }));
+    .map(f => {
+      const meta = MODELO_META[f.name] || {};
+      return {
+        id: f.name.replace(/\.[^.]+$/, ''),
+        label: meta.label || f.name.replace(/\.docx$/, '').replace(/^Metta-/, '').replace(/-/g, ' '),
+        category: meta.category || 'Outros',
+        description: meta.description || '',
+        files: [f],
+        totalBytes: f.sizeBytes,
+        fileCount: 1
+      };
+    })
+    // ordena por categoria (ordem editorial) e, dentro dela, alfabético pelo label
+    .sort((a, b) =>
+      modeloCategoryRank(a.category) - modeloCategoryRank(b.category) ||
+      a.label.localeCompare(b.label, 'pt-BR', { sensitivity: 'base' })
+    );
   return {
     id: 'documentos', label: 'Documentos editáveis (.docx)', kind: 'assets',
     sections, totalBytes: sumSize(files), fileCount: files.length

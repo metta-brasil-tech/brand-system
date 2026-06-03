@@ -21,6 +21,7 @@ const BrandSystem = (() => {
     package: '<line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',
     layers:  '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
     download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+    fileText:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>',
     external:'<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>',
     calendar: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
     target:   '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
@@ -353,6 +354,20 @@ const BrandSystem = (() => {
         attachApplicationsGalleryHandlers(tab, idx);
       } catch (e) {
         main.innerHTML = `<div class="placeholder"><h2>Banco de aplicações indisponível</h2><p>${e.message}</p><p>Rode <code>node scripts/import-applications.mjs</code>.</p></div>`;
+      }
+      return;
+    }
+
+    if (sec && sec.source && sec.source.startsWith('downloads-gallery:')) {
+      const groupId = sec.source.split(':')[1];
+      main.dataset.loading = 'false';
+      try {
+        const manifest = await loadDownloadManifest();
+        const group = manifest.groups.find(g => g.id === groupId);
+        if (!group) throw new Error(`Grupo "${groupId}" não encontrado no manifest.`);
+        main.innerHTML = renderDownloadsGallery(tab, group);
+      } catch (e) {
+        main.innerHTML = `<div class="placeholder"><h2>Modelos indisponíveis</h2><p>${e.message}</p><p>Rode <code>npm run build:manifest</code>.</p></div>`;
       }
       return;
     }
@@ -837,6 +852,70 @@ const BrandSystem = (() => {
       applicationsIndexCache = await res.json();
     }
     return applicationsIndexCache;
+  }
+
+  // ----------- DOWNLOADS GALLERY (modelos de documentos .docx) -----------
+  // Renderiza um grupo do download-manifest como seção navegável, com cards de
+  // download individual agrupados por categoria. Fonte: data/download-manifest.json.
+  const DOWNLOADS_CATEGORY_ORDER = ['Comercial', 'Projetos', 'Pessoas', 'Operação', 'Outros'];
+
+  function renderDownloadsGallery(tab, group) {
+    const docTab = (group.tabs || [])[0];
+    const sections = (docTab && docTab.sections) || [];
+    const total = sections.length;
+
+    // agrupa por categoria preservando a ordem editorial
+    const byCat = new Map();
+    for (const s of sections) {
+      const cat = s.category || 'Outros';
+      if (!byCat.has(cat)) byCat.set(cat, []);
+      byCat.get(cat).push(s);
+    }
+    const cats = Array.from(byCat.keys()).sort((a, b) => {
+      const ia = DOWNLOADS_CATEGORY_ORDER.indexOf(a);
+      const ib = DOWNLOADS_CATEGORY_ORDER.indexOf(b);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+
+    const blocks = cats.map(cat => {
+      const cards = byCat.get(cat).map(s => {
+        const file = (s.files || [])[0] || {};
+        const meta = `DOCX · ${formatBytes(s.totalBytes)}`;
+        const dl = file.path
+          ? `<a class="doc-card-btn" href="${escapeAttr(file.path)}" download="${escapeAttr(file.name || '')}">${svgIcon('download', 14)}<span>Baixar .docx</span></a>`
+          : `<span class="doc-card-btn is-disabled">${svgIcon('download', 14)}<span>Indisponível</span></span>`;
+        return `
+          <article class="doc-card">
+            <div class="doc-card-icon">${svgIcon('fileText', 22)}</div>
+            <div class="doc-card-body">
+              <h3 class="doc-card-title">${escapeHtml(s.label)}</h3>
+              ${s.description ? `<p class="doc-card-desc">${escapeHtml(s.description)}</p>` : ''}
+            </div>
+            <div class="doc-card-foot">
+              <span class="doc-card-meta">${meta}</span>
+              ${dl}
+            </div>
+          </article>`;
+      }).join('');
+      return `
+        <section class="doc-cat">
+          <div class="doc-cat-head">
+            <h2 class="doc-cat-title">${escapeHtml(cat)}</h2>
+            <span class="doc-cat-count">${byCat.get(cat).length}</span>
+          </div>
+          <div class="docs-grid">${cards}</div>
+        </section>`;
+    }).join('');
+
+    return `
+      <div class="docs-page">
+        <header class="docs-hero">
+          <span class="docs-hero-eyebrow">${svgIcon('fileText', 13)}<span>Recursos</span></span>
+          <h1 class="docs-hero-title">${escapeHtml(tab.label || 'Modelos de Documentos')}</h1>
+          <p class="docs-hero-sub">${total} documentos <strong>.docx editáveis</strong> com a identidade Metta. Abra no Word, personalize e use — comercial, projetos, pessoas e operação.</p>
+        </header>
+        ${blocks || '<div class="placeholder"><p>Nenhum modelo encontrado. Rode <code>npm run build:manifest</code>.</p></div>'}
+      </div>`;
   }
 
   function renderApplicationsGallery(tab, idx) {
