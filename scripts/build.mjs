@@ -428,6 +428,7 @@ async function buildSection(tab, sec) {
   if (src.startsWith('transcricoes-gallery:')) return { skipped: 'transcricoes-gallery' };
   if (src.startsWith('icons-gallery:')) return { skipped: 'icons-gallery' };
   if (src.startsWith('applications-gallery:')) return { skipped: 'applications-gallery' };
+  if (src.startsWith('downloads-gallery:')) return { skipped: 'downloads-gallery' };
 
   const absPath = join(VAULT, src);
   if (!existsSync(absPath)) {
