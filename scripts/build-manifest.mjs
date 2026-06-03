@@ -283,31 +283,61 @@ function modeloCategoryRank(cat) {
   const i = MODELO_CATEGORIES.indexOf(cat);
   return i < 0 ? MODELO_CATEGORIES.length : i;
 }
+// fileObj relativo ao ROOT, no mesmo formato do walkFiles
+async function fileObj(abs) {
+  const size = (await stat(abs)).size;
+  return { name: abs.split(sep).pop(), path: relative(ROOT, abs).split(sep).join('/'), sizeBytes: size };
+}
+
 async function buildModelosTab() {
   const dir = join(ASSETS_DIR, 'modelos-documentos');
-  const files = await walkFiles(dir);
-  if (files.length === 0) return null;
-  const sections = files
-    .map(f => {
-      const meta = MODELO_META[f.name] || {};
-      return {
-        id: f.name.replace(/\.[^.]+$/, ''),
-        label: meta.label || f.name.replace(/\.docx$/, '').replace(/^Metta-/, '').replace(/-/g, ' '),
-        category: meta.category || 'Outros',
-        description: meta.description || '',
-        files: [f],
-        totalBytes: f.sizeBytes,
-        fileCount: 1
-      };
-    })
-    // ordena por categoria (ordem editorial) e, dentro dela, alfabético pelo label
-    .sort((a, b) =>
-      modeloCategoryRank(a.category) - modeloCategoryRank(b.category) ||
-      a.label.localeCompare(b.label, 'pt-BR', { sensitivity: 'base' })
-    );
+  // só os .docx de template no TOPO da pasta (ignora previews/ e examples/)
+  let entries;
+  try { entries = await readdir(dir, { withFileTypes: true }); }
+  catch { return null; }
+  const templates = entries.filter(e => e.isFile() && e.name.toLowerCase().endsWith('.docx'));
+  if (templates.length === 0) return null;
+
+  const sections = [];
+  for (const e of templates) {
+    const f = await fileObj(join(dir, e.name));
+    const meta = MODELO_META[f.name] || {};
+    const id = f.name.replace(/\.[^.]+$/, '');                       // Metta-Proposta-Comercial
+
+    // preview: assets/modelos-documentos/previews/<id>/p1.png, p2.png, ...
+    let previewPages = [];
+    const prevDir = join(dir, 'previews', id);
+    if (existsSync(prevDir)) {
+      // .webp após optimize-images; .png como fallback antes da otimização
+      const imgs = (await readdir(prevDir)).filter(n => /\.(webp|png)$/i.test(n))
+        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+      previewPages = imgs.map(n => relative(ROOT, join(prevDir, n)).split(sep).join('/'));
+    }
+
+    // exemplo preenchido: assets/modelos-documentos/examples/<id>-exemplo.docx
+    let exampleFile = null;
+    const exAbs = join(dir, 'examples', `${id}-exemplo.docx`);
+    if (existsSync(exAbs)) exampleFile = await fileObj(exAbs);
+
+    sections.push({
+      id,
+      label: meta.label || f.name.replace(/\.docx$/, '').replace(/^Metta-/, '').replace(/-/g, ' '),
+      category: meta.category || 'Outros',
+      description: meta.description || '',
+      files: [f],
+      previewPages,
+      exampleFile,
+      totalBytes: f.sizeBytes,
+      fileCount: 1
+    });
+  }
+  sections.sort((a, b) =>
+    modeloCategoryRank(a.category) - modeloCategoryRank(b.category) ||
+    a.label.localeCompare(b.label, 'pt-BR', { sensitivity: 'base' })
+  );
   return {
     id: 'documentos', label: 'Documentos editáveis (.docx)', kind: 'assets',
-    sections, totalBytes: sumSize(files), fileCount: files.length
+    sections, totalBytes: sumSize(sections.map(s => s.files[0])), fileCount: sections.length
   };
 }
 

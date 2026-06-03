@@ -366,6 +366,7 @@ const BrandSystem = (() => {
         const group = manifest.groups.find(g => g.id === groupId);
         if (!group) throw new Error(`Grupo "${groupId}" não encontrado no manifest.`);
         main.innerHTML = renderDownloadsGallery(tab, group);
+        attachDownloadsGalleryHandlers(group);
       } catch (e) {
         main.innerHTML = `<div class="placeholder"><h2>Modelos indisponíveis</h2><p>${e.message}</p><p>Rode <code>npm run build:manifest</code>.</p></div>`;
       }
@@ -880,20 +881,35 @@ const BrandSystem = (() => {
     const blocks = cats.map(cat => {
       const cards = byCat.get(cat).map(s => {
         const file = (s.files || [])[0] || {};
-        const meta = `DOCX · ${formatBytes(s.totalBytes)}`;
-        const dl = file.path
-          ? `<a class="doc-card-btn" href="${escapeAttr(file.path)}" download="${escapeAttr(file.name || '')}">${svgIcon('download', 14)}<span>Baixar .docx</span></a>`
-          : `<span class="doc-card-btn is-disabled">${svgIcon('download', 14)}<span>Indisponível</span></span>`;
+        const pages = (s.previewPages || []).length;
+        const cover = pages ? s.previewPages[0] : null;
+        const metaBits = [`DOCX · ${formatBytes(s.totalBytes)}`];
+        if (pages) metaBits.push(`${pages} ${pages === 1 ? 'página' : 'páginas'}`);
+
+        const thumb = cover
+          ? `<button type="button" class="doc-card-thumb" data-preview="${escapeAttr(s.id)}" aria-label="Visualizar ${escapeAttr(s.label)}">
+               <img src="${escapeAttr(cover)}" alt="" loading="lazy">
+               <span class="doc-card-cue">${svgIcon('search', 13)}<span>Visualizar</span></span>
+             </button>`
+          : `<div class="doc-card-thumb is-empty">${svgIcon('fileText', 30)}</div>`;
+
+        const dlTemplate = file.path
+          ? `<a class="doc-card-btn primary" href="${escapeAttr(file.path)}" download="${escapeAttr(file.name || '')}">${svgIcon('download', 14)}<span>Baixar</span></a>`
+          : `<span class="doc-card-btn primary is-disabled">${svgIcon('download', 14)}<span>Indisponível</span></span>`;
+        const dlExample = s.exampleFile && s.exampleFile.path
+          ? `<a class="doc-card-btn ghost" href="${escapeAttr(s.exampleFile.path)}" download="${escapeAttr(s.exampleFile.name || '')}" title="Documento preenchido de exemplo">${svgIcon('fileText', 13)}<span>Exemplo</span></a>`
+          : '';
+
         return `
-          <article class="doc-card">
-            <div class="doc-card-icon">${svgIcon('fileText', 22)}</div>
+          <article class="doc-card" data-doc-id="${escapeAttr(s.id)}">
+            ${thumb}
             <div class="doc-card-body">
               <h3 class="doc-card-title">${escapeHtml(s.label)}</h3>
               ${s.description ? `<p class="doc-card-desc">${escapeHtml(s.description)}</p>` : ''}
             </div>
             <div class="doc-card-foot">
-              <span class="doc-card-meta">${meta}</span>
-              ${dl}
+              <span class="doc-card-meta">${metaBits.join(' · ')}</span>
+              <div class="doc-card-actions">${dlTemplate}${dlExample}</div>
             </div>
           </article>`;
       }).join('');
@@ -912,10 +928,63 @@ const BrandSystem = (() => {
         <header class="docs-hero">
           <span class="docs-hero-eyebrow">${svgIcon('fileText', 13)}<span>Recursos</span></span>
           <h1 class="docs-hero-title">${escapeHtml(tab.label || 'Modelos de Documentos')}</h1>
-          <p class="docs-hero-sub">${total} documentos <strong>.docx editáveis</strong> com a identidade Metta. Abra no Word, personalize e use — comercial, projetos, pessoas e operação.</p>
+          <p class="docs-hero-sub">${total} documentos <strong>.docx editáveis</strong> com a identidade Metta. Clique pra ver um exemplo preenchido, baixe o template em branco e personalize.</p>
         </header>
         ${blocks || '<div class="placeholder"><p>Nenhum modelo encontrado. Rode <code>npm run build:manifest</code>.</p></div>'}
       </div>`;
+  }
+
+  function attachDownloadsGalleryHandlers(group) {
+    const docTab = (group.tabs || [])[0];
+    const sections = (docTab && docTab.sections) || [];
+    const byId = new Map(sections.map(s => [s.id, s]));
+    document.querySelectorAll('[data-preview]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sec = byId.get(btn.dataset.preview);
+        if (sec) openDocPreview(sec);
+      });
+    });
+  }
+
+  // Modal de preview de documento — páginas PNG empilhadas + downloads (template + exemplo)
+  function openDocPreview(sec) {
+    const pages = sec.previewPages || [];
+    const file = (sec.files || [])[0] || {};
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay doc-preview';
+    const pagesHtml = pages.length
+      ? pages.map((p, i) => `<img class="doc-preview-page" src="${escapeAttr(p)}" alt="Página ${i + 1}" loading="${i === 0 ? 'eager' : 'lazy'}">`).join('')
+      : `<div class="placeholder"><p>Sem preview disponível.</p></div>`;
+    const dlTemplate = file.path
+      ? `<a class="doc-card-btn primary" href="${escapeAttr(file.path)}" download="${escapeAttr(file.name || '')}">${svgIcon('download', 14)}<span>Baixar template</span></a>`
+      : '';
+    const dlExample = sec.exampleFile && sec.exampleFile.path
+      ? `<a class="doc-card-btn ghost" href="${escapeAttr(sec.exampleFile.path)}" download="${escapeAttr(sec.exampleFile.name || '')}">${svgIcon('fileText', 14)}<span>Baixar exemplo</span></a>`
+      : '';
+    overlay.innerHTML = `
+      <div class="lightbox-content doc-preview-content">
+        <button class="lightbox-close" aria-label="Fechar">×</button>
+        <header class="doc-preview-head">
+          <div>
+            <span class="doc-preview-eyebrow">${escapeHtml(sec.category || 'Documento')} · exemplo preenchido</span>
+            <h3 class="doc-preview-title">${escapeHtml(sec.label)}</h3>
+          </div>
+          <div class="doc-preview-actions">${dlTemplate}${dlExample}</div>
+        </header>
+        <div class="doc-preview-pages">${pagesHtml}</div>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.body.classList.add('modal-open');
+    function close() {
+      overlay.classList.add('closing');
+      document.body.classList.remove('modal-open');
+      setTimeout(() => overlay.remove(), 200);
+    }
+    overlay.querySelector('.lightbox-close').addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function esc(e) {
+      if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
+    });
   }
 
   function renderApplicationsGallery(tab, idx) {

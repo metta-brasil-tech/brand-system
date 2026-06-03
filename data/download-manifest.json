@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-03T13:47:56.959Z",
+  "generatedAt": "2026-06-03T21:25:26.994Z",
   "grandTotalBytes": 247613762,
   "grandTotalFiles": 1181,
   "grandTotalTabs": 19,
@@ -1767,6 +1767,14 @@
                   "sizeBytes": 41545
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Carta-Comercial/p1.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Carta-Comercial-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Carta-Comercial-exemplo.docx",
+                "sizeBytes": 41860
+              },
               "totalBytes": 41545,
               "fileCount": 1
             },
@@ -1782,6 +1790,15 @@
                   "sizeBytes": 42701
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Contrato-Prestacao-Servicos/p1.webp",
+                "assets/modelos-documentos/previews/Metta-Contrato-Prestacao-Servicos/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Contrato-Prestacao-Servicos-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Contrato-Prestacao-Servicos-exemplo.docx",
+                "sizeBytes": 43142
+              },
               "totalBytes": 42701,
               "fileCount": 1
             },
@@ -1797,6 +1814,14 @@
                   "sizeBytes": 42450
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Orcamento/p1.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Orcamento-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Orcamento-exemplo.docx",
+                "sizeBytes": 42629
+              },
               "totalBytes": 42450,
               "fileCount": 1
             },
@@ -1812,6 +1837,16 @@
                   "sizeBytes": 43177
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Proposta-Comercial/p1.webp",
+                "assets/modelos-documentos/previews/Metta-Proposta-Comercial/p2.webp",
+                "assets/modelos-documentos/previews/Metta-Proposta-Comercial/p3.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Proposta-Comercial-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Proposta-Comercial-exemplo.docx",
+                "sizeBytes": 43733
+              },
               "totalBytes": 43177,
               "fileCount": 1
             },
@@ -1827,6 +1862,15 @@
                   "sizeBytes": 42725
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Ata-Reuniao/p1.webp",
+                "assets/modelos-documentos/previews/Metta-Ata-Reuniao/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Ata-Reuniao-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Ata-Reuniao-exemplo.docx",
+                "sizeBytes": 43103
+              },
               "totalBytes": 42725,
               "fileCount": 1
             },
@@ -1842,6 +1886,15 @@
                   "sizeBytes": 42434
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Briefing-Projeto/p1.webp",
+                "assets/modelos-documentos/previews/Metta-Briefing-Projeto/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Briefing-Projeto-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Briefing-Projeto-exemplo.docx",
+                "sizeBytes": 42948
+              },
               "totalBytes": 42434,
               "fileCount": 1
             },
@@ -1857,6 +1910,14 @@
                   "sizeBytes": 42462
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Plano-de-Acao-5W2H/p1.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Plano-de-Acao-5W2H-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Plano-de-Acao-5W2H-exemplo.docx",
+                "sizeBytes": 42793
+              },
               "totalBytes": 42462,
               "fileCount": 1
             },
@@ -1872,6 +1933,15 @@
                   "sizeBytes": 42686
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Relatorio-Diagnostico/p1.webp",
+                "assets/modelos-documentos/previews/Metta-Relatorio-Diagnostico/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Relatorio-Diagnostico-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Relatorio-Diagnostico-exemplo.docx",
+                "sizeBytes": 43319
+              },
               "totalBytes": 42686,
               "fileCount": 1
             },
@@ -1887,6 +1957,15 @@
                   "sizeBytes": 42974
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Status-Report-Projeto/p1.webp",
+                "assets/modelos-documentos/previews/Metta-Status-Report-Projeto/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Status-Report-Projeto-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Status-Report-Projeto-exemplo.docx",
+                "sizeBytes": 43232
+              },
               "totalBytes": 42974,
               "fileCount": 1
             },
@@ -1902,6 +1981,15 @@
                   "sizeBytes": 42719
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Manual-Onboarding/p1.webp",
+                "assets/modelos-documentos/previews/Metta-Manual-Onboarding/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Manual-Onboarding-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Manual-Onboarding-exemplo.docx",
+                "sizeBytes": 43132
+              },
               "totalBytes": 42719,
               "fileCount": 1
             },
@@ -1917,6 +2005,15 @@
                   "sizeBytes": 42689
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-PDI-Desenvolvimento-Individual/p1.webp",
+                "assets/modelos-documentos/previews/Metta-PDI-Desenvolvimento-Individual/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-PDI-Desenvolvimento-Individual-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-PDI-Desenvolvimento-Individual-exemplo.docx",
+                "sizeBytes": 42882
+              },
               "totalBytes": 42689,
               "fileCount": 1
             },
@@ -1932,6 +2029,15 @@
                   "sizeBytes": 42443
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-Politica-Interna/p1.webp",
+                "assets/modelos-documentos/previews/Metta-Politica-Interna/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Politica-Interna-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-Politica-Interna-exemplo.docx",
+                "sizeBytes": 42797
+              },
               "totalBytes": 42443,
               "fileCount": 1
             },
@@ -1947,6 +2053,15 @@
                   "sizeBytes": 42487
                 }
               ],
+              "previewPages": [
+                "assets/modelos-documentos/previews/Metta-POP-Procedimento-Operacional/p1.webp",
+                "assets/modelos-documentos/previews/Metta-POP-Procedimento-Operacional/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-POP-Procedimento-Operacional-exemplo.docx",
+                "path": "assets/modelos-documentos/examples/Metta-POP-Procedimento-Operacional-exemplo.docx",
+                "sizeBytes": 42844
+              },
               "totalBytes": 42487,
               "fileCount": 1
             }
