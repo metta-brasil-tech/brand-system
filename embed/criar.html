@@ -1011,9 +1011,10 @@ button.stepper-item.done:hover {
   <!-- Renderizado por JS -->
 </div>
 
-<!-- ENV GUARD — bloqueia render em produção (apenas dev local).
-     Mesma lógica do app.js. Em prod, mostra mensagem amigável e ABORTA o script
-     principal antes de carregar STATE/eventos/etc. Reverter: comente o throw. -->
+<!-- ENV GUARD — desativado. Página acessível via link direto em produção,
+     mas não aparece na navegação (dev_only: true no nav.json).
+     Para reativar o bloqueio, descomente o bloco abaixo. -->
+<!--
 <script>
 (function envGuard() {
   const h = (location.hostname || '').toLowerCase();
@@ -1035,10 +1036,10 @@ button.stepper-item.done:hover {
         </p>
       </div>`;
   }
-  // Para qualquer script subsequente — STATE, listeners, fetch /api/generate, etc.
   throw new Error('criar.html: disabled in production (hostname=' + h + ')');
 })();
 </script>
+-->
 
 <script>
 /* ============================================================
