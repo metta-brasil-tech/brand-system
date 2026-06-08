@@ -1011,9 +1011,10 @@ button.stepper-item.done:hover {
   <!-- Renderizado por JS -->
 </div>
 
-<!-- ENV GUARD — bloqueia render em produção (apenas dev local).
-     Mesma lógica do app.js. Em prod, mostra mensagem amigável e ABORTA o script
-     principal antes de carregar STATE/eventos/etc. Reverter: comente o throw. -->
+<!-- ENV GUARD — desativado. Página acessível via link direto em produção,
+     mas não aparece na navegação (dev_only: true no nav.json).
+     Para reativar o bloqueio, descomente o bloco abaixo. -->
+<!--
 <script>
 (function envGuard() {
   const h = (location.hostname || '').toLowerCase();
@@ -1035,10 +1036,10 @@ button.stepper-item.done:hover {
         </p>
       </div>`;
   }
-  // Para qualquer script subsequente — STATE, listeners, fetch /api/generate, etc.
   throw new Error('criar.html: disabled in production (hostname=' + h + ')');
 })();
 </script>
+-->
 
 <script>
 /* ============================================================
@@ -1107,13 +1108,13 @@ const STYLES_METTA = [
   { id: 'YELLOW-EDITORIAL',              label: 'Número gigante amarelo',            desc: 'Big number em amarelo dominando o canvas + contexto curto. Prova social por estatística.',                                                usaImagem: false, formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-editorial.png' },
   { id: 'YELLOW-FRAME',                  label: 'Frame amarelo + headline',          desc: 'Borda amarela grossa enquadrando headline central. Convite emoldurado.',                                                                  usaImagem: false, formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-frame.webp' },
   { id: 'METTA-TWEET-CARD',              label: 'Mock tweet Metta',                  desc: 'Card estilo Twitter feed com header Metta + tese curta. Sentence sem CTA.',                                                                usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/tweet-card.webp' },
-  { id: 'B-foto-top-headline-mixed',     label: 'Foto topo + headline embaixo',      desc: 'Foto top-bleed ocupa ~50% + headline grande + body curto + CTA. Híbrido foto-tipografia.',                                              usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/b.webp',           comingSoon: true },
-  { id: 'LIGHT-SURREAL',                 label: 'Editorial claro surreal',           desc: 'Fundo claro + colagem editorial surreal (B&W com toques de cor). Estética HBR. Insights conceituais.',                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/light-surreal.webp',   comingSoon: true },
-  { id: 'NEWS-CARD',                     label: 'Card de notícia',                   desc: 'Layout estilo headline-news: tag + manchete + foto. Comunicado/anúncio institucional.',                                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/news-card.webp',       comingSoon: true },
-  { id: 'YELLOW-SPLIT',                  label: 'Split amarelo/foto',                desc: 'Canvas dividido — metade amarela com headline, metade foto. Dualidade clara.',                                                            usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-split.webp',    comingSoon: true },
-  { id: 'H-fundo-branco-headline-gigante', label: 'Headline gigante fundo branco',   desc: 'Branco puro + headline gigante em preto. Manifesto/posicionamento de alta gravidade.',                                                  usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/h.webp',               comingSoon: true },
-  { id: 'I-retrato-editorial-pb',        label: 'Retrato editorial P&B',             desc: 'Retrato em preto-e-branco editorial + tipografia mínima. Autoridade silenciosa.',                                                        usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/i.webp',               comingSoon: true },
-  { id: 'LOGO-WALL',                     label: 'Wall de logos clientes',            desc: 'Grade de logos B&W dos clientes (Sicredi, Vivo, etc.) + headline. Prova social agregada.',                                              usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/logo-wall.webp',       comingSoon: true }
+  { id: 'B-foto-top-headline-mixed',     label: 'Foto topo + headline embaixo',      desc: 'Foto top-bleed ocupa ~50% + headline grande + body curto + CTA. Híbrido foto-tipografia.',                                              usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/b.webp' },
+  { id: 'LIGHT-SURREAL',                 label: 'Editorial claro surreal',           desc: 'Fundo claro + colagem editorial surreal (B&W com toques de cor). Estética HBR. Insights conceituais.',                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/light-surreal.png' },
+  { id: 'NEWS-CARD',                     label: 'Card de notícia',                   desc: 'Layout estilo headline-news: tag + manchete + foto. Comunicado/anúncio institucional.',                                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/news-card.png' },
+  { id: 'YELLOW-SPLIT',                  label: 'Split amarelo/foto',                desc: 'Canvas dividido — metade amarela com headline, metade foto. Dualidade clara.',                                                            usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-split.png' },
+  { id: 'H-fundo-branco-headline-gigante', label: 'Headline gigante fundo branco',   desc: 'Branco puro + headline gigante em preto. Manifesto/posicionamento de alta gravidade.',                                                  usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/h.png' },
+  { id: 'I-retrato-editorial-pb',        label: 'Retrato editorial P&B',             desc: 'Retrato em preto-e-branco editorial + tipografia mínima. Autoridade silenciosa.',                                                        usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/i.png' },
+  { id: 'LOGO-WALL',                     label: 'Wall de logos clientes',            desc: 'Grade de logos B&W dos clientes (Sicredi, Vivo, etc.) + headline. Prova social agregada.',                                              usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/logo-wall.png' }
 ];
 
 const STYLES_TIAGO = [
@@ -1122,14 +1123,14 @@ const STYLES_TIAGO = [
   { id: 'TIAGO-TYPO-PURE',              label: 'Frase grande',                       desc: 'Tipografia pura sobre fundo claro com palavra-chave colorida. Frase de impacto isolada.',         usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/typo-pure.webp' },
   { id: 'TIAGO-EDITORIAL-CTA',          label: 'Slide de fechamento de carrossel',   desc: '3 variantes: pergunta de engajamento, qualificação "pra quem é", ou reveal de protocolo.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-cta.webp' },
   { id: 'TIAGO-TWITTER-CARD-IMAGE',     label: 'Tweet com imagem',                   desc: 'Mesmo mock Twitter mas com foto embed (cantos arredondados) na metade inferior do card.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card.webp',          comingSoon: true },
-  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp',       comingSoon: true },
-  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-yellow-block.webp',    comingSoon: true },
-  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-minimal.webp',          comingSoon: true },
-  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/dark-surreal.webp',  comingSoon: true },
-  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/photo-raw.webp',      comingSoon: true },
-  { id: 'TIAGO-EDITORIAL-HERO',         label: 'Capa estilo revista',                desc: 'Manchete gigante + colagem cinema editorial (B&W com selective yellow). Capa de carrossel premium.', usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-hero.webp',   comingSoon: true },
-  { id: 'TIAGO-EDITORIAL-CARD',         label: 'Slide editorial com estatística',    desc: 'Big stat ou lista de sintomas. Slide intermediário de carrossel editorial cinema.',                usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-card.webp',   comingSoon: true },
-  { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-dark.webp',   comingSoon: true }
+  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp' },
+  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-yellow-block.webp' },
+  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-minimal.webp' },
+  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/dark-surreal.webp' },
+  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/photo-raw.webp' },
+  { id: 'TIAGO-EDITORIAL-HERO',         label: 'Capa estilo revista',                desc: 'Manchete gigante + colagem cinema editorial (B&W com selective yellow). Capa de carrossel premium.', usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-hero.webp' },
+  { id: 'TIAGO-EDITORIAL-CARD',         label: 'Slide editorial com estatística',    desc: 'Big stat ou lista de sintomas. Slide intermediário de carrossel editorial cinema.',                usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-card.webp' },
+  { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-dark.webp' }
 ];
 
 /* ----------- DATA: formatos ----------- */
@@ -2212,9 +2213,7 @@ async function generateReal(briefing) {
         ...(STATE.copyHeadline && STATE.copyHeadline.trim() ? { copy_headline: STATE.copyHeadline.trim() } : {}),
         ...(STATE.copySubhead && STATE.copySubhead.trim() ? { copy_subhead: STATE.copySubhead.trim() } : {}),
         ...(STATE.copyBody && STATE.copyBody.trim() ? { copy_body: STATE.copyBody.trim() } : {}),
-        ...(STATE.cta && STATE.cta.trim() ? { cta_text: STATE.cta.trim() } : {}),
-        // Diretor de Arte: decide composição (quebras + accent) + direção da foto
-        art_director: true
+        ...(STATE.cta && STATE.cta.trim() ? { cta_text: STATE.cta.trim() } : {})
       }),
       signal: controller.signal
     });
@@ -2353,34 +2352,6 @@ function toggleMic() {
 ============================================================ */
 async function downloadMockPng() {
   const fname = `${STATE.brand}-${STATE.model_id || 'ad'}-${STATE.run_id || Date.now()}.png`;
-
-  // CAMINHO PRIMÁRIO: render server-side (Chromium real @2×) — nítido e
-  // determinístico. Substitui o html2canvas (reimplementação parcial de CSS,
-  // texto mole, depende do browser do user).
-  if (STATE.ad_html) {
-    try {
-      const r = await fetch(`${ENGINE_URL}/render`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ html: STATE.ad_html, format: STATE.ad_format || 'feed' }),
-      });
-      if (r.ok) {
-        const blob = await r.blob();
-        if (blob && blob.size > 0) {
-          const objUrl = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = objUrl; a.download = fname; a.click();
-          URL.revokeObjectURL(objUrl);
-          return;
-        }
-      }
-      console.warn('render server-side falhou, caindo pro html2canvas', r.status);
-    } catch (err) {
-      console.warn('render server-side indisponível, fallback html2canvas', err);
-    }
-  }
-
-  // FALLBACK: html2canvas no browser (menos fiel — só se o /api/render falhar).
   const iframe = document.getElementById('ad-preview');
   if (!iframe || !iframe.contentDocument) {
     alert('Preview não disponível pra captura.');
