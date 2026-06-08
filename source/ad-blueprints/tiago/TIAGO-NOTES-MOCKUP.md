@@ -2,9 +2,9 @@
 id: TIAGO-NOTES-MOCKUP
 display_name: "Mock iPhone Notes app — H1 marker amarelo + lista numerada"
 marca: tiago
-archetype: notes-mockup
+archetype: tiago-notes
 params: { theme: white, mock: ios-notes, marker: yellow, list: numbered }
-slots: [h1, list]
+slots: [headline, subhead, body, cta]
 image: { required: false, treatment: "nenhum — formato é puro mock textual sem foto" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§3"

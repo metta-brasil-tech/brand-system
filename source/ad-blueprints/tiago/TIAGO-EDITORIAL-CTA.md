@@ -2,9 +2,9 @@
 id: TIAGO-EDITORIAL-CTA
 display_name: "CTA editorial Tiago — slide final com signature handwritten + engajamento"
 marca: tiago
-archetype: engagement-close
+archetype: tiago-editorial-cta
 params: { theme: offwhite, signature: yellow-giant, cta: pill-or-avatar }
-slots: [signature, eyebrow, headline, sub, cta]
+slots: [headline, subhead, body, cta]
 image: { required: false, treatment: "foto real do Tiago palestrando/gesticulando (variant B) — opcional, só quando foto real disponível" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§5"

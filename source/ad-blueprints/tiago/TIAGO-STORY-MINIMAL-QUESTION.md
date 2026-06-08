@@ -2,9 +2,9 @@
 id: TIAGO-STORY-MINIMAL-QUESTION
 display_name: "Story foto lo-fi + texto leve solto SEM caixa — reflexão minimalista"
 marca: tiago
-archetype: photo-bleed-minimal
+archetype: tiago-story-minimal
 params: { theme: photo, format: story, text: floating-light, cta: none }
-slots: [headline]
+slots: [headline, subhead]
 image: { required: true, treatment: "foto lo-fi cotidiana contemplativa — mesa noturna, vista urbana, livro aberto, sala/cozinha — sem rosto direto, mood baixa saturação" }
 formato_nativo: [story]
 dna_ref: "design/banco-tiago-conteudo.md#§3"

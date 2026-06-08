@@ -2,9 +2,9 @@
 id: TIAGO-STORY-YELLOW-BLOCK
 display_name: "Story foto lo-fi + bloco amarelo overlay com pergunta/checklist"
 marca: tiago
-archetype: photo-bleed-yellow-block
+archetype: tiago-story-yellow
 params: { theme: photo, format: story, block: yellow, cta: optional }
-slots: [headline, subhead]
+slots: [headline, subhead, body, cta]
 image: { required: true, treatment: "foto lo-fi de ambiente real — escritório, sala reunião com vista, academia, mesa cozy, paisagem urbana — SEM pessoas como sujeito principal" }
 formato_nativo: [story]
 dna_ref: "design/banco-tiago-conteudo.md#§3"

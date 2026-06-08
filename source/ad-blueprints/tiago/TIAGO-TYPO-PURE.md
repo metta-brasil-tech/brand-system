@@ -2,9 +2,9 @@
 id: TIAGO-TYPO-PURE
 display_name: "Tipográfico puro — headline gigante + keyword colorida"
 marca: tiago
-archetype: typo-only
+archetype: tiago-typo
 params: { theme: offwhite, headline: condensed-giant, keyword: blue-dark, cta: none }
-slots: [headline, handle]
+slots: [headline, subhead, body, cta]
 image: { required: false, treatment: "nenhum — formato tipográfico puro, foto proibida" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§3"

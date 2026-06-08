@@ -2,9 +2,9 @@
 id: TIAGO-STORY-COVER-HERO
 display_name: "Capa de carrossel story — foto lo-fi Tiago + headline + assinatura + ARRASTA"
 marca: tiago
-archetype: photo-bleed-headline-story
+archetype: tiago-story-hero
 params: { theme: photo, format: story, headline: condensed-white, cta: yellow-pill }
-slots: [signature, headline, cta]
+slots: [headline, subhead, body, cta]
 image: { required: true, treatment: "foto real lo-fi do Tiago em contexto — palestrando, em casa, viagem, lendo — bleed full, sem produção, parece celular" }
 formato_nativo: [story]
 dna_ref: "design/banco-tiago-conteudo.md#§3"

@@ -2,7 +2,7 @@
 id: TIAGO-PHOTO-RAW
 display_name: "Foto raw lo-fi sem texto — prova de vida / bastidor"
 marca: tiago
-archetype: photo-raw
+archetype: tiago-photo-raw
 params: { theme: photo, text: none, edit: none }
 slots: []
 image: { required: true, treatment: "selfie ou flagrante real lo-fi do Tiago em contexto pessoal — treino, viagem, família, comunidade, refeição — sem edição, sem filtro, parece celular" }

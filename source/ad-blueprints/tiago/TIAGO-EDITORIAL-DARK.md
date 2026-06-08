@@ -2,9 +2,9 @@
 id: TIAGO-EDITORIAL-DARK
 display_name: "Editorial dark Tiago — cinema noir com headline UPPER white"
 marca: tiago
-archetype: cinema-noir
+archetype: tiago-editorial-dark
 params: { theme: dark, headline: upper-white, accent: yellow, image: fullbleed-dark }
-slots: [header, headline, sub, cta]
+slots: [headline, subhead, body]
 image: { required: false, treatment: "close-up editorial dark — olho humano, silhueta em corredor escuro, mãos em sombra — sempre B&W com tom warm sutil, darkening overlay 60% bottom" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§4"

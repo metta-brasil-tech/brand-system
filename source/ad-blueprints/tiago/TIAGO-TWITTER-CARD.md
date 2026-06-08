@@ -2,9 +2,9 @@
 id: TIAGO-TWITTER-CARD
 display_name: "Carrossel mock-Twitter — perfil Tiago Alves"
 marca: tiago
-archetype: twitter-mock
+archetype: tiago-twitter
 params: { theme: white, mock: twitter-x, ring: yellow, text: sentence-case }
-slots: [headline, body, footnote]
+slots: [headline, subhead, body, cta]
 image: { required: false, treatment: "foto contextual embed radius 28px na base (variant cover) — objeto, cena, screenshot que ilustra o tweet" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§1"

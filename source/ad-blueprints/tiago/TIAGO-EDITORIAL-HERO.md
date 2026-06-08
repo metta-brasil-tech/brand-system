@@ -2,9 +2,9 @@
 id: TIAGO-EDITORIAL-HERO
 display_name: "Capa editorial Tiago — headline gigante + colagem cinema surreal"
 marca: tiago
-archetype: editorial-collage-cover
+archetype: tiago-editorial-hero
 params: { theme: offwhite, headline: dominant, image: surreal-collage, cta: pill }
-slots: [header, headline, subhead, body, cta]
+slots: [tag, headline, subhead, body, cta]
 image: { required: true, treatment: "colagem cinema surreal — corpo decapitado com fumaça/raio amarelo, sujeito com partes pintadas de amarelo solid, objeto-metáfora (peixe-tubarão, T-Rex) — B&W com selective yellow" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§2"

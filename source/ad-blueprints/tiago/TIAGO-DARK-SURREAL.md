@@ -2,7 +2,7 @@
 id: TIAGO-DARK-SURREAL
 display_name: "Fundo preto + imagem surreal isolada — intersticial atmosférico"
 marca: tiago
-archetype: surreal-image-only
+archetype: tiago-dark-surreal
 params: { theme: dark, image: surreal-bw, text: none }
 slots: []
 image: { required: true, treatment: "imagem surreal/onírica isolada B&W — pessoa com máscara animal, gato em espelho oval, objeto isolado luz dura — noir-poster" }

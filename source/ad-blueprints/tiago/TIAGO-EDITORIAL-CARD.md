@@ -2,9 +2,9 @@
 id: TIAGO-EDITORIAL-CARD
 display_name: "Card de dados Tiago — bloco central com stats e ornamento pixel"
 marca: tiago
-archetype: data-card-center
+archetype: tiago-editorial-card
 params: { theme: offwhite, card: dark-teal, cta: inline, ornament: pixel-yellow }
-slots: [eyebrow, stats, remate, cta]
+slots: [headline, subhead, body]
 image: { required: false, treatment: "ornamentos pixel amarelos (triângulos ⚠ e setas) dispersos atrás do card — não foto" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§3"
