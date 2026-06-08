@@ -8,7 +8,15 @@ que o _engine.js seta no browser. Use no pipeline antes de entregar, ou no teste
 from __future__ import annotations
 
 ARCHETYPES = {"typo", "photo-side", "photo-full", "photo-band", "object-center",
-              "card-mock", "logo-wall", "framed", "split"}
+              "card-mock", "logo-wall", "framed", "split", "number-hero"}
+# Marca Tiago tem design system próprio (Inter, off-white, accent #FFCC00) e não
+# usa o mecanismo de theme/token Metta — validado à parte.
+TIAGO_ARCHETYPES = {
+    "tiago-editorial-hero", "tiago-editorial-dark", "tiago-editorial-card",
+    "tiago-editorial-cta", "tiago-typo", "tiago-dark-surreal", "tiago-photo-raw",
+    "tiago-notes", "tiago-story-hero", "tiago-story-yellow", "tiago-story-minimal",
+    "tiago-twitter",
+}
 THEMES = {"dark", "light", "yellow", "paper"}
 
 
@@ -20,11 +28,14 @@ def qa(front_matter: dict, copy: dict, image_url: str, html: str) -> dict:
     params = fm.get("params", {}) or {}
 
     arch = fm.get("archetype")
-    if arch not in ARCHETYPES:
-        issues.append(f"archetype inválido: '{arch}' (esperado um de {sorted(ARCHETYPES)})")
-    theme = params.get("theme", "dark")
-    if theme not in THEMES:
-        issues.append(f"theme inválido: '{theme}'")
+    is_tiago = isinstance(arch, str) and arch.startswith("tiago")
+    if arch not in ARCHETYPES and not (is_tiago and arch in TIAGO_ARCHETYPES):
+        issues.append(f"archetype inválido: '{arch}' (esperado um de {sorted(ARCHETYPES | TIAGO_ARCHETYPES)})")
+    # Theme só vale pro sistema Metta; Tiago define seu próprio bg por archetype.
+    if not is_tiago:
+        theme = params.get("theme", "dark")
+        if theme not in THEMES:
+            issues.append(f"theme inválido: '{theme}'")
 
     # Slots de conteúdo
     if not (copy.get("headline") or "").strip():

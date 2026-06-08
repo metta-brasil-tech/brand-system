@@ -109,7 +109,105 @@ def _photo(image_url: str, cls: str = "photo") -> str:
     return f'<div class="{cls}" style="background-image:url(\'{image_url}\')"></div>'
 
 
+def _br(text) -> str:
+    """Escapa e converte quebras de linha em <br> (subhead/body Tiago)."""
+    return _esc(text).replace("\n", "<br>")
+
+
+def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
+    """Markup dos 12 estilos da marca Tiago — espelha os templates de referência
+    em source/ad-templates/tiago/*. Headlines levam classe `t-head` (auto-fit do
+    _engine.js encolhe copy longa) + a classe específica do estilo (visual)."""
+    head = lambda cls: f'<h1 class="t-head {cls}">{_accent(copy.get("headline", ""))}</h1>'
+    sub = lambda cls: f'<p class="{cls}">{_br(copy["subhead"])}</p>' if copy.get("subhead") else ""
+    body = lambda cls: f'<p class="{cls}">{_br(copy["body"])}</p>' if copy.get("body") else ""
+    photo = lambda cls: (f'<div class="{cls}" style="background-image:url(\'{image_url}\')"></div>'
+                         if image_url else f'<div class="{cls}"></div>')
+
+    if arch == "tiago-editorial-hero":
+        cta = _esc(copy.get("cta") or "Arrasta pro lado")
+        return (f'{photo("teh-photo")}'
+                f'<div class="teh-eyebrows"><p class="teh-eyebrow-left">ESTRATÉGIAS DE GESTÃO DE VENDAS</p>'
+                f'<p class="teh-eyebrow-right">VENDAS É CIÊNCIA</p></div>'
+                f'<div class="teh-text layer">{head("teh-headline")}{sub("teh-subhead")}{body("teh-body")}</div>'
+                f'<div class="teh-cta-wrap"><button class="ad-cta ad-cta--tiago-yellow">{cta}</button></div>')
+
+    if arch == "tiago-editorial-dark":
+        return (f'{photo("ted-photo")}<div class="ted-overlay"></div>'
+                f'<div class="ted-text layer">{head("ted-headline")}{sub("ted-subhead")}{body("ted-body")}</div>')
+
+    if arch == "tiago-editorial-card":
+        return (f'{photo("tec-photo")}<div class="tec-overlay"></div>'
+                f'<div class="tec-text layer">{head("tec-headline")}{sub("tec-subhead")}{body("tec-body")}</div>')
+
+    if arch == "tiago-editorial-cta":
+        cta = _esc(copy.get("cta") or "Saiba mais")
+        return (f'<div class="tecta-text layer">{head("tecta-headline")}{sub("tecta-subhead")}{body("tecta-body")}</div>'
+                f'<div class="tecta-cta-wrap"><button class="ad-cta ad-cta--tiago-yellow">{cta}</button></div>')
+
+    if arch == "tiago-typo":
+        cta = f'<p class="tt-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
+        handle = '<p class="tt-handle">@tiago.alves.oliveira</p>'
+        return (f'<div class="tt-text layer">{head("tt-headline")}{sub("tt-subhead")}{body("tt-body")}</div>'
+                f'{cta}{handle}')
+
+    if arch == "tiago-dark-surreal":
+        return photo("tds-photo")
+
+    if arch == "tiago-photo-raw":
+        return photo("tpr-photo")
+
+    if arch == "tiago-notes":
+        # body multi-linha vira lista numerada (DNA do estilo); 1 linha vira parágrafo
+        _lines = [l.strip() for l in (copy.get("body", "") or "").split("\n") if l.strip()]
+        if len(_lines) > 1:
+            body_html = '<ol class="tn-list">' + "".join(f"<li>{_esc(l)}</li>" for l in _lines) + "</ol>"
+        elif _lines:
+            body_html = f'<div class="tn-body">{_esc(_lines[0])}</div>'
+        else:
+            body_html = ""
+        cta = f'<p class="tn-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
+        return ('<div class="tn-phone">'
+                '<div class="tn-statusbar"><span class="tn-time">9:41</span><span class="tn-icons">●●●●● 100%</span></div>'
+                '<div class="tn-navbar"><span class="tn-back">‹ Notas</span>'
+                '<span class="tn-actions"><span>…</span><span>OK</span></span></div>'
+                f'<div class="tn-notes-body">{head("tn-headline")}{sub("tn-subhead")}{body_html}</div>'
+                f'{cta}</div>')
+
+    if arch == "tiago-story-hero":
+        cta = _esc(copy.get("cta") or "Arrasta pro lado")
+        return (f'{photo("tch-photo")}<div class="tch-scrim"></div>'
+                f'<div class="tch-text layer">{head("tch-headline")}{sub("tch-subhead")}{body("tch-body")}</div>'
+                f'<div class="tch-cta-wrap"><button class="ad-cta ad-cta--tiago-yellow">{cta}</button></div>')
+
+    if arch == "tiago-story-yellow":
+        cta = (f'<div class="tyb-cta-wrap"><button class="ad-cta ad-cta--tiago-yellow">{_esc(copy["cta"])}</button></div>'
+               if copy.get("cta") else "")
+        return (f'{photo("tyb-photo")}<div class="tyb-overlay"></div>'
+                f'<div class="tyb-block layer">{head("tyb-headline")}{sub("tyb-subhead")}{body("tyb-body")}</div>'
+                f'{cta}')
+
+    if arch == "tiago-story-minimal":
+        return (f'{photo("tmq-photo")}<div class="tmq-overlay"></div>'
+                f'<div class="tmq-text layer">{head("tmq-headline")}{sub("tmq-subhead")}</div>')
+
+    if arch == "tiago-twitter":
+        cta = f'<p class="tw-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
+        return ('<header class="tw-header"><div class="tw-avatar"><span class="tw-avatar-initial">T</span></div>'
+                '<div class="tw-user"><div class="tw-name-row"><span class="tw-name">Tiago Alves</span>'
+                '<span class="tw-verified">✓</span></div>'
+                '<span class="tw-handle">@tiago.alves.oliveira</span></div></header>'
+                f'<div class="tw-text">{head("tw-headline")}{sub("tw-subhead")}{body("tw-body")}</div>'
+                f'{cta}')
+
+    # fallback Tiago desconhecido → tipográfico simples
+    return f'<div class="tt-text layer">{head("tt-headline")}{sub("tt-subhead")}{body("tt-body")}</div>'
+
+
 def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
+    if arch.startswith("tiago"):
+        return _markup_tiago(arch, copy, params, image_url)
+
     cta_cls = "cta--dark" if params.get("cta") == "dark" else ("cta--outline" if params.get("cta") == "outline" else "")
 
     if arch == "typo":
@@ -224,7 +322,9 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     head_style = params.get("head", "")
     case = params.get("case", "upper")
     orient = params.get("orient", "vertical")
+    marca_attr = (fm.get("marca") or marca or "").strip().lower()
     data_attrs = (
+        f'data-marca="{_esc(marca_attr)}" '
         f'data-case="{_esc(case)}" data-orient="{_esc(orient)}" '
         f'data-arch="{_esc(arch)}" data-theme="{_esc(theme)}" data-format="{_esc(format)}" '
         f'data-align="{_esc(align)}" data-scale="{_esc(scale)}" data-photo="{_esc(photo)}" '

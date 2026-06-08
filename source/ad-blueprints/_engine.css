@@ -260,3 +260,146 @@ button { all: unset; }
 .ad[data-arch="number-hero"] .t-sub  { color: var(--m-night-10); font-weight: 600; }
 .ad[data-arch="number-hero"] .t-body { color: var(--m-night-10); opacity: .82; }
 .ad[data-arch="number-hero"] .cta-wrap { margin-top: 8px; }
+
+/* =============================================================================
+ * MARCA TIAGO — design system próprio (Inter, off-white #EDEEEE, accent #FFCC00)
+ * Portado fielmente dos templates de referência em source/ad-templates/tiago/*.
+ * TUDO escopado em .ad[data-marca="tiago"]; Metta (data-marca="metta" ou ausente)
+ * permanece 100% intacto. Headlines reusam .t-head pra herdar o auto-fit do
+ * _engine.js (encolhe copy longa); a classe específica (.teh-headline etc.)
+ * sobrescreve o visual.
+ * NOTA: "Inter Condensed" do DNA Tiago é aproximado com Inter + tracking apertado
+ * — a fonte self-hosted (_fonts.css) não tem eixo de largura (wdth).
+ * ===========================================================================*/
+.ad[data-marca="tiago"] {
+  --t-yellow:   #FFCC00;
+  --t-ink:      #0F1419;
+  --t-grey:     #536471;
+  --t-paper:    #EDEEEE;
+  --t-white:    #FFFFFF;
+  --t-teal:     #3D5762;
+  --t-verified: #1D9BF0;
+  font-family: var(--m-text);
+}
+/* headline base Tiago: Inter, sem uppercase forçado (a copy decide a caixa) */
+.ad[data-marca="tiago"] .t-head { font-family: var(--m-text); font-weight: 700; text-transform: none; text-wrap: balance; }
+.ad[data-marca="tiago"] .t-head .hi { color: var(--t-yellow); background: none; padding: 0; -webkit-text-decoration: none; text-decoration: none; }
+/* CTA pill Tiago */
+.ad[data-marca="tiago"] .ad-cta { display: inline-flex; align-items: center; justify-content: center; padding: 26px 38px; border-radius: 999px; font-family: var(--m-text); font-weight: 700; font-size: 26px; text-transform: uppercase; line-height: 1; white-space: nowrap; }
+.ad[data-marca="tiago"] .ad-cta--tiago-yellow { background: var(--t-yellow); color: var(--t-ink); }
+
+/* (T1) tiago-editorial-hero — capa: foto bleed + eyebrows + headline + pill amarela */
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] { background: var(--t-paper); }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-photo { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"]::before { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(237,238,238,.92) 0%, rgba(237,238,238,.55) 18%, rgba(237,238,238,0) 42%, rgba(237,238,238,0) 58%, rgba(237,238,238,.75) 86%, rgba(237,238,238,.95) 100%); }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrows { position: absolute; top: 60px; left: 64px; right: 64px; display: flex; justify-content: space-between; z-index: 5; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrow-left,
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrow-right { font-size: 18px; letter-spacing: .08em; color: var(--t-ink); text-transform: uppercase; font-weight: 700; margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-text { position: absolute; left: 80px; right: 80px; top: 40%; display: flex; flex-direction: column; gap: 24px; z-index: 5; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-headline { font-size: 56px; line-height: 1.0; letter-spacing: -.02em; color: var(--t-ink); margin: 0; word-break: break-word; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-subhead { font-size: 28px; line-height: 1.3; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-body { font-size: 22px; line-height: 1.45; color: var(--t-grey); margin: 0; max-width: 800px; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-cta-wrap { position: absolute; left: 64px; bottom: 100px; z-index: 5; }
+
+/* (T2) tiago-editorial-dark — slide noir: foto B&W fullbleed + headline white */
+.ad[data-marca="tiago"][data-arch="tiago-editorial-dark"] { background: var(--t-ink); }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-dark"] .ted-photo { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) contrast(1.2) brightness(.7); z-index: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-dark"] .ted-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(15,20,25,.5) 0%, rgba(15,20,25,.85) 70%, rgba(15,20,25,.95) 100%); }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-dark"] .ted-text { position: absolute; left: 64px; right: 64px; bottom: 100px; display: flex; flex-direction: column; gap: 20px; z-index: 3; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-dark"] .ted-headline { font-size: 56px; line-height: 1.15; letter-spacing: -.02em; color: var(--t-white); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-dark"] .ted-subhead { font-size: 28px; line-height: 1.4; color: var(--t-white); opacity: .85; margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-dark"] .ted-body { font-size: 22px; line-height: 1.5; color: var(--t-white); opacity: .7; margin: 0; }
+
+/* (T3) tiago-editorial-card — slide intermediário: stat/lista sobre foto suave */
+.ad[data-marca="tiago"][data-arch="tiago-editorial-card"] { background: var(--t-paper); }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-card"] .tec-photo { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: .6; filter: grayscale(.4); z-index: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-card"] .tec-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(237,238,238,.7) 0%, rgba(237,238,238,.95) 100%); }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-card"] .tec-text { position: absolute; left: 64px; right: 64px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 28px; z-index: 3; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-card"] .tec-headline { font-size: 60px; line-height: 1.1; letter-spacing: -.02em; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-card"] .tec-subhead { font-size: 32px; line-height: 1.35; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-card"] .tec-body { font-size: 26px; line-height: 1.5; color: var(--t-grey); margin: 0; }
+
+/* (T4) tiago-editorial-cta — fechamento: pergunta + pill amarela */
+.ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] { background: var(--t-paper); display: flex; flex-direction: column; justify-content: center; padding: 100px 64px 200px; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-text { display: flex; flex-direction: column; gap: 28px; max-width: 880px; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-headline { font-size: 56px; line-height: 1.15; letter-spacing: -.02em; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-subhead { font-size: 30px; line-height: 1.35; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-body { font-size: 24px; line-height: 1.5; color: var(--t-grey); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-cta-wrap { position: absolute; left: 64px; bottom: 100px; }
+
+/* (T5) tiago-typo — tipografia pura sobre fundo claro */
+.ad[data-marca="tiago"][data-arch="tiago-typo"] { background: var(--t-paper); display: flex; flex-direction: column; justify-content: center; padding: 100px 64px; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-text { display: flex; flex-direction: column; gap: 24px; max-width: 880px; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-headline { font-size: 76px; line-height: 1.05; letter-spacing: -.03em; color: var(--t-ink); margin: 0; font-weight: 700; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-subhead { font-size: 30px; line-height: 1.35; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-body { font-size: 22px; line-height: 1.5; color: var(--t-grey); margin: 0; max-width: 800px; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-cta { font-size: 24px; color: var(--t-grey); margin: 24px 0 0; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-handle { font-size: 24px; color: var(--t-grey); margin: 24px 0 0; }
+
+/* (T6) tiago-dark-surreal — bg preto + imagem surreal B&W isolada (sem texto) */
+.ad[data-marca="tiago"][data-arch="tiago-dark-surreal"] { background: #000; }
+.ad[data-marca="tiago"][data-arch="tiago-dark-surreal"] .tds-photo { position: absolute; inset: 0; background-size: contain; background-position: center; background-repeat: no-repeat; filter: grayscale(1) contrast(1.15); z-index: 1; }
+
+/* (T7) tiago-photo-raw — foto crua fullbleed (sem texto) */
+.ad[data-marca="tiago"][data-arch="tiago-photo-raw"] { background: var(--t-ink); }
+.ad[data-marca="tiago"][data-arch="tiago-photo-raw"] .tpr-photo { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
+
+/* (T8) tiago-notes — mock app Notas iPhone centralizado */
+.ad[data-marca="tiago"][data-arch="tiago-notes"] { background: #E5E5EA; display: flex; align-items: center; justify-content: center; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-phone { width: 620px; min-height: 960px; background: var(--t-white); border-radius: 24px; box-shadow: 0 8px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; overflow: hidden; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-statusbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 28px 8px; font-size: 18px; font-weight: 600; color: var(--t-ink); }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 28px 14px; border-bottom: 1px solid rgba(0,0,0,.10); }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-back { font-size: 20px; color: var(--t-yellow); font-weight: 400; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-actions { font-size: 20px; color: var(--t-yellow); display: flex; gap: 20px; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-notes-body { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; gap: 18px; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-headline { font-size: 30px; line-height: 1.2; letter-spacing: -.01em; color: var(--t-ink); margin: 0; background: linear-gradient(180deg, transparent 55%, rgba(255,204,0,.6) 55%); display: inline; padding: 0 2px; font-weight: 700; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-subhead { font-size: 20px; line-height: 1.45; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-body { font-size: 18px; line-height: 1.55; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-list { font-size: 18px; line-height: 1.55; color: var(--t-ink); margin: 0; padding-left: 28px; display: flex; flex-direction: column; gap: 12px; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-cta { font-size: 18px; color: var(--t-grey); margin: 8px 32px 24px; }
+
+/* (T9) tiago-story-hero — story foto bleed + headline gigante centrada + pill */
+.ad[data-marca="tiago"][data-arch="tiago-story-hero"] { background: var(--t-ink); }
+.ad[data-marca="tiago"][data-arch="tiago-story-hero"] .tch-photo { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-story-hero"] .tch-scrim { position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(15,20,25,0) 30%, rgba(15,20,25,.4) 55%, rgba(15,20,25,.85) 90%); }
+.ad[data-marca="tiago"][data-arch="tiago-story-hero"] .tch-text { position: absolute; left: 80px; right: 80px; top: 55%; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; z-index: 3; }
+.ad[data-marca="tiago"][data-arch="tiago-story-hero"] .tch-headline { font-size: 64px; line-height: 1.05; letter-spacing: -.02em; color: var(--t-white); margin: 0; word-break: break-word; font-weight: 600; }
+.ad[data-marca="tiago"][data-arch="tiago-story-hero"] .tch-subhead { font-size: 30px; line-height: 1.35; color: var(--t-white); margin: 0; max-width: 800px; }
+.ad[data-marca="tiago"][data-arch="tiago-story-hero"] .tch-body { font-size: 22px; line-height: 1.45; color: rgba(255,255,255,.85); margin: 0; max-width: 760px; }
+.ad[data-marca="tiago"][data-arch="tiago-story-hero"] .tch-cta-wrap { position: absolute; left: 50%; bottom: 140px; transform: translateX(-50%); z-index: 4; }
+
+/* (T10) tiago-story-yellow — story foto ambiente + bloco amarelo central */
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] { background: var(--t-paper); }
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] .tyb-photo { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] .tyb-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(15,20,25,.4) 0%, rgba(15,20,25,.2) 50%, rgba(15,20,25,.4) 100%); }
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] .tyb-block { position: absolute; left: 80px; right: 80px; top: 50%; transform: translateY(-50%); padding: 48px 56px; background: var(--t-yellow); border-radius: 24px; display: flex; flex-direction: column; gap: 20px; z-index: 3; }
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] .tyb-headline { font-size: 48px; line-height: 1.1; letter-spacing: -.01em; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] .tyb-subhead { font-size: 28px; line-height: 1.3; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] .tyb-body { font-size: 22px; line-height: 1.45; color: var(--t-ink); opacity: .8; margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] .tyb-cta-wrap { position: absolute; left: 50%; transform: translateX(-50%); bottom: 140px; z-index: 4; }
+/* accent amarelo seria invisível no bloco amarelo — vira ink */
+.ad[data-marca="tiago"][data-arch="tiago-story-yellow"] .t-head .hi { color: var(--t-ink); text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 6px; }
+
+/* (T11) tiago-story-minimal — story texto leve sobre foto contemplativa */
+.ad[data-marca="tiago"][data-arch="tiago-story-minimal"] { background: var(--t-ink); }
+.ad[data-marca="tiago"][data-arch="tiago-story-minimal"] .tmq-photo { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-story-minimal"] .tmq-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(15,20,25,.3) 0%, rgba(15,20,25,.5) 60%, rgba(15,20,25,.8) 100%); }
+.ad[data-marca="tiago"][data-arch="tiago-story-minimal"] .tmq-text { position: absolute; left: 80px; right: 80px; bottom: 200px; display: flex; flex-direction: column; gap: 24px; z-index: 3; }
+.ad[data-marca="tiago"][data-arch="tiago-story-minimal"] .tmq-headline { font-size: 56px; line-height: 1.2; letter-spacing: -.02em; color: var(--t-white); margin: 0; font-weight: 400; }
+.ad[data-marca="tiago"][data-arch="tiago-story-minimal"] .tmq-subhead { font-size: 28px; line-height: 1.4; color: var(--t-white); opacity: .85; margin: 0; }
+
+/* (T12) tiago-twitter — mock feed Twitter texto-only */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] { background: var(--t-white); padding: 56px 64px; display: flex; flex-direction: column; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-header { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--t-yellow); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 4px solid var(--t-yellow); }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-avatar-initial { font-size: 52px; color: var(--t-ink); line-height: 1; font-weight: 700; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-user { display: flex; flex-direction: column; gap: 4px; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-name-row { display: flex; align-items: center; gap: 8px; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-name { font-size: 28px; color: var(--t-ink); line-height: 1; font-weight: 700; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-verified { display: inline-flex; width: 24px; height: 24px; border-radius: 50%; background: var(--t-verified); color: var(--t-white); align-items: center; justify-content: center; font-size: 16px; font-weight: 800; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-handle { font-size: 22px; color: var(--t-grey); line-height: 1.2; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline { font-size: 52px; line-height: 1.2; letter-spacing: -.02em; color: var(--t-ink); margin: 0; word-break: break-word; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-subhead { font-size: 36px; line-height: 1.35; color: var(--t-ink); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-body { font-size: 28px; line-height: 1.45; color: var(--t-grey); margin: 0; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-cta { font-size: 28px; color: var(--t-grey); margin: 32px 0 0; }
