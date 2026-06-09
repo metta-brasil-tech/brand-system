@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-story-minimal
 params: { theme: photo, format: story, text: floating-light, cta: none }
 slots: [headline, subhead]
-image: { required: true, treatment: "foto lo-fi cotidiana contemplativa — mesa noturna, vista urbana, livro aberto, sala/cozinha — sem rosto direto, mood baixa saturação" }
+image: { required: true, treatment: "foto lo-fi cotidiana contemplativa — mesa noturna, vista urbana, livro aberto, sala/cozinha — sem rosto direto, mood baixa saturação", prompt_ref: "image-prompts/tiago/style-story-minimal.md" }
 formato_nativo: [story]
 dna_ref: "design/banco-tiago-conteudo.md#§3"
 status: ativo

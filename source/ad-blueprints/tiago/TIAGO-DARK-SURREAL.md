@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-dark-surreal
 params: { theme: dark, image: surreal-bw, text: none }
 slots: []
-image: { required: true, treatment: "imagem surreal/onírica isolada B&W — pessoa com máscara animal, gato em espelho oval, objeto isolado luz dura — noir-poster" }
+image: { required: true, treatment: "imagem surreal/onírica isolada B&W — pessoa com máscara animal, gato em espelho oval, objeto isolado luz dura — noir-poster", prompt_ref: "image-prompts/tiago/style-dark-surreal.md" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§3"
 status: ativo

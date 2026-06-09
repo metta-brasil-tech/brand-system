@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-photo-raw
 params: { theme: photo, text: none, edit: none }
 slots: []
-image: { required: true, treatment: "selfie ou flagrante real lo-fi do Tiago em contexto pessoal — treino, viagem, família, comunidade, refeição — sem edição, sem filtro, parece celular" }
+image: { required: true, treatment: "selfie ou flagrante real lo-fi do Tiago em contexto pessoal — treino, viagem, família, comunidade, refeição — sem edição, sem filtro, parece celular", prompt_ref: "image-prompts/tiago/style-photo-raw.md" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§3"
 status: ativo

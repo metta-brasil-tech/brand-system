@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-story-yellow
 params: { theme: photo, format: story, block: yellow, cta: optional }
 slots: [headline, subhead, body, cta]
-image: { required: true, treatment: "foto lo-fi de ambiente real — escritório, sala reunião com vista, academia, mesa cozy, paisagem urbana — SEM pessoas como sujeito principal" }
+image: { required: true, treatment: "foto lo-fi de ambiente real — escritório, sala reunião com vista, academia, mesa cozy, paisagem urbana — SEM pessoas como sujeito principal", prompt_ref: "image-prompts/tiago/style-story-yellow-block.md" }
 formato_nativo: [story]
 dna_ref: "design/banco-tiago-conteudo.md#§3"
 status: ativo

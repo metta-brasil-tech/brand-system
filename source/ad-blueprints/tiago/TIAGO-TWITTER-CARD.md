@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-twitter
 params: { theme: white, mock: twitter-x, ring: yellow, text: sentence-case }
 slots: [headline, subhead, body, cta]
-image: { required: false, treatment: "foto contextual embed radius 28px na base (variant cover) — objeto, cena, screenshot que ilustra o tweet" }
+image: { required: false, treatment: "foto contextual embed radius 28px na base (variant cover) — objeto, cena, screenshot que ilustra o tweet", prompt_ref: "image-prompts/tiago/style-twitter-card.md" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§1"
 status: ativo

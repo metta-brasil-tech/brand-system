@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-editorial-hero
 params: { theme: offwhite, headline: dominant, image: surreal-collage, cta: pill }
 slots: [tag, headline, subhead, body, cta]
-image: { required: true, treatment: "colagem cinema surreal — corpo decapitado com fumaça/raio amarelo, sujeito com partes pintadas de amarelo solid, objeto-metáfora (peixe-tubarão, T-Rex) — B&W com selective yellow" }
+image: { required: true, treatment: "colagem cinema surreal — corpo decapitado com fumaça/raio amarelo, sujeito com partes pintadas de amarelo solid, objeto-metáfora (peixe-tubarão, T-Rex) — B&W com selective yellow", prompt_ref: "image-prompts/tiago/style-editorial-collage.md" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§2"
 status: ativo
