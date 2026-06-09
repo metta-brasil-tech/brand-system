@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-editorial-cta
 params: { theme: offwhite, signature: yellow-giant, cta: pill-or-avatar }
 slots: [headline, subhead, body, cta]
-image: { required: false, treatment: "foto real do Tiago palestrando/gesticulando (variant B) — opcional, só quando foto real disponível" }
+image: { required: true, treatment: "foto real do Tiago palestrando/gesticulando — direção: enquadramento cintura-acima, gesticulando, fundo desfocado ou liso escuro" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§5"
 status: ativo

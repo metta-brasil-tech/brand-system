@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-editorial-dark
 params: { theme: dark, headline: upper-white, accent: yellow, image: fullbleed-dark }
 slots: [headline, subhead, body]
-image: { required: false, treatment: "close-up editorial dark — olho humano, silhueta em corredor escuro, mãos em sombra — sempre B&W com tom warm sutil, darkening overlay 60% bottom" }
+image: { required: true, treatment: "close-up editorial dark — olho humano, silhueta em corredor escuro, mãos em sombra — sempre B&W com tom warm sutil, darkening overlay 60% bottom" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§4"
 status: ativo

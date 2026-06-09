@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-editorial-card
 params: { theme: offwhite, card: dark-teal, cta: inline, ornament: pixel-yellow }
 slots: [headline, subhead, body]
-image: { required: false, treatment: "ornamentos pixel amarelos (triângulos ⚠ e setas) dispersos atrás do card — não foto" }
+image: { required: true, treatment: "ornamento gráfico ou foto editorial dark — contexto visual que reforça a estatística" }
 formato_nativo: [feed]
 dna_ref: "design/banco-tiago-conteudo.md#§3"
 status: ativo
