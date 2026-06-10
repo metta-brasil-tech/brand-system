@@ -270,7 +270,7 @@ const BrandSystem = (() => {
       main.dataset.loading = 'false';
       // App-mode iframes (ex: criar.html) querem altura FIXA pra ter scroll interno
       // próprio + footer sticky funcional. DS técnico continua auto-grow conforme conteúdo.
-      const isAppMode = /^(criar)\.html$/i.test(file);
+      const isAppMode = /^(criar|dashboard)\.html$/i.test(file);
       const styleAttr = isAppMode
         ? 'style="height: calc(100vh - var(--topbar-height) - 16px); border: none; width: 100%; display: block;"'
         : '';
