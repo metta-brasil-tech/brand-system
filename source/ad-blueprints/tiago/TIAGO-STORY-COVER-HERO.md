@@ -5,7 +5,7 @@ marca: tiago
 archetype: tiago-story-hero
 params: { theme: photo, format: story, headline: condensed-white, cta: yellow-pill }
 slots: [headline, subhead, body, cta]
-image: { required: true, treatment: "foto real lo-fi do Tiago em contexto — palestrando, em casa, viagem, lendo — bleed full, sem produção, parece celular", prompt_ref: "image-prompts/tiago/style-story-cover-hero.md" }
+image: { required: true, prefer_upload: true, treatment: "PREFERIR FOTO REAL do Tiago (upload) — gpt-image-2 não reproduz o rosto dele com fidelidade; geração é só fallback. Foto real lo-fi do Tiago em contexto — palestrando, em casa, viagem, lendo — bleed full, sem produção, parece celular", prompt_ref: "image-prompts/tiago/style-story-cover-hero.md" }
 formato_nativo: [story]
 dna_ref: "design/banco-tiago-conteudo.md#§3"
 status: ativo

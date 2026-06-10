@@ -244,6 +244,19 @@ TIAGO_ARCHETYPE_PROFILES: dict[str, dict] = {
 }
 
 
+# Aparência REAL do Tiago Alves (refs em engine/brand-knowledge/exemplars/tiago/).
+# Injetada quando subject_is_tiago=True pra a geração ao menos PARECER com ele,
+# não um estranho aleatório. ATENÇÃO: gpt-image-2 é texto→imagem e NÃO reproduz
+# pessoa real com fidelidade — o caminho de produção pra esses archetypes é usar
+# FOTO REAL (upload/biblioteca), não geração. Esta descrição é só fallback.
+_TIAGO_LIKENESS = (
+    "the subject is Tiago Alves: a light-skinned Brazilian man in his early-to-mid 40s, "
+    "short dark brown hair greying at the temples, rectangular dark glasses, short greying "
+    "stubble, warm confident expression, typically a charcoal-grey blazer over a plain black "
+    "t-shirt"
+)
+
+
 def get_tiago_profile(archetype: str) -> dict:
     """Perfil fotográfico do archetype Tiago, com FALLBACK seguro no DNA Tiago.
 
@@ -423,6 +436,10 @@ class ArtDirector:
                     "note": "archetype tipográfico/mock — sem foto por design",
                 }
             scene = (subject_hint or "").strip() or prof["scene"]
+            # Se a cena É o Tiago, descreve o rosto real dele (fallback — produção
+            # deve usar foto real). Sem isso, a IA inventa um estranho qualquer.
+            if prof.get("subject_is_tiago"):
+                scene = f"{scene}. {_TIAGO_LIKENESS}"
             if prof.get("lofi"):
                 # Archetypes documentais/crus: NÃO levam acabamento cinema-editorial,
                 # senão o sufixo contradiz o tratamento ("shot on iPhone", "no cinema grade").
