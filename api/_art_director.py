@@ -190,6 +190,7 @@ TIAGO_ARCHETYPE_PROFILES: dict[str, dict] = {
                      "deliberately raw real-life)",
         "needs_image": True,
         "subject_is_tiago": True,
+        "lofi": True,
     },
     "tiago-notes": {
         # Mock iPhone Notes — sem foto.
@@ -207,6 +208,7 @@ TIAGO_ARCHETYPE_PROFILES: dict[str, dict] = {
                      "casual off-center framing, scrim safe-area where the headline sits",
         "needs_image": True,
         "subject_is_tiago": True,
+        "lofi": True,
     },
     "tiago-story-yellow": {
         "scene": "lo-fi documentary snapshot of a real ENVIRONMENT that anchors the theme "
@@ -216,6 +218,7 @@ TIAGO_ARCHETYPE_PROFILES: dict[str, dict] = {
                      "vertical area kept visually quiet so the yellow overlay block sits clean",
         "needs_image": True,
         "subject_is_tiago": False,
+        "lofi": True,
     },
     "tiago-story-minimal": {
         "scene": "quiet contemplative still-life / landscape (night desk with a lit lamp, "
@@ -225,6 +228,7 @@ TIAGO_ARCHETYPE_PROFILES: dict[str, dict] = {
                      "whispered intimate mood, no high contrast",
         "needs_image": True,
         "subject_is_tiago": False,
+        "lofi": True,
     },
     # --- Twitter mock (feed) ----------------------------------------------
     "tiago-twitter": {
@@ -419,12 +423,21 @@ class ArtDirector:
                     "note": "archetype tipográfico/mock — sem foto por design",
                 }
             scene = (subject_hint or "").strip() or prof["scene"]
-            prompt = (
-                f"{scene}. Treatment: {prof['treatment']}. "
-                "Cinematic 35mm/85mm look, shallow depth of field, analog film grain, "
-                "controlled editorial lighting, editorial 4K, intentional framing, "
-                "no text in image."
-            ).strip()
+            if prof.get("lofi"):
+                # Archetypes documentais/crus: NÃO levam acabamento cinema-editorial,
+                # senão o sufixo contradiz o tratamento ("shot on iPhone", "no cinema grade").
+                finish = (
+                    "Shot on a phone, natural existing light, authentic lo-fi snapshot, "
+                    "subtle real-life imperfection, no studio lighting, no color grade, "
+                    "no HDR, intentional framing, no text in image."
+                )
+            else:
+                finish = (
+                    "Cinematic 35mm/85mm look, shallow depth of field, analog film grain, "
+                    "controlled editorial lighting, editorial 4K, intentional framing, "
+                    "no text in image."
+                )
+            prompt = f"{scene}. Treatment: {prof['treatment']}. {finish}".strip()
             return {
                 "prompt": prompt,
                 "negative_prompt": self._NEG_TIAGO,
