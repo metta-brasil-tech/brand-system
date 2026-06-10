@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-06-10T13:14:55.222Z",
+  "generatedAt": "2026-06-10T13:46:53.572Z",
   "tabs": [
     {
       "id": "overview",
@@ -26,20 +26,6 @@
           "id": "novo",
           "label": "Novo conteúdo",
           "source": "embed:criar.html"
-        }
-      ]
-    },
-    {
-      "id": "dashboard",
-      "icon": "trending-up",
-      "label": "Dashboard",
-      "group": "ferramentas",
-      "dev_only": true,
-      "sections": [
-        {
-          "id": "branding",
-          "label": "Acompanhamento de Marca",
-          "source": "embed:dashboard.html"
         }
       ]
     },
