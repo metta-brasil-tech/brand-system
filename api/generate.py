@@ -400,6 +400,7 @@ def _run_pipeline_inline(
     bp_placement: str = ""
     bp_treatment: str = ""
     bp_prompt_ref: str = ""
+    bp_prefer_upload: bool = False
 
     if has_bp:
         try:
@@ -409,6 +410,7 @@ def _run_pipeline_inline(
                 model_requires_image = _img_cfg.get("required") in (True, "true", "True", "yes")
             bp_treatment = str(_img_cfg.get("treatment") or "")
             bp_prompt_ref = str(_img_cfg.get("prompt_ref") or "")
+            bp_prefer_upload = _img_cfg.get("prefer_upload") in (True, "true", "True", "yes")
             bp_placement = _blueprint_placement(bp_fm_full)
             diagnostics.append(
                 f"03-blueprint: image.required={model_requires_image} placement={bp_placement or '-'} "
@@ -481,6 +483,12 @@ def _run_pipeline_inline(
         diagnostics.append(f"04-image-gen: PULADO — usando URL da busca: {image_url[:80]}")
     else:
         # Caminho generate (default): roda skill 04 + image-gen
+        if bp_prefer_upload:
+            diagnostics.append(
+                "04-AVISO: blueprint pede prefer_upload (rosto real do Tiago) mas NENHUMA "
+                "foto foi enviada — gerando como FALLBACK. gpt-image-2 não reproduz o rosto "
+                "real; o ideal é o usuário subir uma foto recortada do Tiago."
+            )
         t04_skill = time.time()
 
         # Pre-carrega base.md da marca + template-do-estilo + preset
