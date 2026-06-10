@@ -384,7 +384,7 @@ def _run_pipeline_inline(
     diagnostics.append(f"format: {format_key} (wizard={wizard_format} briefing={briefing.get('formato')})")
 
     # ============================================================
-    # Skill 04 — Image gen (OpenAI gpt-image-1)
+    # Skill 04 — Image gen (OpenAI gpt-image-2; ver IMAGE_GEN_PROVIDER)
     # Pula quando image_source='none' ou modelo é tipográfico-puro.
     # ============================================================
     image_file_url: str = ""

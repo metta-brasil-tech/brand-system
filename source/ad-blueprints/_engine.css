@@ -295,7 +295,7 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrows { position: absolute; top: 60px; left: 64px; right: 64px; display: flex; justify-content: space-between; z-index: 5; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrow-left,
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrow-right { font-size: 18px; letter-spacing: .08em; color: var(--t-ink); text-transform: uppercase; font-weight: 700; margin: 0; }
-.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-text { position: absolute; left: 80px; right: 80px; top: 40%; display: flex; flex-direction: column; gap: 24px; z-index: 5; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-text { position: absolute; left: 64px; right: 64px; top: 38%; display: flex; flex-direction: column; gap: 20px; z-index: 5; padding: 36px 40px; background: rgba(237,238,238,.88); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 6px; box-shadow: 0 18px 60px rgba(0,0,0,.28); }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-headline { font-size: 56px; line-height: 1.0; letter-spacing: -.02em; color: var(--t-ink); margin: 0; word-break: break-word; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-subhead { font-size: 28px; line-height: 1.3; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-body { font-size: 22px; line-height: 1.45; color: var(--t-grey); margin: 0; max-width: 800px; }
