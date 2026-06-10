@@ -37,13 +37,23 @@ def qa(front_matter: dict, copy: dict, image_url: str, html: str) -> dict:
         if theme not in THEMES:
             issues.append(f"theme inválido: '{theme}'")
 
+    # Estilos imagem-pura (text:none — ex. tiago-photo-raw, tiago-dark-surreal) NÃO
+    # têm texto por design: a peça é só a foto. Headline vazia neles é esperado.
+    image_only = str(params.get("text", "")).strip().lower() == "none"
+
     # Slots de conteúdo
     if not (copy.get("headline") or "").strip():
-        issues.append("headline vazia (slot obrigatório)")
+        if not image_only:
+            issues.append("headline vazia (slot obrigatório)")
     elif len(copy["headline"]) > 90:
         warnings.append(f"headline longa ({len(copy['headline'])}ch) — auto-fit reduz, mas considere encurtar")
-    if not (copy.get("cta") or "").strip():
+    if not (copy.get("cta") or "").strip() and not image_only:
         warnings.append("sem CTA (recomendado: CTA no fim)")
+
+    # Tweet/notes precisam de CORPO — sem body o card sai 'pelado' (lição da sessão).
+    _TWEET_LIKE = {"card-mock", "tiago-twitter", "tiago-notes"}
+    if arch in _TWEET_LIKE and not (copy.get("body") or "").strip():
+        warnings.append("estilo tweet/notes sem corpo (body) — card fica vazio; preencha o body")
 
     # Imagem
     img_req = bool((fm.get("image") or {}).get("required"))
