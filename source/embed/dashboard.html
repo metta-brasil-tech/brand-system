@@ -232,31 +232,8 @@ body { display: flex; flex-direction: column; }
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-hidden="true"></aside>
 
-<!-- ENV GUARD — desabilita em produção (mesma política da aba /criar) -->
-<script>
-(function envGuard() {
-  const h = (location.hostname || '').toLowerCase();
-  const isDev = h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' || h.endsWith('.local');
-  if (isDev) return;
-  const stage = document.getElementById('stage');
-  if (stage) {
-    stage.innerHTML = `
-      <div style="max-width: 540px; margin: 80px auto; padding: 40px; text-align: center;
-                  color: var(--metta-sys-color-on-surface, #0C161B);">
-        <h1 style="font-family: 'Zalando Sans Expanded', system-ui; font-size: 30px; margin: 0 0 16px; line-height: 1.15;">Dashboard de Branding em beta</h1>
-        <p style="font-size: 16px; line-height: 1.5; color: var(--metta-sys-color-on-surface-variant, #435965); margin: 0 0 22px;">
-          O painel de acompanhamento de marca está em construção com o time de tecnologia —
-          disponível por enquanto só no ambiente local de desenvolvimento.
-        </p>
-        <p style="font-size: 14px; color: var(--metta-sys-color-on-surface-variant, #435965); margin: 0;">
-          Em breve, com dados reais conectados.
-        </p>
-      </div>`;
-  }
-  throw new Error('dashboard.html: disabled in production (hostname=' + h + ')');
-})();
-</script>
-
+<!-- Aba oculta no menu (dev_only no nav.json), mas acessível por link direto
+     em produção — mesmo padrão da aba /criar. Sem envGuard. -->
 <script>
 /* ============================================================
    DATA LAYER — modo exemplo.
