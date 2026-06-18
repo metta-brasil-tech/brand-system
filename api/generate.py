@@ -219,6 +219,60 @@ def _art_direction_photo(directives: dict) -> str:
     return ". ".join(bits) + ("." if bits else "")
 
 
+# ----------------------------------------------------------------------------
+# Avatar-alvo (ICP) — resolve segmento + variante pro skill 04.
+# Fonte canônica: engine/brand-knowledge/audience/avatars.json
+# Afeta SÓ a imagem (quem aparece + onde + registro emocional). Opcional:
+# sem avatar, o skill 04 cai no avatar-mãe do _base.md.
+# ----------------------------------------------------------------------------
+_AVATARS_CACHE: dict | None = None
+
+
+def _load_avatars() -> dict:
+    global _AVATARS_CACHE
+    if _AVATARS_CACHE is None:
+        path = Path(os.environ["BRAND_KNOWLEDGE_PATH"]) / "audience" / "avatars.json"
+        try:
+            _AVATARS_CACHE = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            _AVATARS_CACHE = {"segments": [], "variants": []}
+    return _AVATARS_CACHE
+
+
+def _avatar_context(segment_id: str | None, variant_id: str | None) -> str:
+    """Monta o bloco '=== AVATAR ALVO ===' (EN) pro extra_context do skill 04.
+
+    Retorna "" quando nenhum avatar foi escolhido — aí o skill 04 usa o avatar-mãe.
+    """
+    if not segment_id and not variant_id:
+        return ""
+    data = _load_avatars()
+    seg = next((s for s in data.get("segments", []) if s.get("id") == segment_id), None)
+    var = next((v for v in data.get("variants", []) if v.get("id") == variant_id), None)
+    if not seg and not var:
+        return ""
+
+    lines = ["=== AVATAR ALVO (controla quem aparece + onde + registro emocional) ==="]
+    if seg:
+        lines.append(
+            f"Segmento: {seg['id']} — persona (masculina): {seg.get('persona_male','')} "
+            f"| persona (feminina): {seg.get('persona_female','')}"
+        )
+        lines.append(f"Idade: {seg.get('age_range','40-55')}. Roupa: {seg.get('clothing','')}.")
+        lines.append(f"Ambiente: {seg.get('environment','')}.")
+    if var:
+        lines.append(f"Variante: {var['id']} — mood: {var.get('emotional_cue','')}.")
+        lines.append(f"Pose/enquadramento: {var.get('posture','')}.")
+        if var.get("gender_lean"):
+            lines.append(f"Nota de gênero: {var['gender_lean']}.")
+    lines.append(
+        "Paridade de gênero OBRIGATÓRIA: escolha um gênero pro prompt principal e ALTERNE "
+        "no fallback v2. Dor sempre com DIGNIDADE — nunca sofrimento explícito, nunca "
+        "acusatório, nunca cena sensível (regra de moderação do skill 04)."
+    )
+    return "\n".join(lines)
+
+
 def _run_pipeline_inline(
     briefing_text: str,
     mock: bool = False,
@@ -233,6 +287,8 @@ def _run_pipeline_inline(
     user_cta_text: str | None = None,
     user_tag: str | None = None,
     wizard_format: str | None = None,
+    avatar_segment: str | None = None,
+    avatar_variant: str | None = None,
     render_png: bool = False,
     art_director: bool = True,
     vision_qa: bool = True,
@@ -491,6 +547,13 @@ def _run_pipeline_inline(
             )
         t04_skill = time.time()
 
+        # Avatar-alvo (ICP): quem aparece + onde + registro emocional. Opcional.
+        avatar_extra = _avatar_context(avatar_segment, avatar_variant)
+        if avatar_extra:
+            diagnostics.append(
+                f"04-avatar: segmento={avatar_segment or '—'} variante={avatar_variant or '—'}"
+            )
+
         # Pre-carrega base.md da marca + template-do-estilo + preset
         base_path = ENGINE_DIR / "brand-knowledge" / "image-prompts" / marca / (
             "_base.md" if marca == "metta" else "_base-tiago.md"
@@ -554,8 +617,23 @@ def _run_pipeline_inline(
             preset_overlay = chosen_preset.get("prompt_overlay", "")
             _placement_txt = _PLACEMENT_INSTRUCTION.get(bp_placement, "")
             _ad_photo = _art_direction_photo(ad_directives)
+            _avatar_line = ""
+            if avatar_extra:
+                # No fast-path não há LLM: condensa o avatar numa linha de cena.
+                _seg = next((s for s in _load_avatars().get("segments", [])
+                             if s.get("id") == avatar_segment), None)
+                _var = next((v for v in _load_avatars().get("variants", [])
+                             if v.get("id") == avatar_variant), None)
+                _av_bits = []
+                if _seg:
+                    _av_bits.append(_seg.get("persona_male", ""))
+                    _av_bits.append(f"in {_seg.get('environment','')}")
+                if _var:
+                    _av_bits.append(_var.get("emotional_cue", ""))
+                _avatar_line = ", ".join([b for b in _av_bits if b])
             primary_prompt = (
                 f"{briefing_image_text.strip()}. {preset_overlay}"
+                + (f" Subject: {_avatar_line}." if _avatar_line else "")
                 + (f" Composition: {_placement_txt}" if _placement_txt else "")
                 + (f" {_ad_photo}" if _ad_photo else "")
             ).strip()
@@ -584,6 +662,8 @@ def _run_pipeline_inline(
                     f'"{briefing_image_text.strip()}"\n\n'
                     f"Essa direção controla TANTO sujeito QUANTO tratamento. User vence sempre."
                 )
+            if avatar_extra:
+                parts.append(avatar_extra)
             if chosen_preset:
                 parts.append(preset_to_extra_context(chosen_preset))
             # Composição-por-slot vinda do BLUEPRINT (não do style-X.md) — garante
@@ -865,6 +945,8 @@ class handler(BaseHTTPRequestHandler):
                 user_cta_text=data.get("cta_text") or None,
                 user_tag=data.get("copy_tag") or None,
                 wizard_format=data.get("format") or None,
+                avatar_segment=data.get("avatar_segment") or None,
+                avatar_variant=data.get("avatar_variant") or None,
                 render_png=bool(data.get("render_png", False)),
                 art_director=bool(data.get("art_director", True)),
                 vision_qa=bool(data.get("vision_qa", True)),

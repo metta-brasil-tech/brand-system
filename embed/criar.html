@@ -1053,6 +1053,8 @@ const STATE = {
   style: null,          // ID do estilo do banco
   imageSource: null,    // 'generate' (IA) | 'search' (busca web) | 'none' — definido em wiz-imagem
   imageStylePreset: 'fotorrealista', // preset visual escolhido nos cards (default seguro)
+  avatarSegment: 'generico', // avatar-alvo: segmento (quem aparece + onde) — default neutro
+  avatarVariant: 'padrao',   // avatar-alvo: variante (registro emocional do sujeito)
   briefingImage: '',    // direção visual da imagem (cena/mood/cores) — só relevante quando imageSource='generate'
   searchQuery: '',      // termo de busca quando imageSource='search'
   selectedImageUrl: '', // URL escolhida na galeria de busca
@@ -1082,7 +1084,7 @@ const IS_LOCAL_DEV = typeof location !== 'undefined'
 const ENGINE_URL = IS_LOCAL_DEV ? 'http://localhost:8000' : '/api';
 const ENGINE_TIMEOUT_MS = IS_LOCAL_DEV ? 300_000 : 60_000;  // local 5min, Vercel Hobby 60s
 
-const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-imagem-briefing', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
+const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-avatar', 'wiz-imagem-briefing', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
 const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
 // wiz-imagem só aparece se o estilo selecionado usa imagem.
 // wiz-search só aparece se imageSource === 'search'.
@@ -1133,6 +1135,30 @@ const STYLES_TIAGO = [
   { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-dark.webp' }
 ];
 
+/* ----------- DATA: avatares (ICP) -----------
+ * Espelha engine/brand-knowledge/audience/avatars.json (fonte canônica que o
+ * pipeline lê). Aqui só os campos de UI (id + label PT + desc curta). Os ids
+ * DEVEM bater 1:1 com o JSON — o backend resolve persona/ambiente/mood por id.
+ * Eixo combinado: segmento (quem aparece + onde) + variante (registro emocional).
+ * Afeta SÓ a imagem — a copy no wizard é digitada por você.
+ */
+const AVATAR_SEGMENTS = [
+  { id: 'generico',              label: 'Genérico (sem segmento)',  desc: 'Empresário brasileiro em geral, ambiente neutro. Use quando o segmento não importa.' },
+  { id: 'varejo-pet',           label: 'Varejo · Pet shop',         desc: 'Dono de pet/agropet. Ambiente de loja de pet. Ex: Hiperzoo.' },
+  { id: 'varejo-farmacia',      label: 'Varejo · Farmácia',         desc: 'Dono de farmácia/drogaria. Chão de loja com prateleiras. Ex: Brava.' },
+  { id: 'varejo-otica-joias',   label: 'Varejo · Ótica / joalheria',desc: 'Dono de ótica ou joalheria/semi-joias. Boutique com vitrines. Ex: Ótica Visão, Órex.' },
+  { id: 'varejo-construcao-deco', label: 'Varejo · Construção / deco',desc: 'Material de construção, decoração ou móveis. Showroom amplo.' },
+  { id: 'servico-profissional', label: 'Serviço · Advocacia / clínica',desc: 'Advocacia, clínica, consultório, prestação B2C. Escritório com madeira e luz natural.' },
+  { id: 'industria-b2b',        label: 'Indústria · B2B',           desc: 'Indústria pequena/média com venda relacional. Chão de fábrica. Ex: Ambi, CBA Diesel.' }
+];
+
+const AVATAR_VARIANTS = [
+  { id: 'padrao',                    label: 'Padrão',                       desc: 'Empresário em ponto de inflexão. Confiança séria com um traço de cansaço. Registro neutro.' },
+  { id: 'decide-sozinho',            label: 'Decide sozinho',               desc: 'Carrega tudo sem co-decisor. Cansaço e solidão da liderança, com dignidade.' },
+  { id: 'tecnico-virou-empresario',  label: 'Técnico que virou empresário', desc: 'Era advogado/médico/vendedor bom. Desconforto na transição pra gestor.' },
+  { id: 'herdeiro',                  label: 'Herdeiro / continuador',       desc: 'Entrou pra ajudar a família e ficou. Peso de modernizar o legado.' }
+];
+
 /* ----------- DATA: formatos ----------- */
 const FORMATS = [
   { id: 'post',      label: 'Post simples',  desc: '1 imagem 1080×1350 (4:5).',                  icon: 'square'  },
@@ -1177,6 +1203,7 @@ function renderStepper() {
   const usaImagem = styleObj && styleObj.usaImagem;
   stepsToShow = stepsToShow.filter(s => {
     if (s === 'wiz-imagem') return usaImagem;
+    if (s === 'wiz-avatar') return usaImagem && STATE.imageSource === 'generate';
     if (s === 'wiz-imagem-briefing') return usaImagem && STATE.imageSource === 'generate';
     if (s === 'wiz-search') return usaImagem && STATE.imageSource === 'search';
     return true;
@@ -1188,6 +1215,7 @@ function renderStepper() {
     'wiz-format':    'Formato',
     'wiz-style':     'Estilo',
     'wiz-imagem':    'Imagem',
+    'wiz-avatar':    'Avatar',
     'wiz-imagem-briefing': 'Briefing imagem',
     'wiz-search':    'Busca',
     'wiz-copy':      'Copy',
@@ -1359,6 +1387,44 @@ function tplWizImagem() {
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+    </div>
+  `;
+}
+
+/* ---------- AVATAR (ICP) ---------- *
+ * Define QUEM aparece na foto + ONDE + em que registro emocional.
+ * Dois grupos de cards: segmento (quem/onde) + variante (registro emocional).
+ * Default já vem selecionado (generico + padrao) — o passo é skippável.
+ * Afeta SÓ a imagem; flui pro skill 04 via avatar_segment + avatar_variant.
+ */
+function tplWizAvatar() {
+  const segCards = AVATAR_SEGMENTS.map(a => `
+    <button class="choice ${STATE.avatarSegment === a.id ? 'selected' : ''}" data-action="pick-avatar-segment" data-value="${a.id}">
+      <h3 class="choice-title">${escapeHtml(a.label)}</h3>
+      <p class="choice-desc">${escapeHtml(a.desc)}</p>
+    </button>
+  `).join('');
+  const varCards = AVATAR_VARIANTS.map(a => `
+    <button class="choice ${STATE.avatarVariant === a.id ? 'selected' : ''}" data-action="pick-avatar-variant" data-value="${a.id}">
+      <h3 class="choice-title">${escapeHtml(a.label)}</h3>
+      <p class="choice-desc">${escapeHtml(a.desc)}</p>
+    </button>
+  `).join('');
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Avatar (quem você quer atingir)</p>
+      <h1 class="step-title">Pra qual avatar essa foto fala?</h1>
+      <p class="step-sub">O segmento decide quem aparece e o ambiente da foto (loja de pet, farmácia, escritório...). A variante decide o registro emocional do sujeito. Já vem um default seguro — pode seguir direto se não quiser detalhar.</p>
+    </header>
+    <div class="step-body">
+      <p class="field-label" style="margin-bottom:10px">Segmento — quem aparece + onde</p>
+      <div class="choice-grid">${segCards}</div>
+      <p class="field-label" style="margin:24px 0 10px">Registro emocional — como o sujeito se apresenta</p>
+      <div class="choice-grid">${varCards}</div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="next-from-avatar">Continuar ${icon('arrowRight', 16)}</button>
     </div>
   `;
 }
@@ -1536,6 +1602,10 @@ function tplWizConfirm() {
   const styleList   = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
   const styleLabel  = (styleList.find(s => s.id === STATE.style) || {}).label || '—';
   const copyPreview = STATE.copy || '—';
+  // Avatar só aparece quando a imagem é gerada por IA
+  const showAvatar = STATE.imageSource === 'generate';
+  const segLabel = (AVATAR_SEGMENTS.find(a => a.id === STATE.avatarSegment) || {}).label || '—';
+  const varLabel = (AVATAR_VARIANTS.find(a => a.id === STATE.avatarVariant) || {}).label || '—';
 
   return renderStepper() + `
     <header class="step-head">
@@ -1548,6 +1618,7 @@ function tplWizConfirm() {
         ${summaryRow('Marca', brandLabel, 'brand')}
         ${summaryRow('Formato', formatLabel, 'wiz-format')}
         ${summaryRow('Estilo', styleLabel, 'wiz-style')}
+        ${showAvatar ? summaryRow('Avatar', `${segLabel} · ${varLabel}`, 'wiz-avatar') : ''}
         ${summaryRow('Copy', copyPreview, 'wiz-copy')}
         ${summaryRow('CTA', STATE.cta || '—', 'wiz-cta')}
       </div>
@@ -1842,6 +1913,7 @@ const templates = {
   'wiz-format':    tplWizFormat,
   'wiz-style':     tplWizStyle,
   'wiz-imagem':    tplWizImagem,
+  'wiz-avatar':    tplWizAvatar,
   'wiz-imagem-briefing': tplWizImagemBriefing,
   'wiz-search':    tplWizSearch,
   'wiz-copy':      tplWizCopy,
@@ -1937,10 +2009,10 @@ function nextFromCurrent() {
     STATE.imageSource = 'none';
     return goto('wiz-copy');
   }
-  // wiz-imagem → wiz-search (busca) | wiz-imagem-briefing (gerar) | wiz-copy (none)
+  // wiz-imagem → wiz-search (busca) | wiz-avatar (gerar) | wiz-copy (none)
   if (currentStep === 'wiz-imagem') {
     if (STATE.imageSource === 'search') return goto('wiz-search');
-    if (STATE.imageSource === 'generate') return goto('wiz-imagem-briefing');
+    if (STATE.imageSource === 'generate') return goto('wiz-avatar');
     return goto('wiz-copy');
   }
   const map = {
@@ -2024,6 +2096,17 @@ function onAction(e) {
       if (!STATE.selectedImageUrl) return;
       goto('wiz-copy');
       break;
+    case 'pick-avatar-segment':
+      STATE.avatarSegment = value;
+      render();   // re-renderiza pra marcar .selected, sem avançar (variante ainda falta)
+      break;
+    case 'pick-avatar-variant':
+      STATE.avatarVariant = value;
+      render();
+      break;
+    case 'next-from-avatar':
+      goto('wiz-imagem-briefing');
+      break;
     case 'next':
       nextFromCurrent();
       break;
@@ -2100,6 +2183,8 @@ function onAction(e) {
       Object.keys(STATE).forEach(k => {
         if (k === 'history') STATE[k] = [];
         else if (k === 'imageStylePreset') STATE[k] = 'fotorrealista';  // default seguro
+        else if (k === 'avatarSegment') STATE[k] = 'generico';          // default seguro
+        else if (k === 'avatarVariant') STATE[k] = 'padrao';            // default seguro
         else STATE[k] = (typeof STATE[k] === 'string') ? '' : null;
       });
       STATE.run_id = null;
@@ -2205,6 +2290,10 @@ async function generateReal(briefing) {
         // Direção visual livre pra skill 04 (opcional)
         ...(STATE.briefingImage && STATE.briefingImage.trim() ? { briefing_image: STATE.briefingImage.trim() } : {}),
         ...(STATE.imageStylePreset ? { image_style_preset: STATE.imageStylePreset } : {}),
+        // Avatar-alvo (ICP) — só faz sentido quando a imagem é gerada por IA.
+        // Define persona/ambiente/registro emocional da foto no skill 04.
+        ...(STATE.imageSource === 'generate' && STATE.avatarSegment ? { avatar_segment: STATE.avatarSegment } : {}),
+        ...(STATE.imageSource === 'generate' && STATE.avatarVariant ? { avatar_variant: STATE.avatarVariant } : {}),
         // Formato escolhido pelo wizard (post/carrossel/ad-single/ad-story) — backend
         // resolve pra story/feed/sqr. Sem isso, backend cai no que skill 01 inferiu
         // do texto livre, que pode estar errado.
