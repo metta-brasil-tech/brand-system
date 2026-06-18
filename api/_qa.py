@@ -68,8 +68,12 @@ def qa(front_matter: dict, copy: dict, image_url: str, html: str) -> dict:
     if copy.get("headline") and copy["headline"].replace("*", "")[:12] not in html.replace("*", ""):
         warnings.append("headline pode não ter sido injetada no HTML")
 
-    # Overflow (se o html já passou pelo browser e marcou data-overflow="1")
-    if 'data-overflow="1"' in html:
+    # Overflow / colisão (se o html já passou pelo browser e o _engine.js marcou).
+    # data-collision="1" = texto ainda ficaria embaixo do CTA mesmo no piso de
+    # fonte → copy longa demais pro estilo (sinal pra encurtar ou trocar de estilo).
+    if 'data-collision="1"' in html:
+        issues.append("colisão texto×CTA: copy não cabe acima do botão nem no menor tamanho — encurte a copy ou troque de estilo")
+    elif 'data-overflow="1"' in html:
         issues.append("overflow detectado: conteúdo excede o canvas")
 
     status = "FAIL" if issues else ("PASS_WITH_WARNINGS" if warnings else "PASS")
