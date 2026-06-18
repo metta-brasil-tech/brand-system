@@ -398,8 +398,11 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-name { font-size: 28px; color: var(--t-ink); line-height: 1; font-weight: 700; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-verified { display: inline-flex; width: 24px; height: 24px; border-radius: 50%; background: var(--t-verified); color: var(--t-white); align-items: center; justify-content: center; font-size: 16px; font-weight: 800; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-handle { font-size: 22px; color: var(--t-grey); line-height: 1.2; }
-.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 0 1 auto; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline { font-size: 52px; line-height: 1.2; letter-spacing: -.02em; color: var(--t-ink); margin: 0; word-break: break-word; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-subhead { font-size: 36px; line-height: 1.35; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-body { font-size: 28px; line-height: 1.45; color: var(--t-grey); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-cta { font-size: 28px; color: var(--t-grey); margin: 32px 0 0; }
+/* variant cover — foto embed na base do tweet (radius 28px, estilo X media card) */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed { flex: 1; min-height: 380px; margin-top: 32px; border-radius: 28px; overflow: hidden; background: var(--t-light-bg, #f0f0f0); }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed-photo { width: 100%; height: 100%; background-size: cover; background-position: center; }

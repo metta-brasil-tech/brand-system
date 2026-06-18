@@ -193,12 +193,16 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
 
     if arch == "tiago-twitter":
         cta = f'<p class="tw-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
+        # Variant cover: imagem fornecida → embed card radius 28px na base do tweet.
+        # Variant content: sem imagem → só texto (comportamento original).
+        embed = (f'<div class="tw-embed"><div class="tw-embed-photo" '
+                 f'style="background-image:url(\'{image_url}\')"></div></div>') if image_url else ""
         return ('<header class="tw-header"><div class="tw-avatar"><span class="tw-avatar-initial">T</span></div>'
                 '<div class="tw-user"><div class="tw-name-row"><span class="tw-name">Tiago Alves</span>'
                 '<span class="tw-verified">✓</span></div>'
                 '<span class="tw-handle">@tiago.alves.oliveira</span></div></header>'
                 f'<div class="tw-text">{head("tw-headline")}{sub("tw-subhead")}{body("tw-body")}</div>'
-                f'{cta}')
+                f'{cta}{embed}')
 
     # fallback Tiago desconhecido → tipográfico simples
     return f'<div class="tt-text layer">{head("tt-headline")}{sub("tt-subhead")}{body("tt-body")}</div>'
