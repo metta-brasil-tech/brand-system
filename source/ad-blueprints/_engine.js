@@ -52,34 +52,48 @@
     return hov && vov;
   }
 
-  // COLAGEM SEGURA: depois da foto + da headline fitada, garante que o texto
-  // (headline → body → sub) NÃO fique embaixo do CTA. O CTA é absolute/bottom em
-  // photo-side/typo, então uma headline alta empurra o body pra dentro dele.
-  // Encolhe na ordem certa até liberar; se nem no piso liberar, marca colisão.
+  // COLAGEM SEGURA (genérica, vale pra TODOS os 23 archetypes): depois da foto +
+  // headline fitada, garante que NENHUM texto fique embaixo do CTA. Não depende de
+  // nome de classe — acha qualquer CTA sobreposto (position absolute/fixed) e
+  // qualquer texto (h1–h4/p/li) que colida com ele, e encolhe o de MAIOR fonte até
+  // liberar. Se nem no piso liberar, devolve true (copy longa demais → data-collision).
   function clearCta(ad) {
-    var cta = ad.querySelector('.cta-wrap, .teh-cta-wrap, .tecta-cta-wrap, .tch-cta-wrap, .tyb-cta-wrap');
-    if (!cta) return false;
-    // Só importa quando o CTA é sobreposto (absolute/fixed). CTA no fluxo nunca colide.
-    var pos = getComputedStyle(cta).position;
-    if (pos !== 'absolute' && pos !== 'fixed') return false;
-    var stack = ad.querySelector('.stack') || ad.querySelector('.layer');
-    if (!stack) return false;
-    var head = ad.querySelector('.t-head');
-    var body = ad.querySelector('.t-body, .bullets, .t-list');
-    var sub  = ad.querySelector('.t-sub');
-    var gap = 20, floorHead = 30, floorTxt = 14, guard = 0;
-    function hit() { return clash(stack, cta, gap); }
-    while (hit() && guard < 200) {
-      guard++;
-      var hs = head ? px(head, 'fontSize') : 0;
-      if (head && hs > floorHead) { head.style.fontSize = (hs - 2) + 'px'; continue; }
-      var bs = body ? px(body, 'fontSize') : 0;
-      if (body && bs > floorTxt) { body.style.fontSize = (bs - 1) + 'px'; continue; }
-      var ss = sub ? px(sub, 'fontSize') : 0;
-      if (sub && ss > floorTxt) { sub.style.fontSize = (ss - 1) + 'px'; continue; }
-      break; // nada mais pra encolher
+    // 1) CTA sobreposto: o wrapper/botão de CTA que está absolute/fixed.
+    //    Seletor preciso (evita o prefixo de estilo 'tecta-*' que contém 'cta').
+    //    CTA no fluxo normal (tweet/notes) é estático → ignorado.
+    var cta = null, ctas = ad.querySelectorAll('[class*="cta-wrap"], .cta, .ad-cta');
+    for (var i = 0; i < ctas.length; i++) {
+      var p = getComputedStyle(ctas[i]).position;
+      if (p === 'absolute' || p === 'fixed') { cta = ctas[i]; break; }
     }
-    return hit(); // ainda colide no piso = overflow real (sinaliza pro QA)
+    if (!cta) return false;
+    // 2) candidatos de texto: folhas com conteúdo, fora do próprio CTA.
+    var nodes = ad.querySelectorAll('h1, h2, h3, h4, p, li');
+    var text = [];
+    for (var j = 0; j < nodes.length; j++) {
+      var el = nodes[j];
+      if (cta.contains(el) || el.contains(cta)) continue;
+      if (!el.textContent.trim()) continue;
+      text.push(el);
+    }
+    if (!text.length) return false;
+    // 3) Enquanto QUALQUER texto colidir, encolhe o MAIOR texto do anúncio (não só
+    //    o que colide): em layouts de pilha centrada (typo) quem invade o CTA é o
+    //    body, mas quem ocupa o espaço é a headline — reduzi-la levanta a pilha
+    //    inteira e tira o body de cima do botão. 2px por vez, até liberar ou piso.
+    var gap = 18, floor = 14, guard = 0;
+    function anyClash() { for (var k = 0; k < text.length; k++) if (clash(text[k], cta, gap)) return true; return false; }
+    while (anyClash() && guard < 400) {
+      guard++;
+      var target = null, biggest = 0;
+      for (var k = 0; k < text.length; k++) {
+        var fs = px(text[k], 'fontSize');
+        if (fs > floor && fs > biggest) { biggest = fs; target = text[k]; }
+      }
+      if (!target) break; // todos no piso e ainda colide → overflow real
+      target.style.fontSize = (biggest - 2) + 'px';
+    }
+    return anyClash(); // ainda colide no piso = copy longa demais (sinaliza pro QA)
   }
 
   function run() {
