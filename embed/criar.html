@@ -400,6 +400,10 @@ button.stepper-item.done:hover {
 .car-dot { width:10px; height:10px; border-radius:50%; border:none; background:var(--metta-sys-color-outline,#555); cursor:pointer; padding:0; }
 .car-dot.on { background:var(--metta-sys-color-primary,#FFBE18); transform:scale(1.25); }
 .car-dot.err { background:#e5484d; }
+.car-recortes { display:flex; gap:10px; }
+.car-recorte { flex:1; border:1.5px solid var(--metta-sys-color-outline,#3a3a3a); border-radius:10px; padding:6px; background:#1a1a1a; cursor:pointer; }
+.car-recorte.on { border-color:var(--metta-sys-color-primary,#FFBE18); }
+.car-recorte img { width:100%; height:90px; object-fit:contain; display:block; }
 
 .field-hint {
   font-size: 13px;
@@ -2065,7 +2069,7 @@ function _newSlide() {
   const styles = _carStylesForBrand();
   return { style: (styles[0] || {}).id || '', copyHeadline: '', copySubhead: '', copyBody: '', cta: '',
     imageSource: 'generate', briefingImage: '', imageStylePreset: 'fotorrealista',
-    avatarSegment: 'generico', avatarVariant: 'padrao' };
+    avatarSegment: 'generico', avatarVariant: 'padrao', selectedImageUrl: '' };
 }
 function _ensureSlides() {
   if (!STATE.slides.length) { STATE.slides = [_newSlide(), _newSlide(), _newSlide()]; STATE.activeSlide = 0; }
@@ -2096,14 +2100,25 @@ function tplCarouselBuild() {
     </div>`;
   }).join('');
   const styleOpts = styles.map(s => `<option value="${s.id}" ${s.id === sl.style ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
+  const recRow = STATE.brand === 'tiago' ? `
+      <div class="car-recortes">
+        ${TIAGO_RECORTES.map(r => `<button class="car-recorte ${sl.selectedImageUrl === r.src ? 'on' : ''}" data-action="car-recorte" data-value="${r.src}"><img src="${r.src}" alt="${escapeHtml(r.label)}"></button>`).join('')}
+      </div>` : '';
   const imgBlock = usaImagem ? `
     <div class="field">
       <label class="field-label">Imagem</label>
       <div class="car-pillrow">
         <button class="car-pill ${sl.imageSource === 'generate' ? 'on' : ''}" data-action="car-imgsrc" data-value="generate">Gerar com IA</button>
+        <button class="car-pill ${sl.imageSource === 'upload' ? 'on' : ''}" data-action="car-imgsrc" data-value="upload">${STATE.brand === 'tiago' ? 'Foto do Tiago' : 'Enviar foto'}</button>
         <button class="car-pill ${sl.imageSource === 'none' ? 'on' : ''}" data-action="car-imgsrc" data-value="none">Sem imagem</button>
       </div>
     </div>
+    ${sl.imageSource === 'upload' ? `
+    <div class="field">
+      ${recRow}
+      <input type="file" class="input" id="car-upload-input" accept="image/png,image/jpeg,image/webp" style="margin-top:10px">
+      ${sl.selectedImageUrl && sl.selectedImageUrl.startsWith('data:') ? `<img src="${sl.selectedImageUrl}" style="max-height:120px;margin-top:8px;border-radius:8px;background:#1a1a1a">` : ''}
+    </div>` : ''}
     ${sl.imageSource === 'generate' ? `
     <div class="field">
       <label class="field-label">Avatar da foto</label>
@@ -2212,6 +2227,14 @@ function attachCarouselHandlers() {
       else updateCarCounters();          // texto → só contadores
     });
   });
+  // upload de foto por slide
+  const cup = document.getElementById('car-upload-input');
+  if (cup) cup.addEventListener('change', () => {
+    const file = cup.files && cup.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => { const sl = STATE.slides[STATE.activeSlide]; if (sl) { sl.selectedImageUrl = reader.result; render(); } };
+    reader.readAsDataURL(file);
+  });
   updateCarCounters();
 }
 
@@ -2220,13 +2243,15 @@ function carSlidePayload(slide) {
   const copy = [slide.copyHeadline, slide.copySubhead, slide.copyBody].filter(Boolean).join('\n');
   const briefing = `Marca: ${marca}.\nSlide de carrossel.\nCopy:\n${copy || '(vazio)'}`;
   const usaImg = !!_slideStyleObj(slide).usaImagem;
-  const imgsrc = usaImg ? (slide.imageSource || 'generate') : 'none';
+  let imgsrc = usaImg ? (slide.imageSource || 'generate') : 'none';
+  if (imgsrc === 'upload' && !slide.selectedImageUrl) imgsrc = 'none';  // upload sem foto → sem imagem
   const gen = imgsrc === 'generate';
   return {
     briefing, mock: false,
     model_id: slide.style,
     format: STATE.carFormat,
     image_source: imgsrc,
+    ...(imgsrc === 'upload' && slide.selectedImageUrl ? { image_url: slide.selectedImageUrl } : {}),
     ...(gen && slide.briefingImage && slide.briefingImage.trim() ? { briefing_image: slide.briefingImage.trim() } : {}),
     ...(gen && slide.imageStylePreset ? { image_style_preset: slide.imageStylePreset } : {}),
     ...(gen && slide.avatarSegment ? { avatar_segment: slide.avatarSegment } : {}),
@@ -2602,6 +2627,11 @@ function onAction(e) {
     }
     case 'car-imgsrc': {
       const sl = STATE.slides[STATE.activeSlide]; if (sl) sl.imageSource = value;
+      render();
+      break;
+    }
+    case 'car-recorte': {
+      const sl = STATE.slides[STATE.activeSlide]; if (sl) sl.selectedImageUrl = value;
       render();
       break;
     }
