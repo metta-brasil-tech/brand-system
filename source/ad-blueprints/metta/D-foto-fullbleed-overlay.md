@@ -3,7 +3,7 @@ id: D-foto-fullbleed-overlay
 display_name: "Foto full-bleed + overlay escuro"
 marca: metta
 archetype: photo-full
-params: { theme: dark, anchor: bottom, align: left, head: accent, cta: yellow }
+params: { theme: dark, anchor: bottom, align: left, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
 image: { prompt_ref: image-prompts/metta/style-D.md, required: true, treatment: "foto fullbleed dramática, overlay escuro na base" }
 formato_nativo: [story, feed]
