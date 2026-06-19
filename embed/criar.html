@@ -1126,7 +1126,7 @@ const IS_LOCAL_DEV = typeof location !== 'undefined'
 const ENGINE_URL = IS_LOCAL_DEV ? 'http://localhost:8000' : '/api';
 const ENGINE_TIMEOUT_MS = IS_LOCAL_DEV ? 300_000 : 60_000;  // local 5min, Vercel Hobby 60s
 
-const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-avatar', 'wiz-imagem-briefing', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
+const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-avatar', 'wiz-imagem-briefing', 'wiz-upload', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
 const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
 const STEPS_CAROUSEL = ['brand', 'mode', 'carousel-build', 'carousel-loading', 'carousel-result'];
 // wiz-imagem só aparece se o estilo selecionado usa imagem.
@@ -1200,6 +1200,13 @@ const AVATAR_VARIANTS = [
   { id: 'decide-sozinho',            label: 'Decide sozinho',               desc: 'Carrega tudo sem co-decisor. Cansaço e solidão da liderança, com dignidade.' },
   { id: 'tecnico-virou-empresario',  label: 'Técnico que virou empresário', desc: 'Era advogado/médico/vendedor bom. Desconforto na transição pra gestor.' },
   { id: 'herdeiro',                  label: 'Herdeiro / continuador',       desc: 'Entrou pra ajudar a família e ficou. Peso de modernizar o legado.' }
+];
+
+/* ----------- DATA: recortes do Tiago (foto real, fundo removido) ----------- */
+const TIAGO_RECORTES = [
+  { id: 'tiago-palco-01', label: 'Tiago — palco 1', src: '/assets/tiago/recortes/tiago-palco-01.png' },
+  { id: 'tiago-palco-02', label: 'Tiago — palco 2', src: '/assets/tiago/recortes/tiago-palco-02.png' },
+  { id: 'tiago-palco-03', label: 'Tiago — palco 3', src: '/assets/tiago/recortes/tiago-palco-03.png' }
 ];
 
 /* ----------- DATA: budget de copy por estilo -----------
@@ -1288,6 +1295,7 @@ function renderStepper() {
     if (s === 'wiz-imagem') return usaImagem;
     if (s === 'wiz-avatar') return usaImagem && STATE.imageSource === 'generate';
     if (s === 'wiz-imagem-briefing') return usaImagem && STATE.imageSource === 'generate';
+    if (s === 'wiz-upload') return usaImagem && STATE.imageSource === 'upload';
     if (s === 'wiz-search') return usaImagem && STATE.imageSource === 'search';
     return true;
   });
@@ -1299,6 +1307,7 @@ function renderStepper() {
     'wiz-style':     'Estilo',
     'wiz-imagem':    'Imagem',
     'wiz-avatar':    'Avatar',
+    'wiz-upload':    'Foto',
     'wiz-imagem-briefing': 'Briefing imagem',
     'wiz-search':    'Busca',
     'wiz-copy':      'Copy',
@@ -1459,23 +1468,63 @@ function tplWizImagem() {
       <p class="step-sub">O estilo escolhido tem espaço pra uma foto/imagem. Você pode gerar uma com IA (mood/cena descritos), ou buscar uma imagem real na web (ex: foto de pessoa pública, marca conhecida).</p>
     </header>
     <div class="step-body">
-      <div class="choice-grid cols-2">
+      <div class="choice-grid">
         <button class="choice ${STATE.imageSource === 'generate' ? 'selected' : ''}" data-action="pick-image-source" data-value="generate">
           <div class="choice-icon">${icon('sparkles', 24)}</div>
           <h3 class="choice-title">Gerar com IA</h3>
-          <p class="choice-desc">A engine cria uma imagem original via gpt-image-1 (OpenAI) baseada no estilo + briefing. Bom pra cena/mood abstrato (mesa de trabalho, ambiente urbano, etc.).</p>
+          <p class="choice-desc">A engine cria uma imagem original via gpt-image-2 baseada no estilo + avatar + briefing. Bom pra cena/mood (loja, escritório, retrato editorial).</p>
           <span class="choice-tag">~$0,19 por imagem</span>
+        </button>
+        <button class="choice ${STATE.imageSource === 'upload' ? 'selected' : ''}" data-action="pick-image-source" data-value="upload">
+          <div class="choice-icon">${icon('download', 24)}</div>
+          <h3 class="choice-title">Enviar foto${STATE.brand === 'tiago' ? ' / foto do Tiago' : ''}</h3>
+          <p class="choice-desc">${STATE.brand === 'tiago' ? 'Use uma foto real do Tiago (a IA não reproduz o rosto dele) — escolha um recorte pronto ou suba uma foto sua.' : 'Suba uma foto sua (crachá, produto, cena real). Vai direto pro layout, sem gerar.'}</p>
+          <span class="choice-tag">foto real</span>
         </button>
         <button class="choice ${STATE.imageSource === 'search' ? 'selected' : ''}" data-action="pick-image-source" data-value="search">
           <div class="choice-icon">${icon('search', 24)}</div>
           <h3 class="choice-title">Buscar na web</h3>
-          <p class="choice-desc">Busca real de imagens via Google. Bom pra pessoa pública (Michael Jordan), produto específico, marca conhecida — onde gerar IA não faz sentido.</p>
-          <span class="choice-tag">Grátis · 100 buscas/dia</span>
+          <p class="choice-desc">Busca real via Google. Bom pra pessoa pública, produto específico, marca conhecida — onde gerar IA não faz sentido.</p>
+          <span class="choice-tag">Grátis · 100/dia</span>
         </button>
       </div>
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+    </div>
+  `;
+}
+
+function tplWizUpload() {
+  const sel = STATE.selectedImageUrl;
+  const recGallery = STATE.brand === 'tiago' ? `
+    <label class="field-label" style="margin-bottom:10px">Recortes do Tiago (foto real, fundo removido)</label>
+    <div class="choice-grid">
+      ${TIAGO_RECORTES.map(r => `
+        <button class="choice ${sel === r.src ? 'selected' : ''}" data-action="pick-recorte" data-value="${r.src}" style="padding:10px">
+          <img src="${r.src}" alt="${escapeHtml(r.label)}" style="width:100%;height:150px;object-fit:contain;background:#1a1a1a;border-radius:8px">
+          <p class="choice-desc" style="margin-top:8px">${escapeHtml(r.label)}</p>
+        </button>`).join('')}
+    </div>
+    <p class="field-hint" style="margin:18px 0 10px">— ou suba uma foto sua —</p>` : '';
+  const uploadedPreview = (sel && sel.startsWith('data:')) ? `<img src="${sel}" alt="enviada" style="max-width:200px;max-height:200px;object-fit:contain;border-radius:8px;margin-top:10px;background:#1a1a1a">` : '';
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Wizard · Foto</p>
+      <h1 class="step-title">${STATE.brand === 'tiago' ? 'Escolha a foto do Tiago' : 'Envie a foto'}</h1>
+      <p class="step-sub">A foto entra direto no layout, sem geração. Ideal pra rosto real, crachá, produto.</p>
+    </header>
+    <div class="step-body">
+      ${recGallery}
+      <div class="field">
+        <label class="field-label" for="upload-input">${STATE.brand === 'tiago' ? 'Subir outra foto' : 'Arquivo'}</label>
+        <input type="file" class="input" id="upload-input" accept="image/png,image/jpeg,image/webp">
+        ${uploadedPreview}
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="next-from-upload" ${sel ? '' : 'disabled'}>Continuar ${icon('arrowRight', 16)}</button>
     </div>
   `;
 }
@@ -2269,6 +2318,7 @@ const templates = {
   'wiz-style':     tplWizStyle,
   'wiz-imagem':    tplWizImagem,
   'wiz-avatar':    tplWizAvatar,
+  'wiz-upload':    tplWizUpload,
   'wiz-imagem-briefing': tplWizImagemBriefing,
   'wiz-search':    tplWizSearch,
   'wiz-copy':      tplWizCopy,
@@ -2372,6 +2422,7 @@ function nextFromCurrent() {
   // wiz-imagem → wiz-search (busca) | wiz-avatar (gerar) | wiz-copy (none)
   if (currentStep === 'wiz-imagem') {
     if (STATE.imageSource === 'search') return goto('wiz-search');
+    if (STATE.imageSource === 'upload') return goto('wiz-upload');
     if (STATE.imageSource === 'generate') return goto('wiz-avatar');
     return goto('wiz-copy');
   }
@@ -2412,6 +2463,15 @@ function attachStepHandlers() {
   });
   updateCopyCounters();
   attachCarouselHandlers();
+  // Upload de foto → data URI no STATE
+  const up = document.getElementById('upload-input');
+  if (up) up.addEventListener('change', () => {
+    const file = up.files && up.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => { STATE.selectedImageUrl = reader.result; STATE.imageSource = 'upload'; render(); };
+    reader.readAsDataURL(file);
+  });
 }
 
 /* Atualiza os contadores "X / max" do passo de copy, com cor:
@@ -2496,6 +2556,14 @@ function onAction(e) {
       break;
     case 'next-from-avatar':
       goto('wiz-imagem-briefing');
+      break;
+    case 'pick-recorte':
+      STATE.selectedImageUrl = value;   // URL do recorte (asset same-origin)
+      render();
+      break;
+    case 'next-from-upload':
+      if (!STATE.selectedImageUrl) return;
+      goto('wiz-copy');
       break;
     // ----- Carrossel -----
     case 'car-add':

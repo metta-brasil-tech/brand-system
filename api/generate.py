@@ -533,10 +533,11 @@ def _run_pipeline_inline(
 
     if image_source == "none" or not model_requires_image:
         diagnostics.append("04-image-gen: PULADO — modelo sem imagem OU user escolheu sem imagem")
-    elif image_source == "search" and image_url:
-        # URL pronta da busca web — usa direto
+    elif image_source in ("search", "upload", "asset") and image_url:
+        # Foto pronta — busca web, upload do user, ou recorte de asset (ex: Tiago).
+        # Usa direto, sem gerar (gpt-image-2 não reproduz rosto real).
         image_file_url = image_url
-        diagnostics.append(f"04-image-gen: PULADO — usando URL da busca: {image_url[:80]}")
+        diagnostics.append(f"04-image-gen: PULADO — foto fornecida ({image_source}): {image_url[:60]}")
     else:
         # Caminho generate (default): roda skill 04 + image-gen
         if bp_prefer_upload:
@@ -717,7 +718,9 @@ def _run_pipeline_inline(
             # image-gen (10-15s low) + render (1s) vai estourar os 60s.
             # Aborta limpo com erro estruturado ao invés de timeout silencioso.
             elapsed_pre_image = int((time.time() - t_start) * 1000)
-            if elapsed_pre_image > 30_000:
+            # Guard existe pro limite de 60s do Vercel. Local (sem esse teto) pode
+            # ser mais paciente — override por PRE_IMAGE_GUARD_MS.
+            if elapsed_pre_image > int(os.getenv("PRE_IMAGE_GUARD_MS", "30000")):
                 diagnostics.append(
                     f"abort-timeout-guard: já gastou {elapsed_pre_image}ms antes do "
                     f"image-gen. Cold start + skills LLM lentas. Tenta de novo (warm)."
