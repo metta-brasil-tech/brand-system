@@ -182,13 +182,16 @@ def _blueprint_placement(fm: dict) -> str:
     return ""
 
 
+# IMPORTANTE: nunca mencionar "text"/"panel"/"overlay" aqui — descrever pro modelo
+# de imagem que vai haver TEXTO faz o gpt-image-2 RENDERIZAR texto dentro da foto.
+# Falamos só de "clean empty negative space" (espaço vazio), nunca do que vai por cima.
 _PLACEMENT_INSTRUCTION = {
-    "right-bleed": "subject fully within the frame, NOT cropped at the edges, positioned in the RIGHT 42% of the frame; the LEFT 58% must be clean, softly blurred neutral background space (a text/colored panel sits there). The subject must NOT extend into that left zone.",
-    "left-bleed": "subject fully within the frame, NOT cropped at the edges, positioned in the LEFT 45% of the frame; the RIGHT 55% must be clean, softly blurred neutral background space (a text panel sits there). The subject must NOT extend into that right zone.",
-    "top-bleed": "subject fully within the frame, NOT cropped, positioned in the UPPER 50%; the LOWER half is clean, softly blurred environmental space (text sits there).",
-    "bottom-bleed": "subject fully within the frame, NOT cropped, positioned in the LOWER 55%; the UPPER half is clean, softly blurred environmental space (text sits there).",
-    "fullbleed": "subject fully within the frame, mid-shot from the waist or chest up, well composed and NOT cropped awkwardly; ample headroom; lower third slightly darker/out-of-focus so text overlaid there stays readable. Intentional editorial framing only.",
-    "object-center": "a single symbolic OBJECT centered on a clean dark background, fully visible and not cropped, dramatic lighting, generous negative space above and below for text. No human subject.",
+    "right-bleed": "subject fully within the frame, NOT cropped at the edges, positioned in the RIGHT 42% of the frame; the LEFT 58% must be clean, softly blurred, EMPTY neutral background with nothing in it. The subject must NOT extend into that left zone.",
+    "left-bleed": "subject fully within the frame, NOT cropped at the edges, positioned in the LEFT 45% of the frame; the RIGHT 55% must be clean, softly blurred, EMPTY neutral background with nothing in it. The subject must NOT extend into that right zone.",
+    "top-bleed": "subject fully within the frame, NOT cropped, positioned in the UPPER 50%; the LOWER half is clean, softly blurred, EMPTY environmental space with nothing in it.",
+    "bottom-bleed": "subject fully within the frame, NOT cropped, positioned in the LOWER 55%; the UPPER half is clean, softly blurred, EMPTY environmental space with nothing in it.",
+    "fullbleed": "subject fully within the frame, mid-shot from the waist or chest up, well composed and NOT cropped awkwardly; ample headroom; lower third slightly darker and out-of-focus, kept as clean EMPTY space. Intentional editorial framing only.",
+    "object-center": "a single symbolic OBJECT centered on a clean dark background, fully visible and not cropped, dramatic lighting, generous EMPTY negative space above and below. No human subject.",
 }
 
 

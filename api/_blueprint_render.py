@@ -117,6 +117,22 @@ _TIAGO_SIG_ARCH = {"tiago-editorial-hero", "tiago-editorial-dark",
                    "tiago-editorial-card", "tiago-editorial-cta"}  # editoriais levam assinatura
 
 
+_TIAGO_AVATAR_CACHE: str | None = None
+
+
+def _tiago_avatar() -> str:
+    """Data URI do avatar (rosto) do Tiago pro header do mock-tweet. '' se ausente."""
+    global _TIAGO_AVATAR_CACHE
+    if _TIAGO_AVATAR_CACHE is None:
+        import base64
+        p = _BRAND_DIR / "tiago-avatar.png"
+        try:
+            _TIAGO_AVATAR_CACHE = "data:image/png;base64," + base64.b64encode(p.read_bytes()).decode("ascii")
+        except Exception:
+            _TIAGO_AVATAR_CACHE = ""
+    return _TIAGO_AVATAR_CACHE
+
+
 def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
     pref = (params.get("brand") or "").strip().lower()
     if pref == "none":
@@ -242,7 +258,10 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
         embed = (f'<div class="tw-embed"><div class="tw-embed-photo" '
                  f'style="background-image:url(\'{image_url}\')"></div></div>') if has_img else ""
         txtcls = "tw-text tw-text--withimg" if has_img else "tw-text"
-        return ('<header class="tw-header"><div class="tw-avatar"><span class="tw-avatar-initial">T</span></div>'
+        _av = _tiago_avatar()
+        avatar_html = (f'<div class="tw-avatar tw-avatar--photo" style="background-image:url(\'{_av}\')"></div>'
+                       if _av else '<div class="tw-avatar"><span class="tw-avatar-initial">T</span></div>')
+        return (f'<header class="tw-header">{avatar_html}'
                 '<div class="tw-user"><div class="tw-name-row"><span class="tw-name">Tiago Alves</span>'
                 '<span class="tw-verified">✓</span></div>'
                 '<span class="tw-handle">@tiago.alves.oliveira</span></div></header>'
