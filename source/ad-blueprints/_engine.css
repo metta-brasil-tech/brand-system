@@ -70,6 +70,21 @@ button { all: unset; }
 }
 .t-head .hi { color: var(--accent); }
 .ad[data-head="accent"] .t-head { color: var(--accent); }
+
+/* ---------- MARCA: logo Metta / assinatura Tiago (theme-aware no _blueprint_render) ---------- */
+.ad .brand-mark { position: absolute; z-index: 7; pointer-events: none; }
+.ad .brand-mark svg { display: block; width: auto; height: auto; }
+.ad .brand-logo svg { height: 44px; filter: drop-shadow(0 1px 8px rgba(0,0,0,.45)); }
+.ad .brand-sig  svg { height: 132px; opacity: .92; filter: drop-shadow(0 1px 8px rgba(0,0,0,.4)); }
+.ad .brand-mark[data-pos="tl"]     { top: 60px; left: 72px; }
+.ad .brand-mark[data-pos="tr"]     { top: 60px; right: 72px; }
+.ad .brand-mark[data-pos="bl"]     { bottom: 60px; left: 72px; }
+.ad .brand-mark[data-pos="br"]     { bottom: 60px; right: 72px; }
+.ad .brand-mark[data-pos="center"] { top: 60px; left: 50%; transform: translateX(-50%); }
+/* story tem zona segura no topo (header do IG) — desce a marca */
+.ad[data-format="story"] .brand-mark[data-pos="tl"],
+.ad[data-format="story"] .brand-mark[data-pos="tr"],
+.ad[data-format="story"] .brand-mark[data-pos="center"] { top: 120px; }
 /* em tema CLARO a palavra-accent amarela some no fundo → vira BLOCO de destaque
    amarelo com texto escuro (DNA do LIGHT-TIPO §5.8). box-decoration-break clona
    o fundo em cada linha quebrada. */

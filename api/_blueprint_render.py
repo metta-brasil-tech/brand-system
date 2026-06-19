@@ -103,6 +103,42 @@ def _cta(copy: dict, cls: str = "") -> str:
     return f'<div class="cta-wrap"><button class="cta {cls}">{_esc(copy["cta"])}</button></div>'
 
 
+# ---------------------------------------------------------------------------
+# Marca: logo Metta (símbolo + wordmark) / assinatura Tiago. SVGs em
+# source/ad-blueprints/_brand/ (bundlados no deploy). Theme-aware:
+#   dark/yellow → wordmark branco + símbolo amarelo · light/paper → wordmark escuro.
+# Ligado por padrão; blueprint pode sobrescrever com param `brand`:
+#   none | tl | tr | bl | br | center.
+# ---------------------------------------------------------------------------
+_BRAND_DIR = _BLUEPRINTS_DIR / "_brand"
+_METTA_NO_BRAND = {"card-mock", "logo-wall"}                       # mock/UI falsa: sem logo
+_TIAGO_SIG_ARCH = {"tiago-editorial-hero", "tiago-editorial-dark",
+                   "tiago-editorial-card", "tiago-editorial-cta"}  # editoriais levam assinatura
+
+
+def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
+    pref = (params.get("brand") or "").strip().lower()
+    if pref == "none":
+        return ""
+    is_tiago = str(marca).lower() == "tiago"
+    if not pref:  # defaults por marca/archetype
+        if is_tiago and arch not in _TIAGO_SIG_ARCH:
+            return ""
+        if not is_tiago and arch in _METTA_NO_BRAND:
+            return ""
+    dark = theme in ("dark", "yellow")
+    if is_tiago:
+        svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
+        cls, default_pos = "brand-sig", "br"
+    else:
+        svg = _read(_BRAND_DIR / ("logo_metta_colorido_h.svg" if dark else "logo_metta_colorido_escuro_h.svg"))
+        cls, default_pos = "brand-logo", "tl"
+    if not svg:
+        return ""
+    pos = pref if pref in ("tl", "tr", "bl", "br", "center") else default_pos
+    return f'<div class="brand-mark {cls}" data-pos="{pos}">{svg}</div>'
+
+
 def _photo(image_url: str, cls: str = "photo") -> str:
     if not image_url:
         return ""
@@ -323,6 +359,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     case = params.get("case", "upper")
     orient = params.get("orient", "vertical")
     marca_attr = (fm.get("marca") or marca or "").strip().lower()
+    brand = _brand_mark(marca_attr, arch, theme, params)
     data_attrs = (
         f'data-marca="{_esc(marca_attr)}" '
         f'data-case="{_esc(case)}" data-orient="{_esc(orient)}" '
@@ -342,6 +379,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
 <style>body{{display:flex;justify-content:center;align-items:flex-start;}}</style>
 </head><body>
 <div class="ad ad-canvas" {data_attrs}>
+{brand}
 {inner}
 </div>
 <script>{js}</script>
