@@ -422,3 +422,7 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-subhead { font-size: 36px; line-height: 1.35; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-body { font-size: 28px; line-height: 1.45; color: var(--t-grey); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-cta { font-size: 28px; color: var(--t-grey); margin: 32px 0 0; }
+/* variant IMAGE — foto embed radius 28px ocupa a base do card */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text--withimg { flex: 0 0 auto; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed { flex: 1; min-height: 0; margin-top: 32px; border-radius: 28px; overflow: hidden; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed-photo { width: 100%; height: 100%; background-size: cover; background-position: center; }
