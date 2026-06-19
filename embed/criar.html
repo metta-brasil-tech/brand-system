@@ -374,6 +374,33 @@ button.stepper-item.done:hover {
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- Carrossel ---------- */
+.car-format { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--metta-sys-color-on-surface-variant); margin-bottom:18px; }
+.car-pillrow { display:flex; gap:10px; }
+.car-pill { padding:8px 16px; border-radius:999px; border:1px solid var(--metta-sys-color-outline,#3a3a3a); background:transparent; color:inherit; font-size:13px; cursor:pointer; }
+.car-pill.on { background:var(--metta-sys-color-primary,#FFBE18); color:#0C161B; border-color:transparent; font-weight:600; }
+.car-strip { display:flex; gap:10px; overflow-x:auto; padding:6px 2px 14px; margin-bottom:20px; }
+.car-thumb { flex:0 0 auto; width:130px; border:1.5px solid var(--metta-sys-color-outline,#3a3a3a); border-radius:12px; padding:12px; cursor:pointer; background:transparent; }
+.car-thumb.active { border-color:var(--metta-sys-color-primary,#FFBE18); }
+.car-thumb-num { width:24px; height:24px; border-radius:50%; background:var(--metta-sys-color-primary,#FFBE18); color:#0C161B; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.car-thumb-lbl { font-size:12px; margin-top:8px; line-height:1.3; min-height:32px; }
+.car-thumb-ctrls { display:flex; gap:8px; margin-top:8px; }
+.car-mini { cursor:pointer; font-size:13px; opacity:.55; user-select:none; }
+.car-mini:hover { opacity:1; }
+.car-mini.car-del:hover { color:#e5484d; }
+.car-add { flex:0 0 auto; width:92px; border:1.5px dashed var(--metta-sys-color-outline,#3a3a3a); border-radius:12px; background:transparent; color:inherit; cursor:pointer; font-size:13px; }
+.car-editor { border-top:1px solid var(--metta-sys-color-outline,#2a2a2a); padding-top:18px; }
+.car-editing { font-size:13px; font-weight:600; color:var(--metta-sys-color-primary,#FFBE18); margin:0 0 14px; }
+.car-preview-wrap { display:flex; align-items:center; justify-content:center; gap:14px; }
+.car-nav { width:44px; height:44px; border-radius:50%; border:1px solid var(--metta-sys-color-outline,#3a3a3a); background:transparent; color:inherit; font-size:24px; cursor:pointer; flex:0 0 auto; }
+.car-nav:disabled { opacity:.3; cursor:default; }
+.car-stage { display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.car-fail { padding:40px; text-align:center; color:#e5484d; border:1px dashed #e5484d; border-radius:12px; }
+.car-dots { display:flex; gap:8px; justify-content:center; margin-top:18px; flex-wrap:wrap; }
+.car-dot { width:10px; height:10px; border-radius:50%; border:none; background:var(--metta-sys-color-outline,#555); cursor:pointer; padding:0; }
+.car-dot.on { background:var(--metta-sys-color-primary,#FFBE18); transform:scale(1.25); }
+.car-dot.err { background:#e5484d; }
+
 .field-hint {
   font-size: 13px;
   color: var(--metta-sys-color-on-surface-variant);
@@ -1073,6 +1100,12 @@ const STATE = {
   copyBody: '',         // texto/corpo (opcional)
   cta: '',
   audioTranscript: '',
+  // ----- Carrossel (modo multi-slide) -----
+  carFormat: 'feed',     // 'feed' | 'story' — formato compartilhado por todos os slides
+  slides: [],            // [{style, copyHeadline, copySubhead, copyBody, cta, imageSource, briefingImage, imageStylePreset, avatarSegment, avatarVariant}]
+  activeSlide: 0,        // índice do slide em edição
+  carouselResults: [],   // [{ok, html, format, model_id, error}] após gerar
+  carouselView: 0,       // índice no preview swipe
   history: [],
   // Resultado da engine real
   run_id: null,         // ID retornado pelo /generate
@@ -1095,6 +1128,7 @@ const ENGINE_TIMEOUT_MS = IS_LOCAL_DEV ? 300_000 : 60_000;  // local 5min, Verce
 
 const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-avatar', 'wiz-imagem-briefing', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
 const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
+const STEPS_CAROUSEL = ['brand', 'mode', 'carousel-build', 'carousel-loading', 'carousel-result'];
 // wiz-imagem só aparece se o estilo selecionado usa imagem.
 // wiz-search só aparece se imageSource === 'search'.
 // Steps terminais (loading, result, error) não aparecem como done-clicáveis no stepper
@@ -1244,7 +1278,9 @@ function icon(name, size) {
    STEPPER
 ============================================================ */
 function renderStepper() {
-  let stepsToShow = STATE.mode === 'audio' ? STEPS_AUDIO : (STATE.mode === 'wizard' ? STEPS_WIZARD : ['brand', 'mode', '...']);
+  let stepsToShow = STATE.mode === 'audio' ? STEPS_AUDIO
+    : (STATE.mode === 'carousel' ? STEPS_CAROUSEL
+    : (STATE.mode === 'wizard' ? STEPS_WIZARD : ['brand', 'mode', '...']));
   // Filtros condicionais: wiz-imagem só se estilo usa imagem; wiz-search só se escolheu buscar
   const styleObj = (STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style);
   const usaImagem = styleObj && styleObj.usaImagem;
@@ -1325,17 +1361,23 @@ function tplMode() {
       <p class="step-sub">Os dois caminhos chegam no mesmo lugar. Use o guiado se quiser controle fino. Use o áudio/texto livre se já tiver clareza do que quer.</p>
     </header>
     <div class="step-body">
-      <div class="choice-grid cols-2">
+      <div class="choice-grid">
         <button class="choice ${STATE.mode === 'wizard' ? 'selected' : ''}" data-action="pick-mode" data-value="wizard">
           <div class="choice-icon">${icon('layers', 24)}</div>
-          <h3 class="choice-title">Guiado</h3>
-          <p class="choice-desc">A gente passa por formato, estilo, copy e CTA, um campo de cada vez. Bom pra primeira vez.</p>
+          <h3 class="choice-title">Guiado (1 peça)</h3>
+          <p class="choice-desc">Formato, estilo, copy e CTA, um campo de cada vez. Bom pra primeira vez.</p>
           <span class="choice-tag">~5 perguntas</span>
+        </button>
+        <button class="choice ${STATE.mode === 'carousel' ? 'selected' : ''}" data-action="pick-mode" data-value="carousel">
+          <div class="choice-icon">${icon('layers', 24)}</div>
+          <h3 class="choice-title">Carrossel</h3>
+          <p class="choice-desc">Monta vários slides ligados (capa → desenvolvimento → fechamento). Gera todos com marca coerente.</p>
+          <span class="choice-tag">multi-slide</span>
         </button>
         <button class="choice ${STATE.mode === 'audio' ? 'selected' : ''}" data-action="pick-mode" data-value="audio">
           <div class="choice-icon">${icon('mic', 24)}</div>
           <h3 class="choice-title">Áudio ou texto livre</h3>
-          <p class="choice-desc">Você grava ou digita o briefing solto. A gente extrai os campos e mostra um resumo antes de gerar.</p>
+          <p class="choice-desc">Grava ou digita o briefing solto. A gente extrai os campos e mostra um resumo.</p>
           <span class="choice-tag">Mais rápido</span>
         </button>
       </div>
@@ -1960,6 +2002,266 @@ function generateMockHeadline() {
 /* ============================================================
    RENDER + ROUTING
 ============================================================ */
+/* ============================================================
+   CARROSSEL — builder multi-slide + geração + preview swipe
+============================================================ */
+const _BUD2FIELD = { headline: 'copyHeadline', subhead: 'copySubhead', body: 'copyBody' };
+
+function _carStylesForBrand() {
+  const all = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
+  const target = STATE.carFormat === 'story' ? 'story' : 'feed';
+  return all.filter(s => !s.comingSoon && (!s.formatos || s.formatos.includes(target)));
+}
+function _newSlide() {
+  const styles = _carStylesForBrand();
+  return { style: (styles[0] || {}).id || '', copyHeadline: '', copySubhead: '', copyBody: '', cta: '',
+    imageSource: 'generate', briefingImage: '', imageStylePreset: 'fotorrealista',
+    avatarSegment: 'generico', avatarVariant: 'padrao' };
+}
+function _ensureSlides() {
+  if (!STATE.slides.length) { STATE.slides = [_newSlide(), _newSlide(), _newSlide()]; STATE.activeSlide = 0; }
+}
+function _slideStyleObj(s) {
+  return (STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(x => x.id === (s && s.style)) || {};
+}
+
+function tplCarouselBuild() {
+  _ensureSlides();
+  const styles = _carStylesForBrand();
+  if (STATE.activeSlide >= STATE.slides.length) STATE.activeSlide = 0;
+  const sl = STATE.slides[STATE.activeSlide];
+  const styleObj = _slideStyleObj(sl);
+  const usaImagem = !!styleObj.usaImagem;
+  const bud = copyBudgetFor(sl.style);
+  const cnt = (f) => `<span class="copy-count" data-budfield="${f}" data-max="${bud[f] || 0}"></span>`;
+  const strip = STATE.slides.map((s, i) => {
+    const lbl = (_slideStyleObj(s).label) || s.style || '—';
+    return `<div class="car-thumb ${i === STATE.activeSlide ? 'active' : ''}" data-action="car-pick" data-value="${i}">
+      <div class="car-thumb-num">${i + 1}</div>
+      <div class="car-thumb-lbl">${escapeHtml(lbl)}</div>
+      <div class="car-thumb-ctrls">
+        <span class="car-mini" data-action="car-move" data-value="${i}:-1">◀</span>
+        <span class="car-mini" data-action="car-move" data-value="${i}:1">▶</span>
+        <span class="car-mini car-del" data-action="car-del" data-value="${i}">✕</span>
+      </div>
+    </div>`;
+  }).join('');
+  const styleOpts = styles.map(s => `<option value="${s.id}" ${s.id === sl.style ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
+  const imgBlock = usaImagem ? `
+    <div class="field">
+      <label class="field-label">Imagem</label>
+      <div class="car-pillrow">
+        <button class="car-pill ${sl.imageSource === 'generate' ? 'on' : ''}" data-action="car-imgsrc" data-value="generate">Gerar com IA</button>
+        <button class="car-pill ${sl.imageSource === 'none' ? 'on' : ''}" data-action="car-imgsrc" data-value="none">Sem imagem</button>
+      </div>
+    </div>
+    ${sl.imageSource === 'generate' ? `
+    <div class="field">
+      <label class="field-label">Avatar da foto</label>
+      <div class="row">
+        <select class="input" data-action="car-field" data-field="avatarSegment">${AVATAR_SEGMENTS.map(a => `<option value="${a.id}" ${a.id === sl.avatarSegment ? 'selected' : ''}>${escapeHtml(a.label)}</option>`).join('')}</select>
+        <select class="input" data-action="car-field" data-field="avatarVariant">${AVATAR_VARIANTS.map(a => `<option value="${a.id}" ${a.id === sl.avatarVariant ? 'selected' : ''}>${escapeHtml(a.label)}</option>`).join('')}</select>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label">Direção da imagem (opcional)</label>
+      <input type="text" class="input" data-action="car-field" data-field="briefingImage" value="${escapeHtml(sl.briefingImage)}" placeholder="cena / mood / cores">
+    </div>` : ''}` : '';
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Carrossel · ${escapeHtml(STATE.brand === 'metta' ? 'Metta' : 'Tiago Alves')}</p>
+      <h1 class="step-title">Monte os slides</h1>
+      <p class="step-sub">Cada slide tem estilo e copy próprios. Marca, assinatura e colagem ficam coerentes entre todos.</p>
+    </header>
+    <div class="step-body">
+      <div class="car-format">Formato:
+        <button class="car-pill ${STATE.carFormat === 'feed' ? 'on' : ''}" data-action="car-format" data-value="feed">Feed 4:5</button>
+        <button class="car-pill ${STATE.carFormat === 'story' ? 'on' : ''}" data-action="car-format" data-value="story">Story 9:16</button>
+      </div>
+      <div class="car-strip">${strip}<button class="car-add" data-action="car-add">＋ Slide</button></div>
+      <div class="car-editor">
+        <p class="car-editing">Editando slide ${STATE.activeSlide + 1} de ${STATE.slides.length}</p>
+        <div class="field"><label class="field-label">Estilo</label>
+          <select class="input" data-action="car-field" data-field="style">${styleOpts}</select></div>
+        <div class="field"><label class="field-label">Headline ${cnt('headline')}</label>
+          <textarea class="textarea" rows="2" data-action="car-field" data-field="copyHeadline" placeholder="Frase de impacto do slide">${escapeHtml(sl.copyHeadline)}</textarea></div>
+        <div class="field"><label class="field-label">Subheadline (opcional) ${cnt('subhead')}</label>
+          <textarea class="textarea" rows="2" data-action="car-field" data-field="copySubhead">${escapeHtml(sl.copySubhead)}</textarea></div>
+        <div class="field"><label class="field-label">Corpo (opcional) ${cnt('body')}</label>
+          <textarea class="textarea" rows="3" data-action="car-field" data-field="copyBody">${escapeHtml(sl.copyBody)}</textarea></div>
+        <div class="field"><label class="field-label">CTA (opcional)</label>
+          <input type="text" class="input" data-action="car-field" data-field="cta" value="${escapeHtml(sl.cta)}" placeholder="Ex: Arrasta pro lado"></div>
+        ${imgBlock}
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
+      <button class="btn btn-primary" data-action="car-generate">${icon('sparkles', 16)} Gerar carrossel (${STATE.slides.length})</button>
+    </div>`;
+}
+
+function tplCarouselLoading() {
+  return `<div class="loading-step active" style="margin:80px auto;text-align:center">
+    <div class="loading-step-dot"></div>
+    <h1 class="step-title" style="margin-top:24px">Gerando carrossel…</h1>
+    <p class="step-sub" id="car-progress">Preparando os slides…</p>
+    <p class="field-hint" style="margin-top:8px">Cada slide leva ~30s. Não feche a janela.</p>
+  </div>`;
+}
+
+function tplCarouselResult() {
+  const n = STATE.carouselResults.length;
+  if (!n) return tplCarouselBuild();
+  if (STATE.carouselView >= n) STATE.carouselView = 0;
+  const cur = STATE.carouselResults[STATE.carouselView] || {};
+  const okCount = STATE.carouselResults.filter(r => r.ok).length;
+  const dots = STATE.carouselResults.map((r, i) =>
+    `<button class="car-dot ${i === STATE.carouselView ? 'on' : ''} ${r.ok ? '' : 'err'}" data-action="car-view" data-value="${i}"></button>`).join('');
+  return renderStepper() + `
+    <header class="step-head">
+      <p class="step-eyebrow">Carrossel · pronto</p>
+      <h1 class="step-title">${okCount}/${n} slides gerados</h1>
+      <p class="step-sub">Navegue pelas setas/bolinhas. Exporte todos quando estiver bom.</p>
+    </header>
+    <div class="step-body">
+      <div class="car-preview-wrap">
+        <button class="car-nav" data-action="car-view" data-value="${(STATE.carouselView - 1 + n) % n}" ${n < 2 ? 'disabled' : ''}>‹</button>
+        <div class="car-stage" id="car-stage">
+          ${cur.ok ? `<iframe id="car-frame" class="ad-preview"></iframe>` : `<div class="car-fail">Slide ${STATE.carouselView + 1} falhou:<br><small>${escapeHtml(cur.error || 'erro')}</small></div>`}
+        </div>
+        <button class="car-nav" data-action="car-view" data-value="${(STATE.carouselView + 1) % n}" ${n < 2 ? 'disabled' : ''}>›</button>
+      </div>
+      <div class="car-dots">${dots}</div>
+    </div>
+    <div class="foot">
+      <button class="btn btn-ghost" data-action="car-back-build">${icon('arrowLeft', 16)} Editar slides</button>
+      <button class="btn btn-primary" data-action="car-export">${icon('download', 16)} Exportar todos</button>
+    </div>`;
+}
+
+function updateCarCounters() {
+  const sl = STATE.slides[STATE.activeSlide]; if (!sl) return;
+  document.querySelectorAll('.car-editor .copy-count[data-budfield]').forEach(span => {
+    const bk = span.dataset.budfield, max = parseInt(span.dataset.max || '0', 10);
+    const ta = document.querySelector(`.car-editor [data-field="${_BUD2FIELD[bk]}"]`);
+    if (!ta || !max) { span.textContent = ''; return; }
+    const len = ta.value.length;
+    span.textContent = `${len}/${max}`;
+    span.style.color = len > max ? '#e5484d' : (len > max * 0.85 ? '#f5a623' : 'var(--ccd-text-muted,#8a8a8a)');
+    span.style.fontWeight = len > max ? '700' : '500';
+  });
+}
+
+function attachCarouselHandlers() {
+  document.querySelectorAll('.car-editor [data-action="car-field"]').forEach(el => {
+    const field = el.dataset.field;
+    const evt = el.tagName === 'SELECT' ? 'change' : 'input';
+    el.addEventListener(evt, () => {
+      const sl = STATE.slides[STATE.activeSlide]; if (!sl) return;
+      sl[field] = el.value;
+      if (evt === 'change') render();   // style/avatar mudam layout → re-render
+      else updateCarCounters();          // texto → só contadores
+    });
+  });
+  updateCarCounters();
+}
+
+function carSlidePayload(slide) {
+  const marca = STATE.brand === 'metta' ? 'Metta (institucional)' : 'Tiago Alves (marca pessoal)';
+  const copy = [slide.copyHeadline, slide.copySubhead, slide.copyBody].filter(Boolean).join('\n');
+  const briefing = `Marca: ${marca}.\nSlide de carrossel.\nCopy:\n${copy || '(vazio)'}`;
+  const usaImg = !!_slideStyleObj(slide).usaImagem;
+  const imgsrc = usaImg ? (slide.imageSource || 'generate') : 'none';
+  const gen = imgsrc === 'generate';
+  return {
+    briefing, mock: false,
+    model_id: slide.style,
+    format: STATE.carFormat,
+    image_source: imgsrc,
+    ...(gen && slide.briefingImage && slide.briefingImage.trim() ? { briefing_image: slide.briefingImage.trim() } : {}),
+    ...(gen && slide.imageStylePreset ? { image_style_preset: slide.imageStylePreset } : {}),
+    ...(gen && slide.avatarSegment ? { avatar_segment: slide.avatarSegment } : {}),
+    ...(gen && slide.avatarVariant ? { avatar_variant: slide.avatarVariant } : {}),
+    ...(slide.copyHeadline && slide.copyHeadline.trim() ? { copy_headline: slide.copyHeadline.trim() } : {}),
+    ...(slide.copySubhead && slide.copySubhead.trim() ? { copy_subhead: slide.copySubhead.trim() } : {}),
+    ...(slide.copyBody && slide.copyBody.trim() ? { copy_body: slide.copyBody.trim() } : {}),
+    ...(slide.cta && slide.cta.trim() ? { cta_text: slide.cta.trim() } : {})
+  };
+}
+
+async function postGenerate(payload) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), ENGINE_TIMEOUT_MS);
+  try {
+    const r = await fetch(`${ENGINE_URL}/generate`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal });
+    if (!r.ok) { let d = r.statusText; try { d = (await r.json()).detail || d; } catch (_) {} throw new Error(d); }
+    return await r.json();
+  } finally { clearTimeout(timeoutId); }
+}
+
+async function runCarouselGeneration() {
+  STATE.carouselResults = [];
+  const prog = document.getElementById('car-progress');
+  for (let i = 0; i < STATE.slides.length; i++) {
+    if (prog) prog.textContent = `Gerando slide ${i + 1} de ${STATE.slides.length}…`;
+    try {
+      const res = await postGenerate(carSlidePayload(STATE.slides[i]));
+      STATE.carouselResults.push({ ok: !!res.ok, html: res.html || '', format: res.format || STATE.carFormat, model_id: res.model_id || STATE.slides[i].style });
+    } catch (err) {
+      STATE.carouselResults.push({ ok: false, error: err && err.message ? err.message : String(err), format: STATE.carFormat });
+    }
+  }
+  STATE.carouselView = 0;
+  currentStep = 'carousel-result';
+  render();
+}
+
+function hydrateCarousel() {
+  const cur = STATE.carouselResults[STATE.carouselView];
+  if (!cur || !cur.ok || !cur.html) return;
+  const iframe = document.getElementById('car-frame');
+  if (!iframe) return;
+  const SIZES = { story: [1080, 1920], feed: [1080, 1350], sqr: [1080, 1080] };
+  const [cw, ch] = SIZES[cur.format] || SIZES.feed;
+  const container = iframe.parentElement;
+  const availW = Math.min(container.clientWidth || 460, 460);
+  const scale = availW / cw;
+  iframe.style.width = cw + 'px'; iframe.style.height = ch + 'px';
+  iframe.style.transform = `scale(${scale})`; iframe.style.transformOrigin = 'top left';
+  iframe.style.aspectRatio = 'auto';
+  container.style.width = (cw * scale) + 'px'; container.style.height = (ch * scale) + 'px';
+  iframe.srcdoc = cur.html;
+}
+
+async function exportCarousel() {
+  if (typeof html2canvas === 'undefined') { alert('html2canvas ainda carregando — tenta de novo.'); return; }
+  const oks = STATE.carouselResults.map((r, i) => ({ r, i })).filter(x => x.r.ok && x.r.html);
+  if (!oks.length) { alert('Nenhum slide gerado pra exportar.'); return; }
+  const stage = document.createElement('iframe');
+  stage.style.cssText = 'position:fixed;left:-9999px;top:0;border:0;';
+  document.body.appendChild(stage);
+  for (const { r, i } of oks) {
+    const SIZES = { story: [1080, 1920], feed: [1080, 1350], sqr: [1080, 1080] };
+    const [cw, ch] = SIZES[r.format] || SIZES.feed;
+    stage.width = cw; stage.height = ch;
+    await new Promise(res => { stage.onload = res; stage.srcdoc = r.html; });
+    try { if (stage.contentDocument.fonts) await stage.contentDocument.fonts.ready; } catch (_) {}
+    await new Promise(res => setTimeout(res, 400));   // deixa o _engine.js fitar
+    const root = stage.contentDocument.querySelector('.ad-canvas');
+    if (!root) continue;
+    const canvas = await html2canvas(root, { backgroundColor: null, scale: 1, useCORS: true, logging: false, width: cw, height: ch, windowWidth: cw, windowHeight: ch });
+    const blob = await new Promise(res => canvas.toBlob(res, 'image/png', 0.95));
+    if (blob) {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${STATE.brand}-carrossel-slide-${String(i + 1).padStart(2, '0')}.png`;
+      a.click(); URL.revokeObjectURL(a.href);
+      await new Promise(res => setTimeout(res, 250));
+    }
+  }
+  document.body.removeChild(stage);
+}
+
 const templates = {
   'brand':         tplBrand,
   'mode':          tplMode,
@@ -1974,6 +2276,9 @@ const templates = {
   'wiz-confirm':   tplWizConfirm,
   'audio-record':  tplAudioRecord,
   'audio-confirm': tplAudioConfirm,
+  'carousel-build':   tplCarouselBuild,
+  'carousel-loading': tplCarouselLoading,
+  'carousel-result':  tplCarouselResult,
   'loading':       tplLoading,
   'result':        tplResult,
   'error':         tplError
@@ -1988,6 +2293,8 @@ function render() {
   if (currentStep === 'loading')      runGenerationReal();
   if (currentStep === 'audio-record') initSpeechRecognition();
   if (currentStep === 'result')       hydrateAdPreview();
+  if (currentStep === 'carousel-loading') runCarouselGeneration();
+  if (currentStep === 'carousel-result')  hydrateCarousel();
   // Notifica parent pra ajustar altura do iframe
   notifyHeight();
 }
@@ -2070,7 +2377,7 @@ function nextFromCurrent() {
   }
   const map = {
     'brand':         'mode',
-    'mode':          STATE.mode === 'audio' ? 'audio-record' : 'wiz-format',
+    'mode':          STATE.mode === 'audio' ? 'audio-record' : (STATE.mode === 'carousel' ? 'carousel-build' : 'wiz-format'),
     'wiz-format':    'wiz-style',
     'wiz-cta':       'wiz-confirm',
     'audio-record':  'audio-confirm'
@@ -2104,6 +2411,7 @@ function attachStepHandlers() {
     el.addEventListener('input', () => { STATE[key] = el.value; updateCopyCounters(); });
   });
   updateCopyCounters();
+  attachCarouselHandlers();
 }
 
 /* Atualiza os contadores "X / max" do passo de copy, com cor:
@@ -2188,6 +2496,64 @@ function onAction(e) {
       break;
     case 'next-from-avatar':
       goto('wiz-imagem-briefing');
+      break;
+    // ----- Carrossel -----
+    case 'car-add':
+      STATE.slides.push(_newSlide());
+      STATE.activeSlide = STATE.slides.length - 1;
+      render();
+      break;
+    case 'car-del': {
+      const idx = parseInt(value, 10);
+      if (STATE.slides.length <= 1) return;   // mantém pelo menos 1
+      STATE.slides.splice(idx, 1);
+      if (STATE.activeSlide >= STATE.slides.length) STATE.activeSlide = STATE.slides.length - 1;
+      render();
+      break;
+    }
+    case 'car-move': {
+      const [idx, dir] = value.split(':').map(Number);
+      const j = idx + dir;
+      if (j < 0 || j >= STATE.slides.length) return;
+      const tmp = STATE.slides[idx]; STATE.slides[idx] = STATE.slides[j]; STATE.slides[j] = tmp;
+      STATE.activeSlide = j;
+      render();
+      break;
+    }
+    case 'car-pick':
+      STATE.activeSlide = parseInt(value, 10);
+      render();
+      break;
+    case 'car-format': {
+      STATE.carFormat = value;
+      // revalida estilos: se algum slide tem estilo incompatível com o novo formato, troca
+      const okIds = _carStylesForBrand().map(s => s.id);
+      STATE.slides.forEach(s => { if (!okIds.includes(s.style)) s.style = okIds[0] || ''; });
+      render();
+      break;
+    }
+    case 'car-imgsrc': {
+      const sl = STATE.slides[STATE.activeSlide]; if (sl) sl.imageSource = value;
+      render();
+      break;
+    }
+    case 'car-generate': {
+      const missing = STATE.slides.findIndex(s => !s.copyHeadline || !s.copyHeadline.trim());
+      if (missing >= 0) { alert(`Slide ${missing + 1} está sem headline.`); STATE.activeSlide = missing; render(); return; }
+      currentStep = 'carousel-loading';
+      render();
+      break;
+    }
+    case 'car-view':
+      STATE.carouselView = parseInt(value, 10);
+      render();
+      break;
+    case 'car-back-build':
+      currentStep = 'carousel-build';
+      render();
+      break;
+    case 'car-export':
+      exportCarousel();
       break;
     case 'next':
       nextFromCurrent();
@@ -2284,6 +2650,12 @@ function onAction(e) {
       STATE.copySubhead = '';
       STATE.copyBody = '';
       STATE.error = null;
+      // carrossel
+      STATE.carFormat = 'feed';
+      STATE.slides = [];
+      STATE.activeSlide = 0;
+      STATE.carouselResults = [];
+      STATE.carouselView = 0;
       currentStep = 'brand';
       render();
       break;
