@@ -129,7 +129,10 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
     dark = theme in ("dark", "yellow")
     if is_tiago:
         svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
-        cls, default_pos = "brand-sig", "br"
+        # Editoriais levam a assinatura no TOPO (igual às refs de carrossel do Tiago);
+        # hero entre as eyebrows (centro), os demais à direita. Outros archetypes: rodapé.
+        cls = "brand-sig"
+        default_pos = "center" if arch == "tiago-editorial-hero" else ("tr" if arch in _TIAGO_SIG_ARCH else "br")
     else:
         svg = _read(_BRAND_DIR / ("logo_metta_colorido_h.svg" if dark else "logo_metta_colorido_escuro_h.svg"))
         cls, default_pos = "brand-logo", "tl"

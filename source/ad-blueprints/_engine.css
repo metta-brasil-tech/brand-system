@@ -76,6 +76,10 @@ button { all: unset; }
 .ad .brand-mark svg { display: block; width: auto; height: auto; }
 .ad .brand-logo svg { height: 44px; filter: drop-shadow(0 1px 8px rgba(0,0,0,.45)); }
 .ad .brand-sig  svg { height: 132px; opacity: .92; filter: drop-shadow(0 1px 8px rgba(0,0,0,.4)); }
+/* assinatura no TOPO (editoriais) é menor — cabe entre as eyebrows */
+.ad .brand-sig[data-pos="center"] svg,
+.ad .brand-sig[data-pos="tr"] svg,
+.ad .brand-sig[data-pos="tl"] svg { height: 74px; }
 .ad .brand-mark[data-pos="tl"]     { top: 60px; left: 72px; }
 .ad .brand-mark[data-pos="tr"]     { top: 60px; right: 72px; }
 .ad .brand-mark[data-pos="bl"]     { bottom: 60px; left: 72px; }
