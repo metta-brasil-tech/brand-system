@@ -112,6 +112,7 @@ def _cta(copy: dict, cls: str = "") -> str:
 # ---------------------------------------------------------------------------
 _BRAND_DIR = _BLUEPRINTS_DIR / "_brand"
 _METTA_NO_BRAND = {"card-mock", "logo-wall"}                       # mock/UI falsa: sem logo
+_METTA_COVER_ARCH = {"photo-full", "photo-side", "photo-band"}     # covers ganham eyebrow categoria
 _TIAGO_SIG_ARCH = {"tiago-editorial-hero", "tiago-editorial-dark",
                    "tiago-editorial-card", "tiago-editorial-cta"}  # editoriais levam assinatura
 
@@ -139,7 +140,11 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
     if not svg:
         return ""
     pos = pref if pref in ("tl", "tr", "bl", "br", "center") else default_pos
-    return f'<div class="brand-mark {cls}" data-pos="{pos}">{svg}</div>'
+    out = f'<div class="brand-mark {cls}" data-pos="{pos}">{svg}</div>'
+    # Cover Metta: eyebrow de categoria no topo-direito (igual às refs)
+    if not is_tiago and arch in _METTA_COVER_ARCH and pos == "tl":
+        out += '<div class="brand-eyebrow" data-pos="tr">INTELIGÊNCIA COMERCIAL</div>'
+    return out
 
 
 def _photo(image_url: str, cls: str = "photo") -> str:

@@ -89,6 +89,9 @@ button { all: unset; }
 .ad[data-format="story"] .brand-mark[data-pos="tl"],
 .ad[data-format="story"] .brand-mark[data-pos="tr"],
 .ad[data-format="story"] .brand-mark[data-pos="center"] { top: 120px; }
+/* eyebrow de categoria (cover Metta) — topo-direito */
+.ad .brand-eyebrow { position: absolute; z-index: 7; top: 74px; right: 72px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 21px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg); opacity: .92; text-shadow: 0 1px 6px rgba(0,0,0,.4); }
+.ad[data-format="story"] .brand-eyebrow { top: 120px; }
 /* em tema CLARO a palavra-accent amarela some no fundo → vira BLOCO de destaque
    amarelo com texto escuro (DNA do LIGHT-TIPO §5.8). box-decoration-break clona
    o fundo em cada linha quebrada. */
