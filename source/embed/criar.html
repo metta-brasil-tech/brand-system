@@ -364,6 +364,15 @@ button.stepper-item.done:hover {
   text-transform: uppercase;
   color: var(--metta-sys-color-on-surface-variant);
 }
+.copy-count {
+  float: right;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: 100%;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+}
 
 .field-hint {
   font-size: 13px;
@@ -1159,6 +1168,44 @@ const AVATAR_VARIANTS = [
   { id: 'herdeiro',                  label: 'Herdeiro / continuador',       desc: 'Entrou pra ajudar a família e ficou. Peso de modernizar o legado.' }
 ];
 
+/* ----------- DATA: budget de copy por estilo -----------
+ * Limite RECOMENDADO de caracteres pra copy ficar punchy e o texto GRANDE.
+ * Derivado da "Direção de copy" de cada blueprint. O contador ao vivo no passo
+ * de copy avisa quando passa do budget (acima dele o auto-fit encolhe o texto).
+ * headline/subhead/body; 0 = campo não usado nesse estilo.
+ */
+const COPY_BUDGET = {
+  'YELLOW-BLOCO':                    { headline: 55,  subhead: 70, body: 100 },
+  'A-headline-foto-dark':            { headline: 65,  subhead: 70, body: 130 },
+  'D-foto-fullbleed-overlay':        { headline: 90,  subhead: 60, body: 0 },
+  'C-tipografia-pura-dark':          { headline: 90,  subhead: 0,  body: 0 },
+  'YELLOW-EDITORIAL':                { headline: 50,  subhead: 60, body: 140 },
+  'YELLOW-FRAME':                    { headline: 80,  subhead: 0,  body: 0 },
+  'METTA-TWEET-CARD':                { headline: 160, subhead: 0,  body: 0 },
+  'B-foto-top-headline-mixed':       { headline: 80,  subhead: 60, body: 150 },
+  'LIGHT-SURREAL':                   { headline: 95,  subhead: 0,  body: 120 },
+  'NEWS-CARD':                       { headline: 110, subhead: 80, body: 160 },
+  'YELLOW-SPLIT':                    { headline: 80,  subhead: 0,  body: 100 },
+  'H-fundo-branco-headline-gigante': { headline: 60,  subhead: 0,  body: 0 },
+  'I-retrato-editorial-pb':          { headline: 95,  subhead: 70, body: 0 },
+  'LOGO-WALL':                       { headline: 90,  subhead: 60, body: 0 },
+  'TIAGO-TWITTER-CARD':              { headline: 180, subhead: 0,  body: 0 },
+  'TIAGO-NOTES-MOCKUP':              { headline: 60,  subhead: 0,  body: 300 },
+  'TIAGO-TYPO-PURE':                 { headline: 90,  subhead: 0,  body: 0 },
+  'TIAGO-EDITORIAL-CTA':             { headline: 100, subhead: 80, body: 0 },
+  'TIAGO-TWITTER-CARD-IMAGE':        { headline: 180, subhead: 0,  body: 0 },
+  'TIAGO-STORY-COVER-HERO':          { headline: 90,  subhead: 0,  body: 0 },
+  'TIAGO-STORY-YELLOW-BLOCK':        { headline: 60,  subhead: 0,  body: 100 },
+  'TIAGO-STORY-MINIMAL-QUESTION':    { headline: 100, subhead: 0,  body: 0 },
+  'TIAGO-DARK-SURREAL':              { headline: 0,   subhead: 0,  body: 0 },
+  'TIAGO-PHOTO-RAW':                 { headline: 0,   subhead: 0,  body: 0 },
+  'TIAGO-EDITORIAL-HERO':            { headline: 80,  subhead: 80, body: 0 },
+  'TIAGO-EDITORIAL-CARD':            { headline: 80,  subhead: 0,  body: 300 },
+  'TIAGO-EDITORIAL-DARK':            { headline: 80,  subhead: 90, body: 0 }
+};
+const COPY_BUDGET_DEFAULT = { headline: 90, subhead: 70, body: 150 };
+function copyBudgetFor(id) { return COPY_BUDGET[id] || COPY_BUDGET_DEFAULT; }
+
 /* ----------- DATA: formatos ----------- */
 const FORMATS = [
   { id: 'post',      label: 'Post simples',  desc: '1 imagem 1080×1350 (4:5).',                  icon: 'square'  },
@@ -1514,27 +1561,33 @@ function tplWizCopy() {
   // Copy SEMPRE estruturada — modo 'gerar' (LLM escreve sozinho) foi removido.
   // User SEMPRE fornece headline + subhead + body separados, evitando ambiguidade
   // entre "texto livre como copy" vs "texto livre como briefing pra gerar copy".
+  const bud = copyBudgetFor(STATE.style);
+  const styleLbl = ((STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style) || {}).label || STATE.style || 'estilo';
+  const cnt = (field) => `<span class="copy-count" id="cnt-${field}" data-max="${bud[field]||0}"></span>`;
+  const bodyNote = bud.body === 0
+    ? 'Esse estilo não usa corpo — deixe vazio.'
+    : 'Texto adicional. Pode ficar vazio se headline + sub já bastam.';
   return renderStepper() + `
     <header class="step-head">
       <p class="step-eyebrow">Wizard · Copy</p>
       <h1 class="step-title">Qual o texto da peça?</h1>
-      <p class="step-sub">Preenche cada campo separado. Headline é obrigatório; subheadline e corpo são opcionais.</p>
+      <p class="step-sub">Headline curta e punchy mantém o texto GRANDE. O contador mostra o limite recomendado pro estilo <strong>${escapeHtml(styleLbl)}</strong> — passar dele faz o auto-fit encolher a fonte.</p>
     </header>
     <div class="step-body">
       <div class="field">
-        <label class="field-label" for="copy-headline-input">Headline</label>
+        <label class="field-label" for="copy-headline-input">Headline ${cnt('headline')}</label>
         <textarea class="textarea" id="copy-headline-input" rows="2" placeholder="Ex: Para de demitir antes de diagnosticar.">${escapeHtml(STATE.copyHeadline)}</textarea>
-        <p class="field-hint">Frase de impacto principal. 1 sentença, sentence case.</p>
+        <p class="field-hint">Frase de impacto principal. 1 sentença. Quanto mais curta, maior aparece.</p>
       </div>
       <div class="field">
-        <label class="field-label" for="copy-subhead-input">Subheadline (opcional)</label>
+        <label class="field-label" for="copy-subhead-input">Subheadline (opcional) ${cnt('subhead')}</label>
         <textarea class="textarea" id="copy-subhead-input" rows="2" placeholder="Ex: Em 70% dos casos, o problema é o sistema, não a pessoa.">${escapeHtml(STATE.copySubhead)}</textarea>
         <p class="field-hint">Linha de apoio logo abaixo da headline.</p>
       </div>
       <div class="field">
-        <label class="field-label" for="copy-body-input">Texto / corpo (opcional)</label>
+        <label class="field-label" for="copy-body-input">Texto / corpo (opcional) ${cnt('body')}</label>
         <textarea class="textarea" id="copy-body-input" rows="4" placeholder="Ex: Mais detalhes, dado de prova, ou desenvolvimento da tese.">${escapeHtml(STATE.copyBody)}</textarea>
-        <p class="field-hint">Texto adicional. Pode ficar vazio se headline + sub já bastam.</p>
+        <p class="field-hint">${bodyNote}</p>
       </div>
     </div>
     <div class="foot">
@@ -2041,6 +2094,35 @@ function attachStepHandlers() {
     STATE.audioTranscript = audioText.value;
     const t = document.getElementById('transcript');
     if (t) t.textContent = audioText.value;
+  });
+  // Copy: salva no STATE ao vivo + atualiza contadores de budget por estilo
+  [['copy-headline-input','copyHeadline','headline'],
+   ['copy-subhead-input','copySubhead','subhead'],
+   ['copy-body-input','copyBody','body']].forEach(([id, key, field]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', () => { STATE[key] = el.value; updateCopyCounters(); });
+  });
+  updateCopyCounters();
+}
+
+/* Atualiza os contadores "X / max" do passo de copy, com cor:
+   verde (ok) → âmbar (perto do limite) → vermelho (passou, vai encolher). */
+function updateCopyCounters() {
+  const map = { headline: 'copy-headline-input', subhead: 'copy-subhead-input', body: 'copy-body-input' };
+  Object.keys(map).forEach(field => {
+    const span = document.getElementById('cnt-' + field);
+    const ta = document.getElementById(map[field]);
+    if (!span || !ta) return;
+    const max = parseInt(span.dataset.max || '0', 10);
+    const len = ta.value.length;
+    if (!max) { span.textContent = ''; return; }
+    span.textContent = `${len}/${max}`;
+    let color = 'var(--ccd-text-muted, #8a8a8a)';
+    if (len > max) color = '#e5484d';            // passou — auto-fit vai encolher
+    else if (len > max * 0.85) color = '#f5a623'; // chegando no limite
+    span.style.color = color;
+    span.style.fontWeight = len > max ? '700' : '500';
   });
 }
 
