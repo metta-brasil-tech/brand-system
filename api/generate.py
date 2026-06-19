@@ -289,6 +289,7 @@ def _run_pipeline_inline(
     wizard_format: str | None = None,
     avatar_segment: str | None = None,
     avatar_variant: str | None = None,
+    image_only: bool = False,
     render_png: bool = False,
     art_director: bool = True,
     vision_qa: bool = True,
@@ -736,8 +737,9 @@ def _run_pipeline_inline(
                 }
             p = image_spec["prompts"][0]
             # Aspect ratio resolvido pelo formato — story=9:16, feed=4:5, sqr=1:1
-            aspect_by_format = {"story": "9:16", "feed": "4:5", "sqr": "1:1"}
-            aspect = p.get("aspect_ratio") or aspect_by_format.get(format_key, "9:16")
+            aspect_by_format = {"story": "9:16", "feed": "4:5", "sqr": "1:1", "wide": "16:9"}
+            # image_only (panorâmica) força wide independente do aspect do prompt
+            aspect = ("16:9" if image_only else (p.get("aspect_ratio") or aspect_by_format.get(format_key, "9:16")))
             negative = p.get("negative_prompt", "")
             primary_prompt = p["prompt"]
             fallback_prompts = p.get("iteration_strategy", {}).get("fallback_prompts") or []
@@ -774,6 +776,16 @@ def _run_pipeline_inline(
     if image_file_url:
         image_data_uri = _image_to_data_uri(image_file_url)
         diagnostics.append(f"image-uri: data:image embed ({len(image_data_uri) // 1024}KB base64)")
+
+    # image_only (panorâmica): devolve só a imagem larga gerada, sem renderizar.
+    # O frontend fatia em N e usa cada pedaço como fundo de um slide.
+    if image_only:
+        return {
+            "ok": bool(image_data_uri), "run_id": run_id, "image_only": True,
+            "image_data_uri": image_data_uri,
+            "error": "" if image_data_uri else "image-gen falhou no modo image_only",
+            "diagnostics": diagnostics,
+        }
 
     # ============================================================
     # Render HTML (substitui assembler Pillow + skill 03 + skill 05)
@@ -950,6 +962,7 @@ class handler(BaseHTTPRequestHandler):
                 wizard_format=data.get("format") or None,
                 avatar_segment=data.get("avatar_segment") or None,
                 avatar_variant=data.get("avatar_variant") or None,
+                image_only=bool(data.get("image_only", False)),
                 render_png=bool(data.get("render_png", False)),
                 art_director=bool(data.get("art_director", True)),
                 vision_qa=bool(data.get("vision_qa", True)),

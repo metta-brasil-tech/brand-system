@@ -2142,7 +2142,7 @@ function tplCarouselBuild() {
         <button class="car-pill ${STATE.carFormat === 'feed' ? 'on' : ''}" data-action="car-format" data-value="feed">Feed 4:5</button>
         <button class="car-pill ${STATE.carFormat === 'story' ? 'on' : ''}" data-action="car-format" data-value="story">Story 9:16</button>
       </div>
-      <div class="car-strip">${strip}<button class="car-add" data-action="car-add">＋ Slide</button></div>
+      <div class="car-strip">${strip}<button class="car-add" data-action="car-add">＋ Slide</button><button class="car-add" data-action="car-panorama" title="Gera 1 imagem larga e fatia em 2 slides com fundo contínuo">⇲ Panorâmica</button></div>
       <div class="car-editor">
         <p class="car-editing">Editando slide ${STATE.activeSlide + 1} de ${STATE.slides.length}</p>
         <div class="field"><label class="field-label">Estilo</label>
@@ -2334,6 +2334,62 @@ async function exportCarousel() {
     }
   }
   document.body.removeChild(stage);
+}
+
+// Fatia uma imagem larga em N pedaços verticais contínuos (cover por slide).
+function slicePanorama(dataUri, n, format) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const SIZES = { story: [1080, 1920], feed: [1080, 1350], sqr: [1080, 1080] };
+      const [dw, dh] = SIZES[format] || SIZES.feed;
+      const halfW = img.width / n;
+      const scale = Math.max(dw / halfW, dh / img.height);
+      const sW = dw / scale, sH = dh / scale;
+      const sy = (img.height - sH) / 2;
+      const out = [];
+      for (let i = 0; i < n; i++) {
+        const c = document.createElement('canvas'); c.width = dw; c.height = dh;
+        const sx = i * halfW + (halfW - sW) / 2;
+        c.getContext('2d').drawImage(img, sx, sy, sW, sH, 0, 0, dw, dh);
+        out.push(c.toDataURL('image/png'));
+      }
+      resolve(out);
+    };
+    img.onerror = () => resolve([]);
+    img.src = dataUri;
+  });
+}
+
+// Gera 1 imagem panorâmica larga e cria 2 slides full-bleed com fundo contínuo.
+async function addPanoramaPair() {
+  const scene = window.prompt('Descreva a cena panorâmica (ex: "sala de reunião vazia, mesa longa, janela com vista da cidade, cinemático"):');
+  if (!scene || !scene.trim()) return;
+  const fullStyle = STATE.brand === 'metta' ? 'D-foto-fullbleed-overlay' : 'TIAGO-EDITORIAL-DARK';
+  const btn = document.querySelector('[data-action="car-panorama"]');
+  if (btn) { btn.textContent = 'Gerando imagem…'; btn.style.pointerEvents = 'none'; }
+  try {
+    const marca = STATE.brand === 'metta' ? 'Metta' : 'Tiago Alves';
+    const res = await postGenerate({
+      briefing: `Marca: ${marca}. Imagem panorâmica de fundo.`, mock: false,
+      model_id: fullStyle, image_source: 'generate', image_only: true, format: 'feed',
+      briefing_image: scene.trim() + ', wide cinematic panorama, continuous scene, no centered single subject'
+    });
+    if (!res || !res.image_data_uri) throw new Error((res && res.error) || 'sem imagem');
+    const halves = await slicePanorama(res.image_data_uri, 2, STATE.carFormat);
+    if (halves.length !== 2) throw new Error('falha ao fatiar');
+    halves.forEach((h, i) => {
+      const s = _newSlide();
+      s.style = fullStyle; s.imageSource = 'upload'; s.selectedImageUrl = h;
+      s.copyHeadline = i === 0 ? 'Primeira metade da ideia' : 'Segunda metade da ideia';
+      s.cta = i === halves.length - 1 ? 'Arrasta pro lado' : '';
+      STATE.slides.push(s);
+    });
+    STATE.activeSlide = STATE.slides.length - 2;
+  } catch (e) {
+    alert('Falha ao gerar panorâmica: ' + (e && e.message ? e.message : e));
+  }
+  render();
 }
 
 const templates = {
@@ -2595,6 +2651,9 @@ function onAction(e) {
       STATE.slides.push(_newSlide());
       STATE.activeSlide = STATE.slides.length - 1;
       render();
+      break;
+    case 'car-panorama':
+      addPanoramaPair();   // async — gera imagem larga, fatia, cria 2 slides
       break;
     case 'car-del': {
       const idx = parseInt(value, 10);
