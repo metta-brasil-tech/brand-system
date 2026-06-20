@@ -7,6 +7,42 @@ que o _engine.js seta no browser. Use no pipeline antes de entregar, ou no teste
 """
 from __future__ import annotations
 
+import html as _htmllib
+import re
+import unicodedata
+
+# Chrome de marca que aparece no render mas NÃO vem da copy (whitelist embutida).
+# É BRAND-AWARE: cada marca tem o seu chrome fixo (eyebrow/assinatura/tagline).
+_CHROME_SHARED = {"metta"}
+_CHROME_METTA = {"inteligencia", "comercial"}        # eyebrow automático dos covers Metta
+_CHROME_TIAGO = {"estrategias", "gestao", "vendas",  # assinatura/tagline do Tiago Alves
+                 "ciencia", "tiago", "alves"}
+
+
+def _norm_words(s: str) -> list[str]:
+    """Tokens alfanuméricos, lowercase, sem acento — robusto a markup e pontuação."""
+    s = unicodedata.normalize("NFKD", (s or "").lower())
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.findall(r"[a-z0-9]+", s)
+
+
+def _visible_text(html_str: str) -> str:
+    """Texto visível do HTML (tira script/style/head, tags, desescapa entidades)."""
+    h = re.sub(r"(?is)<(script|style|head|title|noscript)\b.*?</\1>", " ", html_str or "")
+    h = re.sub(r"(?s)<[^>]+>", " ", h)
+    return re.sub(r"\s+", " ", _htmllib.unescape(h)).strip()
+
+
+def _is_subseq(needle: list[str], hay: list[str]) -> bool:
+    """needle aparece como sequência CONTÍGUA de tokens em hay."""
+    if not needle:
+        return True
+    for i in range(len(hay) - len(needle) + 1):
+        if hay[i:i + len(needle)] == needle:
+            return True
+    return False
+
+
 ARCHETYPES = {"typo", "photo-side", "photo-full", "photo-band", "object-center",
               "card-mock", "logo-wall", "framed", "split", "number-hero"}
 # Marca Tiago tem design system próprio (Inter, off-white, accent #FFCC00) e não
@@ -75,6 +111,34 @@ def qa(front_matter: dict, copy: dict, image_url: str, html: str) -> dict:
         issues.append("colisão texto×CTA: copy não cabe acima do botão nem no menor tamanho — encurte a copy ou troque de estilo")
     elif 'data-overflow="1"' in html:
         issues.append("overflow detectado: conteúdo excede o canvas")
+
+    # ── Guardrails de COPY LITERAL + TEXTO INVENTADO (portados do gate.py do plugin) ──
+    # A copy é propriedade do brief — o render não pode trocar/perder/cortar palavra,
+    # nem injetar texto fora da copy + whitelist. Comparação por SEQUÊNCIA de palavras
+    # (não byte-a-byte) pra ser robusta a <br>/<span> do auto-quebra e à pontuação.
+    if not image_only:
+        vis_tokens = _norm_words(_visible_text(html))
+        hl = (copy.get("headline") or "").replace("*", "")
+        if hl.strip() and not _is_subseq(_norm_words(hl), vis_tokens):
+            issues.append("copy_headline_literal: headline renderizada não bate com o brief "
+                          "(palavra trocada/perdida/cortada)")
+        sub = (copy.get("subhead") or "").replace("*", "")
+        if sub.strip() and not _is_subseq(_norm_words(sub), vis_tokens):
+            warnings.append("copy_subheadline_literal: subhead renderizada diverge do brief")
+        cta = (copy.get("cta") or "").replace("*", "")
+        if cta.strip() and not _is_subseq(_norm_words(cta), vis_tokens):
+            warnings.append("copy_cta_literal: CTA renderizado diverge do brief")
+
+        # no_invented_text: todo texto visível ∈ copy ∪ chrome da marca ∪ tag/whitelist.
+        allowed: set[str] = set(_CHROME_SHARED) | (_CHROME_TIAGO if is_tiago else _CHROME_METTA)
+        for k in ("headline", "subhead", "body", "cta", "tag"):
+            allowed |= set(_norm_words((copy.get(k) or "").replace("*", "")))
+        for w in (copy.get("whitelist") or []):
+            allowed |= set(_norm_words(str(w)))
+        invented = sorted({w for w in vis_tokens
+                           if w not in allowed and len(w) > 2 and not w.isdigit()})
+        if invented:
+            warnings.append(f"no_invented_text: texto visível fora da copy/whitelist: {invented[:10]}")
 
     status = "FAIL" if issues else ("PASS_WITH_WARNINGS" if warnings else "PASS")
     return {"status": status, "issues": issues, "warnings": warnings}

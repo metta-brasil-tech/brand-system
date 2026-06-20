@@ -12,8 +12,15 @@ wizard (embed/criar.html)  →  POST /api/generate
   → 03 blueprint         (source/ad-blueprints/<marca>/<ID>.md = FONTE DE VERDADE)
   → 04 image-prompt + image-gen  (skill 04 escreve prompt → OpenAI gpt-image-2)
   → render HTML          (api/_blueprint_render.py + _engine.css)
-  → 06 QA                (api/_qa.py)
+  → 06 QA                (api/_qa.py — gate mecânico)
+  → 07 vision-qa         (api/_vision_qa.py — peça isolada: ilustra a copy? mutila?)
+  → 08 crítico           (api/_critic.py — same-designer test contra referência do banco)
 ```
+
+> O **vision-qa** + **crítico** rodam num loop que regenera a imagem (até
+> `VISION_QA_MAX`) injetando o feedback acionável no brief da próxima tentativa.
+> Detalhes e o mapa de insights portados do plugin-metta-ads em
+> `docs/INSIGHTS-PLUGIN-METTA-ADS.md`.
 
 ## Componentes-chave
 
@@ -25,6 +32,11 @@ wizard (embed/criar.html)  →  POST /api/generate
 | `api/_art_director.py` | Direção de arte. **Despacha por marca** (`_SYSTEM_METTA` vs `_SYSTEM_TIAGO`). |
 | `engine/brand-knowledge/image-prompts/<marca>/_base*.md` + `style-*.md` | Templates de prompt de imagem (carregados pela skill 04). `engine/` é **submódulo git** (`ad-generator`). |
 | `api/_qa.py` | Validador estático (archetype, headline, body de tweet, overflow). |
+| `api/_vision_qa.py` | Checagem por visão da peça **isolada**: relevância copy↔imagem + integridade do layout. |
+| `api/_critic.py` | Crítico **comparativo**: escolhe referência do banco (`applications-index.json`) e roda o *same-designer test* + anti-slop + texto-inventado. Gated por `CRITIC_COMPARE`. |
+| `api/_evaluator.py` | **Juiz final**: nota holística 0-10 por dimensão (relevância/marca/hierarquia/acabamento) + veredito SHIP/REVISAR/DESCARTAR + ajustes + `image_fixable`. Consolida vision-qa + critic como guardrail (defeito objetivo limita o veredito). Roda sob demanda — ver `render_out/_avaliar_criativos.py`. |
+| `api/_autogen.py` | **Loop de auto-melhoria** (`generate_until_approved`): gera → avalia (juiz final) → se não-SHIP e `image_fixable`, regera injetando os ajustes como direção visual de prioridade máxima → reavalia, até SHIP ou `max_attempts`. Guarda a melhor tentativa. Demo: `render_out/_autogen_demo.py`. |
+| `content/direcao-arte/anti-slop.md` | Checklist anti-slop (16 itens) usado pelo crítico. |
 | `scripts/validate_styles.py` | Guard de regressão do chain inteiro. Rode antes de publicar. |
 
 ## DNA por marca

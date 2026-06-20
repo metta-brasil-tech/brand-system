@@ -35,3 +35,7 @@ __pycache__/
 /out/
 /artifacts/
 .venv/
+
+# Saídas de teste (regeneráveis) — não versionar
+criativos-teste/
+criativos-auto/

@@ -712,6 +712,13 @@ def _run_pipeline_inline(
                 return {"ok": False, "error": f"image-prompt-engineer: {r.error}",
                         "run_id": run_id, "diagnostics": diagnostics}
             image_spec = r.output
+        # Enriquece o negative_prompt com os modos de falha do gpt-image-2 (mãos,
+        # texto, faces, UI, numerais — portado do plugin-metta-ads) ANTES de salvar o
+        # artefato, pra ele refletir o que de fato vai pro modelo. Vale pras 2 marcas.
+        from _art_director import NEG_MODEL_FAILS as _NEG_FAILS
+        for _pp in (image_spec.get("prompts") or []):
+            _pp["negative_prompt"] = ", ".join(
+                x for x in [_pp.get("negative_prompt", ""), _NEG_FAILS] if x)
         write_artifact(run_id, "04-image-prompt", image_spec, artifacts_dir)
         diagnostics.append(f"04-image-prompt-engineer ({timings['04-skill']}ms): prompts={len(image_spec.get('prompts', []))}")
 
@@ -743,7 +750,7 @@ def _run_pipeline_inline(
             aspect_by_format = {"story": "9:16", "feed": "4:5", "sqr": "1:1", "wide": "16:9"}
             # image_only (panorâmica) força wide independente do aspect do prompt
             aspect = ("16:9" if image_only else (p.get("aspect_ratio") or aspect_by_format.get(format_key, "9:16")))
-            negative = p.get("negative_prompt", "")
+            negative = p.get("negative_prompt", "")  # já enriquecido com NEG_MODEL_FAILS acima
             primary_prompt = p["prompt"]
             fallback_prompts = p.get("iteration_strategy", {}).get("fallback_prompts") or []
             attempt_chain = [primary_prompt] + [
@@ -860,6 +867,7 @@ def _run_pipeline_inline(
     # (só no caminho render_png + Chromium). Só pra peças com foto gerada.
     # ============================================================
     vision_result: dict = {}
+    critic_result: dict = {}
     _vqa_on = (vision_qa and os.getenv("VISION_QA", "1") == "1" and render_png
                and bool(png_data_uri) and image_source == "generate"
                and bool(image_data_uri or image_file_url))
@@ -871,27 +879,67 @@ def _run_pipeline_inline(
             _aspect = {"story": "9:16", "feed": "4:5", "sqr": "1:1"}.get(format_key, "4:5")
             _preset_ov = (chosen_preset or {}).get("prompt_overlay", "") if "chosen_preset" in locals() and chosen_preset else ""
             _vmax = int(os.getenv("VISION_QA_MAX", "2"))
+            # CRÍTICO COMPARATIVO (same-designer test do banco) — aditivo, gated por
+            # CRITIC_COMPARE, degrada gracioso. Escolhe UMA referência do banco pela
+            # copy+conceito+tratamento (F1 do plugin-metta-ads). Sem referência raster
+            # compatível, o pipeline segue só com a vision-qa isolada de sempre.
+            _critic_on = os.getenv("CRITIC_COMPARE", "1") == "1"
+            _reference = None
+            _critique = None
+            if _critic_on:
+                try:
+                    from _critic import pick_reference as _pick_ref, critique as _critique
+                    _q = " ".join(x for x in [
+                        user_headline, user_subhead, user_body,
+                        ((ad_directives or {}).get("image_concept") or {}).get("brief", ""),
+                        bp_treatment] if x)
+                    _reference = _pick_ref(_q, marca)
+                    diagnostics.append(
+                        f"critic: referência do banco = {_reference['id']} (score {_reference['score']})"
+                        if _reference else "critic: sem referência raster compatível — só vision-qa")
+                except Exception as _e:
+                    _critic_on = False
+                    diagnostics.append(f"critic: PULADO ({_e.__class__.__name__}: {str(_e)[:80]})")
+            _critic_feedback = ""
             for _va in range(1, _vmax + 1):
+                critic_result = {}
                 vision_result = _vqa_check(_png, copy_dict)
                 diagnostics.append(
                     f"vision-qa (try {_va}/{_vmax}): {vision_result.get('verdict')} "
                     f"rel={vision_result.get('relevance')} integ={vision_result.get('integrity')} — "
                     f"{str(vision_result.get('reason',''))[:80]}")
-                if vision_result.get("verdict") != "FAIL" or _va == _vmax:
+                if _critic_on and _reference and _critique:
+                    critic_result = _critique(_png, copy_dict, _reference, marca)
+                    if critic_result.get("verdict") != "SKIPPED":
+                        diagnostics.append(
+                            f"critic (try {_va}/{_vmax}): {critic_result.get('verdict')} "
+                            f"same_designer={critic_result.get('same_designer')} "
+                            f"invented={critic_result.get('invented_text')} "
+                            f"slop={critic_result.get('anti_slop_failed')} — "
+                            f"{str(critic_result.get('reason',''))[:80]}")
+                _failed = (vision_result.get("verdict") == "FAIL"
+                           or critic_result.get("verdict") == "FAIL")
+                if not _failed or _va == _vmax:
                     break
+                # Feedback acionável (plugin: feedback_for_designer) → brief da regeneração.
+                _critic_feedback = " | ".join(x for x in [
+                    vision_result.get("reason", "") if vision_result.get("verdict") == "FAIL" else "",
+                    critic_result.get("feedback_for_designer", "") if critic_result.get("verdict") == "FAIL" else "",
+                ] if x) or "a tentativa anterior não bateu com a referência do banco"
                 # REGENERA: conceito novo (evita o reprovado + memória) → imagem → render → png
                 _newdir = _ad_direct2(
                     copy={"headline": user_headline, "subhead": user_subhead,
                           "body": user_body, "cta": user_cta_text},
                     archetype=(bp_fm_full.get("archetype") or "") if bp_fm_full else "",
                     theme=((bp_fm_full.get("params") or {}).get("theme") or "dark") if bp_fm_full else "dark",
-                    marca=marca, brief=(briefing_text or "") + f" | A tentativa anterior falhou: {vision_result.get('reason','')}. Corrija.",
+                    marca=marca, brief=(briefing_text or "") + f" | A tentativa anterior falhou: {_critic_feedback}. Corrija.",
                     llm=llm, placement=bp_placement, needs_image=True, treatment=bp_treatment,
                     recent_concepts=_cmem.read_recent(12))
                 _nc = _newdir.get("image_concept") or {}
                 if not _nc.get("brief"):
                     break
                 _cmem.remember(_nc)
+                from _art_director import NEG_MODEL_FAILS as _NEG_FAILS
                 _pl = _PLACEMENT_INSTRUCTION.get(bp_placement, "")
                 _adp = _art_direction_photo(ad_directives)
                 _regen_prompt = (f"{_nc['brief']}. {_preset_ov}"
@@ -899,7 +947,7 @@ def _run_pipeline_inline(
                                  + (f" {_adp}" if _adp else "")).strip()
                 _ig = ImageGenAdapter().generate(
                     prompt=_regen_prompt,
-                    negative_prompt="no smiling stock pose, no cartoon, no text or logos in image, subject not cropped awkwardly",
+                    negative_prompt="no smiling stock pose, no cartoon, subject not cropped awkwardly, " + _NEG_FAILS,
                     aspect_ratio=_aspect, reference_images=[])
                 image_data_uri = _image_to_data_uri(_ig.url)
                 rendered = render_html(marca=marca, model_id=chosen_model_id, copy=copy_dict,
@@ -930,6 +978,7 @@ def _run_pipeline_inline(
         "png_data_uri": png_data_uri,      # export server-side @2× (quando render_png)
         "qa": qa_result,
         "vision_qa": vision_result,        # checagem final (relevância copy↔imagem + integridade)
+        "critic": critic_result,           # same-designer test contra referência do banco
         "diagnostics": diagnostics,
     }
 

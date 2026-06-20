@@ -31,6 +31,15 @@ from __future__ import annotations
 import json
 import re
 
+# Modos de falha técnicos do gpt-image-2 (válidos pras DUAS marcas) — portado do
+# metta-image-models.md do plugin-metta-ads. Anexado a TODO negative_prompt
+# (caminho determinístico, primário via skill 04, e regeneração da vision-qa).
+NEG_MODEL_FAILS = (
+    "no text in image, no gibberish letters, no watermark, no logos, no signage, "
+    "no deformed hands, no extra fingers, no distorted face, no fused bodies, "
+    "no extra limbs, no rendered UI screen, no readable numbers"
+)
+
 # ===========================================================================
 # SYSTEM PROMPT — METTA (inalterado: marca madura, lógica que já funciona)
 # ===========================================================================
@@ -408,11 +417,11 @@ class ArtDirector:
     _NEG_TIAGO = (
         "no full-color natural photo, no teal-orange grade, no stock smile, "
         "no direct eye contact ad pose, no HDR, no rainbow palette, no cliché, "
-        "no text or logos in image, no AI render artifacts"
+        "no AI render artifacts, " + NEG_MODEL_FAILS
     )
     _NEG_METTA = (
         "no smiling stock pose, no high-five, no lightbulb idea cliché, "
-        "no fisheye distortion, no HDR, no inflated saturation, no text or logos in image"
+        "no fisheye distortion, no HDR, no inflated saturation, " + NEG_MODEL_FAILS
     )
 
     def generate_image_prompt(self, archetype: str, model_id: str = "",

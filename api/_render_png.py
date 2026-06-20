@@ -69,10 +69,18 @@ def _find_chrome() -> str | None:
         r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
         r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
         r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+        # macOS
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "/Applications/Chromium.app/Contents/MacOS/Chromium",
+        "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+        # Linux
+        "/usr/bin/google-chrome", "/usr/bin/chromium", "/usr/bin/chromium-browser",
     ]:
         if os.path.exists(p):
             return p
-    return shutil.which("chrome") or shutil.which("chromium") or shutil.which("msedge")
+    return (shutil.which("google-chrome") or shutil.which("chrome")
+            or shutil.which("chromium") or shutil.which("chromium-browser")
+            or shutil.which("msedge"))
 
 
 def _render_chrome(html: str, width: int, height: int, scale: int) -> bytes:

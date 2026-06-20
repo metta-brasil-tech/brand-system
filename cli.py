@@ -97,6 +97,11 @@ def main():
     print("  modelo :", res.get("model_id"))
     print("  qa     :", (res.get("qa") or {}).get("status"))
     print("  visão  :", (res.get("vision_qa") or {}).get("verdict") or "(sem foto)")
+    _cr = res.get("critic") or {}
+    if _cr.get("verdict"):
+        print(f"  crítico: {_cr.get('verdict')}"
+              + (f" (vs {_cr.get('reference_id')})" if _cr.get('reference_id') else "")
+              + (f" — {_cr.get('reason')}" if _cr.get('reason') else ""))
     print("  html   :", base.with_suffix(".html"))
     if res.get("png_data_uri"):
         print("  png    :", base.with_suffix(".png"))
@@ -104,7 +109,7 @@ def main():
         print("  png    : NÃO gerado (Chromium ausente) — abra o .html no navegador.")
     print("\nDiagnóstico:")
     for d in res.get("diagnostics", []):
-        if any(k in d for k in ["art-director", "diretor-visual", "04-image-gen", "vision-qa", "export-png", "render-html"]):
+        if any(k in d for k in ["art-director", "diretor-visual", "04-image-gen", "vision-qa", "critic", "export-png", "render-html"]):
             print("  ·", d)
 
 
