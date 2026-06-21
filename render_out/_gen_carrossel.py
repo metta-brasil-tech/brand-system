@@ -53,7 +53,8 @@ def main():
     dry = os.getenv("DRY_RUN", "1") == "1"
     plan = plan_serie([s["headline"] for s in SLIDES], MARCA)
     seq = plan["treatments_por_slide"]
-    print(f"=== CARROSSEL {MARCA} · {len(SLIDES)} slides · família={plan['family']} · {'DRY-RUN' if dry else 'GERANDO'} ===")
+    preset = plan.get("preset", "fotorrealista")  # tratamento de foto uniforme da série
+    print(f"=== CARROSSEL {MARCA} · {len(SLIDES)} slides · família={plan['family']} · preset(foto uniforme)={preset} · {'DRY-RUN' if dry else 'GERANDO'} ===")
     print("Direção de série (plan_serie):")
     for i, (m, s) in enumerate(zip(seq, SLIDES), 1):
         info = model_info(m)
@@ -80,7 +81,7 @@ def main():
         try:
             res = _run_pipeline_inline(
                 briefing_text="carrossel", forced_model_id=m, image_source=src,
-                image_style_preset=(None if src == "none" else "fotorrealista"),
+                image_style_preset=(None if src == "none" else preset),
                 user_headline=slide["headline"], user_subhead=slide.get("subhead", ""),
                 user_body=slide.get("body", ""), user_cta_text=slide.get("cta", ""),
                 wizard_format="feed", render_png=True, art_director=True, vision_qa=True)

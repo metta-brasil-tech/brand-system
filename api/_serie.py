@@ -43,6 +43,12 @@ _CLOSERS = {"TIAGO-EDITORIAL-CTA", "K-bold-dourado-urgencia", "YELLOW-FRAME", "D
 # sozinho engana o C4 "paleta travada" — visto no carrossel de teste.)
 _FAMILY_OVERRIDE = {"YELLOW-SPLIT": "YELLOW", "YELLOW-BLOCO": "YELLOW"}
 
+# Preset de foto POR FAMÍLIA — todos os slides da série usam o MESMO tratamento,
+# senão a série parece peças avulsas (slide dark moody + slide cor-natural = quebra).
+# É o motivo "tratamento de foto uniforme" aplicado de verdade.
+_FAMILY_PRESET = {"DARK": "cinematic-dark", "LIGHT": "fotorrealista",
+                  "YELLOW": "bw-yellow", "PHOTO": "fotorrealista"}
+
 _CACHE: dict[str, dict] | None = None
 
 
@@ -162,6 +168,7 @@ def plan_serie(headlines: list[str], marca: str = "metta", fmt: str = "feed") ->
     return {
         "family": family,
         "format": fmt,
+        "preset": _FAMILY_PRESET.get(family, "fotorrealista"),  # tratamento de foto uniforme
         "treatments_por_slide": seq,
         "motivos": ["amarelo cirúrgico recorrente", "tipografia display consistente",
                     "tratamento de foto uniforme"][:3],
