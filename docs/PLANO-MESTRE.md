@@ -114,19 +114,79 @@ Hoje `_evaluator`/`_autogen` são standalone. Para o **site** se auto-melhorar, 
 - **Teste:** request no endpoint com `auto_improve=true` → a nota sobe entre tentativas
   e devolve a melhor. **Pronto:** o site entrega peça auto-melhorada, com freio de custo.
 
-### Fase 7 — Geração reference-aware DE VERDADE ◀
-O diretor de arte ainda pensa a partir de **texto**. O plugin manda o designer **olhar
-o PNG** da referência. Próximo nível: passar a **imagem** da referência pro diretor de
-arte (chamada multimodal), não só a ficha.
-- **Tarefas:** adapter LLM multimodal (Claude vision) no `direct()`; injetar o PNG da
-  referência escolhida pelo `pick_reference`.
-- **Teste:** A/B cena com referência-texto vs referência-imagem → a peça herda melhor a
-  composição? **Pronto:** o "same designer test" passa mais, com menos regeneração.
+### Fase 7 — Geração reference-aware ⚠️ (1ª tentativa REGREDIU — refazer como contexto)
+O diretor de arte pensa a partir de **texto**. Tentei injetar o craft da referência via
+`briefing_image_text` (prioridade máxima) em `_ref_vision.py` → **A/B deu -0.53** (piorou
+2 de 3: atropela o conceito bom do diretor de arte). **Aprendizado:** a referência tem
+que entrar como **CONTEXTO pro diretor de arte** (ele lidera, informado pela imagem da
+ref), **não como override**.
+- **Tarefas (refazer):** adapter multimodal no `_art_director.direct()` que RECEBE o PNG
+  da referência (`pick_reference`) como contexto + o craft, sem substituir o conceito.
+- **Teste:** A/B contexto-imagem vs baseline no golden set → nota sobe (não cai). **Pronto:**
+  same-designer test passa mais, sem regressão.
 
 ### Fase 8 — Paridade local↔prod + custo ◀
 - **Tarefas:** alinhar provider (rodar local no Claude para testes que reflitam prod);
   validar `render.js` vs `_render_png.py`; medir custo por peça com todas as camadas.
 - **Teste:** mesmo brief local (Claude) vs prod → diferença visual aceitável.
+
+---
+
+## 2-B. CARROSSEL — fases dedicadas (PRIORIDADE, não deixar de lado)
+> A lógica de carrossel/panorâmica vive na **UI** (`embed/criar.html`, modo multi-slide
+> `slides[]`), não no core Python. Por isso a **Fase 9 começa com estudo** dessa camada —
+> nada de construir às cegas. O Nathan **amou** a panorâmica ("2 cenas que se completam")
+> e quer **fazer mais**.
+
+### Fase 9 — Carrossel: direção de série (a F1-C do plugin)
+O carrossel deixa de ser N slides soltos e ganha direção: tratamentos por slide
+(vocabulário fechado tipo `T-*`), **paleta travada** no slide 1, **2-3 motivos**
+recorrentes, **anti-monotonia de família** entre carrosséis.
+- **Tarefas:** mapear o data model de slides na UI; `api/_serie.py` (classifica slide →
+  escolhe tratamento → trava paleta → define motivos); injetar essa direção em cada slide.
+- **Teste:** gerar um carrossel → cada slide com tratamento coerente, paleta travada,
+  motivo recorrente. **Pronto:** parece UMA série, não N peças avulsas.
+
+### Fase 10 — Carrossel: guardrails de coerência C1–C8
+Porta as regras do `serie-rules.md` + gate `--serie` do plugin: C1 capa não-tipográfica
+(stop-scroll) · C2 último = CTA · C3 anti-repetição consecutiva · C4 paleta travada ·
+C6 máx 2 tipográficos · C8 um formato/série; C5 motivos + C7 marca = julgamento do crítico.
+- **Tarefas:** `_serie.validate_serie(slides)` (mecânico) + camada D do crítico (série).
+- **Teste:** carrossel que viola C1/C2 reprova; coeso passa. **Pronto:** gate + crítico de série.
+
+### Fase 11 — Carrossel: panorâmica++ (estender as "2 cenas que se completam")
+Generaliza a continuidade panorâmica (imagem larga fatiada com fundo contínuo) — robusta
+e além de 2 slides (3+), com emendas perfeitas. É o "fazer mais" que o Nathan pediu.
+- **Tarefas:** achar a lógica de fatiar (UI/JS); generalizar pra N fatias; garantir
+  continuidade visual; crítico checa a emenda.
+- **Teste:** panorâmico de 3 slides com fundo contínuo sem emenda visível. **Pronto:**
+  dá pra produzir mais disso com qualidade.
+
+## 2-C. Resto do plugin — fases (formaliza a seção 3)
+
+### Fase 12 — Briefer A↔B (refina o prompt de imagem ANTES de gerar)
+Bate-bola propositor↔crítico do plugin: um propõe o prompt de imagem, outro valida contra
+os limites do gpt-image + composição, itera (N rodadas) antes de gastar geração.
+- **Tarefas:** `api/_briefer.py` (propositor + crítico); roda antes do image-gen com foto.
+- **Teste:** A/B prompt-direto vs refinado → menos falhas (mãos/texto) + nota de imagem
+  maior no ledger. **Pronto:** o refinamento sobe a qualidade medida.
+
+### Fase 13 — Safe-zones (margens do IG) como guardrail
+Porta `metta-safe-zones.md`: story tem topo (~220px) e base (~280px) comidos pela UI do
+IG; nada crítico (headline/CTA/marca) pode cair ali.
+- **Tarefas:** check no `_qa`/crítico das zonas mortas (story/feed).
+- **Teste:** story com CTA na base é flagado. **Pronto:** guardrail de safe-zone ativo.
+
+### Fase 14 — 2 variantes de famílias divergentes por chamada
+Hard rule do plugin: 1 brief → 2 variantes de famílias divergentes (ex: DARK + LIGHT/YELLOW).
+- **Tarefas:** gerar 2 variantes de famílias forçadamente diferentes; crítico aprova ambas.
+- **Teste:** 1 brief → 2 peças claramente distintas. **Pronto:** o usuário escolhe entre opções reais.
+
+### Fase 15 — Acabamentos do plugin
+Os menores: **self-inspection por crops** (recortar CTA/rosto/safe-zone e inspecionar
+antes de aprovar) · **whitelist interativa** (perguntar quando aparece texto-chrome novo)
+· **avisos de catálogo** no banco (mismatch nome↔render / só-webp).
+- **Teste:** cada um isolado. **Pronto:** robustez incremental.
 
 ---
 
@@ -270,19 +330,24 @@ aceitável por geração em prod.
 
 ## 7. Sequência sugerida (com dependências)
 
-1. **Agora (destrava o resto):** committar passos 3/4 (não perder); rodar o **batch
-   completo** (5.3) → **baseline** de métricas.
-2. **A/B do ICP** (5.4) + **auditoria do decision log** (5.5) → provar que Fases 2–4
-   funcionam de verdade.
-3. **Fase 5 (flywheel/F8)** + **Fase 6 (auto-melhoria no pipeline)** → o site começa a
-   se auto-melhorar.
-4. **Paralelo:** **Modo B** (3.1) e **expandir conhecimento** (4.1) — alto valor, baixo
-   acoplamento.
-5. **Depois:** **carrossel C1–C8** (3.2), **2 variantes divergentes** (3.3),
-   **reference-aware generation** (Fase 7).
-6. **Contínuo:** **aprendizado acumulado** (4.2) + **observabilidade** (4.5).
+**Já feito (commitado):** Fases 1–6 + 5.5 (camada de conhecimento, ICP no pensador,
+decision-log, avaliador critica o raciocínio, flywheel/F8, ledger, auto-melhoria no
+pipeline via `FINAL_EVAL`) + Modo B (`_copywriter`) + golden set + baseline no ledger.
+
+**Agora em diante (ordem):**
+1. **CARROSSEL — prioridade (Fases 9 → 10 → 11).** Começa pelo estudo da UI
+   (`embed/criar.html`) → direção de série → guardrails C1–C8 → panorâmica++. **Não
+   deixar de lado.**
+2. **Fase 7 refeita** (reference-aware como **contexto**, não override — a 1ª versão regrediu).
+3. **Fase 12 (briefer A↔B)** — sobe a qualidade da imagem; alto valor.
+4. **Fase 13 (safe-zones)** + **Fase 14 (2 variantes divergentes)**.
+5. **Fase 8 (paridade local↔prod + custo)** + **decisão site=high** (async/plano/funil-interno).
+6. **Fase 15 (acabamentos)** + contínuo: aprendizado acumulado (4.2) + observabilidade (4.5).
 7. **Só então → produção:** PR `feat/vision-first-knowledge → main`, com o golden set
    verde e os defaults de prod confirmados (crítico ON = custo; severidade dos guardrails).
+
+> **Regra de ouro (princípio 6):** cada fase entra com uma linha no ledger medindo o
+> antes→depois no golden set. 🔴 PIOROU = reverter (foi o que matou o reference-aware-override).
 
 ---
 
