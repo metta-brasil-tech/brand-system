@@ -146,7 +146,11 @@ def plan_serie(headlines: list[str], marca: str = "metta", fmt: str = "feed") ->
             cand = closers or visual
         else:                             # miolo: alterna visual/tipográfico, sem repetir
             cand = (typo if idx % 3 == 0 and typo else visual) or pool
-        pick = next((m for m in cand if not seq or m != seq[-1]), cand[0] if cand else "")
+        # prefere modelo AINDA não usado (variedade real, não só anti-consecutivo);
+        # senão um != do anterior; senão qualquer um.
+        pick = (next((m for m in cand if m not in seq), None)
+                or next((m for m in cand if not seq or m != seq[-1]), None)
+                or (cand[0] if cand else ""))
         seq.append(pick)
 
     return {
