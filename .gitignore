@@ -36,6 +36,7 @@ __pycache__/
 /artifacts/
 render_out/out/
 render_out/artifacts/
+render_out/tests-e2e/
 .venv/
 
 # Saídas de teste (regeneráveis) — não versionar
