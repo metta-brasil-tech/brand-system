@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "purpose": "Conjunto FIXO de briefs pra medir qualidade ao longo do tempo (régua do ledger de auto-melhoria). Rodar a cada mudança grande e comparar no docs/IMPROVEMENT-LEDGER.md. expected_segment serve pra auditar a inferência de ICP (_avatar_infer).",
+    "version": "1.0",
+    "created": "2026-06-21"
+  },
+  "briefs": [
+    {"id": "metta-farmacia", "marca": "metta", "model": "A-headline-foto-dark", "format": "feed",
+     "headline": "Sua farmácia perde venda no balcão por falta de método.",
+     "subhead": "Quando o atendimento vira processo, a próxima venda deixa de ser sorte.",
+     "cta": "Conheça a Metta", "expected_segment": "varejo-farmacia"},
+
+    {"id": "metta-dentista", "marca": "metta", "model": "I-retrato-editorial-pb", "format": "feed",
+     "headline": "Você é dentista, não vendedor — mas a clínica precisa vender.",
+     "subhead": "Método comercial que respeita a identidade técnica do seu time.",
+     "cta": "Agende um diagnóstico", "expected_segment": "servico-profissional"},
+
+    {"id": "metta-pet", "marca": "metta", "model": "B-foto-top-headline-mixed", "format": "feed",
+     "headline": "Sua rede de pet shop cresceu e o time não acompanha.",
+     "subhead": "Gestão é o que faz o time vender como você vende.",
+     "cta": "Fale com a Metta", "expected_segment": "varejo-pet"},
+
+    {"id": "metta-otica", "marca": "metta", "model": "D-foto-fullbleed-overlay", "format": "feed",
+     "headline": "Sua ótica vende óculos ou empurra produto?",
+     "subhead": "Método transforma atendimento em venda consultiva.",
+     "cta": "Conheça a mentoria", "expected_segment": "varejo-otica-joias"},
+
+    {"id": "metta-construcao", "marca": "metta", "model": "DARK-OBJETO", "format": "feed",
+     "headline": "Sua loja de materiais vende ou só tira pedido?",
+     "subhead": "Equipe ativa com método, não tirador de pedido.",
+     "cta": "Conheça a Metta", "expected_segment": "varejo-construcao-deco"},
+
+    {"id": "metta-inflexao-1", "marca": "metta", "model": "A-headline-foto-dark", "format": "feed",
+     "headline": "Você virou refém da própria empresa.",
+     "subhead": "Dono não devia trabalhar como o principal funcionário.",
+     "cta": "Conheça a Metta", "expected_segment": "generico"},
+
+    {"id": "metta-inflexao-2", "marca": "metta", "model": "FOTO-PILL-CASUAL", "format": "feed",
+     "headline": "O time bate meta sem depender de você?",
+     "subhead": "Gestão é o que separa esforço de previsibilidade.",
+     "cta": "Fale com a Metta", "expected_segment": "generico"},
+
+    {"id": "metta-tipografico", "marca": "metta", "model": "C-tipografia-pura-dark", "format": "feed",
+     "headline": "Vendedor herói não é estratégia.",
+     "body": "Método transforma esforço em previsibilidade.",
+     "cta": "Conheça a mentoria", "expected_segment": "generico", "image": "none"},
+
+    {"id": "tiago-noir", "marca": "tiago", "model": "TIAGO-EDITORIAL-DARK", "format": "feed",
+     "headline": "O silêncio também é decisão.",
+     "subhead": "Liderar é escolher o que não fazer.",
+     "cta": "Siga @tiagoalves", "expected_segment": null},
+
+    {"id": "tiago-surreal", "marca": "tiago", "model": "TIAGO-EDITORIAL-HERO", "format": "feed",
+     "headline": "Você virou refém da própria empresa.",
+     "subhead": "Dono não devia trabalhar como funcionário.",
+     "cta": "Saiba mais", "expected_segment": null},
+
+    {"id": "tiago-story", "marca": "tiago", "model": "TIAGO-STORY-YELLOW-BLOCK", "format": "story",
+     "headline": "Meta não se bate no improviso.",
+     "subhead": "Se constrói com método.",
+     "cta": "Arrasta pra cima", "expected_segment": null},
+
+    {"id": "tiago-lideranca", "marca": "tiago", "model": "TIAGO-EDITORIAL-DARK", "format": "feed",
+     "headline": "Liderança não é apagar incêndio.",
+     "subhead": "É construir um time que decide sem você.",
+     "cta": "Siga @tiagoalves", "expected_segment": null}
+  ]
+}

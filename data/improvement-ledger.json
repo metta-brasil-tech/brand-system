@@ -1,0 +1,19 @@
+[
+  {
+    "ts": "2026-06-21 01:18",
+    "label": "baseline golden set (pós-fix ICP)",
+    "change": "golden set como régua fixa; pipeline já com inferência de ICP ligada",
+    "note": "",
+    "metrics": {
+      "n": 12,
+      "ship_rate": 33.3,
+      "revisar_rate": 66.7,
+      "descartar_rate": 0.0,
+      "avg_score": 8.19,
+      "regen_rate": 0.0,
+      "foto_rate": 91.7
+    },
+    "deltas": {},
+    "verdict": "BASELINE"
+  }
+]
