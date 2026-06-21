@@ -1048,6 +1048,34 @@ def _run_pipeline_inline(
             diagnostics.append(f"vision-qa: PULADO ({_e.__class__.__name__}: {str(_e)[:90]})")
 
     # ============================================================
+    # FASE 6 — AVALIAÇÃO FINAL no pipeline (opt-in por custo). Liga o juiz
+    # holístico (_evaluator), que critica o RACIOCÍNIO (dimensão `ancoragem`)
+    # lendo o 03-decision-log, não só o pixel. OFF por padrão (+1 chamada de
+    # visão por geração); ligue com FINAL_EVAL=1. Best-effort: nunca derruba a
+    # geração — falha vira diagnóstico e `evaluation` fica {}.
+    # ============================================================
+    evaluation: dict = {}
+    if os.getenv("FINAL_EVAL") == "1" and png_data_uri and image_source == "generate":
+        try:
+            from _evaluator import evaluate as _final_eval
+            try:
+                _eval_dl = json.loads(
+                    (artifacts_dir / run_id / "03-decision-log.json").read_text(encoding="utf-8"))
+            except Exception:
+                _eval_dl = None
+            _eval_png = base64.b64decode(png_data_uri.split(",", 1)[1])
+            evaluation = _final_eval(
+                _eval_png, copy_dict, marca, vision_result, critic_result,
+                decision_log=_eval_dl,
+                image_based=bool(image_data_uri or image_file_url))
+            _anc = (evaluation.get("scores") or {}).get("ancoragem")
+            diagnostics.append(
+                f"final-eval: {evaluation.get('verdict')} nota={evaluation.get('geral')}"
+                + (f" ancoragem={_anc}" if _anc is not None else ""))
+        except Exception as _fe:
+            diagnostics.append(f"final-eval: PULADO ({_fe.__class__.__name__}: {str(_fe)[:80]})")
+
+    # ============================================================
     # Sumário + return
     # ============================================================
     total_ms = int((time.time() - t_start) * 1000)
@@ -1068,6 +1096,7 @@ def _run_pipeline_inline(
         "qa": qa_result,
         "vision_qa": vision_result,        # checagem final (relevância copy↔imagem + integridade)
         "critic": critic_result,           # same-designer test contra referência do banco
+        "evaluation": evaluation,          # FASE 6: nota final + ancoragem (só com FINAL_EVAL=1)
         "diagnostics": diagnostics,
     }
 
