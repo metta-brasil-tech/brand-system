@@ -31,11 +31,16 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Ad generator CLI — saídas locais
+# Ad generator CLI — saídas locais (consolidadas sob render_out/)
 /out/
 /artifacts/
+render_out/out/
+render_out/artifacts/
 .venv/
 
 # Saídas de teste (regeneráveis) — não versionar
 criativos-teste/
 criativos-auto/
+
+# override pessoal de permissões (autonomia)
+.claude/settings.local.json

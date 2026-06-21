@@ -30,7 +30,7 @@ os.environ.setdefault("LLM_PROVIDER", "openai")
 os.environ.setdefault("LLM_MODEL_OPENAI", "gpt-4.1")
 os.environ.setdefault("IMAGE_GEN_PROVIDER", "gpt-image-2")
 os.environ.setdefault("IMAGE_QUALITY", "low")
-os.environ.setdefault("ARTIFACTS_DIR", str(ROOT / "artifacts"))
+os.environ.setdefault("ARTIFACTS_DIR", str(ROOT / "render_out" / "artifacts"))
 
 import generate as gen                       # noqa: E402
 from _blueprint_render import list_blueprints  # noqa: E402
@@ -57,7 +57,7 @@ def main():
     ap.add_argument("--max-attempts", type=int, default=3, help="teto de tentativas do --auto-improve")
     ap.add_argument("--no-art-director", action="store_true", help="desliga composição/direção visual")
     ap.add_argument("--no-vision-qa", action="store_true", help="desliga a checagem final por visão")
-    ap.add_argument("--out", default=str(ROOT / "out"), help="pasta de saída (default ./out)")
+    ap.add_argument("--out", default=str(ROOT / "render_out" / "out"), help="pasta de saída (default ./render_out/out)")
     args = ap.parse_args()
 
     if args.list:
