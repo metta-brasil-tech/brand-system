@@ -18,8 +18,8 @@ evoluiu pra resolver o problema de raiz: **a geração nasce cega ao que a marca
 | `api/_art_director.py` | + `NEG_MODEL_FAILS` (modos de falha gpt-image) | ✅ sim |
 | `engine/.../04-image-prompt-engineer.md` | seção de modos de falha do gpt-image | ✅ sim |
 | `api/_render_png.py` | acha Chrome no macOS/Linux (era bug) | ✅ sim |
-| `api/_evaluator.py` | juiz final: nota 0-10 + SHIP/REVISAR/DESCARTAR + `image_fixable` | ⚠️ standalone (driver: `render_out/_avaliar_criativos.py`) |
-| `api/_autogen.py` | loop de auto-melhoria (gera→avalia→regera com feedback→melhor) | ⚠️ standalone (driver: `render_out/_autogen_demo.py`) |
+| `api/_evaluator.py` | juiz final: nota 0-10 + SHIP/REVISAR/DESCARTAR + `image_fixable` | ✅ sim (`FINAL_EVAL=1`, opt-in no pipeline — Fase 6) |
+| `api/_autogen.py` | loop de auto-melhoria (gera→avalia→regera com feedback→melhor) | ✅ sim (`cli --auto-improve` / `FINAL_EVAL` — Fase 6) |
 | `api/_knowledge.py` | **camada de recuperação** — puxa ICP/voz/metodologia/depoimento por copy | ✅ sim (passo 2: injetada no diretor de arte) |
 | `api/generate.py` (decision log) | salva `artifacts/<run_id>/03-decision-log.json`: rationale + image_concept + proveniência + avatar | ✅ sim (passo 3) |
 
@@ -33,7 +33,7 @@ A geração (diretor de arte + skill 04) decide cena/persona com **input pobre**
 segmentos), mas o CLI nunca passa avatar, e mesmo o site só leva o avatar à skill 04,
 **nunca ao diretor de arte (o pensador)**.
 
-## Roadmap (ordem por dependência) — estamos no passo 4
+## Roadmap — Fases 1–6 + 5.5 FEITAS e na `main` (verificado ao vivo). Próxima: Fase 9 (carrossel)
 1. ✅ **Camada de recuperação** (`_knowledge.py`) — dá contexto rico.
 2. ✅ **ICP no pensador** — segmento inferido pela copy + `_knowledge.retrieve()`
    e avatar injetados **dentro de `_art_director.direct()`**; persona/cena nascem
@@ -54,6 +54,6 @@ BRAND_KNOWLEDGE_PATH="$PWD/engine/brand-knowledge" ARTIFACTS_DIR="$PWD/artifacts
 python3.11 cli.py --model A-headline-foto-dark --headline "..." --subhead "..." \
   --cta "..." --image generate --preset fotorrealista --format feed
 ```
-> ⚠️ O CLI ainda **não tem** `--avatar-segment/--avatar-variant` — adicionar isso faz
+> ⚠️ O CLI **já tem** `--avatar-segment/--avatar-variant` + `--auto-improve` (e o ICP é inferido pela copy quando não passado) — adicionar isso faz
 > parte do passo 2. Atenção: local usa OpenAI; produção usa Claude + render via
 > `api/render.js` — resultados podem divergir.
