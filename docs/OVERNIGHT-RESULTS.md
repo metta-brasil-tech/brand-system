@@ -7,12 +7,24 @@ impus: só meu lane (módulos novos `_ref_vision`/experimentos), **sem git**, ru
 
 Régua: golden set. **Baseline (pré): SHIP 33%, nota 8.19** (`docs/IMPROVEMENT-LEDGER.md`).
 
-## Agenda (vou marcando conforme termina)
-- [x] **1. A/B reference-aware** → resultado **NEGATIVO** (não implantado). Ver abaixo.
-- [~] **2. Pivot:** reference-aware como override regrediu → troquei por **auto-melhoria
-      (autogen)**, que é o lever JÁ validado. Rodando o "best of" com ele.
-- [ ] **3. "Best of"** — melhores briefs em qualidade média + autogen → em `render_out/best-of/`.
-- [ ] **4. Relatório final** + parar.
+## Agenda — CONCLUÍDA ✅
+- [x] **1. A/B reference-aware** → **NEGATIVO** (-0.53), não implantado. Ver abaixo.
+- [x] **2. Pivot pra auto-melhoria (autogen)** — o lever validado.
+- [x] **3. "Best of"** (medium) + **pass HIGH** nos vencedores.
+- [x] **4. Relatório** (este) + **parei**.
+
+## ☀️ DE MANHÃ, OLHE PRIMEIRO ISTO
+Os melhores criativos da noite (autogen + qualidade alta):
+- **`render_out/best-of/metta-otica/final-hq.png`** — nota 9.0 (HIGH) ⭐
+- **`render_out/best-of/metta-inflexao-1/final-hq.png`** — nota 8.2 (HIGH)
+- **`render_out/best-of/tiago-surreal/final.png`** — nota 9.0 (MEDIUM; o HIGH bateu na
+  moderação do gpt-image, então o medium é o keeper)
+Comparar medium vs high: `render_out/best-of/<id>/final.png` vs `final-hq.png`.
+
+**3 coisas que precisam da sua decisão (em `## Direções novas` + `## Plano da manhã` abaixo):**
+1. Carrossel (prioridade) — vive na UI `embed/criar.html`; precisa estudo, não fiz às cegas.
+2. Site = alta qualidade → escolher: async vs plano Vercel vs funil-interno (timeout 60s).
+3. 2 Claudes na mesma pasta = risco de colisão → usar `git worktree`? (eu perguntei, sem resposta ainda).
 
 ## Progresso / resultados
 
@@ -55,7 +67,12 @@ Resultados (autogen, qualidade média) — em `render_out/best-of/<id>/final.png
 Após o best-of: pego os SHIP de nota mais alta (≥8.5) e regenero a imagem em
 **qualidade high**, travando a direção aprovada → ficam em `final-hq.png`. É a prova
 do funil low→medium→high e os criativos prontos pra publicar.
-Best-of (medium): **otica 9.2, inflexao-1 9.0, tiago-surreal 9.0** (SHIP) → esses 3 vão pro HIGH.
+Best-of (medium): **otica 9.2, inflexao-1 9.0, tiago-surreal 9.0** (SHIP) → 3 pro HIGH.
+**Resultado HIGH:** otica 9.2→**9.0 SHIP** ✓ · inflexao-1 9.0→**8.2 SHIP** ✓ ·
+tiago-surreal 9.0→**4.5 DESCARTAR** (a re-geração em high bateu na **moderação** do
+gpt-image — o medium 9.0 fica como keeper). Lição: high é geração NOVA (estocástica);
+pra conteúdo sensível à moderação (Tiago surreal), guardar o medium aprovado ou
+re-tentar o high. Os medium estão todos preservados em `final.png`.
 
 ---
 

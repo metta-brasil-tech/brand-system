@@ -1116,8 +1116,8 @@ class handler(BaseHTTPRequestHandler):
             if not isinstance(briefing, str) or not briefing.strip():
                 return self._json(400, {"detail": "Body precisa de { briefing: string não-vazio }"})
 
-            result = _run_pipeline_inline(
-                briefing,
+            brief = dict(
+                briefing_text=briefing,
                 mock=bool(data.get("mock", False)),
                 forced_model_id=data.get("model_id") or None,
                 image_source=data.get("image_source") or None,
@@ -1137,6 +1137,38 @@ class handler(BaseHTTPRequestHandler):
                 art_director=bool(data.get("art_director", True)),
                 vision_qa=bool(data.get("vision_qa", True)),
             )
+
+            # FASE 6 — AUTO-MELHORIA no pipeline (opt-in). Liga o loop
+            # generate→avalia→regera (_autogen) atrás de `auto_improve` no body ou
+            # AUTO_IMPROVE=1. Só faz sentido com foto gerada + PNG (o avaliador julga
+            # o pixel; regerar foto não conserta layout). Devolve a MELHOR tentativa +
+            # metadados (tentativas, melhor nota). OFF por padrão (custo: N gerações).
+            auto_improve = bool(data.get("auto_improve")) or os.getenv("AUTO_IMPROVE") == "1"
+            if auto_improve and brief["image_source"] == "generate" and brief["render_png"]:
+                from _autogen import generate_until_approved
+                try:
+                    max_attempts = int(data.get("max_attempts")
+                                       or os.getenv("AUTO_IMPROVE_MAX_ATTEMPTS") or 3)
+                except (TypeError, ValueError):
+                    max_attempts = 3
+                best, hist = generate_until_approved(
+                    brief, max_attempts=max(1, max_attempts), verbose=False)
+                result = best.get("result") or {}
+                if result.get("ok"):
+                    result["evaluation"] = best.get("eval") or result.get("evaluation") or {}
+                    result["auto_improve"] = {
+                        "enabled": True,
+                        "attempts": len(hist),
+                        "best_attempt": best.get("attempt"),
+                        "best_score": best.get("score"),
+                        "history": [{
+                            "attempt": h.get("attempt"),
+                            "verdict": (h.get("eval") or {}).get("verdict"),
+                            "score": h.get("score"),
+                        } for h in hist],
+                    }
+            else:
+                result = _run_pipeline_inline(**brief)
             if not result.get("ok"):
                 return self._json(500, {"detail": result.get("error", "erro desconhecido"),
                                         "run_id": result.get("run_id"),

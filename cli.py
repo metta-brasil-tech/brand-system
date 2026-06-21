@@ -52,6 +52,9 @@ def main():
                     help="tratamento da foto: fotorrealista | cinematic-dark | bw-yellow | surreal-hbr")
     ap.add_argument("--avatar-segment", default="", help="segmento do ICP (avatars.json) — ancora quem aparece na cena no diretor de arte")
     ap.add_argument("--avatar-variant", default="", help="variante do avatar (mood/pose) — ver engine/brand-knowledge/audience/avatars.json")
+    ap.add_argument("--auto-improve", action="store_true",
+                    help="FASE 6: loop gera→avalia→regera até SHIP (ou --max-attempts). Só com --image generate")
+    ap.add_argument("--max-attempts", type=int, default=3, help="teto de tentativas do --auto-improve")
     ap.add_argument("--no-art-director", action="store_true", help="desliga composição/direção visual")
     ap.add_argument("--no-vision-qa", action="store_true", help="desliga a checagem final por visão")
     ap.add_argument("--out", default=str(ROOT / "out"), help="pasta de saída (default ./out)")
@@ -72,7 +75,7 @@ def main():
         ap.error("defina OPENAI_API_KEY no ambiente (export OPENAI_API_KEY=sk-...)")
 
     print(f"Gerando '{args.model}' ({args.format}, imagem={args.image})...")
-    res = gen._run_pipeline_inline(
+    brief = dict(
         briefing_text="cli", mock=False, forced_model_id=args.model,
         image_source=args.image,
         image_style_preset=(None if args.image == "none" else args.preset),
@@ -83,6 +86,16 @@ def main():
         render_png=True, art_director=not args.no_art_director,
         vision_qa=not args.no_vision_qa,
     )
+    if args.auto_improve and args.image == "generate":
+        from _autogen import generate_until_approved
+        best, hist = generate_until_approved(brief, max_attempts=max(1, args.max_attempts))
+        res = best.get("result") or {}
+        if res.get("ok"):
+            res["evaluation"] = best.get("eval") or res.get("evaluation") or {}
+            print(f"  auto-improve: {len(hist)} tentativa(s) · melhor=#{best.get('attempt')} "
+                  f"nota={best.get('score')}")
+    else:
+        res = gen._run_pipeline_inline(**brief)
 
     if not res.get("ok"):
         print("\nERRO:", res.get("error"))
@@ -106,6 +119,12 @@ def main():
         print(f"  crítico: {_cr.get('verdict')}"
               + (f" (vs {_cr.get('reference_id')})" if _cr.get('reference_id') else "")
               + (f" — {_cr.get('reason')}" if _cr.get('reason') else ""))
+    _ev = res.get("evaluation") or {}
+    if _ev.get("verdict") or _ev.get("geral") is not None:
+        _anc = (_ev.get("scores") or {}).get("ancoragem")
+        print(f"  avaliação: {_ev.get('verdict')} nota={_ev.get('geral')}"
+              + (f" · ancoragem={_anc}" if _anc is not None else "")
+              + "  (FASE 6 / FINAL_EVAL)")
     print("  html   :", base.with_suffix(".html"))
     if res.get("png_data_uri"):
         print("  png    :", base.with_suffix(".png"))
@@ -113,7 +132,7 @@ def main():
         print("  png    : NÃO gerado (Chromium ausente) — abra o .html no navegador.")
     print("\nDiagnóstico:")
     for d in res.get("diagnostics", []):
-        if any(k in d for k in ["art-director", "diretor-visual", "knowledge", "decision-log", "04-avatar", "04-image-gen", "vision-qa", "critic", "export-png", "render-html"]):
+        if any(k in d for k in ["art-director", "diretor-visual", "knowledge", "decision-log", "04-avatar", "04-image-gen", "vision-qa", "critic", "final-eval", "export-png", "render-html"]):
             print("  ·", d)
 
 
