@@ -37,6 +37,12 @@ _THEME_FAMILY = {
 # fechadores conhecidos (C2) — estilos de CTA/fechamento de carrossel
 _CLOSERS = {"TIAGO-EDITORIAL-CTA", "K-bold-dourado-urgencia", "YELLOW-FRAME", "DARK-CARTA"}
 
+# Override de família: modelos cujo RENDER não bate com o `theme` do blueprint.
+# Ex: YELLOW-SPLIT/YELLOW-BLOCO têm theme=dark/light mas renderizam AMARELO dominante
+# → na série eles só combinam com outros amarelos, nunca numa série dark. (O `theme`
+# sozinho engana o C4 "paleta travada" — visto no carrossel de teste.)
+_FAMILY_OVERRIDE = {"YELLOW-SPLIT": "YELLOW", "YELLOW-BLOCO": "YELLOW"}
+
 _CACHE: dict[str, dict] | None = None
 
 
@@ -55,7 +61,7 @@ def _load_models() -> dict[str, dict]:
         marca = (re.search(r"marca:\s*(\w+)", fm) or [None, "metta"])[1]
         out[mid] = {
             "marca": marca, "theme": theme,
-            "family": _THEME_FAMILY.get(theme, "DARK"),
+            "family": _FAMILY_OVERRIDE.get(mid) or _THEME_FAMILY.get(theme, "DARK"),
             "typographic": typo,
             "is_closer": mid in _CLOSERS,
         }
