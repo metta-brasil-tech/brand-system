@@ -18,21 +18,30 @@ dependência. Use como mapa; cada fase tem objetivo, tarefas, teste e critério 
 (ICP, voz, método, depoimentos, banco). Estamos transformando o brand-system de
 arquivo morto em **cérebro da geração**, e fechando o ciclo gerar→avaliar→melhorar.
 
+**Atualizado em 2026-06-21 (pós-merge na main + smoke test local verde).** Tudo abaixo
+está **na `main`** (`86e6387`, submódulo `e1278336a`), verificado: 34/34 regressão,
+12/12 imports, e **1 geração ponta a ponta real** com todas as camadas disparando.
+
 | Camada | Arquivo | Ligado no pipeline? | Estado |
 |---|---|---|---|
-| Crítico (same-designer test) | `api/_critic.py` | ✅ sim | committado |
-| Guardrails copy-literal + no_invented_text | `api/_qa.py` | ✅ sim | committado/working tree |
-| Modos de falha gpt-image | `api/_art_director.py` + skill 04 | ✅ sim | committado |
-| Fix Chrome macOS | `api/_render_png.py` | ✅ sim | committado |
-| Camada de recuperação | `api/_knowledge.py` | ✅ sim (passo 2) | working tree |
-| ICP no pensador | `_art_director.direct()` + `generate.py` | ✅ sim | committado (e619db4) |
-| Decision log | `generate.py` → `03-decision-log.json` | ✅ sim | working tree |
-| Avaliador critica o raciocínio | `api/_evaluator.py` (lê decision_log) | ⚠️ standalone | working tree |
-| Loop de auto-melhoria | `api/_autogen.py` | ⚠️ standalone | working tree |
+| Crítico (same-designer test) | `api/_critic.py` | ✅ sim (`CRITIC_COMPARE=1`) | **na main** |
+| Guardrails copy-literal + no_invented_text | `api/_qa.py` | ✅ sim | **na main** |
+| Modos de falha gpt-image | `api/_art_director.py` + skill 04 | ✅ sim | **na main** |
+| Fix Chrome macOS | `api/_render_png.py` | ✅ sim | **na main** |
+| Camada de recuperação | `api/_knowledge.py` | ✅ sim (Fase 1/2) | **na main** |
+| ICP inferido no pensador | `_avatar_infer` + `_art_director.direct()` | ✅ sim (verificado: farmácia→varejo-farmacia) | **na main** |
+| Decision log | `generate.py` → `03-decision-log.json` | ✅ sim (Fase 3) | **na main** |
+| Avaliador critica o raciocínio | `api/_evaluator.py` (lê decision_log) | ✅ **sim** (`FINAL_EVAL=1`, opt-in — Fase 6) | **na main** |
+| Loop de auto-melhoria | `api/_autogen.py` | ✅ **sim** (`cli --auto-improve` — Fase 6) | **na main** |
+| Flywheel / entrada no banco | `api/_bank.py` (gate de aprovação) | ⚙️ runner manual (`render_out/_flywheel_ingest.py`, dry-run) — **por design** (só entra com aprovação humana, não automático) | **na main** |
+| Modo B (ideia→copy) | `api/_copywriter.py` | ⚙️ standalone (falta expor no wizard/CLI) | **na main** |
+| Ledger de auditoria | `api/_ledger.py` | ⚙️ runner (`_audit_ledger`/`_golden_run`) | **na main** |
 
-**Pendências de processo:** passos 3/4 ainda **não committados**; batch parcial
-(16/34, estava travado por billing — **resolvido agora**); nada na `main` (produção
-roda código antigo). Local usa **OpenAI**; produção usa **Claude + `render.js`**.
+**Estado de processo:** tudo committado e **na `main`** (produção atualizada, deploy
+disparado). Baseline no ledger: golden set **SHIP 33% · nota 8.19**. Local usa
+**OpenAI**; produção usa **Claude + `render.js`** (paridade = Fase 8, ainda a validar).
+**Nuance do flywheel:** ingestão no banco é **manual-com-aprovação** (gated), não
+automática — se quiser automático-pós-SHIP, é uma adição pequena.
 
 ---
 
