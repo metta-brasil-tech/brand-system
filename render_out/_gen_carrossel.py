@@ -40,28 +40,54 @@ os.environ["ARTIFACTS_DIR"] = str(ART)
 from _serie import plan_serie, validate_serie, model_info  # noqa: E402
 
 MARCA = "metta"
-# Narrativa de carrossel (hook → desenvolve → reframe → fecho CTA)
+# Tema do carrossel (usado no COPY_MODE=auto, que escreve a copy ancorada no acervo)
+THEME = os.getenv("CARROSSEL_THEME",
+                  "previsibilidade de meta deixa de ser sorte quando vira método rodando todo dia")
+
+# Narrativa manual (fallback p/ DRY-RUN offline ou COPY_MODE=manual). Agora cada slide
+# carrega `role` + `visual` (direção de cena) — é o que torna a seleção ciente da copy.
 SLIDES = [
-    {"headline": "Meta batida num mês, furada no outro.", "subhead": "", "body": "", "cta": ""},
-    {"headline": "Quando o resultado depende do humor do time, ele é do acaso.", "subhead": "", "body": "", "cta": ""},
-    {"headline": "Previsibilidade não é sorte — é método rodando todo dia.", "subhead": "", "body": "", "cta": ""},
-    {"headline": "Pare de torcer pela meta. Construa ela.", "subhead": "", "body": "", "cta": "Conheça a Metta"},
+    {"role": "hook", "headline": "Meta batida num mês, furada no outro.", "subhead": "", "body": "", "cta": "",
+     "visual": "calendário/painel de metas com um mês verde e o seguinte vermelho, objeto-conceito sobre dark moody"},
+    {"role": "desenvolve", "headline": "Quando o resultado depende do humor do time, ele é do acaso.", "subhead": "", "body": "", "cta": "",
+     "visual": "cena humana de equipe comercial tensa numa sala, luz editorial, foco no clima instável"},
+    {"role": "reframe", "headline": "Previsibilidade não é sorte — é método rodando todo dia.", "subhead": "", "body": "", "cta": "",
+     "visual": "statement tipográfico sobre o conceito de método/sistema; engrenagem/dado como âncora discreta"},
+    {"role": "cta", "headline": "Pare de torcer pela meta. Construa ela.", "subhead": "", "body": "", "cta": "Conheça a Metta",
+     "visual": "fechamento com peso de convite oficial; selo/moldura, dourado cirúrgico"},
 ]
+
+
+def _load_slides():
+    """COPY_MODE=auto escreve a copy do carrossel ancorada no acervo (precisa de chave LLM).
+    Senão usa a narrativa manual acima. Retorna (slides, origem)."""
+    mode = os.getenv("COPY_MODE", "manual").lower()
+    if mode == "auto" and (os.getenv("OPENAI_API_KEY") or os.getenv("LLM_API_KEY")):
+        from _copywriter import propose_carousel_copy
+        n = int(os.getenv("CARROSSEL_N", "4"))
+        prop = propose_carousel_copy(THEME, MARCA, n_slides=n)
+        if prop.get("ok") and prop.get("slides"):
+            print(f"[copy] COPY_MODE=auto — ângulo: {prop.get('angulo','')[:80]}")
+            return prop["slides"], "auto"
+        print(f"[copy] auto falhou ({prop.get('reason','?')}) — usando narrativa manual")
+    return SLIDES, "manual"
 
 
 def main():
     dry = os.getenv("DRY_RUN", "1") == "1"
-    plan = plan_serie([s["headline"] for s in SLIDES], MARCA)
+    slides, origem = _load_slides()
+    plan = plan_serie(slides, MARCA)                # ciente da copy (passa os dicts inteiros)
     seq = plan["treatments_por_slide"]
-    preset = plan.get("preset", "fotorrealista")  # tratamento de foto uniforme da série
-    print(f"=== CARROSSEL {MARCA} · {len(SLIDES)} slides · família={plan['family']} · preset(foto uniforme)={preset} · {'DRY-RUN' if dry else 'GERANDO'} ===")
-    print("Direção de série (plan_serie):")
-    for i, (m, s) in enumerate(zip(seq, SLIDES), 1):
-        info = model_info(m)
-        src = "none" if info["typographic"] else "generate"
-        print(f"  slide {i}: {m:30s} família={info['family']:5s} foto={'não' if src=='none' else 'sim'}  «{s['headline'][:42]}»")
+    preset = plan.get("preset", "fotorrealista")    # tratamento de foto uniforme da série
+    print(f"=== CARROSSEL {MARCA} · {len(slides)} slides · copy={origem} · família={plan['family']} · preset(foto uniforme)={preset} · {'DRY-RUN' if dry else 'GERANDO'} ===")
+    print("Direção de série (plan_serie · seleção CIENTE DA COPY):")
+    for r, s in zip(plan["selecao"], slides):
+        m = r["model"]
+        foto = "sim" if r["foto"] else "não"
+        print(f"  slide {r['slide']}: {m:30s} [{r['role']:11s}] família={model_info(m)['family']:5s} foto={foto} score={r['score']:>4}  «{(s.get('headline') or '')[:40]}»")
+    print(f"capa (direção de cena forte): «{plan.get('cover_direction','')[:80]}»")
     print(f"motivos: {plan['motivos']}")
-    v = validate_serie([{"style": m, "cta": SLIDES[i].get('cta', '')} for i, m in enumerate(seq)])
+    v = validate_serie([{"style": m, "cta": slides[i].get('cta', '')} for i, m in enumerate(seq)])
     print(f"\nvalidação C1–C8: ok={v['ok']}")
     for x in v["issues"]:
         print("  ❌", x)
@@ -73,14 +99,17 @@ def main():
         return
 
     from generate import _run_pipeline_inline
+    briefs = plan.get("briefs_por_slide") or [s.get("visual", "") for s in slides]
     manifest = []
-    for i, (m, slide) in enumerate(zip(seq, SLIDES), 1):
+    for i, (m, slide) in enumerate(zip(seq, slides), 1):
         info = model_info(m)
         src = "none" if info["typographic"] else "generate"
-        print(f"\n[slide {i}/{len(SLIDES)}] {m} (foto={src})…")
+        # briefing_text = direção visual do slide (capa mais forte) — NÃO mais "carrossel"
+        brief = (briefs[i - 1] if i - 1 < len(briefs) else "") or slide.get("headline", "") or "carrossel"
+        print(f"\n[slide {i}/{len(slides)}] {m} (foto={src}) cena: «{brief[:60]}»…")
         try:
             res = _run_pipeline_inline(
-                briefing_text="carrossel", forced_model_id=m, image_source=src,
+                briefing_text=brief, forced_model_id=m, image_source=src,
                 image_style_preset=(None if src == "none" else preset),
                 user_headline=slide["headline"], user_subhead=slide.get("subhead", ""),
                 user_body=slide.get("body", ""), user_cta_text=slide.get("cta", ""),
