@@ -496,6 +496,9 @@ def _run_pipeline_inline(
     # via memória). Resolve a monotonia das imagens (sempre o mesmo empresário).
     # ============================================================
     ad_directives: dict = {}
+    # Ancoragem do passo 2 — inicializadas aqui pra existirem mesmo se o bloco do
+    # diretor for pulado (são reusadas no regen pós-crítico mais abaixo).
+    _k_block, _k_prov, _avatar_for_ad = "", [], ""
     # precisa de conceito visual? só se vai gerar imagem E o user não ditou cena.
     _user_has_visual = bool(briefing_image_text and briefing_image_text.strip())
     _needs_concept = (image_source not in ("none", "search")) and model_requires_image and not _user_has_visual
@@ -507,13 +510,32 @@ def _run_pipeline_inline(
             _arch = (bp_fm_full.get("archetype") if bp_fm_full else "") or ""
             _theme = ((bp_fm_full.get("params") or {}).get("theme") if bp_fm_full else "dark") or "dark"
             _recent = _cmem.read_recent(12) if _needs_concept else []
+            # PASSO 2 — ICP no pensador: o diretor de arte deixa de decidir
+            # persona/cena no escuro. Puxa as fatias relevantes do acervo
+            # (ICP/voz/método/depoimento) + injeta o avatar ALVO escolhido.
+            _k_block, _k_prov = "", []
+            try:
+                import _knowledge
+                _k = _knowledge.retrieve(
+                    {"headline": user_headline, "subhead": user_subhead,
+                     "body": user_body, "cta": user_cta_text}, marca)
+                _k_block = _knowledge.build_block(_k)
+                _k_prov = _k.get("provenance", [])
+            except Exception as _ke:
+                diagnostics.append(f"knowledge: PULADO ({_ke.__class__.__name__}: {str(_ke)[:80]})")
+            _avatar_for_ad = _avatar_context(avatar_segment, avatar_variant)
             ad_directives = _ad_direct(
                 copy={"headline": user_headline, "subhead": user_subhead,
                       "body": user_body, "cta": user_cta_text},
                 archetype=_arch, theme=_theme, marca=marca,
                 brief=briefing_text or "", llm=llm, placement=bp_placement,
-                needs_image=_needs_concept, treatment=bp_treatment, recent_concepts=_recent)
+                needs_image=_needs_concept, treatment=bp_treatment, recent_concepts=_recent,
+                knowledge=_k_block, avatar=_avatar_for_ad)
             mark("art-director", t_ad)
+            if _k_prov:
+                diagnostics.append(
+                    "knowledge → diretor: " + " · ".join(f"{t}={s}" for t, s in _k_prov)
+                )
             _hm = ad_directives.get("headline_marked")
             if _hm:
                 user_headline = _hm  # aplica quebras de linha + accent do DA
@@ -669,6 +691,13 @@ def _run_pipeline_inline(
                 )
             if avatar_extra:
                 parts.append(avatar_extra)
+            # ICP/conhecimento NA SKILL (passo 2): o escritor do prompt de imagem
+            # também precisa do acervo da marca — sem isto, a skill 04 escrevia a
+            # cena sem o ICP (daí persona/ambiente genéricos). _k_block já foi
+            # recuperado no bloco do diretor de arte; reusa.
+            if _k_block:
+                parts.append(_k_block)
+                diagnostics.append("04-knowledge: ICP/voz/método injetados na skill 04")
             if chosen_preset:
                 parts.append(preset_to_extra_context(chosen_preset))
             # Composição-por-slot vinda do BLUEPRINT (não do style-X.md) — garante
@@ -934,7 +963,8 @@ def _run_pipeline_inline(
                     theme=((bp_fm_full.get("params") or {}).get("theme") or "dark") if bp_fm_full else "dark",
                     marca=marca, brief=(briefing_text or "") + f" | A tentativa anterior falhou: {_critic_feedback}. Corrija.",
                     llm=llm, placement=bp_placement, needs_image=True, treatment=bp_treatment,
-                    recent_concepts=_cmem.read_recent(12))
+                    recent_concepts=_cmem.read_recent(12),
+                    knowledge=_k_block, avatar=_avatar_for_ad)
                 _nc = _newdir.get("image_concept") or {}
                 if not _nc.get("brief"):
                     break

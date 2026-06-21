@@ -50,6 +50,8 @@ def main():
                     help="generate = gera foto via IA; none = sem foto (modelos tipográficos)")
     ap.add_argument("--preset", default="fotorrealista",
                     help="tratamento da foto: fotorrealista | cinematic-dark | bw-yellow | surreal-hbr")
+    ap.add_argument("--avatar-segment", default="", help="segmento do ICP (avatars.json) — ancora quem aparece na cena no diretor de arte")
+    ap.add_argument("--avatar-variant", default="", help="variante do avatar (mood/pose) — ver engine/brand-knowledge/audience/avatars.json")
     ap.add_argument("--no-art-director", action="store_true", help="desliga composição/direção visual")
     ap.add_argument("--no-vision-qa", action="store_true", help="desliga a checagem final por visão")
     ap.add_argument("--out", default=str(ROOT / "out"), help="pasta de saída (default ./out)")
@@ -76,6 +78,8 @@ def main():
         image_style_preset=(None if args.image == "none" else args.preset),
         user_headline=args.headline, user_subhead=args.subhead, user_body=args.body,
         user_cta_text=args.cta, user_tag=args.tag, wizard_format=args.format,
+        avatar_segment=args.avatar_segment or None,
+        avatar_variant=args.avatar_variant or None,
         render_png=True, art_director=not args.no_art_director,
         vision_qa=not args.no_vision_qa,
     )
@@ -109,7 +113,7 @@ def main():
         print("  png    : NÃO gerado (Chromium ausente) — abra o .html no navegador.")
     print("\nDiagnóstico:")
     for d in res.get("diagnostics", []):
-        if any(k in d for k in ["art-director", "diretor-visual", "04-image-gen", "vision-qa", "critic", "export-png", "render-html"]):
+        if any(k in d for k in ["art-director", "diretor-visual", "knowledge", "04-avatar", "04-image-gen", "vision-qa", "critic", "export-png", "render-html"]):
             print("  ·", d)
 
 

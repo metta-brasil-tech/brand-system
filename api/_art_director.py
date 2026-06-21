@@ -345,11 +345,18 @@ def _is_tiago(marca: str, archetype: str) -> bool:
 
 def direct(copy: dict, archetype: str, theme: str, marca: str, brief: str,
            llm, placement: str = "", needs_image: bool = False,
-           treatment: str = "", recent_concepts=None) -> dict:
+           treatment: str = "", recent_concepts=None,
+           knowledge: str = "", avatar: str = "") -> dict:
     """Retorna diretivas de composição + (se needs_image) conceito visual.
 
     `llm` precisa ter .complete(system, user). `recent_concepts` = lista de dicts
     {scene_type, subject_note} dos últimos anúncios (pra não repetir).
+
+    `knowledge` = bloco de `_knowledge.build_block()` (ICP + voz + metodologia +
+    depoimento que casam com a copy). `avatar` = bloco do AVATAR ALVO (ICP)
+    escolhido. Ambos ancoram a persona/cena no que a marca SABE, em vez da
+    heurística pobre "use uma pessoa genérica". Opcionais (default "") pra manter
+    compatibilidade com chamadas antigas.
 
     Despacha por MARCA: Metta usa `_SYSTEM_METTA` (lógica madura inalterada);
     Tiago usa um system prompt construído com o DNA Tiago + o perfil fotográfico
@@ -376,12 +383,30 @@ def direct(copy: dict, archetype: str, theme: str, marca: str, brief: str,
     recent_txt = "\n".join(
         f"  - {r.get('scene_type','?')} :: {r.get('subject_note','')}" for r in recent
     ) or "  (nenhum ainda)"
+    # Ancoragem no ICP/voz/método (passo 2): o pensador deixa de decidir persona/cena
+    # no escuro. Só entra se houver conteúdo — degrada gracioso quando vazio.
+    knowledge_blk = f"\n{knowledge.strip()}\n" if (knowledge or "").strip() else ""
+    avatar_blk = f"\n{avatar.strip()}\n" if (avatar or "").strip() else ""
+    grounding = (
+        "\nANCORE a persona e a cena no CONHECIMENTO DA MARCA e no AVATAR ALVO acima "
+        "(quem é o decisor, em que momento, em que ambiente, com que tom) — NÃO "
+        "recaia em pessoa/cena genérica.\n"
+        + (
+            "REGRA DE PRECEDÊNCIA: quando o AVATAR ALVO define um ambiente concreto, "
+            "ele VENCE o mapeamento genérico de cena — ponha o decisor NO ambiente "
+            "do avatar (ex.: o dono no chão da farmácia/loja olhando indicadores num "
+            "tablet), NÃO numa sala de reunião default. Respeite o gênero do avatar.\n"
+            if avatar_blk else ""
+        )
+        if (knowledge_blk or avatar_blk) else ""
+    )
     user = (
         f"MARCA: {marca}\nESTILO: {archetype} · tema visual: {theme}\n"
         f"NEEDS_IMAGE: {'sim' if needs_image else 'não'}\n"
         f"TRATAMENTO do modelo: {treatment_eff or '(retrato editorial padrão)'}\n"
         f"PLACEMENT da foto: {placement or 'sem foto'} (texto à {text_side})\n"
-        f"BRIEF: {brief or '(institucional)'}\n\n"
+        f"BRIEF: {brief or '(institucional)'}\n"
+        f"{knowledge_blk}{avatar_blk}{grounding}\n"
         f"COPY:\nheadline: {headline}\nsubhead: {copy.get('subhead','')}\n"
         f"body: {copy.get('body','')}\ncta: {copy.get('cta','')}\n\n"
         f"CONCEITOS RECENTES (EVITE repetir cena E perfil de pessoa):\n{recent_txt}\n\n"
