@@ -20,7 +20,8 @@ evoluiu pra resolver o problema de raiz: **a geração nasce cega ao que a marca
 | `api/_render_png.py` | acha Chrome no macOS/Linux (era bug) | ✅ sim |
 | `api/_evaluator.py` | juiz final: nota 0-10 + SHIP/REVISAR/DESCARTAR + `image_fixable` | ⚠️ standalone (driver: `render_out/_avaliar_criativos.py`) |
 | `api/_autogen.py` | loop de auto-melhoria (gera→avalia→regera com feedback→melhor) | ⚠️ standalone (driver: `render_out/_autogen_demo.py`) |
-| `api/_knowledge.py` | **camada de recuperação** — puxa ICP/voz/metodologia/depoimento por copy | ⚠️ **construída, NÃO ligada ainda** |
+| `api/_knowledge.py` | **camada de recuperação** — puxa ICP/voz/metodologia/depoimento por copy | ✅ sim (passo 2: injetada no diretor de arte) |
+| `api/generate.py` (decision log) | salva `artifacts/<run_id>/03-decision-log.json`: rationale + image_concept + proveniência + avatar | ✅ sim (passo 3) |
 
 Docs: `INSIGHTS-PLUGIN-METTA-ADS.md`, `CAMADA-RECUPERACAO.md`, `ARQUITETURA-GERACAO.md`.
 
@@ -32,15 +33,17 @@ A geração (diretor de arte + skill 04) decide cena/persona com **input pobre**
 segmentos), mas o CLI nunca passa avatar, e mesmo o site só leva o avatar à skill 04,
 **nunca ao diretor de arte (o pensador)**.
 
-## Roadmap (ordem por dependência) — estamos no passo 2
+## Roadmap (ordem por dependência) — estamos no passo 4
 1. ✅ **Camada de recuperação** (`_knowledge.py`) — dá contexto rico.
-2. ◀ **ICP no pensador** (PRÓXIMO) — inferir segmento pela copy + injetar `_knowledge.retrieve()`
-   e o avatar **dentro de `_art_director.direct()`**, para a persona/cena nascerem
+2. ✅ **ICP no pensador** — segmento inferido pela copy + `_knowledge.retrieve()`
+   e avatar injetados **dentro de `_art_director.direct()`**; persona/cena nascem
    ancoradas no ICP+voz+método, não na heurística "use mulheres".
-3. **Decision log** — salvar o `rationale` do diretor de arte + a proveniência do
-   `_knowledge` por criativo (hoje o `rationale` é gerado e jogado fora).
-4. **Avaliador critica o raciocínio** — `_evaluator` julga "persona bate com o ICP?
-   cena ilustra a copy?", não só o pixel.
+3. ✅ **Decision log** — `generate.py` persiste `artifacts/<run_id>/03-decision-log.json`
+   por criativo: `rationale` do diretor + `image_concept` + proveniência do
+   `_knowledge` (`[(tipo, fonte)]`) + bloco injetado + avatar escolhido. Best-effort
+   (nunca derruba a geração); diagnóstico `decision-log: salvo …`. É a base do passo 4/5.
+4. ◀ **Avaliador critica o raciocínio** (PRÓXIMO) — `_evaluator` lê o `03-decision-log.json`
+   e julga "persona bate com o ICP? cena ilustra a copy?", não só o pixel.
 5. **Flywheel** — peça aprovada (SHIP) entra no banco → crítico mais afiado + geração
    reference-aware → melhora composta.
 

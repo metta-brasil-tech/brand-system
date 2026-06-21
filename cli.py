@@ -113,7 +113,7 @@ def main():
         print("  png    : NÃO gerado (Chromium ausente) — abra o .html no navegador.")
     print("\nDiagnóstico:")
     for d in res.get("diagnostics", []):
-        if any(k in d for k in ["art-director", "diretor-visual", "knowledge", "04-avatar", "04-image-gen", "vision-qa", "critic", "export-png", "render-html"]):
+        if any(k in d for k in ["art-director", "diretor-visual", "knowledge", "decision-log", "04-avatar", "04-image-gen", "vision-qa", "critic", "export-png", "render-html"]):
             print("  ·", d)
 
 

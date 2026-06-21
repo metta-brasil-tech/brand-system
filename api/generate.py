@@ -523,6 +523,22 @@ def _run_pipeline_inline(
                 _k_prov = _k.get("provenance", [])
             except Exception as _ke:
                 diagnostics.append(f"knowledge: PULADO ({_ke.__class__.__name__}: {str(_ke)[:80]})")
+            # PASSO 2 (fix) — INFERIR o ICP pela copy quando não foi passado. Sem isto,
+            # avatar_segment=None → _avatar_context vazio → a persona voltava pra
+            # heurística "use mulheres", mesmo com o bloco de conhecimento presente.
+            # Brand-aware: Tiago → (None,None) (o sujeito é o Tiago/metáfora, não o ICP).
+            if not avatar_segment:
+                try:
+                    from _avatar_infer import infer_segment as _infer_seg
+                    _seg_i, _var_i = _infer_seg(
+                        {"headline": user_headline, "subhead": user_subhead,
+                         "body": user_body}, marca)
+                    avatar_segment = avatar_segment or _seg_i
+                    avatar_variant = avatar_variant or _var_i
+                    if _seg_i:
+                        diagnostics.append(f"avatar-inferido: segmento={_seg_i} variante={_var_i} (pela copy)")
+                except Exception as _ie:
+                    diagnostics.append(f"avatar-infer: PULADO ({_ie.__class__.__name__})")
             _avatar_for_ad = _avatar_context(avatar_segment, avatar_variant)
             ad_directives = _ad_direct(
                 copy={"headline": user_headline, "subhead": user_subhead,
@@ -556,6 +572,49 @@ def _run_pipeline_inline(
             )
         except Exception as _e:
             diagnostics.append(f"art-director: PULADO ({_e.__class__.__name__}: {str(_e)[:90]})")
+
+    # ============================================================
+    # PASSO 3 — DECISION LOG. O diretor de arte gera um `rationale` (o PORQUÊ da
+    # persona/cena) e a camada de conhecimento traz a proveniência (que fatias do
+    # acervo ancoraram a decisão). Hoje tudo isso é calculado e jogado fora. Aqui
+    # persistimos por criativo: vira a base do flywheel (passo 4/5 — o avaliador
+    # critica o raciocínio, não só o pixel) e dá rastreabilidade ("por que essa
+    # imagem?"). Best-effort: nunca derruba a geração.
+    # ============================================================
+    if ad_directives or _k_prov:
+        try:
+            _dl_arch = (bp_fm_full.get("archetype") if bp_fm_full else "") or ""
+            _dl_theme = ((bp_fm_full.get("params") or {}).get("theme") if bp_fm_full else "dark") or "dark"
+            decision_log = {
+                "run_id": run_id,
+                "marca": marca,
+                "archetype": _dl_arch,
+                "theme": _dl_theme,
+                "avatar": {"segment": avatar_segment or "", "variant": avatar_variant or ""},
+                # proveniência: que fatias do acervo (ICP/voz/método/depoimento)
+                # alimentaram o diretor — [(tipo, fonte)].
+                "knowledge_provenance": [{"tipo": t, "fonte": s} for t, s in (_k_prov or [])],
+                "knowledge_block": _k_block,
+                "art_director": {
+                    "rationale": ad_directives.get("rationale", ""),
+                    "emphasis": ad_directives.get("emphasis", ""),
+                    "gaze_direction": ad_directives.get("gaze_direction", ""),
+                    "crop_focus": ad_directives.get("crop_focus", ""),
+                    "headline_marked": ad_directives.get("headline_marked", ""),
+                    "headline_rejected": bool(ad_directives.get("_headline_rejected")),
+                    "image_concept": ad_directives.get("image_concept") or None,
+                },
+            }
+            write_artifact(run_id, "03-decision-log", decision_log, artifacts_dir)
+            diagnostics.append(
+                "decision-log: salvo (rationale="
+                + ("sim" if decision_log["art_director"]["rationale"] else "vazio")
+                + f", proveniência={len(decision_log['knowledge_provenance'])} fatia(s))"
+            )
+        except Exception as _dle:
+            diagnostics.append(
+                f"decision-log: PULADO ({_dle.__class__.__name__}: {str(_dle)[:80]})"
+            )
 
     if image_source == "none" or not model_requires_image:
         diagnostics.append("04-image-gen: PULADO — modelo sem imagem OU user escolheu sem imagem")

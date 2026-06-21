@@ -15,6 +15,9 @@ PARA e sinaliza "trocar de modelo / editar blueprint" em vez de queimar imagens 
 from __future__ import annotations
 
 import base64
+import json
+import os
+from pathlib import Path
 
 
 def _png_bytes(res: dict) -> bytes | None:
@@ -22,6 +25,20 @@ def _png_bytes(res: dict) -> bytes | None:
     if uri.startswith("data:"):
         return base64.b64decode(uri.split(",", 1)[1])
     return None
+
+
+def _decision_log(res: dict) -> dict | None:
+    """Carrega artifacts/<run_id>/03-decision-log.json — a INTENÇÃO do diretor de arte,
+    pra o avaliador julgar fidelidade ao ICP (passo 4). Best-effort: None se faltar."""
+    rid = res.get("run_id")
+    if not rid:
+        return None
+    art = os.getenv("ARTIFACTS_DIR") or "artifacts"
+    p = Path(art) / rid / "03-decision-log.json"
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
 
 
 def generate_until_approved(brief: dict, max_attempts: int = 3,
@@ -60,7 +77,10 @@ def generate_until_approved(brief: dict, max_attempts: int = 3,
         marca = "tiago" if str(brief.get("forced_model_id", "")).upper().startswith("TIAGO") else "metta"
         copy = {"headline": brief.get("user_headline", ""), "subhead": brief.get("user_subhead", ""),
                 "body": brief.get("user_body", ""), "cta": brief.get("user_cta_text", "")}
-        ev = evaluate(png, copy, marca, res.get("vision_qa"), res.get("critic")) if png else {"verdict": "SKIPPED"}
+        # peça tipográfica (sem foto) não deve ser penalizada por "falta de imagem"
+        image_based = bool(res.get("image_data_uri"))
+        ev = evaluate(png, copy, marca, res.get("vision_qa"), res.get("critic"),
+                      decision_log=_decision_log(res), image_based=image_based) if png else {"verdict": "SKIPPED"}
 
         score = float(ev.get("geral") or 0)
         item = {"attempt": attempt, "result": res, "eval": ev, "score": score,

@@ -139,6 +139,19 @@ def qa(front_matter: dict, copy: dict, image_url: str, html: str) -> dict:
                            if w not in allowed and len(w) > 2 and not w.isdigit()})
         if invented:
             warnings.append(f"no_invented_text: texto visível fora da copy/whitelist: {invented[:10]}")
+    else:
+        # ── Guard text:none ──────────────────────────────────────────────────────
+        # Modelo só-foto (text:none): a peça NÃO deve renderizar texto de copy — só o
+        # chrome da marca (logo/assinatura). A foto já leva o negative anti-texto no
+        # prompt da skill 04; este guard cobre o lado HTML/template, que antes era
+        # pulado por inteiro pra image_only (qualquer texto vazava silencioso).
+        vis_tokens = _norm_words(_visible_text(html))
+        allowed: set[str] = set(_CHROME_SHARED) | (_CHROME_TIAGO if is_tiago else _CHROME_METTA)
+        stray = sorted({w for w in vis_tokens
+                        if w not in allowed and len(w) > 2 and not w.isdigit()})
+        if stray:
+            warnings.append(f"text_none_guard: modelo text:none deveria ser só-foto, mas há "
+                            f"texto renderizado fora do chrome da marca: {stray[:10]}")
 
     status = "FAIL" if issues else ("PASS_WITH_WARNINGS" if warnings else "PASS")
     return {"status": status, "issues": issues, "warnings": warnings}
