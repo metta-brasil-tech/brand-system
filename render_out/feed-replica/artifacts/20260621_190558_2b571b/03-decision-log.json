@@ -1,0 +1,45 @@
+{
+  "run_id": "20260621_190558_2b571b",
+  "marca": "metta",
+  "archetype": "object-center",
+  "theme": "dark",
+  "avatar": {
+    "segment": "generico",
+    "variant": "padrao"
+  },
+  "knowledge_provenance": [
+    {
+      "tipo": "ICP",
+      "fonte": "essência"
+    },
+    {
+      "tipo": "Voz da marca",
+      "fonte": "tom & voz"
+    },
+    {
+      "tipo": "Metodologia",
+      "fonte": "gestao-metodo · 7.9. Feedback Sanduiche - A Tecnica ERRADA"
+    },
+    {
+      "tipo": "Depoimento real",
+      "fonte": "depoimentos · 4.1 Sobre o gargalo do dono"
+    }
+  ],
+  "knowledge_block": "=== CONHECIMENTO DA MARCA (fundamente a persona e a cena nisto) ===\n\n[ICP — essência]\nICP vigente da Mentoria. Empresário 35-60a, R$200-600k/mês, Varejo/Serviço, 5+ vendedores, em ponto de inflexão. Vende-se IDENTIDADE NOVA (parar de ser o sistema, virar dono do sistema), não treinamento. Decisão é identitária, não técnica. SUPERSEDE Dossiê ICP v1, ICP+MQL v2 e ICP Detalhado v1.\n\n[Voz da marca — tom & voz]\nApresentação - Rebranding - Identidade Verbal Rebranding Metta Inteligência comercial para empresário Manual de Identidade Verbal & Linguage Rebrandin Manual de Identidade Verbal & Linguage Mett Inteligência comercial para empresário Sumári Introdução O que é Identidade Verbal Conceito — Propósito e Público Arquétipos de Marca Tom e Voz Implicações para o Estilo de Linguagem Vocabulário da Marca Glossário Mensagens-Chave Manifesto da Marc Rebrandin Manual de Identidade Verbal…\n\n[Metodologia — gestao-metodo · 7.9. Feedback Sanduiche - A Tecnica ERRADA]\n**Estrutura do Feedback Sanduiche:** 1. Base: referencias positivas sobre o liderado 2. Recheio: mensagem de melhoria/correcao 3. Fechamento/Tampa: reforco a ponto positivo **Exemplo dado no livro:** > \"Oi, Luiz, como voce esta? Bem, Luiz, sabe que seu trabalho e muito respeitado e admirado aqui na empresa. Seu atendimento e muito elogiado pelos clientes e voce e visto como um colega simpatico e que ajuda a todos.\n\n[Depoimento real — depoimentos · 4.1 Sobre o gargalo do dono]\n**Rafaela (Evolua Digital).** > \"Eu queria tirar férias tranquilas com a minha família, sabendo que a empresa rodaria 100%, todos os processos funcionariam 100% sem eu precisar me envolver.\" **Eduardo (Hiperzoo).** > \"Após a metodologia você passa a depender menos do mercado.",
+  "art_director": {
+    "rationale": "The headline contrasts companies that struggle with those that consistently meet their goals, suggesting a strategic advantage. The chess king symbolizes leadership and strategic dominance, aligning with the message of achieving consistent success. The dark, moody setting with dramatic lighting emphasizes the importance and gravity of the strategic decision-making process, fitting the Metta brand's serious and authoritative tone.",
+    "emphasis": "headline",
+    "gaze_direction": "camera",
+    "crop_focus": "environment",
+    "headline_marked": "Sabe a *diferença* entre a empresa que sofre pra bater meta\ne a que bate a *meta* todos os meses?",
+    "headline_rejected": false,
+    "image_concept": {
+      "scene_type": "object-center",
+      "must_show": [
+        "single black chess king piece"
+      ],
+      "brief": "A single black CHESS KING piece standing isolated and dominant at the center, dark moody background, dramatic warm golden rim light from the right edge, long dramatic cast shadow, vast empty dark negative space around it, photorealistic editorial product photography, NOT a realistic human photo, NOT a generic stock image without symbolic weight.",
+      "subject_note": "chess-king / symbolic-object / dark-mood"
+    }
+  }
+}

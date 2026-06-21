@@ -1,0 +1,47 @@
+{
+  "run_id": "20260621_190703_61ad57",
+  "marca": "metta",
+  "archetype": "photo-side",
+  "theme": "dark",
+  "avatar": {
+    "segment": "generico",
+    "variant": "padrao"
+  },
+  "knowledge_provenance": [
+    {
+      "tipo": "ICP",
+      "fonte": "essência"
+    },
+    {
+      "tipo": "Voz da marca",
+      "fonte": "tom & voz"
+    },
+    {
+      "tipo": "Metodologia",
+      "fonte": "gestao-tempo · Lider Excessivamente Tatico (pouco operacional e comercial)"
+    },
+    {
+      "tipo": "Depoimento real",
+      "fonte": "depoimentos · 2.1 Ambi Soluções Acústicas — Roberto \"Beto\" Razoto, sócio-fundador ^prova-ambi"
+    }
+  ],
+  "knowledge_block": "=== CONHECIMENTO DA MARCA (fundamente a persona e a cena nisto) ===\n\n[ICP — essência]\nICP vigente da Mentoria. Empresário 35-60a, R$200-600k/mês, Varejo/Serviço, 5+ vendedores, em ponto de inflexão. Vende-se IDENTIDADE NOVA (parar de ser o sistema, virar dono do sistema), não treinamento. Decisão é identitária, não técnica. SUPERSEDE Dossiê ICP v1, ICP+MQL v2 e ICP Detalhado v1.\n\n[Voz da marca — tom & voz]\nApresentação - Rebranding - Identidade Verbal Rebranding Metta Inteligência comercial para empresário Manual de Identidade Verbal & Linguage Rebrandin Manual de Identidade Verbal & Linguage Mett Inteligência comercial para empresário Sumári Introdução O que é Identidade Verbal Conceito — Propósito e Público Arquétipos de Marca Tom e Voz Implicações para o Estilo de Linguagem Vocabulário da Marca Glossário Mensagens-Chave Manifesto da Marc Rebrandin Manual de Identidade Verbal…\n\n[Metodologia — gestao-tempo · Lider Excessivamente Tatico (pouco operacional e comercial)]\n**Tendencia:** Padrao excessivamente teorico, pouca intimidade com a pratica **Caracteristicas:** - Ocupa tempo analisando dados sem aprofundar diagnosticos - Traca planos de acao mas nao acompanha andamento - Apega-se as proprias ideias - Inflexivel quanto a desvios do plano original - Dispensa feedbacks - Nao compreende quando o time nao executa o orientado **Razoes provaveis:** 1.\n\n[Depoimento real — depoimentos · 2.1 Ambi Soluções Acústicas — Roberto \"Beto\" Razoto, sócio-fundador ^prova-ambi]\n**Contexto.** Indústria de revestimentos acústicos. 11 anos de operação. Soluções para absorção de ruído em espaços corporativos, auditórios, teatros, escolas, estúdios. **Problema.** Operação pressionada. Meta atingida com desgaste alto. Pessoas sendo consumidas no processo. Crescimento existia, mas com custo emocional enorme. **O que foi aplicado.** Processo de gestão da empresa com identificação de perfis e realocação de pessoas.",
+  "art_director": {
+    "rationale": "The headline emphasizes the dependency of the team on the leader, which is a serious and reflective topic. The image of a serious Brazilian man in a smart-casual outfit, with a reflective gaze, aligns with the message of leadership and decision-making. The setting in a modern studio with a clean background keeps the focus on the individual, reinforcing the theme of personal responsibility and authority. This composition avoids recent concepts and adheres to the brand's identity and the avatar's characteristics.",
+    "emphasis": "headline",
+    "gaze_direction": "left",
+    "crop_focus": "chest-up",
+    "headline_marked": "Quanto mais você *cobra*,\nmais o time *espera você*.",
+    "headline_rejected": false,
+    "image_concept": {
+      "scene_type": "retrato-individual",
+      "must_show": [
+        "Brazilian man",
+        "smart-casual button-up",
+        "clean off-white textured wall"
+      ],
+      "brief": "A serious Brazilian man with light olive skin and short dark hair, wearing a smart-casual button-up, stands in front of a clean off-white textured wall in a modern studio. The lighting is soft and natural, casting gentle shadows. His gaze is slightly off-camera, reflecting serious confidence with a quiet trace of fatigue. The mood is decision-grade, dignified, and reflective. NOT a realistic human photo, NOT smiling, NOT a generic office stock photo.",
+      "subject_note": "Brazilian man / smart-casual / serious confidence"
+    }
+  }
+}

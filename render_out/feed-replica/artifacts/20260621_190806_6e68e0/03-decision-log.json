@@ -1,0 +1,38 @@
+{
+  "run_id": "20260621_190806_6e68e0",
+  "marca": "metta",
+  "archetype": "typo",
+  "theme": "dark",
+  "avatar": {
+    "segment": "generico",
+    "variant": "padrao"
+  },
+  "knowledge_provenance": [
+    {
+      "tipo": "ICP",
+      "fonte": "essência"
+    },
+    {
+      "tipo": "Voz da marca",
+      "fonte": "tom & voz"
+    },
+    {
+      "tipo": "Metodologia",
+      "fonte": "gestao-ativacao · Nivel 4: Necessidades de Autoestima ou Status"
+    },
+    {
+      "tipo": "Depoimento real",
+      "fonte": "depoimentos · 2.1 Ambi Soluções Acústicas — Roberto \"Beto\" Razoto, sócio-fundador ^prova-ambi"
+    }
+  ],
+  "knowledge_block": "=== CONHECIMENTO DA MARCA (fundamente a persona e a cena nisto) ===\n\n[ICP — essência]\nICP vigente da Mentoria. Empresário 35-60a, R$200-600k/mês, Varejo/Serviço, 5+ vendedores, em ponto de inflexão. Vende-se IDENTIDADE NOVA (parar de ser o sistema, virar dono do sistema), não treinamento. Decisão é identitária, não técnica. SUPERSEDE Dossiê ICP v1, ICP+MQL v2 e ICP Detalhado v1.\n\n[Voz da marca — tom & voz]\nApresentação - Rebranding - Identidade Verbal Rebranding Metta Inteligência comercial para empresário Manual de Identidade Verbal & Linguage Rebrandin Manual de Identidade Verbal & Linguage Mett Inteligência comercial para empresário Sumári Introdução O que é Identidade Verbal Conceito — Propósito e Público Arquétipos de Marca Tom e Voz Implicações para o Estilo de Linguagem Vocabulário da Marca Glossário Mensagens-Chave Manifesto da Marc Rebrandin Manual de Identidade Verbal…\n\n[Metodologia — gestao-ativacao · Nivel 4: Necessidades de Autoestima ou Status]\n> \"Antes, e preciso acreditar em si, para que possa acreditar em todo o resto.\" **O lider deve:** - Oferecer treinamento para capacitacao - Expor verbalmente e demonstrar que acredita no liderado - Valorizar cada progresso - Compartilhar boas praticas com todo o grupo - Comemorar grandes negociacoes - Celebrar sonhos pessoais realizados - Valorizar conquistas cotidianas (meta batida por vendedor novo ou com dificuldades) > \"Momentos assim ativam aquele que…\n\n[Depoimento real — depoimentos · 2.1 Ambi Soluções Acústicas — Roberto \"Beto\" Razoto, sócio-fundador ^prova-ambi]\nmeta mensal já batida no dia 11. - Projeção de superar meta anual em 40%. **Citação literal (Beto Razoto).** > \"A Metta nos apoiou de forma excepcional no processo de gestão da empresa. Esse apoio em conseguir colocar as pessoas, identificar cada perfil de pessoa e colocar no lugar certo, transformou nossa empresa, nos preparou para um futuro muito promissor. Não importa o número que você chega, é a forma que você chega lá que é o mais importante.",
+  "art_director": {
+    "rationale": "",
+    "emphasis": "headline",
+    "gaze_direction": "left",
+    "crop_focus": "chest-up",
+    "headline_marked": "Meta batida uma vez é *esforço*.\nMeta batida todo mês é *cultura*.",
+    "headline_rejected": false,
+    "image_concept": null
+  }
+}

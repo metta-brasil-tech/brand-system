@@ -1,0 +1,22 @@
+{
+  "prompts": [
+    {
+      "slot_name": "main",
+      "prompt": "Cinematic photograph of a Brazilian man with light olive skin and short dark hair, wearing a smart-casual button-up, seen from behind as he walks away from a dimly lit corporate office. His silhouette is visible against the low ambient light, creating a moody and somber atmosphere. The lower third of the image is kept darker to allow space for text overlay. The scene conveys a sense of departure and disengagement, with dark tones enhancing the cinematic feel. Dramatic chiaroscuro lighting with half the scene in shadow, deep blacks, single warm light source, golden amber rim light. Editorial cinema quality, Bloomberg Businessweek cover gravitas, low-key palette dominated by dark teals, charcoal, and one warm amber highlight. Subject CENTERED in the frame, mid-shot from chest up, ample headroom and breathing space, background slightly out of focus, lower third kept as clean EMPTY space, sharp focus on subject's silhouette, shallow depth of field with background fall-off, cinematic editorial photography, high contrast, high detail, without smiling stock pose, without bright cheerful lighting, without flat even lighting, without pastel colors, without white background, without high-key look, without text or logos in image, without fake teeth-bleached smile, without recortes de sujeito principal",
+      "negative_prompt": "smiling stock pose, bright cheerful lighting, flat even lighting, pastel colors, white background, high-key look, text or logos in image, fake teeth-bleached smile, recortes de sujeito principal, cartoon, 3D render look generic, anime, children's book illustration, ring light, flash, harsh lighting, any text, letters, words, numbers, captions, paragraphs, titles, labels, signage, charts, graphs, watermarks or document text anywhere in the image, no text in image, no gibberish letters, no watermark, no logos, no signage, no deformed hands, no extra fingers, no distorted face, no fused bodies, no extra limbs, no rendered UI screen, no readable numbers",
+      "aspect_ratio": "4:5",
+      "reference_images": [],
+      "model_hint": "gpt-image-2",
+      "iteration_strategy": {
+        "max_attempts": 1,
+        "fallback_prompts": []
+      },
+      "metadata": {
+        "style_id": "D-foto-fullbleed-overlay",
+        "audience": "generico",
+        "mood_chosen": "departure and disengagement"
+      }
+    }
+  ],
+  "skip": false
+}

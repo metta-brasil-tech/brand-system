@@ -1,0 +1,59 @@
+{
+  "preset": "cinematic-dark",
+  "pieces": [
+    {
+      "n": 1,
+      "model": "DARK-OBJETO",
+      "ref": "post: xadrez (rei)",
+      "foto": true,
+      "headline": "Sabe a diferença entre a empresa que sofre pra bater meta e a que bate a meta todos os meses?",
+      "ok": true,
+      "critic": "PASS"
+    },
+    {
+      "n": 2,
+      "model": "C-tipografia-pura-dark",
+      "ref": "post: GESTÃO/PRESSÃO",
+      "foto": false,
+      "headline": "Quem não sabe fazer *GESTÃO* acaba fazendo *PRESSÃO* no time.",
+      "ok": true,
+      "critic": null
+    },
+    {
+      "n": 3,
+      "model": "B-foto-top-headline-mixed",
+      "ref": "post: diagnóstico comercial",
+      "foto": true,
+      "headline": "O que um diagnóstico comercial revela que a *cobrança* não mostra.",
+      "ok": true,
+      "critic": "PASS"
+    },
+    {
+      "n": 4,
+      "model": "A-headline-foto-dark",
+      "ref": "post: quanto mais você cobra",
+      "foto": true,
+      "headline": "Quanto mais você cobra, mais o time *espera você*.",
+      "ok": true,
+      "critic": "PASS"
+    },
+    {
+      "n": 5,
+      "model": "D-foto-fullbleed-overlay",
+      "ref": "post: jornada do desengajamento",
+      "foto": true,
+      "headline": "A jornada do desengajamento.",
+      "ok": true,
+      "critic": "PASS"
+    },
+    {
+      "n": 6,
+      "model": "K-bold-dourado-urgencia",
+      "ref": "post: cultura comercial (tagline)",
+      "foto": false,
+      "headline": "Meta batida uma vez é esforço. Meta batida todo mês é *cultura*.",
+      "ok": true,
+      "critic": null
+    }
+  ]
+}

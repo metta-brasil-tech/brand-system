@@ -1,0 +1,22 @@
+{
+  "prompts": [
+    {
+      "slot_name": "main",
+      "prompt": "Cinematic photograph of a single black chess king piece standing isolated and dominant at the center, dark moody background, dramatic warm golden rim light from the right edge, long dramatic cast shadow, vast empty dark negative space around it, photorealistic editorial product photography, high detail, without bright cheerful lighting, without flat even lighting, without pastel colors, without white background, without high-key look, without cartoon, without 3D render look generic, without text or logos in image",
+      "negative_prompt": "bright cheerful lighting, flat even lighting, pastel colors, white background, high-key look, cartoon, 3D render look generic, text or logos in image, no text in image, no gibberish letters, no watermark, no logos, no signage, no deformed hands, no extra fingers, no distorted face, no fused bodies, no extra limbs, no rendered UI screen, no readable numbers",
+      "aspect_ratio": "4:5",
+      "reference_images": [],
+      "model_hint": "gpt-image-2",
+      "iteration_strategy": {
+        "max_attempts": 1,
+        "fallback_prompts": []
+      },
+      "metadata": {
+        "style_id": "DARK-OBJETO",
+        "audience": "generic",
+        "mood_chosen": "assertive urgency"
+      }
+    }
+  ],
+  "skip": false
+}
