@@ -173,12 +173,19 @@ e além de 2 slides (3+), com emendas perfeitas. É o "fazer mais" que o Nathan 
 
 ## 2-C. Resto do plugin — fases (formaliza a seção 3)
 
-### Fase 12 — Briefer A↔B (refina o prompt de imagem ANTES de gerar)
+### Fase 12 — Briefer A↔B (refina o prompt de imagem ANTES de gerar) ✅ (working tree, opt-in)
 Bate-bola propositor↔crítico do plugin: um propõe o prompt de imagem, outro valida contra
 os limites do gpt-image + composição, itera (N rodadas) antes de gastar geração.
-- **Tarefas:** `api/_briefer.py` (propositor + crítico); roda antes do image-gen com foto.
+- **Tarefas:** `api/_briefer.py` (propositor + crítico); roda antes do image-gen com foto. ✅
+- **Implementado:** `api/_briefer.py` (`refine()`/`enabled()`) + hook gated em `generate.py:836`
+  (logo após enriquecer o negative_prompt, antes do `write_artifact`/image-gen). Gate
+  `BRIEFER=1` (**default OFF**), rodadas via `BRIEFER_ROUNDS` (=1). Mira os 3 erros reais
+  (ICP genérico, amarelo Metta ausente, concretude); crítico checa contra `NEG_MODEL_FAILS`.
+  Best-effort: qualquer falha devolve o prompt original (nunca quebra o pipeline) e o
+  caminho quente fica intocado com gate OFF (testado).
 - **Teste:** A/B prompt-direto vs refinado → menos falhas (mãos/texto) + nota de imagem
-  maior no ledger. **Pronto:** o refinamento sobe a qualidade medida.
+  maior no ledger. **Pronto:** o refinamento sobe a qualidade medida. ⏳ **PENDENTE: rodar o A/B**
+  (`BRIEFER=1` local, sem teto de 60s) e comparar nota de imagem no ledger antes de ligar em prod.
 
 ### Fase 13 — Safe-zones (margens do IG) como guardrail
 Porta `metta-safe-zones.md`: story tem topo (~220px) e base (~280px) comidos pela UI do

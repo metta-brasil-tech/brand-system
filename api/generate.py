@@ -833,6 +833,28 @@ def _run_pipeline_inline(
         for _pp in (image_spec.get("prompts") or []):
             _pp["negative_prompt"] = ", ".join(
                 x for x in [_pp.get("negative_prompt", ""), _NEG_FAILS] if x)
+        # FASE 12 — Briefer A↔B: refina o prompt principal ANTES do image-gen,
+        # mirando os 3 erros reais (ICP genérico, amarelo ausente, concretude).
+        # Gated (BRIEFER=1, default OFF) pra não somar latência ao caminho quente
+        # sob o guard de 30s pré-image-gen do Vercel. Best-effort: nunca quebra.
+        try:
+            import _briefer
+            _prompts = image_spec.get("prompts") or []
+            if _briefer.enabled() and _prompts:
+                _p0 = _prompts[0]
+                _refined, _blog = _briefer.refine(
+                    llm, _p0.get("prompt", ""),
+                    marca=marca,
+                    avatar=locals().get("_avatar_for_ad", "") or "",
+                    knowledge=locals().get("_k_block", "") or "",
+                    art_direction=_art_direction_photo(locals().get("ad_directives", {}) or {}),
+                    placement=bp_placement or "",
+                )
+                if _refined and _refined != _p0.get("prompt", ""):
+                    _p0["prompt"] = _refined
+                diagnostics.extend(_blog)
+        except Exception as _be:
+            diagnostics.append(f"briefer: PULADO ({_be.__class__.__name__}: {str(_be)[:80]})")
         write_artifact(run_id, "04-image-prompt", image_spec, artifacts_dir)
         diagnostics.append(f"04-image-prompt-engineer ({timings['04-skill']}ms): prompts={len(image_spec.get('prompts', []))}")
 
