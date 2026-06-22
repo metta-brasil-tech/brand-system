@@ -34,7 +34,7 @@ está **na `main`** (`86e6387`, submódulo `e1278336a`), verificado: 34/34 regre
 | Avaliador critica o raciocínio | `api/_evaluator.py` (lê decision_log) | ✅ **sim** (`FINAL_EVAL=1`, opt-in — Fase 6) | **na main** |
 | Loop de auto-melhoria | `api/_autogen.py` | ✅ **sim** (`cli --auto-improve` — Fase 6) | **na main** |
 | Flywheel / entrada no banco | `api/_bank.py` (gate de aprovação) | ⚙️ runner manual (`render_out/_flywheel_ingest.py`, dry-run) — **por design** (só entra com aprovação humana, não automático) | **na main** |
-| Modo B (ideia→copy) | `api/_copywriter.py` | ⚙️ standalone (falta expor no wizard/CLI) | **na main** |
+| Modo B (ideia→copy) | `api/_copywriter.py` | ✅ no CLI (`cli.py --theme`, com `--pick`/`--propose-only`) | **na main** |
 | Ledger de auditoria | `api/_ledger.py` | ⚙️ runner (`_audit_ledger`/`_golden_run`) | **na main** |
 
 **Estado de processo:** tudo committado e **na `main`** (produção atualizada, deploy
@@ -226,7 +226,10 @@ copy LITERAL → segue no pipeline (Modo A).
 - **Validado:** tema "dono preso no operacional" → headlines no eixo identitário do ICP
   ("Você é dono do negócio ou apenas o principal funcionário dele?"), ancorado em
   ICP+Voz+Metodologia+Depoimento.
-- **Falta (integração):** expor no wizard/CLI (`--theme`) e ligar o "aprovar → gerar".
+- **Integração (✅ feito):** exposto no CLI — `cli.py --theme "<tema>"` propõe a copy
+  ancorada no ICP, mostra ângulo + headlines + subhead/CTA + proveniência, e o "aprovar
+  → gerar" é fechado via escolha interativa (TTY) ou `--pick N` / `--propose-only`
+  (não-interativo). A headline escolhida vira copy LITERAL e segue no pipeline (Modo A).
 
 ### 3.2 Guardrails de carrossel (C1–C8 + tratamentos T-* + anti-monotonia de paleta)
 O brand-system faz carrossel (builder multi-slide). O plugin tem: capa não-tipográfica

@@ -36,6 +36,83 @@ import generate as gen                       # noqa: E402
 from _blueprint_render import list_blueprints  # noqa: E402
 
 
+def _infer_marca(model_id: str) -> str:
+    """Mesma regra do pipeline: a marca dona do model_id (default metta)."""
+    for marca, ids in list_blueprints().items():
+        if model_id in ids:
+            return marca
+    return "metta"
+
+
+def _shell_quote(s: str) -> str:
+    return "'" + (s or "").replace("'", "'\\''") + "'"
+
+
+def _modo_b(args, marca: str) -> bool:
+    """Propõe a copy a partir de --theme, aplica a escolha em args (vira copy literal).
+
+    Retorna True para seguir gerando; False para parar (--propose-only ou abortado).
+    """
+    from _copywriter import propose_copy
+    print(f"MODO B — propondo copy para o tema (marca={marca})...\n  tema: {args.theme}")
+    p = propose_copy(args.theme, marca)
+    if not p.get("ok"):
+        print("\nERRO ao propor copy:", p.get("reason"))
+        sys.exit(1)
+
+    heads = [h for h in (p.get("headlines") or []) if str(h).strip()]
+    if not heads:
+        print("\nERRO: o copywriter não retornou headlines.")
+        sys.exit(1)
+
+    print("\nProposta (ancorada no ICP/voz/método):")
+    print("  ângulo    :", p.get("angulo") or "—")
+    for i, h in enumerate(heads, 1):
+        print(f"  headline {i}: {h}")
+    print("  subhead   :", p.get("subhead") or "—")
+    print("  cta       :", p.get("cta") or "—")
+    print("  fundamento:", p.get("fundamento") or "—")
+    if p.get("grounded_in"):
+        print("  ancorado em:", ", ".join(str(g) for g in p["grounded_in"]))
+
+    # --propose-only: mostra o comando Modo A equivalente (headline 1) e para.
+    if args.propose_only:
+        cmd = (f"\npython cli.py --model {args.model} --format {args.format} "
+               f"--image {args.image} --preset {args.preset}\n"
+               f"    --headline {_shell_quote(heads[0])}")
+        if p.get("subhead"):
+            cmd += f" --subhead {_shell_quote(p['subhead'])}"
+        if p.get("cta"):
+            cmd += f" --cta {_shell_quote(p['cta'])}"
+        print("\nComando Modo A equivalente (headline 1):", cmd)
+        return False
+
+    # Escolha da headline: --pick (não-interativo) > prompt (TTY) > headline 1 (fallback).
+    if args.pick and 1 <= args.pick <= len(heads):
+        idx = args.pick - 1
+    elif args.pick:
+        print(f"\n--pick {args.pick} fora de [1..{len(heads)}].")
+        sys.exit(1)
+    elif sys.stdin.isatty():
+        raw = input(f"\nEscolha a headline [1-{len(heads)}], ou 0 p/ abortar: ").strip()
+        if not raw.isdigit() or int(raw) == 0:
+            print("Abortado.")
+            return False
+        idx = max(1, min(int(raw), len(heads))) - 1
+    else:
+        idx = 0
+        print("\n(sem TTY e sem --pick) usando headline 1.")
+
+    # A escolha vira copy LITERAL. Subhead/CTA da proposta só preenchem se o user não passou.
+    args.headline = heads[idx]
+    if not args.subhead.strip():
+        args.subhead = p.get("subhead") or ""
+    if not args.cta.strip():
+        args.cta = p.get("cta") or ""
+    print(f"\n✓ Copy aprovada (headline {idx + 1}) → segue no pipeline (Modo A).")
+    return True
+
+
 def main():
     ap = argparse.ArgumentParser(description="Gera um ad Metta (pipeline blueprint-driven).")
     ap.add_argument("--list", action="store_true", help="lista os modelos disponíveis e sai")
@@ -45,6 +122,16 @@ def main():
     ap.add_argument("--body", default="", help="corpo; use \\n entre linhas pra virar bullets (YELLOW-BLOCO)")
     ap.add_argument("--cta", default="")
     ap.add_argument("--tag", default="", help="eyebrow/label (ex: NEWS-CARD, K)")
+    # MODO B (ideia→copy): em vez de --headline literal, dá um tema; o sistema PROPÕE
+    # a copy ancorada no ICP/voz/método (api/_copywriter) → você aprova → vira literal.
+    ap.add_argument("--theme", default="",
+                    help="MODO B: tema/ângulo → propõe copy ancorada no ICP. Dispensa --headline")
+    ap.add_argument("--marca", default="", choices=["", "metta", "tiago"],
+                    help="marca p/ o copywriter do --theme (default: inferida do --model)")
+    ap.add_argument("--pick", type=int, default=0,
+                    help="MODO B: usa a headline N (1-based) sem perguntar. 0 = pergunta (se TTY)")
+    ap.add_argument("--propose-only", action="store_true",
+                    help="MODO B: só propõe a copy e mostra o comando Modo A equivalente; não gera")
     ap.add_argument("--format", default="feed", choices=["feed", "story", "sqr"])
     ap.add_argument("--image", default="generate", choices=["generate", "none"],
                     help="generate = gera foto via IA; none = sem foto (modelos tipográficos)")
@@ -69,10 +156,16 @@ def main():
 
     if not args.model:
         ap.error("informe --model (ou use --list pra ver os modelos)")
-    if not args.headline.strip():
-        ap.error("informe --headline")
+    if not args.theme.strip() and not args.headline.strip():
+        ap.error("informe --headline (Modo A) ou --theme (Modo B: propõe a copy)")
     if not os.getenv("OPENAI_API_KEY"):
         ap.error("defina OPENAI_API_KEY no ambiente (export OPENAI_API_KEY=sk-...)")
+
+    # MODO B — tema → proposta de copy ancorada no ICP → aprovação → vira literal (Modo A).
+    if args.theme.strip():
+        marca = args.marca or _infer_marca(args.model)
+        if not _modo_b(args, marca):
+            return  # --propose-only ou abortado
 
     print(f"Gerando '{args.model}' ({args.format}, imagem={args.image})...")
     brief = dict(
