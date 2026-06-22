@@ -83,6 +83,17 @@ def qa(front_matter: dict, copy: dict, image_url: str, html: str) -> dict:
             issues.append("headline vazia (slot obrigatório)")
     elif len(copy["headline"]) > 90:
         warnings.append(f"headline longa ({len(copy['headline'])}ch) — auto-fit reduz, mas considere encurtar")
+    # Orçamento de headline por bloco apertado (pré-render, determinístico): o bloco
+    # amarelo do photo-side foi desenhado pra OFERTA CURTA + bullets; headline de tese
+    # estoura o bloco mesmo com auto-fit (vaza pro topo). Flag ANTES de gastar render —
+    # é o "revisor de tamanho" que faltava. ≤50ch = direção de copy do blueprint.
+    _block = str(params.get("block", "")).strip().lower()
+    if arch == "photo-side" and _block == "yellow" and (copy.get("headline") or "").strip():
+        _hl = copy["headline"].replace("*", "")
+        if len(_hl) > 50:
+            issues.append(
+                f"headline {len(_hl)}ch excede o orçamento do bloco amarelo (≤50ch) — "
+                "encurte ou use um template tipográfico (C/H)")
     if not (copy.get("cta") or "").strip() and not image_only:
         warnings.append("sem CTA (recomendado: CTA no fim)")
 
