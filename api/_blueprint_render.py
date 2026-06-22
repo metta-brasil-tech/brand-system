@@ -104,11 +104,41 @@ def _cta(copy: dict, cls: str = "") -> str:
 
 
 # ---------------------------------------------------------------------------
+# Luminância do tema — FONTE ÚNICA DE VERDADE p/ a cor da marca. Espelha os
+# backgrounds reais de `_engine.css`:
+#   dark=#0C161B · paper=#12201a  → canvas ESCURO  → wordmark CLARA (branca).
+#   light=#EBF3F7 · yellow=#FFBE18 → canvas CLARO   → wordmark ESCURA.
+# `paper` estava de fora antes (bug do DARK-CARTA: wordmark escura sobre fundo
+# escuro = invisível). `yellow` é CLARO (seu --fg é escuro) → wordmark escura: nos
+# dois SVGs o símbolo é amarelo e some sobre fundo amarelo, mas só a wordmark
+# escura fica legível. Temas Tiago fora deste set (offwhite/white/photo) caem como
+# claros — coerente com o bg t-paper/foto; tiago-editorial-dark usa theme=dark.
+# ---------------------------------------------------------------------------
+_DARK_THEMES = {"dark", "paper"}
+
+
+def _theme_is_dark(theme: str) -> bool:
+    """True quando o canvas do tema é escuro (→ marca clara). Única heurística de
+    luminância; blueprint pode sobrescrever com `params.brand_logo`."""
+    return str(theme or "").strip().lower() in _DARK_THEMES
+
+
+def _brand_is_light(theme: str, params: dict) -> bool:
+    """A wordmark deve ser CLARA (branca)? `params.brand_logo` (light|dark) vence a
+    luminância do tema. Fonte única usada pelo render e pela auditoria."""
+    override = str((params or {}).get("brand_logo") or "").strip().lower()
+    if override in ("light", "dark"):
+        return override == "light"
+    return _theme_is_dark(theme)
+
+
+# ---------------------------------------------------------------------------
 # Marca: logo Metta (símbolo + wordmark) / assinatura Tiago. SVGs em
-# source/ad-blueprints/_brand/ (bundlados no deploy). Theme-aware:
-#   dark/yellow → wordmark branco + símbolo amarelo · light/paper → wordmark escuro.
-# Ligado por padrão; blueprint pode sobrescrever com param `brand`:
-#   none | tl | tr | bl | br | center.
+# source/ad-blueprints/_brand/ (bundlados no deploy). Theme-aware via
+# `_theme_is_dark`: canvas escuro → wordmark branca · canvas claro → wordmark
+# escura. Ligado por padrão; blueprint pode sobrescrever:
+#   `brand`: none | tl | tr | bl | br | center   (posição / desliga)
+#   `brand_logo`: light | dark                    (cor da marca; vence a luminância)
 # ---------------------------------------------------------------------------
 _BRAND_DIR = _BLUEPRINTS_DIR / "_brand"
 _METTA_NO_BRAND = {"card-mock", "logo-wall"}                       # mock/UI falsa: sem logo
@@ -143,7 +173,8 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
             return ""
         if not is_tiago and arch in _METTA_NO_BRAND:
             return ""
-    dark = theme in ("dark", "yellow")
+    # Cor da marca via fonte única (luminância do tema + override `brand_logo`).
+    dark = _brand_is_light(theme, params)
     if is_tiago:
         svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
         # Editoriais levam a assinatura no TOPO (igual às refs de carrossel do Tiago);
@@ -163,10 +194,44 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
     return out
 
 
-def _photo(image_url: str, cls: str = "photo") -> str:
+# ===========================================================================
+# ENQUADRAMENTO (framing) — o foco do crop é DECIDIDO antes de produzir, não
+# conferido depois. O diretor de arte já emite `crop_focus`; aqui ele vira o
+# `background-position` REAL da foto, garantindo que a cabeça/torso do sujeito
+# fique no slot (nunca decapitado nem cortado no pé). Determinístico: não
+# depende do gpt-image obedecer. Quando crop_focus falta, o _engine.css aplica
+# um default head-safe (não mais `center` cego).
+# ===========================================================================
+# Slots que NÃO cortam por vertical (objeto `contain`, avatar, embed) — não
+# recebem foco; manter o posicionamento nativo do _engine.css.
+_NO_FOCAL_ARCH = {"object-center", "tiago-dark-surreal", "tiago-twitter"}
+# crop_focus → ponto focal vertical (cover-crop corta na vertical). Valores na
+# zona já provada segura no _engine.css (photo-side=28%, number-hero=30%).
+_FOCAL_Y = {"face": "26%", "chest-up": "30%", "waist-up": "38%", "environment": "50%"}
+_DEFAULT_FOCAL_Y = "32%"  # head-safe quando crop_focus é desconhecido/ausente
+
+
+def _focal_position(crop_focus: str | None, arch: str) -> str:
+    """`background-position` derivado do enquadramento pretendido. "" = sem
+    override (slot não corta na vertical ou crop_focus ausente)."""
+    if not crop_focus or arch in _NO_FOCAL_ARCH:
+        return ""
+    y = _FOCAL_Y.get(str(crop_focus).strip().lower(), _DEFAULT_FOCAL_Y)
+    return f"center {y}"
+
+
+def _bg_style(image_url: str, pos: str = "") -> str:
+    """Estilo inline da foto. `background-position` inline vence o _engine.css."""
+    s = f"background-image:url('{image_url}')"
+    if pos:
+        s += f";background-position:{pos}"
+    return s
+
+
+def _photo(image_url: str, cls: str = "photo", pos: str = "") -> str:
     if not image_url:
         return ""
-    return f'<div class="{cls}" style="background-image:url(\'{image_url}\')"></div>'
+    return f'<div class="{cls}" style="{_bg_style(image_url, pos)}"></div>'
 
 
 def _br(text) -> str:
@@ -174,14 +239,14 @@ def _br(text) -> str:
     return _esc(text).replace("\n", "<br>")
 
 
-def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
+def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str, pos: str = "") -> str:
     """Markup dos 12 estilos da marca Tiago — espelha os templates de referência
     em source/ad-templates/tiago/*. Headlines levam classe `t-head` (auto-fit do
     _engine.js encolhe copy longa) + a classe específica do estilo (visual)."""
     head = lambda cls: f'<h1 class="t-head {cls}">{_accent(copy.get("headline", ""))}</h1>'
     sub = lambda cls: f'<p class="{cls}">{_br(copy["subhead"])}</p>' if copy.get("subhead") else ""
     body = lambda cls: f'<p class="{cls}">{_br(copy["body"])}</p>' if copy.get("body") else ""
-    photo = lambda cls: (f'<div class="{cls}" style="background-image:url(\'{image_url}\')"></div>'
+    photo = lambda cls: (f'<div class="{cls}" style="{_bg_style(image_url, pos)}"></div>'
                          if image_url else f'<div class="{cls}"></div>')
 
     if arch == "tiago-editorial-hero":
@@ -272,9 +337,9 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
     return f'<div class="tt-text layer">{head("tt-headline")}{sub("tt-subhead")}{body("tt-body")}</div>'
 
 
-def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
+def _markup(arch: str, copy: dict, params: dict, image_url: str, pos: str = "") -> str:
     if arch.startswith("tiago"):
-        return _markup_tiago(arch, copy, params, image_url)
+        return _markup_tiago(arch, copy, params, image_url, pos)
 
     cta_cls = "cta--dark" if params.get("cta") == "dark" else ("cta--outline" if params.get("cta") == "outline" else "")
 
@@ -295,19 +360,19 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 parts.append('<ul class="bullets">' + "".join(f'<li>{_esc(l)}</li>' for l in _lines) + '</ul>')
             elif _lines:
                 parts.append(f'<p class="t-body">{_esc(_lines[0])}</p>')
-            return (f'{_photo(image_url)}'
+            return (f'{_photo(image_url, pos=pos)}'
                     f'<div class="layer"><div class="stack">{chr(10).join(parts)}</div></div>'
                     f'{_cta(copy, cta_cls)}')
-        return (f'{_photo(image_url)}<div class="grad"></div>'
+        return (f'{_photo(image_url, pos=pos)}<div class="grad"></div>'
                 f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div></div>'
                 f'{_cta(copy, cta_cls)}')
 
     if arch == "photo-full":
-        return (f'{_photo(image_url)}<div class="grad"></div>'
+        return (f'{_photo(image_url, pos=pos)}<div class="grad"></div>'
                 f'<div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>')
 
     if arch == "photo-band":
-        return f'{_photo(image_url)}<div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
+        return f'{_photo(image_url, pos=pos)}<div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
 
     if arch == "object-center":
         obj = _photo(image_url, "object")
@@ -340,13 +405,13 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         return f'<div class="frame"></div><div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
 
     if arch == "split":
-        media = f'<div class="half-media" style="background-image:url(\'{image_url}\')"></div>' if image_url else '<div class="half-media"></div>'
+        media = f'<div class="half-media" style="{_bg_style(image_url, pos)}"></div>' if image_url else '<div class="half-media"></div>'
         return (f'{media}<div class="half-text"><div class="stack">{_txt_blocks(copy)}</div>'
                 f'{_cta(copy, cta_cls)}</div>')
 
     if arch == "number-hero":
         # colagem PB no topo (opcional) + número gigante + sub/body + CTA
-        return (f'{_photo(image_url)}'
+        return (f'{_photo(image_url, pos=pos)}'
                 f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div>{_cta(copy, cta_cls)}</div>')
 
     # fallback
@@ -369,7 +434,8 @@ def list_blueprints() -> dict[str, list[str]]:
     return out
 
 
-def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: str = "story") -> dict:
+def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: str = "story",
+           crop_focus: str | None = None) -> dict:
     bp_path = _blueprint_path(marca, model_id)
     if not bp_path.exists():
         return {"html": "", "model_id": model_id, "marca": marca, "format": format, "missing": True}
@@ -385,7 +451,9 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     anchor = params.get("anchor", "bottom")
 
     copy_clean = {k: (str(v).strip() if v else "") for k, v in (copy or {}).items()}
-    inner = _markup(arch, copy_clean, params, image_url or "")
+    # Enquadramento decidido antes de produzir: o crop_focus do diretor de arte
+    # vira o ponto focal REAL do crop (cabeça/torso no slot, nunca pé/decapitado).
+    inner = _markup(arch, copy_clean, params, image_url or "", _focal_position(crop_focus, arch))
 
     head_style = params.get("head", "")
     case = params.get("case", "upper")

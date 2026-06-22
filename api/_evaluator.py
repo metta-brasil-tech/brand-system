@@ -47,7 +47,8 @@ def _intent_block(dl: dict | None) -> str:
     return "\n".join(parts)
 
 
-def _system(marca: str, has_intent: bool = False, image_based: bool = True) -> str:
+def _system(marca: str, has_intent: bool = False, image_based: bool = True,
+            has_dna: bool = False) -> str:
     dna = (
         "Metta = inteligência comercial B2B: editorial sério (HBR/Bloomberg), dark moody, "
         "autoridade, display Zalando Sans Expanded, amarelo Metta CIRÚRGICO (nunca difuso)."
@@ -73,6 +74,24 @@ def _system(marca: str, has_intent: bool = False, image_based: bool = True) -> s
     else:
         intent_dim = ""
     intent_schema = ',"ancoragem":0' if has_intent else ""
+
+    # FASE 3 — juiz model-aware: confere a peça contra o SPEC do modelo (bloco
+    # injetado no user). O foco nem sempre é o rosto: cada modelo tem seu "tem que
+    # ter / não pode ter". Anti-padrão presente na peça = reprova de fidelidade.
+    if has_dna:
+        dna_rule = (
+            "\n\nFIDELIDADE AO MODELO (há um SPEC DO MODELO no fim da mensagem): além das "
+            "dimensões acima, CONFIRA a peça contra ele — a imagem/layout RESPEITA a "
+            "ESTRUTURA esperada e NÃO cai em nenhum ANTI-PADRÃO listado? (ex.: o modelo é "
+            "colagem conceitual mas a foto é um retrato humano realista = viola; exige rosto "
+            "onde o modelo pede objeto/cena = errado). Se a peça contém QUALQUER anti-padrão "
+            "do spec, rebaixe `marca`/`relevancia` E marque `anti_pattern_violated:true` com a "
+            "razão. Senão, `false`."
+        )
+        dna_schema = ',"anti_pattern_violated":false'
+    else:
+        dna_rule = ""
+        dna_schema = ""
 
     # relevância muda conforme a peça tem foto ou é tipográfica
     if image_based:
@@ -102,7 +121,7 @@ Olhe a peça acabada e dê uma nota 0-10 (decimais ok) em CADA dimensão:{intent
   feed comprimido no mobile?
 - **acabamento**: polish e integridade — nada cortado sem querer, sem AI-slop (gradiente
   arco-íris, glassmorphism, amarelo decorativo difuso, centrado genérico, texto torto na
-  foto, badge de e-commerce), respiro correto?{typo_note}
+  foto, badge de e-commerce), respiro correto?{typo_note}{dna_rule}
 
 Depois dê uma **nota geral 0-10** (julgamento, não precisa ser média) e um VEREDITO:
 - **SHIP**: publicaria como está (geral >= 7.5 e sem defeito grave).
@@ -118,7 +137,7 @@ NÃO muda? → `false` (aí o caminho é trocar de modelo ou editar o blueprint,
 
 Responda APENAS JSON, sem cercas:
 {{"scores":{{"relevancia":0,"marca":0,"hierarquia":0,"acabamento":0{intent_schema}}},
-"geral":0,"verdict":"SHIP|REVISAR|DESCARTAR","image_fixable":true,
+"geral":0,"verdict":"SHIP|REVISAR|DESCARTAR","image_fixable":true{dna_schema},
 "image_feedback":"o que a PRÓXIMA foto precisa mostrar/evitar pra subir a nota (1 frase, EN ou PT)",
 "fixes":["..."],"reason":"frase curta em pt"}}"""
 
@@ -144,9 +163,22 @@ def _guardrail(out: dict, vision_result: dict | None, critic_result: dict | None
         reasons.append("integridade do layout quebrada")
         if out.get("verdict") == "SHIP":
             out["verdict"] = "REVISAR"
+    # FASE 3c — a vision-qa reprovou (relevância/integridade) mas o portão deixava
+    # subir: só rebaixava por texto-inventado/integridade/crítico, NÃO por vision FAIL.
+    # DARK-COLAGEM (visão FAIL, crítico PASS) chegou a subir 8.7 SHIP. Fecha o buraco.
+    if vr.get("verdict") == "FAIL":
+        reasons.append("vision-qa reprovou (relevância/integridade)")
+        if out.get("verdict") == "SHIP":
+            out["verdict"] = "REVISAR"
     # Crítico reprovou no same-designer test = não pode SHIP sem revisão.
     if cr.get("verdict") == "FAIL":
         reasons.append("reprovado no same-designer test")
+        if out.get("verdict") == "SHIP":
+            out["verdict"] = "REVISAR"
+    # FASE 3 — a peça viola um anti-padrão do modelo (juiz model-aware): infidelidade
+    # ao spec não pode subir como SHIP (ex.: homem realista num modelo de colagem).
+    if out.get("anti_pattern_violated") is True:
+        reasons.append("viola anti-padrão do modelo")
         if out.get("verdict") == "SHIP":
             out["verdict"] = "REVISAR"
     if reasons:
@@ -157,12 +189,16 @@ def _guardrail(out: dict, vision_result: dict | None, critic_result: dict | None
 def evaluate(png_bytes: bytes, copy: dict, marca: str,
              vision_result: dict | None = None, critic_result: dict | None = None,
              model: str | None = None, decision_log: dict | None = None,
-             image_based: bool | None = None) -> dict:
+             image_based: bool | None = None, model_dna: dict | None = None) -> dict:
     """Avalia a peça final. Retorna scores + geral + verdict + fixes (ou SKIPPED).
 
     Se `decision_log` (03-decision-log.json) for passado, o juiz também confronta a
     INTENÇÃO do diretor de arte (avatar/ICP, raciocínio, cena, conhecimento ancorado)
     com a peça final — dimensão `ancoragem` (passo 4: julga o raciocínio, não só o pixel).
+
+    Se `model_dna` (FASE 3) for passado, o juiz confere a peça contra o SPEC do modelo
+    (anti-padrões + estrutura): peça que viola anti-padrão marca `anti_pattern_violated`
+    e é rebaixada pelo guardrail — infidelidade ao modelo não sobe como SHIP.
     """
     try:
         from openai import OpenAI
@@ -178,9 +214,17 @@ def evaluate(png_bytes: bytes, copy: dict, marca: str,
     has_intent = bool(intent)
     if image_based is None:  # default: peça é fotográfica salvo sinal em contrário
         image_based = True
+    try:
+        from _blueprint_dna import dna_judge_block
+        dna_spec = dna_judge_block(model_dna)
+    except Exception:
+        dna_spec = ""
+    has_dna = bool(dna_spec)
     user_txt = f"COPY do anúncio:\n{copy_txt}\n\n"
     if has_intent:
         user_txt += f"INTENÇÃO do diretor de arte (o que a peça DEVERIA entregar):\n{intent}\n\n"
+    if has_dna:
+        user_txt += f"{dna_spec}\n\n"
     user_txt += "Avalie a peça final:"
     try:
         b64 = base64.b64encode(png_bytes).decode("ascii")
@@ -188,7 +232,7 @@ def evaluate(png_bytes: bytes, copy: dict, marca: str,
         resp = client.chat.completions.create(
             model=model, max_tokens=500,
             messages=[
-                {"role": "system", "content": _system(marca, has_intent, image_based)},
+                {"role": "system", "content": _system(marca, has_intent, image_based, has_dna)},
                 {"role": "user", "content": [
                     {"type": "text", "text": user_txt},
                     {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},

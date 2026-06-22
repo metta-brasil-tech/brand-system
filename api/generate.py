@@ -210,15 +210,21 @@ def _art_direction_photo(directives: dict) -> str:
         "camera": "subject looking directly at camera, confident",
     }
     crop_map = {
-        "face": "tight editorial portrait, face and shoulders",
-        "chest-up": "editorial mid-shot from the chest up",
-        "waist-up": "editorial three-quarter shot from the waist up",
-        "environment": "wider environmental shot, subject within the scene",
+        "face": "tight editorial portrait, face and shoulders, full head in frame with headroom",
+        "chest-up": "editorial mid-shot from the chest up, full head in frame with headroom",
+        "waist-up": "editorial three-quarter shot from the waist up, full head in frame",
+        "environment": "wider environmental shot, subject within the scene, whole figure unobstructed",
     }
     if gaze in gaze_map:
         bits.append(gaze_map[gaze])
     if crop in crop_map:
         bits.append(crop_map[crop])
+    # Trava de enquadramento (padrão p/ qualquer sujeito humano): a foto é
+    # GERADA já enquadrada — cabeça inteira no quadro, nunca decapitado, nunca
+    # só pernas/pé. Robustez dupla com o crop focal do template (_focal_position).
+    if bits:
+        bits.append("subject's head fully visible and never cropped, never decapitated, "
+                    "never showing only legs or feet, no awkward crop at the body")
     return ". ".join(bits) + ("." if bits else "")
 
 
@@ -314,8 +320,11 @@ def _run_pipeline_inline(
         return has_blueprint(marca, mid) or _has_tpl(marca, mid)
 
     def render_html(**kw):
+        # crop_focus (enquadramento decidido pelo diretor de arte) só existe no
+        # render v3 (blueprint); o v2 estático não o aceita.
+        cf = kw.pop("crop_focus", None)
         if has_blueprint(kw.get("marca"), kw.get("model_id")):
-            return _render_bp(**kw)
+            return _render_bp(crop_focus=cf, **kw)
         return _render_tpl(**kw)
 
     diagnostics: list[str] = []
@@ -461,6 +470,10 @@ def _run_pipeline_inline(
     bp_treatment: str = ""
     bp_prompt_ref: str = ""
     bp_prefer_upload: bool = False
+    # DNA do modelo (prose do blueprint: Intenção/Estrutura/Anti-padrões). Carregada
+    # uma vez aqui e passada ao diretor de arte (1ª chamada E regen) pra a fidelidade
+    # ao modelo fluir no pipeline real. None = sem blueprint → degrada gracioso.
+    model_dna: dict | None = None
 
     if has_bp:
         try:
@@ -472,6 +485,19 @@ def _run_pipeline_inline(
             bp_prompt_ref = str(_img_cfg.get("prompt_ref") or "")
             bp_prefer_upload = _img_cfg.get("prefer_upload") in (True, "true", "True", "yes")
             bp_placement = _blueprint_placement(bp_fm_full)
+            try:
+                from _blueprint_dna import extract_dna as _extract_dna
+                _dna = _extract_dna(marca, chosen_model_id)
+                if _dna and not _dna.get("missing"):
+                    model_dna = _dna
+                    _n_anti = len(_dna.get("anti_patterns") or [])
+                    diagnostics.append(
+                        f"03-dna: intenção={'sim' if _dna.get('intent') else 'não'} "
+                        f"estrutura={'sim' if _dna.get('structure') else 'não'} "
+                        f"anti-padrões={_n_anti}"
+                    )
+            except Exception as _de:
+                diagnostics.append(f"03-dna: PULADO ({_de.__class__.__name__}: {str(_de)[:60]})")
             diagnostics.append(
                 f"03-blueprint: image.required={model_requires_image} placement={bp_placement or '-'} "
                 f"(fonte única; YAML ignorado)"
@@ -546,7 +572,7 @@ def _run_pipeline_inline(
                 archetype=_arch, theme=_theme, marca=marca,
                 brief=briefing_text or "", llm=llm, placement=bp_placement,
                 needs_image=_needs_concept, treatment=bp_treatment, recent_concepts=_recent,
-                knowledge=_k_block, avatar=_avatar_for_ad)
+                knowledge=_k_block, avatar=_avatar_for_ad, model_dna=model_dna)
             mark("art-director", t_ad)
             if _k_prov:
                 diagnostics.append(
@@ -902,6 +928,7 @@ def _run_pipeline_inline(
         copy=copy_dict,
         image_url=image_data_uri or image_file_url,
         format=format_key,
+        crop_focus=(ad_directives or {}).get("crop_focus"),
     )
     mark("render", t_render)
     if rendered.get("missing"):
@@ -991,11 +1018,12 @@ def _run_pipeline_inline(
             _critic_feedback = ""
             for _va in range(1, _vmax + 1):
                 critic_result = {}
-                vision_result = _vqa_check(_png, copy_dict)
+                vision_result = _vqa_check(_png, copy_dict, model_dna=model_dna)
                 diagnostics.append(
                     f"vision-qa (try {_va}/{_vmax}): {vision_result.get('verdict')} "
-                    f"rel={vision_result.get('relevance')} integ={vision_result.get('integrity')} — "
-                    f"{str(vision_result.get('reason',''))[:80]}")
+                    f"rel={vision_result.get('relevance')} integ={vision_result.get('integrity')}"
+                    + (" viola-anti-padrão" if vision_result.get('anti_pattern_violated') else "")
+                    + f" — {str(vision_result.get('reason',''))[:80]}")
                 if _critic_on and _reference and _critique:
                     critic_result = _critique(_png, copy_dict, _reference, marca)
                     if critic_result.get("verdict") != "SKIPPED":
@@ -1006,6 +1034,7 @@ def _run_pipeline_inline(
                             f"slop={critic_result.get('anti_slop_failed')} — "
                             f"{str(critic_result.get('reason',''))[:80]}")
                 _failed = (vision_result.get("verdict") == "FAIL"
+                           or vision_result.get("anti_pattern_violated") is True
                            or critic_result.get("verdict") == "FAIL")
                 if not _failed or _va == _vmax:
                     break
@@ -1023,7 +1052,7 @@ def _run_pipeline_inline(
                     marca=marca, brief=(briefing_text or "") + f" | A tentativa anterior falhou: {_critic_feedback}. Corrija.",
                     llm=llm, placement=bp_placement, needs_image=True, treatment=bp_treatment,
                     recent_concepts=_cmem.read_recent(12),
-                    knowledge=_k_block, avatar=_avatar_for_ad)
+                    knowledge=_k_block, avatar=_avatar_for_ad, model_dna=model_dna)
                 _nc = _newdir.get("image_concept") or {}
                 if not _nc.get("brief"):
                     break
@@ -1040,7 +1069,8 @@ def _run_pipeline_inline(
                     aspect_ratio=_aspect, reference_images=[])
                 image_data_uri = _image_to_data_uri(_ig.url)
                 rendered = render_html(marca=marca, model_id=chosen_model_id, copy=copy_dict,
-                                       image_url=image_data_uri or _ig.url, format=format_key)
+                                       image_url=image_data_uri or _ig.url, format=format_key,
+                                       crop_focus=_newdir.get("crop_focus") or (ad_directives or {}).get("crop_focus"))
                 _png = _rfmt(rendered["html"], format_key, scale=2, downscale=True)
                 png_data_uri = "data:image/png;base64," + base64.b64encode(_png).decode("ascii")
                 diagnostics.append(f"vision-qa: REGENEROU imagem (cena='{_nc.get('scene_type','?')}')")
@@ -1067,11 +1097,13 @@ def _run_pipeline_inline(
             evaluation = _final_eval(
                 _eval_png, copy_dict, marca, vision_result, critic_result,
                 decision_log=_eval_dl,
-                image_based=bool(image_data_uri or image_file_url))
+                image_based=bool(image_data_uri or image_file_url),
+                model_dna=model_dna)
             _anc = (evaluation.get("scores") or {}).get("ancoragem")
             diagnostics.append(
                 f"final-eval: {evaluation.get('verdict')} nota={evaluation.get('geral')}"
-                + (f" ancoragem={_anc}" if _anc is not None else ""))
+                + (f" ancoragem={_anc}" if _anc is not None else "")
+                + (" · viola-anti-padrão" if evaluation.get("anti_pattern_violated") else ""))
         except Exception as _fe:
             diagnostics.append(f"final-eval: PULADO ({_fe.__class__.__name__}: {str(_fe)[:80]})")
 

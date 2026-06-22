@@ -346,7 +346,7 @@ def _is_tiago(marca: str, archetype: str) -> bool:
 def direct(copy: dict, archetype: str, theme: str, marca: str, brief: str,
            llm, placement: str = "", needs_image: bool = False,
            treatment: str = "", recent_concepts=None,
-           knowledge: str = "", avatar: str = "") -> dict:
+           knowledge: str = "", avatar: str = "", model_dna=None) -> dict:
     """Retorna diretivas de composição + (se needs_image) conceito visual.
 
     `llm` precisa ter .complete(system, user). `recent_concepts` = lista de dicts
@@ -379,6 +379,24 @@ def direct(copy: dict, archetype: str, theme: str, marca: str, brief: str,
         treatment_eff = treatment
         text_side = "esquerda" if placement in ("right-bleed", "fullbleed", "") else "direita"
 
+    # DNA do modelo (prose do blueprint): intenção + estrutura + ANTI-PADRÕES.
+    # É o que conserta o "homem realista" na origem — o anti-padrão do modelo
+    # chega ao pensador e vira negativo no brief. Opcional (default None) →
+    # degrada gracioso pras chamadas que ainda não passam model_dna.
+    try:
+        from _blueprint_dna import dna_prompt_block
+        dna_blk = dna_prompt_block(model_dna)
+    except Exception:
+        dna_blk = ""
+    _dna_rule = (
+        "A DNA DO MODELO acima MANDA: o brief tem que seguir a INTENÇÃO/ESTRUTURA e "
+        "NÃO pode cair em nenhum ANTI-PADRÃO — inclua cada anti-padrão como negativo "
+        "(em inglês) no brief (ex.: 'foto humana realista' → 'NOT a realistic human "
+        "photo'). O enquadramento (crop_focus) deve respeitar a ESTRUTURA do modelo "
+        "(colagem/objeto centralizado ≠ retrato chest-up).\n"
+    )
+    dna_section = f"\n{dna_blk}\n{_dna_rule}" if dna_blk else ""
+
     recent = recent_concepts or []
     recent_txt = "\n".join(
         f"  - {r.get('scene_type','?')} :: {r.get('subject_note','')}" for r in recent
@@ -406,6 +424,7 @@ def direct(copy: dict, archetype: str, theme: str, marca: str, brief: str,
         f"TRATAMENTO do modelo: {treatment_eff or '(retrato editorial padrão)'}\n"
         f"PLACEMENT da foto: {placement or 'sem foto'} (texto à {text_side})\n"
         f"BRIEF: {brief or '(institucional)'}\n"
+        f"{dna_section}"
         f"{knowledge_blk}{avatar_blk}{grounding}\n"
         f"COPY:\nheadline: {headline}\nsubhead: {copy.get('subhead','')}\n"
         f"body: {copy.get('body','')}\ncta: {copy.get('cta','')}\n\n"

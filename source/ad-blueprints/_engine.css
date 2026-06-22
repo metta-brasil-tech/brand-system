@@ -206,7 +206,10 @@ button { all: unset; }
 
 /* (4) photo-band — faixa de foto (top|bottom) + faixa de texto */
 .ad[data-arch="photo-band"] { display: flex; flex-direction: column; }
-.ad[data-arch="photo-band"] .photo { position: relative; width: 100%; height: 46%; flex: none; background-size: cover; background-position: center; }
+/* default head-safe: faixa de 46% com `center` cortava o sujeito no meio
+   (decapitado em cima, pé em baixo). 30% mantém rosto/torso no slot. O crop_focus
+   do diretor de arte sobrescreve isto inline quando presente. */
+.ad[data-arch="photo-band"] .photo { position: relative; width: 100%; height: 46%; flex: none; background-size: cover; background-position: center 30%; }
 /* fade-to-bg na borda foto↔texto (assinatura do B; suaviza a costura) */
 .ad[data-arch="photo-band"] .photo::after { content: ''; position: absolute; left: 0; right: 0; height: 30%; pointer-events: none; }
 .ad[data-arch="photo-band"][data-photo="top"] .photo::after { bottom: 0; background: linear-gradient(0deg, var(--m-night-10) 0%, transparent 100%); }

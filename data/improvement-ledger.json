@@ -15,5 +15,30 @@
     },
     "deltas": {},
     "verdict": "BASELINE"
+  },
+  {
+    "ts": "2026-06-21 01:37",
+    "label": "best-of (autogen, qualidade média)",
+    "change": "auto-melhoria nos melhores briefs, qualidade média (não comparável 1:1 ao golden baseline low)",
+    "note": "",
+    "metrics": {
+      "n": 6,
+      "ship_rate": 50.0,
+      "revisar_rate": 50.0,
+      "descartar_rate": 0.0,
+      "avg_score": 8.33,
+      "regen_rate": 0.0,
+      "foto_rate": 100.0
+    },
+    "deltas": {
+      "n": -6,
+      "ship_rate": 16.7,
+      "revisar_rate": -16.7,
+      "descartar_rate": 0.0,
+      "avg_score": 0.14,
+      "regen_rate": 0.0,
+      "foto_rate": 8.3
+    },
+    "verdict": "MELHOROU"
   }
 ]
