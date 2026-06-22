@@ -184,8 +184,13 @@ os limites do gpt-image + composição, itera (N rodadas) antes de gastar geraç
   Best-effort: qualquer falha devolve o prompt original (nunca quebra o pipeline) e o
   caminho quente fica intocado com gate OFF (testado).
 - **Teste:** A/B prompt-direto vs refinado → menos falhas (mãos/texto) + nota de imagem
-  maior no ledger. **Pronto:** o refinamento sobe a qualidade medida. ⏳ **PENDENTE: rodar o A/B**
-  (`BRIEFER=1` local, sem teto de 60s) e comparar nota de imagem no ledger antes de ligar em prod.
+  maior no ledger. **Pronto:** o refinamento sobe a qualidade medida.
+- **✅ A/B RODADO (2026-06-22, N=4/lado, `render_out/ab-briefer/run{0..3}`):** CONTROLE
+  **4/4 SHIP** × TRATAMENTO **2/4 SHIP**. qa+vision_qa = PASS nos 8; a diferença é só o
+  avaliador (dim. `ancoragem`). Causa: o propositor reescreve o SUJEITO — quando troca o
+  gênero da persona cai pra REVISAR. **DECISÃO: NÃO ligar — fica `BRIEFER` default OFF.**
+  Se revisitar: travar o propositor pra não mudar identidade/gênero nem inventar
+  merchandise de marca; só ancorar ambiente/papel/ação.
 
 ### Fase 13 — Safe-zones (margens do IG) como guardrail
 Porta `metta-safe-zones.md`: story tem topo (~220px) e base (~280px) comidos pela UI do
