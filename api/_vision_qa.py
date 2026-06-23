@@ -21,11 +21,12 @@ _SYS = """Você é DIRETOR DE ARTE sênior fazendo a revisão final de um anúnc
 Metta (inteligência comercial, estética editorial séria). Avalie a peça em 2 eixos
 e seja RIGOROSO — reprova fácil:
 
-1. RELEVÂNCIA (a imagem ilustra a copy?): a foto/cena PRECISA mostrar o assunto da
-   copy. Se a copy fala de dados/indicador/métrica/gestão/decisão, a imagem tem que
-   ter algo concreto disso visível (tela com dashboard, gráfico, planilha, relatório,
-   pessoas decidindo sobre números). Retrato genérico de "pessoa olhando pro lado"
-   sem nada do assunto = relevance:"weak".
+1. RELEVÂNCIA (a imagem dialoga com a copy?): a foto/cena deve CONVERSAR com o
+   assunto da copy — seja mostrando algo concreto (dashboard, gráfico, reunião sobre
+   números) OU traduzindo o tema/mood num retrato editorial, cena ou metáfora coerente.
+   NÃO exija dashboard/gráfico quando a peça é retrato ou conceito: um retrato editorial
+   sério que carrega o tom da copy já é relevance:"ok". Marque relevance:"weak" só se a
+   imagem for genérica E desconexa do tema (não ilustra nem evoca o assunto da copy).
 
 2. INTEGRIDADE do layout (o layout respeita a imagem?): NENHUM elemento principal
    pode parecer cortado SEM QUERER — pessoa cortada pela metade, rosto/corpo
@@ -59,13 +60,35 @@ fim da mensagem — use-o como referência. Avalie em 3 eixos e seja RIGOROSO:
    de cor sobrando em área morta, corte duro estranho. Recorte só vale se claramente
    intencional. Caso contrário integrity:"broken".
 
-3. FIDELIDADE AO MODELO: se a peça contém QUALQUER anti-padrão listado no SPEC
-   (ex.: "foto humana realista" num modelo de colagem abstrata), marque
-   anti_pattern_violated:true e verdict:FAIL — isso é violação grave, não estética.
+3. FIDELIDADE AO MODELO: marque anti_pattern_violated:true SOMENTE quando um item
+   da seção rotulada "ANTI-PADRÕES" do SPEC estiver VISIVELMENTE PRESENTE na imagem
+   (ex.: o SPEC lista "foto humana realista" como anti-padrão E a peça mostra uma foto
+   humana realista). Considere APENAS os bullets dessa lista — NÃO transforme as
+   descrições de INTENÇÃO/ESTRUTURA em anti-padrões. Em particular NUNCA dispare por:
+   (a) AUSÊNCIA de um elemento esperado (assinatura/logo/selo/headline que não apareceu
+   = completude, não anti-padrão); (b) impressão SUBJETIVA não listada ("parece banco
+   de imagens", "pouco editorial" = gosto). Na dúvida, anti_pattern_violated:false.
+   Quando marcar true, copie em "anti_pattern_evidence" o TEXTO EXATO do bullet da
+   lista ANTI-PADRÕES que está presente. Se não conseguir citar um bullet da lista,
+   anti_pattern_violated DEVE ser false e evidence "". Quando true de fato,
+   verdict:FAIL — é violação grave.
 
 Responda APENAS JSON, sem cercas:
-{"relevance":"ok|weak","integrity":"ok|broken","anti_pattern_violated":false,"verdict":"PASS|FAIL","reason":"frase curta em pt"}
+{"relevance":"ok|weak","integrity":"ok|broken","anti_pattern_violated":false,"anti_pattern_evidence":"","verdict":"PASS|FAIL","reason":"frase curta em pt"}
 verdict = PASS só se relevance=ok E integrity=ok E anti_pattern_violated=false."""
+
+
+_STOP = {"de", "da", "do", "a", "o", "e", "em", "um", "uma", "que", "com", "para",
+         "no", "na", "the", "use", "pra", "por", "se", "ou"}
+
+
+def _overlap(ev: str, bullet: str) -> bool:
+    """True se a evidência citada e o bullet compartilham ≥2 palavras significativas
+    (≥4 letras). Casa 'foto humana realista' ⇄ 'foto humana realista (use B/D...)'
+    sem exigir igualdade literal."""
+    def words(s):
+        return {w for w in re.findall(r"[a-zà-ú]{4,}", s.lower()) if w not in _STOP}
+    return len(words(ev) & words(bullet)) >= 2
 
 
 def _system(model_dna: dict | None) -> str:
@@ -120,6 +143,27 @@ def check(png_bytes: bytes, copy: dict, model: str | None = None,
         out = json.loads(m.group(0) if m else content)
         out.setdefault("verdict", "PASS")
         out.setdefault("anti_pattern_violated", False)
+        # GUARD (achado #3): o modelo às vezes marca anti_pattern_violated por AUSÊNCIA
+        # de um elemento esperado (assinatura/logo/selo) — que é chrome do template,
+        # composto no render e não na imagem gerada. Isso não é anti-padrão e não deve
+        # reprovar+regerar a IMAGEM. Anti-padrão por PRESENÇA (foto stock, humano
+        # realista em modelo abstrato etc.) não bate nesta guarda e segue reprovando.
+        if out.get("anti_pattern_violated") and out.get("integrity") == "ok":
+            _ev = str(out.get("anti_pattern_evidence", "")).strip().lower()
+            _r = str(out.get("reason", "")).lower()
+            _antis = [str(a).lower() for a in (model_dna or {}).get("anti_patterns", [])]
+            # evidência só conta se casar de fato com um bullet da lista do DNA
+            _ev_real = bool(_ev) and any(
+                _ev in a or a in _ev or _overlap(_ev, a) for a in _antis)
+            _absence = ("ausente", "ausência", "ausencia", "falta ", "falta a",
+                        "faltam", "faltando", "sem a assinatura", "sem assinatura",
+                        "não aparece", "nao aparece", "não há ", "nao ha ",
+                        "não tem ", "nao tem ", "não está presente", "nao esta presente")
+            _by_absence = any(k in _r for k in _absence) or any(k in _ev for k in _absence)
+            if (not _ev_real or _by_absence) and out.get("relevance") == "ok":
+                out["anti_pattern_violated"] = False
+                out["verdict"] = "PASS"
+                out["guard"] = "anti-padrão sem bullet real/por ausência rebaixado (achado #3)"
         return out
     except Exception as e:
         return {"verdict": "SKIPPED", "reason": f"vision falhou: {e.__class__.__name__}", "relevance": "?", "integrity": "?"}
