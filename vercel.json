@@ -21,7 +21,7 @@
       "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy}/**"
     },
     "api/copy-agent.py": {
-      "maxDuration": 60,
+      "maxDuration": 300,
       "includeFiles": "{agente-copy/**}",
       "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine}/**"
     },
