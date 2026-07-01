@@ -526,6 +526,41 @@ def _text_of(response: anthropic.types.Message) -> str:
     return next(block.text for block in response.content if block.type == "text")
 
 
+def _sanitize_json_text(text: str) -> str:
+    """Às vezes o modelo devolve newline/tab CRU dentro de um valor string em
+    vez do escape \\n/\\t que o JSON exige -- json.loads quebra com
+    "Unterminated string starting at: ..." nesse caso (reproduzido em
+    produção em propose_angles). Escapa esses caracteres de controle SÓ
+    quando estão dentro de uma string (rastreando aspas não-escapadas),
+    sem tocar no JSON estrutural em volta -- depois do json.loads, o \\n
+    escapado decodifica de volta pro caractere real, então nada se perde."""
+    out: list[str] = []
+    in_string = False
+    escape_next = False
+    for ch in text:
+        if escape_next:
+            out.append(ch)
+            escape_next = False
+            continue
+        if ch == "\\":
+            out.append(ch)
+            escape_next = True
+            continue
+        if ch == '"':
+            in_string = not in_string
+            out.append(ch)
+            continue
+        if in_string and ch == "\n":
+            out.append("\\n")
+        elif in_string and ch == "\r":
+            out.append("\\r")
+        elif in_string and ch == "\t":
+            out.append("\\t")
+        else:
+            out.append(ch)
+    return "".join(out)
+
+
 def _extract_json(response: anthropic.types.Message) -> dict[str, Any]:
     text = _text_of(response)
     # Mesmo padrão defensivo do validator.py: extrai só entre a primeira "{" e
@@ -534,4 +569,4 @@ def _extract_json(response: anthropic.types.Message) -> dict[str, Any]:
     # deve quebrar -- o max_tokens e' quem previne isso, ver propose_angles).
     start = text.index("{")
     end = text.rindex("}") + 1
-    return json.loads(text[start:end])
+    return json.loads(_sanitize_json_text(text[start:end]))
