@@ -208,7 +208,7 @@ TYPE_QUESTIONS: dict[CopyType, list[Question]] = {
             options=("novo", "variação de um vencedor"),
         ),
         Question(
-            "objective",
+            "cta_goal",
             "Qual objetivo? (lead / clique / agendamento)",
             "Direciona o CTA do criativo",
             options=("lead", "clique", "agendamento"),

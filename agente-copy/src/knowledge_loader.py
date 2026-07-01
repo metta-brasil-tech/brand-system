@@ -31,6 +31,10 @@ BRAND_KNOWLEDGE_FILES = {
     "metta": [
         "tom-de-voz-metta.md",
         "mito-fundador-metta.md",
+        # A mesma skill que generator.py usa pra escrever (_BRAND_FILES) --
+        # carregada aqui pra Skill de Validacao reaplicar em modo leitura
+        # sobre a peca ja pronta (src.validator.run_skill_de_validacao).
+        "SKILLMETTACOPY.md",
     ],
     "tiago": [
         # Per Documento_Mestre_Projeto_v2.md secao 6, tom-de-voz-tiago and

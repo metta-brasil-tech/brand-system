@@ -436,7 +436,9 @@ button {
     const second = validation.second_evaluator;
     rows.push(`<div class="validation-item"><span class="badge ${second.approved ? 'pass' : 'fail'}">2º avaliador ${second.approved ? 'aprovou' : 'reprovou'}</span> ${second.feedback}</div>`);
     const skill = validation.skill_de_validacao;
-    rows.push(`<div class="validation-item"><span class="badge stub">Skill de Validação</span> ${skill.note}</div>`);
+    const skillLabel = skill.is_stub ? 'Skill de Validação' : `Skill de Validação: ${skill.score}/10`;
+    const skillBadgeClass = skill.is_stub ? 'stub' : (skill.score >= 7 ? 'pass' : 'fail');
+    rows.push(`<div class="validation-item"><span class="badge ${skillBadgeClass}">${skillLabel}</span> ${skill.note}</div>`);
     if (revisionNotes && revisionNotes.length) {
       rows.push(`<div class="validation-item">Revisões do julgamento interno de rascunho nesta rodada: ${revisionNotes.length}</div>`);
     }

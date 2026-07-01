@@ -5,19 +5,21 @@ checagens antes da entrega:
 
   1. Avaliacao contra o ICP ("faz sentido para esse publico?").
   2. Revisao de gramatica, fluencia e aderencia ao tom de voz da marca.
-  3. Skill de Validacao (nota automatica) -- ainda stub, ver abaixo.
+  3. Skill de Validacao (nota automatica) -- ver abaixo.
   4. Segundo agente avaliador (auto-critica final, ETAPA SEPARADA do
      julgamento interno que ja acontece durante a geracao em generator.py).
 
 Todas via chamada ao Claude (modelo Opus, por ser julgamento de qualidade de
 copy -- ver Documento_Mestre_Projeto_v2.md secao 7: "Opus para julgamento de
-copy (tom, angulo, calibracao de voz)"), exceto a Skill de Validacao (stub).
+copy (tom, angulo, calibracao de voz)").
 
-A secao 10/15 tambem menciona uma "Skill de Validacao" (nota automatica) que
-ja existe em algum lugar do time, mas ainda nao foi localizada nem integrada
-("Localizar e integrar antes do MVP"). SkillDeValidacao abaixo e um stub
-explicito para essa peca ausente -- nao deve ser confundido com a validacao
-real quando ela for integrada.
+Confirmado pelo Tiago: a "Skill de Validacao" da secao 10/15 nao e uma skill
+separada a localizar em outro lugar do time -- e a MESMA SKILLMETTACOPY.md
+usada pra escrever, aqui reaplicada em modo leitura sobre a peca ja pronta
+(em vez de guiar a escrita, ela audita o que ja foi feito contra o proprio
+QA CHECKLIST). run_skill_de_validacao recebe o conteudo de SKILLMETTACOPY.md
+como `skill_content` -- o caller e responsavel por carrega-lo (mesmo arquivo
+que generator.py._BRAND_FILES ja usa pra escrever).
 
 O segundo agente avaliador (item 4) e distinto do julgamento em
 generator.py._judge: aquele roda MULTIPLAS vezes durante a escrita, reescreve
@@ -70,16 +72,16 @@ class SecondEvaluatorResult:
 
 @dataclass(frozen=True)
 class SkillDeValidacaoResult:
-    """Placeholder output for the (not-yet-located) Skill de Validacao.
+    """Output of the Skill de Validacao (SKILLMETTACOPY.md em modo leitura).
 
-    score is always None here. This class exists so the pipeline has a slot
-    to plug the real skill into later, but it must never be mistaken for a
-    real score -- `is_stub` is always True and `note` says so explicitly.
+    `is_stub` fica True somente quando `skill_content` vem vazio (arquivo nao
+    encontrado/nao carregado pelo caller) -- nesse caso score e None e a nota
+    explica o motivo, em vez de fingir uma avaliacao real sem a skill em maos.
     """
 
     score: float | None
     note: str
-    is_stub: bool = True
+    is_stub: bool
 
 
 def _extract_json(text: str) -> dict:
@@ -206,20 +208,49 @@ Responda apenas com um JSON no formato:
     return SecondEvaluatorResult(approved=bool(data["approved"]), feedback=data["feedback"])
 
 
-def run_skill_de_validacao(piece: dict) -> SkillDeValidacaoResult:
-    """Stub for the Skill de Validacao referenced in secao 10/15 of the spec.
+def run_skill_de_validacao(
+    client: anthropic.Anthropic, piece: dict, skill_content: str
+) -> SkillDeValidacaoResult:
+    """Skill de Validacao: SKILLMETTACOPY.md reaplicada em modo leitura sobre
+    a peca ja pronta, devolvendo uma nota de 0 a 10 contra o proprio QA
+    CHECKLIST da skill -- a mesma regra usada pra escrever, aqui usada pra
+    auditar o que ja foi escrito.
 
-    The real skill has not been located by the team yet ("Skill de Validacao
-    nao localizada... Localizar e integrar antes do MVP"). This function
-    unmistakably marks its output as a placeholder rather than silently
-    pretending to be the real thing.
+    Distinta do segundo agente avaliador (approved/feedback, sem nota) e do
+    julgamento interno de generator.py._judge (reescreve o rascunho).
     """
-    return SkillDeValidacaoResult(
-        score=None,
-        note=(
-            "STUB: a Skill de Validacao real ainda nao foi localizada nem integrada "
-            "(ver Agente_Copy_Criacao_v5.1_CORRIGIDO.md, secao 15). Este resultado "
-            "nao e uma nota real -- e um placeholder ate a skill ser encontrada e "
-            "conectada ao fluxo."
-        ),
+    if not skill_content.strip():
+        return SkillDeValidacaoResult(
+            score=None,
+            note=(
+                "Sem SKILLMETTACOPY.md carregado -- o caller nao passou o conteudo "
+                "da skill (skill_content vazio), entao nao ha o que auditar."
+            ),
+            is_stub=True,
+        )
+
+    full_text = piece.get("full_text") or "\n\n".join(
+        part for part in (piece.get("hook"), piece.get("corpo"), piece.get("cta")) if part
     )
+
+    prompt = f"""Voce e a Skill de Validacao do Agente Copy da Metta Brasil -- a mesma \
+skill abaixo usada pra ESCREVER, aqui reaplicada em modo LEITURA sobre uma peca ja \
+pronta. Releia o QA CHECKLIST da skill e avalie a peca item a item contra ele.
+
+SKILLMETTACOPY.md:
+{skill_content}
+
+Peca pronta para auditoria:
+{full_text}
+
+Responda apenas com um JSON no formato:
+{{"score": nota de 0 a 10 (numero, pode ter uma casa decimal), "note": "avaliacao objetiva item a item do QA CHECKLIST, em portugues"}}"""
+
+    response = client.messages.create(
+        model=VALIDATION_MODEL,
+        max_tokens=1024,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    text = next(block.text for block in response.content if block.type == "text")
+    data = _extract_json(text)
+    return SkillDeValidacaoResult(score=float(data["score"]), note=data["note"], is_stub=False)

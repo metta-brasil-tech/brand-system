@@ -124,10 +124,11 @@ def _run_generate(data: dict) -> dict:
 
     knowledge = load_knowledge_for_brand(data["brand"])
     tom_de_voz = knowledge.get(f"tom-de-voz-{data['brand']}.md", "")
+    skill_content = knowledge.get("SKILLMETTACOPY.md", "")
 
     icp_fit = check_icp_fit(client, piece, data["icp"])
     tone_check = check_grammar_tone(client, piece, tom_de_voz)
-    skill_result = run_skill_de_validacao(piece)
+    skill_result = run_skill_de_validacao(client, piece, skill_content)
     second_evaluator = run_second_evaluator(client, piece, tom_de_voz)
 
     return {
