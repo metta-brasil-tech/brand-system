@@ -194,7 +194,7 @@ button {
       <input id="objective" name="objective" required>
 
       <label for="icp">Qual o ICP?</label>
-      <input id="icp" name="icp" required>
+      <select id="icp" name="icp" required></select>
 
       <div class="row2">
         <div>
@@ -295,6 +295,12 @@ button {
     copyTypeSelect.innerHTML = schema.copy_types
       .map(ct => `<option value="${ct}">${ct.replace('_', ' ')}</option>`)
       .join('');
+
+    const icpSelect = document.getElementById('icp');
+    icpSelect.innerHTML = (schema.icps || [])
+      .map(icp => `<option value="${icp.id}">${icp.label}</option>`)
+      .join('');
+
     renderTypeFields();
     copyTypeSelect.addEventListener('change', renderTypeFields);
   }
@@ -303,10 +309,15 @@ button {
     const copyType = document.getElementById('copy_type').value;
     const questions = (schema.type_questions && schema.type_questions[copyType]) || [];
     const container = document.getElementById('type-fields');
-    container.innerHTML = questions.map(q => `
-      <label for="tf-${q.key}">${q.prompt}</label>
-      <input id="tf-${q.key}" data-key="${q.key}" name="tf-${q.key}">
-    `).join('');
+    container.innerHTML = questions.map(q => {
+      const field = (q.options && q.options.length)
+        ? `<select id="tf-${q.key}" data-key="${q.key}" name="tf-${q.key}">
+             <option value="">—</option>
+             ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+           </select>`
+        : `<input id="tf-${q.key}" data-key="${q.key}" name="tf-${q.key}">`;
+      return `<label for="tf-${q.key}">${q.prompt}</label>${field}`;
+    }).join('');
   }
 
   function setStatus(el, msg, cls) {

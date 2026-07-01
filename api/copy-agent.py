@@ -28,6 +28,12 @@ agente-copy: toda peça depende de aprovação humana antes de ir ao ar.)
 Body (entrega, só depois de revisão humana na UI): {"action": "submit", "piece": {...}}
 Resposta: {"ok": true, "id": "...", "piece": {...}}  (via pieces.submit_piece)
 
+GET /api/copy-agent
+Resposta: schema da entrevista pra UI montar o formulário -- inclui "icps"
+(catálogo real de segmentos, src.icp_catalog) e, em cada pergunta de
+base_questions/type_questions que tiver conjunto fechado de resposta, um
+array "options" (ausente quando a pergunta é de texto livre).
+
 Requer ANTHROPIC_API_KEY nas env vars do Vercel (lida por anthropic.Anthropic()
 dentro do agente-copy -- não setada neste repo).
 """
@@ -152,24 +158,30 @@ class handler(BaseHTTPRequestHandler):
             return self._json(500, {"detail": f"Erro interno: {exc.__class__.__name__}: {exc}"})
 
     def do_GET(self):
-        # Schema da entrevista (perguntas base + por tipo de copy), lido direto
-        # de src.interview -- a UI monta o formulário a partir daqui em vez de
-        # duplicar as perguntas em JS (fonte única de verdade é o agente-copy).
+        # Schema da entrevista (perguntas base + por tipo de copy + catálogo
+        # de ICP), lido direto de src.interview/src.icp_catalog -- a UI monta
+        # o formulário a partir daqui em vez de duplicar isso em JS (fonte
+        # única de verdade é o agente-copy).
         try:
+            from src.icp_catalog import ICP_CATALOG
             from src.interview import BASE_QUESTIONS, TYPE_QUESTIONS
+
+            def _q(q):
+                d = {"key": q.key, "prompt": q.prompt, "purpose": q.purpose}
+                if q.options:
+                    d["options"] = list(q.options)
+                return d
+
             return self._json(200, {
                 "status": "ok",
                 "brands": ["metta", "tiago"],
                 "platforms": ["instagram", "linkedin"],
                 "emotional_axes": ["dor", "desejo", "necessidade"],
                 "copy_types": [ct.value for ct in TYPE_QUESTIONS.keys()],
-                "base_questions": [
-                    {"key": q.key, "prompt": q.prompt, "purpose": q.purpose} for q in BASE_QUESTIONS
-                ],
+                "icps": ICP_CATALOG,
+                "base_questions": [_q(q) for q in BASE_QUESTIONS],
                 "type_questions": {
-                    copy_type.value: [
-                        {"key": q.key, "prompt": q.prompt, "purpose": q.purpose} for q in questions
-                    ]
+                    copy_type.value: [_q(q) for q in questions]
                     for copy_type, questions in TYPE_QUESTIONS.items()
                 },
             })
