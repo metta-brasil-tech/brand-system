@@ -229,7 +229,10 @@ class CopyGenerator:
         knowledge = self._knowledge_base(brand)
         response = self.client.messages.create(
             model=SONNET_MODEL,
-            max_tokens=1500,
+            # 1500 nao era suficiente -- em producao a resposta vinha cortada
+            # no meio de uma string (JSONDecodeError: Unterminated string),
+            # mesma margem dos outros dois usos de SONNET_MODEL neste arquivo.
+            max_tokens=4000,
             system=_build_system_prompt(brand, copy_type),
             messages=[
                 {
@@ -524,4 +527,11 @@ def _text_of(response: anthropic.types.Message) -> str:
 
 
 def _extract_json(response: anthropic.types.Message) -> dict[str, Any]:
-    return json.loads(_text_of(response))
+    text = _text_of(response)
+    # Mesmo padrão defensivo do validator.py: extrai só entre a primeira "{" e
+    # a ultima "}" -- protege contra prosa antes/depois do JSON. Nao protege
+    # contra truncamento de verdade (json.loads ainda quebra nesse caso, e
+    # deve quebrar -- o max_tokens e' quem previne isso, ver propose_angles).
+    start = text.index("{")
+    end = text.rindex("}") + 1
+    return json.loads(text[start:end])
