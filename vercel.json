@@ -16,6 +16,10 @@
       "maxDuration": 15,
       "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public,engine}/**"
     },
+    "api/pieces.py": {
+      "maxDuration": 15,
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine}/**"
+    },
     "api/render.js": {
       "memory": 1024,
       "maxDuration": 30
