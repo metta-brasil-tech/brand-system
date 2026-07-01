@@ -61,7 +61,12 @@ def _run_generate(data: dict) -> dict:
     from src.generator import CopyGenerator
     from src.interview import build_brief_from_answers
     from src.knowledge_loader import load_knowledge_for_brand
-    from src.validator import check_grammar_tone, check_icp_fit, run_skill_de_validacao
+    from src.validator import (
+        check_grammar_tone,
+        check_icp_fit,
+        run_second_evaluator,
+        run_skill_de_validacao,
+    )
 
     answers = {
         "brand": data["brand"],
@@ -99,6 +104,7 @@ def _run_generate(data: dict) -> dict:
     icp_fit = check_icp_fit(client, piece, data["icp"])
     tone_check = check_grammar_tone(client, piece, tom_de_voz)
     skill_result = run_skill_de_validacao(piece)
+    second_evaluator = run_second_evaluator(client, piece, tom_de_voz)
 
     return {
         "ok": True,
@@ -112,6 +118,10 @@ def _run_generate(data: dict) -> dict:
                 "fluencia": tone_check.fluencia,
                 "aderencia_tom": tone_check.aderencia_tom,
                 "reasoning": tone_check.reasoning,
+            },
+            "second_evaluator": {
+                "approved": second_evaluator.approved,
+                "feedback": second_evaluator.feedback,
             },
             "skill_de_validacao": {
                 "score": skill_result.score,

@@ -332,10 +332,12 @@ button {
     rows.push(`<div class="validation-item"><span class="badge ${icp.passed ? 'pass' : 'fail'}">ICP ${icp.passed ? 'ok' : 'falhou'}</span> ${icp.reasoning}</div>`);
     const tone = validation.tone_check;
     rows.push(`<div class="validation-item"><span class="badge ${tone.passed ? 'pass' : 'fail'}">Tom/gramática ${tone.passed ? 'ok' : 'falhou'}</span> ${tone.reasoning}</div>`);
+    const second = validation.second_evaluator;
+    rows.push(`<div class="validation-item"><span class="badge ${second.approved ? 'pass' : 'fail'}">2º avaliador ${second.approved ? 'aprovou' : 'reprovou'}</span> ${second.feedback}</div>`);
     const skill = validation.skill_de_validacao;
     rows.push(`<div class="validation-item"><span class="badge stub">Skill de Validação</span> ${skill.note}</div>`);
     if (revisionNotes && revisionNotes.length) {
-      rows.push(`<div class="validation-item">Revisões do avaliador (Opus) nesta rodada: ${revisionNotes.length}</div>`);
+      rows.push(`<div class="validation-item">Revisões do julgamento interno de rascunho nesta rodada: ${revisionNotes.length}</div>`);
     }
     el.innerHTML = rows.join('');
   }
