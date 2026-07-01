@@ -1,3 +1,6 @@
 [submodule "engine"]
 	path = engine
 	url = https://github.com/metta-brasil-tech/ad-generator.git
+[submodule "agente-copy"]
+	path = agente-copy
+	url = https://github.com/metta-brasil-tech/agente-copy.git

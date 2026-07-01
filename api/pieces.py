@@ -138,6 +138,25 @@ def _check_auth(headers) -> bool:
     return got[len("Bearer "):].strip() == expected
 
 
+def submit_piece(payload: dict) -> dict:
+    """Valida e persiste uma peça. Ponto único de entrada compartilhado entre
+    o endpoint HTTP autenticado (do_POST, para o agente-copy externo) e
+    outros callers no mesmo processo Vercel (api/copy-agent.py, que já roda
+    server-side e tem seu próprio gate de auth antes de chegar aqui).
+
+    Retorna sempre {"ok": bool, "status": <http status>, ...}.
+    """
+    error = _validate_payload(payload)
+    if error:
+        return {"ok": False, "status": 400, "detail": error}
+
+    entry = _build_entry(payload)
+    entries = _read_index()
+    entries.append(entry)
+    _atomic_write_json(_INDEX, entries)
+    return {"ok": True, "status": 201, "id": entry["id"], "piece": entry}
+
+
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         try:
@@ -151,16 +170,9 @@ class handler(BaseHTTPRequestHandler):
             except json.JSONDecodeError:
                 return self._json(400, {"detail": "Body não é JSON válido."})
 
-            error = _validate_payload(data)
-            if error:
-                return self._json(400, {"detail": error})
-
-            entry = _build_entry(data)
-            pieces = _read_index()
-            pieces.append(entry)
-            _atomic_write_json(_INDEX, pieces)
-
-            return self._json(201, {"ok": True, "id": entry["id"], "piece": entry})
+            result = submit_piece(data)
+            status = result.pop("status")
+            return self._json(status, result)
 
         except Exception as exc:
             return self._json(500, {"detail": f"Erro interno: {exc.__class__.__name__}: {exc}"})

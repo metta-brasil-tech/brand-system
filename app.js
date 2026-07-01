@@ -107,6 +107,10 @@ const BrandSystem = (() => {
 
     const groups = {};
     nav.tabs.forEach(tab => {
+      // `hidden: true` tira o botão do menu sem tirar a tab de nav.tabs — ela
+      // continua roteável por link direto (#/id/secao), só não aparece na sidebar.
+      // Diferente de `dev_only`, que remove a tab inteira (menu E rota) em produção.
+      if (tab.hidden) return;
       const g = tab.group || 'principal';
       if (!groups[g]) groups[g] = [];
       groups[g].push(tab);

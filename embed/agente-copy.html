@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agente Copy — Metta Brand System</title>
+
+<link rel="stylesheet" href="../styles/tokens.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--metta-sys-color-surface);
+  color: var(--metta-sys-color-on-surface);
+  font-family: var(--metta-ref-typeface-body), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+body { overflow-y: auto; }
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+}
+
+h1 {
+  font-family: var(--metta-ref-typeface-display), sans-serif;
+  font-size: 22px;
+  margin: 0 0 4px;
+}
+
+.subtitle {
+  color: var(--metta-sys-color-on-surface-variant);
+  font-size: 13px;
+  margin: 0 0 20px;
+}
+
+fieldset {
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: 12px;
+  padding: 16px 18px 18px;
+  margin: 0 0 16px;
+}
+
+legend {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--metta-sys-color-on-surface-variant);
+  padding: 0 6px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 12px 0 4px;
+}
+label:first-child { margin-top: 0; }
+
+.hint {
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: -2px 0 4px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  background: var(--metta-sys-color-surface-container-lowest);
+  color: var(--metta-sys-color-on-surface);
+  font: inherit;
+}
+
+textarea { min-height: 70px; resize: vertical; }
+
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+button {
+  font: inherit;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+}
+.btn-primary:disabled { opacity: .5; cursor: default; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--metta-sys-color-on-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+}
+
+.status {
+  font-size: 13px;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.status.error { color: #B3261E; }
+.status.ok { color: #1E6B3D; }
+
+.result {
+  margin-top: 24px;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+  padding-top: 20px;
+  display: none;
+}
+.result.visible { display: block; }
+
+.piece-block {
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: var(--metta-sys-color-surface-container-lowest);
+}
+.piece-block h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0 0 6px;
+}
+.piece-block p, .piece-block ul { margin: 0; white-space: pre-wrap; }
+.piece-block ul { padding-left: 18px; }
+
+.validation-item {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.badge.pass { background: #D9F2E3; color: #1E6B3D; }
+.badge.fail { background: #FBE1DF; color: #B3261E; }
+.badge.stub { background: #EFE6D9; color: #7A5B00; }
+
+.token-gate {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 24px;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: 12px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div id="token-gate" class="token-gate">
+  <h1>Agente Copy</h1>
+  <p class="subtitle">Token de acesso necessário para gerar e enviar peças.</p>
+  <input id="token-input" type="password" placeholder="Token de acesso" autocomplete="off">
+  <div class="actions" style="justify-content:center; margin-top:14px;">
+    <button class="btn-primary" id="token-save">Entrar</button>
+  </div>
+</div>
+
+<div class="wrap" id="app" style="display:none;">
+  <h1>Agente Copy — Metta Brasil</h1>
+  <p class="subtitle">
+    Entrevista antes de escrever: preencha o briefing, gere a peça, revise e só então envie
+    para o brand-system. Nenhuma peça é publicada sem essa revisão humana.
+    <a href="#" id="token-reset" style="color:inherit;">(trocar token)</a>
+  </p>
+
+  <form id="brief-form">
+    <fieldset>
+      <legend>Briefing</legend>
+
+      <div class="row2">
+        <div>
+          <label for="brand">Marca</label>
+          <select id="brand" name="brand">
+            <option value="metta">Metta</option>
+            <option value="tiago">Tiago Alves</option>
+          </select>
+        </div>
+        <div>
+          <label for="copy_type">Tipo de copy</label>
+          <select id="copy_type" name="copy_type"></select>
+        </div>
+      </div>
+
+      <label for="objective">Qual é o objetivo?</label>
+      <input id="objective" name="objective" required>
+
+      <label for="icp">Qual o ICP?</label>
+      <input id="icp" name="icp" required>
+
+      <div class="row2">
+        <div>
+          <label for="angle_choice">Ângulo (A / B / C)</label>
+          <input id="angle_choice" name="angle_choice">
+        </div>
+        <div>
+          <label for="emotional_axis">Eixo emocional</label>
+          <select id="emotional_axis" name="emotional_axis">
+            <option value="">—</option>
+            <option value="dor">Dor</option>
+            <option value="desejo">Desejo</option>
+            <option value="necessidade">Necessidade</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div>
+          <label for="cta">CTA específico</label>
+          <input id="cta" name="cta">
+        </div>
+        <div>
+          <label for="platform">Plataforma</label>
+          <select id="platform" name="platform">
+            <option value="instagram">Instagram</option>
+            <option value="linkedin">LinkedIn</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset id="type-fieldset">
+      <legend>Perguntas do formato</legend>
+      <div id="type-fields"></div>
+    </fieldset>
+
+    <div class="actions">
+      <button type="submit" class="btn-primary" id="generate-btn">Gerar peça</button>
+      <span class="status" id="generate-status"></span>
+    </div>
+  </form>
+
+  <div class="result" id="result">
+    <div class="piece-block">
+      <h3>Hook</h3>
+      <p id="out-hook"></p>
+    </div>
+    <div class="piece-block">
+      <h3>Corpo</h3>
+      <p id="out-corpo"></p>
+    </div>
+    <div class="piece-block">
+      <h3>CTA</h3>
+      <p id="out-cta"></p>
+    </div>
+    <div class="piece-block">
+      <h3>Variações de hook</h3>
+      <ul id="out-hook-variations"></ul>
+    </div>
+    <div class="piece-block" id="out-linkedin-block" style="display:none;">
+      <h3>Adaptação LinkedIn</h3>
+      <p id="out-linkedin"></p>
+    </div>
+    <div class="piece-block">
+      <h3>Validação</h3>
+      <div id="out-validation"></div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-primary" id="submit-btn">Enviar para o brand-system</button>
+      <button type="button" class="btn-secondary" id="discard-btn">Descartar</button>
+      <span class="status" id="submit-status"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const TOKEN_KEY = 'metta-copy-agent-token';
+  let schema = null;
+  let lastPiece = null;
+
+  const tokenGate = document.getElementById('token-gate');
+  const app = document.getElementById('app');
+
+  function getToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
+  function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
+  function clearToken() { localStorage.removeItem(TOKEN_KEY); }
+
+  async function api(action, body) {
+    const res = await fetch('/api/copy-agent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getToken()}`,
+      },
+      body: JSON.stringify({ action, ...body }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || `Erro HTTP ${res.status}`);
+    return data;
+  }
+
+  async function loadSchema() {
+    const res = await fetch('/api/copy-agent');
+    schema = await res.json();
+    const copyTypeSelect = document.getElementById('copy_type');
+    copyTypeSelect.innerHTML = schema.copy_types
+      .map(ct => `<option value="${ct}">${ct.replace('_', ' ')}</option>`)
+      .join('');
+    renderTypeFields();
+    copyTypeSelect.addEventListener('change', renderTypeFields);
+  }
+
+  function renderTypeFields() {
+    const copyType = document.getElementById('copy_type').value;
+    const questions = (schema.type_questions && schema.type_questions[copyType]) || [];
+    const container = document.getElementById('type-fields');
+    container.innerHTML = questions.map(q => `
+      <label for="tf-${q.key}">${q.prompt}</label>
+      <input id="tf-${q.key}" data-key="${q.key}" name="tf-${q.key}">
+    `).join('');
+  }
+
+  function setStatus(el, msg, cls) {
+    el.textContent = msg;
+    el.className = 'status' + (cls ? ' ' + cls : '');
+  }
+
+  function renderValidation(validation, revisionNotes) {
+    const el = document.getElementById('out-validation');
+    const rows = [];
+    const icp = validation.icp_fit;
+    rows.push(`<div class="validation-item"><span class="badge ${icp.passed ? 'pass' : 'fail'}">ICP ${icp.passed ? 'ok' : 'falhou'}</span> ${icp.reasoning}</div>`);
+    const tone = validation.tone_check;
+    rows.push(`<div class="validation-item"><span class="badge ${tone.passed ? 'pass' : 'fail'}">Tom/gramática ${tone.passed ? 'ok' : 'falhou'}</span> ${tone.reasoning}</div>`);
+    const skill = validation.skill_de_validacao;
+    rows.push(`<div class="validation-item"><span class="badge stub">Skill de Validação</span> ${skill.note}</div>`);
+    if (revisionNotes && revisionNotes.length) {
+      rows.push(`<div class="validation-item">Revisões do avaliador (Opus) nesta rodada: ${revisionNotes.length}</div>`);
+    }
+    el.innerHTML = rows.join('');
+  }
+
+  async function handleGenerate(ev) {
+    ev.preventDefault();
+    const btn = document.getElementById('generate-btn');
+    const statusEl = document.getElementById('generate-status');
+    btn.disabled = true;
+    setStatus(statusEl, 'Gerando… (entrevista → rascunho → julgamento Opus)');
+    document.getElementById('result').classList.remove('visible');
+
+    const typeSpecific = {};
+    document.querySelectorAll('#type-fields [data-key]').forEach(input => {
+      if (input.value) typeSpecific[input.dataset.key] = input.value;
+    });
+
+    const payload = {
+      brand: document.getElementById('brand').value,
+      copy_type: document.getElementById('copy_type').value,
+      objective: document.getElementById('objective').value,
+      icp: document.getElementById('icp').value,
+      angle_choice: document.getElementById('angle_choice').value,
+      emotional_axis: document.getElementById('emotional_axis').value || null,
+      cta: document.getElementById('cta').value,
+      platform: document.getElementById('platform').value,
+      type_specific: typeSpecific,
+    };
+
+    try {
+      const data = await api('generate', payload);
+      lastPiece = data.piece;
+      document.getElementById('out-hook').textContent = data.piece.hook;
+      document.getElementById('out-corpo').textContent = data.piece.corpo;
+      document.getElementById('out-cta').textContent = data.piece.cta;
+      document.getElementById('out-hook-variations').innerHTML =
+        data.piece.hook_variations.map(h => `<li>${h}</li>`).join('');
+      const liBlock = document.getElementById('out-linkedin-block');
+      if (data.piece.linkedin_adaptation) {
+        liBlock.style.display = '';
+        document.getElementById('out-linkedin').textContent = data.piece.linkedin_adaptation;
+      } else {
+        liBlock.style.display = 'none';
+      }
+      renderValidation(data.validation, data.revision_notes);
+      document.getElementById('result').classList.add('visible');
+      setStatus(statusEl, 'Rascunho gerado — revise antes de enviar.', 'ok');
+    } catch (err) {
+      setStatus(statusEl, err.message, 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function handleSubmit() {
+    if (!lastPiece) return;
+    const statusEl = document.getElementById('submit-status');
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    setStatus(statusEl, 'Enviando…');
+    try {
+      const data = await api('submit', { piece: lastPiece });
+      setStatus(statusEl, `Enviado (id: ${data.id})`, 'ok');
+    } catch (err) {
+      setStatus(statusEl, err.message, 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function handleDiscard() {
+    lastPiece = null;
+    document.getElementById('result').classList.remove('visible');
+    setStatus(document.getElementById('submit-status'), '');
+  }
+
+  function showApp() {
+    tokenGate.style.display = 'none';
+    app.style.display = '';
+    loadSchema();
+  }
+
+  document.getElementById('token-save').addEventListener('click', () => {
+    const v = document.getElementById('token-input').value.trim();
+    if (!v) return;
+    setToken(v);
+    showApp();
+  });
+  document.getElementById('token-reset').addEventListener('click', (e) => {
+    e.preventDefault();
+    clearToken();
+    location.reload();
+  });
+  document.getElementById('brief-form').addEventListener('submit', handleGenerate);
+  document.getElementById('submit-btn').addEventListener('click', handleSubmit);
+  document.getElementById('discard-btn').addEventListener('click', handleDiscard);
+
+  if (getToken()) showApp();
+})();
+</script>
+
+</body>
+</html>

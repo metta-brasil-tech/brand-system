@@ -30,6 +30,20 @@
       ]
     },
     {
+      "id": "agente-copy",
+      "icon": "sparkles",
+      "label": "Agente Copy",
+      "group": "ferramentas",
+      "hidden": true,
+      "sections": [
+        {
+          "id": "gerar",
+          "label": "Gerar copy",
+          "source": "embed:agente-copy.html"
+        }
+      ]
+    },
+    {
       "id": "marca",
       "icon": "compass",
       "label": "Marca",

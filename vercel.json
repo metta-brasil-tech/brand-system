@@ -10,14 +10,19 @@
     "api/generate.py": {
       "maxDuration": 60,
       "includeFiles": "{engine/**,source/ad-templates/**,source/ad-blueprints/**}",
-      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public}/**"
+      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public,agente-copy}/**"
     },
     "api/image-search.py": {
       "maxDuration": 15,
-      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public,engine}/**"
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public,engine,agente-copy}/**"
     },
     "api/pieces.py": {
       "maxDuration": 15,
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy}/**"
+    },
+    "api/copy-agent.py": {
+      "maxDuration": 60,
+      "includeFiles": "{agente-copy/**}",
       "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine}/**"
     },
     "api/render.js": {
