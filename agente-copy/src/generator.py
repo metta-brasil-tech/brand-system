@@ -74,6 +74,12 @@ except ImportError:
             type_specific: dict[str, Any] = field(default_factory=dict)
 
 
+try:
+    from src.icp_catalog import icp_knowledge_file  # type: ignore[import-not-found]
+except ImportError:
+    from icp_catalog import icp_knowledge_file  # type: ignore[import-not-found]
+
+
 @dataclass
 class GenerationResult:
     hook: str
@@ -208,6 +214,33 @@ class CopyGenerator:
         )
         return _text_of(response)
 
+    def propose_angles(
+        self, brand: Brand, copy_type: str, icp: str, objective: str, raw_idea: str = ""
+    ) -> list[dict[str, str]]:
+        """Propõe 3 ângulos narrativos (A/B/C) com justificativa, antes de
+        escrever qualquer peça (v5.1 seção 7 / critério de aceitação 5:
+        "sugere ângulos A/B/C antes de escrever"). O usuário escolhe um -- só
+        então a geração de fato roda, evitando retrabalho."""
+        if brand != "metta":
+            raise NotImplementedError(
+                f"Brand {brand!r} is not supported yet. Full support "
+                "requires tom-de-voz-tiago.md, which is not in the repo."
+            )
+        knowledge = self._knowledge_base(brand)
+        response = self.client.messages.create(
+            model=SONNET_MODEL,
+            max_tokens=1500,
+            system=_build_system_prompt(brand, copy_type),
+            messages=[
+                {
+                    "role": "user",
+                    "content": _build_angles_prompt(copy_type, icp, objective, raw_idea, knowledge),
+                }
+            ],
+            output_config={"format": {"type": "json_schema", "schema": _ANGLES_SCHEMA}},
+        )
+        return _extract_json(response)["angles"]
+
     @staticmethod
     def _assemble(draft: dict[str, Any]) -> str:
         return "\n\n".join(
@@ -216,6 +249,20 @@ class CopyGenerator:
 
 
 # --- Prompt construction -----------------------------------------------------
+
+
+def _icp_context(icp_id: str) -> str:
+    """Conteúdo do documento de ICP do segmento escolhido (v5.1 seção 14:
+    "escreve embebido de ICP"). Vazio quando o id não veio do catálogo (ex.:
+    testes com string livre) -- nesse caso o rótulo ainda aparece no
+    briefing, só sem o documento completo."""
+    filename = icp_knowledge_file(icp_id)
+    if filename is None:
+        return ""
+    path = _REPO_ROOT / filename
+    if not path.is_file():
+        return ""
+    return f'<documento fonte="{filename}">\n{path.read_text(encoding="utf-8")}\n</documento>'
 
 # Copy-type-specific structure, drawn from SKILLMETTACOPY.md's Instagram Orgânico
 # flow and the criação doc's copy types. Keeps the model on the real cadence per
@@ -288,10 +335,15 @@ def _build_system_prompt(brand: Brand, copy_type: str) -> str:
 
 
 def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
+    icp_context = _icp_context(brief.icp)
+    icp_block = f"{icp_context}\n\n" if icp_context else ""
     return (
         "Use a base de conhecimento abaixo (tom de voz, skill de copy, avatar, "
-        "posicionamento, oferta, provas, glossário) para escrever a peça.\n\n"
+        "posicionamento, oferta, provas, glossário"
+        + (", documento de ICP do segmento" if icp_context else "")
+        + ") para escrever a peça.\n\n"
         f"{knowledge.as_context()}\n\n"
+        f"{icp_block}"
         "=== BRIEFING DA PEÇA ===\n"
         f"{_render_brief(brief)}\n\n"
         "=== TAREFA ===\n"
@@ -325,6 +377,7 @@ def _build_judgment_prompt(
         "coerência tonal do CTA).\n\n"
         f"{knowledge.document('tom-de-voz-metta.md')}\n\n"
         f"{knowledge.document('SKILLMETTACOPY.md')}\n\n"
+        f"{_icp_context(brief.icp)}\n\n"
         "=== BRIEFING ===\n"
         f"{_render_brief(brief)}\n\n"
         "=== RASCUNHO A AVALIAR ===\n"
@@ -333,6 +386,28 @@ def _build_judgment_prompt(
         "feedback e devolva a peça reescrita e corrigida em 'piece'. Se passar em "
         "tudo, defina approved=true e devolva a peça (com ajustes finos se quiser). "
         "Preserve sempre as 3+ variações de hook, o pilar e o ICP-alvo."
+    )
+
+
+def _build_angles_prompt(
+    copy_type: str, icp: str, objective: str, raw_idea: str, knowledge: KnowledgeBase
+) -> str:
+    icp_context = _icp_context(icp)
+    return (
+        "Antes de escrever qualquer peça, proponha 3 ângulos narrativos "
+        "diferentes para a mesma ideia -- Ângulo A, B e C -- cada um com uma "
+        "abordagem concreta (não genérica) e uma linha de justificativa de "
+        "por que pode performar com esse ICP. Isso evita retrabalho: o "
+        "usuário escolhe um ângulo antes da peça ser escrita.\n\n"
+        f"{knowledge.as_context()}\n\n"
+        + (f"{icp_context}\n\n" if icp_context else "")
+        + "=== CONTEXTO DA PEÇA ===\n"
+        f"Tipo de copy: {copy_type}\n"
+        f"ICP: {icp}\n"
+        f"Objetivo: {objective}\n"
+        + (f"Ideia/tema de partida: {raw_idea}\n" if raw_idea else "")
+        + "\n=== TAREFA ===\n"
+        "Gere exatamente os ângulos A, B e C. Responda no schema JSON pedido."
     )
 
 
@@ -402,6 +477,29 @@ _DRAFT_SCHEMA: dict[str, Any] = {
         "content_pillar",
         "target_icp",
     ],
+    "additionalProperties": False,
+}
+
+_ANGLES_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "angles": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "label": {"type": "string", "enum": ["A", "B", "C"]},
+                    "abordagem": {"type": "string"},
+                    "justificativa": {"type": "string"},
+                },
+                "required": ["label", "abordagem", "justificativa"],
+                "additionalProperties": False,
+            },
+        }
+    },
+    "required": ["angles"],
     "additionalProperties": False,
 }
 

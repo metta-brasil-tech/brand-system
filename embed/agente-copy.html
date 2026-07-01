@@ -161,6 +161,45 @@ button {
 .badge.pass { background: #D9F2E3; color: #1E6B3D; }
 .badge.fail { background: #FBE1DF; color: #B3261E; }
 .badge.stub { background: #EFE6D9; color: #7A5B00; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 6px; }
+.chip {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--metta-sys-color-surface-container-lowest);
+  color: var(--metta-sys-color-on-surface-variant);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.chip.active {
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+  border-color: var(--metta-sys-color-primary);
+}
+
+.angle-actions { display: flex; align-items: center; gap: 10px; margin: -2px 0 8px; }
+.angle-status { font-size: 12px; color: var(--metta-sys-color-on-surface-variant); }
+.angle-cards { display: grid; gap: 8px; margin: 0 0 8px; }
+.angle-card {
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--metta-sys-color-surface-container-lowest);
+  color: var(--metta-sys-color-on-surface);
+}
+.angle-card b { font-size: 12px; }
+.angle-card p { margin: 4px 0 0; font-size: 12px; color: var(--metta-sys-color-on-surface-variant); }
+.angle-card.selected {
+  border-color: var(--metta-sys-color-primary);
+  outline: 2px solid var(--metta-sys-color-primary);
+  outline-offset: -1px;
+}
 </style>
 </head>
 <body>
@@ -199,7 +238,13 @@ button {
       <div class="row2">
         <div>
           <label for="angle_choice">Ângulo (A / B / C)</label>
-          <input id="angle_choice" name="angle_choice">
+          <p class="hint">A IA propõe 3 caminhos com justificativa; escolha um antes de gerar a peça — ou escreva o seu.</p>
+          <div class="angle-actions">
+            <button type="button" class="btn-secondary" id="propose-angles-btn">Propor ângulos</button>
+            <span class="angle-status" id="angle-status"></span>
+          </div>
+          <div class="angle-cards" id="angle-cards"></div>
+          <input id="angle_choice" name="angle_choice" placeholder="ângulo escolhido (clique numa proposta ou escreva)">
         </div>
         <div>
           <label for="emotional_axis">Eixo emocional</label>
@@ -309,15 +354,71 @@ button {
     const copyType = document.getElementById('copy_type').value;
     const questions = (schema.type_questions && schema.type_questions[copyType]) || [];
     const container = document.getElementById('type-fields');
+    // Perguntas com opções (ex: "tempo de leitura") ganham atalhos de um clique,
+    // mas o campo continua um <input> de texto livre -- selecionar não deve ser
+    // a única forma de responder, escrever direto também tem que funcionar.
     container.innerHTML = questions.map(q => {
-      const field = (q.options && q.options.length)
-        ? `<select id="tf-${q.key}" data-key="${q.key}" name="tf-${q.key}">
-             <option value="">—</option>
-             ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-           </select>`
-        : `<input id="tf-${q.key}" data-key="${q.key}" name="tf-${q.key}">`;
-      return `<label for="tf-${q.key}">${q.prompt}</label>${field}`;
+      const inputId = `tf-${q.key}`;
+      const chips = (q.options && q.options.length)
+        ? `<div class="chip-row" data-for="${inputId}">
+             ${q.options.map(opt => `<button type="button" class="chip" data-value="${opt}">${opt}</button>`).join('')}
+           </div>`
+        : '';
+      const placeholder = q.options && q.options.length ? 'ou escreva livremente' : '';
+      return `<label for="${inputId}">${q.prompt}</label>${chips}<input id="${inputId}" data-key="${q.key}" name="${inputId}" placeholder="${placeholder}">`;
     }).join('');
+
+    container.querySelectorAll('.chip-row').forEach(row => {
+      const targetInput = document.getElementById(row.dataset.for);
+      row.querySelectorAll('.chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          targetInput.value = btn.dataset.value;
+          row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b === btn));
+        });
+      });
+      targetInput.addEventListener('input', () => {
+        row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b.dataset.value === targetInput.value));
+      });
+    });
+  }
+
+  async function handleProposeAngles() {
+    const btn = document.getElementById('propose-angles-btn');
+    const statusEl = document.getElementById('angle-status');
+    const cardsEl = document.getElementById('angle-cards');
+    const brand = document.getElementById('brand').value;
+    const copy_type = document.getElementById('copy_type').value;
+    const icp = document.getElementById('icp').value;
+    const objective = document.getElementById('objective').value;
+
+    if (!icp || !objective) {
+      setStatus(statusEl, 'Preencha objetivo e ICP antes de propor ângulos.', 'error');
+      return;
+    }
+
+    btn.disabled = true;
+    setStatus(statusEl, 'Propondo ângulos…');
+    cardsEl.innerHTML = '';
+    try {
+      const data = await api('propose_angles', { brand, copy_type, icp, objective });
+      cardsEl.innerHTML = data.angles.map(a => `
+        <button type="button" class="angle-card" data-label="${a.label}" data-abordagem="${a.abordagem.replace(/"/g, '&quot;')}">
+          <b>Ângulo ${a.label}</b> — ${a.abordagem}
+          <p>${a.justificativa}</p>
+        </button>
+      `).join('');
+      cardsEl.querySelectorAll('.angle-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.getElementById('angle_choice').value = `${card.dataset.label}: ${card.dataset.abordagem}`;
+          cardsEl.querySelectorAll('.angle-card').forEach(c => c.classList.toggle('selected', c === card));
+        });
+      });
+      setStatus(statusEl, 'Escolha um ângulo abaixo (ou edite o campo de texto).', 'ok');
+    } catch (err) {
+      setStatus(statusEl, err.message, 'error');
+    } finally {
+      btn.disabled = false;
+    }
   }
 
   function setStatus(el, msg, cls) {
@@ -417,6 +518,7 @@ button {
   document.getElementById('brief-form').addEventListener('submit', handleGenerate);
   document.getElementById('submit-btn').addEventListener('click', handleSubmit);
   document.getElementById('discard-btn').addEventListener('click', handleDiscard);
+  document.getElementById('propose-angles-btn').addEventListener('click', handleProposeAngles);
 
   loadSchema();
 })();

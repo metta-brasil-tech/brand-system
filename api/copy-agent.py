@@ -11,6 +11,14 @@ continua exigindo o Bearer token porque atende um consumidor diferente (o
 agente-copy externo/CLI, não esta UI).
 
 POST /api/copy-agent
+Body (proposta de ângulo, opcional -- critério de aceitação 5 do v5.1 seção 7:
+"sugere ângulos A/B/C antes de escrever"): {
+  "action": "propose_angles",
+  "brand": "metta" | "tiago", "copy_type": "...", "icp": "...",
+  "objective": "...", "raw_idea": "..." (opcional)
+}
+Resposta: {"ok": true, "angles": [{"label": "A", "abordagem": "...", "justificativa": "..."}, ...]}
+
 Body (rascunho): {
   "action": "generate",
   "brand": "metta" | "tiago",
@@ -54,6 +62,22 @@ if str(Path(__file__).resolve().parent) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 _REQUIRED_GENERATE_FIELDS = ("brand", "copy_type", "objective", "icp", "platform")
+_REQUIRED_ANGLES_FIELDS = ("brand", "copy_type", "objective", "icp")
+
+
+def _run_propose_angles(data: dict) -> dict:
+    import anthropic
+    from src.generator import CopyGenerator
+
+    client = anthropic.Anthropic()
+    angles = CopyGenerator(client).propose_angles(
+        brand=data["brand"],
+        copy_type=data["copy_type"],
+        icp=data["icp"],
+        objective=data["objective"],
+        raw_idea=data.get("raw_idea", ""),
+    )
+    return {"ok": True, "angles": angles}
 
 
 def _run_generate(data: dict) -> dict:
@@ -140,6 +164,17 @@ class handler(BaseHTTPRequestHandler):
             data = json.loads(raw) if raw else {}
             action = data.get("action")
 
+            if action == "propose_angles":
+                missing = [f for f in _REQUIRED_ANGLES_FIELDS if not data.get(f)]
+                if missing:
+                    return self._json(400, {"detail": f"campos obrigatórios ausentes: {', '.join(missing)}"})
+                try:
+                    return self._json(200, _run_propose_angles(data))
+                except NotImplementedError as exc:
+                    return self._json(400, {"detail": str(exc)})
+                except KeyError as exc:
+                    return self._json(400, {"detail": f"resposta obrigatória ausente: {exc}"})
+
             if action == "generate":
                 missing = [f for f in _REQUIRED_GENERATE_FIELDS if not data.get(f)]
                 if missing:
@@ -160,7 +195,7 @@ class handler(BaseHTTPRequestHandler):
                 status = result.pop("status")
                 return self._json(status, result)
 
-            return self._json(400, {"detail": "action precisa ser 'generate' ou 'submit'."})
+            return self._json(400, {"detail": "action precisa ser 'propose_angles', 'generate' ou 'submit'."})
 
         except Exception as exc:
             tb = traceback.format_exc()

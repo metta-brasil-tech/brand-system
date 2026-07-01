@@ -26,3 +26,25 @@ ICP_CATALOG: list[dict[str, str]] = [
     {"id": "varejo-oticas", "label": "Varejo — Óticas"},
     {"id": "varejo-farmacias", "label": "Varejo — Farmácias"},
 ]
+
+# Segmento -> documento de ICP que embasa a geração (v5.1 secao 14: "escreve
+# embebido de ICP"). Mapeamento à parte de ICP_CATALOG (em vez de um campo
+# "file" em cada entrada) porque test_icp_catalog.py trava a forma de
+# ICP_CATALOG como {id, label} apenas -- essa é a extensão aditiva.
+ICP_KNOWLEDGE_FILES: dict[str, str] = {
+    "mentoria-estrategica": "ICP_Estrategico_Mentoria_V2.md",
+    "servicos-saude": "ICP_Secundario_Servicos.md",
+    "servicos-estetica-beleza": "ICP_Secundario_Servicos.md",
+    "servicos-fitness": "ICP_Secundario_Servicos.md",
+    "servicos-pet-outros": "ICP_Secundario_Servicos.md",
+    "varejo-moda-calcados": "ICP_Secundario_Varejo.md",
+    "varejo-construcao-reforma-lar": "ICP_Secundario_Varejo.md",
+    "varejo-oticas": "ICP_Secundario_Varejo.md",
+    "varejo-farmacias": "ICP_Secundario_Varejo.md",
+}
+
+
+def icp_knowledge_file(icp_id: str) -> str | None:
+    """Nome do arquivo ICP_*.md do segmento, ou None se o id não veio do
+    catálogo (texto livre legado ou id desconhecido)."""
+    return ICP_KNOWLEDGE_FILES.get(icp_id)
