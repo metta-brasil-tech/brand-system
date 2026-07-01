@@ -161,34 +161,15 @@ button {
 .badge.pass { background: #D9F2E3; color: #1E6B3D; }
 .badge.fail { background: #FBE1DF; color: #B3261E; }
 .badge.stub { background: #EFE6D9; color: #7A5B00; }
-
-.token-gate {
-  max-width: 420px;
-  margin: 60px auto;
-  padding: 24px;
-  border: 1px solid var(--metta-sys-color-outline-variant);
-  border-radius: 12px;
-  text-align: center;
-}
 </style>
 </head>
 <body>
 
-<div id="token-gate" class="token-gate">
-  <h1>Agente Copy</h1>
-  <p class="subtitle">Token de acesso necessário para gerar e enviar peças.</p>
-  <input id="token-input" type="password" placeholder="Token de acesso" autocomplete="off">
-  <div class="actions" style="justify-content:center; margin-top:14px;">
-    <button class="btn-primary" id="token-save">Entrar</button>
-  </div>
-</div>
-
-<div class="wrap" id="app" style="display:none;">
+<div class="wrap" id="app">
   <h1>Agente Copy — Metta Brasil</h1>
   <p class="subtitle">
     Entrevista antes de escrever: preencha o briefing, gere a peça, revise e só então envie
     para o brand-system. Nenhuma peça é publicada sem essa revisão humana.
-    <a href="#" id="token-reset" style="color:inherit;">(trocar token)</a>
   </p>
 
   <form id="brief-form">
@@ -293,24 +274,13 @@ button {
 
 <script>
 (() => {
-  const TOKEN_KEY = 'metta-copy-agent-token';
   let schema = null;
   let lastPiece = null;
-
-  const tokenGate = document.getElementById('token-gate');
-  const app = document.getElementById('app');
-
-  function getToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
-  function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
-  function clearToken() { localStorage.removeItem(TOKEN_KEY); }
 
   async function api(action, body) {
     const res = await fetch('/api/copy-agent', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${getToken()}`,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action, ...body }),
     });
     const data = await res.json().catch(() => ({}));
@@ -431,28 +401,11 @@ button {
     setStatus(document.getElementById('submit-status'), '');
   }
 
-  function showApp() {
-    tokenGate.style.display = 'none';
-    app.style.display = '';
-    loadSchema();
-  }
-
-  document.getElementById('token-save').addEventListener('click', () => {
-    const v = document.getElementById('token-input').value.trim();
-    if (!v) return;
-    setToken(v);
-    showApp();
-  });
-  document.getElementById('token-reset').addEventListener('click', (e) => {
-    e.preventDefault();
-    clearToken();
-    location.reload();
-  });
   document.getElementById('brief-form').addEventListener('submit', handleGenerate);
   document.getElementById('submit-btn').addEventListener('click', handleSubmit);
   document.getElementById('discard-btn').addEventListener('click', handleDiscard);
 
-  if (getToken()) showApp();
+  loadSchema();
 })();
 </script>
 

@@ -5,10 +5,10 @@ Roda a entrevista -> geração -> validação do agente-copy (submodule git em
 agente-copy/, mesmo padrão do engine/ do ad-generator: código fonte mora no
 repo externo, este arquivo só importa e expõe via HTTP) sem duplicar lógica.
 
-Autenticação: mesmo Bearer token do api/pieces.py (env var PIECES_API_TOKEN)
--- necessário porque `action=generate` gasta chamadas reais à API da
-Anthropic e `action=submit` escreve no mesmo índice que api/pieces.py
-protege; "página sem link no menu" não é controle de acesso por si só.
+Sem autenticação própria por decisão explícita (o link fica de fora do menu
+e isso já é considerado suficiente) -- diferente de api/pieces.py, que
+continua exigindo o Bearer token porque atende um consumidor diferente (o
+agente-copy externo/CLI, não esta UI).
 
 POST /api/copy-agent
 Body (rascunho): {
@@ -46,8 +46,6 @@ if str(_AGENTE_COPY_DIR) not in sys.path:
     sys.path.insert(0, str(_AGENTE_COPY_DIR))
 if str(Path(__file__).resolve().parent) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-
-from pieces import _check_auth, submit_piece  # noqa: E402 — api/pieces.py
 
 _REQUIRED_GENERATE_FIELDS = ("brand", "copy_type", "objective", "icp", "platform")
 
@@ -121,9 +119,6 @@ def _run_generate(data: dict) -> dict:
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         try:
-            if not _check_auth(self.headers):
-                return self._json(401, {"detail": "Authorization Bearer token ausente ou inválido."})
-
             length = int(self.headers.get("Content-Length", 0))
             raw = self.rfile.read(length).decode("utf-8") if length else ""
             data = json.loads(raw) if raw else {}
@@ -144,6 +139,7 @@ class handler(BaseHTTPRequestHandler):
                 piece = data.get("piece")
                 if not isinstance(piece, dict):
                     return self._json(400, {"detail": "corpo precisa ter 'piece' (objeto)."})
+                from pieces import submit_piece  # api/pieces.py -- import tardio de propósito
                 result = submit_piece(piece)
                 status = result.pop("status")
                 return self._json(status, result)
