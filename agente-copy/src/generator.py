@@ -462,9 +462,12 @@ _DRAFT_SCHEMA: dict[str, Any] = {
         "corpo": {"type": "string"},
         "cta": {"type": "string"},
         "hook_variations": {
+            # Sem minItems aqui: a API da Anthropic rejeita output_config.format.schema
+            # com minItems/maxItems fora de {0, 1} ("minItems values other than 0 or 1
+            # are not supported"). O "no minimo 3" e reforcado pelo prompt (linha do
+            # _build_structural_prompt) e cobrado de novo no checklist do _judge.
             "type": "array",
             "items": {"type": "string"},
-            "minItems": 3,
         },
         "content_pillar": {"type": "string"},
         "target_icp": {"type": "string"},
@@ -484,9 +487,10 @@ _ANGLES_SCHEMA: dict[str, Any] = {
     "type": "object",
     "properties": {
         "angles": {
+            # Sem minItems/maxItems pelo mesmo motivo do hook_variations acima -- a
+            # API rejeita o schema inteiro se qualquer array tiver esses valores fora
+            # de {0, 1}. O "exatamente 3" fica só no texto do prompt (_build_angles_prompt).
             "type": "array",
-            "minItems": 3,
-            "maxItems": 3,
             "items": {
                 "type": "object",
                 "properties": {
