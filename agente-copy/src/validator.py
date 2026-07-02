@@ -90,6 +90,21 @@ def _extract_json(text: str) -> dict:
     return json.loads(text[start:end])
 
 
+def _text_of(response: anthropic.types.Message) -> str:
+    """Mesmo endurecimento de generator.py._text_of: next() sem default
+    estourava StopIteration cru quando a resposta nao tinha bloco de texto
+    (reproduzido em producao, embora nestas 4 chamadas nao haja thinking --
+    blindagem defensiva, nao um bug confirmado aqui)."""
+    text_blocks = [block.text for block in response.content if block.type == "text"]
+    if not text_blocks:
+        block_types = [block.type for block in response.content]
+        raise RuntimeError(
+            f"Resposta sem bloco de texto (blocos recebidos: {block_types}, "
+            f"stop_reason: {getattr(response, 'stop_reason', '?')})."
+        )
+    return text_blocks[0]
+
+
 def check_icp_fit(client: anthropic.Anthropic, piece: dict, icp: str) -> ICPFitResult:
     """Ask Claude whether the piece makes sense for the given ICP.
 
@@ -117,7 +132,7 @@ Responda apenas com um JSON no formato:
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
-    text = next(block.text for block in response.content if block.type == "text")
+    text = _text_of(response)
     data = _extract_json(text)
     return ICPFitResult(passed=bool(data["passed"]), reasoning=data["reasoning"])
 
@@ -156,7 +171,7 @@ Responda apenas com um JSON no formato:
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
-    text = next(block.text for block in response.content if block.type == "text")
+    text = _text_of(response)
     data = _extract_json(text)
     return ToneCheckResult(
         passed=bool(data["passed"]),
@@ -203,7 +218,7 @@ Responda apenas com um JSON no formato:
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
-    text = next(block.text for block in response.content if block.type == "text")
+    text = _text_of(response)
     data = _extract_json(text)
     return SecondEvaluatorResult(approved=bool(data["approved"]), feedback=data["feedback"])
 
@@ -251,6 +266,6 @@ Responda apenas com um JSON no formato:
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
-    text = next(block.text for block in response.content if block.type == "text")
+    text = _text_of(response)
     data = _extract_json(text)
     return SkillDeValidacaoResult(score=float(data["score"]), note=data["note"], is_stub=False)
