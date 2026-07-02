@@ -291,8 +291,10 @@ _COPY_TYPE_GUIDANCE: dict[str, str] = {
         "Carrossel: capa (slide 1) é a linha de hook isolada, nunca saudação nem "
         "contexto. Corpo em slides de parágrafos curtos (1-3 frases), progressão "
         "tensão → por que acontece → o que muda. Mediana de 9 slides (2-11). CTA no "
-        "fechamento: link na bio é o padrão mais comum. Hashtags quase nunca em "
-        "carrossel — não force."
+        "fechamento: gatilho de comentário é o padrão mais comum (usado pra ativar "
+        "automação de DM), link na bio vem em segundo lugar e bem menos frequente; "
+        "cerca de 1/3 das peças fecha sem CTA de conversão, em tom institucional. "
+        "Hashtags quase nunca em carrossel — não force."
     ),
     "post_unico": (
         "Post único (estático): a frase de abertura carrega o peso inteiro — não há "

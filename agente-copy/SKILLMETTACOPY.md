@@ -2,6 +2,8 @@
 
 **Skill combinada: Kim Barrett (Direct Response Ads) + boringmarketer (Direct Response Copy), calibrada para o ICP Metta Brasil.**
 
+> **Nota de proveniência (02/07/2026):** a seção "FLUXO PARA CADA TIPO DE PEÇA — INSTAGRAM ORGÂNICO" e a "Observação sobre vocabulário proprietário" foram reconferidas item a item contra o dataset bruto do scraping (`dataset_instagram-scraper-task_2026-07-01_15-08-41-697.json`, 84 registros, `ownerUsername: metta.brasil`). Três correções feitas nesta versão em relação à anterior: (1) ordem de CTA em Carrossel estava invertida — gatilho de comentário é o padrão mais frequente, não link na bio; (2) Post único registrava ausência de gatilho de comentário, que na verdade aparece, só é menos frequente que link na bio; (3) contagens de "Meta Batida" e "CNPJ/CPF" estavam levemente erradas. O resto da seção (contagens de tipo de post, hashtags, mediana de slides, hook de reels, vocabulário proprietário zerado) foi conferido e bate exatamente com o dataset.
+
 ---
 
 ## IDENTIDADE
@@ -340,15 +342,16 @@ O empresário carrega contradições que, quando nomeadas, geram conexão imedia
 - Slides: mediana de 9, variação real de 2 a 11 — bate com o limite de 11 já definido no prompt mestre.
 - Capa (slide 1) é sempre a linha de hook, isolada — nunca começa com contexto ou saudação.
 - Corpo em parágrafos curtos (1–3 frases), progressão: tensão → por que isso acontece → o que muda.
-- CTA no fechamento, em 3 padrões observados, do mais para o menos comum:
-  1. Link na bio ("Clica no link da bio e agende um diagnóstico") — mais frequente.
-  2. Gatilho de comentário ("Comenta GESTÃO aqui embaixo e te enviamos o autodiagnóstico") — usado pra ativar automação de DM, reservar pra quando a peça tiver isca conectada.
+- CTA no fechamento, em 3 padrões observados, do mais para o menos comum (corrigido em 02/07/2026 — contagem refeita direto no dataset bruto, a ordem da versão anterior estava invertida):
+  1. Gatilho de comentário ("Comenta GESTÃO aqui embaixo e te enviamos o autodiagnóstico") — o mais frequente de fato, ~24 de 49 carrosséis (≈49%), usado pra ativar automação de DM.
+  2. Link na bio ("Clica no link da bio e agende um diagnóstico") — só 8 de 49 (≈16%), bem menos comum do que se assumia.
   3. Pergunta aberta sem link, fechando em engajamento puro ("Comente aqui, qual área da sua empresa mais custa seu tempo?") — usado quando o objetivo é comentário, não clique.
+  - Nota: em ~17 de 49 carrosséis (≈35%) não há CTA de conversão nenhum — post fecha em tom institucional/agradecimento, sem pedir ação. Não estava registrado na versão anterior.
 - Hashtags: quase nunca usadas em carrossel (presentes em só ~16% da amostra). Não é regra obrigatória incluir.
 
 ### Post único (estático)
 - Sem CTA de link ou comentário em boa parte da amostra — vários posts fecham só com bloco de 4 a 6 hashtags, sem chamada pra ação. Isso é um padrão real de "postura de autoridade" (institucional falando sem pedir nada), coerente com o que a Base Editorial Canônica já registra pra peças desse tipo.
-- Quando tem CTA, é predominantemente link na bio — gatilho de comentário não aparece nesse formato na amostra.
+- Quando tem CTA, link na bio é o mais comum (6 de 24), mas gatilho de comentário também aparece nesse formato (4 de 24) — não é ausente como se registrou antes, só menos frequente que link na bio.
 - Hashtags aparecem aqui mais que em qualquer outro formato (~42% dos posts únicos), sempre 4 a 6, focadas em termos de nicho (#gestão #vendas #liderança #empresario), nunca termos proprietários da Metta.
 - Frase de abertura carrega o peso inteiro da peça — não tem segunda chance como no carrossel.
 
@@ -368,7 +371,7 @@ O empresário carrega contradições que, quando nomeadas, geram conexão imedia
 - Não apareceu volume suficiente na amostra orgânica pra validar — criativo de tráfego roda em Ads Manager, fora do feed orgânico que o scraping cobre. Manter a estrutura já definida na seção "Criativo / Ad Meta" acima.
 
 ### Observação sobre vocabulário proprietário
-Termos como Garantia Contratual, Chefe Rex, Líder Batmeta, Status Quo Jurássico, 3Rs e IPV não apareceram nenhuma vez nos 84 posts. Termos mais usados: Inteligência Comercial (7), 6 Gestões (6), Meta Batida (5), CNPJ/CPF (4 cada). Isso pode ser prática saudável — o próprio glossário orienta contra sufocar o parágrafo com termo proprietário — ou pode ser um vocabulário que a Metta reserva pra outras camadas de funil (landing page, deck) e ainda não trouxe pro orgânico. Não decidi isso por conta própria: fica como ponto pra confirmar com Alisson ou Amanda antes do agente herdar esse padrão como regra.
+Termos como Garantia Contratual, Chefe Rex, Líder Batmeta, Status Quo Jurássico, 3Rs e IPV não apareceram nenhuma vez nos 84 posts. Termos mais usados (recontados em 02/07/2026 direto no dataset bruto): Inteligência Comercial (7), 6 Gestões (6), Meta Batida (6, não 5 como registrado antes), CNPJ (7) e CPF (6) — não "4 cada" como se registrou antes; os dois aparecem bem mais que isso e não são iguais entre si. Isso pode ser prática saudável — o próprio glossário orienta contra sufocar o parágrafo com termo proprietário — ou pode ser um vocabulário que a Metta reserva pra outras camadas de funil (landing page, deck) e ainda não trouxe pro orgânico. Não decidi isso por conta própria: fica como ponto pra confirmar com Alisson ou Amanda antes do agente herdar esse padrão como regra.
 
 ---
 
