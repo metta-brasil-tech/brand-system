@@ -119,6 +119,7 @@ def _run_generate(data: dict) -> dict:
         "pilar_conteudo": result.content_pillar,
         "icp_alvo": result.target_icp,
         "platform": result.platform,
+        "descricao": result.descricao,
         "linkedin_adaptation": result.linkedin_adaptation,
     }
 
