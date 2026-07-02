@@ -192,12 +192,13 @@ class CopyGenerator:
     ) -> dict[str, Any]:
         response = self.client.messages.create(
             model=OPUS_MODEL,
-            # 4000 nao e' suficiente com thinking adaptive + effort high --
-            # reproduzido em producao: "StopIteration" em _text_of porque o
-            # raciocinio consumiu o orcamento inteiro e nao sobrou espaco pra
-            # escrever a resposta final (resposta so' com bloco de thinking,
-            # sem bloco de texto). 12000 da margem pro raciocinio E a peca.
-            max_tokens=12000,
+            # Reproduzido em produção duas vezes: nem 4000 nem 12000 bastaram
+            # com thinking adaptive + effort high -- o raciocínio consumia o
+            # orçamento inteiro (stop_reason=max_tokens, só bloco de
+            # thinking, sem texto). "Effort high" parece alocar a maior parte
+            # do orçamento pro pensar antes de responder. 32000 dá margem
+            # generosa pro raciocínio E pra peça reescrita no fim.
+            max_tokens=32000,
             thinking={"type": "adaptive"},
             output_config={
                 "effort": "high",
