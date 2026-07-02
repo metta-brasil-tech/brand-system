@@ -192,7 +192,12 @@ class CopyGenerator:
     ) -> dict[str, Any]:
         response = self.client.messages.create(
             model=OPUS_MODEL,
-            max_tokens=4000,
+            # 4000 nao e' suficiente com thinking adaptive + effort high --
+            # reproduzido em producao: "StopIteration" em _text_of porque o
+            # raciocinio consumiu o orcamento inteiro e nao sobrou espaco pra
+            # escrever a resposta final (resposta so' com bloco de thinking,
+            # sem bloco de texto). 12000 da margem pro raciocinio E a peca.
+            max_tokens=12000,
             thinking={"type": "adaptive"},
             output_config={
                 "effort": "high",
@@ -523,7 +528,17 @@ _JUDGMENT_SCHEMA: dict[str, Any] = {
 
 
 def _text_of(response: anthropic.types.Message) -> str:
-    return next(block.text for block in response.content if block.type == "text")
+    text_blocks = [block.text for block in response.content if block.type == "text"]
+    if not text_blocks:
+        # Acontece quando thinking consome o max_tokens inteiro e nao sobra
+        # espaco pra resposta final -- StopIteration puro nao dizia isso.
+        block_types = [block.type for block in response.content]
+        raise RuntimeError(
+            f"Resposta sem bloco de texto (blocos recebidos: {block_types}, "
+            f"stop_reason: {getattr(response, 'stop_reason', '?')}). Provavel "
+            "estouro de max_tokens durante o thinking -- aumente o orcamento."
+        )
+    return text_blocks[0]
 
 
 def _sanitize_json_text(text: str) -> str:
