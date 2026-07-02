@@ -180,7 +180,11 @@ class CopyGenerator:
     def _draft_structural(self, brief: Brief, knowledge: KnowledgeBase) -> dict[str, Any]:
         response = self.client.messages.create(
             model=SONNET_MODEL,
-            max_tokens=4000,
+            # Reproduzido em produção com stage="draft_structural": o modelo
+            # gasta parte do orçamento num bloco de thinking (não pedido
+            # explicitamente) antes de montar o JSON do schema, e 4000
+            # estourava antes de sobrar espaço pro JSON final.
+            max_tokens=16000,
             system=_build_system_prompt(brief.brand, brief.copy_type),
             messages=[{"role": "user", "content": _build_structural_prompt(brief, knowledge)}],
             output_config={"format": {"type": "json_schema", "schema": _DRAFT_SCHEMA}},
@@ -192,15 +196,18 @@ class CopyGenerator:
     ) -> dict[str, Any]:
         response = self.client.messages.create(
             model=OPUS_MODEL,
-            max_tokens=4000,
             # Reproduzido ao vivo 3x: com thinking=adaptive + effort=high, a
             # resposta nunca saía do bloco de thinking pra escrever o JSON
             # final -- nem em 4000, nem 12000, nem 32000 (sempre
             # stop_reason=max_tokens, só bloco de thinking). Não era
             # orçamento pequeno, era incompatibilidade real entre thinking
             # estendido e saída forçada em json_schema -- tira o thinking e
-            # o "effort: high" (que só se aplica com thinking) do julgamento;
-            # Opus continua fazendo o julgamento de qualidade sem eles.
+            # o "effort: high" (que só se aplica com thinking) do julgamento.
+            # Mesmo sem esses dois parâmetros, o modelo ainda gasta parte do
+            # orçamento num bloco de thinking implícito antes do JSON (achado
+            # em _draft_structural com o mesmo padrão de output_config) --
+            # 16000 dá a mesma margem que resolveu lá.
+            max_tokens=16000,
             output_config={
                 "format": {"type": "json_schema", "schema": _JUDGMENT_SCHEMA},
             },
