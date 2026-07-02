@@ -450,6 +450,10 @@ button {
       <h3>Variações de hook</h3>
       <ul id="out-hook-variations"></ul>
     </div>
+    <div class="piece-block">
+      <h3>Descrição / legenda (o que acompanha a peça publicada)</h3>
+      <p id="out-descricao"></p>
+    </div>
     <div class="piece-block" id="out-linkedin-block" style="display:none;">
       <h3>Adaptação LinkedIn</h3>
       <p id="out-linkedin"></p>
@@ -727,6 +731,7 @@ button {
       document.getElementById('out-cta').textContent = data.piece.cta;
       document.getElementById('out-hook-variations').innerHTML =
         data.piece.hook_variations.map(h => `<li>${h}</li>`).join('');
+      document.getElementById('out-descricao').textContent = data.piece.descricao || '';
       const liBlock = document.getElementById('out-linkedin-block');
       if (data.piece.linkedin_adaptation) {
         liBlock.style.display = '';

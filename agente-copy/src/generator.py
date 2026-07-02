@@ -90,6 +90,13 @@ class GenerationResult:
     content_pillar: str
     target_icp: str
     platform: str
+    # Legenda que acompanha a peça quando publicada -- distinta do `corpo`
+    # pra tipos onde o corpo NÃO é o texto que vira legenda (reels: corpo é
+    # o roteiro falado, descricao é o texto embaixo do vídeo). Pra tipos
+    # onde corpo já É a legenda (post_unico, carrossel), o modelo repete/
+    # resume o corpo aqui em vez de inventar um texto novo -- ver
+    # _build_structural_prompt.
+    descricao: str = ""
     linkedin_adaptation: str | None = None
     revision_notes: list[str] = field(default_factory=list)
 
@@ -171,6 +178,7 @@ class CopyGenerator:
             content_pillar=draft["content_pillar"],
             target_icp=draft["target_icp"],
             platform=brief.platform,
+            descricao=draft.get("descricao", ""),
             linkedin_adaptation=linkedin,
             revision_notes=revision_notes,
         )
@@ -313,9 +321,12 @@ _COPY_TYPE_GUIDANCE: dict[str, str] = {
     ),
     "reels": (
         "Reels: hook é quase sempre frase de identificação direta, não pergunta. "
-        "Roteiro: gancho → ciclo do gargalo → por que as outras falharam → mecanismo "
-        "fazedoria → case espelho com nome e número. CTA final majoritariamente link "
-        "na bio; alternativa é pergunta reflexiva sem link."
+        "Roteiro (campo corpo): gancho → ciclo do gargalo → por que as outras "
+        "falharam → mecanismo fazedoria → case espelho com nome e número. CTA final "
+        "majoritariamente link na bio; alternativa é pergunta reflexiva sem link. "
+        "A descrição (campo descricao) é o texto ESCRITO que acompanha o vídeo "
+        "publicado -- diferente do roteiro falado, segue o padrão de post único "
+        "(pode fechar só com hashtags, sem CTA)."
     ),
     "criativo": (
         "Criativo / Ad Meta: hook de dor dupla do ciclo (max 3s) → identificação → "
@@ -374,7 +385,14 @@ def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
         "contradição interna. Traga um case espelho nominal do segmento quando "
         "possível.\n\n"
         "Entregue: hook, corpo, CTA; no mínimo 3 variações de hook distintas; a "
-        "indicação de pilar de conteúdo e o ICP-alvo. Responda no schema JSON pedido."
+        "indicação de pilar de conteúdo e o ICP-alvo; e a descrição/legenda que "
+        "acompanha a peça quando publicada. Para reels, a descrição é um texto "
+        "DIFERENTE do corpo (que é o roteiro falado no vídeo) -- a legenda escrita "
+        "que fica embaixo do vídeo no post, seguindo o mesmo padrão de descrição de "
+        "post único (pode fechar sem CTA, só com hashtags de nicho, postura de "
+        "autoridade). Para os demais tipos, onde o corpo já É a legenda "
+        "(post_unico, carrossel), repita ou resuma o corpo no campo descricao em "
+        "vez de inventar um texto novo. Responda no schema JSON pedido."
     )
 
 
@@ -406,7 +424,9 @@ def _build_judgment_prompt(
         "Se qualquer item falhar, defina approved=false, explique o que falhou em "
         "feedback e devolva a peça reescrita e corrigida em 'piece'. Se passar em "
         "tudo, defina approved=true e devolva a peça (com ajustes finos se quiser). "
-        "Preserve sempre as 3+ variações de hook, o pilar e o ICP-alvo."
+        "Preserve sempre as 3+ variações de hook, o pilar, o ICP-alvo e a descrição "
+        "(campo descricao -- pra reels é a legenda escrita, diferente do roteiro "
+        "falado no corpo; pros demais tipos pode repetir/resumir o corpo)."
     )
 
 
@@ -492,6 +512,12 @@ _DRAFT_SCHEMA: dict[str, Any] = {
         },
         "content_pillar": {"type": "string"},
         "target_icp": {"type": "string"},
+        # Legenda que acompanha a peça quando publicada. Pra reels, é texto
+        # DIFERENTE do `corpo` (que é o roteiro falado) -- ver instrução em
+        # _build_structural_prompt. Pra tipos onde o corpo já é a legenda
+        # (post_unico, carrossel), o modelo pode repetir/resumir o corpo
+        # aqui em vez de inventar um segundo texto.
+        "descricao": {"type": "string"},
     },
     "required": [
         "hook",
@@ -500,6 +526,7 @@ _DRAFT_SCHEMA: dict[str, Any] = {
         "hook_variations",
         "content_pillar",
         "target_icp",
+        "descricao",
     ],
     "additionalProperties": False,
 }
