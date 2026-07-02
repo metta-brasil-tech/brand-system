@@ -197,7 +197,7 @@ class CopyGenerator:
             # estourava antes de sobrar espaço pro JSON final.
             max_tokens=16000,
             system=_build_system_prompt(brief.brand, brief.copy_type),
-            messages=[{"role": "user", "content": _build_structural_prompt(brief, knowledge)}],
+            messages=[{"role": "user", "content": _cached_content(_build_structural_prompt(brief, knowledge))}],
             output_config={"format": {"type": "json_schema", "schema": _DRAFT_SCHEMA}},
         )
         return _extract_json(response, stage="draft_structural")
@@ -223,7 +223,10 @@ class CopyGenerator:
                 "format": {"type": "json_schema", "schema": _JUDGMENT_SCHEMA},
             },
             system=_build_system_prompt(brief.brand, brief.copy_type),
-            messages=[{"role": "user", "content": _build_judgment_prompt(brief, knowledge, draft)}],
+            messages=[{
+                "role": "user",
+                "content": _cached_content(_build_judgment_prompt(brief, knowledge, draft), marker="=== BRIEFING ==="),
+            }],
         )
         return _extract_json(response, stage="judge")
 
@@ -308,7 +311,13 @@ _COPY_TYPE_GUIDANCE: dict[str, str] = {
         "Post único (estático): a frase de abertura carrega o peso inteiro — não há "
         "segunda chance. Muitos posts fecham só com 4-6 hashtags de nicho (#gestao "
         "#vendas #lideranca #empresario), sem CTA — postura de autoridade. Quando há "
-        "CTA, é link na bio. Nunca use termos proprietários como hashtag."
+        "CTA, é link na bio. Nunca use termos proprietários como hashtag. Tamanho "
+        "real (mediana medida em 24 posts reais de @metta.brasil): ~127 palavras, "
+        "~740 caracteres -- não escreva peça de landing page, é uma legenda de "
+        "Instagram. Se usar case espelho, mencione em 1-2 frases (nome, resultado), "
+        "não conte a história toda com múltiplos parágrafos. Protagonista é sempre "
+        "o método/mecanismo, nunca a jornada emocional/identitária de quem lê -- "
+        "isso é registro do Tiago pessoal, não da Metta institucional."
     ),
     "descricao": (
         "Descrição de post: no estático a descrição É a copy principal, não um campo "
@@ -366,6 +375,27 @@ def _build_system_prompt(brand: Brand, copy_type: str) -> str:
     )
 
 
+def _cached_content(prompt: str, marker: str = "=== BRIEFING DA PEÇA ===") -> list[dict[str, Any]]:
+    """Quebra o prompt em (base de conhecimento cacheável) + (parte
+    dinâmica do brief) e marca a primeira com cache_control -- a base de
+    conhecimento (~174 mil caracteres) é a mesma em toda chamada de
+    _draft_structural e, dentro de um mesmo generate(), em toda rodada do
+    loop de _judge (até 2x com max_revisions=1); reenviar isso a preço
+    cheio a cada chamada era o maior custo real medido em produção
+    (1,88M tokens de entrada vs 84 mil de saída no dashboard). Cache
+    "ephemeral" tem TTL de 5 min -- confortável pro tempo de um generate()
+    inteiro rodar. Se o marcador não aparecer no texto (não deveria
+    acontecer com os dois prompts que chamam isso), cai pra um único bloco
+    sem cache -- funciona igual, só sem o desconto."""
+    idx = prompt.find(marker)
+    if idx == -1:
+        return [{"type": "text", "text": prompt}]
+    return [
+        {"type": "text", "text": prompt[:idx], "cache_control": {"type": "ephemeral"}},
+        {"type": "text", "text": prompt[idx:]},
+    ]
+
+
 def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
     icp_context = _icp_context(brief.icp)
     icp_block = f"{icp_context}\n\n" if icp_context else ""
@@ -392,7 +422,13 @@ def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
         "post único (pode fechar sem CTA, só com hashtags de nicho, postura de "
         "autoridade). Para os demais tipos, onde o corpo já É a legenda "
         "(post_unico, carrossel), repita ou resuma o corpo no campo descricao em "
-        "vez de inventar um texto novo. Responda no schema JSON pedido."
+        "vez de inventar um texto novo.\n\n"
+        "IMPORTANTE: o campo hook e o campo corpo são montados em sequência na "
+        "peça final (hook, depois corpo, depois CTA) -- NUNCA repita o hook como "
+        "primeira linha do corpo, isso duplica a frase de abertura quando a peça "
+        "é montada. O corpo começa direto no desenvolvimento, sem repetir o "
+        "hook.\n\n"
+        "Responda no schema JSON pedido."
     )
 
 
@@ -421,6 +457,9 @@ def _build_judgment_prompt(
         f"{_render_brief(brief)}\n\n"
         "=== RASCUNHO A AVALIAR ===\n"
         f"{json.dumps(draft, ensure_ascii=False, indent=2)}\n\n"
+        "Cheque também: o corpo NÃO pode repetir o hook como primeira linha (a "
+        "peça final monta hook + corpo + CTA em sequência, então repetir duplica a "
+        "abertura) -- reprove e corrija se isso acontecer.\n\n"
         "Se qualquer item falhar, defina approved=false, explique o que falhou em "
         "feedback e devolva a peça reescrita e corrigida em 'piece'. Se passar em "
         "tudo, defina approved=true e devolva a peça (com ajustes finos se quiser). "
