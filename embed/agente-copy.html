@@ -117,14 +117,86 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--metta-sys-color-primary) 25%, transparent);
 }
 
-select {
-  appearance: none;
-  -webkit-appearance: none;
+/* select nativo some por completo -- a lista aberta de <option> é
+   renderizada pelo SO/navegador e não dá pra tematizar via CSS (o azul de
+   seleção do Chrome/Windows, por exemplo, ignora qualquer estilo). O widget
+   abaixo (.select-shell/.select-trigger/.select-menu) substitui a aparência
+   inteira mantendo o <select> real por baixo só como fonte de valor/eventos,
+   pra todo o JS que já lê `.value`/escuta `change` continuar funcionando. */
+.native-select-hidden { display: none; }
+
+.select-shell { position: relative; }
+
+.select-trigger {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--metta-sys-color-on-surface);
+  background: var(--metta-sys-color-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-sm);
+  padding: 10px 34px 10px 12px;
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              box-shadow var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.select-trigger::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23435965' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 10px center;
+  background-position: center;
   background-size: 18px;
-  padding-right: 34px;
+  transition: transform var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.select-trigger[aria-expanded="true"]::after { transform: translateY(-50%) rotate(180deg); }
+.select-trigger:focus-visible,
+.select-trigger[aria-expanded="true"] {
+  outline: none;
+  border-color: var(--metta-sys-color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--metta-sys-color-primary) 25%, transparent);
+}
+.select-trigger:disabled { opacity: .55; cursor: default; }
+
+.select-menu {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 6px;
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  background: var(--metta-sys-color-surface-container-lowest);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  box-shadow: var(--metta-sys-elevation-2);
+  display: none;
+}
+.select-menu.open { display: block; }
+.select-option {
+  padding: 9px 10px;
+  border-radius: var(--metta-sys-shape-corner-sm);
+  font-size: 14px;
+  color: var(--metta-sys-color-on-surface);
+  cursor: pointer;
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.select-option:hover, .select-option.focused {
+  background: color-mix(in srgb, var(--metta-sys-color-primary) 10%, transparent);
+}
+.select-option.active {
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+  font-weight: var(--metta-ref-axis-wght-medium-p);
 }
 
 textarea { min-height: 70px; resize: vertical; }
@@ -400,6 +472,103 @@ button {
   let schema = null;
   let lastPiece = null;
 
+  // Substitui a aparência de um <select> nativo por um combobox customizado
+  // (ver .select-shell/.select-trigger/.select-menu no <style>), mantendo o
+  // <select> real escondido como única fonte de verdade -- todo código que
+  // já lia `.value` ou escutava `change` nele continua funcionando sem
+  // mudança nenhuma, porque enhanceSelect só espelha o estado dele.
+  function enhanceSelect(selectEl) {
+    if (!selectEl._enhanced) {
+      selectEl._enhanced = true;
+      selectEl.classList.add('native-select-hidden');
+
+      const shell = document.createElement('div');
+      shell.className = 'select-shell';
+      selectEl.parentNode.insertBefore(shell, selectEl);
+      shell.appendChild(selectEl);
+
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'select-trigger';
+      trigger.setAttribute('aria-haspopup', 'listbox');
+      trigger.setAttribute('aria-expanded', 'false');
+      shell.appendChild(trigger);
+
+      const menu = document.createElement('ul');
+      menu.className = 'select-menu';
+      menu.setAttribute('role', 'listbox');
+      shell.appendChild(menu);
+
+      selectEl._trigger = trigger;
+      selectEl._menu = menu;
+
+      const close = () => { menu.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); };
+      const open = () => {
+        document.querySelectorAll('.select-menu.open').forEach(m => { if (m !== menu) m.classList.remove('open'); });
+        menu.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+        const active = menu.querySelector('.select-option.active');
+        if (active) active.scrollIntoView({ block: 'nearest' });
+      };
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (trigger.disabled) return;
+        menu.classList.contains('open') ? close() : open();
+      });
+      document.addEventListener('click', (e) => { if (!shell.contains(e.target)) close(); });
+      trigger.addEventListener('keydown', (e) => {
+        const options = Array.from(menu.querySelectorAll('.select-option'));
+        if (!options.length) return;
+        const activeIdx = options.findIndex(o => o.classList.contains('focused'))
+          ?? options.findIndex(o => o.classList.contains('active'));
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (!menu.classList.contains('open')) open();
+          const start = activeIdx === -1 ? options.findIndex(o => o.classList.contains('active')) : activeIdx;
+          const next = e.key === 'ArrowDown' ? Math.min(options.length - 1, start + 1) : Math.max(0, start - 1);
+          options.forEach(o => o.classList.remove('focused'));
+          options[next].classList.add('focused');
+          options[next].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (menu.classList.contains('open')) {
+            (menu.querySelector('.select-option.focused') || menu.querySelector('.select-option.active'))?.click();
+          } else {
+            open();
+          }
+        } else if (e.key === 'Escape') {
+          close();
+        }
+      });
+    }
+    refreshSelect(selectEl);
+  }
+
+  function refreshSelect(selectEl) {
+    const trigger = selectEl._trigger;
+    const menu = selectEl._menu;
+    if (!trigger || !menu) return;
+    const options = Array.from(selectEl.options);
+    menu.innerHTML = options.map(opt => `
+      <li class="select-option${opt.selected ? ' active' : ''}" data-value="${opt.value}" role="option" aria-selected="${opt.selected}">${opt.textContent}</li>
+    `).join('');
+    const selectedOpt = options.find(o => o.selected) || options[0];
+    trigger.textContent = selectedOpt ? selectedOpt.textContent : '';
+    trigger.disabled = options.length === 0;
+
+    menu.querySelectorAll('.select-option').forEach(li => {
+      li.addEventListener('click', () => {
+        selectEl.value = li.dataset.value;
+        selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+        menu.querySelectorAll('.select-option').forEach(o => o.classList.remove('active', 'focused'));
+        li.classList.add('active');
+        trigger.textContent = li.textContent;
+        menu.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   async function api(action, body) {
     const res = await fetch('/api/copy-agent', {
       method: 'POST',
@@ -418,11 +587,13 @@ button {
     copyTypeSelect.innerHTML = schema.copy_types
       .map(ct => `<option value="${ct}">${ct.replace('_', ' ')}</option>`)
       .join('');
+    enhanceSelect(copyTypeSelect);
 
     const icpSelect = document.getElementById('icp');
     icpSelect.innerHTML = (schema.icps || [])
       .map(icp => `<option value="${icp.id}">${icp.label}</option>`)
       .join('');
+    enhanceSelect(icpSelect);
 
     renderTypeFields();
     copyTypeSelect.addEventListener('change', renderTypeFields);
@@ -600,6 +771,7 @@ button {
   document.getElementById('discard-btn').addEventListener('click', handleDiscard);
   document.getElementById('propose-angles-btn').addEventListener('click', handleProposeAngles);
 
+  ['brand', 'emotional_axis', 'platform'].forEach(id => enhanceSelect(document.getElementById(id)));
   loadSchema();
 
   // Sincroniza tema (light/dark) com o parent -- mesmo mecanismo do embed:criar.html.
