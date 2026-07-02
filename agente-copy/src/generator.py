@@ -192,16 +192,16 @@ class CopyGenerator:
     ) -> dict[str, Any]:
         response = self.client.messages.create(
             model=OPUS_MODEL,
-            # Reproduzido em produção duas vezes: nem 4000 nem 12000 bastaram
-            # com thinking adaptive + effort high -- o raciocínio consumia o
-            # orçamento inteiro (stop_reason=max_tokens, só bloco de
-            # thinking, sem texto). "Effort high" parece alocar a maior parte
-            # do orçamento pro pensar antes de responder. 32000 dá margem
-            # generosa pro raciocínio E pra peça reescrita no fim.
-            max_tokens=32000,
-            thinking={"type": "adaptive"},
+            max_tokens=4000,
+            # Reproduzido ao vivo 3x: com thinking=adaptive + effort=high, a
+            # resposta nunca saía do bloco de thinking pra escrever o JSON
+            # final -- nem em 4000, nem 12000, nem 32000 (sempre
+            # stop_reason=max_tokens, só bloco de thinking). Não era
+            # orçamento pequeno, era incompatibilidade real entre thinking
+            # estendido e saída forçada em json_schema -- tira o thinking e
+            # o "effort: high" (que só se aplica com thinking) do julgamento;
+            # Opus continua fazendo o julgamento de qualidade sem eles.
             output_config={
-                "effort": "high",
                 "format": {"type": "json_schema", "schema": _JUDGMENT_SCHEMA},
             },
             system=_build_system_prompt(brief.brand, brief.copy_type),
