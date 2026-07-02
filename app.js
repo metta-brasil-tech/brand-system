@@ -797,7 +797,7 @@ const BrandSystem = (() => {
 
   function renderOverview() {
     const cards = nav.tabs
-      .filter(t => t.id !== 'overview')
+      .filter(t => t.id !== 'overview' && !t.hidden)
       .map(t => {
         const status = 'ready';
         const sectionsCount = t.sections.length;
