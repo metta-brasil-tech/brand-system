@@ -227,8 +227,20 @@ button { all: unset; }
   position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;
   background-size: cover; background-position: center;
 }
+/* scrim amarelo fixo no topo — garante headline legível mesmo que o objeto
+   gerado pela IA invada a zona do texto (não dá pra confiar 100% no prompt). */
+.ad[data-arch="object-center"][data-obj-scale="full"]::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(180deg, var(--m-yellow) 0%, var(--m-yellow) 30%, rgba(255,190,24,0) 52%);
+}
 .ad[data-arch="object-center"][data-obj-scale="full"] .layer {
-  justify-content: flex-start; gap: 20px; padding-top: 132px;
+  justify-content: flex-start; gap: 14px; padding-top: 108px;
+}
+/* headline menor + mais compacta nessa variante — a caixa de fit é o canvas
+   inteiro (.layer ocupa 100% da altura), então o auto-fit em _engine.js nunca
+   encolhe sozinho aqui; o tamanho seguro tem que vir fixo no CSS. */
+.ad[data-arch="object-center"][data-obj-scale="full"] .t-head {
+  font-size: 52px; line-height: 1.05;
 }
 .ad[data-arch="object-center"][data-obj-scale="full"] .cta-wrap { margin-top: auto; }
 
