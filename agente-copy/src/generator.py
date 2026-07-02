@@ -583,6 +583,13 @@ def _extract_json(response: anthropic.types.Message) -> dict[str, Any]:
     # a ultima "}" -- protege contra prosa antes/depois do JSON. Nao protege
     # contra truncamento de verdade (json.loads ainda quebra nesse caso, e
     # deve quebrar -- o max_tokens e' quem previne isso, ver propose_angles).
-    start = text.index("{")
-    end = text.rindex("}") + 1
+    try:
+        start = text.index("{")
+        end = text.rindex("}") + 1
+    except ValueError as exc:
+        raise ValueError(
+            "Resposta sem par '{'/'}' completo (provavel truncamento ou "
+            f"ausencia de JSON) -- stop_reason: {getattr(response, 'stop_reason', '?')}, "
+            f"texto completo recebido: {text!r}"
+        ) from exc
     return json.loads(_sanitize_json_text(text[start:end]))
