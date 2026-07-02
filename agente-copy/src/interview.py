@@ -37,6 +37,19 @@ class CopyType(str, Enum):
     CRIATIVOS = "criativos"
 
 
+# Rótulo pra exibição na UI -- o .value do enum é o identificador em
+# snake_case sem acento (contrato com o backend/testes), não o texto que um
+# humano deveria ler no formulário.
+COPY_TYPE_LABELS: dict[CopyType, str] = {
+    CopyType.CARROSSEL: "Carrossel",
+    CopyType.POST_UNICO: "Post único",
+    CopyType.DESCRICAO_POST: "Descrição de post",
+    CopyType.STORIES: "Stories",
+    CopyType.REELS: "Reels",
+    CopyType.CRIATIVOS: "Criativos",
+}
+
+
 @dataclass
 class Brief:
     brand: Brand

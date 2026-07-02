@@ -585,7 +585,7 @@ button {
     schema = await res.json();
     const copyTypeSelect = document.getElementById('copy_type');
     copyTypeSelect.innerHTML = schema.copy_types
-      .map(ct => `<option value="${ct}">${ct.replace('_', ' ')}</option>`)
+      .map(ct => `<option value="${ct.id}">${ct.label}</option>`)
       .join('');
     enhanceSelect(copyTypeSelect);
 

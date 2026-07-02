@@ -210,7 +210,7 @@ class handler(BaseHTTPRequestHandler):
         # única de verdade é o agente-copy).
         try:
             from src.icp_catalog import ICP_CATALOG
-            from src.interview import BASE_QUESTIONS, TYPE_QUESTIONS
+            from src.interview import BASE_QUESTIONS, COPY_TYPE_LABELS, TYPE_QUESTIONS
 
             def _q(q):
                 d = {"key": q.key, "prompt": q.prompt, "purpose": q.purpose}
@@ -223,7 +223,9 @@ class handler(BaseHTTPRequestHandler):
                 "brands": ["metta", "tiago"],
                 "platforms": ["instagram", "linkedin"],
                 "emotional_axes": ["dor", "desejo", "necessidade"],
-                "copy_types": [ct.value for ct in TYPE_QUESTIONS.keys()],
+                "copy_types": [
+                    {"id": ct.value, "label": COPY_TYPE_LABELS[ct]} for ct in TYPE_QUESTIONS.keys()
+                ],
                 "icps": ICP_CATALOG,
                 "base_questions": [_q(q) for q in BASE_QUESTIONS],
                 "type_questions": {
