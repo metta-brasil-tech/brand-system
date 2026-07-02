@@ -422,7 +422,10 @@ def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
         "post único (pode fechar sem CTA, só com hashtags de nicho, postura de "
         "autoridade). Para os demais tipos, onde o corpo já É a legenda "
         "(post_unico, carrossel), repita ou resuma o corpo no campo descricao em "
-        "vez de inventar um texto novo.\n\n"
+        "vez de inventar um texto novo -- mas preserve os parágrafos com quebra de "
+        "linha dupla (\\n\\n) entre eles, igual ao corpo. Uma legenda real de feed "
+        "não sai como bloco único: tem respiro entre ideias. Nunca colapse os "
+        "parágrafos numa massa de texto só, mesmo ao resumir.\n\n"
         "IMPORTANTE: o campo hook e o campo corpo são montados em sequência na "
         "peça final (hook, depois corpo, depois CTA) -- NUNCA repita o hook como "
         "primeira linha do corpo, isso duplica a frase de abertura quando a peça "
@@ -465,7 +468,8 @@ def _build_judgment_prompt(
         "tudo, defina approved=true e devolva a peça (com ajustes finos se quiser). "
         "Preserve sempre as 3+ variações de hook, o pilar, o ICP-alvo e a descrição "
         "(campo descricao -- pra reels é a legenda escrita, diferente do roteiro "
-        "falado no corpo; pros demais tipos pode repetir/resumir o corpo)."
+        "falado no corpo; pros demais tipos pode repetir/resumir o corpo, mas "
+        "SEMPRE com quebra de linha dupla entre parágrafos, nunca como bloco único)."
     )
 
 
