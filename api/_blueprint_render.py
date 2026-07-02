@@ -311,6 +311,11 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
 
     if arch == "object-center":
         obj = _photo(image_url, "object")
+        if params.get("object_scale") == "full":
+            # Imagem cobre o canvas inteiro (o próprio gerador AI já bake-a o fundo
+            # sólido do tema) — objeto vira background, texto flutua por cima ancorado
+            # no topo. DARK-OBJETO não usa esse param — fica no boxed legado abaixo.
+            return f'{obj}<div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
         return f'<div class="layer">{obj}{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
 
     if arch == "card-mock":
@@ -383,6 +388,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     photo = params.get("photo", "right-bleed")
     block = params.get("block", "none")
     anchor = params.get("anchor", "bottom")
+    obj_scale = params.get("object_scale", "boxed")
 
     copy_clean = {k: (str(v).strip() if v else "") for k, v in (copy or {}).items()}
     inner = _markup(arch, copy_clean, params, image_url or "")
@@ -397,7 +403,8 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         f'data-case="{_esc(case)}" data-orient="{_esc(orient)}" '
         f'data-arch="{_esc(arch)}" data-theme="{_esc(theme)}" data-format="{_esc(format)}" '
         f'data-align="{_esc(align)}" data-scale="{_esc(scale)}" data-photo="{_esc(photo)}" '
-        f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}"'
+        f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}" '
+        f'data-obj-scale="{_esc(obj_scale)}"'
     )
 
     fonts_css = _read(_BLUEPRINTS_DIR / "_fonts.css")
