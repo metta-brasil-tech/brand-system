@@ -128,7 +128,10 @@ class KnowledgeBase:
 
 
 class CopyGenerator:
-    def __init__(self, client: anthropic.Anthropic, max_revisions: int = 2) -> None:
+    # 2 -> 1: reduz o teto de chamadas Opus por pedido de 3 para 2 (draft +
+    # até 2 julgamentos em vez de até 3) -- corta o pior caso de custo por
+    # usuário sem depender de nenhuma infra nova de rate limit.
+    def __init__(self, client: anthropic.Anthropic, max_revisions: int = 1) -> None:
         self.client = client
         self.max_revisions = max_revisions
         self._knowledge_bases: dict[Brand, KnowledgeBase] = {}
