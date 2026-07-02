@@ -185,7 +185,7 @@ class CopyGenerator:
             messages=[{"role": "user", "content": _build_structural_prompt(brief, knowledge)}],
             output_config={"format": {"type": "json_schema", "schema": _DRAFT_SCHEMA}},
         )
-        return _extract_json(response)
+        return _extract_json(response, stage="draft_structural")
 
     def _judge(
         self, brief: Brief, knowledge: KnowledgeBase, draft: dict[str, Any]
@@ -207,7 +207,7 @@ class CopyGenerator:
             system=_build_system_prompt(brief.brand, brief.copy_type),
             messages=[{"role": "user", "content": _build_judgment_prompt(brief, knowledge, draft)}],
         )
-        return _extract_json(response)
+        return _extract_json(response, stage="judge")
 
     def _adapt_linkedin(
         self, brief: Brief, knowledge: KnowledgeBase, draft: dict[str, Any]
@@ -218,7 +218,7 @@ class CopyGenerator:
             system=_build_system_prompt(brief.brand, brief.copy_type),
             messages=[{"role": "user", "content": _build_linkedin_prompt(brief, draft)}],
         )
-        return _text_of(response)
+        return _text_of(response, stage="linkedin_adaptation")
 
     def propose_angles(
         self, brand: Brand, copy_type: str, icp: str, objective: str, raw_idea: str = ""
@@ -248,7 +248,7 @@ class CopyGenerator:
             ],
             output_config={"format": {"type": "json_schema", "schema": _ANGLES_SCHEMA}},
         )
-        return _extract_json(response)["angles"]
+        return _extract_json(response, stage="propose_angles")["angles"]
 
     @staticmethod
     def _assemble(draft: dict[str, Any]) -> str:
@@ -528,16 +528,18 @@ _JUDGMENT_SCHEMA: dict[str, Any] = {
 }
 
 
-def _text_of(response: anthropic.types.Message) -> str:
+def _text_of(response: anthropic.types.Message, stage: str = "?") -> str:
     text_blocks = [block.text for block in response.content if block.type == "text"]
     if not text_blocks:
         # Acontece quando thinking consome o max_tokens inteiro e nao sobra
         # espaco pra resposta final -- StopIteration puro nao dizia isso.
+        # `stage` identifica qual chamada falhou (draft_structural/judge/
+        # linkedin_adaptation/propose_angles) -- as quatro chamam _text_of
+        # e o erro sozinho nao dizia qual delas foi.
         block_types = [block.type for block in response.content]
         raise RuntimeError(
-            f"Resposta sem bloco de texto (blocos recebidos: {block_types}, "
-            f"stop_reason: {getattr(response, 'stop_reason', '?')}). Provavel "
-            "estouro de max_tokens durante o thinking -- aumente o orcamento."
+            f"[{stage}] Resposta sem bloco de texto (blocos recebidos: {block_types}, "
+            f"stop_reason: {getattr(response, 'stop_reason', '?')})."
         )
     return text_blocks[0]
 
@@ -577,8 +579,8 @@ def _sanitize_json_text(text: str) -> str:
     return "".join(out)
 
 
-def _extract_json(response: anthropic.types.Message) -> dict[str, Any]:
-    text = _text_of(response)
+def _extract_json(response: anthropic.types.Message, stage: str = "?") -> dict[str, Any]:
+    text = _text_of(response, stage=stage)
     # Mesmo padrão defensivo do validator.py: extrai só entre a primeira "{" e
     # a ultima "}" -- protege contra prosa antes/depois do JSON. Nao protege
     # contra truncamento de verdade (json.loads ainda quebra nesse caso, e
@@ -588,7 +590,7 @@ def _extract_json(response: anthropic.types.Message) -> dict[str, Any]:
         end = text.rindex("}") + 1
     except ValueError as exc:
         raise ValueError(
-            "Resposta sem par '{'/'}' completo (provavel truncamento ou "
+            f"[{stage}] Resposta sem par '{{'/'}}' completo (provavel truncamento ou "
             f"ausencia de JSON) -- stop_reason: {getattr(response, 'stop_reason', '?')}, "
             f"texto completo recebido: {text!r}"
         ) from exc
