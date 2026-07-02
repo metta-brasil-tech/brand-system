@@ -143,7 +143,7 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
             return ""
         if not is_tiago and arch in _METTA_NO_BRAND:
             return ""
-    dark = theme in ("dark", "yellow")
+    dark = theme == "dark"
     if is_tiago:
         svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
         # Editoriais levam a assinatura no TOPO (igual às refs de carrossel do Tiago);

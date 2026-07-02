@@ -3,7 +3,7 @@ id: YELLOW-OBJETO
 display_name: "Objeto-conceito 3D flutuante sobre amarelo"
 marca: metta
 archetype: object-center
-params: { theme: yellow, align: center, cta: dark }
+params: { theme: yellow, align: center, cta: dark, brand: center }
 slots: [tag, headline, subhead, body, cta]
 image: { prompt_ref: image-prompts/metta/style-YELLOW-OBJETO.md, required: true, treatment: "objeto simbólico 3D render estilizado (clay/matte), flutuando, fundo amarelo chapado" }
 formato_nativo: [story, feed, sqr]
