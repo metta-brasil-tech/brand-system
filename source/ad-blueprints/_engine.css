@@ -231,7 +231,7 @@ button { all: unset; }
    gerado pela IA invada a zona do texto (não dá pra confiar 100% no prompt). */
 .ad[data-arch="object-center"][data-obj-scale="full"]::before {
   content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background: linear-gradient(180deg, var(--m-yellow) 0%, var(--m-yellow) 19%, rgba(255,190,24,0) 30%);
+  background: linear-gradient(180deg, var(--m-yellow) 0%, var(--m-yellow) 15%, rgba(255,190,24,0) 20%);
 }
 .ad[data-arch="object-center"][data-obj-scale="full"] .layer {
   justify-content: flex-start; gap: 14px; padding-top: 108px;
