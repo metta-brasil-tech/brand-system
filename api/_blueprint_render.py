@@ -315,7 +315,10 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
             # Imagem cobre o canvas inteiro (o próprio gerador AI já bake-a o fundo
             # sólido do tema) — objeto vira background, texto flutua por cima ancorado
             # no topo. DARK-OBJETO não usa esse param — fica no boxed legado abaixo.
-            return f'{obj}<div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
+            # `.obj-text-zone` tem altura PRÓPRIA (não o canvas inteiro) — é o que
+            # permite o auto-fit do _engine.js medir overflow de verdade e encolher
+            # a headline sozinho, pra qualquer tamanho de copy (ver _engine.js fitHead).
+            return f'{obj}<div class="layer"><div class="obj-text-zone">{_txt_blocks(copy)}</div>{_cta(copy, cta_cls)}</div>'
         return f'<div class="layer">{obj}{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
 
     if arch == "card-mock":
