@@ -38,6 +38,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import random
 import sys
 import time
 import traceback
@@ -119,6 +120,51 @@ def _image_to_data_uri(file_url: str) -> str:
     except Exception:
         pass
     return ""
+
+
+# Recortes prontos (PNG RGBA) do Tiago real, em <repo>/assets/tiago/recortes/.
+# São a FOTO REAL pros archetypes prefer_upload (gpt-image-2 não reproduz o rosto
+# dele). ENGINE_DIR.parent == raiz do repo.
+TIAGO_RECORTES_DIR = ENGINE_DIR.parent / "assets" / "tiago" / "recortes"
+
+
+def _png_orientation(path: Path) -> str:
+    """'portrait' | 'landscape' | 'square' lendo o IHDR do PNG (sem PIL).
+
+    Largura/altura ficam nos bytes 16-24 do arquivo (após assinatura + chunk len/tipo).
+    """
+    try:
+        with open(path, "rb") as f:
+            head = f.read(24)
+        if len(head) < 24 or head[:8] != b"\x89PNG\r\n\x1a\n":
+            return "portrait"  # default seguro (story 9:16)
+        w = int.from_bytes(head[16:20], "big")
+        h = int.from_bytes(head[20:24], "big")
+        if w > h:
+            return "landscape"
+        if h > w:
+            return "portrait"
+        return "square"
+    except Exception:
+        return "portrait"
+
+
+def _pick_tiago_cutout(format_key: str) -> Path | None:
+    """Escolhe um recorte real do Tiago coerente com o formato da peça.
+
+    story/sqr/feed (verticais/quadrados) → recorte portrait/square; wide (16:9) →
+    landscape. Sem match de orientação, cai pra qualquer recorte. random.choice dá
+    variedade entre as poucas opções. Retorna None se não há recortes.
+    """
+    if not TIAGO_RECORTES_DIR.is_dir():
+        return None
+    cutouts = sorted(TIAGO_RECORTES_DIR.glob("*.png"))
+    if not cutouts:
+        return None
+    wants_landscape = (format_key or "").lower() == "wide"
+    preferred = {"landscape"} if wants_landscape else {"portrait", "square"}
+    matching = [c for c in cutouts if _png_orientation(c) in preferred]
+    return random.choice(matching or cutouts)
 
 
 _TOKEN_SYNONYMS = {
@@ -516,6 +562,30 @@ def _run_pipeline_inline(
             diagnostics.append(f"03-yaml (fallback): FALTANDO {model_yaml_path}")
 
     # ============================================================
+    # RECORTE TIAGO — quando o modelo PEDE foto real do Tiago (prefer_upload) e o
+    # user NÃO subiu/escolheu foto, usa um RECORTE pronto de assets/tiago/recortes/
+    # em vez de gerar um rosto falso (gpt-image-2 não reproduz o rosto dele). Roteia
+    # pelo caminho "asset" existente (pula geração). Respeita image_source='none'
+    # (user quer sem foto) e qualquer foto já fornecida.
+    # ============================================================
+    _user_gave_photo = bool(image_url) and image_source in ("search", "upload", "asset")
+    if (marca == "tiago" and model_requires_image and bp_prefer_upload
+            and image_source != "none" and not _user_gave_photo):
+        _cut = _pick_tiago_cutout(format_key)
+        if _cut:
+            image_source = "asset"
+            image_url = str(_cut)
+            diagnostics.append(
+                f"04-cutout: recorte real do Tiago auto-selecionado ({_cut.name}) — "
+                f"pula geração (prefer_upload + sem upload do user)"
+            )
+        else:
+            diagnostics.append(
+                "04-cutout: prefer_upload mas NENHUM recorte em assets/tiago/recortes/ — "
+                "cai pro fallback de geração"
+            )
+
+    # ============================================================
     # DIRETOR DE ARTE + VISUAL — composição (quebras + accent + gaze/crop) E,
     # quando a peça usa foto E o user não deu direção visual própria, um CONCEITO
     # de cena VARIADO (lê a mensagem da copy, evita repetir cenas/pessoas recentes
@@ -527,7 +597,7 @@ def _run_pipeline_inline(
     _k_block, _k_prov, _avatar_for_ad = "", [], ""
     # precisa de conceito visual? só se vai gerar imagem E o user não ditou cena.
     _user_has_visual = bool(briefing_image_text and briefing_image_text.strip())
-    _needs_concept = (image_source not in ("none", "search")) and model_requires_image and not _user_has_visual
+    _needs_concept = (image_source not in ("none", "search", "asset", "upload")) and model_requires_image and not _user_has_visual
     if art_director and not mock and (user_headline or "").strip():
         try:
             t_ad = time.time()

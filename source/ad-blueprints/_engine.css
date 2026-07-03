@@ -351,6 +351,9 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-subhead { font-size: 30px; line-height: 1.35; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-body { font-size: 24px; line-height: 1.5; color: var(--t-grey); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-cta-wrap { position: absolute; left: 64px; bottom: 100px; }
+/* Variante B — recorte real do Tiago à direita (PNG transparente sobre o paper). */
+.ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-photo { position: absolute; right: 0; bottom: 0; width: 50%; height: 88%; background-size: contain; background-position: right bottom; background-repeat: no-repeat; z-index: 1; }
+.ad[data-marca="tiago"][data-arch="tiago-editorial-cta"] .tecta-text--withpic { max-width: 520px; z-index: 5; }
 
 /* (T5) tiago-typo — tipografia pura sobre fundo claro */
 .ad[data-marca="tiago"][data-arch="tiago-typo"] { background: var(--t-paper); display: flex; flex-direction: column; justify-content: center; padding: 100px 64px; }

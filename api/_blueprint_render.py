@@ -267,7 +267,14 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str, pos: str 
 
     if arch == "tiago-editorial-cta":
         cta = _esc(copy.get("cta") or "Saiba mais")
-        return (f'<div class="tecta-text layer">{head("tecta-headline")}{sub("tecta-subhead")}{body("tecta-body")}</div>'
+        # Variante B: foto real do Tiago lateral (recorte) quando há imagem. Sem
+        # imagem mantém a variante texto-first (signature + headline + pílula).
+        has_img = bool(image_url)
+        pic = (f'<div class="tecta-photo" style="{_bg_style(image_url)}"></div>'
+               if has_img else "")
+        txtcls = "tecta-text layer tecta-text--withpic" if has_img else "tecta-text layer"
+        return (f'{pic}'
+                f'<div class="{txtcls}">{head("tecta-headline")}{sub("tecta-subhead")}{body("tecta-body")}</div>'
                 f'<div class="tecta-cta-wrap"><button class="ad-cta ad-cta--tiago-yellow">{cta}</button></div>')
 
     if arch == "tiago-typo":
