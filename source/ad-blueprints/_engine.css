@@ -221,6 +221,31 @@ button { all: unset; }
 .ad[data-arch="object-center"] .layer { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: var(--pad-y) var(--pad-x); gap: 40px; }
 .ad[data-arch="object-center"] .object { width: 460px; height: 460px; background-size: contain; background-repeat: no-repeat; background-position: center; }
 .ad[data-arch="object-center"] .cta-wrap { margin-top: 12px; }
+/* variante full (YELLOW-OBJETO) — objeto = imagem cobrindo o canvas inteiro (o
+   gerador AI já bake-a o fundo sólido do tema), texto ancorado no topo por cima. */
+.ad[data-arch="object-center"][data-obj-scale="full"] .object {
+  position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;
+  background-size: cover; background-position: center;
+}
+/* scrim amarelo fixo no topo — garante headline legível mesmo que o objeto
+   gerado pela IA invada a zona do texto (não dá pra confiar 100% no prompt). */
+.ad[data-arch="object-center"][data-obj-scale="full"]::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(180deg, var(--m-yellow) 0%, var(--m-yellow) 15%, rgba(255,190,24,0) 20%);
+}
+.ad[data-arch="object-center"][data-obj-scale="full"] .layer {
+  justify-content: flex-start; gap: 14px; padding-top: 108px;
+}
+/* zona de texto com altura PRÓPRIA (não o canvas inteiro) — é essa caixa que o
+   auto-fit do _engine.js (fitHead) mede pra encolher a headline sozinho até
+   caber, igual já faz nos outros archetypes. Sem isso o "box" de medição virava
+   o canvas de 1350px e o motor nunca via motivo pra encolher nada. */
+.ad[data-arch="object-center"][data-obj-scale="full"] .obj-text-zone {
+  width: 100%; height: 220px; overflow: hidden; flex: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.ad[data-arch="object-center"][data-obj-scale="full"] .t-head { width: 100%; line-height: 1.05; }
+.ad[data-arch="object-center"][data-obj-scale="full"] .cta-wrap { margin-top: auto; }
 
 /* (6) card-mock — cartão de rede social (tweet) */
 .ad[data-arch="card-mock"] { display: flex; align-items: center; justify-content: center; background: var(--m-night-95); }

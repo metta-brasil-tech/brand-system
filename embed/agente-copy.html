@@ -285,14 +285,25 @@ button {
 .piece-block ul li { margin-bottom: 4px; }
 
 .validation-item {
-  display: flex;
-  gap: 10px;
-  align-items: baseline;
-  font-size: 13px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+  background: var(--metta-sys-color-surface-container-lowest);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-left: 3px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  padding: var(--metta-sys-spacing-4);
+  margin-bottom: var(--metta-sys-spacing-3);
 }
-.validation-item:last-child { border-bottom: none; padding-bottom: 0; }
+.validation-item:last-child { margin-bottom: 0; }
+.validation-item.status-pass { border-left-color: #1E8654; }
+.validation-item.status-fail { border-left-color: #C93338; }
+.validation-item.status-stub { border-left-color: #8A5A00; }
+.validation-item .badge { display: inline-block; margin-bottom: 8px; }
+.validation-item p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  max-width: 70ch;
+  color: var(--metta-sys-color-on-surface);
+}
 .badge {
   font-size: 11px;
   font-weight: var(--metta-ref-axis-wght-bold);
@@ -419,6 +430,16 @@ button {
           </select>
         </div>
       </div>
+
+      <label for="length">Tamanho do texto</label>
+      <p class="hint">Faixa aproximada — o modelo mira nela, não conta caractere a caractere. Clique numa opção ou escreva livremente (ex: "até 300 caracteres", "2 parágrafos").</p>
+      <div class="chip-row" data-for="length">
+        <button type="button" class="chip" data-value="90-180 caracteres (bem curto)">90–180 (bem curto)</button>
+        <button type="button" class="chip" data-value="180-400 caracteres (curto)">180–400 (curto)</button>
+        <button type="button" class="chip" data-value="cerca de 700 caracteres (padrão)">~700 (padrão)</button>
+        <button type="button" class="chip" data-value="texto longo, 1000+ caracteres">longo (1000+)</button>
+      </div>
+      <input id="length" name="length" placeholder="livre ou uma das opções acima">
     </div>
 
     <div class="card" id="type-fieldset">
@@ -621,17 +642,23 @@ button {
       return `<label for="${inputId}">${q.prompt}</label>${chips}<input id="${inputId}" data-key="${q.key}" name="${inputId}" placeholder="${placeholder}">`;
     }).join('');
 
-    container.querySelectorAll('.chip-row').forEach(row => {
-      const targetInput = document.getElementById(row.dataset.for);
-      row.querySelectorAll('.chip').forEach(btn => {
-        btn.addEventListener('click', () => {
-          targetInput.value = btn.dataset.value;
-          row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b === btn));
-        });
+    container.querySelectorAll('.chip-row').forEach(wireChipRow);
+  }
+
+  // Liga uma linha de chips a um <input> (id em data-for): clicar preenche o
+  // input, digitar destaca o chip que bate. Usado nas perguntas do formato e
+  // no campo estático de "Tamanho do texto".
+  function wireChipRow(row) {
+    const targetInput = document.getElementById(row.dataset.for);
+    if (!targetInput) return;
+    row.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        targetInput.value = btn.dataset.value;
+        row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b === btn));
       });
-      targetInput.addEventListener('input', () => {
-        row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b.dataset.value === targetInput.value));
-      });
+    });
+    targetInput.addEventListener('input', () => {
+      row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b.dataset.value === targetInput.value));
     });
   }
 
@@ -679,19 +706,35 @@ button {
     el.className = 'status' + (cls ? ' ' + cls : '');
   }
 
+  function formatValidationText(text) {
+    if (!text) return '';
+    // As respostas do modelo às vezes embutem uma lista numerada no meio do texto
+    // corrido ("(1) ... (2) ...", "Falha 1 (...): ... Falha 2 (...): ...") -- quebra
+    // isso em parágrafos separados em vez de deixar tudo num bloco só.
+    const withBreaks = text
+      .replace(/\s+(?=\(\d+\)\s)/g, '\n\n')
+      .replace(/\s+(?=Falha \d+ \()/g, '\n\n');
+    return withBreaks
+      .split(/\n\n+/)
+      .map(p => p.trim())
+      .filter(Boolean)
+      .map(p => `<p>${p}</p>`)
+      .join('');
+  }
+
   function renderValidation(validation, revisionNotes) {
     const el = document.getElementById('out-validation');
     const rows = [];
     const icp = validation.icp_fit;
-    rows.push(`<div class="validation-item"><span class="badge ${icp.passed ? 'pass' : 'fail'}">ICP ${icp.passed ? 'ok' : 'falhou'}</span> ${icp.reasoning}</div>`);
+    rows.push(`<div class="validation-item status-${icp.passed ? 'pass' : 'fail'}"><span class="badge ${icp.passed ? 'pass' : 'fail'}">ICP ${icp.passed ? 'ok' : 'falhou'}</span>${formatValidationText(icp.reasoning)}</div>`);
     const tone = validation.tone_check;
-    rows.push(`<div class="validation-item"><span class="badge ${tone.passed ? 'pass' : 'fail'}">Tom/gramática ${tone.passed ? 'ok' : 'falhou'}</span> ${tone.reasoning}</div>`);
+    rows.push(`<div class="validation-item status-${tone.passed ? 'pass' : 'fail'}"><span class="badge ${tone.passed ? 'pass' : 'fail'}">Tom/gramática ${tone.passed ? 'ok' : 'falhou'}</span>${formatValidationText(tone.reasoning)}</div>`);
     const second = validation.second_evaluator;
-    rows.push(`<div class="validation-item"><span class="badge ${second.approved ? 'pass' : 'fail'}">2º avaliador ${second.approved ? 'aprovou' : 'reprovou'}</span> ${second.feedback}</div>`);
+    rows.push(`<div class="validation-item status-${second.approved ? 'pass' : 'fail'}"><span class="badge ${second.approved ? 'pass' : 'fail'}">2º avaliador ${second.approved ? 'aprovou' : 'reprovou'}</span>${formatValidationText(second.feedback)}</div>`);
     const skill = validation.skill_de_validacao;
     const skillLabel = skill.is_stub ? 'Skill de Validação' : `Skill de Validação: ${skill.score}/10`;
     const skillBadgeClass = skill.is_stub ? 'stub' : (skill.score >= 7 ? 'pass' : 'fail');
-    rows.push(`<div class="validation-item"><span class="badge ${skillBadgeClass}">${skillLabel}</span> ${skill.note}</div>`);
+    rows.push(`<div class="validation-item status-${skillBadgeClass}"><span class="badge ${skillBadgeClass}">${skillLabel}</span>${formatValidationText(skill.note)}</div>`);
     if (revisionNotes && revisionNotes.length) {
       rows.push(`<div class="validation-item">Revisões do julgamento interno de rascunho nesta rodada: ${revisionNotes.length}</div>`);
     }
@@ -720,6 +763,7 @@ button {
       emotional_axis: document.getElementById('emotional_axis').value || null,
       cta: document.getElementById('cta').value,
       platform: document.getElementById('platform').value,
+      length: document.getElementById('length').value,
       type_specific: typeSpecific,
     };
 
@@ -777,6 +821,7 @@ button {
   document.getElementById('propose-angles-btn').addEventListener('click', handleProposeAngles);
 
   ['brand', 'emotional_axis', 'platform'].forEach(id => enhanceSelect(document.getElementById(id)));
+  document.querySelectorAll('.chip-row[data-for="length"]').forEach(wireChipRow);
   loadSchema();
 
   // Sincroniza tema (light/dark) com o parent -- mesmo mecanismo do embed:criar.html.

@@ -101,6 +101,7 @@ def _run_generate(data: dict) -> dict:
         "cta": data.get("cta", ""),
         "platform": data["platform"],
         "copy_type": data["copy_type"],
+        "length": data.get("length", ""),
         **(data.get("type_specific") or {}),
     }
     brief = build_brief_from_answers(answers)

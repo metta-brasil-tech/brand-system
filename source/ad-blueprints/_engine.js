@@ -9,7 +9,9 @@
     // Container real que limita o texto (não % do canvas). Em archetypes com
     // .layer absoluto inset:0 isso é o canvas; em photo-band/split/bloco é a
     // caixa de texto de fato — é o que evita corte (NEWS-CARD) e estouro (bloco).
-    var box = head.closest('.layer, .half-text, .card') || head.closest('.ad');
+    // .obj-text-zone (object-center full) é a mesma ideia: zona com altura
+    // própria reservada acima do objeto full-bleed, não o canvas inteiro.
+    var box = head.closest('.layer, .half-text, .card, .obj-text-zone') || head.closest('.ad');
     if (!box) return;
     var floor = 38;
     var size = px(head, 'fontSize');
