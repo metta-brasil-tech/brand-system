@@ -42,7 +42,14 @@ from dataclasses import dataclass
 
 import anthropic
 
-VALIDATION_MODEL = "claude-opus-4-8"
+# Opus -> Sonnet 5 (decisão de custo, jul/2026). As 4 checagens deste módulo
+# são uma camada de AUDITORIA pós-geração, separada do portão de qualidade
+# real (generator.py._judge, que continua em Opus e roda dentro do loop de
+# escrita). Medição real: mover estas 4 pra Sonnet corta ~40% do custo delas
+# sem tocar no julgamento que de fato reprova rascunho fraco. Se a qualidade
+# dos pareceres cair de forma perceptível, reverter é trocar só esta linha de
+# volta pra "claude-opus-4-8".
+VALIDATION_MODEL = "claude-sonnet-5"
 
 
 @dataclass(frozen=True)
