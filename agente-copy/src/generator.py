@@ -71,6 +71,7 @@ except ImportError:
             emotional_axis: str
             cta: str
             platform: str = "instagram"
+            length: str = ""
             type_specific: dict[str, Any] = field(default_factory=dict)
 
 
@@ -530,6 +531,14 @@ def _render_brief(brief: Brief) -> str:
         f"CTA: {brief.cta}",
         f"Plataforma: {_enum_value(brief.platform)}",
     ]
+    length = getattr(brief, "length", "")
+    if length:
+        lines.append(
+            f"Tamanho-alvo do texto: {length} -- MIRE nessa faixa (aproximada, "
+            "não conte caractere a caractere); prevalece sobre o tamanho típico "
+            "do formato. Se for curto, corte case/exemplos longos; se for longo, "
+            "desenvolva mais."
+        )
     type_specific = getattr(brief, "type_specific", None)
     if type_specific:
         for key, value in type_specific.items():

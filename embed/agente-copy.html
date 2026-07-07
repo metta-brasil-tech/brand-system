@@ -430,6 +430,16 @@ button {
           </select>
         </div>
       </div>
+
+      <label for="length">Tamanho do texto</label>
+      <p class="hint">Faixa aproximada — o modelo mira nela, não conta caractere a caractere. Clique numa opção ou escreva livremente (ex: "até 300 caracteres", "2 parágrafos").</p>
+      <div class="chip-row" data-for="length">
+        <button type="button" class="chip" data-value="90-180 caracteres (bem curto)">90–180 (bem curto)</button>
+        <button type="button" class="chip" data-value="180-400 caracteres (curto)">180–400 (curto)</button>
+        <button type="button" class="chip" data-value="cerca de 700 caracteres (padrão)">~700 (padrão)</button>
+        <button type="button" class="chip" data-value="texto longo, 1000+ caracteres">longo (1000+)</button>
+      </div>
+      <input id="length" name="length" placeholder="livre ou uma das opções acima">
     </div>
 
     <div class="card" id="type-fieldset">
@@ -632,17 +642,23 @@ button {
       return `<label for="${inputId}">${q.prompt}</label>${chips}<input id="${inputId}" data-key="${q.key}" name="${inputId}" placeholder="${placeholder}">`;
     }).join('');
 
-    container.querySelectorAll('.chip-row').forEach(row => {
-      const targetInput = document.getElementById(row.dataset.for);
-      row.querySelectorAll('.chip').forEach(btn => {
-        btn.addEventListener('click', () => {
-          targetInput.value = btn.dataset.value;
-          row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b === btn));
-        });
+    container.querySelectorAll('.chip-row').forEach(wireChipRow);
+  }
+
+  // Liga uma linha de chips a um <input> (id em data-for): clicar preenche o
+  // input, digitar destaca o chip que bate. Usado nas perguntas do formato e
+  // no campo estático de "Tamanho do texto".
+  function wireChipRow(row) {
+    const targetInput = document.getElementById(row.dataset.for);
+    if (!targetInput) return;
+    row.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        targetInput.value = btn.dataset.value;
+        row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b === btn));
       });
-      targetInput.addEventListener('input', () => {
-        row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b.dataset.value === targetInput.value));
-      });
+    });
+    targetInput.addEventListener('input', () => {
+      row.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b.dataset.value === targetInput.value));
     });
   }
 
@@ -747,6 +763,7 @@ button {
       emotional_axis: document.getElementById('emotional_axis').value || null,
       cta: document.getElementById('cta').value,
       platform: document.getElementById('platform').value,
+      length: document.getElementById('length').value,
       type_specific: typeSpecific,
     };
 
@@ -804,6 +821,7 @@ button {
   document.getElementById('propose-angles-btn').addEventListener('click', handleProposeAngles);
 
   ['brand', 'emotional_axis', 'platform'].forEach(id => enhanceSelect(document.getElementById(id)));
+  document.querySelectorAll('.chip-row[data-for="length"]').forEach(wireChipRow);
   loadSchema();
 
   // Sincroniza tema (light/dark) com o parent -- mesmo mecanismo do embed:criar.html.

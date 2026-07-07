@@ -60,6 +60,11 @@ class Brief:
     emotional_axis: EmotionalAxis | None
     cta: str
     platform: Platform
+    # Tamanho-alvo do texto (ex: "90-180 caracteres", "curto", "texto longo",
+    # ou o que o usuário escrever livremente). Vazio = sem restrição, o modelo
+    # usa o tamanho típico do formato. Só orienta o prompt, não é validado
+    # rigidamente -- o modelo mira essa faixa, não conta caractere a caractere.
+    length: str = ""
     type_specific: dict[str, str] = field(default_factory=dict)
 
 
@@ -284,6 +289,7 @@ def build_brief_from_answers(answers: dict) -> Brief:
         emotional_axis=_parse_axis(answers.get("emotional_axis", "")),
         cta=answers["cta"],
         platform=_parse_platform(answers["platform"]),
+        length=answers.get("length", ""),
         type_specific={key: answers[key] for key in type_keys if key in answers},
     )
 
