@@ -1,8 +1,21 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-08T14:54:54",
+  "generatedAt": "2026-07-08T15:31:15",
   "description": "Criativos gerados pela ferramenta de criação (pipeline ad-generator) — biblioteca viva, separada do catálogo canônico.",
   "items": [
+    {
+      "id": "tiago-story-hero-foto-real-estrutura",
+      "model_id": "TIAGO-STORY-COVER-HERO",
+      "brand": "tiago",
+      "format": "story",
+      "headline": "Motivação não bate meta. Estrutura bate.",
+      "cta": "ARRASTA PRO LADO",
+      "date": "2026-07-08",
+      "qa": "QA PASS · composição sem geração de imagem",
+      "nota": "FOTO REAL do Tiago (assets/tiago/recortes/tiago-palco-02.png), não gerada por IA — corrige o preview anterior que usava rosto fake do gpt-image-2",
+      "engine": "cli local · foto real via upload · sem gpt-image-2",
+      "src": "assets/generated/ads/tiago-story-hero-foto-real-estrutura.webp"
+    },
     {
       "id": "yellow-bloco-convite-mentoria",
       "model_id": "YELLOW-BLOCO",
