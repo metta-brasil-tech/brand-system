@@ -65,6 +65,13 @@ class Brief:
     # usa o tamanho típico do formato. Só orienta o prompt, não é validado
     # rigidamente -- o modelo mira essa faixa, não conta caractere a caractere.
     length: str = ""
+    # Controle explícito do usuário sobre trazer prova social (case espelho
+    # nominal). Default True preserva o comportamento de antes deste campo
+    # existir. False é diferente de "peça curta corta automaticamente" (ver
+    # generator._is_short_length) -- aqui é escolha direta, vale mesmo em
+    # peça longa onde o usuário não quer case por outro motivo (ex: peça
+    # institucional pura).
+    include_case: bool = True
     type_specific: dict[str, str] = field(default_factory=dict)
 
 
@@ -290,8 +297,20 @@ def build_brief_from_answers(answers: dict) -> Brief:
         cta=answers["cta"],
         platform=_parse_platform(answers["platform"]),
         length=answers.get("length", ""),
+        include_case=_parse_bool_default_true(answers.get("include_case", True)),
         type_specific={key: answers[key] for key in type_keys if key in answers},
     )
+
+
+def _parse_bool_default_true(value: object) -> bool:
+    """Aceita bool real (vindo de JSON) ou string ('sim'/'não'/'true'/'false')
+    -- ausência do campo (None) default True, preserva o comportamento de
+    antes deste campo existir (sempre tentava trazer case)."""
+    if value is None:
+        return True
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() not in ("não", "nao", "false", "0", "")
 
 
 def run_interview(copy_type: str | None = None) -> Brief:

@@ -99,6 +99,23 @@ label:first-child { margin-top: 0; }
   margin: -2px 0 8px;
 }
 
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: var(--metta-sys-spacing-4) 0 0;
+  font-size: 13px;
+  font-weight: var(--metta-ref-axis-wght-medium-p);
+  color: var(--metta-sys-color-on-surface);
+  cursor: pointer;
+}
+.checkbox-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--metta-sys-color-primary);
+  cursor: pointer;
+}
+
 input, select, textarea {
   width: 100%;
   padding: 10px 12px;
@@ -440,6 +457,12 @@ button {
         <button type="button" class="chip" data-value="texto longo, 1000+ caracteres">longo (1000+)</button>
       </div>
       <input id="length" name="length" placeholder="livre ou uma das opções acima">
+
+      <label class="checkbox-row" for="include_case">
+        <input type="checkbox" id="include_case" name="include_case" checked>
+        <span>Incluir prova social (case espelho com nome/resultado)</span>
+      </label>
+      <p class="hint">Desligado: a peça não traz cliente/case/número, mesmo em texto longo. Em peça bem curta (90–180) isso já fica desligado sozinho, não cabe case de qualquer forma.</p>
     </div>
 
     <div class="card" id="type-fieldset">
@@ -764,6 +787,7 @@ button {
       cta: document.getElementById('cta').value,
       platform: document.getElementById('platform').value,
       length: document.getElementById('length').value,
+      include_case: document.getElementById('include_case').checked,
       type_specific: typeSpecific,
     };
 

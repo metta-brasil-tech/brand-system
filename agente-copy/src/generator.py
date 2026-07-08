@@ -73,6 +73,7 @@ except ImportError:
             cta: str
             platform: str = "instagram"
             length: str = ""
+            include_case: bool = True
             type_specific: dict[str, Any] = field(default_factory=dict)
 
 
@@ -399,13 +400,11 @@ def _cached_content(prompt: str, marker: str = "=== BRIEFING DA PEÇA ===") -> l
     ]
 
 
-# Arquivos que uma peça MUITO curta não tem espaço pra usar de qualquer jeito
-# (case com nome+número de provas.md, detalhe de oferta/preço de oferta.md) --
-# excluí-los do prompt do rascunho quando o tamanho-alvo é pequeno corta ~40
-# mil caracteres (~10 mil tokens) de entrada sem perder nada que a peça
-# conseguiria usar. NÃO se aplica ao _judge (ele continua auditando contra a
-# base completa, o portão de qualidade não afrouxa).
-_SHORT_LENGTH_SKIP: frozenset[str] = frozenset({"provas.md", "oferta.md"})
+# Arquivos que a peça não usa quando não vai trazer prova social (case com
+# nome+número de provas.md, detalhe de oferta/preço de oferta.md) -- excluí-
+# los do prompt corta ~40 mil caracteres (~10 mil tokens) de entrada sem
+# perder nada que a peça conseguiria usar.
+_CASE_SKIP: frozenset[str] = frozenset({"provas.md", "oferta.md"})
 
 
 def _is_short_length(length: str) -> bool:
@@ -428,25 +427,37 @@ def _is_short_length(length: str) -> bool:
     return any(kw in lowered for kw in ("curto", "chamariz"))
 
 
+def _should_skip_case(brief: Brief) -> bool:
+    """Duas razões independentes pra não trazer prova social, e qualquer
+    uma das duas basta: (1) o usuário desmarcou "incluir prova social"
+    explicitamente (Brief.include_case=False) -- vale mesmo em peça longa;
+    (2) o tamanho-alvo é curto demais pra caber case de qualquer jeito,
+    mesmo com o controle explícito deixado ligado (é restrição física, não
+    preferência) -- ver _is_short_length."""
+    include_case = getattr(brief, "include_case", True)
+    return (not include_case) or _is_short_length(getattr(brief, "length", ""))
+
+
 def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
     icp_context = _icp_context(brief.icp)
     icp_block = f"{icp_context}\n\n" if icp_context else ""
-    short = _is_short_length(getattr(brief, "length", ""))
-    skip = _SHORT_LENGTH_SKIP if short else frozenset()
+    skip_case = _should_skip_case(brief)
+    skip = _CASE_SKIP if skip_case else frozenset()
     doc_list = "tom de voz, skill de copy, avatar, posicionamento, glossário"
-    if not short:
+    if not skip_case:
         doc_list = "tom de voz, skill de copy, avatar, posicionamento, oferta, provas, glossário"
-    short_note = (
-        "\n\nEsta peça é curta e NÃO recebeu os documentos de oferta/provas "
-        "(sem espaço pra caber case com nome+número de qualquer forma) -- não "
-        "invente case nominal aqui; foque em dor/contradição/mecanismo."
-        if short else ""
+    case_note = (
+        "\n\nEsta peça NÃO recebeu os documentos de oferta/provas (usuário "
+        "pediu sem prova social, ou o tamanho-alvo não cabe case de qualquer "
+        "forma) -- não invente case/cliente/número aqui; foque em "
+        "dor/contradição/mecanismo."
+        if skip_case else ""
     )
     return (
         f"Use a base de conhecimento abaixo ({doc_list}"
         + (", documento de ICP do segmento" if icp_context else "")
         + ") para escrever a peça."
-        + short_note + "\n\n"
+        + case_note + "\n\n"
         f"{knowledge.as_context(exclude=skip)}\n\n"
         f"{icp_block}"
         "=== BRIEFING DA PEÇA ===\n"
@@ -455,8 +466,13 @@ def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
         "Escreva a peça montada por partes, respeitando a estrutura do tipo de copy "
         "descrita no system prompt e no fluxo da SKILLMETTACOPY.md. Ative pelo menos "
         "duas dores conectadas do ciclo do gargalo e nomeie pelo menos uma "
-        "contradição interna. Traga um case espelho nominal do segmento quando "
-        "possível.\n\n"
+        "contradição interna."
+        + (
+            ""
+            if skip_case
+            else " Traga um case espelho nominal do segmento quando possível."
+        )
+        + "\n\n"
         "Entregue: hook, corpo, CTA; no mínimo 3 variações de hook distintas; a "
         "indicação de pilar de conteúdo e o ICP-alvo; e a descrição/legenda que "
         "acompanha a peça quando publicada. Para reels, a descrição é um texto "
@@ -481,15 +497,26 @@ def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
 def _build_judgment_prompt(
     brief: Brief, knowledge: KnowledgeBase, draft: dict[str, Any]
 ) -> str:
+    skip_case = _should_skip_case(brief)
+    case_item = (
+        "" if skip_case else "case espelho nominal; "
+    )
+    case_skip_note = (
+        "\n\nEsta peça foi pedida SEM prova social (usuário desmarcou, ou o "
+        "tamanho-alvo não cabe case) -- NÃO reprove por falta de case/número/"
+        "cliente nominal, isso foi intencional, não uma falha."
+        if skip_case else ""
+    )
     return (
         "Você é o revisor de rascunho do Agente Copy (julgamento interno de geração --"
         " NÃO é o segundo agente avaliador; esse roda depois, uma vez, sobre a peça já "
         "pronta). Julgue o rascunho abaixo contra o tom de "
         "voz institucional da Metta (tom-de-voz-metta.md) e o QA CHECKLIST da "
         "SKILLMETTACOPY.md. Você tem autoridade para REPROVAR e reescrever — não "
-        "aprove por inércia.\n\n"
-        "Rode o checklist item a item: 2+ dores conectadas do ciclo; linguagem emic; "
-        "case espelho nominal; garantia contratual quando cabível; tom de empresário "
+        "aprove por inércia."
+        + case_skip_note + "\n\n"
+        f"Rode o checklist item a item: 2+ dores conectadas do ciclo; linguagem emic; "
+        f"{case_item}garantia contratual quando cabível; tom de empresário "
         "falando (não coach); nenhuma urgência artificial; números específicos; "
         "contradição interna nomeada; o empresário se reconheceria; nenhuma palavra "
         "da lista 'nunca use'. Rode também os 7 testes de validação institucional "
