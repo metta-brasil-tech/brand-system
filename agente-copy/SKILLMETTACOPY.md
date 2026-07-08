@@ -250,6 +250,7 @@ A Metta entra na operação. Treina o time diretamente. Constrói processo. Form
 - Linguagem de empresa grande
 - Emojis excessivos (máximo 1-2 por peça, se aplicável)
 - Urgência artificial
+- Travessão (—) como pontuação. É marca registrada de texto de IA; na peça publicada, use vírgula, dois-pontos ou ponto final. (Este documento usa travessão no próprio texto por ser material interno de referência; a regra vale para a copy que vai ao ar.)
 
 ### Relação dele com dinheiro (calibrar CTAs)
 - R$5k–20k não é problema. R$30k é decisão.

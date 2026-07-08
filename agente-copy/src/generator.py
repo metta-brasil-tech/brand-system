@@ -174,16 +174,16 @@ class CopyGenerator:
             linkedin = self._adapt_linkedin(brief, knowledge, draft)
 
         return GenerationResult(
-            hook=draft["hook"],
-            corpo=draft["corpo"],
-            cta=draft["cta"],
-            full_text=self._assemble(draft),
-            hook_variations=draft["hook_variations"],
+            hook=_remove_travessao(draft["hook"]),
+            corpo=_remove_travessao(draft["corpo"]),
+            cta=_remove_travessao(draft["cta"]),
+            full_text=_remove_travessao(self._assemble(draft)),
+            hook_variations=[_remove_travessao(h) for h in draft["hook_variations"]],
             content_pillar=draft["content_pillar"],
             target_icp=draft["target_icp"],
             platform=brief.platform,
-            descricao=draft.get("descricao", ""),
-            linkedin_adaptation=linkedin,
+            descricao=_remove_travessao(draft.get("descricao", "")),
+            linkedin_adaptation=_remove_travessao(linkedin) if linkedin else linkedin,
             revision_notes=revision_notes,
         )
 
@@ -273,7 +273,12 @@ class CopyGenerator:
             ],
             output_config={"format": {"type": "json_schema", "schema": _ANGLES_SCHEMA}},
         )
-        return _extract_json(response, stage="propose_angles")["angles"]
+        angles = _extract_json(response, stage="propose_angles")["angles"]
+        return [
+            {key: _remove_travessao(value) if isinstance(value, str) else value
+             for key, value in angle.items()}
+            for angle in angles
+        ]
 
     @staticmethod
     def _assemble(draft: dict[str, Any]) -> str:
@@ -375,6 +380,11 @@ def _build_system_prompt(brand: Brand, copy_type: str) -> str:
         "Use linguagem de operação (tirador de pedido, apagando incêndio, tô "
         "dependente de mim), prova nominal (cliente + número exato), e nunca urgência "
         "artificial, FOMO, 'mindset', 'próximo nível' ou linguagem de coach.\n\n"
+        "O texto precisa soar escrito por gente, não por IA. Proibido travessão "
+        "(—) como pontuação: use vírgula, dois-pontos ou ponto final. Os documentos "
+        "de referência abaixo usam travessão no texto DELES; não imite isso na "
+        "peça. Evite também paralelismos artificiais em sequência ('não é X, é Y' "
+        "repetido) e fechos de frase simétricos demais.\n\n"
         f"Formato desta peça: {_copy_type_guidance(copy_type)}"
     )
 
@@ -532,7 +542,10 @@ def _build_judgment_prompt(
         f"{json.dumps(draft, ensure_ascii=False, indent=2)}\n\n"
         "Cheque também: o corpo NÃO pode repetir o hook como primeira linha (a "
         "peça final monta hook + corpo + CTA em sequência, então repetir duplica a "
-        "abertura) -- reprove e corrija se isso acontecer.\n\n"
+        "abertura) -- reprove e corrija se isso acontecer. E nenhum campo pode "
+        "conter travessão (—) como pontuação: é marca de texto de IA, proibido na "
+        "peça publicada -- se encontrar, reescreva com vírgula, dois-pontos ou "
+        "ponto final.\n\n"
         "Se qualquer item falhar, defina approved=false, explique o que falhou em "
         "feedback e devolva a peça reescrita e corrigida em 'piece'. Se passar em "
         "tudo, defina approved=true e devolva a peça (com ajustes finos se quiser). "
@@ -702,6 +715,27 @@ def _text_of(response: anthropic.types.Message, stage: str = "?") -> str:
             f"stop_reason: {getattr(response, 'stop_reason', '?')})."
         )
     return text_blocks[0]
+
+
+def _remove_travessao(text: str) -> str:
+    """Remove travessão (em-dash) da peça final, trocando por vírgula.
+
+    Pedido explícito do cliente: travessão é marca registrada de texto de IA
+    e não pode aparecer na copy publicada. A regra também está nos prompts
+    (system + julgamento), mas o modelo imita o próprio material de
+    referência (a skill tem dezenas de travessões no texto dela), então esta
+    é a garantia determinística de que nenhum passa. Só mexe no em-dash (—);
+    meia-risca (–) fica intacta porque faixas numéricas legítimas usam ela
+    ("R$ 200k–600k", "90–180 caracteres")."""
+    if "—" not in text:
+        return text
+    # Pausa no meio da frase vira vírgula; sobras coladas em pontuação
+    # existente são normalizadas depois.
+    cleaned = re.sub(r"\s*—\s*", ", ", text)
+    cleaned = re.sub(r",\s*,", ",", cleaned)
+    cleaned = re.sub(r"([.!?:;])\s*,\s*", r"\1 ", cleaned)
+    cleaned = re.sub(r"^,\s*", "", cleaned, flags=re.MULTILINE)
+    return cleaned
 
 
 def _sanitize_json_text(text: str) -> str:

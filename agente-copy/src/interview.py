@@ -165,6 +165,14 @@ TYPE_QUESTIONS: dict[CopyType, list[Question]] = {
             "Define o peso da copy na descrição",
             options=("chamariz", "complementa o visual"),
         ),
+        # 3ª pergunta do doc v5.1 seção 3.3, faltava desde o início (gap 8.5
+        # da auditoria). Redundância consciente com o CTA base: aqui é o CTA
+        # que FECHA a legenda especificamente, não o CTA geral da peça.
+        Question(
+            "closing_cta",
+            "Qual CTA fecha a descrição?",
+            "Direciona para a ação",
+        ),
     ],
     CopyType.STORIES: [
         Question(
@@ -237,6 +245,14 @@ TYPE_QUESTIONS: dict[CopyType, list[Question]] = {
             "Qual objetivo? (lead / clique / agendamento)",
             "Direciona o CTA do criativo",
             options=("lead", "clique", "agendamento"),
+        ),
+        # 4ª pergunta do doc v5.1 seção 3.6, faltava desde o início (gap 8.5
+        # da auditoria): qual dor/desejo/necessidade o criativo ataca.
+        Question(
+            "attack_axis",
+            "Qual dor/desejo/necessidade ataca?",
+            "Define o ângulo de conversão",
+            options=("dor", "desejo", "necessidade"),
         ),
     ],
 }

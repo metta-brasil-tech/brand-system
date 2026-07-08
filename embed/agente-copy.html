@@ -479,11 +479,11 @@ button {
   <div class="result" id="result">
     <p class="result-heading">Peça gerada</p>
     <div class="piece-block">
-      <h3>Hook</h3>
+      <h3 id="out-hook-label">Hook (frase do criativo / capa)</h3>
       <p id="out-hook"></p>
     </div>
-    <div class="piece-block">
-      <h3>Corpo</h3>
+    <div class="piece-block" id="out-corpo-block">
+      <h3 id="out-corpo-label">Corpo</h3>
       <p id="out-corpo"></p>
     </div>
     <div class="piece-block">
@@ -495,7 +495,7 @@ button {
       <ul id="out-hook-variations"></ul>
     </div>
     <div class="piece-block">
-      <h3>Descrição / legenda (o que acompanha a peça publicada)</h3>
+      <h3>Legenda pronta (copiar e colar na publicação)</h3>
       <p id="out-descricao"></p>
     </div>
     <div class="piece-block" id="out-linkedin-block" style="display:none;">
@@ -800,6 +800,29 @@ button {
       document.getElementById('out-hook-variations').innerHTML =
         data.piece.hook_variations.map(h => `<li>${h}</li>`).join('');
       document.getElementById('out-descricao').textContent = data.piece.descricao || '';
+      // Pra post único e carrossel o corpo É a legenda (a descrição só repete/
+      // resume) -- mostrar os dois é ruído. O corpo só aparece como bloco
+      // próprio quando é conteúdo distinto: roteiro falado (reels) ou quando
+      // não veio descrição. No carrossel o corpo mostra os slides um a um,
+      // então mantém.
+      const corpoBlock = document.getElementById('out-corpo-block');
+      const corpoLabel = document.getElementById('out-corpo-label');
+      const ct = data.piece.copy_type || '';
+      const hookLabels = {
+        post_unico: 'Hook (frase do criativo)',
+        carrossel: 'Hook (capa / slide 1)',
+        reels: 'Hook (abertura do vídeo)',
+      };
+      document.getElementById('out-hook-label').textContent = hookLabels[ct] || 'Hook';
+      if (ct === 'reels') {
+        corpoLabel.textContent = 'Roteiro falado (o que é dito no vídeo)';
+        corpoBlock.style.display = '';
+      } else if (ct === 'post_unico' && data.piece.descricao) {
+        corpoBlock.style.display = 'none';
+      } else {
+        corpoLabel.textContent = ct === 'carrossel' ? 'Corpo (slides)' : 'Corpo';
+        corpoBlock.style.display = '';
+      }
       const liBlock = document.getElementById('out-linkedin-block');
       if (data.piece.linkedin_adaptation) {
         liBlock.style.display = '';
