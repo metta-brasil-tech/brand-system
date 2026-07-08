@@ -249,19 +249,6 @@
       "nota": "virou preview do wizard",
       "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
       "src": "assets/generated/ads/tiago-story-superando-metas.webp"
-    },
-    {
-      "id": "tiago-photo-raw-cobrar-ensina",
-      "model_id": "TIAGO-PHOTO-RAW",
-      "brand": "tiago",
-      "format": "feed",
-      "headline": "Só pode cobrar quem ensina.",
-      "cta": "VER AULA",
-      "date": "2026-07-08",
-      "qa": "crítico PASS (estilo foto-pura)",
-      "nota": "virou preview do wizard",
-      "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
-      "src": "assets/generated/ads/tiago-photo-raw-cobrar-ensina.webp"
     }
   ]
 }
