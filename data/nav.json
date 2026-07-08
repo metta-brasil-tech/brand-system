@@ -5178,6 +5178,21 @@
       ]
     },
     {
+      "id": "criativos",
+      "icon": "sparkles",
+      "label": "Criativos Gerados",
+      "group": "negócio",
+      "description": "Peças produzidas pela ferramenta de criação — com veredito do QA e contexto.",
+      "sections": [
+        {
+          "id": "galeria",
+          "label": "Criativos gerados",
+          "source": "embed:criativos-gerados.html",
+          "description": "Biblioteca viva do que o pipeline gerou."
+        }
+      ]
+    },
+    {
       "id": "modelos",
       "icon": "fileText",
       "label": "Modelos de Documentos",
