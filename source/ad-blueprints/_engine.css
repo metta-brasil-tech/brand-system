@@ -404,6 +404,8 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-body { font-size: 18px; line-height: 1.55; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-list { font-size: 18px; line-height: 1.55; color: var(--t-ink); margin: 0; padding-left: 28px; display: flex; flex-direction: column; gap: 12px; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-cta { font-size: 18px; color: var(--t-grey); margin: 8px 32px 24px; }
+/* accent amarelo seria invisível na marca-texto amarela do headline — vira ink sublinhado */
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .t-head .hi { color: var(--t-ink); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
 
 /* (T9) tiago-story-hero — story foto bleed + headline gigante centrada + pill */
 .ad[data-marca="tiago"][data-arch="tiago-story-hero"] { background: var(--t-ink); }
