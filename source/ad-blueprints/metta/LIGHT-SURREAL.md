@@ -3,7 +3,7 @@ id: LIGHT-SURREAL
 display_name: "Fundo claro + colagem ilustrativa surreal"
 marca: metta
 archetype: photo-full
-params: { theme: light, anchor: bottom, align: center, case: sentence, cta: dark }
+params: { theme: light, anchor: bottom, align: left, case: sentence, cta: dark }
 slots: [tag, headline, subhead, body, cta]
 image: { prompt_ref: image-prompts/metta/style-LIGHT-SURREAL.md, required: true, treatment: "ilustração/colagem surreal fundo claro" }
 formato_nativo: [story, feed]
