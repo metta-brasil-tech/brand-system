@@ -20,6 +20,7 @@ this module never instantiates one or reads keys.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
@@ -124,10 +125,11 @@ class KnowledgeBase:
             documents[filename] = (self.root / filename).read_text(encoding="utf-8")
         return documents
 
-    def as_context(self) -> str:
+    def as_context(self, exclude: frozenset[str] = frozenset()) -> str:
         blocks = [
             f"<documento fonte=\"{name}\">\n{content}\n</documento>"
             for name, content in self._documents.items()
+            if name not in exclude
         ]
         return "\n\n".join(blocks)
 
@@ -397,15 +399,55 @@ def _cached_content(prompt: str, marker: str = "=== BRIEFING DA PEÇA ===") -> l
     ]
 
 
+# Arquivos que uma peça MUITO curta não tem espaço pra usar de qualquer jeito
+# (case com nome+número de provas.md, detalhe de oferta/preço de oferta.md) --
+# excluí-los do prompt do rascunho quando o tamanho-alvo é pequeno corta ~40
+# mil caracteres (~10 mil tokens) de entrada sem perder nada que a peça
+# conseguiria usar. NÃO se aplica ao _judge (ele continua auditando contra a
+# base completa, o portão de qualidade não afrouxa).
+_SHORT_LENGTH_SKIP: frozenset[str] = frozenset({"provas.md", "oferta.md"})
+
+
+def _is_short_length(length: str) -> bool:
+    """True se o tamanho-alvo pedido é pequeno demais pra caber case/oferta.
+
+    Só confia em número quando o texto fala explicitamente de "caracteres"
+    (os chips do formulário sempre incluem essa palavra) -- sem isso, um
+    número solto é ambíguo demais ("2 parágrafos" não é 2 caracteres) e
+    cairia num falso positivo perigoso (corta contexto de uma peça que na
+    verdade não é curta). Sem essa palavra, cai pra palavra-chave
+    ("curto", "chamariz") como sinal mais fraco.
+    """
+    if not length:
+        return False
+    lowered = length.lower()
+    if "caracter" in lowered:
+        numbers = [int(n) for n in re.findall(r"\d+", length)]
+        if numbers:
+            return max(numbers) <= 400
+    return any(kw in lowered for kw in ("curto", "chamariz"))
+
+
 def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
     icp_context = _icp_context(brief.icp)
     icp_block = f"{icp_context}\n\n" if icp_context else ""
+    short = _is_short_length(getattr(brief, "length", ""))
+    skip = _SHORT_LENGTH_SKIP if short else frozenset()
+    doc_list = "tom de voz, skill de copy, avatar, posicionamento, glossário"
+    if not short:
+        doc_list = "tom de voz, skill de copy, avatar, posicionamento, oferta, provas, glossário"
+    short_note = (
+        "\n\nEsta peça é curta e NÃO recebeu os documentos de oferta/provas "
+        "(sem espaço pra caber case com nome+número de qualquer forma) -- não "
+        "invente case nominal aqui; foque em dor/contradição/mecanismo."
+        if short else ""
+    )
     return (
-        "Use a base de conhecimento abaixo (tom de voz, skill de copy, avatar, "
-        "posicionamento, oferta, provas, glossário"
+        f"Use a base de conhecimento abaixo ({doc_list}"
         + (", documento de ICP do segmento" if icp_context else "")
-        + ") para escrever a peça.\n\n"
-        f"{knowledge.as_context()}\n\n"
+        + ") para escrever a peça."
+        + short_note + "\n\n"
+        f"{knowledge.as_context(exclude=skip)}\n\n"
         f"{icp_block}"
         "=== BRIEFING DA PEÇA ===\n"
         f"{_render_brief(brief)}\n\n"
