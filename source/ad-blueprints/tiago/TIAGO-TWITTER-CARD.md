@@ -25,7 +25,9 @@ Fundo branco puro. Header mock fixo: avatar com ring amarelo 10px + "Tiago Alves
 Bold sentence case (48–60px, line-height 125%). Body Regular mesmo size, parágrafos com
 40px de gap. Footnote/remate leve opcional (30–36px). Variant cover: foto embed card radius
 28px na base. Variant content: emoji transition canto inferior. Sem CTA pill, sem amarelo
-de acento além do ring.
+de acento além do ring. Prova de print REAL (motor injeta): selo azul oficial, logo do X
+no canto, timestamp + Visualizações e barra de engajamento com números plausíveis
+(determinísticos pela copy). Desligável com `engagement: none` nos params.
 
 ## Quando brilha
 Statement provocativo curto · pergunta diagnóstica que abre carrossel · auto-confissão

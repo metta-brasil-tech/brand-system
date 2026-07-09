@@ -25,6 +25,11 @@ Card centralizado sobre fundo light (ou dark). Topo com avatar circular Metta + 
 ocupando 50-60% do card. Body como complemento curto e call final na base. Leitura:
 autoridade (avatar) → provocação (statement) → complemento → call.
 
+Prova de print REAL (o motor injeta sozinho): selo verificado DOURADO (organização no
+X — a Metta é empresa), logo do X no canto, linha de timestamp + Visualizações e barra
+de engajamento com números plausíveis (fake mas determinísticos pela copy — a mesma
+peça re-renderizada mantém os números). Desligável com `engagement: none` nos params.
+
 ## Quando brilha
 Quote curta de autoridade · dado de impacto com credencial ("R$2.3M gerados, 3 meses,
 mesmo time") · provocação viral de raciocínio rápido · reframe de mercado · break
