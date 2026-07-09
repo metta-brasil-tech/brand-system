@@ -236,6 +236,15 @@ button { all: unset; }
 .ad[data-arch="object-center"][data-obj-scale="full"] .layer {
   justify-content: flex-start; gap: 14px; padding-top: 108px;
 }
+/* story: a marca (brand: center) desce pra 120px por causa da zona segura do
+   IG — o texto precisa começar ABAIXO dela, senão logo e headline colidem.
+   O scrim acompanha: solid até cobrir a zona de texto (216+220px ≈ 24% de 1920). */
+.ad[data-format="story"][data-arch="object-center"][data-obj-scale="full"] .layer {
+  padding-top: 216px;
+}
+.ad[data-format="story"][data-arch="object-center"][data-obj-scale="full"]::before {
+  background: linear-gradient(180deg, var(--m-yellow) 0%, var(--m-yellow) 25%, rgba(255,190,24,0) 32%);
+}
 /* zona de texto com altura PRÓPRIA (não o canvas inteiro) — é essa caixa que o
    auto-fit do _engine.js (fitHead) mede pra encolher a headline sozinho até
    caber, igual já faz nos outros archetypes. Sem isso o "box" de medição virava
