@@ -25,6 +25,11 @@
       "includeFiles": "{agente-copy/**}",
       "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,render_out}/**"
     },
+    "api/prompt-image.py": {
+      "maxDuration": 30,
+      "includeFiles": "{engine/brand-knowledge/**,source/ad-blueprints/**}",
+      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out}/**"
+    },
     "api/render.js": {
       "memory": 1024,
       "maxDuration": 30
