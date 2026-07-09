@@ -1096,13 +1096,19 @@ def _run_pipeline_inline(
             if _critic_on:
                 try:
                     from _critic import pick_reference as _pick_ref, critique as _critique
+                    from _serie import model_info as _minfo
                     _q = " ".join(x for x in [
                         user_headline, user_subhead, user_body,
                         ((ad_directives or {}).get("image_concept") or {}).get("brief", ""),
                         bp_treatment] if x)
-                    _reference = _pick_ref(_q, marca)
+                    # Referência da MESMA família de paleta do modelo (NEWS-CARD
+                    # light julgado contra referência dark = falso-FAIL crônico).
+                    _fam = str(_minfo(chosen_model_id).get("family") or "")
+                    _fam = "" if _fam == "?" else _fam
+                    _reference = _pick_ref(_q, marca, family=_fam)
                     diagnostics.append(
-                        f"critic: referência do banco = {_reference['id']} (score {_reference['score']})"
+                        f"critic: referência do banco = {_reference['id']} (score {_reference['score']}, "
+                        f"família {(_reference.get('meta') or {}).get('family') or '?'} vs modelo {_fam or '?'})"
                         if _reference else "critic: sem referência raster compatível — só vision-qa")
                 except Exception as _e:
                     _critic_on = False

@@ -112,44 +112,75 @@ def _norm(s: str) -> list[str]:
     return re.findall(r"\w{3,}", (s or "").lower())
 
 
-def pick_reference(query: str, marca: str, exclude_ids=()) -> dict | None:
+# Família de paleta da REFERÊNCIA, derivada dos tokens de BASE (canvas) do ad.
+# Amarelo vem primeiro: bloco/base amarelo domina o render mesmo com canvas
+# escuro (mesma lógica do _FAMILY_OVERRIDE do _serie).
+_TOKEN_FAMILY = (
+    ("yellow-50-base-cheia", "YELLOW"), ("yellow-90-bloco", "YELLOW"),
+    ("charcoal-base", "DARK"), ("midnight-base", "DARK"),
+    ("white-base", "LIGHT"), ("ice", "LIGHT"),
+)
+
+
+def _ref_family(ad: dict) -> str:
+    """DARK/LIGHT/YELLOW da referência via tokens de base; '' se indeterminada."""
+    toks = set(ad.get("tokens_used") or [])
+    for tok, fam in _TOKEN_FAMILY:
+        if tok in toks:
+            return fam
+    return ""
+
+
+def pick_reference(query: str, marca: str, exclude_ids=(), family: str = "") -> dict | None:
     """Escolhe a referência do banco mais próxima da peça em produção.
 
     Filtro DURO por marca; só candidatos com raster em disco. Pontua por
     sobreposição de tokens + similaridade difflib entre `query` (copy + conceito
     visual + tratamento) e o texto buscável da referência (mood/intent/
     archetype_foto/notes/tese/tokens). Retorna {id, path, meta, score} ou None.
+
+    `family` (DARK/LIGHT/YELLOW, opcional) restringe à mesma família de paleta do
+    modelo em produção — julgar um NEWS-CARD (light) contra referência dark gera
+    falso-FAIL persistente. Sem candidato na família, degrada gracioso pra todos.
     """
     marca = (marca or "").strip().lower()
     q_tokens = set(_norm(query))
-    best: dict | None = None
-    best_score = -1.0
-    for ad in _load_index():
-        if (ad.get("brand") or "").strip().lower() != marca:
-            continue
-        if ad.get("id") in exclude_ids:
-            continue
-        path = _raster_path(ad)
-        if not path:
-            continue
-        text = _searchable(ad)
-        overlap = len(q_tokens & set(_norm(text)))
-        ratio = difflib.SequenceMatcher(None, query.lower(), text).ratio()
-        score = overlap + ratio  # overlap domina; ratio desempata
-        if score > best_score:
-            best_score = score
-            best = {
-                "id": ad.get("id"),
-                "path": str(path),
-                "score": round(score, 3),
-                "meta": {
-                    "mood": ad.get("mood"), "intent": ad.get("intent"),
-                    "archetype_foto": ad.get("archetype_foto"),
-                    "tokens_used": ad.get("tokens_used"),
-                    "title": ad.get("title"),
-                },
-            }
-    return best
+    fam = (family or "").strip().upper()
+
+    def _best_of(require_family: bool) -> dict | None:
+        best: dict | None = None
+        best_score = -1.0
+        for ad in _load_index():
+            if (ad.get("brand") or "").strip().lower() != marca:
+                continue
+            if ad.get("id") in exclude_ids:
+                continue
+            if require_family and _ref_family(ad) != fam:
+                continue
+            path = _raster_path(ad)
+            if not path:
+                continue
+            text = _searchable(ad)
+            overlap = len(q_tokens & set(_norm(text)))
+            ratio = difflib.SequenceMatcher(None, query.lower(), text).ratio()
+            score = overlap + ratio  # overlap domina; ratio desempata
+            if score > best_score:
+                best_score = score
+                best = {
+                    "id": ad.get("id"),
+                    "path": str(path),
+                    "score": round(score, 3),
+                    "meta": {
+                        "mood": ad.get("mood"), "intent": ad.get("intent"),
+                        "archetype_foto": ad.get("archetype_foto"),
+                        "tokens_used": ad.get("tokens_used"),
+                        "title": ad.get("title"),
+                        "family": _ref_family(ad),
+                    },
+                }
+        return best
+
+    return (_best_of(True) if fam else None) or _best_of(False)
 
 
 def _img_data_uri(path: str) -> str:
