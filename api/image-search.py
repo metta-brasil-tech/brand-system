@@ -44,6 +44,15 @@ def _search(query: str) -> dict:
             data = json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8", errors="ignore")
+        if e.code == 403 and "Custom Search" in body:
+            # Chave existe mas o projeto Google Cloud dela não tem a API habilitada.
+            return {"error": (
+                "A chave do Google ainda não tem a Custom Search API ativada. "
+                "Ativar em console.cloud.google.com → APIs e serviços → Biblioteca → "
+                "'Custom Search API' → Ativar (no MESMO projeto da GOOGLE_CSE_API_KEY). "
+                "Leva 1 minuto e não precisa de redeploy.")}
+        if e.code == 429:
+            return {"error": "Cota diária da busca esgotou (100/dia no plano grátis). Use 'Gerar com IA' ou 'Enviar foto' por hoje."}
         return {"error": f"Google CSE HTTP {e.code}: {body[:300]}"}
     except Exception as e:
         return {"error": f"{e.__class__.__name__}: {e}"}
