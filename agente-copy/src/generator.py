@@ -20,6 +20,7 @@ this module never instantiates one or reads keys.
 from __future__ import annotations
 
 import json
+import os
 import re
 from dataclasses import dataclass, field
 from enum import Enum
@@ -82,6 +83,42 @@ try:
 except ImportError:
     from icp_catalog import icp_knowledge_file  # type: ignore[import-not-found]
 
+try:
+    from src import retrieval  # type: ignore[import-not-found]
+except ImportError:
+    import retrieval  # type: ignore[import-not-found]
+
+
+# Seleção de trechos (RAG lexical, ver src/retrieval.py). Desligável sem
+# mudança de código: COPY_AGENT_RAG=0 nas env vars da Vercel volta ao
+# comportamento antigo (base completa em toda chamada). Lido a cada chamada
+# de propósito, pra teste conseguir alternar sem recarregar o módulo.
+def _rag_enabled() -> bool:
+    return os.environ.get("COPY_AGENT_RAG", "1") != "0"
+
+
+# Voz e regras de escrita nunca são fatiadas: o modelo escreve A PARTIR
+# delas, não as consulta. A seleção vale só pros documentos de referência.
+_RAG_KEEP_FULL = frozenset({"tom-de-voz-metta.md", "SKILLMETTACOPY.md"})
+
+
+def _brief_query(brief: Brief) -> list[str]:
+    """Termos de busca extraídos do briefing, pra pontuar os trechos.
+
+    _enum_value (definido adiante neste módulo) extrai o valor real do enum;
+    str() cru viraria "CopyType.POST_UNICO" e sujaria a busca com o nome da
+    classe (pego na primeira auditoria com inspect_rag_selection.py)."""
+    type_specific = getattr(brief, "type_specific", None) or {}
+    return retrieval.build_query(
+        brief.objective,
+        brief.angle_choice,
+        str(brief.icp),
+        str(_enum_value(getattr(brief, "copy_type", "")) or ""),
+        str(_enum_value(getattr(brief, "emotional_axis", "") or "") or ""),
+        brief.cta,
+        " ".join(str(v) for v in type_specific.values()),
+    )
+
 
 @dataclass
 class GenerationResult:
@@ -132,6 +169,35 @@ class KnowledgeBase:
             for name, content in self._documents.items()
             if name not in exclude
         ]
+        return "\n\n".join(blocks)
+
+    def as_context_selected(
+        self, query_terms: list[str], exclude: frozenset[str] = frozenset()
+    ) -> str:
+        """Como as_context, mas com seleção de trechos nos documentos de
+        referência (voz e skill sempre inteiras -- ver _RAG_KEEP_FULL).
+        Fallback embutido no retrieval: nada relevante ou erro -> documento
+        completo, idêntico ao as_context."""
+        full = {
+            name: content
+            for name, content in self._documents.items()
+            if name not in exclude and name in _RAG_KEEP_FULL
+        }
+        pool = {
+            name: content
+            for name, content in self._documents.items()
+            if name not in exclude and name not in _RAG_KEEP_FULL
+        }
+        selected = retrieval.select_pool(
+            pool, query_terms, retrieval.POOL_BUDGET_CHARS
+        )
+        blocks = []
+        for name in self._documents:  # preserva a ordem de carga documentada
+            content = full.get(name) or selected.get(name)
+            if content:
+                blocks.append(
+                    f"<documento fonte=\"{name}\">\n{content}\n</documento>"
+                )
         return "\n\n".join(blocks)
 
     def document(self, filename: str) -> str:
@@ -290,18 +356,28 @@ class CopyGenerator:
 # --- Prompt construction -----------------------------------------------------
 
 
-def _icp_context(icp_id: str) -> str:
+def _icp_context(icp_id: str, query_terms: list[str] | None = None) -> str:
     """Conteúdo do documento de ICP do segmento escolhido (v5.1 seção 14:
     "escreve embebido de ICP"). Vazio quando o id não veio do catálogo (ex.:
     testes com string livre) -- nesse caso o rótulo ainda aparece no
-    briefing, só sem o documento completo."""
+    briefing, só sem o documento completo.
+
+    Com query_terms e RAG ligado, o documento é reduzido aos trechos mais
+    relevantes ao briefing (o de mentoria tem 72 mil caracteres inteiro, e
+    ia completo pro rascunho E pro julgamento). Fallback no retrieval:
+    nada relevante ou erro -> documento completo."""
     filename = icp_knowledge_file(icp_id)
     if filename is None:
         return ""
     path = _REPO_ROOT / filename
     if not path.is_file():
         return ""
-    return f'<documento fonte="{filename}">\n{path.read_text(encoding="utf-8")}\n</documento>'
+    content = path.read_text(encoding="utf-8")
+    if query_terms is not None and _rag_enabled():
+        content = retrieval.select_sections(
+            filename, content, query_terms, retrieval.ICP_BUDGET_CHARS
+        )
+    return f'<documento fonte="{filename}">\n{content}\n</documento>'
 
 # Copy-type-specific structure, drawn from SKILLMETTACOPY.md's Instagram Orgânico
 # flow and the criação doc's copy types. Keeps the model on the real cadence per
@@ -449,7 +525,8 @@ def _should_skip_case(brief: Brief) -> bool:
 
 
 def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
-    icp_context = _icp_context(brief.icp)
+    query = _brief_query(brief) if _rag_enabled() else None
+    icp_context = _icp_context(brief.icp, query_terms=query)
     icp_block = f"{icp_context}\n\n" if icp_context else ""
     skip_case = _should_skip_case(brief)
     skip = _CASE_SKIP if skip_case else frozenset()
@@ -463,12 +540,23 @@ def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
         "dor/contradição/mecanismo."
         if skip_case else ""
     )
+    if query is not None:
+        context = knowledge.as_context_selected(query, exclude=skip)
+        selection_note = (
+            "\n\nTom de voz e skill de copy estão completos; dos demais "
+            "documentos você recebeu os trechos mais relevantes a este "
+            "briefing (marcados como 'trechos selecionados'). Não presuma "
+            "nada sobre o que ficou de fora deles."
+        )
+    else:
+        context = knowledge.as_context(exclude=skip)
+        selection_note = ""
     return (
         f"Use a base de conhecimento abaixo ({doc_list}"
         + (", documento de ICP do segmento" if icp_context else "")
         + ") para escrever a peça."
-        + case_note + "\n\n"
-        f"{knowledge.as_context(exclude=skip)}\n\n"
+        + case_note + selection_note + "\n\n"
+        f"{context}\n\n"
         f"{icp_block}"
         "=== BRIEFING DA PEÇA ===\n"
         f"{_render_brief(brief)}\n\n"
@@ -535,7 +623,7 @@ def _build_judgment_prompt(
         "coerência tonal do CTA).\n\n"
         f"{knowledge.document('tom-de-voz-metta.md')}\n\n"
         f"{knowledge.document('SKILLMETTACOPY.md')}\n\n"
-        f"{_icp_context(brief.icp)}\n\n"
+        f"{_icp_context(brief.icp, query_terms=_brief_query(brief) if _rag_enabled() else None)}\n\n"
         "=== BRIEFING ===\n"
         f"{_render_brief(brief)}\n\n"
         "=== RASCUNHO A AVALIAR ===\n"
