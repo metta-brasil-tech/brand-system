@@ -133,6 +133,75 @@ def _tiago_avatar() -> str:
     return _TIAGO_AVATAR_CACHE
 
 
+# ---------------------------------------------------------------------------
+# Tweet-card REAL — o que separa um "card com avatar" de um PRINT de tweet:
+# selo verificado de verdade (dourado = organização no X → Metta; azul = pessoa
+# → Tiago), logo do X no canto, linha de timestamp + Visualizações e a barra de
+# engajamento com números plausíveis. Ícones = a UI real do X sendo replicada
+# (mock de interface, não decoração — não conta como ícone-de-biblioteca do
+# anti-slop). Números FAKE mas determinísticos pela copy: a mesma peça
+# re-renderizada mantém os números; peças diferentes variam.
+# ---------------------------------------------------------------------------
+_VERIFIED_SEAL = (
+    '<svg class="{cls}" viewBox="0 0 24 24" aria-hidden="true">'
+    '<circle cx="12" cy="12" r="6" fill="#fff"/>'
+    '<path fill="{fill}" fill-rule="evenodd" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>')
+_X_LOGO = (
+    '<svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" '
+    'd="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>')
+_ICO = {  # ícones de ação do X (stroke, minimal — legíveis em print pequeno)
+    "reply": '<svg viewBox="0 0 24 24"><path d="M21 11.3c0 3.7-3.8 6.7-8.5 6.7-.9 0-1.8-.1-2.6-.3L5.2 20l1.2-3.1C4.6 15.7 3.5 13.6 3.5 11.3 3.5 7.6 7.4 4.6 12 4.6s9 3 9 6.7z"/></svg>',
+    "repost": '<svg viewBox="0 0 24 24"><path d="M7 8h8.5a3 3 0 0 1 3 3v1.5M17 16.5H8.5a3 3 0 0 1-3-3V12"/><path d="M15.5 5.5 18.5 8l-3 2.5M9 19l-3-2.5 3-2.5"/></svg>',
+    "like": '<svg viewBox="0 0 24 24"><path d="M12 19.5s-7-4.3-8.7-8.4C2.2 8.4 4 5.5 6.9 5.5c2 0 3.3 1 4.1 2.4h2c.8-1.4 2.1-2.4 4.1-2.4 2.9 0 4.7 2.9 3.6 5.6-1.7 4.1-8.7 8.4-8.7 8.4z"/></svg>',
+    "bookmark": '<svg viewBox="0 0 24 24"><path d="M7 4.5h10a.8.8 0 0 1 .8.8V20l-5.8-4-5.8 4V5.3a.8.8 0 0 1 .8-.8z"/></svg>',
+    "share": '<svg viewBox="0 0 24 24"><path d="M12 14.5V4M8.5 7.5 12 4l3.5 3.5M5 12.5V19a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19v-6.5"/></svg>',
+}
+
+
+def _fmt_compact_ptbr(n: int) -> str:
+    """1234 → '1,2 mil' · 2_400_000 → '2,4 mi' (formato compacto do X em pt-BR)."""
+    def _one(v: float, suf: str) -> str:
+        s = f"{v:.1f}".replace(".", ",")
+        s = s[:-2] if s.endswith(",0") else s
+        return f"{s} {suf}"
+    if n >= 1_000_000:
+        return _one(n / 1_000_000, "mi")
+    if n >= 1_000:
+        return _one(n / 1_000, "mil")
+    return str(n)
+
+
+def _tweet_metrics(seed: str) -> dict:
+    """Timestamp + engajamento plausível (replies << reposts < likes << views),
+    derivados por hash da copy — estáveis por peça, variados entre peças."""
+    import hashlib
+    from datetime import datetime, timedelta
+    h = int(hashlib.sha1((seed or "metta").encode("utf-8")).hexdigest(), 16)
+    likes = 400 + h % 4200
+    reposts = max(8, int(likes * (0.16 + ((h >> 8) % 100) / 800)))
+    replies = max(3, int(likes * (0.04 + ((h >> 16) % 50) / 1000)))
+    views = likes * (60 + (h >> 24) % 90)
+    dt = datetime.now() - timedelta(days=1 + (h >> 32) % 6, hours=(h >> 40) % 13)
+    meses = ("jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez")
+    return {
+        "stamp": f"{dt.hour:02d}:{dt.minute:02d} · {dt.day} de {meses[dt.month - 1]} de {dt.strftime('%y')}",
+        "replies": _fmt_compact_ptbr(replies), "reposts": _fmt_compact_ptbr(reposts),
+        "likes": _fmt_compact_ptbr(likes), "views": _fmt_compact_ptbr(views),
+    }
+
+
+def _tweet_proof(mx: dict, prefix: str) -> str:
+    """Linha de meta (timestamp · views) + barra de engajamento (layout do print
+    de detalhe do X: views só na meta; bookmark/share sem contagem). `prefix` = mock|tw."""
+    eng = (f'<span class="eng">{_ICO["reply"]}<i>{mx["replies"]}</i></span>'
+           f'<span class="eng">{_ICO["repost"]}<i>{mx["reposts"]}</i></span>'
+           f'<span class="eng">{_ICO["like"]}<i>{mx["likes"]}</i></span>'
+           f'<span class="eng">{_ICO["bookmark"]}</span>'
+           f'<span class="eng">{_ICO["share"]}</span>')
+    return (f'<div class="{prefix}-meta">{mx["stamp"]} · <b>{mx["views"]}</b> Visualizações</div>'
+            f'<div class="{prefix}-engage">{eng}</div>')
+
+
 def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
     pref = (params.get("brand") or "").strip().lower()
     if pref == "none":
@@ -261,12 +330,16 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
         _av = _tiago_avatar()
         avatar_html = (f'<div class="tw-avatar tw-avatar--photo" style="background-image:url(\'{_av}\')"></div>'
                        if _av else '<div class="tw-avatar"><span class="tw-avatar-initial">T</span></div>')
+        # Selo azul REAL (pessoa verificada) + prova social de print de tweet.
+        seal = _VERIFIED_SEAL.format(cls="tw-verified", fill="#1D9BF0")
+        proof = ("" if params.get("engagement") == "none"
+                 else _tweet_proof(_tweet_metrics(copy.get("headline", "") + "tiago"), "tw"))
         return (f'<header class="tw-header">{avatar_html}'
                 '<div class="tw-user"><div class="tw-name-row"><span class="tw-name">Tiago Alves</span>'
-                '<span class="tw-verified">✓</span></div>'
-                '<span class="tw-handle">@tiago.alves.oliveira</span></div></header>'
+                f'{seal}</div>'
+                f'<span class="tw-handle">@tiago.alves.oliveira</span></div>{_X_LOGO}</header>'
                 f'<div class="{txtcls}">{head("tw-headline")}{sub("tw-subhead")}{body("tw-body")}</div>'
-                f'{cta}{embed}')
+                f'{cta}{embed}{proof}')
 
     # fallback Tiago desconhecido → tipográfico simples
     return f'<div class="tt-text layer">{head("tt-headline")}{sub("tt-subhead")}{body("tt-body")}</div>'
@@ -333,11 +406,16 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
             head_plain = _esc(copy.get("headline", "").replace("*", "").replace("\n", " "))
         body = _esc(copy.get("body", "").replace("*", "")).replace("\n", "<br>")
         cta_line = f'<p class="t-body" style="color:#1D9BF0">{_esc(copy["cta"])} →</p>' if copy.get("cta") else ""
+        # Selo DOURADO = conta de organização no X (a Metta é empresa). Prova
+        # social (timestamp + engajamento) desligável via params.engagement=none.
+        seal = _VERIFIED_SEAL.format(cls="verified", fill="#D9A509")
+        proof = ("" if params.get("engagement") == "none"
+                 else _tweet_proof(_tweet_metrics(copy.get("headline", "") + handle), "mock"))
         return (f'<div class="card"><div class="mock-head"><div class="avatar">{avatar}</div>'
-                f'<div class="who"><span class="name">{_esc(name)} <span class="verified">✔</span></span>'
-                f'<span class="handle">{_esc(handle)}</span></div></div>'
+                f'<div class="who"><span class="name">{_esc(name)} {seal}</span>'
+                f'<span class="handle">{_esc(handle)}</span></div>{_X_LOGO}</div>'
                 f'<h1 class="t-head">{head_plain}</h1>'
-                f'{f"<p class=t-body>{body}</p>" if body else ""}{cta_line}</div>')
+                f'{f"<p class=t-body>{body}</p>" if body else ""}{cta_line}{proof}</div>')
 
     if arch == "logo-wall":
         slots = "".join('<div class="slot">logo</div>' for _ in range(6))
