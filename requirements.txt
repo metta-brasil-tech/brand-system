@@ -1,12 +1,16 @@
 # Deps Python pras Vercel serverless functions em api/*.py.
 # Versão TRIM do requirements.txt original do ad-generator — só o essencial pra runtime.
-# Removidos: click/rich (CLI), fastapi/uvicorn (Vercel não usa servidor), qdrant-client
-# (sem Qdrant, skill 02 cai em fallback textual), python-telegram-bot (pertence ao bot do dev),
-# litellm (não é importado em nenhum lugar do código -- api/*.py e agente-copy/*.py usam
-# anthropic/openai diretamente; litellm sozinho + as deps que ele arrasta (tiktoken,
-# tokenizers, huggingface_hub, hf_xet) somavam 152 MB, a causa real do bundle de 354.50 MB
-# estourando o limite de 225 MB da Vercel -- confirmado com `pip install --target` local).
+# Removidos: fastapi/uvicorn (Vercel não usa servidor), qdrant-client
+# (sem Qdrant, skill 02 cai em fallback textual), python-telegram-bot (pertence ao bot do dev).
+#
+# ATENÇÃO — litellm é OBRIGATÓRIO, não remover:
+#   - api/generate.py:332 instancia LLMAdapter(), e adapters/llm.py levanta
+#     ImportError("litellm not installed") sem ele → toda geração falha.
+#   - o `click` importado no topo do pipeline.py vem TRANSITIVAMENTE do litellm;
+#     removê-lo derruba a geração com "No module named 'click'".
+# Removê-lo (commit b4748d1, 09/07) quebrou a produção; revertido aqui.
 
+litellm>=1.50.0
 openai>=1.50.0
 anthropic>=0.40.0
 Pillow>=10.4.0
