@@ -9,8 +9,8 @@
   "functions": {
     "api/generate.py": {
       "maxDuration": 60,
-      "includeFiles": "{engine/**,source/ad-templates/**,source/ad-blueprints/**}",
-      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out,engine/node_modules,engine/**/node_modules,engine/**/__pycache__,engine/**/.venv,engine/render_out,engine/**/render_out,engine/tests,engine/**/tests-e2e,engine/docs,engine/.github}/**"
+      "includeFiles": "{engine/brand-knowledge/**,source/ad-templates/**,source/ad-blueprints/**}",
+      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public,agente-copy}/**"
     },
     "api/image-search.py": {
       "maxDuration": 15,
