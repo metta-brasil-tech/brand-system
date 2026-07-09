@@ -10,20 +10,20 @@
     "api/generate.py": {
       "maxDuration": 60,
       "includeFiles": "{engine/**,source/ad-templates/**,source/ad-blueprints/**}",
-      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public,agente-copy}/**"
+      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out,engine/node_modules,engine/**/node_modules,engine/**/__pycache__,engine/**/.venv,engine/render_out,engine/**/render_out,engine/tests,engine/**/tests-e2e,engine/docs,engine/.github}/**"
     },
     "api/image-search.py": {
       "maxDuration": 15,
-      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public,engine,agente-copy}/**"
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public,engine,agente-copy,render_out}/**"
     },
     "api/pieces.py": {
       "maxDuration": 15,
-      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy}/**"
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy,render_out}/**"
     },
     "api/copy-agent.py": {
       "maxDuration": 300,
       "includeFiles": "{agente-copy/**}",
-      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine}/**"
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,render_out}/**"
     },
     "api/render.js": {
       "memory": 1024,
