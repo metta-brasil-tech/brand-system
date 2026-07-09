@@ -1,0 +1,38 @@
+{
+  "run_id": "20260621_190628_f785a3",
+  "marca": "metta",
+  "archetype": "typo",
+  "theme": "dark",
+  "avatar": {
+    "segment": "generico",
+    "variant": "padrao"
+  },
+  "knowledge_provenance": [
+    {
+      "tipo": "ICP",
+      "fonte": "essência"
+    },
+    {
+      "tipo": "Voz da marca",
+      "fonte": "tom & voz"
+    },
+    {
+      "tipo": "Metodologia",
+      "fonte": "seis-gestoes · 4. [[Metta - Gestão do Conhecimento|Gestão do Conhecimento]]"
+    },
+    {
+      "tipo": "Depoimento real",
+      "fonte": "depoimentos · 4.7 Sobre autoridade prática (\"aprendo com quem faz\")"
+    }
+  ],
+  "knowledge_block": "=== CONHECIMENTO DA MARCA (fundamente a persona e a cena nisto) ===\n\n[ICP — essência]\nICP vigente da Mentoria. Empresário 35-60a, R$200-600k/mês, Varejo/Serviço, 5+ vendedores, em ponto de inflexão. Vende-se IDENTIDADE NOVA (parar de ser o sistema, virar dono do sistema), não treinamento. Decisão é identitária, não técnica. SUPERSEDE Dossiê ICP v1, ICP+MQL v2 e ICP Detalhado v1.\n\n[Voz da marca — tom & voz]\nApresentação - Rebranding - Identidade Verbal Rebranding Metta Inteligência comercial para empresário Manual de Identidade Verbal & Linguage Rebrandin Manual de Identidade Verbal & Linguage Mett Inteligência comercial para empresário Sumári Introdução O que é Identidade Verbal Conceito — Propósito e Público Arquétipos de Marca Tom e Voz Implicações para o Estilo de Linguagem Vocabulário da Marca Glossário Mensagens-Chave Manifesto da Marc Rebrandin Manual de Identidade Verbal…\n\n[Metodologia — seis-gestoes · 4. [[Metta - Gestão do Conhecimento|Gestão do Conhecimento]]]\n> Técnicas de vendas são imprescindíveis, mas não suficientes. **Pergunta central:** Como expandir os recursos do time além das técnicas de vendas? **Principais temas:** - Os 10 Conhecimentos Básicos: Produtos/Serviços, Termos Técnicos, Indicadores, Promoções, Política Comercial, Cliente, Matemática de Vendas, Processos, Sistemas, Concorrência - Framework dos 5 Domínios do Produto (O que, Quem, Quando, Comos, Quais) - Conhecer vs.\n\n[Depoimento real — depoimentos · 4.7 Sobre autoridade prática (\"aprendo com quem faz\")]\n**Ana Laura (Órex).** > \"Eu gosto de falar muito assim, que eu aprendo com a Metta porque eu aprendo com quem realmente faz.\" **Ótica Visão.** > \"Eu gosto de falar muito assim, que eu aprendo com a Metta porque eu aprendo com quem realmente faz.\"",
+  "art_director": {
+    "rationale": "",
+    "emphasis": "headline",
+    "gaze_direction": "left",
+    "crop_focus": "environment",
+    "headline_marked": "Quem não sabe fazer *GESTÃO* acaba fazendo *PRESSÃO* no *time*",
+    "headline_rejected": false,
+    "image_concept": null
+  }
+}

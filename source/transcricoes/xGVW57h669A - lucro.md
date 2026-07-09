@@ -1,4 +1,0 @@
-# lucro
-# URL: https://youtube.com/watch?v=xGVW57h669A
-
-empresário está satisfeito com seu lucro? Não. Então, tá na hora de fazer uma virada nesse jogo, principalmente na área comercial. Se você quer minha ajuda com a experiência que eu tenho de mais 600 empresas atendidas, R8,2 bilhões deais em metas batidas só no ano passado, eu vou te ajudar num webinário gratuito chamado O Jogo do Luc. Quer participar? Eu vou fazer com você exercícios para você descobrir quais são os gargalos na sua operação que impedem você ter o lucro que você gostaria. Clique e saber mais ou então coloca #jogo.

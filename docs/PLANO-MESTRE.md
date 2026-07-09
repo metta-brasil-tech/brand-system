@@ -34,7 +34,7 @@ está **na `main`** (`86e6387`, submódulo `e1278336a`), verificado: 34/34 regre
 | Avaliador critica o raciocínio | `api/_evaluator.py` (lê decision_log) | ✅ **sim** (`FINAL_EVAL=1`, opt-in — Fase 6) | **na main** |
 | Loop de auto-melhoria | `api/_autogen.py` | ✅ **sim** (`cli --auto-improve` — Fase 6) | **na main** |
 | Flywheel / entrada no banco | `api/_bank.py` (gate de aprovação) | ⚙️ runner manual (`render_out/_flywheel_ingest.py`, dry-run) — **por design** (só entra com aprovação humana, não automático) | **na main** |
-| Modo B (ideia→copy) | `api/_copywriter.py` | ⚙️ standalone (falta expor no wizard/CLI) | **na main** |
+| Modo B (ideia→copy) | `api/_copywriter.py` | ✅ no CLI (`cli.py --theme`, com `--pick`/`--propose-only`) | **na main** |
 | Ledger de auditoria | `api/_ledger.py` | ⚙️ runner (`_audit_ledger`/`_golden_run`) | **na main** |
 
 **Estado de processo:** tudo committado e **na `main`** (produção atualizada, deploy
@@ -173,12 +173,24 @@ e além de 2 slides (3+), com emendas perfeitas. É o "fazer mais" que o Nathan 
 
 ## 2-C. Resto do plugin — fases (formaliza a seção 3)
 
-### Fase 12 — Briefer A↔B (refina o prompt de imagem ANTES de gerar)
+### Fase 12 — Briefer A↔B (refina o prompt de imagem ANTES de gerar) ✅ (working tree, opt-in)
 Bate-bola propositor↔crítico do plugin: um propõe o prompt de imagem, outro valida contra
 os limites do gpt-image + composição, itera (N rodadas) antes de gastar geração.
-- **Tarefas:** `api/_briefer.py` (propositor + crítico); roda antes do image-gen com foto.
+- **Tarefas:** `api/_briefer.py` (propositor + crítico); roda antes do image-gen com foto. ✅
+- **Implementado:** `api/_briefer.py` (`refine()`/`enabled()`) + hook gated em `generate.py:836`
+  (logo após enriquecer o negative_prompt, antes do `write_artifact`/image-gen). Gate
+  `BRIEFER=1` (**default OFF**), rodadas via `BRIEFER_ROUNDS` (=1). Mira os 3 erros reais
+  (ICP genérico, amarelo Metta ausente, concretude); crítico checa contra `NEG_MODEL_FAILS`.
+  Best-effort: qualquer falha devolve o prompt original (nunca quebra o pipeline) e o
+  caminho quente fica intocado com gate OFF (testado).
 - **Teste:** A/B prompt-direto vs refinado → menos falhas (mãos/texto) + nota de imagem
   maior no ledger. **Pronto:** o refinamento sobe a qualidade medida.
+- **✅ A/B RODADO (2026-06-22, N=4/lado, `render_out/ab-briefer/run{0..3}`):** CONTROLE
+  **4/4 SHIP** × TRATAMENTO **2/4 SHIP**. qa+vision_qa = PASS nos 8; a diferença é só o
+  avaliador (dim. `ancoragem`). Causa: o propositor reescreve o SUJEITO — quando troca o
+  gênero da persona cai pra REVISAR. **DECISÃO: NÃO ligar — fica `BRIEFER` default OFF.**
+  Se revisitar: travar o propositor pra não mudar identidade/gênero nem inventar
+  merchandise de marca; só ancorar ambiente/papel/ação.
 
 ### Fase 13 — Safe-zones (margens do IG) como guardrail
 Porta `metta-safe-zones.md`: story tem topo (~220px) e base (~280px) comidos pela UI do
@@ -226,7 +238,10 @@ copy LITERAL → segue no pipeline (Modo A).
 - **Validado:** tema "dono preso no operacional" → headlines no eixo identitário do ICP
   ("Você é dono do negócio ou apenas o principal funcionário dele?"), ancorado em
   ICP+Voz+Metodologia+Depoimento.
-- **Falta (integração):** expor no wizard/CLI (`--theme`) e ligar o "aprovar → gerar".
+- **Integração (✅ feito):** exposto no CLI — `cli.py --theme "<tema>"` propõe a copy
+  ancorada no ICP, mostra ângulo + headlines + subhead/CTA + proveniência, e o "aprovar
+  → gerar" é fechado via escolha interativa (TTY) ou `--pick N` / `--propose-only`
+  (não-interativo). A headline escolhida vira copy LITERAL e segue no pipeline (Modo A).
 
 ### 3.2 Guardrails de carrossel (C1–C8 + tratamentos T-* + anti-monotonia de paleta)
 O brand-system faz carrossel (builder multi-slide). O plugin tem: capa não-tipográfica

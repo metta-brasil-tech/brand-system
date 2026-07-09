@@ -38,6 +38,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import random
 import sys
 import time
 import traceback
@@ -119,6 +120,51 @@ def _image_to_data_uri(file_url: str) -> str:
     except Exception:
         pass
     return ""
+
+
+# Recortes prontos (PNG RGBA) do Tiago real, em <repo>/assets/tiago/recortes/.
+# São a FOTO REAL pros archetypes prefer_upload (gpt-image-2 não reproduz o rosto
+# dele). ENGINE_DIR.parent == raiz do repo.
+TIAGO_RECORTES_DIR = ENGINE_DIR.parent / "assets" / "tiago" / "recortes"
+
+
+def _png_orientation(path: Path) -> str:
+    """'portrait' | 'landscape' | 'square' lendo o IHDR do PNG (sem PIL).
+
+    Largura/altura ficam nos bytes 16-24 do arquivo (após assinatura + chunk len/tipo).
+    """
+    try:
+        with open(path, "rb") as f:
+            head = f.read(24)
+        if len(head) < 24 or head[:8] != b"\x89PNG\r\n\x1a\n":
+            return "portrait"  # default seguro (story 9:16)
+        w = int.from_bytes(head[16:20], "big")
+        h = int.from_bytes(head[20:24], "big")
+        if w > h:
+            return "landscape"
+        if h > w:
+            return "portrait"
+        return "square"
+    except Exception:
+        return "portrait"
+
+
+def _pick_tiago_cutout(format_key: str) -> Path | None:
+    """Escolhe um recorte real do Tiago coerente com o formato da peça.
+
+    story/sqr/feed (verticais/quadrados) → recorte portrait/square; wide (16:9) →
+    landscape. Sem match de orientação, cai pra qualquer recorte. random.choice dá
+    variedade entre as poucas opções. Retorna None se não há recortes.
+    """
+    if not TIAGO_RECORTES_DIR.is_dir():
+        return None
+    cutouts = sorted(TIAGO_RECORTES_DIR.glob("*.png"))
+    if not cutouts:
+        return None
+    wants_landscape = (format_key or "").lower() == "wide"
+    preferred = {"landscape"} if wants_landscape else {"portrait", "square"}
+    matching = [c for c in cutouts if _png_orientation(c) in preferred]
+    return random.choice(matching or cutouts)
 
 
 _TOKEN_SYNONYMS = {
@@ -210,15 +256,21 @@ def _art_direction_photo(directives: dict) -> str:
         "camera": "subject looking directly at camera, confident",
     }
     crop_map = {
-        "face": "tight editorial portrait, face and shoulders",
-        "chest-up": "editorial mid-shot from the chest up",
-        "waist-up": "editorial three-quarter shot from the waist up",
-        "environment": "wider environmental shot, subject within the scene",
+        "face": "tight editorial portrait, face and shoulders, full head in frame with headroom",
+        "chest-up": "editorial mid-shot from the chest up, full head in frame with headroom",
+        "waist-up": "editorial three-quarter shot from the waist up, full head in frame",
+        "environment": "wider environmental shot, subject within the scene, whole figure unobstructed",
     }
     if gaze in gaze_map:
         bits.append(gaze_map[gaze])
     if crop in crop_map:
         bits.append(crop_map[crop])
+    # Trava de enquadramento (padrão p/ qualquer sujeito humano): a foto é
+    # GERADA já enquadrada — cabeça inteira no quadro, nunca decapitado, nunca
+    # só pernas/pé. Robustez dupla com o crop focal do template (_focal_position).
+    if bits:
+        bits.append("subject's head fully visible and never cropped, never decapitated, "
+                    "never showing only legs or feet, no awkward crop at the body")
     return ". ".join(bits) + ("." if bits else "")
 
 
@@ -314,8 +366,11 @@ def _run_pipeline_inline(
         return has_blueprint(marca, mid) or _has_tpl(marca, mid)
 
     def render_html(**kw):
+        # crop_focus (enquadramento decidido pelo diretor de arte) só existe no
+        # render v3 (blueprint); o v2 estático não o aceita.
+        cf = kw.pop("crop_focus", None)
         if has_blueprint(kw.get("marca"), kw.get("model_id")):
-            return _render_bp(**kw)
+            return _render_bp(crop_focus=cf, **kw)
         return _render_tpl(**kw)
 
     diagnostics: list[str] = []
@@ -461,6 +516,10 @@ def _run_pipeline_inline(
     bp_treatment: str = ""
     bp_prompt_ref: str = ""
     bp_prefer_upload: bool = False
+    # DNA do modelo (prose do blueprint: Intenção/Estrutura/Anti-padrões). Carregada
+    # uma vez aqui e passada ao diretor de arte (1ª chamada E regen) pra a fidelidade
+    # ao modelo fluir no pipeline real. None = sem blueprint → degrada gracioso.
+    model_dna: dict | None = None
 
     if has_bp:
         try:
@@ -472,6 +531,19 @@ def _run_pipeline_inline(
             bp_prompt_ref = str(_img_cfg.get("prompt_ref") or "")
             bp_prefer_upload = _img_cfg.get("prefer_upload") in (True, "true", "True", "yes")
             bp_placement = _blueprint_placement(bp_fm_full)
+            try:
+                from _blueprint_dna import extract_dna as _extract_dna
+                _dna = _extract_dna(marca, chosen_model_id)
+                if _dna and not _dna.get("missing"):
+                    model_dna = _dna
+                    _n_anti = len(_dna.get("anti_patterns") or [])
+                    diagnostics.append(
+                        f"03-dna: intenção={'sim' if _dna.get('intent') else 'não'} "
+                        f"estrutura={'sim' if _dna.get('structure') else 'não'} "
+                        f"anti-padrões={_n_anti}"
+                    )
+            except Exception as _de:
+                diagnostics.append(f"03-dna: PULADO ({_de.__class__.__name__}: {str(_de)[:60]})")
             diagnostics.append(
                 f"03-blueprint: image.required={model_requires_image} placement={bp_placement or '-'} "
                 f"(fonte única; YAML ignorado)"
@@ -490,6 +562,30 @@ def _run_pipeline_inline(
             diagnostics.append(f"03-yaml (fallback): FALTANDO {model_yaml_path}")
 
     # ============================================================
+    # RECORTE TIAGO — quando o modelo PEDE foto real do Tiago (prefer_upload) e o
+    # user NÃO subiu/escolheu foto, usa um RECORTE pronto de assets/tiago/recortes/
+    # em vez de gerar um rosto falso (gpt-image-2 não reproduz o rosto dele). Roteia
+    # pelo caminho "asset" existente (pula geração). Respeita image_source='none'
+    # (user quer sem foto) e qualquer foto já fornecida.
+    # ============================================================
+    _user_gave_photo = bool(image_url) and image_source in ("search", "upload", "asset")
+    if (marca == "tiago" and model_requires_image and bp_prefer_upload
+            and image_source != "none" and not _user_gave_photo):
+        _cut = _pick_tiago_cutout(format_key)
+        if _cut:
+            image_source = "asset"
+            image_url = str(_cut)
+            diagnostics.append(
+                f"04-cutout: recorte real do Tiago auto-selecionado ({_cut.name}) — "
+                f"pula geração (prefer_upload + sem upload do user)"
+            )
+        else:
+            diagnostics.append(
+                "04-cutout: prefer_upload mas NENHUM recorte em assets/tiago/recortes/ — "
+                "cai pro fallback de geração"
+            )
+
+    # ============================================================
     # DIRETOR DE ARTE + VISUAL — composição (quebras + accent + gaze/crop) E,
     # quando a peça usa foto E o user não deu direção visual própria, um CONCEITO
     # de cena VARIADO (lê a mensagem da copy, evita repetir cenas/pessoas recentes
@@ -501,7 +597,7 @@ def _run_pipeline_inline(
     _k_block, _k_prov, _avatar_for_ad = "", [], ""
     # precisa de conceito visual? só se vai gerar imagem E o user não ditou cena.
     _user_has_visual = bool(briefing_image_text and briefing_image_text.strip())
-    _needs_concept = (image_source not in ("none", "search")) and model_requires_image and not _user_has_visual
+    _needs_concept = (image_source not in ("none", "search", "asset", "upload")) and model_requires_image and not _user_has_visual
     if art_director and not mock and (user_headline or "").strip():
         try:
             t_ad = time.time()
@@ -546,7 +642,7 @@ def _run_pipeline_inline(
                 archetype=_arch, theme=_theme, marca=marca,
                 brief=briefing_text or "", llm=llm, placement=bp_placement,
                 needs_image=_needs_concept, treatment=bp_treatment, recent_concepts=_recent,
-                knowledge=_k_block, avatar=_avatar_for_ad)
+                knowledge=_k_block, avatar=_avatar_for_ad, model_dna=model_dna)
             mark("art-director", t_ad)
             if _k_prov:
                 diagnostics.append(
@@ -807,6 +903,28 @@ def _run_pipeline_inline(
         for _pp in (image_spec.get("prompts") or []):
             _pp["negative_prompt"] = ", ".join(
                 x for x in [_pp.get("negative_prompt", ""), _NEG_FAILS] if x)
+        # FASE 12 — Briefer A↔B: refina o prompt principal ANTES do image-gen,
+        # mirando os 3 erros reais (ICP genérico, amarelo ausente, concretude).
+        # Gated (BRIEFER=1, default OFF) pra não somar latência ao caminho quente
+        # sob o guard de 30s pré-image-gen do Vercel. Best-effort: nunca quebra.
+        try:
+            import _briefer
+            _prompts = image_spec.get("prompts") or []
+            if _briefer.enabled() and _prompts:
+                _p0 = _prompts[0]
+                _refined, _blog = _briefer.refine(
+                    llm, _p0.get("prompt", ""),
+                    marca=marca,
+                    avatar=locals().get("_avatar_for_ad", "") or "",
+                    knowledge=locals().get("_k_block", "") or "",
+                    art_direction=_art_direction_photo(locals().get("ad_directives", {}) or {}),
+                    placement=bp_placement or "",
+                )
+                if _refined and _refined != _p0.get("prompt", ""):
+                    _p0["prompt"] = _refined
+                diagnostics.extend(_blog)
+        except Exception as _be:
+            diagnostics.append(f"briefer: PULADO ({_be.__class__.__name__}: {str(_be)[:80]})")
         write_artifact(run_id, "04-image-prompt", image_spec, artifacts_dir)
         diagnostics.append(f"04-image-prompt-engineer ({timings['04-skill']}ms): prompts={len(image_spec.get('prompts', []))}")
 
@@ -902,6 +1020,7 @@ def _run_pipeline_inline(
         copy=copy_dict,
         image_url=image_data_uri or image_file_url,
         format=format_key,
+        crop_focus=(ad_directives or {}).get("crop_focus"),
     )
     mark("render", t_render)
     if rendered.get("missing"):
@@ -991,11 +1110,12 @@ def _run_pipeline_inline(
             _critic_feedback = ""
             for _va in range(1, _vmax + 1):
                 critic_result = {}
-                vision_result = _vqa_check(_png, copy_dict)
+                vision_result = _vqa_check(_png, copy_dict, model_dna=model_dna)
                 diagnostics.append(
                     f"vision-qa (try {_va}/{_vmax}): {vision_result.get('verdict')} "
-                    f"rel={vision_result.get('relevance')} integ={vision_result.get('integrity')} — "
-                    f"{str(vision_result.get('reason',''))[:80]}")
+                    f"rel={vision_result.get('relevance')} integ={vision_result.get('integrity')}"
+                    + (" viola-anti-padrão" if vision_result.get('anti_pattern_violated') else "")
+                    + f" — {str(vision_result.get('reason',''))[:80]}")
                 if _critic_on and _reference and _critique:
                     critic_result = _critique(_png, copy_dict, _reference, marca)
                     if critic_result.get("verdict") != "SKIPPED":
@@ -1006,6 +1126,7 @@ def _run_pipeline_inline(
                             f"slop={critic_result.get('anti_slop_failed')} — "
                             f"{str(critic_result.get('reason',''))[:80]}")
                 _failed = (vision_result.get("verdict") == "FAIL"
+                           or vision_result.get("anti_pattern_violated") is True
                            or critic_result.get("verdict") == "FAIL")
                 if not _failed or _va == _vmax:
                     break
@@ -1023,7 +1144,7 @@ def _run_pipeline_inline(
                     marca=marca, brief=(briefing_text or "") + f" | A tentativa anterior falhou: {_critic_feedback}. Corrija.",
                     llm=llm, placement=bp_placement, needs_image=True, treatment=bp_treatment,
                     recent_concepts=_cmem.read_recent(12),
-                    knowledge=_k_block, avatar=_avatar_for_ad)
+                    knowledge=_k_block, avatar=_avatar_for_ad, model_dna=model_dna)
                 _nc = _newdir.get("image_concept") or {}
                 if not _nc.get("brief"):
                     break
@@ -1040,7 +1161,8 @@ def _run_pipeline_inline(
                     aspect_ratio=_aspect, reference_images=[])
                 image_data_uri = _image_to_data_uri(_ig.url)
                 rendered = render_html(marca=marca, model_id=chosen_model_id, copy=copy_dict,
-                                       image_url=image_data_uri or _ig.url, format=format_key)
+                                       image_url=image_data_uri or _ig.url, format=format_key,
+                                       crop_focus=_newdir.get("crop_focus") or (ad_directives or {}).get("crop_focus"))
                 _png = _rfmt(rendered["html"], format_key, scale=2, downscale=True)
                 png_data_uri = "data:image/png;base64," + base64.b64encode(_png).decode("ascii")
                 diagnostics.append(f"vision-qa: REGENEROU imagem (cena='{_nc.get('scene_type','?')}')")
@@ -1067,11 +1189,13 @@ def _run_pipeline_inline(
             evaluation = _final_eval(
                 _eval_png, copy_dict, marca, vision_result, critic_result,
                 decision_log=_eval_dl,
-                image_based=bool(image_data_uri or image_file_url))
+                image_based=bool(image_data_uri or image_file_url),
+                model_dna=model_dna)
             _anc = (evaluation.get("scores") or {}).get("ancoragem")
             diagnostics.append(
                 f"final-eval: {evaluation.get('verdict')} nota={evaluation.get('geral')}"
-                + (f" ancoragem={_anc}" if _anc is not None else ""))
+                + (f" ancoragem={_anc}" if _anc is not None else "")
+                + (" · viola-anti-padrão" if evaluation.get("anti_pattern_violated") else ""))
         except Exception as _fe:
             diagnostics.append(f"final-eval: PULADO ({_fe.__class__.__name__}: {str(_fe)[:80]})")
 

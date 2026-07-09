@@ -1,0 +1,22 @@
+{
+  "prompts": [
+    {
+      "slot_name": "main",
+      "prompt": "Photograph of a middle-aged Brazilian businessman with light olive skin and short dark hair, wearing a smart-casual button-up, seated at a desk in a modern Brazilian small-business office. He is looking over his shoulder at a laptop displaying a sales dashboard, with a printed report containing charts on the desk. The office is softly blurred in the background, and the scene is lit with soft natural light from a window, creating a contemplative and serious mood. The businessman appears thoughtful, embodying serious confidence with a quiet trace of fatigue. Subject positioned in the upper 50% of the frame, with the lower half showing softly blurred, clean, EMPTY environmental floor/desk space with nothing in it. Cinematic dark moody photography with dramatic chiaroscuro lighting, deep blacks, single warm light source, golden amber rim light. Editorial cinema quality, low-key palette dominated by dark teals, charcoal, and one warm amber highlight. High detail, sharp focus on subject's eyes, shallow depth of field, without smiling stock pose, without cartoon, without 3D render look generic, without anime, without children's book illustration, without ring light, without flash, without harsh lighting, without any text, letters, words, numbers, captions, paragraphs, titles, labels, signage, charts, graphs, watermarks or document text anywhere in the image, without fake teeth-bleached smile, without recortes de sujeito principal.",
+      "negative_prompt": "smiling stock pose, cartoon, 3D render look generic, anime, children's book illustration, ring light, flash, harsh lighting, any text, letters, words, numbers, captions, paragraphs, titles, labels, signage, charts, graphs, watermarks or document text anywhere in the image, fake teeth-bleached smile, recortes de sujeito principal, bright cheerful lighting, flat even lighting, pastel colors, white background, high-key look, no text in image, no gibberish letters, no watermark, no logos, no signage, no deformed hands, no extra fingers, no distorted face, no fused bodies, no extra limbs, no rendered UI screen, no readable numbers",
+      "aspect_ratio": "4:5",
+      "reference_images": [],
+      "model_hint": "gpt-image-2",
+      "iteration_strategy": {
+        "max_attempts": 1,
+        "fallback_prompts": []
+      },
+      "metadata": {
+        "style_id": "B-foto-top-headline-mixed",
+        "audience": "generico",
+        "mood_chosen": "serious confidence with a quiet trace of fatigue"
+      }
+    }
+  ],
+  "skip": false
+}

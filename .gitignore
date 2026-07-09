@@ -46,3 +46,24 @@ criativos-auto/
 # override pessoal de permissões (autonomia)
 .claude/settings.local.json
 render_out/saidas-antigas/
+
+# render_out — saídas de IMAGEM regeneráveis (não versionar; scripts geradores e
+# showcase curado feed-replica/_LINHA-DO-TEMPO continuam versionados)
+render_out/criativos-atuais/
+render_out/criativos-avatar/
+render_out/criativos-fix-2/
+render_out/criativos-novos/
+render_out/criativos-novos-21jun/
+render_out/criativos-novos-21jun-bom/
+render_out/criativos-novos-21jun-icp/
+render_out/best-of/
+render_out/golden/
+render_out/carrossel/
+render_out/full/
+render_out/por-modelo/
+render_out/passo3-mostra/
+render_out/quality-iter/
+render_out/refvision-ab/
+render_out/_scratch/
+render_out/_e2e-dark-colagem/
+render_out/*.log

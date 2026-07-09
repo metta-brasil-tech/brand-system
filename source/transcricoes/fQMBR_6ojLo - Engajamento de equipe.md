@@ -1,4 +1,0 @@
-# Engajamento de equipe
-# URL: https://youtube.com/watch?v=fQMBR_6ojLo
-
-O grande, primeiro passo para você ter lucro, liberdade e escala numa empresa é você ter engajamento. Não importa se você tem um ótimo mix de soluções, não importa se você tem um bom preço, não importa se você tem marca, não importa se você tem bom posicionamento, se você tem clientela, se você não tem um time engajado, você não tem nada. Porém, o engajamento não é tão assim óbvio. Por qu? Veja só, segundo a Galope, que é uma empresa de consultoria de pesquisa mundial, ela é a que mais pesquisa sobre engajamento no mundo, ela percebeu que empresas que têm lucratividade de 23% a mais quando se tem um time engajado. Ou seja, um time engajado gera 23% a mais de lucro.

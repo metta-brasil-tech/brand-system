@@ -52,6 +52,19 @@ def generate_until_approved(brief: dict, max_attempts: int = 3,
     from generate import _run_pipeline_inline
     from _evaluator import evaluate
 
+    # DNA do modelo (FASE 3) — carregada uma vez (não muda entre tentativas) pro juiz
+    # conferir a peça contra o spec do modelo. Best-effort: sem blueprint → None.
+    _model_id = str(brief.get("forced_model_id", "") or "")
+    _marca0 = "tiago" if _model_id.upper().startswith("TIAGO") else "metta"
+    model_dna = None
+    if _model_id:
+        try:
+            from _blueprint_dna import extract_dna as _extract_dna
+            _d = _extract_dna(_marca0, _model_id)
+            model_dna = _d if (_d and not _d.get("missing")) else None
+        except Exception:
+            model_dna = None
+
     history: list[dict] = []
     best: dict | None = None
     best_score = -1.0
@@ -80,7 +93,8 @@ def generate_until_approved(brief: dict, max_attempts: int = 3,
         # peça tipográfica (sem foto) não deve ser penalizada por "falta de imagem"
         image_based = bool(res.get("image_data_uri"))
         ev = evaluate(png, copy, marca, res.get("vision_qa"), res.get("critic"),
-                      decision_log=_decision_log(res), image_based=image_based) if png else {"verdict": "SKIPPED"}
+                      decision_log=_decision_log(res), image_based=image_based,
+                      model_dna=model_dna) if png else {"verdict": "SKIPPED"}
 
         score = float(ev.get("geral") or 0)
         item = {"attempt": attempt, "result": res, "eval": ev, "score": score,
@@ -97,18 +111,27 @@ def generate_until_approved(brief: dict, max_attempts: int = 3,
             break
         if attempt == max_attempts:
             break
-        # Decide se vale regerar: só se o problema for de IMAGEM.
-        if ev.get("image_fixable") is False:
+        # Decide se vale regerar: só se o problema for de IMAGEM. EXCEÇÃO (FASE 3d):
+        # violar anti-padrão do modelo É corrigível regerando a foto (com o anti-padrão
+        # como negativo via DNA) — força a regen mesmo se o juiz disse image_fixable=false.
+        _anti = ev.get("anti_pattern_violated") is True
+        if ev.get("image_fixable") is False and not _anti:
             if verbose:
                 print("    parando: problema é de template/layout (não adianta regerar a foto).")
             break
         # Monta o feedback pra próxima imagem: direção original + ajustes da avaliação.
         fixes = "; ".join(ev.get("fixes", []) or [])
         img_fb = ev.get("image_feedback", "") or ev.get("reason", "")
+        # Anti-padrão violado vira instrução EXPLÍCITA de evitar na próxima imagem.
+        _anti_fb = ""
+        if _anti and model_dna:
+            _aps = "; ".join(model_dna.get("anti_patterns") or [])
+            _anti_fb = f"NÃO viole os anti-padrões do modelo: {_aps}." if _aps else ""
         visual_feedback = " ".join(x for x in [
             base_visual,
             f"A versão anterior tirou nota {score}/10 ({ev.get('verdict')}).",
             f"Corrija na imagem: {img_fb}." if img_fb else "",
+            _anti_fb,
             f"Ajustes: {fixes}." if fixes else "",
         ] if x).strip()
 
