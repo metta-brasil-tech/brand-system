@@ -941,10 +941,7 @@ button.stepper-item.done:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* A animação de entrada roda SÓ quando o step troca de verdade (classe .enter
-   posta pelo render()). Re-renders dentro do mesmo step (marcar seleção etc.)
-   não replayam o slide — era isso que dava a sensação de travamento. */
-.stage.enter > * {
+.stage > * {
   animation: slideIn 300ms var(--metta-ref-easing-decelerate) both;
 }
 
@@ -1148,17 +1145,13 @@ let currentStep = 'brand';
  * `desc`       — descrição curta no card
  * `previewSrc` — imagem de referência mostrada no card (opcional)
  * `usaImagem`  — se true, pipeline gera/busca uma imagem; se false, é tipográfico puro
- * `fotoReal`   — a imagem é FOTO REAL da pessoa (IA não reproduz o rosto) → o passo
- *                de imagem esconde "Gerar com IA"; só enviar foto / buscar na web
- * `semAvatar`  — a imagem é objeto/cena SEM pessoa → pula o passo de avatar (que
- *                define quem aparece) e vai direto pra direção visual
  */
 // STYLES_METTA — IDs batem 1:1 com YAMLs em engine/brand-knowledge/models/metta/
 // Cada label/desc reflete o estilo REAL do YAML, não interpretação livre.
 // Ordem: do mais usado/robusto pro mais específico.
 const STYLES_METTA = [
   { id: 'YELLOW-BLOCO',                  label: 'Bloco amarelo + foto pessoa',       desc: 'Bloco amarelo central com headline + bullets, foto pessoa direita bleed corner. Convite institucional com prova social via logo bar.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-bloco.webp' },
-  { id: 'YELLOW-OBJETO',                 label: 'Objeto 3D flutuante amarelo',       desc: 'Objeto-conceito em render 3D estilizado (clay/matte), flutuando sobre fundo amarelo chapado. Metáfora leve, editorial contemporâneo.', usaImagem: true,  semAvatar: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-objeto.webp' },
+  { id: 'YELLOW-OBJETO',                 label: 'Objeto 3D flutuante amarelo',       desc: 'Objeto-conceito em render 3D estilizado (clay/matte), flutuando sobre fundo amarelo chapado. Metáfora leve, editorial contemporâneo.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-objeto.webp' },
   { id: 'A-headline-foto-dark',          label: 'Headline + foto pessoa dark',       desc: 'Fundo escuro, headline grande UPPER + foto pessoa âncora à direita. Caso nominal ou prova editorial.',                              usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/a.webp' },
   { id: 'D-foto-fullbleed-overlay',      label: 'Foto fullbleed com overlay',        desc: 'Foto ocupa canvas inteiro + overlay escuro pra legibilidade do headline em baixo. Imersão visual.',                                      usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/d.webp' },
   { id: 'C-tipografia-pura-dark',        label: 'Tipografia pura dark',              desc: 'Fundo escuro, sem imagem. Headline gigante UPPER + accent yellow em palavras-chave. Frase de impacto isolada.',                          usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/c.webp' },
@@ -1166,7 +1159,7 @@ const STYLES_METTA = [
   { id: 'YELLOW-FRAME',                  label: 'Frame amarelo + headline',          desc: 'Borda amarela grossa enquadrando headline central. Convite emoldurado.',                                                                  usaImagem: false, formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-frame.webp' },
   { id: 'METTA-TWEET-CARD',              label: 'Mock tweet Metta',                  desc: 'Card estilo Twitter feed com header Metta + tese curta. Sentence sem CTA.',                                                                usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/tweet-card.webp' },
   { id: 'B-foto-top-headline-mixed',     label: 'Foto topo + headline embaixo',      desc: 'Foto top-bleed ocupa ~50% + headline grande + body curto + CTA. Híbrido foto-tipografia.',                                              usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/b.webp' },
-  { id: 'LIGHT-SURREAL',                 label: 'Editorial claro surreal',           desc: 'Fundo claro + colagem editorial surreal (B&W com toques de cor). Estética HBR. Insights conceituais.',                                  usaImagem: true,  semAvatar: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/light-surreal.webp' },
+  { id: 'LIGHT-SURREAL',                 label: 'Editorial claro surreal',           desc: 'Fundo claro + colagem editorial surreal (B&W com toques de cor). Estética HBR. Insights conceituais.',                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/light-surreal.webp' },
   { id: 'NEWS-CARD',                     label: 'Card de notícia',                   desc: 'Layout estilo headline-news: tag + manchete + foto. Comunicado/anúncio institucional.',                                                  usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/news-card.webp' },
   { id: 'YELLOW-SPLIT',                  label: 'Split amarelo/foto',                desc: 'Canvas dividido — metade amarela com headline, metade foto. Dualidade clara.',                                                            usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-split.webp' },
   { id: 'H-fundo-branco-headline-gigante', label: 'Headline gigante fundo branco',   desc: 'Branco puro + headline gigante em preto. Manifesto/posicionamento de alta gravidade.',                                                  usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/h.webp' },
@@ -1179,12 +1172,12 @@ const STYLES_TIAGO = [
   { id: 'TIAGO-NOTES-MOCKUP',           label: 'Tela de Notas do iPhone',            desc: 'Mock do app Notas com status bar, marker amarelo no H1 e lista numerada. Storytelling em formato de anotação.', usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/notes-mockup.webp' },
   { id: 'TIAGO-TYPO-PURE',              label: 'Frase grande',                       desc: 'Tipografia pura sobre fundo claro com palavra-chave colorida. Frase de impacto isolada.',         usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/typo-pure.webp' },
   { id: 'TIAGO-EDITORIAL-CTA',          label: 'Slide de fechamento de carrossel',   desc: '3 variantes: pergunta de engajamento, qualificação "pra quem é", ou reveal de protocolo.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-cta.webp' },
-  { id: 'TIAGO-TWITTER-CARD-IMAGE',     label: 'Tweet com imagem',                   desc: 'Mock Twitter com foto embed (cantos arredondados) na base do card. Imagem gerada, buscada ou enviada.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card-image.webp' },
-  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  fotoReal: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp' },
+  { id: 'TIAGO-TWITTER-CARD-IMAGE',     label: 'Tweet com imagem',                   desc: 'Mock Twitter com foto embed (cantos arredondados) na base do card. Imagem gerada, buscada ou enviada.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card.webp' },
+  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp' },
   { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-yellow-block.webp' },
   { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-minimal.webp' },
-  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  semAvatar: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/dark-surreal.webp' },
-  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  fotoReal: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/photo-raw.webp' },
+  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/dark-surreal.webp' },
+  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/photo-raw.webp' },
   { id: 'TIAGO-EDITORIAL-HERO',         label: 'Capa estilo revista',                desc: 'Manchete gigante + colagem cinema editorial (B&W com selective yellow). Capa de carrossel premium.', usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-hero.webp' },
   { id: 'TIAGO-EDITORIAL-CARD',         label: 'Slide editorial com estatística',    desc: 'Big stat ou lista de sintomas. Slide intermediário de carrossel editorial cinema.',                usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-card.webp' },
   { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-dark.webp' }
@@ -1259,14 +1252,12 @@ const COPY_BUDGET = {
 const COPY_BUDGET_DEFAULT = { headline: 90, subhead: 70, body: 150 };
 function copyBudgetFor(id) { return COPY_BUDGET[id] || COPY_BUDGET_DEFAULT; }
 
-/* ----------- DATA: formatos -----------
- * 'post' e o antigo 'ad-single' sempre renderizaram o MESMO canvas (feed 4:5) —
- * eram dois cards pra mesma coisa, então viraram um só. 'ad-single' segue aceito
- * como alias em STATE.format (links antigos / modo áudio) via wizFormat(). */
+/* ----------- DATA: formatos ----------- */
 const FORMATS = [
-  { id: 'post',      label: 'Post / anúncio feed', desc: '1 peça 1080×1350 (4:5). Serve orgânico e Meta Ads.',      icon: 'square'  },
-  { id: 'carrossel', label: 'Carrossel',           desc: '5 a 10 cards 1080×1350 com fluxo narrativo.',             icon: 'layers'  },
-  { id: 'ad-story',  label: 'Story',               desc: '1 peça 9:16 (1080×1920). Story orgânico ou anúncio.',     icon: 'phone'   }
+  { id: 'post',      label: 'Post simples',  desc: '1 imagem 1080×1350 (4:5).',                  icon: 'square'  },
+  { id: 'carrossel', label: 'Carrossel',     desc: '5 a 10 cards 1080×1350 com fluxo narrativo.', icon: 'layers'  },
+  { id: 'ad-single', label: 'Ad single',     desc: 'Anúncio Meta — 1 imagem 1:1 ou 4:5.',         icon: 'target'  },
+  { id: 'ad-story',  label: 'Ad story',      desc: 'Anúncio story 9:16 (1080×1920).',             icon: 'phone'   }
 ];
 
 /* ----------- ICONS ----------- */
@@ -1307,7 +1298,7 @@ function renderStepper() {
   const usaImagem = styleObj && styleObj.usaImagem;
   stepsToShow = stepsToShow.filter(s => {
     if (s === 'wiz-imagem') return usaImagem;
-    if (s === 'wiz-avatar') return usaImagem && STATE.imageSource === 'generate' && !(styleObj && styleObj.semAvatar);
+    if (s === 'wiz-avatar') return usaImagem && STATE.imageSource === 'generate';
     if (s === 'wiz-imagem-briefing') return usaImagem && STATE.imageSource === 'generate';
     if (s === 'wiz-upload') return usaImagem && STATE.imageSource === 'upload';
     if (s === 'wiz-search') return usaImagem && STATE.imageSource === 'search';
@@ -1474,31 +1465,21 @@ function tplWizStyle() {
   `;
 }
 
-/* Estilo selecionado (objeto completo, com flags fotoReal/semAvatar). */
-function currentStyleObj() {
-  const styles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
-  return styles.find(s => s.id === STATE.style) || {};
-}
-
 function tplWizImagem() {
-  const st = currentStyleObj();
   return renderStepper() + `
     <header class="step-head">
       <p class="step-eyebrow">Wizard · Imagem</p>
       <h1 class="step-title">Como obter a imagem da peça?</h1>
-      <p class="step-sub">${st.fotoReal
-        ? 'Esse estilo usa FOTO REAL — a IA não reproduz o rosto de verdade. Envie uma foto ou busque na web.'
-        : 'O estilo escolhido tem espaço pra uma foto/imagem. Você pode gerar uma com IA (mood/cena descritos), ou buscar uma imagem real na web (ex: foto de pessoa pública, marca conhecida).'}</p>
+      <p class="step-sub">O estilo escolhido tem espaço pra uma foto/imagem. Você pode gerar uma com IA (mood/cena descritos), ou buscar uma imagem real na web (ex: foto de pessoa pública, marca conhecida).</p>
     </header>
     <div class="step-body">
       <div class="choice-grid">
-        ${st.fotoReal ? '' : `
         <button class="choice ${STATE.imageSource === 'generate' ? 'selected' : ''}" data-action="pick-image-source" data-value="generate">
           <div class="choice-icon">${icon('sparkles', 24)}</div>
           <h3 class="choice-title">Gerar com IA</h3>
           <p class="choice-desc">A engine cria uma imagem original via gpt-image-2 baseada no estilo + avatar + briefing. Bom pra cena/mood (loja, escritório, retrato editorial).</p>
           <span class="choice-tag">~$0,19 por imagem</span>
-        </button>`}
+        </button>
         <button class="choice ${STATE.imageSource === 'upload' ? 'selected' : ''}" data-action="pick-image-source" data-value="upload">
           <div class="choice-icon">${icon('download', 24)}</div>
           <h3 class="choice-title">Enviar foto${STATE.brand === 'tiago' ? ' / foto do Tiago' : ''}</h3>
@@ -1635,11 +1616,7 @@ function tplWizImagemBriefing() {
       <div class="field" style="margin-top: 28px;">
         <label class="field-label" for="briefing-image-input">Direção visual (cena, sujeito, ambiente)</label>
         <textarea class="textarea" id="briefing-image-input" placeholder="Ex: Empresário sentado na sua mesa de escritório olhando pela janela, laptop fechado ao lado, ambiente cozy. Empresário 45 anos, cabelo curto, jaqueta de lã sobre camisa social aberta.">${escapeHtml(STATE.briefingImage)}</textarea>
-        <div class="row" style="margin-top: 10px;">
-          <button class="btn btn-outlined" data-action="gen-image-brief">${icon('sparkles', 16)} Gerar direção com IA</button>
-          <span class="field-hint" id="gen-brief-status" style="margin: 0"></span>
-        </div>
-        <p class="field-hint">Escreva solto o que você imagina (ou deixe vazio) e clique no botão — a IA transforma em direção completa de cena, já no padrão do estilo. Você pode editar o resultado. Se seguir sem preencher, a engine inventa baseado no preset + estilo + copy.</p>
+        <p class="field-hint">Opcional. Se vazio, a engine inventa baseado no preset + estilo do ad + copy.</p>
       </div>
     </div>
     <div class="foot">
@@ -1841,8 +1818,8 @@ function tplAudioRecord() {
 
 function tplAudioConfirm() {
   const t = STATE.audioTranscript || '';
-  const guessFormat = /story/i.test(t) ? 'ad-story' : (/carrossel/i.test(t) ? 'carrossel' : 'post');
-  const formatLabel = (FORMATS.find(f => f.id === guessFormat) || {}).label || 'Post / anúncio feed';
+  const guessFormat = /story/i.test(t) ? 'ad-story' : (/carrossel/i.test(t) ? 'carrossel' : (/ad|an[uú]ncio/i.test(t) ? 'ad-single' : 'post'));
+  const formatLabel = (FORMATS.find(f => f.id === guessFormat) || {}).label || 'Post simples';
 
   return renderStepper() + `
     <header class="step-head">
@@ -2166,7 +2143,7 @@ function tplCarouselBuild() {
         <button class="car-pill ${STATE.carFormat === 'feed' ? 'on' : ''}" data-action="car-format" data-value="feed">Feed 4:5</button>
         <button class="car-pill ${STATE.carFormat === 'story' ? 'on' : ''}" data-action="car-format" data-value="story">Story 9:16</button>
       </div>
-      <div class="car-strip">${strip}<button class="car-add" data-action="car-add">＋ Slide</button><button class="car-add" data-action="car-panorama" title="Gera 1 imagem larga e fatia em 2 slides com fundo contínuo">⇲ Panorâmica</button></div>
+      <div class="car-strip">${strip}<button class="car-add" data-action="car-add">＋ Slide</button><button class="car-add" data-action="car-panorama" title="Gera 1 imagem larga e fatia em 2 a 4 slides com fundo contínuo">⇲ Panorâmica</button></div>
       <div class="car-editor">
         <p class="car-editing">Editando slide ${STATE.activeSlide + 1} de ${STATE.slides.length}</p>
         <div class="field"><label class="field-label">Estilo</label>
@@ -2385,10 +2362,15 @@ function slicePanorama(dataUri, n, format) {
   });
 }
 
-// Gera 1 imagem panorâmica larga e cria 2 slides full-bleed com fundo contínuo.
+// Gera 1 imagem panorâmica larga e cria N slides full-bleed com fundo contínuo.
+// 2 slides = melhor qualidade · 3-4 = fatias mais estreitas (upscale maior, imagem
+// levemente mais suave — a fonte tem 1536px de largura, cada fatia vira 1080px).
 async function addPanoramaPair() {
   const scene = window.prompt('Descreva a cena panorâmica (ex: "sala de reunião vazia, mesa longa, janela com vista da cidade, cinemático"):');
   if (!scene || !scene.trim()) return;
+  let n = parseInt(window.prompt('Em quantos slides a cena continua? (2 a 4)\n2 = qualidade máxima · 3-4 = imagem um pouco mais suave', '2'), 10);
+  if (isNaN(n)) return;
+  n = Math.max(2, Math.min(4, n));
   const fullStyle = STATE.brand === 'metta' ? 'D-foto-fullbleed-overlay' : 'TIAGO-EDITORIAL-DARK';
   const btn = document.querySelector('[data-action="car-panorama"]');
   if (btn) { btn.textContent = 'Gerando imagem…'; btn.style.pointerEvents = 'none'; }
@@ -2397,19 +2379,19 @@ async function addPanoramaPair() {
     const res = await postGenerate({
       briefing: `Marca: ${marca}. Imagem panorâmica de fundo.`, mock: false,
       model_id: fullStyle, image_source: 'generate', image_only: true, format: 'feed',
-      briefing_image: scene.trim() + ', wide cinematic panorama, continuous scene, no centered single subject'
+      briefing_image: scene.trim() + ', ultra wide cinematic panorama, one single continuous scene spanning the whole width, horizontally distributed elements, no centered single subject, scene reads naturally when cropped into ' + n + ' vertical sections'
     });
     if (!res || !res.image_data_uri) throw new Error((res && res.error) || 'sem imagem');
-    const halves = await slicePanorama(res.image_data_uri, 2, STATE.carFormat);
-    if (halves.length !== 2) throw new Error('falha ao fatiar');
-    halves.forEach((h, i) => {
+    const parts = await slicePanorama(res.image_data_uri, n, STATE.carFormat);
+    if (parts.length !== n) throw new Error('falha ao fatiar');
+    parts.forEach((h, i) => {
       const s = _newSlide();
       s.style = fullStyle; s.imageSource = 'upload'; s.selectedImageUrl = h;
-      s.copyHeadline = i === 0 ? 'Primeira metade da ideia' : 'Segunda metade da ideia';
-      s.cta = i === halves.length - 1 ? 'Arrasta pro lado' : '';
+      s.copyHeadline = `Parte ${i + 1} da ideia`;
+      s.cta = i === parts.length - 1 ? 'Arrasta pro lado' : '';
       STATE.slides.push(s);
     });
-    STATE.activeSlide = STATE.slides.length - 2;
+    STATE.activeSlide = STATE.slides.length - n;
   } catch (e) {
     alert('Falha ao gerar panorâmica: ' + (e && e.message ? e.message : e));
   }
@@ -2439,17 +2421,10 @@ const templates = {
   'error':         tplError
 };
 
-let _lastRenderedStep = null;
 function render() {
   const stage = document.getElementById('stage');
   if (!stage) return;
-  // .enter (animação de entrada) só quando o step TROCOU — re-render do mesmo
-  // step (ex: marcar .selected) não replaya o slide-in nem pula a página.
-  const stepChanged = currentStep !== _lastRenderedStep;
-  stage.classList.toggle('enter', stepChanged);
-  _lastRenderedStep = currentStep;
   stage.innerHTML = (templates[currentStep] || tplBrand)();
-  if (stepChanged) window.scrollTo(0, 0);
   attachStepHandlers();
   // Disparar lógica específica do step
   if (currentStep === 'loading')      runGenerationReal();
@@ -2509,47 +2484,33 @@ function back() {
   render();
 }
 
-// Guard contra double-click ou race entre seleção e setTimeout(nextFromCurrent)
+// Guard contra double-click ou race entre render() e setTimeout(nextFromCurrent)
 let _advancing = false;
-function autoAdvance(el) {
+function autoAdvance() {
   if (_advancing) return;   // já rolou um click no mesmo step — ignora
   _advancing = true;
-  // Marca a seleção NO LUGAR (sem re-render da tela inteira — re-render
-  // redecodificava as imagens do grid e dava o "pisca" antes de avançar).
-  if (el) markSelected(el);
-  else render();
+  render();                  // re-renderiza pra mostrar .selected
   setTimeout(() => {
     nextFromCurrent();
+    // _advancing reseta no próximo render do step novo (a flag fica true até trocar de step)
     _advancing = false;
-  }, 160);
-}
-
-/* Toggle visual de seleção dentro do grupo do card clicado, sem re-render. */
-function markSelected(el, cls = 'selected') {
-  const group = el.closest('.choice-grid, .preset-grid') || el.parentElement;
-  if (!group) return;
-  group.querySelectorAll('.choice, .preset-card').forEach(c => {
-    c.classList.toggle(cls, c === el);
-    if (c.hasAttribute('aria-pressed')) c.setAttribute('aria-pressed', String(c === el));
-  });
+  }, 180);
 }
 
 function nextFromCurrent() {
   // wiz-style → wiz-imagem (se usa imagem) ou wiz-copy direto
   if (currentStep === 'wiz-style') {
-    const styleObj = currentStyleObj();
+    const styles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
+    const styleObj = styles.find(s => s.id === STATE.style);
     if (styleObj && styleObj.usaImagem) return goto('wiz-imagem');
     STATE.imageSource = 'none';
     return goto('wiz-copy');
   }
   // wiz-imagem → wiz-search (busca) | wiz-avatar (gerar) | wiz-copy (none)
-  // Estilo semAvatar (objeto/cena SEM pessoa): pula o avatar → direção visual direto.
   if (currentStep === 'wiz-imagem') {
     if (STATE.imageSource === 'search') return goto('wiz-search');
     if (STATE.imageSource === 'upload') return goto('wiz-upload');
-    if (STATE.imageSource === 'generate') {
-      return goto(currentStyleObj().semAvatar ? 'wiz-imagem-briefing' : 'wiz-avatar');
-    }
+    if (STATE.imageSource === 'generate') return goto('wiz-avatar');
     return goto('wiz-copy');
   }
   const map = {
@@ -2629,15 +2590,15 @@ function onAction(e) {
   switch (action) {
     case 'pick-brand':
       STATE.brand = value;
-      autoAdvance(el);
+      autoAdvance();
       break;
     case 'pick-mode':
       STATE.mode = value;
-      autoAdvance(el);
+      autoAdvance();
       break;
     case 'pick-format':
       STATE.format = value;
-      autoAdvance(el);
+      autoAdvance();
       break;
     case 'pick-style':
       STATE.style = value;
@@ -2645,11 +2606,11 @@ function onAction(e) {
       STATE.imageSource = null;
       STATE.searchQuery = '';
       STATE.selectedImageUrl = '';
-      autoAdvance(el);
+      autoAdvance();
       break;
     case 'pick-image-source':
       STATE.imageSource = value;
-      autoAdvance(el);
+      autoAdvance();
       break;
     case 'run-search': {
       const inp = document.getElementById('search-input');
@@ -2674,22 +2635,19 @@ function onAction(e) {
       break;
     case 'pick-avatar-segment':
       STATE.avatarSegment = value;
-      markSelected(el);   // toggle in-place, sem avançar (variante ainda falta)
+      render();   // re-renderiza pra marcar .selected, sem avançar (variante ainda falta)
       break;
     case 'pick-avatar-variant':
       STATE.avatarVariant = value;
-      markSelected(el);
+      render();
       break;
     case 'next-from-avatar':
       goto('wiz-imagem-briefing');
       break;
-    case 'pick-recorte': {
+    case 'pick-recorte':
       STATE.selectedImageUrl = value;   // URL do recorte (asset same-origin)
-      markSelected(el);
-      const cont = document.querySelector('[data-action="next-from-upload"]');
-      if (cont) cont.removeAttribute('disabled');
+      render();
       break;
-    }
     case 'next-from-upload':
       if (!STATE.selectedImageUrl) return;
       goto('wiz-copy');
@@ -2775,48 +2733,13 @@ function onAction(e) {
       break;
     }
     case 'select-preset': {
-      // Card de preset de foto clicado — toggle in-place (nada de re-render;
-      // o texto digitado no textarea fica intocado)
+      // Card de preset de foto clicado — atualiza STATE e re-renderiza (preserva texto digitado)
       const presetId = (el && el.dataset && el.dataset.presetId) || 'fotorrealista';
+      // Salva texto digitado antes de re-render
       const ta = document.getElementById('briefing-image-input');
       if (ta) STATE.briefingImage = ta.value;
       STATE.imageStylePreset = presetId;
-      markSelected(el, 'is-selected');
-      break;
-    }
-    case 'gen-image-brief': {
-      // Ideia solta do user → direção visual completa via /api/prompt-image.
-      // O texto atual do textarea vira a "ideia"; o resultado substitui (editável).
-      const ta = document.getElementById('briefing-image-input');
-      const status = document.getElementById('gen-brief-status');
-      const btn = el;
-      const idea = ta ? ta.value.trim() : '';
-      btn.setAttribute('disabled', '');
-      if (status) { status.textContent = 'Gerando direção…'; status.style.color = ''; }
-      fetch('/api/prompt-image', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          brand: STATE.brand,
-          model_id: STATE.style,
-          preset: STATE.imageStylePreset || 'fotorrealista',
-          avatar_segment: STATE.avatarSegment || '',
-          avatar_variant: STATE.avatarVariant || '',
-          idea
-        })
-      }).then(r => r.json()).then(data => {
-        btn.removeAttribute('disabled');
-        if (data && data.direction) {
-          if (ta) ta.value = data.direction;
-          STATE.briefingImage = data.direction;
-          if (status) { status.textContent = 'Pronto — edite à vontade.'; status.style.color = '#2E8B57'; }
-        } else {
-          if (status) { status.textContent = (data && data.error) || 'Não deu — tenta de novo.'; status.style.color = '#e5484d'; }
-        }
-      }).catch(() => {
-        btn.removeAttribute('disabled');
-        if (status) { status.textContent = 'Erro de rede — tenta de novo.'; status.style.color = '#e5484d'; }
-      });
+      render();
       break;
     }
     case 'next-from-imagem-briefing': {

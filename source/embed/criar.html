@@ -2143,7 +2143,7 @@ function tplCarouselBuild() {
         <button class="car-pill ${STATE.carFormat === 'feed' ? 'on' : ''}" data-action="car-format" data-value="feed">Feed 4:5</button>
         <button class="car-pill ${STATE.carFormat === 'story' ? 'on' : ''}" data-action="car-format" data-value="story">Story 9:16</button>
       </div>
-      <div class="car-strip">${strip}<button class="car-add" data-action="car-add">＋ Slide</button><button class="car-add" data-action="car-panorama" title="Gera 1 imagem larga e fatia em 2 slides com fundo contínuo">⇲ Panorâmica</button></div>
+      <div class="car-strip">${strip}<button class="car-add" data-action="car-add">＋ Slide</button><button class="car-add" data-action="car-panorama" title="Gera 1 imagem larga e fatia em 2 a 4 slides com fundo contínuo">⇲ Panorâmica</button></div>
       <div class="car-editor">
         <p class="car-editing">Editando slide ${STATE.activeSlide + 1} de ${STATE.slides.length}</p>
         <div class="field"><label class="field-label">Estilo</label>
@@ -2362,10 +2362,15 @@ function slicePanorama(dataUri, n, format) {
   });
 }
 
-// Gera 1 imagem panorâmica larga e cria 2 slides full-bleed com fundo contínuo.
+// Gera 1 imagem panorâmica larga e cria N slides full-bleed com fundo contínuo.
+// 2 slides = melhor qualidade · 3-4 = fatias mais estreitas (upscale maior, imagem
+// levemente mais suave — a fonte tem 1536px de largura, cada fatia vira 1080px).
 async function addPanoramaPair() {
   const scene = window.prompt('Descreva a cena panorâmica (ex: "sala de reunião vazia, mesa longa, janela com vista da cidade, cinemático"):');
   if (!scene || !scene.trim()) return;
+  let n = parseInt(window.prompt('Em quantos slides a cena continua? (2 a 4)\n2 = qualidade máxima · 3-4 = imagem um pouco mais suave', '2'), 10);
+  if (isNaN(n)) return;
+  n = Math.max(2, Math.min(4, n));
   const fullStyle = STATE.brand === 'metta' ? 'D-foto-fullbleed-overlay' : 'TIAGO-EDITORIAL-DARK';
   const btn = document.querySelector('[data-action="car-panorama"]');
   if (btn) { btn.textContent = 'Gerando imagem…'; btn.style.pointerEvents = 'none'; }
@@ -2374,19 +2379,19 @@ async function addPanoramaPair() {
     const res = await postGenerate({
       briefing: `Marca: ${marca}. Imagem panorâmica de fundo.`, mock: false,
       model_id: fullStyle, image_source: 'generate', image_only: true, format: 'feed',
-      briefing_image: scene.trim() + ', wide cinematic panorama, continuous scene, no centered single subject'
+      briefing_image: scene.trim() + ', ultra wide cinematic panorama, one single continuous scene spanning the whole width, horizontally distributed elements, no centered single subject, scene reads naturally when cropped into ' + n + ' vertical sections'
     });
     if (!res || !res.image_data_uri) throw new Error((res && res.error) || 'sem imagem');
-    const halves = await slicePanorama(res.image_data_uri, 2, STATE.carFormat);
-    if (halves.length !== 2) throw new Error('falha ao fatiar');
-    halves.forEach((h, i) => {
+    const parts = await slicePanorama(res.image_data_uri, n, STATE.carFormat);
+    if (parts.length !== n) throw new Error('falha ao fatiar');
+    parts.forEach((h, i) => {
       const s = _newSlide();
       s.style = fullStyle; s.imageSource = 'upload'; s.selectedImageUrl = h;
-      s.copyHeadline = i === 0 ? 'Primeira metade da ideia' : 'Segunda metade da ideia';
-      s.cta = i === halves.length - 1 ? 'Arrasta pro lado' : '';
+      s.copyHeadline = `Parte ${i + 1} da ideia`;
+      s.cta = i === parts.length - 1 ? 'Arrasta pro lado' : '';
       STATE.slides.push(s);
     });
-    STATE.activeSlide = STATE.slides.length - 2;
+    STATE.activeSlide = STATE.slides.length - n;
   } catch (e) {
     alert('Falha ao gerar panorâmica: ' + (e && e.message ? e.message : e));
   }
