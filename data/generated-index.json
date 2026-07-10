@@ -4,6 +4,66 @@
   "description": "Criativos gerados pela ferramenta de criação (pipeline ad-generator) — biblioteca viva, separada do catálogo canônico.",
   "items": [
     {
+      "id": "metta-carrossel-serie-metodo",
+      "type": "carousel",
+      "model_id": "série (paleta travada)",
+      "brand": "metta",
+      "format": "feed",
+      "headline": "Refém da empresa → método (série coesa).",
+      "cta": "Conheça a Metta",
+      "date": "2026-07-10",
+      "qa": "Série tipográfica — paleta travada (escuro ↔ amarelo)",
+      "nota": "Carrossel só-texto com paleta travada: lê como UMA série, não 4 peças soltas",
+      "engine": "render local (motor blueprint) · sem custo de API",
+      "src": "assets/generated/ads/carousels/metta-serie-metodo-1.webp",
+      "slides": [
+        {
+          "src": "assets/generated/ads/carousels/metta-serie-metodo-1.webp",
+          "headline": "Você virou refém da própria empresa."
+        },
+        {
+          "src": "assets/generated/ads/carousels/metta-serie-metodo-2.webp",
+          "headline": "+141% de aumento em vendas."
+        },
+        {
+          "src": "assets/generated/ads/carousels/metta-serie-metodo-3.webp",
+          "headline": "Time bom não salva processo ruim."
+        },
+        {
+          "src": "assets/generated/ads/carousels/metta-serie-metodo-4.webp",
+          "headline": "Método antes de motivação."
+        }
+      ]
+    },
+    {
+      "id": "metta-carrossel-caos-vira-ordem",
+      "type": "carousel",
+      "model_id": "D-foto-fullbleed-overlay",
+      "brand": "metta",
+      "format": "feed",
+      "headline": "Todo mês a mesma correria → método.",
+      "cta": "Conheça a Metta",
+      "date": "2026-07-10",
+      "qa": "Panorâmica — cena contínua fatiada em 3 slides",
+      "nota": "Carrossel panorâmico: a cena CONTINUA de um slide pro outro (caos → pessoa → ordem)",
+      "engine": "gpt-image-2 (1 imagem larga) fatiada em 3 + render local · custo ≈ 1 imagem",
+      "src": "assets/generated/ads/carousels/metta-caos-ordem-1.webp",
+      "slides": [
+        {
+          "src": "assets/generated/ads/carousels/metta-caos-ordem-1.webp",
+          "headline": "Todo mês a mesma correria."
+        },
+        {
+          "src": "assets/generated/ads/carousels/metta-caos-ordem-2.webp",
+          "headline": "O problema não é o time."
+        },
+        {
+          "src": "assets/generated/ads/carousels/metta-caos-ordem-3.webp",
+          "headline": "É a ausência de método."
+        }
+      ]
+    },
+    {
       "id": "metta-feed-yellow-objeto-vai-ficando-facil",
       "model_id": "YELLOW-OBJETO",
       "brand": "metta",
