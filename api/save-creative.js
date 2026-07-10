@@ -9,15 +9,24 @@
 // Sem elas, responde 501 com instrução clara (fail-safe, não quebra a UI).
 //
 // POST /api/save-creative
-// Body (post):     { type:"post", brand, model_id, format, headline, cta,
-//                    image_data_uri:"data:image/png;base64,..." , qa?, nota? }
-// Body (carrossel):{ type:"carousel", brand, model_id, format, headline, cta,
-//                    slides:[{ image_data_uri, headline }], qa?, nota? }
-// Resposta 201: { ok:true, item:{...} }
+// Body (post):     { type:"post", visibility, brand, model_id, format, headline, cta,
+//                    image_data_uri:"data:image/png;base64,...", run_id?, pipeline?, evaluation? }
+// Body (carrossel):{ type:"carousel", visibility, brand, model_id, format, headline, cta,
+//                    slides:[{ image_data_uri, headline }], run_id?, pipeline?, evaluation? }
+//   visibility: "public"  -> galeria VISÍVEL (a pessoa clicou "Salvar")
+//               "archive" -> galeria INVISÍVEL (auto-arquivo de toda peça gerada)
+//   pipeline:   diagnóstico/etapas do pipeline (array de strings)
+//   evaluation: avaliação do QA { qa, vision_qa, critic, evaluation }
+// Resposta 201: { ok:true, item:{...}, visibility }
 import { put } from '@vercel/blob';
 import { kv } from '@vercel/kv';
 
-const KEY = 'creatives:index';
+// Dois "baldes" no KV:
+//   creatives:index   -> galeria VISÍVEL (só o que a pessoa clicou pra salvar)
+//   creatives:archive -> galeria INVISÍVEL (TODA peça gerada, auto-arquivada,
+//                        com criativo + pipeline + avaliação do QA)
+const KEY_PUBLIC = 'creatives:index';
+const KEY_ARCHIVE = 'creatives:archive';
 
 function slug(s, n = 48) {
   return String(s || 'peca')
@@ -63,6 +72,9 @@ export default async function handler(req, res) {
   const headline = String(body.headline || '').slice(0, 300);
   const base = slug(headline || body.model_id || 'peca');
   const stamp = Date.now().toString(36);
+  // 'public' = a pessoa clicou "Salvar na galeria"; 'archive' = auto-arquivo silencioso.
+  const visibility = body.visibility === 'public' ? 'public' : 'archive';
+  const targetKey = visibility === 'public' ? KEY_PUBLIC : KEY_ARCHIVE;
 
   try {
     const record = {
@@ -75,10 +87,16 @@ export default async function handler(req, res) {
       cta: String(body.cta || ''),
       date: new Date().toISOString().slice(0, 10),
       savedAt: new Date().toISOString(),
-      qa: String(body.qa || 'Salvo automaticamente pela ferramenta'),
+      run_id: String(body.run_id || ''),
+      qa: String(body.qa || (visibility === 'public' ? 'Salvo pela ferramenta' : 'Auto-arquivado')),
       nota: String(body.nota || ''),
       engine: String(body.engine || 'ferramenta /criar'),
-      source: 'auto',
+      visibility,
+      source: visibility === 'public' ? 'clicado' : 'auto-arquivo',
+      // registro completo pra análise: o pipeline (etapas/diagnóstico) e a
+      // avaliação do QA (qa + vision_qa + crítico + nota final).
+      pipeline: Array.isArray(body.pipeline) ? body.pipeline.slice(0, 200).map(String) : [],
+      evaluation: (body.evaluation && typeof body.evaluation === 'object') ? body.evaluation : null,
     };
 
     if (type === 'carousel') {
@@ -94,8 +112,8 @@ export default async function handler(req, res) {
       record.src = await uploadImage(body.image_data_uri, `creatives/${record.id}.png`);
     }
 
-    await kv.lpush(KEY, JSON.stringify(record));
-    res.status(201).json({ ok: true, item: record });
+    await kv.lpush(targetKey, JSON.stringify(record));
+    res.status(201).json({ ok: true, item: record, visibility });
   } catch (e) {
     res.status(500).json({ ok: false, error: String((e && e.message) || e) });
   }

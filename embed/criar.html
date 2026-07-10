@@ -2430,7 +2430,7 @@ function render() {
   // Disparar lógica específica do step
   if (currentStep === 'loading')      runGenerationReal();
   if (currentStep === 'audio-record') initSpeechRecognition();
-  if (currentStep === 'result')       hydrateAdPreview();
+  if (currentStep === 'result')     { hydrateAdPreview(); setTimeout(archiveCreative, 1400); }
   if (currentStep === 'carousel-loading') runCarouselGeneration();
   if (currentStep === 'carousel-result')  hydrateCarousel();
   // Notifica parent pra ajustar altura do iframe
@@ -2976,6 +2976,15 @@ function runGenerationReal() {
       STATE.diagnostics = Array.isArray(result.diagnostics) ? result.diagnostics : [];
       STATE.warnings = Array.isArray(result.warnings) ? result.warnings : [];
       STATE.qa_report = Array.isArray(result.qa_report) ? result.qa_report : [];
+      // Avaliação completa do QA (qa mecânico + vision-QA + crítico + nota final)
+      // — guardada pra ir junto no auto-arquivo.
+      STATE.qa_full = {
+        qa: result.qa || null,
+        vision_qa: result.vision_qa || null,
+        critic: result.critic || null,
+        evaluation: result.evaluation || null,
+      };
+      STATE._archived = false;
       STATE.error = null;
       setTimeout(() => goto('result'), 350);
     })
@@ -3077,25 +3086,49 @@ async function captureAdDataUri() {
   return canvas.toDataURL('image/png');
 }
 
-// Salva a peça atual na galeria (POST /api/save-creative -> Vercel Blob + KV).
+// Monta o payload de save da peça atual (imagem capturada + metadados + pipeline + QA).
+async function buildCreativePayload(visibility) {
+  const image_data_uri = await captureAdDataUri();
+  return {
+    type: 'post',
+    visibility,                       // 'public' (galeria visível) | 'archive' (invisível)
+    brand: STATE.brand,
+    model_id: STATE.model_id || '',
+    format: STATE.ad_format || 'feed',
+    headline: STATE.copyHeadline || '',
+    cta: STATE.cta || '',
+    run_id: STATE.run_id || '',
+    image_data_uri,
+    pipeline: Array.isArray(STATE.diagnostics) ? STATE.diagnostics : [],
+    evaluation: STATE.qa_full || null,
+  };
+}
+
+// Auto-arquiva TODA peça gerada na galeria invisível (silencioso, não bloqueia a UI).
+// Roda uma vez por peça. Falha em silêncio (ex: storage não configurado ainda).
+async function archiveCreative() {
+  if (STATE._archived) return;
+  STATE._archived = true;
+  try {
+    const payload = await buildCreativePayload('archive');
+    await fetch('/api/save-creative', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (_) { /* silencioso — arquivo é best-effort */ }
+}
+
+// Salva a peça na galeria VISÍVEL (clique explícito).
 async function saveCreativeToGallery() {
   const btn = document.getElementById('btn-save-gallery');
   const setLabel = t => { if (btn) btn.innerHTML = t; };
   if (btn) btn.disabled = true;
   setLabel('Salvando…');
   try {
-    const image_data_uri = await captureAdDataUri();
+    const payload = await buildCreativePayload('public');
     const res = await fetch('/api/save-creative', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: 'post',
-        brand: STATE.brand,
-        model_id: STATE.model_id || '',
-        format: STATE.ad_format || 'feed',
-        headline: STATE.copyHeadline || '',
-        cta: STATE.cta || '',
-        image_data_uri,
-      }),
+      body: JSON.stringify(payload),
     });
     const data = await res.json().catch(() => ({}));
     if (res.ok && data.ok) {
