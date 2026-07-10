@@ -849,14 +849,28 @@ def _run_pipeline_inline(
             attempt_chain = attempt_chain[:max_attempts]
 
             image_gen = ImageGenAdapter()
+            # Fase C: injeta a referência do banco (só metta) pra o Nano Banana
+            # HERDAR a linguagem Metta. Gated pelo provider — no gpt-image atual
+            # continua [] (no-op); só ativa com nano-banana/gemini/imagen.
+            try:
+                _prov = os.getenv("IMAGE_GEN_PROVIDER", "gpt-image-2").lower()
+                if (marca or "").lower() == "metta" and _prov not in (
+                        "gpt-image-2", "gpt-image-1", "dall-e-3", "openai", "mock"):
+                    from _nano_pipeline import pick_reference as _pkref, _METTA_TREAT as _MT
+                    _r = _pkref(chosen_model_id, {"headline": user_headline})
+                    _bank_refs = [_r["path"]] if _r else []
+                else:
+                    _bank_refs, _MT = [], ""
+            except Exception:
+                _bank_refs, _MT = [], ""
             last_error = None
             for i, attempt_prompt in enumerate(attempt_chain, start=1):
                 try:
                     ig = image_gen.generate(
-                        prompt=attempt_prompt,
+                        prompt=attempt_prompt + ((" " + _MT) if _bank_refs else ""),
                         negative_prompt=negative,
                         aspect_ratio=aspect,
-                        reference_images=[],
+                        reference_images=_bank_refs,
                     )
                     image_file_url = ig.url
                     diagnostics.append(
@@ -1034,10 +1048,22 @@ def _run_pipeline_inline(
                 _regen_prompt = (f"{_nc['brief']}. {_preset_ov}"
                                  + (f" Composition: {_pl}" if _pl else "")
                                  + (f" {_adp}" if _adp else "")).strip()
+                # Fase C: mesma injeção de referência do banco na regeração (gated).
+                try:
+                    _prov2 = os.getenv("IMAGE_GEN_PROVIDER", "gpt-image-2").lower()
+                    if (marca or "").lower() == "metta" and _prov2 not in (
+                            "gpt-image-2", "gpt-image-1", "dall-e-3", "openai", "mock"):
+                        from _nano_pipeline import pick_reference as _pkref2, _METTA_TREAT as _MT2
+                        _r2 = _pkref2(chosen_model_id, copy_dict)
+                        _bank_refs2 = [_r2["path"]] if _r2 else []
+                    else:
+                        _bank_refs2, _MT2 = [], ""
+                except Exception:
+                    _bank_refs2, _MT2 = [], ""
                 _ig = ImageGenAdapter().generate(
-                    prompt=_regen_prompt,
+                    prompt=_regen_prompt + ((" " + _MT2) if _bank_refs2 else ""),
                     negative_prompt="no smiling stock pose, no cartoon, subject not cropped awkwardly, " + _NEG_FAILS,
-                    aspect_ratio=_aspect, reference_images=[])
+                    aspect_ratio=_aspect, reference_images=_bank_refs2)
                 image_data_uri = _image_to_data_uri(_ig.url)
                 rendered = render_html(marca=marca, model_id=chosen_model_id, copy=copy_dict,
                                        image_url=image_data_uri or _ig.url, format=format_key)
