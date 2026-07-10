@@ -357,6 +357,49 @@ class CopyGenerator:
             for angle in angles
         ]
 
+    def derive_winner_variations(
+        self, brand: Brand, winner_text: str, performance_notes: str = ""
+    ) -> dict[str, Any]:
+        """Banco de vencedores (v5.1 seção 9): a partir de um criativo que
+        comprovadamente performou, deriva as versões A, B e C mantendo os
+        elementos responsáveis pela performance -- o modelo primeiro NOMEIA
+        esses elementos (pra ficarem auditáveis na resposta) e só então varia
+        o resto. Sonnet, seguindo a decisão de custo de jul/2026 que migrou
+        todos os usos de Opus deste agente pra Sonnet 5 (ver docstring do
+        módulo); reverter é trocar só o model abaixo."""
+        if brand != "metta":
+            raise NotImplementedError(
+                f"Brand {brand!r} is not supported yet. Full support "
+                "requires tom-de-voz-tiago.md, which is not in the repo."
+            )
+        if not winner_text.strip():
+            raise ValueError("winner_text vazio: cole a copy do criativo vencedor.")
+        knowledge = self._knowledge_base(brand)
+        response = self.client.messages.create(
+            model=SONNET_MODEL,
+            # Mesma margem do _judge: o modelo gasta parte do orçamento num
+            # bloco de thinking implícito antes do JSON do schema.
+            max_tokens=16000,
+            system=_build_system_prompt(brand, "criativos"),
+            messages=[{
+                "role": "user",
+                "content": _cached_content(
+                    _build_winner_variations_prompt(winner_text, performance_notes, knowledge),
+                    marker="=== CRIATIVO VENCEDOR ===",
+                ),
+            }],
+            output_config={
+                "format": {"type": "json_schema", "schema": _WINNER_VARIATIONS_SCHEMA},
+            },
+        )
+        data = _extract_json(response, stage="derive_winner_variations")
+        data["variations"] = [
+            {key: _remove_travessao(value) if isinstance(value, str) else value
+             for key, value in variation.items()}
+            for variation in data["variations"]
+        ]
+        return data
+
     @staticmethod
     def _assemble(draft: dict[str, Any]) -> str:
         return "\n\n".join(
@@ -677,6 +720,32 @@ def _build_angles_prompt(
     )
 
 
+def _build_winner_variations_prompt(
+    winner_text: str, performance_notes: str, knowledge: KnowledgeBase
+) -> str:
+    return (
+        "Um criativo da Metta comprovadamente performou (critério do marketing: "
+        "mais leads qualificados / melhor CTR). Sua tarefa tem duas partes, nesta "
+        "ordem:\n"
+        "1. IDENTIFIQUE os elementos responsáveis pela performance -- o que nessa "
+        "copy fez ela funcionar (o gancho? a dor específica? a prova? o formato do "
+        "CTA? a cadência?). Liste cada elemento de forma concreta e auditável.\n"
+        "2. DERIVE exatamente 3 variações -- A, B e C -- que MANTÊM esses elementos "
+        "intactos e variam o restante (outra abertura, outra prova/case do banco, "
+        "outro fecho, outra forma de entrar na mesma dor). Variação não é paráfrase: "
+        "cada versão precisa ser uma peça nova que preserve o que performa. Pra cada "
+        "variação, diga em uma linha o que mudou em relação à original.\n\n"
+        f"{knowledge.as_context()}\n\n"
+        "=== CRIATIVO VENCEDOR ===\n"
+        f"{winner_text}\n\n"
+        + (f"=== O QUE O MARKETING SABE SOBRE A PERFORMANCE ===\n{performance_notes}\n\n"
+           if performance_notes.strip() else "")
+        + "=== TAREFA ===\n"
+        "Responda no schema JSON pedido: performance_elements (lista) e as "
+        "variações A, B e C (hook, corpo, cta, o_que_mudou)."
+    )
+
+
 def _build_linkedin_prompt(brief: Brief, draft: dict[str, Any]) -> str:
     # Real rewrite for LinkedIn per criação doc seção 4 — not copy-paste. Carrossel
     # vira PDF-style, descrição fica mais densa, tom apropriado da plataforma.
@@ -785,6 +854,34 @@ _ANGLES_SCHEMA: dict[str, Any] = {
         }
     },
     "required": ["angles"],
+    "additionalProperties": False,
+}
+
+_WINNER_VARIATIONS_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        # O que fez a peça performar, nomeado ANTES de variar -- fica na
+        # resposta pra auditoria humana (a pessoa vê o que foi preservado).
+        "performance_elements": {"type": "array", "items": {"type": "string"}},
+        "variations": {
+            # Sem minItems/maxItems (mesma limitação da API dos outros arrays
+            # deste arquivo); o "exatamente 3" fica no texto do prompt.
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "label": {"type": "string", "enum": ["A", "B", "C"]},
+                    "hook": {"type": "string"},
+                    "corpo": {"type": "string"},
+                    "cta": {"type": "string"},
+                    "o_que_mudou": {"type": "string"},
+                },
+                "required": ["label", "hook", "corpo", "cta", "o_que_mudou"],
+                "additionalProperties": False,
+            },
+        },
+    },
+    "required": ["performance_elements", "variations"],
     "additionalProperties": False,
 }
 

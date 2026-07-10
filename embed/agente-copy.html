@@ -547,6 +547,20 @@ button {
       <span class="status" id="submit-status"></span>
     </div>
   </div>
+
+  <div class="card" id="winner-card">
+    <p class="card-label">Banco de vencedores</p>
+    <p class="hint">Um criativo performou (mais leads qualificados, melhor CTR)? Cole a copy dele aqui. A IA identifica os elementos responsáveis pela performance, gera 3 variações que os preservam e guarda o vencedor no banco como benchmark.</p>
+    <label for="winner-text">Copy do criativo vencedor</label>
+    <textarea id="winner-text" placeholder="Cole aqui a copy completa (hook, corpo e CTA) do criativo que performou"></textarea>
+    <label for="winner-notes">O que o marketing sabe sobre a performance (opcional)</label>
+    <input id="winner-notes" placeholder='Ex: "CTR 3x acima da média da conta, público frio"'>
+    <div class="actions">
+      <button type="button" class="btn-secondary" id="winner-btn">Gerar variações A/B/C</button>
+      <span class="status" id="winner-status"></span>
+    </div>
+    <div id="winner-output"></div>
+  </div>
 </div>
 
 <script>
@@ -904,7 +918,9 @@ button {
   // Botões "Copiar" dos blocos do resultado. UL (variações de hook) copia um
   // item por linha; os demais copiam o texto do bloco. Fallback de textarea
   // pra quando navigator.clipboard não estiver disponível dentro do iframe.
-  document.querySelectorAll('.copy-btn').forEach(btn => {
+  // wireCopyButton é reusado pelos blocos criados dinamicamente (banco de
+  // vencedores), por isso é função nomeada e não só o forEach de carga.
+  function wireCopyButton(btn) {
     btn.addEventListener('click', async () => {
       const target = document.getElementById(btn.dataset.copy);
       if (!target) return;
@@ -927,7 +943,51 @@ button {
       btn.classList.add('copied');
       setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1600);
     });
-  });
+  }
+  document.querySelectorAll('.copy-btn').forEach(wireCopyButton);
+
+  // --- Banco de vencedores (v5.1 seção 9) -----------------------------------
+  async function handleWinnerVariations() {
+    const statusEl = document.getElementById('winner-status');
+    const btn = document.getElementById('winner-btn');
+    const out = document.getElementById('winner-output');
+    const winnerText = document.getElementById('winner-text').value.trim();
+    if (!winnerText) { setStatus(statusEl, 'Cole a copy do criativo vencedor primeiro.', 'error'); return; }
+
+    btn.disabled = true;
+    setStatus(statusEl, 'Identificando elementos de performance e derivando A/B/C…');
+    out.innerHTML = '';
+    try {
+      const data = await api('winner_variations', {
+        winner_text: winnerText,
+        performance_notes: document.getElementById('winner-notes').value.trim(),
+      });
+      const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+      let html = `
+        <div class="piece-block">
+          <h3>Elementos responsáveis pela performance (preservados nas variações)</h3>
+          <ul>${data.performance_elements.map(e => `<li>${esc(e)}</li>`).join('')}</ul>
+        </div>`;
+      data.variations.forEach((v, i) => {
+        html += `
+        <div class="piece-block">
+          <button type="button" class="copy-btn" data-copy="winner-var-${i}">Copiar</button>
+          <h3>Variação ${esc(v.label)} — ${esc(v.o_que_mudou)}</h3>
+          <p id="winner-var-${i}">${esc([v.hook, v.corpo, v.cta].filter(Boolean).join('\n\n'))}</p>
+        </div>`;
+      });
+      out.innerHTML = html;
+      out.querySelectorAll('.copy-btn').forEach(wireCopyButton);
+      setStatus(statusEl, data.stored_in_bank
+        ? 'Variações prontas — vencedor guardado no banco.'
+        : 'Variações prontas (banco KV não configurado; vencedor não foi guardado).', 'ok');
+    } catch (err) {
+      setStatus(statusEl, err.message || 'Erro ao derivar variações.', 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+  document.getElementById('winner-btn').addEventListener('click', handleWinnerVariations);
 
   ['brand', 'emotional_axis', 'platform'].forEach(id => enhanceSelect(document.getElementById(id)));
   document.querySelectorAll('.chip-row[data-for="length"]').forEach(wireChipRow);

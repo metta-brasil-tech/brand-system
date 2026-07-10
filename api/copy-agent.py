@@ -51,6 +51,7 @@ import json
 import os
 import sys
 import traceback
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 
@@ -78,6 +79,42 @@ def _run_propose_angles(data: dict) -> dict:
         raw_idea=data.get("raw_idea", ""),
     )
     return {"ok": True, "angles": angles}
+
+
+def _run_winner_variations(data: dict) -> dict:
+    """Banco de vencedores (v5.1 seção 9): deriva variações A/B/C de um
+    criativo que performou e ALIMENTA o banco permanente -- o vencedor entra
+    na lista 'winners:index' do KV (quando configurado) com os elementos de
+    performance identificados, virando benchmark consultável."""
+    import anthropic
+    from src.generator import CopyGenerator
+
+    client = anthropic.Anthropic()
+    result = CopyGenerator(client).derive_winner_variations(
+        brand=data["brand"],
+        winner_text=data["winner_text"],
+        performance_notes=data.get("performance_notes", ""),
+    )
+
+    stored = False
+    try:
+        from pieces import _kv_command, _kv_configured  # api/pieces.py
+
+        if _kv_configured():
+            entry = {
+                "received_at": datetime.now(timezone.utc).isoformat(),
+                "brand": data["brand"],
+                "winner_text": data["winner_text"],
+                "performance_notes": data.get("performance_notes", ""),
+                "performance_elements": result.get("performance_elements", []),
+                "variations": result.get("variations", []),
+            }
+            _kv_command("LPUSH", "winners:index", json.dumps(entry, ensure_ascii=False))
+            stored = True
+    except Exception:
+        pass  # banco indisponível não pode derrubar a derivação em si
+
+    return {"ok": True, "stored_in_bank": stored, **result}
 
 
 def _run_generate(data: dict) -> dict:
@@ -199,7 +236,18 @@ class handler(BaseHTTPRequestHandler):
                 status = result.pop("status")
                 return self._json(status, result)
 
-            return self._json(400, {"detail": "action precisa ser 'propose_angles', 'generate' ou 'submit'."})
+            if action == "winner_variations":
+                if not str(data.get("winner_text", "")).strip():
+                    return self._json(400, {"detail": "campo obrigatório ausente: winner_text (a copy do criativo vencedor)."})
+                data.setdefault("brand", "metta")
+                try:
+                    return self._json(200, _run_winner_variations(data))
+                except NotImplementedError as exc:
+                    return self._json(400, {"detail": str(exc)})
+                except ValueError as exc:
+                    return self._json(400, {"detail": str(exc)})
+
+            return self._json(400, {"detail": "action precisa ser 'propose_angles', 'generate', 'submit' ou 'winner_variations'."})
 
         except Exception as exc:
             tb = traceback.format_exc()
