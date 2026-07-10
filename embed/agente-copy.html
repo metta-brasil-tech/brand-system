@@ -292,6 +292,35 @@ button {
   box-shadow: var(--metta-sys-elevation-1);
   padding: var(--metta-sys-spacing-4) var(--metta-sys-spacing-5);
   margin-bottom: var(--metta-sys-spacing-3);
+  position: relative;
+}
+
+/* Botão "Copiar" no canto do bloco. Fica FORA do h3 de propósito: o JS
+   reescreve o textContent dos títulos (out-hook-label/out-corpo-label) por
+   tipo de copy, e um botão dentro do h3 seria apagado junto. */
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: var(--metta-ref-axis-wght-medium-p);
+  background: transparent;
+  color: var(--metta-sys-color-on-surface-variant);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-full);
+  box-shadow: none;
+}
+.copy-btn:hover {
+  color: var(--metta-sys-color-on-surface);
+  border-color: var(--metta-sys-color-primary);
+  transform: none;
+  box-shadow: none;
+}
+.copy-btn.copied {
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+  border-color: var(--metta-sys-color-primary);
 }
 .piece-block h3 {
   font-size: 11px;
@@ -478,26 +507,32 @@ button {
   <div class="result" id="result">
     <p class="result-heading">Peça gerada</p>
     <div class="piece-block">
+      <button type="button" class="copy-btn" data-copy="out-hook">Copiar</button>
       <h3 id="out-hook-label">Hook (frase do criativo / capa)</h3>
       <p id="out-hook"></p>
     </div>
     <div class="piece-block" id="out-corpo-block">
+      <button type="button" class="copy-btn" data-copy="out-corpo">Copiar</button>
       <h3 id="out-corpo-label">Corpo</h3>
       <p id="out-corpo"></p>
     </div>
     <div class="piece-block">
+      <button type="button" class="copy-btn" data-copy="out-cta">Copiar</button>
       <h3>CTA</h3>
       <p id="out-cta"></p>
     </div>
     <div class="piece-block">
+      <button type="button" class="copy-btn" data-copy="out-hook-variations">Copiar</button>
       <h3>Variações de hook</h3>
       <ul id="out-hook-variations"></ul>
     </div>
     <div class="piece-block">
+      <button type="button" class="copy-btn" data-copy="out-descricao">Copiar</button>
       <h3>Legenda pronta (copiar e colar na publicação)</h3>
       <p id="out-descricao"></p>
     </div>
     <div class="piece-block" id="out-linkedin-block" style="display:none;">
+      <button type="button" class="copy-btn" data-copy="out-linkedin">Copiar</button>
       <h3>Adaptação LinkedIn</h3>
       <p id="out-linkedin"></p>
     </div>
@@ -865,6 +900,34 @@ button {
   document.getElementById('submit-btn').addEventListener('click', handleSubmit);
   document.getElementById('discard-btn').addEventListener('click', handleDiscard);
   document.getElementById('propose-angles-btn').addEventListener('click', handleProposeAngles);
+
+  // Botões "Copiar" dos blocos do resultado. UL (variações de hook) copia um
+  // item por linha; os demais copiam o texto do bloco. Fallback de textarea
+  // pra quando navigator.clipboard não estiver disponível dentro do iframe.
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const target = document.getElementById(btn.dataset.copy);
+      if (!target) return;
+      const text = target.tagName === 'UL'
+        ? Array.from(target.querySelectorAll('li')).map(li => li.textContent).join('\n')
+        : target.textContent;
+      if (!text.trim()) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (_) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      const original = btn.textContent;
+      btn.textContent = 'Copiado ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1600);
+    });
+  });
 
   ['brand', 'emotional_axis', 'platform'].forEach(id => enhanceSelect(document.getElementById(id)));
   document.querySelectorAll('.chip-row[data-for="length"]').forEach(wireChipRow);
