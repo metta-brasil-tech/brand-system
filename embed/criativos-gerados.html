@@ -130,13 +130,22 @@
   const lb = document.getElementById('lb'), lbimg = document.getElementById('lbimg');
   const lbcap = document.getElementById('lbcap'), lbcount = document.getElementById('lbcount'), lbdots = document.getElementById('lbdots');
   let items = [];
+  // Fonte primária: /api/creatives (curados versionados + salvos automáticos no KV).
+  // Fallback: o JSON estático versionado (galeria segue funcionando sem o endpoint).
   try {
-    const res = await fetch('../data/generated-index.json');
-    items = (await res.json()).items || [];
+    const res = await fetch('/api/creatives', { cache: 'no-store' });
+    if (!res.ok) throw new Error('endpoint ' + res.status);
+    const data = await res.json();
+    items = data.items || [];
   } catch (e) {
-    document.getElementById('empty').hidden = false;
-    document.getElementById('empty').textContent = 'Não consegui carregar data/generated-index.json';
-    return;
+    try {
+      const res2 = await fetch('../data/generated-index.json');
+      items = (await res2.json()).items || [];
+    } catch (e2) {
+      document.getElementById('empty').hidden = false;
+      document.getElementById('empty').textContent = 'Não consegui carregar os criativos.';
+      return;
+    }
   }
   items.sort((a, b) => (b.date || '').localeCompare(a.date || '') || a.id.localeCompare(b.id));
   function esc(s) { return String(s || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }

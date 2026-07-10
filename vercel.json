@@ -33,6 +33,15 @@
     "api/render.js": {
       "memory": 1024,
       "maxDuration": 30
+    },
+    "api/save-creative.js": {
+      "maxDuration": 30,
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy,render_out,data}/**"
+    },
+    "api/creatives.js": {
+      "maxDuration": 15,
+      "includeFiles": "data/generated-index.json",
+      "excludeFiles": "{assets,content,source,vendor,scripts,styles,embed,public,engine,agente-copy,render_out}/**"
     }
   }
 }

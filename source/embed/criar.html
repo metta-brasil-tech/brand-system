@@ -2034,6 +2034,7 @@ function tplResult() {
           ` : ''}
           <div class="actions-stack">
             <button class="btn btn-primary" data-action="download-png">${icon('download', 16)} Baixar PNG</button>
+            <button class="btn btn-outlined" data-action="save-gallery" id="btn-save-gallery">${icon('sparkles', 16)} Salvar na galeria</button>
             <button class="btn btn-outlined" data-action="regenerate">${icon('refresh', 16)} Gerar outra variação</button>
             <button class="btn btn-ghost" data-action="restart">Criar peça nova</button>
           </div>
@@ -2825,6 +2826,9 @@ function onAction(e) {
     case 'download-png':
       downloadMockPng();
       break;
+    case 'save-gallery':
+      saveCreativeToGallery();
+      break;
   }
 }
 
@@ -3056,6 +3060,60 @@ function toggleMic() {
 /* ============================================================
    DOWNLOAD PNG REAL — html2canvas captura o iframe ad-preview
 ============================================================ */
+// Captura o .ad-canvas do preview e devolve um dataURL image/png (mesma base do download).
+async function captureAdDataUri() {
+  const iframe = document.getElementById('ad-preview');
+  if (!iframe || !iframe.contentDocument) throw new Error('Preview não disponível pra captura.');
+  if (typeof html2canvas === 'undefined') throw new Error('html2canvas ainda carregando — tenta de novo em 2s.');
+  const adRoot = iframe.contentDocument.querySelector('.ad-canvas');
+  if (!adRoot) throw new Error('Elemento .ad-canvas não encontrado no preview.');
+  if (iframe.contentDocument.fonts && iframe.contentDocument.fonts.ready) await iframe.contentDocument.fonts.ready;
+  await new Promise(r => setTimeout(r, 100));
+  const canvas = await html2canvas(adRoot, {
+    backgroundColor: null, scale: 1, useCORS: true, logging: false,
+    width: adRoot.offsetWidth, height: adRoot.offsetHeight,
+    windowWidth: adRoot.offsetWidth, windowHeight: adRoot.offsetHeight,
+  });
+  return canvas.toDataURL('image/png');
+}
+
+// Salva a peça atual na galeria (POST /api/save-creative -> Vercel Blob + KV).
+async function saveCreativeToGallery() {
+  const btn = document.getElementById('btn-save-gallery');
+  const setLabel = t => { if (btn) btn.innerHTML = t; };
+  if (btn) btn.disabled = true;
+  setLabel('Salvando…');
+  try {
+    const image_data_uri = await captureAdDataUri();
+    const res = await fetch('/api/save-creative', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'post',
+        brand: STATE.brand,
+        model_id: STATE.model_id || '',
+        format: STATE.ad_format || 'feed',
+        headline: STATE.copyHeadline || '',
+        cta: STATE.cta || '',
+        image_data_uri,
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.ok) {
+      setLabel('✓ Salvo na galeria');
+    } else if (res.status === 501) {
+      setLabel('Salvar na galeria');
+      if (btn) btn.disabled = false;
+      alert('Salvar na galeria ainda não está ativo: o armazenamento (Vercel Blob + KV) precisa ser habilitado no projeto. Por enquanto, use "Baixar PNG".');
+    } else {
+      throw new Error((data && data.error) || ('HTTP ' + res.status));
+    }
+  } catch (e) {
+    setLabel('Salvar na galeria');
+    if (btn) btn.disabled = false;
+    alert('Não consegui salvar: ' + (e && e.message ? e.message : e));
+  }
+}
+
 async function downloadMockPng() {
   const fname = `${STATE.brand}-${STATE.model_id || 'ad'}-${STATE.run_id || Date.now()}.png`;
   const iframe = document.getElementById('ad-preview');
