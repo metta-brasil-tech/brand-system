@@ -181,3 +181,82 @@ def generate_creative(marca: str, model_id: str, copy: dict, scene: str,
     png = render_format(res["html"], fmt=format)
     meta["final_bytes"] = len(png)
     return png, meta
+
+
+# ---------------------------------------------------------------------------
+# Carrossel panorâmico: 1 imagem larga → fatiada em N slides que se completam.
+# É 1 geração só (cabe na Vercel ~20s) + fatiamento local (PIL). Resolve o
+# limite de timeout: metade da imagem no slide 1, metade no 2 (o que a Sofia pediu).
+# ---------------------------------------------------------------------------
+_PANO_ASPECT = {2: "3:2", 3: "21:9", 4: "21:9"}
+
+
+def generate_panorama(scene: str, n_slides: int = 2, family: str = "A",
+                      api_key: str | None = None) -> tuple[list[bytes], dict]:
+    """Gera UMA imagem panorâmica (Nano Banana Pro, com referência da família pra
+    herdar a linguagem Metta) e FATIA em n_slides verticais que se completam.
+
+    Retorna (lista_de_png_por_slide, meta). O texto por cima fica a cargo do
+    render/front — aqui são só os fundos contínuos. n_slides ∈ [2,4].
+    """
+    import io
+
+    from PIL import Image
+
+    n_slides = max(2, min(4, int(n_slides)))
+    aspect = _PANO_ASPECT.get(n_slides, "3:2")
+    key = _api_key(api_key)
+
+    # referência de coerência: 1ª peça da família (charcoal/editorial) do banco.
+    cur = _load_curated()
+    refs = [r for r in (cur.get("by_family", {}).get(family, {}) or {}).get("refs", [])
+            if (_ROOT / r.get("path", "")).is_file()]
+    parts: list[dict] = [{"text": (
+        f"Invent ONE single continuous ultra-wide image. Scene: {scene.strip()} {_METTA_TREAT}")}]
+    ref_id = None
+    if refs:
+        refp = _ROOT / refs[0]["path"]
+        ref_id = refs[0]["id"]
+        parts.append({"inlineData": {
+            "mimeType": "image/webp" if refp.suffix.lower() == ".webp" else "image/png",
+            "data": base64.b64encode(refp.read_bytes()).decode("ascii")}})
+
+    payload = {"contents": [{"parts": parts}],
+               "generationConfig": {"responseModalities": ["IMAGE"],
+                                    "imageConfig": {"aspectRatio": aspect}}}
+    url = _GEMINI_URL.format(model=_MODEL, key=key)
+    t0 = time.time()
+    for attempt in (1, 2):
+        r = httpx.post(url, json=payload, timeout=300)
+        if r.status_code == 200:
+            break
+        if attempt == 1:
+            payload["generationConfig"].pop("imageConfig", None)
+            continue
+        raise NanoPipelineError(f"Nano Banana panorama {r.status_code}: {r.text[:200]}")
+
+    raw = None
+    for c in r.json().get("candidates", []):
+        for p in c.get("content", {}).get("parts", []):
+            inl = p.get("inlineData") or p.get("inline_data")
+            if inl and inl.get("data"):
+                raw = base64.b64decode(inl["data"])
+                break
+        if raw:
+            break
+    if not raw:
+        raise NanoPipelineError("Nano Banana não retornou panorama.")
+
+    img = Image.open(io.BytesIO(raw))
+    W, H = img.size
+    step = W // n_slides
+    slices: list[bytes] = []
+    for i in range(n_slides):
+        x0 = i * step
+        x1 = W if i == n_slides - 1 else (i + 1) * step
+        buf = io.BytesIO()
+        img.crop((x0, 0, x1, H)).save(buf, format="PNG")
+        slices.append(buf.getvalue())
+    meta = {"model": _MODEL, "aspect": aspect, "n_slides": n_slides,
+            "ref_id": ref_id, "size": [W, H], "ms": int((time.time() - t0) * 1000)}
+    return slices, meta
