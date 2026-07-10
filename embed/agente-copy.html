@@ -218,7 +218,11 @@ input:focus, select:focus, textarea:focus {
 
 textarea { min-height: 70px; resize: vertical; }
 
-.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--metta-sys-spacing-4); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--metta-sys-spacing-4); align-items: start; margin-top: var(--metta-sys-spacing-4); }
+/* a primeira row2 vem logo após o .card-label, que já tem espaço embaixo --
+   sem isto o espaçamento dobra. Labels dentro de célula de grid são
+   :first-child e perdem a margem de topo, então é a row2 que a fornece. */
+.card-label + .row2 { margin-top: 0; }
 @media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
 
 .actions {
@@ -412,17 +416,16 @@ button {
       <label for="icp">Qual o ICP?</label>
       <select id="icp" name="icp" required></select>
 
+      <label for="angle_choice">Ângulo (A / B / C)</label>
+      <p class="hint">A IA propõe 3 caminhos com justificativa; escolha um antes de gerar a peça — ou escreva o seu.</p>
+      <div class="angle-actions">
+        <button type="button" class="btn-secondary" id="propose-angles-btn">Propor ângulos</button>
+        <span class="angle-status" id="angle-status"></span>
+      </div>
+      <div class="angle-cards" id="angle-cards"></div>
+      <input id="angle_choice" name="angle_choice" placeholder="Ângulo escolhido (clique numa proposta ou escreva)">
+
       <div class="row2">
-        <div>
-          <label for="angle_choice">Ângulo (A / B / C)</label>
-          <p class="hint">A IA propõe 3 caminhos com justificativa; escolha um antes de gerar a peça — ou escreva o seu.</p>
-          <div class="angle-actions">
-            <button type="button" class="btn-secondary" id="propose-angles-btn">Propor ângulos</button>
-            <span class="angle-status" id="angle-status"></span>
-          </div>
-          <div class="angle-cards" id="angle-cards"></div>
-          <input id="angle_choice" name="angle_choice" placeholder="ângulo escolhido (clique numa proposta ou escreva)">
-        </div>
         <div>
           <label for="emotional_axis">Eixo emocional</label>
           <select id="emotional_axis" name="emotional_axis">
@@ -431,13 +434,6 @@ button {
             <option value="desejo">Desejo</option>
             <option value="necessidade">Necessidade</option>
           </select>
-        </div>
-      </div>
-
-      <div class="row2">
-        <div>
-          <label for="cta">CTA específico</label>
-          <input id="cta" name="cta">
         </div>
         <div>
           <label for="platform">Plataforma</label>
@@ -448,6 +444,9 @@ button {
         </div>
       </div>
 
+      <label for="cta">CTA específico</label>
+      <input id="cta" name="cta">
+
       <label for="length">Tamanho do texto</label>
       <p class="hint">Faixa aproximada — o modelo mira nela, não conta caractere a caractere. Clique numa opção ou escreva livremente (ex: "até 300 caracteres", "2 parágrafos").</p>
       <div class="chip-row" data-for="length">
@@ -456,7 +455,7 @@ button {
         <button type="button" class="chip" data-value="cerca de 700 caracteres (padrão)">~700 (padrão)</button>
         <button type="button" class="chip" data-value="texto longo, 1000+ caracteres">longo (1000+)</button>
       </div>
-      <input id="length" name="length" placeholder="livre ou uma das opções acima">
+      <input id="length" name="length" placeholder="Livre ou uma das opções acima">
 
       <label class="checkbox-row" for="include_case">
         <input type="checkbox" id="include_case" name="include_case" checked>
@@ -661,7 +660,7 @@ button {
              ${q.options.map(opt => `<button type="button" class="chip" data-value="${opt}">${opt}</button>`).join('')}
            </div>`
         : '';
-      const placeholder = q.options && q.options.length ? 'ou escreva livremente' : '';
+      const placeholder = q.options && q.options.length ? 'Ou escreva livremente' : '';
       return `<label for="${inputId}">${q.prompt}</label>${chips}<input id="${inputId}" data-key="${q.key}" name="${inputId}" placeholder="${placeholder}">`;
     }).join('');
 
