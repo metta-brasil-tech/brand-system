@@ -29,12 +29,14 @@ AUTENTICAÇÃO: token compartilhado simples via env var PIECES_API_TOKEN (setado
 no Vercel). Sem essa env var configurada, o endpoint recusa todo POST (fail
 closed) — não existe modo "sem auth" em produção.
 
-LIMITAÇÃO CONHECIDA (mesma do _bank.py/flywheel): fora do diretório /tmp, o
-filesystem da Vercel é read-only em produção — a escrita em data/pieces-index.json
-só persiste rodando localmente (vercel dev / npm start) ou num runtime com disco
-gravável. Pra persistência real em produção na Vercel, plugar Vercel Blob/KV ou
-um banco externo (não configurado neste repo ainda). Até lá, isso cobre o fluxo
-de MVP (dev local dos dois repos) e deixa o contrato HTTP definitivo.
+PERSISTÊNCIA: Vercel KV (lista 'pieces:index', mais novo primeiro), mesmo
+storage que api/save-creative.js já usa pros criativos de imagem. Requer
+KV_REST_API_URL + KV_REST_API_TOKEN nas env vars (Storage -> KV no painel).
+Sem essas env vars (dev local), cai no fallback de arquivo
+data/pieces-index.json — que na Vercel é read-only/efêmero, então em produção
+o KV é o único caminho que salva de verdade. O campo "storage" na resposta
+diz qual caminho foi usado, pra ninguém achar que persistiu quando não
+persistiu.
 """
 from __future__ import annotations
 
@@ -42,6 +44,7 @@ import json
 import os
 import re
 import unicodedata
+import urllib.request
 import uuid
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler
@@ -49,6 +52,7 @@ from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent.parent
 _INDEX = _ROOT / "data" / "pieces-index.json"
+_KV_KEY = "pieces:index"
 
 _VALID_PLATFORMS = {"instagram", "linkedin"}
 _VALID_BRANDS = {"metta", "tiago"}
@@ -70,7 +74,44 @@ def _atomic_write_json(path: Path, data) -> None:
     os.replace(tmp, path)
 
 
+# --- Vercel KV (Upstash Redis REST) ------------------------------------------
+# Mesmo storage do save-creative.js, falado direto via REST pra não puxar SDK
+# JS nem dependência Python nova: POST {KV_REST_API_URL} com o comando Redis
+# como array JSON (["LPUSH", key, value]) e Bearer token no header.
+
+def _kv_configured() -> bool:
+    return bool(os.environ.get("KV_REST_API_URL") and os.environ.get("KV_REST_API_TOKEN"))
+
+
+def _kv_command(*args: str):
+    req = urllib.request.Request(
+        os.environ["KV_REST_API_URL"],
+        data=json.dumps(list(args)).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {os.environ['KV_REST_API_TOKEN']}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        payload = json.loads(resp.read().decode("utf-8"))
+    if "error" in payload:
+        raise RuntimeError(f"KV: {payload['error']}")
+    return payload.get("result")
+
+
 def _read_index() -> list[dict]:
+    if _kv_configured():
+        raw_items = _kv_command("LRANGE", _KV_KEY, "0", "-1") or []
+        entries = []
+        for raw in raw_items:
+            try:
+                entry = json.loads(raw)
+            except (json.JSONDecodeError, TypeError):
+                continue
+            if isinstance(entry, dict):
+                entries.append(entry)
+        return entries  # LPUSH = mais novo primeiro
     if not _INDEX.exists():
         return []
     try:
@@ -151,10 +192,15 @@ def submit_piece(payload: dict) -> dict:
         return {"ok": False, "status": 400, "detail": error}
 
     entry = _build_entry(payload)
-    entries = _read_index()
-    entries.append(entry)
-    _atomic_write_json(_INDEX, entries)
-    return {"ok": True, "status": 201, "id": entry["id"], "piece": entry}
+    if _kv_configured():
+        _kv_command("LPUSH", _KV_KEY, json.dumps(entry, ensure_ascii=False))
+        storage = "kv"
+    else:
+        entries = _read_index()
+        entries.append(entry)
+        _atomic_write_json(_INDEX, entries)
+        storage = "file"  # dev local; na Vercel isso é efêmero
+    return {"ok": True, "status": 201, "id": entry["id"], "piece": entry, "storage": storage}
 
 
 class handler(BaseHTTPRequestHandler):
@@ -179,7 +225,8 @@ class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         try:
-            return self._json(200, {"ok": True, "pieces": _read_index()})
+            storage = "kv" if _kv_configured() else "file"
+            return self._json(200, {"ok": True, "storage": storage, "pieces": _read_index()})
         except Exception as exc:
             return self._json(500, {"detail": f"Erro interno: {exc.__class__.__name__}: {exc}"})
 
