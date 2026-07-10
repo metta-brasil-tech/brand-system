@@ -10,13 +10,18 @@ Cada `sim-<id>.png` é o post `<id>` de `data/applications-index.json`
 paleta/grão/tratamento) + copy real → `_blueprint_render` (motor de layout
 real). Comparar com o post real em `assets/applications/ads/thumbs/<id>.webp`.
 
-Lição validada aqui: a cena tem que **ilustrar o conceito** da copy, não pôr
-um sujeito decorativo (`sim-ad-a-eu-quero-voce-fora.png` é a versão conceitual
-— empresário saindo pela porta iluminada, não um retrato parado).
+Lição validada aqui (v2, todas as 6 peças revisadas com essa lógica): a cena
+tem que **ilustrar o conceito** da copy, nunca um sujeito decorativo.
 
-Ressalva conhecida: `sim-ad-news-card-risco-zero-varejo.png` saiu com o
-sujeito cortado na faixa inferior — pendência de composição (corrigir via
-guia de cena melhor ou o recompositor full-bleed de `backup/vision-first`).
+- `A-headline-foto-dark` ("eu quero você fora") → empresário saindo por uma
+  porta iluminada, não um retrato parado.
+- `YELLOW-SPLIT` ("a chave da liberdade não está no balcão") → o balcão vira
+  literalmente uma jaula de madeira, porta iluminada ao fundo fora de alcance.
+- `D-foto-fullbleed-overlay` ("engenharia reversa do vendedor") → diagrama
+  técnico/blueprint saindo do vendedor como um raio-x do processo.
+- `NEWS-CARD` (composição corrigida) → time inteiro visível, sem corte.
+- `LIGHT-SURREAL` e `B-foto-top-headline-mixed` já eram conceituais desde a
+  v1 (pedra esmagando saúde; dono-funcionário no próprio caixa).
 
 ## `carrossel-motores/`
 
