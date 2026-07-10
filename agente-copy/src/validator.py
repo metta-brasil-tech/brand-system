@@ -137,12 +137,13 @@ Responda apenas com um JSON no formato:
 
     response = client.messages.create(
         model=VALIDATION_MODEL,
-        # 1024 -> 4096: mesma familia de bug do generator.py (draft_structural/
-        # judge estouravam max_tokens num bloco de thinking implicito antes de
-        # escrever o JSON) -- essas 4 chamadas nunca reproduziram isso ao vivo
-        # ainda, mas usam o mesmo _text_of/_extract_json e o mesmo modelo, entao
-        # a margem sobe preventivamente em vez de esperar quebrar em producao.
-        max_tokens=4096,
+        # 4096 -> 16000: reproduziu em producao no second_evaluator (stage
+        # abaixo) -- 4096 nao bastava, mesma familia de bug do generator.py
+        # (thinking implicito consome o orcamento antes do JSON final,
+        # stop_reason=max_tokens sem nenhum bloco de texto). 16000 e a mesma
+        # margem que resolveu la; subindo nas 4 chamadas deste arquivo porque
+        # usam o mesmo _text_of/_extract_json e o mesmo modelo.
+        max_tokens=16000,
         messages=[{"role": "user", "content": prompt}],
     )
     text = _text_of(response, stage="icp_fit")
@@ -181,7 +182,7 @@ Responda apenas com um JSON no formato:
 
     response = client.messages.create(
         model=VALIDATION_MODEL,
-        max_tokens=4096,
+        max_tokens=16000,
         messages=[{"role": "user", "content": prompt}],
     )
     text = _text_of(response, stage="grammar_tone")
@@ -228,7 +229,7 @@ Responda apenas com um JSON no formato:
 
     response = client.messages.create(
         model=VALIDATION_MODEL,
-        max_tokens=4096,
+        max_tokens=16000,
         messages=[{"role": "user", "content": prompt}],
     )
     text = _text_of(response, stage="second_evaluator")
@@ -276,7 +277,7 @@ Responda apenas com um JSON no formato:
 
     response = client.messages.create(
         model=VALIDATION_MODEL,
-        max_tokens=4096,
+        max_tokens=16000,
         messages=[{"role": "user", "content": prompt}],
     )
     text = _text_of(response, stage="skill_de_validacao")

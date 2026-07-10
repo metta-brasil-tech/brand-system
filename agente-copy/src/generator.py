@@ -1,16 +1,19 @@
 """Two-stage copy generation for Agente Copy (Metta Brasil).
 
 Pipeline mirrors the documented architecture (Documento_Mestre_Projeto_v2 /
-Agente_Copy_Criacao_v5.1, "Arquitetura técnica"):
+Agente_Copy_Criacao_v5.1, "Arquitetura técnica"), with one deviation from
+those docs: both stages run on Sonnet now, not just the first.
 
   1. Sonnet drafts the structural piece (hook + corpo + CTA) respecting the
      copy-type-specific flow from SKILLMETTACOPY.md.
-  2. Opus judges tone / angle / voice calibration against tom-de-voz-metta.md
+  2. Sonnet judges tone / angle / voice calibration against tom-de-voz-metta.md
      and the skill's QA checklist, and may send the draft back for revision.
 
 The Anthropic knowledge base is plain markdown read fresh each cycle — no RAG,
-no embeddings, per the docs. Model IDs are fixed by the routing decision:
-Sonnet 5 for structural work, Opus 4.8 for copy judgment. Never Haiku.
+no embeddings, per the docs. Model ID: Sonnet 5 for both structural work and
+copy judgment (decisão de custo, jul/2026 -- os docs registram "Opus para
+julgamento de copy" como decisão do Tiago; ver validator.py e os 3 documentos
+mestres para o histórico dessa decisão antes de reverter). Never Haiku.
 
 Depends on the `anthropic` SDK (add `anthropic` to requirements.txt — owned by
 another agent). The caller supplies a constructed `anthropic.Anthropic` client;
@@ -29,9 +32,9 @@ from typing import Any, Literal
 
 import anthropic
 
-# Structural drafting vs. copy judgment. Do not use Haiku (documented decision).
+# Structural drafting and copy judgment both run on Sonnet. Do not use Haiku
+# (documented decision).
 SONNET_MODEL = "claude-sonnet-5"
-OPUS_MODEL = "claude-opus-4-8"
 
 # Repo root holds the markdown knowledge base (this file lives in src/).
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -276,8 +279,14 @@ class CopyGenerator:
         self, brief: Brief, knowledge: KnowledgeBase, draft: dict[str, Any]
     ) -> dict[str, Any]:
         response = self.client.messages.create(
-            model=OPUS_MODEL,
-            # Reproduzido ao vivo 3x: com thinking=adaptive + effort=high, a
+            model=SONNET_MODEL,
+            # Opus -> Sonnet 5 (decisão de custo, jul/2026 -- pedido explícito
+            # da Sofia após o pipeline estourar tokens; ver nota no docstring
+            # do módulo). Era o último uso de Opus no agente de copy; as
+            # outras 4 checagens de validator.py já tinham migrado antes.
+            #
+            # max_tokens=16000 (herdado do tempo em que este era Opus):
+            # reproduzido ao vivo 3x: com thinking=adaptive + effort=high, a
             # resposta nunca saía do bloco de thinking pra escrever o JSON
             # final -- nem em 4000, nem 12000, nem 32000 (sempre
             # stop_reason=max_tokens, só bloco de thinking). Não era
@@ -287,7 +296,9 @@ class CopyGenerator:
             # Mesmo sem esses dois parâmetros, o modelo ainda gasta parte do
             # orçamento num bloco de thinking implícito antes do JSON (achado
             # em _draft_structural com o mesmo padrão de output_config) --
-            # 16000 dá a mesma margem que resolveu lá.
+            # 16000 dá a mesma margem que resolveu lá. Mantido no valor alto
+            # ao trocar pra Sonnet como precaução (mesma família de bug já
+            # vista nas 4 chamadas de validator.py).
             max_tokens=16000,
             output_config={
                 "format": {"type": "json_schema", "schema": _JUDGMENT_SCHEMA},
