@@ -938,6 +938,11 @@ a.topbar-menu-item,
 .content {
   padding: 56px 56px 128px;
   max-width: 1440px;
+  /* centraliza a coluna de conteúdo na área principal. Só tem efeito em telas
+     mais largas que 1440px (onde sobra espaço à direita da coluna); em
+     notebook (<=1440) o conteúdo já preenche tudo e margin auto vira 0, sem
+     mudança visual. */
+  margin-inline: auto;
 }
 
 /* Loading state */
