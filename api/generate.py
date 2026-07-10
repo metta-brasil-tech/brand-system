@@ -849,40 +849,48 @@ def _run_pipeline_inline(
             attempt_chain = attempt_chain[:max_attempts]
 
             image_gen = ImageGenAdapter()
-            # Fase C: injeta a referência do banco (só metta) pra o Nano Banana
-            # HERDAR a linguagem Metta. Gated pelo provider — no gpt-image atual
-            # continua [] (no-op); só ativa com nano-banana/gemini/imagen.
-            try:
-                _prov = os.getenv("IMAGE_GEN_PROVIDER", "gpt-image-2").lower()
-                if (marca or "").lower() == "metta" and _prov not in (
-                        "gpt-image-2", "gpt-image-1", "dall-e-3", "openai", "mock"):
-                    from _nano_pipeline import pick_reference as _pkref, _METTA_TREAT as _MT
-                    _r = _pkref(chosen_model_id, {"headline": user_headline})
-                    _bank_refs = [_r["path"]] if _r else []
-                else:
-                    _bank_refs, _MT = [], ""
-            except Exception:
-                _bank_refs, _MT = [], ""
+            # Fase C: roteamento POR FAMÍLIA do blueprint (não por provider
+            # global) — conceitual/surreal (DARK/LIGHT) segue no gpt-image,
+            # foto-real (A/B/D/NEWS/...) tenta Nano Banana + referência do
+            # banco primeiro. Fallback SEMPRE silencioso pro gpt-image se a
+            # família não mandar Nano Banana, faltar chave, ou a chamada falhar
+            # — nunca quebra a geração.
             last_error = None
-            for i, attempt_prompt in enumerate(attempt_chain, start=1):
-                try:
-                    ig = image_gen.generate(
-                        prompt=attempt_prompt + ((" " + _MT) if _bank_refs else ""),
-                        negative_prompt=negative,
-                        aspect_ratio=aspect,
-                        reference_images=_bank_refs,
-                    )
-                    image_file_url = ig.url
-                    diagnostics.append(
-                        f"04-image-gen: OK provider={ig.provider} model={ig.model} "
-                        f"t={ig.elapsed_ms}ms attempt=v{i}/{len(attempt_chain)}"
-                    )
-                    break
-                except Exception as e:
-                    last_error = e
-                    diagnostics.append(f"04-image-gen: v{i} falhou — {e.__class__.__name__}: {str(e)[:140]}")
-            if not image_file_url:
-                diagnostics.append(f"04-image-gen: TODAS as tentativas falharam")
+            _nano_res = None
+            try:
+                if (marca or "").lower() == "metta":
+                    from _nano_pipeline import generate_via_route as _gvr
+                    _nano_res = _gvr(chosen_model_id, {"headline": user_headline},
+                                     primary_prompt, format=format_key)
+            except Exception:
+                _nano_res = None
+
+            if _nano_res:
+                image_file_url, _nmeta = _nano_res
+                diagnostics.append(
+                    f"04-image-gen: OK provider=nano-banana model={_nmeta.get('model')} "
+                    f"t={_nmeta.get('ms')}ms ref={_nmeta.get('ref_id')} (referência do banco)"
+                )
+            else:
+                for i, attempt_prompt in enumerate(attempt_chain, start=1):
+                    try:
+                        ig = image_gen.generate(
+                            prompt=attempt_prompt,
+                            negative_prompt=negative,
+                            aspect_ratio=aspect,
+                            reference_images=[],
+                        )
+                        image_file_url = ig.url
+                        diagnostics.append(
+                            f"04-image-gen: OK provider={ig.provider} model={ig.model} "
+                            f"t={ig.elapsed_ms}ms attempt=v{i}/{len(attempt_chain)}"
+                        )
+                        break
+                    except Exception as e:
+                        last_error = e
+                        diagnostics.append(f"04-image-gen: v{i} falhou — {e.__class__.__name__}: {str(e)[:140]}")
+                if not image_file_url:
+                    diagnostics.append(f"04-image-gen: TODAS as tentativas falharam")
 
     # Converte file:// → data:image URI pro HTML
     if image_file_url:
@@ -1048,25 +1056,30 @@ def _run_pipeline_inline(
                 _regen_prompt = (f"{_nc['brief']}. {_preset_ov}"
                                  + (f" Composition: {_pl}" if _pl else "")
                                  + (f" {_adp}" if _adp else "")).strip()
-                # Fase C: mesma injeção de referência do banco na regeração (gated).
+                # Fase C: mesmo roteamento por família na regeração — Nano
+                # Banana + referência do banco quando a família mandar e
+                # houver chave; fallback silencioso pro gpt-image existente.
+                _nano_res2 = None
                 try:
-                    _prov2 = os.getenv("IMAGE_GEN_PROVIDER", "gpt-image-2").lower()
-                    if (marca or "").lower() == "metta" and _prov2 not in (
-                            "gpt-image-2", "gpt-image-1", "dall-e-3", "openai", "mock"):
-                        from _nano_pipeline import pick_reference as _pkref2, _METTA_TREAT as _MT2
-                        _r2 = _pkref2(chosen_model_id, copy_dict)
-                        _bank_refs2 = [_r2["path"]] if _r2 else []
-                    else:
-                        _bank_refs2, _MT2 = [], ""
+                    if (marca or "").lower() == "metta":
+                        from _nano_pipeline import generate_via_route as _gvr2
+                        _nano_res2 = _gvr2(chosen_model_id, copy_dict, _regen_prompt, format=format_key)
                 except Exception:
-                    _bank_refs2, _MT2 = [], ""
-                _ig = ImageGenAdapter().generate(
-                    prompt=_regen_prompt + ((" " + _MT2) if _bank_refs2 else ""),
-                    negative_prompt="no smiling stock pose, no cartoon, subject not cropped awkwardly, " + _NEG_FAILS,
-                    aspect_ratio=_aspect, reference_images=_bank_refs2)
-                image_data_uri = _image_to_data_uri(_ig.url)
+                    _nano_res2 = None
+
+                if _nano_res2:
+                    image_data_uri, _nmeta2 = _nano_res2
+                    diagnostics.append(
+                        f"regen-image-gen: OK provider=nano-banana model={_nmeta2.get('model')} "
+                        f"t={_nmeta2.get('ms')}ms ref={_nmeta2.get('ref_id')}")
+                else:
+                    _ig = ImageGenAdapter().generate(
+                        prompt=_regen_prompt,
+                        negative_prompt="no smiling stock pose, no cartoon, subject not cropped awkwardly, " + _NEG_FAILS,
+                        aspect_ratio=_aspect, reference_images=[])
+                    image_data_uri = _image_to_data_uri(_ig.url) or _ig.url
                 rendered = render_html(marca=marca, model_id=chosen_model_id, copy=copy_dict,
-                                       image_url=image_data_uri or _ig.url, format=format_key)
+                                       image_url=image_data_uri, format=format_key)
                 _png = _rfmt(rendered["html"], format_key, scale=2, downscale=True)
                 png_data_uri = "data:image/png;base64," + base64.b64encode(_png).decode("ascii")
                 diagnostics.append(f"vision-qa: REGENEROU imagem (cena='{_nc.get('scene_type','?')}')")

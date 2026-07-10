@@ -104,6 +104,21 @@ def pick_reference(model_id: str, copy: dict) -> dict | None:
     }
 
 
+def _sniff_mime(data: bytes) -> str:
+    """Detecta o mime real pelos magic bytes — a API do Gemini às vezes
+    devolve JPEG mesmo quando pedimos imagem (rotular errado quebraria a
+    data URI em parsers estritos)."""
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return "image/png"
+    if data[:3] == b"\xff\xd8\xff":
+        return "image/jpeg"
+    if data[:6] in (b"GIF87a", b"GIF89a"):
+        return "image/gif"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "image/webp"
+    return "image/png"  # fallback razoável
+
+
 def _api_key(explicit: str | None) -> str:
     key = explicit or os.getenv("GEMINI_API_KEY") or os.getenv("GK") or os.getenv("GOOGLE_API_KEY")
     if not key:
@@ -161,6 +176,50 @@ def generate_background(model_id: str, copy: dict, scene: str,
     raise NanoPipelineError("Nano Banana não retornou imagem.")
 
 
+def resolve_route(model_id: str) -> str:
+    """Motor pra este blueprint: 'nano-banana' ou 'gpt-image'. Decide POR
+    FAMÍLIA (curated-references.json) — DARK/LIGHT (conceitual/surreal) ficam
+    no gpt-image; A/B/C/D/NEWS/OUTROS/TIAGO (foto-real) vão pro Nano Banana.
+
+    Fallback SEMPRE seguro: sem GEMINI_API_KEY disponível, cai pra gpt-image
+    mesmo que a família mande Nano Banana — nunca quebra a geração por falta
+    de chave (útil enquanto a chave ainda não está configurada na Vercel).
+    """
+    if model_id in _NO_PHOTO:
+        return "gpt-image"  # sem foto — não passa pelo Nano Banana de qualquer forma
+    fam = _FAMILY.get(model_id, "OUTROS")
+    try:
+        cur = _load_curated()
+        motor = (cur.get("by_family", {}).get(fam, {}) or {}).get("motor", "gpt-image-2")
+    except Exception:
+        motor = "gpt-image-2"
+    if motor == "hibrido":
+        motor = "nano-banana-2"  # peças YELLOW com foto tratadas como foto-real
+    if motor == "grafico":
+        motor = "gpt-image-2"  # sem geração de foto (LOGO-WALL etc.)
+    has_key = bool(os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY"))
+    if motor != "gpt-image-2" and not has_key:
+        return "gpt-image"
+    return "nano-banana" if motor != "gpt-image-2" else "gpt-image"
+
+
+def generate_via_route(model_id: str, copy: dict, prompt_or_scene: str,
+                       format: str = "feed") -> tuple[str, dict] | None:
+    """Tenta gerar pelo Nano Banana (com referência do banco) SE a família
+    deste blueprint mandar isso e a chave estiver disponível. Retorna
+    (data_uri, meta) em caso de sucesso, ou None (caller deve seguir o
+    caminho gpt-image existente — fallback silencioso, nunca propaga erro).
+    """
+    if resolve_route(model_id) != "nano-banana":
+        return None
+    try:
+        raw, meta = generate_background(model_id, copy, prompt_or_scene, format=format)
+        mime = _sniff_mime(raw)
+        return f"data:{mime};base64," + base64.b64encode(raw).decode("ascii"), meta
+    except Exception:
+        return None
+
+
 def generate_creative(marca: str, model_id: str, copy: dict, scene: str,
                       format: str = "feed", api_key: str | None = None) -> tuple[bytes, dict]:
     """Criativo PRONTO: fundo (Nano Banana + referência) → motor de layout real.
@@ -174,7 +233,7 @@ def generate_creative(marca: str, model_id: str, copy: dict, scene: str,
     from _render_png import render_format
 
     bg, meta = generate_background(model_id, copy, scene, format=format, api_key=api_key)
-    data_uri = "data:image/png;base64," + base64.b64encode(bg).decode("ascii")
+    data_uri = f"data:{_sniff_mime(bg)};base64," + base64.b64encode(bg).decode("ascii")
     res = render(marca, model_id, copy, image_url=data_uri, format=format)
     if res.get("missing"):
         raise NanoPipelineError(f"blueprint '{model_id}' não encontrado pro motor de layout.")
