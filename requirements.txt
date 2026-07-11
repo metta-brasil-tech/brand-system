@@ -20,3 +20,6 @@ pydantic>=2.9.0
 python-dotenv>=1.0.0
 httpx>=0.27.0
 tenacity>=8.2.0
+# Extração de texto de PDF do "material rico" (api/copy-agent.py,
+# action derive_from_material -- v5.1 seção 8). Puro Python, leve.
+pypdf>=4.0.0

@@ -408,6 +408,62 @@ class CopyGenerator:
         ]
         return data
 
+
+    def derive_from_material(
+        self,
+        brand: Brand,
+        material_text: str,
+        copy_types: list[str],
+        theme_hint: str = "",
+    ) -> dict[str, Any]:
+        """Transformação de material rico (v5.1 seção 8): recebe o TEXTO de
+        uma aula/ebook/PDF já extraído (o parsing de arquivo é do caller --
+        este módulo só vê texto) e deriva uma peça por tipo pedido, todas do
+        mesmo tema. Uma chamada só pra todos os tipos: o material é o mesmo,
+        e cada peça derivada pode depois ser refinada no fluxo normal (colar
+        como texto bruto no formulário principal).
+
+        material_text é truncado em 40k caracteres -- proteção de custo e de
+        janela; um ebook inteiro não cabe nem precisa (o tema central cabe).
+        """
+        if brand != "metta":
+            raise NotImplementedError(
+                f"Brand {brand!r} is not supported yet. Full support "
+                "requires tom-de-voz-tiago.md, which is not in the repo."
+            )
+        if not material_text.strip():
+            raise ValueError("material_text vazio: envie o texto do material rico.")
+        valid = {"reels", "stories", "carrossel", "post_unico", "descricao_post", "criativos"}
+        requested = [t for t in copy_types if t in valid]
+        if not requested:
+            raise ValueError(
+                f"copy_types precisa ter ao menos um tipo válido dentre {sorted(valid)}."
+            )
+        material = material_text[:40_000]
+        knowledge = self._knowledge_base(brand)
+        response = self.client.messages.create(
+            model=SONNET_MODEL,
+            # Várias peças completas numa resposta só -- margem maior que o
+            # 16000 padrão das respostas de peça única.
+            max_tokens=32000,
+            system=_build_system_prompt(brand, requested[0]),
+            messages=[{
+                "role": "user",
+                "content": _cached_content(
+                    _build_material_prompt(material, requested, theme_hint, knowledge),
+                    marker="=== MATERIAL RICO ===",
+                ),
+            }],
+            output_config={"format": {"type": "json_schema", "schema": _MATERIAL_SCHEMA}},
+        )
+        data = _extract_json(response, stage="derive_from_material")
+        data["pieces"] = [
+            {key: _remove_travessao(value) if isinstance(value, str) else value
+             for key, value in piece.items()}
+            for piece in data["pieces"]
+        ]
+        return data
+
     @staticmethod
     def _assemble(draft: dict[str, Any]) -> str:
         return "\n\n".join(
@@ -766,6 +822,38 @@ def _build_winner_variations_prompt(
     )
 
 
+def _build_material_prompt(
+    material: str, copy_types: list[str], theme_hint: str, knowledge: KnowledgeBase
+) -> str:
+    # RAG sobre os documentos de referência usando o próprio material como
+    # consulta (tema + primeiros parágrafos): material rico costuma ser longo,
+    # mandar a base inteira junto dobraria o custo sem ganho.
+    if _rag_enabled():
+        query = retrieval.build_query(theme_hint, material[:2000])
+        context = knowledge.as_context_selected(query)
+    else:
+        context = knowledge.as_context()
+    types_pt = ", ".join(copy_types)
+    return (
+        "Você vai TRANSFORMAR um material rico (aula, ebook, transcrição) em "
+        "peças de conteúdo -- todas sobre o MESMO tema central do material, "
+        "cada uma respeitando a estrutura do seu tipo (a skill de copy define "
+        "cada estrutura). Não resuma o material: extraia o argumento mais "
+        "forte pro público e escreva peças originais a partir dele.\n\n"
+        f"{context}\n\n"
+        "=== MATERIAL RICO ===\n"
+        f"{material}\n\n"
+        + (f"Tema/recorte pedido: {theme_hint}\n\n" if theme_hint.strip() else "")
+        + "=== TAREFA ===\n"
+        f"Derive UMA peça de cada tipo a seguir: {types_pt}. Para cada peça "
+        "entregue copy_type, hook, corpo, cta (vazio se o formato fechar sem "
+        "CTA) e descricao (a legenda que acompanha a publicação; para reels o "
+        "corpo é o roteiro falado e a descricao é texto DIFERENTE). Responda "
+        "no schema JSON pedido, com uma entrada em pieces por tipo, na ordem "
+        "pedida."
+    )
+
+
 def _build_linkedin_prompt(brief: Brief, draft: dict[str, Any]) -> str:
     # Real rewrite for LinkedIn per criação doc seção 4 — not copy-paste. Carrossel
     # vira PDF-style, descrição fica mais densa, tom apropriado da plataforma.
@@ -902,6 +990,32 @@ _WINNER_VARIATIONS_SCHEMA: dict[str, Any] = {
         },
     },
     "required": ["performance_elements", "variations"],
+    "additionalProperties": False,
+}
+
+_MATERIAL_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        # O tema central que o modelo extraiu do material -- visível na
+        # resposta pra pessoa validar que a leitura foi a esperada.
+        "tema_central": {"type": "string"},
+        "pieces": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "copy_type": {"type": "string"},
+                    "hook": {"type": "string"},
+                    "corpo": {"type": "string"},
+                    "cta": {"type": "string"},
+                    "descricao": {"type": "string"},
+                },
+                "required": ["copy_type", "hook", "corpo", "cta", "descricao"],
+                "additionalProperties": False,
+            },
+        },
+    },
+    "required": ["tema_central", "pieces"],
     "additionalProperties": False,
 }
 

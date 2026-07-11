@@ -150,6 +150,46 @@ def _run_winner_variations(data: dict) -> dict:
     return {"ok": True, "stored_in_bank": stored, **result}
 
 
+def _extract_material_text(data: dict) -> str:
+    """Texto do material rico: ou já vem como texto (material_text), ou vem
+    um PDF em base64 (material_pdf_base64) que a gente extrai com pypdf.
+    TXT/MD são lidos no browser e chegam como material_text."""
+    text = str(data.get("material_text", "") or "")
+    if text.strip():
+        return text
+    pdf_b64 = data.get("material_pdf_base64")
+    if not pdf_b64:
+        return ""
+    import base64
+    import io
+
+    from pypdf import PdfReader
+
+    reader = PdfReader(io.BytesIO(base64.b64decode(pdf_b64)))
+    pages = [page.extract_text() or "" for page in reader.pages]
+    return "\n\n".join(pages)
+
+
+def _run_derive_from_material(data: dict) -> dict:
+    import anthropic
+    from src.generator import CopyGenerator
+
+    material_text = _extract_material_text(data)
+    if not material_text.strip():
+        raise ValueError(
+            "Nenhum texto no material: envie material_text ou um PDF com texto "
+            "extraível (PDF de imagem escaneada não tem texto pra extrair)."
+        )
+    client = anthropic.Anthropic()
+    result = CopyGenerator(client).derive_from_material(
+        brand=data.get("brand", "metta"),
+        material_text=material_text,
+        copy_types=data.get("copy_types") or [],
+        theme_hint=data.get("theme_hint", ""),
+    )
+    return {"ok": True, "material_chars": len(material_text), **result}
+
+
 def _run_generate(data: dict) -> dict:
     import anthropic
     from src.generator import CopyGenerator
@@ -282,7 +322,15 @@ class handler(BaseHTTPRequestHandler):
                 except ValueError as exc:
                     return self._json(400, {"detail": str(exc)})
 
-            return self._json(400, {"detail": "action precisa ser 'propose_angles', 'generate', 'submit' ou 'winner_variations'."})
+            if action == "derive_from_material":
+                try:
+                    return self._json(200, _run_derive_from_material(data))
+                except NotImplementedError as exc:
+                    return self._json(400, {"detail": str(exc)})
+                except ValueError as exc:
+                    return self._json(400, {"detail": str(exc)})
+
+            return self._json(400, {"detail": "action precisa ser 'propose_angles', 'generate', 'submit', 'winner_variations' ou 'derive_from_material'."})
 
         except Exception as exc:
             tb = traceback.format_exc()

@@ -561,6 +561,31 @@ button {
     </div>
     <div id="winner-output"></div>
   </div>
+
+  <div class="card" id="material-card">
+    <p class="card-label">Material rico</p>
+    <p class="hint">Suba uma aula, ebook ou transcrição (PDF/TXT/MD até 3,5 MB) — ou cole o texto — e a IA deriva múltiplos tipos de peça do mesmo tema, cada um na estrutura certa do formato.</p>
+    <label for="material-file">Arquivo (PDF, TXT ou MD)</label>
+    <input type="file" id="material-file" accept=".pdf,.txt,.md,text/plain,text/markdown,application/pdf">
+    <label for="material-text">Ou cole o texto do material</label>
+    <textarea id="material-text" placeholder="Cole aqui a transcrição da aula, o capítulo do ebook, etc."></textarea>
+    <label for="material-theme">Tema/recorte desejado (opcional)</label>
+    <input id="material-theme" placeholder='Ex: "focar na parte sobre rotina de treino do time"'>
+    <label>Quais formatos derivar?</label>
+    <div class="chip-row" id="material-types">
+      <button type="button" class="chip active" data-type="carrossel">Carrossel</button>
+      <button type="button" class="chip active" data-type="post_unico">Post único</button>
+      <button type="button" class="chip active" data-type="reels">Reels</button>
+      <button type="button" class="chip" data-type="stories">Stories</button>
+      <button type="button" class="chip" data-type="descricao_post">Descrição</button>
+      <button type="button" class="chip" data-type="criativos">Criativo</button>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn-secondary" id="material-btn">Derivar peças</button>
+      <span class="status" id="material-status"></span>
+    </div>
+    <div id="material-output"></div>
+  </div>
 </div>
 
 <script>
@@ -988,6 +1013,86 @@ button {
     }
   }
   document.getElementById('winner-btn').addEventListener('click', handleWinnerVariations);
+
+  // --- Material rico (v5.1 seção 8) ------------------------------------------
+  // Chips de tipo são multi-select (toggle), diferente dos chips de tamanho
+  // (que preenchem um input) -- por isso não passam pelo wireChipRow.
+  document.querySelectorAll('#material-types .chip').forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('active'));
+  });
+
+  function readMaterialFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Falha ao ler o arquivo.'));
+      if (file.name.toLowerCase().endsWith('.pdf')) {
+        reader.onload = () => resolve({ material_pdf_base64: String(reader.result).split(',')[1] });
+        reader.readAsDataURL(file);
+      } else {
+        reader.onload = () => resolve({ material_text: String(reader.result) });
+        reader.readAsText(file);
+      }
+    });
+  }
+
+  const MATERIAL_TYPE_LABELS = {
+    carrossel: 'Carrossel', post_unico: 'Post único', reels: 'Reels',
+    stories: 'Stories', descricao_post: 'Descrição de post', criativos: 'Criativo',
+  };
+
+  async function handleDeriveMaterial() {
+    const statusEl = document.getElementById('material-status');
+    const btn = document.getElementById('material-btn');
+    const out = document.getElementById('material-output');
+    const types = Array.from(document.querySelectorAll('#material-types .chip.active'))
+      .map(c => c.dataset.type);
+    if (!types.length) { setStatus(statusEl, 'Escolha ao menos um formato pra derivar.', 'error'); return; }
+
+    const file = document.getElementById('material-file').files[0];
+    const pasted = document.getElementById('material-text').value.trim();
+    if (!file && !pasted) { setStatus(statusEl, 'Suba um arquivo ou cole o texto do material.', 'error'); return; }
+    if (file && file.size > 3.5 * 1024 * 1024) {
+      setStatus(statusEl, 'Arquivo acima de 3,5 MB — divida o material ou cole só o trecho relevante.', 'error');
+      return;
+    }
+
+    btn.disabled = true;
+    out.innerHTML = '';
+    setStatus(statusEl, 'Lendo o material e derivando as peças… (pode levar 1–2 min)');
+    try {
+      const payload = file ? await readMaterialFile(file) : { material_text: pasted };
+      payload.copy_types = types;
+      payload.theme_hint = document.getElementById('material-theme').value.trim();
+      const data = await api('derive_from_material', payload);
+
+      const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+      let html = `
+        <div class="piece-block">
+          <h3>Tema central extraído do material</h3>
+          <p>${esc(data.tema_central)}</p>
+        </div>`;
+      data.pieces.forEach((pc, i) => {
+        const label = MATERIAL_TYPE_LABELS[pc.copy_type] || pc.copy_type;
+        const parts = [pc.hook, pc.corpo, pc.cta].filter(Boolean).join('\n\n');
+        html += `
+        <div class="piece-block">
+          <button type="button" class="copy-btn" data-copy="material-piece-${i}">Copiar</button>
+          <h3>${esc(label)}</h3>
+          <p id="material-piece-${i}">${esc(parts)}</p>
+          ${pc.descricao && pc.copy_type === 'reels'
+            ? `<h3 style="margin-top:12px">Legenda do ${esc(label)}</h3><p>${esc(pc.descricao)}</p>` : ''}
+        </div>`;
+      });
+      out.innerHTML = html;
+      out.querySelectorAll('.copy-btn').forEach(wireCopyButton);
+      setStatus(statusEl, `Peças derivadas (${data.pieces.length}) — refine qualquer uma colando no formulário principal como texto bruto.`, 'ok');
+    } catch (err) {
+      setStatus(statusEl, err.message || 'Erro ao derivar do material.', 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+  document.getElementById('material-btn').addEventListener('click', handleDeriveMaterial);
 
   ['brand', 'emotional_axis', 'platform'].forEach(id => enhanceSelect(document.getElementById(id)));
   document.querySelectorAll('.chip-row[data-for="length"]').forEach(wireChipRow);
