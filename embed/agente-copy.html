@@ -921,7 +921,13 @@ button {
     setStatus(statusEl, 'Enviando…');
     try {
       const data = await api('submit', { piece: lastPiece });
-      setStatus(statusEl, `Enviado (id: ${data.id})`, 'ok');
+      // storage=file na Vercel é efêmero (some no próximo cold start) --
+      // avisar em vez de fingir sucesso pleno; kv é persistência real.
+      if (data.storage === 'kv') {
+        setStatus(statusEl, `Enviado e salvo (id: ${data.id})`, 'ok');
+      } else {
+        setStatus(statusEl, `Enviado (id: ${data.id}) — ATENÇÃO: sem storage KV configurado na Vercel, a peça não fica salva de forma permanente.`, 'error');
+      }
     } catch (err) {
       setStatus(statusEl, err.message, 'error');
     } finally {

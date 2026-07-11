@@ -443,9 +443,11 @@ class CopyGenerator:
         knowledge = self._knowledge_base(brand)
         response = self.client.messages.create(
             model=SONNET_MODEL,
-            # Várias peças completas numa resposta só -- margem maior que o
-            # 16000 padrão das respostas de peça única.
-            max_tokens=32000,
+            # Várias peças numa resposta só. 32000 disparava a trava do SDK
+            # "Streaming is required for operations that may take longer than
+            # 10 minutes" (pego em teste ao vivo na produção) -- 16000 passa
+            # sem streaming e comporta ~6 peças compactas com folga.
+            max_tokens=16000,
             system=_build_system_prompt(brand, requested[0]),
             messages=[{
                 "role": "user",
