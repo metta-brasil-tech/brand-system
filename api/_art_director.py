@@ -60,7 +60,23 @@ Você entrega DUAS coisas:
 
 == B) CONCEITO VISUAL (só quando NEEDS_IMAGE=sim) ==
 Leia a MENSAGEM da copy (o conceito, não as palavras) e invente uma CENA que a
-ILUSTRE de forma CONCRETA. Regras inegociáveis:
+ILUSTRE de forma CONCRETA.
+
+LINGUAGENS VISUAIS DO BANCO REAL (estudo dna-visual-banco-real.md — escolha UMA,
+a que melhor serve a mensagem; o tom da marca é LEVE, espirituoso e confiante,
+humor absurdo levado a sério — NÃO sombrio-corporativo):
+  • FOTO-CONCEITO CÔMICA: conceito absurdo fotografado sério (homem clonado 5×,
+    homem de 6 braços, homem pegando fogo ao telefone). Ideal pra dor/rotina/caos.
+  • COLAGEM VINTAGE P&B: recorte halftone de foto antiga, escala surreal lúdica
+    (mão gigante soltando um lead, retrato desconstruído). Ideal pra conceito/método.
+  • HUMOR POR OBJETO: um objeto fotorrealista como piada seca (chupeta gigante na
+    mesa executiva = "operação implora por babá"). Ideal pra metáfora de 1 palavra.
+  • FINE-ART SURREAL: foto artística granulada, figura minúscula em cenário vasto
+    (homenzinho no barco de dinheiro). Ideal pra reflexão/pergunta.
+  • DOCUMENTAL DE DETALHE: mãos/mesas/telas sem rosto (mão assinando + laptop com
+    CRM). Ideal pra prova/processo/dados.
+
+Regras inegociáveis:
 - A IMAGEM TEM QUE ILUSTRAR A COPY. Identifique o assunto-chave da copy e GARANTA
   que ele apareça visível na cena. Mapeamento obrigatório:
   • copy fala de DADOS / INDICADOR / MÉTRICA / NÚMERO / GESTÃO / DECISÃO → a cena
@@ -85,8 +101,9 @@ ILUSTRE de forma CONCRETA. Regras inegociáveis:
   (não pessoa). Se indicar colagem surreal, varie a metáfora.
 - EVITE os conceitos recentes que eu listar (cena E perfil de pessoa). Escolha um
   scene_type DIFERENTE dos recentes.
-- Brasileiro, editorial, decision-grade, sem sorriso de stock. Sempre coerente
-  com a mensagem da copy.
+- Brasileiro, editorial, decision-grade. Sorriso genuíno e humor são BEM-VINDOS
+  (o banco real é leve e bem-humorado); proibido só o sorriso-de-stock vazio que
+  não serve à cena. Sempre coerente com a mensagem da copy.
 - must_show: 1-3 elementos CONCRETOS que TÊM que estar visíveis na imagem pra
   ilustrar a copy (ex: ["laptop with a sales dashboard","printed report with charts"]).
 - brief: descrição vívida EM INGLÊS (sujeito + cena + ação + os must_show visíveis +

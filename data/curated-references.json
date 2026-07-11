@@ -19,7 +19,8 @@
           "title": "Cliente na loja nao fecha",
           "mood": "confronto",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-a-diagnostico-1h-gratuito",
@@ -35,7 +36,8 @@
           "title": "Empresário, multiplique seu resultado",
           "mood": "aspiracional",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L3"
         },
         {
           "id": "ad-a-empresario-pare-de-apagar-incendio",
@@ -43,7 +45,8 @@
           "title": "Empresário, pare de apagar incêndio",
           "mood": "confronto",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L3"
         },
         {
           "id": "ad-a-empresario-pare-de-vigiar",
@@ -51,7 +54,8 @@
           "title": "Empresário, pare de vigiar",
           "mood": "confronto",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L2"
         },
         {
           "id": "ad-a-empresario-se-a-sua-rotina",
@@ -59,7 +63,8 @@
           "title": "Empresário, se a sua rotina...",
           "mood": "diagnostico",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L3"
         },
         {
           "id": "ad-a-empresario-voce-esta-satisfeito",
@@ -67,7 +72,8 @@
           "title": "Empresário, você está satisfeito?",
           "mood": "provocacao",
           "archetype_foto": "retrato-individual-confiante",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L6"
         },
         {
           "id": "ad-a-empresario-voce-fatura-200-mil",
@@ -83,7 +89,8 @@
           "title": "Eu quero você fora",
           "mood": "provocacao",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L4"
         },
         {
           "id": "ad-a-extraia-o-potencial-maximo",
@@ -91,7 +98,8 @@
           "title": "Extraia o potencial máximo",
           "mood": "aspiracional",
           "archetype_foto": "time-colaborando-laptops",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L4"
         },
         {
           "id": "ad-a-gerindo-ou-esperando",
@@ -99,7 +107,8 @@
           "title": "Gerindo ou esperando",
           "mood": "provocacao",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-a-me-de-60-minutos",
@@ -107,7 +116,8 @@
           "title": "Me dê 60 minutos",
           "mood": "convite",
           "archetype_foto": "mentoria-1-on-1",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-a-o-segredo-para-dobrar-sua-conversao",
@@ -115,7 +125,8 @@
           "title": "O segredo para dobrar sua conversão",
           "mood": "aspiracional",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L4"
         },
         {
           "id": "ad-a-operacao-funciona-sem-voce",
@@ -123,7 +134,8 @@
           "title": "Operacao funciona sem voce",
           "mood": "confronto",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-a-pare-de-agir-como-um-paramedico",
@@ -131,7 +143,8 @@
           "title": "Pare de agir como um paramédico",
           "mood": "provocacao",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L8"
         },
         {
           "id": "ad-a-sem-meta-rotina-processo",
@@ -139,7 +152,8 @@
           "title": "Sem meta rotina processo",
           "mood": "analitico",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-a-sem-processo-fica-pra-tras",
@@ -147,7 +161,8 @@
           "title": "Sem processo fica pra tras",
           "mood": "urgencia",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-a-servicos-300-milmes",
@@ -155,7 +170,8 @@
           "title": "Servicos 300 mil/mes",
           "mood": "analitico",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-a-servicos-vender-30-mais",
@@ -171,7 +187,8 @@
           "title": "Sua operação comercial não precisa",
           "mood": "reframe",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L5"
         },
         {
           "id": "ad-a-talento-ou-prisao-de-cnpj",
@@ -179,7 +196,8 @@
           "title": "Talento ou prisao de CNPJ",
           "mood": "confronto",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-a-transforme-o-desempenho-do-seu-time",
@@ -187,7 +205,8 @@
           "title": "Transforme o desempenho do seu time",
           "mood": "aspiracional",
           "archetype_foto": "time-colaborando-laptops",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L3"
         },
         {
           "id": "ad-a-voce-paga-o-salario-de-um-time",
@@ -195,7 +214,8 @@
           "title": "Você paga o salário de um time",
           "mood": "confronto",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L2"
         }
       ]
     },
@@ -209,7 +229,8 @@
           "title": "60 min pra tirar do balcao",
           "mood": "autoridade",
           "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-b-convite-loja-nas-costas",
@@ -217,7 +238,8 @@
           "title": "Convite — loja nas costas",
           "mood": "acolhedor",
           "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-b-funcionario-do-proprio-negocio",
@@ -225,7 +247,8 @@
           "title": "Funcionario do proprio negocio",
           "mood": "provocacao",
           "archetype_foto": "executivo-cansado",
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-b-limite-da-exaustao",
@@ -341,7 +364,8 @@
           "title": "Apaga incendio ha 6 meses",
           "mood": "confronto",
           "archetype_foto": null,
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L8"
         },
         {
           "id": "ad-c-aumentar-lucro-em-50",
@@ -349,7 +373,8 @@
           "title": "Aumentar lucro em 50%",
           "mood": "aspiracional",
           "archetype_foto": null,
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L8"
         },
         {
           "id": "ad-c-metta-lucro-tipo-gigante",
@@ -357,7 +382,8 @@
           "title": "Metta — lucro tipo gigante",
           "mood": "autoridade",
           "archetype_foto": null,
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L1"
         },
         {
           "id": "ad-c-time-bater-meta-em-3-meses",
@@ -365,7 +391,8 @@
           "title": "Time bater meta em 3 meses",
           "mood": "aspiracional",
           "archetype_foto": null,
-          "brand": "metta"
+          "brand": "metta",
+          "linguagem": "L7"
         }
       ]
     },
@@ -659,5 +686,16 @@
         }
       ]
     }
+  },
+  "linguagens": {
+    "fonte": "content/direcao-arte/dna-visual-banco-real.md (estudo visual 2026-07-11)",
+    "L1": "foto real do especialista — NUNCA gerar (biblioteca fotoReal); não usar como referência de geração",
+    "L2": "meme/still de filme — direitos autorais; não usar como referência de geração",
+    "L3": "foto-conceito cômica (humor absurdo levado a sério)",
+    "L4": "colagem vintage P&B / gravura halftone",
+    "L5": "humor por objeto (foto realista de objeto como piada)",
+    "L6": "fine-art surreal granulado",
+    "L7": "documental de detalhe (mãos/telas, sem rosto)",
+    "L8": "tipografia pura (sem imagem)"
   }
 }

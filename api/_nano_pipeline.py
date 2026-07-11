@@ -45,6 +45,31 @@ _METTA_TREAT = (
     "No text, no words, no letters, no layout copied."
 )
 
+# Tratamentos por LINGUAGEM visual do banco real (dna-visual-banco-real.md).
+# A referência escolhida carrega `linguagem`; o treatment casa com ela — é o que
+# fez a prova v4 bater com o banco (10/10). Sem etiqueta → _METTA_TREAT genérico.
+_LANG_TREAT = {
+    "L3": ("Comedic conceptual stock photograph: an absurd humorous concept played completely "
+           "straight, professional studio photography, crisp commercial lighting, genuine playful "
+           "expressions (NOT somber, NOT dramatic). Match the reference's background colour and "
+           "palette exactly. "),
+    "L4": ("Vintage black-and-white halftone print / paper-collage: cut-out photographic elements "
+           "with visible print grain, surreal playful scale, premium 1970s magazine art direction, "
+           "generous empty space for typography. Match the reference's background colour (cream, "
+           "yellow or near-black) exactly. "),
+    "L5": ("Photorealistic still photograph of a single object staged as a deadpan visual joke in "
+           "a real business environment, shallow depth of field, warm natural light, the object "
+           "treated with the seriousness of a luxury product shot. "),
+    "L6": ("Grainy fine-art surreal photograph, painterly muted tones, heavy film grain, dreamlike "
+           "atmosphere, tiny human figure in a vast surreal setting, dark vignette for typography. "),
+    "L7": ("Documentary corporate detail photograph: hands, desks and screens only — NO faces. "
+           "Natural office light, realistic candid business setting, screens showing plausible "
+           "abstract dashboards (no readable words). "),
+}
+# Linguagens que NUNCA servem de referência de geração: L1 = foto real do
+# especialista (geraria um "especialista falso"); L2 = still de filme (direitos).
+_NO_GEN_REF = {"L1", "L2"}
+
 # blueprint model_id → família no banco de referências curado.
 _FAMILY = {
     "A-headline-foto-dark": "A", "FOTO-PILL-CASUAL": "A", "I-retrato-editorial-pb": "A",
@@ -91,6 +116,11 @@ def pick_reference(model_id: str, copy: dict) -> dict | None:
     cur = _load_curated()
     refs = (cur.get("by_family", {}).get(fam, {}) or {}).get("refs", [])
     refs = [r for r in refs if (_ROOT / r.get("path", "")).is_file()]
+    # L1 (foto real do especialista) e L2 (meme de filme) nunca guiam geração;
+    # só caem neles se a família não tiver NENHUMA referência gerável.
+    gen_ok = [r for r in refs if r.get("linguagem") not in _NO_GEN_REF]
+    if gen_ok:
+        refs = gen_ok
     if not refs:
         return None
     q = _tokens(f"{copy.get('headline','')} {copy.get('subhead','')}")
@@ -100,6 +130,7 @@ def pick_reference(model_id: str, copy: dict) -> dict | None:
         "family": fam,
         "id": best["id"],
         "path": str(_ROOT / best["path"]),
+        "linguagem": best.get("linguagem"),
         "motor": (cur["by_family"][fam] or {}).get("motor", "nano-banana-2"),
     }
 
@@ -144,7 +175,15 @@ def generate_background(model_id: str, copy: dict, scene: str,
     refp = Path(ref["path"])
     b64ref = base64.b64encode(refp.read_bytes()).decode("ascii")
     mime = "image/webp" if refp.suffix.lower() == ".webp" else "image/png"
-    prompt = f"Invent a new image. Scene: {scene.strip()} {_METTA_TREAT}"
+    lang_treat = _LANG_TREAT.get(ref.get("linguagem") or "")
+    if lang_treat:
+        prompt = (
+            "Use the attached real advertisement ONLY as a style reference: match its photographic "
+            "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
+            f"Create: {lang_treat}Scene: {scene.strip()} "
+            "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
+    else:
+        prompt = f"Invent a new image. Scene: {scene.strip()} {_METTA_TREAT}"
 
     payload = {
         "contents": [{"parts": [
@@ -170,8 +209,8 @@ def generate_background(model_id: str, copy: dict, scene: str,
             if inl and inl.get("data"):
                 png = base64.b64decode(inl["data"])
                 meta = {"model": _MODEL, "ref_id": ref["id"], "family": ref["family"],
-                        "aspect": aspect, "ms": int((time.time() - t0) * 1000),
-                        "bytes": len(png)}
+                        "linguagem": ref.get("linguagem"), "aspect": aspect,
+                        "ms": int((time.time() - t0) * 1000), "bytes": len(png)}
                 return png, meta
     raise NanoPipelineError("Nano Banana não retornou imagem.")
 
@@ -270,6 +309,9 @@ def generate_panorama(scene: str, n_slides: int = 2, family: str = "A",
     cur = _load_curated()
     refs = [r for r in (cur.get("by_family", {}).get(family, {}) or {}).get("refs", [])
             if (_ROOT / r.get("path", "")).is_file()]
+    gen_ok = [r for r in refs if r.get("linguagem") not in _NO_GEN_REF]
+    if gen_ok:
+        refs = gen_ok
     parts: list[dict] = [{"text": (
         f"Invent ONE single continuous ultra-wide image. Scene: {scene.strip()} {_METTA_TREAT}")}]
     ref_id = None
