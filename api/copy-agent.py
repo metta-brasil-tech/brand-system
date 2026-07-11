@@ -81,6 +81,39 @@ def _run_propose_angles(data: dict) -> dict:
     return {"ok": True, "angles": angles}
 
 
+def _winners_benchmark(limit: int = 3, max_chars_each: int = 1500) -> str:
+    """Monta o bloco de benchmark a partir dos vencedores mais recentes do
+    KV (winners:index). Qualquer falha (KV fora, sem env var, lista vazia)
+    devolve string vazia -- a geração roda idêntica ao comportamento
+    pré-banco, nunca quebra por causa do benchmark."""
+    try:
+        from pieces import _kv_command, _kv_configured  # api/pieces.py
+
+        if not _kv_configured():
+            return ""
+        raw_items = _kv_command("LRANGE", "winners:index", "0", str(limit - 1)) or []
+        blocks = []
+        for i, raw in enumerate(raw_items, start=1):
+            try:
+                entry = json.loads(raw)
+            except (json.JSONDecodeError, TypeError):
+                continue
+            text = str(entry.get("winner_text", "")).strip()[:max_chars_each]
+            if not text:
+                continue
+            elements = entry.get("performance_elements") or []
+            notes = str(entry.get("performance_notes", "")).strip()
+            block = f"VENCEDOR {i}:\n{text}"
+            if elements:
+                block += "\nElementos de performance: " + "; ".join(str(e) for e in elements)
+            if notes:
+                block += f"\nNota do marketing: {notes}"
+            blocks.append(block)
+        return "\n\n".join(blocks)
+    except Exception:
+        return ""
+
+
 def _run_winner_variations(data: dict) -> dict:
     """Banco de vencedores (v5.1 seção 9): deriva variações A/B/C de um
     criativo que performou e ALIMENTA o banco permanente -- o vencedor entra
@@ -145,7 +178,9 @@ def _run_generate(data: dict) -> dict:
     brief = build_brief_from_answers(answers)
 
     client = anthropic.Anthropic()
-    result = CopyGenerator(client).generate(brief)
+    # Vencedores acumulados no banco entram como benchmark do que já
+    # performou com esse público (v5.1 seção 9); vazio se KV não configurado.
+    result = CopyGenerator(client).generate(brief, winners_benchmark=_winners_benchmark())
 
     piece = {
         "brand": data["brand"],

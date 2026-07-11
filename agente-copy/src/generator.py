@@ -216,7 +216,13 @@ class CopyGenerator:
         self.max_revisions = max_revisions
         self._knowledge_bases: dict[Brand, KnowledgeBase] = {}
 
-    def generate(self, brief: Brief) -> GenerationResult:
+    def generate(self, brief: Brief, winners_benchmark: str = "") -> GenerationResult:
+        """winners_benchmark: bloco de texto opcional com criativos que
+        comprovadamente performaram (banco de vencedores, v5.1 seção 9) --
+        entra no prompt estrutural como referência do que funciona com esse
+        público. Vazio = comportamento idêntico ao de antes do banco existir.
+        O caller (API do brand-system) é quem busca isso no storage; este
+        módulo não conhece KV."""
         if brief.brand != "metta":
             raise NotImplementedError(
                 f"Brand {brief.brand!r} is not supported yet. Full support "
@@ -224,7 +230,7 @@ class CopyGenerator:
             )
 
         knowledge = self._knowledge_base(brief.brand)
-        draft = self._draft_structural(brief, knowledge)
+        draft = self._draft_structural(brief, knowledge, winners_benchmark)
 
         # The Opus pass judges against the QA checklist and can send the piece
         # back for revision; it is not a rubber stamp. We loop until it approves
@@ -261,7 +267,9 @@ class CopyGenerator:
             self._knowledge_bases[brand] = KnowledgeBase(brand)
         return self._knowledge_bases[brand]
 
-    def _draft_structural(self, brief: Brief, knowledge: KnowledgeBase) -> dict[str, Any]:
+    def _draft_structural(
+        self, brief: Brief, knowledge: KnowledgeBase, winners_benchmark: str = ""
+    ) -> dict[str, Any]:
         response = self.client.messages.create(
             model=SONNET_MODEL,
             # Reproduzido em produção com stage="draft_structural": o modelo
@@ -270,7 +278,7 @@ class CopyGenerator:
             # estourava antes de sobrar espaço pro JSON final.
             max_tokens=16000,
             system=_build_system_prompt(brief.brand, brief.copy_type),
-            messages=[{"role": "user", "content": _cached_content(_build_structural_prompt(brief, knowledge))}],
+            messages=[{"role": "user", "content": _cached_content(_build_structural_prompt(brief, knowledge, winners_benchmark))}],
             output_config={"format": {"type": "json_schema", "schema": _DRAFT_SCHEMA}},
         )
         return _extract_json(response, stage="draft_structural")
@@ -578,7 +586,9 @@ def _should_skip_case(brief: Brief) -> bool:
     return (not include_case) or _is_short_length(getattr(brief, "length", ""))
 
 
-def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
+def _build_structural_prompt(
+    brief: Brief, knowledge: KnowledgeBase, winners_benchmark: str = ""
+) -> str:
     query = _brief_query(brief) if _rag_enabled() else None
     icp_context = _icp_context(brief.icp, query_terms=query)
     icp_block = f"{icp_context}\n\n" if icp_context else ""
@@ -612,7 +622,17 @@ def _build_structural_prompt(brief: Brief, knowledge: KnowledgeBase) -> str:
         + case_note + selection_note + "\n\n"
         f"{context}\n\n"
         f"{icp_block}"
-        "=== BRIEFING DA PEÇA ===\n"
+        + (
+            "=== CRIATIVOS VENCEDORES (benchmark de performance) ===\n"
+            "Os criativos abaixo comprovadamente performaram com esse público "
+            "(critério do marketing: leads qualificados / CTR). Use como "
+            "referência do que funciona -- ângulo de entrada, formato de "
+            "gancho, tipo de prova. NÃO copie frases: a peça nova precisa ser "
+            "original.\n\n"
+            f"{winners_benchmark}\n\n"
+            if winners_benchmark.strip() else ""
+        )
+        + "=== BRIEFING DA PEÇA ===\n"
         f"{_render_brief(brief)}\n\n"
         "=== TAREFA ===\n"
         "Escreva a peça montada por partes, respeitando a estrutura do tipo de copy "
