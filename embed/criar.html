@@ -1486,12 +1486,9 @@ function tplWizImagem() {
           <p class="choice-desc">${STATE.brand === 'tiago' ? 'Use uma foto real do Tiago (a IA não reproduz o rosto dele) — escolha um recorte pronto ou suba uma foto sua.' : 'Suba uma foto sua (crachá, produto, cena real). Vai direto pro layout, sem gerar.'}</p>
           <span class="choice-tag">foto real</span>
         </button>
-        <button class="choice ${STATE.imageSource === 'search' ? 'selected' : ''}" data-action="pick-image-source" data-value="search">
-          <div class="choice-icon">${icon('search', 24)}</div>
-          <h3 class="choice-title">Buscar na web</h3>
-          <p class="choice-desc">Busca real via Google. Bom pra pessoa pública, produto específico, marca conhecida — onde gerar IA não faz sentido.</p>
-          <span class="choice-tag">Grátis · 100/dia</span>
-        </button>
+        <!-- "Buscar na web" removido do wizard: exige GOOGLE_CSE_API_KEY + GOOGLE_CSE_CX_ID
+             na Vercel (nunca configuradas). O backend api/image-search.py continua no lugar;
+             pra reativar, basta configurar as env vars e restaurar este botão. -->
       </div>
     </div>
     <div class="foot">
