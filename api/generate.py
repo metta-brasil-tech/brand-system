@@ -923,6 +923,8 @@ def _run_pipeline_inline(
         "text_anchor": (ad_directives.get("text_anchor") or "").strip().lower(),
         "panel": (ad_directives.get("panel") or "").strip().lower(),
         "head_out": str(ad_directives.get("head_out") or "").strip().lower(),
+        # linha de prova social solta no canto (fora do card), assinatura do banco
+        "proof": (ad_directives.get("proof") or "").strip(),
     }
     rendered = render_html(
         marca=marca,

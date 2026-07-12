@@ -44,6 +44,15 @@
         size += 3; head.style.fontSize = size + 'px'; g++;
       }
       if (over()) { size -= 4; head.style.fontSize = size + 'px'; }
+    } else if (box.classList && box.classList.contains('text-panel') &&
+               !box.classList.contains('head-band')) {
+      // CAIXA com fundo: headline CURTA cresce pra dominar o card (como no banco
+      // real, ex: extraia), até a caixa quase encher a altura máx ou transbordar.
+      var cap2 = 128, g2 = 0;
+      while (!over() && size < cap2 && g2 < 120) {
+        size += 2; head.style.fontSize = size + 'px'; g2++;
+      }
+      if (over()) { size -= 2; head.style.fontSize = size + 'px'; }
     }
     return size;
   }

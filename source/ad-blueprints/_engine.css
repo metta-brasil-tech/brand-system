@@ -187,6 +187,14 @@ button { all: unset; }
 /* quando há caixa, o gradiente da foto some (a caixa já dá a legibilidade) */
 .ad[data-panel="white"] .grad, .ad[data-panel="yellow"] .grad, .ad[data-panel="dark"] .grad { opacity: 0; }
 
+/* LINHA DE PROVA solta no canto inferior (fora do card) — "+1.000 EMPRESAS · ..." */
+.proof-line {
+  position: absolute; left: var(--pad-x); bottom: var(--pad-y); z-index: 6; max-width: 60%;
+  font-family: var(--m-display); font-weight: 700; font-variation-settings: 'wght' 700;
+  font-size: 22px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--fg); opacity: .85; line-height: 1.25;
+}
+
 /* =============================================================================
  * ARCHETYPES
  * ===========================================================================*/

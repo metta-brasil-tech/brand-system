@@ -240,6 +240,15 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
     return out
 
 
+def _proof_line(copy: dict) -> str:
+    """Linha de PROVA SOCIAL solta no canto inferior (fora do card), assinatura do
+    banco real (ex: '+1.000 EMPRESAS · +R$8,5 BI EM VENDAS'). Vazio se não houver."""
+    p = (copy or {}).get("proof")
+    if not p:
+        return ""
+    return f'<div class="proof-line">{_esc(str(p))}</div>'
+
+
 def _photo(image_url: str, cls: str = "photo") -> str:
     if not image_url:
         return ""
@@ -551,6 +560,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
 <div class="ad ad-canvas" {data_attrs}>
 {brand}
 {inner}
+{_proof_line(copy_clean)}
 </div>
 <script>{js}</script>
 </body></html>"""

@@ -81,6 +81,10 @@ Você entrega DUAS coisas:
    (topo, sem card) e o card (white/yellow) embaixo leva só SUBTÍTULO + prova + CTA.
    Use quando a headline é uma pergunta/afirmação de impacto que quer respirar na
    imagem e o apoio é denso. Só vale com panel de fundo (white/yellow/dark).
+8. proof: "" ou linha curta de PROVA SOCIAL em caixa alta (ex: "+1.000 EMPRESAS ·
+   +R$8,5 BI EM VENDAS") — vai solta no canto inferior, fora do card (assinatura do
+   banco). Só preencha se o conhecimento trouxer número real; senão deixe "". Use de
+   preferência quando o card está no TOPO (text_anchor="top"), pra não colidir.
 
 == B) CONCEITO VISUAL (só quando NEEDS_IMAGE=sim) ==
 Leia a MENSAGEM da copy (o conceito, não as palavras) e invente uma CENA que a
@@ -136,7 +140,7 @@ Regras inegociáveis:
 
 Responda APENAS JSON válido, sem cercas:
 {"headline_marked":"...","gaze_direction":"...","crop_focus":"...","emphasis":"...",
- "text_anchor":"top|bottom","panel":"none|plain|white|yellow|dark","head_out":false,
+ "text_anchor":"top|bottom","panel":"none|plain|white|yellow|dark","head_out":false,"proof":"",
  "image_concept":{"scene_type":"...","must_show":["..."],"brief":"...","subject_note":"..."},"rationale":"..."}
 Se NEEDS_IMAGE=não, retorne "image_concept": null."""
 
