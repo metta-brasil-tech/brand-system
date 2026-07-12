@@ -19,11 +19,22 @@
     var floor = 38;
     var size = px(head, 'fontSize');
     var guard = 0;
+    var isPanel = box.classList && box.classList.contains('text-panel');
     // encolhe a headline enquanto a caixa transbordar — vertical OU horizontal
     // (horizontal pega palavra longa única que não quebra, ex: split estreito)
     function over() {
-      return box.scrollHeight > box.clientHeight + 2 ||
-             head.scrollWidth > head.clientWidth + 2;
+      if (box.scrollHeight > box.clientHeight + 2 ||
+          head.scrollWidth > head.clientWidth + 2) return true;
+      // Na CAIXA capada (max-height) o scrollHeight ignora o padding-bottom
+      // quando o conteúdo enche o cap — o CTA assentava RENTE à borda do card
+      // (curvatura vazando) em vez de respeitar o respiro. Exige que o último
+      // filho caiba COM o padding.
+      if (isPanel && box.lastElementChild) {
+        var pb = parseFloat(getComputedStyle(box).paddingBottom) || 0;
+        return box.lastElementChild.getBoundingClientRect().bottom + pb >
+               box.getBoundingClientRect().bottom + 1;
+      }
+      return false;
     }
     // 1) encolhe se transbordar (copy longa)
     while (over() && size > floor && guard < 90) {

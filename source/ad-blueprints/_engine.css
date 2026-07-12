@@ -136,6 +136,12 @@ button { all: unset; }
   display: flex; flex-direction: column; gap: var(--gap);
   border-radius: 28px; padding: 40px 44px;
 }
+/* SEM flex-shrink nos filhos: com max-height e overflow visível, o flex
+   encolheria as CAIXAS dos filhos em silêncio (scrollHeight = clientHeight) e
+   o conteúdo pintaria FORA do card (CTA metade pra fora) sem o auto-fit nem a
+   cascata dispararem. shrink:0 torna o transbordo mensurável → fitHead encolhe
+   a headline e a cascata encolhe sub/body até caber DE VERDADE. */
+.text-panel > * { flex-shrink: 0; }
 /* CTA dentro da caixa NUNCA transborda: cabe na largura, quebra linha se preciso */
 .text-panel .cta { white-space: normal; max-width: 100%; text-align: center; }
 /* caixa SEM fundo: agrupa e limita o texto (auto-fit + não cobre a imagem),
