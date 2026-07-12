@@ -540,13 +540,26 @@ def _run_pipeline_inline(
                 except Exception as _ie:
                     diagnostics.append(f"avatar-infer: PULADO ({_ie.__class__.__name__})")
             _avatar_for_ad = _avatar_context(avatar_segment, avatar_variant)
+            # OLHAR ANTES DE DECIDIR (F1 do Alisson): dá ao diretor a peça REAL do
+            # banco (da família do blueprint) pra ele compor VENDO a linguagem, não
+            # só lendo texto. Só Metta e só quando há chave OpenAI (visão).
+            _ref_imgs = None
+            if (marca or "").lower() == "metta" and _needs_concept:
+                try:
+                    from _nano_pipeline import pick_reference as _pick
+                    _r = _pick(chosen_model_id, {"headline": user_headline, "subhead": user_subhead})
+                    if _r and Path(_r["path"]).is_file():
+                        _ref_imgs = [Path(_r["path"]).read_bytes()]
+                        diagnostics.append(f"diretor VÊ referência do banco: {_r['id']} (linguagem {_r.get('linguagem')})")
+                except Exception as _re:
+                    diagnostics.append(f"ref-visão diretor: PULADO ({_re.__class__.__name__})")
             ad_directives = _ad_direct(
                 copy={"headline": user_headline, "subhead": user_subhead,
                       "body": user_body, "cta": user_cta_text},
                 archetype=_arch, theme=_theme, marca=marca,
                 brief=briefing_text or "", llm=llm, placement=bp_placement,
                 needs_image=_needs_concept, treatment=bp_treatment, recent_concepts=_recent,
-                knowledge=_k_block, avatar=_avatar_for_ad)
+                knowledge=_k_block, avatar=_avatar_for_ad, ref_images=_ref_imgs)
             mark("art-director", t_ad)
             if _k_prov:
                 diagnostics.append(

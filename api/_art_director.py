@@ -394,10 +394,29 @@ def _is_tiago(marca: str, archetype: str) -> bool:
     return (marca or "").strip().lower() == "tiago" or (archetype or "").lower().startswith("tiago")
 
 
+def _complete_with_vision(system: str, user: str, images: list, model: str | None = None) -> str:
+    """Chama a visão DIRETO (OpenAI), mostrando as imagens de referência do banco
+    pro diretor DECIDIR OLHANDO — a fase 'olhar antes de decidir' do Alisson. Fica
+    em api/ (não usa o adaptador só-texto do submódulo). Devolve o content cru."""
+    import base64 as _b64
+    from openai import OpenAI
+    parts = [{"type": "text", "text": user}]
+    for img in images[:4]:
+        b = _b64.b64encode(img).decode("ascii")
+        parts.append({"type": "image_url",
+                      "image_url": {"url": f"data:image/webp;base64,{b}"}})
+    resp = OpenAI().chat.completions.create(
+        model=model or os.getenv("ART_DIRECTOR_MODEL", "gpt-4.1"),
+        max_tokens=800,
+        messages=[{"role": "system", "content": system},
+                  {"role": "user", "content": parts}])
+    return resp.choices[0].message.content or ""
+
+
 def direct(copy: dict, archetype: str, theme: str, marca: str, brief: str,
            llm, placement: str = "", needs_image: bool = False,
            treatment: str = "", recent_concepts=None,
-           knowledge: str = "", avatar: str = "") -> dict:
+           knowledge: str = "", avatar: str = "", ref_images=None) -> dict:
     """Retorna diretivas de composição + (se needs_image) conceito visual.
 
     `llm` precisa ter .complete(system, user). `recent_concepts` = lista de dicts
@@ -464,8 +483,21 @@ def direct(copy: dict, archetype: str, theme: str, marca: str, brief: str,
         f"Componha. Se NEEDS_IMAGE=sim, invente uma CENA variada e coerente com a "
         f"mensagem, diferente dos recentes. Preserve as palavras EXATAS da headline."
     )
-    resp = llm.complete(system=system, user=user, max_tokens=800)
-    content = getattr(resp, "content", resp)
+    # OLHAR ANTES DE DECIDIR (F1 do Alisson): se vierem referências reais do banco,
+    # o diretor DECIDE VENDO as imagens — não só lendo texto. Fallback pro adaptador
+    # só-texto quando não há referência ou a visão falha.
+    if ref_images:
+        try:
+            vis_user = (user + "\n\nVEJA as imagens de referência REAIS do banco Metta "
+                        "acima (a linguagem visual, a caixa de texto, a composição). "
+                        "Componha ESTA peça no MESMO espírito visual que você está vendo.")
+            content = _complete_with_vision(system, vis_user, ref_images)
+        except Exception:
+            resp = llm.complete(system=system, user=user, max_tokens=800)
+            content = getattr(resp, "content", resp)
+    else:
+        resp = llm.complete(system=system, user=user, max_tokens=800)
+        content = getattr(resp, "content", resp)
     out = _coerce_json(content)
 
     # Salvaguarda: headline_marked não pode trocar/perder palavras.
