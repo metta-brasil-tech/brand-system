@@ -43,12 +43,17 @@
     // 2) CRESCE até dominar (só typo) — tipografia É o ad; copy curta tem que
     //    encher a tela (DNA do C/H/K). Cresce até a coluna de texto ocupar ~64%
     //    do canvas ou quase transbordar.
+    // Calibração pelo banco real (carrosséis): headline-FRASE fica em ~72-110px;
+    // só número-hero/1-2 palavras pode ser gigante. O cap cai com o nº de palavras.
+    var words = (head.textContent || '').trim().split(/\s+/).length;
     var ad = head.closest('.ad');
     var _arch = ad && ad.getAttribute('data-arch');
     if (_arch === 'typo' || _arch === 'number-hero') {
       var stack = box.querySelector('.stack') || box;
       var cap = _arch === 'number-hero' ? 300
                 : (ad.getAttribute('data-scale') === 'giant' ? 210 : 150);
+      if (words >= 8) cap = Math.min(cap, 92);
+      else if (words >= 5) cap = Math.min(cap, 112);
       var target = box.clientHeight * (_arch === 'number-hero' ? 0.72 : 0.64);
       var g = 0;
       while (stack.offsetHeight < target && !over() && size < cap && g < 140) {
@@ -60,10 +65,24 @@
       // CAIXA com fundo: headline CURTA cresce pra dominar o card (como no banco
       // real, ex: extraia), até a caixa quase encher a altura máx ou transbordar.
       var cap2 = 128, g2 = 0;
+      if (words >= 8) cap2 = 92; else if (words >= 5) cap2 = 112;
       while (!over() && size < cap2 && g2 < 120) {
         size += 2; head.style.fontSize = size + 'px'; g2++;
       }
       if (over()) { size -= 2; head.style.fontSize = size + 'px'; }
+    }
+    // 4) LINHAS CHEIAS (padrão do banco: nenhuma peça real tem escada de 1
+    //    palavra por linha gigante). Headline com 3+ palavras precisa de média
+    //    >= 2 palavras por linha — senão encolhe até as linhas encherem.
+    if (words >= 3) {
+      var lh = px(head, 'lineHeight') || size * 0.92;
+      var maxLines = Math.max(2, Math.ceil(words / 2.2));
+      var g4 = 0;
+      while (Math.round(head.offsetHeight / lh) > maxLines && size > floor && g4 < 60) {
+        size -= 2; head.style.fontSize = size + 'px';
+        lh = px(head, 'lineHeight') || size * 0.92;
+        g4++;
+      }
     }
     // 3) CASCATA anti-corte da caixa: a .text-panel tem max-height + overflow
     //    hidden — se a headline chegou no piso e o conteúdo AINDA transborda

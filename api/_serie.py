@@ -173,7 +173,8 @@ def familia_hint_from(root) -> str | None:
     return None
 
 
-def plan_serie(slides: list[dict], avoid_familia: str | None = None) -> dict:
+def plan_serie(slides: list[dict], avoid_familia: str | None = None,
+               no_image: bool = False) -> dict:
     """Monta o plano da série: tratamento + blueprint + família por slide.
 
     slides: [{"headline":..., "subhead":..., "body":..., "cta":...}, ...]
@@ -204,25 +205,43 @@ def plan_serie(slides: list[dict], avoid_familia: str | None = None) -> dict:
             cands = [forced]
         else:
             cands = _candidates(cls, position)
+            # Sem imagem, blueprint de FOTO vira vazio morto (metade do canvas
+            # em branco) — só tratamentos sem foto entram, com o leque
+            # tipográfico completo pra não virar 5x o mesmo molde (anti-padrão
+            # A1). Modo degradado: produção real é com imagem.
+            if no_image:
+                sem_foto = [t for t in cands if not TREATMENTS[t]["needs_image"]]
+                if sem_foto and (cls["has_list"] or cls["has_quote"]):
+                    # sinal estrutural forte (lista/citação) mantém o tratamento
+                    # certo — não dilui com alternativas nem cede à família
+                    cands = sem_foto
+                else:
+                    extras = (["T-HIGHLIGHT-XL"] if position == "capa" else
+                              ["T-DEFINICAO", "T-TWEET-CARD", "T-HIGHLIGHT-XL"])
+                    cands = sem_foto + [t for t in extras if t not in sem_foto]
             # Rule C3 — não repetir o tratamento do slide anterior
             cands = [t for t in cands if t != prev_treatment] or cands
             # Análogo C4 — com a família travada, preferir tratamento que tem
             # blueprint na família (sort estável preserva a prioridade
-            # estrutural; sem opção na família vira inversão pontual)
-            if familia_lock:
+            # estrutural; sem opção na família vira inversão pontual).
+            # Sem imagem a série é toda tipográfica: a preferência de família
+            # NÃO se aplica — variedade de fundo (dark/light/yellow) é o que
+            # separa carrossel real de 5x o mesmo slide (banco: burnout).
+            if familia_lock and not no_image:
                 cands = sorted(cands, key=lambda t: 0 if any(
                     familia_of(m) == familia_lock for m in TREATMENTS[t]["models"]) else 1)
-            elif avoid_familia:
+            elif avoid_familia and familia_lock is None:  # só a capa, antes da trava
                 # capa com anti-monotonia: preferir tratamento com opção FORA
                 # da família das últimas séries
                 cands = sorted(cands, key=lambda t: 0 if any(
                     familia_of(m) != avoid_familia for m in TREATMENTS[t]["models"]) else 1)
-            # Rule C6 — teto de 2 tipográficos na série
-            if tipograficos >= 2:
+            # Rule C6 — teto de 2 tipográficos na série (não se aplica no modo
+            # sem-imagem: ali a série é tipográfica por definição)
+            if tipograficos >= 2 and not no_image:
                 nao_tipo = [t for t in cands if not TREATMENTS[t]["tipografico"]]
                 cands = nao_tipo or cands
         treatment = cands[0]
-        model = _pick_model(treatment, familia_lock,
+        model = _pick_model(treatment, None if no_image else familia_lock,
                             avoid=avoid_familia if familia_lock is None else None)
         familia = familia_of(model)
         if i == 0:
@@ -239,7 +258,10 @@ def plan_serie(slides: list[dict], avoid_familia: str | None = None) -> dict:
         if sl.get("continued"):
             entry["continued"] = True
         plan.append(entry)
-    return {"n_slides": n, "familia": familia_lock, "slides": plan}
+    out = {"n_slides": n, "familia": familia_lock, "slides": plan}
+    if no_image:
+        out["no_image"] = True
+    return out
 
 
 def validate_serie(plan: dict) -> list[str]:
@@ -261,12 +283,13 @@ def validate_serie(plan: dict) -> list[str]:
                           f"{a['treatment']} (marque continued pra lista que continua)")
     tipograficos = sum(1 for s in slides
                        if TREATMENTS.get(s["treatment"], {}).get("tipografico"))
-    if tipograficos > 2:
+    if tipograficos > 2 and not plan.get("no_image"):
         issues.append(f"C6: {tipograficos} slides tipográficos (máx 2)")
     familias = [s["familia"] for s in slides]
     dominante = plan.get("familia") or familias[0]
     fora = sum(1 for f in familias if f != dominante)
-    if len(set(familias)) > 2 or fora > len(familias) // 2:
+    if (len(set(familias)) > 2 or fora > len(familias) // 2) and not plan.get("no_image"):
+        # no_image: série tipográfica varia fundo de propósito (banco real faz)
         issues.append(f"C4: família não travada — dominante {dominante}, "
                       f"série tem {sorted(set(familias))} ({fora}/{len(familias)} fora)")
     return issues

@@ -78,7 +78,8 @@ def run_serie(args):
         avoid = familia_hint_from(ROOT / "render_out")
         if avoid:
             print(f"anti-monotonia: últimas 2 séries foram {avoid} — preferindo outra família na capa")
-        plan = plan_serie(slides, avoid_familia=avoid)
+        plan = plan_serie(slides, avoid_familia=avoid,
+                          no_image=(args.image == "none"))
     issues = validate_serie(plan)
     print(f"Série de {plan['n_slides']} slides · família travada: {plan['familia']} · formato: {args.format}"
           + (" · PANORAMA" if args.panorama else ""))

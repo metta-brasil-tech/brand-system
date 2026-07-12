@@ -72,7 +72,15 @@ def _parse_front_matter(md: str) -> dict:
 
 def _accent(text: str) -> str:
     """Converte *palavra* em <span class="hi">palavra</span> e quebras de linha
-    explícitas (\\n) em <br> — quebras são decisão de composição do Diretor de Arte."""
+    explícitas (\\n) em <br> — quebras são decisão de composição do Diretor de Arte.
+
+    Sem marcador nenhum (diretor de arte off ou omisso), headline de 3+ palavras
+    ganha a ÚLTIMA palavra em destaque — no banco real a peça tipográfica sempre
+    tem 1-2 palavras em amarelo; toda branca é peça sem assinatura Metta."""
+    if "*" not in text and len(text.split()) >= 3:
+        parts = text.rstrip().rsplit(" ", 1)
+        if len(parts) == 2 and parts[1]:
+            text = f"{parts[0]} *{parts[1]}*"
     esc = _esc(text)
     esc = re.sub(r"\*([^*]+)\*", r'<span class="hi">\1</span>', esc)
     return esc.replace("\n", "<br>")
