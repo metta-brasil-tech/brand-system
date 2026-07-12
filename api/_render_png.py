@@ -36,6 +36,16 @@ def _downscale(png_bytes: bytes, w: int, h: int) -> bytes:
         return png_bytes
 
 
+# Flags de QA do último render (overflow/collision/fit) — lidos do _engine.js.
+_LAST_QA: dict = {}
+
+
+def last_qa() -> dict:
+    """QA do último render_format: {'overflow':bool,'collision':bool,'fit':str}.
+    overflow/collision True = peça DEFEITUOSA (texto cortou/estourou/colidiu)."""
+    return dict(_LAST_QA)
+
+
 # ---------------------------------------------------------------------------
 # Backend Playwright (preferido — waits determinísticos)
 # ---------------------------------------------------------------------------
@@ -54,6 +64,17 @@ def _render_playwright(html: str, width: int, height: int, scale: int) -> bytes:
             page.evaluate("async () => { if (document.fonts) await document.fonts.ready; }")
         except Exception:
             pass
+        # QA automático: lê os flags que o _engine.js marca (texto estourou o
+        # canvas / texto colidiu com o CTA / tamanhos finais). É o portão pra
+        # rejeitar peça com texto cortado ou caixa cobrindo, sem olhar no olho.
+        try:
+            global _LAST_QA
+            _LAST_QA = page.evaluate(
+                "() => ({overflow: document.documentElement.getAttribute('data-overflow')==='1',"
+                " collision: document.documentElement.getAttribute('data-collision')==='1',"
+                " fit: document.documentElement.getAttribute('data-fit')||''})")
+        except Exception:
+            _LAST_QA = {}
         el = page.query_selector(".ad-canvas") or page.query_selector(".ad")
         png = el.screenshot(type="png") if el else page.screenshot(type="png")
         browser.close()

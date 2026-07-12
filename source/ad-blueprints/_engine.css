@@ -129,13 +129,15 @@ button { all: unset; }
  * ===========================================================================*/
 .text-panel {
   align-self: flex-start; max-width: 86%;
-  /* altura limitada: a caixa nunca ocupa o frame inteiro, então sobra a metade
-     da âncora oposta pro assunto da imagem aparecer sem ser coberto. O fitHead
-     encolhe a headline pra caber DENTRO desta caixa. */
-  max-height: 70%; overflow: hidden;
+  /* altura limitada: a caixa nunca ocupa o frame inteiro, sobra espaço pro
+     assunto aparecer. SEM overflow:hidden (cepava o CTA na largura) — o fitHead
+     encolhe a headline pra caber na altura; nada é cortado. */
+  max-height: 56%;
   display: flex; flex-direction: column; gap: var(--gap);
   border-radius: 28px; padding: 40px 44px;
 }
+/* CTA dentro da caixa NUNCA transborda: cabe na largura, quebra linha se preciso */
+.text-panel .cta { white-space: normal; max-width: 100%; text-align: center; }
 /* caixa SEM fundo: agrupa e limita o texto (auto-fit + não cobre a imagem),
    mas sem card — só sombra pra legibilidade sobre a foto. */
 .text-panel[data-panel="plain"] {
