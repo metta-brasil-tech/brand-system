@@ -219,6 +219,12 @@ def _run_generate(data: dict) -> dict:
 
     client = anthropic.Anthropic()
     generator = CopyGenerator(client)
+    # timings_ms na resposta: diagnóstico permanente de onde o tempo vai
+    # (o caminho LinkedIn estourou o maxDuration 3x ao vivo e sem isso cada
+    # investigação era chute). Custo zero quando ninguém olha.
+    import time as _time
+    timings: dict[str, int] = {}
+    _t0 = _time.monotonic()
     # Vencedores acumulados no banco entram como benchmark do que já
     # performou com esse público (v5.1 seção 9); vazio se KV não configurado.
     # skip_linkedin: a adaptação roda adiante, em paralelo com as validações
@@ -227,6 +233,7 @@ def _run_generate(data: dict) -> dict:
     result = generator.generate(
         brief, winners_benchmark=_winners_benchmark(), skip_linkedin=True
     )
+    timings["generate"] = int((_time.monotonic() - _t0) * 1000)
 
     piece = {
         "brand": data["brand"],
@@ -272,10 +279,12 @@ def _run_generate(data: dict) -> dict:
     second_evaluator = f_second.result()
     if f_linkedin is not None:
         piece["linkedin_adaptation"] = f_linkedin.result()
+    timings["validations_pool"] = int((_time.monotonic() - _t0) * 1000) - timings["generate"]
 
     return {
         "ok": True,
         "piece": piece,
+        "timings_ms": timings,
         "revision_notes": result.revision_notes,
         "validation": {
             "icp_fit": {"passed": icp_fit.passed, "reasoning": icp_fit.reasoning},
