@@ -63,10 +63,15 @@ Você entrega DUAS coisas:
    O brief da cena DEVE deixar essa zona limpa (fundo suave, vazio, sem elementos).
 6. panel: "none"|"plain"|"white"|"yellow"|"dark" — a CAIXA DE TEXTO. Duas famílias:
    CAIXA COM FUNDO (card colorido — mais legível, agrupa muito texto):
-   • "white" → título + DESCRIÇÃO + prova + CTA (documental/informativa, ex: card
-     branco "Mentoria Metta... +1.000 empresas" + botão). O padrão mais comum.
-   • "yellow" → afirmação forte/colagem, texto escuro dentro do card amarelo.
-   • "dark" → foto clara/ocupada onde texto solto sumiria; card escuro discreto.
+   • "white" → título + DESCRIÇÃO/subtítulo + (prova) + CTA. É o PADRÃO da maioria
+     das peças informativas do banco (card branco "Mentoria Metta..." + botão). Na
+     dúvida entre white e dark, ESCOLHA WHITE.
+   • "yellow" → afirmação forte e curta / colagem; texto escuro no card amarelo.
+     Bom pra headline de impacto sem muita descrição.
+   • "dark" → APENAS quando a foto é clara/estourada e um card claro sumiria, ou
+     quando o mood pede peso/cinema. NÃO é o default — use com parcimônia.
+   NÃO escolha "dark" por segurança em toda peça: VARIE conforme a peça pede
+   (a maioria é white; afirmações curtas são yellow; head_out no padrão CRM).
    CAIXA SEM FUNDO:
    • "plain" → texto agrupado sobre a foto SEM card, só com sombra (headline forte
      em zona vazia com pouca informação; visual mais limpo/cinema com hierarquia).
