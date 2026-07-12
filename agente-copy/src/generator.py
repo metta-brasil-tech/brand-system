@@ -216,13 +216,21 @@ class CopyGenerator:
         self.max_revisions = max_revisions
         self._knowledge_bases: dict[Brand, KnowledgeBase] = {}
 
-    def generate(self, brief: Brief, winners_benchmark: str = "") -> GenerationResult:
+    def generate(
+        self, brief: Brief, winners_benchmark: str = "", skip_linkedin: bool = False
+    ) -> GenerationResult:
         """winners_benchmark: bloco de texto opcional com criativos que
         comprovadamente performaram (banco de vencedores, v5.1 seção 9) --
         entra no prompt estrutural como referência do que funciona com esse
         público. Vazio = comportamento idêntico ao de antes do banco existir.
         O caller (API do brand-system) é quem busca isso no storage; este
-        módulo não conhece KV."""
+        módulo não conhece KV.
+
+        skip_linkedin: pula a adaptação LinkedIn mesmo com platform=linkedin,
+        pra quem quer rodá-la em paralelo com outras chamadas via
+        adapt_linkedin() (a adaptação só depende do rascunho aprovado, não
+        das validações -- em série ela empurrava o total da função na Vercel
+        pra cima do maxDuration de 300s, reproduzido ao vivo)."""
         if brief.brand != "metta":
             raise NotImplementedError(
                 f"Brand {brief.brand!r} is not supported yet. Full support "
@@ -245,7 +253,7 @@ class CopyGenerator:
             draft = judgment["piece"]
 
         linkedin = None
-        if brief.platform.lower() == "linkedin":
+        if brief.platform.lower() == "linkedin" and not skip_linkedin:
             linkedin = self._adapt_linkedin(brief, knowledge, draft)
 
         return GenerationResult(
@@ -364,6 +372,12 @@ class CopyGenerator:
              for key, value in angle.items()}
             for angle in angles
         ]
+
+    def adapt_linkedin(self, brief: Brief, draft: dict[str, Any]) -> str:
+        """Versão pública de _adapt_linkedin pra rodar FORA do generate()
+        (em paralelo com as validações): recebe o dict da peça pronta
+        (hook/corpo/cta/...) e devolve o texto adaptado."""
+        return self._adapt_linkedin(brief, self._knowledge_base(brief.brand), draft)
 
     def derive_winner_variations(
         self, brand: Brand, winner_text: str, performance_notes: str = ""

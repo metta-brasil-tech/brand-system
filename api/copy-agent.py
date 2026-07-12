@@ -218,9 +218,15 @@ def _run_generate(data: dict) -> dict:
     brief = build_brief_from_answers(answers)
 
     client = anthropic.Anthropic()
+    generator = CopyGenerator(client)
     # Vencedores acumulados no banco entram como benchmark do que já
     # performou com esse público (v5.1 seção 9); vazio se KV não configurado.
-    result = CopyGenerator(client).generate(brief, winners_benchmark=_winners_benchmark())
+    # skip_linkedin: a adaptação roda adiante, em paralelo com as validações
+    # (só depende do rascunho pronto) -- em série o caminho LinkedIn estourava
+    # o maxDuration de 300s da função (reproduzido ao vivo 2x).
+    result = generator.generate(
+        brief, winners_benchmark=_winners_benchmark(), skip_linkedin=True
+    )
 
     piece = {
         "brand": data["brand"],
@@ -234,7 +240,7 @@ def _run_generate(data: dict) -> dict:
         "icp_alvo": result.target_icp,
         "platform": result.platform,
         "descricao": result.descricao,
-        "linkedin_adaptation": result.linkedin_adaptation,
+        "linkedin_adaptation": None,
     }
 
     knowledge = load_knowledge_for_brand(data["brand"])
@@ -245,18 +251,27 @@ def _run_generate(data: dict) -> dict:
     # pronta) e cada uma é uma chamada de modelo de 15-40s. Em série elas
     # somavam ~2min e, com geração longa (stories em sequência), o total
     # encostava no maxDuration de 300s da função (reproduzido ao vivo:
-    # timeout com 0 bytes). Em paralelo custam o tempo da mais lenta.
+    # timeout com 0 bytes). Em paralelo custam o tempo da mais lenta -- e a
+    # adaptação LinkedIn (quando pedida) entra no mesmo pool pelo mesmo
+    # motivo.
     from concurrent.futures import ThreadPoolExecutor
 
-    with ThreadPoolExecutor(max_workers=4) as pool:
+    with ThreadPoolExecutor(max_workers=5) as pool:
         f_icp = pool.submit(check_icp_fit, client, piece, data["icp"])
         f_tone = pool.submit(check_grammar_tone, client, piece, tom_de_voz)
         f_skill = pool.submit(run_skill_de_validacao, client, piece, skill_content)
         f_second = pool.submit(run_second_evaluator, client, piece, tom_de_voz)
+        f_linkedin = (
+            pool.submit(generator.adapt_linkedin, brief, piece)
+            if str(data.get("platform", "")).lower() == "linkedin"
+            else None
+        )
     icp_fit = f_icp.result()
     tone_check = f_tone.result()
     skill_result = f_skill.result()
     second_evaluator = f_second.result()
+    if f_linkedin is not None:
+        piece["linkedin_adaptation"] = f_linkedin.result()
 
     return {
         "ok": True,
