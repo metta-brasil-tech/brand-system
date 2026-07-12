@@ -241,10 +241,22 @@ def _run_generate(data: dict) -> dict:
     tom_de_voz = knowledge.get(f"tom-de-voz-{data['brand']}.md", "")
     skill_content = knowledge.get("SKILLMETTACOPY.md", "")
 
-    icp_fit = check_icp_fit(client, piece, data["icp"])
-    tone_check = check_grammar_tone(client, piece, tom_de_voz)
-    skill_result = run_skill_de_validacao(client, piece, skill_content)
-    second_evaluator = run_second_evaluator(client, piece, tom_de_voz)
+    # As 4 validações são independentes entre si (cada uma só lê a peça
+    # pronta) e cada uma é uma chamada de modelo de 15-40s. Em série elas
+    # somavam ~2min e, com geração longa (stories em sequência), o total
+    # encostava no maxDuration de 300s da função (reproduzido ao vivo:
+    # timeout com 0 bytes). Em paralelo custam o tempo da mais lenta.
+    from concurrent.futures import ThreadPoolExecutor
+
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        f_icp = pool.submit(check_icp_fit, client, piece, data["icp"])
+        f_tone = pool.submit(check_grammar_tone, client, piece, tom_de_voz)
+        f_skill = pool.submit(run_skill_de_validacao, client, piece, skill_content)
+        f_second = pool.submit(run_second_evaluator, client, piece, tom_de_voz)
+    icp_fit = f_icp.result()
+    tone_check = f_tone.result()
+    skill_result = f_skill.result()
+    second_evaluator = f_second.result()
 
     return {
         "ok": True,
