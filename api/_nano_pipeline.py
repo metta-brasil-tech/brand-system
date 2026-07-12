@@ -175,15 +175,25 @@ def generate_background(model_id: str, copy: dict, scene: str,
     refp = Path(ref["path"])
     b64ref = base64.b64encode(refp.read_bytes()).decode("ascii")
     mime = "image/webp" if refp.suffix.lower() == ".webp" else "image/png"
+    # Zona reservada pro texto: o diretor de arte decide a âncora (top|bottom)
+    # e a IMAGEM nasce com aquela faixa vazia — o layout ancora o texto ali e
+    # nunca tampa o sujeito. (Nunca mencionar "texto" pro modelo: só espaço vazio.)
+    anchor = str(copy.get("text_anchor") or "").strip().lower()
+    zone = {"top": ("Composition: keep the UPPER third of the frame as clean, softly "
+                    "blurred EMPTY space with nothing in it; the subject occupies the "
+                    "lower two thirds. "),
+            "bottom": ("Composition: keep the LOWER third of the frame as clean, softly "
+                       "blurred EMPTY space with nothing in it; the subject occupies the "
+                       "upper two thirds. ")}.get(anchor, "")
     lang_treat = _LANG_TREAT.get(ref.get("linguagem") or "")
     if lang_treat:
         prompt = (
             "Use the attached real advertisement ONLY as a style reference: match its photographic "
             "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
-            f"Create: {lang_treat}Scene: {scene.strip()} "
+            f"Create: {lang_treat}Scene: {scene.strip()} {zone}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
     else:
-        prompt = f"Invent a new image. Scene: {scene.strip()} {_METTA_TREAT}"
+        prompt = f"Invent a new image. Scene: {scene.strip()} {zone}{_METTA_TREAT}"
 
     payload = {
         "contents": [{"parts": [

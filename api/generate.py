@@ -860,7 +860,9 @@ def _run_pipeline_inline(
             try:
                 if (marca or "").lower() == "metta":
                     from _nano_pipeline import generate_via_route as _gvr
-                    _nano_res = _gvr(chosen_model_id, {"headline": user_headline},
+                    _nano_res = _gvr(chosen_model_id,
+                                     {"headline": user_headline,
+                                      "text_anchor": ad_directives.get("text_anchor") or ""},
                                      primary_prompt, format=format_key)
             except Exception:
                 _nano_res = None
@@ -917,6 +919,8 @@ def _run_pipeline_inline(
         "body": (user_body or "").strip(),
         "cta": (user_cta_text or "").strip(),
         "tag": (user_tag or "").strip(),
+        # âncora decidida pelo diretor de arte: texto na zona vazia da cena
+        "text_anchor": (ad_directives.get("text_anchor") or "").strip().lower(),
     }
     rendered = render_html(
         marca=marca,

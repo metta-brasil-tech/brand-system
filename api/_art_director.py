@@ -57,6 +57,10 @@ Você entrega DUAS coisas:
 2. gaze_direction: "left"|"right"|"camera"|"down"|"away" (se texto à esquerda, olhar left).
 3. crop_focus: "face"|"chest-up"|"waist-up"|"environment".
 4. emphasis: "headline"|"image"|"number".
+5. text_anchor: "top"|"bottom" — o bloco de texto vai pra zona VAZIA da cena que
+   você inventou. Sujeito/objeto ocupa a metade de BAIXO (ex: objeto sobre a mesa)
+   → text_anchor="top". Sujeito ocupa o TOPO (rosto/busto em pé) → "bottom".
+   O brief da cena DEVE deixar essa zona limpa (fundo suave, vazio, sem elementos).
 
 == B) CONCEITO VISUAL (só quando NEEDS_IMAGE=sim) ==
 Leia a MENSAGEM da copy (o conceito, não as palavras) e invente uma CENA que a
@@ -112,6 +116,7 @@ Regras inegociáveis:
 
 Responda APENAS JSON válido, sem cercas:
 {"headline_marked":"...","gaze_direction":"...","crop_focus":"...","emphasis":"...",
+ "text_anchor":"top|bottom",
  "image_concept":{"scene_type":"...","must_show":["..."],"brief":"...","subject_note":"..."},"rationale":"..."}
 Se NEEDS_IMAGE=não, retorne "image_concept": null."""
 

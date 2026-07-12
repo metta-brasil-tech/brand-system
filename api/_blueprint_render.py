@@ -468,7 +468,13 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     scale = params.get("scale", "normal")
     photo = params.get("photo", "right-bleed")
     block = params.get("block", "none")
-    anchor = params.get("anchor", "bottom")
+    # Âncora do bloco de texto: o diretor de arte pode sobrescrever por peça
+    # (copy.text_anchor) pra levar o texto pra zona VAZIA da cena — ex: objeto
+    # ocupa a metade de baixo → texto em cima (como no banco real). Sem
+    # override, vale o default do blueprint.
+    anchor = str((copy or {}).get("text_anchor") or "").strip().lower()
+    if anchor not in ("top", "bottom"):
+        anchor = params.get("anchor", "bottom")
     obj_scale = params.get("object_scale", "boxed")
 
     copy_clean = {k: (str(v).strip() if v else "") for k, v in (copy or {}).items()}
