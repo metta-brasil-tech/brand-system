@@ -991,10 +991,11 @@ def _run_pipeline_inline(
             _critic_feedback = ""
             for _va in range(1, _vmax + 1):
                 critic_result = {}
-                vision_result = _vqa_check(_png, copy_dict)
+                vision_result = _vqa_check(_png, copy_dict, format_key=format_key)
                 diagnostics.append(
                     f"vision-qa (try {_va}/{_vmax}): {vision_result.get('verdict')} "
-                    f"rel={vision_result.get('relevance')} integ={vision_result.get('integrity')} — "
+                    f"rel={vision_result.get('relevance')} integ={vision_result.get('integrity')} "
+                    f"safe={vision_result.get('safe_zones', '-')} — "
                     f"{str(vision_result.get('reason',''))[:80]}")
                 if _critic_on and _reference and _critique:
                     critic_result = _critique(_png, copy_dict, _reference, marca)
