@@ -53,7 +53,10 @@ Você entrega DUAS coisas:
 1. headline_marked — a MESMA headline (palavras EXATAS preservadas), com:
    • quebras de linha (\\n) onde um designer quebraria (sentido + ritmo, isolando
      a palavra de impacto). Máx ~5 linhas.
-   • 1-2 palavras-accent em *asteriscos* (a "virada"; nunca artigo/preposição).
+   • accent em *asteriscos* na "virada": pode ser 1 palavra OU uma FRASE CURTA de
+     2-4 palavras (o banco real pinta trechos inteiros: *R$ 300 mil*, *processo
+     comercial*, *bater meta 3 meses*). Marque o NÚCLEO da mensagem, nunca
+     artigo/preposição solta. 1 accent só — não pinte a headline inteira.
 2. gaze_direction: "left"|"right"|"camera"|"down"|"away" (se texto à esquerda, olhar left).
 3. crop_focus: "face"|"chest-up"|"waist-up"|"environment".
 4. emphasis: "headline"|"image"|"number".

@@ -66,6 +66,14 @@ _LANG_TREAT = {
            "Natural office light, realistic candid business setting, screens showing plausible "
            "abstract dashboards (no readable words). "),
 }
+# Anti micro-texto embolado (lição do Alisson): a IA renderiza letras tortas em
+# telas/quadros/papéis. Onde a cena tiver esses elementos, eles mostram só formas
+# abstratas — nunca texto legível (o dado real vai por cima, no motor de layout).
+_NO_MICROTEXT = (
+    "Any screen, monitor, laptop, whiteboard, document or paper in the scene shows ONLY "
+    "abstract shapes, blurred charts, color blocks or is turned off/reflective — NEVER "
+    "readable letters, words or numbers on them. Keep such surfaces out of sharp focus. ")
+
 # Linguagens que NUNCA servem de referência de geração: L1 = foto real do
 # especialista (geraria um "especialista falso"); L2 = still de filme (direitos).
 _NO_GEN_REF = {"L1", "L2"}
@@ -190,10 +198,10 @@ def generate_background(model_id: str, copy: dict, scene: str,
         prompt = (
             "Use the attached real advertisement ONLY as a style reference: match its photographic "
             "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
-            f"Create: {lang_treat}Scene: {scene.strip()} {zone}"
+            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_NO_MICROTEXT}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
     else:
-        prompt = f"Invent a new image. Scene: {scene.strip()} {zone}{_METTA_TREAT}"
+        prompt = f"Invent a new image. Scene: {scene.strip()} {zone}{_NO_MICROTEXT}{_METTA_TREAT}"
 
     payload = {
         "contents": [{"parts": [
