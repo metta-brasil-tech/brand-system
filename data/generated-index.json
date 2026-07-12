@@ -103,19 +103,6 @@
       "src": "assets/generated/ads/tiago-story-yellow-block-treinou-hoje.webp"
     },
     {
-      "id": "tiago-story-cover-3-sinais",
-      "model_id": "TIAGO-STORY-COVER-HERO",
-      "brand": "tiago",
-      "format": "story",
-      "headline": "3 sinais de que seu time desistiu da meta",
-      "cta": "ARRASTA PRO LADO",
-      "date": "2026-07-09",
-      "qa": "APROVADO na bateria de story 1080×1920 (inspeção visual)",
-      "nota": "Bateria de story 9 jul — FOTO REAL do Tiago (recorte tiago-palco-01), não gerada",
-      "engine": "render local (motor blueprint) · imagem reusada do banco de 8 jul · sem custo de API",
-      "src": "assets/generated/ads/tiago-story-cover-3-sinais.webp"
-    },
-    {
       "id": "metta-story-yellow-frame-encontro",
       "model_id": "YELLOW-FRAME",
       "brand": "metta",
@@ -192,19 +179,6 @@
       "nota": "Bateria de story 9 jul — composição exemplar em 9:16; foto reusada do banco gerado de 8 jul",
       "engine": "render local (motor blueprint) · imagem reusada do banco de 8 jul · sem custo de API",
       "src": "assets/generated/ads/metta-story-a-time-bom-processo-ruim.webp"
-    },
-    {
-      "id": "tiago-story-hero-foto-real-estrutura",
-      "model_id": "TIAGO-STORY-COVER-HERO",
-      "brand": "tiago",
-      "format": "story",
-      "headline": "Motivação não bate meta. Estrutura bate.",
-      "cta": "ARRASTA PRO LADO",
-      "date": "2026-07-08",
-      "qa": "QA PASS · composição sem geração de imagem",
-      "nota": "FOTO REAL do Tiago (assets/tiago/recortes/tiago-palco-02.png), não gerada por IA — corrige o preview anterior que usava rosto fake do gpt-image-2",
-      "engine": "cli local · foto real via upload · sem gpt-image-2",
-      "src": "assets/generated/ads/tiago-story-hero-foto-real-estrutura.webp"
     },
     {
       "id": "yellow-bloco-convite-mentoria",
@@ -361,19 +335,6 @@
       "nota": "virou preview do wizard",
       "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
       "src": "assets/generated/ads/tweet-card-gestor-formado.webp"
-    },
-    {
-      "id": "tiago-twitter-baba",
-      "model_id": "TIAGO-TWITTER-CARD",
-      "brand": "tiago",
-      "format": "feed",
-      "headline": "Time que depende do dono pra vender não tem processo. Tem babá.",
-      "cta": "Seguir @tiagoalves",
-      "date": "2026-07-08",
-      "qa": "QA PASS (tipográfico)",
-      "nota": "virou preview do wizard",
-      "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
-      "src": "assets/generated/ads/tiago-twitter-baba.webp"
     },
     {
       "id": "tiago-twitter-img-processo",
