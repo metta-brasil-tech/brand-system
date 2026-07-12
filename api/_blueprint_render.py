@@ -391,6 +391,11 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
     # Com ou sem fundo, a caixa limita o auto-fit (headline encolhe pra caber e
     # não cobre a imagem embaixo — ver _engine.js/fitHead e .text-panel max-height).
     panel = str(params.get("panel", "none")).strip().lower()
+    # Divisor amarelo entre headline e subtítulo: assinatura das peças SEM card
+    # (texto sobre foto/dark). No banco real — cliente-na-loja, sem-processo,
+    # serviços-300, FCA — o divisor separa a headline do apoio. Só quando NÃO há
+    # card (o card já agrupa) E existe subtítulo.
+    _div_photo = panel in ("none", "plain") and bool(copy.get("subhead"))
     def _panel_wrap(body_html: str, cta_variant: str = "") -> str:
         cta_c = cta_variant if cta_variant else cta_cls
         if panel in ("white", "yellow"):
@@ -422,7 +427,7 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
                     f'{_cta(copy, cta_cls)}')
         # photo-side (sem bloco amarelo): texto pode ganhar caixa (panel)
         return (f'{_photo(image_url)}<div class="grad"></div>'
-                f'<div class="layer">{_panel_wrap(f"<div class=stack>{_txt_blocks(copy)}</div>")}</div>')
+                f'<div class="layer">{_panel_wrap(f"<div class=stack>{_txt_blocks(copy, divider=_div_photo)}</div>")}</div>')
 
     if arch == "photo-full":
         # 2 zonas (padrão CRM/chupeta real): headline SOBRE a foto (sem card, com
@@ -436,10 +441,10 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
             return (f'{_photo(image_url)}<div class="grad"></div>'
                     f'<div class="layer layer--split">{head_band}{card}</div>')
         return (f'{_photo(image_url)}<div class="grad"></div>'
-                f'<div class="layer">{_panel_wrap(_txt_blocks(copy))}</div>')
+                f'<div class="layer">{_panel_wrap(_txt_blocks(copy, divider=_div_photo))}</div>')
 
     if arch == "photo-band":
-        return f'{_photo(image_url)}<div class="layer">{_panel_wrap(_txt_blocks(copy))}</div>'
+        return f'{_photo(image_url)}<div class="layer">{_panel_wrap(_txt_blocks(copy, divider=_div_photo))}</div>'
 
     if arch == "object-center":
         obj = _photo(image_url, "object")

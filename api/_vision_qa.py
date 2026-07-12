@@ -36,15 +36,17 @@ RIGOROSO — reprova fácil:
    Só é relevance:"weak" o retrato GENÉRICO que não ilustra nada (pessoa de blazer
    olhando pro lado, sorriso de stock, sem metáfora nem assunto visível).
 
-2. INTEGRIDADE do layout (o layout respeita a imagem?): NENHUM elemento principal
-   pode parecer cortado SEM QUERER. Cheque com ATENÇÃO ESPECIAL (é o erro mais
-   comum e mais grave): a CAIXA DE TEXTO (card branco/amarelo/escuro) NÃO pode
-   cobrir o rosto, a cabeça ou o objeto principal da cena. Se o card tapa o rosto
-   da pessoa, corta a cabeça, ou esconde o assunto que ilustra a copy →
-   integrity:"broken", SEMPRE. O card tem que ficar numa área vazia da imagem.
-   Também broken: pessoa cortada pela metade, sujeito espremido no canto, bloco de
-   cor sobre fundo morto, corte duro estranho. Recorte SÓ vale se for claramente
-   intencional (direção de arte). Na dúvida sobre o card cobrir o assunto = broken."""
+2. INTEGRIDADE do layout (o layout respeita a imagem?): reprove só o defeito
+   CLARO (evite falso-positivo — texto SEMPRE fica sobre parte da foto, isso é
+   normal). É integrity:"broken" quando:
+   - a caixa de texto cobre CLARAMENTE o ROSTO/cabeça da pessoa (mais da metade do
+     rosto escondida) ou esconde o OBJETO que é a piada/assunto da copy. Se a
+     pessoa/objeto aparece OK numa área livre e o card está sobre fundo vazio,
+     está CERTO (não é broken) mesmo que o card encoste na silhueta.
+   - a pessoa está cortada pela metade de forma esquisita, espremida no canto, ou
+     há corte duro estranho não-intencional.
+   Sujeito parcialmente atrás do card, mas com rosto visível = OK. Recorte
+   intencional (direção de arte) = OK. Na dúvida com o rosto visível = ok."""
 
 # Safe zones por formato — espelho condensado de content/direcao-arte/safe-zones.md.
 # Frações da ALTURA da imagem (o modelo de visão não vê coordenadas em px).

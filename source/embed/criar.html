@@ -1612,9 +1612,9 @@ function tplWizImagemBriefing() {
         <p class="field-hint">Esse preset é o TRATAMENTO visual (cores, mood, lighting). O briefing abaixo controla o sujeito/cena. Default seguro: Fotorrealista.</p>
       </div>
       <div class="field" style="margin-top: 28px;">
-        <label class="field-label" for="briefing-image-input">Direção visual (cena, sujeito, ambiente)</label>
-        <textarea class="textarea" id="briefing-image-input" placeholder="Ex: Empresário sentado na sua mesa de escritório olhando pela janela, laptop fechado ao lado, ambiente cozy. Empresário 45 anos, cabelo curto, jaqueta de lã sobre camisa social aberta.">${escapeHtml(STATE.briefingImage)}</textarea>
-        <p class="field-hint">Opcional. Se vazio, a engine inventa baseado no preset + estilo do ad + copy.</p>
+        <label class="field-label" for="briefing-image-input">Direção visual da cena <span style="opacity:.6;font-weight:400">— opcional</span></label>
+        <textarea class="textarea" id="briefing-image-input" placeholder="Deixe em branco que a IA cria a cena a partir da sua copy. Ou descreva você: ex.: empresário na mesa olhando pela janela, laptop fechado ao lado, ambiente cozy.">${escapeHtml(STATE.briefingImage)}</textarea>
+        <p class="field-hint"><strong>Não precisa preencher.</strong> Se deixar em branco, o diretor de arte inventa a cena a partir da sua copy — olhando os criativos reais da Metta pra acertar a linguagem. Preencha só se quiser controlar o sujeito/ambiente.</p>
       </div>
     </div>
     <div class="foot">
