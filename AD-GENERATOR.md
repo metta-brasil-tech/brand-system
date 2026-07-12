@@ -75,6 +75,19 @@ python cli.py --model YELLOW-BLOCO \
 Saída em `./render_out/out/<modelo>.png` (+ `.html`). Abra o PNG.
 (Outra pasta: `--out <caminho>`.)
 
+## 5. Gerar um carrossel (série)
+
+```bash
+# slides.json: [{"headline":"...","subhead":"...","body":"...","cta":"..."}, ...]
+python cli.py --serie slides.json --plan-only    # só o plano (tratamento/modelo/família por slide) — sem custo
+python cli.py --serie slides.json --format feed  # gera ad-slide-N.png + serie-config.json
+```
+
+O plano segue as regras de série (capa nunca tipográfica, último slide sempre
+CTA, anti-repetição, família visual travada no slide 1, máx 2 tipográficos) —
+detalhes em `content/direcao-arte/serie-carrossel.md`. Carrossel é **um formato
+por série** (`--format`, default feed).
+
 ## Opções úteis
 - `--format feed|story|sqr` (default feed = 1080×1350)
 - `--preset fotorrealista | cinematic-dark | bw-yellow | surreal-hbr`
