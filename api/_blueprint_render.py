@@ -351,6 +351,19 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
 
     cta_cls = "cta--dark" if params.get("cta") == "dark" else ("cta--outline" if params.get("cta") == "outline" else "")
 
+    # Caixa de texto (text-panel): agrupa o texto+CTA num card arredondado sobre a
+    # foto (assinatura do banco real). CTA fica DENTRO da caixa (branca/amarela pede
+    # CTA escuro pra contraste). Retorna o HTML já embrulhado, ou o conteúdo cru.
+    panel = str(params.get("panel", "none")).strip().lower()
+    def _panel_wrap(body_html: str, cta_variant: str = "") -> str:
+        cta_c = cta_variant if cta_variant else cta_cls
+        if panel in ("white", "yellow"):
+            cta_c = "cta--dark"  # sobre card claro, CTA escuro
+        inner_cta = _cta(copy, cta_c)
+        if panel in ("white", "dark", "yellow"):
+            return f'<div class="text-panel" data-panel="{panel}">{body_html}{inner_cta}</div>'
+        return f'{body_html}{inner_cta}'
+
     if arch == "typo":
         _div = bool(params.get("divider"))
         return f'<div class="layer"><div class="stack">{_txt_blocks(copy, divider=_div)}</div></div>{_cta(copy, cta_cls)}'
@@ -371,16 +384,16 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
             return (f'{_photo(image_url)}'
                     f'<div class="layer"><div class="stack">{chr(10).join(parts)}</div></div>'
                     f'{_cta(copy, cta_cls)}')
+        # photo-side (sem bloco amarelo): texto pode ganhar caixa (panel)
         return (f'{_photo(image_url)}<div class="grad"></div>'
-                f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div></div>'
-                f'{_cta(copy, cta_cls)}')
+                f'<div class="layer">{_panel_wrap(f"<div class=stack>{_txt_blocks(copy)}</div>")}</div>')
 
     if arch == "photo-full":
         return (f'{_photo(image_url)}<div class="grad"></div>'
-                f'<div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>')
+                f'<div class="layer">{_panel_wrap(_txt_blocks(copy))}</div>')
 
     if arch == "photo-band":
-        return f'{_photo(image_url)}<div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
+        return f'{_photo(image_url)}<div class="layer">{_panel_wrap(_txt_blocks(copy))}</div>'
 
     if arch == "object-center":
         obj = _photo(image_url, "object")
@@ -391,8 +404,8 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
             # `.obj-text-zone` tem altura PRÓPRIA (não o canvas inteiro) — é o que
             # permite o auto-fit do _engine.js medir overflow de verdade e encolher
             # a headline sozinho, pra qualquer tamanho de copy (ver _engine.js fitHead).
-            return f'{obj}<div class="layer"><div class="obj-text-zone">{_txt_blocks(copy)}</div>{_cta(copy, cta_cls)}</div>'
-        return f'<div class="layer">{obj}{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
+            return f'{obj}<div class="layer"><div class="obj-text-zone">{_panel_wrap(_txt_blocks(copy))}</div></div>'
+        return f'<div class="layer">{obj}{_panel_wrap(_txt_blocks(copy))}</div>'
 
     if arch == "card-mock":
         name = params.get("name", "Metta")
@@ -423,17 +436,16 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 f'<div class="wall">{slots}</div>{_cta(copy, cta_cls)}</div>')
 
     if arch == "framed":
-        return f'<div class="frame"></div><div class="layer">{_txt_blocks(copy)}{_cta(copy, cta_cls)}</div>'
+        return f'<div class="frame"></div><div class="layer">{_panel_wrap(_txt_blocks(copy))}</div>'
 
     if arch == "split":
         media = f'<div class="half-media" style="background-image:url(\'{image_url}\')"></div>' if image_url else '<div class="half-media"></div>'
-        return (f'{media}<div class="half-text"><div class="stack">{_txt_blocks(copy)}</div>'
-                f'{_cta(copy, cta_cls)}</div>')
+        return (f'{media}<div class="half-text">{_panel_wrap(f"<div class=stack>{_txt_blocks(copy)}</div>")}</div>')
 
     if arch == "number-hero":
         # colagem PB no topo (opcional) + número gigante + sub/body + CTA
         return (f'{_photo(image_url)}'
-                f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div>{_cta(copy, cta_cls)}</div>')
+                f'<div class="layer">{_panel_wrap(f"<div class=stack>{_txt_blocks(copy)}</div>")}</div>')
 
     # fallback
     return f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div></div>{_cta(copy, cta_cls)}'
@@ -477,8 +489,15 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         anchor = params.get("anchor", "bottom")
     obj_scale = params.get("object_scale", "boxed")
 
+    # Caixa de texto: o diretor de arte pode escolher por peça (copy.panel);
+    # senão vale o default do blueprint. white/dark/yellow/none.
+    panel = str((copy or {}).get("panel") or "").strip().lower()
+    if panel not in ("white", "dark", "yellow", "none"):
+        panel = str(params.get("panel", "none")).strip().lower()
+
     copy_clean = {k: (str(v).strip() if v else "") for k, v in (copy or {}).items()}
-    inner = _markup(arch, copy_clean, params, image_url or "")
+    params_eff = {**params, "anchor": anchor, "panel": panel}
+    inner = _markup(arch, copy_clean, params_eff, image_url or "")
 
     head_style = params.get("head", "")
     case = params.get("case", "upper")
@@ -491,7 +510,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         f'data-arch="{_esc(arch)}" data-theme="{_esc(theme)}" data-format="{_esc(format)}" '
         f'data-align="{_esc(align)}" data-scale="{_esc(scale)}" data-photo="{_esc(photo)}" '
         f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}" '
-        f'data-obj-scale="{_esc(obj_scale)}"'
+        f'data-obj-scale="{_esc(obj_scale)}" data-panel="{_esc(panel)}"'
     )
 
     fonts_css = _read(_BLUEPRINTS_DIR / "_fonts.css")

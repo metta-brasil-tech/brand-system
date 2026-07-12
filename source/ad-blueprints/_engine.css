@@ -122,6 +122,48 @@ button { all: unset; }
 .stack > * + * { margin: 0; }
 
 /* =============================================================================
+ * CAIXA DE TEXTO (text-panel) — o card arredondado que agrupa o texto sobre a
+ * foto, assinatura do banco real: branco (documental/prova), amarelo (colagem/
+ * afirmação), escuro (sobre foto clara/ocupada). Opt-in via param `panel`;
+ * encolhe pro conteúdo (não estica no frame) e senta na âncora, na zona vazia.
+ * ===========================================================================*/
+.text-panel {
+  align-self: flex-start; max-width: 86%;
+  display: flex; flex-direction: column; gap: var(--gap);
+  border-radius: 28px; padding: 40px 44px;
+}
+.ad[data-align="center"] .text-panel { align-self: center; text-align: center; }
+.text-panel .cta-wrap { margin-top: 4px; }
+.text-panel[data-panel="white"] {
+  background: #ffffff; color: var(--m-night-10);
+  box-shadow: 0 24px 70px rgba(0,0,0,.28);
+}
+.text-panel[data-panel="yellow"] {
+  background: var(--m-yellow); color: var(--m-night-10);
+  box-shadow: 0 24px 70px rgba(0,0,0,.22);
+}
+.text-panel[data-panel="dark"] {
+  background: rgba(16,21,25,.86); color: var(--m-white);
+  box-shadow: 0 24px 70px rgba(0,0,0,.35);
+}
+/* cor do texto dentro da caixa vence o tema (a caixa tem fundo próprio) */
+.text-panel[data-panel="white"] .t-head, .text-panel[data-panel="white"] .t-sub, .text-panel[data-panel="white"] .t-body,
+.text-panel[data-panel="yellow"] .t-head, .text-panel[data-panel="yellow"] .t-sub, .text-panel[data-panel="yellow"] .t-body { color: var(--m-night-10); }
+.text-panel[data-panel="dark"] .t-head, .text-panel[data-panel="dark"] .t-sub, .text-panel[data-panel="dark"] .t-body { color: var(--m-white); }
+.text-panel .t-sub, .text-panel .t-body { opacity: .82; }
+/* tag legível dentro dos cards claros (o --muted do tema não serve sobre branco/amarelo) */
+.text-panel[data-panel="white"] .t-tag, .text-panel[data-panel="yellow"] .t-tag { color: rgba(20,25,30,.6); }
+/* accent: sobre card BRANCO vira marca-texto amarelo (assinatura Metta); sobre card
+   AMARELO vira texto escuro (amarelo-sobre-amarelo sumiria) */
+.text-panel[data-panel="white"] .t-head .hi {
+  color: var(--m-night-10); background: var(--m-yellow);
+  padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+}
+.text-panel[data-panel="yellow"] .t-head .hi { color: var(--m-night-10); }
+/* quando há caixa, o gradiente da foto some (a caixa já dá a legibilidade) */
+.ad[data-panel="white"] .grad, .ad[data-panel="yellow"] .grad, .ad[data-panel="dark"] .grad { opacity: 0; }
+
+/* =============================================================================
  * ARCHETYPES
  * ===========================================================================*/
 

@@ -61,6 +61,15 @@ Você entrega DUAS coisas:
    você inventou. Sujeito/objeto ocupa a metade de BAIXO (ex: objeto sobre a mesa)
    → text_anchor="top". Sujeito ocupa o TOPO (rosto/busto em pé) → "bottom".
    O brief da cena DEVE deixar essa zona limpa (fundo suave, vazio, sem elementos).
+6. panel: "none"|"white"|"yellow"|"dark" — a CAIXA DE TEXTO (card arredondado que
+   agrupa o texto sobre a foto, como no banco real). Escolha:
+   • "white" → quando há SUBTÍTULO/DESCRIÇÃO + prova + CTA (peça documental/informativa,
+     ex: card branco com "Mentoria Metta... +1.000 empresas" e botão). Mais legível.
+   • "yellow" → afirmação forte/colagem, headline curta de impacto dentro do card amarelo.
+   • "dark" → foto clara ou muito ocupada onde texto solto sumiria; card escuro discreto.
+   • "none" → headline curta cai direto na zona vazia limpa, sem card (estilo cinema).
+   REGRA: se a peça tem título + descrição (subtítulo/body), PREFIRA um card (white/yellow),
+   nunca deixe muito texto solto sobre a foto — é o que separa a arte real da amadora.
 
 == B) CONCEITO VISUAL (só quando NEEDS_IMAGE=sim) ==
 Leia a MENSAGEM da copy (o conceito, não as palavras) e invente uma CENA que a
@@ -116,7 +125,7 @@ Regras inegociáveis:
 
 Responda APENAS JSON válido, sem cercas:
 {"headline_marked":"...","gaze_direction":"...","crop_focus":"...","emphasis":"...",
- "text_anchor":"top|bottom",
+ "text_anchor":"top|bottom","panel":"none|white|yellow|dark",
  "image_concept":{"scene_type":"...","must_show":["..."],"brief":"...","subject_note":"..."},"rationale":"..."}
 Se NEEDS_IMAGE=não, retorne "image_concept": null."""
 

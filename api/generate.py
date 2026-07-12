@@ -919,8 +919,9 @@ def _run_pipeline_inline(
         "body": (user_body or "").strip(),
         "cta": (user_cta_text or "").strip(),
         "tag": (user_tag or "").strip(),
-        # âncora decidida pelo diretor de arte: texto na zona vazia da cena
+        # âncora + caixa de texto decididas pelo diretor de arte
         "text_anchor": (ad_directives.get("text_anchor") or "").strip().lower(),
+        "panel": (ad_directives.get("panel") or "").strip().lower(),
     }
     rendered = render_html(
         marca=marca,
