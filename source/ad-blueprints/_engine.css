@@ -133,7 +133,9 @@ button { all: unset; }
   border-radius: 28px; padding: 40px 44px;
 }
 .ad[data-align="center"] .text-panel { align-self: center; text-align: center; }
-.text-panel .cta-wrap { margin-top: 4px; }
+/* dentro da caixa o CTA volta a fluir — especificidade extra (.ad[data-panel])
+   pra vencer o .ad[data-arch="photo-side"] .cta-wrap { position:absolute } */
+.ad[data-panel] .text-panel .cta-wrap { position: static; left: auto; bottom: auto; margin-top: 4px; }
 .text-panel[data-panel="white"] {
   background: #ffffff; color: var(--m-night-10);
   box-shadow: 0 24px 70px rgba(0,0,0,.28);
