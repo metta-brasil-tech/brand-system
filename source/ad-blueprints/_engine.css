@@ -172,6 +172,11 @@ button { all: unset; }
 .text-panel .t-sub, .text-panel .t-body { opacity: .82; }
 /* tag legível dentro dos cards claros (o --muted do tema não serve sobre branco/amarelo) */
 .text-panel[data-panel="white"] .t-tag, .text-panel[data-panel="yellow"] .t-tag { color: rgba(20,25,30,.6); }
+/* no card AMARELO a tag vira PÍLULA branca (assinatura do "extraia" real) */
+.text-panel[data-panel="yellow"] .t-tag {
+  align-self: flex-start; background: #fff; color: var(--m-night-10);
+  border-radius: 999px; padding: 9px 22px; letter-spacing: .1em;
+}
 /* accent: sobre card BRANCO vira marca-texto amarelo (assinatura Metta); sobre card
    AMARELO vira texto escuro (amarelo-sobre-amarelo sumiria) */
 .text-panel[data-panel="white"] .t-head .hi {
