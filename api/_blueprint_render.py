@@ -110,6 +110,13 @@ def _txt_blocks(copy: dict, head_accent=True, divider=False,
     if copy.get("body"):
         body = _esc(copy["body"]).replace("\n", "<br>")
         parts.append(f'<p class="t-body">{body}</p>')
+    # Chip de prova emoldurado (assinatura convite/60-min real): SÓ quando tem
+    # legenda ("valor | legenda") vira caixinha com borda no fluxo. Prova simples
+    # (sem "|") segue como linha no rodapé (_proof_line, estilo extraia).
+    if copy.get("proof") and "|" in str(copy["proof"]):
+        _pv, _, _pc = str(copy["proof"]).partition("|")
+        _cap = f'<span class="proof-cap">{_esc(_pc.strip())}</span>' if _pc.strip() else ""
+        parts.append(f'<div class="proof-chip"><span class="proof-val">{_esc(_pv.strip())}</span>{_cap}</div>')
     return "\n".join(parts)
 
 
@@ -257,6 +264,8 @@ def _proof_line(copy: dict, anchor: str = "", brand_html: str = "") -> str:
     marca em bottom-left, a linha muda pro canto direito (data-side)."""
     p = (copy or {}).get("proof")
     if not p:
+        return ""
+    if "|" in str(p):  # prova com legenda vira CHIP no fluxo (não a linha)
         return ""
     if (anchor or "").lower() == "bottom":
         return ""

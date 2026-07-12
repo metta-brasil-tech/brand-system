@@ -121,6 +121,21 @@ button { all: unset; }
 .stack { display: flex; flex-direction: column; gap: var(--gap); }
 .stack > * + * { margin: 0; }
 
+/* CHIP DE PROVA emoldurado (assinatura convite/60-min real): caixinha com borda,
+   valor forte + legenda pequena. Fica no fluxo do texto, acima do CTA. */
+.proof-chip {
+  align-self: flex-start; display: flex; flex-direction: column; gap: 2px;
+  border: 1.5px solid rgba(255,190,24,.55); border-radius: 14px;
+  padding: 14px 22px; background: rgba(255,190,24,.06);
+}
+.proof-chip .proof-val {
+  font-family: var(--m-display); font-weight: 800; font-variation-settings: 'wght' 800;
+  font-size: 30px; letter-spacing: -.01em; color: var(--fg);
+}
+.proof-chip .proof-cap { font-family: var(--m-text); font-weight: 400; font-size: 18px; color: var(--muted); }
+.text-panel[data-panel="white"] .proof-chip, .text-panel[data-panel="yellow"] .proof-chip { border-color: rgba(20,25,30,.25); background: rgba(20,25,30,.04); }
+.text-panel[data-panel="white"] .proof-chip .proof-val, .text-panel[data-panel="yellow"] .proof-chip .proof-val { color: var(--m-night-10); }
+
 /* =============================================================================
  * CAIXA DE TEXTO (text-panel) — o card arredondado que agrupa o texto sobre a
  * foto, assinatura do banco real: branco (documental/prova), amarelo (colagem/
@@ -219,19 +234,23 @@ button { all: unset; }
 .ad[data-arch="typo"][data-align="center"] .cta-wrap { left: 0; right: 0; display: flex; justify-content: center; }
 .ad[data-arch="typo"][data-scale="giant"] .t-head { font-size: 150px; line-height: .88; }
 
-/* (2) photo-side — coluna de texto + foto bleed lateral (+ bloco opcional) */
+/* (2) photo-side — coluna de texto + foto FULL-BLEED (não cortada num retângulo).
+   O banco real (cliente-na-loja, sem-processo) é UMA foto cobrindo o quadro
+   inteiro, com o texto sobre a área naturalmente escura — NÃO foto de um lado +
+   faixa preta chapada do outro (emenda dura = tell de amador). A foto ancora no
+   lado do sujeito e o gradiente escurece o lado do texto sobre a MESMA foto. */
 .ad[data-arch="photo-side"] .photo {
-  position: absolute; top: 0; bottom: 0; width: 62%; z-index: 1;
-  background-size: cover; background-position: center 28%; filter: saturate(.82) contrast(1.1);
+  position: absolute; inset: 0; z-index: 1;
+  background-size: cover; filter: saturate(.82) contrast(1.1);
 }
-.ad[data-arch="photo-side"][data-photo="right-bleed"] .photo { right: -60px; }
-.ad[data-arch="photo-side"][data-photo="left-bleed"]  .photo { left: -60px; }
+.ad[data-arch="photo-side"][data-photo="right-bleed"] .photo { background-position: right center; }
+.ad[data-arch="photo-side"][data-photo="left-bleed"]  .photo { background-position: left center; }
 .ad[data-arch="photo-side"] .grad { position: absolute; inset: 0; z-index: 2; }
 .ad[data-arch="photo-side"][data-photo="right-bleed"] .grad {
-  background: linear-gradient(90deg, var(--m-night-10) 0%, var(--m-night-10) 44%, rgba(12,22,27,.5) 64%, transparent 86%);
+  background: linear-gradient(90deg, rgba(12,22,27,.97) 0%, rgba(12,22,27,.9) 34%, rgba(12,22,27,.5) 62%, transparent 88%);
 }
 .ad[data-arch="photo-side"][data-photo="left-bleed"] .grad {
-  background: linear-gradient(270deg, var(--m-night-10) 0%, var(--m-night-10) 44%, rgba(12,22,27,.5) 64%, transparent 86%);
+  background: linear-gradient(270deg, rgba(12,22,27,.97) 0%, rgba(12,22,27,.9) 34%, rgba(12,22,27,.5) 62%, transparent 88%);
 }
 .ad[data-arch="photo-side"] .layer {
   position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column;
