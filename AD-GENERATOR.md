@@ -72,12 +72,14 @@ python cli.py --model YELLOW-BLOCO \
   --cta "Aplique para a mentoria" --image generate --preset bw-yellow
 ```
 
-Saída em `./out/<modelo>.png` (+ `.html`). Abra o PNG.
+Saída em `./render_out/out/<modelo>.png` (+ `.html`). Abra o PNG.
+(Outra pasta: `--out <caminho>`.)
 
 ## Opções úteis
 - `--format feed|story|sqr` (default feed = 1080×1350)
 - `--preset fotorrealista | cinematic-dark | bw-yellow | surreal-hbr`
 - `--tag "..."` eyebrow/label (NEWS-CARD, K)
+- `--auto-improve` loop gera→avalia→regera até SHIP (teto: `--max-attempts`, default 3; só com `--image generate`)
 - `--no-vision-qa` desliga a checagem final por visão (mais rápido/barato)
 - `--no-art-director` desliga composição/direção visual
 
@@ -90,7 +92,7 @@ pra não repetir) → **engenheiro de prompt** (identidade da marca + composiç�
 ## Notas
 - Modelo de imagem default: `gpt-image-2` no `low` (~20-30s/imagem). Troque com
   `IMAGE_GEN_PROVIDER` / `IMAGE_QUALITY`.
-- A memória de conceitos fica em `artifacts/concept_memory.json` (garante variação
-  entre execuções na mesma máquina).
+- A memória de conceitos fica em `render_out/artifacts/concept_memory.json` no CLI
+  (`ARTIFACTS_DIR` configurável) — garante variação entre execuções na mesma máquina.
 - Em produção o PNG é renderizado pela função Node `api/render.js` (Chromium no Vercel),
   não pelo Python.
