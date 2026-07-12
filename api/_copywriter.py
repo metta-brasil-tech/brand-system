@@ -45,9 +45,18 @@ Proponha copy de anúncio FUNDAMENTADA nisso — nunca genérica. Regras:
 - Aproveite o método e o depoimento como substrato (não copie literal o depoimento).
 - Copy PRONTA pra usar (sem placeholder).
 
+- Além da headline, o criativo real da marca carrega TEXTOS DE APOIO menores
+  (ver banco real): uma TAG qualificadora curta em caixa alta que filtra o ICP
+  (ex: "EXCLUSIVO PARA DONOS DE NEGÓCIOS QUE FATURAM +R$200K/MÊS") e um SUBHEAD
+  de 1-2 frases com o próximo passo/prova (ex: "Aplique agora para uma reunião
+  estratégica 1 a 1 e construa uma equipe que bate meta sem depender de você.").
+  Quando houver prova social no conhecimento (nº de empresas, faturamento gerado),
+  use-a na tag ou no subhead ("+1.000 empresas", "+R$8,5 bi em vendas").
+
 Responda APENAS JSON, sem cercas:
 {{"angulo":"<1 frase: o ângulo escolhido e por quê bate no ICP>",
 "headlines":["<alt 1>","<alt 2>","<alt 3>"],
+"tag":"<tag qualificadora curta em CAIXA ALTA>",
 "subhead":"<1 subhead>","cta":"<1 cta>",
 "fundamento":"<1 frase citando do que ancorou: ICP/voz/método/depoimento>"}}"""
 

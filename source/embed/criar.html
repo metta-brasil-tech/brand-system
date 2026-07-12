@@ -1102,6 +1102,7 @@ const STATE = {
   copyHeadline: '',     // headline (obrigatória)
   copySubhead: '',      // subheadline (opcional)
   copyBody: '',         // texto/corpo (opcional)
+  copyTag: '',          // tag qualificadora em caixa alta (opcional) — vira copy_tag
   cta: '',
   audioTranscript: '',
   // ----- Carrossel (modo multi-slide) -----
@@ -1681,6 +1682,11 @@ function tplWizCopy() {
         <label class="field-label" for="copy-body-input">Texto / corpo (opcional) ${cnt('body')}</label>
         <textarea class="textarea" id="copy-body-input" rows="4" placeholder="Ex: Mais detalhes, dado de prova, ou desenvolvimento da tese.">${escapeHtml(STATE.copyBody)}</textarea>
         <p class="field-hint">${bodyNote}</p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="copy-tag-input">Tag qualificadora (opcional)</label>
+        <input type="text" class="input" id="copy-tag-input" placeholder="Ex: EXCLUSIVO PARA DONOS DE NEGÓCIOS QUE FATURAM +R$200K/MÊS" value="${escapeHtml(STATE.copyTag)}">
+        <p class="field-hint">Faixa curta em caixa alta que filtra o público — igual aos criativos reais do banco.</p>
       </div>
     </div>
     <div class="foot">
@@ -2541,7 +2547,8 @@ function attachStepHandlers() {
   // Copy: salva no STATE ao vivo + atualiza contadores de budget por estilo
   [['copy-headline-input','copyHeadline','headline'],
    ['copy-subhead-input','copySubhead','subhead'],
-   ['copy-body-input','copyBody','body']].forEach(([id, key, field]) => {
+   ['copy-body-input','copyBody','body'],
+   ['copy-tag-input','copyTag','tag']].forEach(([id, key, field]) => {
     const el = document.getElementById(id);
     if (!el) return;
     el.addEventListener('input', () => { STATE[key] = el.value; updateCopyCounters(); });
@@ -2751,9 +2758,11 @@ function onAction(e) {
       const h = document.getElementById('copy-headline-input');
       const s = document.getElementById('copy-subhead-input');
       const b = document.getElementById('copy-body-input');
+      const tg = document.getElementById('copy-tag-input');
       STATE.copyHeadline = h ? h.value : '';
       STATE.copySubhead = s ? s.value : '';
       STATE.copyBody = b ? b.value : '';
+      STATE.copyTag = tg ? tg.value : '';
       // Compõe copy unificada SÓ pra preview de revisão — backend lê os 3 separados
       STATE.copy = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n');
       goto('wiz-cta');
@@ -2920,6 +2929,7 @@ async function generateReal(briefing) {
         ...(STATE.copyHeadline && STATE.copyHeadline.trim() ? { copy_headline: STATE.copyHeadline.trim() } : {}),
         ...(STATE.copySubhead && STATE.copySubhead.trim() ? { copy_subhead: STATE.copySubhead.trim() } : {}),
         ...(STATE.copyBody && STATE.copyBody.trim() ? { copy_body: STATE.copyBody.trim() } : {}),
+        ...(STATE.copyTag && STATE.copyTag.trim() ? { copy_tag: STATE.copyTag.trim() } : {}),
         ...(STATE.cta && STATE.cta.trim() ? { cta_text: STATE.cta.trim() } : {})
       }),
       signal: controller.signal
