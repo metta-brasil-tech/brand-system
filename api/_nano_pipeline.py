@@ -115,6 +115,32 @@ def _tokens(s: str) -> set[str]:
     return set(re.findall(r"\w{3,}", (s or "").lower()))
 
 
+_GENERATED = _ROOT / "data/generated-index.json"
+
+
+def approved_generated_refs(marca: str, copy: dict | None = None, limit: int = 1) -> list[str]:
+    """Peças APROVADAS da biblioteca 'Criativos gerados' (generated-index.json) que
+    servem de INSPIRAÇÃO ao diretor de arte na criação (fecha o loop: peça boa que
+    saiu vira referência da casa — F8 do Alisson). Filtra pela marca e desempata por
+    overlap de tokens com a copy. São composições PRONTAS (com texto): valem pro
+    diretor VER o estilo/composição — NÃO entram como referência de geração de
+    imagem (Nano Banana), que segue só o banco real. Retorna caminhos de arquivo."""
+    try:
+        d = json.loads(_GENERATED.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    items = [it for it in d.get("items", [])
+             if str(it.get("brand", "")).lower() == (marca or "").lower()
+             and it.get("type") != "carousel"
+             and (_ROOT / it.get("src", "")).is_file()]
+    if not items:
+        return []
+    q = _tokens((copy or {}).get("headline", "")) | _tokens((copy or {}).get("subhead", ""))
+    items.sort(key=lambda it: len(q & _tokens(f"{it.get('headline','')} {it.get('nota','')}")),
+               reverse=True)
+    return [str(_ROOT / it["src"]) for it in items[:max(1, limit)]]
+
+
 def pick_reference(model_id: str, copy: dict) -> dict | None:
     """Referência visual do banco pra este blueprint: filtra pela FAMÍLIA e
     desempata por overlap de tokens com a copy. Retorna {family, id, path, motor}

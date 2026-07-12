@@ -544,15 +544,29 @@ def _run_pipeline_inline(
             # banco (da família do blueprint) pra ele compor VENDO a linguagem, não
             # só lendo texto. Só Metta e só quando há chave OpenAI (visão).
             _ref_imgs = None
-            if (marca or "").lower() == "metta" and _needs_concept:
+            if _needs_concept:
+                _cp = {"headline": user_headline, "subhead": user_subhead}
+                _ref_imgs = []
+                # (1) peça REAL do banco (só Metta tem famílias mapeadas)
+                if (marca or "").lower() == "metta":
+                    try:
+                        from _nano_pipeline import pick_reference as _pick
+                        _r = _pick(chosen_model_id, _cp)
+                        if _r and Path(_r["path"]).is_file():
+                            _ref_imgs.append(Path(_r["path"]).read_bytes())
+                            diagnostics.append(f"diretor VÊ ref do banco real: {_r['id']} (linguagem {_r.get('linguagem')})")
+                    except Exception as _re:
+                        diagnostics.append(f"ref-banco diretor: PULADO ({_re.__class__.__name__})")
+                # (2) peça APROVADA da casa (generated-index) — fecha o loop de inspiração
                 try:
-                    from _nano_pipeline import pick_reference as _pick
-                    _r = _pick(chosen_model_id, {"headline": user_headline, "subhead": user_subhead})
-                    if _r and Path(_r["path"]).is_file():
-                        _ref_imgs = [Path(_r["path"]).read_bytes()]
-                        diagnostics.append(f"diretor VÊ referência do banco: {_r['id']} (linguagem {_r.get('linguagem')})")
-                except Exception as _re:
-                    diagnostics.append(f"ref-visão diretor: PULADO ({_re.__class__.__name__})")
+                    from _nano_pipeline import approved_generated_refs as _agr
+                    for _ap in _agr(marca, _cp, limit=1):
+                        if Path(_ap).is_file():
+                            _ref_imgs.append(Path(_ap).read_bytes())
+                            diagnostics.append(f"diretor VÊ peça aprovada da casa: {Path(_ap).name}")
+                except Exception as _ae:
+                    diagnostics.append(f"ref-aprovada diretor: PULADO ({_ae.__class__.__name__})")
+                _ref_imgs = _ref_imgs or None
             ad_directives = _ad_direct(
                 copy={"headline": user_headline, "subhead": user_subhead,
                       "body": user_body, "cta": user_cta_text},
