@@ -87,6 +87,11 @@ def _render_chrome(html: str, width: int, height: int, scale: int) -> bytes:
     chrome = _find_chrome()
     if not chrome:
         raise RuntimeError("Nenhum Chromium encontrado pro render server-side.")
+    # Como root (container/CI) o Chrome recusa rodar sem --no-sandbox; o HTML
+    # renderizado é gerado pelo próprio pipeline, não conteúdo arbitrário.
+    extra = []
+    if os.getenv("RENDER_NO_SANDBOX") == "1" or (hasattr(os, "geteuid") and os.geteuid() == 0):
+        extra.append("--no-sandbox")
     with tempfile.TemporaryDirectory() as td:
         html_path = Path(td) / "ad.html"
         png_path = Path(td) / "ad.png"
@@ -94,6 +99,7 @@ def _render_chrome(html: str, width: int, height: int, scale: int) -> bytes:
         url = "file:///" + str(html_path).replace("\\", "/")
         subprocess.run([
             chrome, "--headless=new", "--disable-gpu", "--hide-scrollbars",
+            *extra,
             f"--force-device-scale-factor={scale}",
             f"--window-size={width},{height}",
             "--virtual-time-budget=7000", "--run-all-compositor-stages-before-draw",

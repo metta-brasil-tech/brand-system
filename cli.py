@@ -11,11 +11,15 @@ Exemplos:
       --cta "Conheça a Metta" --image generate --preset fotorrealista
   python cli.py --model C-tipografia-pura-dark --headline "Vendedor herói não é estratégia." \\
       --cta "Conheça a mentoria" --image none
+  python cli.py --serie slides.json --plan-only     # só o plano da série (sem custo)
+  python cli.py --serie slides.json --format feed   # gera o carrossel inteiro
 
 Saída: HTML + PNG em ./out/. PNG exige Chromium (Playwright ou Chrome instalado).
 Requer OPENAI_API_KEY no ambiente.
 """
+import json
 import os
+import re
 import sys
 import argparse
 import base64
@@ -34,6 +38,88 @@ os.environ.setdefault("ARTIFACTS_DIR", str(ROOT / "render_out" / "artifacts"))
 
 import generate as gen                       # noqa: E402
 from _blueprint_render import list_blueprints  # noqa: E402
+
+
+def run_serie(args):
+    """Modo carrossel: planeja a série (regras C1-C8 mecânicas), gera N slides.
+
+    O plano vem de api/_serie.py (porta das serie-rules do plugin-metta-ads):
+    classificação copy→tratamento, ponte tratamento→blueprint, família travada
+    no slide 1. Coerência visual (motivos, marca) segue sendo olho do critic.
+    """
+    from _serie import plan_serie, validate_serie, familia_hint_from
+
+    raw = json.loads(Path(args.serie).read_text(encoding="utf-8"))
+    slides = raw.get("slides") if isinstance(raw, dict) else raw
+    if not isinstance(slides, list) or not slides:
+        sys.exit(f"--serie: {args.serie} precisa ser lista de slides ou {{\"slides\":[...]}}")
+    for i, sl in enumerate(slides, 1):
+        if not str(sl.get("headline", "")).strip():
+            sys.exit(f"--serie: slide {i} sem headline")
+
+    avoid = familia_hint_from(ROOT / "render_out")
+    if avoid:
+        print(f"anti-monotonia: últimas 2 séries foram {avoid} — preferindo outra família na capa")
+    plan = plan_serie(slides, avoid_familia=avoid)
+    issues = validate_serie(plan)
+    print(f"Série de {plan['n_slides']} slides · família travada: {plan['familia']} · formato: {args.format}")
+    for s in plan["slides"]:
+        print(f"  {s['slide']} {s['position']:<5} {s['treatment']:<20} {s['model']:<28} "
+              f"{s['familia']:<6} img={'sim' if s['needs_image'] else 'não'}")
+    for x in issues:
+        print("  ⚠", x)
+    if args.plan_only:
+        return
+    if not os.getenv("OPENAI_API_KEY"):
+        sys.exit("defina OPENAI_API_KEY no ambiente (export OPENAI_API_KEY=sk-...)")
+
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "serie-config.json").write_text(json.dumps({
+        "familia": plan["familia"], "format": args.format,
+        "slides": [{k: s[k] for k in ("slide", "position", "treatment", "model", "familia")}
+                   for s in plan["slides"]],
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    failed = []
+    for s, sl in zip(plan["slides"], slides):
+        gen_img = s["needs_image"] and args.image != "none"
+        print(f"\n[{s['slide']}/{plan['n_slides']}] '{s['model']}' "
+              f"({s['treatment']}, imagem={'sim' if gen_img else 'não'})...")
+        res = gen._run_pipeline_inline(
+            briefing_text="cli-serie", mock=False, forced_model_id=s["model"],
+            image_source="generate" if gen_img else "none",
+            image_style_preset=(args.preset if gen_img else None),
+            user_headline=str(sl.get("headline", "")),
+            user_subhead=str(sl.get("subhead", "")),
+            # marcador de lista ("- ", "• ") serviu pra classificação; o
+            # blueprint de bullets põe o próprio marcador — tira o duplicado
+            user_body=re.sub(r"(?m)^\s*[-•*]\s+", "", str(sl.get("body", ""))),
+            user_cta_text=str(sl.get("cta", "")), user_tag=str(sl.get("tag", "")),
+            wizard_format=args.format,
+            avatar_segment=args.avatar_segment or None,
+            avatar_variant=args.avatar_variant or None,
+            render_png=True, art_director=not args.no_art_director,
+            vision_qa=not args.no_vision_qa,
+        )
+        base = out / f"ad-slide-{s['slide']}"
+        if not res.get("ok"):
+            failed.append(s["slide"])
+            print("  ERRO:", res.get("error"))
+            continue
+        base.with_suffix(".html").write_text(res["html"], encoding="utf-8")
+        if res.get("png_data_uri"):
+            base.with_suffix(".png").write_bytes(
+                base64.b64decode(res["png_data_uri"].split(",", 1)[1]))
+        print(f"  ok · qa={((res.get('qa') or {}).get('status'))} "
+              f"visão={(res.get('vision_qa') or {}).get('verdict') or '(sem foto)'} "
+              f"→ {base.with_suffix('.png' if res.get('png_data_uri') else '.html')}")
+
+    print(f"\nSérie concluída: {plan['n_slides'] - len(failed)}/{plan['n_slides']} slides em {out}")
+    print("  config :", out / "serie-config.json")
+    if failed:
+        print("  FALHARAM:", failed, "— re-rode só esses com --model/--headline (slide ruim trava o conjunto)")
+        sys.exit(1)
 
 
 def main():
@@ -57,6 +143,11 @@ def main():
     ap.add_argument("--max-attempts", type=int, default=3, help="teto de tentativas do --auto-improve")
     ap.add_argument("--no-art-director", action="store_true", help="desliga composição/direção visual")
     ap.add_argument("--no-vision-qa", action="store_true", help="desliga a checagem final por visão")
+    ap.add_argument("--serie", default="", metavar="SLIDES_JSON",
+                    help="modo carrossel: JSON com os slides ([{headline,subhead,body,cta},...]). "
+                         "UM formato por série (--format). Ver content/direcao-arte/serie-carrossel.md")
+    ap.add_argument("--plan-only", action="store_true",
+                    help="com --serie: só imprime o plano (tratamento/modelo/família por slide) e sai, sem gerar")
     ap.add_argument("--out", default=str(ROOT / "render_out" / "out"), help="pasta de saída (default ./render_out/out)")
     args = ap.parse_args()
 
@@ -66,6 +157,9 @@ def main():
             for i in ids:
                 print("   ", i)
         return
+
+    if args.serie:
+        return run_serie(args)
 
     if not args.model:
         ap.error("informe --model (ou use --list pra ver os modelos)")
