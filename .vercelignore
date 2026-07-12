@@ -5,6 +5,10 @@ node_modules
 __pycache__
 *.pyc
 
+# render_out/ = saídas de teste (decks, PDFs, previews, galerias, vídeo).
+# 168 MB versionados que estouravam o limite de 225 MB da função. Nada de runtime lê daqui.
+render_out
+
 # Engine submodule — só rastreia o que importa pra runtime
 engine/.git
 engine/.venv
