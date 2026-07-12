@@ -68,6 +68,16 @@ número/R$, aspas, muito-curto (≤8 palavras), longo (≥50). Mapa em
 `_serie._candidates`. Com a família travada, tratamentos com blueprint na
 família têm prioridade (sort estável preserva a ordem estrutural).
 
+## Modo panorama (cena contínua no swipe)
+
+`--panorama "<cena>"` (2-4 slides): UMA imagem panorâmica (Nano Banana Pro, com
+referência do banco) é fatiada localmente entre os slides — o fundo se completa
+no swipe. Todos os slides saem em `D-foto-fullbleed-overlay` (fatia como fundo,
+texto por cima com caixa `plain`), o último leva o CTA (C2), e a repetição de
+tratamento é marcada `continued` (exceção legítima da C3 — é uma cena só).
+1 chamada de imagem pra série inteira. Requer `GEMINI_API_KEY`. O fatiamento
+(`_nano_pipeline.slice_panorama`) é puro/local e testado sem API.
+
 ## Anti-monotonia entre séries
 
 Antes de planejar, o CLI olha os últimos `serie-config.json` sob `render_out/`

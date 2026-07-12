@@ -54,6 +54,31 @@
       }
       if (over()) { size -= 2; head.style.fontSize = size + 'px'; }
     }
+    // 3) CASCATA anti-corte da caixa: a .text-panel tem max-height + overflow
+    //    hidden — se a headline chegou no piso e o conteúdo AINDA transborda
+    //    (sub/body longos), o corte seria SILENCIOSO (CTA sumia sem QA pegar).
+    //    Encolhe sub/body até 20px e, em último caso, o respiro da caixa.
+    if (box.classList && box.classList.contains('text-panel') && over()) {
+      var kids = box.querySelectorAll('.t-sub, .t-body');
+      var g3 = 0;
+      while (over() && g3 < 40) {
+        var shrunk = false;
+        for (var ki = 0; ki < kids.length; ki++) {
+          var fs = px(kids[ki], 'fontSize');
+          if (fs > 20) { kids[ki].style.fontSize = (fs - 1) + 'px'; shrunk = true; }
+        }
+        if (!shrunk) break;
+        g3++;
+      }
+      if (over()) {
+        box.style.padding = '24px 30px';
+        box.style.gap = '10px';
+      }
+      if (over()) {
+        // ainda cortando: marca pro QA/visão (copy longa demais pra caixa)
+        document.documentElement.setAttribute('data-panel-clipped', '1');
+      }
+    }
     return size;
   }
 

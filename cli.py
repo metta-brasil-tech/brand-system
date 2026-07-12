@@ -57,12 +57,31 @@ def run_serie(args):
         if not str(sl.get("headline", "")).strip():
             sys.exit(f"--serie: slide {i} sem headline")
 
-    avoid = familia_hint_from(ROOT / "render_out")
-    if avoid:
-        print(f"anti-monotonia: últimas 2 séries foram {avoid} — preferindo outra família na capa")
-    plan = plan_serie(slides, avoid_familia=avoid)
+    if args.panorama and not (2 <= len(slides) <= 4):
+        sys.exit("--panorama: a cena contínua só funciona com 2-4 slides")
+
+    if args.panorama:
+        # Panorama: UMA cena atravessa a série — todos os slides são foto-fullbleed
+        # com a fatia como fundo. continued marca a repetição legítima (C3) e o
+        # último slide leva o CTA sobre a última fatia (C2 via T-CTA-FINAL).
+        n = len(slides)
+        plan = {"n_slides": n, "familia": "DARK", "panorama": True, "slides": [{
+            "slide": i + 1,
+            "position": "capa" if i == 0 else ("fim" if i == n - 1 else "meio"),
+            "treatment": "T-CTA-FINAL" if i == n - 1 else "T-FOTO-CENA",
+            "model": "D-foto-fullbleed-overlay", "familia": "DARK",
+            "needs_image": False,  # a imagem vem da fatia, não do gerador por slide
+            "continued": i > 0,
+        } for i in range(n)]}
+        avoid = None
+    else:
+        avoid = familia_hint_from(ROOT / "render_out")
+        if avoid:
+            print(f"anti-monotonia: últimas 2 séries foram {avoid} — preferindo outra família na capa")
+        plan = plan_serie(slides, avoid_familia=avoid)
     issues = validate_serie(plan)
-    print(f"Série de {plan['n_slides']} slides · família travada: {plan['familia']} · formato: {args.format}")
+    print(f"Série de {plan['n_slides']} slides · família travada: {plan['familia']} · formato: {args.format}"
+          + (" · PANORAMA" if args.panorama else ""))
     for s in plan["slides"]:
         print(f"  {s['slide']} {s['position']:<5} {s['treatment']:<20} {s['model']:<28} "
               f"{s['familia']:<6} img={'sim' if s['needs_image'] else 'não'}")
@@ -75,20 +94,26 @@ def run_serie(args):
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    (out / "serie-config.json").write_text(json.dumps({
-        "familia": plan["familia"], "format": args.format,
-        "slides": [{k: s[k] for k in ("slide", "position", "treatment", "model", "familia")}
-                   for s in plan["slides"]],
-    }, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    failed = []
-    for s, sl in zip(plan["slides"], slides):
-        gen_img = s["needs_image"] and args.image != "none"
-        print(f"\n[{s['slide']}/{plan['n_slides']}] '{s['model']}' "
-              f"({s['treatment']}, imagem={'sim' if gen_img else 'não'})...")
-        res = gen._run_pipeline_inline(
+    # Panorama: gera a cena contínua UMA vez e fatia — cada slide recebe a sua
+    # fatia como foto (data URI). 1 chamada de imagem pra série toda.
+    pano_slices: list[str] = []
+    if args.panorama:
+        from _nano_pipeline import generate_panorama
+        print(f"\nGerando panorama ({plan['n_slides']} fatias)...")
+        raws, pmeta = generate_panorama(args.panorama, n_slides=plan["n_slides"])
+        pano_slices = ["data:image/png;base64," + base64.b64encode(b).decode("ascii")
+                       for b in raws]
+        print(f"  panorama ok · {pmeta['size'][0]}×{pmeta['size'][1]} · ref={pmeta.get('ref_id')} "
+              f"· {pmeta['ms']}ms")
+
+    def _gen_slide(s, sl):
+        gen_img = s["needs_image"] and args.image != "none" and not pano_slices
+        slice_uri = pano_slices[s["slide"] - 1] if pano_slices else None
+        return gen._run_pipeline_inline(
             briefing_text="cli-serie", mock=False, forced_model_id=s["model"],
-            image_source="generate" if gen_img else "none",
+            image_source="upload" if slice_uri else ("generate" if gen_img else "none"),
+            image_url=slice_uri,
             image_style_preset=(args.preset if gen_img else None),
             user_headline=str(sl.get("headline", "")),
             user_subhead=str(sl.get("subhead", "")),
@@ -102,21 +127,54 @@ def run_serie(args):
             render_png=True, art_director=not args.no_art_director,
             vision_qa=not args.no_vision_qa,
         )
+
+    failed = []
+    status_por_slide = {}
+    for s, sl in zip(plan["slides"], slides):
+        gen_img = (s["needs_image"] and args.image != "none") or bool(pano_slices)
+        print(f"\n[{s['slide']}/{plan['n_slides']}] '{s['model']}' "
+              f"({s['treatment']}, imagem={'fatia' if pano_slices else ('sim' if gen_img else 'não')})...")
+        res = _gen_slide(s, sl)
+        if not res.get("ok"):
+            # slide ruim trava o conjunto (regra do plugin): 1 retry automático
+            print("  falhou (%s) — retry 1/1..." % str(res.get("error"))[:60])
+            res = _gen_slide(s, sl)
         base = out / f"ad-slide-{s['slide']}"
         if not res.get("ok"):
             failed.append(s["slide"])
+            status_por_slide[s["slide"]] = {"ok": False, "error": str(res.get("error"))[:200]}
             print("  ERRO:", res.get("error"))
             continue
         base.with_suffix(".html").write_text(res["html"], encoding="utf-8")
         if res.get("png_data_uri"):
             base.with_suffix(".png").write_bytes(
                 base64.b64decode(res["png_data_uri"].split(",", 1)[1]))
+        status_por_slide[s["slide"]] = {
+            "ok": True, "qa": (res.get("qa") or {}).get("status"),
+            "visao": (res.get("vision_qa") or {}).get("verdict"),
+            "png": bool(res.get("png_data_uri")),
+        }
         print(f"  ok · qa={((res.get('qa') or {}).get('status'))} "
               f"visão={(res.get('vision_qa') or {}).get('verdict') or '(sem foto)'} "
               f"→ {base.with_suffix('.png' if res.get('png_data_uri') else '.html')}")
 
+    # Pós-check: plano ↔ arquivos no disco + status por slide vão pro config —
+    # é o registro que o critic de série e a galeria leem depois.
+    missing = [s["slide"] for s in plan["slides"]
+               if s["slide"] not in failed and not (out / f"ad-slide-{s['slide']}.png").exists()]
+    (out / "serie-config.json").write_text(json.dumps({
+        "familia": plan["familia"], "format": args.format,
+        "panorama": bool(args.panorama),
+        "slides": [{**{k: s[k] for k in ("slide", "position", "treatment", "model", "familia")},
+                    **({"continued": True} if s.get("continued") else {}),
+                    "status": status_por_slide.get(s["slide"], {})}
+                   for s in plan["slides"]],
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+
     print(f"\nSérie concluída: {plan['n_slides'] - len(failed)}/{plan['n_slides']} slides em {out}")
     print("  config :", out / "serie-config.json")
+    if missing:
+        print("  SEM PNG (Chromium ausente?):", missing, "— use os .html")
     if failed:
         print("  FALHARAM:", failed, "— re-rode só esses com --model/--headline (slide ruim trava o conjunto)")
         sys.exit(1)
@@ -148,6 +206,10 @@ def main():
                          "UM formato por série (--format). Ver content/direcao-arte/serie-carrossel.md")
     ap.add_argument("--plan-only", action="store_true",
                     help="com --serie: só imprime o plano (tratamento/modelo/família por slide) e sai, sem gerar")
+    ap.add_argument("--panorama", default="", metavar="CENA",
+                    help="com --serie (2-4 slides): UMA cena contínua descrita aqui vira UMA imagem "
+                         "panorâmica (Nano Banana) fatiada entre os slides — fundo que se completa no "
+                         "swipe. Requer GEMINI_API_KEY. Todos os slides saem em foto-fullbleed.")
     ap.add_argument("--out", default=str(ROOT / "render_out" / "out"), help="pasta de saída (default ./render_out/out)")
     args = ap.parse_args()
 

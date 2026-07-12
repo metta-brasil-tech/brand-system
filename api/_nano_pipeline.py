@@ -358,6 +358,20 @@ def generate_panorama(scene: str, n_slides: int = 2, family: str = "A",
     if not raw:
         raise NanoPipelineError("Nano Banana não retornou panorama.")
 
+    slices, (W, H) = slice_panorama(raw, n_slides)
+    meta = {"model": _MODEL, "aspect": aspect, "n_slides": n_slides,
+            "ref_id": ref_id, "size": [W, H], "ms": int((time.time() - t0) * 1000)}
+    return slices, meta
+
+
+def slice_panorama(raw: bytes, n_slides: int) -> tuple[list[bytes], tuple[int, int]]:
+    """Fatia uma imagem larga em n_slides tiras verticais que se completam
+    (puro/local — sem API). Retorna (pngs_por_slide, (W, H) da original)."""
+    import io
+
+    from PIL import Image
+
+    n_slides = max(2, min(4, int(n_slides)))
     img = Image.open(io.BytesIO(raw))
     W, H = img.size
     step = W // n_slides
@@ -368,6 +382,4 @@ def generate_panorama(scene: str, n_slides: int = 2, family: str = "A",
         buf = io.BytesIO()
         img.crop((x0, 0, x1, H)).save(buf, format="PNG")
         slices.append(buf.getvalue())
-    meta = {"model": _MODEL, "aspect": aspect, "n_slides": n_slides,
-            "ref_id": ref_id, "size": [W, H], "ms": int((time.time() - t0) * 1000)}
-    return slices, meta
+    return slices, (W, H)

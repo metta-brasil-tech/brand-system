@@ -240,13 +240,20 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
     return out
 
 
-def _proof_line(copy: dict) -> str:
+def _proof_line(copy: dict, anchor: str = "", brand_html: str = "") -> str:
     """Linha de PROVA SOCIAL solta no canto inferior (fora do card), assinatura do
-    banco real (ex: '+1.000 EMPRESAS · +R$8,5 BI EM VENDAS'). Vazio se não houver."""
+    banco real (ex: '+1.000 EMPRESAS · +R$8,5 BI EM VENDAS'). Vazio se não houver.
+
+    Guardas de colisão: com anchor=bottom o texto/CTA já ocupa o rodapé — a linha
+    é suprimida (a regra do diretor de arte é usá-la com card no topo). Com a
+    marca em bottom-left, a linha muda pro canto direito (data-side)."""
     p = (copy or {}).get("proof")
     if not p:
         return ""
-    return f'<div class="proof-line">{_esc(str(p))}</div>'
+    if (anchor or "").lower() == "bottom":
+        return ""
+    side = ' data-side="right"' if 'data-pos="bl"' in (brand_html or "") else ""
+    return f'<div class="proof-line"{side}>{_esc(str(p))}</div>'
 
 
 def _photo(image_url: str, cls: str = "photo") -> str:
@@ -560,7 +567,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
 <div class="ad ad-canvas" {data_attrs}>
 {brand}
 {inner}
-{_proof_line(copy_clean)}
+{_proof_line(copy_clean, anchor=anchor, brand_html=brand)}
 </div>
 <script>{js}</script>
 </body></html>"""

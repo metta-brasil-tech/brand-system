@@ -196,6 +196,8 @@ button { all: unset; }
   font-size: 22px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--fg); opacity: .85; line-height: 1.25;
 }
+/* marca em bottom-left → prova muda pro canto direito (evita sobreposição) */
+.proof-line[data-side="right"] { left: auto; right: var(--pad-x); text-align: right; }
 
 /* =============================================================================
  * ARCHETYPES
