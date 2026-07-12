@@ -68,6 +68,13 @@ número/R$, aspas, muito-curto (≤8 palavras), longo (≥50). Mapa em
 `_serie._candidates`. Com a família travada, tratamentos com blueprint na
 família têm prioridade (sort estável preserva a ordem estrutural).
 
+## Anti-monotonia entre séries
+
+Antes de planejar, o CLI olha os últimos `serie-config.json` sob `render_out/`
+(`_serie.familia_hint_from`): se as 2 séries mais recentes foram da mesma
+família, a capa da próxima prefere **outra família** — porta da regra da seção
+3.5 do plugin (opera sobre família, não sobre paleta individual).
+
 ## Uso
 
 ```bash
@@ -75,6 +82,16 @@ família têm prioridade (sort estável preserva a ordem estrutural).
 python cli.py --serie slides.json --plan-only    # plano + validação, sem custo
 python cli.py --serie slides.json --format feed  # gera ad-slide-N.png + serie-config.json
 ```
+
+Campos opcionais por slide no JSON:
+
+- `"treatment": "T-*"` — força um tratamento do vocabulário (o planner não
+  reclassifica; validação C1–C6 continua valendo).
+- `"continued": true` — exceção da C3 pra lista/thread que continua no slide
+  seguinte com o mesmo tratamento.
+
+Marcadores de lista no `body` (`- `, `• `) servem só pra classificação — o CLI
+os remove antes do render (o blueprint de bullets põe o próprio marcador).
 
 `serie-config.json` registra família, tratamento e blueprint por slide —
 mesmo artefato de paridade do plugin.

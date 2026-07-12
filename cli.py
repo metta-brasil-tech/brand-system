@@ -19,6 +19,7 @@ Requer OPENAI_API_KEY no ambiente.
 """
 import json
 import os
+import re
 import sys
 import argparse
 import base64
@@ -46,7 +47,7 @@ def run_serie(args):
     classificação copy→tratamento, ponte tratamento→blueprint, família travada
     no slide 1. Coerência visual (motivos, marca) segue sendo olho do critic.
     """
-    from _serie import plan_serie, validate_serie
+    from _serie import plan_serie, validate_serie, familia_hint_from
 
     raw = json.loads(Path(args.serie).read_text(encoding="utf-8"))
     slides = raw.get("slides") if isinstance(raw, dict) else raw
@@ -56,7 +57,10 @@ def run_serie(args):
         if not str(sl.get("headline", "")).strip():
             sys.exit(f"--serie: slide {i} sem headline")
 
-    plan = plan_serie(slides)
+    avoid = familia_hint_from(ROOT / "render_out")
+    if avoid:
+        print(f"anti-monotonia: últimas 2 séries foram {avoid} — preferindo outra família na capa")
+    plan = plan_serie(slides, avoid_familia=avoid)
     issues = validate_serie(plan)
     print(f"Série de {plan['n_slides']} slides · família travada: {plan['familia']} · formato: {args.format}")
     for s in plan["slides"]:
@@ -88,7 +92,9 @@ def run_serie(args):
             image_style_preset=(args.preset if gen_img else None),
             user_headline=str(sl.get("headline", "")),
             user_subhead=str(sl.get("subhead", "")),
-            user_body=str(sl.get("body", "")),
+            # marcador de lista ("- ", "• ") serviu pra classificação; o
+            # blueprint de bullets põe o próprio marcador — tira o duplicado
+            user_body=re.sub(r"(?m)^\s*[-•*]\s+", "", str(sl.get("body", ""))),
             user_cta_text=str(sl.get("cta", "")), user_tag=str(sl.get("tag", "")),
             wizard_format=args.format,
             avatar_segment=args.avatar_segment or None,

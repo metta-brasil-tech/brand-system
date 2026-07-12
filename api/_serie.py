@@ -135,23 +135,54 @@ def _candidates(cls: dict, position: str) -> list[str]:
     return cands
 
 
-def _pick_model(treatment: str, familia_lock: str | None) -> str:
-    """Escolhe o blueprint do tratamento, preferindo a família travada."""
+def _pick_model(treatment: str, familia_lock: str | None,
+                avoid: str | None = None) -> str:
+    """Escolhe o blueprint do tratamento, preferindo a família travada
+    (ou, na capa, evitando a família das últimas séries — anti-monotonia)."""
     models = TREATMENTS[treatment]["models"]
     if familia_lock:
         same = [m for m in models if familia_of(m) == familia_lock]
         if same:
             return same[0]
+    if avoid:
+        other = [m for m in models if familia_of(m) != avoid]
+        if other:
+            return other[0]
     return models[0]
 
 
-def plan_serie(slides: list[dict]) -> dict:
+def familia_hint_from(root) -> str | None:
+    """Anti-monotonia ENTRE séries (plugin, seção 3.5): olha os últimos
+    serie-config.json sob `root`; se as 2 séries mais recentes foram da mesma
+    família, retorna essa família para ser EVITADA na próxima capa."""
+    import json
+    from pathlib import Path
+    try:
+        configs = sorted(Path(root).rglob("serie-config.json"),
+                         key=lambda p: p.stat().st_mtime, reverse=True)[:2]
+    except OSError:
+        return None
+    familias = []
+    for c in configs:
+        try:
+            familias.append(json.loads(c.read_text(encoding="utf-8")).get("familia"))
+        except Exception:
+            pass
+    if len(familias) == 2 and familias[0] and familias[0] == familias[1]:
+        return familias[0]
+    return None
+
+
+def plan_serie(slides: list[dict], avoid_familia: str | None = None) -> dict:
     """Monta o plano da série: tratamento + blueprint + família por slide.
 
     slides: [{"headline":..., "subhead":..., "body":..., "cta":...}, ...]
+    Campos opcionais por slide: "treatment" (força um T-* do vocabulário) e
+    "continued": true (exceção da C3 pra lista/thread que continua).
     Aplica C1 (capa), C2 (fim), C3 (anti-repetição), C6 (máx 2 tipográficos)
     e trava de família (análogo mecânico da C4 — paleta nomeada é do plugin;
     aqui a paleta vive no blueprint, então trava-se a FAMÍLIA dominante).
+    avoid_familia: família a evitar na capa (anti-monotonia entre séries).
     """
     n = len(slides)
     if n < 2:
@@ -165,33 +196,49 @@ def plan_serie(slides: list[dict]) -> dict:
         text = "\n".join(x for x in [sl.get("headline", ""), sl.get("subhead", ""),
                                      sl.get("body", "")] if x)
         cls = classify_slide(text)
-        cands = _candidates(cls, position)
-        # Rule C3 — não repetir o tratamento do slide anterior
-        cands = [t for t in cands if t != prev_treatment] or cands
-        # Análogo C4 — com a família travada, preferir tratamento que tem
-        # blueprint na família (sort estável preserva a prioridade estrutural;
-        # tratamento sem opção na família vira inversão pontual, permitida)
-        if familia_lock:
-            cands = sorted(cands, key=lambda t: 0 if any(
-                familia_of(m) == familia_lock for m in TREATMENTS[t]["models"]) else 1)
-        # Rule C6 — teto de 2 tipográficos na série
-        if tipograficos >= 2:
-            nao_tipo = [t for t in cands if not TREATMENTS[t]["tipografico"]]
-            cands = nao_tipo or cands
+        forced = sl.get("treatment")
+        if forced:
+            if forced not in TREATMENTS:
+                raise ValueError(f"slide {i + 1}: tratamento desconhecido {forced!r} "
+                                 f"(vocabulário: {sorted(TREATMENTS)})")
+            cands = [forced]
+        else:
+            cands = _candidates(cls, position)
+            # Rule C3 — não repetir o tratamento do slide anterior
+            cands = [t for t in cands if t != prev_treatment] or cands
+            # Análogo C4 — com a família travada, preferir tratamento que tem
+            # blueprint na família (sort estável preserva a prioridade
+            # estrutural; sem opção na família vira inversão pontual)
+            if familia_lock:
+                cands = sorted(cands, key=lambda t: 0 if any(
+                    familia_of(m) == familia_lock for m in TREATMENTS[t]["models"]) else 1)
+            elif avoid_familia:
+                # capa com anti-monotonia: preferir tratamento com opção FORA
+                # da família das últimas séries
+                cands = sorted(cands, key=lambda t: 0 if any(
+                    familia_of(m) != avoid_familia for m in TREATMENTS[t]["models"]) else 1)
+            # Rule C6 — teto de 2 tipográficos na série
+            if tipograficos >= 2:
+                nao_tipo = [t for t in cands if not TREATMENTS[t]["tipografico"]]
+                cands = nao_tipo or cands
         treatment = cands[0]
-        model = _pick_model(treatment, familia_lock)
+        model = _pick_model(treatment, familia_lock,
+                            avoid=avoid_familia if familia_lock is None else None)
         familia = familia_of(model)
         if i == 0:
             familia_lock = familia  # trava no slide 1 (análogo C4)
         if TREATMENTS[treatment]["tipografico"]:
             tipograficos += 1
         prev_treatment = treatment
-        plan.append({
+        entry = {
             "slide": i + 1, "position": position, "treatment": treatment,
             "model": model, "familia": familia,
             "needs_image": TREATMENTS[treatment]["needs_image"],
             "classify": cls,
-        })
+        }
+        if sl.get("continued"):
+            entry["continued"] = True
+        plan.append(entry)
     return {"n_slides": n, "familia": familia_lock, "slides": plan}
 
 
