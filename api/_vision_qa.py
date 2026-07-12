@@ -24,17 +24,27 @@ _SYS_BASE = """Você é DIRETOR DE ARTE sênior fazendo a revisão final de um a
 Metta (inteligência comercial, estética editorial séria). Avalie a peça e seja
 RIGOROSO — reprova fácil:
 
-1. RELEVÂNCIA (a imagem ilustra a copy?): a foto/cena PRECISA mostrar o assunto da
-   copy. Se a copy fala de dados/indicador/métrica/gestão/decisão, a imagem tem que
-   ter algo concreto disso visível (tela com dashboard, gráfico, planilha, relatório,
-   pessoas decidindo sobre números). Retrato genérico de "pessoa olhando pro lado"
-   sem nada do assunto = relevance:"weak".
+1. RELEVÂNCIA (a imagem ilustra a copy?): a cena PRECISA ilustrar o CONCEITO da
+   copy — e vale de DUAS formas (o banco real da Metta usa muito a segunda):
+   (a) LITERAL: dados/indicador/gestão → dashboard, gráfico, relatório, pessoas
+       decidindo sobre números.
+   (b) METÁFORA / HUMOR / SÍMBOLO: uma cena conceitual que qualquer um entende como
+       a mensagem. Ex: "funcionário do próprio negócio" → pessoa soterrada de papel;
+       "apagar incêndio" → mesa/pessoa pegando fogo; "operação implora por babá" →
+       chupeta na mesa executiva; "clonar o talento" → pessoa clonada. ISSO É
+       relevance:"ok" — NÃO exija dashboard quando a copy pede metáfora.
+   Só é relevance:"weak" o retrato GENÉRICO que não ilustra nada (pessoa de blazer
+   olhando pro lado, sorriso de stock, sem metáfora nem assunto visível).
 
 2. INTEGRIDADE do layout (o layout respeita a imagem?): NENHUM elemento principal
-   pode parecer cortado SEM QUERER — pessoa cortada pela metade, rosto/corpo
-   espremido no canto, sujeito coberto por bloco de texto, bloco de cor sobrando
-   sobre fundo morto, foto com corte duro estranho. Recorte SÓ vale se for
-   claramente intencional (direção de arte). Caso contrário integrity:"broken"."""
+   pode parecer cortado SEM QUERER. Cheque com ATENÇÃO ESPECIAL (é o erro mais
+   comum e mais grave): a CAIXA DE TEXTO (card branco/amarelo/escuro) NÃO pode
+   cobrir o rosto, a cabeça ou o objeto principal da cena. Se o card tapa o rosto
+   da pessoa, corta a cabeça, ou esconde o assunto que ilustra a copy →
+   integrity:"broken", SEMPRE. O card tem que ficar numa área vazia da imagem.
+   Também broken: pessoa cortada pela metade, sujeito espremido no canto, bloco de
+   cor sobre fundo morto, corte duro estranho. Recorte SÓ vale se for claramente
+   intencional (direção de arte). Na dúvida sobre o card cobrir o assunto = broken."""
 
 # Safe zones por formato — espelho condensado de content/direcao-arte/safe-zones.md.
 # Frações da ALTURA da imagem (o modelo de visão não vê coordenadas em px).
