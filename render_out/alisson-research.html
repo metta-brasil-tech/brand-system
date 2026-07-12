@@ -1,0 +1,228 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 22mm 20mm; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color: #12181F; line-height: 1.55; font-size: 12.5px; }
+  h1 { font-size: 24px; font-weight: 900; border-bottom: 4px solid #FFBE18; padding-bottom: 10px; margin: 0 0 18px; }
+  h2 { font-size: 17px; font-weight: 800; margin: 26px 0 10px; color: #12181F; border-left: 4px solid #FFBE18; padding-left: 10px; }
+  h3 { font-size: 14px; font-weight: 700; margin: 16px 0 6px; }
+  p { margin: 0 0 10px; }
+  strong { font-weight: 700; }
+  code { background: #EFF3F5; padding: 1px 5px; border-radius: 3px; font-family: ui-monospace, Menlo, monospace; font-size: 11px; }
+  pre { background: #131F25; color: #EBF3F7; padding: 12px 14px; border-radius: 6px; overflow-x: auto; font-size: 10.5px; line-height: 1.5; }
+  pre code { background: none; padding: 0; color: inherit; }
+  blockquote { border-left: 3px solid #FFBE18; margin: 10px 0; padding: 4px 0 4px 14px; color: #435965; font-style: italic; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 16px; font-size: 11px; }
+  th, td { border: 1px solid #C9DAE3; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #EFF3F5; font-weight: 700; }
+  hr { border: none; border-top: 1px solid #C9DAE3; margin: 22px 0; }
+  ul, ol { margin: 0 0 10px; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+  .cover { background:#0A1013; color:#fff; margin:-22mm -20mm 20mm; padding:26mm 20mm 16mm; }
+  .cover .eyebrow { color:#FFBE18; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+  .cover h1 { color:#fff; border:none; font-size:30px; margin:14px 0 8px; }
+  .cover p { color:#94B5C8; font-size:13px; }
+</style></head><body>
+<div class="cover">
+  <div class="eyebrow">METTA · BRAND SYSTEM</div>
+  <h1>Pesquisa: plugin-metta-ads (Alisson Oliveira)</h1>
+  <p>O que existe, o que já portamos, e o que ainda falta — documentado pra decisão de produto.</p>
+</div>
+<h1>O que existe no plugin-metta-ads do Alisson</h1>
+<p>Fonte: <code>github.com/AllissonOliveira/plugin-metta-ads</code> (repositório dele, mantenedor Alisson Oliveira — Head de Marketing, Metta). Não faz parte da organização <code>metta-brasil-tech</code>; acessei direto pelo GitHub dele.</p>
+<hr />
+<h2>1. Ele tem modelo de tweet?</h2>
+<p><strong>Não tem um construído de verdade.</strong> Existe uma <em>categoria teórica</em> no vocabulário de tratamentos de carrossel dele (<code>T-TWEET-CARD</code> — "statement emulado em card"), mas a própria documentação dele admite:</p>
+<blockquote>
+<p><em>"sem tweet-card direto no banco; usar a ficha da carta confidencial como família próxima (texto emulado em superfície destacada)"</em></p>
+</blockquote>
+<p>Ou seja: ele nunca gerou/aprovou um tweet-card de verdade. Quando o sistema dele precisa desse tratamento, usa uma peça diferente (<code>ad-dark-carta-convite-sistema-pra-poucos-empresarios</code> — um card estilo "carta confidencial") como aproximação. <strong>Isso bate com o nosso problema</strong>: nós também temos tweet-cards genéricos demais (sem métricas de engajamento, timestamp, logo do X). Nenhum dos dois lados resolveu isso ainda — é um gap real, não só nosso.</p>
+<hr />
+<h2>2. Ele tem biblioteca de imagens?</h2>
+<p><strong>Sim — mas não está no repositório do plugin.</strong> Vive numa dependência separada, uma skill do Claude Code chamada <code>metta-brand</code>, instalada <strong>localmente na máquina dele</strong> em <code>~/.claude/skills/metta-brand/</code>. Não é um repositório público — procurei (<code>AllissonOliveira/metta-brand</code>) e não existe no GitHub. <strong>Não temos acesso a essas imagens reais.</strong></p>
+<p>O que sabemos sobre essa biblioteca (pela documentação, não pelas imagens em si):
+- <strong>69 fichas</strong> catalogadas em <code>INDEX-VISUAL.md</code>, cada uma com 11 campos padronizados: família visual (DARK/LIGHT/YELLOW/COLOR-ACCENT), composição, paleta real (hex), tratamento de foto, headline/sub/CTA literais, presença de marca, elementos extras, tom, vibe.
+- <strong>≥68 PNGs renderizados</strong> (1080×1920), um por peça — a "fonte da verdade visual" que os agentes dele abrem e olham antes de compor.
+- Peças do acervo original são SVG (exportado do Figma); peças novas aprovadas entram como HTML.
+- Regra dele: <strong>"a ficha orienta a busca, mas o PNG é a verdade"</strong> — nunca escolhe referência só pelo texto da ficha, sempre abre a imagem.</p>
+<p><strong>Comparação com o nosso banco</strong>: nosso <code>data/applications-index.json</code> tem <strong>109 peças</strong> (mais que as 69 dele) e já é público/versionado no nosso repo — não depende de instalação local em nenhuma máquina específica. Nesse ponto, estamos à frente.</p>
+<hr />
+<h2>3. Exemplos de prompts e o caminho até eles</h2>
+<p>Ele documenta isso muito bem em <code>lib/metta-image-models.md</code> — vale a pena adotarmos esse formato. Estrutura de prompt que ele validou:</p>
+<pre><code>&lt;descrição da cena em inglês&gt; | &lt;iluminação&gt; | &lt;mood&gt; | &lt;color grading&gt; | &lt;ângulo de câmera&gt; | &lt;notas de composição&gt;
+
+Sempre no final:
+no text, no logos, no signage, photorealistic, cinematic, sharp realism, no hands visible
+</code></pre>
+<h3>O exemplo real que ele documentou (prompt ruim → bom)</h3>
+<p><strong>Briefing</strong>: anúncio sobre "domingo à noite, peso do WhatsApp não respondido".</p>
+<p>❌ <strong>Prompt ruim</strong> (o que ele tentou primeiro):</p>
+<blockquote>
+<p><em>"Hand holding a smartphone showing WhatsApp messages from team, coffee cup on desk, intimate Sunday evening atmosphere"</em></p>
+</blockquote>
+<p>Por que falhou: gpt-image-2 não renderiza bolhas de mensagem com texto coerente, e ainda tenta desenhar uma mão — resultado foi "chat vazio + mão estranha".</p>
+<p>✅ <strong>Prompt bom</strong> (reformulado, mesma ideia, elementos que o modelo renderiza bem):</p>
+<blockquote>
+<p><em>"Smartphone face down on a wooden table at dusk, screen glow leaking from underneath, single cup of coffee gone cold beside it, blurred background of empty living room | warm low-key lighting | atmosphere of unanswered burden | desaturated warm tones | close-up at desk level | composition centered on the phone, coffee cup off-frame partial"</em></p>
+</blockquote>
+<p><strong>O caminho de raciocínio dele</strong> (processo formal, dois "papéis" que se checam):
+1. <strong>Briefer A (propositor)</strong> define o que a imagem precisa carregar da copy (significado/atmosfera), verifica se dá pra comunicar isso com elementos que o gpt-image-2 renderiza bem, e se não der, <strong>reformula o que a imagem mostra sem mudar o significado</strong> (não força o modelo).
+2. <strong>Briefer B (crítico)</strong> valida 3 critérios antes de aprovar: (a) a imagem sozinha comunica a tensão da copy? (b) o gpt-image-2 renderiza isso bem? (c) cabe no template escolhido?</p>
+<h3>Tabela de onde o gpt-image-2 falha (documentada por ele)</h3>
+<table>
+<thead>
+<tr>
+<th>Falha</th>
+<th>Sintoma</th>
+<th>Como ele contorna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Texto na cena</td>
+<td>Letras tortas, bolhas vazias</td>
+<td>Pede cena onde texto não importa (tela com gradiente, folha em branco)</td>
+</tr>
+<tr>
+<td>Mãos detalhadas</td>
+<td>Dedos a mais, mãos retorcidas</td>
+<td>Esconde as mãos na composição</td>
+</tr>
+<tr>
+<td>Logos de marca</td>
+<td>Ícones deformados</td>
+<td>Não gera logo — injeta SVG por cima depois</td>
+</tr>
+<tr>
+<td>Números específicos</td>
+<td>Dígitos trocados/inventados</td>
+<td>Nunca embute número na imagem — só via HTML</td>
+</tr>
+<tr>
+<td>Rostos reconhecíveis</td>
+<td>Rosto genérico mesmo pedindo alguém específico</td>
+<td>Mostra de costas, perfil ou sombra</td>
+</tr>
+<tr>
+<td>Telas de app (UI)</td>
+<td>UI inventada, irreal</td>
+<td>Tela apagada/reflexo, ou silhueta do aparelho</td>
+</tr>
+</tbody>
+</table>
+<p>Isso é <strong>quase idêntico</strong> ao que já portamos pro nosso <code>skills/04-image-prompt-engineer.md</code> (achado #13 do nosso doc de insights) — validação cruzada de que a lista de falhas está certa.</p>
+<hr />
+<h2>4. Qual é o pipeline dele</h2>
+<p>Arquitetura fundamentalmente diferente da nossa — vale entender a diferença antes de copiar qualquer coisa.</p>
+<p><strong>O dele</strong>: orquestração de <strong>subagents do Claude Code</strong> (Task tool), sem código Python de produção — o "pipeline" é uma skill (<code>SKILL.md</code>) que o Claude Code interpreta e executa turno a turno, chamando sub-agentes.</p>
+<p><strong>O nosso</strong>: pipeline <strong>Python determinístico</strong> (LiteLLM + Qdrant + Pillow), roda como função/CLI/serverless, sem depender de uma sessão do Claude Code pra funcionar.</p>
+<h3>As 9 fases dele (F0–F8)</h3>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>F0</strong></td>
+<td>Recebe o brief, detecta Modo A (copy literal) ou Modo B (ideia → proposta de copy aprovada pelo usuário)</td>
+</tr>
+<tr>
+<td><strong>F1</strong> 👁️</td>
+<td><strong>Director abre PNGs de referência do banco</strong> (3-5 imagens) e escolhe olhando, não só pela ficha de texto</td>
+</tr>
+<tr>
+<td><strong>F1-C</strong> 👁️</td>
+<td>(só carrossel) Direção de série: escolhe 1 de 10 tratamentos <code>T-*</code>, trava paleta P1-P10, define motivos recorrentes</td>
+</tr>
+<tr>
+<td><strong>F2</strong></td>
+<td>Decide se precisa gerar imagem nova ou não</td>
+</tr>
+<tr>
+<td><strong>F3</strong></td>
+<td>Dois sub-agentes (Briefer A propositor ↔ Briefer B crítico) refinam o prompt de imagem até 5 rodadas, geram via <code>codex CLI</code></td>
+</tr>
+<tr>
+<td><strong>F4</strong></td>
+<td>Spawna designers em paralelo (1 por variante/slide) — cada um compõe HTML olhando a referência</td>
+</tr>
+<tr>
+<td><strong>F5</strong></td>
+<td>Recebe os resultados: OK, GATE_FAIL ou LAYOUT_IMPOSSIBLE (troca referência se não coube)</td>
+</tr>
+<tr>
+<td><strong>F6</strong></td>
+<td>Um "crítico visual" compara as peças produzidas lado a lado com as referências do banco</td>
+</tr>
+<tr>
+<td><strong>F7</strong> 👁️</td>
+<td><strong>Director abre os PNGs aprovados</strong> antes de entregar — sanity check final</td>
+</tr>
+<tr>
+<td><strong>F8</strong></td>
+<td>Peça aprovada pelo usuário vira entrada nova no banco (ficha + PNG)</td>
+</tr>
+</tbody>
+</table>
+<p>👁️ = "pontos de visão obrigatórios" — a peça central da filosofia dele: <strong>um agente sempre olha a imagem renderizada</strong>, nunca decide só lendo código/texto.</p>
+<h3>A lição mais importante dele (por que as versões v0.1–v0.5 falharam)</h3>
+<blockquote>
+<p><em>"O gargalo não era o algoritmo — era a cegueira. O banco exportado do Figma tem texto em <code>&lt;path&gt;</code> (SVG) e foto em base64: ilegível como código. O pipeline operava sobre uma representação que não correspondia ao que o olho vê."</em></p>
+</blockquote>
+<p>A correção dele foi parar de tentar "ler" a peça como código/XML e passar a literalmente abrir o PNG e olhar. É exatamente o motivo de existir o nosso <code>vision-qa</code> e o <code>crítico anti-slop</code> — resolvemos o mesmo problema, só que via chamada de API de visão (<code>gpt-4.1</code> olhando a imagem) em vez de um agente Claude Code usando a ferramenta <code>Read</code>.</p>
+<h3>Gate mecânico dele — o que ele <strong>removeu</strong> e por quê</h3>
+<p>Ele tinha regras rígidas (tamanho mínimo de fonte, proporção headline/sub, CTA obrigatoriamente amarelo, marca sempre presente) e <strong>removeu todas</strong> na v0.6 porque o próprio banco de peças campeãs violava essas regras. Ficou só o que é genuinamente binário: copy bate byte a byte, texto na imagem não pode ser inventado, tokens de cor batem com o design system. <strong>Isso é idêntico à lição que já está documentada no nosso <code>docs/INSIGHTS-PLUGIN-METTA-ADS.md</code></strong> — inclusive citamos isso ao portar: "regra mecânica que contradiz o banco é regra errada".</p>
+<hr />
+<h2>O que já portamos vs. o que ainda não</h2>
+<p>Já tínhamos investigado isso a fundo antes (<code>docs/INSIGHTS-PLUGIN-METTA-ADS.md</code>, na branch recuperada do backup). Resumo do que falta:</p>
+<table>
+<thead>
+<tr>
+<th>Do plugin dele</th>
+<th>Status no nosso ad-generator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modos de falha do gpt-image (mãos, texto, logos, números, rostos)</td>
+<td>✅ portado — skill 04 v5.0</td>
+</tr>
+<tr>
+<td>Vision-QA (olhar o PNG produzido)</td>
+<td>✅ temos (<code>_vision_qa.py</code>)</td>
+</tr>
+<tr>
+<td>Crítico comparando com referência do banco ("same designer test")</td>
+<td>✅ portado (<code>_critic.py</code>) — igual ao dele</td>
+</tr>
+<tr>
+<td>Checklist anti-slop</td>
+<td>✅ portado (<code>anti-slop.md</code>)</td>
+</tr>
+<tr>
+<td>Gate mecânico reduzido (só o binário)</td>
+<td>✅ já alinhado</td>
+</tr>
+<tr>
+<td><strong>Direção de série (10 tratamentos, paletas P1-P10, regras C1-C8)</strong></td>
+<td>⚠️ recuperamos versão nossa do backup, ainda não mergeada</td>
+</tr>
+<tr>
+<td><strong>Modo B — ideia bruta → proposta de copy aprovada</strong></td>
+<td>⚠️ existe como skill mas pulado no wizard</td>
+</tr>
+<tr>
+<td><strong>Tweet-card de verdade</strong></td>
+<td>❌ nenhum dos dois lados tem — gap real, precisamos construir do zero</td>
+</tr>
+<tr>
+<td>Multi-variante de famílias divergentes por chamada</td>
+<td>❌ fora de escopo nos dois (gera 1 peça por vez)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão prática</strong>: não tem "código pra roubar" dele que já não tenhamos processado — o valor real do trabalho dele já foi extraído e documentado. O que resta é decisão de produto (vale implementar Modo B? vale construir direção de série completa?), não descoberta técnica nova.</p>
+</body></html>
