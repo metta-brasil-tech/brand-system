@@ -77,19 +77,6 @@
       "src": "assets/generated/ads/metta-feed-yellow-objeto-vai-ficando-facil.webp"
     },
     {
-      "id": "tiago-story-minimal-vendeu-junto",
-      "model_id": "TIAGO-STORY-MINIMAL-QUESTION",
-      "brand": "tiago",
-      "format": "story",
-      "headline": "Quando foi a última vez que você vendeu junto com o time?",
-      "cta": "",
-      "date": "2026-07-09",
-      "qa": "APROVADO na bateria de story 1080×1920 (inspeção visual)",
-      "nota": "Bateria de story 9 jul — contemplativo, texto na base",
-      "engine": "render local (motor blueprint) · imagem reusada do banco de 8 jul · sem custo de API",
-      "src": "assets/generated/ads/tiago-story-minimal-vendeu-junto.webp"
-    },
-    {
       "id": "tiago-story-yellow-block-treinou-hoje",
       "model_id": "TIAGO-STORY-YELLOW-BLOCK",
       "brand": "tiago",
@@ -324,19 +311,6 @@
       "src": "assets/generated/ads/yellow-frame-meta-rotina.webp"
     },
     {
-      "id": "tweet-card-gestor-formado",
-      "model_id": "METTA-TWEET-CARD",
-      "brand": "metta",
-      "format": "feed",
-      "headline": "Gestor de vendas não nasce — é formado com método, não com motivação.",
-      "cta": "Descubra o Método Metta",
-      "date": "2026-07-08",
-      "qa": "QA PASS (tipográfico)",
-      "nota": "virou preview do wizard",
-      "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
-      "src": "assets/generated/ads/tweet-card-gestor-formado.webp"
-    },
-    {
       "id": "tiago-twitter-img-processo",
       "model_id": "TIAGO-TWITTER-CARD-IMAGE",
       "brand": "tiago",
@@ -348,19 +322,6 @@
       "nota": "virou preview do wizard (arquivo novo)",
       "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
       "src": "assets/generated/ads/tiago-twitter-img-processo.webp"
-    },
-    {
-      "id": "tiago-typo-vendedor-heroi",
-      "model_id": "TIAGO-TYPO-PURE",
-      "brand": "tiago",
-      "format": "feed",
-      "headline": "Vendedor herói não é estratégia.",
-      "cta": "Conheça a mentoria",
-      "date": "2026-07-08",
-      "qa": "QA PASS (tipográfico)",
-      "nota": "virou preview do wizard",
-      "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
-      "src": "assets/generated/ads/tiago-typo-vendedor-heroi.webp"
     },
     {
       "id": "tiago-edit-hero-lideranca-persuasiva",
