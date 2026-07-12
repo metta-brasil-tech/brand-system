@@ -61,15 +61,26 @@ Você entrega DUAS coisas:
    você inventou. Sujeito/objeto ocupa a metade de BAIXO (ex: objeto sobre a mesa)
    → text_anchor="top". Sujeito ocupa o TOPO (rosto/busto em pé) → "bottom".
    O brief da cena DEVE deixar essa zona limpa (fundo suave, vazio, sem elementos).
-6. panel: "none"|"white"|"yellow"|"dark" — a CAIXA DE TEXTO (card arredondado que
-   agrupa o texto sobre a foto, como no banco real). Escolha:
-   • "white" → quando há SUBTÍTULO/DESCRIÇÃO + prova + CTA (peça documental/informativa,
-     ex: card branco com "Mentoria Metta... +1.000 empresas" e botão). Mais legível.
-   • "yellow" → afirmação forte/colagem, headline curta de impacto dentro do card amarelo.
-   • "dark" → foto clara ou muito ocupada onde texto solto sumiria; card escuro discreto.
-   • "none" → headline curta cai direto na zona vazia limpa, sem card (estilo cinema).
-   REGRA: se a peça tem título + descrição (subtítulo/body), PREFIRA um card (white/yellow),
-   nunca deixe muito texto solto sobre a foto — é o que separa a arte real da amadora.
+6. panel: "none"|"plain"|"white"|"yellow"|"dark" — a CAIXA DE TEXTO. Duas famílias:
+   CAIXA COM FUNDO (card colorido — mais legível, agrupa muito texto):
+   • "white" → título + DESCRIÇÃO + prova + CTA (documental/informativa, ex: card
+     branco "Mentoria Metta... +1.000 empresas" + botão). O padrão mais comum.
+   • "yellow" → afirmação forte/colagem, texto escuro dentro do card amarelo.
+   • "dark" → foto clara/ocupada onde texto solto sumiria; card escuro discreto.
+   CAIXA SEM FUNDO:
+   • "plain" → texto agrupado sobre a foto SEM card, só com sombra (headline forte
+     em zona vazia com pouca informação; visual mais limpo/cinema com hierarquia).
+   • "none" → texto livre no gradiente (legado; headline curtíssima só).
+   REGRAS DURAS:
+   - A caixa fica na ZONA VAZIA (a mesma do text_anchor) e NUNCA cobre o assunto
+     (rosto, recorte, objeto). Descreva a cena deixando essa metade limpa.
+   - Se a peça tem título + descrição/subtítulo, PREFIRA caixa (white/yellow) —
+     texto demais solto sobre a foto é o que separa a arte amadora da real.
+   - Headline longa NÃO é problema: a fonte encolhe sozinha pra caber na caixa.
+7. head_out: true|false — padrão CRM/2-zonas. true = a HEADLINE fica SOBRE a foto
+   (topo, sem card) e o card (white/yellow) embaixo leva só SUBTÍTULO + prova + CTA.
+   Use quando a headline é uma pergunta/afirmação de impacto que quer respirar na
+   imagem e o apoio é denso. Só vale com panel de fundo (white/yellow/dark).
 
 == B) CONCEITO VISUAL (só quando NEEDS_IMAGE=sim) ==
 Leia a MENSAGEM da copy (o conceito, não as palavras) e invente uma CENA que a
@@ -125,7 +136,7 @@ Regras inegociáveis:
 
 Responda APENAS JSON válido, sem cercas:
 {"headline_marked":"...","gaze_direction":"...","crop_focus":"...","emphasis":"...",
- "text_anchor":"top|bottom","panel":"none|white|yellow|dark",
+ "text_anchor":"top|bottom","panel":"none|plain|white|yellow|dark","head_out":false,
  "image_concept":{"scene_type":"...","must_show":["..."],"brief":"...","subject_note":"..."},"rationale":"..."}
 Se NEEDS_IMAGE=não, retorne "image_concept": null."""
 

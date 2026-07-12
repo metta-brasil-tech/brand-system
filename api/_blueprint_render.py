@@ -81,14 +81,22 @@ def _accent(text: str) -> str:
 # ---------------------------------------------------------------------------
 # Markup por archetype — recebe (copy, params) e devolve o innerHTML do .ad
 # ---------------------------------------------------------------------------
-def _txt_blocks(copy: dict, head_accent=True, divider=False) -> str:
+def _txt_blocks(copy: dict, head_accent=True, divider=False,
+                only_head=False, skip_head=False) -> str:
+    """Blocos de texto. only_head=só a headline (+tag); skip_head=tudo menos a
+    headline (pro layout de 2 zonas: headline na foto + apoio no card)."""
     head = _accent(copy.get("headline", "")) if head_accent else _esc(copy.get("headline", ""))
     parts = []
-    if copy.get("tag"):
+    if not skip_head:
+        if copy.get("tag"):
+            parts.append(f'<p class="t-tag">{_esc(copy["tag"])}</p>')
+        parts.append(f'<h1 class="t-head">{head}</h1>')
+        if divider:  # divisor amarelo (assinatura do K) — depois da headline
+            parts.append('<div class="t-divider"></div>')
+        if only_head:
+            return "\n".join(parts)
+    elif copy.get("tag"):  # sem headline mas com tag → tag encabeça o card
         parts.append(f'<p class="t-tag">{_esc(copy["tag"])}</p>')
-    parts.append(f'<h1 class="t-head">{head}</h1>')
-    if divider:  # divisor amarelo (assinatura do K) — depois da headline
-        parts.append('<div class="t-divider"></div>')
     if copy.get("subhead"):
         parts.append(f'<p class="t-sub">{_esc(copy["subhead"])}</p>')
     if copy.get("body"):
@@ -354,13 +362,17 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
     # Caixa de texto (text-panel): agrupa o texto+CTA num card arredondado sobre a
     # foto (assinatura do banco real). CTA fica DENTRO da caixa (branca/amarela pede
     # CTA escuro pra contraste). Retorna o HTML já embrulhado, ou o conteúdo cru.
+    # panel: white/yellow/dark = caixa COM fundo · plain = caixa SEM fundo (texto
+    # agrupado e limitado, com sombra pra legibilidade) · none = livre (legado).
+    # Com ou sem fundo, a caixa limita o auto-fit (headline encolhe pra caber e
+    # não cobre a imagem embaixo — ver _engine.js/fitHead e .text-panel max-height).
     panel = str(params.get("panel", "none")).strip().lower()
     def _panel_wrap(body_html: str, cta_variant: str = "") -> str:
         cta_c = cta_variant if cta_variant else cta_cls
         if panel in ("white", "yellow"):
             cta_c = "cta--dark"  # sobre card claro, CTA escuro
         inner_cta = _cta(copy, cta_c)
-        if panel in ("white", "dark", "yellow"):
+        if panel in ("white", "dark", "yellow", "plain"):
             return f'<div class="text-panel" data-panel="{panel}">{body_html}{inner_cta}</div>'
         return f'{body_html}{inner_cta}'
 
@@ -389,6 +401,16 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 f'<div class="layer">{_panel_wrap(f"<div class=stack>{_txt_blocks(copy)}</div>")}</div>')
 
     if arch == "photo-full":
+        # 2 zonas (padrão CRM/chupeta real): headline SOBRE a foto (sem card, com
+        # sombra) no topo + card só com apoio/CTA embaixo. Liga com head_out=1
+        # quando há caixa. Senão, caixa única com tudo dentro.
+        head_out = str(params.get("head_out", "")).lower() in ("1", "true", "yes")
+        if head_out and panel in ("white", "yellow", "dark", "plain"):
+            head_band = (f'<div class="text-panel head-band" data-panel="plain">'
+                         f'{_txt_blocks(copy, only_head=True)}</div>')
+            card = _panel_wrap(_txt_blocks(copy, skip_head=True))
+            return (f'{_photo(image_url)}<div class="grad"></div>'
+                    f'<div class="layer layer--split">{head_band}{card}</div>')
         return (f'{_photo(image_url)}<div class="grad"></div>'
                 f'<div class="layer">{_panel_wrap(_txt_blocks(copy))}</div>')
 
@@ -492,11 +514,14 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     # Caixa de texto: o diretor de arte pode escolher por peça (copy.panel);
     # senão vale o default do blueprint. white/dark/yellow/none.
     panel = str((copy or {}).get("panel") or "").strip().lower()
-    if panel not in ("white", "dark", "yellow", "none"):
+    if panel not in ("white", "dark", "yellow", "plain", "none"):
         panel = str(params.get("panel", "none")).strip().lower()
 
+    # head_out: headline na foto + card só com apoio (2 zonas, padrão CRM).
+    head_out = str((copy or {}).get("head_out") or params.get("head_out", "")).strip().lower()
+
     copy_clean = {k: (str(v).strip() if v else "") for k, v in (copy or {}).items()}
-    params_eff = {**params, "anchor": anchor, "panel": panel}
+    params_eff = {**params, "anchor": anchor, "panel": panel, "head_out": head_out}
     inner = _markup(arch, copy_clean, params_eff, image_url or "")
 
     head_style = params.get("head", "")
