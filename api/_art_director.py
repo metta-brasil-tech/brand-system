@@ -89,10 +89,13 @@ Você entrega DUAS coisas:
    (topo, sem card) e o card (white/yellow) embaixo leva só SUBTÍTULO + prova + CTA.
    Use quando a headline é uma pergunta/afirmação de impacto que quer respirar na
    imagem e o apoio é denso. Só vale com panel de fundo (white/yellow/dark).
-8. proof: "" ou linha curta de PROVA SOCIAL em caixa alta (ex: "+1.000 EMPRESAS ·
-   +R$8,5 BI EM VENDAS") — vai solta no canto inferior, fora do card (assinatura do
-   banco). Só preencha se o conhecimento trouxer número real; senão deixe "". Use de
-   preferência quando o card está no TOPO (text_anchor="top"), pra não colidir.
+8. proof: "" ou PROVA SOCIAL. Dois formatos:
+   • LINHA (canto inferior): "+1.000 EMPRESAS · +R$8,5 BI EM VENDAS". Use quando o
+     card está no topo (text_anchor="top"), pra não colidir.
+   • CHIP emoldurado (no fluxo do texto): "valor | legenda", ex.: "+R$ 8,5 BILHÕES |
+     gerados em vendas no último ano". Vira uma caixinha com borda (assinatura
+     convite/60-min). Use quando há um número forte a destacar.
+   Só preencha se o conhecimento trouxer número REAL; senão deixe "".
 
 == B) CONCEITO VISUAL (só quando NEEDS_IMAGE=sim) ==
 Leia a MENSAGEM da copy (o conceito, não as palavras) e invente uma CENA que a
