@@ -296,8 +296,13 @@ def _run_pipeline_inline(
     render_png: bool = False,
     art_director: bool = True,
     vision_qa: bool = True,
+    serie_info: dict | None = None,
 ) -> dict:
-    """Pipeline principal — retorna HTML pronto pra iframe + metadata."""
+    """Pipeline principal — retorna HTML pronto pra iframe + metadata.
+
+    serie_info: contexto de carrossel ({"i": n_do_slide, "n": total, "last": bool})
+    — liga o decor de série do render (seta de navegação; wordmark na base do
+    slide final). None = peça avulsa, nada muda."""
     from skills_runner import SkillRunner
     from adapters.llm import LLMAdapter, MockLLMAdapter
     from adapters.image_gen import ImageGenAdapter
@@ -956,6 +961,8 @@ def _run_pipeline_inline(
         # linha de prova social solta no canto (fora do card), assinatura do banco
         "proof": (ad_directives.get("proof") or "").strip(),
     }
+    if serie_info:
+        copy_dict["serie"] = serie_info  # decor de carrossel (seta / wordmark base)
     rendered = render_html(
         marca=marca,
         model_id=chosen_model_id,

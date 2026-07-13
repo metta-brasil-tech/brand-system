@@ -558,9 +558,25 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     # head_out: headline na foto + card só com apoio (2 zonas, padrão CRM).
     head_out = str((copy or {}).get("head_out") or params.get("head_out", "")).strip().lower()
 
-    copy_clean = {k: (str(v).strip() if v else "") for k, v in (copy or {}).items()}
+    # Decor de carrossel (copy.serie = {"i","n","last"}): seta de navegação nos
+    # slides intermediários; wordmark gigante cortado na base no slide final
+    # (assinatura dos carrosséis reais do banco — burnout slide 9). É dict,
+    # sai ANTES do copy_clean (que stringifica tudo).
+    serie = (copy or {}).get("serie") or None
+
+    copy_clean = {k: (str(v).strip() if v else "")
+                  for k, v in (copy or {}).items() if k != "serie"}
     params_eff = {**params, "anchor": anchor, "panel": panel, "head_out": head_out}
     inner = _markup(arch, copy_clean, params_eff, image_url or "")
+
+    serie_under = ""   # atrás do conteúdo (wordmark base)
+    serie_over = ""    # sobre o conteúdo (seta →)
+    if isinstance(serie, dict) and serie:
+        if serie.get("last"):
+            if (fm.get("marca") or marca or "").strip().lower() == "metta":
+                serie_under = '<div class="serie-wordmark" aria-hidden="true">metta</div>'
+        else:
+            serie_over = '<div class="serie-next" aria-hidden="true">&#8594;</div>'
 
     head_style = params.get("head", "")
     case = params.get("case", "upper")
@@ -587,9 +603,11 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
 <style>body{{display:flex;justify-content:center;align-items:flex-start;}}</style>
 </head><body>
 <div class="ad ad-canvas" {data_attrs}>
+{serie_under}
 {brand}
 {inner}
 {_proof_line(copy_clean, anchor=anchor, brand_html=brand)}
+{serie_over}
 </div>
 <script>{js}</script>
 </body></html>"""

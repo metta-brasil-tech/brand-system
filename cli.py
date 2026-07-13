@@ -127,6 +127,8 @@ def run_serie(args):
             avatar_variant=args.avatar_variant or None,
             render_png=True, art_director=not args.no_art_director,
             vision_qa=not args.no_vision_qa,
+            serie_info={"i": s["slide"], "n": plan["n_slides"],
+                        "last": s["slide"] == plan["n_slides"]},
         )
 
     failed = []

@@ -220,6 +220,31 @@ button { all: unset; }
 /* marca em bottom-left → prova muda pro canto direito (evita sobreposição) */
 .proof-line[data-side="right"] { left: auto; right: var(--pad-x); text-align: right; }
 
+/* ---------- DECOR DE CARROSSEL (copy.serie no render) ----------
+ * Assinaturas dos carrosséis reais do banco (37-burnout, gestão-da-mudança):
+ * seta → em círculo fino no canto inferior-direito dos slides que continuam;
+ * wordmark gigante cortado na base do slide final (burnout slide 9). */
+.serie-next {
+  position: absolute; right: 72px; bottom: 64px; z-index: 8;
+  width: 58px; height: 58px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--fg); opacity: .55;
+  color: var(--fg); font-size: 26px; line-height: 1;
+}
+.serie-wordmark {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: -0.32em; z-index: 1; pointer-events: none;
+  font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
+  font-size: 500px; line-height: 1; letter-spacing: -.03em;
+  color: var(--m-yellow); white-space: nowrap;
+}
+/* com o wordmark na base, o conteúdo (CTA incluso) sobe pra faixa livre —
+   inclusive os CTAs ABSOLUTOS dos archetypes typo/photo-side */
+.ad:has(.serie-wordmark) .layer { padding-bottom: 300px; }
+.ad:has(.serie-wordmark) .cta-wrap[style], /* especificidade */
+.ad[data-arch="typo"]:has(.serie-wordmark) .cta-wrap,
+.ad[data-arch="photo-side"]:has(.serie-wordmark) .cta-wrap { bottom: 340px; }
+
 /* =============================================================================
  * ARCHETYPES
  * ===========================================================================*/
