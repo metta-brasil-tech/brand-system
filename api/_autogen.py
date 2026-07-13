@@ -80,7 +80,8 @@ def generate_until_approved(brief: dict, max_attempts: int = 3,
         # peça tipográfica (sem foto) não deve ser penalizada por "falta de imagem"
         image_based = bool(res.get("image_data_uri"))
         ev = evaluate(png, copy, marca, res.get("vision_qa"), res.get("critic"),
-                      decision_log=_decision_log(res), image_based=image_based) if png else {"verdict": "SKIPPED"}
+                      decision_log=_decision_log(res), image_based=image_based,
+                      user_direction=base_visual) if png else {"verdict": "SKIPPED"}
 
         score = float(ev.get("geral") or 0)
         item = {"attempt": attempt, "result": res, "eval": ev, "score": score,

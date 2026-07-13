@@ -527,7 +527,10 @@ def _run_pipeline_inline(
             # avatar_segment=None → _avatar_context vazio → a persona voltava pra
             # heurística "use mulheres", mesmo com o bloco de conhecimento presente.
             # Brand-aware: Tiago → (None,None) (o sujeito é o Tiago/metáfora, não o ICP).
-            if not avatar_segment:
+            # Achado #5: se o usuário deu DIREÇÃO VISUAL explícita, ela domina — NÃO
+            # inferir/injetar avatar por cima (senão o skill 04 força uma persona que o
+            # user não pediu, ex.: "sem pessoas" acaba virando retrato).
+            if not avatar_segment and not _user_has_visual:
                 try:
                     from _avatar_infer import infer_segment as _infer_seg
                     _seg_i, _var_i = _infer_seg(

@@ -47,7 +47,25 @@ def _intent_block(dl: dict | None) -> str:
     return "\n".join(parts)
 
 
-def _system(marca: str, has_intent: bool = False, image_based: bool = True) -> str:
+def _user_direction_block(user_direction: str = "") -> str:
+    """Achado #5: quando o usuário dá direção visual EXPLÍCITA, ela domina o juízo —
+    senão o avaliador penaliza 'falta de persona/ICP' numa peça que o user pediu sem
+    pessoas (dava 9.4 pra versão com pessoa vs 7.8 pra só-objeto que o user QUERIA)."""
+    ud = (user_direction or "").strip()
+    if not ud:
+        return ""
+    return (
+        f"\n\n⚠️ DIREÇÃO VISUAL EXPLÍCITA DO USUÁRIO (PRIORIDADE MÁXIMA): \"{ud}\"\n"
+        "Julgue a fidelidade a ESSA direção acima de tudo. Se o usuário pediu SEM pessoas, "
+        "só objeto, ou uma cena específica, ESSA é a intenção correta — NÃO penalize a "
+        "ausência de persona/retrato/ICP na foto e NÃO sugira 'adicionar pessoa'. Aqui a "
+        "ancoragem se mede pela direção do usuário, não pelo avatar-persona padrão: uma peça "
+        "que HONRA a direção do usuário merece nota ALTA mesmo sem pessoa nenhuma."
+    )
+
+
+def _system(marca: str, has_intent: bool = False, image_based: bool = True,
+            user_direction: str = "") -> str:
     dna = (
         "Metta = inteligência comercial B2B: editorial sério (HBR/Bloomberg), dark moody, "
         "autoridade, display Zalando Sans Expanded, amarelo Metta CIRÚRGICO (nunca difuso)."
@@ -92,7 +110,7 @@ def _system(marca: str, has_intent: bool = False, image_based: bool = True) -> s
         "`false` e `image_feedback` vazio (não há foto a regerar)."
     )
     return f"""Você é o DIRETOR DE CRIAÇÃO fazendo a aprovação FINAL de um anúncio antes
-de publicar. {dna}
+de publicar. {dna}{_user_direction_block(user_direction)}
 
 Olhe a peça acabada e dê uma nota 0-10 (decimais ok) em CADA dimensão:{intent_dim}
 
@@ -157,7 +175,7 @@ def _guardrail(out: dict, vision_result: dict | None, critic_result: dict | None
 def evaluate(png_bytes: bytes, copy: dict, marca: str,
              vision_result: dict | None = None, critic_result: dict | None = None,
              model: str | None = None, decision_log: dict | None = None,
-             image_based: bool | None = None) -> dict:
+             image_based: bool | None = None, user_direction: str | None = None) -> dict:
     """Avalia a peça final. Retorna scores + geral + verdict + fixes (ou SKIPPED).
 
     Se `decision_log` (03-decision-log.json) for passado, o juiz também confronta a
@@ -188,7 +206,7 @@ def evaluate(png_bytes: bytes, copy: dict, marca: str,
         resp = client.chat.completions.create(
             model=model, max_tokens=500,
             messages=[
-                {"role": "system", "content": _system(marca, has_intent, image_based)},
+                {"role": "system", "content": _system(marca, has_intent, image_based, user_direction or "")},
                 {"role": "user", "content": [
                     {"type": "text", "text": user_txt},
                     {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
