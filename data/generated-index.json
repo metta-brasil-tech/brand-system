@@ -376,19 +376,6 @@
       "src": "assets/generated/ads/tiago-story-superando-metas.webp"
     },
     {
-      "id": "metta-feed-operacao-implora-baba",
-      "model_id": "A-headline-foto · card branco",
-      "brand": "metta",
-      "format": "feed",
-      "headline": "Sua operação comercial não precisa de um líder… ela implora por uma babá.",
-      "cta": "Aplique agora",
-      "date": "2026-07-13",
-      "qa": "validada no banco de simulados (fluxo e2e/prova-v4)",
-      "nota": "promovida do banco-metta-simulados — objeto-metáfora (chupeta) — humor L5",
-      "engine": "gpt-image (banco de simulados) · promovida sem custo de API",
-      "src": "assets/generated/ads/metta-feed-operacao-implora-baba.webp"
-    },
-    {
       "id": "metta-feed-multiplique-clonando-metodo",
       "model_id": "A-headline-foto · 2 zonas",
       "brand": "metta",
@@ -452,19 +439,6 @@
       "nota": "promovida do banco-metta-simulados — foto-dark editorial",
       "engine": "gpt-image (banco de simulados) · promovida sem custo de API",
       "src": "assets/generated/ads/metta-feed-virou-funcionario-negocio.webp"
-    },
-    {
-      "id": "metta-feed-parar-incendios-sem-bracos",
-      "model_id": "YELLOW-BLOCO · pessoa",
-      "brand": "metta",
-      "format": "feed",
-      "headline": "Pra parar de apagar incêndios, você não precisa de mais braços.",
-      "cta": "Saiba mais",
-      "date": "2026-07-13",
-      "qa": "validada no banco de simulados (fluxo e2e/prova-v4)",
-      "nota": "promovida do banco-metta-simulados — amarelo + pessoa (objeto-cabeça)",
-      "engine": "gpt-image (banco de simulados) · promovida sem custo de API",
-      "src": "assets/generated/ads/metta-feed-parar-incendios-sem-bracos.webp"
     },
     {
       "id": "metta-feed-rotina-incendios-cinzas",
