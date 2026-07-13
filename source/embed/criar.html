@@ -1255,10 +1255,9 @@ function copyBudgetFor(id) { return COPY_BUDGET[id] || COPY_BUDGET_DEFAULT; }
 
 /* ----------- DATA: formatos ----------- */
 const FORMATS = [
-  { id: 'post',      label: 'Post simples',  desc: '1 imagem 1080×1350 (4:5).',                  icon: 'square'  },
-  { id: 'carrossel', label: 'Carrossel',     desc: '5 a 10 cards 1080×1350 com fluxo narrativo.', icon: 'layers'  },
-  { id: 'ad-single', label: 'Ad single',     desc: 'Anúncio Meta — 1 imagem 1:1 ou 4:5.',         icon: 'target'  },
-  { id: 'ad-story',  label: 'Ad story',      desc: 'Anúncio story 9:16 (1080×1920).',             icon: 'phone'   }
+  { id: 'post',      label: 'Feed',      desc: '1 imagem 4:5 (1080×1350) — feed do Instagram/Meta.', icon: 'square'  },
+  { id: 'ad-story',  label: 'Story',     desc: '1 imagem 9:16 (1080×1920) — story ou reels.',        icon: 'phone'   },
+  { id: 'carrossel', label: 'Carrossel', desc: '5 a 10 cards com fluxo narrativo.',                  icon: 'layers'  }
 ];
 
 /* ----------- ICONS ----------- */
@@ -1821,8 +1820,8 @@ function tplAudioRecord() {
 
 function tplAudioConfirm() {
   const t = STATE.audioTranscript || '';
-  const guessFormat = /story/i.test(t) ? 'ad-story' : (/carrossel/i.test(t) ? 'carrossel' : (/ad|an[uú]ncio/i.test(t) ? 'ad-single' : 'post'));
-  const formatLabel = (FORMATS.find(f => f.id === guessFormat) || {}).label || 'Post simples';
+  const guessFormat = /story/i.test(t) ? 'ad-story' : (/carrossel/i.test(t) ? 'carrossel' : 'post');
+  const formatLabel = (FORMATS.find(f => f.id === guessFormat) || {}).label || 'Feed';
 
   return renderStepper() + `
     <header class="step-head">
