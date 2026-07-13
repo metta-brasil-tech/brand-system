@@ -64,19 +64,6 @@
       ]
     },
     {
-      "id": "metta-feed-yellow-objeto-vai-ficando-facil",
-      "model_id": "YELLOW-OBJETO",
-      "brand": "metta",
-      "format": "feed",
-      "headline": "Vai ficando mais fácil, é só fazer todo o dia.",
-      "cta": "",
-      "date": "2026-07-02",
-      "qa": "APROVADO (inspeção visual — peça que validou o estilo YELLOW-OBJETO)",
-      "nota": "Teste de validação do estilo novo — réplica da referência do Instagram (rocha derretendo + escada + banquinho)",
-      "engine": "pipeline completo local · imagem gerada via gpt-image-2 · logo escura centralizada (fix do tema yellow)",
-      "src": "assets/generated/ads/metta-feed-yellow-objeto-vai-ficando-facil.webp"
-    },
-    {
       "id": "tiago-story-yellow-block-treinou-hoje",
       "model_id": "TIAGO-STORY-YELLOW-BLOCK",
       "brand": "tiago",
@@ -361,19 +348,6 @@
       "nota": "virou preview do wizard",
       "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
       "src": "assets/generated/ads/tiago-story-3-perguntas.webp"
-    },
-    {
-      "id": "tiago-story-superando-metas",
-      "model_id": "TIAGO-STORY-MINIMAL-QUESTION",
-      "brand": "tiago",
-      "format": "story",
-      "headline": "Seu negócio está superando metas?",
-      "cta": "Responde aqui",
-      "date": "2026-07-08",
-      "qa": "PASS duplo de primeira",
-      "nota": "virou preview do wizard",
-      "engine": "cli local · gpt-image-2 low · vision-QA + crítico anti-slop",
-      "src": "assets/generated/ads/tiago-story-superando-metas.webp"
     },
     {
       "id": "metta-feed-multiplique-clonando-metodo",
