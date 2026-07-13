@@ -328,7 +328,9 @@ button { all: unset; }
   position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column;
   justify-content: flex-end; padding: var(--pad-y) var(--pad-x); gap: var(--gap);
 }
-.ad[data-arch="photo-full"][data-anchor="top"] .layer { justify-content: flex-start; }
+.ad[data-arch="photo-full"][data-anchor="top"] .layer { justify-content: flex-start; padding-top: 168px; }
+/* topo com folga da marca: logo (~104px) + eyebrow não podem colar no headline */
+.ad[data-format="story"][data-arch="photo-full"][data-anchor="top"] .layer { padding-top: 224px; }
 /* 2 zonas (head_out): headline no topo da foto + card de apoio embaixo */
 .ad[data-arch="photo-full"] .layer--split { justify-content: space-between; }
 .layer--split .head-band { max-height: 44%; }

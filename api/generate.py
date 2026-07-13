@@ -933,6 +933,16 @@ def _run_pipeline_inline(
     if image_file_url:
         image_data_uri = _image_to_data_uri(image_file_url)
         diagnostics.append(f"image-uri: data:image embed ({len(image_data_uri) // 1024}KB base64)")
+        # Salva o FUNDO LIMPO (sem texto) separado. Assim o texto vira camada
+        # RE-EDITÁVEL: dá pra diminuir/reposicionar sem regerar a imagem — que era
+        # a raiz do "texto queimado" (não dava pra consertar peça antiga). Best-effort.
+        try:
+            _bg_b64 = image_data_uri.split(",", 1)[1]
+            (artifacts_dir / run_id).mkdir(parents=True, exist_ok=True)
+            (artifacts_dir / run_id / "background.png").write_bytes(base64.b64decode(_bg_b64))
+            diagnostics.append("bg-salvo: background.png (texto re-editável sem regerar imagem)")
+        except Exception as _be:
+            diagnostics.append(f"bg-save: pulado ({_be.__class__.__name__})")
 
     # image_only (panorâmica): devolve só a imagem larga gerada, sem renderizar.
     # O frontend fatia em N e usa cada pedaço como fundo de um slide.
