@@ -1,0 +1,125 @@
+{
+  "familia": "YELLOW",
+  "format": "feed",
+  "panorama": false,
+  "slides": [
+    {
+      "slide": 1,
+      "position": "capa",
+      "treatment": "T-AMARELO-STATEMENT",
+      "model": "YELLOW-EDITORIAL",
+      "familia": "YELLOW",
+      "status": {
+        "ok": true,
+        "qa": "PASS_WITH_WARNINGS",
+        "visao": null,
+        "png": true
+      }
+    },
+    {
+      "slide": 2,
+      "position": "meio",
+      "treatment": "T-TWEET-CARD",
+      "model": "METTA-TWEET-CARD",
+      "familia": "DARK",
+      "status": {
+        "ok": true,
+        "qa": "PASS_WITH_WARNINGS",
+        "visao": null,
+        "png": true
+      }
+    },
+    {
+      "slide": 3,
+      "position": "meio",
+      "treatment": "T-HIGHLIGHT-XL",
+      "model": "C-tipografia-pura-dark",
+      "familia": "DARK",
+      "status": {
+        "ok": true,
+        "qa": "PASS_WITH_WARNINGS",
+        "visao": null,
+        "png": true
+      }
+    },
+    {
+      "slide": 4,
+      "position": "meio",
+      "treatment": "T-DEFINICAO",
+      "model": "H-fundo-branco-headline-gigante",
+      "familia": "LIGHT",
+      "status": {
+        "ok": true,
+        "qa": "PASS_WITH_WARNINGS",
+        "visao": null,
+        "png": true
+      }
+    },
+    {
+      "slide": 5,
+      "position": "meio",
+      "treatment": "T-BULLETS-DARK",
+      "model": "YELLOW-BLOCO",
+      "familia": "YELLOW",
+      "status": {
+        "ok": true,
+        "qa": "PASS_WITH_WARNINGS",
+        "visao": null,
+        "png": true
+      }
+    },
+    {
+      "slide": 6,
+      "position": "meio",
+      "treatment": "T-HIGHLIGHT-XL",
+      "model": "K-bold-dourado-urgencia",
+      "familia": "DARK",
+      "status": {
+        "ok": true,
+        "qa": "PASS_WITH_WARNINGS",
+        "visao": null,
+        "png": true
+      }
+    },
+    {
+      "slide": 7,
+      "position": "meio",
+      "treatment": "T-DEFINICAO",
+      "model": "LIGHT-TIPO",
+      "familia": "LIGHT",
+      "status": {
+        "ok": true,
+        "qa": "PASS_WITH_WARNINGS",
+        "visao": null,
+        "png": true
+      }
+    },
+    {
+      "slide": 8,
+      "position": "meio",
+      "treatment": "T-DEFINICAO",
+      "model": "H-fundo-branco-headline-gigante",
+      "familia": "LIGHT",
+      "continued": true,
+      "status": {
+        "ok": true,
+        "qa": "PASS_WITH_WARNINGS",
+        "visao": null,
+        "png": true
+      }
+    },
+    {
+      "slide": 9,
+      "position": "fim",
+      "treatment": "T-CTA-FINAL",
+      "model": "K-bold-dourado-urgencia",
+      "familia": "DARK",
+      "status": {
+        "ok": true,
+        "qa": "PASS",
+        "visao": null,
+        "png": true
+      }
+    }
+  ]
+}

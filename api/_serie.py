@@ -241,8 +241,14 @@ def plan_serie(slides: list[dict], avoid_familia: str | None = None,
                 nao_tipo = [t for t in cands if not TREATMENTS[t]["tipografico"]]
                 cands = nao_tipo or cands
         treatment = cands[0]
-        model = _pick_model(treatment, None if no_image else familia_lock,
-                            avoid=avoid_familia if familia_lock is None else None)
+        forced_model = sl.get("model")
+        if forced_model:
+            # recriação/direção manual: usa o blueprint pedido (o pipeline
+            # valida a existência); família vem da tabela (default DARK)
+            model = forced_model
+        else:
+            model = _pick_model(treatment, None if no_image else familia_lock,
+                                avoid=avoid_familia if familia_lock is None else None)
         familia = familia_of(model)
         if i == 0:
             familia_lock = familia  # trava no slide 1 (análogo C4)
