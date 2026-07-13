@@ -961,6 +961,14 @@ def _run_pipeline_inline(
         # linha de prova social solta no canto (fora do card), assinatura do banco
         "proof": (ad_directives.get("proof") or "").strip(),
     }
+    # GUARDA ANTI-CABEÇA (estrutural): sujeito com rosto/busto no TOPO (crop
+    # face/chest-up/waist-up) → o card NUNCA pode ancorar no topo, senão cobre a
+    # cabeça (o defeito do demo reprovado do card amarelo). Força bottom mesmo que
+    # o diretor de arte erre — vira impossível, não só reprovado depois no QA.
+    _crop_top = (ad_directives.get("crop_focus") or "").strip().lower()
+    if _crop_top in ("face", "chest-up", "waist-up") and copy_dict["text_anchor"] != "bottom":
+        copy_dict["text_anchor"] = "bottom"
+        diagnostics.append(f"guarda-anti-cabeça: crop={_crop_top} → card forçado p/ bottom (não cobre o rosto)")
     if serie_info:
         copy_dict["serie"] = serie_info  # decor de carrossel (seta / wordmark base)
     rendered = render_html(
