@@ -19,12 +19,12 @@
     {
       "slide": 2,
       "position": "meio",
-      "treatment": "T-TWEET-CARD",
-      "model": "METTA-TWEET-CARD",
+      "treatment": "T-MOCKUP-NEWS",
+      "model": "METTA-STAT-STACK",
       "familia": "DARK",
       "status": {
         "ok": true,
-        "qa": "PASS_WITH_WARNINGS",
+        "qa": "FAIL",
         "visao": null,
         "png": true
       }
@@ -33,11 +33,11 @@
       "slide": 3,
       "position": "meio",
       "treatment": "T-HIGHLIGHT-XL",
-      "model": "C-tipografia-pura-dark",
+      "model": "METTA-EQUACAO",
       "familia": "DARK",
       "status": {
         "ok": true,
-        "qa": "PASS_WITH_WARNINGS",
+        "qa": "FAIL",
         "visao": null,
         "png": true
       }
@@ -46,11 +46,11 @@
       "slide": 4,
       "position": "meio",
       "treatment": "T-DEFINICAO",
-      "model": "H-fundo-branco-headline-gigante",
-      "familia": "LIGHT",
+      "model": "METTA-CHAT-DEF",
+      "familia": "DARK",
       "status": {
         "ok": true,
-        "qa": "PASS_WITH_WARNINGS",
+        "qa": "FAIL",
         "visao": null,
         "png": true
       }

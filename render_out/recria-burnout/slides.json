@@ -1,35 +1,65 @@
 [
-  {"headline": "37% dos empreendedores estão em *burnout*.",
-   "subhead": "E a maioria acha que é \"parte do jogo\".",
-   "tag": "GESTÃO COMERCIAL",
-   "treatment": "T-AMARELO-STATEMENT", "model": "YELLOW-EDITORIAL"},
-  {"headline": "94,1% dos empreendedores enfrentaram problemas de saúde mental.",
-   "body": "70% do engajamento da equipe depende do líder.",
-   "tag": "PESQUISA 2026 · FONTE: GALLUP",
-   "treatment": "T-TWEET-CARD", "model": "METTA-TWEET-CARD"},
-  {"headline": "Líder esgotado = meta não batida = equipe desengajada.",
-   "subhead": "Burnout não é fraqueza. É consequência de gestão sem método.",
-   "treatment": "T-HIGHLIGHT-XL", "model": "C-tipografia-pura-dark"},
-  {"headline": "Empresidiário",
-   "subhead": "O empresário prisioneiro da própria empresa. 14h por dia. Sem férias.",
-   "body": "\"Se eu não estiver em cima, não funciona.\"",
-   "treatment": "T-DEFINICAO", "model": "H-fundo-branco-headline-gigante"},
-  {"headline": "É o olho do dono que engorda o gado.",
-   "body": "- Processo engorda.\n- Método engorda.\n- Microgerenciamento sufoca — o dono e o time.",
-   "treatment": "T-BULLETS-DARK", "model": "YELLOW-BLOCO"},
-  {"headline": "Hiperoperacionalização",
-   "subhead": "Sem processo replicável, o líder faz tudo sozinho. O conhecimento vive na cabeça dele. Nunca foi extraído para o time.",
-   "tag": "CAUSA Nº1",
-   "treatment": "T-HIGHLIGHT-XL", "model": "K-bold-dourado-urgencia"},
-  {"headline": "A Metta extrai a inteligência que *já está dentro*.",
-   "subhead": "Documenta · Replica · Treina · Mede",
-   "body": "Quando o método funciona sem o dono, o CNPJ patrocina o CPF.",
-   "treatment": "T-DEFINICAO", "model": "LIGHT-TIPO"},
-  {"headline": "Burnout não se resolve com *meditação*.",
-   "subhead": "Se resolve com método que torna o negócio autônomo. Escala + Lucro + Liberdade.",
-   "treatment": "T-DEFINICAO", "model": "H-fundo-branco-headline-gigante", "continued": true},
-  {"headline": "72% dos nossos clientes colocam qualidade de vida como prioridade nº 1.",
-   "subhead": "Resultado e equilíbrio. Sem sacrifício.",
-   "cta": "Fale com a Metta",
-   "treatment": "T-CTA-FINAL", "model": "K-bold-dourado-urgencia"}
+  {
+    "headline": "37%",
+    "subhead": "dos empreendedores estão em burnout.",
+    "tag": "GESTÃO COMERCIAL",
+    "treatment": "T-AMARELO-STATEMENT",
+    "model": "YELLOW-EDITORIAL",
+    "body": "E a maioria acha que é \"parte do jogo\"."
+  },
+  {
+    "headline": "94,1% dos empreendedores enfrentaram problemas de saúde mental.",
+    "body": "70% do engajamento da equipe depende do líder.",
+    "tag": "PESQUISA 2026 · FONTE: GALLUP",
+    "treatment": "T-MOCKUP-NEWS",
+    "model": "METTA-STAT-STACK",
+    "subhead": ""
+  },
+  {
+    "headline": "Líder esgotado = meta não batida = equipe desengajada.",
+    "subhead": "Burnout não é fraqueza. É consequência de gestão sem método.",
+    "treatment": "T-HIGHLIGHT-XL",
+    "model": "METTA-EQUACAO"
+  },
+  {
+    "headline": "Empresidiário",
+    "subhead": "O empresário prisioneiro da própria empresa. 14h por dia. Sem férias.",
+    "body": "\"Se eu não estiver em cima, não funciona.\"",
+    "treatment": "T-DEFINICAO",
+    "model": "METTA-CHAT-DEF"
+  },
+  {
+    "headline": "É o olho do dono que engorda o gado.",
+    "body": "- Processo engorda.\n- Método engorda.\n- Microgerenciamento sufoca — o dono e o time.",
+    "treatment": "T-BULLETS-DARK",
+    "model": "YELLOW-BLOCO"
+  },
+  {
+    "headline": "Hiperoperacionalização",
+    "subhead": "Sem processo replicável, o líder faz tudo sozinho. O conhecimento vive na cabeça dele. Nunca foi extraído para o time.",
+    "tag": "CAUSA Nº1",
+    "treatment": "T-HIGHLIGHT-XL",
+    "model": "K-bold-dourado-urgencia"
+  },
+  {
+    "headline": "A Metta extrai a inteligência que *já está dentro*.",
+    "subhead": "Documenta · Replica · Treina · Mede",
+    "body": "Quando o método funciona sem o dono, o CNPJ patrocina o CPF.",
+    "treatment": "T-DEFINICAO",
+    "model": "LIGHT-TIPO"
+  },
+  {
+    "headline": "Burnout não se resolve com *meditação*.",
+    "subhead": "Se resolve com método que torna o negócio autônomo. Escala + Lucro + Liberdade.",
+    "treatment": "T-DEFINICAO",
+    "model": "H-fundo-branco-headline-gigante",
+    "continued": true
+  },
+  {
+    "headline": "72% dos nossos clientes colocam qualidade de vida como prioridade nº 1.",
+    "subhead": "Resultado e equilíbrio. Sem sacrifício.",
+    "cta": "Fale com a Metta",
+    "treatment": "T-CTA-FINAL",
+    "model": "K-bold-dourado-urgencia"
+  }
 ]

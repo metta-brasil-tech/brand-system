@@ -464,6 +464,55 @@ button { all: unset; }
 .ad[data-arch="number-hero"] .t-body { color: var(--m-night-10); opacity: .82; }
 .ad[data-arch="number-hero"] .cta-wrap { margin-top: 8px; }
 
+/* ---------- STAT-STACK: estatísticas empilhadas + fonte (carrossel pesquisa) ---------- */
+.ad[data-arch="stat-stack"] .layer { justify-content: flex-end; padding: var(--pad-y) var(--pad-x); }
+.stat-wrap { display: flex; flex-direction: column; gap: 26px; }
+.stat { background: rgba(255,255,255,.06); border-radius: 28px; padding: 38px 44px; }
+.ad[data-theme="light"] .stat { background: rgba(20,25,30,.05); }
+.stat-num {
+  font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
+  font-size: 128px; line-height: .86; letter-spacing: -.02em; color: var(--accent);
+}
+.stat-desc { font-family: var(--m-text); font-weight: 500; font-size: 34px; line-height: 1.18; color: var(--fg); margin-top: 12px; }
+.stat-source {
+  font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
+  text-transform: uppercase; font-size: 66px; line-height: 1; letter-spacing: -.01em;
+  color: var(--fg); margin-top: 40px;
+}
+
+/* ---------- EQUATION: termos empilhados com sinal "=" amarelo (slide líder=meta=equipe) ---------- */
+.ad[data-arch="equation"] .layer { justify-content: center; align-items: center; padding: var(--pad-y) var(--pad-x); }
+.eq-stack { align-items: center; text-align: center; gap: 22px; max-width: 92%; }
+.eq-term {
+  font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
+  text-transform: uppercase; font-size: 66px; line-height: .94; letter-spacing: -.01em; color: var(--fg);
+}
+.eq-sign { position: relative; width: 84px; height: 46px; }
+.eq-sign::before, .eq-sign::after { content: ""; position: absolute; left: 0; right: 0; height: 11px; border-radius: 3px; background: var(--m-yellow); }
+.eq-sign::before { top: 8px; } .eq-sign::after { bottom: 8px; }
+.ad[data-arch="equation"] .eq-stack .t-sub { margin-top: 12px; font-weight: 600; opacity: .9; }
+
+/* ---------- CHAT-DEF: palavra-definição + balão de chat + "escrevendo…" ---------- */
+.ad[data-arch="chat-def"] .layer { justify-content: flex-start; padding: var(--pad-y) var(--pad-x); }
+.cd-word { font-size: 128px; line-height: .9; }
+.ad[data-arch="chat-def"] .t-sub { margin-top: 6px; }
+.cd-bubble {
+  align-self: flex-end; max-width: 78%; margin-top: 30px;
+  background: var(--m-white); color: var(--m-night-10); border-radius: 34px 34px 8px 34px;
+  padding: 28px 34px; font-family: var(--m-text); font-weight: 600; font-size: 34px; line-height: 1.15;
+}
+.cd-typing {
+  align-self: flex-start; display: flex; align-items: center; gap: 12px; margin-top: 18px;
+  background: var(--m-white); border-radius: 999px; padding: 18px 28px;
+  font-family: var(--m-text); font-size: 24px; color: rgba(20,25,30,.55);
+}
+.cd-typing .cd-brand {
+  font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
+  color: var(--m-night-10); text-transform: lowercase; margin-right: 4px;
+}
+.cd-typing .cd-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(20,25,30,.35); }
+.cd-typing em { font-style: normal; margin-left: 4px; }
+
 /* =============================================================================
  * MARCA TIAGO — design system próprio (Inter, off-white #EDEEEE, accent #FFCC00)
  * Portado fielmente dos templates de referência em source/ad-templates/tiago/*.

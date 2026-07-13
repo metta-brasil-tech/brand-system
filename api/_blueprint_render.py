@@ -507,6 +507,50 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         return (f'{_photo(image_url)}'
                 f'<div class="layer">{_panel_wrap(f"<div class=stack>{_txt_blocks(copy)}</div>")}</div>')
 
+    if arch == "stat-stack":
+        # 2+ estatísticas empilhadas em cards (número gigante + descrição), fonte
+        # embaixo. headline = 1º dado; body = dados seguintes (1 por linha);
+        # tag = fonte/ano. (banco real: slide 'pesquisa 2026 / gallup')
+        def _stat(txt: str) -> str:
+            m = re.match(r"\s*([\d.,]+\s*%?)\s*(.*)", txt or "", re.S)
+            if m and m.group(1).strip():
+                return (f'<div class="stat"><div class="stat-num">{_esc(m.group(1).strip())}</div>'
+                        f'<div class="stat-desc">{_esc(m.group(2).strip())}</div></div>')
+            return f'<div class="stat"><div class="stat-desc">{_esc(txt.strip())}</div></div>'
+        rows = [copy.get("headline", "")] + [l.strip() for l in
+                (copy.get("body", "") or "").split("\n") if l.strip()]
+        stats = "".join(_stat(r) for r in rows if r.strip())
+        src = f'<div class="stat-source">{_esc(copy["tag"])}</div>' if copy.get("tag") else ""
+        return f'<div class="layer"><div class="stat-wrap">{stats}</div>{src}{_cta(copy, cta_cls)}</div>'
+
+    if arch == "equation":
+        # headline com "=" vira termos empilhados + sinal amarelo entre eles.
+        # subhead = linha de apoio embaixo (aceita *destaque*).
+        terms = [t.strip() for t in re.split(r"\s*=\s*", copy.get("headline", "")) if t.strip()]
+        blocks = []
+        for i, t in enumerate(terms):
+            if i:
+                blocks.append('<div class="eq-sign" aria-hidden="true"></div>')
+            blocks.append(f'<div class="eq-term">{_accent(t)}</div>')
+        sub = f'<p class="t-sub">{_accent(copy["subhead"])}</p>' if copy.get("subhead") else ""
+        return (f'<div class="layer"><div class="stack eq-stack">{"".join(blocks)}'
+                f'{sub}</div></div>{_cta(copy, cta_cls)}')
+
+    if arch == "chat-def":
+        # palavra-definição gigante + definição + citação em balão de chat +
+        # "escrevendo…". headline=palavra; subhead=definição; body=fala do balão.
+        word = f'<h1 class="t-head cd-word">{_esc(copy.get("headline", ""))}</h1>'
+        sub = f'<p class="t-sub">{_esc(copy["subhead"])}</p>' if copy.get("subhead") else ""
+        quote = (copy.get("body", "") or "").strip().strip('"').strip("“”")
+        bubble = typing = ""
+        if quote:
+            bubble = f'<div class="cd-bubble">{_esc(quote)}</div>'
+            typing = ('<div class="cd-typing"><span class="cd-brand">metta</span>'
+                      '<span class="cd-dot"></span><span class="cd-dot"></span>'
+                      '<span class="cd-dot"></span><em>escrevendo…</em></div>')
+        return (f'{_photo(image_url)}<div class="grad"></div>'
+                f'<div class="layer"><div class="stack">{word}{sub}{bubble}{typing}</div></div>')
+
     # fallback
     return f'<div class="layer"><div class="stack">{_txt_blocks(copy)}</div></div>{_cta(copy, cta_cls)}'
 
