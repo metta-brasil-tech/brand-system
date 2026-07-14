@@ -1,701 +1,781 @@
 {
-  "version": "1.0",
-  "purpose": "Banco de referências visuais Metta por família de estilo. A geração usa estas peças reais como reference_images (Nano Banana) para herdar paleta, grão, mood e composição do banco — em vez de partir só de texto. Selecção fina em runtime continua via api/_critic.pick_reference.",
-  "como_usar": "generate.py: para o estilo escolhido, resolver a família -> puxar 2-3 refs desta lista -> passar em reference_images. Motor por família no campo 'motor'.",
-  "roteamento_motor": {
-    "nano-banana-2": "foto-real editorial (aceita referência + proporção nativa 9:16/4:5)",
-    "gpt-image-2": "conceitual/surreal/tipográfico (texto->imagem, ignora referência)",
-    "hibrido": "decide por sub-estilo: se a peça tem foto -> nano-banana-2; se é bloco/gráfico -> render puro",
-    "grafico": "sem geração de foto — 100% motor de layout"
-  },
-  "by_family": {
-    "A": {
-      "motor": "nano-banana-2",
-      "descricao": "Retrato editorial dark — foto de pessoa à direita, tipografia massiva, amarelo no CTA.",
-      "refs": [
-        {
-          "id": "ad-a-cliente-na-loja-nao-fecha",
-          "path": "assets/applications/ads/thumbs/ad-a-cliente-na-loja-nao-fecha.webp",
-          "title": "Cliente na loja nao fecha",
-          "mood": "confronto",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-a-diagnostico-1h-gratuito",
-          "path": "assets/applications/ads/thumbs/ad-a-diagnostico-1h-gratuito.webp",
-          "title": "Diagnostico 1h gratuito",
-          "mood": "autoridade",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-a-empresario-multiplique-seu-resultado",
-          "path": "assets/applications/ads/thumbs/ad-a-empresario-multiplique-seu-resultado.webp",
-          "title": "Empresário, multiplique seu resultado",
-          "mood": "aspiracional",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L3"
-        },
-        {
-          "id": "ad-a-empresario-pare-de-apagar-incendio",
-          "path": "assets/applications/ads/thumbs/ad-a-empresario-pare-de-apagar-incendio.webp",
-          "title": "Empresário, pare de apagar incêndio",
-          "mood": "confronto",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L3"
-        },
-        {
-          "id": "ad-a-empresario-pare-de-vigiar",
-          "path": "assets/applications/ads/thumbs/ad-a-empresario-pare-de-vigiar.webp",
-          "title": "Empresário, pare de vigiar",
-          "mood": "confronto",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L2"
-        },
-        {
-          "id": "ad-a-empresario-se-a-sua-rotina",
-          "path": "assets/applications/ads/thumbs/ad-a-empresario-se-a-sua-rotina.webp",
-          "title": "Empresário, se a sua rotina...",
-          "mood": "diagnostico",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L3"
-        },
-        {
-          "id": "ad-a-empresario-voce-esta-satisfeito",
-          "path": "assets/applications/ads/thumbs/ad-a-empresario-voce-esta-satisfeito.webp",
-          "title": "Empresário, você está satisfeito?",
-          "mood": "provocacao",
-          "archetype_foto": "retrato-individual-confiante",
-          "brand": "metta",
-          "linguagem": "L6"
-        },
-        {
-          "id": "ad-a-empresario-voce-fatura-200-mil",
-          "path": "assets/applications/ads/thumbs/ad-a-empresario-voce-fatura-200-mil.svg",
-          "title": "Empresário, você fatura 200 mil",
-          "mood": "diagnostico",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-a-eu-quero-voce-fora",
-          "path": "assets/applications/ads/thumbs/ad-a-eu-quero-voce-fora.webp",
-          "title": "Eu quero você fora",
-          "mood": "provocacao",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L4"
-        },
-        {
-          "id": "ad-a-extraia-o-potencial-maximo",
-          "path": "assets/applications/ads/thumbs/ad-a-extraia-o-potencial-maximo.webp",
-          "title": "Extraia o potencial máximo",
-          "mood": "aspiracional",
-          "archetype_foto": "time-colaborando-laptops",
-          "brand": "metta",
-          "linguagem": "L4"
-        },
-        {
-          "id": "ad-a-gerindo-ou-esperando",
-          "path": "assets/applications/ads/thumbs/ad-a-gerindo-ou-esperando.webp",
-          "title": "Gerindo ou esperando",
-          "mood": "provocacao",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-a-me-de-60-minutos",
-          "path": "assets/applications/ads/thumbs/ad-a-me-de-60-minutos.webp",
-          "title": "Me dê 60 minutos",
-          "mood": "convite",
-          "archetype_foto": "mentoria-1-on-1",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-a-o-segredo-para-dobrar-sua-conversao",
-          "path": "assets/applications/ads/thumbs/ad-a-o-segredo-para-dobrar-sua-conversao.webp",
-          "title": "O segredo para dobrar sua conversão",
-          "mood": "aspiracional",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L4"
-        },
-        {
-          "id": "ad-a-operacao-funciona-sem-voce",
-          "path": "assets/applications/ads/thumbs/ad-a-operacao-funciona-sem-voce.webp",
-          "title": "Operacao funciona sem voce",
-          "mood": "confronto",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-a-pare-de-agir-como-um-paramedico",
-          "path": "assets/applications/ads/thumbs/ad-a-pare-de-agir-como-um-paramedico.webp",
-          "title": "Pare de agir como um paramédico",
-          "mood": "provocacao",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L8"
-        },
-        {
-          "id": "ad-a-sem-meta-rotina-processo",
-          "path": "assets/applications/ads/thumbs/ad-a-sem-meta-rotina-processo.webp",
-          "title": "Sem meta rotina processo",
-          "mood": "analitico",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-a-sem-processo-fica-pra-tras",
-          "path": "assets/applications/ads/thumbs/ad-a-sem-processo-fica-pra-tras.webp",
-          "title": "Sem processo fica pra tras",
-          "mood": "urgencia",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-a-servicos-300-milmes",
-          "path": "assets/applications/ads/thumbs/ad-a-servicos-300-milmes.webp",
-          "title": "Servicos 300 mil/mes",
-          "mood": "analitico",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-a-servicos-vender-30-mais",
-          "path": "assets/applications/ads/thumbs/ad-a-servicos-vender-30-mais.webp",
-          "title": "Servicos vender 30 mais",
-          "mood": "analitico",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-a-sua-operacao-comercial-nao-precisa",
-          "path": "assets/applications/ads/thumbs/ad-a-sua-operacao-comercial-nao-precisa.webp",
-          "title": "Sua operação comercial não precisa",
-          "mood": "reframe",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L5"
-        },
-        {
-          "id": "ad-a-talento-ou-prisao-de-cnpj",
-          "path": "assets/applications/ads/thumbs/ad-a-talento-ou-prisao-de-cnpj.webp",
-          "title": "Talento ou prisao de CNPJ",
-          "mood": "confronto",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-a-transforme-o-desempenho-do-seu-time",
-          "path": "assets/applications/ads/thumbs/ad-a-transforme-o-desempenho-do-seu-time.webp",
-          "title": "Transforme o desempenho do seu time",
-          "mood": "aspiracional",
-          "archetype_foto": "time-colaborando-laptops",
-          "brand": "metta",
-          "linguagem": "L3"
-        },
-        {
-          "id": "ad-a-voce-paga-o-salario-de-um-time",
-          "path": "assets/applications/ads/thumbs/ad-a-voce-paga-o-salario-de-um-time.webp",
-          "title": "Você paga o salário de um time",
-          "mood": "confronto",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L2"
-        }
-      ]
+ "version": "1.0",
+ "purpose": "Banco de referências visuais Metta por família de estilo. A geração usa estas peças reais como reference_images (Nano Banana) para herdar paleta, grão, mood e composição do banco — em vez de partir só de texto. Selecção fina em runtime continua via api/_critic.pick_reference.",
+ "como_usar": "generate.py: para o estilo escolhido, resolver a família -> puxar 2-3 refs desta lista -> passar em reference_images. Motor por família no campo 'motor'.",
+ "roteamento_motor": {
+  "nano-banana-2": "foto-real editorial (aceita referência + proporção nativa 9:16/4:5)",
+  "gpt-image-2": "conceitual/surreal/tipográfico (texto->imagem, ignora referência)",
+  "hibrido": "decide por sub-estilo: se a peça tem foto -> nano-banana-2; se é bloco/gráfico -> render puro",
+  "grafico": "sem geração de foto — 100% motor de layout"
+ },
+ "by_family": {
+  "A": {
+   "motor": "nano-banana-2",
+   "descricao": "Retrato editorial dark — foto de pessoa à direita, tipografia massiva, amarelo no CTA.",
+   "refs": [
+    {
+     "id": "ad-a-cliente-na-loja-nao-fecha",
+     "path": "assets/applications/ads/thumbs/ad-a-cliente-na-loja-nao-fecha.webp",
+     "title": "Cliente na loja nao fecha",
+     "mood": "confronto",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
     },
-    "B": {
-      "motor": "nano-banana-2",
-      "descricao": "Foto no topo abre a cena emocional, headline entrega embaixo.",
-      "refs": [
-        {
-          "id": "ad-b-60-min-pra-tirar-do-balcao",
-          "path": "assets/applications/ads/thumbs/ad-b-60-min-pra-tirar-do-balcao.webp",
-          "title": "60 min pra tirar do balcao",
-          "mood": "autoridade",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-b-convite-loja-nas-costas",
-          "path": "assets/applications/ads/thumbs/ad-b-convite-loja-nas-costas.webp",
-          "title": "Convite — loja nas costas",
-          "mood": "acolhedor",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-b-funcionario-do-proprio-negocio",
-          "path": "assets/applications/ads/thumbs/ad-b-funcionario-do-proprio-negocio.webp",
-          "title": "Funcionario do proprio negocio",
-          "mood": "provocacao",
-          "archetype_foto": "executivo-cansado",
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-b-limite-da-exaustao",
-          "path": "assets/applications/ads/thumbs/ad-b-limite-da-exaustao.webp",
-          "title": "Limite da exaustao",
-          "mood": "acolhedor",
-          "archetype_foto": "executivo-cansado",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-b-maquina-que-bate-meta-todo-mes",
-          "path": "assets/applications/ads/thumbs/ad-b-maquina-que-bate-meta-todo-mes.webp",
-          "title": "Maquina que bate meta todo mes",
-          "mood": "aspiracional",
-          "archetype_foto": "time-em-acao",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-b-mesmo-metodo-grandes-redes",
-          "path": "assets/applications/ads/thumbs/ad-b-mesmo-metodo-grandes-redes.webp",
-          "title": "Mesmo metodo — grandes redes",
-          "mood": "autoridade",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-b-refem-operacional-ha-12-meses",
-          "path": "assets/applications/ads/thumbs/ad-b-refem-operacional-ha-12-meses.webp",
-          "title": "Refem operacional ha 12 meses",
-          "mood": "confronto",
-          "archetype_foto": "executivo-cansado",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-b-tirador-de-pedido",
-          "path": "assets/applications/ads/thumbs/ad-b-tirador-de-pedido.webp",
-          "title": "Tirador de pedido",
-          "mood": "provocacao",
-          "archetype_foto": "vendedor-passivo",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-b-ultimas-vagas-sessao",
-          "path": "assets/applications/ads/thumbs/ad-b-ultimas-vagas-sessao.webp",
-          "title": "Ultimas vagas — sessao",
-          "mood": "urgencia",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
-        }
-      ]
+    {
+     "id": "ad-a-diagnostico-1h-gratuito",
+     "path": "assets/applications/ads/thumbs/ad-a-diagnostico-1h-gratuito.webp",
+     "title": "Diagnostico 1h gratuito",
+     "mood": "autoridade",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L1"
     },
-    "D": {
-      "motor": "nano-banana-2",
-      "descricao": "Método / engenharia reversa com foto de apoio.",
-      "refs": [
-        {
-          "id": "ad-d-engenharia-reversa-do-melhor-vendedor",
-          "path": "assets/applications/ads/thumbs/ad-d-engenharia-reversa-do-melhor-vendedor.webp",
-          "title": "Engenharia reversa do melhor vendedor",
-          "mood": "analitico",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-d-metodo-replicavel-em-60-min",
-          "path": "assets/applications/ads/thumbs/ad-d-metodo-replicavel-em-60-min.webp",
-          "title": "Metodo replicavel em 60 min",
-          "mood": "autoridade",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-d-metodo-tira-a-loja-das-costas",
-          "path": "assets/applications/ads/thumbs/ad-d-metodo-tira-a-loja-das-costas.webp",
-          "title": "Metodo tira a loja das costas",
-          "mood": "acolhedor",
-          "archetype_foto": "executivo-cansado",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-d-palestras-nao-batem-meta",
-          "path": "assets/applications/ads/thumbs/ad-d-palestras-nao-batem-meta.webp",
-          "title": "Palestras nao batem meta",
-          "mood": "provocacao",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-d-prisao-do-so-funciona-comigo",
-          "path": "assets/applications/ads/thumbs/ad-d-prisao-do-so-funciona-comigo.svg",
-          "title": "Prisao do 'so funciona comigo'",
-          "mood": "confronto",
-          "archetype_foto": "executivo-cansado",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-d-risco-100-nosso",
-          "path": "assets/applications/ads/thumbs/ad-d-risco-100-nosso.webp",
-          "title": "Risco 100% nosso",
-          "mood": "autoridade",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
-        }
-      ]
+    {
+     "id": "ad-a-empresario-multiplique-seu-resultado",
+     "path": "assets/applications/ads/thumbs/ad-a-empresario-multiplique-seu-resultado.webp",
+     "title": "Empresário, multiplique seu resultado",
+     "mood": "aspiracional",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L3"
     },
-    "C": {
-      "motor": "nano-banana-2",
-      "descricao": "Prova/oferta com foto de apoio.",
-      "refs": [
-        {
-          "id": "ad-c-apaga-incendio-ha-6-meses",
-          "path": "assets/applications/ads/thumbs/ad-c-apaga-incendio-ha-6-meses.webp",
-          "title": "Apaga incendio ha 6 meses",
-          "mood": "confronto",
-          "archetype_foto": null,
-          "brand": "metta",
-          "linguagem": "L8"
-        },
-        {
-          "id": "ad-c-aumentar-lucro-em-50",
-          "path": "assets/applications/ads/thumbs/ad-c-aumentar-lucro-em-50.webp",
-          "title": "Aumentar lucro em 50%",
-          "mood": "aspiracional",
-          "archetype_foto": null,
-          "brand": "metta",
-          "linguagem": "L8"
-        },
-        {
-          "id": "ad-c-metta-lucro-tipo-gigante",
-          "path": "assets/applications/ads/thumbs/ad-c-metta-lucro-tipo-gigante.webp",
-          "title": "Metta — lucro tipo gigante",
-          "mood": "autoridade",
-          "archetype_foto": null,
-          "brand": "metta",
-          "linguagem": "L1"
-        },
-        {
-          "id": "ad-c-time-bater-meta-em-3-meses",
-          "path": "assets/applications/ads/thumbs/ad-c-time-bater-meta-em-3-meses.webp",
-          "title": "Time bater meta em 3 meses",
-          "mood": "aspiracional",
-          "archetype_foto": null,
-          "brand": "metta",
-          "linguagem": "L7"
-        }
-      ]
+    {
+     "id": "ad-a-empresario-pare-de-apagar-incendio",
+     "path": "assets/applications/ads/thumbs/ad-a-empresario-pare-de-apagar-incendio.webp",
+     "title": "Empresário, pare de apagar incêndio",
+     "mood": "confronto",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L3"
     },
-    "YELLOW": {
-      "motor": "hibrido",
-      "descricao": "Identidade amarela: bloco/frame/split/editorial. Foto quando há; senão gráfico.",
-      "refs": [
-        {
-          "id": "ad-yellow-bloco-aumentar-lucro-em-50",
-          "path": "assets/applications/ads/thumbs/ad-yellow-bloco-aumentar-lucro-em-50.webp",
-          "title": "Aumentar lucro em 50%",
-          "mood": "aspiracional",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-bloco-equipe-precisa-de-sistema",
-          "path": "assets/applications/ads/thumbs/ad-yellow-bloco-equipe-precisa-de-sistema.webp",
-          "title": "Equipe precisa de sistema",
-          "mood": "analitico",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-bloco-inteligencia-comercial-checklist",
-          "path": "assets/applications/ads/thumbs/ad-yellow-bloco-inteligencia-comercial-checklist.webp",
-          "title": "Inteligencia comercial — checklist",
-          "mood": "analitico",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-bloco-mentoria-metodologia-lucro",
-          "path": "assets/applications/ads/thumbs/ad-yellow-bloco-mentoria-metodologia-lucro.webp",
-          "title": "Metodologia de vendas que constrói lucro na sua operação",
-          "mood": "autoridade",
-          "archetype_foto": "retrato-individual-confiante",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-bloco-nao-consegue-sair-da-operacao",
-          "path": "assets/applications/ads/thumbs/ad-yellow-bloco-nao-consegue-sair-da-operacao.webp",
-          "title": "Nao consegue sair da operacao",
-          "mood": "acolhedor",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-bloco-troque-motivacao-por-processo",
-          "path": "assets/applications/ads/thumbs/ad-yellow-bloco-troque-motivacao-por-processo.webp",
-          "title": "Troque motivacao por processo",
-          "mood": "provocacao",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-draw-pressao-modo-sobrevivencia",
-          "path": "assets/applications/ads/thumbs/ad-yellow-draw-pressao-modo-sobrevivencia.webp",
-          "title": "Pressao — modo sobrevivencia",
-          "mood": "acolhedor",
-          "archetype_foto": "ilustracao-editorial",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-editorial-r85bi-mesmo-time",
-          "path": "assets/applications/ads/thumbs/ad-yellow-editorial-r85bi-mesmo-time.webp",
-          "title": "R$8,5bi — mesmo time",
-          "mood": "autoridade",
-          "archetype_foto": "executivos-pb-blurred",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-frame-servicos-aguenta-12-meses",
-          "path": "assets/applications/ads/thumbs/ad-yellow-frame-servicos-aguenta-12-meses.webp",
-          "title": "Servicos — aguenta 12 meses?",
-          "mood": "confronto",
-          "archetype_foto": "executivo-cansado",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-frame-servicos-comercial-de-gente-grande",
-          "path": "assets/applications/ads/thumbs/ad-yellow-frame-servicos-comercial-de-gente-grande.webp",
-          "title": "Servicos — comercial de gente grande",
-          "mood": "analitico",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-frame-vendas-dependem-de-voce",
-          "path": "assets/applications/ads/thumbs/ad-yellow-frame-vendas-dependem-de-voce.webp",
-          "title": "Vendas dependem de voce",
-          "mood": "confronto",
-          "archetype_foto": "executivo-cansado",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-yellow-split-chave-da-liberdade-balcao",
-          "path": "assets/applications/ads/thumbs/ad-yellow-split-chave-da-liberdade-balcao.webp",
-          "title": "Chave da liberdade — balcao",
-          "mood": "aspiracional",
-          "archetype_foto": "metafora-conceitual",
-          "brand": "metta"
-        }
-      ]
+    {
+     "id": "ad-a-empresario-pare-de-vigiar",
+     "path": "assets/applications/ads/thumbs/ad-a-empresario-pare-de-vigiar.webp",
+     "title": "Empresário, pare de vigiar",
+     "mood": "confronto",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L2"
     },
-    "DARK": {
-      "motor": "gpt-image-2",
-      "descricao": "Objeto-metáfora e colagem surreal dark — imaginação a partir de texto.",
-      "refs": [
-        {
-          "id": "ad-dark-carta-convite-sistema-pra-poucos-empresarios",
-          "path": "assets/applications/ads/thumbs/ad-dark-carta-convite-sistema-pra-poucos-empresarios.webp",
-          "title": "Convite — sistema pra poucos empresarios",
-          "mood": "aspiracional",
-          "archetype_foto": null,
-          "brand": "metta"
-        },
-        {
-          "id": "ad-dark-colagem-craque-de-vendas-quebra-cabeca",
-          "path": "assets/applications/ads/thumbs/ad-dark-colagem-craque-de-vendas-quebra-cabeca.webp",
-          "title": "Craque de vendas — quebra-cabeca",
-          "mood": "analitico",
-          "archetype_foto": "metafora-conceitual",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-dark-objeto-multiplique-o-melhor-vendedor-domino",
-          "path": "assets/applications/ads/thumbs/ad-dark-objeto-multiplique-o-melhor-vendedor-domino.webp",
-          "title": "Multiplique o melhor vendedor — domino",
-          "mood": "analitico",
-          "archetype_foto": "objeto-conceitual",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-dark-objeto-queime-o-script",
-          "path": "assets/applications/ads/thumbs/ad-dark-objeto-queime-o-script.webp",
-          "title": "Queime o script",
-          "mood": "provocacao",
-          "archetype_foto": "objeto-conceitual-escuro",
-          "brand": "metta"
-        }
-      ]
+    {
+     "id": "ad-a-empresario-se-a-sua-rotina",
+     "path": "assets/applications/ads/thumbs/ad-a-empresario-se-a-sua-rotina.webp",
+     "title": "Empresário, se a sua rotina...",
+     "mood": "diagnostico",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L3"
     },
-    "LIGHT": {
-      "motor": "gpt-image-2",
-      "descricao": "Colagem surreal fundo claro + tipográfico light.",
-      "refs": [
-        {
-          "id": "ad-light-surreal-jantar-com-filhos-vs-reuniao",
-          "path": "assets/applications/ads/thumbs/ad-light-surreal-jantar-com-filhos-vs-reuniao.webp",
-          "title": "Jantar com filhos vs reuniao",
-          "mood": "acolhedor",
-          "archetype_foto": "metafora-conceitual",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-light-surreal-negocio-saude-familia",
-          "path": "assets/applications/ads/thumbs/ad-light-surreal-negocio-saude-familia.webp",
-          "title": "Negocio, saude, familia",
-          "mood": "acolhedor",
-          "archetype_foto": "metafora-conceitual",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-light-surreal-processo-morre-em-30-dias",
-          "path": "assets/applications/ads/thumbs/ad-light-surreal-processo-morre-em-30-dias.webp",
-          "title": "Processo morre em 30 dias",
-          "mood": "analitico",
-          "archetype_foto": "metafora-conceitual",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-light-surreal-varejistas-que-dobram-de-tamanho",
-          "path": "assets/applications/ads/thumbs/ad-light-surreal-varejistas-que-dobram-de-tamanho.webp",
-          "title": "Varejistas que dobram de tamanho",
-          "mood": "analitico",
-          "archetype_foto": "metafora-conceitual",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-light-tipo-faturamento-e-ego-lucro-e-liberdade",
-          "path": "assets/applications/ads/thumbs/ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.webp",
-          "title": "Faturamento e ego — lucro e liberdade",
-          "mood": "provocacao",
-          "archetype_foto": null,
-          "brand": "metta"
-        }
-      ]
+    {
+     "id": "ad-a-empresario-voce-esta-satisfeito",
+     "path": "assets/applications/ads/thumbs/ad-a-empresario-voce-esta-satisfeito.webp",
+     "title": "Empresário, você está satisfeito?",
+     "mood": "provocacao",
+     "archetype_foto": "retrato-individual-confiante",
+     "brand": "metta",
+     "linguagem": "L6"
     },
-    "NEWS": {
-      "motor": "nano-banana-2",
-      "descricao": "Card estilo notícia, foto em zona própria embaixo.",
-      "refs": [
-        {
-          "id": "ad-news-card-risco-zero-varejo",
-          "path": "assets/applications/ads/thumbs/ad-news-card-risco-zero-varejo.webp",
-          "title": "Risco zero — varejo",
-          "mood": "autoridade",
-          "archetype_foto": "executivo-em-decisao",
-          "brand": "metta"
-        }
-      ]
+    {
+     "id": "ad-a-eu-quero-voce-fora",
+     "path": "assets/applications/ads/thumbs/ad-a-eu-quero-voce-fora.webp",
+     "title": "Eu quero você fora",
+     "mood": "provocacao",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L4"
     },
-    "OUTROS": {
-      "motor": "nano-banana-2",
-      "descricao": "Hooks diversos (H/I/K) com foto de apoio.",
-      "refs": [
-        {
-          "id": "ad-h-perde-vendas-todo-dia",
-          "path": "assets/applications/ads/thumbs/ad-h-perde-vendas-todo-dia.webp",
-          "title": "Perde vendas todo dia",
-          "mood": "confronto",
-          "archetype_foto": "objeto-conceitual",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-i-anos-tentando-1-hora-ouvindo",
-          "path": "assets/applications/ads/thumbs/ad-i-anos-tentando-1-hora-ouvindo.svg",
-          "title": "Anos tentando — 1 hora ouvindo",
-          "mood": "autoridade",
-          "archetype_foto": "tiago-retrato-pb",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-i-varejo-que-conhece-o-cliente",
-          "path": "assets/applications/ads/thumbs/ad-i-varejo-que-conhece-o-cliente.webp",
-          "title": "Varejo que conhece o cliente",
-          "mood": "analitico",
-          "archetype_foto": "tiago-retrato-pb",
-          "brand": "metta"
-        },
-        {
-          "id": "ad-k-convite-reservado-plano-b",
-          "path": "assets/applications/ads/thumbs/ad-k-convite-reservado-plano-b.webp",
-          "title": "Convite reservado — plano B",
-          "mood": "aspiracional",
-          "archetype_foto": null,
-          "brand": "metta"
-        }
-      ]
+    {
+     "id": "ad-a-extraia-o-potencial-maximo",
+     "path": "assets/applications/ads/thumbs/ad-a-extraia-o-potencial-maximo.webp",
+     "title": "Extraia o potencial máximo",
+     "mood": "aspiracional",
+     "archetype_foto": "time-colaborando-laptops",
+     "brand": "metta",
+     "linguagem": "L4"
     },
-    "LOGO": {
-      "motor": "grafico",
-      "descricao": "Prova social — grade de logos. Sem geração de foto.",
-      "refs": [
-        {
-          "id": "ad-logo-wall-1000-empresas-r85bi",
-          "path": "assets/applications/ads/thumbs/ad-logo-wall-1000-empresas-r85bi.webp",
-          "title": "+1.000 empresas — R$8,5bi",
-          "mood": "autoridade",
-          "archetype_foto": "logos-clientes",
-          "brand": "metta"
-        }
-      ]
+    {
+     "id": "ad-a-gerindo-ou-esperando",
+     "path": "assets/applications/ads/thumbs/ad-a-gerindo-ou-esperando.webp",
+     "title": "Gerindo ou esperando",
+     "mood": "provocacao",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
     },
-    "TIAGO": {
-      "motor": "nano-banana-2",
-      "descricao": "Marca pessoal cinema B&W com amarelo seletivo. Ver exemplars/tiago/.",
-      "refs": [
-        {
-          "id": "tiago-ad-twitter-card",
-          "path": "assets/style-previews/tiago/twitter-card.webp",
-          "title": "Tweet card — frase de impacto Tiago",
-          "mood": "provocacao",
-          "archetype_foto": null,
-          "brand": "tiago"
-        },
-        {
-          "id": "tiago-ad-notes-mockup",
-          "path": "assets/style-previews/tiago/notes-mockup.webp",
-          "title": "Notas do iPhone — lista numerada Tiago",
-          "mood": "analitico",
-          "archetype_foto": null,
-          "brand": "tiago"
-        },
-        {
-          "id": "tiago-ad-typo-pure",
-          "path": "assets/style-previews/tiago/typo-pure.webp",
-          "title": "Frase grande — tipografia pura Tiago",
-          "mood": "confronto",
-          "archetype_foto": null,
-          "brand": "tiago"
-        },
-        {
-          "id": "tiago-ad-editorial-cta",
-          "path": "assets/style-previews/tiago/editorial-cta.webp",
-          "title": "Slide de fechamento de carrossel — CTA Tiago",
-          "mood": "autoridade",
-          "archetype_foto": "tiago-conselheiro",
-          "brand": "tiago"
-        }
-      ]
+    {
+     "id": "ad-a-me-de-60-minutos",
+     "path": "assets/applications/ads/thumbs/ad-a-me-de-60-minutos.webp",
+     "title": "Me dê 60 minutos",
+     "mood": "convite",
+     "archetype_foto": "mentoria-1-on-1",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-a-o-segredo-para-dobrar-sua-conversao",
+     "path": "assets/applications/ads/thumbs/ad-a-o-segredo-para-dobrar-sua-conversao.webp",
+     "title": "O segredo para dobrar sua conversão",
+     "mood": "aspiracional",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L4"
+    },
+    {
+     "id": "ad-a-operacao-funciona-sem-voce",
+     "path": "assets/applications/ads/thumbs/ad-a-operacao-funciona-sem-voce.webp",
+     "title": "Operacao funciona sem voce",
+     "mood": "confronto",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-a-pare-de-agir-como-um-paramedico",
+     "path": "assets/applications/ads/thumbs/ad-a-pare-de-agir-como-um-paramedico.webp",
+     "title": "Pare de agir como um paramédico",
+     "mood": "provocacao",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-a-sem-meta-rotina-processo",
+     "path": "assets/applications/ads/thumbs/ad-a-sem-meta-rotina-processo.webp",
+     "title": "Sem meta rotina processo",
+     "mood": "analitico",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-a-sem-processo-fica-pra-tras",
+     "path": "assets/applications/ads/thumbs/ad-a-sem-processo-fica-pra-tras.webp",
+     "title": "Sem processo fica pra tras",
+     "mood": "urgencia",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-a-servicos-300-milmes",
+     "path": "assets/applications/ads/thumbs/ad-a-servicos-300-milmes.webp",
+     "title": "Servicos 300 mil/mes",
+     "mood": "analitico",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-a-servicos-vender-30-mais",
+     "path": "assets/applications/ads/thumbs/ad-a-servicos-vender-30-mais.webp",
+     "title": "Servicos vender 30 mais",
+     "mood": "analitico",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-a-sua-operacao-comercial-nao-precisa",
+     "path": "assets/applications/ads/thumbs/ad-a-sua-operacao-comercial-nao-precisa.webp",
+     "title": "Sua operação comercial não precisa",
+     "mood": "reframe",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L5"
+    },
+    {
+     "id": "ad-a-talento-ou-prisao-de-cnpj",
+     "path": "assets/applications/ads/thumbs/ad-a-talento-ou-prisao-de-cnpj.webp",
+     "title": "Talento ou prisao de CNPJ",
+     "mood": "confronto",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-a-transforme-o-desempenho-do-seu-time",
+     "path": "assets/applications/ads/thumbs/ad-a-transforme-o-desempenho-do-seu-time.webp",
+     "title": "Transforme o desempenho do seu time",
+     "mood": "aspiracional",
+     "archetype_foto": "time-colaborando-laptops",
+     "brand": "metta",
+     "linguagem": "L3"
+    },
+    {
+     "id": "ad-a-voce-paga-o-salario-de-um-time",
+     "path": "assets/applications/ads/thumbs/ad-a-voce-paga-o-salario-de-um-time.webp",
+     "title": "Você paga o salário de um time",
+     "mood": "confronto",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L2"
     }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 27,
+    "bloco_altura_pct": 49,
+    "ancora": "meio",
+    "range": "8-60"
+   }
   },
-  "linguagens": {
-    "fonte": "content/direcao-arte/dna-visual-banco-real.md (estudo visual 2026-07-11)",
-    "L1": "foto real do especialista — NUNCA gerar (biblioteca fotoReal); não usar como referência de geração",
-    "L2": "meme/still de filme — direitos autorais; não usar como referência de geração",
-    "L3": "foto-conceito cômica (humor absurdo levado a sério)",
-    "L4": "colagem vintage P&B / gravura halftone",
-    "L5": "humor por objeto (foto realista de objeto como piada)",
-    "L6": "fine-art surreal granulado",
-    "L7": "documental de detalhe (mãos/telas, sem rosto)",
-    "L8": "tipografia pura (sem imagem)"
+  "B": {
+   "motor": "nano-banana-2",
+   "descricao": "Foto no topo abre a cena emocional, headline entrega embaixo.",
+   "refs": [
+    {
+     "id": "ad-b-60-min-pra-tirar-do-balcao",
+     "path": "assets/applications/ads/thumbs/ad-b-60-min-pra-tirar-do-balcao.webp",
+     "title": "60 min pra tirar do balcao",
+     "mood": "autoridade",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-b-convite-loja-nas-costas",
+     "path": "assets/applications/ads/thumbs/ad-b-convite-loja-nas-costas.webp",
+     "title": "Convite — loja nas costas",
+     "mood": "acolhedor",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-b-funcionario-do-proprio-negocio",
+     "path": "assets/applications/ads/thumbs/ad-b-funcionario-do-proprio-negocio.webp",
+     "title": "Funcionario do proprio negocio",
+     "mood": "provocacao",
+     "archetype_foto": "executivo-cansado",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-b-limite-da-exaustao",
+     "path": "assets/applications/ads/thumbs/ad-b-limite-da-exaustao.webp",
+     "title": "Limite da exaustao",
+     "mood": "acolhedor",
+     "archetype_foto": "executivo-cansado",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-b-maquina-que-bate-meta-todo-mes",
+     "path": "assets/applications/ads/thumbs/ad-b-maquina-que-bate-meta-todo-mes.webp",
+     "title": "Maquina que bate meta todo mes",
+     "mood": "aspiracional",
+     "archetype_foto": "time-em-acao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-b-mesmo-metodo-grandes-redes",
+     "path": "assets/applications/ads/thumbs/ad-b-mesmo-metodo-grandes-redes.webp",
+     "title": "Mesmo metodo — grandes redes",
+     "mood": "autoridade",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-b-refem-operacional-ha-12-meses",
+     "path": "assets/applications/ads/thumbs/ad-b-refem-operacional-ha-12-meses.webp",
+     "title": "Refem operacional ha 12 meses",
+     "mood": "confronto",
+     "archetype_foto": "executivo-cansado",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-b-tirador-de-pedido",
+     "path": "assets/applications/ads/thumbs/ad-b-tirador-de-pedido.webp",
+     "title": "Tirador de pedido",
+     "mood": "provocacao",
+     "archetype_foto": "vendedor-passivo",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-b-ultimas-vagas-sessao",
+     "path": "assets/applications/ads/thumbs/ad-b-ultimas-vagas-sessao.webp",
+     "title": "Ultimas vagas — sessao",
+     "mood": "urgencia",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L1"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 24,
+    "bloco_altura_pct": 54,
+    "ancora": "topo",
+    "range": "11-52"
+   }
+  },
+  "D": {
+   "motor": "nano-banana-2",
+   "descricao": "Método / engenharia reversa com foto de apoio.",
+   "refs": [
+    {
+     "id": "ad-d-engenharia-reversa-do-melhor-vendedor",
+     "path": "assets/applications/ads/thumbs/ad-d-engenharia-reversa-do-melhor-vendedor.webp",
+     "title": "Engenharia reversa do melhor vendedor",
+     "mood": "analitico",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-d-metodo-replicavel-em-60-min",
+     "path": "assets/applications/ads/thumbs/ad-d-metodo-replicavel-em-60-min.webp",
+     "title": "Metodo replicavel em 60 min",
+     "mood": "autoridade",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-d-metodo-tira-a-loja-das-costas",
+     "path": "assets/applications/ads/thumbs/ad-d-metodo-tira-a-loja-das-costas.webp",
+     "title": "Metodo tira a loja das costas",
+     "mood": "acolhedor",
+     "archetype_foto": "executivo-cansado",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-d-palestras-nao-batem-meta",
+     "path": "assets/applications/ads/thumbs/ad-d-palestras-nao-batem-meta.webp",
+     "title": "Palestras nao batem meta",
+     "mood": "provocacao",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-d-risco-100-nosso",
+     "path": "assets/applications/ads/thumbs/ad-d-risco-100-nosso.webp",
+     "title": "Risco 100% nosso",
+     "mood": "autoridade",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L8"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 13,
+    "bloco_altura_pct": 62,
+    "ancora": "topo",
+    "range": "8-25"
+   }
+  },
+  "C": {
+   "motor": "nano-banana-2",
+   "descricao": "Prova/oferta com foto de apoio.",
+   "refs": [
+    {
+     "id": "ad-c-apaga-incendio-ha-6-meses",
+     "path": "assets/applications/ads/thumbs/ad-c-apaga-incendio-ha-6-meses.webp",
+     "title": "Apaga incendio ha 6 meses",
+     "mood": "confronto",
+     "archetype_foto": null,
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-c-aumentar-lucro-em-50",
+     "path": "assets/applications/ads/thumbs/ad-c-aumentar-lucro-em-50.webp",
+     "title": "Aumentar lucro em 50%",
+     "mood": "aspiracional",
+     "archetype_foto": null,
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-c-metta-lucro-tipo-gigante",
+     "path": "assets/applications/ads/thumbs/ad-c-metta-lucro-tipo-gigante.webp",
+     "title": "Metta — lucro tipo gigante",
+     "mood": "autoridade",
+     "archetype_foto": null,
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-c-time-bater-meta-em-3-meses",
+     "path": "assets/applications/ads/thumbs/ad-c-time-bater-meta-em-3-meses.webp",
+     "title": "Time bater meta em 3 meses",
+     "mood": "aspiracional",
+     "archetype_foto": null,
+     "brand": "metta",
+     "linguagem": "L7"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 16,
+    "bloco_altura_pct": 53,
+    "ancora": "meio",
+    "range": "8-24"
+   }
+  },
+  "YELLOW": {
+   "motor": "hibrido",
+   "descricao": "Identidade amarela: bloco/frame/split/editorial. Foto quando há; senão gráfico.",
+   "refs": [
+    {
+     "id": "ad-yellow-bloco-aumentar-lucro-em-50",
+     "path": "assets/applications/ads/thumbs/ad-yellow-bloco-aumentar-lucro-em-50.webp",
+     "title": "Aumentar lucro em 50%",
+     "mood": "aspiracional",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-yellow-bloco-equipe-precisa-de-sistema",
+     "path": "assets/applications/ads/thumbs/ad-yellow-bloco-equipe-precisa-de-sistema.webp",
+     "title": "Equipe precisa de sistema",
+     "mood": "analitico",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-yellow-bloco-inteligencia-comercial-checklist",
+     "path": "assets/applications/ads/thumbs/ad-yellow-bloco-inteligencia-comercial-checklist.webp",
+     "title": "Inteligencia comercial — checklist",
+     "mood": "analitico",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-yellow-bloco-mentoria-metodologia-lucro",
+     "path": "assets/applications/ads/thumbs/ad-yellow-bloco-mentoria-metodologia-lucro.webp",
+     "title": "Metodologia de vendas que constrói lucro na sua operação",
+     "mood": "autoridade",
+     "archetype_foto": "retrato-individual-confiante",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-yellow-bloco-nao-consegue-sair-da-operacao",
+     "path": "assets/applications/ads/thumbs/ad-yellow-bloco-nao-consegue-sair-da-operacao.webp",
+     "title": "Nao consegue sair da operacao",
+     "mood": "acolhedor",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-yellow-bloco-troque-motivacao-por-processo",
+     "path": "assets/applications/ads/thumbs/ad-yellow-bloco-troque-motivacao-por-processo.webp",
+     "title": "Troque motivacao por processo",
+     "mood": "provocacao",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-yellow-draw-pressao-modo-sobrevivencia",
+     "path": "assets/applications/ads/thumbs/ad-yellow-draw-pressao-modo-sobrevivencia.webp",
+     "title": "Pressao — modo sobrevivencia",
+     "mood": "acolhedor",
+     "archetype_foto": "ilustracao-editorial",
+     "brand": "metta",
+     "linguagem": "L4"
+    },
+    {
+     "id": "ad-yellow-editorial-r85bi-mesmo-time",
+     "path": "assets/applications/ads/thumbs/ad-yellow-editorial-r85bi-mesmo-time.webp",
+     "title": "R$8,5bi — mesmo time",
+     "mood": "autoridade",
+     "archetype_foto": "executivos-pb-blurred",
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-yellow-frame-servicos-aguenta-12-meses",
+     "path": "assets/applications/ads/thumbs/ad-yellow-frame-servicos-aguenta-12-meses.webp",
+     "title": "Servicos — aguenta 12 meses?",
+     "mood": "confronto",
+     "archetype_foto": "executivo-cansado",
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-yellow-frame-servicos-comercial-de-gente-grande",
+     "path": "assets/applications/ads/thumbs/ad-yellow-frame-servicos-comercial-de-gente-grande.webp",
+     "title": "Servicos — comercial de gente grande",
+     "mood": "analitico",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-yellow-frame-vendas-dependem-de-voce",
+     "path": "assets/applications/ads/thumbs/ad-yellow-frame-vendas-dependem-de-voce.webp",
+     "title": "Vendas dependem de voce",
+     "mood": "confronto",
+     "archetype_foto": "executivo-cansado",
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-yellow-split-chave-da-liberdade-balcao",
+     "path": "assets/applications/ads/thumbs/ad-yellow-split-chave-da-liberdade-balcao.webp",
+     "title": "Chave da liberdade — balcao",
+     "mood": "aspiracional",
+     "archetype_foto": "metafora-conceitual",
+     "brand": "metta",
+     "linguagem": "L1"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 18,
+    "bloco_altura_pct": 62,
+    "ancora": "meio",
+    "range": "8-38"
+   }
+  },
+  "DARK": {
+   "motor": "gpt-image-2",
+   "descricao": "Objeto-metáfora e colagem surreal dark — imaginação a partir de texto.",
+   "refs": [
+    {
+     "id": "ad-dark-carta-convite-sistema-pra-poucos-empresarios",
+     "path": "assets/applications/ads/thumbs/ad-dark-carta-convite-sistema-pra-poucos-empresarios.webp",
+     "title": "Convite — sistema pra poucos empresarios",
+     "mood": "aspiracional",
+     "archetype_foto": null,
+     "brand": "metta",
+     "linguagem": "L8"
+    },
+    {
+     "id": "ad-dark-colagem-craque-de-vendas-quebra-cabeca",
+     "path": "assets/applications/ads/thumbs/ad-dark-colagem-craque-de-vendas-quebra-cabeca.webp",
+     "title": "Craque de vendas — quebra-cabeca",
+     "mood": "analitico",
+     "archetype_foto": "metafora-conceitual",
+     "brand": "metta",
+     "linguagem": "L4"
+    },
+    {
+     "id": "ad-dark-objeto-multiplique-o-melhor-vendedor-domino",
+     "path": "assets/applications/ads/thumbs/ad-dark-objeto-multiplique-o-melhor-vendedor-domino.webp",
+     "title": "Multiplique o melhor vendedor — domino",
+     "mood": "analitico",
+     "archetype_foto": "objeto-conceitual",
+     "brand": "metta",
+     "linguagem": "L5"
+    },
+    {
+     "id": "ad-dark-objeto-queime-o-script",
+     "path": "assets/applications/ads/thumbs/ad-dark-objeto-queime-o-script.webp",
+     "title": "Queime o script",
+     "mood": "provocacao",
+     "archetype_foto": "objeto-conceitual-escuro",
+     "brand": "metta",
+     "linguagem": "L5"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 21,
+    "bloco_altura_pct": 55,
+    "ancora": "meio",
+    "range": "18-23"
+   }
+  },
+  "LIGHT": {
+   "motor": "gpt-image-2",
+   "descricao": "Colagem surreal fundo claro + tipográfico light.",
+   "refs": [
+    {
+     "id": "ad-light-surreal-jantar-com-filhos-vs-reuniao",
+     "path": "assets/applications/ads/thumbs/ad-light-surreal-jantar-com-filhos-vs-reuniao.webp",
+     "title": "Jantar com filhos vs reuniao",
+     "mood": "acolhedor",
+     "archetype_foto": "metafora-conceitual",
+     "brand": "metta",
+     "linguagem": "L6"
+    },
+    {
+     "id": "ad-light-surreal-negocio-saude-familia",
+     "path": "assets/applications/ads/thumbs/ad-light-surreal-negocio-saude-familia.webp",
+     "title": "Negocio, saude, familia",
+     "mood": "acolhedor",
+     "archetype_foto": "metafora-conceitual",
+     "brand": "metta",
+     "linguagem": "L6"
+    },
+    {
+     "id": "ad-light-surreal-processo-morre-em-30-dias",
+     "path": "assets/applications/ads/thumbs/ad-light-surreal-processo-morre-em-30-dias.webp",
+     "title": "Processo morre em 30 dias",
+     "mood": "analitico",
+     "archetype_foto": "metafora-conceitual",
+     "brand": "metta",
+     "linguagem": "L6"
+    },
+    {
+     "id": "ad-light-surreal-varejistas-que-dobram-de-tamanho",
+     "path": "assets/applications/ads/thumbs/ad-light-surreal-varejistas-que-dobram-de-tamanho.webp",
+     "title": "Varejistas que dobram de tamanho",
+     "mood": "analitico",
+     "archetype_foto": "metafora-conceitual",
+     "brand": "metta",
+     "linguagem": "L6"
+    },
+    {
+     "id": "ad-light-tipo-faturamento-e-ego-lucro-e-liberdade",
+     "path": "assets/applications/ads/thumbs/ad-light-tipo-faturamento-e-ego-lucro-e-liberdade.webp",
+     "title": "Faturamento e ego — lucro e liberdade",
+     "mood": "provocacao",
+     "archetype_foto": null,
+     "brand": "metta",
+     "linguagem": "L8"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 35,
+    "bloco_altura_pct": 41,
+    "ancora": "meio",
+    "range": "22-58"
+   }
+  },
+  "NEWS": {
+   "motor": "nano-banana-2",
+   "descricao": "Card estilo notícia, foto em zona própria embaixo.",
+   "refs": [
+    {
+     "id": "ad-news-card-risco-zero-varejo",
+     "path": "assets/applications/ads/thumbs/ad-news-card-risco-zero-varejo.webp",
+     "title": "Risco zero — varejo",
+     "mood": "autoridade",
+     "archetype_foto": "executivo-em-decisao",
+     "brand": "metta",
+     "linguagem": "L8"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 41,
+    "bloco_altura_pct": 30,
+    "ancora": "meio",
+    "range": "41"
+   }
+  },
+  "OUTROS": {
+   "motor": "nano-banana-2",
+   "descricao": "Hooks diversos (H/I/K) com foto de apoio.",
+   "refs": [
+    {
+     "id": "ad-h-perde-vendas-todo-dia",
+     "path": "assets/applications/ads/thumbs/ad-h-perde-vendas-todo-dia.webp",
+     "title": "Perde vendas todo dia",
+     "mood": "confronto",
+     "archetype_foto": "objeto-conceitual",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-i-varejo-que-conhece-o-cliente",
+     "path": "assets/applications/ads/thumbs/ad-i-varejo-que-conhece-o-cliente.webp",
+     "title": "Varejo que conhece o cliente",
+     "mood": "analitico",
+     "archetype_foto": "tiago-retrato-pb",
+     "brand": "metta",
+     "linguagem": "L1"
+    },
+    {
+     "id": "ad-k-convite-reservado-plano-b",
+     "path": "assets/applications/ads/thumbs/ad-k-convite-reservado-plano-b.webp",
+     "title": "Convite reservado — plano B",
+     "mood": "aspiracional",
+     "archetype_foto": null,
+     "brand": "metta",
+     "linguagem": "L8"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 29,
+    "bloco_altura_pct": 47,
+    "ancora": "meio",
+    "range": "12-39"
+   }
+  },
+  "LOGO": {
+   "motor": "grafico",
+   "descricao": "Prova social — grade de logos. Sem geração de foto.",
+   "refs": [
+    {
+     "id": "ad-logo-wall-1000-empresas-r85bi",
+     "path": "assets/applications/ads/thumbs/ad-logo-wall-1000-empresas-r85bi.webp",
+     "title": "+1.000 empresas — R$8,5bi",
+     "mood": "autoridade",
+     "archetype_foto": "logos-clientes",
+     "brand": "metta",
+     "linguagem": "L8"
+    }
+   ],
+   "posicionamento_real": {
+    "texto_comeca_pct": 20,
+    "bloco_altura_pct": 56,
+    "ancora": "meio",
+    "range": "20"
+   }
+  },
+  "TIAGO": {
+   "motor": "nano-banana-2",
+   "descricao": "Marca pessoal cinema B&W com amarelo seletivo. Ver exemplars/tiago/.",
+   "refs": [
+    {
+     "id": "tiago-ad-twitter-card",
+     "path": "assets/style-previews/tiago/twitter-card.webp",
+     "title": "Tweet card — frase de impacto Tiago",
+     "mood": "provocacao",
+     "archetype_foto": null,
+     "brand": "tiago",
+     "linguagem": "L1"
+    },
+    {
+     "id": "tiago-ad-notes-mockup",
+     "path": "assets/style-previews/tiago/notes-mockup.webp",
+     "title": "Notas do iPhone — lista numerada Tiago",
+     "mood": "analitico",
+     "archetype_foto": null,
+     "brand": "tiago",
+     "linguagem": "L1"
+    },
+    {
+     "id": "tiago-ad-typo-pure",
+     "path": "assets/style-previews/tiago/typo-pure.webp",
+     "title": "Frase grande — tipografia pura Tiago",
+     "mood": "confronto",
+     "archetype_foto": null,
+     "brand": "tiago",
+     "linguagem": "L1"
+    },
+    {
+     "id": "tiago-ad-editorial-cta",
+     "path": "assets/style-previews/tiago/editorial-cta.webp",
+     "title": "Slide de fechamento de carrossel — CTA Tiago",
+     "mood": "autoridade",
+     "archetype_foto": "tiago-conselheiro",
+     "brand": "tiago",
+     "linguagem": "L8"
+    }
+   ],
+   "posicionamento_real": null
   }
+ },
+ "linguagens": {
+  "fonte": "content/direcao-arte/dna-visual-banco-real.md (estudo visual 2026-07-11)",
+  "L1": "foto real do especialista — NUNCA gerar (biblioteca fotoReal); não usar como referência de geração",
+  "L2": "meme/still de filme — direitos autorais; não usar como referência de geração",
+  "L3": "foto-conceito cômica (humor absurdo levado a sério)",
+  "L4": "colagem vintage P&B / gravura halftone",
+  "L5": "humor por objeto (foto realista de objeto como piada)",
+  "L6": "fine-art surreal granulado",
+  "L7": "documental de detalhe (mãos/telas, sem rosto)",
+  "L8": "tipografia pura (sem imagem)"
+ }
 }

@@ -575,11 +575,25 @@ def _run_pipeline_inline(
                 except Exception as _ae:
                     diagnostics.append(f"ref-aprovada diretor: PULADO ({_ae.__class__.__name__})")
                 _ref_imgs = _ref_imgs or None
+            # CALIBRAÇÃO: injeta a convenção de posição REAL da família (mapa medido
+            # das 66 peças reais — content/direcao-arte/mapa-posicionamento-real.md)
+            # pra o diretor posicionar o texto como o banco real faz POR FAMÍLIA.
+            _pos_hint = ""
+            try:
+                from _nano_pipeline import _FAMILY as _FAM_MAP, _load_curated as _load_cur
+                _pr = ((_load_cur().get("by_family", {}).get(
+                    _FAM_MAP.get(chosen_model_id, "OUTROS"), {}) or {}).get("posicionamento_real")) or {}
+                if _pr:
+                    _pos_hint = (f"\n\nPOSIÇÃO REAL DA FAMÍLIA (banco medido — SIGA a convenção): "
+                                 f"âncora {_pr.get('ancora')}, o texto começa ~{_pr.get('texto_comeca_pct')}% "
+                                 f"do topo e ocupa ~{_pr.get('bloco_altura_pct')}% da altura.")
+            except Exception:
+                pass
             ad_directives = _ad_direct(
                 copy={"headline": user_headline, "subhead": user_subhead,
                       "body": user_body, "cta": user_cta_text},
                 archetype=_arch, theme=_theme, marca=marca,
-                brief=briefing_text or "", llm=llm, placement=bp_placement,
+                brief=(briefing_text or "") + _pos_hint, llm=llm, placement=bp_placement,
                 needs_image=_needs_concept, treatment=bp_treatment, recent_concepts=_recent,
                 knowledge=_k_block, avatar=_avatar_for_ad, ref_images=_ref_imgs)
             mark("art-director", t_ad)
