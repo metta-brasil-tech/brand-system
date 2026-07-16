@@ -18,9 +18,8 @@
     {
       "id": "criar",
       "icon": "sparkles",
-      "label": "Criar",
+      "label": "Agente Design",
       "group": "ferramentas",
-      "hidden": true,
       "sections": [
         {
           "id": "novo",
@@ -34,7 +33,6 @@
       "icon": "sparkles",
       "label": "Agente Copy",
       "group": "ferramentas",
-      "hidden": true,
       "sections": [
         {
           "id": "gerar",
