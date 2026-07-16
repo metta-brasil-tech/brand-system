@@ -393,18 +393,23 @@ button { all: unset; }
 /* (6) card-mock — cartão de rede social (tweet) */
 .ad[data-arch="card-mock"] { display: flex; align-items: center; justify-content: center; background: var(--m-night-95); }
 .ad[data-arch="card-mock"] .card {
-  width: 920px; background: var(--m-white); border-radius: 32px; padding: 64px;
+  width: 920px; background: var(--m-white); border-radius: 16px; padding: 64px;
   display: flex; flex-direction: column; gap: 28px; box-shadow: 0 24px 80px rgba(12,22,27,.12);
 }
 .ad[data-arch="card-mock"] .mock-head { display: flex; align-items: center; gap: 20px; }
-.ad[data-arch="card-mock"] .avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--m-yellow); display: flex; align-items: center; justify-content: center; font-family: var(--m-display); font-weight: 900; font-size: 52px; color: var(--m-night-10); }
+.ad[data-arch="card-mock"] .avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--m-night-10); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.ad[data-arch="card-mock"] .avatar svg { width: 54%; height: 54%; }
+.ad[data-arch="card-mock"] .avatar-initial { font-family: var(--m-display); font-weight: 900; font-size: 52px; color: var(--m-yellow); }
 .ad[data-arch="card-mock"] .who { display: flex; flex-direction: column; }
 .ad[data-arch="card-mock"] .who .name { font-family: var(--m-text); font-weight: 700; font-size: 34px; color: var(--m-night-10); display: flex; align-items: center; gap: 8px; }
 .ad[data-arch="card-mock"] .who .handle { font-family: var(--m-text); font-size: 28px; color: var(--m-night-40); }
 .ad[data-arch="card-mock"] .verified { width: 34px; height: 34px; flex-shrink: 0; }
 .ad[data-arch="card-mock"] .x-logo { width: 40px; height: 40px; margin-left: auto; align-self: flex-start; color: var(--m-night-40); opacity: .7; }
-.ad[data-arch="card-mock"] .t-head { font-family: var(--m-text); font-weight: 700; font-size: 56px; line-height: 1.12; text-transform: none; letter-spacing: -.02em; color: var(--m-night-10); }
-.ad[data-arch="card-mock"] .t-head .hi { color: #B8860B; }
+/* print real do X: corpo do tweet é peso normal, só a palavra em negrito
+   (feedback Sofia — "tudo em negrito" não é como o X renderiza). */
+.ad[data-arch="card-mock"] .t-head { font-family: var(--m-text); font-weight: 500; font-variation-settings: normal; font-size: 56px; line-height: 1.12; text-transform: none; letter-spacing: -.02em; color: var(--m-night-10); }
+/* print real do X não tem destaque colorido — só negrito na palavra (feedback Sofia) */
+.ad[data-arch="card-mock"] .t-head .hi { color: inherit; font-weight: 900; }
 .ad[data-arch="card-mock"] .t-body { font-size: 30px; color: var(--m-night-40); }
 /* prova social de print real: timestamp + views e barra de engajamento do X */
 .ad[data-arch="card-mock"] .mock-meta { font-family: var(--m-text); font-size: 27px; color: var(--m-night-40); padding-top: 24px; border-top: 1px solid #EFF3F4; }
@@ -420,7 +425,7 @@ button { all: unset; }
 .ad[data-arch="card-mock"][data-theme="dark"] .who .name { color: var(--m-white); }
 .ad[data-arch="card-mock"][data-theme="dark"] .who .handle { color: var(--m-night-85); }
 .ad[data-arch="card-mock"][data-theme="dark"] .t-head { color: var(--m-white); }
-.ad[data-arch="card-mock"][data-theme="dark"] .t-head .hi { color: var(--m-yellow); }
+.ad[data-arch="card-mock"][data-theme="dark"] .t-head .hi { color: inherit; font-weight: 900; }
 .ad[data-arch="card-mock"][data-theme="dark"] .t-body { color: var(--m-night-85); }
 .ad[data-arch="card-mock"][data-theme="dark"] .x-logo { color: var(--m-night-85); }
 .ad[data-arch="card-mock"][data-theme="dark"] .mock-meta,
@@ -598,21 +603,37 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-photo-raw"] { background: var(--t-ink); }
 .ad[data-marca="tiago"][data-arch="tiago-photo-raw"] .tpr-photo { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
 
-/* (T8) tiago-notes — mock app Notas iPhone centralizado */
+/* (T8) tiago-notes — mock app Notas iPhone centralizado
+   Fidelidade ao app real (feedback Sofia): fonte de sistema (SF Pro, nao a
+   fonte da marca) e status bar com icones reais (sinal/wifi/bateria), nao
+   texto de bolinhas. */
 .ad[data-marca="tiago"][data-arch="tiago-notes"] { background: #E5E5EA; display: flex; align-items: center; justify-content: center; }
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-phone { width: 620px; min-height: 960px; background: var(--t-white); border-radius: 24px; box-shadow: 0 8px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; overflow: hidden; }
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-statusbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 28px 8px; font-size: 18px; font-weight: 600; color: var(--t-ink); }
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 28px 14px; border-bottom: 1px solid rgba(0,0,0,.10); }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-phone {
+  width: 620px; min-height: 960px; background: var(--t-white); border-radius: 24px; box-shadow: 0 8px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-statusbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 32px 6px; font-size: 19px; font-weight: 600; color: var(--t-ink); letter-spacing: -.01em; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-status-icons { display: flex; align-items: center; gap: 7px; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-status-icons svg { display: block; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 22px 14px; border-bottom: 1px solid rgba(0,0,0,.10); }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-back { font-size: 20px; color: var(--t-yellow); font-weight: 400; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-actions { font-size: 20px; color: var(--t-yellow); display: flex; gap: 20px; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-notes-body { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; gap: 18px; }
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-headline { font-size: 30px; line-height: 1.2; letter-spacing: -.01em; color: var(--t-ink); margin: 0; background: linear-gradient(180deg, transparent 55%, rgba(255,204,0,.6) 55%); display: inline; padding: 0 2px; font-weight: 700; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-headline {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  font-size: 30px; line-height: 1.32; letter-spacing: -.01em; color: var(--t-ink); margin: 0;
+  font-weight: 600; font-variation-settings: normal; text-transform: none;
+}
+/* marca-texto do Notas: span interno com box-decoration-break (clona o fundo
+   por linha, sem o bug do gradiente cortando só 1 linha). Real: highlight
+   inteiro do trecho selecionado, sem sublinhado. */
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-hl {
+  background: #FFE066; box-decoration-break: clone; -webkit-box-decoration-break: clone; padding: .02em .12em;
+}
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-subhead { font-size: 20px; line-height: 1.45; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-body { font-size: 18px; line-height: 1.55; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-list { font-size: 18px; line-height: 1.55; color: var(--t-ink); margin: 0; padding-left: 28px; display: flex; flex-direction: column; gap: 12px; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-cta { font-size: 18px; color: var(--t-grey); margin: 8px 32px 24px; }
-/* accent amarelo seria invisível na marca-texto amarela do headline — vira ink sublinhado */
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .t-head .hi { color: var(--t-ink); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
 
 /* (T9) tiago-story-hero — story foto bleed + headline gigante centrada + pill */
 .ad[data-marca="tiago"][data-arch="tiago-story-hero"] { background: var(--t-ink); }
@@ -657,13 +678,31 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .x-logo { width: 36px; height: 36px; margin-left: auto; align-self: flex-start; color: var(--t-grey); opacity: .7; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-handle { font-size: 22px; color: var(--t-grey); line-height: 1.2; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 1; justify-content: center; }
-.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline { font-size: 52px; line-height: 1.2; letter-spacing: -.02em; color: var(--t-ink); margin: 0; word-break: break-word; }
+/* multi-parágrafo (post real de reflexão: vários blocos curtos, não 1 bloco
+   esticado no centro) — cada linha em branco no textarea vira um bloco. */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text--multi { justify-content: flex-start; padding-top: 8px; gap: 34px; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-para {
+  font-family: var(--t-text, 'Inter', sans-serif); font-size: 38px; line-height: 1.38;
+  letter-spacing: -.01em; color: var(--t-ink); margin: 0; font-weight: 500;
+}
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-para .hi { color: inherit; font-weight: 800; }
+/* print real do X: fonte de texto (nao o display da marca) + peso normal no
+   corpo, só a palavra em negrito (feedback Sofia). */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline {
+  font-family: var(--t-text, 'Inter', sans-serif); font-weight: 500; font-variation-settings: normal;
+  font-size: 46px; line-height: 1.25; letter-spacing: -.01em; text-transform: none; color: var(--t-ink); margin: 0; word-break: break-word;
+}
+/* print real do X não tem destaque colorido nem bloco — só negrito na palavra (feedback Sofia) */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .t-head .hi,
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline .hi { color: inherit; background: none; padding: 0; font-weight: 900; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-subhead { font-size: 36px; line-height: 1.35; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-body { font-size: 28px; line-height: 1.45; color: var(--t-grey); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-cta { font-size: 28px; color: var(--t-grey); margin: 32px 0 0; }
+/* post multi-parágrafo real: 👉 sozinho, alinhado à direita */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-cta--arrow-only { text-align: right; font-size: 44px; margin: 40px 0 0; }
 /* variant IMAGE — foto embed radius 28px ocupa a base do card */
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text--withimg { flex: 0 0 auto; }
-.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed { flex: 1; min-height: 0; margin-top: 32px; border-radius: 28px; overflow: hidden; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed { flex: 1; min-height: 0; margin-top: 32px; border-radius: 16px; overflow: hidden; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed-photo { width: 100%; height: 100%; background-size: cover; background-position: center; }
 /* prova social de print real: timestamp + views e barra de engajamento do X */
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-meta { font-size: 24px; color: var(--t-grey); margin-top: 36px; padding-top: 22px; border-top: 1px solid #EFF3F4; }

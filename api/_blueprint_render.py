@@ -134,6 +134,25 @@ def _cta(copy: dict, cls: str = "") -> str:
 #   none | tl | tr | bl | br | center.
 # ---------------------------------------------------------------------------
 _BRAND_DIR = _BLUEPRINTS_DIR / "_brand"
+_TIAGO_SIG_DIR = _ROOT / "assets" / "tiago" / "assinatura"
+
+# Fundo aproximado por tema, pra o sistema de assinatura decidir a variante.
+_THEME_BG = {"dark": "#0C161B", "light": "#FAFCFD", "yellow": "#FFBE18", "paper": "#12201A"}
+
+try:  # sistema contrast-aware de seleção de assinatura (opcional; fallback binário)
+    from _brand_signature import pick_signature as _pick_signature
+except Exception:  # pragma: no cover
+    _pick_signature = None
+
+
+def _pick_sig(bg_hex: str, marca: str, intent: str = "default"):
+    """Escolhe a variante de assinatura/logo pro fundo. None → cai no binário."""
+    if _pick_signature is None:
+        return None
+    try:
+        return _pick_signature(bg_hex, brand=str(marca), intent=intent)
+    except Exception:
+        return None
 _METTA_NO_BRAND = {"card-mock", "logo-wall"}                       # mock/UI falsa: sem logo
 _METTA_COVER_ARCH = {"photo-full", "photo-side", "photo-band"}     # covers ganham eyebrow categoria
 _TIAGO_SIG_ARCH = {"tiago-editorial-hero", "tiago-editorial-dark",
@@ -156,6 +175,19 @@ def _tiago_avatar() -> str:
     return _TIAGO_AVATAR_CACHE
 
 
+_METTA_SYMBOL_CACHE = None
+def _metta_symbol() -> str:
+    """SVG do símbolo real da Metta — avatar do tweet (não a letra 'M')."""
+    global _METTA_SYMBOL_CACHE
+    if _METTA_SYMBOL_CACHE is None:
+        p = _ROOT / "assets" / "symbols" / "simbolo_metta_amarelo.svg"
+        try:
+            _METTA_SYMBOL_CACHE = p.read_text(encoding="utf-8")
+        except Exception:
+            _METTA_SYMBOL_CACHE = ""
+    return _METTA_SYMBOL_CACHE
+
+
 # ---------------------------------------------------------------------------
 # Tweet-card REAL — o que separa um "card com avatar" de um PRINT de tweet:
 # selo verificado de verdade (dourado = organização no X → Metta; azul = pessoa
@@ -172,6 +204,20 @@ _VERIFIED_SEAL = (
 _X_LOGO = (
     '<svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" '
     'd="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>')
+# ícones reais de status bar iOS (sinal/wifi/bateria) — mock de UI real,
+# feedback Sofia: texto de bolinhas ("●●●●") não parece uma status bar real.
+_IOS_SIGNAL = (
+    '<svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor" aria-hidden="true">'
+    '<rect x="0" y="7" width="3" height="5" rx="0.8"/><rect x="4.5" y="5" width="3" height="7" rx="0.8"/>'
+    '<rect x="9" y="3" width="3" height="9" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="11.5" rx="0.8"/></svg>')
+_IOS_WIFI = (
+    '<svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true">'
+    '<path d="M8 11.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zM8 6.2c1.7 0 3.2.6 4.4 1.7l-1.4 1.5A4.3 4.3 0 0 0 8 8.2c-1.2 0-2.2.4-3 1.2L3.6 7.9A6.3 6.3 0 0 1 8 6.2zm0-4.2c3 0 5.7 1.1 7.8 3l-1.4 1.5A9 9 0 0 0 8 4.3a9 9 0 0 0-6.4 2.2L.2 5C2.3 3.1 5 2 8 2z"/></svg>')
+_IOS_BATTERY = (
+    '<svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true">'
+    '<rect x="0.75" y="0.75" width="20.5" height="10.5" rx="2.5" stroke="currentColor" stroke-opacity="0.4"/>'
+    '<rect x="2.25" y="2.25" width="17.5" height="7.5" rx="1.3" fill="currentColor"/>'
+    '<rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="currentColor" fill-opacity="0.4"/></svg>')
 _ICO = {  # ícones de ação do X (stroke, minimal — legíveis em print pequeno)
     "reply": '<svg viewBox="0 0 24 24"><path d="M21 11.3c0 3.7-3.8 6.7-8.5 6.7-.9 0-1.8-.1-2.6-.3L5.2 20l1.2-3.1C4.6 15.7 3.5 13.6 3.5 11.3 3.5 7.6 7.4 4.6 12 4.6s9 3 9 6.7z"/></svg>',
     "repost": '<svg viewBox="0 0 24 24"><path d="M7 8h8.5a3 3 0 0 1 3 3v1.5M17 16.5H8.5a3 3 0 0 1-3-3V12"/><path d="M15.5 5.5 18.5 8l-3 2.5M9 19l-3-2.5 3-2.5"/></svg>',
@@ -235,15 +281,28 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
             return ""
         if not is_tiago and arch in _METTA_NO_BRAND:
             return ""
+    # Cor da assinatura/logo pelo FUNDO — sistema contrast-aware (_brand_signature),
+    # não mais binário. Nos casos comuns escolhe a mesma versão que antes (sem
+    # regressão), mas pela razão certa: corrige "paper" (fundo escuro) e habilita os
+    # especiais amarelo/cinza quando params.sig_intent = "accent"/"subtle".
+    bg_hex = _THEME_BG.get(str(theme).lower(), _THEME_BG["dark"])
+    intent = str(params.get("sig_intent") or "default").strip().lower()
+    pick = _pick_sig(bg_hex, marca, intent)
     dark = theme == "dark"
     if is_tiago:
-        svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
+        svg = _read(_TIAGO_SIG_DIR / f"assinatura-{pick.variant}.svg") if pick else ""
+        if not svg:  # fallback binário se o sistema/arquivo faltar
+            svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
         # Editoriais levam a assinatura no TOPO (igual às refs de carrossel do Tiago);
         # hero entre as eyebrows (centro), os demais à direita. Outros archetypes: rodapé.
         cls = "brand-sig"
         default_pos = "center" if arch == "tiago-editorial-hero" else ("tr" if arch in _TIAGO_SIG_ARCH else "br")
     else:
-        svg = _read(_BRAND_DIR / ("logo_metta_colorido_h.svg" if dark else "logo_metta_colorido_escuro_h.svg"))
+        # Corner Metta = logo colorido (símbolo + wordmark). A variante do sistema dá
+        # a polaridade da tinta: branco/amarelo = tinta clara (fundo escuro) → logo_h;
+        # escuro/cinza = tinta escura (fundo claro/amarelo) → logo_escuro_h.
+        light_ink = pick.variant in ("branco", "amarelo") if pick else dark
+        svg = _read(_BRAND_DIR / ("logo_metta_colorido_h.svg" if light_ink else "logo_metta_colorido_escuro_h.svg"))
         cls, default_pos = "brand-logo", "tl"
     if not svg:
         return ""
@@ -337,11 +396,16 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
         else:
             body_html = ""
         cta = f'<p class="tn-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
+        # headline inteiro marca-texto (como o app real quando vc seleciona e
+        # destaca) — sem *accent* parcial, que ficaria invisível dentro do highlight.
+        title_txt = _esc((copy.get("headline", "") or "").replace("*", ""))
+        title_html = f'<h1 class="t-head tn-headline"><span class="tn-hl">{title_txt}</span></h1>'
         return ('<div class="tn-phone">'
-                '<div class="tn-statusbar"><span class="tn-time">9:41</span><span class="tn-icons">●●●●● 100%</span></div>'
+                f'<div class="tn-statusbar"><span class="tn-time">9:41</span>'
+                f'<span class="tn-status-icons">{_IOS_SIGNAL}{_IOS_WIFI}{_IOS_BATTERY}</span></div>'
                 '<div class="tn-navbar"><span class="tn-back">‹ Notas</span>'
                 '<span class="tn-actions"><span>…</span><span>OK</span></span></div>'
-                f'<div class="tn-notes-body">{head("tn-headline")}{sub("tn-subhead")}{body_html}</div>'
+                f'<div class="tn-notes-body">{title_html}{sub("tn-subhead")}{body_html}</div>'
                 f'{cta}</div>')
 
     if arch == "tiago-story-hero":
@@ -362,12 +426,37 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 f'<div class="tmq-text layer">{head("tmq-headline")}{sub("tmq-subhead")}</div>')
 
     if arch == "tiago-twitter":
-        cta = f'<p class="tw-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
         # Variant IMAGE: foto embed (radius 28px) na base quando há imagem.
         has_img = bool(image_url)
         embed = (f'<div class="tw-embed"><div class="tw-embed-photo" '
                  f'style="background-image:url(\'{image_url}\')"></div></div>') if has_img else ""
-        txtcls = "tw-text tw-text--withimg" if has_img else "tw-text"
+        # Post reflexivo real (feedback: texto "esticado" quando é 1 bloco só
+        # centralizado) — headline com linha em branco vira vários parágrafos
+        # curtos, lidos do topo pra baixo, cada um podendo ter *negrito* no
+        # início (ex: "*A boa:* dá tempo de chegar..."). 1 parágrafo só cai no
+        # comportamento antigo (headline gigante centralizada).
+        def _bold_only(t: str) -> str:
+            # como _accent(), mas SEM o fallback de auto-negritar a última
+            # palavra — aqui cada parágrafo só fica em negrito onde o
+            # diretor de arte marcou *explicitamente* com asterisco.
+            e = _esc(t)
+            e = re.sub(r"\*([^*]+)\*", r'<span class="hi">\1</span>', e)
+            return e.replace("\n", "<br>")
+        _paras = [p.strip() for p in re.split(r"\n\s*\n", copy.get("headline", "") or "") if p.strip()]
+        _multi = len(_paras) > 1
+        if _multi:
+            text_html = "".join(f'<p class="tw-para">{_bold_only(p)}</p>' for p in _paras)
+            txtcls = "tw-text tw-text--multi tw-text--withimg" if has_img else "tw-text tw-text--multi"
+        else:
+            text_html = head("tw-headline")
+            txtcls = "tw-text tw-text--withimg" if has_img else "tw-text"
+        # post reflexivo real fecha só com a setinha (👉), sem texto de CTA antes
+        if copy.get("cta"):
+            cta = f'<p class="tw-cta">{_esc(copy["cta"])} 👉</p>'
+        elif _multi:
+            cta = '<p class="tw-cta tw-cta--arrow-only">👉</p>'
+        else:
+            cta = ""
         _av = _tiago_avatar()
         avatar_html = (f'<div class="tw-avatar tw-avatar--photo" style="background-image:url(\'{_av}\')"></div>'
                        if _av else '<div class="tw-avatar"><span class="tw-avatar-initial">T</span></div>')
@@ -379,7 +468,7 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 '<div class="tw-user"><div class="tw-name-row"><span class="tw-name">Tiago Alves</span>'
                 f'{seal}</div>'
                 f'<span class="tw-handle">@tiago.alves.oliveira</span></div>{_X_LOGO}</header>'
-                f'<div class="{txtcls}">{head("tw-headline")}{sub("tw-subhead")}{body("tw-body")}</div>'
+                f'<div class="{txtcls}">{text_html}{sub("tw-subhead")}{body("tw-body")}</div>'
                 f'{cta}{embed}{proof}')
 
     # fallback Tiago desconhecido → tipográfico simples
@@ -470,7 +559,8 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
     if arch == "card-mock":
         name = params.get("name", "Metta")
         handle = params.get("handle", "@metta.brasil")
-        avatar = (name or "M")[0].upper()
+        _sym = _metta_symbol()
+        avatar = _sym if _sym else f'<span class="avatar-initial">{(name or "M")[0].upper()}</span>'
         # Card DARK (DNA Metta) tem palavra-accent amarela; card light (Twitter)
         # corre texto sem cor. Quebras (\n) sempre viram espaço (texto fluido).
         if params.get("theme") == "dark":
@@ -481,7 +571,7 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         cta_line = f'<p class="t-body" style="color:#1D9BF0">{_esc(copy["cta"])} →</p>' if copy.get("cta") else ""
         # Selo DOURADO = conta de organização no X (a Metta é empresa). Prova
         # social (timestamp + engajamento) desligável via params.engagement=none.
-        seal = _VERIFIED_SEAL.format(cls="verified", fill="#D9A509")
+        seal = _VERIFIED_SEAL.format(cls="verified", fill="#1D9BF0")  # azul (pedido do Nathan)
         proof = ("" if params.get("engagement") == "none"
                  else _tweet_proof(_tweet_metrics(copy.get("headline", "") + handle), "mock"))
         return (f'<div class="card"><div class="mock-head"><div class="avatar">{avatar}</div>'
@@ -594,9 +684,12 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     obj_scale = params.get("object_scale", "boxed")
 
     # Caixa de texto: o diretor de arte pode escolher por peça (copy.panel);
-    # senão vale o default do blueprint. white/dark/yellow/none.
+    # senão vale o default do blueprint. white/dark/plain/none.
+    # "yellow" fica de fora de propósito (feedback da Sofia: caixa amarela atrás
+    # de texto nunca ficou boa) — não confundir com params.block="yellow", o
+    # layout estrutural fixo do YELLOW-BLOCO/TIAGO-STORY-YELLOW-BLOCK, que é outra coisa.
     panel = str((copy or {}).get("panel") or "").strip().lower()
-    if panel not in ("white", "dark", "yellow", "plain", "none"):
+    if panel not in ("white", "dark", "plain", "none"):
         panel = str(params.get("panel", "none")).strip().lower()
 
     # head_out: headline na foto + card só com apoio (2 zonas, padrão CRM).
