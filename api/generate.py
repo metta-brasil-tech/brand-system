@@ -368,6 +368,15 @@ def _run_pipeline_inline(
         diagnostics.append(
             f"01-briefing-parser ({timings['01']}ms): marca={marca} intent={briefing.get('intent')}"
         )
+        # Modo livre (briefing por voz/texto, sem os campos estruturados do wizard):
+        # sem isso, user_headline fica vazio, o bloco do diretor de arte é pulado
+        # (guard "if ... (user_headline or '').strip()") e a peça renderiza sem
+        # copy nenhuma — o bug "briefing por voz não gera nada".
+        if not (user_headline or "").strip():
+            _tese = (briefing.get("tese_central") or "").strip()
+            if _tese:
+                user_headline = _tese
+                diagnostics.append("01-briefing-parser: user_headline vazio — usando tese_central como headline")
 
     # ============================================================
     # Skill 02 — Style selector (ou usa o forçado pelo wizard)
