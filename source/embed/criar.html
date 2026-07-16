@@ -1660,6 +1660,7 @@ function tplWizCopy() {
   // User SEMPRE fornece headline + subhead + body separados, evitando ambiguidade
   // entre "texto livre como copy" vs "texto livre como briefing pra gerar copy".
   const bud = copyBudgetFor(STATE.style);
+  const isTweet = STATE.style === 'METTA-TWEET-CARD' || STATE.style === 'TIAGO-TWITTER-CARD';
   const styleLbl = ((STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style) || {}).label || STATE.style || 'estilo';
   const cnt = (field) => `<span class="copy-count" id="cnt-${field}" data-max="${bud[field]||0}"></span>`;
   const bodyNote = bud.body === 0
@@ -1673,10 +1674,11 @@ function tplWizCopy() {
     </header>
     <div class="step-body">
       <div class="field">
-        <label class="field-label" for="copy-headline-input">Headline ${cnt('headline')}</label>
-        <textarea class="textarea" id="copy-headline-input" rows="2" placeholder="Ex: Para de demitir antes de diagnosticar.">${escapeHtml(STATE.copyHeadline)}</textarea>
-        <p class="field-hint">Frase de impacto principal. 1 sentença. Quanto mais curta, maior aparece.</p>
+        <label class="field-label" for="copy-headline-input">${isTweet ? 'Mensagem do tweet' : 'Headline'} ${cnt('headline')}</label>
+        <textarea class="textarea" id="copy-headline-input" rows="${isTweet ? 3 : 2}" placeholder="${isTweet ? 'Ex: Quanto mais você carrega o resultado nas costas, menos a operação cresce sem você.' : 'Ex: Para de demitir antes de diagnosticar.'}">${escapeHtml(STATE.copyHeadline)}</textarea>
+        <p class="field-hint">${isTweet ? 'É o texto que vai direto no corpo do tweet — só isso.' : 'Frase de impacto principal. 1 sentença. Quanto mais curta, maior aparece.'}</p>
       </div>
+      ${isTweet ? '' : `
       <div class="field">
         <label class="field-label" for="copy-subhead-input">Subheadline (opcional) ${cnt('subhead')}</label>
         <textarea class="textarea" id="copy-subhead-input" rows="2" placeholder="Ex: Em 70% dos casos, o problema é o sistema, não a pessoa.">${escapeHtml(STATE.copySubhead)}</textarea>
@@ -1692,6 +1694,7 @@ function tplWizCopy() {
         <input type="text" class="input" id="copy-tag-input" placeholder="Ex: EXCLUSIVO PARA DONOS DE NEGÓCIOS QUE FATURAM +R$200K/MÊS" value="${escapeHtml(STATE.copyTag)}">
         <p class="field-hint">Faixa curta em caixa alta que filtra o público — igual aos criativos reais do banco.</p>
       </div>
+      `}
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
@@ -2778,7 +2781,13 @@ function onAction(e) {
       STATE.copyTag = tg ? tg.value : '';
       // Compõe copy unificada SÓ pra preview de revisão — backend lê os 3 separados
       STATE.copy = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n');
-      goto('wiz-cta');
+      // Tweet é mensagem direta: sem subhead/body/tag e sem CTA → pula pro confirm
+      if (STATE.style === 'METTA-TWEET-CARD' || STATE.style === 'TIAGO-TWITTER-CARD') {
+        STATE.cta = '';
+        goto('wiz-confirm');
+      } else {
+        goto('wiz-cta');
+      }
       break;
     }
     case 'pick-cta-suggestion':
