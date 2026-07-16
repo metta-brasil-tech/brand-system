@@ -678,6 +678,14 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .x-logo { width: 36px; height: 36px; margin-left: auto; align-self: flex-start; color: var(--t-grey); opacity: .7; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-handle { font-size: 22px; color: var(--t-grey); line-height: 1.2; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 1; justify-content: center; }
+/* multi-parágrafo (post real de reflexão: vários blocos curtos, não 1 bloco
+   esticado no centro) — cada linha em branco no textarea vira um bloco. */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text--multi { justify-content: flex-start; padding-top: 8px; gap: 34px; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-para {
+  font-family: var(--t-text, 'Inter', sans-serif); font-size: 38px; line-height: 1.38;
+  letter-spacing: -.01em; color: var(--t-ink); margin: 0; font-weight: 500;
+}
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-para .hi { color: inherit; font-weight: 800; }
 /* print real do X: fonte de texto (nao o display da marca) + peso normal no
    corpo, só a palavra em negrito (feedback Sofia). */
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline {
@@ -690,6 +698,8 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-subhead { font-size: 36px; line-height: 1.35; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-body { font-size: 28px; line-height: 1.45; color: var(--t-grey); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-cta { font-size: 28px; color: var(--t-grey); margin: 32px 0 0; }
+/* post multi-parágrafo real: 👉 sozinho, alinhado à direita */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-cta--arrow-only { text-align: right; font-size: 44px; margin: 40px 0 0; }
 /* variant IMAGE — foto embed radius 28px ocupa a base do card */
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text--withimg { flex: 0 0 auto; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed { flex: 1; min-height: 0; margin-top: 32px; border-radius: 16px; overflow: hidden; }

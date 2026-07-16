@@ -426,12 +426,37 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 f'<div class="tmq-text layer">{head("tmq-headline")}{sub("tmq-subhead")}</div>')
 
     if arch == "tiago-twitter":
-        cta = f'<p class="tw-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
         # Variant IMAGE: foto embed (radius 28px) na base quando há imagem.
         has_img = bool(image_url)
         embed = (f'<div class="tw-embed"><div class="tw-embed-photo" '
                  f'style="background-image:url(\'{image_url}\')"></div></div>') if has_img else ""
-        txtcls = "tw-text tw-text--withimg" if has_img else "tw-text"
+        # Post reflexivo real (feedback: texto "esticado" quando é 1 bloco só
+        # centralizado) — headline com linha em branco vira vários parágrafos
+        # curtos, lidos do topo pra baixo, cada um podendo ter *negrito* no
+        # início (ex: "*A boa:* dá tempo de chegar..."). 1 parágrafo só cai no
+        # comportamento antigo (headline gigante centralizada).
+        def _bold_only(t: str) -> str:
+            # como _accent(), mas SEM o fallback de auto-negritar a última
+            # palavra — aqui cada parágrafo só fica em negrito onde o
+            # diretor de arte marcou *explicitamente* com asterisco.
+            e = _esc(t)
+            e = re.sub(r"\*([^*]+)\*", r'<span class="hi">\1</span>', e)
+            return e.replace("\n", "<br>")
+        _paras = [p.strip() for p in re.split(r"\n\s*\n", copy.get("headline", "") or "") if p.strip()]
+        _multi = len(_paras) > 1
+        if _multi:
+            text_html = "".join(f'<p class="tw-para">{_bold_only(p)}</p>' for p in _paras)
+            txtcls = "tw-text tw-text--multi tw-text--withimg" if has_img else "tw-text tw-text--multi"
+        else:
+            text_html = head("tw-headline")
+            txtcls = "tw-text tw-text--withimg" if has_img else "tw-text"
+        # post reflexivo real fecha só com a setinha (👉), sem texto de CTA antes
+        if copy.get("cta"):
+            cta = f'<p class="tw-cta">{_esc(copy["cta"])} 👉</p>'
+        elif _multi:
+            cta = '<p class="tw-cta tw-cta--arrow-only">👉</p>'
+        else:
+            cta = ""
         _av = _tiago_avatar()
         avatar_html = (f'<div class="tw-avatar tw-avatar--photo" style="background-image:url(\'{_av}\')"></div>'
                        if _av else '<div class="tw-avatar"><span class="tw-avatar-initial">T</span></div>')
@@ -443,7 +468,7 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 '<div class="tw-user"><div class="tw-name-row"><span class="tw-name">Tiago Alves</span>'
                 f'{seal}</div>'
                 f'<span class="tw-handle">@tiago.alves.oliveira</span></div>{_X_LOGO}</header>'
-                f'<div class="{txtcls}">{head("tw-headline")}{sub("tw-subhead")}{body("tw-body")}</div>'
+                f'<div class="{txtcls}">{text_html}{sub("tw-subhead")}{body("tw-body")}</div>'
                 f'{cta}{embed}{proof}')
 
     # fallback Tiago desconhecido → tipográfico simples
