@@ -397,7 +397,9 @@ button { all: unset; }
   display: flex; flex-direction: column; gap: 28px; box-shadow: 0 24px 80px rgba(12,22,27,.12);
 }
 .ad[data-arch="card-mock"] .mock-head { display: flex; align-items: center; gap: 20px; }
-.ad[data-arch="card-mock"] .avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--m-yellow); display: flex; align-items: center; justify-content: center; font-family: var(--m-display); font-weight: 900; font-size: 52px; color: var(--m-night-10); }
+.ad[data-arch="card-mock"] .avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--m-night-10); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.ad[data-arch="card-mock"] .avatar svg { width: 54%; height: 54%; }
+.ad[data-arch="card-mock"] .avatar-initial { font-family: var(--m-display); font-weight: 900; font-size: 52px; color: var(--m-yellow); }
 .ad[data-arch="card-mock"] .who { display: flex; flex-direction: column; }
 .ad[data-arch="card-mock"] .who .name { font-family: var(--m-text); font-weight: 700; font-size: 34px; color: var(--m-night-10); display: flex; align-items: center; gap: 8px; }
 .ad[data-arch="card-mock"] .who .handle { font-family: var(--m-text); font-size: 28px; color: var(--m-night-40); }

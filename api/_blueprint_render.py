@@ -175,6 +175,19 @@ def _tiago_avatar() -> str:
     return _TIAGO_AVATAR_CACHE
 
 
+_METTA_SYMBOL_CACHE = None
+def _metta_symbol() -> str:
+    """SVG do símbolo real da Metta — avatar do tweet (não a letra 'M')."""
+    global _METTA_SYMBOL_CACHE
+    if _METTA_SYMBOL_CACHE is None:
+        p = _ROOT / "assets" / "symbols" / "simbolo_metta_amarelo.svg"
+        try:
+            _METTA_SYMBOL_CACHE = p.read_text(encoding="utf-8")
+        except Exception:
+            _METTA_SYMBOL_CACHE = ""
+    return _METTA_SYMBOL_CACHE
+
+
 # ---------------------------------------------------------------------------
 # Tweet-card REAL — o que separa um "card com avatar" de um PRINT de tweet:
 # selo verificado de verdade (dourado = organização no X → Metta; azul = pessoa
@@ -502,7 +515,8 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
     if arch == "card-mock":
         name = params.get("name", "Metta")
         handle = params.get("handle", "@metta.brasil")
-        avatar = (name or "M")[0].upper()
+        _sym = _metta_symbol()
+        avatar = _sym if _sym else f'<span class="avatar-initial">{(name or "M")[0].upper()}</span>'
         # Card DARK (DNA Metta) tem palavra-accent amarela; card light (Twitter)
         # corre texto sem cor. Quebras (\n) sempre viram espaço (texto fluido).
         if params.get("theme") == "dark":
@@ -513,7 +527,7 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         cta_line = f'<p class="t-body" style="color:#1D9BF0">{_esc(copy["cta"])} →</p>' if copy.get("cta") else ""
         # Selo DOURADO = conta de organização no X (a Metta é empresa). Prova
         # social (timestamp + engajamento) desligável via params.engagement=none.
-        seal = _VERIFIED_SEAL.format(cls="verified", fill="#D9A509")
+        seal = _VERIFIED_SEAL.format(cls="verified", fill="#1D9BF0")  # azul (pedido do Nathan)
         proof = ("" if params.get("engagement") == "none"
                  else _tweet_proof(_tweet_metrics(copy.get("headline", "") + handle), "mock"))
         return (f'<div class="card"><div class="mock-head"><div class="avatar">{avatar}</div>'
