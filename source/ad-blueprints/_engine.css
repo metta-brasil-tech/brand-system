@@ -393,7 +393,7 @@ button { all: unset; }
 /* (6) card-mock — cartão de rede social (tweet) */
 .ad[data-arch="card-mock"] { display: flex; align-items: center; justify-content: center; background: var(--m-night-95); }
 .ad[data-arch="card-mock"] .card {
-  width: 920px; background: var(--m-white); border-radius: 32px; padding: 64px;
+  width: 920px; background: var(--m-white); border-radius: 16px; padding: 64px;
   display: flex; flex-direction: column; gap: 28px; box-shadow: 0 24px 80px rgba(12,22,27,.12);
 }
 .ad[data-arch="card-mock"] .mock-head { display: flex; align-items: center; gap: 20px; }
@@ -406,7 +406,8 @@ button { all: unset; }
 .ad[data-arch="card-mock"] .verified { width: 34px; height: 34px; flex-shrink: 0; }
 .ad[data-arch="card-mock"] .x-logo { width: 40px; height: 40px; margin-left: auto; align-self: flex-start; color: var(--m-night-40); opacity: .7; }
 .ad[data-arch="card-mock"] .t-head { font-family: var(--m-text); font-weight: 700; font-size: 56px; line-height: 1.12; text-transform: none; letter-spacing: -.02em; color: var(--m-night-10); }
-.ad[data-arch="card-mock"] .t-head .hi { color: #B8860B; }
+/* print real do X não tem destaque colorido — só negrito na palavra (feedback Sofia) */
+.ad[data-arch="card-mock"] .t-head .hi { color: inherit; font-weight: 900; }
 .ad[data-arch="card-mock"] .t-body { font-size: 30px; color: var(--m-night-40); }
 /* prova social de print real: timestamp + views e barra de engajamento do X */
 .ad[data-arch="card-mock"] .mock-meta { font-family: var(--m-text); font-size: 27px; color: var(--m-night-40); padding-top: 24px; border-top: 1px solid #EFF3F4; }
@@ -422,7 +423,7 @@ button { all: unset; }
 .ad[data-arch="card-mock"][data-theme="dark"] .who .name { color: var(--m-white); }
 .ad[data-arch="card-mock"][data-theme="dark"] .who .handle { color: var(--m-night-85); }
 .ad[data-arch="card-mock"][data-theme="dark"] .t-head { color: var(--m-white); }
-.ad[data-arch="card-mock"][data-theme="dark"] .t-head .hi { color: var(--m-yellow); }
+.ad[data-arch="card-mock"][data-theme="dark"] .t-head .hi { color: inherit; font-weight: 900; }
 .ad[data-arch="card-mock"][data-theme="dark"] .t-body { color: var(--m-night-85); }
 .ad[data-arch="card-mock"][data-theme="dark"] .x-logo { color: var(--m-night-85); }
 .ad[data-arch="card-mock"][data-theme="dark"] .mock-meta,
@@ -660,12 +661,15 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-handle { font-size: 22px; color: var(--t-grey); line-height: 1.2; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 1; justify-content: center; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline { font-size: 52px; line-height: 1.2; letter-spacing: -.02em; color: var(--t-ink); margin: 0; word-break: break-word; }
+/* print real do X não tem destaque colorido nem bloco — só negrito na palavra (feedback Sofia) */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .t-head .hi,
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline .hi { color: inherit; background: none; padding: 0; font-weight: 900; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-subhead { font-size: 36px; line-height: 1.35; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-body { font-size: 28px; line-height: 1.45; color: var(--t-grey); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-cta { font-size: 28px; color: var(--t-grey); margin: 32px 0 0; }
 /* variant IMAGE — foto embed radius 28px ocupa a base do card */
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text--withimg { flex: 0 0 auto; }
-.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed { flex: 1; min-height: 0; margin-top: 32px; border-radius: 28px; overflow: hidden; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed { flex: 1; min-height: 0; margin-top: 32px; border-radius: 16px; overflow: hidden; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-embed-photo { width: 100%; height: 100%; background-size: cover; background-position: center; }
 /* prova social de print real: timestamp + views e barra de engajamento do X */
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-meta { font-size: 24px; color: var(--t-grey); margin-top: 36px; padding-top: 22px; border-top: 1px solid #EFF3F4; }
