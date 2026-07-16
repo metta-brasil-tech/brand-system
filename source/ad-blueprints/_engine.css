@@ -405,7 +405,9 @@ button { all: unset; }
 .ad[data-arch="card-mock"] .who .handle { font-family: var(--m-text); font-size: 28px; color: var(--m-night-40); }
 .ad[data-arch="card-mock"] .verified { width: 34px; height: 34px; flex-shrink: 0; }
 .ad[data-arch="card-mock"] .x-logo { width: 40px; height: 40px; margin-left: auto; align-self: flex-start; color: var(--m-night-40); opacity: .7; }
-.ad[data-arch="card-mock"] .t-head { font-family: var(--m-text); font-weight: 700; font-size: 56px; line-height: 1.12; text-transform: none; letter-spacing: -.02em; color: var(--m-night-10); }
+/* print real do X: corpo do tweet é peso normal, só a palavra em negrito
+   (feedback Sofia — "tudo em negrito" não é como o X renderiza). */
+.ad[data-arch="card-mock"] .t-head { font-family: var(--m-text); font-weight: 500; font-variation-settings: normal; font-size: 56px; line-height: 1.12; text-transform: none; letter-spacing: -.02em; color: var(--m-night-10); }
 /* print real do X não tem destaque colorido — só negrito na palavra (feedback Sofia) */
 .ad[data-arch="card-mock"] .t-head .hi { color: inherit; font-weight: 900; }
 .ad[data-arch="card-mock"] .t-body { font-size: 30px; color: var(--m-night-40); }
@@ -676,7 +678,12 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .x-logo { width: 36px; height: 36px; margin-left: auto; align-self: flex-start; color: var(--t-grey); opacity: .7; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-handle { font-size: 22px; color: var(--t-grey); line-height: 1.2; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 1; justify-content: center; }
-.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline { font-size: 52px; line-height: 1.2; letter-spacing: -.02em; color: var(--t-ink); margin: 0; word-break: break-word; }
+/* print real do X: fonte de texto (nao o display da marca) + peso normal no
+   corpo, só a palavra em negrito (feedback Sofia). */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline {
+  font-family: var(--t-text, 'Inter', sans-serif); font-weight: 500; font-variation-settings: normal;
+  font-size: 46px; line-height: 1.25; letter-spacing: -.01em; text-transform: none; color: var(--t-ink); margin: 0; word-break: break-word;
+}
 /* print real do X não tem destaque colorido nem bloco — só negrito na palavra (feedback Sofia) */
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .t-head .hi,
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-headline .hi { color: inherit; background: none; padding: 0; font-weight: 900; }
