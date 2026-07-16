@@ -585,8 +585,11 @@ def _run_pipeline_inline(
                     _FAM_MAP.get(chosen_model_id, "OUTROS"), {}) or {}).get("posicionamento_real")) or {}
                 if _pr:
                     _pos_hint = (f"\n\nPOSIÇÃO REAL DA FAMÍLIA (banco medido — SIGA a convenção): "
-                                 f"âncora {_pr.get('ancora')}, o texto começa ~{_pr.get('texto_comeca_pct')}% "
-                                 f"do topo e ocupa ~{_pr.get('bloco_altura_pct')}% da altura.")
+                                 f"âncora {_pr.get('ancora')}, ALINHAMENTO {_pr.get('alinhamento')}, "
+                                 f"o texto começa ~{_pr.get('texto_comeca_pct')}% do topo e ocupa "
+                                 f"~{_pr.get('bloco_altura_pct')}% da altura. RESPIRO: {_pr.get('respiro')}. "
+                                 f"O banco real da Metta CENTRALIZA nas famílias de fundo chapado "
+                                 f"(YELLOW/tipográfica/objeto) e deixa muito espaço — NUNCA lote o texto à esquerda.")
             except Exception:
                 pass
             ad_directives = _ad_direct(

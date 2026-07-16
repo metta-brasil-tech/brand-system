@@ -216,7 +216,9 @@
     "texto_comeca_pct": 27,
     "bloco_altura_pct": 49,
     "ancora": "meio",
-    "range": "8-60"
+    "range": "8-60",
+    "alinhamento": "lateral (card num canto) ou centro",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "B": {
@@ -309,7 +311,9 @@
     "texto_comeca_pct": 24,
     "bloco_altura_pct": 54,
     "ancora": "topo",
-    "range": "11-52"
+    "range": "11-52",
+    "alinhamento": "lateral/centro",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "D": {
@@ -366,7 +370,9 @@
     "texto_comeca_pct": 13,
     "bloco_altura_pct": 62,
     "ancora": "topo",
-    "range": "8-25"
+    "range": "8-25",
+    "alinhamento": "centro ou topo",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "C": {
@@ -414,7 +420,9 @@
     "texto_comeca_pct": 16,
     "bloco_altura_pct": 53,
     "ancora": "meio",
-    "range": "8-24"
+    "range": "8-24",
+    "alinhamento": "centralizado",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "YELLOW": {
@@ -534,7 +542,9 @@
     "texto_comeca_pct": 18,
     "bloco_altura_pct": 62,
     "ancora": "meio",
-    "range": "8-38"
+    "range": "8-38",
+    "alinhamento": "centralizado",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "DARK": {
@@ -582,7 +592,9 @@
     "texto_comeca_pct": 21,
     "bloco_altura_pct": 55,
     "ancora": "meio",
-    "range": "18-23"
+    "range": "18-23",
+    "alinhamento": "centralizado",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "LIGHT": {
@@ -639,7 +651,9 @@
     "texto_comeca_pct": 35,
     "bloco_altura_pct": 41,
     "ancora": "meio",
-    "range": "22-58"
+    "range": "22-58",
+    "alinhamento": "centralizado",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "NEWS": {
@@ -660,7 +674,9 @@
     "texto_comeca_pct": 41,
     "bloco_altura_pct": 30,
     "ancora": "meio",
-    "range": "41"
+    "range": "41",
+    "alinhamento": "centralizado",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "OUTROS": {
@@ -699,7 +715,9 @@
     "texto_comeca_pct": 29,
     "bloco_altura_pct": 47,
     "ancora": "meio",
-    "range": "12-39"
+    "range": "12-39",
+    "alinhamento": "centralizado",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "LOGO": {
@@ -720,7 +738,9 @@
     "texto_comeca_pct": 20,
     "bloco_altura_pct": 56,
     "ancora": "meio",
-    "range": "20"
+    "range": "20",
+    "alinhamento": "centralizado",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
    }
   },
   "TIAGO": {
@@ -764,7 +784,10 @@
      "linguagem": "L8"
     }
    ],
-   "posicionamento_real": null
+   "posicionamento_real": {
+    "alinhamento": "centralizado",
+    "respiro": "generoso — o banco real deixa MUITO espaço livre; não lotar o texto"
+   }
   }
  },
  "linguagens": {

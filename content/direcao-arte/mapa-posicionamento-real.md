@@ -40,6 +40,27 @@ O motor deve **respeitar a convenção da família da peça**, não aplicar um p
 colar na logo — o resto (âncora + altura do bloco) vem da família, alimentado no diretor
 de arte a partir deste mapa.
 
+## Alinhamento e respiro (o eixo que faltava)
+
+Medir só a posição vertical não bastava — o que mais diferencia o banco real é
+**alinhamento** e **respiro**. Medido nas famílias de fundo chapado (onde dá pra isolar
+o texto do fundo):
+
+- **O banco real CENTRALIZA.** YELLOW = 9 de 12 centralizadas; C, DARK, LIGHT, OUTROS =
+  centro dominante. Nossas peças vinham quase todas **à esquerda** — divergência sistêmica.
+- **O banco real RESPIRA.** Deixa muito espaço livre (fundo/objeto respira); o texto não
+  lota. Nossas peças **lotavam** (texto encostado, elementos sobrepostos).
+
+Exemplo-prova: o "o segredo" real é **centralizado**, com a mão no topo, o homem caindo
+embaixo e um **card branco de rodapé** — tudo separado, muito amarelo livre. A nossa recria
+saiu à esquerda, lotada, sem o rodapé. Por isso "tampava o fundo".
+
+**Ressalva metodológica:** nas famílias de FOTO (A/B/D) a medição automática de alinhamento
+se contamina com as bordas da própria foto, então ali o alinhamento fica marcado como
+"lateral/variável" — o card pode legitimamente ficar num canto. O achado forte de
+"centralizar + respirar" vale com certeza pras famílias de fundo chapado (YELLOW, tipográfica,
+objeto). Gravado em `posicionamento_real.alinhamento` / `.respiro` por família.
+
 ## Cobertura
 - **Famílias:** 66/66 peças mapeadas.
 - **Linguagens (L1–L8):** todas taggeadas (43 completadas em 2026-07-13; antes só a família A tinha).

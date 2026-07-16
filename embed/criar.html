@@ -1089,7 +1089,7 @@ button.stepper-item.done:hover {
 const STATE = {
   brand: null,          // 'metta' | 'tiago'
   mode: null,           // 'wizard' | 'audio'
-  format: null,         // 'post' | 'carrossel' | 'ad-single' | 'ad-story'
+  format: null,         // 'feed' | 'sqr' | 'ad-story'  (proporção da peça)
   style: null,          // ID do estilo do banco
   imageSource: null,    // 'generate' (IA) | 'search' (busca web) | 'none' — definido em wiz-imagem
   imageStylePreset: 'fotorrealista', // preset visual escolhido nos cards (default seguro)
@@ -1254,11 +1254,14 @@ const COPY_BUDGET_DEFAULT = { headline: 90, subhead: 70, body: 150 };
 function copyBudgetFor(id) { return COPY_BUDGET[id] || COPY_BUDGET_DEFAULT; }
 
 /* ----------- DATA: formatos ----------- */
+// Formato = PROPORÇÃO real da peça (o botão diz o tamanho que sai). Antes tinha
+// "Post simples" e "Ad single" que geravam a MESMA peça (feed 4:5) — duplicata só de
+// rótulo. E "carrossel" é MODO próprio (passo 2), não formato. Aqui ficam as 3
+// proporções que o backend (_resolve_format) realmente entrega: feed/sqr/story.
 const FORMATS = [
-  { id: 'post',      label: 'Post simples',  desc: '1 imagem 1080×1350 (4:5).',                  icon: 'square'  },
-  { id: 'carrossel', label: 'Carrossel',     desc: '5 a 10 cards 1080×1350 com fluxo narrativo.', icon: 'layers'  },
-  { id: 'ad-single', label: 'Ad single',     desc: 'Anúncio Meta — 1 imagem 1:1 ou 4:5.',         icon: 'target'  },
-  { id: 'ad-story',  label: 'Ad story',      desc: 'Anúncio story 9:16 (1080×1920).',             icon: 'phone'   }
+  { id: 'feed',     label: 'Feed 4:5',     desc: '1080×1350. Vertical — o padrão do feed.',   icon: 'portrait' },
+  { id: 'sqr',      label: 'Quadrado 1:1', desc: '1080×1080. Quadrado de feed ou anúncio.',    icon: 'square'   },
+  { id: 'ad-story', label: 'Story 9:16',   desc: '1080×1920. Tela cheia — Stories e Reels.',   icon: 'phone'    }
 ];
 
 /* ----------- ICONS ----------- */
@@ -1272,6 +1275,7 @@ const ICONS = {
   refresh:   '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
   edit:      '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
   square:    '<rect x="3" y="3" width="18" height="18" rx="2"/>',
+  portrait:  '<rect x="6" y="3" width="12" height="18" rx="2"/>',
   layers:    '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
   target:    '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
   phone:     '<rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/>',
@@ -1378,7 +1382,7 @@ function tplMode() {
     <div class="step-body">
       <div class="choice-grid">
         <button class="choice ${STATE.mode === 'wizard' ? 'selected' : ''}" data-action="pick-mode" data-value="wizard">
-          <div class="choice-icon">${icon('layers', 24)}</div>
+          <div class="choice-icon">${icon('square', 24)}</div>
           <h3 class="choice-title">Guiado (1 peça)</h3>
           <p class="choice-desc">Formato, estilo, copy e CTA, um campo de cada vez. Bom pra primeira vez.</p>
           <span class="choice-tag">~5 perguntas</span>
@@ -1428,7 +1432,7 @@ function tplWizFormat() {
 }
 
 // Mapeia STATE.format pro grupo aceito por style.formatos[]:
-// 'post' / 'carrossel' / 'ad-single' → 'feed' · 'ad-story' → 'story'
+// 'feed' / 'sqr' → 'feed' · 'ad-story' → 'story'
 function _styleFormatGroup(stateFormat) {
   return stateFormat === 'ad-story' ? 'story' : 'feed';
 }
@@ -1821,8 +1825,9 @@ function tplAudioRecord() {
 
 function tplAudioConfirm() {
   const t = STATE.audioTranscript || '';
-  const guessFormat = /story/i.test(t) ? 'ad-story' : (/carrossel/i.test(t) ? 'carrossel' : (/ad|an[uú]ncio/i.test(t) ? 'ad-single' : 'post'));
-  const formatLabel = (FORMATS.find(f => f.id === guessFormat) || {}).label || 'Post simples';
+  // Modo livre gera peça única — não tenta "carrossel" (esse é modo próprio, passo 2).
+  const guessFormat = /story|reels?/i.test(t) ? 'ad-story' : (/quadrad|1:1|1x1/i.test(t) ? 'sqr' : 'feed');
+  const formatLabel = (FORMATS.find(f => f.id === guessFormat) || {}).label || 'Feed 4:5';
 
   return renderStepper() + `
     <header class="step-head">
@@ -2490,15 +2495,23 @@ function back() {
 
 // Guard contra double-click ou race entre render() e setTimeout(nextFromCurrent)
 let _advancing = false;
-function autoAdvance() {
+function autoAdvance(el) {
   if (_advancing) return;   // já rolou um click no mesmo step — ignora
   _advancing = true;
-  render();                  // re-renderiza pra mostrar .selected
+  // Feedback instantâneo SEM reconstruir o stage: marca só o card clicado no DOM vivo.
+  // Antes chamávamos render() (teardown do innerHTML) só pra pintar .selected — isso
+  // derrubava o estado :hover e fazia o card "pular" (cair do translateY -2px) antes
+  // de navegar, dando sensação de clique perdido. Tocar a classe direto evita o pulo.
+  if (el && el.classList && el.classList.contains('choice')) {
+    const grid = el.closest('.choice-grid');
+    if (grid) grid.querySelectorAll('.choice.selected').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
   setTimeout(() => {
     nextFromCurrent();
     // _advancing reseta no próximo render do step novo (a flag fica true até trocar de step)
     _advancing = false;
-  }, 180);
+  }, 140);
 }
 
 function nextFromCurrent() {
@@ -2595,15 +2608,15 @@ function onAction(e) {
   switch (action) {
     case 'pick-brand':
       STATE.brand = value;
-      autoAdvance();
+      autoAdvance(el);
       break;
     case 'pick-mode':
       STATE.mode = value;
-      autoAdvance();
+      autoAdvance(el);
       break;
     case 'pick-format':
       STATE.format = value;
-      autoAdvance();
+      autoAdvance(el);
       break;
     case 'pick-style':
       STATE.style = value;
@@ -2611,11 +2624,11 @@ function onAction(e) {
       STATE.imageSource = null;
       STATE.searchQuery = '';
       STATE.selectedImageUrl = '';
-      autoAdvance();
+      autoAdvance(el);
       break;
     case 'pick-image-source':
       STATE.imageSource = value;
-      autoAdvance();
+      autoAdvance(el);
       break;
     case 'run-search': {
       const inp = document.getElementById('search-input');
@@ -2921,7 +2934,7 @@ async function generateReal(briefing) {
         // Define persona/ambiente/registro emocional da foto no skill 04.
         ...(STATE.imageSource === 'generate' && STATE.avatarSegment ? { avatar_segment: STATE.avatarSegment } : {}),
         ...(STATE.imageSource === 'generate' && STATE.avatarVariant ? { avatar_variant: STATE.avatarVariant } : {}),
-        // Formato escolhido pelo wizard (post/carrossel/ad-single/ad-story) — backend
+        // Formato escolhido pelo wizard (feed/sqr/ad-story) — backend
         // resolve pra story/feed/sqr. Sem isso, backend cai no que skill 01 inferiu
         // do texto livre, que pode estar errado.
         ...(STATE.format ? { format: STATE.format } : {}),
