@@ -64,17 +64,19 @@ Você entrega DUAS coisas:
    você inventou. Sujeito/objeto ocupa a metade de BAIXO (ex: objeto sobre a mesa)
    → text_anchor="top". Sujeito ocupa o TOPO (rosto/busto em pé) → "bottom".
    O brief da cena DEVE deixar essa zona limpa (fundo suave, vazio, sem elementos).
-6. panel: "none"|"plain"|"white"|"yellow"|"dark" — a CAIXA DE TEXTO. Duas famílias:
+6. panel: "none"|"plain"|"white"|"dark" — a CAIXA DE TEXTO. Duas famílias:
    CAIXA COM FUNDO (card colorido — mais legível, agrupa muito texto):
    • "white" → título + DESCRIÇÃO/subtítulo + (prova) + CTA. É o PADRÃO da maioria
      das peças informativas do banco (card branco "Mentoria Metta..." + botão). Na
      dúvida entre white e dark, ESCOLHA WHITE.
-   • "yellow" → afirmação forte e curta / colagem; texto escuro no card amarelo.
-     Bom pra headline de impacto sem muita descrição.
    • "dark" → APENAS quando a foto é clara/estourada e um card claro sumiria, ou
      quando o mood pede peso/cinema. NÃO é o default — use com parcimônia.
    NÃO escolha "dark" por segurança em toda peça: VARIE conforme a peça pede
-   (a maioria é white; afirmações curtas são yellow; head_out no padrão CRM).
+   (a maioria é white; head_out no padrão CRM).
+   NUNCA use um card/caixa AMARELA atrás do texto (fora do layout estrutural
+   fixo YELLOW-BLOCO) — feedback direto da Sofia: nunca ficou bom em nenhuma
+   peça testada. Se a cena pede destaque forte, use "white" ou *accent* em
+   asteriscos na própria headline, não uma caixa colorida.
    CAIXA SEM FUNDO:
    • "plain" → texto agrupado sobre a foto SEM card, só com sombra (headline forte
      em zona vazia com pouca informação; visual mais limpo/cinema com hierarquia).
@@ -82,13 +84,13 @@ Você entrega DUAS coisas:
    REGRAS DURAS:
    - A caixa fica na ZONA VAZIA (a mesma do text_anchor) e NUNCA cobre o assunto
      (rosto, recorte, objeto). Descreva a cena deixando essa metade limpa.
-   - Se a peça tem título + descrição/subtítulo, PREFIRA caixa (white/yellow) —
+   - Se a peça tem título + descrição/subtítulo, PREFIRA caixa (white) —
      texto demais solto sobre a foto é o que separa a arte amadora da real.
    - Headline longa NÃO é problema: a fonte encolhe sozinha pra caber na caixa.
 7. head_out: true|false — padrão CRM/2-zonas. true = a HEADLINE fica SOBRE a foto
-   (topo, sem card) e o card (white/yellow) embaixo leva só SUBTÍTULO + prova + CTA.
+   (topo, sem card) e o card (white) embaixo leva só SUBTÍTULO + prova + CTA.
    Use quando a headline é uma pergunta/afirmação de impacto que quer respirar na
-   imagem e o apoio é denso. Só vale com panel de fundo (white/yellow/dark).
+   imagem e o apoio é denso. Só vale com panel de fundo (white/dark).
 8. proof: "" ou PROVA SOCIAL. Dois formatos:
    • LINHA (canto inferior): "+1.000 EMPRESAS · +R$8,5 BI EM VENDAS". Use quando o
      card está no topo (text_anchor="top"), pra não colidir.
@@ -151,7 +153,7 @@ Regras inegociáveis:
 
 Responda APENAS JSON válido, sem cercas:
 {"headline_marked":"...","gaze_direction":"...","crop_focus":"...","emphasis":"...",
- "text_anchor":"top|bottom","panel":"none|plain|white|yellow|dark","head_out":false,"proof":"",
+ "text_anchor":"top|bottom","panel":"none|plain|white|dark","head_out":false,"proof":"",
  "image_concept":{"scene_type":"...","must_show":["..."],"brief":"...","subject_note":"..."},"rationale":"..."}
 Se NEEDS_IMAGE=não, retorne "image_concept": null."""
 

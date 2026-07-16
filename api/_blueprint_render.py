@@ -134,6 +134,25 @@ def _cta(copy: dict, cls: str = "") -> str:
 #   none | tl | tr | bl | br | center.
 # ---------------------------------------------------------------------------
 _BRAND_DIR = _BLUEPRINTS_DIR / "_brand"
+_TIAGO_SIG_DIR = _ROOT / "assets" / "tiago" / "assinatura"
+
+# Fundo aproximado por tema, pra o sistema de assinatura decidir a variante.
+_THEME_BG = {"dark": "#0C161B", "light": "#FAFCFD", "yellow": "#FFBE18", "paper": "#12201A"}
+
+try:  # sistema contrast-aware de seleção de assinatura (opcional; fallback binário)
+    from _brand_signature import pick_signature as _pick_signature
+except Exception:  # pragma: no cover
+    _pick_signature = None
+
+
+def _pick_sig(bg_hex: str, marca: str, intent: str = "default"):
+    """Escolhe a variante de assinatura/logo pro fundo. None → cai no binário."""
+    if _pick_signature is None:
+        return None
+    try:
+        return _pick_signature(bg_hex, brand=str(marca), intent=intent)
+    except Exception:
+        return None
 _METTA_NO_BRAND = {"card-mock", "logo-wall"}                       # mock/UI falsa: sem logo
 _METTA_COVER_ARCH = {"photo-full", "photo-side", "photo-band"}     # covers ganham eyebrow categoria
 _TIAGO_SIG_ARCH = {"tiago-editorial-hero", "tiago-editorial-dark",
@@ -235,15 +254,28 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
             return ""
         if not is_tiago and arch in _METTA_NO_BRAND:
             return ""
+    # Cor da assinatura/logo pelo FUNDO — sistema contrast-aware (_brand_signature),
+    # não mais binário. Nos casos comuns escolhe a mesma versão que antes (sem
+    # regressão), mas pela razão certa: corrige "paper" (fundo escuro) e habilita os
+    # especiais amarelo/cinza quando params.sig_intent = "accent"/"subtle".
+    bg_hex = _THEME_BG.get(str(theme).lower(), _THEME_BG["dark"])
+    intent = str(params.get("sig_intent") or "default").strip().lower()
+    pick = _pick_sig(bg_hex, marca, intent)
     dark = theme == "dark"
     if is_tiago:
-        svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
+        svg = _read(_TIAGO_SIG_DIR / f"assinatura-{pick.variant}.svg") if pick else ""
+        if not svg:  # fallback binário se o sistema/arquivo faltar
+            svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
         # Editoriais levam a assinatura no TOPO (igual às refs de carrossel do Tiago);
         # hero entre as eyebrows (centro), os demais à direita. Outros archetypes: rodapé.
         cls = "brand-sig"
         default_pos = "center" if arch == "tiago-editorial-hero" else ("tr" if arch in _TIAGO_SIG_ARCH else "br")
     else:
-        svg = _read(_BRAND_DIR / ("logo_metta_colorido_h.svg" if dark else "logo_metta_colorido_escuro_h.svg"))
+        # Corner Metta = logo colorido (símbolo + wordmark). A variante do sistema dá
+        # a polaridade da tinta: branco/amarelo = tinta clara (fundo escuro) → logo_h;
+        # escuro/cinza = tinta escura (fundo claro/amarelo) → logo_escuro_h.
+        light_ink = pick.variant in ("branco", "amarelo") if pick else dark
+        svg = _read(_BRAND_DIR / ("logo_metta_colorido_h.svg" if light_ink else "logo_metta_colorido_escuro_h.svg"))
         cls, default_pos = "brand-logo", "tl"
     if not svg:
         return ""
@@ -594,9 +626,12 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     obj_scale = params.get("object_scale", "boxed")
 
     # Caixa de texto: o diretor de arte pode escolher por peça (copy.panel);
-    # senão vale o default do blueprint. white/dark/yellow/none.
+    # senão vale o default do blueprint. white/dark/plain/none.
+    # "yellow" fica de fora de propósito (feedback da Sofia: caixa amarela atrás
+    # de texto nunca ficou boa) — não confundir com params.block="yellow", o
+    # layout estrutural fixo do YELLOW-BLOCO/TIAGO-STORY-YELLOW-BLOCK, que é outra coisa.
     panel = str((copy or {}).get("panel") or "").strip().lower()
-    if panel not in ("white", "dark", "yellow", "plain", "none"):
+    if panel not in ("white", "dark", "plain", "none"):
         panel = str(params.get("panel", "none")).strip().lower()
 
     # head_out: headline na foto + card só com apoio (2 zonas, padrão CRM).
