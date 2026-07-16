@@ -601,21 +601,37 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-photo-raw"] { background: var(--t-ink); }
 .ad[data-marca="tiago"][data-arch="tiago-photo-raw"] .tpr-photo { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 1; }
 
-/* (T8) tiago-notes — mock app Notas iPhone centralizado */
+/* (T8) tiago-notes — mock app Notas iPhone centralizado
+   Fidelidade ao app real (feedback Sofia): fonte de sistema (SF Pro, nao a
+   fonte da marca) e status bar com icones reais (sinal/wifi/bateria), nao
+   texto de bolinhas. */
 .ad[data-marca="tiago"][data-arch="tiago-notes"] { background: #E5E5EA; display: flex; align-items: center; justify-content: center; }
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-phone { width: 620px; min-height: 960px; background: var(--t-white); border-radius: 24px; box-shadow: 0 8px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; overflow: hidden; }
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-statusbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 28px 8px; font-size: 18px; font-weight: 600; color: var(--t-ink); }
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 28px 14px; border-bottom: 1px solid rgba(0,0,0,.10); }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-phone {
+  width: 620px; min-height: 960px; background: var(--t-white); border-radius: 24px; box-shadow: 0 8px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-statusbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 32px 6px; font-size: 19px; font-weight: 600; color: var(--t-ink); letter-spacing: -.01em; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-status-icons { display: flex; align-items: center; gap: 7px; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-status-icons svg { display: block; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 22px 14px; border-bottom: 1px solid rgba(0,0,0,.10); }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-back { font-size: 20px; color: var(--t-yellow); font-weight: 400; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-actions { font-size: 20px; color: var(--t-yellow); display: flex; gap: 20px; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-notes-body { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; gap: 18px; }
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-headline { font-size: 30px; line-height: 1.2; letter-spacing: -.01em; color: var(--t-ink); margin: 0; background: linear-gradient(180deg, transparent 55%, rgba(255,204,0,.6) 55%); display: inline; padding: 0 2px; font-weight: 700; }
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-headline {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  font-size: 30px; line-height: 1.32; letter-spacing: -.01em; color: var(--t-ink); margin: 0;
+  font-weight: 600; font-variation-settings: normal; text-transform: none;
+}
+/* marca-texto do Notas: span interno com box-decoration-break (clona o fundo
+   por linha, sem o bug do gradiente cortando só 1 linha). Real: highlight
+   inteiro do trecho selecionado, sem sublinhado. */
+.ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-hl {
+  background: #FFE066; box-decoration-break: clone; -webkit-box-decoration-break: clone; padding: .02em .12em;
+}
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-subhead { font-size: 20px; line-height: 1.45; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-body { font-size: 18px; line-height: 1.55; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-list { font-size: 18px; line-height: 1.55; color: var(--t-ink); margin: 0; padding-left: 28px; display: flex; flex-direction: column; gap: 12px; }
 .ad[data-marca="tiago"][data-arch="tiago-notes"] .tn-cta { font-size: 18px; color: var(--t-grey); margin: 8px 32px 24px; }
-/* accent amarelo seria invisível na marca-texto amarela do headline — vira ink sublinhado */
-.ad[data-marca="tiago"][data-arch="tiago-notes"] .t-head .hi { color: var(--t-ink); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
 
 /* (T9) tiago-story-hero — story foto bleed + headline gigante centrada + pill */
 .ad[data-marca="tiago"][data-arch="tiago-story-hero"] { background: var(--t-ink); }

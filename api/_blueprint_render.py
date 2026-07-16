@@ -204,6 +204,20 @@ _VERIFIED_SEAL = (
 _X_LOGO = (
     '<svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" '
     'd="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>')
+# ícones reais de status bar iOS (sinal/wifi/bateria) — mock de UI real,
+# feedback Sofia: texto de bolinhas ("●●●●") não parece uma status bar real.
+_IOS_SIGNAL = (
+    '<svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor" aria-hidden="true">'
+    '<rect x="0" y="7" width="3" height="5" rx="0.8"/><rect x="4.5" y="5" width="3" height="7" rx="0.8"/>'
+    '<rect x="9" y="3" width="3" height="9" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="11.5" rx="0.8"/></svg>')
+_IOS_WIFI = (
+    '<svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true">'
+    '<path d="M8 11.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zM8 6.2c1.7 0 3.2.6 4.4 1.7l-1.4 1.5A4.3 4.3 0 0 0 8 8.2c-1.2 0-2.2.4-3 1.2L3.6 7.9A6.3 6.3 0 0 1 8 6.2zm0-4.2c3 0 5.7 1.1 7.8 3l-1.4 1.5A9 9 0 0 0 8 4.3a9 9 0 0 0-6.4 2.2L.2 5C2.3 3.1 5 2 8 2z"/></svg>')
+_IOS_BATTERY = (
+    '<svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true">'
+    '<rect x="0.75" y="0.75" width="20.5" height="10.5" rx="2.5" stroke="currentColor" stroke-opacity="0.4"/>'
+    '<rect x="2.25" y="2.25" width="17.5" height="7.5" rx="1.3" fill="currentColor"/>'
+    '<rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="currentColor" fill-opacity="0.4"/></svg>')
 _ICO = {  # ícones de ação do X (stroke, minimal — legíveis em print pequeno)
     "reply": '<svg viewBox="0 0 24 24"><path d="M21 11.3c0 3.7-3.8 6.7-8.5 6.7-.9 0-1.8-.1-2.6-.3L5.2 20l1.2-3.1C4.6 15.7 3.5 13.6 3.5 11.3 3.5 7.6 7.4 4.6 12 4.6s9 3 9 6.7z"/></svg>',
     "repost": '<svg viewBox="0 0 24 24"><path d="M7 8h8.5a3 3 0 0 1 3 3v1.5M17 16.5H8.5a3 3 0 0 1-3-3V12"/><path d="M15.5 5.5 18.5 8l-3 2.5M9 19l-3-2.5 3-2.5"/></svg>',
@@ -382,11 +396,16 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
         else:
             body_html = ""
         cta = f'<p class="tn-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
+        # headline inteiro marca-texto (como o app real quando vc seleciona e
+        # destaca) — sem *accent* parcial, que ficaria invisível dentro do highlight.
+        title_txt = _esc((copy.get("headline", "") or "").replace("*", ""))
+        title_html = f'<h1 class="t-head tn-headline"><span class="tn-hl">{title_txt}</span></h1>'
         return ('<div class="tn-phone">'
-                '<div class="tn-statusbar"><span class="tn-time">9:41</span><span class="tn-icons">●●●●● 100%</span></div>'
+                f'<div class="tn-statusbar"><span class="tn-time">9:41</span>'
+                f'<span class="tn-status-icons">{_IOS_SIGNAL}{_IOS_WIFI}{_IOS_BATTERY}</span></div>'
                 '<div class="tn-navbar"><span class="tn-back">‹ Notas</span>'
                 '<span class="tn-actions"><span>…</span><span>OK</span></span></div>'
-                f'<div class="tn-notes-body">{head("tn-headline")}{sub("tn-subhead")}{body_html}</div>'
+                f'<div class="tn-notes-body">{title_html}{sub("tn-subhead")}{body_html}</div>'
                 f'{cta}</div>')
 
     if arch == "tiago-story-hero":
