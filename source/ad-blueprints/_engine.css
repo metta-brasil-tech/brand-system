@@ -669,7 +669,10 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-story-minimal"] .tmq-subhead { font-size: 28px; line-height: 1.4; color: var(--t-white); opacity: .85; margin: 0; }
 
 /* (T12) tiago-twitter — mock feed Twitter texto-only */
-.ad[data-marca="tiago"][data-arch="tiago-twitter"] { background: var(--t-white); padding: 56px 64px; display: flex; flex-direction: column; }
+/* bloco inteiro (header+mensagem+engajamento) centralizado como unidade —
+   mata o vazio branco que sobrava entre a mensagem e a barra de engajamento
+   presa no rodapé (feedback: "esticada, conteúdo só no meio, não completa"). */
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] { background: var(--t-white); padding: 56px 64px; display: flex; flex-direction: column; justify-content: center; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-header { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--t-yellow); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 4px solid var(--t-yellow); }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-avatar-initial { font-size: 52px; color: var(--t-ink); line-height: 1; font-weight: 700; }
@@ -680,7 +683,7 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-verified { width: 28px; height: 28px; flex-shrink: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .x-logo { width: 36px; height: 36px; margin-left: auto; align-self: flex-start; color: var(--t-grey); opacity: .7; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-handle { font-size: 22px; color: var(--t-grey); line-height: 1.2; }
-.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 1; justify-content: center; }
+.ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text { display: flex; flex-direction: column; gap: 24px; flex: 0 0 auto; justify-content: center; }
 /* multi-parágrafo (post real de reflexão: vários blocos curtos, não 1 bloco
    esticado no centro) — cada linha em branco no textarea vira um bloco. */
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .tw-text--multi { justify-content: flex-start; padding-top: 8px; gap: 34px; }
