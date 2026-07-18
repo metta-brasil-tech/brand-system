@@ -65,7 +65,10 @@ button { all: unset; }
 }
 .t-head {
   font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
-  font-size: 84px; line-height: .92; letter-spacing: -.01em; text-transform: uppercase;
+  /* line-height 1.0 (era .92): .92 clipava diacríticos UPPER (Ê/Ã/Õ) da linha
+     de baixo na linha de cima — bug comum em PT. 1.0 dá o ar mínimo mantendo
+     o look apertado; o auto-fit (fitHead) reajusta o tamanho pra caber. */
+  font-size: 84px; line-height: 1.0; letter-spacing: -.01em; text-transform: uppercase;
   color: var(--fg); text-wrap: balance;
 }
 .t-head .hi { color: var(--accent); }
