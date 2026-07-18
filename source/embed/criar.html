@@ -1660,7 +1660,12 @@ function tplWizCopy() {
   // User SEMPRE fornece headline + subhead + body separados, evitando ambiguidade
   // entre "texto livre como copy" vs "texto livre como briefing pra gerar copy".
   const bud = copyBudgetFor(STATE.style);
-  const isTweet = STATE.style === 'METTA-TWEET-CARD' || STATE.style === 'TIAGO-TWITTER-CARD';
+  // Todo modelo de tweet = 1 mensagem só (inclui o tweet COM imagem). Sem
+  // título/subtítulo/descrição — um tweet não tem esses campos. A imagem do
+  // TIAGO-TWITTER-CARD-IMAGE é escolhida no passo de imagem, não aqui.
+  const isTweet = STATE.style === 'METTA-TWEET-CARD'
+               || STATE.style === 'TIAGO-TWITTER-CARD'
+               || STATE.style === 'TIAGO-TWITTER-CARD-IMAGE';
   const styleLbl = ((STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style) || {}).label || STATE.style || 'estilo';
   const cnt = (field) => `<span class="copy-count" id="cnt-${field}" data-max="${bud[field]||0}"></span>`;
   const bodyNote = bud.body === 0
