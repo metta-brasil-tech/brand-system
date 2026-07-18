@@ -1053,10 +1053,12 @@ def _run_pipeline_inline(
         try:
             t_png = time.time()
             from _render_png import render_format
-            _png = render_format(rendered["html"], format_key, scale=2, downscale=True)
+            # 2x/retina (2160px): o render já acontece em 2x; downscale=False só
+            # NÃO joga a resolução fora no final. Mesmo custo de render, saída nítida.
+            _png = render_format(rendered["html"], format_key, scale=2, downscale=False)
             png_data_uri = "data:image/png;base64," + base64.b64encode(_png).decode("ascii")
             mark("png", t_png)
-            diagnostics.append(f"export-png ({timings['png']}ms): {len(_png)//1024}KB @2x->1x server-side")
+            diagnostics.append(f"export-png ({timings['png']}ms): {len(_png)//1024}KB @2x (2160px)")
         except Exception as _e:
             diagnostics.append(f"export-png: PULADO ({_e.__class__.__name__}: {str(_e)[:80]})")
 
@@ -1170,7 +1172,7 @@ def _run_pipeline_inline(
                     image_data_uri = _image_to_data_uri(_ig.url) or _ig.url
                 rendered = render_html(marca=marca, model_id=chosen_model_id, copy=copy_dict,
                                        image_url=image_data_uri, format=format_key)
-                _png = _rfmt(rendered["html"], format_key, scale=2, downscale=True)
+                _png = _rfmt(rendered["html"], format_key, scale=2, downscale=False)  # 2x/retina, ver acima
                 png_data_uri = "data:image/png;base64," + base64.b64encode(_png).decode("ascii")
                 diagnostics.append(f"vision-qa: REGENEROU imagem (cena='{_nc.get('scene_type','?')}')")
         except Exception as _e:
