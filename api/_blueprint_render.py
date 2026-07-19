@@ -86,6 +86,32 @@ def _accent(text: str) -> str:
     return esc.replace("\n", "<br>")
 
 
+def _embed_aspect(image_url: str, ar_min: float = 0.52, ar_max: float = 1.30):
+    """Mede W×H da imagem embed do tweet e devolve (w, h) inteiros pro
+    aspect-ratio do CSS, CLAMPADO estilo Twitter (muito wide → ~1.91:1; muito
+    tall → ~4:5). Assim a foto aparece na proporção dela em vez de esticar.
+    None se não der pra medir (o CSS cai no fallback)."""
+    if not image_url:
+        return None
+    try:
+        import base64 as _b64, io as _io
+        from PIL import Image as _Image
+        if image_url.startswith("data:"):
+            im = _Image.open(_io.BytesIO(_b64.b64decode(image_url.split(",", 1)[1])))
+        else:
+            p = Path(image_url)
+            if not p.exists():
+                return None
+            im = _Image.open(p)
+        w, h = im.size
+        if not w or not h:
+            return None
+        ar = max(ar_min, min(ar_max, h / w))
+        return (1000, int(round(1000 * ar)))
+    except Exception:
+        return None
+
+
 # ---------------------------------------------------------------------------
 # Markup por archetype — recebe (copy, params) e devolve o innerHTML do .ad
 # ---------------------------------------------------------------------------
@@ -426,9 +452,12 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 f'<div class="tmq-text layer">{head("tmq-headline")}{sub("tmq-subhead")}</div>')
 
     if arch == "tiago-twitter":
-        # Variant IMAGE: foto embed (radius 28px) na base quando há imagem.
+        # Variant IMAGE: foto embed na base quando há imagem. A proporção do
+        # embed segue a da imagem (medida + clampada estilo X) — não estica.
         has_img = bool(image_url)
-        embed = (f'<div class="tw-embed"><div class="tw-embed-photo" '
+        _ar = _embed_aspect(image_url) if has_img else None
+        _ar_style = f' style="aspect-ratio:{_ar[0]}/{_ar[1]}"' if _ar else ""
+        embed = (f'<div class="tw-embed"{_ar_style}><div class="tw-embed-photo" '
                  f'style="background-image:url(\'{image_url}\')"></div></div>') if has_img else ""
         # Post reflexivo real (feedback: texto "esticado" quando é 1 bloco só
         # centralizado) — headline com linha em branco vira vários parágrafos
@@ -727,6 +756,8 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         f'data-align="{_esc(align)}" data-scale="{_esc(scale)}" data-photo="{_esc(photo)}" '
         f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}" '
         f'data-obj-scale="{_esc(obj_scale)}" data-panel="{_esc(panel)}"'
+        # tweet COM imagem → canvas auto-height (print cru, altura = conteúdo)
+        + (' data-embed="1"' if (arch == "tiago-twitter" and (image_url or "").strip()) else "")
     )
 
     fonts_css = _read(_BLUEPRINTS_DIR / "_fonts.css")

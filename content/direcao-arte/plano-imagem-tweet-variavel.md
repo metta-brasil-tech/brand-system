@@ -69,8 +69,11 @@ emite no `.tw-embed`:
 | **A — canvas fixo** (feed 4:5) + imagem no aspecto dela, centralizada | mantém 1080×1350 | posta direto no Instagram (formato fixo) | sobra branca variável em cima/embaixo |
 | **B — canvas auto-height** (altura = conteúdo) | dimensão variável | 1:1 com print de tweet real | não é 4:5 fixo p/ feed do Instagram |
 
-**Recomendação: começar pela A** (menor risco, mantém o formato de post). B fica
-como evolução se a equipe quiser o print "cru".
+**DECISÃO (Nathan, 18/07): opção B — canvas auto-height.** O card do tweet
+renderiza na altura do conteúdo (header + texto + imagem no aspecto dela +
+engajamento), igual a um print de tweet real e cru. Saída com dimensão variável
+(não 4:5 fixo). Implica um caminho de render que captura a altura natural (não
+força FORMAT_DIMS) só pra os archetypes de mock (tweet).
 
 ## Onde mexer
 
