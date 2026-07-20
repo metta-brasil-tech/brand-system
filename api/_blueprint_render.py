@@ -819,7 +819,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     marca_attr = (fm.get("marca") or marca or "").strip().lower()
     brand = _brand_mark(marca_attr, arch, theme, params)
     data_attrs = (
-        f'data-marca="{_esc(marca_attr)}" '
+        f'data-marca="{_esc(marca_attr)}" data-model="{_esc(model_id)}" '
         f'data-case="{_esc(case)}" data-orient="{_esc(orient)}" '
         f'data-arch="{_esc(arch)}" data-theme="{_esc(theme)}" data-format="{_esc(format)}" '
         f'data-align="{_esc(align)}" data-scale="{_esc(scale)}" data-photo="{_esc(photo)}" '

@@ -743,3 +743,9 @@ button { all: unset; }
 .ad[data-ornament="draw"] .layer { justify-content: flex-start; padding-top: 13%; }
 .ad-ornament--draw .draw-illo { position: absolute; left: 9%; right: 9%; bottom: 15%;
   width: 82%; height: 32%; }
+
+/* FOTO-PILL: foto DOMINANTE (YAML pede 55-65%) + texto colado embaixo, sem
+   deixar faixa clara vazia comendo metade do canvas (feedback Nathan) */
+.ad[data-model="FOTO-PILL-CASUAL"] .photo { height: 62%; }
+.ad[data-model="FOTO-PILL-CASUAL"] .photo::after { height: 22%; }
+.ad[data-model="FOTO-PILL-CASUAL"] .layer { justify-content: flex-start; padding-top: 44px; }
