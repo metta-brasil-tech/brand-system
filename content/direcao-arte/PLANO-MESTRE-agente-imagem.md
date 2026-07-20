@@ -56,7 +56,7 @@ garante o nível dos exemplos feitos à mão — automatizado.
 
 | # | Tarefa | Status |
 |---|---|---|
-| 1.1 | **Focus map em produção** — medir onde está o sujeito (energia de borda por zona) e jogar o texto pra zona vazia automaticamente. Já validado como POC à mão. | ⬜ pendente |
+| 1.1 | **Focus map em produção** — medir onde está o sujeito (energia de borda por zona) e jogar o texto pra zona vazia automaticamente. | ✅ `api/_focus_map.py` + wiring no `generate_creative` + steering forte de zona (~45%). Provado: troféu em 1 tentativa, prompt neutro, texto não tampa. FALTA: wirar no fluxo do `generate.py` (site) — hoje só no path `generate_creative`. |
 | 1.2 | **Banco de foto limpa curado** — puxar foto on-brand marcada por conceito em vez de gerar cru toda hora (fonte do slop). | ⬜ pendente |
 | 1.3 | **Rejeição de slop no QA** — detectar/barrar card branco flutuante, texto de IA dentro da foto, número inventado, foto off-brand. | 🟡 parcial (número inventado ✅) |
 | 1.4 | **Medir a imagem e adaptar o layout** — aspecto variável + auto-height. | 🟢 feito no tweet; ⬜ estender às outras peças |

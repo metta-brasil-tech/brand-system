@@ -212,13 +212,16 @@ def generate_background(model_id: str, copy: dict, scene: str,
     # Zona reservada pro texto: o diretor de arte decide a âncora (top|bottom)
     # e a IMAGEM nasce com aquela faixa vazia — o layout ancora o texto ali e
     # nunca tampa o sujeito. (Nunca mencionar "texto" pro modelo: só espaço vazio.)
-    anchor = str(copy.get("text_anchor") or "").strip().lower()
-    zone = {"top": ("Composition: keep the UPPER third of the frame as clean, softly "
-                    "blurred EMPTY space with nothing in it; the subject occupies the "
-                    "lower two thirds. "),
-            "bottom": ("Composition: keep the LOWER third of the frame as clean, softly "
-                       "blurred EMPTY space with nothing in it; the subject occupies the "
-                       "upper two thirds. ")}.get(anchor, "")
+    # Default: objeto/cena sem âncora explícita → topo vazio (sujeito embaixo). Sem
+    # isso o gerador CENTRALIZA o sujeito e não sobra metade limpa (o focus map não
+    # tem como salvar depois). Steering forte (~45%, não "um terço") + focus map = 1 shot.
+    anchor = str(copy.get("text_anchor") or "top").strip().lower()
+    zone = {"top": ("Composition: the subject sits ENTIRELY in the LOWER HALF of the frame; "
+                    "its highest point does not rise above the vertical middle. The ENTIRE "
+                    "UPPER 45% is clean, dark, softly blurred EMPTY space with nothing in it. "),
+            "bottom": ("Composition: the subject sits ENTIRELY in the UPPER HALF of the frame; "
+                       "its lowest point does not go below the vertical middle. The ENTIRE "
+                       "LOWER 45% is clean, softly blurred EMPTY space with nothing in it. ")}.get(anchor, "")
     lang_treat = _LANG_TREAT.get(ref.get("linguagem") or "")
     if lang_treat:
         prompt = (
@@ -316,6 +319,17 @@ def generate_creative(marca: str, model_id: str, copy: dict, scene: str,
     from _render_png import render_format
 
     bg, meta = generate_background(model_id, copy, scene, format=format, api_key=api_key)
+    # FOCUS MAP (Fase 1.1): mede a imagem REAL e ancora o texto na zona vazia —
+    # não confia no prompt ter deixado o topo/base livre. É o que garante, em 1
+    # geração, que o texto não tampe o sujeito (matou os "3 retries" do troféu).
+    try:
+        from _focus_map import focus_anchor
+        anc, fmeta = focus_anchor(bg)
+        meta["focus_map"] = fmeta
+        if not fmeta.get("ambiguous"):
+            copy = {**copy, "text_anchor": anc}
+    except Exception as _e:
+        meta["focus_map"] = {"error": str(_e)[:80]}
     data_uri = f"data:{_sniff_mime(bg)};base64," + base64.b64encode(bg).decode("ascii")
     res = render(marca, model_id, copy, image_url=data_uri, format=format)
     if res.get("missing"):
