@@ -76,7 +76,7 @@ garante o nível dos exemplos feitos à mão — automatizado.
 | # | Tarefa | Status |
 |---|---|---|
 | 3.1 | **15 → ~7 recipes calibradas** de verdade. | ⬜ pendente |
-| 3.2 | **6 modelos Metta faltando** no picker (DARK-CARTA, DARK-OBJETO, LIGHT-TIPO, FOTO-PILL-CASUAL, K-bold-dourado, YELLOW-DRAW). | 🟢 **5/6 expostos e provados:** DARK-OBJETO (505f59e), K-bold-dourado + LIGHT-TIPO (b3393ba), **YELLOW-DRAW + DARK-CARTA (1d79165 — ornamentos SVG inline, ver §5)**. **Falta 1:** **FOTO-PILL-CASUAL** — DIAGNÓSTICO REVISADO (20/07): com a chave, roteia certo (nano-banana/gemini-3-pro-image + ref do banco) e a **foto sai boa** (vision-QA PASSA: ilustra a copy, layout íntegro). O que REPROVA é o **crítico de MARCA sobre o LAYOUT**: o card branco flutuante lê como "glassmorphism / AI-poster / centralização vazia", não como as refs Metta que integram foto+texto+amarelo sem card solto. Logo NÃO é bloqueio de Gemini — é decisão de design: (a) redesenhar o estilo p/ integrar texto na foto (vira ~A/B), (b) expor assim mesmo (humano achou ok), ou (c) descartar. Segurar fora do picker até decidir. |
+| 3.2 | **6 modelos Metta faltando** no picker (DARK-CARTA, DARK-OBJETO, LIGHT-TIPO, FOTO-PILL-CASUAL, K-bold-dourado, YELLOW-DRAW). | ✅ **COMPLETO 6/6:** DARK-OBJETO (505f59e), K-bold-dourado + LIGHT-TIPO (b3393ba), YELLOW-DRAW + DARK-CARTA (1d79165 — ornamentos SVG, §5), **FOTO-PILL-CASUAL (ae6f17e redesenho + fb9d33e exposto)**. FOTO-PILL foi REDESENHADO: o card branco flutuante que o crítico reprovava virou layout integrado (photo-band: foto topo + faixa sólida, `panel=plain`, sem card) → crítico PASSA (same_designer=yes, slop=[]). É o único foto-real dos 6 (depende do Gemini em prod). Resíduo: loop de relevância do vision-qa às vezes regenera pra metáfora de objeto (comportamento do art-director). |
 | 3.3 | **LOGO-WALL** — trazer logos reais dos clientes (hoje placeholder → "Em breve"). | ⬜ pendente |
 | 3.4 | **UX por formato** — esconder subtítulo/corpo no slide-tweet do carrossel (o fix pegou só a peça única). | ⬜ pendente |
 | 3.5 | **Tweet Metta (card-mock)** — aplicar aspecto variável de imagem (só o Tiago tem). | ⬜ pendente |
@@ -99,8 +99,10 @@ garante o nível dos exemplos feitos à mão — automatizado.
 - **Número inventado** ("+R$ 8,5 BI") — removido do art director.
 - **Carrossel real** (crachá + 65%) recriado pelo motor, provando o banco.
 - **Focus map no SITE** (`generate.py`, 620a2dd) — fecha o buraco da Fase 1.1.
-- **+5 modelos no picker** (Fase 3.2): DARK-OBJETO, K-bold-dourado, LIGHT-TIPO,
-  YELLOW-DRAW, DARK-CARTA — todos com creative provado antes de expor.
+- **Fase 3.2 COMPLETA (6/6)** no picker: DARK-OBJETO, K-bold-dourado, LIGHT-TIPO,
+  YELLOW-DRAW, DARK-CARTA, FOTO-PILL-CASUAL — todos com creative provado antes.
+- **FOTO-PILL redesenhado** de card flutuante → layout integrado (photo-band +
+  `panel=plain`); passou a herdar a linguagem editorial Metta (crítico PASS).
 - **Camada de ornamento SVG inline** (`_ornament()` + param `ornament` + CSS
   `.ad-ornament`) — destrava estilos cujo recurso definidor NÃO é foto gerada,
   grátis e render-puro: YELLOW-DRAW (ilustração hand-drawn com wobble de traço) e
