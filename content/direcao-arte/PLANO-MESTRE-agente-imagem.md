@@ -56,7 +56,7 @@ garante o nível dos exemplos feitos à mão — automatizado.
 
 | # | Tarefa | Status |
 |---|---|---|
-| 1.1 | **Focus map em produção** — medir onde está o sujeito (energia de borda por zona) e jogar o texto pra zona vazia automaticamente. | ✅ `api/_focus_map.py` + wiring no `generate_creative` + steering forte de zona (~45%). Provado: troféu em 1 tentativa, prompt neutro, texto não tampa. FALTA: wirar no fluxo do `generate.py` (site) — hoje só no path `generate_creative`. |
+| 1.1 | **Focus map em produção** — medir onde está o sujeito (energia de borda por zona) e jogar o texto pra zona vazia automaticamente. | ✅ **COMPLETO.** `api/_focus_map.py` + wiring no `generate_creative` **e agora no `generate.py`** (commit 620a2dd: mede a imagem real gerada NO SITE, aceita data-URI, sobrescreve `text_anchor` só quando a leitura é confiável; ambíguo → diretor manda; guarda-anti-cabeça é override final). O buraco do site foi fechado. |
 | 1.2 | **Banco de foto limpa curado** — puxar foto on-brand marcada por conceito em vez de gerar cru toda hora (fonte do slop). | ⬜ pendente |
 | 1.3 | **Rejeição de slop no QA** — detectar/barrar card branco flutuante, texto de IA dentro da foto, número inventado, foto off-brand. | 🟡 parcial (número inventado ✅) |
 | 1.4 | **Medir a imagem e adaptar o layout** — aspecto variável + auto-height. | 🟢 feito no tweet; ⬜ estender às outras peças |
@@ -76,7 +76,7 @@ garante o nível dos exemplos feitos à mão — automatizado.
 | # | Tarefa | Status |
 |---|---|---|
 | 3.1 | **15 → ~7 recipes calibradas** de verdade. | ⬜ pendente |
-| 3.2 | **6 modelos Metta faltando** no picker (DARK-CARTA, DARK-OBJETO, LIGHT-TIPO, FOTO-PILL-CASUAL, K-bold-dourado, YELLOW-DRAW). | ⬜ pendente |
+| 3.2 | **6 modelos Metta faltando** no picker (DARK-CARTA, DARK-OBJETO, LIGHT-TIPO, FOTO-PILL-CASUAL, K-bold-dourado, YELLOW-DRAW). | 🟡 **3/6 expostos e provados:** DARK-OBJETO (505f59e), K-bold-dourado + LIGHT-TIPO (b3393ba). **3 bloqueados por qualidade** (gate do princípio #5): **YELLOW-DRAW** — ornamento `hand-drawn-illustration` não renderiza (sai amarelo tipográfico vazio); **DARK-CARTA** — mockup carta selada + `metta-seal-m` não renderiza (sai dark tipográfico genérico ~= C); **FOTO-PILL-CASUAL** — gpt-image produz slop (card flutuante + sujeito-fantasma), crítico REPROVA → precisa rota Gemini + fix de slop. |
 | 3.3 | **LOGO-WALL** — trazer logos reais dos clientes (hoje placeholder → "Em breve"). | ⬜ pendente |
 | 3.4 | **UX por formato** — esconder subtítulo/corpo no slide-tweet do carrossel (o fix pegou só a peça única). | ⬜ pendente |
 | 3.5 | **Tweet Metta (card-mock)** — aplicar aspecto variável de imagem (só o Tiago tem). | ⬜ pendente |
@@ -98,6 +98,9 @@ garante o nível dos exemplos feitos à mão — automatizado.
 - **Fotos reais do Tiago** (as 14 enviadas) ligadas no wizard.
 - **Número inventado** ("+R$ 8,5 BI") — removido do art director.
 - **Carrossel real** (crachá + 65%) recriado pelo motor, provando o banco.
+- **Focus map no SITE** (`generate.py`, 620a2dd) — fecha o buraco da Fase 1.1.
+- **+3 modelos no picker** (Fase 3.2): DARK-OBJETO, K-bold-dourado, LIGHT-TIPO —
+  todos com creative provado antes de expor (gate de qualidade respeitado).
 
 ---
 
@@ -107,8 +110,17 @@ garante o nível dos exemplos feitos à mão — automatizado.
 slop (resto) · 1.5 confirmar Gemini na Vercel · 2.1/2.2 paradigma concept-first.
 
 **Médias/menores:** 3.4 UX do slide-tweet no carrossel · 3.5 tweet Metta aspecto
-variável · 3.2 6 modelos Metta · 3.3 logos LOGO-WALL · afinar clamp de aspecto ·
-remover recortes de palco antigos · atualizar board do Monday.
+variável · 3.2 restam 3 modelos Metta (bloqueados por feature de render, não por
+picker — ver abaixo) · 3.3 logos LOGO-WALL · afinar clamp de aspecto · remover
+recortes de palco antigos · atualizar board do Monday.
+
+**Descoberto nesta rodada (feeds 1.x / motor de render):**
+- **Ornamentos não renderizados** — `hand-drawn-illustration` (YELLOW-DRAW) e
+  `metta-seal-m` + mockup de carta (DARK-CARTA) estão nos YAMLs mas o motor não
+  desenha; a peça sai sem seu recurso definidor. Construir os ornamentos (SVG/
+  render) antes de expor esses 2 estilos.
+- **FOTO-PILL-CASUAL vira slop no gpt-image** — confirma a dependência da rota
+  Gemini (1.5) + rejeição de slop (1.3) pra estilos foto-real leves funcionarem.
 
 ---
 
