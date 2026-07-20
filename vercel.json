@@ -10,8 +10,8 @@
     "api/generate.py": {
       "maxDuration": 60,
       "memory": 1769,
-      "includeFiles": "{engine/brand-knowledge/**,source/ad-templates/**,source/ad-blueprints/**,assets/symbols/**,assets/tiago/**}",
-      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public,agente-copy}/**"
+      "includeFiles": "{engine/brand-knowledge/**,source/ad-templates/**,source/ad-blueprints/**,assets/symbols/**,assets/tiago/assinatura/**}",
+      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,assets/tiago/recortadas,assets/tiago/recortes,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public,agente-copy}/**"
     },
     "api/image-search.py": {
       "maxDuration": 15,
@@ -33,8 +33,8 @@
     },
     "api/preview.py": {
       "maxDuration": 10,
-      "includeFiles": "{source/ad-blueprints/**,assets/symbols/**,assets/tiago/**}",
-      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,engine,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out}/**"
+      "includeFiles": "{source/ad-blueprints/**,assets/symbols/**,assets/tiago/assinatura/**}",
+      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,assets/tiago/recortadas,assets/tiago/recortes,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,engine,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out}/**"
     },
     "api/render.js": {
       "memory": 1024,
