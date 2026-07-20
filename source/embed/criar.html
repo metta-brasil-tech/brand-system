@@ -237,6 +237,54 @@ button.stepper-item.done:hover {
   background: var(--metta-sys-color-surface-container);
   display: block;
 }
+/* ---- Preview VIVO da copy (concept-first) ---- */
+.lp-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--metta-sys-color-surface-container);
+}
+.lp-wrap iframe {
+  position: absolute; top: 0; left: 0;
+  border: 0;
+  pointer-events: none;           /* clique atravessa pro card */
+  transform-origin: top left;
+  background: #fff;
+}
+.lp-wrap .lp-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.lp-status {
+  position: absolute; left: 8px; bottom: 8px; z-index: 2;
+  font-size: 10.5px; font-family: var(--metta-ref-typeface-mono);
+  padding: 3px 8px; border-radius: 999px;
+  background: rgba(12,22,27,.72); color: #fff;
+}
+.lp-badge {
+  position: absolute; left: 8px; top: 8px; z-index: 2;
+  font-size: 10.5px; font-weight: 600;
+  padding: 3px 8px; border-radius: 999px;
+  background: #FFBE18; color: #0C161B;
+}
+.lp-live { position: absolute; right: 8px; top: 8px; z-index: 2; font-size: 10px; font-weight: 700;
+  letter-spacing: .04em; padding: 3px 7px; border-radius: 999px; background: #16653480; color: #DCFCE7; }
+.rec-head { display: flex; align-items: baseline; gap: 10px; margin: 4px 0 12px; }
+.rec-head h3 { font-size: 15px; margin: 0; }
+.rec-head span { font-size: 12.5px; color: var(--metta-sys-color-on-surface-variant); }
+.rec-reason {
+  font-size: 12px; line-height: 1.35;
+  color: var(--metta-sys-color-on-surface-variant);
+  border-top: 1px dashed var(--metta-sys-color-outline-variant, #d8d5cc);
+  margin-top: 6px; padding-top: 6px;
+}
+details.all-styles { margin-top: 22px; }
+details.all-styles > summary {
+  cursor: pointer; list-style: none;
+  font-size: 14px; font-weight: 600;
+  padding: 12px 16px; border-radius: 10px;
+  border: 1px dashed var(--metta-sys-color-outline, #b9b5aa);
+  color: var(--metta-sys-color-on-surface-variant);
+}
+details.all-styles > summary::-webkit-details-marker { display: none; }
+details.all-styles[open] > summary { margin-bottom: 14px; }
 .choice-body {
   display: flex;
   flex-direction: column;
@@ -1115,6 +1163,9 @@ const STATE = {
   // Resultado da engine real
   run_id: null,         // ID retornado pelo /generate
   ad_html: null,        // Documento HTML completo do ad (renderizado em iframe srcdoc)
+  ad_html_original: null,   // versão original do generate (pro "Auto" do editor de texto)
+  bg_image_uri: null,       // fundo limpo (sem texto) — re-render de âncora custo zero
+  text_anchor_override: null, // null=auto · 'top' · 'bottom' (Fase C)
   ad_format: null,      // 'story' | 'feed' | 'sqr' (controla aspect-ratio do iframe)
   model_id: null,       // ID do modelo escolhido pelo pipeline (deveria casar com STATE.style)
   diagnostics: [],      // log do pipeline (lista de strings) — pra debug visual
@@ -1131,7 +1182,9 @@ const IS_LOCAL_DEV = typeof location !== 'undefined'
 const ENGINE_URL = IS_LOCAL_DEV ? 'http://localhost:8000' : '/api';
 const ENGINE_TIMEOUT_MS = IS_LOCAL_DEV ? 300_000 : 60_000;  // local 5min, Vercel Hobby 60s
 
-const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-imagem', 'wiz-avatar', 'wiz-imagem-briefing', 'wiz-upload', 'wiz-search', 'wiz-copy', 'wiz-cta', 'wiz-confirm', 'loading', 'result'];
+// CONCEPT-FIRST (Fase 2): copy vem ANTES do estilo — o picker mostra a copy
+// REAL do usuário renderizada em cada estilo (preview vivo), não thumbnail cego.
+const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-copy', 'wiz-cta', 'wiz-style', 'wiz-imagem', 'wiz-avatar', 'wiz-imagem-briefing', 'wiz-upload', 'wiz-search', 'wiz-confirm', 'loading', 'result'];
 const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
 const STEPS_CAROUSEL = ['brand', 'mode', 'carousel-build', 'carousel-loading', 'carousel-result'];
 // wiz-imagem só aparece se o estilo selecionado usa imagem.
@@ -1454,32 +1507,221 @@ function _styleFormatGroup(stateFormat) {
   return stateFormat === 'ad-story' ? 'story' : 'feed';
 }
 
+/* ============================================================
+   CONCEPT-FIRST (Fase 2) — preview vivo da copy + recomendação
+============================================================ */
+// Cache de previews: chave (model|format|copy). Limpa quando a copy muda.
+const PREVIEW_CACHE = new Map();
+
+function _previewFormat() {
+  // STATE.format ('feed'|'sqr'|'ad-story') → formato do backend ('feed'|'sqr'|'story')
+  return STATE.format === 'ad-story' ? 'story' : (STATE.format || 'feed');
+}
+function _previewCopy() {
+  return {
+    headline: (STATE.copyHeadline || '').trim(),
+    subhead:  (STATE.copySubhead  || '').trim(),
+    body:     (STATE.copyBody     || '').trim(),
+    cta:      (STATE.cta          || '').trim(),
+    tag:      (STATE.copyTag      || '').trim(),
+  };
+}
+function _previewKey(modelId) {
+  const c = _previewCopy();
+  return modelId + '|' + _previewFormat() + '|' + [c.headline, c.subhead, c.body, c.cta, c.tag].join('');
+}
+async function fetchStylePreview(modelId) {
+  const key = _previewKey(modelId);
+  if (PREVIEW_CACHE.has(key)) return PREVIEW_CACHE.get(key);
+  const p = fetch(`${ENGINE_URL}/preview`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      marca: STATE.brand || 'metta',
+      model_id: modelId,
+      copy: _previewCopy(),
+      format: _previewFormat(),
+    }),
+  }).then(r => {
+    if (!r.ok) throw new Error('preview http ' + r.status);
+    return r.json();
+  }).then(j => {
+    if (!j || !j.html) throw new Error(j && j.error || 'preview vazio');
+    return j;
+  });
+  // cacheia a Promise (dedupe de chamadas concorrentes); remove se falhar
+  PREVIEW_CACHE.set(key, p);
+  p.catch(() => PREVIEW_CACHE.delete(key));
+  return p;
+}
+// Monta o iframe escalado dentro do wrap. Mesmo padrão do hydrateAdPreview.
+function _mountLivePreview(wrap, html) {
+  const CANVAS = { feed: [1080, 1350], sqr: [1080, 1080], story: [1080, 1920] };
+  const [cw, ch] = CANVAS[_previewFormat()] || CANVAS.feed;
+  const w = wrap.clientWidth || 300;
+  const scale = w / cw;
+  const iframe = document.createElement('iframe');
+  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin'); // roda o auto-fit (_engine.js)
+  iframe.setAttribute('tabindex', '-1');
+  iframe.setAttribute('aria-hidden', 'true');
+  iframe.style.width = cw + 'px';
+  iframe.style.height = ch + 'px';
+  iframe.style.transform = `scale(${scale})`;
+  iframe.srcdoc = html;
+  wrap.appendChild(iframe);
+  const live = document.createElement('span');
+  live.className = 'lp-live';
+  live.textContent = 'SUA COPY';
+  wrap.appendChild(live);
+}
+// Lazy-load: só busca o preview quando o card entra na viewport.
+let _lpObserver = null;
+function initLivePreviews() {
+  const wraps = document.querySelectorAll('.lp-wrap[data-lp]:not([data-lp-done])');
+  if (!wraps.length) return;
+  const hasCopy = Boolean((STATE.copyHeadline || '').trim());
+  if (!hasCopy) { // sem copy não há o que renderizar — mantém thumbnail
+    wraps.forEach(w => { const st = w.querySelector('.lp-status'); if (st) st.remove(); });
+    return;
+  }
+  const load = (wrap) => {
+    wrap.setAttribute('data-lp-done', '1');
+    fetchStylePreview(wrap.getAttribute('data-lp'))
+      .then(j => {
+        const st = wrap.querySelector('.lp-status'); if (st) st.remove();
+        _mountLivePreview(wrap, j.html);
+      })
+      .catch(() => { // fallback: thumbnail estático permanece
+        const st = wrap.querySelector('.lp-status'); if (st) st.remove();
+      });
+  };
+  if (_lpObserver) _lpObserver.disconnect();
+  _lpObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { _lpObserver.unobserve(e.target); load(e.target); } });
+  }, { rootMargin: '200px' });
+  wraps.forEach(w => _lpObserver.observe(w));
+}
+
+/* Recomendador heurístico (Fase 2.1): sinais da copy → 2–3 estilos que servem
+   a mensagem. Determinístico, grátis, com o PORQUÊ de cada recomendação. */
+function recommendStyles() {
+  const all = (STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO)
+    .filter(s => !s.comingSoon)
+    .filter(s => !s.formatos || s.formatos.includes(_styleFormatGroup(STATE.format)));
+  const ids = new Set(all.map(s => s.id));
+  const c = _previewCopy();
+  const full = [c.headline, c.subhead, c.body].join(' ');
+  const h = c.headline;
+  const sig = {
+    num:      /\d/.test(full) && /(%|R\$|\+?\d{2,})/.test(full),
+    question: /\?\s*$/.test(h),
+    bullets:  /\n/.test(c.body),
+    longMsg:  h.length > 110 || /\n\n/.test(h),
+    short:    h.length > 0 && h.length <= 60,
+    tag:      Boolean(c.tag),
+    convite:  /convite|mentoria|inscri|vaga|aplica|diagn[oó]stico gratuito/i.test(full),
+    anuncio:  /an[uú]ncio|lan[çc]amento|novidade|oficial|chegou/i.test(full),
+    urgencia: /agora|hoje|[uú]ltim|s[oó] at[eé]|acabando|prazo/i.test(full),
+    conversa: /\bvoc[eê]\b|\ba gente\b/i.test(h),
+    lista:    /^\s*\d+[\.\)]/m.test(c.body),
+  };
+  const score = {};
+  const why = {};
+  const add = (id, pts, reason) => {
+    if (!ids.has(id)) return;
+    score[id] = (score[id] || 0) + pts;
+    if (!why[id]) why[id] = reason;
+  };
+  if (STATE.brand === 'metta') {
+    if (sig.bullets || sig.convite) add('YELLOW-BLOCO', 5, 'Convite estruturado: headline + bullets no bloco amarelo.');
+    if (sig.num)      add('YELLOW-EDITORIAL', 5, 'Tem número forte — o big number vira o herói da peça.');
+    if (sig.num && (sig.anuncio || sig.tag)) add('NEWS-CARD', 4, 'Tom de comunicado: manchete + prova.');
+    if (sig.anuncio)  add('NEWS-CARD', 4, 'Tom de anúncio/comunicado institucional.');
+    if (sig.urgencia) add('K-bold-dourado-urgencia', 5, 'Urgência real na copy — estilo feito pra isso.');
+    if (sig.question) add('LIGHT-TIPO', 5, 'Pergunta direta brilha em statement tipográfico limpo.');
+    if (sig.question) add('H-fundo-branco-headline-gigante', 3, 'Pergunta em headline gigante, sem distração.');
+    if (sig.short && !sig.num) add('C-tipografia-pura-dark', 4, 'Frase curta de impacto — tipografia pura segura sozinha.');
+    if (sig.short && !sig.question) add('DARK-OBJETO', 4, 'Frase-conceito — a imagem vira metáfora que ilustra a copy.');
+    if (sig.conversa && h.length > 60) add('METTA-TWEET-CARD', 4, 'Tom de conversa direta — formato de tweet.');
+    // fallback: composições robustas
+    add('D-foto-fullbleed-overlay', 1, 'Foto imersiva + headline — composição robusta pra qualquer tese.');
+    add('C-tipografia-pura-dark', 1, 'Tipografia pura — sempre segura.');
+    add('YELLOW-BLOCO', 1, 'Estrutura clássica Metta.');
+  } else {
+    if (sig.question) add('TIAGO-TYPO-PURE', 5, 'Pergunta reflexiva — frase grande, sem ruído.');
+    if (sig.longMsg)  add('TIAGO-TWITTER-CARD', 5, 'Mensagem longa multi-parágrafo — formato de tweet.');
+    if (sig.lista)    add('TIAGO-NOTES-MOCKUP', 5, 'Lista numerada — nasceu pra tela de Notas.');
+    if (sig.num)      add('TIAGO-EDITORIAL-CARD', 4, 'Estatística forte — slide editorial com big stat.');
+    if (sig.short)    add('TIAGO-TYPO-PURE', 3, 'Frase curta de impacto.');
+    if (sig.conversa) add('TIAGO-TWITTER-CARD', 3, 'Tom de conversa — tweet.');
+    add('TIAGO-EDITORIAL-HERO', 1, 'Capa premium com sua manchete.');
+    add('TIAGO-TWITTER-CARD', 1, 'Formato nativo do feed.');
+    add('TIAGO-TYPO-PURE', 1, 'Tipografia pura — sempre segura.');
+  }
+  return Object.keys(score)
+    .sort((a, b) => score[b] - score[a])
+    .slice(0, 3)
+    .map(id => ({ ...(all.find(s => s.id === id)), reason: why[id] }));
+}
+
+function _styleCardHtml(s, opts) {
+  const { recommended = false, reason = '' } = opts || {};
+  const CANVAS = { feed: '1080 / 1350', sqr: '1080 / 1080', story: '1080 / 1920' };
+  const aspect = CANVAS[_previewFormat()] || CANVAS.feed;
+  const disabled = Boolean(s.comingSoon);
+  const previewArea = `
+    <div class="lp-wrap" ${disabled ? '' : `data-lp="${s.id}"`} style="aspect-ratio:${aspect}">
+      ${s.previewSrc ? `<img class="lp-fallback" src="${s.previewSrc}" alt="${escapeHtml(s.label)}" loading="lazy">` : ''}
+      ${disabled ? '' : '<span class="lp-status">renderizando sua copy…</span>'}
+      ${s.usaImagem && !disabled ? '<span class="lp-badge">+ foto ao escolher</span>' : ''}
+    </div>`;
+  return `
+    <div class="choice with-preview ${STATE.style === s.id ? 'selected' : ''} ${disabled ? 'coming-soon' : ''}"
+         ${disabled ? 'aria-disabled="true"' : `role="button" tabindex="0" data-action="pick-style" data-value="${s.id}"`}>
+      ${previewArea}
+      <div class="choice-body">
+        <h3 class="choice-title">${escapeHtml(s.label)}</h3>
+        <p class="choice-desc">${escapeHtml(s.desc)}</p>
+        <span class="choice-tag">${s.usaImagem ? 'com imagem' : 'só texto'}</span>
+        ${recommended && reason ? `<p class="rec-reason">${escapeHtml(reason)}</p>` : ''}
+      </div>
+    </div>`;
+}
+
 function tplWizStyle() {
   const allStyles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
   const target = _styleFormatGroup(STATE.format);
   // Filtra estilos compatíveis com o formato escolhido. Sem `formatos` = aceita tudo (fallback).
   const styles = allStyles.filter(s => !s.formatos || s.formatos.includes(target));
+  const hasCopy = Boolean((STATE.copyHeadline || '').trim());
+  const recs = hasCopy ? recommendStyles() : [];
+  const recIds = new Set(recs.map(r => r.id));
+  const rest = styles.filter(s => !recIds.has(s.id));
   return renderStepper() + `
     <header class="step-head">
-      <p class="step-eyebrow">Wizard · Estilo visual</p>
-      <h1 class="step-title">Que tipo de peça você quer criar?</h1>
-      <p class="step-sub">Clique no preview que mais se parece com o resultado desejado. A engine cria do zero adaptando à copy — não clona o template.</p>
+      <p class="step-eyebrow">Wizard · Composição</p>
+      <h1 class="step-title">${hasCopy ? 'Sua copy, renderizada. Escolha a composição.' : 'Que tipo de peça você quer criar?'}</h1>
+      <p class="step-sub">${hasCopy
+        ? 'Cada card mostra a <strong>sua mensagem de verdade</strong> no estilo (não é ilustração). Nos estilos com imagem, a foto é gerada depois que você escolher — o layout já é fiel.'
+        : 'Clique no preview que mais se parece com o resultado desejado. A engine cria do zero adaptando à copy — não clona o template.'}</p>
     </header>
     <div class="step-body">
-      <div class="choice-grid">
-        ${styles.map(s => `
-          <button class="choice ${s.previewSrc ? 'with-preview' : ''} ${STATE.style === s.id ? 'selected' : ''} ${s.comingSoon ? 'coming-soon' : ''}" ${s.comingSoon ? 'disabled aria-disabled="true"' : `data-action="pick-style" data-value="${s.id}"`}>
-            ${s.previewSrc
-              ? `<img class="choice-preview" src="${s.previewSrc}" alt="${escapeHtml(s.label)}" loading="lazy">`
-              : ''}
-            <div class="${s.previewSrc ? 'choice-body' : ''}" ${s.previewSrc ? '' : 'style="display:contents"'}>
-              <h3 class="choice-title">${escapeHtml(s.label)}</h3>
-              <p class="choice-desc">${escapeHtml(s.desc)}</p>
-              <span class="choice-tag">${s.usaImagem ? 'com imagem' : 'só texto'}</span>
-            </div>
-          </button>
-        `).join('')}
-      </div>
+      ${recs.length ? `
+        <div class="rec-head"><h3>Recomendadas pra sua mensagem</h3><span>escolhidas pela sua copy</span></div>
+        <div class="choice-grid">
+          ${recs.map(s => _styleCardHtml(s, { recommended: true, reason: s.reason })).join('')}
+        </div>
+        <details class="all-styles">
+          <summary>Ver todos os estilos (${rest.length}) — todos com a sua copy</summary>
+          <div class="choice-grid">
+            ${rest.map(s => _styleCardHtml(s)).join('')}
+          </div>
+        </details>
+      ` : `
+        <div class="choice-grid">
+          ${styles.map(s => _styleCardHtml(s)).join('')}
+        </div>
+      `}
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
@@ -1683,16 +1925,21 @@ function tplWizCopy() {
   const isTweet = STATE.style === 'METTA-TWEET-CARD'
                || STATE.style === 'TIAGO-TWITTER-CARD'
                || STATE.style === 'TIAGO-TWITTER-CARD-IMAGE';
-  const styleLbl = ((STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style) || {}).label || STATE.style || 'estilo';
+  const styleLbl = ((STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style) || {}).label || STATE.style || '';
   const cnt = (field) => `<span class="copy-count" id="cnt-${field}" data-max="${bud[field]||0}"></span>`;
   const bodyNote = bud.body === 0
     ? 'Esse estilo não usa corpo — deixe vazio.'
     : 'Texto adicional. Pode ficar vazio se headline + sub já bastam.';
+  // CONCEPT-FIRST: na 1ª passada não há estilo — o texto vem primeiro e o próximo
+  // passo mostra a copy renderizada nos estilos (preview vivo). Revisita mantém o hint do estilo.
+  const subMsg = STATE.style
+    ? `Headline curta e punchy mantém o texto GRANDE. O contador mostra o limite recomendado pro estilo <strong>${escapeHtml(styleLbl)}</strong> — passar dele faz o auto-fit encolher a fonte.`
+    : `Headline curta e punchy mantém o texto GRANDE. No próximo passo você vê <strong>essa copy renderizada de verdade</strong> nos estilos e escolhe a composição.`;
   return renderStepper() + `
     <header class="step-head">
       <p class="step-eyebrow">Wizard · Copy</p>
       <h1 class="step-title">Qual o texto da peça?</h1>
-      <p class="step-sub">Headline curta e punchy mantém o texto GRANDE. O contador mostra o limite recomendado pro estilo <strong>${escapeHtml(styleLbl)}</strong> — passar dele faz o auto-fit encolher a fonte.</p>
+      <p class="step-sub">${subMsg}</p>
     </header>
     <div class="step-body">
       <div class="field">
@@ -1767,7 +2014,7 @@ function tplWizCta() {
       <div class="field">
         <label class="field-label" for="cta-input">Ou escreva seu próprio CTA</label>
         <input type="text" class="input" id="cta-input" placeholder="${STATE.brand === 'metta' ? 'Diagnostica antes de demitir.' : 'Comenta aqui se você concorda.'}" value="${escapeHtml(STATE.cta)}">
-        <p class="field-hint">Uma única frase. Sem call-to-action genérico ("clica no link", "agenda agora").</p>
+        <p class="field-hint">Uma única frase. Sem call-to-action genérico ("clica no link", "agenda agora").${STATE.style ? '' : ' Se você escolher um estilo de tweet no próximo passo, o CTA não entra na arte (tweet é só a mensagem).'}</p>
       </div>
     </div>
     <div class="foot">
@@ -1782,7 +2029,8 @@ function tplWizConfirm() {
   const formatLabel = (FORMATS.find(f => f.id === STATE.format) || {}).label || '—';
   const styleList   = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
   const styleLabel  = (styleList.find(s => s.id === STATE.style) || {}).label || '—';
-  const copyPreview = STATE.copy || '—';
+  // Compõe ao vivo dos campos (não depende do next-from-copy ter rodado)
+  const copyPreview = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n') || STATE.copy || '—';
   // Avatar só aparece quando a imagem é gerada por IA
   const showAvatar = STATE.imageSource === 'generate';
   const segLabel = (AVATAR_SEGMENTS.find(a => a.id === STATE.avatarSegment) || {}).label || '—';
@@ -2064,6 +2312,19 @@ function tplResult() {
               </summary>
               <ul style="margin: 0; padding-left: 18px;">${diagItems}</ul>
             </details>
+          ` : ''}
+          ${STATE.bg_image_uri ? `
+            <div class="result-card" id="anchor-editor">
+              <h4 class="result-card-title">Ajustar posição do texto</h4>
+              <p style="font-size:12px; line-height:1.4; color:var(--metta-sys-color-on-surface-variant); margin:0 0 10px;">
+                Mesma foto, texto reposicionado na hora — sem gerar de novo.
+              </p>
+              <div class="cta-chips">
+                ${[['auto','Auto'],['top','Texto no topo'],['bottom','Texto na base']].map(([v,l]) => `
+                  <button class="cta-chip ${(STATE.text_anchor_override || 'auto') === v ? 'active' : ''}" data-action="adjust-anchor" data-value="${v}">${l}</button>
+                `).join('')}
+              </div>
+            </div>
           ` : ''}
           <div class="actions-stack">
             <button class="btn btn-primary" data-action="download-png">${icon('download', 16)} Baixar PNG</button>
@@ -2463,11 +2724,48 @@ function render() {
   // Disparar lógica específica do step
   if (currentStep === 'loading')      runGenerationReal();
   if (currentStep === 'audio-record') initSpeechRecognition();
+  if (currentStep === 'wiz-style')    initLivePreviews();
   if (currentStep === 'result')     { hydrateAdPreview(); setTimeout(archiveCreative, 1400); }
   if (currentStep === 'carousel-loading') runCarouselGeneration();
   if (currentStep === 'carousel-result')  hydrateCarousel();
   // Notifica parent pra ajustar altura do iframe
   notifyHeight();
+}
+
+/* Fase C — editor de texto ao vivo no resultado: re-renderiza a MESMA foto com a
+   âncora escolhida via /api/preview (motor de layout puro, custo zero). "Auto"
+   restaura o HTML original do generate (que pode ter copy recomposta pelo diretor). */
+async function adjustTextAnchor(value) {
+  if (!STATE.bg_image_uri && value !== 'auto') return;
+  const editor = document.getElementById('anchor-editor');
+  if (editor) editor.style.opacity = '0.55';
+  try {
+    if (value === 'auto') {
+      STATE.ad_html = STATE.ad_html_original || STATE.ad_html;
+      STATE.text_anchor_override = null;
+    } else {
+      const r = await fetch(`${ENGINE_URL}/preview`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          marca: STATE.brand || 'metta',
+          model_id: STATE.model_id,
+          copy: _previewCopy(),
+          format: STATE.ad_format || 'feed',
+          image_data_uri: STATE.bg_image_uri,
+          layout: { text_anchor: value },
+        }),
+      });
+      const j = await r.json();
+      if (!r.ok || !j.html) throw new Error((j && j.error) || 'preview falhou');
+      STATE.ad_html = j.html;
+      STATE.text_anchor_override = value;
+    }
+    render();   // re-render do step result (re-hidrata o iframe; archive é guardado por flag)
+  } catch (err) {
+    if (editor) editor.style.opacity = '';
+    alert('Não consegui reposicionar o texto: ' + (err.message || err));
+  }
 }
 
 /* Injeta o documento HTML do ad gerado dentro do <iframe id="ad-preview"> +
@@ -2540,26 +2838,27 @@ function autoAdvance(el) {
 }
 
 function nextFromCurrent() {
-  // wiz-style → wiz-imagem (se usa imagem) ou wiz-copy direto
+  // CONCEPT-FIRST: copy já existe quando o estilo é escolhido.
+  // wiz-style → wiz-imagem (se usa imagem) ou wiz-confirm direto
   if (currentStep === 'wiz-style') {
     const styles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
     const styleObj = styles.find(s => s.id === STATE.style);
     if (styleObj && styleObj.usaImagem) return goto('wiz-imagem');
     STATE.imageSource = 'none';
-    return goto('wiz-copy');
+    return goto('wiz-confirm');
   }
-  // wiz-imagem → wiz-search (busca) | wiz-avatar (gerar) | wiz-copy (none)
+  // wiz-imagem → wiz-search (busca) | wiz-avatar (gerar) | wiz-confirm (none)
   if (currentStep === 'wiz-imagem') {
     if (STATE.imageSource === 'search') return goto('wiz-search');
     if (STATE.imageSource === 'upload') return goto('wiz-upload');
     if (STATE.imageSource === 'generate') return goto('wiz-avatar');
-    return goto('wiz-copy');
+    return goto('wiz-confirm');
   }
   const map = {
     'brand':         'mode',
     'mode':          STATE.mode === 'audio' ? 'audio-record' : (STATE.mode === 'carousel' ? 'carousel-build' : 'wiz-format'),
-    'wiz-format':    'wiz-style',
-    'wiz-cta':       'wiz-confirm',
+    'wiz-format':    'wiz-copy',
+    'wiz-cta':       'wiz-style',
     'audio-record':  'audio-confirm'
   };
   const next = map[currentStep];
@@ -2572,6 +2871,13 @@ function nextFromCurrent() {
 function attachStepHandlers() {
   document.querySelectorAll('[data-action]').forEach(el => {
     el.addEventListener('click', onAction);
+  });
+  // Cards de estilo agora são <div role="button"> (podem conter iframe de preview
+  // — iframe dentro de <button> é HTML inválido). Enter/Espaço = clique.
+  document.querySelectorAll('[role="button"][data-action]').forEach(el => {
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onAction({ currentTarget: el, target: el, preventDefault() {} }); }
+    });
   });
   // Inputs livres (copy-input do modo 'gerar' removido — só CTA e audio aqui)
   const ctaInput = document.getElementById('cta-input');
@@ -2674,7 +2980,7 @@ function onAction(e) {
       break;
     case 'confirm-search-pick':
       if (!STATE.selectedImageUrl) return;
-      goto('wiz-copy');
+      goto('wiz-confirm');
       break;
     case 'pick-avatar-segment':
       STATE.avatarSegment = value;
@@ -2693,7 +2999,7 @@ function onAction(e) {
       break;
     case 'next-from-upload':
       if (!STATE.selectedImageUrl) return;
-      goto('wiz-copy');
+      goto('wiz-confirm');
       break;
     // ----- Carrossel -----
     case 'car-add':
@@ -2788,7 +3094,7 @@ function onAction(e) {
     case 'next-from-imagem-briefing': {
       const ta = document.getElementById('briefing-image-input');
       STATE.briefingImage = ta ? ta.value : '';
-      goto('wiz-copy');
+      goto('wiz-confirm');
       break;
     }
     case 'next-from-copy': {
@@ -2803,10 +3109,13 @@ function onAction(e) {
       STATE.copyTag = tg ? tg.value : '';
       // Compõe copy unificada SÓ pra preview de revisão — backend lê os 3 separados
       STATE.copy = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n');
-      // Tweet é mensagem direta: sem subhead/body/tag e sem CTA → pula pro confirm
+      // Copy mudou → invalida cache de previews (o preview é DA copy)
+      PREVIEW_CACHE.clear();
+      // CONCEPT-FIRST: o estilo vem DEPOIS da copy. Na primeira passada não há
+      // estilo → sempre CTA. Revisita com estilo de tweet → pula CTA (tweet não tem).
       if (STATE.style === 'METTA-TWEET-CARD' || STATE.style === 'TIAGO-TWITTER-CARD') {
         STATE.cta = '';
-        goto('wiz-confirm');
+        goto('wiz-style');
       } else {
         goto('wiz-cta');
       }
@@ -2819,7 +3128,9 @@ function onAction(e) {
     case 'next-from-cta': {
       const inp = document.getElementById('cta-input');
       STATE.cta = inp ? inp.value : '';
-      goto('wiz-confirm');
+      // CONCEPT-FIRST: CTA fecha a copy → agora escolhe a composição com preview vivo
+      PREVIEW_CACHE.clear();   // CTA entra no preview — invalida cache
+      goto('wiz-style');
       break;
     }
     case 'next-from-audio': {
@@ -2837,6 +3148,9 @@ function onAction(e) {
       break;
     case 'toggle-mic':
       toggleMic();
+      break;
+    case 'adjust-anchor':
+      adjustTextAnchor(value);
       break;
     case 'regenerate':
       goto('loading');
@@ -3024,6 +3338,11 @@ function runGenerationReal() {
       STATE.ad_html = result.html || null;
       STATE.ad_format = result.format || null;
       STATE.model_id = result.model_id || null;
+      // Fase C (editor de texto): guarda o FUNDO LIMPO e o HTML original.
+      // Re-render com âncora nova usa a MESMA foto via /api/preview (custo zero).
+      STATE.bg_image_uri = result.image_data_uri || null;
+      STATE.ad_html_original = STATE.ad_html;
+      STATE.text_anchor_override = null;
       STATE.diagnostics = Array.isArray(result.diagnostics) ? result.diagnostics : [];
       STATE.warnings = Array.isArray(result.warnings) ? result.warnings : [];
       STATE.qa_report = Array.isArray(result.qa_report) ? result.qa_report : [];

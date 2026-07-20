@@ -34,6 +34,10 @@ if str(Path(__file__).resolve().parent) not in sys.path:
 
 _SLOTS = ("headline", "subhead", "body", "cta", "tag")
 _MAX = 600  # cada slot de copy não precisa de mais que isso
+# Overrides de LAYOUT aceitos no re-render (Fase C — editor de texto ao vivo):
+# mesmos campos que o diretor de arte emite e o motor já entende no copy dict.
+_LAYOUT_KEYS = ("text_anchor", "panel", "head_out")
+_MAX_IMAGE_CHARS = 9_000_000  # ~6.7MB de PNG em base64 — teto sano pro data URI
 
 
 def _blueprint_usa_imagem(marca: str, model_id: str) -> bool:
@@ -59,8 +63,22 @@ def _make_preview(payload: dict) -> dict:
     raw = payload.get("copy") or {}
     copy = {k: str(raw.get(k) or "").strip()[:_MAX] for k in _SLOTS}
 
+    # Overrides de layout (Fase C): âncora/caixa vindos do editor ao vivo.
+    lay = payload.get("layout") or {}
+    for k in _LAYOUT_KEYS:
+        v = str(lay.get(k) or "").strip().lower()[:20]
+        if v:
+            copy[k] = v
+
+    # Re-render SOBRE a foto já gerada (Fase C): mesma imagem, texto reposicionado,
+    # custo zero. Aceita só data URI de imagem (nunca URL externa).
+    image_url = ""
+    img = payload.get("image_data_uri") or ""
+    if isinstance(img, str) and img.startswith("data:image/") and len(img) <= _MAX_IMAGE_CHARS:
+        image_url = img
+
     from _blueprint_render import render as _render  # import tardio (cold start)
-    out = _render(marca, model_id, copy, image_url="", format=fmt)
+    out = _render(marca, model_id, copy, image_url=image_url, format=fmt)
     if out.get("missing"):
         return {"error": f"blueprint '{model_id}' não encontrado", "missing": True}
     return {
