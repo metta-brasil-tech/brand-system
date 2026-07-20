@@ -76,7 +76,7 @@ garante o nível dos exemplos feitos à mão — automatizado.
 | # | Tarefa | Status |
 |---|---|---|
 | 3.1 | **15 → ~7 recipes calibradas** de verdade. | ⬜ pendente |
-| 3.2 | **6 modelos Metta faltando** no picker (DARK-CARTA, DARK-OBJETO, LIGHT-TIPO, FOTO-PILL-CASUAL, K-bold-dourado, YELLOW-DRAW). | 🟡 **3/6 expostos e provados:** DARK-OBJETO (505f59e), K-bold-dourado + LIGHT-TIPO (b3393ba). **3 bloqueados por qualidade** (gate do princípio #5): **YELLOW-DRAW** — ornamento `hand-drawn-illustration` não renderiza (sai amarelo tipográfico vazio); **DARK-CARTA** — mockup carta selada + `metta-seal-m` não renderiza (sai dark tipográfico genérico ~= C); **FOTO-PILL-CASUAL** — gpt-image produz slop (card flutuante + sujeito-fantasma), crítico REPROVA → precisa rota Gemini + fix de slop. |
+| 3.2 | **6 modelos Metta faltando** no picker (DARK-CARTA, DARK-OBJETO, LIGHT-TIPO, FOTO-PILL-CASUAL, K-bold-dourado, YELLOW-DRAW). | 🟢 **5/6 expostos e provados:** DARK-OBJETO (505f59e), K-bold-dourado + LIGHT-TIPO (b3393ba), **YELLOW-DRAW + DARK-CARTA (1d79165 — ornamentos SVG inline, ver §5)**. **Falta 1:** **FOTO-PILL-CASUAL** — gpt-image produz slop (card flutuante + sujeito-fantasma), crítico REPROVA → precisa rota Gemini (1.5) + fix de slop (1.3). |
 | 3.3 | **LOGO-WALL** — trazer logos reais dos clientes (hoje placeholder → "Em breve"). | ⬜ pendente |
 | 3.4 | **UX por formato** — esconder subtítulo/corpo no slide-tweet do carrossel (o fix pegou só a peça única). | ⬜ pendente |
 | 3.5 | **Tweet Metta (card-mock)** — aplicar aspecto variável de imagem (só o Tiago tem). | ⬜ pendente |
@@ -99,8 +99,12 @@ garante o nível dos exemplos feitos à mão — automatizado.
 - **Número inventado** ("+R$ 8,5 BI") — removido do art director.
 - **Carrossel real** (crachá + 65%) recriado pelo motor, provando o banco.
 - **Focus map no SITE** (`generate.py`, 620a2dd) — fecha o buraco da Fase 1.1.
-- **+3 modelos no picker** (Fase 3.2): DARK-OBJETO, K-bold-dourado, LIGHT-TIPO —
-  todos com creative provado antes de expor (gate de qualidade respeitado).
+- **+5 modelos no picker** (Fase 3.2): DARK-OBJETO, K-bold-dourado, LIGHT-TIPO,
+  YELLOW-DRAW, DARK-CARTA — todos com creative provado antes de expor.
+- **Camada de ornamento SVG inline** (`_ornament()` + param `ornament` + CSS
+  `.ad-ornament`) — destrava estilos cujo recurso definidor NÃO é foto gerada,
+  grátis e render-puro: YELLOW-DRAW (ilustração hand-drawn com wobble de traço) e
+  DARK-CARTA (carta/contrato + selo M de cera). Extensível a novos ornamentos.
 
 ---
 
@@ -114,13 +118,12 @@ variável · 3.2 restam 3 modelos Metta (bloqueados por feature de render, não 
 picker — ver abaixo) · 3.3 logos LOGO-WALL · afinar clamp de aspecto · remover
 recortes de palco antigos · atualizar board do Monday.
 
-**Descoberto nesta rodada (feeds 1.x / motor de render):**
-- **Ornamentos não renderizados** — `hand-drawn-illustration` (YELLOW-DRAW) e
-  `metta-seal-m` + mockup de carta (DARK-CARTA) estão nos YAMLs mas o motor não
-  desenha; a peça sai sem seu recurso definidor. Construir os ornamentos (SVG/
-  render) antes de expor esses 2 estilos.
+**Achados (feeds 1.x / motor de render):**
+- ✅ **Ornamentos não renderizados** (YELLOW-DRAW/DARK-CARTA) — RESOLVIDO: camada
+  de ornamento SVG inline (1d79165). Mecanismo genérico e extensível.
 - **FOTO-PILL-CASUAL vira slop no gpt-image** — confirma a dependência da rota
   Gemini (1.5) + rejeição de slop (1.3) pra estilos foto-real leves funcionarem.
+  É o único dos 6 do 3.2 que ainda falta.
 
 ---
 
