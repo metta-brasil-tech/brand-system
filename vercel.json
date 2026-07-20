@@ -30,6 +30,11 @@
       "includeFiles": "{engine/brand-knowledge/**,source/ad-blueprints/**}",
       "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out}/**"
     },
+    "api/preview.py": {
+      "maxDuration": 10,
+      "includeFiles": "{source/ad-blueprints/**,assets/symbols/**}",
+      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,engine,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out}/**"
+    },
     "api/render.js": {
       "memory": 1024,
       "maxDuration": 30
