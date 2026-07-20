@@ -211,11 +211,16 @@ def _metta_symbol() -> str:
     """SVG do símbolo real da Metta — avatar do tweet (não a letra 'M')."""
     global _METTA_SYMBOL_CACHE
     if _METTA_SYMBOL_CACHE is None:
-        p = _ROOT / "assets" / "symbols" / "simbolo_metta_amarelo.svg"
-        try:
-            _METTA_SYMBOL_CACHE = p.read_text(encoding="utf-8")
-        except Exception:
-            _METTA_SYMBOL_CACHE = ""
+        # _brand PRIMEIRO: é o único caminho presente no bundle da Vercel
+        # (assets/** fica fora — excludeFiles tem teto de 256 chars, não dá
+        # pra enumerar exceções). assets/ segue como fallback pro dev local.
+        for p in (_BRAND_DIR / "simbolo_metta_amarelo.svg",
+                  _ROOT / "assets" / "symbols" / "simbolo_metta_amarelo.svg"):
+            try:
+                _METTA_SYMBOL_CACHE = p.read_text(encoding="utf-8")
+                break
+            except Exception:
+                _METTA_SYMBOL_CACHE = ""
     return _METTA_SYMBOL_CACHE
 
 
@@ -374,7 +379,10 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
     pick = _pick_sig(bg_hex, marca, intent)
     dark = theme == "dark"
     if is_tiago:
-        svg = _read(_TIAGO_SIG_DIR / f"assinatura-{pick.variant}.svg") if pick else ""
+        # _brand primeiro (único caminho no bundle Vercel), assets como fallback local
+        svg = ""
+        if pick:
+            svg = _read(_BRAND_DIR / f"assinatura-{pick.variant}.svg") or _read(_TIAGO_SIG_DIR / f"assinatura-{pick.variant}.svg")
         if not svg:  # fallback binário se o sistema/arquivo faltar
             svg = _read(_BRAND_DIR / ("assinatura-branco.svg" if dark else "assinatura-escuro.svg"))
         # Editoriais levam a assinatura no TOPO (igual às refs de carrossel do Tiago);
