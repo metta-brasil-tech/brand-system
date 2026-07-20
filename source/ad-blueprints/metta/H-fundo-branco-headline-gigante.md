@@ -3,7 +3,7 @@ id: H-fundo-branco-headline-gigante
 display_name: "Fundo branco com headline gigante"
 marca: metta
 archetype: typo
-params: { theme: light, align: left, scale: giant, cta: dark }
+params: { theme: light, align: center, scale: giant, cta: dark }
 slots: [tag, headline, subhead, body, cta]
 image: { required: false }
 formato_nativo: [story, feed]

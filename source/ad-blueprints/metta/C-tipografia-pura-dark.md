@@ -3,7 +3,7 @@ id: C-tipografia-pura-dark
 display_name: "Tipografia pura sobre escuro"
 marca: metta
 archetype: typo
-params: { theme: dark, align: left, cta: yellow }
+params: { theme: dark, align: center, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
 image: { required: false }
 formato_nativo: [story, feed]

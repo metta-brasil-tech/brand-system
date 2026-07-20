@@ -3,7 +3,7 @@ id: DARK-CARTA
 display_name: "Carta/contrato formal sobre escuro"
 marca: metta
 archetype: typo
-params: { theme: paper, align: left, cta: yellow }
+params: { theme: paper, align: center, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
 image: { required: false }
 formato_nativo: [story, feed]

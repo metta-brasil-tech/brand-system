@@ -3,7 +3,7 @@ id: LIGHT-TIPO
 display_name: "Fundo claro 100% tipográfico"
 marca: metta
 archetype: typo
-params: { theme: light, align: left, cta: dark }
+params: { theme: light, align: center, cta: dark }
 slots: [tag, headline, subhead, body, cta]
 image: { required: false }
 formato_nativo: [story, feed]

@@ -704,7 +704,12 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     arch = fm.get("archetype", "typo")
     params = fm.get("params", {}) or {}
     theme = params.get("theme", "dark")
-    align = params.get("align", "left")
+    # Alinhamento: o diretor de arte pode variar por peça (copy.align) — o banco real
+    # NÃO fica sempre no mesmo lugar (centraliza em fundo chapado, lateral em foto).
+    # Sem override, vale o default do blueprint (já calibrado pela convenção da família).
+    align = str((copy or {}).get("align") or params.get("align", "left")).strip().lower()
+    if align not in ("left", "center", "right"):
+        align = params.get("align", "left")
     scale = params.get("scale", "normal")
     photo = params.get("photo", "right-bleed")
     block = params.get("block", "none")
