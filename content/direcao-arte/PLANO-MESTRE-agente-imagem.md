@@ -67,9 +67,21 @@ garante o nível dos exemplos feitos à mão — automatizado.
 
 | # | Tarefa | Status |
 |---|---|---|
-| 2.1 | **Fluxo concept-first** — escreve a ideia → vê a copy real renderizada em 2–3 composições calibradas → escolhe. | ⬜ pendente |
-| 2.2 | **Preview da copy real** do usuário nos estilos candidatos (não thumbnail estático). | ⬜ pendente |
+| 2.1 | **Fluxo concept-first** — escreve a ideia → vê a copy real renderizada em 2–3 composições calibradas → escolhe. | ✅ **COMPLETO** (79d9c78). Ordem do wizard virou formato → **copy → CTA → estilo**. Recomendador heurístico (sinais: número, pergunta, bullets, urgência, convite, tamanho) propõe 2–3 composições com o PORQUÊ; "Ver todos os estilos" é o escape hatch. Tweet revisitado pula CTA. |
+| 2.2 | **Preview da copy real** do usuário nos estilos candidatos (não thumbnail estático). | ✅ **COMPLETO** (79d9c78 sobre a base 3c72b45). Cada card do picker renderiza a copy REAL via `/api/preview` em iframe escalado (auto-fit roda), lazy por IntersectionObserver + cache por copy/formato. Foto-real = layout fiel text-only + badge "+ foto ao escolher". Falhou → thumbnail estático (nunca card vazio). |
 | 2.3 | **Gating por qualidade** — só entra no picker o estilo com creative provado; resto "Em breve". | 🟢 aplicado (LOGO-WALL, YELLOW-OBJETO) |
+| 2.4 | **Editor de texto pós-geração (Fase C)** — reposicionar âncora sobre a MESMA foto sem regerar. | ✅ **COMPLETO** (79d9c78). Card "Ajustar posição do texto" (Auto/Topo/Base) no resultado; re-render custo zero via `/api/preview` (novos passthrough `image_data_uri` + `layout{text_anchor,panel,head_out}`). "Auto" restaura o HTML original do generate. |
+| 2.5 | **Editar a copy no resultado (Fase D)** — corrigir texto da peça pronta sem regerar foto. | ✅ **COMPLETO** (7b33c4c, outra sessão). Mesma mecânica do 2.4 via `/api/preview`. |
+
+**Fixes de PRODUÇÃO achados na verificação ao vivo (fe440d8):** (a) `/api/generate`
+500 em TODA geração com art-director — OOM do import do litellm no limite default
+de 1024MB; prova: `mock:true` 200/0.5s, `art_director:false` 200/0.7s, com
+art-director o processo morria. `memory: 1769`. (b) peça gerada em prod saía SEM
+logo Metta/avatar Tiago — bundle excluía `assets/**` e o render lê
+`assets/symbols` + `assets/tiago` em runtime (fallback silencioso; mesma classe
+do reclamo do editor "não tem o logo"). includeFiles ganhou os dois. Deploys
+falhando desde 3c72b45 foram raiz-causados pela outra sessão (bundle >225MB,
+ba809d0) — as duas sessões convergiram no mesmo working tree.
 
 ### ✨ Fase 3 — Consolidar & polir
 
