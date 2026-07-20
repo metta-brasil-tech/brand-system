@@ -364,34 +364,39 @@ button { all: unset; }
   position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;
   background-size: cover; background-position: center;
 }
-/* scrim amarelo fixo no topo — garante headline legível mesmo que o objeto
-   gerado pela IA invada a zona do texto (não dá pra confiar 100% no prompt). */
+/* FOCAL-AWARE: o texto vai na ZONA VAZIA que a imagem já nasce com (âncora
+   top|bottom, decidida pelo diretor de arte e obedecida pela geração). O scrim
+   NÃO é mais uma faixa amarela chapada — é um gradiente suave da COR DO TEMA
+   (extensão do fundo da marca na aresta do texto), então o --fg do tema sempre
+   contrasta (branco no dark, night no amarelo). Feedback do Nathan: fundo
+   amarelo forçado quebra a peça; o objeto tem que dominar e o texto respeita o foco. */
+.ad[data-arch="object-center"][data-obj-scale="full"] { --obj-scrim: 8,12,14; }        /* night (dark/paper) */
+.ad[data-arch="object-center"][data-obj-scale="full"][data-theme="yellow"] { --obj-scrim: 255,190,24; }
+.ad[data-arch="object-center"][data-obj-scale="full"][data-theme="light"]  { --obj-scrim: 235,243,247; }
 .ad[data-arch="object-center"][data-obj-scale="full"]::before {
   content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background: linear-gradient(180deg, var(--m-yellow) 0%, var(--m-yellow) 15%, rgba(255,190,24,0) 20%);
+  background: linear-gradient(180deg, rgba(var(--obj-scrim),.88) 0%, rgba(var(--obj-scrim),.62) 16%, rgba(var(--obj-scrim),0) 40%);
+}
+.ad[data-arch="object-center"][data-obj-scale="full"][data-anchor="bottom"]::before {
+  background: linear-gradient(0deg, rgba(var(--obj-scrim),.88) 0%, rgba(var(--obj-scrim),.62) 16%, rgba(var(--obj-scrim),0) 40%);
 }
 .ad[data-arch="object-center"][data-obj-scale="full"] .layer {
-  justify-content: flex-start; gap: 14px; padding-top: 108px;
+  justify-content: flex-start; gap: 16px; padding-top: 96px;
 }
-/* story: a marca (brand: center) desce pra 120px por causa da zona segura do
-   IG — o texto precisa começar ABAIXO dela, senão logo e headline colidem.
-   O scrim acompanha: solid até cobrir a zona de texto (216+220px ≈ 24% de 1920). */
-.ad[data-format="story"][data-arch="object-center"][data-obj-scale="full"] .layer {
-  padding-top: 216px;
+.ad[data-arch="object-center"][data-obj-scale="full"][data-anchor="bottom"] .layer {
+  justify-content: flex-end; padding-top: var(--pad-y); padding-bottom: 96px;
 }
-.ad[data-format="story"][data-arch="object-center"][data-obj-scale="full"]::before {
-  background: linear-gradient(180deg, var(--m-yellow) 0%, var(--m-yellow) 25%, rgba(255,190,24,0) 32%);
-}
-/* zona de texto com altura PRÓPRIA (não o canvas inteiro) — é essa caixa que o
-   auto-fit do _engine.js (fitHead) mede pra encolher a headline sozinho até
-   caber, igual já faz nos outros archetypes. Sem isso o "box" de medição virava
-   o canvas de 1350px e o motor nunca via motivo pra encolher nada. */
+/* story: a marca (brand: center) desce por causa da zona segura do IG — texto começa abaixo. */
+.ad[data-format="story"][data-arch="object-center"][data-obj-scale="full"] .layer { padding-top: 208px; }
+/* zona de texto com altura GENEROSA — é a caixa que o auto-fit (_engine.js fitHead)
+   mede pra encolher a headline até caber. Alta o bastante pra 3 linhas grandes sem
+   truncar; max-height evita invadir o objeto. */
 .ad[data-arch="object-center"][data-obj-scale="full"] .obj-text-zone {
-  width: 100%; height: 220px; overflow: hidden; flex: none;
+  width: 100%; min-height: 320px; max-height: 46%; overflow: hidden; flex: none;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 .ad[data-arch="object-center"][data-obj-scale="full"] .t-head { width: 100%; line-height: 1.05; }
-.ad[data-arch="object-center"][data-obj-scale="full"] .cta-wrap { margin-top: auto; }
+.ad[data-arch="object-center"][data-obj-scale="full"] .cta-wrap { margin-top: 24px; }
 
 /* (6) card-mock — cartão de rede social (tweet) */
 .ad[data-arch="card-mock"] { display: flex; align-items: center; justify-content: center; background: var(--m-night-95); }
@@ -557,7 +562,9 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrows { position: absolute; top: 60px; left: 64px; right: 64px; display: flex; justify-content: space-between; z-index: 5; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrow-left,
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-eyebrow-right { font-size: 18px; letter-spacing: .08em; color: var(--t-ink); text-transform: uppercase; font-weight: 700; margin: 0; }
-.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-text { position: absolute; left: 64px; right: 64px; top: 38%; display: flex; flex-direction: column; gap: 20px; z-index: 5; padding: 36px 40px; background: rgba(237,238,238,.88); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 6px; box-shadow: 0 18px 60px rgba(0,0,0,.28); }
+/* FOCAL-AWARE: o bloco de coverline vai pra BASE (zona vazia + scrim), não mais
+   travado no meio (top:38%) cobrindo o rosto/peito do sujeito. Igual ao editorial-dark. */
+.ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-text { position: absolute; left: 64px; right: 64px; top: auto; bottom: 210px; display: flex; flex-direction: column; gap: 18px; z-index: 5; padding: 32px 36px; background: rgba(237,238,238,.9); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 6px; box-shadow: 0 18px 60px rgba(0,0,0,.28); }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-headline { font-size: 56px; line-height: 1.0; letter-spacing: -.02em; color: var(--t-ink); margin: 0; word-break: break-word; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-subhead { font-size: 28px; line-height: 1.3; color: var(--t-ink); margin: 0; }
 .ad[data-marca="tiago"][data-arch="tiago-editorial-hero"] .teh-body { font-size: 22px; line-height: 1.45; color: var(--t-grey); margin: 0; max-width: 800px; }

@@ -3,7 +3,7 @@ id: DARK-OBJETO
 display_name: "Objeto-conceito 3D em destaque sobre dark"
 marca: metta
 archetype: object-center
-params: { theme: dark, align: center, cta: yellow }
+params: { theme: dark, align: center, cta: yellow, object_scale: full, anchor: top }
 slots: [tag, headline, subhead, body, cta]
 image: { prompt_ref: image-prompts/metta/style-DARK-OBJETO-chess.md, required: true, treatment: "objeto simbólico central (cédula, peça de xadrez, etc) render 3d/foto" }
 formato_nativo: [story, feed]

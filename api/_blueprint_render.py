@@ -163,7 +163,12 @@ _BRAND_DIR = _BLUEPRINTS_DIR / "_brand"
 _TIAGO_SIG_DIR = _ROOT / "assets" / "tiago" / "assinatura"
 
 # Fundo aproximado por tema, pra o sistema de assinatura decidir a variante.
-_THEME_BG = {"dark": "#0C161B", "light": "#FAFCFD", "yellow": "#FFBE18", "paper": "#12201A"}
+# Fundo real de cada tema — usado pra escolher a cor da assinatura por CONTRASTE.
+# Faltavam offwhite/white/photo: caíam no fallback dark → assinatura BRANCA em fundo
+# claro (bug do editorial-hero/cta: assinatura sumindo). offwhite/white = claro →
+# assinatura night; paper (DARK-CARTA) é escuro esverdeado; photo = tratado dark.
+_THEME_BG = {"dark": "#0C161B", "light": "#FAFCFD", "yellow": "#FFBE18", "paper": "#12201A",
+             "offwhite": "#EDEEEE", "white": "#FFFFFF", "photo": "#0C161B"}
 
 try:  # sistema contrast-aware de seleção de assinatura (opcional; fallback binário)
     from _brand_signature import pick_signature as _pick_signature
