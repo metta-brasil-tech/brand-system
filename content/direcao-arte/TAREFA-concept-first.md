@@ -66,6 +66,13 @@ Já existe `prototipos/editor-texto.html` (WYSIWYG que reposiciona texto sobre a
 
 ---
 
+### FASE D — Editar a COPY no resultado + escolher a voz de escrita (pedido do Nathan, 20/07)
+Hoje a tela "Sua peça foi gerada" só tem **Baixar / Salvar / Gerar variação / Criar nova** — **não dá pra editar o texto** que a IA escreveu, nem escolher o modelo/voz de copy. Isso é um gap real (o usuário quer ajustar as palavras sem regerar tudo).
+1. **Editar a copy no resultado (barato, sem regerar foto):** adicionar campos editáveis (headline / body / CTA / tag) na tela de resultado. Ao editar, re-renderizar via **`/api/preview`** passando a **MESMA foto** (`image_data_uri` passthrough — o endpoint já aceita isso, é o mesmo mecanismo do editor de âncora 2.4) + a copy nova. Custo zero, instantâneo. Só o texto muda; a foto fica.
+2. **Escolher a voz/modelo de escrita:** antes/durante a copy, deixar o usuário escolher o registro (ex.: direto/provocativo, institucional, reflexivo) ou pedir "reescrever" — chama o copywriter (`api/_copywriter.py`) com o registro escolhido e devolve variações de copy pra escolher. Mínimo viável: um botão "reescrever a copy" com 2–3 variações; ideal: seletor de tom.
+3. **Permissão de edição:** o ponto do Nathan foi "sem permissão de edição" — a copy final tem que ser editável à mão pelo usuário, não só gerada. Garantir que os campos são editáveis e persistem no re-render/download.
+Liga com a FASE C (editor de âncora já existe): unificar num painel "Ajustar" no resultado = **texto (palavras) + posição (âncora) + tom (voz)**, tudo re-renderizando sobre a mesma foto via `/api/preview`.
+
 ## 4. Protocolo de teste e deploy (OBRIGATÓRIO)
 
 1. **Local primeiro.** Testar o motor: `.venv/bin/python cli.py --model <ID> --headline "..." --image none --out /tmp/x` e abrir o PNG. Testar o endpoint importando `api/preview.py::_make_preview({...})` num script (ver exemplo abaixo).
