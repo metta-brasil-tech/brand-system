@@ -9,7 +9,8 @@
   "functions": {
     "api/generate.py": {
       "maxDuration": 60,
-      "includeFiles": "{engine/brand-knowledge/**,source/ad-templates/**,source/ad-blueprints/**}",
+      "memory": 1769,
+      "includeFiles": "{engine/brand-knowledge/**,source/ad-templates/**,source/ad-blueprints/**,assets/symbols/**,assets/tiago/**}",
       "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,source/brain,source/tiago,source/work,source/arquitetura,source/arquivo,source/tools,node_modules,vendor,scripts,styles,data,public,agente-copy}/**"
     },
     "api/image-search.py": {
@@ -32,7 +33,7 @@
     },
     "api/preview.py": {
       "maxDuration": 10,
-      "includeFiles": "{source/ad-blueprints/**,assets/symbols/**}",
+      "includeFiles": "{source/ad-blueprints/**,assets/symbols/**,assets/tiago/**}",
       "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,engine,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out}/**"
     },
     "api/render.js": {
