@@ -1016,6 +1016,11 @@ def _run_pipeline_inline(
         # linha de prova social solta no canto (fora do card), assinatura do banco
         "proof": (ad_directives.get("proof") or "").strip(),
     }
+    # FOTO-PILL: o arch photo-band já separa a foto (topo) da faixa de texto
+    # (base sólida clara) — card flutuante é redundante e o crítico de marca lê
+    # como "AI-poster / cartão de vidro". Texto integrado na faixa (plain, sem card).
+    if chosen_model_id == "FOTO-PILL-CASUAL":
+        copy_dict["panel"] = "plain"
     # GUARDA ANTI-CABEÇA (estrutural): sujeito com rosto/busto no TOPO (crop
     # face/chest-up/waist-up) → o card NUNCA pode ancorar no topo, senão cobre a
     # cabeça (o defeito do demo reprovado do card amarelo). Força bottom mesmo que

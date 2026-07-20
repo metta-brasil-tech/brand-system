@@ -2,8 +2,8 @@
 id: FOTO-PILL-CASUAL
 display_name: "Foto fullbleed light + headline casual + pill CTA"
 marca: metta
-archetype: photo-full
-params: { theme: light, anchor: bottom, align: left, cta: dark }
+archetype: photo-band
+params: { theme: light, photo: top, align: left, cta: dark }
 slots: [tag, headline, subhead, body, cta]
 image: { required: true, treatment: "foto casual da pessoa, tom mais leve" }
 formato_nativo: [story, feed]
