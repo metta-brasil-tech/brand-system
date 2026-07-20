@@ -1152,7 +1152,8 @@ let currentStep = 'brand';
 // Ordem: do mais usado/robusto pro mais específico.
 const STYLES_METTA = [
   { id: 'YELLOW-BLOCO',                  label: 'Bloco amarelo + foto pessoa',       desc: 'Bloco amarelo central com headline + bullets, foto pessoa direita bleed corner. Convite institucional com prova social via logo bar.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-bloco.webp' },
-  { id: 'YELLOW-OBJETO',                 label: 'Objeto 3D flutuante amarelo',       desc: 'Objeto-conceito em render 3D estilizado (clay/matte), flutuando sobre fundo amarelo chapado. Metáfora leve, editorial contemporâneo.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-objeto.webp' },
+  { id: 'YELLOW-OBJETO',                 label: 'Objeto 3D flutuante amarelo',       desc: 'Objeto-conceito em render 3D estilizado (clay/matte), flutuando sobre fundo amarelo chapado. Metáfora leve, editorial contemporâneo.', usaImagem: true,  formatos: ['feed','ad-story'], comingSoon: true, previewSrc: '/assets/style-previews/metta/yellow-objeto.webp' },
+  { id: 'DARK-OBJETO',                   label: 'Objeto-conceito dark',              desc: 'Objeto-metáfora em foto dark moody (chiaroscuro) sobre fundo escuro. A imagem ILUSTRA a copy — ex.: troféu enrolado em fita métrica = “a meta é régua”. Headline no topo, objeto embaixo.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/dark-objeto.webp' },
   { id: 'A-headline-foto-dark',          label: 'Headline + foto pessoa dark',       desc: 'Fundo escuro, headline grande UPPER + foto pessoa âncora à direita. Caso nominal ou prova editorial.',                              usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/a.webp' },
   { id: 'D-foto-fullbleed-overlay',      label: 'Foto fullbleed com overlay',        desc: 'Foto ocupa canvas inteiro + overlay escuro pra legibilidade do headline em baixo. Imersão visual.',                                      usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/d.webp' },
   { id: 'C-tipografia-pura-dark',        label: 'Tipografia pura dark',              desc: 'Fundo escuro, sem imagem. Headline gigante UPPER + accent yellow em palavras-chave. Frase de impacto isolada.',                          usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/c.webp' },
@@ -1165,7 +1166,7 @@ const STYLES_METTA = [
   { id: 'YELLOW-SPLIT',                  label: 'Split amarelo/foto',                desc: 'Canvas dividido — metade amarela com headline, metade foto. Dualidade clara.',                                                            usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-split.webp' },
   { id: 'H-fundo-branco-headline-gigante', label: 'Headline gigante fundo branco',   desc: 'Branco puro + headline gigante em preto. Manifesto/posicionamento de alta gravidade.',                                                  usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/h.webp' },
   { id: 'I-retrato-editorial-pb',        label: 'Retrato editorial P&B',             desc: 'Retrato em preto-e-branco editorial + tipografia mínima. Autoridade silenciosa.',                                                        usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/metta/i.webp' },
-  { id: 'LOGO-WALL',                     label: 'Wall de logos clientes',            desc: 'Grade de logos B&W dos clientes (Sicredi, Vivo, etc.) + headline. Prova social agregada.',                                              usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/metta/logo-wall.webp' }
+  { id: 'LOGO-WALL',                     label: 'Wall de logos clientes',            desc: 'Grade de logos B&W dos clientes (Sicredi, Vivo, etc.) + headline. Prova social agregada.',                                              usaImagem: false, formatos: ['feed'], comingSoon: true, previewSrc: '/assets/style-previews/metta/logo-wall.webp' }
 ];
 
 const STYLES_TIAGO = [
@@ -1173,7 +1174,7 @@ const STYLES_TIAGO = [
   { id: 'TIAGO-NOTES-MOCKUP',           label: 'Tela de Notas do iPhone',            desc: 'Mock do app Notas com status bar, marker amarelo no H1 e lista numerada. Storytelling em formato de anotação.', usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/notes-mockup.webp' },
   { id: 'TIAGO-TYPO-PURE',              label: 'Frase grande',                       desc: 'Tipografia pura sobre fundo claro com palavra-chave colorida. Frase de impacto isolada.',         usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/typo-pure.webp' },
   { id: 'TIAGO-EDITORIAL-CTA',          label: 'Slide de fechamento de carrossel',   desc: '3 variantes: pergunta de engajamento, qualificação "pra quem é", ou reveal de protocolo.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-cta.webp' },
-  { id: 'TIAGO-TWITTER-CARD-IMAGE',     label: 'Tweet com imagem',                   desc: 'Mock Twitter com foto embed (cantos arredondados) na base do card. Imagem gerada, buscada ou enviada.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card.webp' },
+  { id: 'TIAGO-TWITTER-CARD-IMAGE',     label: 'Tweet com imagem',                   desc: 'Mock Twitter com foto embed (cantos arredondados) na base do card. Imagem gerada, buscada ou enviada.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card-image.webp' },
   { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp' },
   { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-yellow-block.webp' },
   { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-minimal.webp' },
@@ -1210,9 +1211,14 @@ const AVATAR_VARIANTS = [
 
 /* ----------- DATA: recortes do Tiago (foto real, fundo removido) ----------- */
 const TIAGO_RECORTES = [
-  { id: 'tiago-palco-01', label: 'Tiago — palco 1', src: '/assets/tiago/recortes/tiago-palco-01.png' },
-  { id: 'tiago-palco-02', label: 'Tiago — palco 2', src: '/assets/tiago/recortes/tiago-palco-02.png' },
-  { id: 'tiago-palco-03', label: 'Tiago — palco 3', src: '/assets/tiago/recortes/tiago-palco-03.png' }
+  { id: 'tiago-31',     label: 'Tiago — braços cruzados', src: '/assets/tiago/recortadas/tiago-31.png' },
+  { id: 'tiago-gen-01', label: 'Tiago — social',          src: '/assets/tiago/recortadas/tiago-gen-01.png' },
+  { id: 'tiago-11',     label: 'Tiago — sorrindo',        src: '/assets/tiago/recortadas/tiago-11.png' },
+  { id: 'tiago-17',     label: 'Tiago — reflexivo',       src: '/assets/tiago/recortadas/tiago-17.png' },
+  { id: 'tiago-15',     label: 'Tiago — em pé',           src: '/assets/tiago/recortadas/tiago-15.png' },
+  { id: 'tiago-13',     label: 'Tiago — sentado',         src: '/assets/tiago/recortadas/tiago-13.png' },
+  { id: 'tiago-04',     label: 'Tiago — mão no queixo',   src: '/assets/tiago/recortadas/tiago-04.png' },
+  { id: 'tiago-12',     label: 'Tiago — sorrindo 2',      src: '/assets/tiago/recortadas/tiago-12.png' }
 ];
 
 /* ----------- DATA: budget de copy por estilo -----------
@@ -1229,6 +1235,7 @@ const COPY_BUDGET = {
   'YELLOW-EDITORIAL':                { headline: 50,  subhead: 60, body: 140 },
   'YELLOW-FRAME':                    { headline: 80,  subhead: 0,  body: 0 },
   'METTA-TWEET-CARD':                { headline: 160, subhead: 0,  body: 0 },
+  'DARK-OBJETO':                     { headline: 50,  subhead: 45, body: 0 },
   'B-foto-top-headline-mixed':       { headline: 80,  subhead: 60, body: 150 },
   'LIGHT-SURREAL':                   { headline: 95,  subhead: 0,  body: 120 },
   'NEWS-CARD':                       { headline: 110, subhead: 80, body: 160 },
@@ -1660,6 +1667,12 @@ function tplWizCopy() {
   // User SEMPRE fornece headline + subhead + body separados, evitando ambiguidade
   // entre "texto livre como copy" vs "texto livre como briefing pra gerar copy".
   const bud = copyBudgetFor(STATE.style);
+  // Todo modelo de tweet = 1 mensagem só (inclui o tweet COM imagem). Sem
+  // título/subtítulo/descrição — um tweet não tem esses campos. A imagem do
+  // TIAGO-TWITTER-CARD-IMAGE é escolhida no passo de imagem, não aqui.
+  const isTweet = STATE.style === 'METTA-TWEET-CARD'
+               || STATE.style === 'TIAGO-TWITTER-CARD'
+               || STATE.style === 'TIAGO-TWITTER-CARD-IMAGE';
   const styleLbl = ((STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style) || {}).label || STATE.style || 'estilo';
   const cnt = (field) => `<span class="copy-count" id="cnt-${field}" data-max="${bud[field]||0}"></span>`;
   const bodyNote = bud.body === 0
@@ -1673,10 +1686,11 @@ function tplWizCopy() {
     </header>
     <div class="step-body">
       <div class="field">
-        <label class="field-label" for="copy-headline-input">Headline ${cnt('headline')}</label>
-        <textarea class="textarea" id="copy-headline-input" rows="2" placeholder="Ex: Para de demitir antes de diagnosticar.">${escapeHtml(STATE.copyHeadline)}</textarea>
-        <p class="field-hint">Frase de impacto principal. 1 sentença. Quanto mais curta, maior aparece.</p>
+        <label class="field-label" for="copy-headline-input">${isTweet ? 'Mensagem do tweet' : 'Headline'} ${cnt('headline')}</label>
+        <textarea class="textarea" id="copy-headline-input" rows="${isTweet ? 3 : 2}" placeholder="${isTweet ? 'Ex: Quanto mais você carrega o resultado nas costas, menos a operação cresce sem você.' : 'Ex: Para de demitir antes de diagnosticar.'}">${escapeHtml(STATE.copyHeadline)}</textarea>
+        <p class="field-hint">${isTweet ? 'É o texto que vai direto no corpo do tweet — só isso.' : 'Frase de impacto principal. 1 sentença. Quanto mais curta, maior aparece.'}</p>
       </div>
+      ${isTweet ? '' : `
       <div class="field">
         <label class="field-label" for="copy-subhead-input">Subheadline (opcional) ${cnt('subhead')}</label>
         <textarea class="textarea" id="copy-subhead-input" rows="2" placeholder="Ex: Em 70% dos casos, o problema é o sistema, não a pessoa.">${escapeHtml(STATE.copySubhead)}</textarea>
@@ -1692,6 +1706,7 @@ function tplWizCopy() {
         <input type="text" class="input" id="copy-tag-input" placeholder="Ex: EXCLUSIVO PARA DONOS DE NEGÓCIOS QUE FATURAM +R$200K/MÊS" value="${escapeHtml(STATE.copyTag)}">
         <p class="field-hint">Faixa curta em caixa alta que filtra o público — igual aos criativos reais do banco.</p>
       </div>
+      `}
     </div>
     <div class="foot">
       <button class="btn btn-ghost" data-action="back">${icon('arrowLeft', 16)} Voltar</button>
@@ -2778,7 +2793,13 @@ function onAction(e) {
       STATE.copyTag = tg ? tg.value : '';
       // Compõe copy unificada SÓ pra preview de revisão — backend lê os 3 separados
       STATE.copy = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n');
-      goto('wiz-cta');
+      // Tweet é mensagem direta: sem subhead/body/tag e sem CTA → pula pro confirm
+      if (STATE.style === 'METTA-TWEET-CARD' || STATE.style === 'TIAGO-TWITTER-CARD') {
+        STATE.cta = '';
+        goto('wiz-confirm');
+      } else {
+        goto('wiz-cta');
+      }
       break;
     }
     case 'pick-cta-suggestion':
