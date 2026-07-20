@@ -249,6 +249,59 @@ _IOS_BATTERY = (
     '<rect x="0.75" y="0.75" width="20.5" height="10.5" rx="2.5" stroke="currentColor" stroke-opacity="0.4"/>'
     '<rect x="2.25" y="2.25" width="17.5" height="7.5" rx="1.3" fill="currentColor"/>'
     '<rect x="22.5" y="4" width="1.5" height="4" rx="0.7" fill="currentColor" fill-opacity="0.4"/></svg>')
+# ── ORNAMENTOS decorativos (SVG inline, camada ATRÁS do texto) ──────────────
+# Recurso definidor de estilos cujo YAML pede um elemento visual que NÃO é foto
+# gerada (grátis, re-renderável, legível). Ativados por params.ornament no
+# blueprint. Ficam em .ad-ornament (z-index 0); o texto (.layer) fica acima.
+# carta-selo (DARK-CARTA): motivo de carta/contrato em ângulo + selo M de cera.
+_CARTA_DOC = (
+    '<svg class="carta-doc" viewBox="0 0 400 300" fill="none" stroke="#ffffff" '
+    'stroke-width="2" stroke-linecap="round">'
+    '<g transform="rotate(-5 200 150)">'
+    '<rect x="62" y="18" width="276" height="264" rx="6"/>'
+    '<line x1="92" y1="66" x2="308" y2="66"/><line x1="92" y1="96" x2="308" y2="96"/>'
+    '<line x1="92" y1="126" x2="286" y2="126"/><line x1="92" y1="156" x2="308" y2="156"/>'
+    '<line x1="92" y1="186" x2="254" y2="186"/>'
+    '<path d="M96 244 q22 -20 44 0 t44 0 t44 0" stroke-width="3"/>'
+    '</g></svg>')
+_CARTA_SEAL = (
+    '<svg class="carta-seal" viewBox="0 0 100 100" aria-hidden="true">'
+    '<circle cx="50" cy="50" r="45" fill="#FFBE18"/>'
+    '<circle cx="50" cy="50" r="45" fill="none" stroke="#0C161B" stroke-opacity="0.28" stroke-width="1.5"/>'
+    '<circle cx="50" cy="50" r="36" fill="none" stroke="#0C161B" stroke-opacity="0.55" '
+    'stroke-width="2" stroke-dasharray="2 4.2"/>'
+    '<text x="50" y="51" font-family="Inter, Arial, sans-serif" font-weight="900" '
+    'font-size="48" fill="#0C161B" text-anchor="middle" dominant-baseline="central">M</text>'
+    '</svg>')
+# draw (YELLOW-DRAW): ilustração hand-drawn (curva de crescimento + seta) com
+# wobble de traço via filtro de deslocamento — leveza editorial, não cartoon.
+_DRAW_ILLO = (
+    '<svg class="draw-illo" viewBox="0 0 600 240" fill="none" stroke="#0C161B" '
+    'stroke-width="7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    '<filter id="orn-rough" x="-5%" y="-5%" width="110%" height="110%">'
+    '<feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>'
+    '<feDisplacementMap in="SourceGraphic" in2="n" scale="6"/></filter>'
+    '<g filter="url(#orn-rough)">'
+    '<path d="M60 205 L560 205" stroke-opacity="0.5"/>'
+    '<path d="M78 216 L78 40" stroke-opacity="0.5"/>'
+    '<path d="M92 188 C180 178 226 150 286 150 S372 118 420 92 S506 66 548 42"/>'
+    '<path d="M548 42 l-36 6 M548 42 l-7 35"/>'
+    '<path d="M150 205 l0 11 M260 205 l0 11 M370 205 l0 11 M470 205 l0 11" '
+    'stroke-opacity="0.38" stroke-width="4"/>'
+    '</g></svg>')
+
+def _ornament(name: str, theme: str = "") -> str:
+    """HTML da camada de ornamento decorativo p/ o model_id, ou '' se não houver.
+    Fica ATRÁS do texto (CSS z-index). Best-effort: nome desconhecido → sem nada."""
+    name = (name or "").strip().lower()
+    if name == "carta-selo":
+        return ('<div class="ad-ornament ad-ornament--carta" aria-hidden="true">'
+                f'{_CARTA_DOC}{_CARTA_SEAL}</div>')
+    if name == "draw":
+        return ('<div class="ad-ornament ad-ornament--draw" aria-hidden="true">'
+                f'{_DRAW_ILLO}</div>')
+    return ""
+
 _ICO = {  # ícones de ação do X (stroke, minimal — legíveis em print pequeno)
     "reply": '<svg viewBox="0 0 24 24"><path d="M21 11.3c0 3.7-3.8 6.7-8.5 6.7-.9 0-1.8-.1-2.6-.3L5.2 20l1.2-3.1C4.6 15.7 3.5 13.6 3.5 11.3 3.5 7.6 7.4 4.6 12 4.6s9 3 9 6.7z"/></svg>',
     "repost": '<svg viewBox="0 0 24 24"><path d="M7 8h8.5a3 3 0 0 1 3 3v1.5M17 16.5H8.5a3 3 0 0 1-3-3V12"/><path d="M15.5 5.5 18.5 8l-3 2.5M9 19l-3-2.5 3-2.5"/></svg>',
@@ -740,6 +793,12 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     # sai ANTES do copy_clean (que stringifica tudo).
     serie = (copy or {}).get("serie") or None
 
+    # Ornamento decorativo (recurso definidor de estilos sem foto gerada —
+    # ex: selo M da DARK-CARTA, ilustração hand-drawn do YELLOW-DRAW). Camada
+    # atrás do texto; nome desconhecido → sem nada (best-effort).
+    ornament = str(params.get("ornament", "")).strip().lower()
+    ornament_html = _ornament(ornament, theme)
+
     copy_clean = {k: (str(v).strip() if v else "")
                   for k, v in (copy or {}).items() if k != "serie"}
     params_eff = {**params, "anchor": anchor, "panel": panel, "head_out": head_out}
@@ -766,6 +825,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         f'data-align="{_esc(align)}" data-scale="{_esc(scale)}" data-photo="{_esc(photo)}" '
         f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}" '
         f'data-obj-scale="{_esc(obj_scale)}" data-panel="{_esc(panel)}"'
+        + (f' data-ornament="{_esc(ornament)}"' if ornament else "")
         # tweet COM imagem → canvas auto-height (print cru, altura = conteúdo)
         + (' data-embed="1"' if (arch == "tiago-twitter" and (image_url or "").strip()) else "")
     )
@@ -782,6 +842,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
 </head><body>
 <div class="ad ad-canvas" {data_attrs}>
 {serie_under}
+{ornament_html}
 {brand}
 {inner}
 {_proof_line(copy_clean, anchor=anchor, brand_html=brand)}

@@ -3,7 +3,7 @@ id: YELLOW-DRAW
 display_name: "Fundo amarelo + ilustração desenhada à mão"
 marca: metta
 archetype: typo
-params: { theme: yellow, align: center, cta: dark }
+params: { theme: yellow, align: center, cta: dark, ornament: draw }
 slots: [tag, headline, subhead, body, cta]
 image: { required: false }
 formato_nativo: [story, feed]

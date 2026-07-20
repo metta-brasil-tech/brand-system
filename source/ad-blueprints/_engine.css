@@ -730,3 +730,16 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .eng { display: inline-flex; align-items: center; gap: 9px; font-size: 23px; color: var(--t-grey); }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .eng i { font-style: normal; }
 .ad[data-marca="tiago"][data-arch="tiago-twitter"] .eng svg { width: 32px; height: 32px; fill: none; stroke: var(--t-grey); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── ORNAMENTOS decorativos (camada atrás do texto) ───────────────────────── */
+.ad-ornament { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.ad[data-ornament] .layer { position: relative; z-index: 2; }
+/* DARK-CARTA: carta/contrato faint em ângulo (marca d'água) + selo M de cera */
+.carta-doc  { position: absolute; left: 17%; top: 18%; width: 66%; opacity: .07; }
+/* selo de cera no fim da carta (zona vazia inferior) — não colide c/ headline */
+.carta-seal { position: absolute; right: 24%; top: 60%; width: 172px; height: 172px;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,.4)); }
+/* YELLOW-DRAW: reserva a faixa inferior pra ilustração e sobe o texto */
+.ad[data-ornament="draw"] .layer { justify-content: flex-start; padding-top: 13%; }
+.ad-ornament--draw .draw-illo { position: absolute; left: 9%; right: 9%; bottom: 15%;
+  width: 82%; height: 32%; }
