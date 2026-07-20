@@ -956,9 +956,27 @@ def _run_pipeline_inline(
                     diagnostics.append(f"04-image-gen: TODAS as tentativas falharam")
 
     # Converte file:// → data:image URI pro HTML
+    _focus_anchor = None  # âncora MEDIDA na imagem real (focus map) — None = não mediu
     if image_file_url:
         image_data_uri = _image_to_data_uri(image_file_url)
         diagnostics.append(f"image-uri: data:image embed ({len(image_data_uri) // 1024}KB base64)")
+        # FOCUS MAP (Fase 1.1): mede a imagem REAL gerada e decide a zona vazia
+        # onde o texto ancora — em vez de confiar no palpite do diretor de arte.
+        # É o fio que faz o focal-aware valer pras peças geradas NO SITE (o
+        # _nano_pipeline já media no teste local; aqui era o buraco). Ambíguo →
+        # não sobrescreve, o diretor de arte manda. Best-effort: nunca quebra.
+        try:
+            from _focus_map import focus_anchor
+            _anc, _fmeta = focus_anchor(image_data_uri)
+            if not _fmeta.get("ambiguous"):
+                _focus_anchor = _anc
+            diagnostics.append(
+                f"focus-map: anchor={_anc} top={_fmeta.get('energy_top')} "
+                f"mid={_fmeta.get('energy_mid')} bot={_fmeta.get('energy_bottom')}"
+                f"{' ~ambíguo (diretor manda)' if _fmeta.get('ambiguous') else ''}"
+            )
+        except Exception as _fe:
+            diagnostics.append(f"focus-map: pulado ({_fe.__class__.__name__}: {str(_fe)[:60]})")
         # Salva o FUNDO LIMPO (sem texto) separado. Assim o texto vira camada
         # RE-EDITÁVEL: dá pra diminuir/reposicionar sem regerar a imagem — que era
         # a raiz do "texto queimado" (não dava pra consertar peça antiga). Best-effort.
@@ -990,8 +1008,9 @@ def _run_pipeline_inline(
         "body": (user_body or "").strip(),
         "cta": (user_cta_text or "").strip(),
         "tag": (user_tag or "").strip(),
-        # âncora + caixa de texto decididas pelo diretor de arte
-        "text_anchor": (ad_directives.get("text_anchor") or "").strip().lower(),
+        # âncora: MEDIDA na imagem real (focus map) quando confiável; senão o
+        # palpite do diretor de arte. A guarda-anti-cabeça abaixo é o override final.
+        "text_anchor": (_focus_anchor or ad_directives.get("text_anchor") or "").strip().lower(),
         "panel": (ad_directives.get("panel") or "").strip().lower(),
         "head_out": str(ad_directives.get("head_out") or "").strip().lower(),
         # linha de prova social solta no canto (fora do card), assinatura do banco
