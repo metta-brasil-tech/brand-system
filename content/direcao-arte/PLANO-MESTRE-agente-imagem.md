@@ -60,7 +60,7 @@ garante o nível dos exemplos feitos à mão — automatizado.
 | 1.2 | **Banco de foto limpa curado** — puxar foto on-brand marcada por conceito em vez de gerar cru toda hora (fonte do slop). | ⬜ pendente |
 | 1.3 | **Rejeição de slop no QA** — detectar/barrar card branco flutuante, texto de IA dentro da foto, número inventado, foto off-brand. | 🟡 parcial (número inventado ✅) |
 | 1.4 | **Medir a imagem e adaptar o layout** — aspecto variável + auto-height. | 🟢 feito no tweet; ⬜ estender às outras peças |
-| 1.5 | **Provider routing** — Gemini (Nano Banana) p/ pessoa real/específica com referência; gpt-image p/ conceito/objeto. Confirmar `IMAGE_GEN_PROVIDER` na Vercel. | 🟡 parcial |
+| 1.5 | **Provider routing** — Gemini (Nano Banana) p/ pessoa real/específica com referência; gpt-image p/ conceito/objeto. Confirmar `IMAGE_GEN_PROVIDER` na Vercel. | 🟡 **código pronto, falta SÓ a env.** Prova ao vivo (20/07): geração D-fullbleed em prod caiu em `provider=openai` mas `resolve_route` local com chave → `nano-banana` (famílias A/B/D/NEWS/YELLOW). Ou seja: `GEMINI_API_KEY` NÃO está no runtime da Vercel — adicionar em Settings→Environment Variables (Production) + redeploy. DARK/LIGHT ficam no gpt-image por design. |
 
 ### 🔄 Fase 2 — Repensar o PARADIGMA
 *Mata o "picker de thumbnails iguais e enganosos".*
