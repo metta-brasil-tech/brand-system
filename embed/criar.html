@@ -2313,6 +2313,24 @@ function tplResult() {
               <ul style="margin: 0; padding-left: 18px;">${diagItems}</ul>
             </details>
           ` : ''}
+          ${STATE.model_id ? (() => {
+            const bud = copyBudgetFor(STATE.model_id);
+            const fld = (id, label, val, rows) => `
+              <label style="display:block; font-size:12px; font-weight:600; margin:8px 0 4px; color:var(--metta-sys-color-on-surface-variant);">${label}</label>
+              <textarea class="textarea" id="edit-${id}" rows="${rows}">${escapeHtml(val || '')}</textarea>`;
+            return `
+            <div class="result-card" id="copy-editor">
+              <h4 class="result-card-title">Editar o texto</h4>
+              <p style="font-size:12px; line-height:1.4; color:var(--metta-sys-color-on-surface-variant); margin:0 0 6px;">
+                Ajuste as palavras e aplique — mesma foto, re-render na hora.
+              </p>
+              ${fld('headline','Headline', STATE.copyHeadline, 2)}
+              ${bud.subhead ? fld('subhead','Subtítulo', STATE.copySubhead, 1) : ''}
+              ${bud.body ? fld('body','Corpo', STATE.copyBody, 2) : ''}
+              ${fld('cta','Botão (CTA)', STATE.cta, 1)}
+              <button class="btn btn-outlined" data-action="apply-copy-edit" style="width:100%; margin-top:10px;">${icon('refresh', 16)} Aplicar edição</button>
+            </div>`;
+          })() : ''}
           ${STATE.bg_image_uri ? `
             <div class="result-card" id="anchor-editor">
               <h4 class="result-card-title">Ajustar posição do texto</h4>
@@ -2768,6 +2786,44 @@ async function adjustTextAnchor(value) {
   }
 }
 
+/* Fase D — editar a COPY no resultado: lê os campos editáveis, atualiza o STATE e
+   re-renderiza a MESMA foto com o texto novo via /api/preview (custo zero, sem
+   regerar imagem). Vale pra peça com foto (usa bg_image_uri) e sem foto (text-only). */
+async function applyCopyEdit() {
+  const get = id => { const el = document.getElementById('edit-' + id); return el ? el.value : null; };
+  const h = get('headline'); if (h !== null) STATE.copyHeadline = h;
+  const s = get('subhead');  if (s !== null) STATE.copySubhead  = s;
+  const b = get('body');     if (b !== null) STATE.copyBody     = b;
+  const c = get('cta');      if (c !== null) STATE.cta          = c;
+  const editor = document.getElementById('copy-editor');
+  if (editor) editor.style.opacity = '0.55';
+  try {
+    const layout = {};
+    if (STATE.text_anchor_override) layout.text_anchor = STATE.text_anchor_override;
+    const body = {
+      marca: STATE.brand || 'metta',
+      model_id: STATE.model_id,
+      copy: _previewCopy(),
+      format: STATE.ad_format || 'feed',
+      layout,
+    };
+    if (STATE.bg_image_uri) body.image_data_uri = STATE.bg_image_uri;  // peça com foto → mesma foto
+    const r = await fetch(`${ENGINE_URL}/preview`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const j = await r.json();
+    if (!r.ok || !j.html) throw new Error((j && j.error) || 'preview falhou');
+    STATE.ad_html = j.html;
+    STATE.ad_html_original = j.html;   // copy editada vira o novo "original" (âncora Auto mantém o texto)
+    render();
+  } catch (err) {
+    if (editor) editor.style.opacity = '';
+    alert('Não consegui aplicar a edição do texto: ' + (err.message || err));
+  }
+}
+
 /* Injeta o documento HTML do ad gerado dentro do <iframe id="ad-preview"> +
    escala o iframe pra preservar a proporção EXATA do canvas (1080×{1350|1920|1080}).
    Sem isso, CSS aspect-ratio pode dar resultado visual diferente do canvas real. */
@@ -3151,6 +3207,9 @@ function onAction(e) {
       break;
     case 'adjust-anchor':
       adjustTextAnchor(value);
+      break;
+    case 'apply-copy-edit':
+      applyCopyEdit();
       break;
     case 'regenerate':
       goto('loading');
