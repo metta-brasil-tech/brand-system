@@ -15,21 +15,21 @@
     },
     "api/image-search.py": {
       "maxDuration": 15,
-      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,content,source,node_modules,vendor,scripts,styles,embed,data,public,engine,agente-copy,render_out}/**"
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,data,public,engine,agente-copy,render_out}/**"
     },
     "api/pieces.py": {
       "maxDuration": 15,
-      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy,render_out}/**"
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy,render_out}/**"
     },
     "api/copy-agent.py": {
       "maxDuration": 300,
       "includeFiles": "{agente-copy/**}",
-      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,content,source,node_modules,vendor,scripts,styles,embed,public,engine,render_out}/**"
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,render_out}/**"
     },
     "api/prompt-image.py": {
       "maxDuration": 30,
       "includeFiles": "{engine/brand-knowledge/**,source/ad-blueprints/**}",
-      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out}/**"
+      "excludeFiles": "{assets,content,source/embed,source/metta,source/design,source/compartilhado,source/transcricoes,node_modules,vendor,scripts,styles,data,public,agente-copy,render_out}/**"
     },
     "api/preview.py": {
       "maxDuration": 10,
@@ -42,12 +42,12 @@
     },
     "api/save-creative.js": {
       "maxDuration": 30,
-      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy,render_out,data}/**"
+      "excludeFiles": "{assets,content,source,node_modules,vendor,scripts,styles,embed,public,engine,agente-copy,render_out,data}/**"
     },
     "api/creatives.js": {
       "maxDuration": 15,
       "includeFiles": "data/generated-index.json",
-      "excludeFiles": "{assets/applications,assets/fotografia,assets/generated,assets/icons,assets/logos,assets/modelos-documentos,assets/photo-presets,assets/signatures,assets/style-previews,content,source,vendor,scripts,styles,embed,public,engine,agente-copy,render_out}/**"
+      "excludeFiles": "{assets,content,source,vendor,scripts,styles,embed,public,engine,agente-copy,render_out}/**"
     }
   }
 }
