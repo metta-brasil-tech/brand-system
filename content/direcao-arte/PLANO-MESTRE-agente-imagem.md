@@ -87,9 +87,9 @@ ba809d0) — as duas sessões convergiram no mesmo working tree.
 
 | # | Tarefa | Status |
 |---|---|---|
-| 3.1 | **15 → ~7 recipes calibradas** de verdade. | ⬜ pendente |
+| 3.1 | **15 → ~7 recipes calibradas** de verdade. | 🟢 **Tiago feito (7ba882d):** picker de peça única foi de 13 → **5** (TWITTER-CARD, NOTES, TYPO-PURE, TWITTER-CARD-IMAGE, EDITORIAL-HERO). Flag novo `carouselOnly` (aparece no carrossel, some do picker de peça única) tirou os 5 papéis-de-slide/fillers (EDITORIAL-CARD/DARK/CTA + DARK-SURREAL + PHOTO-RAW); as 3 stories viraram `comingSoon` (zero creative provado, redundantes com HERO/TYPO). ⬜ Falta o mesmo pente-fino no Metta. **Achado:** o fluxo STORY do Tiago é subdesenvolvido — nenhum creative de story provado; story-carrossel Tiago fica só com os 2 fillers. |
 | 3.2 | **6 modelos Metta faltando** no picker (DARK-CARTA, DARK-OBJETO, LIGHT-TIPO, FOTO-PILL-CASUAL, K-bold-dourado, YELLOW-DRAW). | ✅ **COMPLETO 6/6:** DARK-OBJETO (505f59e), K-bold-dourado + LIGHT-TIPO (b3393ba), YELLOW-DRAW + DARK-CARTA (1d79165 — ornamentos SVG, §5), **FOTO-PILL-CASUAL (ae6f17e redesenho + fb9d33e exposto)**. FOTO-PILL foi REDESENHADO: o card branco flutuante que o crítico reprovava virou layout integrado (photo-band: foto topo + faixa sólida, `panel=plain`, sem card) → crítico PASSA (same_designer=yes, slop=[]). É o único foto-real dos 6 (depende do Gemini em prod). Resíduo: loop de relevância do vision-qa às vezes regenera pra metáfora de objeto (comportamento do art-director). |
-| 3.3 | **LOGO-WALL** — trazer logos reais dos clientes (hoje placeholder → "Em breve"). | ⬜ pendente |
+| 3.3 | **LOGO-WALL** — trazer logos reais dos clientes (hoje placeholder → "Em breve"). | ⬜ pendente (Nathan confirmou 21/07: LOGO-WALL não está bom → segue "Em breve"). YELLOW-OBJETO aprovado no mesmo dia → destravado (7ba882d). |
 | 3.4 | **UX por formato** — esconder subtítulo/corpo no slide-tweet do carrossel (o fix pegou só a peça única). | ⬜ pendente |
 | 3.5 | **Tweet Metta (card-mock)** — aplicar aspecto variável de imagem (só o Tiago tem). | ⬜ pendente |
 
