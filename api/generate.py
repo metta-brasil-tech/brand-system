@@ -986,19 +986,21 @@ def _run_pipeline_inline(
         image_data_uri = _image_to_data_uri(image_file_url)
         diagnostics.append(f"image-uri: data:image embed ({len(image_data_uri) // 1024}KB base64)")
         # FOCUS MAP (Fase 1.1): mede a imagem REAL gerada e decide a zona vazia
-        # onde o texto ancora — em vez de confiar no palpite do diretor de arte.
-        # É o fio que faz o focal-aware valer pras peças geradas NO SITE (o
-        # _nano_pipeline já media no teste local; aqui era o buraco). Ambíguo →
-        # não sobrescreve, o diretor de arte manda. Best-effort: nunca quebra.
+        # onde o texto ancora. REGRA DE COMPOSIÇÃO VENCE O BLUEPRINT: o texto vai
+        # pra faixa vazia MEDIDA na imagem, SEMPRE — mesmo que o modelo tenha um
+        # anchor fixo (ex.: LIGHT-SURREAL 'anchor: bottom, align: center' cobria o
+        # rosto). Só cede pro anchor curado do blueprint quando o sujeito ocupa o
+        # quadro TODO (sem zona segura = ambíguo). Best-effort: nunca quebra.
         try:
             from _focus_map import focus_anchor
             _anc, _fmeta = focus_anchor(image_data_uri)
             if not _fmeta.get("ambiguous"):
-                _focus_anchor = _anc
+                _focus_anchor = _anc   # a nossa regra manda no lugar do modelo
             diagnostics.append(
                 f"focus-map: anchor={_anc} top={_fmeta.get('energy_top')} "
-                f"mid={_fmeta.get('energy_mid')} bot={_fmeta.get('energy_bottom')}"
-                f"{' ~ambíguo (diretor manda)' if _fmeta.get('ambiguous') else ''}"
+                f"mid={_fmeta.get('energy_mid')} bot={_fmeta.get('energy_bottom')} "
+                f"{'centrado' if _fmeta.get('subject_centered') else ''}"
+                f"{'— sujeito ocupa tudo, blueprint decide' if _fmeta.get('ambiguous') else '→ REGRA VENCE o blueprint'}"
             )
         except Exception as _fe:
             diagnostics.append(f"focus-map: pulado ({_fe.__class__.__name__}: {str(_fe)[:60]})")

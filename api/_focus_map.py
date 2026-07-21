@@ -63,10 +63,20 @@ def focus_anchor(image, min_gap: float = 0.04) -> tuple[str, dict]:
 
     e = _band_energy(img, bands=3)   # [topo, meio, base]
     top, mid, bot = e
-    ambiguous = abs(top - bot) < min_gap
+    # A âncora vai SEMPRE pra faixa mais vazia entre topo e base — o texto foge do
+    # assunto. NUNCA o meio (onde o sujeito costuma estar).
     anchor = "top" if top <= bot else "bottom"
+    lo = min(top, bot)
+    # Sujeito CENTRALIZADO (o meio é a faixa mais cheia) = topo E base seguros → a
+    # leitura é CONFIÁVEL. ERA O BUG: centralizado caía em `abs(top-bot)<gap` e virava
+    # "ambíguo", o texto ia pro anchor fixo do blueprint e cobria o rosto.
+    subject_centered = mid >= max(top, bot)
+    # "Ambíguo" de verdade = não existe faixa vazia (o sujeito ocupa o quadro todo):
+    # a faixa mais vazia AINDA está cheia, topo≈base, e não é caso de centralizado.
+    ambiguous = (lo > 0.14) and (abs(top - bot) < min_gap) and not subject_centered
     meta = {"energy_top": round(top, 3), "energy_mid": round(mid, 3),
-            "energy_bottom": round(bot, 3), "ambiguous": ambiguous, "anchor": anchor}
+            "energy_bottom": round(bot, 3), "ambiguous": ambiguous, "anchor": anchor,
+            "subject_centered": subject_centered}
     return anchor, meta
 
 
