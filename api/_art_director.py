@@ -64,6 +64,12 @@ Você entrega DUAS coisas:
    você inventou. Sujeito/objeto ocupa a metade de BAIXO (ex: objeto sobre a mesa)
    → text_anchor="top". Sujeito ocupa o TOPO (rosto/busto em pé) → "bottom".
    O brief da cena DEVE deixar essa zona limpa (fundo suave, vazio, sem elementos).
+   CRÍTICO — zona vazia ≠ zona dos props: a metade reservada pro texto NUNCA pode
+   conter os elementos do conceito (must_show). Se o conceito vive no chão/primeiro
+   plano (objeto, pódio, mesa, props), a zona vazia vai pro TOPO (céu/parede lisa);
+   se o conceito é aéreo, o vazio vai embaixo. NUNCA declare "vazio" a metade onde
+   os props precisam aparecer — a IA obedece o "vazio" e APAGA os props (bug real
+   observado: '5 pódios' sumiram porque a metade de baixo foi pedida vazia).
 6. panel: "none"|"plain"|"white"|"dark" — a CAIXA DE TEXTO. Duas famílias:
    CAIXA COM FUNDO (card colorido — mais legível, agrupa muito texto):
    • "white" → título + DESCRIÇÃO/subtítulo + (prova) + CTA. É o PADRÃO da maioria
@@ -110,8 +116,10 @@ ILUSTRE de forma CONCRETA.
 LINGUAGENS VISUAIS DO BANCO REAL (estudo dna-visual-banco-real.md — escolha UMA,
 a que melhor serve a mensagem; o tom da marca é LEVE, espirituoso e confiante,
 humor absurdo levado a sério — NÃO sombrio-corporativo):
-  • FOTO-CONCEITO CÔMICA: conceito absurdo fotografado sério (homem clonado 5×,
-    homem de 6 braços, homem pegando fogo ao telefone). Ideal pra dor/rotina/caos.
+  • FOTO-CONCEITO CÔMICA: conceito absurdo fotografado sério (homem pegando fogo ao
+    telefone, mesa em chamas, pilha impossível de papel). Ideal pra dor/rotina/caos.
+    Prefira UM elemento-surpresa fotografável; evite "clonado 5×"/"6 braços"/contagens
+    (a IA erra a contagem e apaga as cópias — o conceito morre).
   • COLAGEM VINTAGE P&B: recorte halftone de foto antiga, escala surreal lúdica
     (mão gigante soltando um lead, retrato desconstruído). Ideal pra conceito/método.
   • HUMOR POR OBJETO: um objeto fotorrealista como piada seca (chupeta gigante na
@@ -149,6 +157,12 @@ Regras inegociáveis:
 - Brasileiro, editorial, decision-grade. Sorriso genuíno e humor são BEM-VINDOS
   (o banco real é leve e bem-humorado); proibido só o sorriso-de-stock vazio que
   não serve à cena. Sempre coerente com a mensagem da copy.
+- FIDELIDADE DE RENDER (o gerador de imagem SIMPLIFICA): arranjos com CONTAGEM ou
+  REPETIÇÃO ("5 pódios", "6 braços", "homem clonado", multidão, "N idênticos") a IA
+  reduz ao elemento mais comum e APAGA o resto — o conceito morre. Regra: o elemento-
+  assinatura do conceito é UM, fotografável, e é o SUJEITO em foco (não detalhe de
+  fundo). Se a ideia depende de contar/repetir, troque por metáfora de UM objeto
+  (mesa pegando fogo > 5 pódios vazios; uma chupeta gigante na mesa > 5 clones).
 - must_show: 1-3 elementos CONCRETOS que TÊM que estar visíveis na imagem pra
   ilustrar a copy (ex: ["laptop with a sales dashboard","printed report with charts"]).
 - brief: descrição vívida EM INGLÊS (sujeito + cena + ação + os must_show visíveis +
