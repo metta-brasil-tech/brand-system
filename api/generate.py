@@ -820,14 +820,27 @@ def _run_pipeline_inline(
                 diagnostics.append("04-knowledge: ICP/voz/método injetados na skill 04")
             if chosen_preset:
                 parts.append(preset_to_extra_context(chosen_preset))
-            # Composição-por-slot vinda do BLUEPRINT (não do style-X.md) — garante
-            # que o sujeito encaixe no slot real do layout v3.
+            # Composição-por-slot vinda do BLUEPRINT — encaixa o sujeito no slot do
+            # layout. MAS: quando o USER escreveu a direção, o blueprint vira DICA
+            # (não regra) e NÃO força sujeito/pessoa nem tratamento — senão o pedido
+            # do user (ex: "sem pessoa na imagem") era ignorado, porque o placement/
+            # treatment do modelo ASSUME uma pessoa. A direção do user vence.
             if bp_placement and bp_placement in _PLACEMENT_INSTRUCTION:
-                parts.append(
-                    f"=== COMPOSIÇÃO-POR-SLOT (placement={bp_placement}) — OBRIGATÓRIO ===\n"
-                    f"{_PLACEMENT_INSTRUCTION[bp_placement]}"
-                    + (f"\nTratamento do modelo: {bp_treatment}" if bp_treatment else "")
-                )
+                if user_briefing_present:
+                    parts.append(
+                        f"=== ENQUADRAMENTO (placement={bp_placement}) — DICA, NÃO regra ===\n"
+                        f"{_PLACEMENT_INSTRUCTION[bp_placement]}\n"
+                        f"IMPORTANTE: isto é SÓ pra deixar uma zona vazia pro texto. A "
+                        f"DIREÇÃO DO USER (acima) VENCE em sujeito, cena e tratamento. "
+                        f"Se o user NÃO pediu pessoa (ou pediu 'sem pessoa'/'sem gente'), "
+                        f"NÃO coloque pessoa nenhuma — não assuma o sujeito humano do modelo."
+                    )
+                else:
+                    parts.append(
+                        f"=== COMPOSIÇÃO-POR-SLOT (placement={bp_placement}) — OBRIGATÓRIO ===\n"
+                        f"{_PLACEMENT_INSTRUCTION[bp_placement]}"
+                        + (f"\nTratamento do modelo: {bp_treatment}" if bp_treatment else "")
+                    )
             _ad_photo = _art_direction_photo(ad_directives)
             if _ad_photo:
                 parts.append(f"=== DIREÇÃO DE ARTE DA FOTO (Diretor de Arte) ===\n{_ad_photo}")
@@ -916,10 +929,22 @@ def _run_pipeline_inline(
             # banco primeiro. Fallback SEMPRE silencioso pro gpt-image se a
             # família não mandar Nano Banana, faltar chave, ou a chamada falhar
             # — nunca quebra a geração.
+            # "SEM PESSOA": se o user pediu imagem sem gente, a rota nano usa uma
+            # foto de PESSOA do banco como referência e força a pessoa mesmo com o
+            # prompt negando. Então detecta e pula a rota de referência → gpt-image
+            # (text-to-image puro, sem viés de referência humana). Respeita o user.
+            _no_person = bool(user_briefing_present and re.search(
+                r"sem\s+(pessoa|pessoas|gente|humano|humanos|ningu[eé]m)|"
+                r"nenhum[a]?\s+(ser\s+humano|pessoa|gente|humano)|"
+                r"no\s+(person|people|human|humans)|without\s+(a\s+)?(person|people|human)|"
+                r"apenas\s+(um|uma)\s+objeto|s[oó]\s+(um\s+|uma\s+)?objeto",
+                briefing_image_text or "", re.I))
+            if _no_person:
+                diagnostics.append("rota: 'sem pessoa' no briefing → pula nano/referência-humana, usa gpt-image")
             last_error = None
             _nano_res = None
             try:
-                if (marca or "").lower() == "metta":
+                if (marca or "").lower() == "metta" and not _no_person:
                     from _nano_pipeline import generate_via_route as _gvr
                     _nano_res = _gvr(chosen_model_id,
                                      {"headline": user_headline,
