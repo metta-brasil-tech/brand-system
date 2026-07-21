@@ -251,7 +251,10 @@ button.stepper-item.done:hover {
   transform-origin: top left;
   background: #fff;
 }
-.lp-wrap .lp-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+/* O thumbnail estático (copy de EXEMPLO) fica ESCONDIDO por padrão — senão ele
+   aparece no 'loading' e vira o 'thumbnail que engana' que o concept-first mata.
+   Só é revelado (via JS) quando o preview vivo da copy real FALHA. */
+.lp-wrap .lp-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: none; }
 .lp-status {
   position: absolute; left: 8px; bottom: 8px; z-index: 2;
   font-size: 10.5px; font-family: var(--metta-ref-typeface-mono);
@@ -1567,8 +1570,28 @@ function _mountLivePreview(wrap, html) {
   iframe.style.width = cw + 'px';
   iframe.style.height = ch + 'px';
   iframe.style.transform = `scale(${scale})`;
+  // ANTI-FLICKER: o _engine.js encolhe a headline pra caber (auto-fit) DEPOIS do
+  // load. Sem esconder, o preview pisca com o texto GIGANTE transbordando/cortado
+  // por uma fração de segundo (o que o Nathan fotografou). Revela só quando o
+  // auto-fit termina (data-engine-ready=1), com fade suave.
+  iframe.style.opacity = '0';
+  iframe.style.transition = 'opacity .18s ease';
   iframe.srcdoc = html;
   wrap.appendChild(iframe);
+  let revealed = false;
+  const reveal = () => { if (!revealed) { revealed = true; iframe.style.opacity = '1'; } };
+  iframe.addEventListener('load', () => {
+    let tries = 0;
+    const check = () => {
+      try {
+        const d = iframe.contentDocument;
+        if (!d || d.documentElement.getAttribute('data-engine-ready') === '1' || tries > 60) return reveal();
+      } catch (_) { return reveal(); }
+      tries++; setTimeout(check, 20);
+    };
+    check();
+  });
+  setTimeout(reveal, 1600); // fallback: nunca fica invisível pra sempre
   const live = document.createElement('span');
   live.className = 'lp-live';
   live.textContent = 'SUA COPY';
@@ -1591,8 +1614,9 @@ function initLivePreviews() {
         const st = wrap.querySelector('.lp-status'); if (st) st.remove();
         _mountLivePreview(wrap, j.html);
       })
-      .catch(() => { // fallback: thumbnail estático permanece
+      .catch(() => { // SÓ na falha: revela o thumbnail estático (degradação graciosa)
         const st = wrap.querySelector('.lp-status'); if (st) st.remove();
+        const fb = wrap.querySelector('.lp-fallback'); if (fb) fb.style.display = 'block';
       });
   };
   if (_lpObserver) _lpObserver.disconnect();
