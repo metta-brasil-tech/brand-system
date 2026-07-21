@@ -1205,7 +1205,7 @@ let currentStep = 'brand';
 // Ordem: do mais usado/robusto pro mais específico.
 const STYLES_METTA = [
   { id: 'YELLOW-BLOCO',                  label: 'Bloco amarelo + foto pessoa',       desc: 'Bloco amarelo central com headline + bullets, foto pessoa direita bleed corner. Convite institucional com prova social via logo bar.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-bloco.webp' },
-  { id: 'YELLOW-OBJETO',                 label: 'Objeto 3D flutuante amarelo',       desc: 'Objeto-conceito em render 3D estilizado (clay/matte), flutuando sobre fundo amarelo chapado. Metáfora leve, editorial contemporâneo.', usaImagem: true,  formatos: ['feed','ad-story'], comingSoon: true, previewSrc: '/assets/style-previews/metta/yellow-objeto.webp' },
+  { id: 'YELLOW-OBJETO',                 label: 'Objeto 3D flutuante amarelo',       desc: 'Objeto-conceito em render 3D estilizado (clay/matte), flutuando sobre fundo amarelo chapado. Metáfora leve, editorial contemporâneo.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-objeto.webp' },
   { id: 'DARK-OBJETO',                   label: 'Objeto-conceito dark',              desc: 'Objeto-metáfora em foto dark moody (chiaroscuro) sobre fundo escuro. A imagem ILUSTRA a copy — ex.: troféu enrolado em fita métrica = “a meta é régua”. Headline no topo, objeto embaixo.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/dark-objeto.webp' },
   { id: 'A-headline-foto-dark',          label: 'Headline + foto pessoa dark',       desc: 'Fundo escuro, headline grande UPPER + foto pessoa âncora à direita. Caso nominal ou prova editorial.',                              usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/a.webp' },
   { id: 'D-foto-fullbleed-overlay',      label: 'Foto fullbleed com overlay',        desc: 'Foto ocupa canvas inteiro + overlay escuro pra legibilidade do headline em baixo. Imersão visual.',                                      usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/d.webp' },
@@ -1231,16 +1231,16 @@ const STYLES_TIAGO = [
   { id: 'TIAGO-TWITTER-CARD',           label: 'Tweet (só texto)',                   desc: 'Mock feed X/Twitter — header com avatar + verified + tweet bold sentence. Sem foto.',            usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card.webp' },
   { id: 'TIAGO-NOTES-MOCKUP',           label: 'Tela de Notas do iPhone',            desc: 'Mock do app Notas com status bar, marker amarelo no H1 e lista numerada. Storytelling em formato de anotação.', usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/notes-mockup.webp' },
   { id: 'TIAGO-TYPO-PURE',              label: 'Frase grande',                       desc: 'Tipografia pura sobre fundo claro com palavra-chave colorida. Frase de impacto isolada.',         usaImagem: false, formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/typo-pure.webp' },
-  { id: 'TIAGO-EDITORIAL-CTA',          label: 'Slide de fechamento de carrossel',   desc: '3 variantes: pergunta de engajamento, qualificação "pra quem é", ou reveal de protocolo.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-cta.webp' },
+  { id: 'TIAGO-EDITORIAL-CTA',          label: 'Slide de fechamento de carrossel',   desc: '3 variantes: pergunta de engajamento, qualificação "pra quem é", ou reveal de protocolo.',         usaImagem: true,  formatos: ['feed'], carouselOnly: true, previewSrc: '/assets/style-previews/tiago/editorial-cta.webp' },
   { id: 'TIAGO-TWITTER-CARD-IMAGE',     label: 'Tweet com imagem',                   desc: 'Mock Twitter com foto embed (cantos arredondados) na base do card. Imagem gerada, buscada ou enviada.',         usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/twitter-card-image.webp' },
-  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp' },
-  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-yellow-block.webp' },
-  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  formatos: ['story'], previewSrc: '/assets/style-previews/tiago/story-minimal.webp' },
-  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/dark-surreal.webp' },
-  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  formatos: ['feed','story'], previewSrc: '/assets/style-previews/tiago/photo-raw.webp' },
+  { id: 'TIAGO-STORY-COVER-HERO',       label: 'Capa de story com você',             desc: 'Foto sua + headline branco + chamada "Arrasta pro lado". Story 9:16 pra capa de carrossel.',     usaImagem: true,  formatos: ['story'], comingSoon: true, previewSrc: '/assets/style-previews/tiago/story-cover-hero.webp' },
+  { id: 'TIAGO-STORY-YELLOW-BLOCK',     label: 'Pergunta sobre ambiente',            desc: 'Foto de ambiente (sala, academia, mesa) + bloco amarelo central com pergunta ou checklist.',    usaImagem: true,  formatos: ['story'], comingSoon: true, previewSrc: '/assets/style-previews/tiago/story-yellow-block.webp' },
+  { id: 'TIAGO-STORY-MINIMAL-QUESTION', label: 'Reflexão minimal',                   desc: 'Texto leve sobre foto contemplativa. Sem caixa, sem CTA. Baixo volume.',                          usaImagem: true,  formatos: ['story'], comingSoon: true, previewSrc: '/assets/style-previews/tiago/story-minimal.webp' },
+  { id: 'TIAGO-DARK-SURREAL',           label: 'Imagem surreal preto e branco',      desc: 'Fundo preto + imagem surreal B&W isolada SEM texto. Intersticial atmosférico de carrossel.',     usaImagem: true,  formatos: ['feed','story'], carouselOnly: true, previewSrc: '/assets/style-previews/tiago/dark-surreal.webp' },
+  { id: 'TIAGO-PHOTO-RAW',              label: 'Foto sem texto',                     desc: 'Foto crua sem edição (selfie, bastidor, comunidade). Humanização alta.',                          usaImagem: true,  formatos: ['feed','story'], carouselOnly: true, previewSrc: '/assets/style-previews/tiago/photo-raw.webp' },
   { id: 'TIAGO-EDITORIAL-HERO',         label: 'Capa estilo revista',                desc: 'Manchete gigante + colagem cinema editorial (B&W com selective yellow). Capa de carrossel premium.', usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-hero.webp' },
-  { id: 'TIAGO-EDITORIAL-CARD',         label: 'Slide editorial com estatística',    desc: 'Big stat ou lista de sintomas. Slide intermediário de carrossel editorial cinema.',                usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-card.webp' },
-  { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  formatos: ['feed'], previewSrc: '/assets/style-previews/tiago/editorial-dark.webp' }
+  { id: 'TIAGO-EDITORIAL-CARD',         label: 'Slide editorial com estatística',    desc: 'Big stat ou lista de sintomas. Slide intermediário de carrossel editorial cinema.',                usaImagem: true,  formatos: ['feed'], carouselOnly: true, previewSrc: '/assets/style-previews/tiago/editorial-card.webp' },
+  { id: 'TIAGO-EDITORIAL-DARK',         label: 'Slide noir investigativo',           desc: 'Tese psicológica/comportamental (medo, exaustão). Cinema noir, reframe heavy.',                   usaImagem: true,  formatos: ['feed'], carouselOnly: true, previewSrc: '/assets/style-previews/tiago/editorial-dark.webp' }
 ];
 
 /* ----------- DATA: avatares (ICP) -----------
@@ -1606,7 +1606,7 @@ function initLivePreviews() {
    a mensagem. Determinístico, grátis, com o PORQUÊ de cada recomendação. */
 function recommendStyles() {
   const all = (STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO)
-    .filter(s => !s.comingSoon)
+    .filter(s => !s.comingSoon && !s.carouselOnly)
     .filter(s => !s.formatos || s.formatos.includes(_styleFormatGroup(STATE.format)));
   const ids = new Set(all.map(s => s.id));
   const c = _previewCopy();
@@ -1691,8 +1691,10 @@ function _styleCardHtml(s, opts) {
 function tplWizStyle() {
   const allStyles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
   const target = _styleFormatGroup(STATE.format);
-  // Filtra estilos compatíveis com o formato escolhido. Sem `formatos` = aceita tudo (fallback).
-  const styles = allStyles.filter(s => !s.formatos || s.formatos.includes(target));
+  // Filtra por formato + esconde os `carouselOnly` (papéis de slide de carrossel —
+  // ex.: slides editoriais, intersticiais — que só fazem sentido dentro de uma série,
+  // não como peça única). Eles continuam disponíveis no modo Carrossel.
+  const styles = allStyles.filter(s => (!s.formatos || s.formatos.includes(target)) && !s.carouselOnly);
   const hasCopy = Boolean((STATE.copyHeadline || '').trim());
   const recs = hasCopy ? recommendStyles() : [];
   const recIds = new Set(recs.map(r => r.id));
