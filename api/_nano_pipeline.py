@@ -141,13 +141,85 @@ def approved_generated_refs(marca: str, copy: dict | None = None, limit: int = 1
     return [str(_ROOT / it["src"]) for it in items[:max(1, limit)]]
 
 
-def pick_reference(model_id: str, copy: dict) -> dict | None:
-    """Referência visual do banco pra este blueprint: filtra pela FAMÍLIA e
-    desempata por overlap de tokens com a copy. Retorna {family, id, path, motor}
-    ou None se a família não tiver referência utilizável em disco.
+# scene_type/brief do art-director → LINGUAGEM (tratamento fotográfico) do banco.
+# A referência transfere TRATAMENTO (grão/paleta/luz), e o tratamento mora na
+# linguagem — NÃO na família. Por isso a seleção casa a linguagem no banco INTEIRO.
+# Ordem importa: o 1º grupo que casar vence (L3→L7).
+_SCENE_TO_LANG = [
+    (("comic", "cômic", "conceito-comic", "comedic", "absurd"), "L3"),
+    (("colagem", "collage", "halftone", "vintage", "gravura", "cut-out", "cutout"), "L4"),
+    (("humor-objeto", "humor por objeto", "single object", "object gag", "object",
+      "objeto simból", "trophy", "lone ", "deadpan"), "L5"),
+    (("surreal", "fine-art", "fine art", "dreamlike", "painterly", "granulad"), "L6"),
+    (("documental", "documentary", "detalhe", "no faces", "sem rosto"), "L7"),
+]
+# Linguagens que carregam TRATAMENTO fotográfico (servem de referência de foto).
+# L1/L2 = foto real/filme (proibidas); L8 = tipografia (não tem foto pra transferir).
+_PHOTO_LANGS = {"L3", "L4", "L5", "L6", "L7"}
+
+
+def _lang_from_scene(scene_type: str, scene_text: str) -> str | None:
+    """Linguagem de tratamento que o art-director pediu, lida do scene_type + do
+    texto da cena/brief. Retorna 'L3'..'L7' ou None (aí cai no fallback família)."""
+    s = f"{scene_type or ''} {scene_text or ''}".lower()
+    for keys, lg in _SCENE_TO_LANG:
+        if any(k in s for k in keys):
+            return lg
+    return None
+
+
+def _photo_refs_all() -> list[dict]:
+    """Refs do banco INTEIRO que carregam tratamento fotográfico (L3-L7) e existem
+    em disco. Cada uma marcada com _family (pra preferir a família na desempate)."""
+    cur = _load_curated()
+    out = []
+    for fam, v in cur.get("by_family", {}).items():
+        for r in ((v or {}).get("refs", []) if isinstance(v, dict) else []):
+            if r.get("linguagem") in _PHOTO_LANGS and (_ROOT / r.get("path", "")).is_file():
+                out.append({**r, "_family": fam})
+    return out
+
+
+def _ref_out(best: dict, fam: str, cur: dict) -> dict:
+    return {
+        "family": best.get("_family", fam),
+        "id": best["id"],
+        "path": str(_ROOT / best["path"]),
+        "linguagem": best.get("linguagem"),
+        "motor": ((cur.get("by_family", {}).get(fam) or {}).get("motor", "nano-banana-2")),
+    }
+
+
+def pick_reference(model_id: str, copy: dict, scene: str = "",
+                   scene_type: str = "") -> dict | None:
+    """Referência visual do banco. Retorna {family,id,path,linguagem,motor} ou None.
+
+    ESTRATÉGIA: a referência transfere TRATAMENTO, e tratamento = linguagem, não
+    família. Então:
+    1) Se o art-director escolheu uma linguagem de tratamento (cômica/colagem/objeto/
+       surreal/documental), casa essa linguagem no banco INTEIRO — resolve famílias
+       B/D/NEWS que não têm ref de foto própria (hoje caem numa tipografia L8 inútil)
+       e casa o CONCEITO, não só a família.
+    2) Fallback: comportamento antigo por família (desempate por tokens da copy).
     """
     fam = _FAMILY.get(model_id, "OUTROS")
     cur = _load_curated()
+
+    # 1) SELEÇÃO POR CONCEITO/LINGUAGEM (global) -------------------------------
+    target = _lang_from_scene(scene_type, scene)
+    if target:
+        pool = [r for r in _photo_refs_all() if r.get("linguagem") == target]
+        if pool:
+            q = _tokens(f"{scene} {copy.get('headline','')} {copy.get('subhead','')}")
+
+            def _score(r):
+                overlap = len(q & _tokens(
+                    f"{r.get('title','')} {r.get('mood','')} {r.get('archetype_foto','')}"))
+                return overlap + (1 if r.get("_family") == fam else 0)  # leve prefer. da família
+
+            return _ref_out(max(pool, key=_score), fam, cur)
+
+    # 2) FALLBACK POR FAMÍLIA (legado) -----------------------------------------
     refs = (cur.get("by_family", {}).get(fam, {}) or {}).get("refs", [])
     refs = [r for r in refs if (_ROOT / r.get("path", "")).is_file()]
     # L1 (foto real do especialista) e L2 (meme de filme) nunca guiam geração;
@@ -160,13 +232,7 @@ def pick_reference(model_id: str, copy: dict) -> dict | None:
     q = _tokens(f"{copy.get('headline','')} {copy.get('subhead','')}")
     best = max(refs, key=lambda r: len(q & _tokens(
         f"{r.get('title','')} {r.get('mood','')} {r.get('archetype_foto','')}")))
-    return {
-        "family": fam,
-        "id": best["id"],
-        "path": str(_ROOT / best["path"]),
-        "linguagem": best.get("linguagem"),
-        "motor": (cur["by_family"][fam] or {}).get("motor", "nano-banana-2"),
-    }
+    return _ref_out(best, fam, cur)
 
 
 def _sniff_mime(data: bytes) -> str:
@@ -192,13 +258,15 @@ def _api_key(explicit: str | None) -> str:
 
 
 def generate_background(model_id: str, copy: dict, scene: str,
-                        format: str = "feed", api_key: str | None = None) -> tuple[bytes, dict]:
+                        format: str = "feed", api_key: str | None = None,
+                        scene_type: str = "") -> tuple[bytes, dict]:
     """Gera o FUNDO via Nano Banana Pro com a referência do banco injetada.
 
     `scene` = descrição EM INGLÊS da cena/conceito (idealmente vinda do diretor de
-    arte). Retorna (png_bytes, meta). Levanta NanoPipelineError em falha.
+    arte). `scene_type` = tag do art-director (ex: 'foto-conceito-comica') usada pra
+    casar a LINGUAGEM da referência. Retorna (png_bytes, meta). Levanta em falha.
     """
-    ref = pick_reference(model_id, copy)
+    ref = pick_reference(model_id, copy, scene=scene, scene_type=scene_type)
     if not ref:
         raise NanoPipelineError(
             f"sem referência de banco pra '{model_id}' — NÃO gerar só por texto "
@@ -290,16 +358,18 @@ def resolve_route(model_id: str) -> str:
 
 
 def generate_via_route(model_id: str, copy: dict, prompt_or_scene: str,
-                       format: str = "feed") -> tuple[str, dict] | None:
+                       format: str = "feed", scene_type: str = "") -> tuple[str, dict] | None:
     """Tenta gerar pelo Nano Banana (com referência do banco) SE a família
-    deste blueprint mandar isso e a chave estiver disponível. Retorna
-    (data_uri, meta) em caso de sucesso, ou None (caller deve seguir o
-    caminho gpt-image existente — fallback silencioso, nunca propaga erro).
+    deste blueprint mandar isso e a chave estiver disponível. `scene_type` = tag
+    do art-director pra casar a linguagem da referência. Retorna (data_uri, meta)
+    em caso de sucesso, ou None (caller segue o caminho gpt-image — fallback
+    silencioso, nunca propaga erro).
     """
     if resolve_route(model_id) != "nano-banana":
         return None
     try:
-        raw, meta = generate_background(model_id, copy, prompt_or_scene, format=format)
+        raw, meta = generate_background(model_id, copy, prompt_or_scene,
+                                        format=format, scene_type=scene_type)
         mime = _sniff_mime(raw)
         return f"data:{mime};base64," + base64.b64encode(raw).decode("ascii"), meta
     except Exception:

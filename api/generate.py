@@ -949,7 +949,8 @@ def _run_pipeline_inline(
                     _nano_res = _gvr(chosen_model_id,
                                      {"headline": user_headline,
                                       "text_anchor": ad_directives.get("text_anchor") or ""},
-                                     primary_prompt, format=format_key)
+                                     primary_prompt, format=format_key,
+                                     scene_type=(ad_directives.get("image_concept") or {}).get("scene_type") or "")
             except Exception:
                 _nano_res = None
 
