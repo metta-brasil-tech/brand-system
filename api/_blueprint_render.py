@@ -584,6 +584,12 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
     # Com ou sem fundo, a caixa limita o auto-fit (headline encolhe pra caber e
     # não cobre a imagem embaixo — ver _engine.js/fitHead e .text-panel max-height).
     panel = str(params.get("panel", "none")).strip().lower()
+    # REGRA DURA (Nathan, categórico): NENHUM card com fundo AMARELO atrás de
+    # texto/CTA — em modelo nenhum. Se qualquer coisa pedir panel amarelo, vira
+    # card BRANCO (o card claro aprovado). Garantia estrutural: não depende do
+    # art-director nem do blueprint se comportarem.
+    if panel == "yellow":
+        panel = "white"
     # Divisor amarelo entre headline e subtítulo: assinatura das peças SEM card
     # (texto sobre foto/dark). No banco real — cliente-na-loja, sem-processo,
     # serviços-300, FCA — o divisor separa a headline do apoio. Só quando NÃO há
@@ -791,6 +797,8 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     panel = str((copy or {}).get("panel") or "").strip().lower()
     if panel not in ("white", "dark", "plain", "none"):
         panel = str(params.get("panel", "none")).strip().lower()
+    if panel == "yellow":  # REGRA DURA: nunca card amarelo atrás de texto → vira branco
+        panel = "white"
 
     # head_out: headline na foto + card só com apoio (2 zonas, padrão CRM).
     head_out = str((copy or {}).get("head_out") or params.get("head_out", "")).strip().lower()

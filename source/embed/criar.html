@@ -1207,7 +1207,6 @@ let currentStep = 'brand';
 // Cada label/desc reflete o estilo REAL do YAML, não interpretação livre.
 // Ordem: do mais usado/robusto pro mais específico.
 const STYLES_METTA = [
-  { id: 'YELLOW-BLOCO',                  label: 'Bloco amarelo + foto pessoa',       desc: 'Bloco amarelo central com headline + bullets, foto pessoa direita bleed corner. Convite institucional com prova social via logo bar.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-bloco.webp' },
   { id: 'YELLOW-OBJETO',                 label: 'Objeto 3D flutuante amarelo',       desc: 'Objeto-conceito em render 3D estilizado (clay/matte), flutuando sobre fundo amarelo chapado. Metáfora leve, editorial contemporâneo.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/yellow-objeto.webp' },
   { id: 'DARK-OBJETO',                   label: 'Objeto-conceito dark',              desc: 'Objeto-metáfora em foto dark moody (chiaroscuro) sobre fundo escuro. A imagem ILUSTRA a copy — ex.: troféu enrolado em fita métrica = “a meta é régua”. Headline no topo, objeto embaixo.', usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/dark-objeto.webp' },
   { id: 'A-headline-foto-dark',          label: 'Headline + foto pessoa dark',       desc: 'Fundo escuro, headline grande UPPER + foto pessoa âncora à direita. Caso nominal ou prova editorial.',                              usaImagem: true,  formatos: ['feed','ad-story'], previewSrc: '/assets/style-previews/metta/a.webp' },
@@ -1289,7 +1288,6 @@ const TIAGO_RECORTES = [
  * headline/subhead/body; 0 = campo não usado nesse estilo.
  */
 const COPY_BUDGET = {
-  'YELLOW-BLOCO':                    { headline: 55,  subhead: 70, body: 100 },
   'A-headline-foto-dark':            { headline: 65,  subhead: 70, body: 130 },
   'D-foto-fullbleed-overlay':        { headline: 90,  subhead: 60, body: 0 },
   'C-tipografia-pura-dark':          { headline: 90,  subhead: 0,  body: 0 },
@@ -1657,7 +1655,7 @@ function recommendStyles() {
     if (!why[id]) why[id] = reason;
   };
   if (STATE.brand === 'metta') {
-    if (sig.bullets || sig.convite) add('YELLOW-BLOCO', 5, 'Convite estruturado: headline + bullets no bloco amarelo.');
+    if (sig.bullets || sig.convite) add('DARK-CARTA', 5, 'Convite estruturado — carta editorial com selo, tom institucional.');
     if (sig.num)      add('YELLOW-EDITORIAL', 5, 'Tem número forte — o big number vira o herói da peça.');
     if (sig.num && (sig.anuncio || sig.tag)) add('NEWS-CARD', 4, 'Tom de comunicado: manchete + prova.');
     if (sig.anuncio)  add('NEWS-CARD', 4, 'Tom de anúncio/comunicado institucional.');
@@ -1670,7 +1668,7 @@ function recommendStyles() {
     // fallback: composições robustas
     add('D-foto-fullbleed-overlay', 1, 'Foto imersiva + headline — composição robusta pra qualquer tese.');
     add('C-tipografia-pura-dark', 1, 'Tipografia pura — sempre segura.');
-    add('YELLOW-BLOCO', 1, 'Estrutura clássica Metta.');
+    add('A-headline-foto-dark', 1, 'Estrutura clássica Metta — headline + foto.');
   } else {
     if (sig.question) add('TIAGO-TYPO-PURE', 5, 'Pergunta reflexiva — frase grande, sem ruído.');
     if (sig.longMsg)  add('TIAGO-TWITTER-CARD', 5, 'Mensagem longa multi-parágrafo — formato de tweet.');
