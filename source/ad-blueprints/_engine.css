@@ -102,8 +102,12 @@ button { all: unset; }
   background: var(--m-yellow); color: var(--m-night-10);
   padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
 }
-/* sentence-case (LIGHT-SURREAL, NEWS-CARD pedem caixa-baixa editorial, não UPPER) */
-.ad[data-case="sentence"] .t-head { text-transform: none; letter-spacing: -.02em; }
+/* sentence-case (LIGHT-SURREAL, NEWS-CARD pedem caixa-baixa editorial, não UPPER).
+   line-height maior (1.14 vs 1.0 do UPPER): caixa-baixa TEM descendentes (j/g/p/q/y)
+   e, com o bloco-accent amarelo preenchendo a linha de baixo, a line-height apertada
+   fazia o bloco COBRIR o descendente da linha de cima (o "j" de "já" virava "i").
+   O respiro extra tira o descendente de baixo do bloco. */
+.ad[data-case="sentence"] .t-head { text-transform: none; letter-spacing: -.02em; line-height: 1.14; }
 /* divisor amarelo horizontal — assinatura do K (separa headline do body) */
 .t-divider { width: 132px; height: 7px; background: var(--m-yellow); border-radius: 2px; }
 .t-sub  { font-family: var(--m-text); font-weight: 500; font-size: 30px; line-height: 1.25; color: var(--fg); }
