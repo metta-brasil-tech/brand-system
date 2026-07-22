@@ -82,6 +82,11 @@ def _accent(text: str) -> str:
         if len(parts) == 2 and parts[1]:
             text = f"{parts[0]} *{parts[1]}*"
     esc = _esc(text)
+    # Hífen NÃO-QUEBRÁVEL (U+2011) dentro de palavras (ex: DEMONSTRA-SE): impede a
+    # quebra feia no hífen que partia a palavra E o realce amarelo em duas caixas.
+    # Com a palavra inteira, o auto-fit (fitHead) detecta o estouro de largura e
+    # encolhe a fonte até caber — assim o accent nunca quebra no meio.
+    esc = re.sub(r"(?<=\w)-(?=\w)", "‑", esc)
     esc = re.sub(r"\*([^*]+)\*", r'<span class="hi">\1</span>', esc)
     return esc.replace("\n", "<br>")
 
