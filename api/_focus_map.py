@@ -80,6 +80,60 @@ def focus_anchor(image, min_gap: float = 0.04) -> tuple[str, dict]:
     return anchor, meta
 
 
+def _load_img(image):
+    from PIL import Image
+    if isinstance(image, str):
+        if image.startswith("data:"):
+            import base64
+            return Image.open(io.BytesIO(base64.b64decode(image.split(",", 1)[1])))
+        return Image.open(image)
+    if isinstance(image, (bytes, bytearray)):
+        return Image.open(io.BytesIO(bytes(image)))
+    return image
+
+
+def focal_grid(image, rows: int = 4, cols: int = 3) -> list[list[float]]:
+    """Grade 2D de energia de conteúdo (0..1) — mede ONDE está o sujeito na imagem.
+    Pura PIL (roda no deploy). Célula cheia = sujeito; célula vazia = fundo liso."""
+    from PIL import Image, ImageFilter
+    g = _load_img(image).convert("L")
+    w0, h0 = g.size
+    tw = 144
+    th = max(1, round(h0 * tw / w0))
+    g = g.resize((tw, th), Image.BILINEAR).filter(ImageFilter.FIND_EDGES)
+    px = g.load()
+    grid = [[0.0] * cols for _ in range(rows)]
+    for r in range(rows):
+        y0, y1 = int(r * th / rows), (th if r == rows - 1 else int((r + 1) * th / rows))
+        for c in range(cols):
+            x0, x1 = int(c * tw / cols), (tw if c == cols - 1 else int((c + 1) * tw / cols))
+            s = n = 0
+            for y in range(y0, y1):
+                for x in range(x0, x1):
+                    s += px[x, y]; n += 1
+            grid[r][c] = (s / n / 255.0) if n else 0.0
+    mx = max((max(row) for row in grid), default=1.0) or 1.0
+    return [[round(v / mx, 3) for v in row] for row in grid]
+
+
+def focal_zone(image) -> tuple[str, dict]:
+    """A IMAGEM MANDA: recomenda a zona de texto (a mais VAZIA), independente do
+    blueprint. Retorna (zone, meta). zone ∈ {'top','bottom'} + coluna mais vazia em
+    meta. Regra do Nathan: no empate, prefere o TOPO ('o plano superior')."""
+    grid = focal_grid(image, rows=4, cols=3)
+    rows, cols = len(grid), len(grid[0])
+    half = rows // 2
+    top = sum(sum(r) for r in grid[:half]) / (half * cols)
+    bot = sum(sum(r) for r in grid[half:]) / ((rows - half) * cols)
+    band = "top" if top <= bot + 0.02 else "bottom"
+    zone_rows = grid[:half] if band == "top" else grid[half:]
+    col_energy = [sum(row[c] for row in zone_rows) / len(zone_rows) for c in range(cols)]
+    col = ["left", "center", "right"][col_energy.index(min(col_energy))]
+    meta = {"band": band, "col": col, "energy_top": round(top, 3),
+            "energy_bottom": round(bot, 3), "grid": grid}
+    return band, meta
+
+
 if __name__ == "__main__":
     import sys
     for p in sys.argv[1:]:

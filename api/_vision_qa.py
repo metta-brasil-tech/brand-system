@@ -57,9 +57,15 @@ RIGOROSO — reprova fácil:
      telas, torso) é intencional = ok.
    - a pessoa está cortada pela metade de forma esquisita, espremida no canto, ou
      há corte duro estranho não-intencional.
-   Sujeito parcialmente atrás do card mas com o ROSTO INTEIRO visível = OK. Recorte
-   de detalhe documental SEM rosto = OK. Fora o corte de topo de cabeça acima, na
-   dúvida com o rosto inteiro e com respiro = ok."""
+   - o BLOCO DE TEXTO / card ENCOSTA, RASPA ou fica COLADO no sujeito/ponto focal
+     (em especial no rosto) SEM respiro — mesmo que não cubra. A regra da marca: o
+     texto vai pra uma ZONA VAZIA da imagem (céu, parede, fundo liso), com FOLGA do
+     foco. Se metade da imagem está vazia e o card foi parar encostado no rosto em
+     vez de na zona vazia, isso é integrity:"broken". (NÃO confunda com o card sobre
+     fundo vazio encostando de leve na silhueta do corpo/ombro = OK.)
+   Sujeito parcialmente atrás do card mas com o ROSTO INTEIRO visível E com respiro
+   = OK. Recorte de detalhe documental SEM rosto = OK. Fora os casos acima, na
+   dúvida com o rosto inteiro e folgado = ok."""
 
 # Safe zones por formato — espelho condensado de content/direcao-arte/safe-zones.md.
 # Frações da ALTURA da imagem (o modelo de visão não vê coordenadas em px).
