@@ -10,7 +10,13 @@ Avalia 3 regras (feedback do dono + safe zones do IG):
      zona útil do formato — a UI do Instagram cobre topo/rodapé do story e as
      margens do feed truncam. Fonte canônica: content/direcao-arte/safe-zones.md.
 
-Retorna {verdict: PASS|FAIL, relevance, integrity, safe_zones, reason}. Usa OpenAI vision.
+Retorna {verdict: PASS|FAIL, relevance, integrity, safe_zones, reason}.
+
+Visão via LiteLLM (mesmo caminho do cérebro) — provider-agnóstico. Por padrão
+usa o MESMO provider do cérebro (`LLM_PROVIDER`, default claude): assim o loop
+de QA enxerga com Claude e FUNCIONA no deploy. Antes usava a OpenAI direto —
+com a OpenAI fora do ar (cota) a QA voltava SKIPPED e o loop ficava CEGO, nunca
+regenerava. Override: VISION_QA_PROVIDER / VISION_QA_MODEL.
 """
 from __future__ import annotations
 
@@ -36,17 +42,24 @@ RIGOROSO — reprova fácil:
    Só é relevance:"weak" o retrato GENÉRICO que não ilustra nada (pessoa de blazer
    olhando pro lado, sorriso de stock, sem metáfora nem assunto visível).
 
-2. INTEGRIDADE do layout (o layout respeita a imagem?): reprove só o defeito
-   CLARO (evite falso-positivo — texto SEMPRE fica sobre parte da foto, isso é
-   normal). É integrity:"broken" quando:
+2. INTEGRIDADE (a imagem e o layout não mutilam o sujeito?): reprove o defeito
+   CLARO (texto SEMPRE fica sobre parte da foto — isso é normal, não reprove por
+   isso). É integrity:"broken" quando:
    - a caixa de texto cobre CLARAMENTE o ROSTO/cabeça da pessoa (mais da metade do
      rosto escondida) ou esconde o OBJETO que é a piada/assunto da copy. Se a
      pessoa/objeto aparece OK numa área livre e o card está sobre fundo vazio,
      está CERTO (não é broken) mesmo que o card encoste na silhueta.
+   - HÁ UM ROSTO na cena e o TOPO DA CABEÇA / a TESTA está CORTADO pela BORDA
+     SUPERIOR da imagem (rosto aparece mas sem NENHUM respiro acima da cabeça —
+     o crânio raspa/some na borda de cima). Esse é o erro MAIS COMUM do gerador —
+     seja RIGOROSO: rosto presente + topo da cabeça/testa raspando a borda = broken.
+     EXCEÇÃO: enquadramento de DETALHE documental SEM rosto nenhum (só mãos, mesa,
+     telas, torso) é intencional = ok.
    - a pessoa está cortada pela metade de forma esquisita, espremida no canto, ou
      há corte duro estranho não-intencional.
-   Sujeito parcialmente atrás do card, mas com rosto visível = OK. Recorte
-   intencional (direção de arte) = OK. Na dúvida com o rosto visível = ok."""
+   Sujeito parcialmente atrás do card mas com o ROSTO INTEIRO visível = OK. Recorte
+   de detalhe documental SEM rosto = OK. Fora o corte de topo de cabeça acima, na
+   dúvida com o rosto inteiro e com respiro = ok."""
 
 # Safe zones por formato — espelho condensado de content/direcao-arte/safe-zones.md.
 # Frações da ALTURA da imagem (o modelo de visão não vê coordenadas em px).
@@ -101,29 +114,42 @@ def check(png_bytes: bytes, copy: dict, model: str | None = None,
     o comportamento de 2 eixos.
     """
     try:
-        from openai import OpenAI
+        from litellm import completion
     except Exception as e:
-        return {"verdict": "SKIPPED", "reason": f"openai indisponível: {e}", "relevance": "?", "integrity": "?"}
+        return {"verdict": "SKIPPED", "reason": f"litellm indisponível: {e}", "relevance": "?", "integrity": "?"}
 
-    model = model or os.getenv("VISION_QA_MODEL", "gpt-4.1")
+    # Provider/modelo da VISÃO — por padrão o MESMO do cérebro (claude). É o que
+    # faz a QA enxergar no deploy (a OpenAI está fora). Override por env.
+    provider = (os.getenv("VISION_QA_PROVIDER") or os.getenv("LLM_PROVIDER", "claude")).lower()
+    model = model or os.getenv("VISION_QA_MODEL") or {
+        "claude": os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8"),
+        "openai": "gpt-4.1",
+        "gemini": os.getenv("LLM_MODEL_GEMINI", "gemini-2.5-flash"),
+    }.get(provider, os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8"))
+
     b64 = base64.b64encode(png_bytes).decode("ascii")
     copy_txt = (
         f"headline: {copy.get('headline','')}\nsubhead: {copy.get('subhead','')}\n"
         f"body: {copy.get('body','')}\ncta: {copy.get('cta','')}"
     ).replace("*", "")
+    kwargs = {
+        "model": model,
+        "max_tokens": 300,
+        "messages": [
+            {"role": "system", "content": _sys_prompt(format_key)},
+            {"role": "user", "content": [
+                {"type": "text", "text": f"COPY do anúncio:\n{copy_txt}\n\nAvalie a peça:"},
+                {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
+            ]},
+        ],
+        "timeout": float(os.getenv("VISION_QA_TIMEOUT_S", "60")),
+        "num_retries": int(os.getenv("LLM_NUM_RETRIES", "2")),
+    }
+    # Claude descontinuou temperature; só manda pros demais.
+    if not str(model).startswith(("claude-", "anthropic/")):
+        kwargs["temperature"] = 0
     try:
-        client = OpenAI()
-        resp = client.chat.completions.create(
-            model=model,
-            max_tokens=200,
-            messages=[
-                {"role": "system", "content": _sys_prompt(format_key)},
-                {"role": "user", "content": [
-                    {"type": "text", "text": f"COPY do anúncio:\n{copy_txt}\n\nAvalie a peça:"},
-                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
-                ]},
-            ],
-        )
+        resp = completion(**kwargs)
         content = resp.choices[0].message.content or ""
         content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip(), flags=re.IGNORECASE)
         m = re.search(r"\{.*\}", content, re.DOTALL)

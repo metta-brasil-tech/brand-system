@@ -222,11 +222,17 @@ def critique(png_bytes: bytes, copy: dict, reference: dict, marca: str,
     if not reference or not reference.get("path"):
         return {"verdict": "SKIPPED", "reason": "sem referência"}
     try:
-        from openai import OpenAI
+        from litellm import completion
     except Exception as e:
-        return {"verdict": "SKIPPED", "reason": f"openai indisponível: {e}"}
+        return {"verdict": "SKIPPED", "reason": f"litellm indisponível: {e}"}
 
-    model = model or os.getenv("CRITIC_MODEL") or os.getenv("VISION_QA_MODEL", "gpt-4.1")
+    # Mesmo provider do cérebro por padrão (claude) — funciona no deploy sem OpenAI.
+    provider = (os.getenv("VISION_QA_PROVIDER") or os.getenv("LLM_PROVIDER", "claude")).lower()
+    model = model or os.getenv("CRITIC_MODEL") or os.getenv("VISION_QA_MODEL") or {
+        "claude": os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8"),
+        "openai": "gpt-4.1",
+        "gemini": os.getenv("LLM_MODEL_GEMINI", "gemini-2.5-flash"),
+    }.get(provider, os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8"))
     copy_txt = (
         f"headline: {copy.get('headline','')}\nsubhead: {copy.get('subhead','')}\n"
         f"body: {copy.get('body','')}\ncta: {copy.get('cta','')}"
@@ -237,11 +243,10 @@ def critique(png_bytes: bytes, copy: dict, reference: dict, marca: str,
     try:
         ref_uri = _img_data_uri(reference["path"])
         prod_uri = "data:image/png;base64," + base64.b64encode(png_bytes).decode("ascii")
-        client = OpenAI()
-        resp = client.chat.completions.create(
-            model=model,
-            max_tokens=400,
-            messages=[
+        kwargs = {
+            "model": model,
+            "max_tokens": 400,
+            "messages": [
                 {"role": "system", "content": _system(marca)},
                 {"role": "user", "content": [
                     {"type": "text", "text": f"CORPUS de texto permitido (a copy):\n{copy_txt}\n\n"
@@ -252,7 +257,12 @@ def critique(png_bytes: bytes, copy: dict, reference: dict, marca: str,
                     {"type": "text", "text": "Julgue a PRODUZIDA contra a REFERÊNCIA."},
                 ]},
             ],
-        )
+            "timeout": float(os.getenv("VISION_QA_TIMEOUT_S", "60")),
+            "num_retries": int(os.getenv("LLM_NUM_RETRIES", "2")),
+        }
+        if not str(model).startswith(("claude-", "anthropic/")):
+            kwargs["temperature"] = 0
+        resp = completion(**kwargs)
         content = resp.choices[0].message.content or ""
         content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip(), flags=re.IGNORECASE)
         m = re.search(r"\{.*\}", content, re.DOTALL)
