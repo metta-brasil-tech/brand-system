@@ -188,7 +188,7 @@ def _blueprint_placement(fm: dict) -> str:
 _PLACEMENT_INSTRUCTION = {
     "right-bleed": "subject fully within the frame, NOT cropped at the edges, positioned in the RIGHT 42% of the frame; the LEFT 58% must be clean, softly blurred, EMPTY neutral background with nothing in it. The subject must NOT extend into that left zone.",
     "left-bleed": "subject fully within the frame, NOT cropped at the edges, positioned in the LEFT 45% of the frame; the RIGHT 55% must be clean, softly blurred, EMPTY neutral background with nothing in it. The subject must NOT extend into that right zone.",
-    "top-bleed": "subject fully within the frame, NOT cropped, positioned in the UPPER 50%; the LOWER half is clean, softly blurred, EMPTY environmental space with nothing in it.",
+    "top-bleed": "subject fully within the frame, positioned in the UPPER 50% but with a clean margin at the VERY TOP edge so the subject (and the top of the head, if a person) is NEVER cropped at the top; the LOWER half is clean, softly blurred, EMPTY environmental space with nothing in it.",
     "bottom-bleed": "subject fully within the frame, NOT cropped, positioned in the LOWER 55%; the UPPER half is clean, softly blurred, EMPTY environmental space with nothing in it.",
     "fullbleed": "subject fully within the frame, mid-shot from the waist or chest up, well composed and NOT cropped awkwardly; ample headroom; lower third slightly darker and out-of-focus, kept as clean EMPTY space. Intentional editorial framing only.",
     "object-center": "a single symbolic OBJECT centered on a clean dark background, fully visible and not cropped, dramatic lighting, generous EMPTY negative space above and below. No human subject.",
@@ -210,10 +210,10 @@ def _art_direction_photo(directives: dict) -> str:
         "camera": "subject looking directly at camera, confident",
     }
     crop_map = {
-        "face": "tight editorial portrait, face and shoulders",
-        "chest-up": "editorial mid-shot from the chest up",
-        "waist-up": "editorial three-quarter shot from the waist up",
-        "environment": "wider environmental shot, subject within the scene",
+        "face": "tight editorial portrait, face and shoulders, the entire head fully in frame with clean headroom above it — NEVER crop the top of the head or forehead",
+        "chest-up": "editorial mid-shot from the chest up, the entire head fully in frame with clean headroom above it — NEVER crop the top of the head or forehead",
+        "waist-up": "editorial three-quarter shot from the waist up, the entire head fully in frame with clean headroom above it — NEVER crop the top of the head or forehead",
+        "environment": "wider environmental shot, subject fully within the scene",
     }
     if gaze in gaze_map:
         bits.append(gaze_map[gaze])
