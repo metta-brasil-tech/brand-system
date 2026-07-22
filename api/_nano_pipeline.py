@@ -65,6 +65,18 @@ _LANG_TREAT = {
     "L7": ("Documentary corporate detail photograph: hands, desks and screens only — NO faces. "
            "Natural office light, realistic candid business setting, screens showing plausible "
            "abstract dashboards (no readable words). "),
+    # LR = foto-editorial realista COM pessoas. Não é linguagem do banco (as fotos
+    # reais são L1, proibidas de virar referência) — é o BRIEF de tratamento usado
+    # quando NÃO existe imagem de referência de foto pra casar (as 6 famílias-gap).
+    # Fiel ao DNA do banco (dna-visual-banco-real.md): editorial-documental, NÃO
+    # stock glossy, NÃO luz de filme dramática; amarelo #FFBE18 único e disciplinado.
+    "LR": ("Editorial-documentary photograph of real, grounded business people in a real "
+           "workplace — candid and believable, in the style of a premium brand magazine, "
+           "NOT glossy advertising stock and NOT dramatic movie-still lighting. Soft "
+           "directional daylight, restrained warm-neutral palette, gentle film texture, "
+           "shallow depth of field, real (softly blurred) office or a clean flat studio "
+           "background. At most ONE single disciplined yellow (#FFBE18) accent somewhere "
+           "in the scene. Natural, unforced expressions. "),
 }
 # Anti micro-texto embolado (lição do Alisson): a IA renderiza letras tortas em
 # telas/quadros/papéis. Onde a cena tiver esses elementos, eles mostram só formas
@@ -219,20 +231,32 @@ def pick_reference(model_id: str, copy: dict, scene: str = "",
 
             return _ref_out(max(pool, key=_score), fam, cur)
 
-    # 2) FALLBACK POR FAMÍLIA (legado) -----------------------------------------
+    # 2) FALLBACK POR FAMÍLIA — só refs de FOTO (L3-L7) -------------------------
+    # L1/L2 (foto real/filme) e L8 (tipografia pura) NUNCA guiam uma foto: L1/L2 por
+    # direitos/identidade, L8 porque não tem tratamento fotográfico pra transferir
+    # (o bug antigo: pescar um pôster de tipografia como "referência de foto").
     refs = (cur.get("by_family", {}).get(fam, {}) or {}).get("refs", [])
-    refs = [r for r in refs if (_ROOT / r.get("path", "")).is_file()]
-    # L1 (foto real do especialista) e L2 (meme de filme) nunca guiam geração;
-    # só caem neles se a família não tiver NENHUMA referência gerável.
-    gen_ok = [r for r in refs if r.get("linguagem") not in _NO_GEN_REF]
-    if gen_ok:
-        refs = gen_ok
-    if not refs:
-        return None
-    q = _tokens(f"{copy.get('headline','')} {copy.get('subhead','')}")
-    best = max(refs, key=lambda r: len(q & _tokens(
-        f"{r.get('title','')} {r.get('mood','')} {r.get('archetype_foto','')}")))
-    return _ref_out(best, fam, cur)
+    refs = [r for r in refs
+            if r.get("linguagem") in _PHOTO_LANGS and (_ROOT / r.get("path", "")).is_file()]
+    if refs:
+        q = _tokens(f"{scene} {copy.get('headline','')} {copy.get('subhead','')}")
+        best = max(refs, key=lambda r: len(q & _tokens(
+            f"{r.get('title','')} {r.get('mood','')} {r.get('archetype_foto','')}")))
+        return _ref_out(best, fam, cur)
+
+    # 3) GAP DE REFERÊNCIA — nenhuma imagem de foto no banco pra este conceito/família
+    # (famílias B/D/NEWS/OUTROS/LOGO/TIAGO). Em vez de falhar (→ gpt-image genérico)
+    # ou pescar tipografia, gera com um BRIEF de tratamento (texto) casado com a
+    # linguagem pedida, ou realista-editorial (LR) por padrão — SEM imagem anexa.
+    brief_lang = target if (target and _LANG_TREAT.get(target)) else "LR"
+    return {
+        "family": fam,
+        "id": f"brief:{brief_lang}",
+        "path": None,
+        "linguagem": brief_lang,
+        "brief": _LANG_TREAT.get(brief_lang, ""),
+        "motor": ((cur.get("by_family", {}).get(fam) or {}).get("motor", "nano-banana-2")),
+    }
 
 
 def _sniff_mime(data: bytes) -> str:
@@ -274,9 +298,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
     key = _api_key(api_key)
     aspect = _ASPECT.get(format, "4:5")
 
-    refp = Path(ref["path"])
-    b64ref = base64.b64encode(refp.read_bytes()).decode("ascii")
-    mime = "image/webp" if refp.suffix.lower() == ".webp" else "image/png"
+    ref_path = ref.get("path")
     # Zona reservada pro texto: o diretor de arte decide a âncora (top|bottom)
     # e a IMAGEM nasce com aquela faixa vazia — o layout ancora o texto ali e
     # nunca tampa o sujeito. (Nunca mencionar "texto" pro modelo: só espaço vazio.)
@@ -290,21 +312,29 @@ def generate_background(model_id: str, copy: dict, scene: str,
             "bottom": ("Composition: the subject sits ENTIRELY in the UPPER HALF of the frame; "
                        "its lowest point does not go below the vertical middle. The ENTIRE "
                        "LOWER 45% is clean, softly blurred EMPTY space with nothing in it. ")}.get(anchor, "")
-    lang_treat = _LANG_TREAT.get(ref.get("linguagem") or "")
-    if lang_treat:
+    lang_treat = _LANG_TREAT.get(ref.get("linguagem") or "") or ref.get("brief") or ""
+    if ref_path:
+        refp = Path(ref_path)
+        b64ref = base64.b64encode(refp.read_bytes()).decode("ascii")
+        mime = "image/webp" if refp.suffix.lower() == ".webp" else "image/png"
         prompt = (
             "Use the attached real advertisement ONLY as a style reference: match its photographic "
             "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
             f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_NO_MICROTEXT}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
+        parts = [{"text": prompt}, {"inlineData": {"mimeType": mime, "data": b64ref}}]
     else:
-        prompt = f"Invent a new image. Scene: {scene.strip()} {zone}{_NO_MICROTEXT}{_METTA_TREAT}"
+        # GAP DE REFERÊNCIA: sem imagem no banco pra este conceito. Gera do BRIEF de
+        # tratamento (texto) — on-brand — em vez de anexar uma imagem enganosa.
+        treat = lang_treat or _METTA_TREAT
+        prompt = (
+            "Invent a completely new image from scratch (no reference image is provided). "
+            f"Create: {treat}Scene: {scene.strip()} {zone}{_NO_MICROTEXT}"
+            "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
+        parts = [{"text": prompt}]
 
     payload = {
-        "contents": [{"parts": [
-            {"text": prompt},
-            {"inlineData": {"mimeType": mime, "data": b64ref}},
-        ]}],
+        "contents": [{"parts": parts}],
         "generationConfig": {"responseModalities": ["IMAGE"],
                              "imageConfig": {"aspectRatio": aspect}},
     }
