@@ -408,8 +408,17 @@ def generate_via_route(model_id: str, copy: dict, prompt_or_scene: str,
     global _LAST_ROUTE_ERR
     route = resolve_route(model_id)
     if route != "nano-banana":
-        _LAST_ROUTE_ERR = (f"rota={route} — motor da família não é nano-banana "
-                           f"OU sem GEMINI_API_KEY no ambiente")
+        # Diz EXATAMENTE por que não foi pro Gemini (antes juntava tudo num "OU").
+        has_key = bool(os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY"))
+        try:
+            bank_ok = bool(_load_curated().get("by_family"))
+        except Exception:
+            bank_ok = False
+        why = ("banco ausente no bundle (data/curated-references.json fora do deploy)"
+               if not bank_ok else
+               "sem GEMINI_API_KEY no ambiente" if not has_key else
+               "motor da família não é nano-banana")
+        _LAST_ROUTE_ERR = f"rota={route} — {why}"
         return None
     try:
         raw, meta = generate_background(model_id, copy, prompt_or_scene,
