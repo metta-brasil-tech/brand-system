@@ -943,16 +943,17 @@ def _run_pipeline_inline(
                 diagnostics.append("rota: 'sem pessoa' no briefing → pula nano/referência-humana, usa gpt-image")
             last_error = None
             _nano_res = None
-            try:
-                if (marca or "").lower() == "metta" and not _no_person:
+            _nano_attempted = ((marca or "").lower() == "metta" and not _no_person)
+            if _nano_attempted:
+                try:
                     from _nano_pipeline import generate_via_route as _gvr
                     _nano_res = _gvr(chosen_model_id,
                                      {"headline": user_headline,
                                       "text_anchor": ad_directives.get("text_anchor") or ""},
                                      primary_prompt, format=format_key,
                                      scene_type=(ad_directives.get("image_concept") or {}).get("scene_type") or "")
-            except Exception:
-                _nano_res = None
+                except Exception:
+                    _nano_res = None
 
             if _nano_res:
                 image_file_url, _nmeta = _nano_res
@@ -961,6 +962,14 @@ def _run_pipeline_inline(
                     f"t={_nmeta.get('ms')}ms ref={_nmeta.get('ref_id')} (referência do banco)"
                 )
             else:
+                if _nano_attempted:
+                    try:
+                        from _nano_pipeline import last_route_error as _lre
+                        _why = _lre()
+                        if _why:
+                            diagnostics.append(f"04-image-gen: nano-banana PULOU → {_why} — caindo pro gpt-image")
+                    except Exception:
+                        pass
                 for i, attempt_prompt in enumerate(attempt_chain, start=1):
                     try:
                         ig = image_gen.generate(

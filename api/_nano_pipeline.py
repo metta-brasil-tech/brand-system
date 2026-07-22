@@ -387,22 +387,38 @@ def resolve_route(model_id: str) -> str:
     return "nano-banana" if motor != "gpt-image-2" else "gpt-image"
 
 
+# Motivo do último fallback pro gpt-image — o caller (generate.py) lê e joga no
+# diagnóstico. Antes o fallback era MUDO: no deploy a foto virava mock/gpt-image
+# sem dizer se foi falta de chave, teto de gasto (429) ou timeout do Pro.
+_LAST_ROUTE_ERR: str | None = None
+
+
+def last_route_error() -> str | None:
+    return _LAST_ROUTE_ERR
+
+
 def generate_via_route(model_id: str, copy: dict, prompt_or_scene: str,
                        format: str = "feed", scene_type: str = "") -> tuple[str, dict] | None:
     """Tenta gerar pelo Nano Banana (com referência do banco) SE a família
     deste blueprint mandar isso e a chave estiver disponível. `scene_type` = tag
     do art-director pra casar a linguagem da referência. Retorna (data_uri, meta)
-    em caso de sucesso, ou None (caller segue o caminho gpt-image — fallback
-    silencioso, nunca propaga erro).
+    em caso de sucesso, ou None (caller segue o caminho gpt-image). O MOTIVO do
+    None fica em last_route_error() — nunca mais um fallback mudo.
     """
-    if resolve_route(model_id) != "nano-banana":
+    global _LAST_ROUTE_ERR
+    route = resolve_route(model_id)
+    if route != "nano-banana":
+        _LAST_ROUTE_ERR = (f"rota={route} — motor da família não é nano-banana "
+                           f"OU sem GEMINI_API_KEY no ambiente")
         return None
     try:
         raw, meta = generate_background(model_id, copy, prompt_or_scene,
                                         format=format, scene_type=scene_type)
         mime = _sniff_mime(raw)
+        _LAST_ROUTE_ERR = None
         return f"data:{mime};base64," + base64.b64encode(raw).decode("ascii"), meta
-    except Exception:
+    except Exception as e:
+        _LAST_ROUTE_ERR = f"{e.__class__.__name__}: {str(e)[:180]}"
         return None
 
 
