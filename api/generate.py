@@ -1210,6 +1210,18 @@ def _run_pipeline_inline(
                            or critic_result.get("verdict") == "FAIL")
                 if not _failed or _va == _vmax:
                     break
+                # TRAVA DE TEMPO: a Vercel mata em maxDuration (60s no Hobby). Uma
+                # regeneração leva ~35-40s; se já gastamos quase o orçamento, entregar
+                # a peça atual (com aviso) é melhor que estourar o limite e dar 500.
+                # Suba maxDuration (Vercel Pro → 300s) + GEN_BUDGET_S pra o QA refazer.
+                _elapsed = time.time() - t_start
+                _budget = float(os.getenv("GEN_BUDGET_S", "55"))
+                if _elapsed > _budget - 38:
+                    diagnostics.append(
+                        f"vision-qa: reprovou, mas SEM TEMPO de refazer no limite "
+                        f"({int(_elapsed)}s/~{int(_budget)}s) — entrego a atual (evita timeout 60s). "
+                        f"Suba maxDuration+GEN_BUDGET_S pra o QA regenerar.")
+                    break
                 # Feedback acionável (plugin: feedback_for_designer) → brief da regeneração.
                 _critic_feedback = " | ".join(x for x in [
                     vision_result.get("reason", "") if vision_result.get("verdict") == "FAIL" else "",
