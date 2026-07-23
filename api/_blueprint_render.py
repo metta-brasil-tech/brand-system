@@ -599,7 +599,9 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
     # (texto sobre foto/dark). No banco real — cliente-na-loja, sem-processo,
     # serviços-300, FCA — o divisor separa a headline do apoio. Só quando NÃO há
     # card (o card já agrupa) E existe subtítulo.
-    _div_photo = panel in ("none", "plain") and bool(copy.get("subhead"))
+    # SEM traço separador (feedback Nathan): a barrinha amarela entre headline e
+    # apoio lê como "design feito por IA". Removida de todos os padrões.
+    _div_photo = False
     def _panel_wrap(body_html: str, cta_variant: str = "") -> str:
         cta_c = cta_variant if cta_variant else cta_cls
         if panel in ("white", "yellow"):
@@ -610,7 +612,7 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         return f'{body_html}{inner_cta}'
 
     if arch == "typo":
-        _div = bool(params.get("divider"))
+        _div = False  # sem linha divisória em nenhum padrão (inclui K-bold) — Nathan
         return f'<div class="layer"><div class="stack">{_txt_blocks(copy, divider=_div)}</div></div>{_cta(copy, cta_cls)}'
 
     if arch == "photo-side":
