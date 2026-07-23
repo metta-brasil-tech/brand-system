@@ -90,6 +90,22 @@ _NO_MICROTEXT = (
 # especialista (geraria um "especialista falso"); L2 = still de filme (direitos).
 _NO_GEN_REF = {"L1", "L2"}
 
+# Tratamento GRÁFICO por modelo — sobrepõe o tratamento por linguagem quando o
+# estilo NÃO é foto. Ex: YELLOW-OBJETO é clay 3D sobre amarelo chapado; o Gemini
+# vinha tratando como foto realista (saía objeto cinza num quarto real). Com isso
+# o modelo gera do BRIEF gráfico, SEM referência de foto (que puxa pro realista).
+_MODEL_TREAT = {
+    "YELLOW-OBJETO": (
+        "3D rendered illustration in a matte clay / soft-plastic material (like modern "
+        "app-onboarding art or a Pixar-style concept render) — NOT photography, NOT a real "
+        "photo, NOT a 2D cartoon. A SINGLE large hero object filling ~70-85% of the frame "
+        "width, floating isolated on a SOLID FLAT YELLOW background (#F5C518) that reaches "
+        "ALL FOUR edges with NO gradient, NO texture, NO real room or environment. Soft "
+        "studio lighting, gentle contact shadow under the object, matte finish, at most 1-2 "
+        "muted accent colours on the object itself. High-quality 3D render. "
+        "Absolutely NO photorealism, NO real scene, NO people. "),
+}
+
 # blueprint model_id → família no banco de referências curado.
 _FAMILY = {
     "A-headline-foto-dark": "A", "FOTO-PILL-CASUAL": "A", "I-retrato-editorial-pb": "A",
@@ -313,6 +329,12 @@ def generate_background(model_id: str, copy: dict, scene: str,
                        "its lowest point does not go below the vertical middle. The ENTIRE "
                        "LOWER 45% is clean, softly blurred EMPTY space with nothing in it. ")}.get(anchor, "")
     lang_treat = _LANG_TREAT.get(ref.get("linguagem") or "") or ref.get("brief") or ""
+    # Estilo gráfico por modelo (ex: YELLOW-OBJETO clay-3D) vence o tratamento por
+    # linguagem E dispensa a referência de foto (que puxaria pro realista).
+    _mt = _MODEL_TREAT.get(model_id)
+    if _mt:
+        ref_path = None
+        lang_treat = _mt
     if ref_path:
         refp = Path(ref_path)
         b64ref = base64.b64encode(refp.read_bytes()).decode("ascii")
