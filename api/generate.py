@@ -581,7 +581,9 @@ def _run_pipeline_inline(
                     try:
                         from _nano_pipeline import pick_reference as _pick
                         _r = _pick(chosen_model_id, _cp)
-                        if _r and Path(_r["path"]).is_file():
+                        # famílias-gap retornam brief sem imagem (path=None) — não há
+                        # ref de foto pro diretor VER, e Path(None) estouraria TypeError.
+                        if _r and _r.get("path") and Path(_r["path"]).is_file():
                             _ref_imgs.append(Path(_r["path"]).read_bytes())
                             diagnostics.append(f"diretor VÊ ref do banco real: {_r['id']} (linguagem {_r.get('linguagem')})")
                     except Exception as _re:
