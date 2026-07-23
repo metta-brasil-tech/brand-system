@@ -1170,6 +1170,7 @@ const STATE = {
   ad_html_original: null,   // versão original do generate (pro "Auto" do editor de texto)
   bg_image_uri: null,       // fundo limpo (sem texto) — re-render de âncora custo zero
   text_anchor_override: null, // null=auto · 'top' · 'bottom' (Fase C)
+  voiceBusy: null,          // voz sendo reescrita agora (Fase D) — null=ocioso
   ad_format: null,      // 'story' | 'feed' | 'sqr' (controla aspect-ratio do iframe)
   model_id: null,       // ID do modelo escolhido pelo pipeline (deveria casar com STATE.style)
   diagnostics: [],      // log do pipeline (lista de strings) — pra debug visual
@@ -2344,6 +2345,17 @@ function tplResult() {
               ${bud.body ? fld('body','Corpo', STATE.copyBody, 2) : ''}
               ${fld('cta','Botão (CTA)', STATE.cta, 1)}
               <button class="btn btn-outlined" data-action="apply-copy-edit" style="width:100%; margin-top:10px;">${icon('refresh', 16)} Aplicar edição</button>
+              <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--metta-sys-color-outline-variant);">
+                <label style="display:block; font-size:12px; font-weight:600; margin:0 0 4px; color:var(--metta-sys-color-on-surface-variant);">Voz da escrita</label>
+                <p style="font-size:12px; line-height:1.4; color:var(--metta-sys-color-on-surface-variant); margin:0 0 8px;">
+                  Reescreve a copy no tom escolhido — mesmo sentido, mesma foto.
+                </p>
+                <div class="cta-chips">
+                  ${[['direto','Direto'],['consultivo','Consultivo'],['inspirador','Inspirador'],['story','Story']].map(([v,l]) => `
+                    <button class="cta-chip ${STATE.voiceBusy === v ? 'active' : ''}" data-action="revoice" data-value="${v}"${STATE.voiceBusy ? ' disabled' : ''}>${STATE.voiceBusy === v ? '…' : l}</button>
+                  `).join('')}
+                </div>
+              </div>
             </div>`;
           })() : ''}
           ${STATE.bg_image_uri ? `
@@ -2801,6 +2813,42 @@ async function adjustTextAnchor(value) {
   }
 }
 
+/* Fase D — VOZ da escrita: reescreve a copy no tom escolhido via /api/revoice (1
+   chamada barata), escreve no STATE e re-renderiza a MESMA foto (via applyCopyEdit,
+   custo zero). Mantém sentido e slots — só troca o tom. */
+async function revoiceCopy(voice) {
+  if (!voice || STATE.voiceBusy) return;
+  STATE.voiceBusy = voice;
+  render();  // reflete o "…" no chip
+  try {
+    const r = await fetch(`${ENGINE_URL}/revoice`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        brand: STATE.brand || 'metta',
+        voice,
+        model_id: STATE.model_id || '',
+        copy: _previewCopy(),
+      }),
+    });
+    const j = await r.json();
+    if (!r.ok || !j.ok || !j.copy) throw new Error((j && j.error) || 'revoice falhou');
+    const c = j.copy;
+    if (c.headline != null) STATE.copyHeadline = c.headline;
+    if (c.subhead  != null) STATE.copySubhead  = c.subhead;
+    if (c.body     != null) STATE.copyBody     = c.body;
+    if (c.cta      != null) STATE.cta          = c.cta;
+    if (c.tag      != null) STATE.copyTag      = c.tag;
+    STATE.voiceBusy = null;
+    render();               // atualiza os campos do editor com o texto novo (DOM)
+    await applyCopyEdit();  // lê os campos já atualizados e re-renderiza a mesma foto
+  } catch (err) {
+    STATE.voiceBusy = null;
+    render();
+    alert('Não consegui reescrever na voz escolhida: ' + (err.message || err));
+  }
+}
+
 /* Fase D — editar a COPY no resultado: lê os campos editáveis, atualiza o STATE e
    re-renderiza a MESMA foto com o texto novo via /api/preview (custo zero, sem
    regerar imagem). Vale pra peça com foto (usa bg_image_uri) e sem foto (text-only). */
@@ -3225,6 +3273,9 @@ function onAction(e) {
       break;
     case 'apply-copy-edit':
       applyCopyEdit();
+      break;
+    case 'revoice':
+      revoiceCopy(value);
       break;
     case 'regenerate':
       goto('loading');
