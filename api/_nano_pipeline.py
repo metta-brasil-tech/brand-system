@@ -78,6 +78,38 @@ _LANG_TREAT = {
            "background. At most ONE single disciplined yellow (#FFBE18) accent somewhere "
            "in the scene. Natural, unforced expressions. "),
 }
+# Tratamento por FAMÍLIA-GAP (B/D/NEWS/OUTROS): as famílias cujo banco só tem foto
+# real (L1) ou tipografia (L8) não têm imagem de referência pra casar. Antes caíam
+# TODAS no brief genérico LR. Aqui cada uma ganha um brief próprio, fiel ao DNA
+# documental do banco (dna-visual-banco-real.md): editorial real, NÃO stock glossy,
+# NÃO luz de filme; um único amarelo #FFBE18 disciplinado. Só entra quando o
+# art-director NÃO marcou uma linguagem de tratamento (aí a linguagem sempre vence).
+_FAMILY_TREAT = {
+    # B — "foto no topo abre a cena emocional, headline entrega embaixo".
+    "B": ("Editorial-documentary photograph of a real business owner or professional in a "
+          "genuine, quietly emotional decision moment inside a real workplace — believable and "
+          "unposed, premium brand-magazine style, NOT glossy stock and NOT dramatic movie "
+          "lighting. The human subject sits in the UPPER portion of the frame with calm open "
+          "space below for typography. Soft directional daylight, restrained warm-neutral "
+          "palette, gentle film texture, shallow depth of field. At most ONE disciplined yellow "
+          "(#FFBE18) accent. Natural, unforced expression. "),
+    # D — fullbleed de tensão/urgência, mas ancorado no real (nada de filme).
+    "D": ("Editorial-documentary photograph carrying real, grounded tension — a high-stakes "
+          "business moment (a decision under pressure, a turning point) in a believable "
+          "workplace, shot like a serious brand documentary and NOT like a movie still. "
+          "Full-bleed composition with a naturally darker, restrained palette so bold "
+          "typography can overlay one side. Soft realistic light, subtle film grain, shallow "
+          "depth of field. At most ONE disciplined yellow (#FFBE18) accent. NO glossy stock, "
+          "NO theatrical lighting, NO fake drama. "),
+    # NEWS — estética de imprensa/documental crível.
+    "NEWS": ("Editorial press-documentary photograph with a credible, journalistic feel — a real "
+             "business or newsroom-adjacent scene (a briefing, a desk, a press moment), candid "
+             "and believable like premium reportage, NOT glossy advertising stock. Natural "
+             "available light, neutral realistic palette, gentle film texture, shallow depth of "
+             "field, clean uncluttered background with room for a headline. At most ONE "
+             "disciplined yellow (#FFBE18) accent. "),
+}
+
 # Anti micro-texto embolado (lição do Alisson): a IA renderiza letras tortas em
 # telas/quadros/papéis. Onde a cena tiver esses elementos, eles mostram só formas
 # abstratas — nunca texto legível (o dado real vai por cima, no motor de layout).
@@ -264,13 +296,20 @@ def pick_reference(model_id: str, copy: dict, scene: str = "",
     # (famílias B/D/NEWS/OUTROS/LOGO/TIAGO). Em vez de falhar (→ gpt-image genérico)
     # ou pescar tipografia, gera com um BRIEF de tratamento (texto) casado com a
     # linguagem pedida, ou realista-editorial (LR) por padrão — SEM imagem anexa.
-    brief_lang = target if (target and _LANG_TREAT.get(target)) else "LR"
+    if target and _LANG_TREAT.get(target):
+        # o art-director marcou uma linguagem — ela sempre vence
+        brief_lang, brief, brief_id = target, _LANG_TREAT[target], f"brief:{target}"
+    elif _FAMILY_TREAT.get(fam):
+        # família-gap com brief próprio (B/D/NEWS) em vez do LR genérico
+        brief_lang, brief, brief_id = "LR", _FAMILY_TREAT[fam], f"brief:fam:{fam}"
+    else:
+        brief_lang, brief, brief_id = "LR", _LANG_TREAT["LR"], "brief:LR"
     return {
         "family": fam,
-        "id": f"brief:{brief_lang}",
+        "id": brief_id,
         "path": None,
         "linguagem": brief_lang,
-        "brief": _LANG_TREAT.get(brief_lang, ""),
+        "brief": brief,
         "motor": ((cur.get("by_family", {}).get(fam) or {}).get("motor", "nano-banana-2")),
     }
 
@@ -328,7 +367,9 @@ def generate_background(model_id: str, copy: dict, scene: str,
             "bottom": ("Composition: the subject sits ENTIRELY in the UPPER HALF of the frame; "
                        "its lowest point does not go below the vertical middle. The ENTIRE "
                        "LOWER 45% is clean, softly blurred EMPTY space with nothing in it. ")}.get(anchor, "")
-    lang_treat = _LANG_TREAT.get(ref.get("linguagem") or "") or ref.get("brief") or ""
+    # brief (já resolvido no pick_reference — pode ser o da família-gap) vence o mapa
+    # por linguagem; sem brief (refs de foto L3-L7) casa o tratamento pela linguagem.
+    lang_treat = ref.get("brief") or _LANG_TREAT.get(ref.get("linguagem") or "") or ""
     # Estilo gráfico por modelo (ex: YELLOW-OBJETO clay-3D) vence o tratamento por
     # linguagem E dispensa a referência de foto (que puxaria pro realista).
     _mt = _MODEL_TREAT.get(model_id)
