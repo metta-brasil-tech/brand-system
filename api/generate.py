@@ -289,6 +289,7 @@ def _run_pipeline_inline(
     user_body: str | None = None,
     user_cta_text: str | None = None,
     user_tag: str | None = None,
+    sig_bg: str | None = None,   # TIAGO-TYPO-PURE: assinatura no fundo (on/off)
     wizard_format: str | None = None,
     avatar_segment: str | None = None,
     avatar_variant: str | None = None,
@@ -1080,6 +1081,8 @@ def _run_pipeline_inline(
         "panel": (ad_directives.get("panel") or "").strip().lower(),
         # sensor 2D: quando setado, o render troca photo-side → faixa (photo-full)
         "_force_band": _force_band or "",
+        # TIAGO-TYPO-PURE: assinatura no fundo (vazio = default ligado; 'off' desliga)
+        "sig_bg": sig_bg or "",
         "head_out": str(ad_directives.get("head_out") or "").strip().lower(),
         # linha de prova social solta no canto (fora do card), assinatura do banco
         "proof": (ad_directives.get("proof") or "").strip(),
@@ -1364,6 +1367,7 @@ class handler(BaseHTTPRequestHandler):
                 user_body=data.get("copy_body") or None,
                 user_cta_text=data.get("cta_text") or None,
                 user_tag=data.get("copy_tag") or None,
+                sig_bg=data.get("sig_bg"),
                 wizard_format=data.get("format") or None,
                 avatar_segment=data.get("avatar_segment") or None,
                 avatar_variant=data.get("avatar_variant") or None,
