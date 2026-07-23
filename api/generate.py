@@ -335,13 +335,19 @@ def _run_pipeline_inline(
     artifacts_dir.mkdir(parents=True, exist_ok=True)
     run_id = datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:6]
 
-    llm = MockLLMAdapter(fixtures=MOCK_FIXTURES) if mock else LLMAdapter()
+    # Cost-log (P4): medidor que embrulha os adapters e acumula tokens/custo por
+    # etapa. `meter.stage = "..."` rotula as chamadas seguintes.
+    from _cost import Meter, MeteredLLM
+    meter = Meter()
+    _base_llm = MockLLMAdapter(fixtures=MOCK_FIXTURES) if mock else LLMAdapter()
+    llm = MeteredLLM(_base_llm, meter)
     runner = SkillRunner(llm=llm)
     # Passo de ESCRITA DO PROMPT de imagem (skill 04) num modelo RÁPIDO (Sonnet): é
     # redação a partir de template, não exige o raciocínio do Opus. Corta ~8s/peça —
     # crítico sem Vercel Pro (teto de 60s). Override por LLM_MODEL_PROMPT.
     _prompt_model = os.getenv("LLM_MODEL_PROMPT", "claude-haiku-4-5-20251001")
-    runner_prompt = runner if mock else SkillRunner(llm=LLMAdapter(model=_prompt_model))
+    runner_prompt = runner if mock else SkillRunner(
+        llm=MeteredLLM(LLMAdapter(model=_prompt_model), meter))
 
     # ============================================================
     # Skill 01 — Briefing parser
@@ -607,6 +613,7 @@ def _run_pipeline_inline(
                                  f"(YELLOW/tipográfica/objeto) e deixa muito espaço — NUNCA lote o texto à esquerda.")
             except Exception:
                 pass
+            meter.stage = "art-director"
             ad_directives = _ad_direct(
                 copy={"headline": user_headline, "subhead": user_subhead,
                       "body": user_body, "cta": user_cta_text},
@@ -874,6 +881,7 @@ def _run_pipeline_inline(
                 "briefing": briefing,
                 "image_slots": [{"slot_name": "main", "image_prompt_ref": ""}],
             }
+            meter.stage = "04-prompt"
             r = runner_prompt.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
             mark("04-skill", t04_skill)
             if not r.ok:
@@ -963,6 +971,7 @@ def _run_pipeline_inline(
 
             if _nano_res:
                 image_file_url, _nmeta = _nano_res
+                meter.set_image("nano-banana", _nmeta.get("model", ""))
                 diagnostics.append(
                     f"04-image-gen: OK provider=nano-banana model={_nmeta.get('model')} "
                     f"t={_nmeta.get('ms')}ms ref={_nmeta.get('ref_id')} (referência do banco)"
@@ -985,6 +994,7 @@ def _run_pipeline_inline(
                             reference_images=[],
                         )
                         image_file_url = ig.url
+                        meter.set_image(ig.provider, ig.model)
                         diagnostics.append(
                             f"04-image-gen: OK provider={ig.provider} model={ig.model} "
                             f"t={ig.elapsed_ms}ms attempt=v{i}/{len(attempt_chain)}"
@@ -1321,10 +1331,13 @@ def _run_pipeline_inline(
         f"TOTAL: {total_ms}ms ({total_ms/1000:.1f}s) — " +
         " · ".join(f"{k}={v}ms" for k, v in timings.items())
     )
+    cost = meter.summary()
+    diagnostics.append(meter.one_line())
 
     return {
         "ok": True,
         "run_id": run_id,
+        "cost": cost,
         "model_id": chosen_model_id,
         "marca": marca,
         "format": format_key,
