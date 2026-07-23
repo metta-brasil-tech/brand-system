@@ -336,6 +336,11 @@ def _run_pipeline_inline(
 
     llm = MockLLMAdapter(fixtures=MOCK_FIXTURES) if mock else LLMAdapter()
     runner = SkillRunner(llm=llm)
+    # Passo de ESCRITA DO PROMPT de imagem (skill 04) num modelo RÁPIDO (Sonnet): é
+    # redação a partir de template, não exige o raciocínio do Opus. Corta ~8s/peça —
+    # crítico sem Vercel Pro (teto de 60s). Override por LLM_MODEL_PROMPT.
+    _prompt_model = os.getenv("LLM_MODEL_PROMPT", "claude-sonnet-5")
+    runner_prompt = runner if mock else SkillRunner(llm=LLMAdapter(model=_prompt_model))
 
     # ============================================================
     # Skill 01 — Briefing parser
@@ -868,7 +873,7 @@ def _run_pipeline_inline(
                 "briefing": briefing,
                 "image_slots": [{"slot_name": "main", "image_prompt_ref": ""}],
             }
-            r = runner.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
+            r = runner_prompt.run("04-image-prompt-engineer", prompt_input, extra_context=skill_extra)
             mark("04-skill", t04_skill)
             if not r.ok:
                 return {"ok": False, "error": f"image-prompt-engineer: {r.error}",

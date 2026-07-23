@@ -110,8 +110,8 @@ button { all: unset; }
 .ad[data-case="sentence"] .t-head { text-transform: none; letter-spacing: -.02em; line-height: 1.14; }
 /* divisor amarelo horizontal — assinatura do K (separa headline do body) */
 .t-divider { width: 132px; height: 7px; background: var(--m-yellow); border-radius: 2px; }
-.t-sub  { font-family: var(--m-text); font-weight: 500; font-size: 30px; line-height: 1.25; color: var(--fg); }
-.t-body { font-family: var(--m-text); font-weight: 400; font-size: 23px; line-height: 1.45; color: var(--muted); }
+.t-sub  { font-family: var(--m-text); font-weight: 500; font-size: 30px; line-height: 1.25; color: var(--fg); text-wrap: pretty; }
+.t-body { font-family: var(--m-text); font-weight: 400; font-size: 23px; line-height: 1.45; color: var(--muted); text-wrap: pretty; }
 
 /* CTA pill */
 .cta {
