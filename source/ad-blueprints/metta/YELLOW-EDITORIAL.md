@@ -2,8 +2,8 @@
 id: YELLOW-EDITORIAL
 display_name: "Editorial tipográfico — headline amarela sobre dark"
 marca: metta
-archetype: number-hero
-params: { theme: yellow, cta: dark }
+archetype: typo
+params: { theme: yellow, align: center, cta: dark }
 slots: [tag, headline, subhead, body, cta]
 image: { required: false, treatment: "nenhuma — tipografia pura, sem imagem" }
 formato_nativo: [story, feed]
