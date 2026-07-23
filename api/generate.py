@@ -339,7 +339,7 @@ def _run_pipeline_inline(
     # Passo de ESCRITA DO PROMPT de imagem (skill 04) num modelo RÁPIDO (Sonnet): é
     # redação a partir de template, não exige o raciocínio do Opus. Corta ~8s/peça —
     # crítico sem Vercel Pro (teto de 60s). Override por LLM_MODEL_PROMPT.
-    _prompt_model = os.getenv("LLM_MODEL_PROMPT", "claude-sonnet-5")
+    _prompt_model = os.getenv("LLM_MODEL_PROMPT", "claude-haiku-4-5-20251001")
     runner_prompt = runner if mock else SkillRunner(llm=LLMAdapter(model=_prompt_model))
 
     # ============================================================
