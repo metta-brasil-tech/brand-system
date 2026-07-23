@@ -118,6 +118,14 @@ _NO_MICROTEXT = (
     "abstract shapes, blurred charts, color blocks or is turned off/reflective — NEVER "
     "readable letters, words or numbers on them. Keep such surfaces out of sharp focus. ")
 
+# Anti cabeça-cortada (P1): o Gemini tende a cortar o topo da cabeça/testa quando
+# enquadra pessoas. Cláusula de segurança — inofensiva pra cenas de objeto (só age
+# se houver figura humana). O QA (vision) ainda reprova como rede de segurança.
+_HEADROOM = (
+    "If any person or human figure appears, keep their ENTIRE head fully inside the frame "
+    "with comfortable empty space above the top of the head — NEVER crop the top of the "
+    "head, the forehead or the chin against the frame edge. ")
+
 # Linguagens que NUNCA servem de referência de geração: L1 = foto real do
 # especialista (geraria um "especialista falso"); L2 = still de filme (direitos).
 _NO_GEN_REF = {"L1", "L2"}
@@ -209,7 +217,7 @@ _SCENE_TO_LANG = [
     (("comic", "cômic", "conceito-comic", "comedic", "absurd"), "L3"),
     (("colagem", "collage", "halftone", "vintage", "gravura", "cut-out", "cutout"), "L4"),
     (("humor-objeto", "humor por objeto", "single object", "object gag", "object",
-      "objeto simból", "trophy", "lone ", "deadpan"), "L5"),
+      "objeto simból", "trophy", " lone ", "deadpan"), "L5"),
     (("surreal", "fine-art", "fine art", "dreamlike", "painterly", "granulad"), "L6"),
     (("documental", "documentary", "detalhe", "no faces", "sem rosto"), "L7"),
 ]
@@ -383,7 +391,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         prompt = (
             "Use the attached real advertisement ONLY as a style reference: match its photographic "
             "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
-            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_NO_MICROTEXT}"
+            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_HEADROOM}{_NO_MICROTEXT}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}, {"inlineData": {"mimeType": mime, "data": b64ref}}]
     else:
@@ -392,7 +400,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         treat = lang_treat or _METTA_TREAT
         prompt = (
             "Invent a completely new image from scratch (no reference image is provided). "
-            f"Create: {treat}Scene: {scene.strip()} {zone}{_NO_MICROTEXT}"
+            f"Create: {treat}Scene: {scene.strip()} {zone}{_HEADROOM}{_NO_MICROTEXT}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}]
 
