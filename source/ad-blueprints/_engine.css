@@ -608,6 +608,11 @@ button { all: unset; }
 .ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-body { font-size: 22px; line-height: 1.5; color: var(--t-grey); margin: 0; max-width: 800px; }
 .ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-cta { font-size: 24px; color: var(--t-grey); margin: 24px 0 0; }
 .ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-handle { font-size: 24px; color: var(--t-grey); margin: 24px 0 0; }
+/* assinatura do Tiago no fundo (ligável via sig_bg) — rodapé, atrás do texto */
+.ad[data-marca="tiago"][data-arch="tiago-typo"] { position: relative; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-signature { position: absolute; left: 64px; bottom: 96px; z-index: 1; pointer-events: none; opacity: .95; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-signature svg { width: 360px; height: auto; max-height: 140px; display: block; }
+.ad[data-marca="tiago"][data-arch="tiago-typo"] .tt-handle { position: relative; z-index: 2; }
 
 /* (T6) tiago-dark-surreal — bg preto + imagem surreal B&W isolada (sem texto) */
 .ad[data-marca="tiago"][data-arch="tiago-dark-surreal"] { background: #000; }

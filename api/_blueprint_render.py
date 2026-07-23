@@ -474,7 +474,16 @@ def _markup_tiago(arch: str, copy: dict, params: dict, image_url: str) -> str:
     if arch == "tiago-typo":
         cta = f'<p class="tt-cta">{_esc(copy["cta"])} 👉</p>' if copy.get("cta") else ""
         handle = '<p class="tt-handle">@tiago.alves.oliveira</p>'
-        return (f'<div class="tt-text layer">{head("tt-headline")}{sub("tt-subhead")}{body("tt-body")}</div>'
+        # Assinatura do Tiago no fundo — ligável (wizard). Default LIGADO; desliga
+        # com copy.sig_bg = 0/off/false. Variante por contraste com o tema.
+        sig = ""
+        if str(copy.get("sig_bg", "on")).strip().lower() not in ("0", "off", "false", "no", "none"):
+            _sig_theme = params.get("theme", "offwhite")
+            _var = "escuro" if _sig_theme in ("offwhite", "light", "white", "paper", "yellow") else "branco"
+            _svg = _read(_TIAGO_SIG_DIR / f"assinatura-{_var}.svg") or _read(_BRAND_DIR / f"assinatura-{_var}.svg")
+            if _svg:
+                sig = f'<div class="tt-signature" aria-hidden="true">{_svg}</div>'
+        return (f'{sig}<div class="tt-text layer">{head("tt-headline")}{sub("tt-subhead")}{body("tt-body")}</div>'
                 f'{cta}{handle}')
 
     if arch == "tiago-dark-surreal":
