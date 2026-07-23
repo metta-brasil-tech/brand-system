@@ -776,6 +776,15 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     arch = fm.get("archetype", "typo")
     params = fm.get("params", {}) or {}
     theme = params.get("theme", "dark")
+    # IMAGE-FIRST (sensor focal 2D): quando o sujeito ocupa a coluna lateral do
+    # photo-side, o texto vira FAIXA (photo-full + anchor + gradiente, sem card,
+    # como o exemplo aprovado). A IMAGEM manda, não o blueprint. generate.py mede
+    # a foto e seta copy._force_band = 'top'|'bottom'.
+    _force_band = str((copy or {}).get("_force_band") or "").strip().lower()
+    if _force_band not in ("top", "bottom"):
+        _force_band = ""
+    if _force_band and arch == "photo-side":
+        arch = "photo-full"
     # Alinhamento: o diretor de arte pode variar por peça (copy.align) — o banco real
     # NÃO fica sempre no mesmo lugar (centraliza em fundo chapado, lateral em foto).
     # Sem override, vale o default do blueprint (já calibrado pela convenção da família).
@@ -790,6 +799,8 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     # ocupa a metade de baixo → texto em cima (como no banco real). Sem
     # override, vale o default do blueprint.
     anchor = str((copy or {}).get("text_anchor") or "").strip().lower()
+    if _force_band:
+        anchor = _force_band   # a faixa vai pra zona vazia medida na imagem
     if anchor not in ("top", "bottom"):
         anchor = params.get("anchor", "bottom")
     obj_scale = params.get("object_scale", "boxed")
@@ -804,6 +815,8 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         panel = str(params.get("panel", "none")).strip().lower()
     if panel == "yellow":  # REGRA DURA: nunca card amarelo atrás de texto → vira branco
         panel = "white"
+    if _force_band:  # faixa = texto sobre o gradiente (como o exemplo aprovado), sem card
+        panel = "none"
 
     # head_out: headline na foto + card só com apoio (2 zonas, padrão CRM).
     head_out = str((copy or {}).get("head_out") or params.get("head_out", "")).strip().lower()

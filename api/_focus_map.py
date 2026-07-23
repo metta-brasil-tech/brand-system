@@ -129,8 +129,12 @@ def focal_zone(image) -> tuple[str, dict]:
     zone_rows = grid[:half] if band == "top" else grid[half:]
     col_energy = [sum(row[c] for row in zone_rows) / len(zone_rows) for c in range(cols)]
     col = ["left", "center", "right"][col_energy.index(min(col_energy))]
+    # Energia por LADO — decide se a coluna lateral do photo-side bate no sujeito.
+    left = sum(row[0] for row in grid) / rows
+    right = sum(row[cols - 1] for row in grid) / rows
     meta = {"band": band, "col": col, "energy_top": round(top, 3),
-            "energy_bottom": round(bot, 3), "grid": grid}
+            "energy_bottom": round(bot, 3), "energy_left": round(left, 3),
+            "energy_right": round(right, 3), "grid": grid}
     return band, meta
 
 

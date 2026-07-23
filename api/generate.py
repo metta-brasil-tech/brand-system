@@ -992,6 +992,7 @@ def _run_pipeline_inline(
 
     # Converte file:// → data:image URI pro HTML
     _focus_anchor = None  # âncora MEDIDA na imagem real (focus map) — None = não mediu
+    _force_band = None    # sensor 2D: photo-side com sujeito na coluna → texto vira faixa
     if image_file_url:
         image_data_uri = _image_to_data_uri(image_file_url)
         diagnostics.append(f"image-uri: data:image embed ({len(image_data_uri) // 1024}KB base64)")
@@ -1014,6 +1015,29 @@ def _run_pipeline_inline(
             )
         except Exception as _fe:
             diagnostics.append(f"focus-map: pulado ({_fe.__class__.__name__}: {str(_fe)[:60]})")
+        # SENSOR FOCAL 2D: photo-side (foto num lado, texto no outro). Se o sujeito
+        # invade a coluna do TEXTO, o card cai na cara (o defeito do A-headline).
+        # Mede esquerda vs direita e, se colide, o texto vira FAIXA (photo-full) na
+        # zona vazia — a imagem manda, não o blueprint (padrão aprovado pelo Nathan).
+        try:
+            from _focus_map import focal_zone
+            _arch_bp = (bp_fm_full or {}).get("archetype", "") if bp_fm_full else ""
+            if _arch_bp == "photo-side":
+                _band2, _fz = focal_zone(image_data_uri)
+                _photo_p = ((bp_fm_full or {}).get("params", {}) or {}).get("photo", "right-bleed")
+                _text_left = "right" in str(_photo_p)   # foto à direita → texto à esquerda
+                _eL, _eR = _fz.get("energy_left", 0), _fz.get("energy_right", 0)
+                _collide = (_eL >= _eR - 0.04) if _text_left else (_eR >= _eL - 0.04)
+                if _collide:
+                    _force_band = _band2
+                    diagnostics.append(
+                        f"sensor-2D: photo-side, sujeito na coluna do texto "
+                        f"(L={_eL} R={_eR}) → texto vira FAIXA no {_band2} (não tampa o foco)")
+                else:
+                    diagnostics.append(
+                        f"sensor-2D: photo-side ok, sujeito no lado oposto (L={_eL} R={_eR}) — mantém coluna")
+        except Exception as _fze:
+            diagnostics.append(f"sensor-2D: pulado ({_fze.__class__.__name__}: {str(_fze)[:50]})")
         # Salva o FUNDO LIMPO (sem texto) separado. Assim o texto vira camada
         # RE-EDITÁVEL: dá pra diminuir/reposicionar sem regerar a imagem — que era
         # a raiz do "texto queimado" (não dava pra consertar peça antiga). Best-effort.
@@ -1047,8 +1071,10 @@ def _run_pipeline_inline(
         "tag": (user_tag or "").strip(),
         # âncora: MEDIDA na imagem real (focus map) quando confiável; senão o
         # palpite do diretor de arte. A guarda-anti-cabeça abaixo é o override final.
-        "text_anchor": (_focus_anchor or ad_directives.get("text_anchor") or "").strip().lower(),
+        "text_anchor": (_force_band or _focus_anchor or ad_directives.get("text_anchor") or "").strip().lower(),
         "panel": (ad_directives.get("panel") or "").strip().lower(),
+        # sensor 2D: quando setado, o render troca photo-side → faixa (photo-full)
+        "_force_band": _force_band or "",
         "head_out": str(ad_directives.get("head_out") or "").strip().lower(),
         # linha de prova social solta no canto (fora do card), assinatura do banco
         "proof": (ad_directives.get("proof") or "").strip(),
