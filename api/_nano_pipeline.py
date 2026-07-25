@@ -442,6 +442,16 @@ def resolve_route(model_id: str) -> str:
     """
     if model_id in _NO_PHOTO:
         return "gpt-image"  # sem foto — não passa pelo Nano Banana de qualquer forma
+    # Override: com IMAGE_ROUTE_FORCE=nano-banana|gemini (+ chave), TUDO com foto
+    # vai pro Gemini — inclusive DARK/LIGHT que normalmente iriam pro gpt-image.
+    # Útil quando a OpenAI está fora (teto de billing): o gpt-image morto viraria
+    # mock; assim o Gemini (que funciona) assume os slides de objeto/conceito.
+    # (Env DEDICADA — não a IMAGE_GEN_PROVIDER, que o ImageGenAdapter valida e
+    # quebraria com um valor 'nano-banana'.)
+    _force = (os.getenv("IMAGE_ROUTE_FORCE") or "").lower()
+    if _force in ("nano-banana", "nano-banana-2", "gemini") and (
+            os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")):
+        return "nano-banana"
     fam = _FAMILY.get(model_id, "OUTROS")
     try:
         cur = _load_curated()

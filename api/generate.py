@@ -938,7 +938,13 @@ def _run_pipeline_inline(
             max_attempts = int(os.getenv("IMAGE_MAX_ATTEMPTS", "1"))
             attempt_chain = attempt_chain[:max_attempts]
 
-            image_gen = ImageGenAdapter()
+            # Provider desconhecido (ex: IMAGE_GEN_PROVIDER=nano-banana enquanto a
+            # OpenAI está fora) não pode DERRUBAR a geração — o caminho Nano cobre.
+            try:
+                image_gen = ImageGenAdapter()
+            except Exception as _ige:
+                image_gen = None
+                diagnostics.append(f"image-gen adapter indisponível ({_ige.__class__.__name__}) — só Nano Banana")
             # Fase C: roteamento POR FAMÍLIA do blueprint (não por provider
             # global) — conceitual/surreal (DARK/LIGHT) segue no gpt-image,
             # foto-real (A/B/D/NEWS/...) tenta Nano Banana + referência do
@@ -988,6 +994,9 @@ def _run_pipeline_inline(
                     except Exception:
                         pass
                 for i, attempt_prompt in enumerate(attempt_chain, start=1):
+                    if image_gen is None:
+                        diagnostics.append("04-image-gen: gpt-image indisponível e Nano não cobriu — segue sem foto")
+                        break
                     try:
                         ig = image_gen.generate(
                             prompt=attempt_prompt,
