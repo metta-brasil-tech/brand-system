@@ -849,14 +849,36 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     params_eff = {**params, "anchor": anchor, "panel": panel, "head_out": head_out}
     inner = _markup(arch, copy_clean, params_eff, image_url or "")
 
-    serie_under = ""   # atrás do conteúdo (wordmark base)
-    serie_over = ""    # sobre o conteúdo (seta →)
+    serie_under = ""   # atrás do conteúdo (wordmark base / spine)
+    serie_over = ""    # sobre o conteúdo (seta → / progress)
+    _arc_i = _arc_n = 0
     if isinstance(serie, dict) and serie:
+        _arc_i = int(serie.get("i") or 0)
+        _arc_n = int(serie.get("n") or 0)
+        # ARCO VISUAL — camada 1: SPINE viajante (eco do logo-alvo). Um anel
+        # concêntrico gigante e sutil cujo centro CAMINHA da esquerda (slide 1) à
+        # direita (slide n), sangrando nas bordas — a mesma "coluna" corre por
+        # todos os slides, ligando os quadros numa jornada (não no slide final,
+        # que já tem o wordmark). Atrás do conteúdo, nunca tampa o foco.
+        if _arc_n >= 2 and _arc_i >= 1 and not serie.get("last"):
+            _frac = (_arc_i - 1) / max(1, _arc_n - 1)      # 0..1 ao longo da série
+            _spine_left = round(-15 + _frac * 130)          # -15%..115% (bleed)
+            serie_under += (f'<div class="serie-spine" aria-hidden="true" '
+                            f'style="left:{_spine_left}%"></div>')
+        # ARCO VISUAL — camada 2: PROGRESS (posição na jornada). Fileira de traços,
+        # o atual em amarelo. Topo-centro (zona livre entre logo e olho-de-marca).
+        if _arc_n >= 2 and _arc_i >= 1:
+            _ticks = "".join(
+                f'<span class="{"on" if k == _arc_i else ""}"></span>'
+                for k in range(1, _arc_n + 1))
+            serie_over += (f'<div class="serie-progress" aria-hidden="true">'
+                           f'{_ticks}</div>')
+        # decor legado: wordmark no último, seta nos intermediários
         if serie.get("last"):
             if (fm.get("marca") or marca or "").strip().lower() == "metta":
-                serie_under = '<div class="serie-wordmark" aria-hidden="true">metta</div>'
+                serie_under += '<div class="serie-wordmark" aria-hidden="true">metta</div>'
         else:
-            serie_over = '<div class="serie-next" aria-hidden="true">&#8594;</div>'
+            serie_over += '<div class="serie-next" aria-hidden="true">&#8594;</div>'
 
     head_style = params.get("head", "")
     case = params.get("case", "upper")
@@ -871,9 +893,16 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         f'data-block="{_esc(block)}" data-anchor="{_esc(anchor)}" data-head="{_esc(head_style)}" '
         f'data-obj-scale="{_esc(obj_scale)}" data-panel="{_esc(panel)}"'
         + (f' data-ornament="{_esc(ornament)}"' if ornament else "")
+        + (f' data-arc-i="{_arc_i}" data-arc-n="{_arc_n}"' if _arc_n >= 2 else "")
         # tweet COM imagem → canvas auto-height (print cru, altura = conteúdo)
         + (' data-embed="1"' if (arch == "tiago-twitter" and (image_url or "").strip()) else "")
     )
+
+    # glow do arco: 0 no gancho → cresce até ~22 no CTA (tensão→alívio amarelo)
+    _arc_style = ""
+    if _arc_n >= 2 and _arc_i >= 1:
+        _arc_glow = round(((_arc_i - 1) / max(1, _arc_n - 1)) * 22)
+        _arc_style = f' style="--arc-glow:{_arc_glow}"'
 
     fonts_css = _read(_BLUEPRINTS_DIR / "_fonts.css")
     css = _read(_BLUEPRINTS_DIR / "_engine.css")
@@ -885,7 +914,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
 <style>{css}</style>
 <style>body{{display:flex;justify-content:center;align-items:flex-start;}}</style>
 </head><body>
-<div class="ad ad-canvas" {data_attrs}>
+<div class="ad ad-canvas" {data_attrs}{_arc_style}>
 {serie_under}
 {ornament_html}
 {brand}

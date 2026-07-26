@@ -252,6 +252,55 @@ button { all: unset; }
 .ad[data-arch="typo"]:has(.serie-wordmark) .cta-wrap,
 .ad[data-arch="photo-side"]:has(.serie-wordmark) .cta-wrap { bottom: 340px; }
 
+/* ---------- ARCO VISUAL (liga os quadros numa jornada) ----------
+ * Camadas somadas ao decor de série: SPINE viajante (eco do logo-alvo),
+ * PROGRESS (posição na jornada) e progressão de TOM (data-arc-i/n).
+ * Tudo atrás do foco / em zona livre — nunca tampa sujeito ou texto. */
+
+/* SPINE: anel concêntrico gigante, sutil, cujo centro caminha pelos slides.
+   A MESMA coluna corre por todos → sensação de peça única. */
+.serie-spine {
+  position: absolute; top: 46%; width: 1180px; height: 1180px;
+  transform: translate(-50%, -50%); z-index: 0; pointer-events: none;
+  border-radius: 50%;
+  border: 3px solid color-mix(in srgb, var(--m-yellow) 26%, transparent);
+}
+.serie-spine::before {
+  content: ""; position: absolute; inset: 210px; border-radius: 50%;
+  border: 3px solid color-mix(in srgb, var(--m-yellow) 18%, transparent);
+}
+/* em fundo amarelo (slides YELLOW) o anel amarelo some — usa tinta escura */
+.ad[data-theme="yellow"] .serie-spine,
+.ad[data-theme="light"] .serie-spine { border-color: color-mix(in srgb, var(--fg) 12%, transparent); }
+.ad[data-theme="yellow"] .serie-spine::before,
+.ad[data-theme="light"] .serie-spine::before { border-color: color-mix(in srgb, var(--fg) 9%, transparent); }
+/* sobre foto, o anel compete com a cena → bem mais discreto */
+.ad[data-photo="true"] .serie-spine { border-color: color-mix(in srgb, #fff 14%, transparent); }
+.ad[data-photo="true"] .serie-spine::before { border-color: color-mix(in srgb, #fff 10%, transparent); }
+
+/* PROGRESS: fileira de traços no topo-centro; o atual em amarelo e mais largo. */
+.serie-progress {
+  position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+  z-index: 9; display: flex; gap: 9px; align-items: center;
+}
+.serie-progress span {
+  width: 24px; height: 5px; border-radius: 3px;
+  background: color-mix(in srgb, var(--fg) 22%, transparent);
+}
+.serie-progress span.on { background: var(--m-yellow); width: 40px; }
+.ad[data-photo="true"] .serie-progress span { background: color-mix(in srgb, #fff 30%, transparent); }
+.ad[data-photo="true"] .serie-progress span.on { background: var(--m-yellow); }
+
+/* TOM: um glow amarelo que CRESCE rumo ao fim (arco = tensão→alívio). A
+   intensidade vem inline (--arc-glow) calculada no render por i/n. */
+.ad[data-arc-n] .layer { position: relative; }
+.ad[data-arc-n]::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(120% 80% at 50% 118%,
+              color-mix(in srgb, var(--m-yellow) calc(var(--arc-glow, 0) * 1%), transparent),
+              transparent 70%);
+}
+
 /* =============================================================================
  * ARCHETYPES
  * ===========================================================================*/
