@@ -301,6 +301,42 @@ button { all: unset; }
               transparent 70%);
 }
 
+/* ---------- SISTEMA "LISTA NUMERADA" (modulo-num, = c1-metta-julho) ----------
+ * Módulo idêntico repetido: nº grande + thumb pequena + colchete amarelo +
+ * headline + body com 1 palavra amarela. A unidade vem da repetição do molde. */
+.mod-layer {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 40px; padding: 120px 90px;
+}
+.mod-top { display: flex; align-items: center; gap: 32px; }
+.mod-num {
+  font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
+  font-size: 190px; line-height: .78; letter-spacing: -.04em;
+  color: var(--m-yellow); flex: none;
+}
+.mod-thumb {
+  width: 300px; height: 200px; border-radius: 20px; flex: none;
+  background-size: cover; background-position: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.mod-bracket { width: 96px; height: 76px; color: var(--m-yellow); flex: none; }
+.mod-txt { display: flex; flex-direction: column; gap: 20px; }
+.mod-title {
+  font-family: var(--m-display); font-weight: 800; font-variation-settings: 'wght' 800;
+  font-size: 74px; line-height: 1.0; letter-spacing: -.015em; color: #fff;
+  max-width: 15ch; text-wrap: balance;
+}
+.mod-body { font-size: 32px; line-height: 1.35; color: rgba(255,255,255,.66); max-width: 24ch; }
+.mod-body .hi { color: var(--m-yellow); }
+.mod-arrow {
+  position: absolute; right: 90px; bottom: 96px;
+  width: 60px; height: 60px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.35);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.7); font-size: 26px;
+}
+
 /* =============================================================================
  * ARCHETYPES
  * ===========================================================================*/

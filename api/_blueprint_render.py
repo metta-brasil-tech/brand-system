@@ -620,6 +620,29 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
             return f'<div class="text-panel" data-panel="{panel}">{body_html}{inner_cta}</div>'
         return f'{body_html}{inner_cta}'
 
+    if arch == "modulo-num":
+        # Sistema "Lista Numerada" (= c1-metta-julho): módulo IDÊNTICO repetido em
+        # cada slide — nº grande + thumb pequena + colchete amarelo + headline +
+        # body com 1 palavra em amarelo. A unidade do carrossel vem da REPETIÇÃO
+        # deste molde (não de tratamentos diferentes por slide). Número vem de
+        # copy['num'] (o assembler de série passa 1..k).
+        num = _esc(copy.get("num") or params.get("num") or "")
+        thumb = _photo(image_url, cls="mod-thumb") if (image_url or "").strip() else ""
+        # colchete/aspas amarelo — motivo recorrente do sistema
+        bracket = ('<svg class="mod-bracket" viewBox="0 0 120 96" aria-hidden="true">'
+                   '<path fill="currentColor" d="M8 96V52C8 26 26 8 52 6l4 15C40 24 30 34 '
+                   '29 48h19v48zM68 96V52C68 26 86 8 112 6l4 15C100 24 90 34 89 48h19v48z"/>'
+                   '</svg>')
+        head = _accent(copy.get("headline", ""))
+        _bd = copy.get("body") or copy.get("subhead") or ""
+        body = f'<p class="t-body mod-body">{_accent(_bd)}</p>' if _bd else ""
+        return (f'<div class="layer mod-layer">'
+                f'<div class="mod-top">'
+                f'<span class="mod-num">{num}</span>'
+                f'{thumb}{bracket}</div>'
+                f'<div class="mod-txt"><h1 class="t-head mod-title">{head}</h1>{body}</div>'
+                f'</div>')
+
     if arch == "typo":
         _div = False  # sem linha divisória em nenhum padrão (inclui K-bold) — Nathan
         return f'<div class="layer"><div class="stack">{_txt_blocks(copy, divider=_div)}</div></div>{_cta(copy, cta_cls)}'
@@ -860,7 +883,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         # direita (slide n), sangrando nas bordas — a mesma "coluna" corre por
         # todos os slides, ligando os quadros numa jornada (não no slide final,
         # que já tem o wordmark). Atrás do conteúdo, nunca tampa o foco.
-        if _arc_n >= 2 and _arc_i >= 1 and not serie.get("last"):
+        if _arc_n >= 2 and _arc_i >= 1 and not serie.get("last") and arch != "modulo-num":
             _frac = (_arc_i - 1) / max(1, _arc_n - 1)      # 0..1 ao longo da série
             _spine_left = round(-15 + _frac * 130)          # -15%..115% (bleed)
             serie_under += (f'<div class="serie-spine" aria-hidden="true" '
