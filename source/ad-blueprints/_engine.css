@@ -290,6 +290,11 @@ button { all: unset; }
 .serie-progress span.on { background: var(--m-yellow); width: 40px; }
 .ad[data-photo="true"] .serie-progress span { background: color-mix(in srgb, #fff 30%, transparent); }
 .ad[data-photo="true"] .serie-progress span.on { background: var(--m-yellow); }
+/* em fundo amarelo/claro o tick amarelo some → usa escuro */
+.ad[data-theme="yellow"] .serie-progress span,
+.ad[data-theme="light"] .serie-progress span { background: color-mix(in srgb, #1a1a1a 22%, transparent); }
+.ad[data-theme="yellow"] .serie-progress span.on,
+.ad[data-theme="light"] .serie-progress span.on { background: #1a1a1a; }
 
 /* TOM: um glow amarelo que CRESCE rumo ao fim (arco = tensão→alívio). A
    intensidade vem inline (--arc-glow) calculada no render por i/n. */
@@ -304,12 +309,14 @@ button { all: unset; }
 /* ---------- SISTEMA "LISTA NUMERADA" (modulo-num, = c1-metta-julho) ----------
  * Módulo idêntico repetido: nº grande + thumb pequena + colchete amarelo +
  * headline + body com 1 palavra amarela. A unidade vem da repetição do molde. */
-.mod-layer {
+/* especificidade extra (.ad …) pra vencer '.ad[data-arc-n] .layer{position:relative}'
+   do glow do arco — senão o módulo não preenche a altura e cola no topo. */
+.ad .layer.mod-layer {
   position: absolute; inset: 0; z-index: 3;
   display: flex; flex-direction: column; justify-content: center;
-  gap: 40px; padding: 120px 90px;
+  align-items: flex-start; gap: 44px; padding: 130px 90px;
 }
-.mod-top { display: flex; align-items: center; gap: 32px; }
+.mod-top { position: relative; display: flex; align-items: center; gap: 30px; }
 .mod-num {
   font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
   font-size: 190px; line-height: .78; letter-spacing: -.04em;
@@ -320,7 +327,11 @@ button { all: unset; }
   background-size: cover; background-position: center;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
-.mod-bracket { width: 96px; height: 76px; color: var(--m-yellow); flex: none; }
+/* colchete/aspas: gruda no canto superior-direito da thumb (não flutua solto) */
+.mod-bracket {
+  position: absolute; z-index: 4; width: 78px; height: 62px;
+  color: var(--m-yellow); left: 470px; top: -6px;
+}
 .mod-txt { display: flex; flex-direction: column; gap: 20px; }
 .mod-title {
   font-family: var(--m-display); font-weight: 800; font-variation-settings: 'wght' 800;
