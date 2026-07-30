@@ -70,6 +70,19 @@ def _parse_front_matter(md: str) -> dict:
     return out
 
 
+def _no_dash(text: str) -> str:
+    """Regra dura (Nathan): NUNCA travessão/traço-separador na copy — o em-dash '—'
+    tem cara de texto de IA. Vira vírgula. NÃO toca hífen intra-palavra (bem-vindo,
+    DEMONSTRA-SE): só em/en dash e hífen cercado por espaços (usado como separador)."""
+    if not isinstance(text, str) or not text:
+        return text
+    t = re.sub(r"\s*[—–]\s*", ", ", text)          # travessão (em/en dash) → vírgula
+    t = re.sub(r"(?<=\w)\s+-\s+(?=\w)", ", ", t)    # hífen SEPARADOR (com espaços) → vírgula
+    t = re.sub(r"^[\s,]+", "", t)                    # sem vírgula órfã no início
+    t = re.sub(r"\s*,\s*,", ",", t)                  # colapsa vírgula dupla
+    return t
+
+
 def _accent(text: str) -> str:
     """Converte *palavra* em <span class="hi">palavra</span> e quebras de linha
     explícitas (\\n) em <br> — quebras são decisão de composição do Diretor de Arte.
@@ -867,7 +880,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     ornament = str(params.get("ornament", "")).strip().lower()
     ornament_html = _ornament(ornament, theme)
 
-    copy_clean = {k: (str(v).strip() if v else "")
+    copy_clean = {k: (_no_dash(str(v).strip()) if v else "")
                   for k, v in (copy or {}).items() if k != "serie"}
     params_eff = {**params, "anchor": anchor, "panel": panel, "head_out": head_out}
     inner = _markup(arch, copy_clean, params_eff, image_url or "")
