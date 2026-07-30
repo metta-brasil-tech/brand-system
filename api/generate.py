@@ -961,6 +961,18 @@ def _run_pipeline_inline(
                 r"no\s+(person|people|human|humans)|without\s+(a\s+)?(person|people|human)|"
                 r"apenas\s+(um|uma)\s+objeto|s[oó]\s+(um\s+|uma\s+)?objeto",
                 briefing_image_text or "", re.I))
+            # A regra 'sem pessoa → gpt-image' ficou OBSOLETA: (1) a OpenAI está com
+            # billing travado (gpt-image morto → viraria mock); (2) o Nano faz objeto
+            # muito bem, ainda mais modelos com brief gráfico próprio (_MODEL_TREAT,
+            # ex: YELLOW-OBJETO clay-3D) que NÃO usam referência humana. Então: se a
+            # rota está forçada pro nano OU o modelo tem tratamento gráfico próprio,
+            # NÃO pula pro gpt — o Nano gera do brief, sem viés humano.
+            from _nano_pipeline import _MODEL_TREAT as _MT_MAP
+            _force_nano = (os.getenv("IMAGE_ROUTE_FORCE") or "").lower() in (
+                "nano-banana", "nano-banana-2", "gemini")
+            if _no_person and (_force_nano or chosen_model_id in _MT_MAP):
+                _no_person = False
+                diagnostics.append("rota: 'sem pessoa' ignorado (nano forçado / brief gráfico próprio) → Nano gera o objeto")
             if _no_person:
                 diagnostics.append("rota: 'sem pessoa' no briefing → pula nano/referência-humana, usa gpt-image")
             last_error = None
