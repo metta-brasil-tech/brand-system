@@ -46,3 +46,4 @@ criativos-auto/
 # override pessoal de permissões (autonomia)
 .claude/settings.local.json
 render_out/saidas-antigas/
+_figma-ingest/
