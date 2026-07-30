@@ -150,8 +150,13 @@ Regras inegociáveis:
 - VARIE AS PESSOAS: gênero (use MULHERES com frequência), idade 30-60, etnia
   dentro do Brasil (parda, preta, branca, asiática-brasileira), COM e SEM barba,
   trajes variados (não sempre camisa social azul-marinho), ambientes e luz variados.
-- Se o TRATAMENTO indicar OBJETO (object), invente um OBJETO simbólico variado
-  (não pessoa). Se indicar colagem surreal, varie a metáfora.
+- Se o TRATAMENTO indicar OBJETO (object): invente UM objeto REAL, CONCRETO e
+  RECONHECÍVEL do dia a dia (ex: haltere, escada, ampulheta, chave, engrenagem,
+  bússola, régua, tijolo, ímã, funil) que seja metáfora CLARA da copy e nomeável
+  numa palavra. PROIBIDO forma abstrata, massa/blob amorfo, "escultura" indefinida
+  ou mancha — o gerador transforma isso num borrão sem sentido. O objeto tem que
+  ser lido de imediato ("é um X"). Varie o objeto entre peças. Se indicar colagem
+  surreal, varie a metáfora.
 - EVITE os conceitos recentes que eu listar (cena E perfil de pessoa). Escolha um
   scene_type DIFERENTE dos recentes.
 - Brasileiro, editorial, decision-grade. Sorriso genuíno e humor são BEM-VINDOS
