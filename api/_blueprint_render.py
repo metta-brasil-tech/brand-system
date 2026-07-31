@@ -699,15 +699,21 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
 
     if arch == "object-center":
         obj = _photo(image_url, "object")
+        # CTA vai pro RODAPÉ, SEPARADO da zona de texto do topo (Nathan: o botão
+        # colado na headline no topo espremia a composição "headline em cima, objeto
+        # embaixo"). O texto (headline/sub/body) fica no topo; o CTA desce.
+        _obj_cta = _cta(copy, cta_cls)
+        _obj_txt = _txt_blocks(copy)
+        if panel in ("white", "dark", "plain"):
+            _obj_txt = f'<div class="text-panel" data-panel="{panel}">{_obj_txt}</div>'
         if params.get("object_scale") == "full":
-            # Imagem cobre o canvas inteiro (o próprio gerador AI já bake-a o fundo
-            # sólido do tema) — objeto vira background, texto flutua por cima ancorado
-            # no topo. DARK-OBJETO não usa esse param — fica no boxed legado abaixo.
+            # Imagem cobre o canvas inteiro (o gerador AI já bake-a o fundo sólido do
+            # tema) — objeto vira background, texto ancora no topo, CTA no rodapé.
             # `.obj-text-zone` tem altura PRÓPRIA (não o canvas inteiro) — é o que
-            # permite o auto-fit do _engine.js medir overflow de verdade e encolher
-            # a headline sozinho, pra qualquer tamanho de copy (ver _engine.js fitHead).
-            return f'{obj}<div class="layer"><div class="obj-text-zone">{_panel_wrap(_txt_blocks(copy))}</div></div>'
-        return f'<div class="layer">{obj}{_panel_wrap(_txt_blocks(copy))}</div>'
+            # permite o auto-fit do _engine.js medir overflow e encolher a headline.
+            return (f'{obj}<div class="layer"><div class="obj-text-zone">{_obj_txt}</div>'
+                    f'{_obj_cta}</div>')
+        return f'<div class="layer">{obj}<div class="obj-text-zone">{_obj_txt}</div>{_obj_cta}</div>'
 
     if arch == "card-mock":
         name = params.get("name", "Metta")

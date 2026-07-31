@@ -255,6 +255,8 @@ button.stepper-item.done:hover {
    aparece no 'loading' e vira o 'thumbnail que engana' que o concept-first mata.
    Só é revelado (via JS) quando o preview vivo da copy real FALHA. */
 .lp-wrap .lp-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: none; }
+/* estilos COM IMAGEM mostram a preview estática (exemplo real) — não têm render vivo */
+.lp-wrap .lp-fallback.lp-show { display: block; }
 .lp-status {
   position: absolute; left: 8px; bottom: 8px; z-index: 2;
   font-size: 10.5px; font-family: var(--metta-ref-typeface-mono);
@@ -1682,11 +1684,15 @@ function _styleCardHtml(s, opts) {
   const CANVAS = { feed: '1080 / 1350', sqr: '1080 / 1080', story: '1080 / 1920' };
   const aspect = CANVAS[_previewFormat()] || CANVAS.feed;
   const disabled = Boolean(s.comingSoon);
+  // Estilos COM IMAGEM: mostram a preview ESTÁTICA (exemplo real do estilo), porque
+  // a foto só nasce ao escolher — o render ao vivo sairia com o slot de foto vazio
+  // (preto). Estilos SÓ-TEXTO: render ao vivo da copy do user (exato e grátis).
+  const liveRender = !disabled && !s.usaImagem;
   const previewArea = `
-    <div class="lp-wrap" ${disabled ? '' : `data-lp="${s.id}"`} style="aspect-ratio:${aspect}">
-      ${s.previewSrc ? `<img class="lp-fallback" src="${s.previewSrc}" alt="${escapeHtml(s.label)}" loading="lazy">` : ''}
-      ${disabled ? '' : '<span class="lp-status">renderizando sua copy…</span>'}
-      ${s.usaImagem && !disabled ? '<span class="lp-badge">+ foto ao escolher</span>' : ''}
+    <div class="lp-wrap" ${liveRender ? `data-lp="${s.id}"` : ''} style="aspect-ratio:${aspect}">
+      ${s.previewSrc ? `<img class="lp-fallback${s.usaImagem ? ' lp-show' : ''}" src="${s.previewSrc}" alt="${escapeHtml(s.label)}" loading="lazy">` : ''}
+      ${liveRender ? '<span class="lp-status">renderizando sua copy…</span>' : ''}
+      ${s.usaImagem && !disabled ? '<span class="lp-badge">exemplo · foto ao escolher</span>' : ''}
     </div>`;
   return `
     <div class="choice with-preview ${STATE.style === s.id ? 'selected' : ''} ${disabled ? 'coming-soon' : ''}"
@@ -1940,6 +1946,12 @@ function tplWizCopy() {
   const isTweet = STATE.style === 'METTA-TWEET-CARD'
                || STATE.style === 'TIAGO-TWITTER-CARD'
                || STATE.style === 'TIAGO-TWITTER-CARD-IMAGE';
+  // MENSAGEM-PRIMEIRO: na 1ª passada (concept-first) o estilo ainda não foi escolhido,
+  // então NÃO presume a estrutura "Headline" (que não serve p/ tweet = 1 mensagem).
+  // Rótulo neutro "Sua mensagem"; só vira "Headline" quando um estilo estruturado já
+  // foi escolhido; tweet tem rótulo próprio.
+  const headlineLabel = isTweet ? 'Mensagem do tweet'
+                      : (STATE.style ? 'Headline' : 'Sua mensagem');
   const styleLbl = ((STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO).find(s => s.id === STATE.style) || {}).label || STATE.style || '';
   const cnt = (field) => `<span class="copy-count" id="cnt-${field}" data-max="${bud[field]||0}"></span>`;
   const bodyNote = bud.body === 0
@@ -1958,9 +1970,9 @@ function tplWizCopy() {
     </header>
     <div class="step-body">
       <div class="field">
-        <label class="field-label" for="copy-headline-input">${isTweet ? 'Mensagem do tweet' : 'Headline'} ${cnt('headline')}</label>
+        <label class="field-label" for="copy-headline-input">${headlineLabel} ${cnt('headline')}</label>
         <textarea class="textarea" id="copy-headline-input" rows="${isTweet ? 3 : 2}" placeholder="${isTweet ? 'Ex: Quanto mais você carrega o resultado nas costas, menos a operação cresce sem você.' : 'Ex: Para de demitir antes de diagnosticar.'}">${escapeHtml(STATE.copyHeadline)}</textarea>
-        <p class="field-hint">${isTweet ? 'É o texto que vai direto no corpo do tweet — só isso.' : 'Frase de impacto principal. 1 sentença. Quanto mais curta, maior aparece.'}</p>
+        <p class="field-hint">${isTweet ? 'É o texto que vai direto no corpo do tweet, só isso.' : 'Frase de impacto principal. 1 sentença. Quanto mais curta, maior aparece.'}</p>
       </div>
       ${isTweet ? '' : `
       <div class="field">
@@ -2426,6 +2438,9 @@ function tplCarouselBuild() {
   const sl = STATE.slides[STATE.activeSlide];
   const styleObj = _slideStyleObj(sl);
   const usaImagem = !!styleObj.usaImagem;
+  // slide de tweet = 1 mensagem só (pode ter imagem ou não, por slide) — some
+  // subheadline/corpo, deixa só "Mensagem do tweet" + o bloco de imagem.
+  const isTweetSlide = ['METTA-TWEET-CARD', 'TIAGO-TWITTER-CARD', 'TIAGO-TWITTER-CARD-IMAGE'].includes(sl.style);
   const bud = copyBudgetFor(sl.style);
   const cnt = (f) => `<span class="copy-count" data-budfield="${f}" data-max="${bud[f] || 0}"></span>`;
   const strip = STATE.slides.map((s, i) => {
@@ -2488,12 +2503,13 @@ function tplCarouselBuild() {
         <p class="car-editing">Editando slide ${STATE.activeSlide + 1} de ${STATE.slides.length}</p>
         <div class="field"><label class="field-label">Estilo</label>
           <select class="input" data-action="car-field" data-field="style">${styleOpts}</select></div>
-        <div class="field"><label class="field-label">Headline ${cnt('headline')}</label>
-          <textarea class="textarea" rows="2" data-action="car-field" data-field="copyHeadline" placeholder="Frase de impacto do slide">${escapeHtml(sl.copyHeadline)}</textarea></div>
+        <div class="field"><label class="field-label">${isTweetSlide ? 'Mensagem do tweet' : 'Headline'} ${cnt('headline')}</label>
+          <textarea class="textarea" rows="${isTweetSlide ? 3 : 2}" data-action="car-field" data-field="copyHeadline" placeholder="${isTweetSlide ? 'Ex: Paz não é uma empresa sem problemas. É uma empresa que não precisa de você para resolver todos eles.' : 'Frase de impacto do slide'}">${escapeHtml(sl.copyHeadline)}</textarea></div>
+        ${isTweetSlide ? '' : `
         <div class="field"><label class="field-label">Subheadline (opcional) ${cnt('subhead')}</label>
           <textarea class="textarea" rows="2" data-action="car-field" data-field="copySubhead">${escapeHtml(sl.copySubhead)}</textarea></div>
         <div class="field"><label class="field-label">Corpo (opcional) ${cnt('body')}</label>
-          <textarea class="textarea" rows="3" data-action="car-field" data-field="copyBody">${escapeHtml(sl.copyBody)}</textarea></div>
+          <textarea class="textarea" rows="3" data-action="car-field" data-field="copyBody">${escapeHtml(sl.copyBody)}</textarea></div>`}
         <div class="field"><label class="field-label">CTA (opcional)</label>
           <input type="text" class="input" data-action="car-field" data-field="cta" value="${escapeHtml(sl.cta)}" placeholder="Ex: Arrasta pro lado"></div>
         ${imgBlock}
