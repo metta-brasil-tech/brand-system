@@ -252,7 +252,14 @@ def _run_generate(data: dict) -> dict:
 
     knowledge = load_knowledge_for_brand(data["brand"])
     tom_de_voz = knowledge.get(f"tom-de-voz-{data['brand']}.md", "")
-    skill_content = knowledge.get("SKILLMETTACOPY.md", "")
+    # Skill de copy por marca: Metta usa SKILLMETTACOPY.md, Tiago usa a versao
+    # pessoal do fundador. A Skill de Validacao reaplica a mesma skill que o
+    # generator usou pra escrever (ver _BRAND_FILES em generator.py).
+    _skill_by_brand = {
+        "metta": "SKILLMETTACOPY.md",
+        "tiago": "SKILLTIAGOCOPY.md",
+    }
+    skill_content = knowledge.get(_skill_by_brand.get(data["brand"], ""), "")
 
     # As 4 validações são independentes entre si (cada uma só lê a peça
     # pronta) e cada uma é uma chamada de modelo de 15-40s. Em série elas

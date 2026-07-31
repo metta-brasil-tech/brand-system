@@ -37,11 +37,15 @@ BRAND_KNOWLEDGE_FILES = {
         "SKILLMETTACOPY.md",
     ],
     "tiago": [
-        # Per Documento_Mestre_Projeto_v2.md secao 6, tom-de-voz-tiago and
-        # mito-fundador-tiago are pending -- not yet present in the repo.
-        # Listed here so they load automatically once added.
         "tom-de-voz-tiago.md",
+        # mito-fundador-tiago.md ainda nao existe (Fase 2, pendente); fica
+        # listado pra carregar automaticamente assim que for criado --
+        # load_knowledge_files pula arquivos ausentes sem quebrar.
         "mito-fundador-tiago.md",
+        # A mesma skill que generator.py usa pra escrever a voz Tiago
+        # (_BRAND_FILES["tiago"]) -- carregada aqui pra Skill de Validacao
+        # reaplicar em modo leitura sobre a peca ja pronta.
+        "SKILLTIAGOCOPY.md",
     ],
 }
 
