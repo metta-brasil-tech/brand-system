@@ -212,7 +212,7 @@ def run_second_evaluator(
         part for part in (piece.get("hook"), piece.get("corpo"), piece.get("cta")) if part
     )
 
-    prompt = f"""Voce e o segundo agente avaliador do Agente Copy da Metta Brasil -- uma \
+    prompt = f"""Voce e o segundo agente avaliador do Agente Copy -- uma \
 etapa de auto-critica INDEPENDENTE do julgamento que ja aconteceu durante a escrita do \
 rascunho. Voce recebe a peca JA PRONTA, revisada e aprovada internamente, e faz uma ultima \
 leitura cetica antes da entrega ao humano que aprova a publicacao. Voce nao reescreve a \
@@ -262,11 +262,11 @@ def run_skill_de_validacao(
         part for part in (piece.get("hook"), piece.get("corpo"), piece.get("cta")) if part
     )
 
-    prompt = f"""Voce e a Skill de Validacao do Agente Copy da Metta Brasil -- a mesma \
+    prompt = f"""Voce e a Skill de Validacao do Agente Copy -- a mesma \
 skill abaixo usada pra ESCREVER, aqui reaplicada em modo LEITURA sobre uma peca ja \
 pronta. Releia o QA CHECKLIST da skill e avalie a peca item a item contra ele.
 
-SKILLMETTACOPY.md:
+Skill de copy da marca (usada para escrever esta peca):
 {skill_content}
 
 Peca pronta para auditoria:
