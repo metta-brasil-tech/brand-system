@@ -1141,7 +1141,8 @@ details.all-styles[open] > summary { margin-bottom: 14px; }
 
 const STATE = {
   brand: null,          // 'metta' | 'tiago'
-  mode: null,           // 'wizard' | 'audio'
+  mode: null,           // 'wizard' | 'audio' | 'carousel'
+  intent: null,         // 'statement' | 'foto' | 'tweet' (dentro do wizard) — filtra estilos + adapta copy
   format: null,         // 'feed' | 'sqr' | 'ad-story'  (proporção da peça)
   style: null,          // ID do estilo do banco
   imageSource: null,    // 'generate' (IA) | 'search' (busca web) | 'none' — definido em wiz-imagem
@@ -1438,31 +1439,44 @@ function tplBrand() {
 }
 
 function tplMode() {
+  const isW = (i) => STATE.mode === 'wizard' && STATE.intent === i;
   return renderStepper() + `
     <header class="step-head">
-      <p class="step-eyebrow">Passo 2 — Como você quer criar?</p>
-      <h1 class="step-title">Guiado por etapas ou descrição livre?</h1>
-      <p class="step-sub">Os dois caminhos chegam no mesmo lugar. Use o guiado se quiser controle fino. Use o áudio/texto livre se já tiver clareza do que quer.</p>
+      <p class="step-eyebrow">Passo 2 — O que você quer criar?</p>
+      <h1 class="step-title">Escolha o tipo de peça.</h1>
+      <p class="step-sub">O tipo já filtra os estilos e ajusta os campos de texto — um tweet é 1 mensagem, um post com foto pede cena, e por aí vai.</p>
     </header>
     <div class="step-body">
       <div class="choice-grid">
-        <button class="choice ${STATE.mode === 'wizard' ? 'selected' : ''}" data-action="pick-mode" data-value="wizard">
+        <button class="choice ${isW('statement') ? 'selected' : ''}" data-action="pick-mode" data-value="wizard" data-intent="statement">
           <div class="choice-icon">${icon('square', 24)}</div>
-          <h3 class="choice-title">Guiado (1 peça)</h3>
-          <p class="choice-desc">Formato, estilo, copy e CTA, um campo de cada vez. Bom pra primeira vez.</p>
-          <span class="choice-tag">~5 perguntas</span>
+          <h3 class="choice-title">Post statement</h3>
+          <p class="choice-desc">Frase de impacto em tipografia. Tese, método, manifesto. Sem foto.</p>
+          <span class="choice-tag">só texto</span>
         </button>
-        <button class="choice ${STATE.mode === 'carousel' ? 'selected' : ''}" data-action="pick-mode" data-value="carousel">
+        <button class="choice ${isW('foto') ? 'selected' : ''}" data-action="pick-mode" data-value="wizard" data-intent="foto">
+          <div class="choice-icon">${icon('sparkles', 24)}</div>
+          <h3 class="choice-title">Post com foto</h3>
+          <p class="choice-desc">Headline + imagem (cena, retrato, objeto-conceito). A foto é gerada ou enviada.</p>
+          <span class="choice-tag">com imagem</span>
+        </button>
+        <button class="choice ${isW('tweet') ? 'selected' : ''}" data-action="pick-mode" data-value="wizard" data-intent="tweet">
+          <div class="choice-icon">${icon('square', 24)}</div>
+          <h3 class="choice-title">Tweet</h3>
+          <p class="choice-desc">Card estilo print de tweet. 1 mensagem só, sem título/subtítulo/CTA.</p>
+          <span class="choice-tag">1 mensagem</span>
+        </button>
+        <button class="choice ${STATE.mode === 'carousel' ? 'selected' : ''}" data-action="pick-mode" data-value="carousel" data-intent="">
           <div class="choice-icon">${icon('layers', 24)}</div>
           <h3 class="choice-title">Carrossel</h3>
-          <p class="choice-desc">Monta vários slides ligados (capa → desenvolvimento → fechamento). Gera todos com marca coerente.</p>
+          <p class="choice-desc">Vários slides ligados (capa → desenvolvimento → fechamento), com marca coerente.</p>
           <span class="choice-tag">multi-slide</span>
         </button>
-        <button class="choice ${STATE.mode === 'audio' ? 'selected' : ''}" data-action="pick-mode" data-value="audio">
+        <button class="choice ${STATE.mode === 'audio' ? 'selected' : ''}" data-action="pick-mode" data-value="audio" data-intent="">
           <div class="choice-icon">${icon('mic', 24)}</div>
           <h3 class="choice-title">Áudio ou texto livre</h3>
           <p class="choice-desc">Grava ou digita o briefing solto. A gente extrai os campos e mostra um resumo.</p>
-          <span class="choice-tag">Mais rápido</span>
+          <span class="choice-tag">mais rápido</span>
         </button>
       </div>
     </div>
@@ -1713,9 +1727,20 @@ function tplWizStyle() {
   // Filtra por formato + esconde os `carouselOnly` (papéis de slide de carrossel —
   // ex.: slides editoriais, intersticiais — que só fazem sentido dentro de uma série,
   // não como peça única). Eles continuam disponíveis no modo Carrossel.
-  const styles = allStyles.filter(s => (!s.formatos || s.formatos.includes(target)) && !s.carouselOnly);
+  let styles = allStyles.filter(s => (!s.formatos || s.formatos.includes(target)) && !s.carouselOnly);
+  // FILTRO POR INTENÇÃO (MODO): statement=só-texto · foto=com-imagem · tweet=cards de tweet.
+  // Sem intenção (ex: fluxo legado) mostra tudo. É o que resolve descoberta+encaixe:
+  // no tweet você só vê os tweet-cards, num post-foto só os com imagem, etc.
+  const TWEET_IDS = ['METTA-TWEET-CARD', 'TIAGO-TWITTER-CARD', 'TIAGO-TWITTER-CARD-IMAGE'];
+  if (STATE.intent === 'tweet')          styles = styles.filter(s => TWEET_IDS.includes(s.id));
+  else if (STATE.intent === 'statement') styles = styles.filter(s => !s.usaImagem && !TWEET_IDS.includes(s.id));
+  else if (STATE.intent === 'foto')      styles = styles.filter(s => s.usaImagem && !TWEET_IDS.includes(s.id));
+  // salvaguarda: se a intenção esvaziar o conjunto (combinação rara de formato),
+  // volta a mostrar todos os do formato — nunca deixa a tela de estilos vazia.
+  if (!styles.length) styles = allStyles.filter(s => (!s.formatos || s.formatos.includes(target)) && !s.carouselOnly);
   const hasCopy = Boolean((STATE.copyHeadline || '').trim());
-  const recs = hasCopy ? recommendStyles() : [];
+  // recomendações restritas ao conjunto da intenção (não recomenda estilo fora do tipo)
+  const recs = hasCopy ? recommendStyles().filter(r => styles.some(s => s.id === r.id)) : [];
   const recIds = new Set(recs.map(r => r.id));
   const rest = styles.filter(s => !recIds.has(s.id));
   return renderStepper() + `
@@ -1943,7 +1968,8 @@ function tplWizCopy() {
   // Todo modelo de tweet = 1 mensagem só (inclui o tweet COM imagem). Sem
   // título/subtítulo/descrição — um tweet não tem esses campos. A imagem do
   // TIAGO-TWITTER-CARD-IMAGE é escolhida no passo de imagem, não aqui.
-  const isTweet = STATE.style === 'METTA-TWEET-CARD'
+  const isTweet = STATE.intent === 'tweet'
+               || STATE.style === 'METTA-TWEET-CARD'
                || STATE.style === 'TIAGO-TWITTER-CARD'
                || STATE.style === 'TIAGO-TWITTER-CARD-IMAGE';
   // MENSAGEM-PRIMEIRO: na 1ª passada (concept-first) o estilo ainda não foi escolhido,
@@ -3078,6 +3104,8 @@ function onAction(e) {
       break;
     case 'pick-mode':
       STATE.mode = value;
+      // intenção (statement|foto|tweet) dentro do wizard — filtra estilos + adapta copy
+      STATE.intent = el.getAttribute('data-intent') || null;
       autoAdvance(el);
       break;
     case 'pick-format':
