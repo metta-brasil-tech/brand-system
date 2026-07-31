@@ -496,7 +496,10 @@ button { all: unset; }
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 .ad[data-arch="object-center"][data-obj-scale="full"] .t-head { width: 100%; line-height: 1.05; }
-.ad[data-arch="object-center"][data-obj-scale="full"] .cta-wrap { margin-top: 24px; }
+/* CTA no RODAPÉ (não colado na headline no topo): margin-top:auto empurra pro fim
+   do layer (flex-column, altura cheia); fica sobre a base, separado do objeto. */
+.ad[data-arch="object-center"][data-obj-scale="full"] .cta-wrap { margin-top: auto; margin-bottom: 40px; }
+.ad[data-format="story"][data-arch="object-center"][data-obj-scale="full"] .cta-wrap { margin-bottom: 120px; }
 
 /* (6) card-mock — cartão de rede social (tweet) */
 .ad[data-arch="card-mock"] { display: flex; align-items: center; justify-content: center; background: var(--m-night-95); }
