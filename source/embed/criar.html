@@ -1684,13 +1684,15 @@ function _styleCardHtml(s, opts) {
   const CANVAS = { feed: '1080 / 1350', sqr: '1080 / 1080', story: '1080 / 1920' };
   const aspect = CANVAS[_previewFormat()] || CANVAS.feed;
   const disabled = Boolean(s.comingSoon);
-  // Estilos COM IMAGEM: mostram a preview ESTÁTICA (exemplo real do estilo), porque
-  // a foto só nasce ao escolher — o render ao vivo sairia com o slot de foto vazio
-  // (preto). Estilos SÓ-TEXTO: render ao vivo da copy do user (exato e grátis).
-  const liveRender = !disabled && !s.usaImagem;
+  // TODO estilo mostra a preview ESTÁTICA (exemplo real) como base — nunca fica
+  // cinza vazio. O render AO VIVO da copy do user só entra por cima nos estilos
+  // SÓ-TEXTO E quando já existe copy (concept-first). Estilos com imagem ficam só
+  // na estática (a foto real nasce ao escolher).
+  const hasCopy = Boolean((STATE.copyHeadline || '').trim());
+  const liveRender = !disabled && !s.usaImagem && hasCopy;
   const previewArea = `
     <div class="lp-wrap" ${liveRender ? `data-lp="${s.id}"` : ''} style="aspect-ratio:${aspect}">
-      ${s.previewSrc ? `<img class="lp-fallback${s.usaImagem ? ' lp-show' : ''}" src="${s.previewSrc}" alt="${escapeHtml(s.label)}" loading="lazy">` : ''}
+      ${s.previewSrc ? `<img class="lp-fallback lp-show" src="${s.previewSrc}" alt="${escapeHtml(s.label)}" loading="lazy">` : ''}
       ${liveRender ? '<span class="lp-status">renderizando sua copy…</span>' : ''}
       ${s.usaImagem && !disabled ? '<span class="lp-badge">exemplo · foto ao escolher</span>' : ''}
     </div>`;
