@@ -51,6 +51,18 @@ _BRAND_FILES: dict[str, tuple[str, ...]] = {
         "provas.md",
         "glossario-2.md",
     ),
+    # Marca Tiago (Fase 2): mesma oferta/provas/avatar/posicionamento/glossario
+    # da Metta (o Tiago vende os mesmos programas -- Supere a Meta, diagnostico);
+    # troca so a voz e a skill de copy pela versao pessoal do fundador.
+    "tiago": (
+        "tom-de-voz-tiago.md",
+        "SKILLTIAGOCOPY.md",
+        "avatar.md",
+        "posicionamento.md",
+        "oferta.md",
+        "provas.md",
+        "glossario-2.md",
+    ),
 }
 
 Brand = Literal["metta", "tiago"]
@@ -102,7 +114,14 @@ def _rag_enabled() -> bool:
 
 # Voz e regras de escrita nunca são fatiadas: o modelo escreve A PARTIR
 # delas, não as consulta. A seleção vale só pros documentos de referência.
-_RAG_KEEP_FULL = frozenset({"tom-de-voz-metta.md", "SKILLMETTACOPY.md"})
+_RAG_KEEP_FULL = frozenset(
+    {
+        "tom-de-voz-metta.md",
+        "SKILLMETTACOPY.md",
+        "tom-de-voz-tiago.md",
+        "SKILLTIAGOCOPY.md",
+    }
+)
 
 
 def _brief_query(brief: Brief) -> list[str]:
@@ -149,12 +168,13 @@ class KnowledgeBase:
 
     def __init__(self, brand: Brand, root: Path = _REPO_ROOT) -> None:
         if brand not in _BRAND_FILES:
-            # Tiago's tom-de-voz file doesn't exist in the repo yet, so the
-            # "tiago" brand can't be embedded. Fail loudly rather than mixing
-            # voices — Metta and Tiago must never blend.
+            # Fail loudly rather than mixing voices -- Metta and Tiago must
+            # never blend. Both brands are supported (each has its own
+            # tom-de-voz + skill em _BRAND_FILES); any other brand has no
+            # knowledge base yet.
             raise NotImplementedError(
-                f"Brand {brand!r} has no knowledge base yet. Only 'metta' is "
-                "supported until tom-de-voz-tiago.md exists."
+                f"Brand {brand!r} has no knowledge base yet. Supported brands: "
+                f"{', '.join(sorted(_BRAND_FILES))}."
             )
         self.brand = brand
         self.root = root
@@ -231,12 +251,6 @@ class CopyGenerator:
         adapt_linkedin() (a adaptação só depende do rascunho aprovado, não
         das validações -- em série ela empurrava o total da função na Vercel
         pra cima do maxDuration de 300s, reproduzido ao vivo)."""
-        if brief.brand != "metta":
-            raise NotImplementedError(
-                f"Brand {brief.brand!r} is not supported yet. Full support "
-                "requires tom-de-voz-tiago.md, which is not in the repo."
-            )
-
         knowledge = self._knowledge_base(brief.brand)
         draft = self._draft_structural(brief, knowledge, winners_benchmark)
 
@@ -345,11 +359,6 @@ class CopyGenerator:
         escrever qualquer peça (v5.1 seção 7 / critério de aceitação 5:
         "sugere ângulos A/B/C antes de escrever"). O usuário escolhe um -- só
         então a geração de fato roda, evitando retrabalho."""
-        if brand != "metta":
-            raise NotImplementedError(
-                f"Brand {brand!r} is not supported yet. Full support "
-                "requires tom-de-voz-tiago.md, which is not in the repo."
-            )
         knowledge = self._knowledge_base(brand)
         response = self.client.messages.create(
             model=SONNET_MODEL,
@@ -376,8 +385,13 @@ class CopyGenerator:
     def adapt_linkedin(self, brief: Brief, draft: dict[str, Any]) -> str:
         """Versão pública de _adapt_linkedin pra rodar FORA do generate()
         (em paralelo com as validações): recebe o dict da peça pronta
-        (hook/corpo/cta/...) e devolve o texto adaptado."""
-        return self._adapt_linkedin(brief, self._knowledge_base(brief.brand), draft)
+        (hook/corpo/cta/...) e devolve o texto adaptado.
+
+        Passa por _remove_travessao igual ao caminho de dentro do generate()
+        (linkedin_adaptation lá): esta é uma saída publicável, então a
+        garantia determinística contra travessão vale aqui também."""
+        adapted = self._adapt_linkedin(brief, self._knowledge_base(brief.brand), draft)
+        return _remove_travessao(adapted)
 
     def derive_winner_variations(
         self, brand: Brand, winner_text: str, performance_notes: str = ""
@@ -389,11 +403,6 @@ class CopyGenerator:
         o resto. Sonnet, seguindo a decisão de custo de jul/2026 que migrou
         todos os usos de Opus deste agente pra Sonnet 5 (ver docstring do
         módulo); reverter é trocar só o model abaixo."""
-        if brand != "metta":
-            raise NotImplementedError(
-                f"Brand {brand!r} is not supported yet. Full support "
-                "requires tom-de-voz-tiago.md, which is not in the repo."
-            )
         if not winner_text.strip():
             raise ValueError("winner_text vazio: cole a copy do criativo vencedor.")
         knowledge = self._knowledge_base(brand)
@@ -440,11 +449,6 @@ class CopyGenerator:
         material_text é truncado em 40k caracteres -- proteção de custo e de
         janela; um ebook inteiro não cabe nem precisa (o tema central cabe).
         """
-        if brand != "metta":
-            raise NotImplementedError(
-                f"Brand {brand!r} is not supported yet. Full support "
-                "requires tom-de-voz-tiago.md, which is not in the repo."
-            )
         if not material_text.strip():
             raise ValueError("material_text vazio: envie o texto do material rico.")
         valid = {"reels", "stories", "carrossel", "post_unico", "descricao_post", "criativos"}
@@ -572,12 +576,29 @@ def _copy_type_guidance(copy_type: str) -> str:
     )
 
 
+# Regra de escrita "menos IA" comum às duas marcas: sem travessão, sem
+# paralelismo artificial repetido, sem fecho simétrico demais. Isolada aqui
+# porque vale igual pra Metta e pra Tiago -- só o resto do system prompt muda.
+_ANTI_IA_RULE = (
+    "O texto precisa soar escrito por gente, não por IA. Proibido travessão "
+    "(—) como pontuação: use vírgula, dois-pontos ou ponto final. Os documentos "
+    "de referência abaixo usam travessão no texto DELES; não imite isso na "
+    "peça. Evite também paralelismos artificiais em sequência ('não é X, é Y' "
+    "repetido) e fechos de frase simétricos demais."
+)
+
+
 def _build_system_prompt(brand: Brand, copy_type: str) -> str:
-    if brand != "metta":
-        raise NotImplementedError(
-            f"System prompt for brand {brand!r} not implemented — Tiago voice "
-            "file does not exist yet."
-        )
+    if brand == "metta":
+        return _build_metta_system_prompt(copy_type)
+    if brand == "tiago":
+        return _build_tiago_system_prompt(copy_type)
+    raise NotImplementedError(
+        f"System prompt for brand {brand!r} not implemented. Supported: metta, tiago."
+    )
+
+
+def _build_metta_system_prompt(copy_type: str) -> str:
     return (
         "Você é o Agente Copy da Metta Brasil: um copywriter de resposta direta "
         "especializado em mentoria high-ticket para empresários >R$200k/mês.\n\n"
@@ -590,11 +611,50 @@ def _build_system_prompt(brand: Brand, copy_type: str) -> str:
         "Use linguagem de operação (tirador de pedido, apagando incêndio, tô "
         "dependente de mim), prova nominal (cliente + número exato), e nunca urgência "
         "artificial, FOMO, 'mindset', 'próximo nível' ou linguagem de coach.\n\n"
-        "O texto precisa soar escrito por gente, não por IA. Proibido travessão "
-        "(—) como pontuação: use vírgula, dois-pontos ou ponto final. Os documentos "
-        "de referência abaixo usam travessão no texto DELES; não imite isso na "
-        "peça. Evite também paralelismos artificiais em sequência ('não é X, é Y' "
-        "repetido) e fechos de frase simétricos demais.\n\n"
+        f"{_ANTI_IA_RULE}\n\n"
+        f"Formato desta peça: {_copy_type_guidance(copy_type)}"
+    )
+
+
+def _build_tiago_system_prompt(copy_type: str) -> str:
+    # Voz PESSOAL do fundador (Fase 2). Calibrada pela SKILLTIAGOCOPY.md e
+    # pelo tom-de-voz-tiago.md (ambos entram como base abaixo). Regra de
+    # separação inviolável: se o texto pudesse ser assinado por qualquer
+    # profissional da Metta, está na voz errada -- aqui o herói é o LEITOR
+    # (o dono), não o método.
+    return (
+        "Você é o Agente Copy da marca pessoal TIAGO ALVES: escreve como o próprio "
+        "Tiago, empresário que atendeu mais de 1000 operações em 20 anos e fala de "
+        "dono para dono. Resposta direta, opinião assinada, autoridade construída na "
+        "própria história.\n\n"
+        "Você escreve na voz PESSOAL do Tiago — nunca na voz institucional da Metta. "
+        "As duas vozes jamais se misturam. No Tiago o PROTAGONISTA é o leitor (o "
+        "dono): 'você é esse 1%', 'a vitória depende de você'. O método é o caminho "
+        "que liberta o dono, não o herói da frase. A Metta, quando aparece, é 'minha "
+        "empresa', coadjuvante. Ele vende visão de mundo e ruptura com o sistema "
+        "antigo, e joga a pessoa pro direct ou pro diagnóstico.\n\n"
+        "Escreva em primeira pessoa, com história real e vulnerabilidade como prova "
+        "de autoridade (a queda que prova a virada). Abertura curta e provocadora (uma "
+        "frase). Muito respiro entre parágrafos. Use a PONTE característica: uma "
+        "analogia de esporte (Copa, Messi, Ancelotti, Jordan), artes marciais, "
+        "automobilismo ou família, e então vire a chave para a empresa ('e o que isso "
+        "tem a ver com você?', 'na empresa acontece igual'). A analogia nunca é "
+        "gratuita: ancora uma lição de gestão. Depois espelhe a operação do dono com "
+        "precisão desconfortável e feche com reframe que tira a culpa e devolve "
+        "direção ('não é falta de talento que te prende, é falta de método').\n\n"
+        "Bordões proprietários (use 1 ou 2, só onde encaixam): método vence talento, "
+        "estratégia vence esforço, tirador de pedido, apagando incêndio, meta do CNPJ "
+        "x meta do CPF, craque x time, capitão joga/treinador forma/dono pensa o jogo, "
+        "FCA (fato, causa, ação), empresa que tem processo não sente julho, empresário "
+        "para empresário sem pitch. Prova sempre ancorada em número real (8,2 bilhões "
+        "em metas batidas, +1000 operações, 20 anos, garantia de devolver o dinheiro) "
+        "ou case nominal já existente na base — nunca invente número, cliente ou "
+        "citação.\n\n"
+        "LINHA VERMELHA: a ironia mira o sistema, o mercado e o comportamento (o "
+        "'tirador de pedido', o 'vendedor de sonho'), NUNCA o dono que lê. O dono é "
+        "tratado como par que já passou pela mesma dor. Nunca urgência artificial, "
+        "FOMO, 'mindset', 'próximo nível' ou linguagem de coach de palco.\n\n"
+        f"{_ANTI_IA_RULE}\n\n"
         f"Formato desta peça: {_copy_type_guidance(copy_type)}"
     )
 
@@ -738,6 +798,16 @@ def _build_structural_prompt(
     )
 
 
+# (tom-de-voz, skill) por marca -- usado pelo julgamento pra puxar os
+# documentos certos do KnowledgeBase (pra Tiago os arquivos da Metta nem
+# existem no _documents, então um document('...metta.md') fixo lançaria
+# KeyError). Espelha os dois primeiros itens de _BRAND_FILES.
+_BRAND_VOICE_SKILL: dict[str, tuple[str, str]] = {
+    "metta": ("tom-de-voz-metta.md", "SKILLMETTACOPY.md"),
+    "tiago": ("tom-de-voz-tiago.md", "SKILLTIAGOCOPY.md"),
+}
+
+
 def _build_judgment_prompt(
     brief: Brief, knowledge: KnowledgeBase, draft: dict[str, Any]
 ) -> str:
@@ -751,24 +821,53 @@ def _build_judgment_prompt(
         "cliente nominal, isso foi intencional, não uma falha."
         if skip_case else ""
     )
+    brand = _enum_value(brief.brand)
+    voice_file, skill_file = _BRAND_VOICE_SKILL[brand]
+    if brand == "tiago":
+        intro = (
+            "Julgue o rascunho abaixo contra o tom de voz PESSOAL do Tiago "
+            f"({voice_file}) e o QA CHECKLIST da {skill_file}. Você tem "
+            "autoridade para REPROVAR e reescrever — não aprove por inércia."
+        )
+        checklist = (
+            "Rode o checklist item a item: voz do Tiago em primeira pessoa (não "
+            "institucional da Metta); abertura curta e provocadora; a PONTE "
+            "analogia→empresa existe e não é gratuita; o dono se reconhece no "
+            "espelho da operação; reframe que tira a culpa e devolve direção; o "
+            "PROTAGONISTA é o leitor, não o método; a ironia mira o sistema/"
+            "comportamento e NUNCA o dono que lê; "
+            f"{case_item}prova ancorada em número real ou case nominal da base "
+            "(nada inventado); CTA único e coerente com o estágio de funil "
+            "(comentário com palavra-gatilho / pergunta aberta / direct / link na "
+            "bio); nenhuma urgência artificial, FOMO, 'mindset', 'próximo nível' "
+            "ou linguagem de coach de palco."
+        )
+    else:
+        intro = (
+            "Julgue o rascunho abaixo contra o tom de voz institucional da Metta "
+            f"({voice_file}) e o QA CHECKLIST da {skill_file}. Você tem "
+            "autoridade para REPROVAR e reescrever — não aprove por inércia."
+        )
+        checklist = (
+            "Rode o checklist item a item: 2+ dores conectadas do ciclo; "
+            f"linguagem emic; {case_item}garantia contratual quando cabível; tom "
+            "de empresário falando (não coach); nenhuma urgência artificial; "
+            "números específicos; contradição interna nomeada; o empresário se "
+            "reconheceria; nenhuma palavra da lista 'nunca use'. Rode também os 7 "
+            "testes de validação institucional (categoria nova, protagonismo do "
+            "método, prova nominal, vocabulário próprio aplicado, oscilação rigor/"
+            "acessibilidade, combate ao sistema e não à pessoa, coerência tonal do "
+            "CTA)."
+        )
     return (
         "Você é o revisor de rascunho do Agente Copy (julgamento interno de geração --"
         " NÃO é o segundo agente avaliador; esse roda depois, uma vez, sobre a peça já "
-        "pronta). Julgue o rascunho abaixo contra o tom de "
-        "voz institucional da Metta (tom-de-voz-metta.md) e o QA CHECKLIST da "
-        "SKILLMETTACOPY.md. Você tem autoridade para REPROVAR e reescrever — não "
-        "aprove por inércia."
+        "pronta). "
+        + intro
         + case_skip_note + "\n\n"
-        f"Rode o checklist item a item: 2+ dores conectadas do ciclo; linguagem emic; "
-        f"{case_item}garantia contratual quando cabível; tom de empresário "
-        "falando (não coach); nenhuma urgência artificial; números específicos; "
-        "contradição interna nomeada; o empresário se reconheceria; nenhuma palavra "
-        "da lista 'nunca use'. Rode também os 7 testes de validação institucional "
-        "(categoria nova, protagonismo do método, prova nominal, vocabulário próprio "
-        "aplicado, oscilação rigor/acessibilidade, combate ao sistema e não à pessoa, "
-        "coerência tonal do CTA).\n\n"
-        f"{knowledge.document('tom-de-voz-metta.md')}\n\n"
-        f"{knowledge.document('SKILLMETTACOPY.md')}\n\n"
+        + checklist + "\n\n"
+        f"{knowledge.document(voice_file)}\n\n"
+        f"{knowledge.document(skill_file)}\n\n"
         f"{_icp_context(brief.icp, query_terms=_brief_query(brief) if _rag_enabled() else None)}\n\n"
         "=== BRIEFING ===\n"
         f"{_render_brief(brief)}\n\n"
