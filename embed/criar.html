@@ -1191,7 +1191,7 @@ const ENGINE_TIMEOUT_MS = IS_LOCAL_DEV ? 300_000 : 60_000;  // local 5min, Verce
 
 // CONCEPT-FIRST (Fase 2): copy vem ANTES do estilo — o picker mostra a copy
 // REAL do usuário renderizada em cada estilo (preview vivo), não thumbnail cego.
-const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-copy', 'wiz-cta', 'wiz-style', 'wiz-imagem', 'wiz-avatar', 'wiz-imagem-briefing', 'wiz-upload', 'wiz-search', 'wiz-confirm', 'loading', 'result'];
+const STEPS_WIZARD = ['brand', 'mode', 'wiz-format', 'wiz-style', 'wiz-copy', 'wiz-cta', 'wiz-imagem', 'wiz-avatar', 'wiz-imagem-briefing', 'wiz-upload', 'wiz-search', 'wiz-confirm', 'loading', 'result'];
 const STEPS_AUDIO  = ['brand', 'mode', 'audio-record', 'audio-confirm', 'loading', 'result'];
 const STEPS_CAROUSEL = ['brand', 'mode', 'carousel-build', 'carousel-loading', 'carousel-result'];
 // wiz-imagem só aparece se o estilo selecionado usa imagem.
@@ -1723,10 +1723,10 @@ function tplWizStyle() {
   return renderStepper() + `
     <header class="step-head">
       <p class="step-eyebrow">Wizard · Composição</p>
-      <h1 class="step-title">${hasCopy ? 'Sua copy, renderizada. Escolha a composição.' : 'Que tipo de peça você quer criar?'}</h1>
+      <h1 class="step-title">${hasCopy ? 'Sua copy, renderizada. Escolha a composição.' : 'Escolha o estilo da peça.'}</h1>
       <p class="step-sub">${hasCopy
-        ? 'Cada card mostra a <strong>sua copy de verdade</strong> no estilo. Nos estilos <strong>só-texto</strong>, é exatamente o que sai. Nos estilos <strong>com imagem</strong>, isto é uma prévia do layout — a <strong>foto e o enquadramento final</strong> são criados quando você escolher (o texto se ajusta à foto), então pode sair diferente daqui.'
-        : 'Clique no preview que mais se parece com o resultado desejado. A engine cria do zero adaptando à copy — não clona o template.'}</p>
+        ? 'Cada card mostra a <strong>sua copy de verdade</strong> no estilo. Nos estilos <strong>só-texto</strong>, é exatamente o que sai. Nos estilos <strong>com imagem</strong>, isto é uma prévia do layout: a <strong>foto e o enquadramento final</strong> são criados quando você escolher (o texto se ajusta à foto), então pode sair diferente daqui.'
+        : 'Cada prévia mostra um exemplo real do estilo. Clique no que mais combina com o que você quer, e no próximo passo você escreve a copy (que se ajusta ao modelo). A engine cria do zero, não clona o template.'}</p>
     </header>
     <div class="step-body">
       ${recs.length ? `
@@ -2974,16 +2974,20 @@ function autoAdvance(el) {
   }, 140);
 }
 
+// STYLE-FIRST: depois que copy (+CTA) fecham, vai pra imagem (se o estilo usa foto)
+// ou direto pra confirmação. É a decisão que ANTES ficava no fim do wiz-style.
+function afterCopyCta() {
+  const styles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
+  const styleObj = styles.find(s => s.id === STATE.style);
+  if (styleObj && styleObj.usaImagem) return goto('wiz-imagem');
+  STATE.imageSource = 'none';
+  return goto('wiz-confirm');
+}
+
 function nextFromCurrent() {
-  // CONCEPT-FIRST: copy já existe quando o estilo é escolhido.
-  // wiz-style → wiz-imagem (se usa imagem) ou wiz-confirm direto
-  if (currentStep === 'wiz-style') {
-    const styles = STATE.brand === 'metta' ? STYLES_METTA : STYLES_TIAGO;
-    const styleObj = styles.find(s => s.id === STATE.style);
-    if (styleObj && styleObj.usaImagem) return goto('wiz-imagem');
-    STATE.imageSource = 'none';
-    return goto('wiz-confirm');
-  }
+  // STYLE-FIRST: escolhe o estilo PRIMEIRO; a copy vem depois e se adapta ao modelo
+  // (tweet = 1 mensagem, sem CTA; estruturados = headline+apoio+CTA). wiz-style → wiz-copy.
+  if (currentStep === 'wiz-style') return goto('wiz-copy');
   // wiz-imagem → wiz-search (busca) | wiz-avatar (gerar) | wiz-confirm (none)
   if (currentStep === 'wiz-imagem') {
     if (STATE.imageSource === 'search') return goto('wiz-search');
@@ -2994,8 +2998,7 @@ function nextFromCurrent() {
   const map = {
     'brand':         'mode',
     'mode':          STATE.mode === 'audio' ? 'audio-record' : (STATE.mode === 'carousel' ? 'carousel-build' : 'wiz-format'),
-    'wiz-format':    'wiz-copy',
-    'wiz-cta':       'wiz-style',
+    'wiz-format':    'wiz-style',
     'audio-record':  'audio-confirm'
   };
   const next = map[currentStep];
@@ -3248,11 +3251,12 @@ function onAction(e) {
       STATE.copy = [STATE.copyHeadline, STATE.copySubhead, STATE.copyBody].filter(Boolean).join('\n');
       // Copy mudou → invalida cache de previews (o preview é DA copy)
       PREVIEW_CACHE.clear();
-      // CONCEPT-FIRST: o estilo vem DEPOIS da copy. Na primeira passada não há
-      // estilo → sempre CTA. Revisita com estilo de tweet → pula CTA (tweet não tem).
-      if (STATE.style === 'METTA-TWEET-CARD' || STATE.style === 'TIAGO-TWITTER-CARD') {
+      // STYLE-FIRST: o estilo já foi escolhido. Tweet não tem CTA → pula direto pra
+      // imagem/confirmação. Os demais vão pro passo de CTA.
+      const isTweetStyle = ['METTA-TWEET-CARD', 'TIAGO-TWITTER-CARD', 'TIAGO-TWITTER-CARD-IMAGE'].includes(STATE.style);
+      if (isTweetStyle) {
         STATE.cta = '';
-        goto('wiz-style');
+        afterCopyCta();
       } else {
         goto('wiz-cta');
       }
@@ -3265,9 +3269,8 @@ function onAction(e) {
     case 'next-from-cta': {
       const inp = document.getElementById('cta-input');
       STATE.cta = inp ? inp.value : '';
-      // CONCEPT-FIRST: CTA fecha a copy → agora escolhe a composição com preview vivo
-      PREVIEW_CACHE.clear();   // CTA entra no preview — invalida cache
-      goto('wiz-style');
+      // STYLE-FIRST: CTA fecha a copy → vai pra imagem (se o estilo usa) ou confirmação.
+      afterCopyCta();
       break;
     }
     case 'next-from-audio': {
