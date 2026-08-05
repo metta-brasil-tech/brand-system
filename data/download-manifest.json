@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-03T21:25:26.994Z",
-  "grandTotalBytes": 247613762,
-  "grandTotalFiles": 1181,
-  "grandTotalTabs": 19,
+  "generatedAt": "2026-08-05T14:48:46.160Z",
+  "grandTotalBytes": 264039100,
+  "grandTotalFiles": 1184,
+  "grandTotalTabs": 20,
   "groups": [
     {
       "id": "docs",
@@ -2068,6 +2068,87 @@
           ],
           "totalBytes": 553492,
           "fileCount": 13
+        },
+        {
+          "id": "ebooks",
+          "label": "Modelos de Ebook (kit editável)",
+          "kind": "assets",
+          "sections": [
+            {
+              "id": "Metta-Ebook-V1-Editorial-Noite",
+              "label": "Ebook V1 · Editorial Noite",
+              "category": "Ebooks",
+              "description": "Capa escura tipográfica, miolo claro com cabeçalho e rodapé institucionais. A versão mais formal. Kit editável + guia do modelo.",
+              "files": [
+                {
+                  "name": "Metta-Ebook-V1-Editorial-Noite.zip",
+                  "path": "assets/modelos-ebook/Metta-Ebook-V1-Editorial-Noite.zip",
+                  "sizeBytes": 6489081
+                }
+              ],
+              "previewPages": [
+                "assets/modelos-ebook/previews/Metta-Ebook-V1-Editorial-Noite/p1.webp",
+                "assets/modelos-ebook/previews/Metta-Ebook-V1-Editorial-Noite/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Ebook-V1-Editorial-Noite-exemplo.pdf",
+                "path": "assets/modelos-ebook/examples/Metta-Ebook-V1-Editorial-Noite-exemplo.pdf",
+                "sizeBytes": 6295929
+              },
+              "totalBytes": 6489081,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Ebook-V2-Gelo-Minimal",
+              "label": "Ebook V2 · Gelo Minimal",
+              "category": "Ebooks",
+              "description": "Capa branca, coluna de leitura estreita e máximo respiro. A versão mais limpa. Kit editável + guia do modelo.",
+              "files": [
+                {
+                  "name": "Metta-Ebook-V2-Gelo-Minimal.zip",
+                  "path": "assets/modelos-ebook/Metta-Ebook-V2-Gelo-Minimal.zip",
+                  "sizeBytes": 3550804
+                }
+              ],
+              "previewPages": [
+                "assets/modelos-ebook/previews/Metta-Ebook-V2-Gelo-Minimal/p1.webp",
+                "assets/modelos-ebook/previews/Metta-Ebook-V2-Gelo-Minimal/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Ebook-V2-Gelo-Minimal-exemplo.pdf",
+                "path": "assets/modelos-ebook/examples/Metta-Ebook-V2-Gelo-Minimal-exemplo.pdf",
+                "sizeBytes": 3186212
+              },
+              "totalBytes": 3550804,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Ebook-V3-Revista-Bold",
+              "label": "Ebook V3 · Revista Bold",
+              "category": "Ebooks",
+              "description": "Capa com foto sangrada, sumário escuro e miolo em duas colunas. A versão mais visual. Kit editável + guia do modelo.",
+              "files": [
+                {
+                  "name": "Metta-Ebook-V3-Revista-Bold.zip",
+                  "path": "assets/modelos-ebook/Metta-Ebook-V3-Revista-Bold.zip",
+                  "sizeBytes": 6385453
+                }
+              ],
+              "previewPages": [
+                "assets/modelos-ebook/previews/Metta-Ebook-V3-Revista-Bold/p1.webp",
+                "assets/modelos-ebook/previews/Metta-Ebook-V3-Revista-Bold/p2.webp"
+              ],
+              "exampleFile": {
+                "name": "Metta-Ebook-V3-Revista-Bold-exemplo.pdf",
+                "path": "assets/modelos-ebook/examples/Metta-Ebook-V3-Revista-Bold-exemplo.pdf",
+                "sizeBytes": 6155745
+              },
+              "totalBytes": 6385453,
+              "fileCount": 1
+            }
+          ],
+          "totalBytes": 16425338,
+          "fileCount": 3
         }
       ]
     },

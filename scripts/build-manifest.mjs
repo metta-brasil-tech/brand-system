@@ -341,6 +341,60 @@ async function buildModelosTab() {
   };
 }
 
+// ----------- MODELOS DE EBOOK (kits HTML+CSS zipados) -----------
+// Cada kit: HTML do modelo + ebook-base.css + fontes + imagens de exemplo + guia PDF
+// próprio (documentação autossuficiente por modelo). Exemplo = PDF renderizado.
+const EBOOK_META = {
+  'Metta-Ebook-V1-Editorial-Noite.zip': { label: 'Ebook V1 · Editorial Noite', category: 'Ebooks', description: 'Capa escura tipográfica, miolo claro com cabeçalho e rodapé institucionais. A versão mais formal. Kit editável + guia do modelo.' },
+  'Metta-Ebook-V2-Gelo-Minimal.zip':    { label: 'Ebook V2 · Gelo Minimal',    category: 'Ebooks', description: 'Capa branca, coluna de leitura estreita e máximo respiro. A versão mais limpa. Kit editável + guia do modelo.' },
+  'Metta-Ebook-V3-Revista-Bold.zip':    { label: 'Ebook V3 · Revista Bold',    category: 'Ebooks', description: 'Capa com foto sangrada, sumário escuro e miolo em duas colunas. A versão mais visual. Kit editável + guia do modelo.' }
+};
+
+async function buildEbooksTab() {
+  const dir = join(ASSETS_DIR, 'modelos-ebook');
+  let entries;
+  try { entries = await readdir(dir, { withFileTypes: true }); }
+  catch { return null; }
+  const kits = entries.filter(e => e.isFile() && e.name.toLowerCase().endsWith('.zip'));
+  if (kits.length === 0) return null;
+
+  const sections = [];
+  for (const e of kits) {
+    const f = await fileObj(join(dir, e.name));
+    const meta = EBOOK_META[f.name] || {};
+    const id = f.name.replace(/\.[^.]+$/, '');
+
+    let previewPages = [];
+    const prevDir = join(dir, 'previews', id);
+    if (existsSync(prevDir)) {
+      const imgs = (await readdir(prevDir)).filter(n => /\.(webp|png)$/i.test(n))
+        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+      previewPages = imgs.map(n => relative(ROOT, join(prevDir, n)).split(sep).join('/'));
+    }
+
+    let exampleFile = null;
+    const exAbs = join(dir, 'examples', `${id}-exemplo.pdf`);
+    if (existsSync(exAbs)) exampleFile = await fileObj(exAbs);
+
+    sections.push({
+      id,
+      label: meta.label || id.replace(/^Metta-/, '').replace(/-/g, ' '),
+      category: meta.category || 'Ebooks',
+      description: meta.description || '',
+      files: [f],
+      previewPages,
+      exampleFile,
+      totalBytes: f.sizeBytes,
+      fileCount: 1
+    });
+  }
+  sections.sort((a, b) => a.label.localeCompare(b.label, 'pt-BR', { sensitivity: 'base' }));
+  return {
+    id: 'ebooks', label: 'Modelos de Ebook (kit editável)', kind: 'assets',
+    sections, totalBytes: sumSize(sections.map(s => s.files[0])), fileCount: sections.length
+  };
+}
+
 async function buildGroup(id, label, tabSpecs) {
   const tabs = [];
   for (const t of tabSpecs) {
@@ -423,7 +477,8 @@ async function main() {
 
   log.group('Grupo: Modelos de Documentos');
   const modelosGroup = await buildGroup('modelos', 'Modelos de Documentos', [
-    { id: 'documentos', builder: () => buildModelosTab() }
+    { id: 'documentos', builder: () => buildModelosTab() },
+    { id: 'ebooks', builder: () => buildEbooksTab() }
   ]);
 
   const groups = [docsGroup, modelosGroup, galeriaGroup, appsGroup, dsGroup].filter(g => g.tabs.length > 0);

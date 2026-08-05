@@ -862,11 +862,11 @@ const BrandSystem = (() => {
   // ----------- DOWNLOADS GALLERY (modelos de documentos .docx) -----------
   // Renderiza um grupo do download-manifest como seção navegável, com cards de
   // download individual agrupados por categoria. Fonte: data/download-manifest.json.
-  const DOWNLOADS_CATEGORY_ORDER = ['Comercial', 'Projetos', 'Pessoas', 'Operação', 'Outros'];
+  const DOWNLOADS_CATEGORY_ORDER = ['Comercial', 'Projetos', 'Pessoas', 'Operação', 'Ebooks', 'Outros'];
 
   function renderDownloadsGallery(tab, group) {
-    const docTab = (group.tabs || [])[0];
-    const sections = (docTab && docTab.sections) || [];
+    // todas as abas do grupo (documentos .docx + kits de ebook)
+    const sections = (group.tabs || []).flatMap(t => t.sections || []);
     const total = sections.length;
 
     // agrupa por categoria preservando a ordem editorial
@@ -887,7 +887,8 @@ const BrandSystem = (() => {
         const file = (s.files || [])[0] || {};
         const pages = (s.previewPages || []).length;
         const cover = pages ? s.previewPages[0] : null;
-        const metaBits = [`DOCX · ${formatBytes(s.totalBytes)}`];
+        const ext = ((file.name || '').split('.').pop() || 'arquivo').toUpperCase();
+        const metaBits = [`${ext} · ${formatBytes(s.totalBytes)}`];
         if (pages) metaBits.push(`${pages} ${pages === 1 ? 'página' : 'páginas'}`);
 
         const thumb = cover
@@ -932,15 +933,14 @@ const BrandSystem = (() => {
         <header class="docs-hero">
           <span class="docs-hero-eyebrow">${svgIcon('fileText', 13)}<span>Recursos</span></span>
           <h1 class="docs-hero-title">${escapeHtml(tab.label || 'Modelos de Documentos')}</h1>
-          <p class="docs-hero-sub">${total} documentos <strong>.docx editáveis</strong> com a identidade Metta. Clique pra ver um exemplo preenchido, baixe o template em branco e personalize.</p>
+          <p class="docs-hero-sub">${total} modelos editáveis com a identidade Metta: documentos <strong>.docx</strong> e <strong>kits de ebook</strong>. Clique pra ver um exemplo, baixe o template e personalize.</p>
         </header>
         ${blocks || '<div class="placeholder"><p>Nenhum modelo encontrado. Rode <code>npm run build:manifest</code>.</p></div>'}
       </div>`;
   }
 
   function attachDownloadsGalleryHandlers(group) {
-    const docTab = (group.tabs || [])[0];
-    const sections = (docTab && docTab.sections) || [];
+    const sections = (group.tabs || []).flatMap(t => t.sections || []);
     const byId = new Map(sections.map(s => [s.id, s]));
     document.querySelectorAll('[data-preview]').forEach(btn => {
       btn.addEventListener('click', () => {
