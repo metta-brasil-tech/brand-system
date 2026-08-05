@@ -1069,6 +1069,10 @@ button {
       const payload = file ? await readMaterialFile(file) : { material_text: pasted };
       payload.copy_types = types;
       payload.theme_hint = document.getElementById('material-theme').value.trim();
+      // Bug corrigido 2026-08-04: o payload nunca mandava a marca, então o
+      // backend caía silenciosamente pra "metta" (default de
+      // _run_derive_from_material) mesmo com Tiago selecionado no topo.
+      payload.brand = document.getElementById('brand').value;
       const data = await api('derive_from_material', payload);
 
       const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
