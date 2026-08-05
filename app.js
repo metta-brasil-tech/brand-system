@@ -370,7 +370,7 @@ const BrandSystem = (() => {
         const group = manifest.groups.find(g => g.id === groupId);
         if (!group) throw new Error(`Grupo "${groupId}" não encontrado no manifest.`);
         main.innerHTML = renderDownloadsGallery(tab, group);
-        attachDownloadsGalleryHandlers(group);
+        attachDownloadsGalleryHandlers(group, tab);
       } catch (e) {
         main.innerHTML = `<div class="placeholder"><h2>Modelos indisponíveis</h2><p>${e.message}</p><p>Rode <code>npm run build:manifest</code>.</p></div>`;
       }
@@ -863,11 +863,22 @@ const BrandSystem = (() => {
   // Renderiza um grupo do download-manifest como seção navegável, com cards de
   // download individual agrupados por categoria. Fonte: data/download-manifest.json.
   const DOWNLOADS_CATEGORY_ORDER = ['Comercial', 'Projetos', 'Pessoas', 'Operação', 'Ebooks', 'Outros'];
+  // rótulos curtos das abas pro filtro por tipo; fallback = label da aba no manifest
+  const DOWNLOADS_TYPE_LABELS = { documentos: 'Documentos .docx', ebooks: 'Ebooks' };
+  let downloadsTypeFilter = 'all';
 
   function renderDownloadsGallery(tab, group) {
-    // todas as abas do grupo (documentos .docx + kits de ebook)
-    const sections = (group.tabs || []).flatMap(t => t.sections || []);
+    // todas as abas do grupo (documentos .docx + kits de ebook), tipadas pela aba de origem
+    const tabs = group.tabs || [];
+    const all = tabs.flatMap(t => (t.sections || []).map(s => ({ ...s, _type: t.id })));
+    if (downloadsTypeFilter !== 'all' && !tabs.some(t => t.id === downloadsTypeFilter)) downloadsTypeFilter = 'all';
+    const sections = downloadsTypeFilter === 'all' ? all : all.filter(s => s._type === downloadsTypeFilter);
     const total = sections.length;
+
+    const filterBtns = [{ id: 'all', label: 'Todos', count: all.length }]
+      .concat(tabs.map(t => ({ id: t.id, label: DOWNLOADS_TYPE_LABELS[t.id] || t.label, count: (t.sections || []).length })))
+      .map(f => `<button type="button" class="docs-filter-btn${f.id === downloadsTypeFilter ? ' is-active' : ''}" data-dl-filter="${escapeAttr(f.id)}">${escapeHtml(f.label)}<span class="docs-filter-count">${f.count}</span></button>`)
+      .join('');
 
     // agrupa por categoria preservando a ordem editorial
     const byCat = new Map();
@@ -934,18 +945,27 @@ const BrandSystem = (() => {
           <span class="docs-hero-eyebrow">${svgIcon('fileText', 13)}<span>Recursos</span></span>
           <h1 class="docs-hero-title">${escapeHtml(tab.label || 'Modelos de Documentos')}</h1>
           <p class="docs-hero-sub">${total} modelos editáveis com a identidade Metta: documentos <strong>.docx</strong> e <strong>kits de ebook</strong>. Clique pra ver um exemplo, baixe o template e personalize.</p>
+          <div class="docs-filter" role="group" aria-label="Filtrar por tipo de modelo">${filterBtns}</div>
         </header>
         ${blocks || '<div class="placeholder"><p>Nenhum modelo encontrado. Rode <code>npm run build:manifest</code>.</p></div>'}
       </div>`;
   }
 
-  function attachDownloadsGalleryHandlers(group) {
+  function attachDownloadsGalleryHandlers(group, tab) {
     const sections = (group.tabs || []).flatMap(t => t.sections || []);
     const byId = new Map(sections.map(s => [s.id, s]));
     document.querySelectorAll('[data-preview]').forEach(btn => {
       btn.addEventListener('click', () => {
         const sec = byId.get(btn.dataset.preview);
         if (sec) openDocPreview(sec);
+      });
+    });
+    document.querySelectorAll('[data-dl-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        downloadsTypeFilter = btn.dataset.dlFilter;
+        const main = document.getElementById('content');
+        main.innerHTML = renderDownloadsGallery(tab, group);
+        attachDownloadsGalleryHandlers(group, tab);
       });
     });
   }

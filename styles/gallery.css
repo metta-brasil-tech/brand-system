@@ -469,6 +469,43 @@
 }
 .docs-hero-sub strong { color: var(--metta-sys-color-on-surface, #111); font-weight: 600; }
 
+/* filtro por tipo de modelo (header da galeria de downloads) */
+.docs-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.docs-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--metta-ref-typeface-display, 'Zalando Sans Expanded'), system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface, #111);
+  background: transparent;
+  border: 1px solid var(--metta-sys-color-outline-variant, rgba(0,0,0,.14));
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, opacity 140ms ease;
+}
+.docs-filter-btn:hover { border-color: var(--metta-sys-color-on-surface, #111); }
+.docs-filter-btn:focus-visible { outline: 2px solid var(--metta-sys-color-primary, #FFBE18); outline-offset: 2px; }
+.docs-filter-btn.is-active {
+  background: var(--metta-sys-color-on-surface, #111);
+  border-color: var(--metta-sys-color-on-surface, #111);
+  color: var(--metta-sys-color-surface, #fff);
+}
+.docs-filter-count {
+  font-size: 11px;
+  font-weight: 700;
+  opacity: .55;
+}
+
 .doc-cat { margin-top: 32px; }
 .doc-cat-head {
   display: flex;
