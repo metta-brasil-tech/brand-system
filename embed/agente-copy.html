@@ -84,6 +84,13 @@ h1 {
   margin: 0 0 var(--metta-sys-spacing-4);
 }
 
+.section-divider {
+  margin: var(--metta-sys-spacing-6) 0 var(--metta-sys-spacing-4);
+  padding-top: var(--metta-sys-spacing-6);
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+}
+.section-divider .subtitle { margin-bottom: 0; }
+
 label {
   display: block;
   font-size: 13px;
@@ -548,6 +555,15 @@ button {
     </div>
   </div>
 
+  <div class="section-divider">
+    <p class="eyebrow">Ferramentas independentes</p>
+    <p class="subtitle">
+      As duas seções abaixo não usam o briefing preenchido acima — cada uma só
+      depende da Marca selecionada no topo da página. Não é preciso gerar uma
+      peça primeiro nem preencher objetivo/ICP/ângulo pra usá-las.
+    </p>
+  </div>
+
   <div class="card" id="winner-card">
     <p class="card-label">Banco de vencedores</p>
     <p class="hint">Um criativo performou (mais leads qualificados, melhor CTR)? Cole a copy dele aqui. A IA identifica os elementos responsáveis pela performance, gera 3 variações que os preservam e guarda o vencedor no banco como benchmark.</p>
@@ -777,10 +793,14 @@ button {
     cardsEl.innerHTML = '';
     try {
       const data = await api('propose_angles', { brand, copy_type, icp, objective });
+      // esc() igual ao resto do arquivo (handleDeriveMaterial/handleWinnerVariations):
+      // texto vindo da API entrava cru no innerHTML aqui, sem escapar -- se algum dia
+      // trouxer '<'/'>'/'&' quebra o render ou injeta HTML.
+      const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
       cardsEl.innerHTML = data.angles.map(a => `
-        <button type="button" class="angle-card" data-label="${a.label}" data-abordagem="${a.abordagem.replace(/"/g, '&quot;')}">
-          <b>Ângulo ${a.label}</b> — ${a.abordagem}
-          <p>${a.justificativa}</p>
+        <button type="button" class="angle-card" data-label="${esc(a.label)}" data-abordagem="${esc(a.abordagem).replace(/"/g, '&quot;')}">
+          <b>Ângulo ${esc(a.label)}</b> — ${esc(a.abordagem)}
+          <p>${esc(a.justificativa)}</p>
         </button>
       `).join('');
       cardsEl.querySelectorAll('.angle-card').forEach(card => {
@@ -992,6 +1012,11 @@ button {
       const data = await api('winner_variations', {
         winner_text: winnerText,
         performance_notes: document.getElementById('winner-notes').value.trim(),
+        // Bug corrigido 2026-08-05: mesmo bug do Material Rico (não mandava
+        // a marca). O backend tinha um setdefault('brand','metta') que
+        // evitava o crash mas gerava sempre em Metta, ignorando o Tiago
+        // selecionado no topo.
+        brand: document.getElementById('brand').value,
       });
       const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
       let html = `
@@ -1103,6 +1128,18 @@ button {
     }
   }
   document.getElementById('material-btn').addEventListener('click', handleDeriveMaterial);
+
+  // Título da página era fixo em "Metta Brasil" mesmo com Tiago Alves
+  // selecionado -- toda a página (Banco de vencedores e Material Rico
+  // inclusive) usa a marca do <select id="brand">, então o título precisa
+  // acompanhar em vez de dar a impressão de que a ferramenta é só da Metta.
+  const BRAND_HEADINGS = { metta: 'Metta Brasil', tiago: 'Tiago Alves' };
+  function updateBrandHeading() {
+    const brand = document.getElementById('brand').value;
+    document.querySelector('h1').textContent = BRAND_HEADINGS[brand] || BRAND_HEADINGS.metta;
+  }
+  document.getElementById('brand').addEventListener('change', updateBrandHeading);
+  updateBrandHeading();
 
   ['brand', 'emotional_axis', 'platform'].forEach(id => enhanceSelect(document.getElementById(id)));
   document.querySelectorAll('.chip-row[data-for="length"]').forEach(wireChipRow);
