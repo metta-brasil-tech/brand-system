@@ -32,6 +32,9 @@ __pycache__/
 *.pyo
 
 # Ad generator CLI — saídas locais (consolidadas sob render_out/)
+# render_out/ inteiro é artefato REGENERÁVEL — nunca versionar (bloat/Vercel).
+# (Untrackeado em massa: 195 arquivos / 173MB que estavam no repo à toa.)
+render_out/
 /out/
 /artifacts/
 render_out/out/
