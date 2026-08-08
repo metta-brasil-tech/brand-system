@@ -4575,8 +4575,7 @@
       "formato_canonico": "poster-manifesto",
       "serie_id": "posters-manifesto-fundador",
       "densidade_texto": "alta"
-    }
-    ,
+    },
     {
       "id": "tiago-ad-twitter-card",
       "type": "ad",
@@ -4584,7 +4583,10 @@
       "format": "feed-1080x1350",
       "brand": "tiago",
       "intent": "autoridade",
-      "icp_target": ["acelera", "premium"],
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
       "title": "Tweet card — frase de impacto Tiago",
       "tese": "Tiago usa a linguagem do X/Twitter pra entregar uma tese de gestão como se fosse um tweet viral — credibilidade via familiaridade do formato.",
       "mood": "provocacao",
@@ -4592,14 +4594,26 @@
         "thumb": "assets/style-previews/tiago/twitter-card.webp",
         "mid": "assets/style-previews/tiago/twitter-card.webp"
       },
-      "dimensions": {"w": 1080, "h": 1350},
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
       "sourcePath": "",
       "date": "2026-05-22",
       "status": "canonical",
-      "tokens_used": ["tiago-white", "tiago-black", "tiago-blue-verified", "tiago-yellow"],
+      "tokens_used": [
+        "tiago-white",
+        "tiago-black",
+        "tiago-blue-verified",
+        "tiago-yellow"
+      ],
       "archetype_foto": null,
       "notes": "Mock do feed X/Twitter com avatar Tiago Alves, verificado, handle @tiago.alves.oliveira. Headline é o 'tweet' — frase curta, direta, tese de gestão ou reframe comportamental. Sem imagem, sem subheadline. Quando brilha: provocações de 1 linha que sozinhas geram reflexão ('Você não tem problema de vendas, tem problema de posicionamento'). Tom: conselheiro direto, sem rodeio. CTA fica no rodapé como 'Leia a legenda'. ICP: empresário 1M-10M que consome conteúdo de gestão no X.",
-      "copy": {"headline": "", "subheadline": "", "cta": "Leia a legenda"},
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": "Leia a legenda"
+      },
       "formato_canonico": "provocacao-editorial",
       "serie_id": "tiago-feed-templates",
       "densidade_texto": "baixa"
@@ -4611,7 +4625,10 @@
       "format": "feed-1080x1350",
       "brand": "tiago",
       "intent": "autoridade",
-      "icp_target": ["acelera", "premium"],
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
       "title": "Notas do iPhone — lista numerada Tiago",
       "tese": "Tiago expõe seu raciocínio estruturado no formato de nota de celular — humaniza o processo de tomada de decisão e gera identificação imediata.",
       "mood": "analitico",
@@ -4619,14 +4636,26 @@
         "thumb": "assets/style-previews/tiago/notes-mockup.webp",
         "mid": "assets/style-previews/tiago/notes-mockup.webp"
       },
-      "dimensions": {"w": 1080, "h": 1350},
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
       "sourcePath": "",
       "date": "2026-05-22",
       "status": "canonical",
-      "tokens_used": ["tiago-white", "tiago-black", "tiago-yellow", "tiago-grey"],
+      "tokens_used": [
+        "tiago-white",
+        "tiago-black",
+        "tiago-yellow",
+        "tiago-grey"
+      ],
       "archetype_foto": null,
       "notes": "Mock do app Notas do iPhone: status bar (9:41), navbar com '‹ Notas' e 'OK', headline com marcador amarelo tipo highlighter. Corpo: lista numerada com título em bold + desenvolvimento em regular. Quando brilha: revelações de bastidor ('3 coisas que todo sócio precisa alinhar'), decisões tomadas, protocolos práticos. Headline curto e provocador com highlight. Body em 2-4 itens numerados, cada um com bold + frase de desenvolvimento. Tom: bastidor autêntico, como se você fosse ler a nota real do Tiago. ICP: empresário que quer acesso ao raciocínio prático de quem já resolveu o problema.",
-      "copy": {"headline": "", "subheadline": "", "cta": ""},
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
       "formato_canonico": "provocacao-editorial",
       "serie_id": "tiago-feed-templates",
       "densidade_texto": "alta"
@@ -4638,7 +4667,10 @@
       "format": "feed-1080x1350",
       "brand": "tiago",
       "intent": "autoridade",
-      "icp_target": ["acelera", "premium"],
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
       "title": "Frase grande — tipografia pura Tiago",
       "tese": "Frase de alto impacto em tipografia dominante, com palavra-chave em azul Tiago — simples, direto, sem distração visual.",
       "mood": "confronto",
@@ -4646,14 +4678,25 @@
         "thumb": "assets/style-previews/tiago/typo-pure.webp",
         "mid": "assets/style-previews/tiago/typo-pure.webp"
       },
-      "dimensions": {"w": 1080, "h": 1350},
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
       "sourcePath": "",
       "date": "2026-05-22",
       "status": "canonical",
-      "tokens_used": ["tiago-white", "tiago-black", "tiago-blue"],
+      "tokens_used": [
+        "tiago-white",
+        "tiago-black",
+        "tiago-blue"
+      ],
       "archetype_foto": null,
       "notes": "Fundo branco, tipografia expandida pesada. Headline ocupa a maior parte do canvas — 2 a 3 linhas máximo. Uma palavra ou trecho em azul Tiago como sotaque. Handle @tiago.alves.oliveira no rodapé. Quando brilha: reframes fortes de 1 frase ('A verdadeira meta batida é ter o CNPJ patrocinando o CPF'), manifesto de posicionamento, provocação que para o scroll. Sem imagem, sem corpo — a força é 100% na frase. Tom: direto, sem rodeio, quase agressivo na clareza. ICP: empresário que consome conteúdo denso e valoriza objetividade.",
-      "copy": {"headline": "", "subheadline": "", "cta": ""},
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
       "formato_canonico": "provocacao-editorial",
       "serie_id": "tiago-feed-templates",
       "densidade_texto": "baixa"
@@ -4665,7 +4708,10 @@
       "format": "feed-1080x1350",
       "brand": "tiago",
       "intent": "conversao",
-      "icp_target": ["acelera", "premium"],
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
       "title": "Slide de fechamento de carrossel — CTA Tiago",
       "tese": "Último card do carrossel: fecha o argumento com uma pergunta de qualificação, revela pra quem é o método, ou abre protocolo com CTA direto.",
       "mood": "autoridade",
@@ -4673,17 +4719,422 @@
         "thumb": "assets/style-previews/tiago/editorial-cta.webp",
         "mid": "assets/style-previews/tiago/editorial-cta.webp"
       },
-      "dimensions": {"w": 1080, "h": 1350},
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
       "sourcePath": "",
       "date": "2026-05-22",
       "status": "canonical",
-      "tokens_used": ["tiago-white", "tiago-black", "tiago-yellow", "tiago-blue"],
+      "tokens_used": [
+        "tiago-white",
+        "tiago-black",
+        "tiago-yellow",
+        "tiago-blue"
+      ],
       "archetype_foto": "tiago-conselheiro",
       "notes": "Card de fechamento editorial com foto Tiago (conselheiro, meio corpo, expressão direta) + headline de CTA. 3 variantes de uso: (1) Pergunta de engajamento — 'Isso acontece na sua empresa?' + CTA comentar; (2) Qualificação — 'Isso é pra você se...' + 3 critérios; (3) Reveal de protocolo — 'O método que usei:' + CTA link na bio. Quando brilha: último slide de carrossel que converte reflexão em ação. Foto ancora autoridade pessoal. CTA sempre presente e direto. Tom: conselheiro que oferece o próximo passo. ICP: empresário já convencido pelo carrossel, pronto pra agir.",
-      "copy": {"headline": "", "subheadline": "", "cta": ""},
+      "copy": {
+        "headline": "",
+        "subheadline": "",
+        "cta": ""
+      },
       "formato_canonico": "provocacao-editorial",
       "serie_id": "tiago-feed-templates",
       "densidade_texto": "media"
+    },
+    {
+      "id": "metta-carrossel-tiago-jornada",
+      "type": "carrossel",
+      "style": null,
+      "format": "carrossel-1080x1350",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Tiago: preso no operacional → de volta ao comando",
+      "tese": "Panorama coeso com o Tiago REAL (via referência): 1 cena contínua, ele aparece 3x como a jornada caos→comando.",
+      "mood": "jornada-editorial",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Referência-mestre: rosto real do Tiago via referência Gemini + panorama coeso (narrativa=visual). UMA linguagem do slide 1 ao 3.",
+      "copy": {
+        "headline": "Você de volta ao comando.",
+        "subheadline": "Método tira você do centro da operação.",
+        "cta": "Conheça a Metta"
+      },
+      "formato_canonico": "carrossel",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/carousels/metta-carrossel-tiago-jornada-1.webp",
+        "mid": "assets/generated/ads/carousels/metta-carrossel-tiago-jornada-1.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
+      "slot_count": 3,
+      "slots": [
+        {
+          "n": 1,
+          "function": "capa-hook",
+          "src": "assets/generated/ads/carousels/metta-carrossel-tiago-jornada-1.webp"
+        },
+        {
+          "n": 2,
+          "function": "desenvolvimento",
+          "src": "assets/generated/ads/carousels/metta-carrossel-tiago-jornada-2.webp"
+        },
+        {
+          "n": 3,
+          "function": "cta-final",
+          "src": "assets/generated/ads/carousels/metta-carrossel-tiago-jornada-3.webp"
+        }
+      ]
+    },
+    {
+      "id": "metta-carrossel-caos-ordem-panorama",
+      "type": "carrossel",
+      "style": null,
+      "format": "carrossel-1080x1350",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Do caos à saída da operação (cena contínua)",
+      "tese": "Panorama coeso caos→ordem: UMA mesa única atravessa os 4 slides, do caos à porta iluminada.",
+      "mood": "transformacao",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Referência de carrossel-panorama: uma linguagem só; a transformação visual É a narrativa. Não misturar foto-slide com anel-slide.",
+      "copy": {
+        "headline": "A saída da operação.",
+        "subheadline": "Método põe ordem no processo.",
+        "cta": "Conheça a Metta"
+      },
+      "formato_canonico": "carrossel",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/carousels/metta-carrossel-caos-ordem-panorama-1.webp",
+        "mid": "assets/generated/ads/carousels/metta-carrossel-caos-ordem-panorama-1.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
+      "slot_count": 4,
+      "slots": [
+        {
+          "n": 1,
+          "function": "capa-hook",
+          "src": "assets/generated/ads/carousels/metta-carrossel-caos-ordem-panorama-1.webp"
+        },
+        {
+          "n": 2,
+          "function": "tensao",
+          "src": "assets/generated/ads/carousels/metta-carrossel-caos-ordem-panorama-2.webp"
+        },
+        {
+          "n": 3,
+          "function": "virada",
+          "src": "assets/generated/ads/carousels/metta-carrossel-caos-ordem-panorama-3.webp"
+        },
+        {
+          "n": 4,
+          "function": "cta-final",
+          "src": "assets/generated/ads/carousels/metta-carrossel-caos-ordem-panorama-4.webp"
+        }
+      ]
+    },
+    {
+      "id": "metta-carrossel-orfaos-conceito",
+      "type": "carrossel",
+      "style": null,
+      "format": "carrossel-1080x1350",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Método: definição, conta e prova (série gráfica)",
+      "tese": "Carrossel gráfico coeso (campo de anéis contínuo) revivendo CHAT-DEF, EQUAÇÃO e STAT-STACK.",
+      "mood": "conceitual",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Referência de carrossel gráfico: campo de anéis contínuo (centro anda 100%/slide). Mostra 3 modelos antes órfãos funcionando.",
+      "copy": {
+        "headline": "Saia do centro da operação.",
+        "subheadline": "Falta processo, não esforço.",
+        "cta": "Conheça a Metta"
+      },
+      "formato_canonico": "carrossel",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/carousels/metta-carrossel-orfaos-conceito-1.webp",
+        "mid": "assets/generated/ads/carousels/metta-carrossel-orfaos-conceito-1.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      },
+      "slot_count": 5,
+      "slots": [
+        {
+          "n": 1,
+          "function": "capa-definicao",
+          "src": "assets/generated/ads/carousels/metta-carrossel-orfaos-conceito-1.webp"
+        },
+        {
+          "n": 2,
+          "function": "equacao",
+          "src": "assets/generated/ads/carousels/metta-carrossel-orfaos-conceito-2.webp"
+        },
+        {
+          "n": 3,
+          "function": "dado",
+          "src": "assets/generated/ads/carousels/metta-carrossel-orfaos-conceito-3.webp"
+        },
+        {
+          "n": 4,
+          "function": "verdade",
+          "src": "assets/generated/ads/carousels/metta-carrossel-orfaos-conceito-4.webp"
+        },
+        {
+          "n": 5,
+          "function": "cta-final",
+          "src": "assets/generated/ads/carousels/metta-carrossel-orfaos-conceito-5.webp"
+        }
+      ]
+    },
+    {
+      "id": "metta-tiago-editorial-hero",
+      "type": "ad",
+      "style": null,
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Tiago no palco: quem tem método não improvisa",
+      "tese": "Quem tem método não improvisa na hora da decisão.",
+      "mood": "autoridade",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Tiago real (referência Gemini) no palco — editorial usável, rosto preservado.",
+      "copy": {
+        "headline": "Quem tem método não improvisa na hora da decisão.",
+        "subheadline": "",
+        "cta": "Conheça a Metta"
+      },
+      "formato_canonico": "story",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/metta-tiago-editorial-hero.webp",
+        "mid": "assets/generated/ads/metta-tiago-editorial-hero.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      }
+    },
+    {
+      "id": "metta-tiago-dark-surreal",
+      "type": "ad",
+      "style": null,
+      "format": "feed-1080x1350",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Tiago: o caos não é falta de esforço",
+      "tese": "O caos não é falta de esforço, é falta de método.",
+      "mood": "autoridade",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Tiago real no vórtice de papéis se organizando — surreal COM rosto real (a opção de recorte não fazia isso).",
+      "copy": {
+        "headline": "O caos não é falta de esforço, é falta de método.",
+        "subheadline": "",
+        "cta": "Conheça a Metta"
+      },
+      "formato_canonico": "feed",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/metta-tiago-dark-surreal.webp",
+        "mid": "assets/generated/ads/metta-tiago-dark-surreal.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      }
+    },
+    {
+      "id": "metta-tiago-story-cover-hero",
+      "type": "ad",
+      "style": null,
+      "format": "story-1080x1920",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Tiago: você não precisa estar em todas as decisões",
+      "tese": "Você não precisa estar em todas as decisões.",
+      "mood": "autoridade",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Tiago real em escritório de vidro, golden hour.",
+      "copy": {
+        "headline": "Você não precisa estar em todas as decisões.",
+        "subheadline": "",
+        "cta": "Arrasta pro lado"
+      },
+      "formato_canonico": "story",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/metta-tiago-story-cover-hero.webp",
+        "mid": "assets/generated/ads/metta-tiago-story-cover-hero.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1920
+      }
+    },
+    {
+      "id": "metta-tiago-editorial-dark",
+      "type": "ad",
+      "style": null,
+      "format": "feed-1080x1350",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Tiago: sua empresa cresce ou te consome?",
+      "tese": "Sua empresa cresce ou só te consome mais?",
+      "mood": "autoridade",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Tiago real em editorial dark moody (resolve o 'escuro demais' — rosto visível).",
+      "copy": {
+        "headline": "Sua empresa cresce ou só te consome mais?",
+        "subheadline": "",
+        "cta": "Conheça a Metta"
+      },
+      "formato_canonico": "feed",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/metta-tiago-editorial-dark.webp",
+        "mid": "assets/generated/ads/metta-tiago-editorial-dark.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      }
+    },
+    {
+      "id": "metta-tiago-photo-raw",
+      "type": "ad",
+      "style": null,
+      "format": "feed-1080x1350",
+      "brand": "metta",
+      "intent": "autoridade",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Tiago: o operacional consome quem devia liderar",
+      "tese": "O operacional consome quem devia estar liderando.",
+      "mood": "autoridade",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Tiago real candid lo-fi num escritório movimentado.",
+      "copy": {
+        "headline": "O operacional consome quem devia estar liderando.",
+        "subheadline": "",
+        "cta": "Segue pra entender"
+      },
+      "formato_canonico": "feed",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/metta-tiago-photo-raw.webp",
+        "mid": "assets/generated/ads/metta-tiago-photo-raw.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      }
+    },
+    {
+      "id": "metta-tiago-twitter-card",
+      "type": "ad",
+      "style": null,
+      "format": "feed-1080x1350",
+      "brand": "metta",
+      "intent": "prova",
+      "icp_target": [
+        "acelera",
+        "premium"
+      ],
+      "title": "Tiago: todo dono trava no operacional",
+      "tese": "Todo dono trava no operacional antes de virar dono de verdade.",
+      "mood": "autoridade",
+      "date": "2026-08-08",
+      "status": "aprovado",
+      "tokens_used": 0,
+      "archetype_foto": null,
+      "notes": "Tweet card com o Tiago real.",
+      "copy": {
+        "headline": "Todo dono trava no operacional antes de virar dono de verdade.",
+        "subheadline": "",
+        "cta": "Conheça a Metta"
+      },
+      "formato_canonico": "feed",
+      "serie_id": null,
+      "densidade_texto": "media",
+      "src": {
+        "thumb": "assets/generated/ads/metta-tiago-twitter-card.webp",
+        "mid": "assets/generated/ads/metta-tiago-twitter-card.webp"
+      },
+      "dimensions": {
+        "w": 1080,
+        "h": 1350
+      }
     }
   ],
   "totalApplications": 109,
