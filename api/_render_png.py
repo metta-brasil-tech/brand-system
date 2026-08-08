@@ -104,10 +104,37 @@ def _find_chrome() -> str | None:
             or shutil.which("msedge"))
 
 
+# Blindagem da FAIXA BRANCA no fallback: o _render_chrome tira um screenshot de
+# JANELA CHEIA (o CLI do Chrome não sabe recortar por elemento como o
+# el.screenshot() do playwright/render.js). Qualquer margin do body ou fundo de
+# página em volta do .ad-canvas vira uma faixa (clara) no PNG. Este CSS zera a
+# margem/padding do body e prende o canvas no topo-esquerda pra ele PREENCHER a
+# janela exatamente — sem heurística de crop por pixel (que já cortou peça clara
+# de mais no passado). Inofensivo pro caminho limpo (só é injetado aqui).
+# NÃO mexer no background do body: com margem zerada e o canvas preso em 0,0
+# preenchendo a janela, nenhum pixel do body aparece (a cor dele é justamente a
+# faixa). Forçar transparent arriscaria o Chrome pintar branco no PNG sem alpha.
+_CHROME_NOSTRIP_CSS = (
+    "<style id=\"_nostrip\">html,body{margin:0!important;padding:0!important;"
+    "border:0!important}"
+    ".ad-canvas,.ad{position:absolute!important;top:0!important;left:0!important;"
+    "margin:0!important}</style>")
+
+
+def _inject_nostrip(html: str) -> str:
+    if "</head>" in html:
+        return html.replace("</head>", _CHROME_NOSTRIP_CSS + "</head>", 1)
+    if "<body" in html:
+        i = html.find(">", html.find("<body")) + 1
+        return html[:i] + _CHROME_NOSTRIP_CSS + html[i:]
+    return _CHROME_NOSTRIP_CSS + html
+
+
 def _render_chrome(html: str, width: int, height: int, scale: int) -> bytes:
     chrome = _find_chrome()
     if not chrome:
         raise RuntimeError("Nenhum Chromium encontrado pro render server-side.")
+    html = _inject_nostrip(html)
     # Como root (container/CI) o Chrome recusa rodar sem --no-sandbox; o HTML
     # renderizado é gerado pelo próprio pipeline, não conteúdo arbitrário.
     extra = []

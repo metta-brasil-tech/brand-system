@@ -62,7 +62,28 @@ TREATMENTS: dict[str, dict] = {
                    "YELLOW-EDITORIAL"],
         "capa_ok": False, "tipografico": False, "needs_image": False,
     },
+    # --- 3 modelos que existiam mas eram ÓRFÃOS do planner (nunca escolhidos há
+    # meses). Agora no vocabulário, ligados às estruturas de copy que eles servem. ---
+    "T-STAT-DADOS": {  # números empilhados gigantes (pesquisa/resultado)
+        "models": ["METTA-STAT-STACK"],
+        "capa_ok": False, "tipografico": True, "needs_image": False,
+    },
+    "T-EQUACAO": {  # headline com "=" vira termos + sinal amarelo
+        "models": ["METTA-EQUACAO"],
+        "capa_ok": True, "tipografico": True, "needs_image": False,
+    },
+    "T-CHAT-DEF": {  # palavra-definição + balão de chat "escrevendo…" (hook)
+        "models": ["METTA-CHAT-DEF"],
+        "capa_ok": True, "tipografico": True, "needs_image": False,
+    },
 }
+
+# Regra C9 — MÁX 1 foto de PESSOA por carrossel. Pessoas geradas por IA em slides
+# consecutivos saem sósias (mesmo homem/loja) e o conjunto lê como "foto repetida"
+# (feedback do Nathan). Estes tratamentos põem PESSOA no quadro; objeto/tipografia
+# não têm o risco. A partir da 1ª foto de pessoa, o planner rebaixa as próximas pra
+# tratamento sem-pessoa (objeto/tipográfico). "menos foto, mais conceito."
+_PERSON_TREATMENTS = {"T-FOTO-CENA", "T-SPLIT-DUAL", "T-MOCKUP-NEWS"}
 
 # Família visual por blueprint (anti-monotonia e trava C4 operam sobre FAMÍLIA).
 # Derivada do params.theme do blueprint, com overrides onde o theme engana.
@@ -83,6 +104,7 @@ _FAMILIA_BY_MODEL = {
     "LIGHT-SURREAL": "LIGHT", "LIGHT-TIPO": "LIGHT", "NEWS-CARD": "LIGHT",
     "YELLOW-DRAW": "YELLOW", "YELLOW-EDITORIAL": "YELLOW",
     "YELLOW-FRAME": "YELLOW", "YELLOW-OBJETO": "YELLOW",
+    "METTA-STAT-STACK": "DARK", "METTA-EQUACAO": "DARK", "METTA-CHAT-DEF": "DARK",
 }
 _FAMILIA_BY_MODEL.update(_FAMILIA_OVERRIDE)
 
@@ -101,12 +123,19 @@ def classify_slide(copy_text: str) -> dict:
     has_question = "?" in text
     has_number = bool(re.search(r"\b\d+(?:[.,]\d+)?\s*%?|R\$\s*\d", text))
     has_quote = any(q in text for q in ('"', "“", "”"))
+    # "=" na headline vira METTA-EQUACAO (termos empilhados + sinal amarelo).
+    has_equation = "=" in text
+    # definição-dicionário: 1ª palavra curta seguida de "·"/"—"/":" (ex: "Método ·
+    # substantivo...") OU pergunta muito curta → hook de definição (METTA-CHAT-DEF).
+    has_definition = bool(re.search(r"^\s*[\wÀ-ÿ]+\.?\s*[·:—-]", text))
     return {
         "word_count": word_count,
         "has_list": has_list,
         "has_question": has_question,
         "has_number": has_number,
         "has_quote": has_quote,
+        "has_equation": has_equation,
+        "has_definition": has_definition,
         "is_very_short": word_count <= 8,
         "is_long": word_count >= 50,
     }
@@ -118,14 +147,18 @@ def _candidates(cls: dict, position: str) -> list[str]:
         return ["T-CTA-FINAL"]  # Rule C2
     if cls["has_list"]:
         cands = ["T-BULLETS-DARK"]
+    elif cls.get("has_equation"):        # "=" na headline → equação (só modelo certo)
+        cands = ["T-EQUACAO", "T-HIGHLIGHT-XL", "T-AMARELO-STATEMENT"]
+    elif cls.get("has_definition"):      # "palavra · definição" → hook de chat-def
+        cands = ["T-CHAT-DEF", "T-DEFINICAO", "T-HIGHLIGHT-XL"]
     elif cls["has_quote"]:
         cands = ["T-TWEET-CARD", "T-FOTO-CENA"]
     elif cls["is_very_short"] and cls["has_question"]:
-        cands = ["T-FOTO-CENA", "T-HIGHLIGHT-XL", "T-AMARELO-STATEMENT"]
+        cands = ["T-CHAT-DEF", "T-FOTO-CENA", "T-HIGHLIGHT-XL", "T-AMARELO-STATEMENT"]
     elif cls["is_very_short"]:
         cands = ["T-AMARELO-STATEMENT", "T-HIGHLIGHT-XL", "T-OBJ-ESCURO"]
     elif cls["has_number"]:
-        cands = ["T-MOCKUP-NEWS", "T-FOTO-CENA", "T-HIGHLIGHT-XL"]
+        cands = ["T-STAT-DADOS", "T-MOCKUP-NEWS", "T-FOTO-CENA", "T-HIGHLIGHT-XL"]
     elif cls["is_long"]:
         cands = ["T-FOTO-CENA", "T-TWEET-CARD", "T-OBJ-ESCURO"]
     else:
@@ -191,6 +224,7 @@ def plan_serie(slides: list[dict], avoid_familia: str | None = None,
     plan: list[dict] = []
     familia_lock: str | None = None
     tipograficos = 0
+    person_photos = 0   # C9: conta fotos de PESSOA já usadas (teto = 1)
     prev_treatment = ""
     for i, sl in enumerate(slides):
         position = "capa" if i == 0 else ("fim" if i == n - 1 else "meio")
@@ -240,7 +274,15 @@ def plan_serie(slides: list[dict], avoid_familia: str | None = None,
             if tipograficos >= 2 and not no_image:
                 nao_tipo = [t for t in cands if not TREATMENTS[t]["tipografico"]]
                 cands = nao_tipo or cands
+            # Rule C9 — já tem 1 foto de PESSOA: rebaixa as próximas pra
+            # tratamento sem-pessoa (evita sósias). Se só sobrar pessoa, mantém
+            # (não trava a série); a capa foto-âncora costuma ser a única.
+            if person_photos >= 1:
+                sem_pessoa = [t for t in cands if t not in _PERSON_TREATMENTS]
+                cands = sem_pessoa or cands
         treatment = cands[0]
+        if treatment in _PERSON_TREATMENTS:
+            person_photos += 1
         forced_model = sl.get("model")
         if forced_model:
             # recriação/direção manual: usa o blueprint pedido (o pipeline

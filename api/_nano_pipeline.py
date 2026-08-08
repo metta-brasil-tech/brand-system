@@ -126,6 +126,19 @@ _HEADROOM = (
     "with comfortable empty space above the top of the head — NEVER crop the top of the "
     "head, the forehead or the chin against the frame edge. ")
 
+# Foco-no-ROSTO (P1): o Gemini tende a enquadrar a pessoa de corpo inteiro / de longe,
+# deixando o foco cair no tronco ou nas PERNAS (ex.: B-foto saía com a cabeça cortada e
+# foco nas pernas). Esta cláusula fixa o RECORTE (cabeça+ombros até meio-tronco, rosto
+# como ponto focal), NÃO a posição vertical — quem manda na faixa vazia é o `zone` do
+# text_anchor, então as duas convivem. Guarda "se uma pessoa for o sujeito" → inerte em
+# cena de objeto/tipografia, igual ao _HEADROOM. Rede de segurança: o QA (vision) reprova.
+_FACE_FOCAL = (
+    "If a person is the main subject, use a HEAD-AND-SHOULDERS to mid-torso crop so the "
+    "FACE reads as the clear focal point at natural portrait scale, shot at eye level. "
+    "NEVER frame the person full-body or from the waist down, never let the legs or lower "
+    "torso become the focal point instead of the face, and never shoot from so far away "
+    "that the face turns small. ")
+
 # Linguagens que NUNCA servem de referência de geração: L1 = foto real do
 # especialista (geraria um "especialista falso"); L2 = still de filme (direitos).
 _NO_GEN_REF = {"L1", "L2"}
@@ -391,7 +404,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         prompt = (
             "Use the attached real advertisement ONLY as a style reference: match its photographic "
             "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
-            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_HEADROOM}{_NO_MICROTEXT}"
+            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}, {"inlineData": {"mimeType": mime, "data": b64ref}}]
     else:
@@ -400,7 +413,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         treat = lang_treat or _METTA_TREAT
         prompt = (
             "Invent a completely new image from scratch (no reference image is provided). "
-            f"Create: {treat}Scene: {scene.strip()} {zone}{_HEADROOM}{_NO_MICROTEXT}"
+            f"Create: {treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}]
 

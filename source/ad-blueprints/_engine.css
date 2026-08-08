@@ -259,24 +259,35 @@ button { all: unset; }
 
 /* SPINE: anel concêntrico gigante, sutil, cujo centro caminha pelos slides.
    A MESMA coluna corre por todos → sensação de peça única. */
+/* CAMPO CONTÍNUO: sistema de anéis concêntricos GRANDE (3 anéis) centrado no meio do
+   carrossel. Grande o bastante pra algum anel cruzar TODO slide; o render anda o
+   centro 100% por slide (uma largura), então as bordas alinham e ao deslizar parece
+   UM campo só (não anéis soltos). Diâmetros 4200/2800/1400 (raios 2100/1400/700). */
 .serie-spine {
-  position: absolute; top: 46%; width: 1180px; height: 1180px;
+  position: absolute; top: 46%; width: 4200px; height: 4200px;
   transform: translate(-50%, -50%); z-index: 0; pointer-events: none;
   border-radius: 50%;
-  border: 3px solid color-mix(in srgb, var(--m-yellow) 26%, transparent);
+  border: 3px solid color-mix(in srgb, var(--m-yellow) 20%, transparent);
 }
 .serie-spine::before {
-  content: ""; position: absolute; inset: 210px; border-radius: 50%;
-  border: 3px solid color-mix(in srgb, var(--m-yellow) 18%, transparent);
+  content: ""; position: absolute; inset: 700px; border-radius: 50%;
+  border: 3px solid color-mix(in srgb, var(--m-yellow) 15%, transparent);
+}
+.serie-spine::after {
+  content: ""; position: absolute; inset: 1400px; border-radius: 50%;
+  border: 3px solid color-mix(in srgb, var(--m-yellow) 11%, transparent);
 }
 /* em fundo amarelo (slides YELLOW) o anel amarelo some — usa tinta escura */
 .ad[data-theme="yellow"] .serie-spine,
 .ad[data-theme="light"] .serie-spine { border-color: color-mix(in srgb, var(--fg) 12%, transparent); }
 .ad[data-theme="yellow"] .serie-spine::before,
 .ad[data-theme="light"] .serie-spine::before { border-color: color-mix(in srgb, var(--fg) 9%, transparent); }
+.ad[data-theme="yellow"] .serie-spine::after,
+.ad[data-theme="light"] .serie-spine::after { border-color: color-mix(in srgb, var(--fg) 7%, transparent); }
 /* sobre foto, o anel compete com a cena → bem mais discreto */
-.ad[data-photo="true"] .serie-spine { border-color: color-mix(in srgb, #fff 14%, transparent); }
-.ad[data-photo="true"] .serie-spine::before { border-color: color-mix(in srgb, #fff 10%, transparent); }
+.ad[data-photo="true"] .serie-spine { border-color: color-mix(in srgb, #fff 12%, transparent); }
+.ad[data-photo="true"] .serie-spine::before { border-color: color-mix(in srgb, #fff 9%, transparent); }
+.ad[data-photo="true"] .serie-spine::after { border-color: color-mix(in srgb, #fff 7%, transparent); }
 
 /* PROGRESS: fileira de traços no topo-centro; o atual em amarelo e mais largo. */
 .serie-progress {
@@ -295,6 +306,14 @@ button { all: unset; }
 .ad[data-theme="light"] .serie-progress span { background: color-mix(in srgb, #1a1a1a 22%, transparent); }
 .ad[data-theme="yellow"] .serie-progress span.on,
 .ad[data-theme="light"] .serie-progress span.on { background: #1a1a1a; }
+/* Header sobre FOTO no topo (photo-band photo:top): o eyebrow, os ticks e a seta
+   ficam sobre a FOTO, não sobre o fundo do tema. Em tema light saíam escuros sobre
+   foto escura (dark-on-dark, achado do QA). Força claro + sombra. Vence as regras
+   de tema light acima (mais específico). */
+.ad[data-arch="photo-band"][data-photo="top"] .brand-eyebrow { color: var(--m-white); text-shadow: 0 1px 8px rgba(0,0,0,.55); }
+.ad[data-arch="photo-band"][data-photo="top"] .serie-progress span { background: color-mix(in srgb, #fff 32%, transparent); }
+.ad[data-arch="photo-band"][data-photo="top"] .serie-progress span.on { background: var(--m-yellow); }
+.ad[data-arch="photo-band"][data-photo="top"] .serie-next { color: var(--m-white); border-color: color-mix(in srgb, #fff 40%, transparent); }
 
 /* TOM: um glow amarelo que CRESCE rumo ao fim (arco = tensão→alívio). A
    intensidade vem inline (--arc-glow) calculada no render por i/n. */
@@ -361,6 +380,14 @@ button { all: unset; }
 .ad[data-arch="typo"] .cta-wrap { position: absolute; left: var(--pad-x); bottom: var(--pad-y); z-index: 3; }
 .ad[data-arch="typo"][data-align="center"] .cta-wrap { left: 0; right: 0; display: flex; justify-content: center; }
 .ad[data-arch="typo"][data-scale="giant"] .t-head { font-size: 150px; line-height: .88; }
+/* DARK-CARTA / YELLOW-DRAW: headline gigante enche o box centrado e transbordava
+   pra cima, colando no logo do topo. Top-ancora reservando a faixa da marca
+   (mesma folga do photo-full story, 224px). Escopo por data-model: NAO afeta
+   K-bold, C-tipografia, H-fundo, LIGHT-TIPO nem YELLOW-EDITORIAL. */
+.ad[data-arch="typo"][data-model="DARK-CARTA"] .layer,
+.ad[data-arch="typo"][data-model="YELLOW-DRAW"] .layer {
+  justify-content: flex-start; padding-top: 224px;
+}
 
 /* (2) photo-side — coluna de texto + foto FULL-BLEED (não cortada num retângulo).
    O banco real (cliente-na-loja, sem-processo) é UMA foto cobrindo o quadro
@@ -583,7 +610,13 @@ button { all: unset; }
 .ad[data-arch="number-hero"] .cta-wrap { margin-top: 8px; }
 
 /* ---------- STAT-STACK: estatísticas empilhadas + fonte (carrossel pesquisa) ---------- */
-.ad[data-arch="stat-stack"] .layer { justify-content: flex-end; padding: var(--pad-y) var(--pad-x); }
+/* Layer = flex-column de CANVAS INTEIRO centralizada. Sem inset:0/display:flex a
+   layer tinha altura-automática: o conteúdo grudava no topo (colado no logo) com
+   vazio embaixo, em vez de centralizar (achado do Nathan). Mesmo fix do CHAT-DEF. */
+.ad[data-arch="stat-stack"] .layer {
+  position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column;
+  justify-content: center; padding: var(--pad-y) var(--pad-x);
+}
 .stat-wrap { display: flex; flex-direction: column; gap: 26px; }
 .stat { background: rgba(255,255,255,.06); border-radius: 28px; padding: 38px 44px; }
 .ad[data-theme="light"] .stat { background: rgba(20,25,30,.05); }
@@ -599,7 +632,12 @@ button { all: unset; }
 }
 
 /* ---------- EQUATION: termos empilhados com sinal "=" amarelo (slide líder=meta=equipe) ---------- */
-.ad[data-arch="equation"] .layer { justify-content: center; align-items: center; padding: var(--pad-y) var(--pad-x); }
+/* Canvas inteiro centralizado (mesmo fix do CHAT-DEF/STAT-STACK): sem inset:0 a
+   equação grudava no topo/logo com vazio embaixo em vez de centralizar. */
+.ad[data-arch="equation"] .layer {
+  position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; padding: var(--pad-y) var(--pad-x);
+}
 .eq-stack { align-items: center; text-align: center; gap: 22px; max-width: 92%; }
 .eq-term {
   font-family: var(--m-display); font-weight: 900; font-variation-settings: 'wght' 900;
@@ -611,7 +649,15 @@ button { all: unset; }
 .ad[data-arch="equation"] .eq-stack .t-sub { margin-top: 12px; font-weight: 600; opacity: .9; }
 
 /* ---------- CHAT-DEF: palavra-definição + balão de chat + "escrevendo…" ---------- */
-.ad[data-arch="chat-def"] .layer { justify-content: flex-start; padding: var(--pad-y) var(--pad-x); }
+/* Layer = flex-column de canvas INTEIRO (inset:0) centralizado no vertical. Sem o
+   inset:0/display:flex a layer era um bloco de altura-automática: o justify-content
+   não tinha folga pra distribuir, o cd-word colava no logo e sobrava um vazião
+   embaixo (não preenchia o 4:5). Centralizado, o bloco equilibra o formato e clareia
+   o logo (conteúdo alto nunca alcança o topo). */
+.ad[data-arch="chat-def"] .layer {
+  position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column;
+  justify-content: center; padding: var(--pad-y) var(--pad-x);
+}
 .cd-word { font-size: 128px; line-height: .9; }
 .ad[data-arch="chat-def"] .t-sub { margin-top: 6px; }
 .cd-bubble {

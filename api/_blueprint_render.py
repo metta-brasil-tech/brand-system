@@ -412,6 +412,13 @@ def _brand_mark(marca: str, arch: str, theme: str, params: dict) -> str:
         # a polaridade da tinta: branco/amarelo = tinta clara (fundo escuro) → logo_h;
         # escuro/cinza = tinta escura (fundo claro/amarelo) → logo_escuro_h.
         light_ink = pick.variant in ("branco", "amarelo") if pick else dark
+        # Header sobre FOTO no topo (photo-band photo:top, ex: FOTO-PILL, B-foto): quem
+        # fica atrás do logo é a FOTO, não o fundo do tema. O _pick_sig usava o bg do
+        # tema — em tema light escolhia o logo ESCURO, que sumia sobre foto escura
+        # (dark-on-dark, achado do QA). Força tinta CLARA (o logo claro + drop-shadow
+        # lê tanto sobre foto escura quanto clara).
+        if arch == "photo-band" and str(params.get("photo") or "top").lower() == "top":
+            light_ink = True
         svg = _read(_BRAND_DIR / ("logo_metta_colorido_h.svg" if light_ink else "logo_metta_colorido_escuro_h.svg"))
         cls, default_pos = "brand-logo", "tl"
     if not svg:
@@ -761,7 +768,9 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         # embaixo. headline = 1º dado; body = dados seguintes (1 por linha);
         # tag = fonte/ano. (banco real: slide 'pesquisa 2026 / gallup')
         def _stat(txt: str) -> str:
-            m = re.match(r"\s*([\d.,]+\s*%?)\s*(.*)", txt or "", re.S)
+            # aceita sinal à frente (+141%, -30%) e sufixo x/% — sem o [+\-]? o
+            # "+" quebrava a detecção e o número caía no stat-desc (miudinho).
+            m = re.match(r"\s*([+\-]?[\d.,]+\s*[%x]?)\s*(.*)", txt or "", re.S)
             if m and m.group(1).strip():
                 return (f'<div class="stat"><div class="stat-num">{_esc(m.group(1).strip())}</div>'
                         f'<div class="stat-desc">{_esc(m.group(2).strip())}</div></div>')
@@ -886,6 +895,13 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     ornament = str(params.get("ornament", "")).strip().lower()
     ornament_html = _ornament(ornament, theme)
 
+    # Dedupe de eyebrow (achado do QA): capas Metta (photo-full/side/band) já ganham
+    # a eyebrow de categoria "INTELIGÊNCIA COMERCIAL" no topo-direita (_brand_mark).
+    # Se o slide passa um `tag` IDÊNTICO, a mesma frase aparece 2x (topo-direita +
+    # kicker acima da headline, ex: caos-ordem). Quando forem iguais, dropa o kicker.
+    if (str(marca).lower() != "tiago" and arch in _METTA_COVER_ARCH
+            and str((copy or {}).get("tag") or "").strip().upper() == "INTELIGÊNCIA COMERCIAL"):
+        copy = {**(copy or {}), "tag": ""}
     copy_clean = {k: (_no_dash(str(v).strip()) if v else "")
                   for k, v in (copy or {}).items() if k != "serie"}
     params_eff = {**params, "anchor": anchor, "panel": panel, "head_out": head_out}
@@ -902,9 +918,15 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
         # direita (slide n), sangrando nas bordas — a mesma "coluna" corre por
         # todos os slides, ligando os quadros numa jornada (não no slide final,
         # que já tem o wordmark). Atrás do conteúdo, nunca tampa o foco.
-        if _arc_n >= 2 and _arc_i >= 1 and not serie.get("last") and arch != "modulo-num":
-            _frac = (_arc_i - 1) / max(1, _arc_n - 1)      # 0..1 ao longo da série
-            _spine_left = round(-15 + _frac * 130)          # -15%..115% (bleed)
+        if _arc_n >= 2 and _arc_i >= 1 and arch != "modulo-num":
+            # CAMPO CONTÍNUO: os anéis são UM sistema concêntrico fixo, centrado no
+            # MEIO do carrossel. O centro anda EXATAMENTE 100% (uma largura de slide)
+            # por slide — então a fatia da borda direita de um slide continua na borda
+            # esquerda do próximo. Ao deslizar (o IG passa da direita p/ esquerda), lê
+            # como um campo inteiro, não "a bola num lugar diferente em cada slide".
+            # (Antes andava ~32%/slide → desalinhado.) Todos os slides mostram a sua
+            # fatia (inclusive o último — o wordmark de rodapé já foi removido).
+            _spine_left = round(50 + ((_arc_n + 1) / 2 - _arc_i) * 100)
             serie_under += (f'<div class="serie-spine" aria-hidden="true" '
                             f'style="left:{_spine_left}%"></div>')
         # ARCO VISUAL — camada 2: PROGRESS (posição na jornada). Fileira de traços,
@@ -915,11 +937,10 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
                 for k in range(1, _arc_n + 1))
             serie_over += (f'<div class="serie-progress" aria-hidden="true">'
                            f'{_ticks}</div>')
-        # decor legado: wordmark no último, seta nos intermediários
-        if serie.get("last"):
-            if (fm.get("marca") or marca or "").strip().lower() == "metta":
-                serie_under += '<div class="serie-wordmark" aria-hidden="true">metta</div>'
-        else:
+        # só a seta -> nos intermediários. O wordmark gigante "metta" no rodapé do
+        # slide final foi REMOVIDO (regra do Nathan: logo embaixo é desnecessário,
+        # já tem o logo no topo de todo slide) — não confundir com o logo do header.
+        if not serie.get("last"):
             serie_over += '<div class="serie-next" aria-hidden="true">&#8594;</div>'
 
     head_style = params.get("head", "")

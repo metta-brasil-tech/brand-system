@@ -37,6 +37,16 @@ __pycache__/
 render_out/out/
 render_out/artifacts/
 render_out/tests-e2e/
+# saídas GERADAS (artefatos PNG regeneráveis) — NÃO versionar (bloat/Vercel)
+render_out/out_fixes/
+render_out/novo-carrossel-teste/
+render_out/orfaos-showcase/
+render_out/tiago-pano/
+render_out/split-test/
+render_out/pano-full/
+render_out/qa_typo/
+render_out/_*.png
+render_out/*.log
 .venv/
 
 # Saídas de teste (regeneráveis) — não versionar
