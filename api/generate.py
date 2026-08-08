@@ -692,6 +692,28 @@ def _run_pipeline_inline(
                 f"decision-log: PULADO ({_dle.__class__.__name__}: {str(_dle)[:80]})"
             )
 
+    # WIRE Tiago-por-referência: modelos de foto do Tiago (prefer_upload) SEM upload
+    # do user — em vez de inventar humano falso (fallback antigo) OU depender do
+    # art-director (Anthropic, hoje sem crédito), compõe o Tiago REAL numa cena nova
+    # via referência de imagem no Gemini (rosto preservado). Sucesso → vira "asset" e
+    # segue no caminho de foto-pronta abaixo (pula skill-04 + Anthropic). Falha →
+    # cai no fluxo antigo intacto (nada quebra).
+    if (marca == "tiago" and bp_prefer_upload and model_requires_image
+            and image_source not in ("upload", "search", "asset")
+            and not (image_url or "").strip()):
+        try:
+            from _tiago_ref import gen_tiago_scene as _gen_tiago
+            _tref = _gen_tiago(chosen_model_id, format_key, user_headline or "")
+        except Exception as _te:
+            _tref = None
+            diagnostics.append(f"04-tiago-ref: erro ({_te.__class__.__name__}) — fallback")
+        if _tref:
+            image_url = "data:image/png;base64," + base64.b64encode(_tref).decode("ascii")
+            image_source = "asset"
+            diagnostics.append(
+                "04-tiago-ref: Tiago REAL via referência (Gemini) — rosto preservado, "
+                "sem inventar humano nem depender do art-director/Anthropic")
+
     if image_source == "none" or not model_requires_image:
         diagnostics.append("04-image-gen: PULADO — modelo sem imagem OU user escolheu sem imagem")
     elif image_source in ("search", "upload", "asset") and image_url:
