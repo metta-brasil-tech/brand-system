@@ -2597,7 +2597,7 @@ function attachCarouselHandlers() {
   updateCarCounters();
 }
 
-function carSlidePayload(slide) {
+function carSlidePayload(slide, i, n) {
   const marca = STATE.brand === 'metta' ? 'Metta (institucional)' : 'Tiago Alves (marca pessoal)';
   const copy = [slide.copyHeadline, slide.copySubhead, slide.copyBody].filter(Boolean).join('\n');
   const briefing = `Marca: ${marca}.\nSlide de carrossel.\nCopy:\n${copy || '(vazio)'}`;
@@ -2605,11 +2605,16 @@ function carSlidePayload(slide) {
   let imgsrc = usaImg ? (slide.imageSource || 'generate') : 'none';
   if (imgsrc === 'upload' && !slide.selectedImageUrl) imgsrc = 'none';  // upload sem foto → sem imagem
   const gen = imgsrc === 'generate';
+  // Decor de série: campo de anéis contínuo + ticks + seta → o carrossel lê como
+  // UMA peça no swipe, não N slides soltos. i = 1-based, last no fechamento.
+  const serie = (typeof i === 'number' && typeof n === 'number' && n >= 2)
+    ? { i: i + 1, n, last: i === n - 1 } : null;
   return {
     briefing, mock: false,
     model_id: slide.style,
     format: STATE.carFormat,
     image_source: imgsrc,
+    ...(serie ? { serie_info: serie } : {}),
     ...(imgsrc === 'upload' && slide.selectedImageUrl ? { image_url: slide.selectedImageUrl } : {}),
     ...(gen && slide.briefingImage && slide.briefingImage.trim() ? { briefing_image: slide.briefingImage.trim() } : {}),
     ...(gen && slide.imageStylePreset ? { image_style_preset: slide.imageStylePreset } : {}),
@@ -2638,7 +2643,7 @@ async function runCarouselGeneration() {
   for (let i = 0; i < STATE.slides.length; i++) {
     if (prog) prog.textContent = `Gerando slide ${i + 1} de ${STATE.slides.length}…`;
     try {
-      const res = await postGenerate(carSlidePayload(STATE.slides[i]));
+      const res = await postGenerate(carSlidePayload(STATE.slides[i], i, STATE.slides.length));
       STATE.carouselResults.push({ ok: !!res.ok, html: res.html || '', format: res.format || STATE.carFormat, model_id: res.model_id || STATE.slides[i].style });
     } catch (err) {
       STATE.carouselResults.push({ ok: false, error: err && err.message ? err.message : String(err), format: STATE.carFormat });

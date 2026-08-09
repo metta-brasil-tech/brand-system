@@ -297,6 +297,7 @@ def _run_pipeline_inline(
     render_png: bool = False,
     art_director: bool = True,
     vision_qa: bool = True,
+    vision_qa_max: int | None = None,
     serie_info: dict | None = None,
 ) -> dict:
     """Pipeline principal — retorna HTML pronto pra iframe + metadata.
@@ -1237,7 +1238,12 @@ def _run_pipeline_inline(
             from _art_director import direct as _ad_direct2
             _aspect = {"story": "9:16", "feed": "4:5", "sqr": "1:1"}.get(format_key, "4:5")
             _preset_ov = (chosen_preset or {}).get("prompt_overlay", "") if "chosen_preset" in locals() and chosen_preset else ""
-            _vmax = int(os.getenv("VISION_QA_MAX", "2"))
+            # vision_qa_max override (usado pelo _autogen): quando o loop EXTERNO de
+            # auto-melhoria é dono do regen, capamos o loop INTERNO em 1 — a vision-qa/
+            # critic ainda RODAM (alimentam o guardrail do _evaluator), mas não
+            # regeneram por dentro, evitando o loop-dentro-de-loop (até 2x gerações +
+            # juízes de visão duplicados por peça). None = usa o default por env.
+            _vmax = vision_qa_max if vision_qa_max is not None else int(os.getenv("VISION_QA_MAX", "2"))
             # CRÍTICO COMPARATIVO (same-designer test do banco) — aditivo, gated por
             # CRITIC_COMPARE, degrada gracioso. Escolhe UMA referência do banco pela
             # copy+conceito+tratamento (F1 do plugin-metta-ads). Sem referência raster
@@ -1441,6 +1447,12 @@ class handler(BaseHTTPRequestHandler):
                 render_png=bool(data.get("render_png", False)),
                 art_director=bool(data.get("art_director", True)),
                 vision_qa=bool(data.get("vision_qa", True)),
+                # decor de carrossel ({"i","n","last"}): campo de anéis contínuo +
+                # ticks de progresso + seta. Antes só o /api/carousel passava isso
+                # (in-process); expor no handler HTTP deixa QUALQUER slide de
+                # carrossel do site sair COESO (não N peças soltas). Ver serie_info
+                # em _run_pipeline_inline / copy["serie"] no _blueprint_render.
+                serie_info=data.get("serie_info") or None,
             )
 
             # FASE 6 — AUTO-MELHORIA no pipeline (opt-in). Liga o loop

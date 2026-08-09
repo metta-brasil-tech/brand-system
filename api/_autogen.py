@@ -58,6 +58,14 @@ def generate_until_approved(brief: dict, max_attempts: int = 3,
     visual_feedback = (brief.get("briefing_image_text") or "").strip()
     base_visual = visual_feedback  # direção original do usuário (preservada)
 
+    # Este loop é DONO da regeneração. O pipeline tem um loop INTERNO de vision-qa
+    # que também regera (VISION_QA_MAX, default 2) → sem isto, dois ciclos
+    # "gera→julga→regera" aninhados (até ~2x gerações + juízes de visão por
+    # tentativa, à toa). Capamos o interno em 1: a vision-qa/critic ainda RODAM e
+    # alimentam o guardrail do _evaluator, mas não regeram — quem regera é aqui.
+    brief = dict(brief)
+    brief.setdefault("vision_qa_max", 1)
+
     for attempt in range(1, max_attempts + 1):
         kwargs = dict(brief)
         kwargs["briefing_image_text"] = visual_feedback or None
