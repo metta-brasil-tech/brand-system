@@ -62,6 +62,32 @@ _DEFAULT_SCENE = (
     "lighting, editorial portrait, calm authoritative expression")
 
 
+# --------------------------------------------------------------------------
+# Regra: quando uma peça METTA usa o Tiago no lugar de pessoa genérica.
+# Decisão (Nathan delegou os contextos): usar o Tiago quando a figura representa
+# AUTORIDADE/EXPERT — o Tiago é a cara/especialista da Metta. Manter pessoa
+# genérica quando a figura é o CLIENTE/ICP (o dono sufocado com quem o espectador
+# se identifica) — não faz sentido o Tiago ser "o cliente sofrendo".
+# --------------------------------------------------------------------------
+_METTA_TIAGO_ALWAYS = {"I-retrato-editorial-pb"}            # retrato de autoridade P&B
+_METTA_TIAGO_IF_AUTHORITY = {                               # autoridade quando intent pede
+    "A-headline-foto-dark", "D-foto-fullbleed-overlay",
+    "YELLOW-SPLIT", "YELLOW-BLOCO", "NEWS-CARD",
+}
+_METTA_TIAGO_NEVER = {"FOTO-PILL-CASUAL", "B-foto-top-headline-mixed"}  # cliente/ICP
+
+
+def should_use_tiago_for_metta(model_id: str, intent: str | None = "") -> bool:
+    """True se a peça METTA deve usar o Tiago real (contexto de autoridade)."""
+    if model_id in _METTA_TIAGO_NEVER:
+        return False
+    if model_id in _METTA_TIAGO_ALWAYS:
+        return True
+    if model_id in _METTA_TIAGO_IF_AUTHORITY:
+        return str(intent or "").strip().lower() in ("autoridade", "prova")
+    return False
+
+
 def _aspect(format_key: str) -> str:
     f = (format_key or "").lower()
     if "story" in f or "1920" in f:
