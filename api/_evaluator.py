@@ -183,11 +183,22 @@ def evaluate(png_bytes: bytes, copy: dict, marca: str,
     com a peça final — dimensão `ancoragem` (passo 4: julga o raciocínio, não só o pixel).
     """
     try:
-        from openai import OpenAI
+        from litellm import completion
     except Exception as e:
-        return {"verdict": "SKIPPED", "reason": f"openai indisponível: {e}"}
+        return {"verdict": "SKIPPED", "reason": f"litellm indisponível: {e}"}
 
-    model = model or os.getenv("EVAL_MODEL") or os.getenv("VISION_QA_MODEL", "gpt-4.1")
+    # Juiz FINAL por visão via LiteLLM — mesmo caminho do cérebro (provider-agnóstico).
+    # Antes usava o SDK da OpenAI direto; com a OpenAI fora do ar (sem crédito) o
+    # avaliador voltava SKIPPED e o PORTÃO FINAL (+ a nota de ranking do auto_improve)
+    # ficava MORTO no deploy — a única das 3 camadas de visão ainda presa à OpenAI
+    # (o _vision_qa e o _critic já migraram). Agora defaulta pro provider do cérebro
+    # (LLM_PROVIDER, default claude). Override: EVAL_PROVIDER / EVAL_MODEL.
+    provider = (os.getenv("EVAL_PROVIDER") or os.getenv("LLM_PROVIDER", "claude")).lower()
+    model = model or os.getenv("EVAL_MODEL") or os.getenv("VISION_QA_MODEL") or {
+        "claude": os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8"),
+        "openai": "gpt-4.1",
+        "gemini": os.getenv("LLM_MODEL_GEMINI", "gemini-2.5-flash"),
+    }.get(provider, os.getenv("LLM_MODEL_CLAUDE", "claude-opus-4-8"))
     copy_txt = (
         f"headline: {copy.get('headline','')}\nsubhead: {copy.get('subhead','')}\n"
         f"body: {copy.get('body','')}\ncta: {copy.get('cta','')}"
@@ -202,17 +213,22 @@ def evaluate(png_bytes: bytes, copy: dict, marca: str,
     user_txt += "Avalie a peça final:"
     try:
         b64 = base64.b64encode(png_bytes).decode("ascii")
-        client = OpenAI()
-        resp = client.chat.completions.create(
-            model=model, max_tokens=500,
-            messages=[
+        kwargs = {
+            "model": model, "max_tokens": 500,
+            "messages": [
                 {"role": "system", "content": _system(marca, has_intent, image_based, user_direction or "")},
                 {"role": "user", "content": [
                     {"type": "text", "text": user_txt},
                     {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
                 ]},
             ],
-        )
+            "timeout": float(os.getenv("EVAL_TIMEOUT_S", "60")),
+            "num_retries": int(os.getenv("LLM_NUM_RETRIES", "2")),
+        }
+        # Claude descontinuou temperature; só manda pros demais.
+        if not str(model).startswith(("claude-", "anthropic/")):
+            kwargs["temperature"] = 0
+        resp = completion(**kwargs)
         out = _coerce(resp.choices[0].message.content or "")
         out.setdefault("verdict", "REVISAR")
         out.setdefault("scores", {})

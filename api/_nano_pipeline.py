@@ -574,10 +574,8 @@ def generate_panorama(scene: str, n_slides: int = 2, family: str = "A",
     Retorna (lista_de_png_por_slide, meta). O texto por cima fica a cargo do
     render/front — aqui são só os fundos contínuos. n_slides ∈ [2,4].
     """
-    import io
-
-    from PIL import Image
-
+    # (io/PIL não são usados aqui — o fatiamento é delegado a slice_panorama,
+    # que faz o próprio import; imports mortos removidos na auditoria.)
     n_slides = max(2, min(4, int(n_slides)))
     aspect = _PANO_ASPECT.get(n_slides, "3:2")
     key = _api_key(api_key)
