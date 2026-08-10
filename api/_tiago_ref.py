@@ -98,7 +98,7 @@ def _aspect(format_key: str) -> str:
 
 
 def gen_tiago_scene(model_id: str, format_key: str = "feed",
-                    headline: str = "", tries: int = 4) -> bytes | None:
+                    headline: str = "", tries: int = 2) -> bytes | None:
     """Gera o Tiago REAL numa cena nova (rosto preservado). None em falha."""
     cut = _TIAGO_DIR / _CUTOUTS.get(model_id, _DEFAULT_CUTOUT)
     if not cut.is_file():
@@ -130,11 +130,19 @@ def gen_tiago_scene(model_id: str, format_key: str = "feed",
             pl["generationConfig"]["imageConfig"] = {"aspectRatio": aspect}
         return httpx.post(np._GEMINI_URL.format(model=np._MODEL, key=key), json=pl, timeout=240)
 
+    # Antes: até 4 tentativas × 2 POSTs (com e sem imageConfig) + backoff 6/12/18s →
+    # pior caso ~8 chamadas e ~36s de sleep BLOQUEANTE no request. Agora: o fallback
+    # sem imageConfig roda no MÁXIMO 1 vez (se o aspect for rejeitado, fixa use_cfg=False
+    # pras próximas), tries=2 e backoff 4/8s. Pior caso ~3 chamadas e ~4s.
+    use_cfg = True
     for a in range(1, tries + 1):
         try:
-            r = _call(True)
-            if r.status_code != 200:
-                r = _call(False)
+            r = _call(use_cfg)
+            if r.status_code != 200 and use_cfg:
+                # imageConfig pode ser rejeitado — tenta sem UMA vez e fixa pras próximas
+                r2 = _call(False)
+                if r2.status_code == 200:
+                    use_cfg, r = False, r2
             if r.status_code == 200:
                 for c in r.json().get("candidates", []):
                     for p in c.get("content", {}).get("parts", []):
@@ -143,10 +151,10 @@ def gen_tiago_scene(model_id: str, format_key: str = "feed",
                             return base64.b64decode(inl["data"])
                 return None
             if r.status_code in (429, 500, 503) and a < tries:
-                time.sleep(6 * a); continue
+                time.sleep(4 * a); continue
             return None
         except Exception:
             if a < tries:
-                time.sleep(6 * a); continue
+                time.sleep(4 * a); continue
             return None
     return None

@@ -118,6 +118,15 @@ _NO_MICROTEXT = (
     "abstract shapes, blurred charts, color blocks or is turned off/reflective — NEVER "
     "readable letters, words or numbers on them. Keep such surfaces out of sharp focus. ")
 
+# Anti-falha de anatomia. O NEG_MODEL_FAILS do art-director (mãos deformadas, dedos
+# extras, face distorcida, membros fundidos) NUNCA chegava ao Nano — generate_background/
+# generate_via_route não têm parâmetro negative e a chamada nem o passa. A parte de
+# texto/logo já está coberta inline (_NO_MICROTEXT + "ABSOLUTELY NO TEXT"); faltava a de
+# corpo. Injetado inline no prompt (frase positiva funciona melhor no Gemini que "no ...").
+_NO_ANATOMY = (
+    "If any person appears, render anatomy correctly: natural hands with exactly five "
+    "fingers each, undistorted realistic face, no extra or fused limbs. ")
+
 # Anti cabeça-cortada (P1): o Gemini tende a cortar o topo da cabeça/testa quando
 # enquadra pessoas. Cláusula de segurança — inofensiva pra cenas de objeto (só age
 # se houver figura humana). O QA (vision) ainda reprova como rede de segurança.
@@ -404,7 +413,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         prompt = (
             "Use the attached real advertisement ONLY as a style reference: match its photographic "
             "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
-            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}"
+            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}, {"inlineData": {"mimeType": mime, "data": b64ref}}]
     else:
@@ -413,7 +422,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         treat = lang_treat or _METTA_TREAT
         prompt = (
             "Invent a completely new image from scratch (no reference image is provided). "
-            f"Create: {treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}"
+            f"Create: {treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}]
 

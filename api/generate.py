@@ -769,10 +769,20 @@ def _run_pipeline_inline(
                 image_prompt_template = tpl_path.read_text(encoding="utf-8")
                 diagnostics.append(f"04-template: {tpl_path.name} ({len(image_prompt_template)} chars)")
 
-        # Provider awareness + preset
-        active_provider = os.getenv("IMAGE_GEN_PROVIDER", "openai").lower()
+        # Provider awareness + preset. A SEÇÃO do template (PROD=gpt-image /
+        # LEGACY=Nano Banana) tem que casar com o motor que REALMENTE vai rodar,
+        # não com a env global. IMAGE_GEN_PROVIDER é fixada em gpt-image-2 no import
+        # (o ImageGenAdapter quebraria com 'nano-banana'), então derivar a seção dela
+        # escrevia SEMPRE "SEÇÃO PROD" — mesmo quando a peça foto-real da Metta roteia
+        # pro Nano (resolve_route por família). Resultado: prompt afinado pro gpt-image
+        # sendo mandado pro Nano (bug de fidelidade). Agora derivamos do roteamento real.
+        try:
+            from _nano_pipeline import resolve_route as _resolve_route
+            active_provider = _resolve_route(chosen_model_id)  # "nano-banana" | "gpt-image"
+        except Exception:
+            active_provider = os.getenv("IMAGE_GEN_PROVIDER", "gpt-image-2").lower()
         active_section_key = (
-            "SEÇÃO LEGACY" if active_provider in ("nano-banana-2", "gemini") else "SEÇÃO PROD"
+            "SEÇÃO LEGACY" if "nano" in active_provider else "SEÇÃO PROD"
         )
 
         try:
@@ -1218,6 +1228,25 @@ def _run_pipeline_inline(
             png_data_uri = "data:image/png;base64," + base64.b64encode(_png).decode("ascii")
             mark("png", t_png)
             diagnostics.append(f"export-png ({timings['png']}ms): {len(_png)//1024}KB @2x (2160px)")
+            # Religa o PORTÃO de overflow/colisão ao sinal REAL do browser. O _qa
+            # (acima) roda sobre o HTML estático, onde data-collision/data-overflow
+            # NUNCA existem — só o _engine.js os marca em runtime → aquele check era
+            # morto. Aqui, pós-Chromium, last_qa() traz o sinal medido de verdade;
+            # promovemos p/ issue do qa_result (que só é reportado, não bloqueia).
+            try:
+                from _render_png import last_qa as _last_qa
+                _bq = _last_qa()
+                _bq_issue = ("colisão texto×CTA (medido no browser): a copy não cabe "
+                             "acima do botão nem no menor tamanho — encurte ou troque de estilo"
+                             if _bq.get("collision") else
+                             "overflow (medido no browser): conteúdo excede o canvas"
+                             if _bq.get("overflow") else "")
+                if _bq_issue:
+                    qa_result["issues"] = list(qa_result.get("issues", [])) + [_bq_issue]
+                    qa_result["status"] = "FAIL"
+                    diagnostics.append(f"qa(browser): {_bq_issue[:60]} · fit={_bq.get('fit','')}")
+            except Exception as _e:
+                diagnostics.append(f"qa(browser): PULADO ({_e.__class__.__name__})")
         except Exception as _e:
             diagnostics.append(f"export-png: PULADO ({_e.__class__.__name__}: {str(_e)[:80]})")
 
