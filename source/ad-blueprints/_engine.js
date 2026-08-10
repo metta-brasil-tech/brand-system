@@ -14,7 +14,7 @@
     // .text-panel PRIMEIRO: quando há caixa de texto, o limite do auto-fit é a
     // CAIXA (não a .layer/canvas) — é o que garante a headline encolher pra caber
     // na caixa e NUNCA vazar sobre a parte importante da imagem embaixo.
-    var box = head.closest('.text-panel, .layer, .half-text, .card, .obj-text-zone') || head.closest('.ad');
+    var box = head.closest('.text-panel, .versus-col, .half-text, .card, .obj-text-zone, .layer') || head.closest('.ad');
     if (!box) return;
     var floor = 38;
     var size = px(head, 'fontSize');

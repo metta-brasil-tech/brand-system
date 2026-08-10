@@ -263,6 +263,10 @@ button { all: unset; }
    carrossel. Grande o bastante pra algum anel cruzar TODO slide; o render anda o
    centro 100% por slide (uma largura), então as bordas alinham e ao deslizar parece
    UM campo só (não anéis soltos). Diâmetros 4200/2800/1400 (raios 2100/1400/700). */
+/* container da decoração de série: inset:0 + overflow:hidden clipa o anel de 4200px
+   na borda do canvas (visual igual, sangra até a borda) E isola o overflow — sem isso
+   o anel inflava o scrollHeight do .ad e o portão de QA marcava overflow falso. */
+.serie-field { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
 .serie-spine {
   position: absolute; top: 46%; width: 4200px; height: 4200px;
   transform: translate(-50%, -50%); z-index: 0; pointer-events: none;
@@ -467,6 +471,50 @@ button { all: unset; }
 .layer--split .text-panel:not(.head-band) { max-height: 52%; }
 .ad[data-arch="photo-full"][data-align="center"] .layer { justify-content: center; align-items: center; text-align: center; }
 .ad[data-arch="photo-full"] .cta-wrap { margin-top: 8px; }
+
+/* (3b) photo-versus — cover "A × B" com ZONAS INDEPENDENTES.
+   headline(s) top-pinned · foto livre no meio · ✕ central · subline+CTA bottom-pinned.
+   Cada zona ancora sozinha (space-between) — o CTA NÃO segue o headline. */
+.ad[data-arch="photo-versus"] .photo {
+  position: absolute; inset: 0; z-index: 1; background-size: cover; background-position: center;
+}
+/* DUAL scrim: escurece topo E base, deixa o MEIO (os sujeitos) limpo */
+.ad[data-arch="photo-versus"] .grad--versus {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(180deg, rgba(8,14,17,.80) 0%, rgba(8,14,17,.32) 22%, transparent 40%),
+              linear-gradient(0deg, rgba(8,14,17,.86) 0%, rgba(8,14,17,.34) 20%, transparent 38%);
+}
+/* tema light (cover branco): scrim CLARO em cima/embaixo, texto/logo escuros */
+.ad[data-arch="photo-versus"][data-theme="light"] .grad--versus {
+  background: linear-gradient(180deg, rgba(238,244,247,.92) 0%, rgba(238,244,247,.4) 22%, transparent 42%),
+              linear-gradient(0deg, rgba(238,244,247,.94) 0%, rgba(238,244,247,.42) 20%, transparent 40%);
+}
+.ad[data-arch="photo-versus"] .layer--versus {
+  position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column;
+  justify-content: space-between; padding: var(--pad-y) var(--pad-x); padding-top: 184px;
+}
+.ad[data-format="story"][data-arch="photo-versus"] .layer--versus { padding-top: 248px; }
+/* topo: uma ou duas headlines (comparação) */
+.ad[data-arch="photo-versus"] .versus-heads { display: flex; justify-content: space-between; gap: 28px; align-items: flex-start; }
+.ad[data-arch="photo-versus"] .versus-heads--single { display: block; }
+/* cada headline na sua coluna 47%: min-width:0 deixa o flex encolher (senão o texto
+   vaza pra fora do canvas). O fitHead usa a LARGURA da coluna como limite. */
+.ad[data-arch="photo-versus"] .versus-col { flex: 0 1 47%; min-width: 0; }
+.ad[data-arch="photo-versus"] .versus-heads--single .versus-col { flex: 0 1 78%; }
+/* text-wrap:normal (não balance): na coluna estreita o balance espalha em 3 linhas
+   curtas e o passo "linhas cheias" do fitHead encolhe até o piso tentando forçar 2.
+   Com wrap normal a headline enche as linhas e o auto-fit para no tamanho certo. */
+.ad[data-arch="photo-versus"] .versus-col .t-head { margin: 0; text-wrap: normal; }
+.ad[data-arch="photo-versus"] .versus-col.vs-right { text-align: right; }
+/* ✕ central — entre os dois sujeitos, no meio vertical */
+.ad[data-arch="photo-versus"] .versus-x {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4;
+  font-family: 'Zalando Sans Expanded', system-ui, sans-serif; font-weight: 800;
+  font-size: 96px; line-height: 1; color: var(--fg); text-shadow: 0 2px 24px rgba(0,0,0,.35);
+}
+/* base: subline + CTA, ancorados no rodapé, independentes do topo */
+.ad[data-arch="photo-versus"] .versus-foot { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.ad[data-arch="photo-versus"] .versus-foot .cta-wrap { margin: 0; }
 
 /* (4) photo-band — faixa de foto (top|bottom) + faixa de texto */
 .ad[data-arch="photo-band"] { display: flex; flex-direction: column; }

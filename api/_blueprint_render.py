@@ -203,7 +203,7 @@ def _pick_sig(bg_hex: str, marca: str, intent: str = "default"):
     except Exception:
         return None
 _METTA_NO_BRAND = {"card-mock", "logo-wall"}                       # mock/UI falsa: sem logo
-_METTA_COVER_ARCH = {"photo-full", "photo-side", "photo-band"}     # covers ganham eyebrow categoria
+_METTA_COVER_ARCH = {"photo-full", "photo-side", "photo-band", "photo-versus"}  # covers ganham eyebrow categoria
 _TIAGO_SIG_ARCH = {"tiago-editorial-hero", "tiago-editorial-dark",
                    "tiago-editorial-card", "tiago-editorial-cta"}  # editoriais levam assinatura
 
@@ -701,6 +701,32 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         return (f'{_photo(image_url)}<div class="grad"></div>'
                 f'<div class="layer">{_panel_wrap(_txt_blocks(copy, divider=_div_photo))}</div>')
 
+    if arch == "photo-versus":
+        # Cover "VERSUS" com ZONAS INDEPENDENTES — cada elemento tem posição própria,
+        # NÃO um bloco flex único (a limitação do photo-full que colava o CTA no
+        # headline). Layout: headline(s) no TOPO (top-pinned, sobre scrim) · foto/
+        # pessoas livres no MEIO · ✕ central · subline+CTA na BASE (bottom-pinned,
+        # sobre scrim). Resolve de vez: texto tampando o sujeito, CTA grudado no
+        # headline e logo-branca-no-branco (scrim garantido em cima e embaixo).
+        # Copy: headline (esq) + headline_right (dir, opcional) → comparação A × B.
+        hr = copy.get("headline_right")
+        if hr:
+            heads = (f'<div class="versus-heads">'
+                     f'<div class="versus-col vs-left"><h1 class="t-head">{_accent(copy.get("headline",""))}</h1></div>'
+                     f'<div class="versus-col vs-right"><h1 class="t-head">{_accent(hr)}</h1></div></div>')
+        else:
+            heads = (f'<div class="versus-heads versus-heads--single">'
+                     f'<div class="versus-col"><h1 class="t-head">{_accent(copy.get("headline",""))}</h1></div></div>')
+        x_mark = ("" if str(params.get("vs_mark", "1")).lower() in ("0", "false", "no")
+                  else '<span class="versus-x" aria-hidden="true">&#10005;</span>')
+        foot_parts = []
+        if copy.get("subhead"):
+            foot_parts.append(f'<p class="t-sub">{_esc(copy["subhead"])}</p>')
+        foot_parts.append(_cta(copy, cta_cls))
+        foot = f'<div class="versus-foot">{"".join(foot_parts)}</div>'
+        return (f'{_photo(image_url)}<div class="grad grad--versus"></div>'
+                f'<div class="layer layer--versus">{heads}{x_mark}{foot}</div>')
+
     if arch == "photo-band":
         return f'{_photo(image_url)}<div class="layer">{_panel_wrap(_txt_blocks(copy, divider=_div_photo))}</div>'
 
@@ -971,6 +997,14 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
     css = _read(_BLUEPRINTS_DIR / "_engine.css")
     js = _read(_BLUEPRINTS_DIR / "_engine.js")
 
+    # A decoração de série (anel-spine de 4200px) sangra de propósito pras bordas.
+    # Solta no .ad ela INFLA o scrollHeight → o portão de overflow do _engine.js
+    # (data-overflow) dava FALSO POSITIVO em TODO slide de carrossel. Envolver num
+    # container inset:0 overflow:hidden clipa o anel na borda (visual igual) E isola
+    # o overflow (não propaga pro .ad). Corrige o falso-FAIL que o QA #6 propagava.
+    serie_field = (f'<div class="serie-field" aria-hidden="true">{serie_under}</div>'
+                   if serie_under.strip() else "")
+
     doc = f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <title>{_esc(model_id)}</title>
 <style>{fonts_css}</style>
@@ -978,7 +1012,7 @@ def render(marca: str, model_id: str, copy: dict, image_url: str = "", format: s
 <style>body{{display:flex;justify-content:center;align-items:flex-start;}}</style>
 </head><body>
 <div class="ad ad-canvas" {data_attrs}{_arc_style}>
-{serie_under}
+{serie_field}
 {ornament_html}
 {brand}
 {inner}

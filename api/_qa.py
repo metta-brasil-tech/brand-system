@@ -43,8 +43,8 @@ def _is_subseq(needle: list[str], hay: list[str]) -> bool:
     return False
 
 
-ARCHETYPES = {"typo", "photo-side", "photo-full", "photo-band", "object-center",
-              "card-mock", "logo-wall", "framed", "split", "number-hero"}
+ARCHETYPES = {"typo", "photo-side", "photo-full", "photo-band", "photo-versus",
+              "object-center", "card-mock", "logo-wall", "framed", "split", "number-hero"}
 # Marca Tiago tem design system próprio (Inter, off-white, accent #FFCC00) e não
 # usa o mecanismo de theme/token Metta — validado à parte.
 TIAGO_ARCHETYPES = {
@@ -131,7 +131,7 @@ def qa(front_matter: dict, copy: dict, image_url: str, html: str) -> dict:
 
         # no_invented_text: todo texto visível ∈ copy ∪ chrome da marca ∪ tag/whitelist.
         allowed: set[str] = set(_CHROME_SHARED) | (_CHROME_TIAGO if is_tiago else _CHROME_METTA)
-        for k in ("headline", "subhead", "body", "cta", "tag"):
+        for k in ("headline", "headline_right", "subhead", "body", "cta", "tag"):
             allowed |= set(_norm_words((copy.get(k) or "").replace("*", "")))
         for w in (copy.get("whitelist") or []):
             allowed |= set(_norm_words(str(w)))
