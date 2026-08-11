@@ -5,7 +5,7 @@ marca: metta
 archetype: photo-side
 params: { theme: dark, photo: right-bleed, block: none, align: left, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
-image: { prompt_ref: image-prompts/metta/style-A.md, required: true, treatment: "retrato editorial dessaturado (-20%), +contraste, sujeito íntegro, sério" }
+image: { prompt_ref: image-prompts/metta/style-A.md, required: true, treatment: "retrato editorial dessaturado (-20%), +contraste, sério; sujeito no LADO da foto (bleed) preenchendo o quadro verticalmente, o lado OPOSTO em sombra suave pro texto; SEM área cinza morta" }
 formato_nativo: [story, feed]
 dna_ref: "design/banco-ads-figma.md#§4.1"
 status: ativo

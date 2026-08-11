@@ -135,6 +135,19 @@ _HEADROOM = (
     "with comfortable empty space above the top of the head — NEVER crop the top of the "
     "head, the forehead or the chin against the frame edge. ")
 
+# Preencher o quadro (achado do Nathan): o Gemini às vezes devolve METADE da imagem como
+# parede/teto CINZA CHAPADO vazio (área morta) — a peça fica pobre e a banda de texto
+# parece cobrir buraco. Esta cláusula manda encher a cena de ponta a ponta E, ao mesmo
+# tempo, manter o sujeito no MIOLO com o topo/base sendo partes CALMAS da cena (não morto,
+# não o sujeito) — é o headroom pras bandas de texto, compatível com o zones:split.
+_FILL_FRAME = (
+    "Fill the ENTIRE frame edge-to-edge with a rich cinematic scene — NO flat empty gray "
+    "borders, NO blank wall or ceiling taking up half the image, no dead negative space. "
+    "Keep the main subject in the CENTRAL area; the top and the bottom of the frame should "
+    "be calmer PARTS of the same scene (soft background, surfaces, ambient light) — never "
+    "dead empty space and never the busy subject — leaving breathing room where a headline "
+    "and a button will sit. ")
+
 # Foco-no-ROSTO (P1): o Gemini tende a enquadrar a pessoa de corpo inteiro / de longe,
 # deixando o foco cair no tronco ou nas PERNAS (ex.: B-foto saía com a cabeça cortada e
 # foco nas pernas). Esta cláusula fixa o RECORTE (cabeça+ombros até meio-tronco, rosto
@@ -413,7 +426,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         prompt = (
             "Use the attached real advertisement ONLY as a style reference: match its photographic "
             "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
-            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}"
+            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}{_FILL_FRAME}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}, {"inlineData": {"mimeType": mime, "data": b64ref}}]
     else:
@@ -422,7 +435,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         treat = lang_treat or _METTA_TREAT
         prompt = (
             "Invent a completely new image from scratch (no reference image is provided). "
-            f"Create: {treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}"
+            f"Create: {treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}{_FILL_FRAME}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}]
 

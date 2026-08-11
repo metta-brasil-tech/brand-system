@@ -3,7 +3,7 @@ id: DARK-COLAGEM
 display_name: "Colagem fotográfica conceitual escura"
 marca: metta
 archetype: photo-full
-params: { theme: dark, anchor: bottom, align: center, cta: yellow }
+params: { theme: dark, zones: split, align: center, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
 image: { required: true, treatment: "colagem/ilustração surreal escura fullbleed" }
 formato_nativo: [story, feed]

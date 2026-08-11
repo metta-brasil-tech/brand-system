@@ -3,7 +3,7 @@ id: I-retrato-editorial-pb
 display_name: "Retrato editorial P&B + logo badge"
 marca: metta
 archetype: photo-full
-params: { theme: dark, anchor: bottom, align: left, cta: yellow }
+params: { theme: dark, zones: split, align: left, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
 image: { required: true, treatment: "retrato editorial preto e branco, alto contraste" }
 formato_nativo: [story, feed]

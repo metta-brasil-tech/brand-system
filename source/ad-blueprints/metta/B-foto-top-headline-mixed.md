@@ -5,7 +5,7 @@ marca: metta
 archetype: photo-band
 params: { theme: dark, photo: top, align: left, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
-image: { prompt_ref: image-prompts/metta/style-B.md, required: true, treatment: "foto editorial topo, sujeito íntegro" }
+image: { prompt_ref: image-prompts/metta/style-B.md, required: true, treatment: "foto editorial que aparece na FAIXA superior (~50%): sujeito no terço superior-central, cena preenchendo a borda toda, rica e cinematográfica; SEM área cinza morta" }
 formato_nativo: [story, feed]
 dna_ref: "design/banco-ads-figma.md#§4.2"
 status: ativo
