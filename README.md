@@ -138,12 +138,18 @@ O site fica atrás de login Google, restrito a contas `@mettabrasil.com.br`.
 ```
 middleware.js          portão global (roda antes de servir qualquer arquivo)
 lib/auth.js            cookie de sessão assinado (HMAC) + regra de acesso
-api/auth/{login,callback,logout}.js
+api/auth.js            as 3 etapas (login, callback, logout) numa função só
 login.html             tela de entrada
 ```
 
 Ligado pela env var `AUTH_ENABLED=1` na Vercel. Sem ela, o site serve normalmente sem pedir login, o que é o modo seguro pra rodar local (`npm start`).
 
 Env vars necessárias: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `SESSION_SECRET`, `ALLOWED_DOMAINS` e, opcionalmente, `ALLOWED_EMAILS` pra convidados de fora do domínio.
+
+As três etapas vivem no mesmo arquivo de propósito: o plano Hobby da Vercel limita
+projetos sem framework a **12 Serverless Functions por deployment**, e a `api/` já
+usa 10. As URLs públicas seguem sendo `/api/auth/login`, `/callback` e `/logout`,
+mapeadas pelos `rewrites` do `vercel.json`. Antes de criar função nova em `api/`,
+conte quantas já existem.
 
 Setup completo do Google Cloud, ordem de ativação e troubleshooting: `arquitetura/brand-system-login-google.md` no vault.
