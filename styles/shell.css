@@ -90,7 +90,8 @@ aside.nav .brand {
 aside.nav .brand-symbol {
   width: 32px; height: 32px;
   display: grid; place-items: center;
-  color: var(--metta-sys-color-on-surface);
+  /* símbolo é um dos dois usos liberados do amarelo (o outro é CTA) */
+  color: var(--metta-ref-palette-yellow-50);
   flex-shrink: 0;
 }
 aside.nav .brand-symbol svg { width: 100%; height: 100%; display: block; }
@@ -4063,6 +4064,7 @@ body.search-open { overflow: hidden; }
 
 
 /* ============ SESSÃO (login Google) ============ */
+.nav-user[hidden] { display: none; }
 .nav-user {
   margin-top: 24px;
   padding: 12px 0 0;
@@ -4081,6 +4083,7 @@ body.search-open { overflow: hidden; }
 }
 .nav-user-sair {
   flex: none;
+  color: inherit;
   text-decoration: none;
   opacity: .7;
   font-weight: 600;
