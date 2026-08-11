@@ -695,11 +695,24 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
         # parte confiável). A imagem deve deixar topo/base livres (headroom). Liga com
         # `zones: split`. É o padrão que o VERSUS-COVER provou, generalizado.
         if str(params.get("zones", "")).strip().lower() == "split":
-            head_html = f'<div class="zone-head">{_txt_blocks(copy, only_head=True)}</div>'
-            foot_html = (f'<div class="zone-foot">{_txt_blocks(copy, skip_head=True)}'
-                         f'{_cta(copy, cta_cls)}</div>')
-            return (f'{_photo(image_url)}<div class="grad grad--dual"></div>'
-                    f'<div class="layer layer--zones">{head_html}{foot_html}</div>')
+            # SELETOR (item 3): dentro do frame fixo, o focus-map escolhe entre 3
+            # layouts SEGUROS conforme onde o sujeito está (copy.zone, medido em
+            # generate.py). split = sujeito no meio (headline topo + CTA base) ·
+            # top = sujeito embaixo → todo o texto EM CIMA · bottom = sujeito em cima
+            # → todo o texto EMBAIXO. Assim, quando a imagem NÃO coopera, o texto foge
+            # do sujeito em vez de sentar em cima (o scrim segue como rede). Isto é o
+            # "automático preso a opções seguras", não posicionamento livre.
+            zplace = str((copy or {}).get("zone") or "split").strip().lower()
+            if zplace not in ("split", "top", "bottom"):
+                zplace = "split"
+            cta_html = _cta(copy, cta_cls)
+            if zplace == "split":
+                inner_zones = (f'<div class="zone-head">{_txt_blocks(copy, only_head=True)}</div>'
+                               f'<div class="zone-foot">{_txt_blocks(copy, skip_head=True)}{cta_html}</div>')
+            else:  # zona única no lado LIVRE (sujeito ocupa o oposto)
+                inner_zones = f'<div class="zone-solo">{_txt_blocks(copy)}{cta_html}</div>'
+            return (f'{_photo(image_url)}<div class="grad grad--zone" data-zone="{zplace}"></div>'
+                    f'<div class="layer layer--zones" data-zone="{zplace}">{inner_zones}</div>')
         # 2 zonas (padrão CRM/chupeta real): headline SOBRE a foto (sem card, com
         # sombra) no topo + card só com apoio/CTA embaixo. Liga com head_out=1
         # quando há caixa. Senão, caixa única com tudo dentro.

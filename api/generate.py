@@ -1073,6 +1073,7 @@ def _run_pipeline_inline(
     # Converte file:// → data:image URI pro HTML
     _focus_anchor = None  # âncora MEDIDA na imagem real (focus map) — None = não mediu
     _force_band = None    # sensor 2D: photo-side com sujeito na coluna → texto vira faixa
+    _zone_sel = None      # seletor zones:split — split|top|bottom (texto foge do sujeito)
     if image_file_url:
         image_data_uri = _image_to_data_uri(image_file_url)
         diagnostics.append(f"image-uri: data:image embed ({len(image_data_uri) // 1024}KB base64)")
@@ -1093,6 +1094,16 @@ def _run_pipeline_inline(
                 f"{'centrado' if _fmeta.get('subject_centered') else ''}"
                 f"{'— sujeito ocupa tudo, blueprint decide' if _fmeta.get('ambiguous') else '→ REGRA VENCE o blueprint'}"
             )
+            # SELETOR de zona (zones:split): reusa a decisão CALIBRADA do focus_anchor
+            # — _anc é o lado VAZIO (= onde o texto vai). sujeito no topo → texto embaixo
+            # (zone=bottom); sujeito embaixo → texto em cima (zone=top); sujeito no meio
+            # ou ocupando tudo → split (headline topo + CTA base). É o "automático preso
+            # a 3 layouts seguros": o texto FOGE do sujeito, nunca senta em cima.
+            _bp_par = ((bp_fm_full or {}).get("params", {}) or {}) if bp_fm_full else {}
+            if str(_bp_par.get("zones", "")).strip().lower() == "split":
+                _zone_sel = (_anc if (_anc in ("top", "bottom")
+                                      and not _fmeta.get("ambiguous")) else "split")
+                diagnostics.append(f"zone-seletor: {_zone_sel} (texto foge do sujeito)")
         except Exception as _fe:
             diagnostics.append(f"focus-map: pulado ({_fe.__class__.__name__}: {str(_fe)[:60]})")
         # SENSOR FOCAL 2D: photo-side (foto num lado, texto no outro). Se o sujeito
@@ -1155,6 +1166,8 @@ def _run_pipeline_inline(
         "panel": (ad_directives.get("panel") or "").strip().lower(),
         # sensor 2D: quando setado, o render troca photo-side → faixa (photo-full)
         "_force_band": _force_band or "",
+        # seletor de zona (zones:split): split|top|bottom — o texto foge do sujeito
+        "zone": _zone_sel or "",
         # TIAGO-TYPO-PURE: assinatura no fundo (vazio = default ligado; 'off' desliga)
         "sig_bg": sig_bg or "",
         "head_out": str(ad_directives.get("head_out") or "").strip().lower(),
