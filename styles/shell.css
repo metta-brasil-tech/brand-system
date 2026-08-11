@@ -4060,3 +4060,29 @@ body.search-open { overflow: hidden; }
   .search-overlay { padding: 40px 12px 12px; }
   .search-panel { border-radius: 14px; }
 }
+
+
+/* ============ SESSÃO (login Google) ============ */
+.nav-user {
+  margin-top: 24px;
+  padding: 12px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid var(--metta-sys-color-outline-variant, rgba(127,127,127,.2));
+  font-size: 12px;
+}
+.nav-user-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: .7;
+}
+.nav-user-sair {
+  flex: none;
+  text-decoration: none;
+  opacity: .7;
+  font-weight: 600;
+}
+.nav-user-sair:hover { opacity: 1; }

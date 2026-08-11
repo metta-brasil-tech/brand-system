@@ -34,6 +34,12 @@
     <nav id="nav-tabs" aria-label="Navegação principal">
       <!-- Renderizado por app.js a partir de data/nav.json -->
     </nav>
+
+    <!-- Sessão: só aparece quando o login Google está ligado -->
+    <div class="nav-user" id="nav-user" hidden>
+      <span class="nav-user-email" id="nav-user-email"></span>
+      <a class="nav-user-sair" href="/api/auth/logout">Sair</a>
+    </div>
   </aside>
 
   <!-- ============== MAIN ============== -->
@@ -166,6 +172,17 @@
 
 </div>
 
+<script>
+  // Mostra quem está logado. O cookie mbs_user é só exibição; a credencial de
+  // verdade é o mbs_sess (HttpOnly), conferido no middleware.
+  (function () {
+    var m = document.cookie.match(/(?:^|;\s*)mbs_user=([^;]+)/);
+    if (!m) return;
+    var caixa = document.getElementById('nav-user');
+    document.getElementById('nav-user-email').textContent = decodeURIComponent(m[1]);
+    caixa.hidden = false;
+  })();
+</script>
 <script src="vendor/jszip.min.js"></script>
 <script src="app.js"></script>
 </body>

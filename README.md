@@ -128,3 +128,22 @@ brand-system/
 - **Roteamento simples** — hash routing vanilla, sem framework. URLs como `#/marca/manifesto`.
 - **Tema light/dark** — toggle persistido em `localStorage`.
 - **Sem emojis na UI** — apenas ícones SVG no estilo DS (line, viewBox 24x24, stroke currentColor 2.2).
+
+---
+
+## Acesso (login Google)
+
+O site fica atrás de login Google, restrito a contas `@mettabrasil.com.br`.
+
+```
+middleware.js          portão global (roda antes de servir qualquer arquivo)
+lib/auth.js            cookie de sessão assinado (HMAC) + regra de acesso
+api/auth/{login,callback,logout}.js
+login.html             tela de entrada
+```
+
+Ligado pela env var `AUTH_ENABLED=1` na Vercel. Sem ela, o site serve normalmente sem pedir login, o que é o modo seguro pra rodar local (`npm start`).
+
+Env vars necessárias: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `SESSION_SECRET`, `ALLOWED_DOMAINS` e, opcionalmente, `ALLOWED_EMAILS` pra convidados de fora do domínio.
+
+Setup completo do Google Cloud, ordem de ativação e troubleshooting: `arquitetura/brand-system-login-google.md` no vault.
