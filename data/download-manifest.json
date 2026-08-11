@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-05T14:48:46.160Z",
-  "grandTotalBytes": 264039100,
-  "grandTotalFiles": 1184,
+  "generatedAt": "2026-08-11T11:14:29.675Z",
+  "grandTotalBytes": 264068438,
+  "grandTotalFiles": 1185,
   "grandTotalTabs": 20,
   "groups": [
     {
@@ -79,6 +79,19 @@
               "fileCount": 1
             },
             {
+              "id": "protocolo",
+              "label": "Protocolo M.E.T.T.A.",
+              "files": [
+                {
+                  "name": "protocolo.md",
+                  "path": "content/marca/protocolo.md",
+                  "sizeBytes": 29338
+                }
+              ],
+              "totalBytes": 29338,
+              "fileCount": 1
+            },
+            {
               "id": "glossario",
               "label": "Glossário",
               "files": [
@@ -92,8 +105,8 @@
               "fileCount": 1
             }
           ],
-          "totalBytes": 191642,
-          "fileCount": 6
+          "totalBytes": 220980,
+          "fileCount": 7
         },
         {
           "id": "audiencia",
