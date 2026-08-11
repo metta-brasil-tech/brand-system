@@ -688,6 +688,18 @@ def _markup(arch: str, copy: dict, params: dict, image_url: str) -> str:
                 f'<div class="layer">{_panel_wrap(f"<div class=stack>{_txt_blocks(copy, divider=_div_photo)}</div>")}</div>')
 
     if arch == "photo-full":
+        # ZONAS FIXAS (determinístico, como os blueprints fixos tweet/notes): headline
+        # numa banda no TOPO + subhead/body/CTA numa banda na BASE, com scrim duplo. O
+        # LUGAR de cada coisa é FIXO — não a âncora calculada (focus-map) que erra e
+        # tampa o sujeito / gruda o CTA. O auto-fit só dimensiona DENTRO da banda (a
+        # parte confiável). A imagem deve deixar topo/base livres (headroom). Liga com
+        # `zones: split`. É o padrão que o VERSUS-COVER provou, generalizado.
+        if str(params.get("zones", "")).strip().lower() == "split":
+            head_html = f'<div class="zone-head">{_txt_blocks(copy, only_head=True)}</div>'
+            foot_html = (f'<div class="zone-foot">{_txt_blocks(copy, skip_head=True)}'
+                         f'{_cta(copy, cta_cls)}</div>')
+            return (f'{_photo(image_url)}<div class="grad grad--dual"></div>'
+                    f'<div class="layer layer--zones">{head_html}{foot_html}</div>')
         # 2 zonas (padrão CRM/chupeta real): headline SOBRE a foto (sem card, com
         # sombra) no topo + card só com apoio/CTA embaixo. Liga com head_out=1
         # quando há caixa. Senão, caixa única com tudo dentro.

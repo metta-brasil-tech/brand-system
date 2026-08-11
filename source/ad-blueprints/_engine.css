@@ -472,6 +472,28 @@ button { all: unset; }
 .ad[data-arch="photo-full"][data-align="center"] .layer { justify-content: center; align-items: center; text-align: center; }
 .ad[data-arch="photo-full"] .cta-wrap { margin-top: 8px; }
 
+/* ZONAS FIXAS (zones: split) — headline top-band + subhead/CTA bottom-band, scrim
+   duplo. Posição determinística (não âncora calculada). Mesmo padrão do versus. */
+.ad[data-arch="photo-full"] .grad--dual {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(180deg, rgba(8,14,17,.82) 0%, rgba(8,14,17,.34) 22%, transparent 42%),
+              linear-gradient(0deg, rgba(8,14,17,.9) 0%, rgba(8,14,17,.42) 24%, transparent 46%);
+}
+.ad[data-arch="photo-full"][data-theme="light"] .grad--dual {
+  background: linear-gradient(180deg, rgba(238,244,247,.92) 0%, rgba(238,244,247,.4) 22%, transparent 44%),
+              linear-gradient(0deg, rgba(238,244,247,.94) 0%, rgba(238,244,247,.46) 24%, transparent 48%);
+}
+.ad[data-arch="photo-full"] .layer--zones {
+  position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column;
+  justify-content: space-between; padding: var(--pad-y) var(--pad-x); padding-top: 184px;
+}
+.ad[data-format="story"][data-arch="photo-full"] .layer--zones { padding-top: 248px; }
+.ad[data-arch="photo-full"] .zone-head { max-width: 92%; }
+.ad[data-arch="photo-full"][data-align="center"] .layer--zones { align-items: center; text-align: center; }
+.ad[data-arch="photo-full"] .zone-foot { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; max-width: 88%; }
+.ad[data-arch="photo-full"][data-align="center"] .zone-foot { align-items: center; }
+.ad[data-arch="photo-full"] .zone-foot .cta-wrap { margin: 0; }
+
 /* (3b) photo-versus — cover "A × B" com ZONAS INDEPENDENTES.
    headline(s) top-pinned · foto livre no meio · ✕ central · subline+CTA bottom-pinned.
    Cada zona ancora sozinha (space-between) — o CTA NÃO segue o headline. */

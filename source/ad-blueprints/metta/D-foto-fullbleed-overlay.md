@@ -3,9 +3,9 @@ id: D-foto-fullbleed-overlay
 display_name: "Foto full-bleed + overlay escuro"
 marca: metta
 archetype: photo-full
-params: { theme: dark, anchor: bottom, align: left, cta: yellow }
+params: { theme: dark, zones: split, align: left, cta: yellow }
 slots: [tag, headline, subhead, body, cta]
-image: { prompt_ref: image-prompts/metta/style-D.md, required: true, treatment: "foto fullbleed dramática, overlay escuro na base" }
+image: { prompt_ref: image-prompts/metta/style-D.md, required: true, treatment: "foto fullbleed dramática; sujeito no terço MÉDIO, deixando o topo (~28%) e a base (~24%) com espaço calmo pras bandas de texto (headroom)" }
 formato_nativo: [story, feed]
 dna_ref: "design/banco-ads-figma.md#§4.4"
 status: ativo
