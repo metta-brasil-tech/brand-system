@@ -682,7 +682,8 @@ button { all: unset; }
 .ad[data-arch="split"][data-orient="horizontal"] .half-media { width: 100%; height: 54%; background-color: var(--m-night-10); }
 .ad[data-arch="split"][data-orient="horizontal"] .half-text { width: 100%; height: 46%; background: var(--m-yellow); padding: 56px 64px; justify-content: center; }
 .ad[data-arch="split"][data-orient="horizontal"] .half-text .t-head,
-.ad[data-arch="split"][data-orient="horizontal"] .half-text .t-sub { color: var(--m-night-10); }
+.ad[data-arch="split"][data-orient="horizontal"] .half-text .t-sub,
+.ad[data-arch="split"][data-orient="horizontal"] .half-text .t-body { color: var(--m-night-10); }
 .ad[data-arch="split"][data-orient="horizontal"] .half-text .t-head .hi { color: var(--m-night-10); background: none; }
 .ad[data-arch="split"][data-orient="horizontal"] .cta { background: var(--m-night-10); color: var(--m-white); }
 
