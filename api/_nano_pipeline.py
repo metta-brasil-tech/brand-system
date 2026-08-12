@@ -404,12 +404,23 @@ def generate_background(model_id: str, copy: dict, scene: str,
     # isso o gerador CENTRALIZA o sujeito e não sobra metade limpa (o focus map não
     # tem como salvar depois). Steering forte (~45%, não "um terço") + focus map = 1 shot.
     anchor = str(copy.get("text_anchor") or "top").strip().lower()
-    zone = {"top": ("Composition: the subject sits ENTIRELY in the LOWER HALF of the frame; "
-                    "its highest point does not rise above the vertical middle. The ENTIRE "
-                    "UPPER 45% is clean, dark, softly blurred EMPTY space with nothing in it. "),
-            "bottom": ("Composition: the subject sits ENTIRELY in the UPPER HALF of the frame; "
-                       "its lowest point does not go below the vertical middle. The ENTIRE "
-                       "LOWER 45% is clean, softly blurred EMPTY space with nothing in it. ")}.get(anchor, "")
+    # A zona vazia de texto precisa seguir o TEMA (achado do Nathan no YELLOW-OBJETO):
+    # antes era sempre "dark" → no tema dark (texto branco) OK, mas no amarelo/light
+    # (texto/logo PRETO) o Gemini deixava o topo escuro e a escrita sumia (preto no
+    # escuro). Modelos de fundo claro/amarelo → zona vazia CLARA; dark → escura.
+    _LIGHT_BG_MODELS = {"YELLOW-OBJETO", "YELLOW-BLOCO", "YELLOW-EDITORIAL", "YELLOW-FRAME",
+                        "YELLOW-DRAW", "YELLOW-SPLIT", "LIGHT-SURREAL", "LIGHT-TIPO",
+                        "H-fundo-branco-headline-gigante"}
+    _empty = ("clean, BRIGHT, evenly lit, softly blurred EMPTY space (light background, NO dark "
+              "shadow or vignette)" if (model_id in _LIGHT_BG_MODELS
+              or str(copy.get("theme", "")).lower() in ("yellow", "light", "paper", "white", "offwhite"))
+              else "clean, dark, softly blurred EMPTY space")
+    zone = {"top": (f"Composition: the subject sits ENTIRELY in the LOWER HALF of the frame; "
+                    f"its highest point does not rise above the vertical middle. The ENTIRE "
+                    f"UPPER 45% is {_empty} with nothing in it. "),
+            "bottom": (f"Composition: the subject sits ENTIRELY in the UPPER HALF of the frame; "
+                       f"its lowest point does not go below the vertical middle. The ENTIRE "
+                       f"LOWER 45% is {_empty} with nothing in it. ")}.get(anchor, "")
     # brief (já resolvido no pick_reference — pode ser o da família-gap) vence o mapa
     # por linguagem; sem brief (refs de foto L3-L7) casa o tratamento pela linguagem.
     lang_treat = ref.get("brief") or _LANG_TREAT.get(ref.get("linguagem") or "") or ""
