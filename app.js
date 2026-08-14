@@ -862,9 +862,9 @@ const BrandSystem = (() => {
   // ----------- DOWNLOADS GALLERY (modelos de documentos .docx) -----------
   // Renderiza um grupo do download-manifest como seção navegável, com cards de
   // download individual agrupados por categoria. Fonte: data/download-manifest.json.
-  const DOWNLOADS_CATEGORY_ORDER = ['Comercial', 'Projetos', 'Pessoas', 'Operação', 'Ebooks', 'Outros'];
+  const DOWNLOADS_CATEGORY_ORDER = ['Comercial', 'Projetos', 'Pessoas', 'Operação', 'Ebooks', 'Fundos de videochamada', 'Outros'];
   // rótulos curtos das abas pro filtro por tipo; fallback = label da aba no manifest
-  const DOWNLOADS_TYPE_LABELS = { documentos: 'Documentos .docx', ebooks: 'Ebooks' };
+  const DOWNLOADS_TYPE_LABELS = { documentos: 'Documentos .docx', ebooks: 'Ebooks', 'fundos-videochamada': 'Fundos de videochamada' };
   let downloadsTypeFilter = 'all';
 
   function renderDownloadsGallery(tab, group) {
@@ -900,7 +900,9 @@ const BrandSystem = (() => {
         const cover = pages ? s.previewPages[0] : null;
         const ext = ((file.name || '').split('.').pop() || 'arquivo').toUpperCase();
         const metaBits = [`${ext} · ${formatBytes(s.totalBytes)}`];
-        if (pages) metaBits.push(`${pages} ${pages === 1 ? 'página' : 'páginas'}`);
+        // imagem avulsa (fundo de videochamada) não tem "páginas", mostra a resolução
+        if (s.previewKind === 'imagem') { if (s.resolucao) metaBits.push(s.resolucao); }
+        else if (pages) metaBits.push(`${pages} ${pages === 1 ? 'página' : 'páginas'}`);
 
         const thumb = cover
           ? `<button type="button" class="doc-card-thumb" data-preview="${escapeAttr(s.id)}" aria-label="Visualizar ${escapeAttr(s.label)}">
@@ -944,7 +946,7 @@ const BrandSystem = (() => {
         <header class="docs-hero">
           <span class="docs-hero-eyebrow">${svgIcon('fileText', 13)}<span>Recursos</span></span>
           <h1 class="docs-hero-title">${escapeHtml(tab.label || 'Modelos de Documentos')}</h1>
-          <p class="docs-hero-sub">${total} modelos editáveis com a identidade Metta: documentos <strong>.docx</strong> e <strong>kits de ebook</strong>. Clique pra ver um exemplo, baixe o template e personalize.</p>
+          <p class="docs-hero-sub">${escapeHtml(tab.description || `${total} recursos prontos com a identidade Metta. Clique pra visualizar, baixe e use.`)}</p>
           <div class="docs-filter" role="group" aria-label="Filtrar por tipo de modelo">${filterBtns}</div>
         </header>
         ${blocks || '<div class="placeholder"><p>Nenhum modelo encontrado. Rode <code>npm run build:manifest</code>.</p></div>'}
@@ -980,7 +982,7 @@ const BrandSystem = (() => {
       ? pages.map((p, i) => `<img class="doc-preview-page" src="${escapeAttr(p)}" alt="Página ${i + 1}" loading="${i === 0 ? 'eager' : 'lazy'}">`).join('')
       : `<div class="placeholder"><p>Sem preview disponível.</p></div>`;
     const dlTemplate = file.path
-      ? `<a class="doc-card-btn primary" href="${escapeAttr(file.path)}" download="${escapeAttr(file.name || '')}">${svgIcon('download', 14)}<span>Baixar template</span></a>`
+      ? `<a class="doc-card-btn primary" href="${escapeAttr(file.path)}" download="${escapeAttr(file.name || '')}">${svgIcon('download', 14)}<span>${sec.previewKind === 'imagem' ? 'Baixar imagem' : 'Baixar template'}</span></a>`
       : '';
     const dlExample = sec.exampleFile && sec.exampleFile.path
       ? `<a class="doc-card-btn ghost" href="${escapeAttr(sec.exampleFile.path)}" download="${escapeAttr(sec.exampleFile.name || '')}">${svgIcon('fileText', 14)}<span>Baixar exemplo</span></a>`
@@ -990,7 +992,7 @@ const BrandSystem = (() => {
         <button class="lightbox-close" aria-label="Fechar">×</button>
         <header class="doc-preview-head">
           <div>
-            <span class="doc-preview-eyebrow">${escapeHtml(sec.category || 'Documento')} · exemplo preenchido</span>
+            <span class="doc-preview-eyebrow">${escapeHtml(sec.previewEyebrow || `${sec.category || 'Documento'} · exemplo preenchido`)}</span>
             <h3 class="doc-preview-title">${escapeHtml(sec.label)}</h3>
           </div>
           <div class="doc-preview-actions">${dlTemplate}${dlExample}</div>

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-11T11:14:29.675Z",
-  "grandTotalBytes": 264068438,
-  "grandTotalFiles": 1185,
-  "grandTotalTabs": 20,
+  "generatedAt": "2026-08-14T15:57:41.079Z",
+  "grandTotalBytes": 265835599,
+  "grandTotalFiles": 1190,
+  "grandTotalTabs": 21,
   "groups": [
     {
       "id": "docs",
@@ -1761,7 +1761,7 @@
     },
     {
       "id": "modelos",
-      "label": "Modelos de Documentos",
+      "label": "Modelos e Kits",
       "tabs": [
         {
           "id": "documentos",
@@ -2162,6 +2162,125 @@
           ],
           "totalBytes": 16425338,
           "fileCount": 3
+        },
+        {
+          "id": "fundos-videochamada",
+          "label": "Fundos de videochamada",
+          "kind": "assets",
+          "sections": [
+            {
+              "id": "Metta-Fundo-Videochamada-01-Poster-Bora-Bater-Meta",
+              "label": "Sala com poster · Bora bater meta",
+              "category": "Fundos de videochamada",
+              "description": "Sala clara com o poster \"Superar metas para viver\". Clima de casa, boa pra reunião interna e daily.",
+              "files": [
+                {
+                  "name": "Metta-Fundo-Videochamada-01-Poster-Bora-Bater-Meta.jpg",
+                  "path": "assets/fundos-videochamada/Metta-Fundo-Videochamada-01-Poster-Bora-Bater-Meta.jpg",
+                  "sizeBytes": 330047
+                }
+              ],
+              "previewPages": [
+                "assets/fundos-videochamada/previews/Metta-Fundo-Videochamada-01-Poster-Bora-Bater-Meta/p1.webp"
+              ],
+              "exampleFile": null,
+              "previewKind": "imagem",
+              "resolucao": "1920×1080",
+              "previewEyebrow": "Fundo de videochamada · 1920×1080",
+              "totalBytes": 330047,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Fundo-Videochamada-02-Sala-Parede-Metta",
+              "label": "Sala de reunião · Parede metta",
+              "category": "Fundos de videochamada",
+              "description": "Sala ampla com a parede amarela assinada ao fundo. Institucional sem pesar, serve pra call com cliente.",
+              "files": [
+                {
+                  "name": "Metta-Fundo-Videochamada-02-Sala-Parede-Metta.jpg",
+                  "path": "assets/fundos-videochamada/Metta-Fundo-Videochamada-02-Sala-Parede-Metta.jpg",
+                  "sizeBytes": 331815
+                }
+              ],
+              "previewPages": [
+                "assets/fundos-videochamada/previews/Metta-Fundo-Videochamada-02-Sala-Parede-Metta/p1.webp"
+              ],
+              "exampleFile": null,
+              "previewKind": "imagem",
+              "resolucao": "1920×1080",
+              "previewEyebrow": "Fundo de videochamada · 1920×1080",
+              "totalBytes": 331815,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Fundo-Videochamada-03-Arcos-Gelo",
+              "label": "Arcos · Fundo gelo",
+              "category": "Fundos de videochamada",
+              "description": "Fundo neutro claro com arcos e símbolo nos cantos. O mais discreto do conjunto: não briga com a sua imagem.",
+              "files": [
+                {
+                  "name": "Metta-Fundo-Videochamada-03-Arcos-Gelo.jpg",
+                  "path": "assets/fundos-videochamada/Metta-Fundo-Videochamada-03-Arcos-Gelo.jpg",
+                  "sizeBytes": 346655
+                }
+              ],
+              "previewPages": [
+                "assets/fundos-videochamada/previews/Metta-Fundo-Videochamada-03-Arcos-Gelo/p1.webp"
+              ],
+              "exampleFile": null,
+              "previewKind": "imagem",
+              "resolucao": "1920×1080",
+              "previewEyebrow": "Fundo de videochamada · 1920×1080",
+              "totalBytes": 346655,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Fundo-Videochamada-04-Superar-Metas",
+              "label": "Superar metas é o que nos move",
+              "category": "Fundos de videochamada",
+              "description": "Amarelo cheio com a frase em tipografia grande. Presença forte, melhor pra gravação, evento e webinar.",
+              "files": [
+                {
+                  "name": "Metta-Fundo-Videochamada-04-Superar-Metas.jpg",
+                  "path": "assets/fundos-videochamada/Metta-Fundo-Videochamada-04-Superar-Metas.jpg",
+                  "sizeBytes": 279221
+                }
+              ],
+              "previewPages": [
+                "assets/fundos-videochamada/previews/Metta-Fundo-Videochamada-04-Superar-Metas/p1.webp"
+              ],
+              "exampleFile": null,
+              "previewKind": "imagem",
+              "resolucao": "1920×1080",
+              "previewEyebrow": "Fundo de videochamada · 1920×1080",
+              "totalBytes": 279221,
+              "fileCount": 1
+            },
+            {
+              "id": "Metta-Fundo-Videochamada-05-Sala-Logo-Parede",
+              "label": "Sala de reunião · Logo na parede",
+              "category": "Fundos de videochamada",
+              "description": "Sala com o logo aplicado na parede e mesa amarela. A leitura mais corporativa, boa pra reunião externa.",
+              "files": [
+                {
+                  "name": "Metta-Fundo-Videochamada-05-Sala-Logo-Parede.jpg",
+                  "path": "assets/fundos-videochamada/Metta-Fundo-Videochamada-05-Sala-Logo-Parede.jpg",
+                  "sizeBytes": 479423
+                }
+              ],
+              "previewPages": [
+                "assets/fundos-videochamada/previews/Metta-Fundo-Videochamada-05-Sala-Logo-Parede/p1.webp"
+              ],
+              "exampleFile": null,
+              "previewKind": "imagem",
+              "resolucao": "1920×1080",
+              "previewEyebrow": "Fundo de videochamada · 1920×1080",
+              "totalBytes": 479423,
+              "fileCount": 1
+            }
+          ],
+          "totalBytes": 1767161,
+          "fileCount": 5
         }
       ]
     },

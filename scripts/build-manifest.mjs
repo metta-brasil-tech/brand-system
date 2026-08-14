@@ -12,6 +12,7 @@ import { readFile, writeFile, stat, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, resolve, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -395,6 +396,71 @@ async function buildEbooksTab() {
   };
 }
 
+// ----------- FUNDOS DE VIDEOCHAMADA (uso do time) -----------
+// Imagens 1920x1080 prontas pra subir como plano de fundo no Google Meet e no Zoom.
+// Ficam em JPG de propósito: nenhuma das duas plataformas aceita WebP no upload
+// (ver KEEP_ORIGINAL_DIRS em scripts/optimize-images.mjs). Preview é WebP normal.
+const FUNDO_META = {
+  'Metta-Fundo-Videochamada-01-Poster-Bora-Bater-Meta.jpg': { label: 'Sala com poster · Bora bater meta', description: 'Sala clara com o poster "Superar metas para viver". Clima de casa, boa pra reunião interna e daily.' },
+  'Metta-Fundo-Videochamada-02-Sala-Parede-Metta.jpg':      { label: 'Sala de reunião · Parede metta',     description: 'Sala ampla com a parede amarela assinada ao fundo. Institucional sem pesar, serve pra call com cliente.' },
+  'Metta-Fundo-Videochamada-03-Arcos-Gelo.jpg':             { label: 'Arcos · Fundo gelo',                 description: 'Fundo neutro claro com arcos e símbolo nos cantos. O mais discreto do conjunto: não briga com a sua imagem.' },
+  'Metta-Fundo-Videochamada-04-Superar-Metas.jpg':          { label: 'Superar metas é o que nos move',     description: 'Amarelo cheio com a frase em tipografia grande. Presença forte, melhor pra gravação, evento e webinar.' },
+  'Metta-Fundo-Videochamada-05-Sala-Logo-Parede.jpg':       { label: 'Sala de reunião · Logo na parede',   description: 'Sala com o logo aplicado na parede e mesa amarela. A leitura mais corporativa, boa pra reunião externa.' }
+};
+
+async function buildFundosTab() {
+  const dir = join(ASSETS_DIR, 'fundos-videochamada');
+  let entries;
+  try { entries = await readdir(dir, { withFileTypes: true }); }
+  catch { return null; }
+  const imagens = entries.filter(e => e.isFile() && /\.(jpe?g|png)$/i.test(e.name));
+  if (imagens.length === 0) return null;
+
+  const sections = [];
+  for (const e of imagens) {
+    const f = await fileObj(join(dir, e.name));
+    const meta = FUNDO_META[f.name] || {};
+    const id = f.name.replace(/\.[^.]+$/, '');
+
+    // resolução real do arquivo — vira badge no card ("1920×1080")
+    let dim = '';
+    try {
+      const m = await sharp(join(dir, e.name)).metadata();
+      if (m.width && m.height) dim = `${m.width}×${m.height}`;
+    } catch { /* sem sharp disponível: card fica só com formato e peso */ }
+
+    let previewPages = [];
+    const prevDir = join(dir, 'previews', id);
+    if (existsSync(prevDir)) {
+      const imgs = (await readdir(prevDir)).filter(n => /\.(webp|png|jpe?g)$/i.test(n))
+        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+      previewPages = imgs.map(n => relative(ROOT, join(prevDir, n)).split(sep).join('/'));
+    }
+
+    sections.push({
+      id,
+      label: meta.label || id.replace(/^Metta-Fundo-Videochamada-\d+-/, '').replace(/-/g, ' '),
+      category: 'Fundos de videochamada',
+      description: meta.description || '',
+      files: [f],
+      previewPages,
+      exampleFile: null,
+      // sinaliza pro app.js: card de imagem, não de documento paginado
+      previewKind: 'imagem',
+      resolucao: dim,
+      previewEyebrow: `Fundo de videochamada${dim ? ' · ' + dim : ''}`,
+      totalBytes: f.sizeBytes,
+      fileCount: 1
+    });
+  }
+  // ordem = numeração do arquivo (01..05), que é a ordem editorial do conjunto
+  sections.sort((a, b) => a.id.localeCompare(b.id, 'pt-BR', { numeric: true }));
+  return {
+    id: 'fundos-videochamada', label: 'Fundos de videochamada', kind: 'assets',
+    sections, totalBytes: sumSize(sections.map(s => s.files[0])), fileCount: sections.length
+  };
+}
+
 async function buildGroup(id, label, tabSpecs) {
   const tabs = [];
   for (const t of tabSpecs) {
@@ -475,10 +541,11 @@ async function main() {
     })}
   ]);
 
-  log.group('Grupo: Modelos de Documentos');
-  const modelosGroup = await buildGroup('modelos', 'Modelos de Documentos', [
+  log.group('Grupo: Modelos e Kits');
+  const modelosGroup = await buildGroup('modelos', 'Modelos e Kits', [
     { id: 'documentos', builder: () => buildModelosTab() },
-    { id: 'ebooks', builder: () => buildEbooksTab() }
+    { id: 'ebooks', builder: () => buildEbooksTab() },
+    { id: 'fundos-videochamada', builder: () => buildFundosTab() }
   ]);
 
   const groups = [docsGroup, modelosGroup, galeriaGroup, appsGroup, dsGroup].filter(g => g.tabs.length > 0);

@@ -21,6 +21,13 @@ const ASSETS_DIR = join(ROOT, 'assets');
 
 // Formatos raster que convertemos pra WebP. SVG fica de fora.
 const CONVERTIBLE = new Set(['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.tif', '.avif']);
+// Pastas cujo arquivo final é BAIXADO e usado fora do navegador, onde WebP não serve.
+// Ex.: fundos de videochamada — Google Meet e Zoom só aceitam JPG/PNG no upload de
+// plano de fundo. Preview dentro dessas pastas (previews/) segue convertendo.
+const KEEP_ORIGINAL_DIRS = ['assets/fundos-videochamada'];
+function keepOriginal(relPath) {
+  return KEEP_ORIGINAL_DIRS.some(d => relPath.startsWith(d + '/') && !relPath.startsWith(d + '/previews/'));
+}
 const WEBP_QUALITY = 85;       // bom equilíbrio fidelidade/peso pra brand assets
 const PNG_LOSSLESS_QUALITY = 90; // se o PNG é UI/screenshot, eleva qualidade
 
@@ -84,6 +91,7 @@ async function main() {
     const ext = extname(file).toLowerCase();
     if (!CONVERTIBLE.has(ext)) continue;
     const rel = relative(ROOT, file).split(sep).join('/');
+    if (keepOriginal(rel)) { log.info(`${rel} — mantido no formato original (KEEP_ORIGINAL_DIRS)`); continue; }
     try {
       const r = await convertToWebp(file);
       converted++;
