@@ -24,7 +24,9 @@ const CONVERTIBLE = new Set(['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '
 // Pastas cujo arquivo final é BAIXADO e usado fora do navegador, onde WebP não serve.
 // Ex.: fundos de videochamada — Google Meet e Zoom só aceitam JPG/PNG no upload de
 // plano de fundo. Preview dentro dessas pastas (previews/) segue convertendo.
-const KEEP_ORIGINAL_DIRS = ['assets/fundos-videochamada'];
+// - assets/tiago/recortadas e /recortes: embed/criar.html referencia esses arquivos
+//   por caminho .png fixo; converter pra WebP derruba os recortes do wizard.
+const KEEP_ORIGINAL_DIRS = ['assets/fundos-videochamada', 'assets/tiago/recortadas', 'assets/tiago/recortes'];
 function keepOriginal(relPath) {
   return KEEP_ORIGINAL_DIRS.some(d => relPath.startsWith(d + '/') && !relPath.startsWith(d + '/previews/'));
 }
