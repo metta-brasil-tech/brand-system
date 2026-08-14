@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-08-14T15:57:40.610Z",
+  "generatedAt": "2026-08-14T17:38:38.853Z",
   "tabs": [
     {
       "id": "overview",
@@ -5365,6 +5365,7 @@
       "icon": "sparkles",
       "label": "Criativos Gerados",
       "group": "negócio",
+      "dev_only": true,
       "description": "Peças produzidas pela ferramenta de criação — com veredito do QA e contexto.",
       "sections": [
         {
