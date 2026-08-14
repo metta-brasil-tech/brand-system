@@ -148,6 +148,28 @@ _FILL_FRAME = (
     "dead empty space and never the busy subject — leaving breathing room where a headline "
     "and a button will sit. ")
 
+# COMPOSIÇÃO POR LAYOUT (achado do Nathan): o card/bloco tampava o rosto do sujeito.
+# Direção de composição por modelo, injetada DIRETO no prompt do nano (determinística,
+# não depende do art-director LLM). Modelos de card/lateral → sujeito no lado OPOSTO ao
+# texto, rosto no alto e livre; photo-band → a cena PREENCHE. Validado 5/5 no YELLOW-BLOCO.
+_COMPOSE = {
+    "YELLOW-BLOCO": ("Composition: the single person sits in the RIGHT THIRD of the frame with the "
+                     "HEAD and FACE HIGH in the upper-right, looking at camera, FULLY clear of the "
+                     "entire left 60 percent; the LEFT 60 percent is a calm softly blurred background "
+                     "with no important detail. "),
+    "A-headline-foto-dark": ("Composition: the single person sits on the RIGHT side of the frame with "
+                             "the face clear and unobstructed; the LEFT 55 percent is a calm softly "
+                             "blurred background for text, no important detail there. "),
+    "NEWS-CARD": ("Composition: the scene FILLS the entire frame edge to edge with a rich cinematic "
+                  "shot, subject well framed, NO flat empty or dead areas. "),
+    "B-foto-top-headline-mixed": ("Composition: the scene FILLS the entire frame edge to edge, the "
+                                  "subject in the upper-center, NO flat empty or dead areas. "),
+    "FOTO-PILL-CASUAL": ("Composition: a candid real photo that FILLS the entire frame edge to edge, "
+                         "the person naturally framed, NO flat empty or dead areas. "),
+    "YELLOW-SPLIT": ("Composition: a dramatic subject that FILLS the frame edge to edge, well framed "
+                     "in the upper-center, NO flat empty or dead areas. "),
+}
+
 # Foco-no-ROSTO (P1): o Gemini tende a enquadrar a pessoa de corpo inteiro / de longe,
 # deixando o foco cair no tronco ou nas PERNAS (ex.: B-foto saía com a cabeça cortada e
 # foco nas pernas). Esta cláusula fixa o RECORTE (cabeça+ombros até meio-tronco, rosto
@@ -421,6 +443,11 @@ def generate_background(model_id: str, copy: dict, scene: str,
             "bottom": (f"Composition: the subject sits ENTIRELY in the UPPER HALF of the frame; "
                        f"its lowest point does not go below the vertical middle. The ENTIRE "
                        f"LOWER 45% is {_empty} with nothing in it. ")}.get(anchor, "")
+    # COMPOSIÇÃO POR LAYOUT (achado do Nathan: o card/bloco tampava o rosto do sujeito).
+    # Modelos de card/lateral → sujeito no lado OPOSTO ao texto, rosto livre; photo-band
+    # → a cena PREENCHE o quadro. Determinístico (não depende do art-director, que é LLM
+    # e falha) e VALIDADO (5/5 no YELLOW-BLOCO). Fora do mapa → usa a zona top/bottom.
+    composition = _COMPOSE.get(model_id, zone)
     # brief (já resolvido no pick_reference — pode ser o da família-gap) vence o mapa
     # por linguagem; sem brief (refs de foto L3-L7) casa o tratamento pela linguagem.
     lang_treat = ref.get("brief") or _LANG_TREAT.get(ref.get("linguagem") or "") or ""
@@ -437,7 +464,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         prompt = (
             "Use the attached real advertisement ONLY as a style reference: match its photographic "
             "treatment, grain, palette and lighting exactly; IGNORE its text, layout and typography. "
-            f"Create: {lang_treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}{_FILL_FRAME}"
+            f"Create: {lang_treat}Scene: {scene.strip()} {composition}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}{_FILL_FRAME}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}, {"inlineData": {"mimeType": mime, "data": b64ref}}]
     else:
@@ -446,7 +473,7 @@ def generate_background(model_id: str, copy: dict, scene: str,
         treat = lang_treat or _METTA_TREAT
         prompt = (
             "Invent a completely new image from scratch (no reference image is provided). "
-            f"Create: {treat}Scene: {scene.strip()} {zone}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}{_FILL_FRAME}"
+            f"Create: {treat}Scene: {scene.strip()} {composition}{_FACE_FOCAL}{_HEADROOM}{_NO_MICROTEXT}{_NO_ANATOMY}{_FILL_FRAME}"
             "ABSOLUTELY NO TEXT: no words, letters, numbers, logos or watermarks in the image.")
         parts = [{"text": prompt}]
 
