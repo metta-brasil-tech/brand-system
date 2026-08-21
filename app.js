@@ -2317,7 +2317,17 @@ const BrandSystem = (() => {
     'banco de imagens': ['galeria de imagens'],
     'botao': ['componentes'],
     'card': ['componentes'],
-    'etiqueta': ['componentes']
+    'etiqueta': ['componentes'],
+    // O produto virou "programa de aceleração", mas a aba continua "Mentoria":
+    // quem procura pelo nome novo (ou pela sigla) tem que cair no mesmo lugar.
+    'programa de aceleracao': ['mentoria'],
+    'programa de acompanhamento': ['mentoria'],
+    'aceleracao': ['mentoria'],
+    'smtm': ['mentoria'],
+    'supere a meta': ['mentoria'],
+    'plano': ['mentoria'],
+    'preco': ['mentoria'],
+    'investimento': ['mentoria']
   };
 
   // Preposições e artigos curtos: sozinhos, batem por substring em quase

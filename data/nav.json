@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-08-21T15:56:09.259Z",
+  "generatedAt": "2026-08-21T16:04:17.877Z",
   "tabs": [
     {
       "id": "overview",
@@ -4909,7 +4909,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-08-21T12:56:42-03:00"
         },
         {
           "id": "consultoria",
@@ -4988,8 +4988,8 @@
               "depth": 3
             },
             {
-              "id": "diferenciais-vs-mentoria-smtm",
-              "label": "Diferenciais vs. mentoria SMTM",
+              "id": "diferenciais-em-relacao-ao-smtm",
+              "label": "Diferenciais em relação ao SMTM",
               "depth": 2
             },
             {
@@ -5013,7 +5013,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-08-21T12:56:42-03:00"
         }
       ]
     },

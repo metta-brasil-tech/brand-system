@@ -1,12 +1,12 @@
 # Consultoria B2B
 
-A Consultoria B2B é a frente da Metta voltada para **médias e grandes operações comerciais**. Diferente do programa SMTM (digital, foco em empresários), a Consultoria atua diretamente dentro da empresa — modelo *hands-on*, presencial e híbrido, com **garantia contratual de superação de meta**. É a frente que mantém a mão da Metta na realidade do mercado: o laboratório onde o Protocolo M.E.T.T.A.™ é aplicado em escala, retroalimentando todo o ecossistema (mentoria, EAD, MBA, livros).
+A Consultoria B2B é a frente da Metta voltada para **médias e grandes operações comerciais**. Diferente do programa SMTM (digital, foco em empresários), a Consultoria atua diretamente dentro da empresa — modelo *hands-on*, presencial e híbrido, com **garantia contratual de superação de meta**. É a frente que mantém a mão da Metta na realidade do mercado: o laboratório onde o Protocolo M.E.T.T.A.™ é aplicado em escala, retroalimentando todo o ecossistema (programa de aceleração, EAD, MBA, livros).
 
 A Consultoria não entra em copy de aquisição pública — é vendida pelo time comercial direto, com contratos a partir de R$ 300 mil.
 
 ## Para quem é
 
-A Consultoria atende empresas que já têm **estrutura comercial montada** e precisam de uma intervenção sistêmica — não de mais um curso ou de uma mentoria à distância.
+A Consultoria atende empresas que já têm **estrutura comercial montada** e precisam de uma intervenção sistêmica, não de mais um curso ou de um acompanhamento à distância.
 
 ### Porte e firmografia
 - **Médias e grandes empresas** com operações comerciais estruturadas
@@ -16,7 +16,7 @@ A Consultoria atende empresas que já têm **estrutura comercial montada** e pre
 - **Setores** — Varejo, telecom, construção, indústria, serviços, pet, mídia (B2B e B2C)
 
 ### Quando faz sentido
-A Consultoria entra quando o problema da empresa **não cabe em mentoria digital**. Sinais clássicos de demanda:
+A Consultoria entra quando o problema da empresa **não cabe em programa digital**. Sinais clássicos de demanda:
 
 - Operação grande demais para o dono treinar pessoalmente
 - Múltiplas unidades, regionais ou linhas de produto exigindo padronização
@@ -69,9 +69,9 @@ Especialista entende processos do cliente e mapeia oportunidades em recrutamento
 ### Acompanhamento até autonomia
 A Consultoria não termina quando a metodologia foi entregue. Acompanha implementação, ajusta em tempo real, mensura resultado e só sai quando a operação ganhou autonomia para sustentar o método sozinha.
 
-## Diferenciais vs. mentoria SMTM
+## Diferenciais em relação ao SMTM
 
-| Dimensão | Mentoria SMTM | Consultoria B2B |
+| Dimensão | Programa de aceleração (SMTM) | Consultoria B2B |
 |----------|---------------|-----------------|
 | **Formato** | Programa digital contínuo | Projeto presencial/híbrido dentro da operação |
 | **Quem entra** | Empresário (dono individual) | Empresa (camada executiva inteira) |

@@ -1,8 +1,8 @@
-# Mentoria SMTM — Supere a Meta Todo Mês
+# Programa de Aceleração: Supere a Meta Todo Mês
 
 O **SMTM** é o programa digital contínuo de aceleração de lucratividade e profissionalização comercial da Metta. Foi criado para ajudar empresários a superar metas com previsibilidade, estruturar método, desenvolver pessoas e escalar resultados. É organizado em **5 planos** que cobrem desde a entrada (preparação para escalar) até o topo da linha (assessoria 360° com acesso direto ao Tiago Alves), encaixando-se no porte da empresa e no estágio da operação comercial.
 
-A Metta está migrando para uma linha *as a service*. Por isso, em comunicação institucional e copy, o termo oficial é **"programa de aceleração"** — não mais "mentoria". O termo "mentoria" segue válido como nome interno da aba e em conversas comerciais legadas.
+A Metta está migrando para uma linha *as a service*. Por isso, em comunicação institucional e em copy, o termo oficial é **"programa de aceleração"**, não mais "mentoria". No menu deste Brand System a aba segue chamada de "Mentoria", que é o nome pelo qual o time ainda procura, e em conversas comerciais legadas o termo continua valendo.
 
 ## O que muda entre os planos
 
@@ -32,7 +32,7 @@ A **base metodológica** é a mesma. Mudam acesso, personalização e intensidad
 | **Exclusive** | R$ 12.000/mês | Boleto ou cartão | + R$ 1M/mês | Alta | Metta constrói | Parcial — encontros quinzenais | Escala e descentralização |
 | **Premium** | R$ 2.916/mês | Cartão | R$ 200k–400k/mês | Média | Metta orienta | Parcial — encontros quinzenais | Consistência mensal |
 | **Acelera** | R$ 1.499/mês | Cartão | R$ 100k–200k/mês | Baixa | — | — | Preparar para escalar |
-| **Academy** | R$ 375/mês* | Cartão | Pós-mentoria | Baixa | — | — | Retenção e LTV |
+| **Academy** | R$ 375/mês* | Cartão | Pós-programa | Baixa | — | — | Retenção e LTV |
 
 *Academy: R$ 375/mês + R$ 500/ano por vendedor adicional + R$ 800/ano por gerente adicional.*
 
@@ -134,7 +134,7 @@ Equivalência: **R$ 2.916/mês.**
 - Empresários com faturamento entre R$ 100 mil e R$ 200 mil por mês.
 - Negócios que ainda não se sentem seguros para entrar em soluções de maior investimento.
 - Donos com alto nível de atuação operacional.
-- Leads em fase de preparação para mentoria ou planos mais estratégicos.
+- Leads em fase de preparação para o programa ou para planos mais estratégicos.
 
 ### O que está incluído
 - **Diagnóstico de gestão** + **Plano de ação / aceleração**.
@@ -156,10 +156,10 @@ Equivalência: **R$ 2.916/mês.**
 
 ## Plano Academy
 
-**Plano de retenção e LTV.** Para clientes que já passaram por mentoria mais profunda (Premium, Exclusive ou Elite) e querem manter acesso à plataforma EAD, à comunidade e à evolução contínua dos conteúdos.
+**Plano de retenção e LTV.** Para clientes que já passaram por um plano mais profundo (Premium, Exclusive ou Elite) e querem manter acesso à plataforma EAD, à comunidade e à evolução contínua dos conteúdos.
 
 ### Para quem é
-- Empresas pós-mentoria que querem continuidade.
+- Empresas que já concluíram o programa e querem continuidade.
 - Times que precisam manter formação contínua (vendedores e gerentes).
 - Operações que valorizam a relação de longo prazo com a Metta.
 
@@ -225,11 +225,11 @@ A escolha não é só pelo preço — é pela combinação de **porte + estágio
 
 | Cenário | Plano sugerido |
 |---------|----------------|
-| Faturamento R$ 100k–200k, dono ainda muito operacional, primeira mentoria | **Acelera** |
+| Faturamento R$ 100k–200k, dono ainda muito operacional, primeiro programa | **Acelera** |
 | Faturamento R$ 200k–400k, em estruturação, valoriza grupo e networking | **Premium** |
 | Faturamento +R$ 1M, estrutura gerencial montada, dono ainda no dia a dia | **Exclusive** |
 | Faturamento +R$ 2M, em crescimento acelerado, demanda decisão estratégica direta | **Elite** |
-| Pós-mentoria, manter acesso e continuidade | **Academy** |
+| Já concluiu o programa, quer manter acesso e continuidade | **Academy** |
 
 Em copy de tráfego pago, segmentar por faturamento alvo evita atrair lead do plano errado. **Em qualquer plano**, a porta de entrada de marketing é a sessão estratégica gratuita — o plano só é apresentado depois do diagnóstico.
 
