@@ -138,7 +138,7 @@ O site fica atrás de login Google, restrito a contas `@mettabrasil.com.br`.
 ```
 middleware.js          portão global (roda antes de servir qualquer arquivo)
 lib/auth.js            cookie de sessão assinado (HMAC) + regra de acesso
-api/auth.js            as 3 etapas (login, callback, logout) numa função só
+api/auth.js            login, callback, logout, /me e /perfil numa função só
 login.html             tela de entrada
 ```
 
@@ -146,7 +146,26 @@ Ligado pela env var `AUTH_ENABLED=1` na Vercel. Sem ela, o site serve normalment
 
 Env vars necessárias: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `SESSION_SECRET`, `ALLOWED_DOMAINS` e, opcionalmente, `ALLOWED_EMAILS` pra convidados de fora do domínio.
 
-As três etapas vivem no mesmo arquivo de propósito: o plano Hobby da Vercel limita
+### Conta e perfil
+
+O rodapé do menu mostra quem está logado (foto, nome, e-mail), leva pra `#/perfil`
+e traz o botão de sair. Fica `sticky` porque a lista de abas rola: solto no fim do
+conteúdo, o bloco sumia embaixo do scroll e não havia como sair.
+
+Em `#/perfil` dá pra alterar **nome, sobrenome e foto**. O e-mail vem da sessão e
+é somente leitura: o endpoint ignora qualquer e-mail vindo do corpo do request e
+sempre grava na chave da sessão, então editar perfil não vira troca de identidade.
+
+- `GET /api/auth/me` — quem está logado (401 se ninguém).
+- `POST /api/auth/perfil` — `{ nome, sobrenome, foto }`. A foto chega como data URI
+  já recortada em quadrado e reduzida a 320 px pelo navegador (limite de 700 KB).
+- Armazenamento: **Vercel KV**, chave `perfil:<email>`, pela API REST (sem SDK novo
+  no bundle). Sem `KV_REST_API_URL`/`KV_REST_API_TOKEN` o endpoint responde 501 e a
+  UI cai pro modo "só neste navegador", avisando na tela.
+- No primeiro login o perfil já nasce com `given_name`, `family_name` e a foto que
+  o Google devolveu.
+
+As etapas vivem no mesmo arquivo de propósito: o plano Hobby da Vercel limita
 projetos sem framework a **12 Serverless Functions por deployment**, e a `api/` já
 usa 10. As URLs públicas seguem sendo `/api/auth/login`, `/callback` e `/logout`,
 mapeadas pelos `rewrites` do `vercel.json`. Antes de criar função nova em `api/`,

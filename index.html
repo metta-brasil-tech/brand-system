@@ -35,10 +35,22 @@
       <!-- Renderizado por app.js a partir de data/nav.json -->
     </nav>
 
-    <!-- Sessão: só aparece quando o login Google está ligado -->
+    <!-- Conta: só aparece quando há sessão. Fica colado no rodapé do menu. -->
     <div class="nav-user" id="nav-user" hidden>
-      <span class="nav-user-email" id="nav-user-email"></span>
-      <a class="nav-user-sair" href="/api/auth/logout">Sair</a>
+      <a class="nav-user-card" id="nav-user-card" href="#/perfil" title="Meu perfil">
+        <span class="nav-user-avatar" id="nav-user-avatar" data-iniciais="" aria-hidden="true"></span>
+        <span class="nav-user-texto">
+          <span class="nav-user-nome" id="nav-user-nome">Minha conta</span>
+          <span class="nav-user-email" id="nav-user-email"></span>
+        </span>
+      </a>
+      <a class="nav-user-sair" id="nav-user-sair" href="/api/auth/logout" title="Sair da conta" aria-label="Sair da conta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </a>
     </div>
   </aside>
 
@@ -172,17 +184,6 @@
 
 </div>
 
-<script>
-  // Mostra quem está logado. O cookie mbs_user é só exibição; a credencial de
-  // verdade é o mbs_sess (HttpOnly), conferido no middleware.
-  (function () {
-    var m = document.cookie.match(/(?:^|;\s*)mbs_user=([^;]+)/);
-    if (!m) return;
-    var caixa = document.getElementById('nav-user');
-    document.getElementById('nav-user-email').textContent = decodeURIComponent(m[1]);
-    caixa.hidden = false;
-  })();
-</script>
 <script src="vendor/jszip.min.js"></script>
 <script src="app.js"></script>
 </body>

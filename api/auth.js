@@ -8,7 +8,7 @@
 // pelos rewrites do vercel.json, então o Google Cloud não precisa saber disso.
 import {
   SESSION_COOKIE, STATE_COOKIE,
-  createSession, serializeCookie, serializeUserCookie,
+  createSession, verifySession, serializeCookie, serializeUserCookie,
   clearCookie, clearUserCookie, readCookie, isAllowed, safeNext,
 } from '../lib/auth.js';
 
@@ -25,12 +25,171 @@ function acaoDe(req) {
   if (caminho.endsWith('/callback')) return 'callback';
   if (caminho.endsWith('/logout')) return 'logout';
   if (caminho.endsWith('/login')) return 'login';
+  if (caminho.endsWith('/me')) return 'me';
+  if (caminho.endsWith('/perfil')) return 'perfil';
   return req.query?.action || 'login';
 }
 
 function recusa(res, motivo) {
   res.setHeader('Set-Cookie', clearCookie(STATE_COOKIE));
   res.redirect(302, `/login?erro=${encodeURIComponent(motivo)}`);
+}
+
+// ---------------------------------------------------------------- perfil
+// Nome, sobrenome e foto de quem entrou. Fica no Vercel KV (o mesmo storage
+// que a galeria de criativos já usa), acessado pela API REST em vez do SDK
+// pra não engordar o bundle desta função. Chave: perfil:<email>.
+//
+// O e-mail nunca sai daqui alterado: ele vem da sessão assinada, não do corpo
+// do request. Editar perfil não pode virar troca de identidade.
+const FOTO_MAX = 700 * 1024;   // data URI; o KV aceita 1 MB por valor
+
+function temKv() {
+  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+}
+
+function chavePerfil(email) {
+  return `perfil:${String(email).toLowerCase()}`;
+}
+
+async function kvLer(chave) {
+  if (!temKv()) return null;
+  const resp = await fetch(`${process.env.KV_REST_API_URL}/get/${encodeURIComponent(chave)}`, {
+    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
+    cache: 'no-store',
+  });
+  if (!resp.ok) return null;
+  const { result } = await resp.json();
+  if (!result) return null;
+  try { return JSON.parse(result); } catch { return null; }
+}
+
+async function kvGravar(chave, valor) {
+  if (!temKv()) return false;
+  const resp = await fetch(`${process.env.KV_REST_API_URL}/set/${encodeURIComponent(chave)}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(valor),
+  });
+  return resp.ok;
+}
+
+function limpaNome(valor, max = 40) {
+  return String(valor ?? '')
+    .replace(/[\x00-\x1f\x7f]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, max);
+}
+
+/** Devolve a foto normalizada, '' pra "sem foto" ou null se veio coisa estranha. */
+function limpaFoto(valor) {
+  const foto = String(valor ?? '').trim();
+  if (!foto) return '';
+  if (foto.startsWith('https://')) return foto.length <= 500 ? foto : null;
+  if (/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(foto)) {
+    return foto.length <= FOTO_MAX ? foto : null;
+  }
+  return null;
+}
+
+/** Primeiro palpite de nome quando ainda não há nada salvo: o próprio e-mail. */
+function perfilPadrao(email) {
+  const local = String(email || '').split('@')[0] || '';
+  const partes = local.split(/[._-]+/).filter(Boolean)
+    .map((p) => p.charAt(0).toUpperCase() + p.slice(1));
+  return { nome: partes[0] || local, sobrenome: partes.slice(1).join(' '), foto: '' };
+}
+
+async function lerPerfil(email) {
+  let salvo = null;
+  try {
+    salvo = await kvLer(chavePerfil(email));
+  } catch (e) {
+    console.error('[perfil] falha lendo do KV', e);
+  }
+  const base = perfilPadrao(email);
+  return {
+    nome: salvo?.nome || base.nome,
+    sobrenome: salvo?.sobrenome ?? base.sobrenome,
+    foto: salvo?.foto ?? base.foto,
+  };
+}
+
+async function sessaoDe(req) {
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) return null;
+  return verifySession(readCookie(req.headers.cookie, SESSION_COOKIE), secret);
+}
+
+// GET /api/auth/me -> quem está logado neste navegador (401 se ninguém).
+async function quemSou(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
+  const sessao = await sessaoDe(req);
+  if (!sessao) { res.status(401).json({ ok: false, error: 'nao_autenticado' }); return; }
+  const perfil = await lerPerfil(sessao.email);
+  res.status(200).json({ ok: true, email: sessao.email, ...perfil, servidor: temKv() });
+}
+
+// POST /api/auth/perfil -> altera nome, sobrenome e foto. E-mail é imutável.
+async function salvarPerfil(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
+  if (req.method !== 'POST') { res.status(405).json({ ok: false, error: 'metodo_invalido' }); return; }
+
+  const sessao = await sessaoDe(req);
+  if (!sessao) { res.status(401).json({ ok: false, error: 'nao_autenticado' }); return; }
+
+  let corpo = req.body;
+  if (typeof corpo === 'string') { try { corpo = JSON.parse(corpo); } catch { corpo = null; } }
+  if (!corpo || typeof corpo !== 'object') { res.status(400).json({ ok: false, error: 'corpo_invalido' }); return; }
+
+  const nome = limpaNome(corpo.nome);
+  if (!nome) { res.status(400).json({ ok: false, error: 'nome_vazio' }); return; }
+  const sobrenome = limpaNome(corpo.sobrenome);
+
+  const atual = await lerPerfil(sessao.email);
+  let foto = atual.foto;
+  if (corpo.foto !== undefined) {
+    foto = limpaFoto(corpo.foto);
+    if (foto === null) { res.status(400).json({ ok: false, error: 'foto_invalida' }); return; }
+  }
+
+  const perfil = { nome, sobrenome, foto };
+
+  if (!temKv()) {
+    // Storage não configurado: a UI cai pro modo "só neste navegador".
+    res.status(501).json({ ok: false, error: 'sem_armazenamento', email: sessao.email, ...perfil });
+    return;
+  }
+
+  let gravou = false;
+  try {
+    gravou = await kvGravar(chavePerfil(sessao.email), { ...perfil, atualizado_em: new Date().toISOString() });
+  } catch (e) {
+    console.error('[perfil] falha gravando no KV', e);
+  }
+  if (!gravou) { res.status(502).json({ ok: false, error: 'gravacao_falhou' }); return; }
+
+  res.status(200).json({ ok: true, email: sessao.email, ...perfil, servidor: true });
+}
+
+/** Primeiro login: aproveita nome e foto que o Google já devolveu. Best effort. */
+async function semeiaPerfil(email, claims) {
+  if (!temKv()) return;
+  try {
+    if (await kvLer(chavePerfil(email))) return;
+    await kvGravar(chavePerfil(email), {
+      nome: limpaNome(claims.given_name) || perfilPadrao(email).nome,
+      sobrenome: limpaNome(claims.family_name),
+      foto: limpaFoto(claims.picture) || '',
+      atualizado_em: new Date().toISOString(),
+    });
+  } catch (e) {
+    console.error('[perfil] nao consegui semear o perfil de', email, e);
+  }
 }
 
 // ---------------------------------------------------------------- login
@@ -126,6 +285,7 @@ async function voltarDoGoogle(req, res) {
   }
 
   const email = String(claims.email).toLowerCase();
+  await semeiaPerfil(email, claims);
   const sessao = await createSession(email, SESSION_SECRET);
   const destino = safeNext(destinoB64 ? Buffer.from(destinoB64, 'base64url').toString('utf8') : '/');
 
@@ -147,6 +307,8 @@ export default async function handler(req, res) {
   switch (acaoDe(req)) {
     case 'callback': return voltarDoGoogle(req, res);
     case 'logout':   return sair(req, res);
+    case 'me':       return quemSou(req, res);
+    case 'perfil':   return salvarPerfil(req, res);
     default:         return entrar(req, res);
   }
 }

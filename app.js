@@ -7,6 +7,8 @@ const BrandSystem = (() => {
   let nav = null;
   let currentTabId = null;
   let currentSectionId = null;
+  let perfil = null;      // quem está logado: { email, nome, sobrenome, foto, servidor }
+  let rascunho = null;    // edição em andamento na página de perfil
 
   // ----------- ICON SET (estilo DS v2) -----------
   // viewBox 0 0 24 24 · stroke currentColor · stroke-width 2.2
@@ -35,7 +37,11 @@ const BrandSystem = (() => {
     search:   '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
     link:     '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
     check:    '<polyline points="20 6 9 17 4 12"/>',
-    sparkles: '<path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6L12 3z"/><path d="M19 14l.9 2.6L22 17.5l-2.1.9L19 21l-.9-2.6L16 17.5l2.1-.9L19 14z"/>'
+    sparkles: '<path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6L12 3z"/><path d="M19 14l.9 2.6L22 17.5l-2.1.9L19 21l-.9-2.6L16 17.5l2.1-.9L19 14z"/>',
+    logout:   '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
+    user:     '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    trash:    '<polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>',
+    alert:    '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16.5" x2="12" y2="16.5"/>'
   };
 
   // ----------- DATA UTILS -----------
@@ -196,6 +202,8 @@ const BrandSystem = (() => {
 
   function onHashChange() {
     let { tabId, sectionId } = parseHash();
+    // Perfil não vem do nav.json: é uma pagina de conta, fora da arvore de conteudo.
+    if (tabId === 'perfil') { abrePerfil(); return; }
     if (!tabId) {
       tabId = nav.tabs[0].id;
       sectionId = (nav.tabs[0].sections.find(s => !s.hidden) || nav.tabs[0].sections[0])?.id || null;
@@ -220,6 +228,8 @@ const BrandSystem = (() => {
   }
 
   function updateActiveStates() {
+    const conta = document.getElementById('nav-user');
+    if (conta) conta.classList.toggle('ativo', currentTabId === 'perfil');
     document.querySelectorAll('aside.nav .tab').forEach(b => {
       b.classList.toggle('active', b.dataset.tabId === currentTabId);
     });
@@ -1810,6 +1820,336 @@ const BrandSystem = (() => {
     `;
   }
 
+  // ============================================================
+  //  CONTA E PERFIL
+  //  A sessão de verdade é o cookie HttpOnly conferido no middleware; aqui é só
+  //  a cara dela: quem está logado, foto, e a página pra editar nome e foto.
+  // ============================================================
+  const PERFIL_CACHE = 'brand-perfil';
+
+  function salvaCachePerfil() {
+    try {
+      if (perfil) localStorage.setItem(PERFIL_CACHE, JSON.stringify(perfil));
+      else localStorage.removeItem(PERFIL_CACHE);
+    } catch (e) { /* modo privado ou storage cheio: segue sem cache */ }
+  }
+
+  function nomeCompletoDe(p) {
+    return [p?.nome, p?.sobrenome].filter(Boolean).join(' ').trim();
+  }
+
+  function iniciaisDe(p) {
+    const a = (p?.nome || '').trim().charAt(0);
+    const b = (p?.sobrenome || '').trim().charAt(0);
+    const iniciais = (a + b).toUpperCase();
+    if (iniciais) return iniciais;
+    return (p?.email || '?').charAt(0).toUpperCase();
+  }
+
+  function avatarHtml(p, tamanho) {
+    if (p?.foto) return `<img src="${escapeAttr(p.foto)}" alt="" width="${tamanho}" height="${tamanho}">`;
+    return '';
+  }
+
+  function pintaNavUser() {
+    const caixa = document.getElementById('nav-user');
+    if (!caixa) return;
+    if (!perfil) { caixa.hidden = true; return; }
+
+    const nome = nomeCompletoDe(perfil) || perfil.email;
+    caixa.hidden = false;
+    document.getElementById('nav-user-nome').textContent = nome;
+    const campoEmail = document.getElementById('nav-user-email');
+    campoEmail.textContent = perfil.email;
+    campoEmail.title = perfil.email;   // no menu estreito o e-mail vem cortado
+
+    const av = document.getElementById('nav-user-avatar');
+    if (av) {
+      av.innerHTML = avatarHtml(perfil, 36);
+      av.dataset.iniciais = perfil.foto ? '' : iniciaisDe(perfil);
+    }
+    const card = document.getElementById('nav-user-card');
+    if (card) card.title = `${nome} · abrir meu perfil`;
+  }
+
+  async function initUsuario() {
+    const antes = JSON.stringify(perfil);
+    // 1) cache local pinta na hora, sem esperar a rede
+    try {
+      const cache = JSON.parse(localStorage.getItem(PERFIL_CACHE) || 'null');
+      if (cache && cache.email) { perfil = cache; pintaNavUser(); }
+    } catch (e) { localStorage.removeItem(PERFIL_CACHE); }
+
+    // 2) o servidor é quem manda
+    let resposta = null;   // objeto = logado · 'sem-sessao' = deslogado · null = API fora do ar
+    try {
+      const res = await fetch('/api/auth/me', { headers: { accept: 'application/json' }, cache: 'no-store' });
+      if (res.ok) {
+        const dados = await res.json();
+        if (dados && dados.ok) {
+          resposta = {
+            email: dados.email,
+            nome: dados.nome || '',
+            sobrenome: dados.sobrenome || '',
+            foto: dados.foto || '',
+            servidor: dados.servidor !== false,
+          };
+        }
+      } else if (res.status === 401) {
+        resposta = 'sem-sessao';
+      }
+    } catch (e) {
+      // Sem rede, ou rodando o site estático sem as functions (npm start).
+    }
+
+    if (resposta && resposta !== 'sem-sessao') {
+      perfil = resposta;
+      salvaCachePerfil();
+    } else if (resposta === 'sem-sessao') {
+      perfil = null;
+      salvaCachePerfil();
+    } else if (!perfil && isDev()) {
+      // Servidor estático local: perfil de trabalho só deste navegador, pra dar
+      // pra ver e testar a tela sem subir as functions.
+      perfil = { email: 'local@dev', nome: 'Modo', sobrenome: 'local', foto: '', servidor: false };
+      salvaCachePerfil();
+    }
+
+    pintaNavUser();
+    if (currentTabId === 'perfil' && JSON.stringify(perfil) !== antes) abrePerfil();
+  }
+
+  // ----------- PÁGINA DE PERFIL -----------
+  function abrePerfil() {
+    currentTabId = 'perfil';
+    currentSectionId = null;
+    updateActiveStates();
+
+    const bc = document.getElementById('breadcrumb');
+    if (bc) {
+      bc.innerHTML = `
+        <a class="breadcrumb-link" href="#/">
+          <span class="breadcrumb-icon">${svgIcon('home', 12)}</span>
+          <span>Brand System</span>
+        </a>
+        <span class="sep">/</span><span class="current">Meu perfil</span>`;
+    }
+
+    const main = document.getElementById('content');
+    if (!main) return;
+    main.dataset.loading = 'false';
+    rascunho = perfil
+      ? { nome: perfil.nome || '', sobrenome: perfil.sobrenome || '', foto: perfil.foto || '' }
+      : null;
+    main.innerHTML = renderPerfil();
+    attachPerfilHandlers();
+  }
+
+  function renderPerfil() {
+    if (!perfil) {
+      return `
+        <section class="hero">
+          <h1>Meu perfil</h1>
+          <p>Não há sessão ativa neste navegador.</p>
+        </section>
+        <div class="placeholder">
+          <h2>Sem sessão</h2>
+          <p>Entre com a sua conta Metta para ver e editar o seu perfil.</p>
+          <p><a class="perfil-btn" href="/api/auth/login">Entrar com a conta Metta</a></p>
+        </div>`;
+    }
+
+    const aviso = perfil.servidor ? '' : `
+      <p class="perfil-nota">
+        ${svgIcon('alert', 15)}
+        <span>O armazenamento do servidor não está disponível: o que for salvo aqui fica só neste navegador.</span>
+      </p>`;
+
+    return `
+      <section class="hero">
+        <h1>Meu perfil</h1>
+        <p>Nome e foto aparecem no rodapé do menu. O e-mail vem da conta Google da Metta e não pode ser alterado por aqui.</p>
+      </section>
+      ${aviso}
+      <form class="perfil" id="perfil-form" autocomplete="off" novalidate>
+        <div class="perfil-foto">
+          <div class="perfil-avatar" id="perfil-avatar" data-iniciais="${escapeAttr(rascunho.foto ? '' : iniciaisDe(rascunho))}">
+            ${avatarHtml(rascunho, 128)}
+          </div>
+          <div class="perfil-foto-lado">
+            <div class="perfil-foto-acoes">
+              <label class="action-mini" for="perfil-arquivo">
+                ${svgIcon('camera', 14)}<span>${rascunho.foto ? 'Trocar foto' : 'Adicionar foto'}</span>
+              </label>
+              <input type="file" id="perfil-arquivo" accept="image/png,image/jpeg,image/webp" hidden>
+              <button type="button" class="action-mini" data-acao="remover-foto" ${rascunho.foto ? '' : 'disabled'}>
+                ${svgIcon('trash', 14)}<span>Remover</span>
+              </button>
+            </div>
+            <p class="perfil-dica">JPG, PNG ou WebP de até 8 MB. A imagem é recortada no centro, em quadrado, e reduzida para 320 px antes de subir.</p>
+          </div>
+        </div>
+
+        <div class="perfil-campos">
+          <label class="perfil-campo">
+            <span class="perfil-label">Nome</span>
+            <input type="text" name="nome" maxlength="40" value="${escapeAttr(rascunho.nome)}" placeholder="Seu nome">
+          </label>
+          <label class="perfil-campo">
+            <span class="perfil-label">Sobrenome</span>
+            <input type="text" name="sobrenome" maxlength="40" value="${escapeAttr(rascunho.sobrenome)}" placeholder="Seu sobrenome">
+          </label>
+          <div class="perfil-campo perfil-campo-largo">
+            <span class="perfil-label">E-mail</span>
+            <input type="email" value="${escapeAttr(perfil.email)}" disabled>
+            <span class="perfil-ajuda">${svgIcon('check', 12)} Vem da conta Google da Metta. Não pode ser alterado.</span>
+          </div>
+        </div>
+
+        <div class="perfil-rodape">
+          <button type="submit" class="perfil-btn" data-acao="salvar"><span>Salvar alterações</span></button>
+          <button type="button" class="action-mini" data-acao="descartar"><span>Descartar</span></button>
+          <span class="perfil-aviso" id="perfil-aviso" role="status" aria-live="polite"></span>
+          <a class="action-mini perfil-sair" href="/api/auth/logout">
+            ${svgIcon('logout', 14)}<span>Sair da conta</span>
+          </a>
+        </div>
+      </form>`;
+  }
+
+  /** Recorta no centro, em quadrado, e devolve um data URI JPEG pequeno. */
+  function reduzImagem(file, lado = 320) {
+    return new Promise((resolve, reject) => {
+      const leitor = new FileReader();
+      leitor.onerror = () => reject(new Error('Não consegui ler o arquivo.'));
+      leitor.onload = () => {
+        const img = new Image();
+        img.onerror = () => reject(new Error('O arquivo não parece uma imagem válida.'));
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = canvas.height = lado;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, lado, lado);
+          const corte = Math.min(img.width, img.height);
+          ctx.drawImage(img, (img.width - corte) / 2, (img.height - corte) / 2, corte, corte, 0, 0, lado, lado);
+          resolve(canvas.toDataURL('image/jpeg', 0.86));
+        };
+        img.src = leitor.result;
+      };
+      leitor.readAsDataURL(file);
+    });
+  }
+
+  function mensagemDeErro(codigo) {
+    if (codigo === 'nome_vazio') return 'Preencha o nome.';
+    if (codigo === 'foto_invalida') return 'A foto não foi aceita: tente outra imagem.';
+    if (codigo === 'nao_autenticado') return 'Sua sessão expirou. Entre de novo.';
+    return 'Não consegui salvar agora.';
+  }
+
+  function attachPerfilHandlers() {
+    const form = document.getElementById('perfil-form');
+    if (!form || !rascunho) return;
+
+    const aviso = form.querySelector('#perfil-aviso');
+    const avatar = form.querySelector('#perfil-avatar');
+    const arquivo = form.querySelector('#perfil-arquivo');
+    const btnRemover = form.querySelector('[data-acao="remover-foto"]');
+    const rotuloFoto = form.querySelector('label[for="perfil-arquivo"] span');
+
+    function fala(texto, tipo) {
+      if (!aviso) return;
+      aviso.textContent = texto || '';
+      aviso.dataset.tipo = tipo || '';
+    }
+
+    function pintaFoto() {
+      avatar.innerHTML = avatarHtml(rascunho, 128);
+      avatar.dataset.iniciais = rascunho.foto ? '' : iniciaisDe(rascunho);
+      if (btnRemover) btnRemover.disabled = !rascunho.foto;
+      if (rotuloFoto) rotuloFoto.textContent = rascunho.foto ? 'Trocar foto' : 'Adicionar foto';
+    }
+
+    // Iniciais acompanham o que está sendo digitado enquanto não há foto.
+    form.querySelectorAll('input[name="nome"], input[name="sobrenome"]').forEach((campo) => {
+      campo.addEventListener('input', () => {
+        rascunho[campo.name] = campo.value;
+        if (!rascunho.foto) avatar.dataset.iniciais = iniciaisDe(rascunho);
+        fala('');
+      });
+    });
+
+    if (arquivo) {
+      arquivo.addEventListener('change', async () => {
+        const file = arquivo.files && arquivo.files[0];
+        arquivo.value = '';
+        if (!file) return;
+        if (!/^image\//.test(file.type)) { fala('Escolha um arquivo de imagem.', 'erro'); return; }
+        if (file.size > 8 * 1024 * 1024) { fala('Imagem grande demais: o limite é 8 MB.', 'erro'); return; }
+        try {
+          rascunho.foto = await reduzImagem(file);
+          pintaFoto();
+          fala('Foto carregada. Clique em salvar para valer.', 'ok');
+        } catch (e) {
+          fala(e.message || 'Não consegui abrir essa imagem.', 'erro');
+        }
+      });
+    }
+
+    if (btnRemover) {
+      btnRemover.addEventListener('click', () => {
+        rascunho.foto = '';
+        pintaFoto();
+        fala('Foto removida. Clique em salvar para valer.', 'ok');
+      });
+    }
+
+    const btnDescartar = form.querySelector('[data-acao="descartar"]');
+    if (btnDescartar) btnDescartar.addEventListener('click', () => abrePerfil());
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const botao = form.querySelector('[data-acao="salvar"]');
+      const nome = form.querySelector('input[name="nome"]').value.trim();
+      const sobrenome = form.querySelector('input[name="sobrenome"]').value.trim();
+      if (!nome) { fala('Preencha o nome.', 'erro'); return; }
+
+      botao.disabled = true;
+      fala('Salvando…', '');
+
+      let noServidor = false;
+      try {
+        const res = await fetch('/api/auth/perfil', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ nome, sobrenome, foto: rascunho.foto }),
+        });
+        const dados = await res.json().catch(() => ({}));
+        if (res.ok && dados.ok) {
+          noServidor = true;
+        } else if (res.status === 400 || res.status === 401) {
+          fala(mensagemDeErro(dados.error), 'erro');
+          botao.disabled = false;
+          return;
+        }
+        // 501 (sem storage), 502 ou 404: guarda local e avisa embaixo.
+      } catch (err) {
+        // Offline: mesmo caminho do fallback local.
+      }
+
+      perfil = { ...perfil, nome, sobrenome, foto: rascunho.foto, servidor: noServidor };
+      rascunho = { nome, sobrenome, foto: rascunho.foto };
+      salvaCachePerfil();
+      pintaNavUser();
+      botao.disabled = false;
+      fala(
+        noServidor ? 'Perfil salvo.' : 'Salvo só neste navegador: o servidor não guardou.',
+        noServidor ? 'ok' : 'erro'
+      );
+    });
+  }
+
   // ----------- SIDEBAR (collapse desktop + drawer mobile) -----------
   function initSidebar() {
     const app = document.querySelector('.app');
@@ -2669,6 +3009,8 @@ const BrandSystem = (() => {
       btn.addEventListener('click', () => setTheme(btn.dataset.theme));
     });
     await loadNav();
+    // Nao espera a rede: o cache local ja pinta a conta antes do primeiro await.
+    initUsuario();
     initSidebar();
     initSearch();
     initDocsModal();
