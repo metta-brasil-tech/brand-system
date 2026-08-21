@@ -4346,3 +4346,63 @@ body.search-open { overflow: hidden; }
   .perfil-campos { grid-template-columns: 1fr; }
   .perfil-sair { margin-left: 0; }
 }
+
+/* ============================================================
+   BUSCA (Ctrl+K) — índice de navegação: cabeçalho de grupo,
+   atalhos do estado vazio, destaque de material encontrado.
+   Reaproveita .search-result-crumb/-title/-snippet já existentes.
+============================================================ */
+
+/* Cabeçalho que separa cada grupo de resultado por tipo (Páginas, Materiais,
+   Ícones...) — evita a lista virar uma sopa de itens sem contexto. */
+.search-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 12px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.search-group-header:first-child { padding-top: 6px; }
+.search-group-header svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.8; }
+
+/* Estado vazio: em vez de só um contador, oferece atalho pros destinos mais
+   procurados — abrir a busca já ajuda, sem precisar digitar nada. */
+.search-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 4px 4px;
+  justify-content: center;
+}
+.search-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: var(--metta-sys-shape-corner-full, 999px);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  background: var(--metta-sys-color-surface-container);
+  color: var(--metta-sys-color-on-surface);
+  font-size: 13px;
+  font-weight: 560;
+  text-decoration: none;
+  transition: border-color 0.12s ease-out, transform 0.12s ease-out;
+}
+.search-shortcut:hover {
+  border-color: var(--metta-sys-color-outline);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.search-shortcut svg { color: var(--metta-sys-color-on-surface-variant); flex-shrink: 0; }
+
+/* Material encontrado pela busca: pisca um contorno na cor da marca pra
+   marcar qual card é o resultado, já que a página abre com vários. */
+.doc-card.is-highlighted {
+  outline: 2px solid var(--metta-sys-color-primary);
+  outline-offset: 2px;
+  transition: outline-color 0.2s ease-out;
+}

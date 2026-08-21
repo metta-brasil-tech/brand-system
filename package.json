@@ -6,11 +6,12 @@
   "type": "module",
   "scripts": {
     "start": "npx --yes serve -p 5173 --no-clipboard -c serve.json .",
-    "build": "node scripts/optimize-images.mjs && node scripts/build.mjs && node scripts/build-manifest.mjs",
+    "build": "node scripts/optimize-images.mjs && node scripts/build.mjs && node scripts/build-manifest.mjs && node scripts/build-nav-index.mjs",
     "build:content": "node scripts/build.mjs",
     "build:manifest": "node scripts/build-manifest.mjs",
+    "build:nav-index": "node scripts/build-nav-index.mjs",
     "build:images": "node scripts/optimize-images.mjs",
-    "build:full": "node scripts/optimize-images.mjs && node scripts/build.mjs --full && node scripts/build-manifest.mjs"
+    "build:full": "node scripts/optimize-images.mjs && node scripts/build.mjs --full && node scripts/build-manifest.mjs && node scripts/build-nav-index.mjs"
   },
   "dependencies": {
     "@sparticuz/chromium": "^131.0.0",

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-21T15:23:42.519Z",
-  "grandTotalBytes": 265833537,
+  "generatedAt": "2026-08-21T15:56:09.645Z",
+  "grandTotalBytes": 265834325,
   "grandTotalFiles": 1190,
   "grandTotalTabs": 21,
   "groups": [
@@ -490,10 +490,10 @@
                 {
                   "name": "mentoria.md",
                   "path": "content/produtos/mentoria.md",
-                  "sizeBytes": 20839
+                  "sizeBytes": 21627
                 }
               ],
-              "totalBytes": 20839,
+              "totalBytes": 21627,
               "fileCount": 1
             },
             {
@@ -510,7 +510,7 @@
               "fileCount": 1
             }
           ],
-          "totalBytes": 24951,
+          "totalBytes": 25739,
           "fileCount": 2
         },
         {

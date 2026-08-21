@@ -22,7 +22,7 @@ tags:
 formato_consumo: referencia
 prioridade_carregamento: alta
 versao: "1.0"
-summary: "3 planos SMTM em copy de marketing — Premium R$2.916/mês (R$200-400k/mês), Exclusive R$5.500/mês (+R$1M/mês), Elite R$14.500/mês (+R$2M/mês). Terminologia: 'programa de aceleração'. NUNCA expor preço em copy pública. CTA único: sessão estratégica gratuita."
+summary: "3 planos SMTM em copy de marketing — Premium R$2.916/mês (R$200-400k/mês), Exclusive R$12.000/mês (+R$1M/mês), Elite R$19.000/mês (+R$2M/mês). Terminologia: 'programa de aceleração'. NUNCA expor preço em copy pública. CTA único: sessão estratégica gratuita."
 created: 2026-04-29
 updated: 2026-05-01
 ---
@@ -37,8 +37,8 @@ Esse documento tem conexão com
 - **3 planos comercializados em marketing:** Premium / Exclusive / Elite. Acelera e Academy ficam fora (não entram em copy de aquisição).
 - **Terminologia oficial:** "programa de aceleração" — NÃO "mentoria". Migrando pra modelo *as a service*.
 - **Premium** R$2.916/mês cartão · ICP R$200-400k/mês · objetivo: consistência mensal · acesso parcial Tiago (encontros quinzenais).
-- **Exclusive** R$5.500/mês cartão/boleto · ICP +R$1M/mês · objetivo: escala e descentralização · acesso parcial Tiago (encontros quinzenais).
-- **Elite** R$14.500/mês cartão/boleto · ICP +R$2M/mês · acesso TOTAL Tiago (direto) · objetivo: aceleração 360°.
+- **Exclusive** R$12.000/mês cartão/boleto · ICP +R$1M/mês · objetivo: escala e descentralização · acesso parcial Tiago (encontros quinzenais) · 6 meses individual + 6 meses em grupo.
+- **Elite** R$19.000/mês cartão/boleto · ICP +R$2M/mês · acesso TOTAL Tiago (direto) · objetivo: aceleração 360°.
 - **Vendas em formato 12 meses** — sempre.
 - **Igual em todos:** Protocolo M.E.T.T.A. V9 · plataforma EAD · Alfred (IA 24h) · comunidade Batmeta.
 - **🔒 Regra de copy:** **NUNCA exponha preço em ad/LP públicos.** A oferta é SEMPRE a sessão estratégica gratuita (porta de entrada). Plano é apresentado na sessão.
@@ -81,8 +81,8 @@ O programa se chama **Supere a Meta Todo Mês (SMTM)**. É um programa digital c
 
 | Plano | Valor | Forma de pagamento | ICP (faturamento) | Exclusividade | Método próprio | Acesso aos sócios | Objetivo principal |
 |---|---|---|---|---|---|---|---|
-| **Elite** | R$ 14.500/mês | Boleto ou cartão | +R$ 2M/mês | Máxima | Sim (Metta constrói) | Total (acesso direto a Tiago Alves) | Aceleração 360° |
-| **Exclusive** | R$ 5.500/mês | Boleto ou cartão | +R$ 1M/mês | Alta | Sim (Metta constrói) | Parcial (encontros quinzenais com Tiago) | Escala e descentralização |
+| **Elite** | R$ 19.000/mês | Boleto ou cartão | +R$ 2M/mês | Máxima | Sim (Metta constrói) | Total (acesso direto a Tiago Alves) | Aceleração 360° |
+| **Exclusive** | R$ 12.000/mês | Boleto ou cartão | +R$ 1M/mês | Alta | Sim (Metta constrói) | Parcial (encontros quinzenais com Tiago) | Escala e descentralização |
 | **Premium** | R$ 2.916/mês | Cartão | R$ 200k a R$ 400k/mês | Média | Orientamos a construir | Parcial (encontros quinzenais com Tiago) | Consistência mensal |
 
 Todas as vendas são em formato 12 meses.
@@ -159,9 +159,12 @@ Modelo indicado pra negócios em estruturação, que precisam de direcionamento 
 
 Formato 12 meses. Três opções de pagamento convivem.
 
-- **Dentro da call, no cartão:** R$ 35.000 à vista.
-- **Boleto parcelado:** 12x de R$ 3.200,00 (total R$ 38.400).
-- **Fora da call:** R$ 40.000.
+- **À vista no PIX:** R$ 34.000 (vale dentro ou fora da call).
+- **Cartão, dentro da call:** 12x de R$ 2.916,66 (total R$ 35.000).
+- **Cartão, fora da call:** 12x de R$ 3.333,33 (total R$ 40.000).
+- **Boleto:** 12x de R$ 3.666,00 (total R$ 44.000), 25% acima do cartão dentro da call.
+
+Com entrada de 2 parcelas pagas no ato, dentro da reunião, o boleto pode sair com 10% de desconto.
 
 Valor mensal equivalente na tabela-resumo: R$ 2.916/mês.
 
@@ -233,11 +236,13 @@ Indicado para empresas que já possuem estrutura gerencial, mas que ainda depend
 
 Formato 12 meses. Três opções de pagamento convivem.
 
-- **Cartão:** 12x de R$ 6.000 (total R$ 72.000).
-- **Boleto:** 12x de R$ 7.000 (total R$ 84.000).
-- **À vista:** R$ 52.000.
+- **Cartão:** 12x de R$ 12.000 (total R$ 144.000).
+- **Boleto:** 12x de R$ 12.650.
+- **À vista:** R$ 129.600.
 
-Valor mensal equivalente na tabela-resumo: R$ 5.500/mês.
+Formato: 6 meses de acompanhamento individual e 6 meses em grupo, para manutenção.
+
+Valor mensal equivalente na tabela-resumo: R$ 12.000/mês.
 
 ---
 
@@ -313,9 +318,9 @@ Indicado para cenários em que decisões estratégicas, velocidade de execução
 
 Formato 12 meses.
 
-- **R$ 14.500/mês** (boleto ou cartão).
+- **R$ 19.000/mês** (boleto ou cartão), 12 meses: total de R$ 228.000.
 
-Equivalência pra pitch: pra quem fatura R$ 2M/mês, o investimento representa aproximadamente 0,73% do faturamento anual.
+Equivalência pra pitch: pra quem fatura R$ 2M/mês, o investimento representa aproximadamente 0,95% do faturamento anual.
 
 ---
 
@@ -388,5 +393,5 @@ Este documento cobre apenas os três planos SMTM usados em ações de marketing.
 - Cada plano tem ICP específico. Copy de tráfego pago ideal segmenta por faturamento alvo pra não atrair lead do plano errado.
 - Números institucionais confirmados (21 anos, +1.000 empresas, R$ 8,5 bi em metas batidas no último ano) podem ser usados em copy de qualquer plano.
 - Quando citar investimento, preferir valor mensal como entrada ("a partir de R$ 2.916/mês") vs valor cheio, salvo em pitch comercial já avançado.
-- Equivalência percentual do investimento sobre faturamento (Elite: ~0,73%) é argumento forte pra objeção de preço.
+- Equivalência percentual do investimento sobre faturamento (Elite: ~0,95%) é argumento forte pra objeção de preço.
 - Garantia contratual de superação de meta é diferencial que vale mencionar em copy de qualquer plano, não só Elite.

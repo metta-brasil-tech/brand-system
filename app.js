@@ -379,8 +379,17 @@ const BrandSystem = (() => {
         const manifest = await loadDownloadManifest();
         const group = manifest.groups.find(g => g.id === groupId);
         if (!group) throw new Error(`Grupo "${groupId}" não encontrado no manifest.`);
+        // Lê ?cat= (vindo da busca ou de um link direto) pra abrir já filtrado
+        // pelo tipo de material — sem isso a página sempre abre em "Todos".
+        const params = new URLSearchParams(location.hash.split('?')[1] || '');
+        const catParam = params.get('cat');
+        downloadsTypeFilter = (catParam && group.tabs.some(t => t.id === catParam)) ? catParam : 'all';
         main.innerHTML = renderDownloadsGallery(tab, group);
         attachDownloadsGalleryHandlers(group, tab);
+        // Lê ?q= (id do material) pra rolar até o card certo e destacar —
+        // é o que faz o resultado de busca levar direto ao item, não só à página.
+        const wantedId = params.get('q');
+        if (wantedId) highlightDocCard(wantedId);
       } catch (e) {
         main.innerHTML = `<div class="placeholder"><h2>Modelos indisponíveis</h2><p>${e.message}</p><p>Rode <code>npm run build:manifest</code>.</p></div>`;
       }
@@ -402,6 +411,7 @@ const BrandSystem = (() => {
         main.dataset.loading = 'false';
         main.innerHTML = renderSectionShell(tab, sec, html);
         attachActionHandlers();
+        scrollToAnchorFromHash();
         return;
       }
     } catch (e) {
@@ -410,6 +420,31 @@ const BrandSystem = (() => {
 
     main.dataset.loading = 'false';
     main.innerHTML = renderPlaceholder(tab, sec);
+  }
+
+  // Rola até o h2/h3 apontado por ?h=<id> na hash (usado pelos resultados de
+  // busca do tipo "assunto"). Sem o parâmetro, não faz nada — comportamento
+  // de navegação normal fica intacto.
+  function scrollToAnchorFromHash() {
+    const params = new URLSearchParams(location.hash.split('?')[1] || '');
+    const anchor = params.get('h');
+    if (!anchor) return;
+    requestAnimationFrame(() => {
+      const target = document.getElementById(anchor);
+      if (!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  }
+
+  // Rola até o card do material e pisca uma borda — usado pelos resultados de
+  // busca do tipo "material" pra levar direto ao item, não só à página.
+  function highlightDocCard(id) {
+    const card = Array.from(document.querySelectorAll('.doc-card')).find(el => el.dataset.docId === id);
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('is-highlighted');
+    setTimeout(() => card.classList.remove('is-highlighted'), 2200);
   }
 
   function renderSectionShell(tab, sec, html) {
@@ -2213,9 +2248,17 @@ const BrandSystem = (() => {
     });
   }
 
-  // ----------- SEARCH (lazy-loaded index + modal Ctrl+K) -----------
+  // ----------- SEARCH (índice de navegação leve + índice de conteúdo pesado + modal Ctrl+K) -----------
+  // Dois índices, dois papéis:
+  //  - navIndex (data/nav-index.json): leve, carrega no boot, responde na hora.
+  //    Cobre página, assunto (h2), material, ícone, foto, logo, transcrição —
+  //    tudo que existe na plataforma, não só doc.
+  //  - searchIndex (data/search-index.json): pesado, carrega só quando abre a
+  //    busca. Cobre o texto integral das páginas de documentação.
   let searchIndex = null;
   let searchLoading = null;
+  let navIndex = null;
+  let navIndexLoading = null;
   let searchSelected = 0;
   let searchResults = [];
 
@@ -2236,23 +2279,178 @@ const BrandSystem = (() => {
     return searchLoading;
   }
 
-  function runSearch(query) {
-    if (!searchIndex || !query.trim()) return [];
-    const terms = normalizeForSearch(query).split(/\s+/).filter(Boolean);
-    if (terms.length === 0) return [];
-    const scored = [];
-    for (const entry of searchIndex) {
-      let score = 0;
-      const labelNorm = normalizeForSearch(entry.label);
-      for (const t of terms) {
-        if (labelNorm.includes(t)) score += 10;          // match no título pesa mais
-        const occurrences = entry.textNorm.split(t).length - 1;
-        score += Math.min(occurrences, 8);
-      }
-      if (score > 0) scored.push({ entry, score });
+  async function ensureNavIndex() {
+    if (navIndex) return navIndex;
+    if (navIndexLoading) return navIndexLoading;
+    navIndexLoading = fetch('data/nav-index.json').then(r => r.json()).then(data => {
+      navIndex = data.entries || [];
+      return navIndex;
+    }).catch(err => {
+      console.error('Falha ao carregar nav-index:', err);
+      return [];
+    });
+    return navIndexLoading;
+  }
+
+  // ----------- SINÔNIMOS DE BUSCA -----------
+  // Coração do pedido: a pessoa não sabe o nome interno das coisas — ela digita
+  // "fundo de tela", não "Fundos de videochamada". Esse mapa traduz o termo comum
+  // pro termo que existe de fato no título/caminho de alguma entrada do índice.
+  // Pra adicionar um sinônimo novo: uma linha "o que a pessoa digita": ['termo(s) real(is) pra também buscar'].
+  const SEARCH_SYNONYMS = {
+    'fundo de tela': ['fundos de videochamada'],
+    'papel de parede': ['fundos de videochamada'],
+    'plano de fundo': ['fundos de videochamada'],
+    'template': ['documento', 'modelo'],
+    'modelo': ['documento'],
+    'word': ['documento'],
+    'cor': ['cores'],
+    'paleta': ['cores'],
+    'fonte': ['tipografia'],
+    'letra': ['tipografia'],
+    'logo': ['logos'],
+    'logotipo': ['logos'],
+    'marca': ['logos'],
+    'simbolo': ['logos'],
+    'foto': ['galeria de imagens'],
+    'imagem': ['galeria de imagens'],
+    'banco de imagens': ['galeria de imagens'],
+    'botao': ['componentes'],
+    'card': ['componentes'],
+    'etiqueta': ['componentes']
+  };
+
+  // Preposições e artigos curtos: sozinhos, batem por substring em quase
+  // qualquer coisa (ex: "de" dentro de "Depoimentos") e só sujam o resultado.
+  // Ficam de fora do casamento por palavra — mas a frase inteira (pra sinônimo
+  // de várias palavras, tipo "fundo de tela") continua intacta.
+  const SEARCH_STOPWORDS_PT = new Set(['de', 'da', 'do', 'das', 'dos', 'a', 'o', 'as', 'os', 'e', 'em', 'no', 'na', 'nos', 'nas', 'um', 'uma', 'pra', 'para', 'com', 'que', 'ao', 'aos']);
+
+  // Expande os termos digitados com os sinônimos que baterem — tanto por
+  // palavra isolada ("cor") quanto por frase inteira ("fundo de tela").
+  function expandSearchTerms(termos, queryNormalizada) {
+    const extras = [];
+    for (const [chave, canonicos] of Object.entries(SEARCH_SYNONYMS)) {
+      if (termos.includes(chave) || queryNormalizada.includes(chave)) extras.push(...canonicos);
     }
-    scored.sort((a, b) => b.score - a.score);
-    return scored.slice(0, 30).map(x => x.entry);
+    if (!extras.length) return termos;
+    return Array.from(new Set([...termos, ...extras.map(normalizeForSearch)]));
+  }
+
+  const SEARCH_TIPO_LABEL = {
+    pagina: 'Páginas',
+    assunto: 'Dentro das páginas',
+    material: 'Materiais para baixar',
+    icone: 'Ícones',
+    foto: 'Fotos',
+    logo: 'Logos',
+    transcricao: 'Transcrições',
+    documento: 'Nos documentos'
+  };
+  const SEARCH_TIPO_ICON = {
+    pagina: 'fileText',
+    assunto: 'link',
+    material: 'download',
+    icone: 'layers',
+    foto: 'camera',
+    logo: 'compass',
+    transcricao: 'mic',
+    documento: 'fileText'
+  };
+
+  // tab/section (sem query string) — usado pra não repetir a mesma página
+  // como atalho de navegação E como trecho de documento.
+  function hashPageKey(hash) {
+    return hash.replace(/^#\//, '').split('?')[0];
+  }
+
+  function scoreNavEntry(entry, terms) {
+    const tituloNorm = normalizeForSearch(entry.titulo);
+    let score = 0;
+    let acertouTitulo = false;
+    for (const t of terms) {
+      if (tituloNorm.includes(t)) { score += 30; acertouTitulo = true; }
+      else if (entry.texto.includes(t)) { score += 10; }
+    }
+    if (score === 0) return 0;
+    // O nome bate com o termo → vai pro topo, acima de qualquer trecho de
+    // documento. É o que a pessoa quer quando digita "ebook".
+    if (acertouTitulo) score += 25;
+    if (entry.tipo === 'assunto') score *= 0.7; // bom achado, mas destino principal vem antes
+    return score;
+  }
+
+  function scoreContentEntry(entry, terms) {
+    let score = 0;
+    const labelNorm = normalizeForSearch(entry.label);
+    for (const t of terms) {
+      if (labelNorm.includes(t)) score += 10;          // match no título pesa mais
+      const occurrences = entry.textNorm.split(t).length - 1;
+      score += Math.min(occurrences, 8);
+    }
+    return score;
+  }
+
+  function runSearch(query) {
+    if (!query.trim()) return [];
+    if ((!navIndex || !navIndex.length) && (!searchIndex || !searchIndex.length)) return [];
+
+    const queryNorm = normalizeForSearch(query);
+    const todasPalavras = queryNorm.split(/\s+/).filter(Boolean);
+    // Tira preposição/artigo curto do casamento por palavra — sem isso "tom
+    // de voz" casava qualquer título que contivesse só o "de". Se a busca for
+    // feita só de stopword (raro), mantém as palavras originais.
+    const semStopwords = todasPalavras.filter(p => p.length > 2 && !SEARCH_STOPWORDS_PT.has(p));
+    const termosBrutos = semStopwords.length ? semStopwords : todasPalavras;
+    if (!termosBrutos.length) return [];
+    const termos = expandSearchTerms(termosBrutos, queryNorm);
+
+    const resultadosNav = [];
+    for (const entry of navIndex || []) {
+      const score = scoreNavEntry(entry, termos);
+      if (score > 0) {
+        resultadosNav.push({ origem: 'nav', tipo: entry.tipo, titulo: entry.titulo, caminho: entry.caminho, hash: entry.hash, snippet: null, score });
+      }
+    }
+
+    // Página que já ganhou um atalho de navegação (pagina/assunto) não precisa
+    // também aparecer como "trecho de documento" — o atalho já é mais preciso.
+    const paginasComAtalho = new Set(
+      resultadosNav.filter(r => r.tipo === 'pagina' || r.tipo === 'assunto').map(r => hashPageKey(r.hash))
+    );
+
+    const resultadosConteudo = [];
+    for (const entry of searchIndex || []) {
+      const score = scoreContentEntry(entry, termos);
+      if (score <= 0) continue;
+      const hash = `#/${entry.tab}/${entry.sectionId}`;
+      if (paginasComAtalho.has(hashPageKey(hash))) continue;
+      resultadosConteudo.push({
+        origem: 'conteudo',
+        tipo: 'documento',
+        titulo: entry.label,
+        caminho: [entry.tabLabel, entry.label],
+        hash,
+        snippet: entry.snippet,
+        score
+      });
+    }
+
+    const combinados = [...resultadosNav, ...resultadosConteudo]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 40);
+
+    // Agrupa por tipo preservando a ordem de aparição — o grupo do melhor
+    // resultado vem primeiro, e dentro de cada grupo os itens seguem ordenados por score.
+    const ordemGrupos = [];
+    const porTipo = new Map();
+    for (const r of combinados) {
+      if (!porTipo.has(r.tipo)) { porTipo.set(r.tipo, []); ordemGrupos.push(r.tipo); }
+      porTipo.get(r.tipo).push(r);
+    }
+    const agrupado = [];
+    for (const tipo of ordemGrupos) agrupado.push(...porTipo.get(tipo));
+    return agrupado;
   }
 
   function highlightTerms(text, query) {
@@ -2290,6 +2488,42 @@ const BrandSystem = (() => {
     return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
   }
 
+  // Atalhos pros destinos mais procurados — mostrados de cara ao abrir a busca,
+  // antes de a pessoa digitar qualquer coisa. Abrir a busca já ajuda.
+  const SEARCH_SHORTCUTS = [
+    { label: 'Materiais para baixar', hash: '#/modelos/documentos', icon: 'download' },
+    { label: 'Logos', hash: '#/visual/logos', icon: 'compass' },
+    { label: 'Cores', hash: '#/visual/ds-cores', icon: 'palette' },
+    { label: 'Tipografia', hash: '#/visual/ds-tipografia', icon: 'type' },
+    { label: 'Galeria de imagens', hash: '#/direcao-arte/galeria', icon: 'camera' }
+  ];
+
+  function renderSearchEmptyState() {
+    const empty = document.getElementById('search-empty');
+    if (!empty) return;
+    const totalConteudo = (searchIndex || []).length;
+    const totalNav = (navIndex || []).length;
+    const meta = totalNav
+      ? `Busca em ${totalNav} itens da plataforma${totalConteudo ? ` + texto de ${totalConteudo} páginas` : ''}.`
+      : 'Digite pra buscar em todo o Brand System.';
+    empty.style.display = 'block';
+    empty.innerHTML = `
+      <div class="search-hint">${meta}</div>
+      <div class="search-shortcuts">
+        ${SEARCH_SHORTCUTS.map(s => `
+          <a class="search-shortcut" href="${s.hash}">
+            ${svgIcon(s.icon, 16)}
+            <span>${escapeHtml(s.label)}</span>
+          </a>
+        `).join('')}
+      </div>
+    `;
+    // Link nativo (href) navega sozinho — só falta fechar o modal por cima.
+    empty.querySelectorAll('.search-shortcut').forEach(a => {
+      a.addEventListener('click', () => closeSearch());
+    });
+  }
+
   function renderSearchResults(query) {
     const list = document.getElementById('search-results');
     const empty = document.getElementById('search-empty');
@@ -2298,10 +2532,7 @@ const BrandSystem = (() => {
     searchSelected = 0;
     if (!query.trim()) {
       list.innerHTML = '';
-      if (empty) {
-        empty.style.display = 'block';
-        empty.innerHTML = `<div class="search-hint">Digite pra buscar em todo o Brand System (${(searchIndex || []).length} documentos)</div>`;
-      }
+      renderSearchEmptyState();
       return;
     }
     if (empty) empty.style.display = searchResults.length ? 'none' : 'block';
@@ -2310,20 +2541,32 @@ const BrandSystem = (() => {
       list.innerHTML = '';
       return;
     }
-    list.innerHTML = searchResults.map((r, idx) => `
-      <button class="search-result" data-idx="${idx}" data-tab="${r.tab}" data-section="${r.sectionId}">
-        <div class="search-result-crumb">${escapeHtml(r.tabLabel)}</div>
-        <div class="search-result-title">${highlightTerms(r.label, query)}</div>
-        <div class="search-result-snippet">${highlightTerms(snippetAroundMatch(r.snippet, query), query)}</div>
-      </button>
-    `).join('');
+    // Agrupado por tipo, com um cabeçalho toda vez que o tipo muda (a lista
+    // já vem agrupada de runSearch — aqui é só desenhar a divisória).
+    let ultimoTipo = null;
+    list.innerHTML = searchResults.map((r, idx) => {
+      const cabecalho = r.tipo !== ultimoTipo
+        ? `<div class="search-group-header">${svgIcon(SEARCH_TIPO_ICON[r.tipo] || 'fileText', 13)}<span>${escapeHtml(SEARCH_TIPO_LABEL[r.tipo] || r.tipo)}</span></div>`
+        : '';
+      ultimoTipo = r.tipo;
+      const snippetHtml = r.snippet
+        ? `<div class="search-result-snippet">${highlightTerms(snippetAroundMatch(r.snippet, query), query)}</div>`
+        : '';
+      return `
+        ${cabecalho}
+        <button class="search-result" data-idx="${idx}" data-hash="${escapeAttr(r.hash)}">
+          <div class="search-result-crumb">${escapeHtml(r.caminho.join(' › '))}</div>
+          <div class="search-result-title">${highlightTerms(r.titulo, query)}</div>
+          ${snippetHtml}
+        </button>
+      `;
+    }).join('');
     updateSelected();
     list.querySelectorAll('.search-result').forEach(el => {
       el.addEventListener('click', () => {
-        const tab = el.dataset.tab;
-        const sec = el.dataset.section;
+        const hash = el.dataset.hash;
         closeSearch();
-        location.hash = `#/${tab}/${sec}`;
+        location.hash = hash;
       });
       el.addEventListener('mouseenter', () => {
         searchSelected = parseInt(el.dataset.idx, 10);
@@ -2351,7 +2594,7 @@ const BrandSystem = (() => {
         <div class="search-panel" role="dialog" aria-label="Busca">
           <div class="search-input-wrap">
             ${svgIcon('search', 18)}
-            <input type="search" id="search-input" placeholder="Buscar manifesto, ICP, tom de voz..." autocomplete="off" spellcheck="false">
+            <input type="search" id="search-input" placeholder="Buscar ebook, ícone, cor, protocolo..." autocomplete="off" spellcheck="false">
             <kbd class="search-esc">Esc</kbd>
           </div>
           <div id="search-empty" class="search-empty"></div>
@@ -2365,12 +2608,18 @@ const BrandSystem = (() => {
     }
     overlay.classList.add('is-open');
     document.body.classList.add('search-open');
-    ensureSearchIndex().then(() => {
-      renderSearchResults(document.getElementById('search-input').value);
-    });
     const input = document.getElementById('search-input');
+    // O índice de navegação é leve e foi disparado no boot (initSearch) — na
+    // maioria das vezes já está pronto aqui. O de conteúdo é pesado e só
+    // carrega agora; os dois redesenham o resultado assim que chegam.
+    renderSearchResults(input.value);
+    ensureNavIndex().then(() => renderSearchResults(input.value));
+    ensureSearchIndex().then(() => renderSearchResults(input.value));
     input.focus();
-    input.addEventListener('input', () => renderSearchResults(input.value));
+    if (!input.dataset.bound) {
+      input.dataset.bound = '1';
+      input.addEventListener('input', () => renderSearchResults(input.value));
+    }
   }
 
   function closeSearch() {
@@ -2380,6 +2629,9 @@ const BrandSystem = (() => {
   }
 
   function initSearch() {
+    // Dispara cedo: nav-index é leve, então na hora que a pessoa aperta
+    // Ctrl+K ele já deve estar pronto (índice pesado continua lazy).
+    ensureNavIndex();
     document.addEventListener('keydown', (e) => {
       // Ctrl+K / Cmd+K
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
@@ -2409,7 +2661,7 @@ const BrandSystem = (() => {
         const target = searchResults[searchSelected];
         if (target) {
           closeSearch();
-          location.hash = `#/${target.tab}/${target.sectionId}`;
+          location.hash = target.hash;
         }
       }
     });
@@ -2654,7 +2906,7 @@ const BrandSystem = (() => {
     if (submit) submit.disabled = items === 0 || submit.dataset.state === 'generating';
     if (submitLabel && submit && submit.dataset.state !== 'generating') {
       if (items === 0) submitLabel.textContent = 'Selecione pelo menos um item';
-      else if (bytes > HEAVY_BYTES_WARN) submitLabel.textContent = `Baixar ${formatBytes(bytes)} — pode demorar`;
+      else if (bytes > HEAVY_BYTES_WARN) submitLabel.textContent = `Baixar ${formatBytes(bytes)}, pode demorar`;
       else submitLabel.textContent = `Baixar ${formatBytes(bytes)} (.zip)`;
     }
     document.querySelectorAll('.dlm-tab').forEach(card => {
@@ -2811,7 +3063,7 @@ const BrandSystem = (() => {
       }, 1200);
     } catch (err) {
       console.error('[download] falha:', err);
-      if (submitLabel) submitLabel.textContent = 'Erro — tente de novo';
+      if (submitLabel) submitLabel.textContent = 'Erro, tente de novo';
       submit.dataset.state = '';
       setTimeout(updateSummary, 1800);
     }

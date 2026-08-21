@@ -79,7 +79,7 @@ A Consultoria não termina quando a metodologia foi entregue. Acompanha implemen
 | **Construção do método** | Orientada (Premium) ou construída pela Metta (Exclusive/Elite) | **Construída pela Metta na operação** |
 | **Treinamento** | Em grupo ou exclusivo | **Sempre exclusivo, dentro da empresa** |
 | **Faturamento alvo** | R$ 100k a +R$ 2M/mês | +R$ 5M/mês |
-| **Investimento** | R$ 375 a R$ 14.500/mês | A partir de R$ 300 mil/contrato |
+| **Investimento** | R$ 375 a R$ 19.000/mês | A partir de R$ 300 mil/contrato |
 | **Garantia** | Contratual de resultado | Contratual de resultado (escopo amplo) |
 | **Canal de venda** | Marketing (sessão estratégica) | **Comercial direto** (não marketing público) |
 

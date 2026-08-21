@@ -28,8 +28,8 @@ A **base metodológica** é a mesma. Mudam acesso, personalização e intensidad
 
 | Plano | Valor | Pagamento | ICP (faturamento) | Exclusividade | Método próprio | Acesso aos sócios | Objetivo |
 |-------|-------|-----------|-------------------|---------------|----------------|-------------------|----------|
-| **Elite** | R$ 14.500/mês | Boleto ou cartão | + R$ 2M/mês | Máxima | Metta constrói | Total — Tiago direto | Aceleração 360° |
-| **Exclusive** | R$ 5.500/mês | Boleto ou cartão | + R$ 1M/mês | Alta | Metta constrói | Parcial — encontros quinzenais | Escala e descentralização |
+| **Elite** | R$ 19.000/mês | Boleto ou cartão | + R$ 2M/mês | Máxima | Metta constrói | Total — Tiago direto | Aceleração 360° |
+| **Exclusive** | R$ 12.000/mês | Boleto ou cartão | + R$ 1M/mês | Alta | Metta constrói | Parcial — encontros quinzenais | Escala e descentralização |
 | **Premium** | R$ 2.916/mês | Cartão | R$ 200k–400k/mês | Média | Metta orienta | Parcial — encontros quinzenais | Consistência mensal |
 | **Acelera** | R$ 1.499/mês | Cartão | R$ 100k–200k/mês | Baixa | — | — | Preparar para escalar |
 | **Academy** | R$ 375/mês* | Cartão | Pós-mentoria | Baixa | — | — | Retenção e LTV |
@@ -60,9 +60,9 @@ O modelo mais completo de assessoria da Metta. Atuação comercial 360°, com **
 - **Guia SMTM dedicado** (não compartilhado com outros clientes).
 
 ### Oferta
-12 meses · **R$ 14.500/mês** (boleto ou cartão).
+12 meses · **R$ 19.000/mês** (boleto ou cartão), total de R$ 228.000.
 
-> Para quem fatura R$ 2M/mês, o investimento representa aproximadamente **0,73% do faturamento anual**. Argumento forte para objeção de preço.
+> Para quem fatura R$ 2M/mês, o investimento representa aproximadamente **0,95% do faturamento anual**. Argumento forte para objeção de preço.
 
 ---
 
@@ -87,10 +87,10 @@ Modelo de **assessoria individualizada**, com orientação estratégica direta a
 - Acesso a Tiago via Workshop Estratégico + Hotseat (quinzenais, em grupo).
 
 ### Oferta
-12 meses. Três opções de pagamento:
-- **Cartão** — 12× R$ 6.000 (total R$ 72.000)
-- **Boleto** — 12× R$ 7.000 (total R$ 84.000)
-- **À vista** — R$ 52.000
+12 meses, sendo 6 de acompanhamento individual e 6 em grupo, para manutenção. Três opções de pagamento:
+- **Cartão** — 12× R$ 12.000 (total R$ 144.000)
+- **Boleto** — 12× R$ 12.650
+- **À vista** — R$ 129.600
 
 ---
 
@@ -114,10 +114,13 @@ Modelo de **assessoria individualizada**, com orientação estratégica direta a
 - **Acompanhamento intensivo** — Guia SMTM disponível seg-sex 8h-18h, entrada quinzenal, mensuração mensal de satisfação.
 
 ### Oferta
-12 meses. Três opções de pagamento:
-- **Cartão (dentro da call)** — R$ 35.000 à vista
-- **Boleto** — 12× R$ 3.200 (total R$ 38.400)
-- **Fora da call** — R$ 40.000
+12 meses. Quatro opções de pagamento:
+- **À vista no PIX** — R$ 34.000 (dentro ou fora da call)
+- **Cartão, dentro da call** — 12× R$ 2.916,66 (total R$ 35.000)
+- **Cartão, fora da call** — 12× R$ 3.333,33 (total R$ 40.000)
+- **Boleto** — 12× R$ 3.666 (total R$ 44.000), 25% acima do cartão dentro da call
+
+Com entrada de 2 parcelas pagas no ato, dentro da reunião, o boleto pode sair com 10% de desconto.
 
 Equivalência: **R$ 2.916/mês.**
 
@@ -161,7 +164,7 @@ Equivalência: **R$ 2.916/mês.**
 - Operações que valorizam a relação de longo prazo com a Metta.
 
 ### Oferta
-- **R$ 375/mês** (cartão) — base
+- **R$ 375/mês** (cartão) — base, total R$ 4.500 por ano
 - **+ R$ 500/ano** por vendedor adicional
 - **+ R$ 800/ano** por gerente adicional
 
@@ -235,7 +238,7 @@ Em copy de tráfego pago, segmentar por faturamento alvo evita atrair lead do pl
 - Usar **"programa de aceleração"** ou "programa", não "mentoria" (em copy externa).
 - **Nunca expor preço em ad/LP públicos.** A oferta é sempre a sessão estratégica gratuita.
 - Quando citar investimento (em pitch comercial avançado), preferir **valor mensal de entrada** ("a partir de R$ 2.916/mês") em vez de valor cheio.
-- **Equivalência percentual sobre faturamento** (Elite: ~0,73%) é argumento forte para objeção de preço.
+- **Equivalência percentual sobre faturamento** (Elite: ~0,95%) é argumento forte para objeção de preço.
 - **Garantia contratual de superação de meta** é diferencial que vale mencionar em copy de qualquer plano — não só Elite.
 - Números institucionais (21 anos, +1.000 empresas, R$ 8,5 bi em metas batidas no último ano) podem ser usados em qualquer plano.
 - Em copy de aquisição (ad/LP), o foco geralmente é Premium (MQL2) e Exclusive/Elite (MQL1). Acelera e Academy são operados pelo time comercial e ficam fora de copy de aquisição.
