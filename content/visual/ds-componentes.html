@@ -1,14 +1,13 @@
 <h1 id="componentes">Componentes</h1>
-<p>Os componentes da Metta são as <strong>unidades visuais reusáveis</strong> que combinam tokens (cor, tipografia, forma, espaçamento, elevação) numa peça funcional. Cada componente tem regra clara de uso editorial — onde aplicar, em que estado, com que conteúdo. <strong>Componente fora do sistema descaracteriza a marca tão rápido quanto cor improvisada.</strong></p>
-<p>Esta página cobre os componentes editoriais principais: <strong>CTA, Card, Pill, Headline display, Espaço de respiro, Padrões de movimento</strong>. Componentes mais técnicos (form fields, dropdowns, toasts) ficam no catálogo técnico do DS.</p>
-<h2 id="botoes-cta">Botões CTA</h2>
-<p>Botões primários da marca. <strong>Sempre forma <code>full</code> (pill)</strong>, peso <code>Expanded Bold</code> (700) com font-stretch 132%. Três variantes — uma escolha não é estética, é funcional.</p>
+<p>A Metta tem um conjunto de peças prontas que se repetem em qualquer material da marca: botões, cards, etiquetas, textos de destaque e um bloco de respiro. Cada uma tem um uso específico. Veja abaixo o que é cada peça e quando usar.</p>
+<h2 id="botoes">Botões</h2>
+<p>Três versões do botão de ação da marca. Sempre em formato de pílula (cantos totalmente arredondados), sempre com peso forte na tipografia.</p>
 <div class="cta-demo-list">
   <div class="cta-demo-row">
     <div class="cta-demo-meta">
-      <strong>CTA Amarelo</strong>
-      <span class="cta-tag">primário · ação principal</span>
-      <p>Use pra a ação principal de qualquer peça (apenas 1 por composição). Background amarelo Metta sobre on-primary night-10.</p>
+      <strong>Botão amarelo</strong>
+      <span class="cta-tag">principal · ação mais importante</span>
+      <p>A ação principal de qualquer peça. Só um botão amarelo por composição.</p>
     </div>
     <div class="cta-demo-stage">
       <button class="ds-cta ds-cta-yellow">Quero participar</button>
@@ -16,9 +15,9 @@
   </div>
   <div class="cta-demo-row">
     <div class="cta-demo-meta">
-      <strong>CTA Escuro</strong>
+      <strong>Botão escuro</strong>
       <span class="cta-tag">secundário · ação alternativa</span>
-      <p>Use pra ação secundária ao lado do CTA primário. Background night-10 com texto branco. Hover: night-20.</p>
+      <p>Uma segunda opção ao lado do botão principal, sempre em segundo plano.</p>
     </div>
     <div class="cta-demo-stage">
       <button class="ds-cta ds-cta-dark">Saiba mais</button>
@@ -26,9 +25,9 @@
   </div>
   <div class="cta-demo-row">
     <div class="cta-demo-meta">
-      <strong>CTA Claro</strong>
+      <strong>Botão claro</strong>
       <span class="cta-tag">sobre fundo escuro</span>
-      <p>Versão para fundo escuro (manifesto, hero noite). Background branco gelo com texto night-10. Hover: night-95.</p>
+      <p>Versão pra usar sobre fundos escuros, como um manifesto ou uma cena noturna.</p>
     </div>
     <div class="cta-demo-stage cta-demo-stage--dark">
       <button class="ds-cta ds-cta-light">Conheça o método</button>
@@ -36,40 +35,28 @@
   </div>
 </div>
 
-<h3 id="regras-cta">Regras CTA</h3>
-<ul>
-<li><strong>Apenas 1 CTA primário (amarelo) por peça.</strong> Múltiplos amarelos competem e diluem hierarquia.</li>
-<li><strong>CTA secundário (escuro)</strong> pode coexistir com primário, mas sempre subordinado visualmente.</li>
-<li><strong>Texto sempre verbo no imperativo</strong> — &quot;Quero participar&quot;, &quot;Agendar diagnóstico&quot;, &quot;Acessar&quot;. Nunca &quot;Clique aqui&quot;, nunca &quot;Saiba mais sobre nossos serviços&quot;.</li>
-<li><strong>Largura proporcional ao texto</strong> (com padding <code>spacing-6</code> lateral, <code>spacing-4</code> vertical). Nunca CTA full-width em peça editorial — fica fraqueza visual.</li>
-<li><strong>Estado disabled</strong> com opacidade 40% e cursor <code>not-allowed</code>. Usar com parcimônia — preferir esconder a desabilitar.</li>
-</ul>
+<p>O texto do botão é sempre um verbo de ação, como &quot;Quero participar&quot; ou &quot;Agendar diagnóstico&quot;. Frases genéricas como &quot;Clique aqui&quot; não são usadas.</p>
 <h2 id="cards">Cards</h2>
-<p>5 variantes de card, cada uma com função editorial. <strong>Card padrão</strong> é o default; outras variantes têm propósito específico.</p>
-<h3 id="card-padrao">Card padrão</h3>
-<p>Use pra qualquer item de lista, grid de features ou conteúdo neutro. Forma <code>md</code> (12px), elevação Level 1.</p>
+<p>Cinco formatos de card, cada um com uma função.</p>
 <div class="ds-card">
   <h4>Workshop quinzenal</h4>
   <p>Diagnóstico estratégico ao vivo, em grupo restrito de empresários no mesmo porte.</p>
 </div>
 
-<h3 id="card-elevated">Card elevated</h3>
-<p>Use pra featured items, callouts hero ou conteúdo que precisa &quot;saltar&quot; do resto. Forma <code>xl</code> (24px), elevação Level 3. <strong>Mais peso visual</strong> — usar com parcimônia.</p>
+<p>Card padrão. Usado pra qualquer item de lista, grid de destaques ou conteúdo do dia a dia.</p>
 <div class="ds-card ds-card-elevated">
   <h4>Aplicação aberta</h4>
-  <p>Programa SMTM 2026 · vagas limitadas. Análise gratuita em 48h, decisão dos dois lados.</p>
+  <p>Programa SMTM 2026, vagas limitadas. Análise gratuita em 48h, decisão dos dois lados.</p>
 </div>
 
-<h3 id="card-stat">Card stat</h3>
-<p>Use pra estatísticas, métricas e resultados quantitativos. <strong>Número grande</strong> puxa o olhar primeiro, label e descrição apoiam.</p>
+<p>Card em destaque. Usado pra um item que precisa se sobressair na página, com mais espaço e mais sombra. Peça com moderação.</p>
 <div class="ds-card ds-card-stat">
   <div class="ds-card-stat-number">+47%</div>
   <div class="ds-card-stat-label">Faturamento mensal</div>
   <div class="ds-card-stat-desc">Crescimento médio em 8 meses pros clientes que completaram a primeira fase de implementação.</div>
 </div>
 
-<h3 id="card-icon">Card icon</h3>
-<p>Use pra apresentar features, capacidades ou itens de lista visual onde o ícone reforça o conceito. Ícone sempre estilo SVG do DS (viewBox 24x24, stroke-width 2.2, currentColor).</p>
+<p>Card de estatística. Usado pra mostrar um número, uma métrica ou um resultado.</p>
 <div class="ds-card ds-card-icon">
   <div class="ds-card-icon-svg">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -78,23 +65,16 @@
   <p>Toda aplicação é avaliada pessoalmente pela equipe. Quem não se encaixa é avisado direto, sem call vazia.</p>
 </div>
 
-<h3 id="card-filled">Card filled</h3>
-<p>Use em peças de <strong>destaque máximo</strong> — garantia, oferta, callout final. Fundo <code>inverse-surface</code> (night-10) contrastante. <strong>Apenas 1 por peça</strong>.</p>
+<p>Card com ícone. Usado pra apresentar uma característica ou capacidade, com um ícone que reforça a ideia.</p>
 <div class="ds-card ds-card-filled">
   <span class="ds-card-eyebrow">Garantia contratual</span>
   <h4>Se não bater, a Metta responde</h4>
   <p>Cláusula irrevogável no contrato. Compromisso compartilhado pela meta.</p>
 </div>
 
-<h3 id="regras-card">Regras Card</h3>
-<ul>
-<li><strong>Padding interno</strong> sempre <code>spacing-5</code> (24px) no padrão; <code>spacing-7</code> (48px) no elevated/filled.</li>
-<li><strong>Cards no mesmo grid</strong> sempre com altura igual (<code>grid-template-columns</code> com <code>1fr</code> e <code>align-items: stretch</code>).</li>
-<li><strong>Não aninhar cards.</strong> Card dentro de card vira ruído estrutural.</li>
-<li><strong>Card stat</strong> apenas com 1 número visível — não use 2-3 stats no mesmo card.</li>
-</ul>
-<h2 id="etiquetas-pill">Etiquetas Pill</h2>
-<p>Tags em <strong>caixa alta</strong> com espaçamento entre letras. Duas variantes: contorno (neutra) e preenchimento (destaque amarelo).</p>
+<p>Card preenchido. Reservado pro destaque máximo de uma peça, como uma garantia ou uma oferta. No máximo um por peça.</p>
+<h2 id="etiquetas">Etiquetas</h2>
+<p>Tags curtas em letras maiúsculas, em duas versões: contorno e preenchida em amarelo.</p>
 <div class="pill-demo-stage">
   <span class="ds-pill">Elite</span>
   <span class="ds-pill">Premium</span>
@@ -103,95 +83,44 @@
   <span class="ds-pill ds-pill-filled">Mentoria SMTM</span>
 </div>
 
-<h3 id="aplicacao">Aplicação</h3>
-<ul>
-<li><strong>Pill contorno</strong> — categorização neutra, marcador de plano (Elite, Premium), tag editorial.</li>
-<li><strong>Pill amarelo</strong> — destaque de tema/conceito proprietário, marca-d&#39;água editorial, badge de coleção.</li>
-<li><strong>Sempre uppercase</strong> com tracking 0.18em. Nunca title case ou lowercase.</li>
-<li><strong>Texto curto</strong> (1–3 palavras). Pill com frase é cartaz, não tag.</li>
-</ul>
-<h2 id="tipografia-de-destaque-display-headlines">Tipografia de destaque (Display Headlines)</h2>
-<p>5 variações de display headline. Use a que melhor reforça o tom da peça — <strong>uppercase agressivo</strong> pra autoridade, <strong>sentence case</strong> pra editorial, <strong>mixed weight</strong> pra ritmo, <strong>itálico ou marker</strong> pra ênfase tipográfica não-cromática.</p>
-<h3 id="variacao-01-caixa-alta-destaque-amarelo">Variação 01 — Caixa alta + destaque amarelo</h3>
-<p>Headline corporativa direta com palavra-chave em amarelo Metta. Use em peças institucionais e CTAs principais.</p>
+<p>A versão de contorno marca categorias neutras, como o nome de um plano. A versão amarela destaca um tema ou conceito próprio da marca. O texto é sempre curto, de uma a três palavras.</p>
+<h2 id="textos-de-destaque">Textos de destaque</h2>
+<p>Cinco formas de dar peso a um título. A escolha depende do tom da peça.</p>
 <div class="ds-headline-stage">
   <div class="ds-headline ds-headline-v1">Demita o achismo. Construa <span class="ds-headline-accent">método</span>.</div>
 </div>
 
-<h3 id="variacao-02-caixa-baixa-destaque-escuro">Variação 02 — Caixa baixa + destaque escuro</h3>
-<p>Tom editorial, narrativo. Use em peça mais longa, leitura literária.</p>
+<p>Caixa alta com uma palavra em amarelo. Usado em peças institucionais e chamadas principais.</p>
 <div class="ds-headline-stage">
   <div class="ds-headline ds-headline-v2">A inteligência comercial existe. Está <span class="ds-headline-accent-dark">invisível</span> na sua operação.</div>
 </div>
 
-<h3 id="variacao-03-pesos-misturados-heavy-light">Variação 03 — Pesos misturados (Heavy + Light)</h3>
-<p>Cria ritmo tipográfico sem cor. Use em peça que precisa contraste sem amarelo.</p>
+<p>Caixa baixa, tom mais editorial. Usado em peças de leitura mais longa.</p>
 <div class="ds-headline-stage">
   <div class="ds-headline ds-headline-v3">Método <span class="ds-headline-light">não é</span> luxo.</div>
 </div>
 
-<h3 id="variacao-04-destaque-em-italico">Variação 04 — Destaque em itálico</h3>
-<p>Ênfase narrativa. Use em quote, citação literária, tom mais reflexivo.</p>
+<p>Mistura de peso forte e leve na mesma frase, cria contraste sem precisar de cor.</p>
 <div class="ds-headline-stage">
   <div class="ds-headline ds-headline-v4">A única consultoria que <em>responde</em> contratualmente pela meta.</div>
 </div>
 
-<h3 id="variacao-05-marca-texto-amarelo">Variação 05 — Marca-texto amarelo</h3>
-<p>Highlight horizontal sobre palavra-chave. Use pra ênfase visual em texto narrativo.</p>
+<p>Destaque em itálico. Usado em citações e trechos mais reflexivos.</p>
 <div class="ds-headline-stage">
   <div class="ds-headline ds-headline-v5">Empresário no seu porte <span class="ds-headline-marked">trava aqui</span>.</div>
 </div>
 
-<h3 id="regras-headline">Regras Headline</h3>
-<ul>
-<li><strong>Apenas 1 headline display por peça.</strong> Múltiplos display competem.</li>
-<li><strong>Linha quebrada por intenção</strong> — controle as quebras manualmente em headlines curtas (use <code>&lt;br&gt;</code> ou shy hyphen).</li>
-<li><strong>Destaque em UMA palavra ou expressão curta</strong>. Destaque em frase inteira não é destaque.</li>
-<li><strong>Nunca centralize headline longa</strong> — leitura sofre. Headline curta (3-4 palavras) pode centralizar; headline longa sempre alinhada à esquerda.</li>
-</ul>
+<p>Uma marca-texto amarela sobre a palavra-chave. Usado pra dar ênfase visual num texto mais narrativo.</p>
+<p>Cada peça usa só um texto de destaque, e o realce em amarelo recai sobre uma palavra ou expressão curta, nunca a frase inteira.</p>
 <h2 id="espaco-de-respiro">Espaço de respiro</h2>
-<p>Container único central com tom sutil. <strong>Área de respiro em anúncios e stories.</strong> Forma <code>2xl</code> (32px), preenchimento <code>spacing-7</code> (48px). <strong>Nunca composto por 4 retângulos</strong> — sempre 1 frame único arredondado.</p>
+<p>Um bloco central com fundo levemente colorido, que separa o texto principal do fundo da peça.</p>
 <div class="ds-breathing-stage">
   <div class="ds-breathing-room">
     <h4>Espaço de respiração</h4>
-    <p>Tint sutil sobre o background, corner 32px, padding 48px. CTA fica embedado dentro, headline acima, content abaixo.</p>
+    <p>Um fundo sutil que isola o conteúdo principal do restante da peça, dando espaço pra headline e botão respirarem.</p>
   </div>
 </div>
 
-<h3 id="aplicacao">Aplicação</h3>
-<ul>
-<li><strong>Ad estático</strong> — frame central que isola headline + CTA do fundo fotográfico.</li>
-<li><strong>Story</strong> — bloco editorial sobre paisagem que respeita zona safe do Instagram.</li>
-<li><strong>Slide</strong> — bloco de destaque em apresentação executiva.</li>
-</ul>
-<h3 id="regras">Regras</h3>
-<ul>
-<li><strong>Apenas 1 espaço de respiro por peça.</strong> Múltiplos viram caixas dentro de caixas.</li>
-<li><strong>Background atrás precisa contraste suficiente.</strong> Tint do bloco precisa diferenciar do fundo.</li>
-<li><strong>Nunca borda visível</strong> no espaço de respiro — distinção é só por background sutil.</li>
-</ul>
-<h2 id="padroes-de-movimento">Padrões de movimento</h2>
-<p>5 padrões editoriais reusáveis em LP, hero, story:</p>
-<ol>
-<li><strong>Reveal</strong> — fade-in + translate-Y conforme entra na viewport</li>
-<li><strong>Magnetic</strong> — hover sutil que puxa elemento na direção do cursor</li>
-<li><strong>Counter</strong> — números crescem de 0 ao final em scroll</li>
-<li><strong>Ken Burns</strong> — zoom lento em foto hero (1.0 → 1.06 max)</li>
-<li><strong>Tipo-machine controlada</strong> — texto letra por letra em manifesto</li>
-</ol>
-<p>Detalhes completos de cada padrão (curva, duração, parâmetros) na <strong>página Movimento</strong> do DS.</p>
-<h2 id="componentes-nao-cobertos-aqui">Componentes não cobertos aqui</h2>
-<p>Esta página cobre os componentes <strong>editoriais e de marca</strong>. Componentes mais técnicos ficam no catálogo técnico do DS:</p>
-<ul>
-<li>Form fields (input, textarea, select, checkbox, radio)</li>
-<li>Modal e dialog</li>
-<li>Toast e snackbar</li>
-<li>Dropdown e menu</li>
-<li>Breadcrumb e pagination</li>
-<li>Tab e accordion</li>
-<li>Tooltip e popover</li>
-<li>Avatar, badge, chip</li>
-<li>Progress bar e skeleton</li>
-</ul>
-<h2 id="para-implementacao-tecnica">Para implementação técnica</h2>
-<p>Tokens completos por componente, snippets de código, mapeamento Figma e exemplos React/Vue ficam no <strong>catálogo técnico do Design System</strong>. Esta página cobre o uso editorial — quando aplicar, com que conteúdo, com que estado.</p>
+<p>Aparece em anúncios, isolando a chamada principal da foto de fundo, em stories e em slides de apresentação. Cada peça usa só um bloco de respiro.</p>
+<h2 id="pecas-mais-tecnicas">Peças mais técnicas</h2>
+<p>Este guia cobre as peças editoriais do dia a dia. Campos de formulário, menus, avisos do sistema e outros componentes mais técnicos estão na versão completa deste documento, disponível para download.</p>

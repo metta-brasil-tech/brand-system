@@ -51,922 +51,216 @@ updated: 2026-05-01
 - Brief novo de copy — checar arquétipos antes de começar
 - Reescrita de texto que soa "fora da marca"
 
-## §1 O que é Identidade Verbal
-
-Apresentação - Rebranding - Identidade Verbal
-
-Rebranding
-Metta
-
-Inteligência comercial para empresário
-
-Manual de Identidade
-Verbal & Linguage
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Sumári
-
-Introdução
-
-O que é Identidade Verbal
-
-Conceito — Propósito e Público
-
-Arquétipos de Marca
-
-Tom e Voz
-
-Implicações para o Estilo de Linguagem
-
-Vocabulário da Marca
-
-Glossário
-
-Mensagens-Chave
-
-Manifesto da Marc
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Introduçã
+## §1 Introdução
 
 A identidade de uma marca deve refletir suas características e valores mais estáveis.
 
-A metta é o ecossistema de inteligência comercial dos empresários que buscam bater
+A Metta é o ecossistema de inteligência comercial dos empresários que buscam bater metas de forma mais leve, fácil e sustentável. É o movimento que busca extinguir o jeito antigo e ineficiente de gestão comercial no Brasil. Essa base ajuda a construir a percepção da marca a partir de autoridade, método e segurança, expressos verbalmente em cada ponto de contato.
 
-metas de forma mais leve, fácil e sustentável. É o movimento que busca extinguir o jeito
+A identidade visual e verbal da marca deve ser consistente e alcançar um equilíbrio entre como a Metta se autodefine e como os empresários a percebem. Nosso objetivo é integrar os elementos de modo a expressar que bater meta não é sorte, é método.
 
-antigo e ineficiente de gestão comercial no Brasil. Essa base ajuda a construir a
+Uma identidade verbal bem construída garante que a marca seja reconhecida pelo que diz e pelo como diz, independentemente de quem escreve ou fala em nome dela.
 
-percepção da marca a partir de autoridade, método e segurança, expressos verbalmente
+A consistência verbal não engessa a comunicação. Ela a torna mais forte, mais confiável e mais memorável. É o que transforma uma empresa em uma marca.
 
-em cada ponto de contato.
+Todas as pessoas que criam conteúdo em nome da Metta, textos, apresentações, propostas, roteiros, devem ter este documento como referência central.
 
-A identidade visual e verbal da marca deve ser consistente e alcançar um equilíbrio entre
+## §2 O que é Identidade Verbal
 
-como a Metta se autodefine e como os empresários a percebem. Nosso objetivo é
+A Identidade Verbal engloba todos os elementos linguísticos da marca: nome, vocabulário, narrativa, tom e voz, além do nível de formalidade e uso de termos técnicos. Ela inclui o "o quê" e o "como" falamos. Para a Metta, o discurso deve ser direto, confiante e data-driven, evitando "academicismo" ou "consultês" e focando na clareza que gera ação.
 
-integrar os elementos de modo a expressar que bater meta não é sorte, é método
+Ela cobre cinco dimensões: Nome, Vocabulário, Narrativa, Tom e Voz, Território de Palavras.
 
-Uma identidade verbal bem construída garante que a marca seja reconhecida pelo que
+Ela deve ser consistente, adaptável a diferentes canais de comunicação (do LinkedIn ao WhatsApp) e, principalmente, intencional. Sem uma visão estratégica, dada pelo posicionamento de "Inteligência Comercial para Empresários", o discurso pode soar como apenas mais uma consultoria teórica.
 
-diz e pelo como diz — independentemente de quem escreve ou fala em nome dela.
+### O que a marca diz e como a marca diz
 
-A consistência verbal não engessa a comunicação. Ela a torna mais forte, mais
+| O que a marca diz | Como a marca diz |
+|---|---|
+| O conteúdo das mensagens: os temas que a Metta aborda, os conceitos que defende, as promessas que faz e os resultados que comunica. É a substância da comunicação. | O estilo, o tom, o ritmo, a escolha das palavras. É aquilo que torna a voz da Metta reconhecível: direta, humana, especialista e comprometida com execução. |
 
-confiável e mais memorável. É o que transforma uma empresa em uma marca.
+## §3 Conceito, Propósito e Público
 
-Todas as pessoas que criam conteúdo em nome da Metta — textos, apresentações,
+### Propósito duplo
 
-propostas, roteiros — devem ter este documento como referência central
+A Metta tem dois propósitos inseparáveis: fazer pessoas e empresas baterem metas, e profissionalizar o mercado de gestão comercial no Brasil.
 
-Rebrandin
+Como? Transformando como líderes e equipes alcançam resultados, com leveza, método e sustentabilidade.
 
-Manual de Identidade Verbal & Linguage
+Esses dois propósitos são inseparáveis. Ao transformar a realidade de cada empresa que atende, a Metta eleva o padrão de todo um mercado. O impacto é individual e, ao mesmo tempo, sistêmico.
 
-Mett
+### Público
 
-Inteligência comercial para empresário
+CEOs, VPs e Diretores comerciais de pequenas, médias e grandes empresas, exaustos da imprevisibilidade operacional.
 
-O que é
-identidade
-verba
+Perfil: líderes transformadores que escolheram ciência em vez de achismo, método em vez de improviso, qualidade de vida em vez de burnout.
 
-A Identidade Verbal engloba todos os elementos linguísticos da marca: nome,
+Principalmente entre 35 e 50 anos, em fase de maturidade profissional, que já provaram capacidade de gerar resultado mas agora buscam fazê-lo de forma sustentável, deixando legado de método (não dependência pessoal).
 
-vocabulário, narrativa, tom e voz, além do nível de formalidade e uso de termos
+Transformação de identidade social: de "empresário que trabalha 70h por semana" para "líder estratégico que construiu empresa autônoma".
 
-técnicos. Ela inclui o "o quê" e o "como" falamos. Para a Metta, o discurso deve ser
+A Metta ajuda o público a se posicionar como "profissional que rejeita amadorismo, caos e baixa performance e está disposto a aderir a um novo método de gestão em vendas", seja CEO, diretor comercial ou gerente. É símbolo de profissionalização da gestão comercial brasileira.
 
-direto, confiante e data-driven, evitando "academicismo" ou “consultês” e focando na
+## §4 Arquétipos de Marca
 
-clareza que gera ação
+A construção da identidade verbal da Metta é guiada por uma tríade arquetípica: Sábio e Governante. Lidera com autoridade e responsabilidade. Guia com inteligência. Entrega resultados com metodologia e enfrenta desafios com determinação e coragem.
 
-N O M
+### Sábio: a ciência por trás da Metta
 
-VO CA B U L Á R I
+Este arquétipo sustenta o pilar técnico e intelectual da marca.
 
-N A R R AT I V
+O que o Sábio traz para a comunicação: profundidade sem pedantismo. Conhecimento que se traduz em prática. Metodologia humanizada. A ciência como ferramenta de conexão, não de distância.
 
-TO M   E   VO
+- **Ciência nas vendas**: a Metta não acredita em "dom" ou "lábia", mas sim na intersecção entre processos, gestão e liderança para desenvolver o comportamento humano.
+- **Perfil intelectual**: somos conselheiros. Ouvimos, entendemos, diagnosticamos e aconselhamos com base em dados e experiência.
+- **Dados vencem opiniões**: utilizamos diagnósticos baseados em métricas concretas em vez de "achismos".
+- **Simplificamos o complexo**: entendemos o seu universo comercial e o transformamos em processos simples e compreensíveis.
 
-T E R R I TÓ R I O   D E   PA L AV R A
+### Governante: sistema e ordem
 
-Ela deve ser consistente, adaptável a diferentes canais de comunicação (do LinkedIn
+Este arquétipo é responsável pela estrutura, controle e previsibilidade que a marca entrega ao empresário.
 
-ao WhatsApp) e, principalmente, intencional. Sem uma visão estratégica, dada pelo
+O que o Governante traz para a comunicação: segurança, assertividade, clareza nas promessas, responsabilidade sobre o resultado. Fala com quem decide. Não pede desculpas por ser direta. Apresenta dados e age.
 
-posicionamento de "Inteligência Comercial para Empresários", o discurso pode soar
+- **Liderança e autoridade**: a Metta posiciona-se como uma autoridade que lidera com responsabilidade, guiando o cliente com inteligência.
+- **Fim do caos**: sua função principal é substituir a "montanha-russa" de resultados e a imprevisibilidade por resultados previsíveis, eficiência de trabalho e processos estabelecidos.
+- **Criação de padrões**: bater a meta é comunicado não como um evento heroico, mas como a consequência lógica e natural de um sistema de gestão bem executado.
+- **Responsabilidade contratual**: manifesta-se na garantia contratual de resultados, assumindo a responsabilidade pela "ordem" estabelecida.
 
-como apenas mais uma consultoria teórica
+## §5 Tom e Voz
 
-O que a marca di
+A voz da Metta é inteligente, humana, responsável e comprometida com resultado.
 
-Como a marca di
+A voz é o atributo estável da marca, é o que a torna reconhecível independentemente do canal ou do assunto. A voz da Metta não muda. O que muda é o tom, dependendo do contexto.
 
-O conteúdo das mensagens: os temas que a Metta aborda, os
+O tom é maleável: se adapta ao canal, ao momento e ao interlocutor. A Metta pode ser mais técnica em uma proposta, mais próxima em um post, mais formal em um contrato, mas sempre reconhecível.
 
-O estilo, o tom, o ritmo, a escolha das palavras. É aquilo que torna
+### Direta e confiante (não é arrogante)
 
-conceitos que defende, as promessas que faz e os resultados que
+- Vamos direto ao ponto, sem rodeios ou enrolação.
+- Falamos a verdade, mesmo quando é desconfortável.
+- Temos clareza do que entregamos e dizemos isso sem arrogância.
+- Não usamos linguagem vaga ou corporativês.
 
-a voz da Metta reconhecível — direta, humana, especialista e
+Fala a verdade com clareza, sem rodeios e sem arrogância. Sabe o que entrega e não tem medo de dizer. A Metta não usa o discurso de quem está tentando convencer, usa o de quem já sabe.
 
-comunica. É a substância da comunicação
+### Humana e próxima (não é genérica)
 
-comprometida com execução
+- Tratamos cada interação como parceria real.
+- Escutamos antes de propor solução.
+- Celebramos vitórias juntos (não apenas nosso resultado).
+- Usamos "nós" e "juntos" (não "vocês" de forma distante).
 
-Rebrandin
+Trata cada interação como uma parceria real. Escuta antes de propor. Reconhece a tensão do líder comercial e fala a partir dela, não sobre ela. Do porteiro ao presidente, cada pessoa importa.
 
-Manual de Identidade Verbal & Linguage
+### Especialista e acessível (não é pedante)
 
-Mett
+- Dominamos o assunto (18 anos, +450 empresas, cientificamente embasado).
+- Explicamos de forma simples, sem jargões desnecessários.
+- Transformamos complexidade em clareza.
+- Autoridade intelectual sem arrogância.
 
-Inteligência comercial para empresário
+Domina o universo comercial sem usar jargões desnecessários. Transforma complexidade em clareza. Não precisa impressionar com termos técnicos, imprime com resultados. É exclusiva, não hermética.
 
-Propósito
-& Públic
+### Executora e comprometida (não é vaga)
 
-0
+- Não prometemos o que não podemos cumprir.
+- Quando assumimos, entregamos, e temos contrato para provar.
+- Termos vagos como "potencializamos" ou "alavancamos" devem ter contexto de fala.
+- A Metta age.
 
-0
+Não promete o que não pode cumprir. Quando assume, entrega, e tem contrato para provar. A comunicação reflete essa postura: termos vagos como "potencializamos" ou "alavancamos" devem ter contexto de fala. A Metta age.
 
-Fazer pessoas e empresas
-baterem metas
+## §6 Implicações para o Estilo de Linguagem
 
-Profissionalizar o mercado de
-gestão comercial no Brasil
+### Prefira palavras diretas e concretas
 
-Como? Transformando como líderes e equipes alcançam resultados — com leveza,
+O empresário não tem tempo para decifrar o que você quer dizer. Use a palavra mais simples que expresse a ideia com precisão.
 
-método e sustentabilidade
+### Verbos fortes e no presente
 
-Esses dois propósitos são inseparáveis. Ao transformar a realidade
+Verbos fracos e substantivações tornam a comunicação vaga e burocrática. Use verbos que indiquem ação real.
 
-de cada empresa que atende, a Metta eleva o padrão de todo um
+| Em vez de | Use |
+|---|---|
+| alavancar resultados | bater meta |
+| fazer a entrega de | entregar |
+| potencializar a performance | melhorar o desempenho |
+| realizar a implementação | implementar |
+| implementar um framework | construir um método |
+| promover a capacitação | desenvolver |
 
-mercado. O impacto é individual e, ao mesmo tempo, sistêmic
+### Frases curtas e estrutura direta
 
-Rebrandin
+Use a ordem natural: sujeito, verbo, objeto. Uma ideia por período. A Metta não escreve para impressionar, escreve para ser entendida na primeira leitura.
 
-Manual de Identidade Verbal & Linguage
+### Use dados para ancorar afirmações
 
-Mett
+A Metta não fala em feeling, fala em ciência e evidência. Sempre que possível, ancore afirmações em dados concretos, cases ou metodologia. Exemplos:
 
-Inteligência comercial para empresário
+- "A Metta implementa processos comerciais com método customizado e garantia."
+- "Enquanto seus concorrentes crescem, você está estagnado."
+- "79% dos gestores e líderes de vendas dizem que a receita aumentou no último ano."
 
-Propósito
-& Públic
+### Fale para quem decide
 
-CEOs, VPs e Diretores comerciai
+O interlocutor da Metta é um CEO, VP ou Diretor Comercial. Pessoas que lidam com pressão, metas e equipes no limite. A comunicação reconhece essa realidade antes de propor qualquer solução.
 
-De pequenas, médias e grandes empresas exaustos da imprevisibilidade operacional
+Quatro palavras-âncora: Resultado, Eficiência, Previsibilidade, Equilíbrio.
 
-Perfi
+### Evite o discurso motivacional
 
-líderes transformadores que escolheram ciência em vez de achismo, método em vez de
+A Metta não é palestrante. Não usa frases de efeito sem conteúdo. Não promete transformação sem metodologia. O tom é de parceiro executivo, não de coach de palco.
 
-improviso, qualidade de vida em vez de burnout.
+Evitar: "Destrave seu potencial", "Seja extraordinário", "Transforme sua vida", "Mindset de campeão".
 
-Principalmente 35-50 anos, em fase de maturidade profissional, que já provaram
+## §7 Vocabulário da Marca
 
-capacidade de gerar resultado mas agora buscam fazê-lo de forma sustentável, deixando
+O vocabulário da Metta reúne os termos e palavras-chave que compõem o discurso da marca. Esses são os conceitos que devem habitar os textos, apresentações e comunicações da empresa. A lista é viva e pode ser ampliada conforme a marca evolui.
 
-legado de método (não dependência pessoal).
+**Substantivos:** Resultado · Meta · Previsibilidade · Processo · Metodologia · Equilíbrio · Inteligência · Diagnóstico · Gestão · Vendedores · Equipe · Consistência · Comercial · Escala · Dados · Vendas · Crescimento · Execução · Desempenho · Liderança · Garantia · Ecossistema.
 
-Transformação de identidade social: De "empresário que trabalha 70h/semana" para
+**Adjetivos:** Leve · Previsível · Sustentável · Integrado · Validado · Humana · Comprometida · Direta · Inteligente · Estruturada · Confiável · Escalável · Mensurável · Mais leve.
 
-"líder estratégico que construiu empresa autônoma"
+**Verbos:** Bater · Implementar · Entregar · Construir · Medir · Transformar · Vender · Garantir · Converter · Qualificar · Liderar · Resolver · Crescer · Simplificar · Evoluir.
 
-A Metta ajuda o público a se posicionar como "Profissional que rejeita
-amadorismo, caos e baixa performance e está disposto a aderir um novo
-método de gestão em vendas" — seja CEO, diretor comercial ou gerente. É
-símbolo de profissionalização da gestão comercial brasileira
+## §8 Glossário
 
-Rebrandin
+O glossário da Metta define os termos centrais do universo de atuação da marca. Esses conceitos devem ser usados de forma consistente em toda comunicação, sempre seguidos de exemplos concretos quando necessário.
 
-Manual de Identidade Verbal & Linguage
+- **Inteligência Comercial**: a combinação de ciência comportamental, dados e metodologia proprietária aplicada à gestão de vendas. É o que transforma a área comercial em uma máquina de resultados saudável e escalável.
+- **Ciência Comportamental**: o conjunto de estudos sobre como as pessoas aprendem, tomam decisões, mudam comportamentos e performam. A Metta aplica esses princípios à gestão comercial para criar métodos que funcionam de verdade, não no papel.
+- **Meta**: não é um número qualquer. É um compromisso. Para a Metta, a meta é o ponto de partida. É o que queremos alcançar, seja na empresa, seja em nossa vida.
+- **Previsibilidade**: a capacidade de transformar variáveis comerciais em consistência mensurável. Processos previsíveis substituem o heroísmo individual por um sistema que funciona sem depender de talento único.
+- **Fazedoria**: o modelo hands-on da Metta. Não consultamos à distância: estamos na trincheira com o cliente, implementando e ajustando em tempo real. Fazedoria é o oposto de relatório sem execução.
+- **Ecossistema de Soluções**: o conjunto integrado de serviços da Metta que cobre todas as dimensões da gestão comercial, do diagnóstico à implementação, do desenvolvimento de liderança ao treinamento de equipes.
 
-Mett
+## §9 Mensagens-Chave
 
-Inteligência comercial para empresário
+As mensagens-chave são os temas que devem habitar toda a comunicação da Metta. São âncoras conceituais, ponto de partida para qualquer conteúdo, não scripts fixos.
 
-Arquétipos
-de marc
+- **Diferencial**: "A Metta é o único ecossistema que une ciência comportamental, dados e execução, com garantia contratual de resultado."
+- **Sobre leveza**: "Resultado com eficiência, não com sacrifício. O crescimento sustentável começa com um time que performa sem se esgotar."
+- **Sobre método**: "Bater meta não é sorte. É método. E o método é replicável para o seu negócio."
+- **Sobre ciência**: "Cada decisão da Metta é sustentada por dados e psicologia comportamental. Não trabalhamos com achismo."
+- **Sobre público**: "Seu time de vendas não precisa de mais motivação. Precisa de um processo que funcione sem depender de talento individual."
+- **Sobre mercado**: "Nascemos para profissionalizar a gestão comercial no Brasil. O impacto começa em cada empresa, e se multiplica no mercado."
 
-A construção da identidade verbal da Metta é guiada por uma tríade arquetípica
+## §10 Manifesto da Marca
 
-Sábi
-
-Governant
-
-Lidera com autoridade e responsabilidade. Guia com inteligência. Entrega
-resultados com metodologia e enfrenta desafios com determinação e coragem
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Arquétipos de marc
-
-Sábi
-
-A Ciência por trás da Met
-
-Este arquétipo sustenta o pilar
-técnico e intelectual da marca
-
-O que o Sábio  traz para a comunicaçã
-
-Profundidade sem pedantismo. Conhecimento que se traduz em prática. Metodologia
-
-humanizada. A ciência como ferramenta de conexão, não de distância
-
-Ciência nas venda
-
-Perfil Intelectua
-
-Dados vencem Opiniõe
-
-Simplificamos o complex
-
-A Metta não acredita em "dom" ou
-"lábia", mas sim na intersecção entre
-Processos, Gestão e Liderança para
-desenvolver o comportamento humano
-
-Somos conselheiros. Ouvimos,
-entendemos, diagnosticamos e
-aconselhamos com base em dados
-e experiênci
-
-Utilizamos diagnósticos baseados
-em métricas concretas em vez de
-"achismos"
-
-Entendemos o seu universo
-comercial e o transformamos em
-processos simples e compreensívei
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Arquétipos de marc
-
-Governant
-
-Sistema e Orde
-
-Este arquétipo é responsável pela estrutura, controle
-e previsibilidade que a marca entrega ao empresári
-
-O que o Governante traz para a comunicaçã
-
-Segurança, assertividade, clareza nas promessas, responsabilidade sobre o resultado.
-
-Fala com quem decide. Não pede desculpas por ser direta. Apresenta dados e age
-
-Liderança e Autoridad
-
-Fim do Cao
-
-Criação de Padrõe
-
-Responsabilidade Contratua
-
-A Metta posiciona-se como uma
-autoridade que lidera com
-responsabilidade, guiando o cliente
-com inteligência
-
-Sua função principal é substituir a
-"montanha-russa" de resultados e a
-imprevisibilidade por resultados
-previsíveis, eficiência de trabalho e
-processos estabelecidos
-
-Bater a meta é comunicado não
-como um evento heroico, mas
-como a consequência lógica e
-natural de um sistema de gestão
-bem executado
-
-Manifesta-se na garantia contratual
-de resultados, assumindo a
-responsabilidade pela "ordem"
-estabelecida
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Pilares do
-tom de vo
-
-Inteligente. Humana. Responsável e Comprometida com resultado
-
-A voz da mett
-
-O Tom de Vo
-
-A voz é o atributo estável da marca — é o que a torna reconhecível
-
-O tom é maleável: se adapta ao canal, ao momento e ao interlocutor.
-
-independentemente do canal ou do assunto. A voz da Metta não
-
-A Metta pode ser mais técnica em uma proposta, mais próxima em um
-
-muda. O que muda é o tom, dependendo do contexto
-
-post, mais formal em um contrato — mas sempre reconhecível
-
-DIRET
-
-CONFIANT
-
-HUMAN
-
-ESPECIALIST
-
-ACESSÍVE
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Pilares do
-tom de vo
-
-Direta e confiant
-
-Vamos direto ao ponto, sem rodeios ou enrolaçã
-
-Falamos a verdade, mesmo quando é desconfortáve
-
-Temos clareza do que entregamos e dizemos isso sem arrogânci
-
-Não usamos linguagem vaga ou corporativê
-
-Fala a verdade com clareza, sem rodeios e sem arrogância. Sabe o
-
-que entrega e não tem medo de dizer. A Metta não usa o discurso
-
-de quem está tentando convencer — usa o de quem já sabe
-
-NÃO É ARROGANT
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Pilares do
-tom de vo
-
-Humana e próxim
-
-Tratamos cada interação como parceria rea
-
-Escutamos antes de propor soluçã
-
-Celebramos vitórias juntos (não apenas nosso resultado
-
-Usamos "nós" e "juntos" (não "vocês" de forma distante
-
-Trata cada interação como uma parceria real. Escuta antes de
-
-propor. Reconhece a tensão do líder comercial e fala a partir dela
-
-— não sobre ela. Do porteiro ao presidente, cada pessoa importa
-
-NÃO É GENÉRIC
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Pilares do
-tom de vo
-
-Especialista e acessíve
-
-Dominamos o assunto (18 anos, +450 empresas, cientificamente embasado
-
-Explicamos de forma simples, sem jargões desnecessário
-
-Transformamos complexidade em clarez
-
-Autoridade intelectual sem arrogânci
-
-Domina o universo comercial sem usar jargões desnecessários. Transforma
-
-complexidade em clareza. Não precisa impressionar com termos técnicos —
-
-imprime com resultados. É exclusiva, não hermética
-
-NÃO É PEDANT
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Pilares do
-tom de vo
-
-Executora e comprometid
-
-Não prometemos o que não podemos cumpri
-
-Explicamos de forma simples, sem jargões desnecessário
-
-Transformamos complexidade em clarez
-
-Autoridade intelectual sem arrogânci
-
-Não promete o que não pode cumprir. Quando assume, entrega — e tem contrato
-
-para provar. A comunicação reflete essa postura: termos vagos como
-
-"potencializamos" ou "alavancamos" devem ter contexto de fala. A Metta age
-
-NÃO É VAG
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Implicações
-para o Estilo
-de Linguage
-
-Prefira palavras diretas e
-concreta
-
-Verbos fortes e no present
-
-O empresário não tem tempo para decifrar o que você quer dizer.
-
-Use a palavra mais simples que expresse a ideia com precisão
-
-Verbos fracos e substantivações tornam a comunicação
-
-vaga e burocrática. Use verbos que indiquem ação real
-
-alavancar resultados → bater meta
-
-fazer a entrega de → entrega
-
-potencializar a performance → melhorar o desempenh
-
-realizar a implementação → implementa
-
-implementar um framework → construir um métod
-
-promover a capacitação → desenvolve
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Implicações
-para o Estilo
-de Linguage
-
-Frases curtas e estrutura diret
-
-Use dados para ancorar afirmaçõe
-
-Use a ordem natural: sujeito + verbo + objeto. Uma ideia por
-
-A Metta não fala em feeling — fala em ciência e evidência. Sempre que
-
-período. A Metta não escreve para impressionar — escreve
-
-possível, ancore afirmações em dados concretos, cases ou metodologia
-
-para ser entendida na primeira leitura
-
-"A Metta implementa processos comerciai
-com método customizado e garantia.
-
-"Enquanto seus concorrentes crescem, você está estagnado
-
-79% dos gestores e líderes de vendas dizem que a receita
-aumentou no último ano
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Implicações
-para o Estilo
-de Linguage
-
-Fale para quem decid
-
-Evite o discurso motivaciona
-
-O interlocutor da Metta é um CEO, VP ou Diretor Comercial.
-
-A Metta não é palestrante. Não usa frases de efeito sem conteúdo. Não
-
-Pessoas que lidam com pressão, metas e equipes no limite. A
-
-promete transformação sem metodologia. O tom é de parceiro executivo
-
-comunicação reconhece essa realidade antes de propor
-
-— não de coach de palco
-
-qualquer solução
-
-RESULTAD
-
-EFICIÊNCI
-
-PREVISIBILIDAD
-
-ESQUILÍBRI
-
-"Destrave seu potencial", "Seja extraordinário", "Transforme
-sua vida", "Mindset de campeão
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Vocabulári
-
-O vocabulário da Metta reúne os termos e palavras-chave que
-
-compõem o discurso da marca. Esses são os conceitos que devem
-
-habitar os textos, apresentações e comunicações da empresa. A
-
-lista é viva e pode ser ampliada conforme a marca evolui
-
-Substantivo
-
-Adjetivo
-
-Verbo
-
-RESULTAD
-
-MET
-
-PREVISIBILIDAD
-
-LEV
-
-PREVISÍVE
-
-SUSTENTÁVE
-
-BATE
-
-IMPLEMENTA
-
-ENTREGA
-
-PROCESS
-
-METODOLOGI
-
-ESQUILÍBRI
-
-INTEGRAD
-
-VALIDAD
-
-HUMAN
-
-CONSTRUÍ
-
-MEDI
-
-TRANSFORMA
-
-ECOSSISTEM
-
-DADO
-
-VENDA
-
-COMPROMETID
-
-DIRET
-
-INTELIGENT
-
-VENDE
-
-GARANTI
-
-CONVERTE
-
-EXECUÇÃ
-
-DESEMPENH
-
-LIDERNAÇ
-
-ESTRUTURAD
-
-CONFIÁVE
-
-ESCALÁVE
-
-QUALIFICA
-
-LIDERA
-
-RESOLVE
-
-GARANTI
-
-CRESCIMENT
-
-MAIS LEV
-
-MENSURÁVE
-
-CRESCE
-
-SIMPLIFICA
-
-EVOLUI
-
-INTELIGÊNCI
-
-DIAGNÓSTIC
-
-GESTÃ
-
-VENDEDORE
-
-EQUIP
-
-CONSISTÊNCI
-
-COMERCIA
-
-ESCALA
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Glossári
-
-O glossário da Metta define os termos centrais do universo de
-
-atuação da marca. Esses conceitos devem ser usados de forma
-
-consistente em toda comunicação — sempre seguidos de
-
-exemplos concretos quando necessário
-
-Inteligência Comercia
-
-Ciência Comportamenta
-
-Met
-
-A combinação de ciência comportamental, dados e
-
-O conjunto de estudos sobre como as pessoas aprendem,
-
-Não é um número qualquer. É um compromisso. Para a
-
-metodologia proprietária aplicada à gestão de vendas.
-
-tomam decisões, mudam comportamentos e performam.
-
-Metta, a meta é o ponto de partida. É o que queremos
-
-É o que transforma a área comercial em uma máquina
-
-A Metta aplica esses princípios à gestão comercial para
-
-alcançar, seja na empresa, seja em nossa vida
-
-de resultados saudável e escalável
-
-criar métodos que funcionam de verdade — não no papel
-
-Previsibilidad
-
-Fazedori
-
-Ecossistema de Soluçõe
-
-A capacidade de transformar variáveis comerciais em
-
-O modelo hands-on da Metta. Não consultamos à
-
-O conjunto integrado de serviços da Metta que cobre
-
-consistência mensurável. Processos previsíveis
-
-distância: estamos na trincheira com o cliente,
-
-todas as dimensões da gestão comercial — do
-
-substituem o heroísmo individual por um sistema que
-
-implementando e ajustando em tempo real. Fazedoria
-
-diagnóstico à implementação, do desenvolvimento de
-
-funciona sem depender de talento único
-
-é o oposto de relatório sem execução
-
-liderança ao treinamento de equipes
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-Mensagens-chav
-
-As mensagens-chave são os temas que devem habitar toda a
-
-comunicação da Metta. São âncoras conceituais — ponto de
-
-partida para qualquer conteúdo, não scripts fixos
-
-Diferencia
-
-Sobre levez
-
-Sobre métod
-
-"A Metta é o único ecossistema que une ciência
-
-"Resultado com eficiência — não com sacrifício. O
-
-"Bater meta não é sorte. É método. E o método é
-
-comportamental, dados e execução — com garantia
-
-crescimento sustentável começa com um time que
-
-replicável para o seu negócio.
-
-contratual de resultado.
-
-performa sem se esgotar.
-
-Sobre ciênci
-
-Sobre o públic
-
-Sobre mercad
-
-"Cada decisão da Metta é sustentada por dados e
-
-"Seu time de vendas não precisa de mais motivação.
-
-"Nascemos para profissionalizar a gestão comercial
-
-psicologia comportamental. Não trabalhamos com
-
-Precisa de um processo que funcione sem depender
-
-no Brasil. O impacto começa em cada empresa — e se
-
-achismo.
-
-de talento individual.
-
-multiplica no mercado.
-
-Rebrandin
-
-Manual de Identidade Verbal & Linguage
-
-Mett
-
-Inteligência comercial para empresário
-
-A metta é o
-novo padrão
-
-Existe uma mentira confortável no mercado de gestão comercial.
-
-A Metta faz diferente. Estamos na trincheira. Não aconselhamos
-
-A de que resultado é questão de talento. De que bons vendedores
-
-entregamos processo. Não prometemos transformação:
-
-nascem prontos. De que metas são batidas na base da cobrança,
-
-assumimos a meta contratualmente.
-
-de longe,  implementamos junto. Não entregamos teoria ,
-
-ou não são batidas.
+Existe uma mentira confortável no mercado de gestão comercial. A de que resultado é questão de talento. De que bons vendedores nascem prontos. De que metas são batidas na base da cobrança, ou não são batidas.
 
 A Metta nasceu para acabar com essa mentira.
 
-processos previsíveis transformam times comuns em máquinas de
+Vimos de perto o que acontece quando líderes comerciais talentosos tentam tudo que existe no mercado: consultorias que entregam PowerPoint e somem. Palestras que motivam por uma semana. Ferramentas sem implementação. Processos sem resultado.
 
-Vimos de perto o que acontece quando líderes comerciais
+O resultado é sempre o mesmo: um time exausto. Uma liderança no limite. E a meta que continua no mesmo lugar.
 
-são opostos. São a única forma de crescer de verdade.
+A Metta faz diferente. Estamos na trincheira. Não aconselhamos de longe, implementamos junto. Não entregamos teoria, entregamos processo. Não prometemos transformação: assumimos a meta contratualmente.
 
-talentosos tentam tudo que existe no mercado: consultorias que
+Fazemos isso unindo comportamento humano a dados concretos. Metodologia proprietária a execução real. Ciência a cuidado. Porque acreditamos que bater meta é ciência, não sorte. Que processos previsíveis transformam times comuns em máquinas de resultado. Que crescimento sustentável e equilíbrio pessoal não são opostos: são a única forma de crescer de verdade.
 
-entregam PowerPoint e somem. Palestras que motivam por uma
-
-Fazemos isso unindo comportamento humano a dados concretos.
-
-semana. Ferramentas sem implementação. Processos sem
-
-Metodologia proprietária a execução real. Ciência a cuidado.
-
-resultado. Que crescimento sustentável e equilíbrio pessoal não
-
-Porque acreditamos que bater meta é ciência, não sorte. Que
-
-pessoas.
-
-O resultado é sempre o mesmo: um time exausto. Uma liderança
-
-no limite. E a meta que continua no mesmo lugar
-
-O novo padrão do mercado de gestão comercial no Brasil
-
-A Metta é inteligência comercial para empresários.
+O novo padrão do mercado de gestão comercial no Brasil. A Metta é inteligência comercial para empresários.
 
 ---
 

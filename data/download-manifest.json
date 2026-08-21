@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-14T17:38:39.509Z",
-  "grandTotalBytes": 265835599,
+  "generatedAt": "2026-08-21T15:06:29.226Z",
+  "grandTotalBytes": 265833537,
   "grandTotalFiles": 1190,
   "grandTotalTabs": 21,
   "groups": [
@@ -168,14 +168,14 @@
                 {
                   "name": "identidade-verbal.md",
                   "path": "content/verbal/identidade-verbal.md",
-                  "sizeBytes": 20259
+                  "sizeBytes": 18197
                 }
               ],
-              "totalBytes": 20259,
+              "totalBytes": 18197,
               "fileCount": 1
             }
           ],
-          "totalBytes": 20259,
+          "totalBytes": 18197,
           "fileCount": 1
         },
         {
@@ -210,16 +210,16 @@
               "fileCount": 1
             },
             {
-              "id": "ds-cores",
-              "label": "Cores",
+              "id": "logos",
+              "label": "Logos",
               "files": [
                 {
-                  "name": "ds-cores.md",
-                  "path": "content/visual/ds-cores.md",
-                  "sizeBytes": 29531
+                  "name": "logos.md",
+                  "path": "content/visual/logos.md",
+                  "sizeBytes": 10382
                 }
               ],
-              "totalBytes": 29531,
+              "totalBytes": 10382,
               "fileCount": 1
             },
             {
@@ -233,6 +233,32 @@
                 }
               ],
               "totalBytes": 29531,
+              "fileCount": 1
+            },
+            {
+              "id": "ds-cores",
+              "label": "Cores",
+              "files": [
+                {
+                  "name": "ds-cores.md",
+                  "path": "content/visual/ds-cores.md",
+                  "sizeBytes": 29531
+                }
+              ],
+              "totalBytes": 29531,
+              "fileCount": 1
+            },
+            {
+              "id": "ds-componentes",
+              "label": "Componentes",
+              "files": [
+                {
+                  "name": "ds-componentes.md",
+                  "path": "content/visual/ds-componentes.md",
+                  "sizeBytes": 6106
+                }
+              ],
+              "totalBytes": 6106,
               "fileCount": 1
             },
             {
@@ -273,32 +299,6 @@
               ],
               "totalBytes": 29531,
               "fileCount": 1
-            },
-            {
-              "id": "logos",
-              "label": "Logos",
-              "files": [
-                {
-                  "name": "logos.md",
-                  "path": "content/visual/logos.md",
-                  "sizeBytes": 10382
-                }
-              ],
-              "totalBytes": 10382,
-              "fileCount": 1
-            },
-            {
-              "id": "ds-componentes",
-              "label": "Componentes",
-              "files": [
-                {
-                  "name": "ds-componentes.md",
-                  "path": "content/visual/ds-componentes.md",
-                  "sizeBytes": 6106
-                }
-              ],
-              "totalBytes": 6106,
-              "fileCount": 1
             }
           ],
           "totalBytes": 230236,
@@ -306,7 +306,7 @@
         },
         {
           "id": "direcao-arte",
-          "label": "Direção de Arte",
+          "label": "Galeria de imagens",
           "kind": "docs",
           "sections": [
             {

@@ -1,67 +1,59 @@
 # Movimento
 
-5 durações + 4 curvas de aceleração. Tom: **sólido, confiante, inevitável**. Nada elástico, nada bouncy, nada que pareça brincadeira de UI infantil. Movimento na Metta serve à hierarquia editorial — mostra causa e consequência, marca transição entre estados, dá ritmo de leitura. **Animações decorativas (parallax exagerado, autoplay de carrossel sem motivo, efeitos hover gratuitos) estão proibidas.**
+Quando algo se move numa peça da Metta, o movimento é firme e preciso, nunca elástico ou brincalhão. Nada de exagero, nada de "bounce": cada animação existe pra mostrar uma transição ou guiar o olho, não pra decorar. Se um movimento não ajuda a entender algo, ele não entra na peça.
 
-## Curvas de aceleração
+## Como o movimento se comporta
 
-Quatro curvas oficiais. Cada uma cobre um momento específico de animação. **As tiles abaixo rodam em loop infinito** — observe o dot percorrendo a faixa pra sentir a curva.
+Toda animação da Metta segue uma das quatro curvas abaixo. Cada quadro roda em loop: observe a bolinha percorrendo a faixa pra sentir a diferença entre elas.
 
 <div class="motion-grid">
   <div class="motion-tile motion-standard">
     <span class="motion-name">Padrão</span>
-    <code class="motion-curve">cubic-bezier(0.4, 0, 0.2, 1)</code>
+    <code class="motion-curve">suave, do início ao fim</code>
     <div class="motion-track"><div class="motion-dot"></div></div>
-    <p class="motion-desc">Curva neutra. Acelera no início e desacelera no fim. <strong>Default pra mudança de estado, hover, transições UI.</strong></p>
+    <p class="motion-desc">A curva mais usada. Serve pra passar o mouse, trocar de estado, qualquer transição comum de interface.</p>
   </div>
   <div class="motion-tile motion-emphasized">
     <span class="motion-name">Enfatizada</span>
-    <code class="motion-curve">cubic-bezier(0.2, 0, 0, 1)</code>
+    <code class="motion-curve">arranca forte, termina em deslize</code>
     <div class="motion-track"><div class="motion-dot"></div></div>
-    <p class="motion-desc">Mais dramática. Aceleração marcante no início, longo deslize no fim. <strong>Pra transições importantes que precisam puxar o olho.</strong></p>
+    <p class="motion-desc">Mais dramática. Usamos em transições importantes, que precisam puxar o olho de quem está vendo.</p>
   </div>
   <div class="motion-tile motion-enter">
     <span class="motion-name">Entrada</span>
-    <code class="motion-curve">cubic-bezier(0, 0, 0.2, 1)</code>
+    <code class="motion-curve">chega direto e desacelera</code>
     <div class="motion-track"><div class="motion-dot"></div></div>
-    <p class="motion-desc">Sem aceleração inicial — entra direto e desacelera. <strong>Pra elementos surgindo na tela (modal, dropdown, fade-in).</strong></p>
+    <p class="motion-desc">Usada quando um elemento surge na tela, como um aviso ou um menu que se abre.</p>
   </div>
   <div class="motion-tile motion-exit">
     <span class="motion-name">Saída</span>
-    <code class="motion-curve">cubic-bezier(0.4, 0, 1, 1)</code>
+    <code class="motion-curve">acelera até sumir</code>
     <div class="motion-track"><div class="motion-dot"></div></div>
-    <p class="motion-desc">Acelera continuamente até sair. <strong>Pra elementos saindo da tela (modal fechando, dismiss, fade-out).</strong></p>
+    <p class="motion-desc">Usada quando um elemento sai da tela, como um aviso que se fecha.</p>
   </div>
 </div>
 
 ## Duração
 
-Cinco valores de duração. **Mesma escala 8-pontos do espaçamento aplicada ao tempo** — escolha durações dentro da família, nunca arbitrário.
+A velocidade de cada movimento também segue uma escala fixa, do quase instantâneo ao mais longo.
 
 <div class="spacing-list">
-  <div class="spacing-row"><span class="name">duration-instant</span><span class="value">50ms</span><div class="bar" style="width:7%"></div></div>
-  <div class="spacing-row"><span class="name">duration-short</span><span class="value">200ms</span><div class="bar" style="width:28%"></div></div>
-  <div class="spacing-row"><span class="name">duration-medium</span><span class="value">300ms</span><div class="bar" style="width:42%"></div></div>
-  <div class="spacing-row"><span class="name">duration-long</span><span class="value">500ms</span><div class="bar" style="width:71%"></div></div>
-  <div class="spacing-row"><span class="name">duration-x-long</span><span class="value">700ms</span><div class="bar" style="width:100%"></div></div>
+  <div class="spacing-row"><span class="name">Instantânea</span><span class="value">50ms</span><div class="bar" style="width:7%"></div></div>
+  <div class="spacing-row"><span class="name">Curta</span><span class="value">200ms</span><div class="bar" style="width:28%"></div></div>
+  <div class="spacing-row"><span class="name">Média</span><span class="value">300ms</span><div class="bar" style="width:42%"></div></div>
+  <div class="spacing-row"><span class="name">Longa</span><span class="value">500ms</span><div class="bar" style="width:71%"></div></div>
+  <div class="spacing-row"><span class="name">Bem longa</span><span class="value">700ms</span><div class="bar" style="width:100%"></div></div>
 </div>
 
-### Aplicação típica
+Quanto maior a distância que o elemento percorre ou quanto mais importante a transição, mais longa é a duração. Um pequeno destaque some quase na hora; a abertura de um manifesto ou a revelação de uma capa pode levar bem mais tempo.
 
-| Duração | Uso |
-|---------|-----|
-| **instant (50ms)** | Highlight de seleção, feedback tátil instantâneo |
-| **short (200ms)** | Hover, focus, mudança de estado de UI (default da maioria) |
-| **medium (300ms)** | Transição entre views, dropdown abrindo, card flip |
-| **long (500ms)** | Modal entrada/saída, hero reveal em LP, animação narrativa |
-| **x-long (700ms)** | Animação cinematográfica de capa, sequência multi-stage |
+## Quando o movimento entra
 
-## Padrões editoriais de movimento
+Alguns movimentos aparecem em pontos específicos de uma peça. Veja cada um ao vivo abaixo: clique em "Repetir" pra ver de novo.
 
-5 padrões reusáveis em LPs, hero sections e stories. Auto-iniciam via `data-*` attributes e respeitam `prefers-reduced-motion` (acessibilidade). **Cada exemplo abaixo está rodando ao vivo** — clique em "Repetir" pra ver de novo.
+### Revelar
 
-### 1. Reveal
-
-Elementos surgem em sequência conforme entram na viewport. Combina **fade-in + translate-Y sutil** (8 a 16px de baixo pra cima). Use em listas, cards de feature, blocos de section longa.
+Elementos surgem em sequência conforme a pessoa rola a página, com um leve deslocamento de baixo pra cima. Usado em listas, cards de destaque e blocos de conteúdo mais longos.
 
 <div class="motion-demo">
   <div class="motion-demo-stage">
@@ -71,12 +63,12 @@ Elementos surgem em sequência conforme entram na viewport. Combina **fade-in + 
     </div>
   </div>
   <div class="motion-demo-meta">
-    <code class="motion-attr">data-motion="reveal"</code>
+    <code class="motion-attr">efeito: revelar</code>
     <button class="motion-replay" data-rerun="block">Repetir</button>
   </div>
 </div>
 
-**Stagger** — múltiplos elementos com delay incremental:
+Quando são vários elementos juntos, cada um aparece com um pequeno atraso em relação ao anterior, criando uma sequência:
 
 <div class="motion-demo">
   <div class="motion-demo-stage">
@@ -89,103 +81,63 @@ Elementos surgem em sequência conforme entram na viewport. Combina **fade-in + 
     </div>
   </div>
   <div class="motion-demo-meta">
-    <code class="motion-attr">stagger 80–120ms</code>
+    <code class="motion-attr">aparecem em sequência</code>
     <button class="motion-replay" data-rerun="stagger">Repetir</button>
   </div>
 </div>
 
-- Curva: **Entrada** (`cubic-bezier(0, 0, 0.2, 1)`)
-- Duração: `medium` (300ms) por elemento
-- Stagger entre elementos: 80–120ms
+### Magnético
 
-### 2. Magnetic
-
-Hover sutil em CTA — botão "puxa" levemente em direção ao cursor. Cria sensação de **resposta tátil** sem teatralidade. **Passe o mouse no botão abaixo.**
+Ao passar o mouse, o botão puxa levemente na direção do cursor. Passe o mouse no botão abaixo pra sentir.
 
 <div class="motion-demo">
   <div class="motion-demo-stage">
     <button class="ds-cta ds-cta-yellow" data-motion="magnetic">Passe o mouse</button>
   </div>
   <div class="motion-demo-meta">
-    <code class="motion-attr">data-motion="magnetic"</code>
-    <span class="motion-note">desativa em mobile · respeita reduced motion</span>
+    <code class="motion-attr">efeito: magnético</code>
+    <span class="motion-note">só no computador, desativado em celular</span>
   </div>
 </div>
 
-- Curva: **Padrão**
-- Duração: `short` (200ms)
-- Translate máximo: 6px
+### Contador
 
-### 3. Counter
-
-Números crescem de 0 ao valor final em scroll. Usado em métricas hero (faturamento, número de empresas, anos de mercado).
+Números sobem de zero até o valor final quando aparecem na tela. Usado em estatísticas de destaque, como faturamento, número de empresas ou anos de mercado.
 
 <div class="motion-demo">
   <div class="motion-demo-stage">
     <span class="motion-counter" data-motion="counter" data-to="47" data-prefix="+" data-suffix="%" data-duration="1500" data-motion-demo="counter">+0%</span>
   </div>
   <div class="motion-demo-meta">
-    <code class="motion-attr">data-motion="counter"</code>
+    <code class="motion-attr">efeito: contador</code>
     <button class="motion-replay" data-rerun="counter">Repetir</button>
   </div>
 </div>
 
-- Curva: **Enfatizada** (acelera, depois desacelera)
-- Duração: `long` (500ms) ou `x-long` (700ms) conforme magnitude do número
-- Easing aplicado ao valor numérico, não só ao estilo CSS
+### Ken Burns
 
-### 4. Ken Burns
-
-Zoom lento em foto de hero. Cria sensação cinematográfica sem distrair do conteúdo. Usado apenas em capa/abertura — nunca em foto de meio de peça.
+Zoom bem lento sobre uma foto de capa. Dá um ar de cinema sem tirar a atenção do conteúdo. Usado só em fotos de abertura, nunca no meio de uma peça.
 
 <div class="motion-demo">
   <div class="motion-demo-stage motion-demo-stage--photo">
     <div class="motion-kenburns" aria-hidden="true"></div>
   </div>
   <div class="motion-demo-meta">
-    <code class="motion-attr">scale 1.0 → 1.06 · 10s loop</code>
-    <span class="motion-note">linear · sem easing</span>
+    <code class="motion-attr">zoom lento e contínuo</code>
+    <span class="motion-note">sem parar, sem acelerar</span>
   </div>
 </div>
 
-- Curva: **Linear** (sem easing pra movimento contínuo)
-- Duração: 8s a 12s (loop sutil)
-- Scale: 1.0 → 1.06 (nunca mais que 8% — vira efeito de pós-produção barato)
+### Máquina de escrever
 
-### 5. Tipo-machine (mecanografia controlada)
-
-Texto aparece letra por letra. Usado em **manifesto narrativo, abertura de VSL**. Diferente do efeito "typewriter" comum: sem cursor piscando, sem som de máquina, sem aceleração visível.
+O texto aparece letra por letra, sem cursor piscando e sem som. Usado em manifestos e aberturas mais narrativas.
 
 <div class="motion-demo">
   <div class="motion-demo-stage">
     <p class="motion-typewriter" data-motion="typewriter" data-speed="42" data-motion-demo="typewriter">Quem ganha não improvisa o método.</p>
   </div>
   <div class="motion-demo-meta">
-    <code class="motion-attr">data-motion="typewriter"</code>
+    <code class="motion-attr">efeito: máquina de escrever</code>
     <button class="motion-replay" data-rerun="typewriter">Repetir</button>
   </div>
 </div>
-
-- Velocidade: 30–40ms por caractere
-- Pausas em pontuação forte (ponto final, travessão)
-- Curva linear
-
-## Princípios invioláveis
-
-### O que NUNCA fazer
-- **Bouncy / spring / overshoot.** Animação que "passa do ponto e volta" não pertence à marca.
-- **Easter eggs visuais.** Confete, animação especial em hover de logo, mascote piscando — tudo proibido. Marca não brinca.
-- **Autoplay de vídeo com som.** Som ativa só por ação do usuário.
-- **Carrossel automático sem controle do usuário.** Permite navegação manual sempre.
-- **Animação > 1s sem propósito narrativo.** Se não está contando história, mais curta.
-- **Ignorar `prefers-reduced-motion`.** Toda animação respeita a preferência do usuário.
-
-### O que SEMPRE fazer
-- **Movimento serve à hierarquia.** Pergunta antes de animar: o que isso comunica? Se a resposta é "fica bonito", remova.
-- **Curva consistente** dentro do mesmo padrão de UI. Hover de todos os botões usa a mesma curva.
-- **Duração proporcional à distância.** Elemento que se move 8px usa `short` (200ms). Elemento que se move 200px usa `medium` (300ms).
-- **Reduced motion = sem animação.** Não substitua por versão mais lenta — desligue completamente.
-
-## Para implementação técnica
-
-Helper `motion.js` com auto-trigger via `data-*` attributes, snippets de Web Animations API, exemplos de implementação em React/Vue e referência completa de tokens CSS ficam no **catálogo técnico do Design System**.

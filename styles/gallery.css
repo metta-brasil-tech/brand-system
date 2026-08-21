@@ -468,7 +468,6 @@
   margin: 0;
 }
 .docs-hero-sub strong { color: var(--metta-sys-color-on-surface, #111); font-weight: 600; }
-
 /* filtro por tipo de modelo (header da galeria de downloads) */
 .docs-filter {
   display: flex;
@@ -728,4 +727,101 @@ body.modal-open { overflow: hidden; }
   .docs-grid { grid-template-columns: 1fr; }
   .doc-preview-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .doc-preview-actions { width: 100%; }
+}
+
+/* ============================================================
+   GRADE DE LOGOS (página Identidade Visual > Logos)
+   Mostra o arquivo oficial no fundo em que ele deve ser usado,
+   com o download ao lado. Substitui a lista de nomes de arquivo.
+============================================================ */
+.prose .logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin: 24px 0 32px;
+  /* a grade escapa da medida de leitura: as artes precisam de largura */
+  width: calc(100% + 180px);
+  max-width: calc(100vw - 420px);
+}
+.prose .logo-tile {
+  margin: 0;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-lg);
+  overflow: hidden;
+  background: var(--metta-sys-color-surface);
+  /* coluna flex pra area de arte esticar e as legendas alinharem entre os cards */
+  display: flex;
+  flex-direction: column;
+}
+.prose .logo-tile.is-larga { grid-column: 1 / -1; }
+
+.prose .logo-tile-art {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 28px 24px;
+  min-height: 150px;
+}
+.prose .logo-tile-art img {
+  max-width: 100%;
+  max-height: 56px;
+  width: auto;
+  margin: 0;
+  border-radius: 0;
+  display: block;
+}
+.prose .logo-tile-art.is-vertical img { max-height: 96px; }
+.prose .logo-tile-art.is-simbolo img { max-height: 60px; }
+.prose .logo-tile-art.is-assinatura img { max-height: 40px; }
+
+.prose .logo-tile[data-fundo="claro"] .logo-tile-art { background: #FAFCFD; }
+.prose .logo-tile[data-fundo="escuro"] .logo-tile-art { background: #0C161B; }
+.prose .logo-tile[data-fundo="amarelo"] .logo-tile-art { background: #FFBE18; }
+/* "foto" é um cinza médio que simula imagem por baixo, sem depender de asset */
+.prose .logo-tile[data-fundo="foto"] .logo-tile-art {
+  background: linear-gradient(135deg, #435965 0%, #2E3E47 60%, #1A2A35 100%);
+}
+
+.prose .logo-tile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+  background: var(--metta-sys-color-surface-container-low);
+}
+.prose .logo-tile-nome {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--metta-sys-color-on-surface);
+}
+.prose .logo-tile-uso {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.prose .logo-tile-baixar {
+  align-self: flex-start;
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 650;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: var(--metta-sys-color-on-surface-variant);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-full);
+  padding: 5px 12px;
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.prose .logo-tile-baixar:hover {
+  background: var(--metta-sys-color-on-surface);
+  color: var(--metta-sys-color-surface);
+  text-decoration: none;
+}
+
+@media (max-width: 1280px) {
+  .prose .logo-grid { width: 100%; max-width: 100%; }
 }

@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-08-14T17:38:38.853Z",
+  "generatedAt": "2026-08-21T15:06:28.827Z",
   "tabs": [
     {
       "id": "overview",
@@ -2032,7 +2032,8 @@
               "depth": 3
             }
           ],
-          "updatedAt": "2026-05-27T12:46:21-03:00"
+          "updatedAt": "2026-05-27T12:46:21-03:00",
+          "hidden": true
         },
         {
           "id": "manual-marca",
@@ -2186,6 +2187,66 @@
             }
           ],
           "blog_source": "compartilhado/brand-system-blog/visual/manual-marca.md",
+          "updatedAt": "2026-05-27T12:23:18-03:00",
+          "hidden": true
+        },
+        {
+          "id": "logos",
+          "label": "Logos",
+          "source": "design/metta-logos.md",
+          "description": "As versões oficiais do logo Metta e quando usar cada uma.",
+          "h2s": [
+            {
+              "id": "as-duas-orientacoes",
+              "label": "As duas orientações",
+              "depth": 2
+            },
+            {
+              "id": "a-versao-certa-para-cada-fundo",
+              "label": "A versão certa para cada fundo",
+              "depth": 2
+            },
+            {
+              "id": "quando-o-logo-inteiro-nao-cabe",
+              "label": "Quando o logo inteiro não cabe",
+              "depth": 2
+            },
+            {
+              "id": "com-a-frase-da-marca",
+              "label": "Com a frase da marca",
+              "depth": 2
+            }
+          ],
+          "updatedAt": "2026-08-21T14:49:27.477Z",
+          "blog_source": "compartilhado/brand-system-blog/visual/logos.md"
+        },
+        {
+          "id": "ds-tipografia",
+          "label": "Tipografia",
+          "source": "design/metta-tokens.md",
+          "blog_source": "compartilhado/brand-system-blog/visual/ds-tipografia.md",
+          "h2s": [
+            {
+              "id": "as-duas-fontes-da-metta",
+              "label": "As duas fontes da Metta",
+              "depth": 2
+            },
+            {
+              "id": "como-reconhecer-cada-uma",
+              "label": "Como reconhecer cada uma",
+              "depth": 2
+            },
+            {
+              "id": "zalando-sans-expanded-do-titulo-ao-rotulo",
+              "label": "Zalando Sans Expanded, do título ao rótulo",
+              "depth": 2
+            },
+            {
+              "id": "inter-do-texto-de-abertura-a-legenda",
+              "label": "Inter, do texto de abertura à legenda",
+              "depth": 2
+            }
+          ],
           "updatedAt": "2026-05-27T12:23:18-03:00"
         },
         {
@@ -2193,202 +2254,83 @@
           "label": "Cores",
           "source": "design/metta-tokens.md",
           "blog_source": "compartilhado/brand-system-blog/visual/ds-cores.md",
-          "subgroup": "design-system",
-          "subgroupLabel": "Design System",
           "h2s": [
             {
-              "id": "como-ler-esta-pagina",
-              "label": "Como ler esta página",
+              "id": "amarelo-a-cor-de-assinatura",
+              "label": "Amarelo, a cor de assinatura",
               "depth": 2
             },
             {
-              "id": "paleta-yellow",
-              "label": "Paleta Yellow",
+              "id": "charcoal-a-base-que-sustenta",
+              "label": "Charcoal, a base que sustenta",
               "depth": 2
             },
             {
-              "id": "paleta-night",
-              "label": "Paleta Night",
-              "depth": 2
-            },
-            {
-              "id": "funcoes-de-cor",
-              "label": "Funções de cor",
-              "depth": 2
-            },
-            {
-              "id": "marca",
-              "label": "Marca",
-              "depth": 3
-            },
-            {
-              "id": "superficies",
-              "label": "Superfícies",
-              "depth": 3
-            },
-            {
-              "id": "estrutura",
-              "label": "Estrutura",
-              "depth": 3
-            },
-            {
-              "id": "inverso-pecas-escuras-dentro-do-tema-claro",
-              "label": "Inverso (peças escuras dentro do tema claro)",
-              "depth": 3
-            },
-            {
-              "id": "tema-escuro",
-              "label": "Tema escuro",
-              "depth": 2
-            },
-            {
-              "id": "regras-de-aplicacao",
-              "label": "Regras de aplicação",
-              "depth": 2
-            },
-            {
-              "id": "predominancia",
-              "label": "Predominância",
-              "depth": 3
-            },
-            {
-              "id": "alternancia-de-fundos-em-peca-longa",
-              "label": "Alternância de fundos em peça longa",
-              "depth": 3
-            },
-            {
-              "id": "contraste-minimo",
-              "label": "Contraste mínimo",
-              "depth": 3
-            },
-            {
-              "id": "o-que-nao-fazer",
-              "label": "O que NÃO fazer",
-              "depth": 3
-            },
-            {
-              "id": "para-implementacao-tecnica",
-              "label": "Para implementação técnica",
+              "id": "como-as-cores-se-combinam",
+              "label": "Como as cores se combinam",
               "depth": 2
             }
           ],
           "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
-          "id": "ds-tipografia",
-          "label": "Tipografia",
-          "source": "design/metta-tokens.md",
-          "blog_source": "compartilhado/brand-system-blog/visual/ds-tipografia.md",
-          "subgroup": "design-system",
+          "id": "ds-componentes",
+          "label": "Componentes",
+          "source": "design/metta-components.md",
+          "blog_source": "compartilhado/brand-system-blog/visual/ds-componentes.md",
           "h2s": [
             {
-              "id": "os-dois-grupos",
-              "label": "Os dois grupos",
+              "id": "botoes",
+              "label": "Botões",
               "depth": 2
             },
             {
-              "id": "variacoes-zalando-sans-expanded-display",
-              "label": "Variações Zalando Sans Expanded (display)",
+              "id": "cards",
+              "label": "Cards",
               "depth": 2
             },
             {
-              "id": "variacoes-inter-body",
-              "label": "Variações Inter (body)",
+              "id": "etiquetas",
+              "label": "Etiquetas",
               "depth": 2
             },
             {
-              "id": "type-roles-editoriais",
-              "label": "Type roles editoriais",
+              "id": "textos-de-destaque",
+              "label": "Textos de destaque",
               "depth": 2
             },
             {
-              "id": "hierarquia-visual-em-peca",
-              "label": "Hierarquia visual em peça",
+              "id": "espaco-de-respiro",
+              "label": "Espaço de respiro",
               "depth": 2
             },
             {
-              "id": "regra-das-tres-variacoes",
-              "label": "Regra das três variações",
-              "depth": 3
-            },
-            {
-              "id": "mixed-weight-combinacao-black-light-dentro-de-zalando",
-              "label": "Mixed-weight (combinação Black + Light dentro de Zalando)",
-              "depth": 3
-            },
-            {
-              "id": "tracking-letter-spacing",
-              "label": "Tracking (letter-spacing)",
-              "depth": 3
-            },
-            {
-              "id": "line-height",
-              "label": "Line-height",
-              "depth": 3
-            },
-            {
-              "id": "largura-maxima-de-leitura",
-              "label": "Largura máxima de leitura",
-              "depth": 2
-            },
-            {
-              "id": "regras-inviolaveis",
-              "label": "Regras invioláveis",
-              "depth": 2
-            },
-            {
-              "id": "como-aplicar",
-              "label": "Como aplicar",
-              "depth": 2
-            },
-            {
-              "id": "para-implementacao-tecnica",
-              "label": "Para implementação técnica",
+              "id": "pecas-mais-tecnicas",
+              "label": "Peças mais técnicas",
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-27T12:23:18-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00"
         },
         {
           "id": "ds-formas-espacamento",
           "label": "Formas e Espaçamento",
           "source": "design/metta-tokens.md",
           "blog_source": "compartilhado/brand-system-blog/visual/ds-formas-espacamento.md",
-          "subgroup": "design-system",
           "h2s": [
             {
-              "id": "formas-raio-de-canto",
-              "label": "Formas — raio de canto",
+              "id": "cantos-arredondados",
+              "label": "Cantos arredondados",
               "depth": 2
             },
             {
-              "id": "regras",
-              "label": "Regras",
-              "depth": 3
-            },
-            {
-              "id": "espacamento-escala-de-8-pontos-estendida",
-              "label": "Espaçamento — escala de 8 pontos estendida",
+              "id": "espaco-entre-elementos",
+              "label": "Espaço entre elementos",
               "depth": 2
             },
             {
-              "id": "aplicacao-tipica",
-              "label": "Aplicação típica",
-              "depth": 3
-            },
-            {
-              "id": "regras",
-              "label": "Regras",
-              "depth": 3
-            },
-            {
-              "id": "geometria-precisa-alinhamento-rigoroso",
-              "label": "Geometria precisa, alinhamento rigoroso",
-              "depth": 2
-            },
-            {
-              "id": "para-implementacao-tecnica",
-              "label": "Para implementação técnica",
+              "id": "como-reconhecer-o-padrao",
+              "label": "Como reconhecer o padrão",
               "depth": 2
             }
           ],
@@ -2399,61 +2341,20 @@
           "label": "Elevação e Estados",
           "source": "design/metta-tokens.md",
           "blog_source": "compartilhado/brand-system-blog/visual/ds-elevacao-estados.md",
-          "subgroup": "design-system",
           "h2s": [
             {
-              "id": "elevacao",
-              "label": "Elevação",
+              "id": "profundidade",
+              "label": "Profundidade",
               "depth": 2
             },
             {
-              "id": "aplicacao",
-              "label": "Aplicação",
-              "depth": 3
-            },
-            {
-              "id": "regras",
-              "label": "Regras",
-              "depth": 3
-            },
-            {
-              "id": "estados-de-interacao",
-              "label": "Estados de interação",
+              "id": "estados-do-botao",
+              "label": "Estados do botão",
               "depth": 2
-            },
-            {
-              "id": "demonstracao",
-              "label": "Demonstração",
-              "depth": 3
-            },
-            {
-              "id": "regras",
-              "label": "Regras",
-              "depth": 3
             },
             {
               "id": "gradientes",
               "label": "Gradientes",
-              "depth": 2
-            },
-            {
-              "id": "aplicacao",
-              "label": "Aplicação",
-              "depth": 3
-            },
-            {
-              "id": "regras",
-              "label": "Regras",
-              "depth": 3
-            },
-            {
-              "id": "principio-editorial-comum",
-              "label": "Princípio editorial comum",
-              "depth": 2
-            },
-            {
-              "id": "para-implementacao-tecnica",
-              "label": "Para implementação técnica",
               "depth": 2
             }
           ],
@@ -2464,11 +2365,10 @@
           "label": "Movimento",
           "source": "design/metta-tokens.md",
           "blog_source": "compartilhado/brand-system-blog/visual/ds-movimento.md",
-          "subgroup": "design-system",
           "h2s": [
             {
-              "id": "curvas-de-aceleracao",
-              "label": "Curvas de aceleração",
+              "id": "como-o-movimento-se-comporta",
+              "label": "Como o movimento se comporta",
               "depth": 2
             },
             {
@@ -2477,264 +2377,34 @@
               "depth": 2
             },
             {
-              "id": "aplicacao-tipica",
-              "label": "Aplicação típica",
-              "depth": 3
-            },
-            {
-              "id": "padroes-editoriais-de-movimento",
-              "label": "Padrões editoriais de movimento",
+              "id": "quando-o-movimento-entra",
+              "label": "Quando o movimento entra",
               "depth": 2
             },
             {
-              "id": "1-reveal",
-              "label": "1. Reveal",
+              "id": "revelar",
+              "label": "Revelar",
               "depth": 3
             },
             {
-              "id": "2-magnetic",
-              "label": "2. Magnetic",
+              "id": "magnetico",
+              "label": "Magnético",
               "depth": 3
             },
             {
-              "id": "3-counter",
-              "label": "3. Counter",
+              "id": "contador",
+              "label": "Contador",
               "depth": 3
             },
             {
-              "id": "4-ken-burns",
-              "label": "4. Ken Burns",
+              "id": "ken-burns",
+              "label": "Ken Burns",
               "depth": 3
             },
             {
-              "id": "5-tipo-machine-mecanografia-controlada",
-              "label": "5. Tipo-machine (mecanografia controlada)",
+              "id": "maquina-de-escrever",
+              "label": "Máquina de escrever",
               "depth": 3
-            },
-            {
-              "id": "principios-inviolaveis",
-              "label": "Princípios invioláveis",
-              "depth": 2
-            },
-            {
-              "id": "o-que-nunca-fazer",
-              "label": "O que NUNCA fazer",
-              "depth": 3
-            },
-            {
-              "id": "o-que-sempre-fazer",
-              "label": "O que SEMPRE fazer",
-              "depth": 3
-            },
-            {
-              "id": "para-implementacao-tecnica",
-              "label": "Para implementação técnica",
-              "depth": 2
-            }
-          ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
-        },
-        {
-          "id": "logos",
-          "label": "Logos",
-          "source": "design/metta-logos.md",
-          "description": "Variações oficiais do logo Metta — regras de uso por fundo, IDs Drive, paths SVG.",
-          "subgroup": "design-system",
-          "h2s": [
-            {
-              "id": "05-mapeamento-local-drive",
-              "label": "0.5 Mapeamento local ↔ Drive",
-              "depth": 2
-            },
-            {
-              "id": "0-regras-absolutas-prd-64",
-              "label": "0. REGRAS ABSOLUTAS (PRD 6.4)",
-              "depth": 2
-            },
-            {
-              "id": "1-selecao-de-logo-por-fundo",
-              "label": "1. Seleção de logo por fundo",
-              "depth": 2
-            },
-            {
-              "id": "2-catalogo-completo-de-logos",
-              "label": "2. Catálogo completo de logos",
-              "depth": 2
-            },
-            {
-              "id": "simbolos-icone-isolado",
-              "label": "Símbolos (ícone isolado)",
-              "depth": 3
-            },
-            {
-              "id": "logo-com-tagline",
-              "label": "Logo com tagline",
-              "depth": 3
-            },
-            {
-              "id": "assinaturas-logo-compacto",
-              "label": "Assinaturas (logo compacto)",
-              "depth": 3
-            },
-            {
-              "id": "logo-protocolo-metta",
-              "label": "Logo Protocolo Metta",
-              "depth": 3
-            },
-            {
-              "id": "3-backgrounds-oficiais",
-              "label": "3. Backgrounds oficiais",
-              "depth": 2
-            },
-            {
-              "id": "4-modelos-de-reels",
-              "label": "4. Modelos de Reels",
-              "depth": 2
-            },
-            {
-              "id": "5-tipografia-arquivos",
-              "label": "5. Tipografia (arquivos)",
-              "depth": 2
-            },
-            {
-              "id": "6-posicionamento-do-logo",
-              "label": "6. Posicionamento do logo",
-              "depth": 2
-            },
-            {
-              "id": "7-como-baixar-curl-base64-pra-plugin-api",
-              "label": "7. Como baixar (curl + base64 pra Plugin API)",
-              "depth": 2
-            }
-          ],
-          "updatedAt": "2026-05-27T12:23:18-03:00"
-        },
-        {
-          "id": "ds-componentes",
-          "label": "Componentes",
-          "source": "design/metta-components.md",
-          "blog_source": "compartilhado/brand-system-blog/visual/ds-componentes.md",
-          "subgroup": "design-system",
-          "h2s": [
-            {
-              "id": "botoes-cta",
-              "label": "Botões CTA",
-              "depth": 2
-            },
-            {
-              "id": "regras-cta",
-              "label": "Regras CTA",
-              "depth": 3
-            },
-            {
-              "id": "cards",
-              "label": "Cards",
-              "depth": 2
-            },
-            {
-              "id": "card-padrao",
-              "label": "Card padrão",
-              "depth": 3
-            },
-            {
-              "id": "card-elevated",
-              "label": "Card elevated",
-              "depth": 3
-            },
-            {
-              "id": "card-stat",
-              "label": "Card stat",
-              "depth": 3
-            },
-            {
-              "id": "card-icon",
-              "label": "Card icon",
-              "depth": 3
-            },
-            {
-              "id": "card-filled",
-              "label": "Card filled",
-              "depth": 3
-            },
-            {
-              "id": "regras-card",
-              "label": "Regras Card",
-              "depth": 3
-            },
-            {
-              "id": "etiquetas-pill",
-              "label": "Etiquetas Pill",
-              "depth": 2
-            },
-            {
-              "id": "aplicacao",
-              "label": "Aplicação",
-              "depth": 3
-            },
-            {
-              "id": "tipografia-de-destaque-display-headlines",
-              "label": "Tipografia de destaque (Display Headlines)",
-              "depth": 2
-            },
-            {
-              "id": "variacao-01-caixa-alta-destaque-amarelo",
-              "label": "Variação 01 — Caixa alta + destaque amarelo",
-              "depth": 3
-            },
-            {
-              "id": "variacao-02-caixa-baixa-destaque-escuro",
-              "label": "Variação 02 — Caixa baixa + destaque escuro",
-              "depth": 3
-            },
-            {
-              "id": "variacao-03-pesos-misturados-heavy-light",
-              "label": "Variação 03 — Pesos misturados (Heavy + Light)",
-              "depth": 3
-            },
-            {
-              "id": "variacao-04-destaque-em-italico",
-              "label": "Variação 04 — Destaque em itálico",
-              "depth": 3
-            },
-            {
-              "id": "variacao-05-marca-texto-amarelo",
-              "label": "Variação 05 — Marca-texto amarelo",
-              "depth": 3
-            },
-            {
-              "id": "regras-headline",
-              "label": "Regras Headline",
-              "depth": 3
-            },
-            {
-              "id": "espaco-de-respiro",
-              "label": "Espaço de respiro",
-              "depth": 2
-            },
-            {
-              "id": "aplicacao",
-              "label": "Aplicação",
-              "depth": 3
-            },
-            {
-              "id": "regras",
-              "label": "Regras",
-              "depth": 3
-            },
-            {
-              "id": "padroes-de-movimento",
-              "label": "Padrões de movimento",
-              "depth": 2
-            },
-            {
-              "id": "componentes-nao-cobertos-aqui",
-              "label": "Componentes não cobertos aqui",
-              "depth": 2
-            },
-            {
-              "id": "para-implementacao-tecnica",
-              "label": "Para implementação técnica",
-              "depth": 2
             }
           ],
           "updatedAt": "2026-05-13T14:29:52-03:00"
@@ -2743,26 +2413,26 @@
           "id": "icones",
           "label": "Ícones",
           "source": "icons-gallery:all",
-          "description": "Catálogo dos ícones do sistema — extraídos do Figma e classificados por contexto de uso.",
-          "subgroup": "design-system"
+          "description": "Catálogo dos ícones do sistema — extraídos do Figma e classificados por contexto de uso."
         }
       ]
     },
     {
       "id": "direcao-arte",
       "icon": "camera",
-      "label": "Direção de Arte",
+      "label": "Galeria de imagens",
       "group": "expressão",
       "sections": [
         {
           "id": "galeria",
-          "label": "Galeria",
+          "label": "Galeria de imagens",
           "source": "gallery:photo-index"
         },
         {
           "id": "arquetipos",
           "label": "Estilos",
-          "source": "archetypes:photo-index"
+          "source": "archetypes:photo-index",
+          "hidden": true
         },
         {
           "id": "principios",
@@ -2811,7 +2481,8 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "hidden": true
         }
       ]
     },
@@ -5358,7 +5029,8 @@
           "source": "applications-gallery:all",
           "description": "Ads, carrosséis, slides, telas e posters classificados por tipo, brand e intenção."
         }
-      ]
+      ],
+      "hidden": true
     },
     {
       "id": "criativos",
@@ -5379,9 +5051,9 @@
     {
       "id": "modelos",
       "icon": "fileText",
-      "label": "Modelos e Kits",
+      "label": "Materiais para baixar",
       "group": "negócio",
-      "description": "Recursos prontos com a identidade Metta pro time usar no dia a dia: documentos .docx editáveis, kits de ebook e fundos de videochamada pro Meet e pro Zoom.",
+      "description": "Tudo pronto para usar, com a identidade da Metta já aplicada: modelos de documento que abrem no Word, kits de ebook e fundos de tela para reunião por vídeo. Clique na capa para folhear antes de baixar.",
       "sections": [
         {
           "id": "documentos",

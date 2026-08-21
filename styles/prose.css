@@ -4,9 +4,9 @@
 ============================================================ */
 
 .prose {
-  max-width: 760px;
-  font-size: var(--metta-sys-typescale-body-large-size);
-  line-height: 1.65;
+  max-width: 700px;
+  font-size: clamp(16px, 1.05vw, 17px);
+  line-height: 1.7;
   color: var(--metta-sys-color-on-surface);
 }
 
@@ -24,7 +24,7 @@
   margin-bottom: 0.6em;
 }
 .prose h1 {
-  font-size: clamp(40px, 5vw, 56px);
+  font-size: clamp(30px, 3.4vw, 40px);
   font-weight: 870;
   text-transform: uppercase;
   letter-spacing: -0.02em;
@@ -32,18 +32,18 @@
   margin-top: 0;
 }
 .prose h2 {
-  font-size: clamp(28px, 3.4vw, 40px);
+  font-size: clamp(21px, 2.1vw, 26px);
   font-weight: 650;
   margin-top: 1.6em;
   padding-top: 0.8em;
   border-top: 1px solid var(--metta-sys-color-outline-variant);
 }
 .prose h3 {
-  font-size: clamp(20px, 2.4vw, 26px);
+  font-size: clamp(18px, 1.5vw, 20px);
   font-weight: 650;
 }
 .prose h4 {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 540;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -81,7 +81,7 @@
   border-left: 4px solid var(--metta-sys-color-primary);
   background: var(--metta-sys-color-surface-container-low);
   border-radius: 0 var(--metta-sys-shape-corner-md) var(--metta-sys-shape-corner-md) 0;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--metta-sys-color-on-surface-variant);
 }

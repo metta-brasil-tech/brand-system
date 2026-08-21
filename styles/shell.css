@@ -1032,8 +1032,10 @@ a.topbar-menu-item,
   position: relative;
 }
 .hero h1 {
-  /* type role: Title Large — Expanded Heavy · H1 de section, abertura de bloco */
-  font-size: var(--metta-sys-typescale-title-large-size);
+  /* type role: Title Large — Expanded Heavy · H1 de section, abertura de bloco.
+     Tamanho proprio (menor que o token) porque aqui e cabecalho de pagina de
+     leitura, nao peca editorial: o token da marca fica intacto em tokens.css. */
+  font-size: clamp(40px, 4.4vw, 56px);
   font-weight: var(--metta-sys-typescale-title-large-weight);
   font-stretch: var(--metta-sys-typescale-title-large-stretch);
   line-height: var(--metta-sys-typescale-title-large-line-height);

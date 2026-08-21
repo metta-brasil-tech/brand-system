@@ -570,8 +570,12 @@ async function main() {
         if (result.updatedAt) {
           sec.updatedAt = result.updatedAt;
         }
-        // Indexa pra busca global
-        searchIndex.push({
+        // Indexa pra busca global.
+        // Seção oculta não entra: se ela saiu do menu de propósito, não faz sentido
+        // reaparecer numa busca. Exceção: transcrição, que é hidden só porque a lista
+        // vive na galeria da aba, mas continua sendo conteúdo que se procura pelo nome.
+        const foraDoMenu = sec.hidden && !sec.transcricao;
+        if (!foraDoMenu) searchIndex.push({
           tab: tab.id,
           tabLabel: tab.label,
           sectionId: sec.id,

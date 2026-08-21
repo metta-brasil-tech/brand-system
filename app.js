@@ -258,7 +258,7 @@ const BrandSystem = (() => {
         <span>${tab.label}</span>
       </a>
       ${subgroupHtml}
-      ${sec ? `<span class="sep">/</span><span class="current">${sec.label}</span>` : ''}
+      ${sec && sec.label !== tab.label ? `<span class="sep">/</span><span class="current">${sec.label}</span>` : ''}
     `;
   }
 
@@ -810,8 +810,8 @@ const BrandSystem = (() => {
       .filter(t => t.id !== 'overview' && !t.hidden)
       .map(t => {
         const status = 'ready';
-        const sectionsCount = t.sections.length;
-        const statusLabel = `${sectionsCount} seçõe${sectionsCount === 1 ? '' : 's'}`;
+        const sectionsCount = t.sections.filter(sec => !sec.hidden).length;
+        const statusLabel = `${sectionsCount} ${sectionsCount === 1 ? 'seção' : 'seções'}`;
         return `
           <a class="overview-card" data-status="${status}" href="#/${t.id}">
             <div class="icon">${svgIcon(t.icon, 28)}</div>
@@ -827,7 +827,7 @@ const BrandSystem = (() => {
       <section class="hero">
         <div class="yellow-band"></div>
         <h1>Brand<br><span class="accent">System.</span></h1>
-        <p>Resumo institucional da marca Metta — para onboarding, alinhamento e referência rápida. Cada seção traz o essencial validado; documentações completas ficam a um clique de distância (abrir ou baixar).</p>
+        <p>A marca Metta reunida num lugar só: o que a marca é, como ela fala, como ela aparece e o que você pode baixar para usar. Cada página traz o essencial já validado, e a documentação completa fica a um clique, para abrir ou baixar.</p>
       </section>
       <div class="overview-grid">${cards}</div>
     `;
@@ -838,12 +838,13 @@ const BrandSystem = (() => {
       marca:        'Manifesto, história, plataforma, estratégia, narrativa.',
       audiencia:    'ICP estratégico, MQL, dossiês e banco de provas.',
       verbal:       'Tom, vocabulário, código de conteúdo, linha editorial.',
-      visual:       'Resumo da identidade + Design System completo.',
-      'direcao-arte': 'Princípios fotográficos, estilos de cena, galeria curada.',
+      visual:       'Logos, tipografia, cores e os componentes da marca.',
+      'direcao-arte': 'Fotos aprovadas para usar em peça, post e apresentação.',
       metodologia:  '6 Gestões da Meta Batida, aceleradores, FCA e CHA.',
       produtos:     'Mentoria SMTM (5 planos) e consultoria.',
+      modelos:      'Modelos de documento, ebooks e fundos de tela prontos para baixar.',
       aplicacoes:   'Catálogo vivo de ads, carrosséis, slides, telas e posters canônicos.',
-      transcricoes: '95 transcrições do Tiago classificadas por tema — banco vivo de discurso.'
+      transcricoes: '95 transcrições do Tiago classificadas por tema, banco vivo de discurso.'
     }[id] || '';
   }
 
@@ -874,7 +875,7 @@ const BrandSystem = (() => {
   // download individual agrupados por categoria. Fonte: data/download-manifest.json.
   const DOWNLOADS_CATEGORY_ORDER = ['Comercial', 'Projetos', 'Pessoas', 'Operação', 'Ebooks', 'Fundos de videochamada', 'Outros'];
   // rótulos curtos das abas pro filtro por tipo; fallback = label da aba no manifest
-  const DOWNLOADS_TYPE_LABELS = { documentos: 'Documentos .docx', ebooks: 'Ebooks', 'fundos-videochamada': 'Fundos de videochamada' };
+  const DOWNLOADS_TYPE_LABELS = { documentos: 'Documentos do Word', ebooks: 'Ebooks', 'fundos-videochamada': 'Fundos de tela' };
   let downloadsTypeFilter = 'all';
 
   function renderDownloadsGallery(tab, group) {
@@ -917,7 +918,7 @@ const BrandSystem = (() => {
         const thumb = cover
           ? `<button type="button" class="doc-card-thumb" data-preview="${escapeAttr(s.id)}" aria-label="Visualizar ${escapeAttr(s.label)}">
                <img src="${escapeAttr(cover)}" alt="" loading="lazy">
-               <span class="doc-card-cue">${svgIcon('search', 13)}<span>Visualizar</span></span>
+               <span class="doc-card-cue">${svgIcon('search', 13)}<span>Ver por dentro</span></span>
              </button>`
           : `<div class="doc-card-thumb is-empty">${svgIcon('fileText', 30)}</div>`;
 
@@ -954,10 +955,10 @@ const BrandSystem = (() => {
     return `
       <div class="docs-page">
         <header class="docs-hero">
-          <span class="docs-hero-eyebrow">${svgIcon('fileText', 13)}<span>Recursos</span></span>
-          <h1 class="docs-hero-title">${escapeHtml(tab.label || 'Modelos de Documentos')}</h1>
-          <p class="docs-hero-sub">${escapeHtml(tab.description || `${total} recursos prontos com a identidade Metta. Clique pra visualizar, baixe e use.`)}</p>
-          <div class="docs-filter" role="group" aria-label="Filtrar por tipo de modelo">${filterBtns}</div>
+          <span class="docs-hero-eyebrow">${svgIcon('download', 13)}<span>Baixe e use</span></span>
+          <h1 class="docs-hero-title">${escapeHtml(tab.label || 'Materiais para baixar')}</h1>
+          <p class="docs-hero-sub">${escapeHtml(tab.description || `${total} materiais prontos, com a identidade da Metta já aplicada. Clique na capa para folhear, baixe e edite.`)}</p>
+          <div class="docs-filter" role="group" aria-label="Filtrar por tipo de material">${filterBtns}</div>
         </header>
         ${blocks || '<div class="placeholder"><p>Nenhum modelo encontrado. Rode <code>npm run build:manifest</code>.</p></div>'}
       </div>`;
@@ -1654,16 +1655,12 @@ const BrandSystem = (() => {
       return `
         <section class="hero">
           <div class="yellow-band"></div>
-          <h1>Galeria<br><span class="accent">em curadoria.</span></h1>
-          <p>O banco de imagens foi zerado para receber apenas fotos aprovadas pela direção de arte. Os estilos editoriais com prompts profissionais continuam disponíveis para gerar novas imagens via gpt-image-1.</p>
+          <h1>Galeria de imagens<br><span class="accent">em curadoria.</span></h1>
+          <p>O banco está sendo remontado para receber só fotos aprovadas.</p>
         </section>
         <div class="placeholder">
-          <span class="badge">Galeria vazia</span>
           <h2>Sem fotos no momento</h2>
-          <p>Quando houver imagens validadas, elas aparecerão aqui automaticamente. Por enquanto, consulte os estilos para gerar referências fotográficas alinhadas ao DNA Metta.</p>
-          <div class="source-list" style="margin-top:24px;">
-            <a href="#/direcao-arte/arquetipos" class="action-btn action-btn-primary" style="margin-top:8px;">Ver estilos</a>
-          </div>
+          <p>Assim que houver imagens aprovadas, elas aparecem aqui automaticamente.</p>
         </div>
       `;
     }
@@ -1695,8 +1692,8 @@ const BrandSystem = (() => {
     return `
       <section class="hero">
         <div class="yellow-band"></div>
-        <h1>Galeria<br><span class="accent">${filtered.length} fotos.</span></h1>
-        <p>Banco curado de referências fotográficas. Cada foto tem prompt profissional em inglês pra gerar novas imagens via gpt-image-1 mantendo DNA Metta.</p>
+        <h1>Galeria de imagens<br><span class="accent">${filtered.length} fotos.</span></h1>
+        <p>Fotos aprovadas para usar em peça, apresentação e post da Metta. Filtre por assunto ou por estilo, clique para ver em tamanho grande e baixar. Cada foto também guarda o texto que a gerou, para quem quiser criar uma variação.</p>
       </section>
       <div class="gallery-controls">
         <label>Categoria

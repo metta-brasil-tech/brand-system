@@ -1,7 +1,11 @@
-<h1 id="logos">Logos</h1>
-<p>O logo da Metta tem um conjunto fechado de versões, pensado para cobrir qualquer fundo e qualquer espaço, do anúncio ao rodapé do e-mail. Escolher a certa é uma questão prática: olhe o fundo da peça e o espaço que você tem. Todas as versões estão prontas aqui, é só baixar e usar.</p>
-<h2 id="as-duas-orientacoes">As duas orientações</h2>
-<p>A horizontal, com o símbolo ao lado do nome, é a versão padrão e resolve a maior parte das peças: anúncio, slide, documento, post. A vertical, com o símbolo acima do nome, entra quando o espaço é mais alto do que largo.</p>
+# Logos
+
+O logo da Metta tem um conjunto fechado de versões, pensado para cobrir qualquer fundo e qualquer espaço, do anúncio ao rodapé do e-mail. Escolher a certa é uma questão prática: olhe o fundo da peça e o espaço que você tem. Todas as versões estão prontas aqui, é só baixar e usar.
+
+## As duas orientações
+
+A horizontal, com o símbolo ao lado do nome, é a versão padrão e resolve a maior parte das peças: anúncio, slide, documento, post. A vertical, com o símbolo acima do nome, entra quando o espaço é mais alto do que largo.
+
 <div class="logo-grid">
   <figure class="logo-tile" data-fundo="claro">
     <div class="logo-tile-art"><img src="assets/logos/logo_metta_colorido_escuro_h.svg" alt="Logo Metta horizontal, símbolo amarelo e nome em azul noite"></div>
@@ -37,8 +41,10 @@
   </figure>
 </div>
 
-<h2 id="a-versao-certa-para-cada-fundo">A versão certa para cada fundo</h2>
-<p>O símbolo é sempre amarelo. O que muda é a cor da escrita, que acompanha o fundo da peça. Em cima do próprio amarelo da marca, o logo vai inteiro em azul noite, para não repetir o amarelo duas vezes.</p>
+## A versão certa para cada fundo
+
+O símbolo é sempre amarelo. O que muda é a cor da escrita, que acompanha o fundo da peça. Em cima do próprio amarelo da marca, o logo vai inteiro em azul noite, para não repetir o amarelo duas vezes.
+
 <div class="logo-grid">
   <figure class="logo-tile" data-fundo="amarelo">
     <div class="logo-tile-art"><img src="assets/logos/logo_metta_azul_h.svg" alt="Logo Metta inteiro em azul noite sobre fundo amarelo"></div>
@@ -66,8 +72,10 @@
   </figure>
 </div>
 
-<h2 id="quando-o-logo-inteiro-nao-cabe">Quando o logo inteiro não cabe</h2>
-<p>Duas reduções resolvem os espaços pequenos. O símbolo sozinho serve de ícone: foto de perfil, favicon, avatar, aplicativo. A assinatura é um bloco compacto que ainda junta símbolo e nome, para rodapé, canto de slide e assinatura de e-mail.</p>
+## Quando o logo inteiro não cabe
+
+Duas reduções resolvem os espaços pequenos. O símbolo sozinho serve de ícone: foto de perfil, favicon, avatar, aplicativo. A assinatura é um bloco compacto que ainda junta símbolo e nome, para rodapé, canto de slide e assinatura de e-mail.
+
 <div class="logo-grid">
   <figure class="logo-tile" data-fundo="escuro">
     <div class="logo-tile-art is-simbolo"><img src="assets/symbols/simbolo_metta_amarelo.svg" alt="Símbolo Metta em amarelo"></div>
@@ -103,8 +111,10 @@
   </figure>
 </div>
 
-<h2 id="com-a-frase-da-marca">Com a frase da marca</h2>
-<p>Existe uma versão que traz &quot;inteligência comercial&quot; ao lado do nome. Ela é para momento de apresentação da marca: capa de proposta, abertura de material institucional, primeiro contato. No dia a dia, o logo sem a frase já basta.</p>
+## Com a frase da marca
+
+Existe uma versão que traz "inteligência comercial" ao lado do nome. Ela é para momento de apresentação da marca: capa de proposta, abertura de material institucional, primeiro contato. No dia a dia, o logo sem a frase já basta.
+
 <div class="logo-grid">
   <figure class="logo-tile is-larga" data-fundo="escuro">
     <div class="logo-tile-art"><img src="assets/logos/logo_metta_tagline_colorida_h.svg" alt="Logo Metta com a frase inteligência comercial ao lado"></div>
@@ -116,4 +126,4 @@
   </figure>
 </div>
 
-<p>O logo é sempre o arquivo pronto, baixado daqui. Escrever &quot;Metta&quot; em outra fonte no lugar do arquivo não é o logo da marca.</p>
+O logo é sempre o arquivo pronto, baixado daqui. Escrever "Metta" em outra fonte no lugar do arquivo não é o logo da marca.
