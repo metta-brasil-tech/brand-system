@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T15:06:29.226Z",
+  "generatedAt": "2026-08-21T15:23:42.519Z",
   "grandTotalBytes": 265833537,
   "grandTotalFiles": 1190,
   "grandTotalTabs": 21,
@@ -79,19 +79,6 @@
               "fileCount": 1
             },
             {
-              "id": "protocolo",
-              "label": "Protocolo M.E.T.T.A.",
-              "files": [
-                {
-                  "name": "protocolo.md",
-                  "path": "content/marca/protocolo.md",
-                  "sizeBytes": 29338
-                }
-              ],
-              "totalBytes": 29338,
-              "fileCount": 1
-            },
-            {
               "id": "glossario",
               "label": "Glossário",
               "files": [
@@ -105,8 +92,8 @@
               "fileCount": 1
             }
           ],
-          "totalBytes": 220980,
-          "fileCount": 7
+          "totalBytes": 191642,
+          "fileCount": 6
         },
         {
           "id": "audiencia",
@@ -332,8 +319,21 @@
           "kind": "docs",
           "sections": [
             {
+              "id": "protocolo",
+              "label": "Protocolo M.E.T.T.A.",
+              "files": [
+                {
+                  "name": "protocolo.md",
+                  "path": "content/metodologia/protocolo.md",
+                  "sizeBytes": 29338
+                }
+              ],
+              "totalBytes": 29338,
+              "fileCount": 1
+            },
+            {
               "id": "seis-gestoes",
-              "label": "6 Gestões — Visão Geral",
+              "label": "6 Gestões: Visão Geral",
               "files": [
                 {
                   "name": "seis-gestoes.md",
@@ -475,8 +475,8 @@
               "fileCount": 1
             }
           ],
-          "totalBytes": 355974,
-          "fileCount": 11
+          "totalBytes": 385312,
+          "fileCount": 12
         },
         {
           "id": "produtos",

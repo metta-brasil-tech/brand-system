@@ -840,7 +840,7 @@ const BrandSystem = (() => {
       verbal:       'Tom, vocabulário, código de conteúdo, linha editorial.',
       visual:       'Logos, tipografia, cores e os componentes da marca.',
       'direcao-arte': 'Fotos aprovadas para usar em peça, post e apresentação.',
-      metodologia:  '6 Gestões da Meta Batida, aceleradores, FCA e CHA.',
+      metodologia:  'O Protocolo M.E.T.T.A., as 6 Gestões da Meta Batida, FCA e CHA.',
       produtos:     'Mentoria SMTM (5 planos) e consultoria.',
       modelos:      'Modelos de documento, ebooks e fundos de tela prontos para baixar.',
       aplicacoes:   'Catálogo vivo de ads, carrosséis, slides, telas e posters canônicos.',

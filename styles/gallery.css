@@ -736,12 +736,12 @@ body.modal-open { overflow: hidden; }
 ============================================================ */
 .prose .logo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 16px;
   margin: 24px 0 32px;
-  /* a grade escapa da medida de leitura: as artes precisam de largura */
-  width: calc(100% + 180px);
-  max-width: calc(100vw - 420px);
+  /* fica dentro da coluna de leitura: escapando, ela passava por cima do
+     sumario lateral em qualquer tela menor que ~1640px */
+  width: 100%;
 }
 .prose .logo-tile {
   margin: 0;
@@ -822,6 +822,4 @@ body.modal-open { overflow: hidden; }
   text-decoration: none;
 }
 
-@media (max-width: 1280px) {
-  .prose .logo-grid { width: 100%; max-width: 100%; }
-}
+
