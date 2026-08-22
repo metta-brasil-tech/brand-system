@@ -2182,6 +2182,373 @@ const BrandSystem = (() => {
     });
   }
 
+  // ============================================================
+  //  SOLICITAÇÕES
+  //  Formulário que vira card no Monday. O time pede material novo, tira
+  //  dúvida ou sugere melhoria sem sair da página em que está.
+  // ============================================================
+  const REQ_RASCUNHO = 'brand-solicitacao-rascunho';
+  let reqConfig = null;        // limites e categorias, vindos de /api/solicitacoes/config
+  let reqAnexos = [];          // { nome, mime, dataUri, bytes }
+  let reqCategoria = 'material';
+  let reqEnviando = false;
+  let reqFocoAnterior = null;
+
+  const REQ_ROTULO_TIPO = {
+    'image/png': 'Imagem', 'image/jpeg': 'Imagem', 'image/webp': 'Imagem', 'image/gif': 'Imagem',
+    'application/pdf': 'PDF',
+    'application/msword': 'Word',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'Word',
+    'application/vnd.ms-excel': 'Excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Excel',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'PowerPoint',
+    'text/plain': 'Texto', 'text/csv': 'CSV',
+  };
+
+  async function carregaConfigSolicitacao() {
+    if (reqConfig) return reqConfig;
+    try {
+      const res = await fetch('/api/solicitacoes/config', { headers: { accept: 'application/json' }, cache: 'no-store' });
+      if (!res.ok) throw new Error(String(res.status));
+      reqConfig = await res.json();
+    } catch (e) {
+      // Sem API (site estático local) ou fora do ar: assume os mesmos limites do
+      // servidor pra interface continuar utilizável e o envio falhar com aviso.
+      reqConfig = {
+        configurado: false,
+        categorias: [
+          { id: 'material', label: 'Material novo' },
+          { id: 'duvida', label: 'Dúvida' },
+          { id: 'melhoria', label: 'Sugestão de melhoria' },
+        ],
+        limites: { titulo: 120, descricao: 5000, anexos: 3, bytesTotal: 3.5 * 1024 * 1024 },
+      };
+    }
+    return reqConfig;
+  }
+
+  function reqLimites() {
+    return (reqConfig && reqConfig.limites) || { anexos: 3, bytesTotal: 3.5 * 1024 * 1024 };
+  }
+
+  function salvaRascunhoSolicitacao() {
+    const form = document.getElementById('req-form');
+    if (!form) return;
+    try {
+      localStorage.setItem(REQ_RASCUNHO, JSON.stringify({
+        categoria: reqCategoria,
+        titulo: form.querySelector('[name="titulo"]').value,
+        descricao: form.querySelector('[name="descricao"]').value,
+      }));
+    } catch (e) { /* storage cheio ou bloqueado: seguir sem rascunho */ }
+  }
+
+  function limpaRascunhoSolicitacao() {
+    try { localStorage.removeItem(REQ_RASCUNHO); } catch (e) { /* ignora */ }
+  }
+
+  function pintaCategorias() {
+    const caixa = document.getElementById('req-categorias');
+    if (!caixa) return;
+    const cats = (reqConfig && reqConfig.categorias) || [];
+    caixa.innerHTML = cats.map((c) => `
+      <label class="req-chip">
+        <input type="radio" name="categoria" value="${escapeAttr(c.id)}" ${c.id === reqCategoria ? 'checked' : ''}>
+        <span>${escapeHtml(c.label)}</span>
+      </label>
+    `).join('');
+    caixa.querySelectorAll('input[name="categoria"]').forEach((r) => {
+      r.addEventListener('change', () => { reqCategoria = r.value; salvaRascunhoSolicitacao(); });
+    });
+  }
+
+  function pintaAnexos() {
+    const lista = document.getElementById('req-anexos-lista');
+    const total = document.getElementById('req-anexos-total');
+    if (!lista) return;
+    lista.innerHTML = reqAnexos.map((a, i) => `
+      <li class="req-anexo">
+        <span class="req-anexo-tipo">${escapeHtml(REQ_ROTULO_TIPO[a.mime] || 'Arquivo')}</span>
+        <span class="req-anexo-nome" title="${escapeAttr(a.nome)}">${escapeHtml(a.nome)}</span>
+        <span class="req-anexo-peso">${formatBytes(a.bytes)}</span>
+        <button type="button" class="req-anexo-remover" data-remover="${i}" aria-label="Remover ${escapeAttr(a.nome)}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </li>
+    `).join('');
+    lista.querySelectorAll('[data-remover]').forEach((b) => {
+      b.addEventListener('click', () => {
+        reqAnexos.splice(Number(b.dataset.remover), 1);
+        pintaAnexos();
+        atualizaEnvio();
+      });
+    });
+    const soma = reqAnexos.reduce((s, a) => s + a.bytes, 0);
+    const teto = reqLimites().bytesTotal;
+    if (total) {
+      total.textContent = reqAnexos.length ? `${formatBytes(soma)} de ${formatBytes(teto)}` : '';
+      total.dataset.estourou = soma > teto ? 'true' : 'false';
+    }
+  }
+
+  /** Reduz imagem grande antes de enviar. Sem corte: aqui a foto inteira importa. */
+  function reduzImagemLivre(file, ladoMax = 1600) {
+    return new Promise((resolve, reject) => {
+      const leitor = new FileReader();
+      leitor.onerror = () => reject(new Error('Não consegui ler o arquivo.'));
+      leitor.onload = () => {
+        const img = new Image();
+        img.onerror = () => reject(new Error('O arquivo não parece uma imagem válida.'));
+        img.onload = () => {
+          const escala = Math.min(1, ladoMax / Math.max(img.width, img.height));
+          if (escala === 1 && leitor.result.length < 900 * 1024) { resolve(leitor.result); return; }
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(img.width * escala);
+          canvas.height = Math.round(img.height * escala);
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL('image/jpeg', 0.85));
+        };
+        img.src = leitor.result;
+      };
+      leitor.readAsDataURL(file);
+    });
+  }
+
+  function leArquivoCru(file) {
+    return new Promise((resolve, reject) => {
+      const leitor = new FileReader();
+      leitor.onerror = () => reject(new Error('Não consegui ler o arquivo.'));
+      leitor.onload = () => resolve(leitor.result);
+      leitor.readAsDataURL(file);
+    });
+  }
+
+  function bytesDeDataUri(uri) {
+    const base64 = String(uri).split(',')[1] || '';
+    return Math.floor(base64.length * 0.75);
+  }
+
+  function falaSolicitacao(texto, tipo) {
+    const aviso = document.getElementById('req-aviso');
+    if (!aviso) return;
+    aviso.textContent = texto || '';
+    aviso.dataset.tipo = tipo || '';
+  }
+
+  function atualizaEnvio() {
+    const form = document.getElementById('req-form');
+    const botao = document.getElementById('req-enviar');
+    if (!form || !botao) return;
+    const titulo = form.querySelector('[name="titulo"]').value.trim();
+    const descricao = form.querySelector('[name="descricao"]').value.trim();
+    const soma = reqAnexos.reduce((s, a) => s + a.bytes, 0);
+    const cabe = soma <= reqLimites().bytesTotal;
+    botao.disabled = reqEnviando || titulo.length < 3 || descricao.length < 10 || !cabe;
+  }
+
+  async function abreSolicitacao() {
+    const modal = document.getElementById('solicitacao-modal');
+    if (!modal) return;
+    await carregaConfigSolicitacao();
+
+    reqFocoAnterior = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    // rascunho: só o texto, nunca os anexos (estouram a cota do localStorage)
+    let rascunho = null;
+    try { rascunho = JSON.parse(localStorage.getItem(REQ_RASCUNHO) || 'null'); } catch (e) { rascunho = null; }
+    reqCategoria = (rascunho && rascunho.categoria) || 'material';
+    pintaCategorias();
+
+    const form = document.getElementById('req-form');
+    form.querySelector('[name="titulo"]').value = (rascunho && rascunho.titulo) || '';
+    form.querySelector('[name="descricao"]').value = (rascunho && rascunho.descricao) || '';
+    atualizaContadorSolicitacao();
+    pintaAnexos();
+
+    if (reqConfig && reqConfig.configurado === false) {
+      falaSolicitacao('O envio está indisponível agora. Fale com o time de Criação.', 'erro');
+    } else {
+      falaSolicitacao('');
+    }
+    atualizaEnvio();
+    form.querySelector('[name="titulo"]').focus();
+  }
+
+  function fechaSolicitacao() {
+    const modal = document.getElementById('solicitacao-modal');
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    if (reqFocoAnterior && reqFocoAnterior.focus) reqFocoAnterior.focus();
+  }
+
+  function atualizaContadorSolicitacao() {
+    const campo = document.getElementById('req-descricao');
+    const contador = document.getElementById('req-contador');
+    if (!campo || !contador) return;
+    contador.textContent = `${campo.value.length} / 5000`;
+  }
+
+  function mensagemErroSolicitacao(dados, status) {
+    const porCodigo = {
+      categoria_invalida: 'Escolha uma das três opções.',
+      titulo_curto: 'O assunto precisa de pelo menos 3 letras.',
+      descricao_curta: 'Descreva com um pouco mais de detalhe.',
+      anexos_demais: 'No máximo 3 arquivos por solicitação.',
+      anexo_ilegivel: 'Um dos arquivos não pôde ser lido.',
+      tipo_nao_aceito: 'Esse tipo de arquivo não é aceito.',
+      anexo_grande: 'Um dos arquivos passou do limite de tamanho.',
+      anexos_grandes: 'Os arquivos somados passaram do limite.',
+      nao_autenticado: 'Sua sessão expirou. Entre de novo e reenvie.',
+      sem_integracao: 'O envio ainda não foi configurado. Avise o time de Criação.',
+      monday_falhou: 'O quadro de solicitações recusou o envio. Tente de novo em instantes.',
+    };
+    if (dados && porCodigo[dados.error]) return porCodigo[dados.error];
+    if (status === 413) return 'Os arquivos somados passaram do limite.';
+    return 'Não consegui enviar agora. Tente de novo em instantes.';
+  }
+
+  function mostraSucessoSolicitacao(url, avisos) {
+    const corpo = document.getElementById('req-form');
+    const rodape = document.querySelector('#solicitacao-modal .req-footer');
+    if (!corpo) return;
+    const extra = (avisos && avisos.length)
+      ? `<p class="req-sucesso-aviso">${escapeHtml(avisos.join(' '))}</p>` : '';
+    corpo.innerHTML = `
+      <div class="req-sucesso">
+        <div class="req-sucesso-marca">${svgIcon('check', 22)}</div>
+        <h3>Solicitação enviada</h3>
+        <p>A equipe de Criação recebeu e foi notificada. Você pode acompanhar o andamento pelo quadro.</p>
+        ${extra}
+        <div class="req-sucesso-acoes">
+          ${url ? `<a class="req-enviar" href="${escapeAttr(url)}" target="_blank" rel="noopener">Ver no Monday</a>` : ''}
+          <button type="button" class="action-mini" data-nova-solicitacao>Enviar outra</button>
+        </div>
+      </div>`;
+    if (rodape) rodape.hidden = true;
+    const botaoNova = corpo.querySelector('[data-nova-solicitacao]');
+    if (botaoNova) {
+      botaoNova.addEventListener('click', () => {
+        fechaSolicitacao();
+        // recarrega o modal limpo na próxima abertura
+        location.reload();
+      });
+    }
+  }
+
+  async function enviaSolicitacao(e) {
+    e.preventDefault();
+    if (reqEnviando) return;
+    const form = document.getElementById('req-form');
+    const botao = document.getElementById('req-enviar');
+    const titulo = form.querySelector('[name="titulo"]').value.trim();
+    const descricao = form.querySelector('[name="descricao"]').value.trim();
+    if (titulo.length < 3) { falaSolicitacao('O assunto precisa de pelo menos 3 letras.', 'erro'); return; }
+    if (descricao.length < 10) { falaSolicitacao('Descreva com um pouco mais de detalhe.', 'erro'); return; }
+
+    reqEnviando = true;
+    botao.disabled = true;
+    botao.dataset.state = 'generating';
+    botao.querySelector('span').textContent = 'Enviando…';
+    falaSolicitacao('');
+
+    try {
+      const res = await fetch('/api/solicitacoes/criar', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          categoria: reqCategoria,
+          titulo,
+          descricao,
+          anexos: reqAnexos.map((a) => ({ nome: a.nome, mime: a.mime, data_uri: a.dataUri })),
+        }),
+      });
+      const dados = await res.json().catch(() => ({}));
+      if (res.ok && dados.ok) {
+        limpaRascunhoSolicitacao();
+        reqAnexos = [];
+        mostraSucessoSolicitacao(dados.url, dados.avisos);
+        return;
+      }
+      // Falhou: nada do que a pessoa escreveu se perde.
+      falaSolicitacao(mensagemErroSolicitacao(dados, res.status), 'erro');
+    } catch (err) {
+      falaSolicitacao('Sem conexão com o servidor. O que você escreveu está salvo.', 'erro');
+    } finally {
+      reqEnviando = false;
+      botao.dataset.state = '';
+      const rotulo = botao.querySelector('span');
+      if (rotulo) rotulo.textContent = 'Enviar solicitação';
+      atualizaEnvio();
+    }
+  }
+
+  async function escolheArquivos(input) {
+    const escolhidos = Array.from(input.files || []);
+    input.value = '';
+    const lim = reqLimites();
+    for (const file of escolhidos) {
+      if (reqAnexos.length >= lim.anexos) { falaSolicitacao(`No máximo ${lim.anexos} arquivos.`, 'erro'); break; }
+      if (file.size > 12 * 1024 * 1024) { falaSolicitacao(`"${file.name}" é grande demais.`, 'erro'); continue; }
+      try {
+        const ehImagem = /^image\/(png|jpe?g|webp|gif)$/.test(file.type);
+        const dataUri = ehImagem && file.type !== 'image/gif'
+          ? await reduzImagemLivre(file)
+          : await leArquivoCru(file);
+        const mime = (String(dataUri).match(/^data:([^;]+);/) || [])[1] || file.type;
+        reqAnexos.push({ nome: file.name, mime, dataUri, bytes: bytesDeDataUri(dataUri) });
+        falaSolicitacao('');
+      } catch (err) {
+        falaSolicitacao(err.message || `Não consegui ler "${file.name}".`, 'erro');
+      }
+    }
+    pintaAnexos();
+    atualizaEnvio();
+  }
+
+  function initSolicitacao() {
+    const gatilho = document.getElementById('solicitar-trigger');
+    const modal = document.getElementById('solicitacao-modal');
+    if (!gatilho || !modal) return;
+
+    gatilho.addEventListener('click', abreSolicitacao);
+    modal.addEventListener('click', (e) => {
+      if (e.target.closest('[data-req-close]')) fechaSolicitacao();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (modal.hidden) return;
+      if (e.key === 'Escape') { e.preventDefault(); fechaSolicitacao(); return; }
+      // Focus trap: o modal de download não tem, mas aqui é formulário e o foco
+      // escapar para trás da cortina atrapalha de verdade.
+      if (e.key !== 'Tab') return;
+      const focaveis = modal.querySelectorAll('a[href], button:not([disabled]), input:not([hidden]), textarea, [tabindex]:not([tabindex="-1"])');
+      if (!focaveis.length) return;
+      const primeiro = focaveis[0];
+      const ultimo = focaveis[focaveis.length - 1];
+      if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+    });
+
+    const form = document.getElementById('req-form');
+    form.addEventListener('submit', enviaSolicitacao);
+    form.addEventListener('input', (e) => {
+      if (e.target.id === 'req-descricao') atualizaContadorSolicitacao();
+      atualizaEnvio();
+      salvaRascunhoSolicitacao();
+    });
+
+    const arquivos = document.getElementById('req-arquivos');
+    if (arquivos) arquivos.addEventListener('change', () => escolheArquivos(arquivos));
+  }
+
   // ----------- SIDEBAR (collapse desktop + drawer mobile) -----------
   function initSidebar() {
     const app = document.querySelector('.app');
@@ -3274,6 +3641,7 @@ const BrandSystem = (() => {
     initSearch();
     initDocsModal();
     initTopbarMenu();
+    initSolicitacao();
     window.addEventListener('hashchange', onHashChange);
     onHashChange();
   }

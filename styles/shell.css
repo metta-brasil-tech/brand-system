@@ -2324,6 +2324,8 @@ aside.nav .subnav a.placeholder {
   .search-trigger .search-trigger-label,
   .search-trigger .search-trigger-kbd { display: none; }
   .search-trigger { padding: 8px; gap: 0; }
+  .solicitar-trigger .solicitar-trigger-label { display: none; }
+  .solicitar-trigger { padding: 8px; gap: 0; }
 }
 
 /* ============================================================
@@ -4405,4 +4407,438 @@ body.search-open { overflow: hidden; }
   outline: 2px solid var(--metta-sys-color-primary);
   outline-offset: 2px;
   transition: outline-color 0.2s ease-out;
+}
+
+/* ============================================================
+   SOLICITAÇÕES — gatilho na topbar e modal de envio
+   Mesma moldura do .download-modal: painel, cabeçalho e rodapé
+   idênticos. O que muda é o corpo, que aqui é formulário.
+   O amarelo aparece só no CTA e no foco, como no resto da UI.
+============================================================ */
+
+.solicitar-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  background: transparent;
+  border: 1px solid var(--metta-sys-color-outline);
+  border-radius: var(--metta-sys-shape-corner-full);
+  color: var(--metta-sys-color-on-surface-variant);
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.solicitar-trigger:hover {
+  background: var(--metta-sys-color-surface-container);
+  border-color: var(--metta-sys-color-on-surface-variant);
+  color: var(--metta-sys-color-on-surface);
+}
+.solicitar-trigger svg { flex-shrink: 0; }
+
+/* --- moldura --- */
+.req-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 41;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.req-modal[hidden] { display: none; }
+.req-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 14, 18, 0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+[data-theme="dark"] .req-modal-backdrop {
+  background: rgba(0, 0, 0, 0.56);
+}
+.req-modal-panel {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  background: var(--metta-sys-color-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-lg, 16px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+[data-theme="dark"] .req-modal-panel {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65), 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* --- cabeçalho --- */
+.req-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid var(--metta-sys-color-outline-variant);
+}
+.req-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 660;
+  font-stretch: 116%;
+  letter-spacing: -0.01em;
+  color: var(--metta-sys-color-on-surface);
+}
+.req-sub {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--metta-sys-color-on-surface-variant);
+  letter-spacing: 0;
+  line-height: 1.45;
+}
+.req-close {
+  flex-shrink: 0;
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  border: 1px solid transparent;
+  border-radius: var(--metta-sys-shape-corner-full);
+  background: transparent;
+  color: var(--metta-sys-color-on-surface-variant);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.req-close:hover {
+  background: var(--metta-sys-color-surface-container);
+  color: var(--metta-sys-color-on-surface);
+}
+
+/* --- corpo do formulário --- */
+.req-body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 24px 24px;
+}
+.req-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+fieldset.req-campo {
+  display: block;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.req-label {
+  font-size: 11px;
+  font-weight: 580;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+fieldset.req-campo > .req-label {
+  display: block;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.req-campo input[type="text"],
+.req-campo textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  color: var(--metta-sys-color-on-surface);
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md, 10px);
+  padding: 11px 14px;
+  transition: border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.req-campo input[type="text"]::placeholder,
+.req-campo textarea::placeholder {
+  color: var(--metta-sys-color-on-surface-variant);
+  opacity: 0.7;
+}
+.req-campo input[type="text"]:focus,
+.req-campo textarea:focus {
+  outline: none;
+  border-color: var(--metta-sys-color-primary);
+  background: var(--metta-sys-color-surface);
+}
+.req-campo textarea {
+  resize: vertical;
+  min-height: 132px;
+}
+.req-contador {
+  align-self: flex-end;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.req-ajuda {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+
+/* --- categorias --- */
+.req-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.req-chip { position: relative; display: inline-flex; }
+.req-chip input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+.req-chip span {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 540;
+  letter-spacing: -0.005em;
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-full);
+  color: var(--metta-sys-color-on-surface-variant);
+  cursor: pointer;
+  transition: background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.req-chip:hover span {
+  border-color: var(--metta-sys-color-on-surface-variant);
+  color: var(--metta-sys-color-on-surface);
+}
+.req-chip input:checked + span {
+  background: var(--metta-sys-color-on-surface, #111);
+  border-color: var(--metta-sys-color-on-surface, #111);
+  color: var(--metta-sys-color-surface, #fff);
+  font-weight: 580;
+}
+.req-chip input:focus-visible + span {
+  outline: 2px solid var(--metta-sys-color-primary);
+  outline-offset: 2px;
+}
+
+/* --- anexos --- */
+.req-anexos-acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.req-anexos-acoes .action-mini { cursor: pointer; }
+.req-anexos-total {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.req-anexos-total[data-estourou="true"] {
+  color: var(--metta-sys-color-error, #C03127);
+  font-weight: 580;
+}
+.req-anexos-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.req-anexos-lista:empty { display: none; }
+.req-anexo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px 8px 12px;
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md, 10px);
+  min-width: 0;
+}
+.req-anexo-tipo {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 580;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.req-anexo-nome {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.req-anexo-peso {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.req-anexo-remover {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--metta-sys-shape-corner-full);
+  background: transparent;
+  color: var(--metta-sys-color-on-surface-variant);
+  cursor: pointer;
+}
+.req-anexo-remover:hover {
+  background: var(--metta-sys-color-surface-container-high);
+  color: var(--metta-sys-color-on-surface);
+}
+
+/* --- rodapé --- */
+.req-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+  background: var(--metta-sys-color-surface);
+}
+.req-footer[hidden] { display: none; }
+.req-enviar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 580;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+  border: 1px solid var(--metta-sys-color-primary);
+  border-radius: var(--metta-sys-shape-corner-full);
+  cursor: pointer;
+  transition: opacity var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.req-enviar:hover:not(:disabled) { opacity: 0.88; text-decoration: none; }
+.req-enviar:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.req-enviar[data-state="generating"] {
+  opacity: 0.72;
+  cursor: progress;
+}
+.req-aviso {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.req-aviso[data-tipo="erro"] {
+  color: var(--metta-sys-color-error, #C03127);
+  font-weight: 540;
+}
+.req-aviso:empty { display: none; }
+
+/* --- confirmação (substitui o formulário depois do envio) --- */
+.req-sucesso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 24px 8px 8px;
+}
+.req-sucesso-marca {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--metta-sys-shape-corner-full);
+  background: var(--metta-sys-color-primary);
+  color: var(--metta-sys-color-on-primary);
+  margin-bottom: 4px;
+}
+.req-sucesso h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 660;
+  font-stretch: 116%;
+  letter-spacing: -0.01em;
+  color: var(--metta-sys-color-on-surface);
+}
+.req-sucesso p {
+  margin: 0;
+  max-width: 44ch;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+/* Precisa do p. na frente: `.req-sucesso p` acima é mais específico que a classe. */
+.req-sucesso p.req-sucesso-aviso {
+  color: var(--metta-sys-color-error, #C03127);
+  font-weight: 540;
+}
+.req-sucesso-acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+.req-sucesso-acoes .action-mini { cursor: pointer; }
+
+@media (max-width: 640px) {
+  .req-modal { padding: 12px; }
+  .req-modal-panel { max-height: calc(100vh - 24px); }
+  .req-header { padding: 16px 16px 12px; }
+  .req-body { padding: 16px; gap: 18px; }
+  .req-footer {
+    padding: 12px 16px;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .req-enviar { width: 100%; justify-content: center; }
+  .req-aviso { text-align: center; }
+}
+
+/* O #C03127 que o resto do sistema usa como erro nasceu como fallback: nao ha
+   token de erro em tokens.css. Sobre o fundo escuro ele fica em ~2,5:1 e some.
+   Aqui o vermelho sobe so no dark. Se virar token, esta regra sai. */
+[data-theme="dark"] .req-aviso[data-tipo="erro"],
+[data-theme="dark"] .req-anexos-total[data-estourou="true"],
+[data-theme="dark"] .req-sucesso p.req-sucesso-aviso {
+  color: var(--metta-sys-color-error-dark, #F2645A);
 }

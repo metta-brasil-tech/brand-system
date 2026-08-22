@@ -11,6 +11,10 @@ import {
   createSession, verifySession, serializeCookie, serializeUserCookie,
   clearCookie, clearUserCookie, readCookie, isAllowed, safeNext,
 } from '../lib/auth.js';
+import {
+  temKv, chavePerfil, kvLer, kvGravar,
+  limpaTexto as limpaNome, limpaFoto, perfilPadrao, lerPerfil,
+} from '../lib/perfil.js';
 
 function redirectUri(req) {
   if (process.env.OAUTH_REDIRECT_URI) return process.env.OAUTH_REDIRECT_URI;
@@ -36,88 +40,12 @@ function recusa(res, motivo) {
 }
 
 // ---------------------------------------------------------------- perfil
-// Nome, sobrenome e foto de quem entrou. Fica no Vercel KV (o mesmo storage
-// que a galeria de criativos já usa), acessado pela API REST em vez do SDK
-// pra não engordar o bundle desta função. Chave: perfil:<email>.
+// Nome, sobrenome e foto de quem entrou, no Vercel KV (chave perfil:<email>).
+// Os helpers vivem em lib/perfil.js porque api/solicitacoes.js também precisa
+// ler o perfil, e lib/ não gasta slot de Serverless Function.
 //
 // O e-mail nunca sai daqui alterado: ele vem da sessão assinada, não do corpo
 // do request. Editar perfil não pode virar troca de identidade.
-const FOTO_MAX = 700 * 1024;   // data URI; o KV aceita 1 MB por valor
-
-function temKv() {
-  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
-}
-
-function chavePerfil(email) {
-  return `perfil:${String(email).toLowerCase()}`;
-}
-
-async function kvLer(chave) {
-  if (!temKv()) return null;
-  const resp = await fetch(`${process.env.KV_REST_API_URL}/get/${encodeURIComponent(chave)}`, {
-    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
-    cache: 'no-store',
-  });
-  if (!resp.ok) return null;
-  const { result } = await resp.json();
-  if (!result) return null;
-  try { return JSON.parse(result); } catch { return null; }
-}
-
-async function kvGravar(chave, valor) {
-  if (!temKv()) return false;
-  const resp = await fetch(`${process.env.KV_REST_API_URL}/set/${encodeURIComponent(chave)}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(valor),
-  });
-  return resp.ok;
-}
-
-function limpaNome(valor, max = 40) {
-  return String(valor ?? '')
-    .replace(/[\x00-\x1f\x7f]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, max);
-}
-
-/** Devolve a foto normalizada, '' pra "sem foto" ou null se veio coisa estranha. */
-function limpaFoto(valor) {
-  const foto = String(valor ?? '').trim();
-  if (!foto) return '';
-  if (foto.startsWith('https://')) return foto.length <= 500 ? foto : null;
-  if (/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(foto)) {
-    return foto.length <= FOTO_MAX ? foto : null;
-  }
-  return null;
-}
-
-/** Primeiro palpite de nome quando ainda não há nada salvo: o próprio e-mail. */
-function perfilPadrao(email) {
-  const local = String(email || '').split('@')[0] || '';
-  const partes = local.split(/[._-]+/).filter(Boolean)
-    .map((p) => p.charAt(0).toUpperCase() + p.slice(1));
-  return { nome: partes[0] || local, sobrenome: partes.slice(1).join(' '), foto: '' };
-}
-
-async function lerPerfil(email) {
-  let salvo = null;
-  try {
-    salvo = await kvLer(chavePerfil(email));
-  } catch (e) {
-    console.error('[perfil] falha lendo do KV', e);
-  }
-  const base = perfilPadrao(email);
-  return {
-    nome: salvo?.nome || base.nome,
-    sobrenome: salvo?.sobrenome ?? base.sobrenome,
-    foto: salvo?.foto ?? base.foto,
-  };
-}
 
 async function sessaoDe(req) {
   const secret = process.env.SESSION_SECRET;

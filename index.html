@@ -76,6 +76,13 @@
         <span class="search-trigger-label">Buscar</span>
         <kbd class="search-trigger-kbd">Ctrl K</kbd>
       </button>
+      <button class="solicitar-trigger" type="button" id="solicitar-trigger" title="Enviar uma solicitação para a equipe">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path>
+          <polyline points="22 7 12 14 2 7"></polyline>
+        </svg>
+        <span class="solicitar-trigger-label">Solicitar</span>
+      </button>
       <div class="theme-toggle" role="tablist" aria-label="Tema">
         <button data-theme="light" class="active" role="tab">Light</button>
         <button data-theme="dark" role="tab">Dark</button>
@@ -178,6 +185,65 @@
           </svg>
           <span data-submit-label>Selecione pelo menos um item</span>
         </button>
+      </footer>
+    </div>
+  </div>
+
+
+  <!-- ============== MODAL: ENVIAR SOLICITAÇÃO ============== -->
+  <div class="req-modal" id="solicitacao-modal" role="dialog" aria-modal="true" aria-labelledby="req-titulo" hidden>
+    <div class="req-modal-backdrop" data-req-close></div>
+    <div class="req-modal-panel" role="document">
+      <header class="req-header">
+        <div>
+          <h2 class="req-title" id="req-titulo">Enviar solicitação</h2>
+          <p class="req-sub">Peça um material novo, tire uma dúvida ou sugira uma melhoria. A equipe de Criação recebe e responde.</p>
+        </div>
+        <button class="req-close" type="button" aria-label="Fechar" data-req-close>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      <form class="req-body" id="req-form" autocomplete="off" novalidate>
+        <fieldset class="req-campo">
+          <legend class="req-label">O que você precisa?</legend>
+          <div class="req-chips" id="req-categorias"><!-- montado por app.js --></div>
+        </fieldset>
+
+        <label class="req-campo">
+          <span class="req-label">Assunto</span>
+          <input type="text" name="titulo" id="req-titulo-campo" maxlength="120" placeholder="Em poucas palavras, do que se trata">
+        </label>
+
+        <label class="req-campo">
+          <span class="req-label">Descrição</span>
+          <textarea name="descricao" id="req-descricao" rows="7" maxlength="5000" placeholder="Conte com detalhe o que precisa: onde vai usar, para quando, e qualquer referência que ajude."></textarea>
+          <span class="req-contador" id="req-contador">0 / 5000</span>
+        </label>
+
+        <div class="req-campo">
+          <span class="req-label">Anexos</span>
+          <div class="req-anexos-acoes">
+            <label class="action-mini" for="req-arquivos">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+              </svg>
+              <span>Anexar arquivo</span>
+            </label>
+            <input type="file" id="req-arquivos" multiple hidden>
+            <span class="req-anexos-total" id="req-anexos-total"></span>
+          </div>
+          <ul class="req-anexos-lista" id="req-anexos-lista"></ul>
+          <span class="req-ajuda">Imagem, PDF, Word, Excel ou texto. Até 3 arquivos.</span>
+        </div>
+      </form>
+
+      <footer class="req-footer">
+        <button type="submit" form="req-form" class="req-enviar" id="req-enviar"><span>Enviar solicitação</span></button>
+        <span class="req-aviso" id="req-aviso" role="status" aria-live="polite"></span>
       </footer>
     </div>
   </div>
