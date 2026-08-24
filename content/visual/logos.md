@@ -35,6 +35,24 @@ updated: 2026-04-28
 | Branco | `logo_metta_branco_h.svg` | `1dUkDiVqLASKO9b52rnVzlzXkG4LmP09F` |
 | Cinza | `logo_metta_cinza_h.svg` | `1KyPV4XPyPPGrrd3mLAQhvlZlz7pQUqhy` |
 
+### Logos verticais (`logos/`)
+
+| Variante | Arquivo local | Drive ID (PNG) |
+|---|---|---|
+| Colorido (fundo escuro) | `logo_metta_colorido_v.svg` | `1TAOMF6zc41fK4zGSzbf3WsjUl08b30Np` |
+| Colorido escuro (fundo claro) | `logo_metta_colorido_escuro_v.svg` | `1WF7is4MRzYUBz144eVGFl70SKGzW8g6Z` |
+| Azul (fundo amarelo) | `logo_metta_azul_v.svg` | `1pwxckpUPu_Wbvi2IPt6Cu_eJ06HvrT8E` |
+| Azul secundário | `logo_metta_azul2_v.svg` | `11t337xMRuUF2J8__dfxHgO9sXN4qHpr4` |
+| Branco | `logo_metta_branco_v.svg` | `1726eRnBpslYqMi0DsVpm3NxcWGFvfND4` |
+| Cinza | `logo_metta_cinza_v.svg` | `1N3yDA9CA8QonLnGwDKLcAXUYwtU-MWAz` |
+
+### Logo com tagline (`logos/`)
+
+| Variante | Arquivo local | Drive ID (SVG) |
+|---|---|---|
+| Colorida (fundo escuro) | `logo_metta_tagline_colorida_h.svg` | `1ml7q5kY5hR_JBThjk11Q53kunxccGKSE` |
+| Colorida escura (fundo claro) | `logo_metta_tagline_colorida_escura_h.svg` | sem ID Drive, exportada do Figma `2505:1051` |
+
 ### Símbolos (`symbols/`)
 
 | Cor | Arquivo local | Drive ID |
@@ -120,7 +138,8 @@ JPGs flat plates + gradients. 10 arquivos:
 
 | Versão | SVG ID |
 |---|---|
-| Colorida horizontal | `1ml7q5kY5hR_JBThjk11Q53kunxccGKSE` |
+| Colorida horizontal (fundo escuro) | `1ml7q5kY5hR_JBThjk11Q53kunxccGKSE` |
+| Colorida escura horizontal (fundo claro) | sem ID Drive, arquivo local `logo_metta_tagline_colorida_escura_h.svg` |
 
 ### Assinaturas (logo compacto)
 

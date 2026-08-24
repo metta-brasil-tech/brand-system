@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-08-21T16:04:17.877Z",
+  "generatedAt": "2026-08-24T17:51:02.931Z",
   "tabs": [
     {
       "id": "overview",
@@ -2014,18 +2014,28 @@
           "description": "As versões oficiais do logo Metta e quando usar cada uma.",
           "h2s": [
             {
-              "id": "as-duas-orientacoes",
-              "label": "As duas orientações",
+              "id": "a-regra-de-cor",
+              "label": "A regra de cor",
               "depth": 2
             },
             {
-              "id": "a-versao-certa-para-cada-fundo",
-              "label": "A versão certa para cada fundo",
+              "id": "horizontal-a-versao-padrao",
+              "label": "Horizontal, a versão padrão",
               "depth": 2
             },
             {
-              "id": "quando-o-logo-inteiro-nao-cabe",
-              "label": "Quando o logo inteiro não cabe",
+              "id": "vertical-para-espaco-estreito",
+              "label": "Vertical, para espaço estreito",
+              "depth": 2
+            },
+            {
+              "id": "so-o-simbolo",
+              "label": "Só o símbolo",
+              "depth": 2
+            },
+            {
+              "id": "a-assinatura",
+              "label": "A assinatura",
               "depth": 2
             },
             {
@@ -4909,7 +4919,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-08-21T12:56:42-03:00"
+          "updatedAt": "2026-08-21T13:04:18-03:00"
         },
         {
           "id": "consultoria",
@@ -5013,7 +5023,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-08-21T12:56:42-03:00"
+          "updatedAt": "2026-08-21T13:04:18-03:00"
         }
       ]
     },

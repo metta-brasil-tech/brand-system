@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-21T16:04:18.167Z",
-  "grandTotalBytes": 265834325,
-  "grandTotalFiles": 1190,
+  "generatedAt": "2026-08-24T17:51:03.536Z",
+  "grandTotalBytes": 265853591,
+  "grandTotalFiles": 1191,
   "grandTotalTabs": 21,
   "groups": [
     {
@@ -203,10 +203,10 @@
                 {
                   "name": "logos.md",
                   "path": "content/visual/logos.md",
-                  "sizeBytes": 10382
+                  "sizeBytes": 11464
                 }
               ],
-              "totalBytes": 10382,
+              "totalBytes": 11464,
               "fileCount": 1
             },
             {
@@ -288,7 +288,7 @@
               "fileCount": 1
             }
           ],
-          "totalBytes": 230236,
+          "totalBytes": 231318,
           "fileCount": 9
         },
         {
@@ -4472,6 +4472,20 @@
               "fileCount": 1
             },
             {
+              "id": "logo_metta_tagline_colorida_escura_h",
+              "label": "Tagline Colorida Escura · Horizontal",
+              "files": [
+                {
+                  "name": "logo_metta_tagline_colorida_escura_h.svg",
+                  "path": "assets/logos/logo_metta_tagline_colorida_escura_h.svg",
+                  "sizeBytes": 18184
+                }
+              ],
+              "preview": "assets/logos/logo_metta_tagline_colorida_escura_h.svg",
+              "totalBytes": 18184,
+              "fileCount": 1
+            },
+            {
               "id": "logo_metta_tagline_colorida_h",
               "label": "Tagline Colorida · Horizontal",
               "files": [
@@ -4486,8 +4500,8 @@
               "fileCount": 1
             }
           ],
-          "totalBytes": 129047,
-          "fileCount": 13
+          "totalBytes": 147231,
+          "fileCount": 14
         },
         {
           "id": "symbols",
