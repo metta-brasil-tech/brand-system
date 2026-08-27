@@ -1,0 +1,384 @@
+/* ============================================================
+   METTA BRAND SYSTEM — HIERARQUIA DE METODOLOGIA
+   Constrói visualmente a lógica: o Protocolo M.E.T.T.A. é a
+   metodologia proprietária da casa; 6 Gestões, Aceleradores,
+   FCA, CHA e A Venda 4.0 são submetodologias que derivam dele.
+   Dados vêm de data/nav.json (nivel, parent, etapa, resumo).
+============================================================ */
+
+/* Os blocos vivem dentro de .prose, que sublinha todo link. Aqui o link é
+   componente (chip, card, botão), não link de texto: sublinhado sai. */
+.prose a.metod-chip,
+.prose a.metod-card,
+.prose a.metod-btn,
+.prose a.metod-no,
+.prose a.metod-etapa-nome {
+  text-decoration: none;
+}
+.prose a.metod-etapa-nome:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--metta-sys-color-primary);
+  text-underline-offset: 3px;
+}
+
+/* ---------- Selo de raiz (topo da página do Protocolo) ---------- */
+.metod-selo {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 0 0 28px;
+  padding: 16px 20px;
+  background: var(--metta-sys-color-surface-container-low);
+  border-left: 3px solid var(--metta-sys-color-primary);
+  border-radius: 0 var(--metta-sys-shape-corner-md) var(--metta-sys-shape-corner-md) 0;
+}
+.metod-selo .metod-selo-icon {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--metta-sys-color-on-surface);
+  display: flex;
+}
+.metod-selo-kicker {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), sans-serif;
+  font-stretch: 132%;
+  font-size: 10px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--metta-sys-color-on-surface);
+  margin-bottom: 4px;
+}
+.metod-selo-texto {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+/* ---------- Abertura padrão de toda página de metodologia ----------
+   Mesma frase de contexto logo abaixo do título, venha ela do doc (citação de
+   abertura) ou do resumo no nav.json. Sem cara de citação: é subtítulo. */
+.prose .metod-sub,
+.prose blockquote.metod-sub {
+  margin: -0.2em 0 2em;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  font-size: clamp(17px, 1.35vw, 19px);
+  line-height: 1.5;
+  color: var(--metta-sys-color-on-surface-variant);
+  max-width: 60ch;
+}
+.prose blockquote.metod-sub p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+.prose blockquote.metod-sub p + p {
+  margin-top: 0.4em;
+}
+
+/* ---------- Faixa de contexto (páginas filhas) ---------- */
+.metod-context {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: 0 0 24px;
+  padding: 12px 16px;
+  background: var(--metta-sys-color-surface-container-low);
+  border-radius: var(--metta-sys-shape-corner-md);
+}
+.metod-context-trilha {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.metod-context-trilha .metod-no {
+  color: var(--metta-sys-color-on-surface);
+  font-weight: 590;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.metod-context-trilha a.metod-no:hover {
+  border-bottom-color: var(--metta-sys-color-primary);
+}
+.metod-context-trilha .metod-seta {
+  opacity: 0.5;
+  font-size: 11px;
+}
+.metod-context-trilha .metod-atual {
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.metod-context-acoes {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* Botão pequeno usado nas faixas e nos mapas */
+.metod-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 540;
+  line-height: 1;
+  color: var(--metta-sys-color-on-surface);
+  background: var(--metta-sys-color-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-full);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.metod-btn:hover {
+  border-color: var(--metta-sys-color-outline);
+  background: var(--metta-sys-color-surface-container);
+}
+.metod-btn svg { flex: 0 0 auto; }
+
+/* ---------- Chips por etapa (dentro do doc do Protocolo) ---------- */
+.metod-chips {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -4px 0 24px;
+  padding: 0;
+}
+.metod-chips-label {
+  font-size: 10px;
+  font-weight: 650;
+  font-stretch: 132%;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--metta-sys-color-on-surface-variant);
+  opacity: 0.85;
+  margin-right: 2px;
+}
+.metod-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: 12.5px;
+  font-weight: 540;
+  line-height: 1.2;
+  color: var(--metta-sys-color-on-surface);
+  background: var(--metta-sys-color-surface-container-low);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-full);
+  text-decoration: none;
+  transition: border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              background var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.metod-chip:hover {
+  border-color: var(--metta-sys-color-primary);
+  background: var(--metta-sys-color-surface-container);
+}
+
+/* ---------- Índice das 5 etapas (abertura do Protocolo) ---------- */
+.metod-indice {
+  margin: 0 0 40px;
+}
+.metod-indice-label {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), sans-serif;
+  font-stretch: 132%;
+  font-size: 10px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-bottom: 12px;
+}
+
+/* ---------- Mapa da metodologia (fim da página do Protocolo) ---------- */
+.metod-mapa {
+  margin: 56px 0 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--metta-sys-color-outline-variant);
+}
+.metod-mapa-head { margin-bottom: 24px; }
+.metod-mapa-kicker {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), sans-serif;
+  font-stretch: 132%;
+  font-size: 10px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin-bottom: 8px;
+}
+/* O bloco já tem a própria linha (border-top do .metod-mapa): o H2 não desenha outra. */
+.prose h2.metod-mapa-titulo {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+.metod-mapa-titulo {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), sans-serif;
+  font-stretch: 132%;
+  font-size: clamp(21px, 2.1vw, 26px);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--metta-sys-color-on-surface);
+  margin: 0 0 8px;
+}
+.metod-mapa-sub {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0;
+  max-width: 62ch;
+}
+
+.metod-etapas {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 32px;
+}
+.metod-etapa {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 18px;
+  background: var(--metta-sys-color-surface-container-low);
+  border-radius: var(--metta-sys-shape-corner-md);
+}
+.metod-etapa-letra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), sans-serif;
+  font-stretch: 132%;
+  font-size: 20px;
+  font-weight: 870;
+  line-height: 1;
+  color: var(--metta-sys-color-on-surface);
+  background: var(--metta-sys-color-surface);
+  border-radius: var(--metta-sys-shape-corner-sm);
+}
+.metod-etapa-nome {
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--metta-sys-color-on-surface);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 3px;
+}
+.metod-etapa-nome:hover { text-decoration: underline; text-underline-offset: 3px; }
+.metod-etapa-resolve {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0 0 10px;
+}
+.metod-etapa .metod-chips { margin: 0; }
+.metod-etapa-vazio {
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface-variant);
+  opacity: 0.7;
+}
+
+/* ---------- Cards de submetodologia ---------- */
+.metod-familia + .metod-familia { margin-top: 28px; }
+.metod-familia-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.metod-familia-label {
+  font-family: var(--metta-ref-typeface-brand), var(--metta-ref-typeface-fallback), sans-serif;
+  font-stretch: 132%;
+  font-size: 10px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--metta-sys-color-on-surface-variant);
+}
+.metod-familia-nota {
+  font-size: 12px;
+  color: var(--metta-sys-color-on-surface-variant);
+  opacity: 0.8;
+}
+.metod-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+.metod-card {
+  display: block;
+  padding: 16px 18px;
+  background: var(--metta-sys-color-surface);
+  border: 1px solid var(--metta-sys-color-outline-variant);
+  border-radius: var(--metta-sys-shape-corner-md);
+  text-decoration: none;
+  transition: border-color var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard),
+              transform var(--metta-sys-motion-duration-short) var(--metta-sys-motion-easing-standard);
+}
+.metod-card:hover {
+  border-color: var(--metta-sys-color-primary);
+  transform: translateY(-1px);
+}
+.metod-card-ordem {
+  font-size: 10px;
+  font-weight: 650;
+  font-stretch: 132%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--metta-sys-color-on-surface-variant);
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+.metod-card-titulo {
+  font-size: 14.5px;
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--metta-sys-color-on-surface);
+  margin-bottom: 5px;
+}
+.metod-card-resumo {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--metta-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+/* ---------- Sidebar: item raiz da metodologia ----------
+   O menu é uma lista plana. O que diz "esta é a metodologia principal" é o
+   marcador amarelo, o peso do texto e o respiro que separa ela das demais. */
+aside.nav .subnav a.raiz {
+  font-weight: 650;
+  color: var(--metta-sys-color-on-surface);
+  padding-left: 12px;
+  border-left: 2px solid var(--metta-sys-color-primary);
+  border-radius: 0 var(--metta-sys-shape-corner-sm) var(--metta-sys-shape-corner-sm) 0;
+  margin-left: -13px;
+  margin-bottom: 10px;
+}
+aside.nav .subnav a.raiz.active {
+  background: var(--metta-sys-color-surface-container-highest);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 720px) {
+  .metod-etapa { grid-template-columns: 36px 1fr; gap: 12px; padding: 14px; }
+  .metod-etapa-letra { width: 36px; height: 36px; font-size: 17px; }
+  .metod-context-acoes { margin-left: 0; }
+  .metod-cards { grid-template-columns: 1fr; }
+}

@@ -17,7 +17,7 @@ tags:
   - usado-por/criar
 formato_consumo: referencia-pontual
 prioridade_carregamento: media
-versao: "1.0"
+versão: "1.0"
 sucedido_por: null
 complementar_com: "[[Metta - Identidade Verbal]] · [[Metta - Plataforma de Marca]] · [[Metta - Manifesto de Marca]]"
 summary: "Brandbook Metta — consolida identidade verbal+visual+estratégica num só doc, referência pontual"

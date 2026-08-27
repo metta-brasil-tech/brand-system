@@ -16,7 +16,7 @@ tags:
   - usado-por/criar
 formato_consumo: contexto-skill
 prioridade_carregamento: alta
-versao: "1.0"
+versão: "1.0"
 sucedido_por: null
 complementar_com: "[[Metta - Manifesto de Marca]]"
 summary: "Plataforma de marca da Metta: ecossistema de inteligência comercial para empresários, com propósito de fazer pessoas e empresas baterem metas e profissionalizar a gestão comercial no Brasil — sustentado por 6 pilares (propósito, posicionamento, audiência, valores, personalidade, drivers)."

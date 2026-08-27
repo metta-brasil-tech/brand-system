@@ -5,9 +5,9 @@ aliases:
 tags:
   - marca/tiago
   - status/arquivo
-  - tema/lideranca
+  - tema/liderança
   - tipo/aula-ao-vivo
-  - tipo/transcricao
+  - tipo/transcrição
 summary: "Transcrição de live: autonomia do time, líder treinador, dependência operacional."
 created: 2026-04-10
 updated: 2026-04-10
@@ -223,7 +223,7 @@ precisa, necessita, tem desejo.
 Como é que eu encanto com soluções? faça
 esse cliente brilhar os olhos sobre o
 que eu tô vendendo. Como é que eu
-negocio com inteligência, porque ele vai
+negócio com inteligência, porque ele vai
 querer desconto, ele vai querer pensar
 em preço, ele vai ter outras coisas.
 Como é que eu decido o fechamento, levo
@@ -235,7 +235,7 @@ possui um método de vendas que descreve
 
 <!-- Página 5 -->
 todas essas etapas sobre como vender?
-Diga aqui sim ou não e se você tiver se
+Diga aqui sim ou não é se você tiver se
 você é aluno da meta ou não. Comente
 aqui. Você tem um passo a passo que
 ensine seu vendedor a vender, que

@@ -11,7 +11,7 @@ tags:
   - status/ativo
   - tema/provas
   - tema/cases
-  - tipo/audiencia
+  - tipo/audiência
   - usado-por/copy-ad
   - usado-por/copy-lp
   - usado-por/copy-email
@@ -22,7 +22,7 @@ tags:
   - usado-por/hook-forge
 formato_consumo: referencia
 prioridade_carregamento: alta
-versao: "1.0"
+versão: "1.0"
 summary: "Banco de cases, depoimentos e números verificáveis pra sustentar copy. 8 cases nominais (AMBI, Hiperzoo, Evolua, CBA, Platano, Órex, Brava, Ótica Visão) + quotes literais por tema. Clientes proibidos: Acertando, Farmácia NIC."
 created: 2026-04-29
 updated: 2026-05-01
@@ -44,7 +44,7 @@ Esse documento tem conexão com
   - `^prova-platano` — Platano (Alexandre): +41% lucro operacional.
   - `^prova-orex` — Órex (Ana Laura): foco em método.
   - `^prova-brava` — Brava (Laise): retenção via Plano de Voo.
-  - `^prova-otica-visao` — Ótica Visão / Ótica Conceito: 17 de 18 metas em 18 meses.
+  - `^prova-ótica-visão` — Ótica Visão / Ótica Conceito: 17 de 18 metas em 18 meses.
 - **Clientes PROIBIDOS:** Acertando, Farmácia NIC. Zero menção em qualquer copy.
 - **Regra de uso:** prova nominal (nome + número) > prova genérica ("muitas empresas"). Sempre.
 - **Prioridade de fonte:** transcrição direta > documento institucional. Doc institucional não fabrica número.
@@ -118,7 +118,7 @@ Cada case traz: contexto da empresa, problema antes da Metta, o que foi aplicado
 - Operação manteve crescimento mesmo com o setor em queda.
 
 **Citação literal (Patrícia Maioca).**
-> "A construção do método de vendas é muito importante. Ela nos gera uma série de benefícios em cadeia. Quando a equipe de fato atua com ele, eu já integro com o método de vendas, com o padrão de atendimento. A hora que ela chega na loja, ela já está sabendo o que está acontecendo."
+> "A construção do método de vendas é muito importante. Ela nos gera uma série de benefícios em cadeia. Quando a equipe de fato atua com ele, eu já íntegro com o método de vendas, com o padrão de atendimento. A hora que ela chega na loja, ela já está sabendo o que está acontecendo."
 
 **Citação literal (Eduardo).**
 > "Falando em resultados tangíveis, a gente teve um resultado de janeiro de 2021 a julho de 2022 um crescimento de 141%. Enquanto o mercado teve uma queda de 44%, nós continuamos o nosso crescimento. Porque após a metodologia você passa a depender menos do mercado. E você consegue conscientizar os seus gestores, os seus líderes de que eles possuem ação sobre a meta."
@@ -216,7 +216,7 @@ Cada case traz: contexto da empresa, problema antes da Metta, o que foi aplicado
 
 **Atenção:** Laise é executiva da gestão, não sócia da Brava. Use o depoimento como prova de método aplicado em rede de farmácias com resultado quantificado, mas não como case-espelho de empresário. Pra case-espelho de dono, prefira Beto, Patrícia/Eduardo, Rafaela, Ana Laura, Alexandre, Fagner.
 
-### 2.8 Ótica Visão (rede Poutpourri) — depoimento de proprietária ^prova-otica-visao
+### 2.8 Ótica Visão (rede Poutpourri) — depoimento de proprietária ^prova-ótica-visão
 
 **Contexto.** Rede de óticas com 30 anos de operação. Várias unidades.
 

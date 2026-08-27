@@ -13,7 +13,7 @@ tags:
   - tema/metodo
 formato_consumo: contexto-consulta
 prioridade_carregamento: alta
-versao: "1.0"
+versão: "1.0"
 origem: "eBook A VENDA 4.0 (Tiago Alves / Metta)"
 summary: "Método de vendas proprietário da Metta — 6 etapas (Aborde, Visualize, Encante, Negocie, Decida, Amplie) baseadas no princípio da venda centrada no cliente e no perfil do Vendedor 4.0 (CHA: Conhecimento, Habilidade, Atitude)."
 created: 2026-05-09

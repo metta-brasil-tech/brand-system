@@ -15,160 +15,160 @@ created: 2026-04-10
 updated: 2026-04-10
 ---
 
-# Gestao da Meta - E-book Completo
+# Gestão da Meta - E-book Completo
 
-## [[Metta - As 6 Gestões da Meta Batida]] | Gestao #5
+## [[Metta - As 6 Gestões da Meta Batida]] | Gestão #5
 
-Este documento compila integralmente o conteudo do e-book **"Gestao da Meta"**, a quinta gestao do framework **As 6 Gestoes da Meta Batida**, desenvolvido por **Tiago Alves**, fundador da **Metta**. O livro ensina lideres comerciais a fazer gestao estrategica de metas, indo alem dos numeros para construir resultados sustentaveis por meio de diagnosticos, planos de acao e desenvolvimento de pessoas.
+Este documento compila integralmente o conteúdo do e-book **"Gestão da Meta"**, a quinta gestão do framework **As 6 Gestões da Meta Batida**, desenvolvido por **Tiago Alves**, fundador da **Metta**. O livro ensina líderes comerciais a fazer gestão estratégica de metas, indo além dos números para construir resultados sustentáveis por meio de diagnósticos, planos de ação e desenvolvimento de pessoas.
 
-> **Navegacao entre as 6 Gestoes:**
+> **Navegação entre as 6 Gestões:**
 > [[Metta - Gestão do Conhecimento|← 4. Conhecimento]] | **5. Meta** | [[Metta - Gestão do Tempo|6. Tempo →]]
 >
-> [[Metta - Gestão da Mudança|Mudanca]] · [[Metta - Gestão da Ativação|Ativacao]] · [[Metta - Gestão do Método|Metodo]] · [[Metta - Gestão do Conhecimento|Conhecimento]] · [[Metta - Gestão da Meta|Meta]] · [[Metta - Gestão do Tempo|Tempo]]
+> [[Metta - Gestão da Mudança|Mudança]] · [[Metta - Gestão da Ativação|Ativação]] · [[Metta - Gestão do Método|Método]] · [[Metta - Gestão do Conhecimento|Conhecimento]] · [[Metta - Gestão da Meta|Meta]] · [[Metta - Gestão do Tempo|Tempo]]
 
 ---
 
-## 1. Visao Geral / Resumo
+## 1. Visão Geral / Resumo
 
-A Gestao da Meta e a **quinta etapa** das 6 Gestoes da Meta Batida. O livro explica que ela nao e a primeira gestao porque **o resultado se constroi** -- nao basta olhar numeros e pressionar vendedores. As gestoes anteriores (Mudanca, Ativacao, Metodo, Conhecimento) formam o alicerce necessario.
+A Gestão da Meta e a **quinta etapa** das 6 Gestões da Meta Batida. O livro explica que ela não é a primeira gestão porque **o resultado se constrói** -- não basta olhar números e pressionar vendedores. As gestões anteriores (Mudança, Ativação, Método, Conhecimento) formam o alicerce necessário.
 
-**Definicao central:**
+**Definição central:**
 
-> Gestao da Meta e a capacidade de identificar causas para determinado resultado e executar as acoes que o corrijam ou o potencializem.
+> Gestão da Meta é a capacidade de identificar causas para determinado resultado e executar as ações que o corrijam ou o potencializem.
 
-O livro diferencia claramente entre saber **o que aconteceu** (qualquer sistema mostra) e entender **por que aconteceu** (competencia rara entre gestores). O trabalho do lider e **conectar pontos entre os numeros e o contexto**, transformando dados em estrategias.
+O livro diferencia claramente entre saber **o que aconteceu** (qualquer sistema mostra) e entender **por que aconteceu** (competência rara entre gestores). O trabalho do líder e **conectar pontos entre os números e o contexto**, transformando dados em estratégias.
 
-### Sequencia das 6 Gestoes da Meta Batida
+### Sequência das 6 Gestões da Meta Batida
 
-1. Gestao da Mudanca
-2. Gestao da Ativacao
-3. Gestao do Metodo
-4. Gestao do Conhecimento
-5. **Gestao da Meta** (este e-book)
-6. Gestao do Tempo
+1. Gestão da Mudança
+2. Gestão da Ativação
+3. Gestão do Método
+4. Gestão do Conhecimento
+5. **Gestão da Meta** (este e-book)
+6. Gestão do Tempo
 
 ---
 
-## 2. Capitulos e Conteudo Completo
+## 2. Capítulos e Conteúdo Completo
 
-### Capitulo 1: Por Que e Preciso Construir Resultados Para Atingir a Meta?
+### Capítulo 1: Por Que é Preciso Construir Resultados Para Atingir a Meta?
 
-O capitulo justifica por que a Gestao da Meta nao e o primeiro assunto estudado. O resultado se constroi -- apenas olhar numeros e mobilizar vendedores nao e suficiente. Se fosse, todas as empresas comemorariam constantemente.
+O capítulo justifica por que a Gestão da Meta não é o primeiro assunto estudado. O resultado se constrói -- apenas olhar números e mobilizar vendedores não é suficiente. Se fosse, todas as empresas comemorariam constantemente.
 
-**O papel de cada gestao anterior como alicerce:**
+**O papel de cada gestão anterior como alicerce:**
 
-| Gestao | Papel |
+| Gestão | Papel |
 |--------|-------|
-| Gestao da Mudanca | Gerou conscientizacao |
-| Gestao da Ativacao | Mostrou a importancia dos comportamentos |
-| Gestao do Metodo | Ensinou as tecnicas necessarias |
-| Gestao do Conhecimento | Esclareceu o que precisa ser estudado constantemente |
+| Gestão da Mudança | Gerou conscientização |
+| Gestão da Ativação | Mostrou a importância dos comportamentos |
+| Gestão do Método | Ensinou as técnicas necessárias |
+| Gestão do Conhecimento | Esclareceu o que precisa ser estudado constantemente |
 
-**Impacto de cada gestao: "Se a gestao nao for praticada" vs. "Quando a gestao e praticada"**
+**Impacto de cada gestão: "Se a gestão não for praticada" vs. "Quando a gestão é praticada"**
 
-#### Gestao da Mudanca
+#### Gestão da Mudança
 
-**Sem a gestao:**
-- Vendedores nao se engajam porque sao cobrados pela meta da empresa
-- Nao ressignificam ou traduzem em metas pessoais
-- Nao se dao conta das transformacoes permanentes do mercado
-- Nao compreendem a importancia da mudanca
+**Sem a gestão:**
+- Vendedores não se engajam porque são cobrados pela meta da empresa
+- Não ressignificam ou traduzem em metas pessoais
+- Não se dão conta das transformações permanentes do mercado
+- Não compreendem a importância da mudança
 
-**Com a gestao:**
+**Com a gestão:**
 - Vendedores se motivam por metas que transcendem as da empresa porque planejaram seus sonhos a partir das conquistas profissionais
-- Tem consciencia da necessidade de se adaptar e se desenvolver constantemente
-- Veem claramente os ganhos que terao com a mudanca
-- Se integram as novas propostas e agem sem necessidade de cobrancas do lider
+- Tem consciência da necessidade de se adaptar e se desenvolver constantemente
+- Veem claramente os ganhos que terão com a mudança
+- Se integram as novas propostas e agem sem necessidade de cobranças do líder
 
-#### Gestao da Ativacao
+#### Gestão da Ativação
 
-**Sem a gestao:**
-- Vendedores nao veem razao para fazer o que o Lider pede
-- Terceirizam a responsabilidade do resultado (culpam fraquezas da empresa ou forcas do concorrente)
+**Sem a gestão:**
+- Vendedores não veem razão para fazer o que o Líder pede
+- Terceirizam a responsabilidade do resultado (culpam fraquezas da empresa ou forças do concorrente)
 - Geram necessidade de microgerenciamento
 
-**Com a gestao:**
+**Com a gestão:**
 - Vendedores adotam novos comportamentos porque sentem leveza diante de atitudes positivas
 - Ativam a autorresponsabilidade pelos resultados
-- Focam na solucao e nao nos problemas
-- O time **quer** fazer o que e preciso, esperando apenas direcionamento do Lider
+- Focam na solução e não nos problemas
+- O time **quer** fazer o que é preciso, esperando apenas direcionamento do Líder
 
-#### Gestao do Metodo
+#### Gestão do Método
 
-**Sem a gestao:**
-- Vendedores perdem vendas por nao saberem lidar com circunstancias dos atendimentos
+**Sem a gestão:**
+- Vendedores perdem vendas por não saberem lidar com circunstâncias dos atendimentos
 - Tentam reproduzir conceitos mas sem certeza de estarem corretos
-- Duvidam da eficiencia do Metodo quando resultados nao vem
-- Vendedores novos dependem de propria experiencia, tentativa e erro
+- Duvidam da eficiência do Método quando resultados não vem
+- Vendedores novos dependem de própria experiência, tentativa e erro
 
-**Com a gestao:**
-- Vendedores sao treinados nas tecnicas com base em situacoes do dia a dia
-- Sao orientados com frequencia sobre execucao do Metodo
-- Concluem que o Metodo e caminho para bater metas e conquistar objetivos pessoais
-- Vendedores novos sao treinados desde o inicio com as mesmas tecnicas
+**Com a gestão:**
+- Vendedores são treinados nas técnicas com base em situações do dia a dia
+- São orientados com frequência sobre execução do Método
+- Concluem que o Método e caminho para bater metas e conquistar objetivos pessoais
+- Vendedores novos são treinados desde o início com as mesmas técnicas
 
-#### Gestao do Conhecimento
+#### Gestão do Conhecimento
 
-**Sem a gestao:**
-- Vendedores conhecem produtos/servicos superficialmente (o que sao e o que fazem), mas nao dominam o que sao capazes de proporcionar ao cliente
-- Repetem informacoes mecanicamente diante de comparacoes
+**Sem a gestão:**
+- Vendedores conhecem produtos/serviços superficialmente (o que são e o que fazem), mas não dominam o que são capazes de proporcionar ao cliente
+- Repetem informações mecanicamente diante de comparações
 - Atendem todos os clientes da mesma forma
 
-**Com a gestao:**
-- Time entende quais beneficios cada produto/servico pode oferecer
-- Adaptam ganhos a diferentes situacoes ou perfis de clientes
-- Dominam detalhes decisivos e conhecem tecnicas para enfrentar comparacoes
-- Personalizam o atendimento, sabendo que cada cliente e unico
+**Com a gestão:**
+- Time entende quais benefícios cada produto/serviço pode oferecer
+- Adaptam ganhos a diferentes situações ou perfis de clientes
+- Dominam detalhes decisivos e conhecem técnicas para enfrentar comparações
+- Personalizam o atendimento, sabendo que cada cliente é único
 
 **Impacto do Conhecimento na lucratividade:**
 
-1. **Reducao dos descontos** por:
-   - Maior VALOR percebido pelo cliente quando o vendedor envolve com beneficios e vantagens
-   - Neutralizacao das objecoes pelo conhecimento pleno do mercado
+1. **Redução dos descontos** por:
+   - Maior VALOR percebido pelo cliente quando o vendedor envolve com benefícios e vantagens
+   - Neutralização das objeções pelo conhecimento pleno do mercado
 
-2. **Crescente faturamento** impulsionado pelo aumento do ticket medio quando o time vende produtos/servicos complementares ou itens com maior valor agregado
+2. **Crescente faturamento** impulsionado pelo aumento do ticket médio quando o time vende produtos/serviços complementares ou itens com maior valor agregado
 
-> "E a coexistencia entre as Gestoes que faz o resultado acontecer."
+> "E a coexistência entre as Gestões que faz o resultado acontecer."
 
 ---
 
-### Capitulo 2: O Que e Gestao da Meta?
+### Capítulo 2: O Que é Gestão da Meta?
 
-**Definicao:**
+**Definição:**
 
-> Gestao da Meta e a capacidade de identificar causas para determinado resultado e executar as acoes que o corrijam ou o potencializem.
+> Gestão da Meta é a capacidade de identificar causas para determinado resultado e executar as ações que o corrijam ou o potencializem.
 
-**Diferenciacao fundamental:**
-- Fazer gestao da meta **NAO significa** saber metrificar ou calcular melhor os dados
+**Diferenciação fundamental:**
+- Fazer gestão da meta **NÃO significa** saber metrificar ou calcular melhor os dados
 - Qualquer sistema mostra **o que aconteceu**
-- O principal (e que pouquissimos gestores fazem) e encontrar as razoes -- **por que aconteceu**
+- O principal (e que pouquissimos gestores fazem) e encontrar as razões -- **por que aconteceu**
 
-**O trabalho do lider:** Conectar pontos entre os numeros e o contexto, composto de:
+**O trabalho do líder:** Conectar pontos entre os números e o contexto, composto de:
 - Movimentos do mercado
-- Nivel de ativacao dos vendedores
-- Acoes da empresa
-- Promocoes e ofertas internas e de concorrentes
-- Itens com alto indice de desconto cedido
-- Qualidade dos atendimentos (avaliacao do Mapa da Venda)
+- Nível de ativação dos vendedores
+- Ações da empresa
+- Promoções e ofertas internas e de concorrentes
+- Itens com alto índice de desconto cedido
+- Qualidade dos atendimentos (avaliação do Mapa da Venda)
 
-**Resultado:** O diagnostico dessa avaliacao traz as causas do fato inicial, sendo o ponto de partida para um **plano de acoes direcionado e qualificado**. Quando se faz Gestao da Meta, descobre-se oportunidades de melhoria ou avancos, **transformando dados em estrategias**.
+**Resultado:** O diagnóstico dessa avaliação traz as causas do fato inicial, sendo o ponto de partida para um **plano de ações direcionado e qualificado**. Quando se faz Gestão da Meta, descobre-se oportunidades de melhoria ou avanços, **transformando dados em estratégias**.
 
 ---
 
-### Capitulo 3: Gerir Qual Resultado?
+### Capítulo 3: Gerir Qual Resultado?
 
-#### Niveis dos Indicadores
+#### Níveis dos Indicadores
 
-Os indicadores podem ser classificados em tres niveis, de acordo com sua finalidade e ponto de vista:
+Os indicadores podem ser classificados em três níveis, de acordo com sua finalidade e ponto de vista:
 
-| Tipo | Definicao |
+| Tipo | Definição |
 |------|-----------|
 | **Indicador Fim** | O resultado final de um determinado indicador |
-| **Indicador Meio** | Aqueles que fazem parte do conjunto de acoes que levam ao resultado do indicador fim |
-| **Indicador de Desenvolvimento** | Indicadores que acompanham a evolucao do time |
+| **Indicador Meio** | Aqueles que fazem parte do conjunto de ações que levam ao resultado do indicador fim |
+| **Indicador de Desenvolvimento** | Indicadores que acompanham a evolução do time |
 
 **Exemplo de relatividade dos indicadores:**
-- **Faturamento** para o socio da empresa = indicador **meio** (porque integra o lucro, que e o indicador fim)
+- **Faturamento** para o sócio da empresa = indicador **meio** (porque integra o lucro, que é o indicador fim)
 - **Faturamento** para o gerente comercial = indicador **fim**
 
 #### Indicadores por Cargo
@@ -177,693 +177,693 @@ Os indicadores podem ser classificados em tres niveis, de acordo com sua finalid
 
 | Tipo | Indicadores | Justificativa |
 |------|-------------|---------------|
-| Fim | Lucro liquido | Avaliacao final do processo de vendas |
-| Meio | DRE (faturamento, despesas, impostos, CPV, CMV etc.) | Demonstrativo que traduz em lucro ou prejuizo os efeitos das atividades |
-| Desenvolvimento | NPS; Turnover | NPS reflete qualidade do time; Turnover indica performance dos lideres |
+| Fim | Lucro líquido | Avaliação final do processo de vendas |
+| Meio | DRE (faturamento, despesas, impostos, CPV, CMV etc.) | Demonstrativo que traduz em lucro ou prejuízo os efeitos das atividades |
+| Desenvolvimento | NPS; Turnover | NPS reflete qualidade do time; Turnover indica performance dos líderes |
 
 **Gerente de Vendas:**
 
 | Tipo | Indicadores | Justificativa |
 |------|-------------|---------------|
-| Fim | Lucro bruto; Faturamento | Lucro bruto (nem sempre tem acesso a todas as variaveis do liquido); Faturamento = vendas do time |
-| Meio | Ticket medio; Desconto; Numero de negocios | Balizadores do faturamento |
-| Desenvolvimento | Produtividade diaria; Produtividade por tempo na funcao; % vendedores que atingem meta; % reducao de turnover; Conceito do atendimento (Mapa da Venda); Media de conhecimento de produtos/servicos | Medem desempenho individual e coletivo |
+| Fim | Lucro bruto; Faturamento | Lucro bruto (nem sempre tem acesso a todas as variáveis do líquido); Faturamento = vendas do time |
+| Meio | Ticket médio; Desconto; Número de negócios | Balizadores do faturamento |
+| Desenvolvimento | Produtividade diária; Produtividade por tempo na função; % vendedores que atingem meta; % redução de turnover; Conceito do atendimento (Mapa da Venda); Média de conhecimento de produtos/serviços | Medem desempenho individual e coletivo |
 
-#### Glossario de Indicadores
+#### Glossário de Indicadores
 
-- **DRE:** Demonstrativo de resultados do exercicio
-- **CPV:** Custo dos produtos vendidos (produzidos pela propria empresa)
-- **CMV:** Custo de mercadorias vendidas (compra para revenda ou servicos)
-- **NPS:** Net Promoter Score (metrica de satisfacao dos clientes)
-- **Turnover:** Taxa de rotatividade de funcionarios
-- **Onboarding:** Processo de integracao de novos funcionarios
-- **Lucro bruto:** Diferenca entre receita total e custos variaveis ligados a producao/prestacao de servicos
+- **DRE:** Demonstrativo de resultados do exercício
+- **CPV:** Custo dos produtos vendidos (produzidos pela própria empresa)
+- **CMV:** Custo de mercadorias vendidas (compra para revenda ou serviços)
+- **NPS:** Net Promoter Score (métrica de satisfação dos clientes)
+- **Turnover:** Taxa de rotatividade de funcionários
+- **Onboarding:** Processo de integração de novos funcionários
+- **Lucro bruto:** Diferença entre receita total e custos variáveis ligados a produção/prestação de serviços
 - **Faturamento:** Valor total dos pagamentos recebidos dos clientes
-- **Ticket medio:** Valor medio de venda = faturamento / numero de negocios
-- **Desconto:** Valor ou indice medio de descontos concedidos em relacao ao total do faturamento
-- **Produtividade diaria:** Valor total faturado por vendedor no periodo / dias trabalhados
-- **Produtividade por tempo na funcao:** Valor total faturado por vendedor no periodo / semanas, meses ou anos
+- **Ticket médio:** Valor médio de venda = faturamento / número de negócios
+- **Desconto:** Valor ou índice médio de descontos concedidos em relação ao total do faturamento
+- **Produtividade diária:** Valor total faturado por vendedor no período / dias trabalhados
+- **Produtividade por tempo na função:** Valor total faturado por vendedor no período / semanas, meses ou anos
 
-#### Exercicio Pratico
-Preencher tabela com indicadores fim, meio e de desenvolvimento para o Lider de Vendas e para o proprio cargo.
+#### Exercício Prático
+Preencher tabela com indicadores fim, meio e de desenvolvimento para o Líder de Vendas e para o próprio cargo.
 
 ---
 
-### Capitulo 4: Tornando a Meta Atingivel
+### Capítulo 4: Tornando a Meta Atingível
 
-**Principio central:** As pessoas recebem melhor a meta quando ela e divulgada em valores menores, isto e, **desmembrada**. Quanto mais diluida, mais factivel a meta sera percebida.
+**Princípio central:** As pessoas recebem melhor a meta quando ela é divulgada em valores menores, isto é, **desmembrada**. Quanto mais diluída, mais factível a meta será percebida.
 
 **Exemplo comparativo:**
-1. "A meta deste mes e de R$200 mil." (intimidador)
-2. "Para chegar a meta sera preciso vender por dia R$512,90 para 15 clientes." (factivel)
+1. "A meta deste mês e de R$200 mil." (intimidador)
+2. "Para chegar a meta será preciso vender por dia R$512,90 para 15 clientes." (factível)
 
 **Fluxo de desmembramento:**
 
 ```
-Meta mensal -> Meta semanal -> Meta diaria -> Ticket medio + Numero de clientes -> META BATIDA!
+Meta mensal -> Meta semanal -> Meta diária -> Ticket médio + Número de clientes -> META BATIDA!
 ```
 
 #### Meta Mensal
-A meta mensal ja e um fragmento da meta da empresa, distribuida entre setores e depois fragmentada entre vendedores.
+A meta mensal já e um fragmento da meta da empresa, distribuida entre setores e depois fragmentada entre vendedores.
 
 #### Meta Semanal
 
-A divisao **nao e direta** (meta / numero de semanas). Deve considerar a **representatividade historica** de cada semana.
+A divisão **não é direta** (meta / número de semanas). Deve considerar a **representatividade histórica** de cada semana.
 
 **Passo a passo:**
-1. Analise o historico de vendas dos ultimos meses
-2. Confira as vendas semanais em cada mes
-3. Calcule a media de vendas entre as semanas (media das primeiras semanas, media das segundas etc.)
-4. Transforme essa media em percentual com relacao ao total vendido
-5. Chegara a uma taxa por semana: Semana 1: N%, Semana 2: X%, Semana 3: Y%, Semana 4: Z%
+1. Analise o histórico de vendas dos últimos meses
+2. Confira as vendas semanais em cada mês
+3. Calcule a média de vendas entre as semanas (media das primeiras semanas, média das segundas etc.)
+4. Transforme essa média em percentual com relação ao total vendido
+5. Chegará a uma taxa por semana: Semana 1: N%, Semana 2: X%, Semana 3: Y%, Semana 4: Z%
 
 **Replanejamento semanal:**
-Se o vendedor encerrou a segunda semana com R$250 mil (50% da meta de R$500 mil), mas o historico diz que deveria estar em 66% (R$330 mil), ele precisa recalcular considerando as proporcoes das semanas restantes (que sao mais baixas para os ultimos dias). O time deve desenvolver **consciencia dos ajustes necessarios** para autogerenciar o resultado.
+Se o vendedor encerrou a segunda semana com R$250 mil (50% da meta de R$500 mil), mas o histórico diz que deveria estar em 66% (R$330 mil), ele precisa recalcular considerando as proporções das semanas restantes (que são mais baixas para os últimos dias). O time deve desenvolver **consciência dos ajustes necessários** para autogerenciar o resultado.
 
-#### Meta Diaria
+#### Meta Diária
 
-A venda/dia e o padrao para analises de produtividade. Divisao da meta semanal em dias considerando:
-- Proporcao historica do negocio
-- Sazonalidades e outras influencias
+A venda/dia é o padrão para análises de produtividade. Divisão da meta semanal em dias considerando:
+- Proporção histórica do negócio
+- Sazonalidades e outras influências
 - Replanejamento
 
-Principal beneficio: **exatidao na interpretacao da performance**.
+Principal benefício: **exatidão na interpretação da performance**.
 
-#### Simplificando em Ticket Medio e Quantidade de Vendas
+#### Simplificando em Ticket Médio e Quantidade de Vendas
 
-**Exemplo pratico com meta diaria de R$3.000,00 e ticket medio do time de R$300,00:**
+**Exemplo prático com meta diária de R$3.000,00 e ticket médio do time de R$300,00:**
 
-| Perfil do Vendedor | Quantidade de Vendas | Ticket Medio |
+| Perfil do Vendedor | Quantidade de Vendas | Ticket Médio |
 |---------------------|---------------------|--------------|
-| Indicadores na media do time | 10 vendas | R$300,00 |
-| Ticket medio acima da media, vendas abaixo | 6 vendas | R$500,00 |
-| Ticket medio abaixo da media, alto volume | 12 vendas | R$250,00 |
+| Indicadores na média do time | 10 vendas | R$300,00 |
+| Ticket médio acima da média, vendas abaixo | 6 vendas | R$500,00 |
+| Ticket médio abaixo da média, alto volume | 12 vendas | R$250,00 |
 
-**Regra:** O valor da meta diaria nao se altera. O que pode ser negociado e **COMO chegar** a ela.
+**Regra:** O valor da meta diária não se altera. O que pode ser negociado e **COMO chegar** a ela.
 
-#### Ganhos de personalizar e cadenciar as informacoes sobre a meta:
+#### Ganhos de personalizar e cadenciar as informações sobre a meta:
 
-1. Vendedor trabalha estimulado pelo proprio sonho, acredita na meta, reconhece importancia de investir tempo nas prioridades
-2. Com objetivo claro, entende o valor de praticar o Metodo de Vendas
+1. Vendedor trabalha estimulado pelo próprio sonho, acredita na meta, reconhece importância de investir tempo nas prioridades
+2. Com objetivo claro, entende o valor de praticar o Método de Vendas
 3. Quando o time reconhece a possibilidade de chegar as metas, os resultados acontecem com maior facilidade -- **promove um ciclo virtuoso e vitorioso**
 
 ---
 
-### Capitulo 5: Traduzindo Metas em Objetivos Pessoais
+### Capítulo 5: Traduzindo Metas em Objetivos Pessoais
 
-Retoma o conceito da Gestao da Mudanca: e imprescindivel traduzir metas da empresa em metas pessoais para engajar.
+Retoma o conceito da Gestão da Mudança: é imprescindível traduzir metas da empresa em metas pessoais para engajar.
 
 #### Plano de Voo como Aliado
 
-**Se o vendedor NAO esta evoluindo conforme o plano:**
+**Se o vendedor NÃO está evoluindo conforme o plano:**
 
-Verificar: Houve crescimento ou a projecao e de chegar em breve?
-- **Sim:** Mostre que esta no caminho certo
-- **Nao:** Analise a meta estabelecida:
-  - **E muito alta?** Volte um passo e recalcule para algo mais factivel
-  - **E praticavel?** Descubra o que falta:
+Verificar: Houve crescimento ou a projeção e de chegar em breve?
+- **Sim:** Mostre que está no caminho certo
+- **Não:** Analise a meta estabelecida:
+  - **É muito alta?** Volte um passo e recalcule para algo mais factível
+  - **E praticável?** Descubra o que falta:
     - Falta **conhecimento**? Em que?
     - Falta **habilidade**? Em que?
     - Falta **atitude**? Qual?
-  - Apos identificar, converse com o vendedor esclarecendo as razoes tecnicas e construa um **plano de acao**
+  - Após identificar, converse com o vendedor esclarecendo as razões técnicas e construa um **plano de ação**
 
-**Se o vendedor ESTA evoluindo e alcancando as metas:**
+**Se o vendedor ESTÁ evoluindo e alcançando as metas:**
 
-Aumente gradualmente a meta, atrelando-a aos objetivos e a possibilidade de **novos sonhos**. Exemplo: se o calculo inicial era para a entrada de uma casa, ao bater a meta regularmente pode expandir para moveis novos, eletrodomesticos, piscina, carro novo, viagem etc.
+Aumente gradualmente a meta, atrelando-a aos objetivos e a possibilidade de **novos sonhos**. Exemplo: se o cálculo inicial era para a entrada de uma casa, ao bater a meta regularmente pode expandir para móveis novos, eletrodomésticos, piscina, carro novo, viagem etc.
 
-Para obter condicoes de novos investimentos, o vendedor pode:
-- Desempenhar cada vez melhor o Metodo de Vendas
-- Otimizar atendimentos (aumentar ticket medio, conquistar indicacoes, ampliar relacionamento)
-- Nao apenas alcancar, mas superar as metas
+Para obter condições de novos investimentos, o vendedor pode:
+- Desempenhar cada vez melhor o Método de Vendas
+- Otimizar atendimentos (aumentar ticket médio, conquistar indicações, ampliar relacionamento)
+- Não apenas alcançar, mas superar as metas
 
 #### Fale na Linguagem Certa
 
-**O que NAO funciona (exemplo):**
-> "Marcos, o mes esta acabando e seu numero aparece abaixo da projecao para a semana. A empresa e a equipe estao contando com voce, tenha mais empenho! Preciso que voce corra atras, faca o que for preciso, mas precisamos chegar na meta!"
+**O que NÃO funciona (exemplo):**
+> "Marcos, o mês está acabando e seu número aparece abaixo da projeção para a semana. A empresa e a equipe estão contando com você, tenha mais empenho! Preciso que você corra atrás, faça o que for preciso, mas precisamos chegar na meta!"
 
 **Problemas desta abordagem:**
 - Cobra pelo resultado
 - Usa a empresa e os colegas como argumento
-- Nao averigua se o vendedor sabe o que fazer, simplesmente diz O QUE fazer
-- Nao mostra beneficios pessoais
-- Nao faz nenhum acordo nem gera compromisso
+- Não averigua se o vendedor sabe o que fazer, simplesmente diz O QUE fazer
+- Não mostra benefícios pessoais
+- Não faz nenhum acordo nem gera compromisso
 
 **Como fazer o vendedor ouvir (exemplo):**
-> "Oi, Marcos, tudo bem? (...) Que bom! E entao, como esta o seu resultado com relacao a meta? Esse valor esta abaixo do planejado, nao e mesmo? (...) Como voce pensa em recuperar a diferenca para se aproximar mais do sonho da sua casa propria? (...) O que voce pode fazer nos atendimentos para diferenciar do que tem feito ate aqui? (...) Em quais etapas do Metodo de Vendas voce precisa se concentrar mais para elevar os indicadores? (...) Muito bem. Alem dos pontos que voce citou, minha sugestao e [outras estrategias]. O valor para a entrada da sua casa depende disso, concorda? Entao vamos la, vou acompanhar o seu proximo atendimento, tudo bem?"
+> "Oi, Marcos, tudo bem? (...) Que bom! E então, como está o seu resultado com relação a meta? Esse valor esta abaixo do planejado, não é mesmo? (...) Como você pensa em recuperar a diferença para se aproximar mais do sonho da sua casa própria? (...) O que você pode fazer nos atendimentos para diferenciar do que tem feito até aqui? (...) Em quais etapas do Método de Vendas você precisa se concentrar mais para elevar os indicadores? (...) Muito bem. Além dos pontos que você citou, minha sugestão e [outras estratégias]. O valor para a entrada da sua casa depende disso, concorda? Então vamos la, vou acompanhar o seu próximo atendimento, tudo bem?"
 
 **Qualidades desta abordagem:**
-- Verifica se o vendedor esta ciente dos resultados
+- Verifica se o vendedor está ciente dos resultados
 - Lembra o vendedor do motivo mais importante: o **objetivo pessoal**
-- Identifica quais estrategias o vendedor pretende usar e sugere outras (assegura que sabe COMO fazer)
-- Se o vendedor nao soubesse, seria o momento de pesquisar se falta conhecimento, habilidade ou atitude
-- Relembra que o objetivo depende da mudanca de acoes
-- Estimula o compromisso ao combinar acompanhamento do proximo atendimento
+- Identifica quais estratégias o vendedor pretende usar e sugere outras (assegura que sabe COMO fazer)
+- Se o vendedor não soubesse, seria o momento de pesquisar se falta conhecimento, habilidade ou atitude
+- Relembra que o objetivo depende da mudança de ações
+- Estimula o compromisso ao combinar acompanhamento do próximo atendimento
 
-#### Adapte a Comunicacao Durante os Treinamentos
+#### Adapte a Comunicação Durante os Treinamentos
 
-Para cada tecnica, **exponha quais indicadores serao impactados** e lembre que cada atendimento, acao e cliente tem potencial de aproximar o vendedor da meta e da remuneracao esperada para cumprir o Plano de Voo.
+Para cada técnica, **exponha quais indicadores serão impactados** e lembre que cada atendimento, ação e cliente tem potencial de aproximar o vendedor da meta e da remuneração esperada para cumprir o Plano de Voo.
 
-#### Simule as Comissoes e os Valores Variaveis
+#### Simule as Comissões e os Valores Variáveis
 
-Simular comissoes pode ser um excelente motivador. Pessoas guiadas pela satisfacao da conquista vivem com as premissas da **ATITUDE**:
+Simular comissões pode ser um excelente motivador. Pessoas guiadas pela satisfação da conquista vivem com as premissas da **ATITUDE**:
 
 | Letra | Premissa |
 |-------|----------|
 | **A** | **Acreditam na meta** porque sabem o que ela proporciona na vida |
-| **T** | **Tem habitos vitoriosos** que tornam o dia a dia mais tranquilo e prazeroso |
+| **T** | **Tem hábitos vitoriosos** que tornam o dia a dia mais tranquilo e prazeroso |
 | **I** | **Investem tempo nas prioridades**, ou seja, naquilo que leva a meta |
 | **T** | **Treinam continuamente** para se manter atualizadas e competitivas |
-| **U** | **Unem coragem e persistencia** para superar dificuldades e desafios |
-| **D** | **Decidem ser felizes** e fazem o que e preciso na busca pelo mais importante |
-| **E** | **Encaram a vida como aprendizado**, aproveitando cada situacao para evoluir |
+| **U** | **Unem coragem e persistência** para superar dificuldades e desafios |
+| **D** | **Decidem ser felizes** e fazem o que é preciso na busca pelo mais importante |
+| **E** | **Encaram a vida como aprendizado**, aproveitando cada situação para evoluir |
 
-**Exercicio de simulacao de comissoes:**
+**Exercício de simulação de comissões:**
 - **Passo 01:** Divida o percentual de comissionamento pelo valor desejado
 - **Passo 02:** Dilua o novo valor de vendas em quanto precisa vender por dia, quantas vendas e por qual valor
 
-Campos: percentual de comissionamento, comissionamento do mes anterior, valor de vendas do mes anterior, novo valor de vendas.
+Campos: percentual de comissionamento, comissionamento do mês anterior, valor de vendas do mês anterior, novo valor de vendas.
 
 ---
 
-### Capitulo 6: FCA (Fato, Causa, Acao)
+### Capítulo 6: FCA (Fato, Causa, Ação)
 
-O **FCA** e o framework central para diagnostico e resolucao de problemas na Gestao da Meta.
+O **FCA** e o framework central para diagnóstico e resolução de problemas na Gestão da Meta.
 
 #### FATO
 
-**Definicao:** Algo que seja do conhecimento das pessoas e que tenha sua existencia comprovada, sem margem para duvidas. O fato sempre sera representado por **dados quantitativos**, nunca por avaliacoes superficiais ou subjetivas.
+**Definição:** Algo que seja do conhecimento das pessoas e que tenha sua existência comprovada, sem margem para dúvidas. O fato sempre será representado por **dados quantitativos**, nunca por avaliações superficiais ou subjetivas.
 
 **Exemplos de fatos:**
-- A media de descontos esta em 6% e precisa chegar ao valor de 3% para atingir a meta
-- O percentual de satisfacao do cliente esta em 55%, quando deveria ser de 80%
-- A media de vendedores atingindo a meta esta em 40%, diante de um objetivo de 70%
+- A média de descontos esta em 6% e precisa chegar ao valor de 3% para atingir a meta
+- O percentual de satisfação do cliente está em 55%, quando deveria ser de 80%
+- A média de vendedores atingindo a meta esta em 40%, diante de um objetivo de 70%
 
-**Exemplos do que NAO sao fatos:**
-- A equipe nao atingiu a meta do mes (nao e mensuravel/especifico)
-- O indice de descontos esta alto (nao e mensuravel)
-- O nivel de satisfacao do cliente esta abaixo do esperado (vago)
+**Exemplos do que NÃO são fatos:**
+- A equipe não atingiu a meta do mês (não é mensurável/específico)
+- O índice de descontos está alto (não é mensurável)
+- O nível de satisfação do cliente está abaixo do esperado (vago)
 
-#### Acrostico METAS para Construcao do Fato
+#### Acróstico METAS para Construção do Fato
 
-| Letra | Criterio | Descricao |
+| Letra | Critério | Descrição |
 |-------|----------|-----------|
-| **M** | Mensuravel | O fato deve conter numeros claros |
-| **E** | Especifico | Deve ser preciso no que descreve |
+| **M** | Mensurável | O fato deve conter números claros |
+| **E** | Específico | Deve ser preciso no que descreve |
 | **T** | Temporal | Deve ter prazo definido |
-| **A** | Alcancavel | Deve ser viavel de atingir |
+| **A** | Alcançável | Deve ser viável de atingir |
 | **S** | Significativa | Deve ser relevante para o objetivo maior |
 
-**Exemplo de fato bem construido:**
-> "Aumentar o ticket medio de R$12 mil para R$14.160 (+18%) entre os dias 15 e 30 deste mes."
+**Exemplo de fato bem construído:**
+> "Aumentar o ticket médio de R$12 mil para R$14.160 (+18%) entre os dias 15 e 30 deste mês."
 
-- **Mensuravel:** De R$12 mil para R$14.160 (+18%)
-- **Especifico:** Ticket medio
+- **Mensurável:** De R$12 mil para R$14.160 (+18%)
+- **Específico:** Ticket médio
 - **Temporal:** Entre os dias 15 e 30
-- **Alcancavel:** Crescimento de 18% (analise previa de viabilidade)
-- **Significativa:** A acao e significativa para chegar a meta principal
+- **Alcançável:** Crescimento de 18% (análise prévia de viabilidade)
+- **Significativa:** A ação é significativa para chegar a meta principal
 
 #### CAUSA
 
-**Definicao:** O motivo pelo qual o fato esta acontecendo. Ela diz com clareza o que falta de **conhecimento, habilidade e atitude** no time.
+**Definição:** O motivo pelo qual o fato está acontecendo. Ela diz com clareza o que falta de **conhecimento, habilidade e atitude** no time.
 
 **Dois tipos de causas:**
 
-**1. Causas sob o controle do Lider**
+**1. Causas sob o controle do Líder**
 
-Usar a tecnica dos **5 Porques** -- questionar pelo menos cinco vezes as razoes ate chegar a causa raiz.
+Usar a técnica dos **5 Porquês** -- questionar pelo menos cinco vezes as razões até chegar a causa raiz.
 
 **Exemplo completo:**
 
-Fato: Vendedor nao atinge o ticket medio. Esta em R$X, quando a meta seria R$Y na primeira quinzena.
+Fato: Vendedor não atinge o ticket médio. Está em R$X, quando a meta seria R$Y na primeira quinzena.
 
-1. **Por que** nao atinge o indicador? Porque nao vende itens de maior valor agregado.
-2. **Por que** nao vende esses itens? Porque nao tem conhecimento sobre o produto/servico.
-3. **Por que** nao tem o conhecimento? Porque nao estudou a respeito.
-4. **Por que** nao estudou? Porque o Lider nao pratica uma rotina de acompanhamento.
-5. **Por que** nao ha rotina de acompanhamento? Porque o Lider nao planejou nenhuma acao a partir da identificacao das necessidades.
+1. **Por que** não atinge o indicador? Porque não vende itens de maior valor agregado.
+2. **Por que** não vende esses itens? Porque não tem conhecimento sobre o produto/serviço.
+3. **Por que** não tem o conhecimento? Porque não estudou a respeito.
+4. **Por que** não estudou? Porque o Líder não pratica uma rotina de acompanhamento.
+5. **Por que** não ha rotina de acompanhamento? Porque o Líder não planejou nenhuma ação a partir da identificação das necessidades.
 
-#### Triade de Diagnostico: Conhecimento, Habilidade, Atitude (CHA)
+#### Tríade de Diagnóstico: Conhecimento, Habilidade, Atitude (CHA)
 
-| Fator | Descricao |
+| Fator | Descrição |
 |-------|-----------|
-| **Falta de conhecimento** | Carencia de informacoes (ex: nao conhecem determinado produto/servico, refletindo na forma de ofertar) |
-| **Falta de habilidade** | Dominam tecnicamente mas nao argumentam com eficiencia; falam mecanicamente; dificuldade com objecoes |
-| **Falta de atitude** | Possuem conhecimento mas nao veem valor na qualidade do oferecimento; nao se empenham em encantar o cliente |
+| **Falta de conhecimento** | Carência de informações (ex: não conhecem determinado produto/serviço, refletindo na forma de ofertar) |
+| **Falta de habilidade** | Dominam tecnicamente mas não argumentam com eficiência; falam mecanicamente; dificuldade com objeções |
+| **Falta de atitude** | Possuem conhecimento mas não veem valor na qualidade do oferecimento; não se empenham em encantar o cliente |
 
-**2. Causas que NAO estao sob o controle do Lider**
+**2. Causas que NÃO estão sob o controle do Líder**
 
-- Causas sob dominio da empresa/outros departamentos: informar adequadamente ao responsavel com **fatos (numeros)** e demonstrar beneficios da correcao
-- **Fatalidades** (inflacao, crise economica, pandemia, guerra): estao fora do alcance. Resta **intensificar a atuacao sobre o que pode ser modificado** dentro da equipe
+- Causas sob domínio da empresa/outros departamentos: informar adequadamente ao responsável com **fatos (números)** e demonstrar benefícios da correção
+- **Fatalidades** (inflação, crise econômica, pandemia, guerra): estão fora do alcance. Resta **intensificar a atuação sobre o que pode ser modificado** dentro da equipe
 
-> **Fatalidade:** "Acontecimento imprevisivel, inevitavel, como que marcado pelo destino ou fado; sina, ventura. Reves da sorte; acontecimento funesto; adversidade, calamidade, desgraca." (Dicionario Michaelis)
+> **Fatalidade:** "Acontecimento imprevisível, inevitável, como que marcado pelo destino ou fado; sina, ventura. Reves da sorte; acontecimento funesto; adversidade, calamidade, desgraça." (Dicionário Michaelis)
 
-#### ACAO
+#### AÇÃO
 
-**Definicao:** A unica maneira de reverter um fato e agir na correcao de todas as causas encontradas.
+**Definição:** A única maneira de reverter um fato e agir na correção de todas as causas encontradas.
 
-**Duas condicoes obrigatorias:**
+**Duas condições obrigatórias:**
 
-**1. Coerencia**
-A acao precisa corresponder diretamente a causa identificada.
+**1. Coerência**
+A ação precisa corresponder diretamente a causa identificada.
 
-**Exemplo de incoerencia:**
-- Causa: Vendedor nao tem **conhecimento** sobre produto/servico
-- Acao: Realizar **teatro de vendas** (simulacao)
-- Problema: Se falta conhecimento, o vendedor nao tera repertorio para a simulacao. Primeiro precisa estudar.
+**Exemplo de incoerência:**
+- Causa: Vendedor não tem **conhecimento** sobre produto/serviço
+- Ação: Realizar **teatro de vendas** (simulação)
+- Problema: Se falta conhecimento, o vendedor não terá repertório para a simulação. Primeiro precisa estudar.
 
 **2. Factibilidade (viabilidade)**
-Se executada, atingira o proposito? E possivel executar no prazo?
+Se executada, atingirá o propósito? É possível executar no prazo?
 
-#### Os 5 Pilares da Acao
+#### Os 5 Pilares da Ação
 
 **1. O QUE**
-- Estudar? Estudar O QUE? Qual conhecimento? Qual etapa da metodologia A VENDA? Qual produto? Qual objecao? Qual concorrente?
-- Treinar? Treinar O QUE? Qual habilidade? Qual tecnica?
+- Estudar? Estudar O QUE? Qual conhecimento? Qual etapa da metodologia A VENDA? Qual produto? Qual objeção? Qual concorrente?
+- Treinar? Treinar O QUE? Qual habilidade? Qual técnica?
 - Prospectar? Qual perfil de cliente?
-- Resgatar clientes inativos? Quais? De qual periodo? Qual regiao?
-- Pedir indicacoes? Para quais clientes?
+- Resgatar clientes inativos? Quais? De qual período? Qual região?
+- Pedir indicações? Para quais clientes?
 
-*Como NAO fazer:* "Aumentar conhecimento de produtos/servicos." (generico)
+*Como NÃO fazer:* "Aumentar conhecimento de produtos/serviços." (genérico)
 
 **2. COMO**
-- Qual passo a passo? Teatro de vendas, sabatina, diagnostico? Visita pessoal, ligacao, e-mail?
-- Quais entregas esperadas? Se pesquisa, quais informacoes? Se Cliente Oculto, quais concorrentes/unidades e o que verificar?
+- Qual passo a passo? Teatro de vendas, sabatina, diagnóstico? Visita pessoal, ligação, e-mail?
+- Quais entregas esperadas? Se pesquisa, quais informações? Se Cliente Oculto, quais concorrentes/unidades e o que verificar?
 
-*Como NAO fazer:* "Aumentar conhecimento atraves do estudo do Metodo de Vendas." (superficial)
+*Como NÃO fazer:* "Aumentar conhecimento através do estudo do Método de Vendas." (superficial)
 
 **3. QUEM**
-- O Lider? Todos os vendedores? Um vendedor? Um grupo? Quais nomes? Quais pre-requisitos?
+- O Líder? Todos os vendedores? Um vendedor? Um grupo? Quais nomes? Quais pré-requisitos?
 
-*Como NAO fazer:* "Vendedor." (gera duvidas, despertica tempo)
+*Como NÃO fazer:* "Vendedor." (gera dúvidas, despertica tempo)
 
 **4. QUANDO**
-- Qual dia, hora? Cronograma definido. Bloquear a agenda com dia e horario para:
+- Qual dia, hora? Cronograma definido. Bloquear a agenda com dia e horário para:
   - Estimular o compromisso
   - Mostrar momentos mais convenientes
   - Evitar esquecimento ou desculpas
 
-*Como NAO fazer:* "Estudar toda semana." (sem dia/horario definido)
+*Como NÃO fazer:* "Estudar toda semana." (sem dia/horário definido)
 
 **5. QUANTO**
-- Qual frequencia? Volume? Quantidade? Periodo total?
+- Qual frequência? Volume? Quantidade? Período total?
 
-*Como NAO fazer:* "Semanalmente." (vago -- um minuto por semana atenderia?)
+*Como NÃO fazer:* "Semanalmente." (vago -- um minuto por semana atenderia?)
 
-#### Exemplos de Acoes Completas
+#### Exemplos de Ações Completas
 
 | Elemento | Exemplo 1 | Exemplo 2 |
 |----------|-----------|-----------|
-| O que | Treinar a etapa Negocie com Inteligencia por parte do Metodo | Estudar caracteristicas, beneficios e vantagens do novo item que entrara no portfolio |
-| Como | Em teatro de vendas | Por meio de Caderno de Caracteristicas e Beneficios |
+| O que | Treinar a etapa Negocie com Inteligência por parte do Método | Estudar características, benefícios e vantagens do novo item que entrara no portfólio |
+| Como | Em teatro de vendas | Por meio de Caderno de Características e Benefícios |
 | Quem | Com a vendedora Alice | Com toda a equipe |
 | Quando | Nos dias 2, 4 e 6 de maio | No dia 9 de maio |
 | Quanto | Das 8:00 as 08:30 | Das 11:20 as 12:00 |
 
-#### Checklist do Lider para Diagnostico
+#### Checklist do Líder para Diagnóstico
 
-- Avaliar a equipe para encontrar carencias de Conhecimento, Habilidade e Atitude
-- Analisar o mercado para entender possiveis influencias
-- Checar os recursos operacionais (informacoes e usabilidade que o time precisa)
+- Avaliar a equipe para encontrar carências de Conhecimento, Habilidade e Atitude
+- Analisar o mercado para entender possíveis influências
+- Checar os recursos operacionais (informações e usabilidade que o time precisa)
 - Examinar o Mapa da Venda para saber quais etapas podem ser melhoradas
-- Fazer diagnosticos de conhecimento sobre produtos/servicos
+- Fazer diagnósticos de conhecimento sobre produtos/serviços
 
-#### Orientacoes Gerais para o FCA
+#### Orientações Gerais para o FCA
 
 - Construa em conjunto
-- Use tecnica diante de objecoes
+- Use técnica diante de objeções
 - Desafie o vendedor a pensar em alternativas
-- Descubra o motivo da falta de adesao
-- Descubra o motivo da estagnacao dos indicadores
+- Descubra o motivo da falta de adesão
+- Descubra o motivo da estagnação dos indicadores
 
-#### Tirando a Prova Real -- Validacao do FCA
+#### Tirando a Prova Real -- Validação do FCA
 
-| Componente | Pergunta de Validacao |
+| Componente | Pergunta de Validação |
 |------------|----------------------|
-| Fato | Obedece aos criterios METAS? |
-| Causa | A causa definida e a certa? E a raiz do problema? |
-| Acao | As acoes sao coerentes e factiveis? Realmente solucionam a causa? Todos os elementos estao definidos? |
+| Fato | Obedece aos critérios METAS? |
+| Causa | A causa definida é a certa? E a raiz do problema? |
+| Ação | As ações são coerentes e factíveis? Realmente solucionam a causa? Todos os elementos estão definidos? |
 
-#### Exercicios de Validacao do FCA
+#### Exercícios de Validação do FCA
 
-**Exercicio 1 -- Identificar qual criterio METAS o fato viola:**
+**Exercício 1 -- Identificar qual critério METAS o fato viola:**
 
-| Fato | Criterio violado |
+| Fato | Critério violado |
 |------|-----------------|
-| Elevar em 150% o numero de clientes, passando de 15 para 37 em 5 dias | Nao e **Alcancavel** (4) |
-| Promover experiencia de compra incrivel ate o final do mes | Nao e **Mensuravel** (1) |
-| Dobrar ticket medio, cupons e prospeccoes em relacao a primeira semana entre os dias 10 e 16 | Nao e **Especifico** (2) |
-| Fazer nova abordagem padronizada com clientes mais velhos ate dia 4 | Nao e **Significante** (5) |
-| Vender um item adicional por cliente | Nao e **Temporal** (3) |
+| Elevar em 150% o número de clientes, passando de 15 para 37 em 5 dias | Não é **Alcançável** (4) |
+| Promover experiência de compra incrível até o final do mês | Não é **Mensurável** (1) |
+| Dobrar ticket médio, cupons e prospecções em relação a primeira semana entre os dias 10 e 16 | Não é **Específico** (2) |
+| Fazer nova abordagem padronizada com clientes mais velhos até dia 4 | Não é **Significante** (5) |
+| Vender um item adicional por cliente | Não é **Temporal** (3) |
 
-**Exercicio 2 -- Causas que NAO se relacionam ao fato (indice de desconto de 21% para 18%):**
-1. Vendedor nao chama o cliente pelo nome -- **NAO relacionado**
-2. Vendedor nao encanta o cliente com solucoes -- relacionado
-3. Vendedor nao negocia com inteligencia diante de objecoes -- relacionado
-4. Vendedor nao amplia o relacionamento -- **NAO relacionado**
-5. Vendedor nao domina conhecimento de caracteristicas e beneficios -- relacionado
+**Exercício 2 -- Causas que NÃO se relacionam ao fato (índice de desconto de 21% para 18%):**
+1. Vendedor não chama o cliente pelo nome -- **NÃO relacionado**
+2. Vendedor não encanta o cliente com soluções -- relacionado
+3. Vendedor não negocia com inteligência diante de objeções -- relacionado
+4. Vendedor não amplia o relacionamento -- **NÃO relacionado**
+5. Vendedor não domina conhecimento de características e benefícios -- relacionado
 
-**Exercicio 3 -- Acoes problematicas:**
-- "Treinar a objecao 'So estou pesquisando preco'" para fato de "aumentar media de itens por nota de 2 para 3 em tres dias" = **Nao e coerente** (2)
-- "Fazendo contato" como descricao de COMO FAZER = **Nao e factivel** (1)
-- "Quanto for necessario" como descricao de QUANTO = **Nao e factivel** (1)
+**Exercício 3 -- Ações problemáticas:**
+- "Treinar a objeção 'Só estou pesquisando preço'" para fato de "aumentar média de itens por nota de 2 para 3 em três dias" = **Não é coerente** (2)
+- "Fazendo contato" como descrição de COMO FAZER = **Não é factível** (1)
+- "Quanto for necessário" como descrição de QUANTO = **Não é factível** (1)
 
-**Exercicio 4 -- Selecao de acoes apropriadas:**
+**Exercício 4 -- Seleção de ações apropriadas:**
 
-Situacao 1: Vendedor deve aumentar taxa de conversao de 40% para 70%. Causa: nao vive a atitude "Acredito na Meta".
-- Acoes corretas: (1) Refazer venda da Mudanca e atualizar Plano de Voo; (2) Treinar a AtivAcao "Acredito na Meta"
-- Acoes incorretas: Preencher Caderno de Caracteristicas; Aplicar mais Mapa da Venda
+Situação 1: Vendedor deve aumentar taxa de conversão de 40% para 70%. Causa: não vive a atitude "Acredito na Meta".
+- Ações corretas: (1) Refazer venda da Mudança e atualizar Plano de Voo; (2) Treinar a Ativação "Acredito na Meta"
+- Ações incorretas: Preencher Caderno de Características; Aplicar mais Mapa da Venda
 
-Situacao 2: Equipe estagnada ha 6 meses, precisa elevar faturamento em 20%. Causa: Lider nao faz acompanhamento individual.
-- Acoes corretas: (2) Realizar diagnosticos de conhecimento; (3) Realizar Mapas da Venda com todos; (4) Fazer plano de acao individual
-- Acao incorreta: Fazer dinamicas motivacionais
+Situação 2: Equipe estagnada ha 6 meses, precisa elevar faturamento em 20%. Causa: Líder não faz acompanhamento individual.
+- Ações corretas: (2) Realizar diagnósticos de conhecimento; (3) Realizar Mapas da Venda com todos; (4) Fazer plano de ação individual
+- Ação incorreta: Fazer dinâmicas motivacionais
 
 ---
 
-### Capitulo 7: Ensine o Time a Pensar Sobre a Meta
+### Capítulo 7: Ensine o Time a Pensar Sobre a Meta
 
-A maior parte dos times comerciais pensa limitadamente -- voltam atencao a **como vender** em vez de elaborar melhores taticas para chegar ao resultado. Recebem a meta e ja comecam a persegui-la. O Lider ve alem, pensa na melhor trajetoria, enxerga riscos. O time nao expressa o mesmo nivel de envolvimento.
+A maior parte dos times comerciais pensa limitadamente -- voltam atenção a **como vender** em vez de elaborar melhores táticas para chegar ao resultado. Recebem a meta e já começam a persegui-la. O Líder ve além, pensa na melhor trajetória, enxerga riscos. O time não expressa o mesmo nível de envolvimento.
 
-**5 etapas para colocar o time na mesma pagina:**
+**5 etapas para colocar o time na mesma página:**
 
-1. Ensine o que e FCA
+1. Ensine o que é FCA
 2. Exemplifique o FCA
-3. Faca os exercicios junto com a equipe
+3. Faça os exercícios junto com a equipe
 4. Construa o FCA de cada vendedor
-5. Peca a atualizacao permanente do FCA
+5. Peça a atualização permanente do FCA
 
-> "Ja imaginou todos olhando com o mesmo criterio e o mesmo alinhamento dos fatos, das causas e proativamente agindo nas acoes desenhadas?"
+> "Já imaginou todos olhando com o mesmo critério e o mesmo alinhamento dos fatos, das causas e proativamente agindo nas ações desenhadas?"
 
 ---
 
-### Capitulo 8: Reuniao de Resultados com o Time
+### Capítulo 8: Reunião de Resultados com o Time
 
-#### Principais Falhas em Reunioes de Resultados
+#### Principais Falhas em Reuniões de Resultados
 
 - A palavra e somente do chefe
 - O debate se concentra na busca por culpados
-- O chefe mostra apenas numeros
-- Existe alguma estrategia, mas nao contempla treinamento
-- O chefe nao trata de fatos, nao pesquisa causas e nao propoe plano de acao
-- A reuniao e longa demais
-- Os elogios sao sempre para as mesmas pessoas
+- O chefe mostra apenas números
+- Existe alguma estratégia, mas não contempla treinamento
+- O chefe não trata de fatos, não pesquisa causas e não propõe plano de ação
+- A reunião e longa demais
+- Os elogios são sempre para as mesmas pessoas
 
-#### Como Fazer uma Reuniao Eficiente
+#### Como Fazer uma Reunião Eficiente
 
 **1. Garanta objetividade**
-- Os dados sao realmente necessarios?
-- O time sabe do que esta sendo falado?
-- O time pode fazer estudo previo?
+- Os dados são realmente necessários?
+- O time sabe do que está sendo falado?
+- O time pode fazer estudo prévio?
 
-**Principio: "Aprenda com o passado, direcione o agora, planeje o futuro"**
+**Princípio: "Aprenda com o passado, direcione o agora, planeje o futuro"**
 
-Perguntas focadas no passado geram justificativas. Em vez de perguntar sobre o que nao foi feito, **conduza partindo do presente em direcao ao futuro:**
+Perguntas focadas no passado geram justificativas. Em vez de perguntar sobre o que não foi feito, **conduza partindo do presente em direção ao futuro:**
 
-- "Quais mudancas podemos fazer nos atendimentos para conquistar resultados diferentes?"
+- "Quais mudanças podemos fazer nos atendimentos para conquistar resultados diferentes?"
 - "Quais oportunidades podemos explorar?"
-- "Quais principais desafios voces veem que dificultam nossos objetivos?"
-- "Quais estrategias vamos adotar para resgatar clientes inativos? Retomar propostas em aberto? Buscar novos clientes?"
-- "Quais concorrentes estao sendo mais agressivos? O que apresentam como forcas e com quais vantagens podemos combate-los?"
+- "Quais principais desafios vocês veem que dificultam nossos objetivos?"
+- "Quais estratégias vamos adotar para resgatar clientes inativos? Retomar propostas em aberto? Buscar novos clientes?"
+- "Quais concorrentes estão sendo mais agressivos? O que apresentam como forças e com quais vantagens podemos combate-los?"
 
-**2. Transforme a reuniao em um dialogo**
-Qualquer reuniao ganha valor com a colaboracao do grupo. Perguntas sao excelente alternativa para gerar discussoes e incitar participacao.
+**2. Transforme a reunião em um diálogo**
+Qualquer reunião ganha valor com a colaboração do grupo. Perguntas são excelente alternativa para gerar discussões e incitar participação.
 
 **3. Pratique o FCA**
-Aproveite todas as chances para incentivar o time a formular o raciocinio do FCA.
+Aproveite todas as chances para incentivar o time a formular o raciocínio do FCA.
 
-**Exemplo de conducao:**
+**Exemplo de condução:**
 
-Lider: "Time, temos um fato: o nosso ticket medio teve uma queda de 15%. Ele deveria estar em R$___, mas hoje o valor e de R$___. Quais podem ser as causas?"
+Líder: "Time, temos um fato: o nosso ticket médio teve uma queda de 15%. Ele deveria estar em R$___, mas hoje o valor e de R$___. Quais podem ser as causas?"
 
-Time (respostas tipicas): "O mercado esta retraido." / "A concorrencia esta com acao agressiva."
+Time (respostas típicas): "O mercado está retraido." / "A concorrência esta com ação agressiva."
 
-Lider (redirecionamento): "Sim, temos esta questao. Mas isso nao esta em nossas maos. Mesmo com os desafios externos, precisamos agir para compensar. Vamos pensar juntos..."
+Líder (redirecionamento): "Sim, temos esta questão. Mas isso não está em nossas mãos. Mesmo com os desafios externos, precisamos agir para compensar. Vamos pensar juntos..."
 
 **Perguntas de aprofundamento:**
-- "Quais etapas do Metodo de Vendas nao estao sendo praticadas?"
-- "O que esta faltando de conhecimento ou habilidade?"
+- "Quais etapas do Método de Vendas não estão sendo praticadas?"
+- "O que está faltando de conhecimento ou habilidade?"
 - "Quais atitudes precisam acontecer?"
 
-**Para cada causa, aprofundar ate as acoes:**
-- "Na pratica, como essa melhoria poderia ser feita?"
+**Para cada causa, aprofundar até as ações:**
+- "Na prática, como essa melhoria poderia ser feita?"
 - "Como seriam esses treinamentos?"
 - "Quando aconteceriam para haver tempo de reverter?"
-- "Quais seriam os papeis de todos nos?"
-- "Que outras formas, alem do treinamento, poderiam ajudar?"
-- "Como poderiamos medir o rendimento destas acoes?"
+- "Quais seriam os papéis de todos nós?"
+- "Que outras formas, além do treinamento, poderiam ajudar?"
+- "Como poderíamos medir o rendimento destas ações?"
 
-**4. Avalie desempenho em vez de numeros**
+**4. Avalie desempenho em vez de números**
 
-**Caso pratico: Lia vs. Adriana**
+**Caso prático: Lia vs. Adriana**
 
 Meta mensal: R$100 mil. Primeiro semestre.
-- **Lia:** Media de vendas = R$101.000. Na empresa ha 2 anos. Mesma media nos ultimos 12 meses.
-- **Adriana:** Media = R$81.900. Na empresa ha 6 meses. Ultimos 3 resultados: R$70.000 -> R$82.500 -> R$93.400.
+- **Lia:** Média de vendas = R$101.000. Na empresa ha 2 anos. Mesma media nos últimos 12 meses.
+- **Adriana:** Média = R$81.900. Na empresa ha 6 meses. Últimos 3 resultados: R$70.000 -> R$82.500 -> R$93.400.
 
-**Quem merece maior reconhecimento?** Adriana, pelas seguintes razoes:
-- Apresentou o **maior crescimento** entre as comparacoes
-- Nos ultimos 3 meses **aumentou resultado em 33%**
-- A **projecao do crescimento e excelente**, provavelmente superando a media de Lia
-- Evolucao gradativa demonstra permanente **esforco**
-- Demonstra competencia: aquisicao de **conhecimento** transformado em **habilidade** a partir de **atitudes** vitoriosas
+**Quem merece maior reconhecimento?** Adriana, pelas seguintes razões:
+- Apresentou o **maior crescimento** entre as comparações
+- Nos últimos 3 meses **aumentou resultado em 33%**
+- A **projeção do crescimento e excelente**, provavelmente superando a média de Lia
+- Evolução gradativa demonstra permanente **esforço**
+- Demonstra competência: aquisição de **conhecimento** transformado em **habilidade** a partir de **atitudes** vitoriosas
 
-**Quanto a Lia:** Os dados sugerem possivel acomodacao, mantendo-se no mesmo resultado ha bastante tempo.
+**Quanto a Lia:** Os dados sugerem possível acomodação, mantendo-se no mesmo resultado ha bastante tempo.
 
-**Riscos de avaliar apenas numeros:**
-- Desligamentos desnecessarios (pessoas desmotivadas)
+**Riscos de avaliar apenas números:**
+- Desligamentos desnecessários (pessoas desmotivadas)
 - Desligamentos injustos (pessoas subavaliadas)
-- Numeros estagnados que nao fazem a meta avancar
+- Números estagnados que não fazem a meta avançar
 
 ---
 
-### Capitulo 9: Reuniao Individual de Resultados
+### Capítulo 9: Reunião Individual de Resultados
 
-Encontros individuais sao **imprescindíveis** para o desenvolvimento do vendedor. Neles:
-- Assuntos sao tratados com mais aprofundamento
+Encontros individuais são **imprescindíveis** para o desenvolvimento do vendedor. Neles:
+- Assuntos são tratados com mais aprofundamento
 - FCA trabalhado com maior intensidade
 - Momento de motivar o vendedor
-- Verificar se o programado na reuniao geral esta funcionando
+- Verificar se o programado na reunião geral está funcionando
 - Fazer ajustes de rota
 
-#### Principais Falhas nas Reunioes Individuais
+#### Principais Falhas nas Reuniões Individuais
 
-- A reuniao e encarada como pressao
-- Reunioes e feedbacks acontecem em excesso
-- O chefe aplica tom pessoal as afirmacoes
-- O chefe usa mais emocao do que razao
+- A reunião é encarada como pressão
+- Reuniões e feedbacks acontecem em excesso
+- O chefe aplica tom pessoal as afirmações
+- O chefe usa mais emoção do que razão
 
-#### Como Fazer uma Reuniao Individual Eficiente
+#### Como Fazer uma Reunião Individual Eficiente
 
-**1. Venda a reuniao associando as Gestoes da Meta Batida**
+**1. Venda a reunião associando as Gestões da Meta Batida**
 
 **2. Utilize sempre a linguagem do FCA**
 
-**3. Crie uma rotina de reunioes individuais**
+**3. Crie uma rotina de reuniões individuais**
 
-| Perfil do Vendedor | Frequencia | Foco |
+| Perfil do Vendedor | Frequência | Foco |
 |-------------------|------------|------|
-| Bate metas regularmente | Maior distancia entre reunioes | Indicadores principais e atitudes com maior probabilidade de interferir (rejeicao a clientes de menor potencial, desperdicio de tempo, falta de interesse em estudo permanente) |
-| Nao bate metas regularmente | Maior regularidade | Desenvolver melhor performance e maturidade; liderar com acompanhamento e direcionamento |
-| Vendedores novos | Assistencia sistematica e permanente (especialmente no periodo de experiencia) | Desenvolver continuamente para identificar competencia para a funcao; fornecer conhecimento, treinamento e suporte para ativacoes |
+| Bate metas regularmente | Maior distância entre reuniões | Indicadores principais e atitudes com maior probabilidade de interferir (rejeição a clientes de menor potencial, desperdício de tempo, falta de interesse em estudo permanente) |
+| Não bate metas regularmente | Maior regularidade | Desenvolver melhor performance e maturidade; liderar com acompanhamento e direcionamento |
+| Vendedores novos | Assistência sistemática e permanente (especialmente no período de experiência) | Desenvolver continuamente para identificar competência para a função; fornecer conhecimento, treinamento e suporte para ativações |
 
-**Nota sobre vendedores novos:** Se nao evoluir mesmo recebendo conhecimento, treinamento de habilidade e suporte para ativacoes, **talvez signifique que nao esta alinhado a funcao**.
+**Nota sobre vendedores novos:** Se não evoluir mesmo recebendo conhecimento, treinamento de habilidade e suporte para ativações, **talvez signifique que não está alinhado a função**.
 
-**4. Programe as reunioes para os momentos mais adequados**
+**4. Programe as reuniões para os momentos mais adequados**
 
-#### Exercicio: Cronograma Estrategico de Vendedores
+#### Exercício: Cronograma Estratégico de Vendedores
 
-Classificar o time por perfil e definir frequencia das reunioes individuais (nomes, datas e horarios).
+Classificar o time por perfil e definir frequência das reuniões individuais (nomes, datas e horários).
 
-#### Treinamentos Gerais vs. Especificos
+#### Treinamentos Gerais vs. Específicos
 
-Com visao geral dos indicadores, o lider pode organizar:
+Com visão geral dos indicadores, o líder pode organizar:
 - **Treinamentos gerais:** Para vendedores com dificuldades similares
-- **Treinamentos individuais:** Para demandas especificas
+- **Treinamentos individuais:** Para demandas específicas
 
-Beneficio: **otimizar tempo** paralelamente a **potencializar resultados**.
+Benefício: **otimizar tempo** paralelamente a **potencializar resultados**.
 
 ---
 
-### Capitulo 10: Todas as Gestoes Mobilizadas pela Meta
+### Capítulo 10: Todas as Gestões Mobilizadas pela Meta
 
 Para assegurar que o progresso continue:
 
-**1. Marketing interno sobre esta transformacao**
-Divulgar e reforcar as mudancas e conquistas.
+**1. Marketing interno sobre esta transformação**
+Divulgar e reforçar as mudanças e conquistas.
 
 **2. Continuidade e regularidade**
-Manter a pratica constante de todas as gestoes.
+Manter a prática constante de todas as gestões.
 
-**Transicao para a proxima gestao:**
-Se o lider ainda nao consegue se organizar dentro da rotina para implementar tudo, a solucao e **gerir o tempo**. Este sera o assunto da **6a e ultima etapa: Gestao do Tempo**.
+**Transição para a próxima gestão:**
+Se o líder ainda não consegue se organizar dentro da rotina para implementar tudo, a solução e **gerir o tempo**. Este será o assunto da **6a e última etapa: Gestão do Tempo**.
 
-> "Prepare-se para construir uma rotina vencedora, na qual o que e importante sempre vai ter espaco para fazer a diferenca!"
+> "Prepare-se para construir uma rotina vencedora, na qual o que é importante sempre vai ter espaço para fazer a diferença!"
 
 ---
 
 ## 3. Frameworks, Ferramentas e Metodologias
 
-### Framework FCA (Fato, Causa, Acao)
-Framework central de diagnostico e resolucao. Identifica fatos quantitativos, aprofunda causas com tecnica dos 5 Porques e planeja acoes estruturadas com 5 pilares (O que, Como, Quem, Quando, Quanto).
+### Framework FCA (Fato, Causa, Ação)
+Framework central de diagnóstico e resolução. Identifica fatos quantitativos, aprofunda causas com técnica dos 5 Porquês e planeja ações estruturadas com 5 pilares (O que, Como, Quem, Quando, Quanto).
 
-### Acrostico METAS
-Criterios para construcao de fatos: Mensuravel, Especifico, Temporal, Alcancavel, Significativa.
+### Acróstico METAS
+Critérios para construção de fatos: Mensurável, Específico, Temporal, Alcançável, Significativa.
 
-### Acrostico ATITUDE
-Premissas comportamentais: Acreditam na meta, Tem habitos vitoriosos, Investem tempo nas prioridades, Treinam continuamente, Unem coragem e persistencia, Decidem ser felizes, Encaram a vida como aprendizado.
+### Acróstico ATITUDE
+Premissas comportamentais: Acreditam na meta, Tem hábitos vitoriosos, Investem tempo nas prioridades, Treinam continuamente, Unem coragem e persistência, Decidem ser felizes, Encaram a vida como aprendizado.
 
-### Tecnica dos 5 Porques
-Questionar pelo menos cinco vezes as razoes de algo ate chegar a causa raiz.
+### Técnica dos 5 Porquês
+Questionar pelo menos cinco vezes as razões de algo até chegar a causa raiz.
 
-### Triade CHA (Conhecimento, Habilidade, Atitude)
-Diagnostico das causas de baixo desempenho sempre passa por estas tres dimensoes.
+### Tríade CHA (Conhecimento, Habilidade, Atitude)
+Diagnóstico das causas de baixo desempenho sempre passa por estas três dimensões.
 
-### Classificacao de Indicadores (Fim, Meio, Desenvolvimento)
+### Classificação de Indicadores (Fim, Meio, Desenvolvimento)
 Sistema para categorizar indicadores conforme seu papel no resultado final.
 
 ### Desmembramento da Meta
-Processo de diluir a meta mensal em semanal, diaria, e em ticket medio + quantidade de vendas.
+Processo de diluir a meta mensal em semanal, diária, e em ticket médio + quantidade de vendas.
 
 ### Plano de Voo
-Ferramenta da Gestao da Mudanca que traduz metas da empresa em metas e sonhos pessoais.
+Ferramenta da Gestão da Mudança que traduz metas da empresa em metas e sonhos pessoais.
 
 ### Mapa da Venda
-Ferramenta de avaliacao da qualidade dos atendimentos com base no Metodo de Vendas (conceito do atendimento).
+Ferramenta de avaliação da qualidade dos atendimentos com base no Método de Vendas (conceito do atendimento).
 
-### Caderno de Caracteristicas e Beneficios
-Material de estudo sobre produtos/servicos com foco em caracteristicas, beneficios e vantagens.
+### Caderno de Características e Benefícios
+Material de estudo sobre produtos/serviços com foco em características, benefícios e vantagens.
 
-### Metodo de Vendas "A VENDA"
-Metodologia de vendas da Metta com etapas especificas (mencionadas: Encante com Solucoes, Negocie com Inteligencia, entre outras).
+### Método de Vendas "A VENDA"
+Metodologia de vendas da Metta com etapas específicas (mencionadas: Encante com Soluções, Negocie com Inteligência, entre outras).
 
-### Cronograma Estrategico de Vendedores
-Ferramenta para classificar o time por perfil (bate meta / nao bate / novo) e definir frequencia de reunioes individuais.
+### Cronograma Estratégico de Vendedores
+Ferramenta para classificar o time por perfil (bate meta / não bate / novo) e definir frequência de reuniões individuais.
 
 ---
 
-## 4. Todos os Conceitos e Definicoes
+## 4. Todos os Conceitos e Definições
 
-| Conceito | Definicao |
+| Conceito | Definição |
 |----------|-----------|
-| Gestao da Meta | Capacidade de identificar causas para determinado resultado e executar as acoes que o corrijam ou o potencializem |
+| Gestão da Meta | Capacidade de identificar causas para determinado resultado e executar as ações que o corrijam ou o potencializem |
 | Indicador Fim | O resultado final de um determinado indicador |
-| Indicador Meio | Aqueles que fazem parte do conjunto de acoes que levam ao resultado do indicador fim |
-| Indicador de Desenvolvimento | Indicadores que acompanham a evolucao do time |
-| Fato (FCA) | Algo do conhecimento das pessoas com existencia comprovada, representado por dados quantitativos |
-| Causa (FCA) | Motivo pelo qual o fato esta acontecendo; diz com clareza o que falta de CHA |
-| Acao (FCA) | Atividade pensada para solucionar as causas; deve ser coerente e factivel |
-| Fatalidade | Acontecimento imprevisivel, inevitavel, fora do alcance do lider e da empresa |
-| Lider Treinador | O lider que vai alem da gestao de numeros e desenvolve pessoas |
-| DRE | Demonstrativo de Resultados do Exercicio |
+| Indicador Meio | Aqueles que fazem parte do conjunto de ações que levam ao resultado do indicador fim |
+| Indicador de Desenvolvimento | Indicadores que acompanham a evolução do time |
+| Fato (FCA) | Algo do conhecimento das pessoas com existência comprovada, representado por dados quantitativos |
+| Causa (FCA) | Motivo pelo qual o fato está acontecendo; diz com clareza o que falta de CHA |
+| Ação (FCA) | Atividade pensada para solucionar as causas; deve ser coerente e factível |
+| Fatalidade | Acontecimento imprevisível, inevitável, fora do alcance do líder e da empresa |
+| Líder Treinador | O líder que vai além da gestão de números e desenvolve pessoas |
+| DRE | Demonstrativo de Resultados do Exercício |
 | CPV | Custo dos Produtos Vendidos |
 | CMV | Custo de Mercadorias Vendidas |
 | NPS | Net Promoter Score |
-| Turnover | Taxa de rotatividade de funcionarios |
-| Onboarding | Processo de integracao de novos funcionarios |
-| Ticket medio | Valor medio de venda (faturamento / numero de negocios) |
-| Produtividade diaria | Valor faturado por vendedor / dias trabalhados |
-| Venda/dia | Padrao usado para analises de produtividade de vendas |
+| Turnover | Taxa de rotatividade de funcionários |
+| Onboarding | Processo de integração de novos funcionários |
+| Ticket médio | Valor médio de venda (faturamento / número de negócios) |
+| Produtividade diária | Valor faturado por vendedor / dias trabalhados |
+| Venda/dia | Padrão usado para análises de produtividade de vendas |
 
 ---
 
-## 5. Exercicios e Atividades Praticas
+## 5. Exercícios e Atividades Práticas
 
-1. **Preencher tabela de indicadores** (Fim, Meio, Desenvolvimento) para o proprio cargo
+1. **Preencher tabela de indicadores** (Fim, Meio, Desenvolvimento) para o próprio cargo
 2. **Detalhar a meta mensal** do time
-3. **Analisar historico de vendas** e calcular representatividade percentual por semana
+3. **Analisar histórico de vendas** e calcular representatividade percentual por semana
 4. **Preencher metas semanais** com percentuais de representatividade e valores por indicador
-5. **Preencher metas diarias** por semana
-6. **Desmembrar a meta** em quantidade de vendas e ticket medio diarios
-7. **Simulacao de comissoes** (calcular novo valor de vendas a partir do comissionamento desejado)
-8. **Definir um FATO** usando o acrostico METAS
+5. **Preencher metas diárias** por semana
+6. **Desmembrar a meta** em quantidade de vendas e ticket médio diários
+7. **Simulação de comissões** (calcular novo valor de vendas a partir do comissionamento desejado)
+8. **Definir um FATO** usando o acróstico METAS
 9. **Escrever causas** de conhecimento, habilidade e atitude que impactam o indicador
-10. **Estruturar plano de acao** completo (O que, Como, Quem, Quando, Quanto) para cada causa
-11. **Exercicios de validacao do FCA** (identificar erros em fatos, causas e acoes)
-12. **Exercicio de caso: Reducao de novos clientes** (72 para 51) -- identificar causas aplicaveis e nao aplicaveis
-13. **Cronograma estrategico de vendedores** -- classificar o time por perfil e definir datas de reunioes individuais
+10. **Estruturar plano de ação** completo (O que, Como, Quem, Quando, Quanto) para cada causa
+11. **Exercícios de validação do FCA** (identificar erros em fatos, causas e ações)
+12. **Exercício de caso: Redução de novos clientes** (72 para 51) -- identificar causas aplicáveis e não aplicáveis
+13. **Cronograma estratégico de vendedores** -- classificar o time por perfil e definir datas de reuniões individuais
 
 ---
 
-## 6. Dados, Estatisticas e Citacoes
+## 6. Dados, Estatísticas e Citações
 
 ### Dados Quantitativos Usados como Exemplos
 - Meta mensal de R$200 mil dividida em R$512,90/dia para 15 clientes em 26 dias de trabalho
 - Meta de R$500 mil com representatividade de 66% nas duas primeiras semanas
-- Meta diaria de R$3.000,00 com ticket medio de R$300,00
-- Aumento de ticket medio de R$12 mil para R$14.160 (+18%)
-- Indice de desconto de 21% para 18% (reducao de 3 pontos percentuais)
-- Taxa de conversao de 40% para 70%
-- Media de vendedores atingindo meta de 40% para objetivo de 70%
-- Satisfacao do cliente de 55% para meta de 80%
-- Reducao de clientes de 72 para 51
+- Meta diária de R$3.000,00 com ticket médio de R$300,00
+- Aumento de ticket médio de R$12 mil para R$14.160 (+18%)
+- Índice de desconto de 21% para 18% (redução de 3 pontos percentuais)
+- Taxa de conversão de 40% para 70%
+- Média de vendedores atingindo meta de 40% para objetivo de 70%
+- Satisfação do cliente de 55% para meta de 80%
+- Redução de clientes de 72 para 51
 
-### Caso Pratico Lia vs. Adriana
-- Meta: R$100.000/mes
-- Lia: R$101.000 de media (2 anos na empresa, mesma media por 12 meses)
-- Adriana: R$81.900 de media (6 meses na empresa), evolucao: R$70.000 -> R$82.500 -> R$93.400 (+33% em 3 meses)
+### Caso Prático Lia vs. Adriana
+- Meta: R$100.000/mês
+- Lia: R$101.000 de média (2 anos na empresa, mesma media por 12 meses)
+- Adriana: R$81.900 de média (6 meses na empresa), evolução: R$70.000 -> R$82.500 -> R$93.400 (+33% em 3 meses)
 
 ### Sobre o Autor (Tiago Alves)
-- Quando crianca, vendia salgados na rua e frangos na feira
+- Quando criança, vendia salgados na rua e frangos na feira
 - Formado em Psicologia (FEPAR)
-- MBA em Gestao Estrategica de Pessoas (FGV)
+- MBA em Gestão Estratégica de Pessoas (FGV)
 - GBA em Franchising (FGV)
 - Professor em diversas universidades
-- Criou o MBA Gestao em Vendas - Enfase em Resultados
+- Criou o MBA Gestão em Vendas - Ênfase em Resultados
 - 17 anos atuando em consultoria
 - Orientou mais de 300 empresas
 - Fundador da Metta
-- Autor de 8 livros sobre vendas e gestao
+- Autor de 8 livros sobre vendas e gestão
 
 ---
 
-## 7. Principios e Frases Notaveis
+## 7. Princípios e Frases Notáveis
 
-> "O resultado se constroi."
+> "O resultado se constrói."
 
-> "Gestao da Meta e a capacidade de identificar causas para determinado resultado e executar as acoes que o corrijam ou o potencializem."
+> "Gestão da Meta é a capacidade de identificar causas para determinado resultado e executar as ações que o corrijam ou o potencializem."
 
-> "Apenas olhar os numeros e mobilizar os vendedores para que dem foco a determinado produto/servico, pedir que conquistem novos clientes, pressionar para que faturem mais, e o que todos fazem."
+> "Apenas olhar os números e mobilizar os vendedores para que dem foco a determinado produto/serviço, pedir que conquistem novos clientes, pressionar para que faturem mais, e o que todos fazem."
 
-> "Gerar resultado e algo bem diferente e muito maior, depende de uma serie de medidas para conscientizar e capacitar as pessoas."
+> "Gerar resultado é algo bem diferente e muito maior, depende de uma série de medidas para conscientizar e capacitar as pessoas."
 
-> "E a coexistencia entre as Gestoes que faz o resultado acontecer."
+> "E a coexistência entre as Gestões que faz o resultado acontecer."
 
-> "O que pouquissimos gestores tem habilidade em fazer e encontrar as razoes para determinado indicador nao ter alcancado sua finalidade ou quais fatores permitiram que ele a superasse."
+> "O que pouquissimos gestores tem habilidade em fazer e encontrar as razões para determinado indicador não ter alcançado sua finalidade ou quais fatores permitiram que ele a superasse."
 
-> "Quando voce faz a Gestao da Meta, descobre oportunidades de melhoria ou avancos, transformando dados em estrategias."
+> "Quando você faz a Gestão da Meta, descobre oportunidades de melhoria ou avanços, transformando dados em estratégias."
 
-> "Quanto mais diluida, mais factivel a meta sera percebida."
+> "Quanto mais diluída, mais factível a meta será percebida."
 
 > "Aprenda com o passado, direcione o agora, planeje o futuro."
 
-> "Quando o foco das reflexoes esta no passado, e muito provavel que apenas justificativas aparecam como resposta."
+> "Quando o foco das reflexões está no passado, é muito provável que apenas justificativas aparecam como resposta."
 
 > "Somente encontrando o cerne do problema existe a chance de reverter o fato."
 
-> "Acreditamos que a meta pode ser atingida de forma mais leve, facil e sustentavel quando se desenvolve competencias."
+> "Acreditamos que a meta pode ser atingida de forma mais leve, fácil e sustentável quando se desenvolve competências."
 
-> "O sucesso das empresas sao as pessoas."
+> "O sucesso das empresas são as pessoas."
 
 ---
 
-## 8. Conexoes com as Outras Gestoes
+## 8. Conexões com as Outras Gestões
 
-| Gestao | Como se Conecta a Gestao da Meta |
+| Gestão | Como se Conecta a Gestão da Meta |
 |--------|----------------------------------|
-| Gestao da Mudanca | Gerou conscientizacao; Plano de Voo traduz metas em sonhos pessoais |
-| Gestao da Ativacao | Ativou comportamentos e autorresponsabilidade; acrostico ATITUDE |
-| Gestao do Metodo | Ensinou tecnicas de vendas (A VENDA); Mapa da Venda avalia qualidade |
-| Gestao do Conhecimento | Caderno de Caracteristicas e Beneficios; diagnosticos de conhecimento |
-| Gestao do Tempo | Proxima etapa -- organizar a rotina para implementar tudo |
+| Gestão da Mudança | Gerou conscientização; Plano de Voo traduz metas em sonhos pessoais |
+| Gestão da Ativação | Ativou comportamentos e autorresponsabilidade; acróstico ATITUDE |
+| Gestão do Método | Ensinou técnicas de vendas (A VENDA); Mapa da Venda avalia qualidade |
+| Gestão do Conhecimento | Caderno de Características e Benefícios; diagnósticos de conhecimento |
+| Gestão do Tempo | Próxima etapa -- organizar a rotina para implementar tudo |
 
 ---
 
 ## 9. Sobre a Metta
 
-**Posicionamento:** "Somos especialistas em aumentar resultados ao fornecer solucoes com foco em potencializar conhecimentos, habilidades e atitudes de lideres e vendedores."
+**Posicionamento:** "Somos especialistas em aumentar resultados ao fornecer soluções com foco em potencializar conhecimentos, habilidades e atitudes de líderes e vendedores."
 
-**Crenca central:** "A meta pode ser atingida de forma mais leve, facil e sustentavel quando se desenvolve competencias."
+**Crença central:** "A meta pode ser atingida de forma mais leve, fácil e sustentável quando se desenvolve competências."
 
-**Proposito:** Ajudar pessoas a chegarem aos seus objetivos atraves de consultorias, treinamentos (presenciais e pela internet), MBAs e livros.
+**Propósito:** Ajudar pessoas a chegarem aos seus objetivos através de consultorias, treinamentos (presenciais e pela internet), MBAs e livros.
 
 **Site:** www.mettabrasil.com.br
 

@@ -332,7 +332,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Cliente na loja nao fecha",
+      "title": "Cliente na loja não fecha",
       "tese": "Cliente entra na loja e nao fecha — o problema e operacao, nao trafego",
       "mood": "confronto",
       "src": {
@@ -374,7 +374,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Diagnostico 1h gratuito",
+      "title": "Diagnóstico 1h gratuito",
       "tese": "Em 1 hora gratuita, mapeamos o gargalo operacional do negocio",
       "mood": "autoridade",
       "src": {
@@ -878,7 +878,7 @@
         "exclusive",
         "elite"
       ],
-      "title": "Operacao funciona sem voce",
+      "title": "Operação funciona sem você",
       "tese": "Sua operacao funciona quando voce sai por 7 dias?",
       "mood": "confronto",
       "src": {
@@ -1002,7 +1002,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Sem processo fica pra tras",
+      "title": "Sem processo fica pra trás",
       "tese": "Empresa sem processo nao acompanha quem tem",
       "mood": "urgencia",
       "src": {
@@ -1043,7 +1043,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Servicos 300 mil/mes",
+      "title": "Serviços 300 mil/mês",
       "tese": "Empresas de servico de R$300k/mes tem teto operacional especifico",
       "mood": "analitico",
       "src": {
@@ -1084,7 +1084,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Servicos vender 30 mais",
+      "title": "Serviços vender 30 mais",
       "tese": "Empresas de servico crescem 30%+ com inteligencia comercial",
       "mood": "analitico",
       "src": {
@@ -1167,7 +1167,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Talento ou prisao de CNPJ",
+      "title": "Talento ou prisão de CNPJ",
       "tese": "Seu talento virou prisao do CNPJ — voce so funciona se voce estiver dentro",
       "mood": "confronto",
       "src": {
@@ -1293,7 +1293,7 @@
         "acelera",
         "premium"
       ],
-      "title": "60 min pra tirar do balcao",
+      "title": "60 min pra tirar do balcão",
       "tese": "Em 60 minutos mostramos o caminho de saida do balcao",
       "mood": "autoridade",
       "src": {
@@ -1375,7 +1375,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Funcionario do proprio negocio",
+      "title": "Funcionário do próprio negócio",
       "tese": "Empresario que so tira pedido virou funcionario do proprio CNPJ",
       "mood": "provocacao",
       "src": {
@@ -1417,7 +1417,7 @@
         "exclusive",
         "elite"
       ],
-      "title": "Limite da exaustao",
+      "title": "Limite da exaustão",
       "tese": "Voce bateu no limite da capacidade pessoal",
       "mood": "acolhedor",
       "src": {
@@ -1459,7 +1459,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Maquina que bate meta todo mes",
+      "title": "Máquina que bate meta todo mês",
       "tese": "SMTM e a maquina que faz o time bater meta todo mes",
       "mood": "aspiracional",
       "src": {
@@ -1501,7 +1501,7 @@
         "exclusive",
         "elite"
       ],
-      "title": "Mesmo metodo — grandes redes",
+      "title": "Mesmo método — grandes redes",
       "tese": "Mesmo metodo que grandes redes usam, escalado pro empresario medio",
       "mood": "autoridade",
       "src": {
@@ -1542,7 +1542,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Refem operacional ha 12 meses",
+      "title": "Refém operacional ha 12 meses",
       "tese": "Voce esta refem da operacao ha 12 meses sem perceber",
       "mood": "confronto",
       "src": {
@@ -1624,7 +1624,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Ultimas vagas — sessao",
+      "title": "Últimas vagas — sessão",
       "tese": "Ultimas vagas pra sessao estrategica deste mes",
       "mood": "urgencia",
       "src": {
@@ -1665,7 +1665,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Apaga incendio ha 6 meses",
+      "title": "Apaga incêndio ha 6 meses",
       "tese": "Voce apaga incendio ha 6 meses sem mexer no que importa",
       "mood": "confronto",
       "src": {
@@ -1875,7 +1875,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Metodo replicavel em 60 min",
+      "title": "Método replicável em 60 min",
       "tese": "Metodo que se replica no time em 60 minutos por vendedor",
       "mood": "autoridade",
       "src": {
@@ -1917,7 +1917,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Metodo tira a loja das costas",
+      "title": "Método tira a loja das costas",
       "tese": "Metodo que tira a loja das costas do empresario",
       "mood": "acolhedor",
       "src": {
@@ -1960,7 +1960,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Palestras nao batem meta",
+      "title": "Palestras não batem meta",
       "tese": "Palestra motivacional nao bate meta — implementacao bate",
       "mood": "provocacao",
       "src": {
@@ -2001,7 +2001,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Prisao do 'so funciona comigo'",
+      "title": "Prisão do 'so funciona comigo'",
       "tese": "Voce esta preso na crenca de que so funciona com voce dentro",
       "mood": "confronto",
       "src": {
@@ -2084,7 +2084,7 @@
         "exclusive",
         "elite"
       ],
-      "title": "Convite — sistema pra poucos empresarios",
+      "title": "Convite — sistema pra poucos empresários",
       "tese": "Convite formal pra um sistema que cabe em poucos empresarios",
       "mood": "aspiracional",
       "src": {
@@ -2127,7 +2127,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Craque de vendas — quebra-cabeca",
+      "title": "Craque de vendas — quebra-cabeça",
       "tese": "Craque de vendas e peca que so encaixa no sistema certo",
       "mood": "analitico",
       "src": {
@@ -2168,7 +2168,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Multiplique o melhor vendedor — domino",
+      "title": "Multiplique o melhor vendedor — dominó",
       "tese": "Multiplicar o melhor vendedor e efeito cascata, nao copia",
       "mood": "analitico",
       "src": {
@@ -2417,7 +2417,7 @@
         "exclusive",
         "elite"
       ],
-      "title": "Jantar com filhos vs reuniao",
+      "title": "Jantar com filhos vs reunião",
       "tese": "Empresario que perde jantar com filhos pra reuniao perdeu o sentido",
       "mood": "acolhedor",
       "src": {
@@ -2460,7 +2460,7 @@
         "exclusive",
         "elite"
       ],
-      "title": "Negocio, saude, familia",
+      "title": "Negócio, saúde, família",
       "tese": "Quando negocio cresce, saude e familia nao podem encolher",
       "mood": "acolhedor",
       "src": {
@@ -2795,7 +2795,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Inteligencia comercial — checklist",
+      "title": "Inteligência comercial — checklist",
       "tese": "Inteligencia comercial em 5 itens praticos",
       "mood": "analitico",
       "src": {
@@ -2879,7 +2879,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Nao consegue sair da operacao",
+      "title": "Não consegue sair da operação",
       "tese": "Convite pra empresarios que ja tentaram sair da operacao e nao conseguiram",
       "mood": "acolhedor",
       "src": {
@@ -2920,7 +2920,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Troque motivacao por processo",
+      "title": "Troque motivação por processo",
       "tese": "Troque motivacao por processo — bullets do como",
       "mood": "provocacao",
       "src": {
@@ -2961,7 +2961,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Pressao — modo sobrevivencia",
+      "title": "Pressão — modo sobrevivência",
       "tese": "Empresario em modo sobrevivencia perde a capacidade de pensar a frente",
       "mood": "acolhedor",
       "src": {
@@ -3046,7 +3046,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Servicos — aguenta 12 meses?",
+      "title": "Serviços — aguenta 12 meses?",
       "tese": "Sua empresa de servico aguenta mais 12 meses no modelo atual?",
       "mood": "confronto",
       "src": {
@@ -3088,7 +3088,7 @@
         "acelera",
         "premium"
       ],
-      "title": "Servicos — comercial de gente grande",
+      "title": "Serviços — comercial de gente grande",
       "tese": "Empresa de servico precisa de comercial de gente grande pra crescer",
       "mood": "analitico",
       "src": {
@@ -3129,7 +3129,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Vendas dependem de voce",
+      "title": "Vendas dependem de você",
       "tese": "Suas vendas ainda dependem de voce estar dentro?",
       "mood": "confronto",
       "src": {
@@ -3170,7 +3170,7 @@
         "premium",
         "exclusive"
       ],
-      "title": "Chave da liberdade — balcao",
+      "title": "Chave da liberdade — balcão",
       "tese": "A chave da liberdade nao esta no balcao — esta no sistema",
       "mood": "aspiracional",
       "src": {
@@ -3718,7 +3718,7 @@
         "exclusive",
         "elite"
       ],
-      "title": "Somos lider",
+      "title": "Somos líder",
       "tese": "Posicionamento de lideranca de mercado Metta",
       "mood": "autoridade",
       "src": {
@@ -3967,7 +3967,7 @@
       "icp_target": [
         "acelera"
       ],
-      "title": "Hero LP institucional - retrato cinematografico + tags de produto",
+      "title": "Hero LP institucional - retrato cinematográfico + tags de produto",
       "tese": "Hero institucional Metta com retrato decision-grade + tags de oferta (livros/treinamentos/formacoes/MBA/mentoria/consultoria) + lockup oficial.",
       "mood": "aspiracional",
       "src": {

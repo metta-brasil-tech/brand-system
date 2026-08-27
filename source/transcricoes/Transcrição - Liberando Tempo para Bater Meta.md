@@ -7,7 +7,7 @@ tags:
   - status/arquivo
   - tema/produtividade
   - tipo/aula-ao-vivo
-  - tipo/transcricao
+  - tipo/transcrição
 summary: "Transcrição de live: ladrões de tempo, rotinas, do operacional ao tático."
 created: 2026-04-10
 updated: 2026-04-10
@@ -375,7 +375,7 @@ então às vezes as pessoas se questionam
 cara será que deveria trabalhar muito
 agora será que eu deveria focar agora
 será que não deveria viver a minha vida
-sem Tudo Claro obvio você tem que viver
+sem Tudo Claro óbvio você tem que viver
 tua vida tem que aproveitar só que o que
 você tá plantando agora
 você não vai comer sempre

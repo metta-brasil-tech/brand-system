@@ -1,5 +1,5 @@
 ---
-id: K-bold-dourado-urgencia
+id: K-bold-dourado-urgência
 display_name: "Bold dourado / urgência fundamentada"
 marca: metta
 archetype: typo

@@ -8,14 +8,14 @@ aliases:
 tags:
   - marca/metta
   - status/ativo
-  - tema/conversao
+  - tema/conversão
   - tipo/narrativa
   - tipo/script
   - usado-por/copy-vsl
   - usado-por/copy-lp
 formato_consumo: playbook
 prioridade_carregamento: alta
-versao: "10 (completa)"
+versão: "10 (completa)"
 complementar_com: "[[Metta - Narrativa de Marca - Arco Narrativo 7 Etapas (V10 - Enxuta)]]"
 summary: "Roteiro COMPLETO do webinário/VSL flagship — 7 etapas detalhadas. Pra webinário 45-60min, LP cold longa, VSL flagship. Pra ads/LP curta/isca, usar versão Enxuta."
 created: 2026-04-10
@@ -406,7 +406,7 @@ __*— Patrícia Maeoka — Sócia Administradora, Hiperzoo Pet Shop*__
 
 E não foi só o faturamento\. O método mudou a forma como a equipe inteira opera\. Antes, a diferença entre o melhor e o pior vendedor era gritante\. Hoje, com o método de vendas estruturado, cada pessoa que entra já sabe o caminho\.
 
-*“Os gerentes achavam que nós criávamos as metas para não serem atingidas\. A gente oscilava muito o atingimento das metas\. E a gente tinha uma discrepância muito grande entre o vendedor lá em cima e o vendedor lá embaixo\. A construção do método de vendas nos gera benefícios em cadeia\. Quando a equipe de fato atua com o método, eu já integro desde a contratação — a hora que o colaborador chega na loja, ele já está sabendo o que está acontecendo\.”*
+*“Os gerentes achavam que nós criávamos as metas para não serem atingidas\. A gente oscilava muito o atingimento das metas\. E a gente tinha uma discrepância muito grande entre o vendedor lá em cima e o vendedor lá embaixo\. A construção do método de vendas nos gera benefícios em cadeia\. Quando a equipe de fato atua com o método, eu já íntegro desde a contratação — a hora que o colaborador chega na loja, ele já está sabendo o que está acontecendo\.”*
 
 __*— Eduardo — Diretor Administrativo Financeiro, Hiperzoo Pet Shop*__
 
@@ -476,7 +476,7 @@ A Ótica Conceito estabeleceu 18 metas\. Bateu 17\. Porque meta ali não é linh
 
 *“Nesses nossos 30 anos, a gente nunca tinha atingido esse faturamento, esse recorde que a gente chegou através do método que a gente aplicou\. Foi a certeza que realmente estão nos levando para o caminho certo\.”*
 
-__*— Angela — Ótica Visão/Poutpourri \(recorde em 30 anos de empresa\)*__
+__*— Ângela — Ótica Visão/Poutpourri \(recorde em 30 anos de empresa\)*__
 
 __E quando o sonho não é crescer a empresa — é ter a vida de volta?__
 

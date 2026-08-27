@@ -1,6 +1,6 @@
 # Movimento
 
-Quando algo se move numa peça da Metta, o movimento é firme e preciso, nunca elástico ou brincalhão. Nada de exagero, nada de "bounce": cada animação existe pra mostrar uma transição ou guiar o olho, não pra decorar. Se um movimento não ajuda a entender algo, ele não entra na peça.
+Quando algo se move numa peça da Metta, o movimento é firme é preciso, nunca elástico ou brincalhão. Nada de exagero, nada de "bounce": cada animação existe pra mostrar uma transição ou guiar o olho, não pra decorar. Se um movimento não ajuda a entender algo, ele não entra na peça.
 
 ## Como o movimento se comporta
 

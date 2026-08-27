@@ -1,4 +1,4 @@
-# sua equipe bate meta todo mes?
+# Sua equipe bate meta todo mês?
 # URL: https://youtube.com/watch?v=NU-uDSRTcMA
 
 esforço é o mínimo tudo numa empresa gira em torno da Meta agora que que eu te pergunto o que mais gera felicidade no ambiente de vendas a coisa que mais traz felicidade é bater meta o que mais gera medo numa empresa não bater a meta o que mais gera crescimento seja Profissional ou seja da instituição bater a meta superar a meta e o que mais gera desligamento n vendedores e in gestores não bater a meta se você entender esta Lógica tudo gira em torno de uma meta ou seja não gira em torno do esforço não gira em torno do vestir a camisa não gira em torno da puxação de saco não gira em torno da carga horária tudo gira em torno de bater meta só que a a gente acha que vai conseguir gerar o resultado pelo esforço se você é uma pessoa honesta e esforçada parabéns você já tá acima da média porém esforço é o mínimo agora esforço com técnica é o que faz você chegar ao resultado

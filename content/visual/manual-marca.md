@@ -12,7 +12,7 @@ tags:
   - tipo/figma-spec
 formato_consumo: contexto-skill
 prioridade_carregamento: media
-versao: "1.0"
+versão: "1.0"
 sucedido_por: null
 complementar_com: "[[Metta - Plataforma de Marca]]"
 summary: "Spec da página '📖 Manual de Marca' criada dentro do arquivo Figma Design System (file key 0zEMoFMq6FlIXbANZs9LCG). Sintetiza visualmente a estratégia, posicionamento e comunicação Metta em 7 seções, ancorada nos docs canônicos do vault."
@@ -63,7 +63,7 @@ A página foi inserida entre **Changelog & Versioning** e **FUNDAMENTOS**, dentr
 🧪 Playground · Banco — Fotos Tiago
 ```
 
-### §1.2 Seções (top → down) ^estrutura-secoes
+### §1.2 Seções (top → down) ^estrutura-seções
 
 | § | Seção | BG | Origem do conteúdo |
 |---|---|---|---|
@@ -111,7 +111,7 @@ Cada seção é uma **projeção visual** de um doc canônico. Ao atualizar a fo
 
 ### §4.1 Header
 - **Título:** "Manual de Marca" (130px Expanded Heavy, 2 linhas)
-- **Sub:** "Estratégia, posicionamento e comunicação da Metta — o porquê, o pra quem e o como falamos com o mercado."
+- **Sub:** "Estratégia, posicionamento e comunicação da Metta — o porquê, o pra quem é o como falamos com o mercado."
 - **Sumário:** 7 itens com kicker §, nome, descrição
 
 ### §4.2 Essência

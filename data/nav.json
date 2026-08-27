@@ -1,6 +1,6 @@
 {
   "version": "2.4",
-  "generatedAt": "2026-08-24T17:51:02.931Z",
+  "generatedAt": "2026-08-27T15:54:52.552Z",
   "tabs": [
     {
       "id": "overview",
@@ -1140,6 +1140,11 @@
               "depth": 2
             },
             {
+              "id": "28-otica-visao-rede-poutpourri-depoimento-de-proprietaria-prova-otica-visao",
+              "label": "2.8 Ótica Visão (rede Poutpourri) — depoimento de proprietária ^prova-ótica-visão",
+              "depth": 3
+            },
+            {
               "id": "3-cases-secundarios-executivos-nao-donos",
               "label": "3. Cases secundários (executivos, não donos)",
               "depth": 2
@@ -1505,7 +1510,7 @@
             },
             {
               "id": "missao",
-              "label": "Missao",
+              "label": "Missão",
               "depth": 3
             },
             {
@@ -1535,12 +1540,12 @@
             },
             {
               "id": "22-versoes-do-logo",
-              "label": "2.2 Versoes do Logo",
+              "label": "2.2 Versões do Logo",
               "depth": 3
             },
             {
               "id": "23-versoes-por-tamanho",
-              "label": "2.3 Versoes por Tamanho",
+              "label": "2.3 Versões por Tamanho",
               "depth": 3
             },
             {
@@ -1550,7 +1555,7 @@
             },
             {
               "id": "26-area-de-protecao-e-grid",
-              "label": "2.6 Area de Protecao e Grid",
+              "label": "2.6 Área de Proteção e Grid",
               "depth": 3
             },
             {
@@ -1560,12 +1565,12 @@
             },
             {
               "id": "31-cores-primarias",
-              "label": "3.1 Cores Primarias",
+              "label": "3.1 Cores Primárias",
               "depth": 3
             },
             {
               "id": "32-cores-secundarias",
-              "label": "3.2 Cores Secundarias",
+              "label": "3.2 Cores Secundárias",
               "depth": 3
             },
             {
@@ -1635,7 +1640,7 @@
             },
             {
               "id": "53-formatacao-dos-nomes",
-              "label": "5.3 Formatacao dos Nomes",
+              "label": "5.3 Formatação dos Nomes",
               "depth": 3
             },
             {
@@ -1645,7 +1650,7 @@
             },
             {
               "id": "61-simbolo-icone",
-              "label": "6.1 Simbolo / Icone",
+              "label": "6.1 Símbolo / Ícone",
               "depth": 3
             },
             {
@@ -1670,12 +1675,12 @@
             },
             {
               "id": "71-estilo-fotografico",
-              "label": "7.1 Estilo Fotografico",
+              "label": "7.1 Estilo Fotográfico",
               "depth": 3
             },
             {
               "id": "72-composicao-de-cards-pessoais",
-              "label": "7.2 Composicao de Cards Pessoais",
+              "label": "7.2 Composição de Cards Pessoais",
               "depth": 3
             },
             {
@@ -1685,7 +1690,7 @@
             },
             {
               "id": "74-o-que-evitar-referencia-da-marca-antiga",
-              "label": "7.4 O que Evitar (Referencia da marca antiga)",
+              "label": "7.4 O que Evitar (Referência da marca antiga)",
               "depth": 3
             },
             {
@@ -1700,12 +1705,12 @@
             },
             {
               "id": "82-aplicacao-digital",
-              "label": "8.2 Aplicacao Digital",
+              "label": "8.2 Aplicação Digital",
               "depth": 3
             },
             {
               "id": "83-aplicacao-fisica",
-              "label": "8.3 Aplicacao Fisica",
+              "label": "8.3 Aplicação Física",
               "depth": 3
             },
             {
@@ -1730,7 +1735,7 @@
             },
             {
               "id": "93-espacamento",
-              "label": "9.3 Espacamento",
+              "label": "9.3 Espaçamento",
               "depth": 3
             },
             {
@@ -1775,12 +1780,12 @@
             },
             {
               "id": "126-guia-de-selecao-de-assets",
-              "label": "12.6 Guia de Selecao de Assets",
+              "label": "12.6 Guia de Seleção de Assets",
               "depth": 3
             },
             {
               "id": "127-instrucoes-para-o-agente",
-              "label": "12.7 Instrucoes para o Agente",
+              "label": "12.7 Instruções para o Agente",
               "depth": 3
             },
             {
@@ -1800,37 +1805,37 @@
             },
             {
               "id": "133-padrao-editorial-poster",
-              "label": "13.3 Padrao Editorial Poster",
+              "label": "13.3 Padrão Editorial Poster",
               "depth": 3
             },
             {
               "id": "134-padrao-slide-statement",
-              "label": "13.4 Padrao Slide Statement",
+              "label": "13.4 Padrão Slide Statement",
               "depth": 3
             },
             {
               "id": "135-pill-tag-list-componente-reusavel",
-              "label": "13.5 Pill Tag List (Componente Reusavel)",
+              "label": "13.5 Pill Tag List (Componente Reusável)",
               "depth": 3
             },
             {
               "id": "136-yellow-brand-band-componente-reusavel",
-              "label": "13.6 Yellow Brand Band (Componente Reusavel)",
+              "label": "13.6 Yellow Brand Band (Componente Reusável)",
               "depth": 3
             },
             {
               "id": "137-vertical-rotated-wordmark-fragment-componente-reusavel",
-              "label": "13.7 Vertical Rotated Wordmark Fragment (Componente Reusavel)",
+              "label": "13.7 Vertical Rotated Wordmark Fragment (Componente Reusável)",
               "depth": 3
             },
             {
               "id": "138-avatar-name-stack-componente-reusavel",
-              "label": "13.8 Avatar + Name Stack (Componente Reusavel)",
+              "label": "13.8 Avatar + Name Stack (Componente Reusável)",
               "depth": 3
             },
             {
               "id": "139-brand-lockup-pill-componente-reusavel",
-              "label": "13.9 Brand Lockup Pill (Componente Reusavel)",
+              "label": "13.9 Brand Lockup Pill (Componente Reusável)",
               "depth": 3
             },
             {
@@ -1845,7 +1850,7 @@
             },
             {
               "id": "1312-observacoes-finais-e-diferencas-vs-documentacao-anterior",
-              "label": "13.12 Observacoes Finais e Diferencas vs Documentacao Anterior",
+              "label": "13.12 Observações Finais e Diferenças vs Documentação Anterior",
               "depth": 3
             }
           ],
@@ -2044,7 +2049,7 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-08-21T12:07:00-03:00",
+          "updatedAt": "2026-08-24T15:06:02-03:00",
           "blog_source": "compartilhado/brand-system-blog/visual/logos.md"
         },
         {
@@ -2501,14 +2506,50 @@
             }
           ],
           "updatedAt": "2026-08-11T11:19:19-03:00",
-          "description": "As 5 etapas do método Metta: Mapear, Estruturar, Transformar, Treinar e Acelerar."
+          "description": "As 5 etapas do método Metta: Mapear, Estruturar, Transformar, Treinar e Acelerar.",
+          "nivel": "raiz",
+          "tipo": "protocolo",
+          "resumo": "A metodologia proprietária da Metta. Cinco etapas que instalam um sistema completo de superação de metas, sob medida para cada empresa.",
+          "etapas": [
+            {
+              "letra": "M",
+              "anchor": "1-m-mapear-a-oportunidade",
+              "nome": "Mapear a Oportunidade",
+              "resolve": "Diagnosticar a realidade e enxergar onde está o resultado escondido."
+            },
+            {
+              "letra": "E",
+              "anchor": "2-e-estruturar-a-estrategia",
+              "nome": "Estruturar a Estratégia",
+              "resolve": "Transformar o diagnóstico em estratégia executável para todos os níveis."
+            },
+            {
+              "letra": "T",
+              "anchor": "3-t-transformar-em-metodo",
+              "nome": "Transformar em Método",
+              "resolve": "Construir o método de vendas sob medida da empresa."
+            },
+            {
+              "letra": "T",
+              "anchor": "4-t-treinar-o-time",
+              "nome": "Treinar o Time",
+              "resolve": "Desenvolver competência real no time e na liderança."
+            },
+            {
+              "letra": "A",
+              "anchor": "5-a-acelerar-o-resultado",
+              "nome": "Acelerar o Resultado",
+              "resolve": "Estruturar a jornada completa e a rotina que sustenta o crescimento."
+            }
+          ],
+          "highlight": true,
+          "nomeCurto": "Protocolo M.E.T.T.A.",
+          "tituloPagina": "Protocolo M.E.T.T.A.™"
         },
         {
           "id": "seis-gestoes",
-          "label": "6 Gestões: Visão Geral",
+          "label": "6 Gestões da Meta Batida",
           "source": "metta/metodologia/Metta - As 6 Gestões da Meta Batida.md",
-          "subgroup": "seis-gestoes",
-          "subgroupLabel": "6 Gestões da Meta Batida",
           "h2s": [
             {
               "id": "visao-geral",
@@ -2541,32 +2582,35 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "familia",
+          "tipo": "familia",
+          "parent": "protocolo",
+          "etapa": [
+            "4-t-treinar-o-time"
+          ],
+          "resumo": "O sistema operacional do líder: as seis gestões que sustentam a etapa T — Treinar o Time.",
+          "nomeCurto": "6 Gestões da Meta Batida",
+          "tituloPagina": "As 6 Gestões da Meta Batida"
         },
         {
           "id": "gestao-mudanca",
           "label": "Gestão da Mudança",
           "source": "metta/metodologia/Metta - Gestão da Mudança.md",
-          "subgroup": "seis-gestoes",
           "h2s": [
             {
-              "id": "sumario-do-livro",
-              "label": "SUMARIO DO LIVRO",
-              "depth": 2
-            },
-            {
               "id": "1-visao-geral-resumo",
-              "label": "1. VISAO GERAL / RESUMO",
+              "label": "1. VISÃO GERAL / RESUMO",
               "depth": 2
             },
             {
               "id": "2-prefacio-o-problema-das-metas",
-              "label": "2. PREFACIO - O PROBLEMA DAS METAS",
+              "label": "2. PREFÁCIO - O PROBLEMA DAS METAS",
               "depth": 2
             },
             {
               "id": "o-cenario-atual",
-              "label": "O Cenario Atual",
+              "label": "O Cenário Atual",
               "depth": 3
             },
             {
@@ -2581,27 +2625,27 @@
             },
             {
               "id": "por-que-o-velho-caminho-esta-fadado-ao-fracasso",
-              "label": "Por que o Velho Caminho esta Fadado ao Fracasso",
+              "label": "Por que o Velho Caminho está Fadado ao Fracasso",
               "depth": 3
             },
             {
               "id": "3-introducao-os-tres-pilares-fundamentais",
-              "label": "3. INTRODUCAO - OS TRES PILARES FUNDAMENTAIS",
+              "label": "3. INTRODUÇÃO - OS TRÊS PILARES FUNDAMENTAIS",
               "depth": 2
             },
             {
               "id": "os-tres-pilares-da-meta-batida",
-              "label": "Os Tres Pilares da Meta Batida",
+              "label": "Os Três Pilares da Meta Batida",
               "depth": 3
             },
             {
               "id": "4-as-6-gestoes-da-meta-batida-visao-geral",
-              "label": "4. AS 6 GESTOES DA META BATIDA - VISAO GERAL",
+              "label": "4. AS 6 GESTÕES DA META BATIDA - VISÃO GERAL",
               "depth": 2
             },
             {
               "id": "perguntas-que-cada-gestao-responde",
-              "label": "Perguntas que Cada Gestao Responde",
+              "label": "Perguntas que Cada Gestão Responde",
               "depth": 3
             },
             {
@@ -2631,12 +2675,12 @@
             },
             {
               "id": "orientacoes-de-implementacao",
-              "label": "Orientacoes de Implementacao",
+              "label": "Orientações de Implementação",
               "depth": 3
             },
             {
               "id": "7-gestao-da-mudanca-capitulo-principal",
-              "label": "7. GESTAO DA MUDANCA - CAPITULO PRINCIPAL",
+              "label": "7. GESTÃO DA MUDANÇA - CAPÍTULO PRINCIPAL",
               "depth": 2
             },
             {
@@ -2646,87 +2690,87 @@
             },
             {
               "id": "8-vendas-em-mudanca",
-              "label": "8. VENDAS EM MUDANCA",
+              "label": "8. VENDAS EM MUDANÇA",
               "depth": 2
             },
             {
               "id": "areas-de-mudanca-no-universo-de-vendas",
-              "label": "Areas de Mudanca no Universo de Vendas",
+              "label": "Áreas de Mudança no Universo de Vendas",
               "depth": 3
             },
             {
               "id": "exercicio-pratico",
-              "label": "Exercicio Pratico",
+              "label": "Exercício Prático",
               "depth": 3
             },
             {
               "id": "9-empresa-em-mudanca-analise-swot",
-              "label": "9. EMPRESA EM MUDANCA - ANALISE SWOT",
+              "label": "9. EMPRESA EM MUDANÇA - ANÁLISE SWOT",
               "depth": 2
             },
             {
               "id": "framework-analise-swot",
-              "label": "Framework: Analise SWOT",
+              "label": "Framework: Análise SWOT",
               "depth": 3
             },
             {
               "id": "beneficios-de-cada-quadrante",
-              "label": "Beneficios de Cada Quadrante",
+              "label": "Benefícios de Cada Quadrante",
               "depth": 3
             },
             {
               "id": "analise-swot-com-o-time-7-etapas",
-              "label": "Analise SWOT com o Time - 7 Etapas",
+              "label": "Análise SWOT com o Time - 7 Etapas",
               "depth": 3
             },
             {
               "id": "swot-pessoal-do-lider",
-              "label": "SWOT Pessoal do Lider",
+              "label": "SWOT Pessoal do Líder",
               "depth": 3
             },
             {
               "id": "10-lider-de-vendas-em-mudanca",
-              "label": "10. LIDER DE VENDAS EM MUDANCA",
+              "label": "10. LÍDER DE VENDAS EM MUDANÇA",
               "depth": 2
             },
             {
               "id": "tres-perfis-de-lider-de-vendas",
-              "label": "Tres Perfis de Lider de Vendas",
+              "label": "Três Perfis de Líder de Vendas",
               "depth": 3
             },
             {
               "id": "os-3-efeitos-poderosos-do-lider-treinador",
-              "label": "Os 3 Efeitos Poderosos do Lider Treinador",
+              "label": "Os 3 Efeitos Poderosos do Líder Treinador",
               "depth": 3
             },
             {
               "id": "o-lider-treinador",
-              "label": "O Lider Treinador",
+              "label": "O Líder Treinador",
               "depth": 3
             },
             {
               "id": "11-eu-em-mudanca",
-              "label": "11. EU EM MUDANCA",
+              "label": "11. EU EM MUDANÇA",
               "depth": 2
             },
             {
               "id": "tres-perguntas-fundamentais",
-              "label": "Tres Perguntas Fundamentais",
+              "label": "Três Perguntas Fundamentais",
               "depth": 3
             },
             {
               "id": "12-ambiente-em-mudanca",
-              "label": "12. AMBIENTE EM MUDANCA",
+              "label": "12. AMBIENTE EM MUDANÇA",
               "depth": 2
             },
             {
               "id": "principio",
-              "label": "Principio",
+              "label": "Princípio",
               "depth": 3
             },
             {
               "id": "ambientes-fisicos-checklist",
-              "label": "Ambientes Fisicos - Checklist",
+              "label": "Ambientes Físicos - Checklist",
               "depth": 3
             },
             {
@@ -2741,7 +2785,7 @@
             },
             {
               "id": "13-time-em-mudanca",
-              "label": "13. TIME EM MUDANCA",
+              "label": "13. TIME EM MUDANÇA",
               "depth": 2
             },
             {
@@ -2751,32 +2795,32 @@
             },
             {
               "id": "reflexao-adicional",
-              "label": "Reflexao Adicional",
+              "label": "Reflexão Adicional",
               "depth": 3
             },
             {
               "id": "como-vender-a-mudanca-para-o-time",
-              "label": "COMO VENDER A MUDANCA PARA O TIME",
+              "label": "COMO VENDER A MUDANÇA PARA O TIME",
               "depth": 3
             },
             {
               "id": "respostas-para-as-objecoes-do-time",
-              "label": "Respostas para as Objecoes do Time",
+              "label": "Respostas para as Objeções do Time",
               "depth": 3
             },
             {
               "id": "exercicio",
-              "label": "Exercicio",
+              "label": "Exercício",
               "depth": 3
             },
             {
               "id": "14-mudanca-individual-do-time-o-plano-de-voo",
-              "label": "14. MUDANCA INDIVIDUAL DO TIME - O PLANO DE VOO",
+              "label": "14. MUDANÇA INDIVIDUAL DO TIME - O PLANO DE VOO",
               "depth": 2
             },
             {
               "id": "o-que-e-o-plano-de-voo",
-              "label": "O que e o Plano de Voo",
+              "label": "O que é o Plano de Voo",
               "depth": 3
             },
             {
@@ -2786,7 +2830,7 @@
             },
             {
               "id": "15-mudanca-na-gestao",
-              "label": "15. MUDANCA NA GESTAO",
+              "label": "15. MUDANÇA NA GESTÃO",
               "depth": 2
             },
             {
@@ -2796,42 +2840,42 @@
             },
             {
               "id": "solucao-delegar",
-              "label": "Solucao: DELEGAR",
+              "label": "Solução: DELEGAR",
               "depth": 3
             },
             {
               "id": "framework-triade-do-tempo-do-gestor-de-vendas",
-              "label": "Framework: Triade do Tempo do Gestor de Vendas",
+              "label": "Framework: Tríade do Tempo do Gestor de Vendas",
               "depth": 3
             },
             {
               "id": "exercicio",
-              "label": "Exercicio",
+              "label": "Exercício",
               "depth": 3
             },
             {
               "id": "framework-lideranca-situacional",
-              "label": "Framework: Lideranca Situacional",
+              "label": "Framework: Liderança Situacional",
               "depth": 3
             },
             {
               "id": "os-4-quadrantes-da-lideranca-situacional",
-              "label": "Os 4 Quadrantes da Lideranca Situacional",
+              "label": "Os 4 Quadrantes da Liderança Situacional",
               "depth": 3
             },
             {
               "id": "como-aplicar-a-lideranca-situacional-na-pratica",
-              "label": "Como Aplicar a Lideranca Situacional na Pratica",
+              "label": "Como Aplicar a Liderança Situacional na Prática",
               "depth": 3
             },
             {
               "id": "exemplo-pratico-de-delegacao-completa",
-              "label": "Exemplo Pratico de Delegacao Completa",
+              "label": "Exemplo Prático de Delegação Completa",
               "depth": 3
             },
             {
               "id": "exercicio",
-              "label": "Exercicio",
+              "label": "Exercício",
               "depth": 3
             },
             {
@@ -2846,91 +2890,76 @@
             },
             {
               "id": "compilacao-de-frameworks-e-ferramentas",
-              "label": "COMPILACAO DE FRAMEWORKS E FERRAMENTAS",
+              "label": "COMPILAÇÃO DE FRAMEWORKS E FERRAMENTAS",
               "depth": 2
             },
             {
               "id": "compilacao-de-exercicios-e-acoes-praticas",
-              "label": "COMPILACAO DE EXERCICIOS E ACOES PRATICAS",
+              "label": "COMPILAÇÃO DE EXERCÍCIOS E AÇÕES PRÁTICAS",
               "depth": 2
             },
             {
               "id": "dados-estatisticas-e-referencias-cientificas",
-              "label": "DADOS, ESTATISTICAS E REFERENCIAS CIENTIFICAS",
+              "label": "DADOS, ESTATÍSTICAS E REFERÊNCIAS CIENTÍFICAS",
               "depth": 2
             },
             {
               "id": "citacoes-e-principios-notaveis",
-              "label": "CITACOES E PRINCIPIOS NOTAVEIS",
+              "label": "CITAÇÕES E PRINCÍPIOS NOTÁVEIS",
               "depth": 2
-            },
-            {
-              "id": "sobre-o-autor-e-a-empresa",
-              "label": "SOBRE O AUTOR E A EMPRESA",
-              "depth": 2
-            },
-            {
-              "id": "tiago-alves",
-              "label": "Tiago Alves",
-              "depth": 3
-            },
-            {
-              "id": "metta",
-              "label": "Metta",
-              "depth": 3
             },
             {
               "id": "conceitos-chave-e-glossario",
-              "label": "CONCEITOS-CHAVE E GLOSSARIO",
+              "label": "CONCEITOS-CHAVE E GLOSSÁRIO",
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "gestao",
+          "parent": "seis-gestoes",
+          "ordem": 1,
+          "resumo": "Como engajar o time para sair do estado atual e adotar novos comportamentos.",
+          "tituloPagina": "Gestão da Mudança"
         },
         {
           "id": "gestao-ativacao",
           "label": "Gestão da Ativação",
           "source": "metta/metodologia/Metta - Gestão da Ativação.md",
-          "subgroup": "seis-gestoes",
           "h2s": [
             {
-              "id": "sumario-original",
-              "label": "Sumario Original",
-              "depth": 2
-            },
-            {
               "id": "1-visao-geral-resumo",
-              "label": "1. VISAO GERAL / RESUMO",
+              "label": "1. VISÃO GERAL / RESUMO",
               "depth": 2
             },
             {
               "id": "2-capitulos-e-conteudo-detalhado",
-              "label": "2. CAPITULOS E CONTEUDO DETALHADO",
+              "label": "2. CAPÍTULOS E CONTEÚDO DETALHADO",
               "depth": 2
             },
             {
               "id": "21-motivacao",
-              "label": "2.1 MOTIVACAO",
+              "label": "2.1 MOTIVAÇÃO",
               "depth": 3
             },
             {
               "id": "22-ativacao",
-              "label": "2.2 ATIVACAO",
+              "label": "2.2 ATIVAÇÃO",
               "depth": 3
             },
             {
               "id": "23-lider-ativado",
-              "label": "2.3 LIDER ATIVADO",
+              "label": "2.3 LÍDER ATIVADO",
               "depth": 3
             },
             {
               "id": "24-diagnostico-do-lider-ativado",
-              "label": "2.4 DIAGNOSTICO DO LIDER ATIVADO",
+              "label": "2.4 DIAGNÓSTICO DO LÍDER ATIVADO",
               "depth": 3
             },
             {
               "id": "25-ativacao-do-ambiente",
-              "label": "2.5 ATIVACAO DO AMBIENTE",
+              "label": "2.5 ATIVAÇÃO DO AMBIENTE",
               "depth": 3
             },
             {
@@ -2940,7 +2969,7 @@
             },
             {
               "id": "27-diagnostico-da-ativacao-do-vendedor",
-              "label": "2.7 DIAGNOSTICO DA ATIVACAO (do vendedor)",
+              "label": "2.7 DIAGNÓSTICO DA ATIVAÇÃO (do vendedor)",
               "depth": 3
             },
             {
@@ -2960,32 +2989,32 @@
             },
             {
               "id": "31-metodologia-ativacao-acronimo-atitude",
-              "label": "3.1 Metodologia AtivAcao (acronimo ATITUDE)",
+              "label": "3.1 Metodologia Ativação (acrônimo ATITUDE)",
               "depth": 3
             },
             {
               "id": "32-modelo-cha-de-competencia-scott-parry-1996",
-              "label": "3.2 Modelo CHA de Competencia (Scott Parry, 1996)",
+              "label": "3.2 Modelo CHA de Competência (Scott Parry, 1996)",
               "depth": 3
             },
             {
               "id": "33-metodo-a-venda-aplicado-a-lideranca",
-              "label": "3.3 Metodo A VENDA (aplicado a lideranca)",
+              "label": "3.3 Método A VENDA (aplicado a liderança)",
               "depth": 3
             },
             {
               "id": "34-tecnica-saida-para-lidar-com-medos",
-              "label": "3.4 Tecnica SAIDA (para lidar com medos)",
+              "label": "3.4 Técnica SAÍDA (para lidar com medos)",
               "depth": 3
             },
             {
               "id": "35-piramide-de-maslow-adaptada-para-vendas",
-              "label": "3.5 Piramide de Maslow adaptada para vendas",
+              "label": "3.5 Pirâmide de Maslow adaptada para vendas",
               "depth": 3
             },
             {
               "id": "36-momento-ativacao-ferramenta-de-reuniao-semanal",
-              "label": "3.6 Momento AtivAcao (ferramenta de reuniao semanal)",
+              "label": "3.6 Momento Ativação (ferramenta de reunião semanal)",
               "depth": 3
             },
             {
@@ -3000,12 +3029,12 @@
             },
             {
               "id": "39-repreensao-minuto-alinhamento-de-rota",
-              "label": "3.9 Repreensao Minuto (Alinhamento de Rota)",
+              "label": "3.9 Repreensão Minuto (Alinhamento de Rota)",
               "depth": 3
             },
             {
               "id": "310-diagnostico-da-ativacao",
-              "label": "3.10 Diagnostico da AtivAcao",
+              "label": "3.10 Diagnóstico da Ativação",
               "depth": 3
             },
             {
@@ -3025,22 +3054,22 @@
             },
             {
               "id": "314-plano-de-acao-formato-padrao",
-              "label": "3.14 Plano de Acao (formato padrao)",
+              "label": "3.14 Plano de Ação (formato padrão)",
               "depth": 3
             },
             {
               "id": "4-conceitos-e-definicoes-chave",
-              "label": "4. CONCEITOS E DEFINICOES-CHAVE",
+              "label": "4. CONCEITOS E DEFINIÇÕES-CHAVE",
               "depth": 2
             },
             {
               "id": "5-exercicios-e-acoes-praticas",
-              "label": "5. EXERCICIOS E ACOES PRATICAS",
+              "label": "5. EXERCÍCIOS E AÇÕES PRÁTICAS",
               "depth": 2
             },
             {
               "id": "para-o-lider",
-              "label": "Para o Lider",
+              "label": "Para o Líder",
               "depth": 3
             },
             {
@@ -3060,22 +3089,22 @@
             },
             {
               "id": "6-dados-estatisticas-e-referencias-cientificas",
-              "label": "6. DADOS, ESTATISTICAS E REFERENCIAS CIENTIFICAS",
+              "label": "6. DADOS, ESTATÍSTICAS E REFERÊNCIAS CIENTÍFICAS",
               "depth": 2
             },
             {
               "id": "7-citacoes-e-principios-notaveis",
-              "label": "7. CITACOES E PRINCIPIOS NOTAVEIS",
+              "label": "7. CITAÇÕES E PRINCÍPIOS NOTÁVEIS",
               "depth": 2
             },
             {
               "id": "principios-fundamentais",
-              "label": "Principios fundamentais",
+              "label": "Princípios fundamentais",
               "depth": 3
             },
             {
               "id": "citacoes-de-terceiros-utilizadas",
-              "label": "Citacoes de terceiros utilizadas",
+              "label": "Citações de terceiros utilizadas",
               "depth": 3
             },
             {
@@ -3085,91 +3114,86 @@
             },
             {
               "id": "as-6-gestoes-da-meta-batida-posicao-deste-livro-no-todo",
-              "label": "As 6 Gestoes da Meta Batida (posicao deste livro no todo)",
+              "label": "As 6 Gestões da Meta Batida (posição deste livro no todo)",
               "depth": 3
             },
             {
               "id": "fluxo-da-gestao-da-ativacao",
-              "label": "Fluxo da Gestao da Ativacao",
+              "label": "Fluxo da Gestão da Ativação",
               "depth": 3
-            },
-            {
-              "id": "9-sobre-o-autor-e-a-metta",
-              "label": "9. SOBRE O AUTOR E A METTA",
-              "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "gestao",
+          "parent": "seis-gestoes",
+          "ordem": 2,
+          "resumo": "Como fazer a equipe realizar vendas ativas: prospecção, indicação e resgate de clientes.",
+          "tituloPagina": "Gestão da Ativação"
         },
         {
           "id": "gestao-metodo",
           "label": "Gestão do Método",
           "source": "metta/metodologia/Metta - Gestão do Método.md",
-          "subgroup": "seis-gestoes",
           "h2s": [
             {
               "id": "1-visao-geral-resumo",
-              "label": "1. Visao Geral / Resumo",
+              "label": "1. Visão Geral / Resumo",
               "depth": 2
             },
             {
-              "id": "2-sumario-estrutura-do-livro",
-              "label": "2. Sumario / Estrutura do Livro",
-              "depth": 2
-            },
-            {
-              "id": "3-capitulo-1-o-que-e-metodo-de-vendas",
-              "label": "3. Capitulo 1: O que e Metodo de Vendas",
+              "id": "3-o-que-e-metodo-de-vendas",
+              "label": "3. O que é Método de Vendas",
               "depth": 2
             },
             {
               "id": "31-diagnostico-inicial-perguntas-de-reflexao",
-              "label": "3.1. Diagnostico Inicial - Perguntas de Reflexao",
+              "label": "3.1. Diagnóstico Inicial - Perguntas de Reflexão",
               "depth": 3
             },
             {
               "id": "32-realidades-comuns-dos-lideres-de-venda",
-              "label": "3.2. Realidades Comuns dos Lideres de Venda",
+              "label": "3.2. Realidades Comuns dos Líderes de Venda",
               "depth": 3
             },
             {
               "id": "33-definicao-de-metodo-de-vendas",
-              "label": "3.3. Definicao de Metodo de Vendas",
+              "label": "3.3. Definição de Método de Vendas",
               "depth": 3
             },
             {
               "id": "34-os-8-requisitos-do-metodo-de-vendas",
-              "label": "3.4. Os 8 Requisitos do Metodo de Vendas",
+              "label": "3.4. Os 8 Requisitos do Método de Vendas",
               "depth": 3
             },
             {
               "id": "35-como-criar-um-metodo",
-              "label": "3.5. Como Criar um Metodo",
+              "label": "3.5. Como Criar um Método",
               "depth": 3
             },
             {
-              "id": "4-capitulo-2-como-transformar-o-metodo-em-resultados",
-              "label": "4. Capitulo 2: Como Transformar o Metodo em Resultados",
+              "id": "4-como-transformar-o-metodo-em-resultados",
+              "label": "4. Como Transformar o Método em Resultados",
               "depth": 2
             },
             {
               "id": "41-ciencia-do-aprendizado-e-esquecimento",
-              "label": "4.1. Ciencia do Aprendizado e Esquecimento",
+              "label": "4.1. Ciência do Aprendizado e Esquecimento",
               "depth": 3
             },
             {
               "id": "42-piramide-de-aprendizagem-de-william-glasser",
-              "label": "4.2. Piramide de Aprendizagem de William Glasser",
+              "label": "4.2. Pirâmide de Aprendizagem de William Glasser",
               "depth": 3
             },
             {
               "id": "43-tres-focos-de-treinamento-baseados-em-glasser",
-              "label": "4.3. Tres Focos de Treinamento (baseados em Glasser)",
+              "label": "4.3. Três Focos de Treinamento (baseados em Glasser)",
               "depth": 3
             },
             {
               "id": "44-os-4-estagios-da-gestao-do-metodo",
-              "label": "4.4. Os 4 Estagios da Gestao do Metodo",
+              "label": "4.4. Os 4 Estágios da Gestão do Método",
               "depth": 3
             },
             {
@@ -3183,18 +3207,18 @@
               "depth": 3
             },
             {
-              "id": "5-capitulo-3-como-vender-o-metodo",
-              "label": "5. Capitulo 3: Como Vender o Metodo",
+              "id": "5-como-vender-o-metodo",
+              "label": "5. Como Vender o Método",
               "depth": 2
             },
             {
               "id": "51-preparacao-do-lider",
-              "label": "5.1. Preparacao do Lider",
+              "label": "5.1. Preparação do Líder",
               "depth": 3
             },
             {
               "id": "52-referencia-a-marshall-rosenberg",
-              "label": "5.2. Referencia a Marshall Rosenberg",
+              "label": "5.2. Referência a Marshall Rosenberg",
               "depth": 3
             },
             {
@@ -3204,27 +3228,27 @@
             },
             {
               "id": "54-impressoes-negativas-a-evitar",
-              "label": "5.4. Impressoes Negativas a Evitar",
+              "label": "5.4. Impressões Negativas a Evitar",
               "depth": 3
             },
             {
               "id": "55-framework-a-venda-etapas-da-venda-do-metodo-para-a-equipe",
-              "label": "5.5. Framework A VENDA - Etapas da Venda do Metodo para a Equipe",
+              "label": "5.5. Framework A VENDA - Etapas da Venda do Método para a Equipe",
               "depth": 3
             },
             {
               "id": "56-exercicio-pratico",
-              "label": "5.6. Exercicio Pratico",
+              "label": "5.6. Exercício Prático",
               "depth": 3
             },
             {
-              "id": "6-capitulo-4-como-ensinar-o-metodo",
-              "label": "6. Capitulo 4: Como Ensinar o Metodo",
+              "id": "6-como-ensinar-o-metodo",
+              "label": "6. Como Ensinar o Método",
               "depth": 2
             },
             {
               "id": "61-estudo-do-metodo-de-vendas",
-              "label": "6.1. Estudo do Metodo de Vendas",
+              "label": "6.1. Estudo do Método de Vendas",
               "depth": 3
             },
             {
@@ -3234,37 +3258,37 @@
             },
             {
               "id": "63-exercicio-de-ensino",
-              "label": "6.3. Exercicio de Ensino",
+              "label": "6.3. Exercício de Ensino",
               "depth": 3
             },
             {
               "id": "64-debate-do-metodo-de-vendas",
-              "label": "6.4. Debate do Metodo de Vendas",
+              "label": "6.4. Debate do Método de Vendas",
               "depth": 3
             },
             {
               "id": "65-exercicio-de-debate",
-              "label": "6.5. Exercicio de Debate",
+              "label": "6.5. Exercício de Debate",
               "depth": 3
             },
             {
-              "id": "7-capitulo-5-como-treinar-o-metodo",
-              "label": "7. Capitulo 5: Como Treinar o Metodo",
+              "id": "7-como-treinar-o-metodo",
+              "label": "7. Como Treinar o Método",
               "depth": 2
             },
             {
               "id": "71-mudanca-de-postura-do-lider",
-              "label": "7.1. Mudanca de Postura do Lider",
+              "label": "7.1. Mudança de Postura do Líder",
               "depth": 3
             },
             {
               "id": "72-desafios-que-surgem-na-pratica",
-              "label": "7.2. Desafios que Surgem na Pratica",
+              "label": "7.2. Desafios que Surgem na Prática",
               "depth": 3
             },
             {
               "id": "73-criterios-para-escolher-por-quem-comecar",
-              "label": "7.3. Criterios para Escolher por Quem Comecar",
+              "label": "7.3. Critérios para Escolher por Quem Começar",
               "depth": 3
             },
             {
@@ -3274,7 +3298,7 @@
             },
             {
               "id": "75-mapa-da-venda-ferramenta-de-avaliacao",
-              "label": "7.5. Mapa da Venda - Ferramenta de Avaliacao",
+              "label": "7.5. Mapa da Venda - Ferramenta de Avaliação",
               "depth": 3
             },
             {
@@ -3284,47 +3308,47 @@
             },
             {
               "id": "77-autoavaliacao-com-o-mapa-da-venda",
-              "label": "7.7. Autoavaliacao com o Mapa da Venda",
+              "label": "7.7. Autoavaliação com o Mapa da Venda",
               "depth": 3
             },
             {
               "id": "78-dinamicas-de-simulacao-de-vendas",
-              "label": "7.8. Dinamicas de Simulacao de Vendas",
+              "label": "7.8. Dinâmicas de Simulação de Vendas",
               "depth": 3
             },
             {
               "id": "79-feedback-sanduiche-a-tecnica-errada",
-              "label": "7.9. Feedback Sanduiche - A Tecnica ERRADA",
+              "label": "7.9. Feedback Sanduiche - A Técnica ERRADA",
               "depth": 3
             },
             {
               "id": "710-feedback-treinador-a-tecnica-correta",
-              "label": "7.10. Feedback Treinador - A Tecnica CORRETA",
+              "label": "7.10. Feedback Treinador - A Técnica CORRETA",
               "depth": 3
             },
             {
               "id": "711-exercicio-pratico-feedback-treinador",
-              "label": "7.11. Exercicio Pratico - Feedback Treinador",
+              "label": "7.11. Exercício Prático - Feedback Treinador",
               "depth": 3
             },
             {
-              "id": "8-capitulo-6-como-gerir-o-metodo",
-              "label": "8. Capitulo 6: Como Gerir o Metodo",
+              "id": "8-como-gerir-o-metodo",
+              "label": "8. Como Gerir o Método",
               "depth": 2
             },
             {
               "id": "81-indicadores-x-treinamento-do-metodo",
-              "label": "8.1. Indicadores x Treinamento do Metodo",
+              "label": "8.1. Indicadores x Treinamento do Método",
               "depth": 3
             },
             {
               "id": "82-framework-fato-causa-acao",
-              "label": "8.2. Framework Fato-Causa-Acao",
+              "label": "8.2. Framework Fato-Causa-Ação",
               "depth": 3
             },
             {
               "id": "83-exemplo-completo-ticket-medio",
-              "label": "8.3. Exemplo Completo: Ticket Medio",
+              "label": "8.3. Exemplo Completo: Ticket Médio",
               "depth": 3
             },
             {
@@ -3334,17 +3358,17 @@
             },
             {
               "id": "85-exemplo-pratico-desenvolvimento-de-ticket-medio",
-              "label": "8.5. Exemplo Pratico: Desenvolvimento de Ticket Medio",
+              "label": "8.5. Exemplo Prático: Desenvolvimento de Ticket Médio",
               "depth": 3
             },
             {
               "id": "86-aprimoramento-do-metodo",
-              "label": "8.6. Aprimoramento do Metodo",
+              "label": "8.6. Aprimoramento do Método",
               "depth": 3
             },
             {
               "id": "87-gestao-do-metodo-gestao-do-conhecimento",
-              "label": "8.7. Gestao do Metodo + Gestao do Conhecimento",
+              "label": "8.7. Gestão do Método + Gestão do Conhecimento",
               "depth": 3
             },
             {
@@ -3364,27 +3388,27 @@
             },
             {
               "id": "93-dinamicas-de-treinamento",
-              "label": "9.3. Dinamicas de Treinamento",
+              "label": "9.3. Dinâmicas de Treinamento",
               "depth": 3
             },
             {
               "id": "10-todos-os-conceitos-e-definicoes-chave",
-              "label": "10. Todos os Conceitos e Definicoes-Chave",
+              "label": "10. Todos os Conceitos e Definições-Chave",
               "depth": 2
             },
             {
               "id": "11-todos-os-exercicios-e-acoes-praticas",
-              "label": "11. Todos os Exercicios e Acoes Praticas",
+              "label": "11. Todos os Exercícios e Ações Práticas",
               "depth": 2
             },
             {
               "id": "12-dados-estatisticas-e-citacoes-academicas",
-              "label": "12. Dados, Estatisticas e Citacoes Academicas",
+              "label": "12. Dados, Estatísticas e Citações Acadêmicas",
               "depth": 2
             },
             {
               "id": "pesquisadores-e-teoricos-citados",
-              "label": "Pesquisadores e Teoricos Citados",
+              "label": "Pesquisadores e Teóricos Citados",
               "depth": 3
             },
             {
@@ -3394,56 +3418,51 @@
             },
             {
               "id": "inspiracoes-culturais",
-              "label": "Inspiracoes Culturais",
+              "label": "Inspirações Culturais",
               "depth": 3
             },
             {
               "id": "13-principios-e-citacoes-notaveis",
-              "label": "13. Principios e Citacoes Notaveis",
+              "label": "13. Princípios e Citações Notáveis",
               "depth": 2
             },
             {
               "id": "14-conexoes-com-outros-livros-da-serie",
-              "label": "14. Conexoes com Outros Livros da Serie",
+              "label": "14. Conexões com Outros Livros da Série",
               "depth": 2
             },
             {
               "id": "referencias-a-outros-livros",
-              "label": "Referencias a Outros Livros",
+              "label": "Referências a Outros Livros",
               "depth": 3
             },
             {
               "id": "metodo-de-vendas-quota-vendaquot-etapas",
-              "label": "Metodo de Vendas &quot;A VENDA&quot; (Etapas)",
+              "label": "Método de Vendas &quot;A VENDA&quot; (Etapas)",
               "depth": 3
-            },
-            {
-              "id": "15-sobre-o-autor-e-a-metta",
-              "label": "15. Sobre o Autor e a Metta",
-              "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "gestao",
+          "parent": "seis-gestoes",
+          "ordem": 3,
+          "resumo": "Como garantir que o método de vendas seja aplicado no dia a dia.",
+          "tituloPagina": "Gestão do Método"
         },
         {
           "id": "gestao-conhecimento",
           "label": "Gestão do Conhecimento",
           "source": "metta/metodologia/Metta - Gestão do Conhecimento.md",
-          "subgroup": "seis-gestoes",
           "h2s": [
             {
               "id": "1-visao-geral-resumo",
-              "label": "1. Visao Geral / Resumo",
+              "label": "1. Visão Geral / Resumo",
               "depth": 2
             },
             {
-              "id": "2-sumario-estrutura-do-livro",
-              "label": "2. Sumario / Estrutura do Livro",
-              "depth": 2
-            },
-            {
-              "id": "3-capitulo-1-o-que-e-gestao-do-conhecimento-p-3",
-              "label": "3. Capitulo 1: O que e Gestao do Conhecimento? (p. 3)",
+              "id": "3-o-que-e-gestao-do-conhecimento-p-3",
+              "label": "3. O que é Gestão do Conhecimento? (p. 3)",
               "depth": 2
             },
             {
@@ -3453,7 +3472,7 @@
             },
             {
               "id": "tres-pilares-do-aprendizado",
-              "label": "Tres Pilares do Aprendizado",
+              "label": "Três Pilares do Aprendizado",
               "depth": 3
             },
             {
@@ -3463,22 +3482,22 @@
             },
             {
               "id": "perguntas-retoricas-de-abertura",
-              "label": "Perguntas Retoricas de Abertura",
+              "label": "Perguntas Retóricas de Abertura",
               "depth": 3
             },
             {
               "id": "exercicio-pratico",
-              "label": "Exercicio Pratico",
+              "label": "Exercício Prático",
               "depth": 3
             },
             {
-              "id": "4-capitulo-2-gestao-de-qual-conhecimento-pp-4-14",
-              "label": "4. Capitulo 2: Gestao de qual Conhecimento? (pp. 4-14)",
+              "id": "4-gestao-de-qual-conhecimento-pp-4-14",
+              "label": "4. Gestão de qual Conhecimento? (pp. 4-14)",
               "depth": 2
             },
             {
               "id": "41-produtosservicos-p-4-5",
-              "label": "4.1. Produtos/Servicos (p. 4-5)",
+              "label": "4.1. Produtos/Serviços (p. 4-5)",
               "depth": 3
             },
             {
@@ -3493,12 +3512,12 @@
             },
             {
               "id": "44-promocoes-p-8",
-              "label": "4.4. Promocoes (p. 8)",
+              "label": "4.4. Promoções (p. 8)",
               "depth": 3
             },
             {
               "id": "45-politica-comercial-p-8",
-              "label": "4.5. Politica Comercial (p. 8)",
+              "label": "4.5. Política Comercial (p. 8)",
               "depth": 3
             },
             {
@@ -3508,7 +3527,7 @@
             },
             {
               "id": "47-matematica-p-10",
-              "label": "4.7. Matematica (p. 10)",
+              "label": "4.7. Matemática (p. 10)",
               "depth": 3
             },
             {
@@ -3523,27 +3542,27 @@
             },
             {
               "id": "410-concorrencia-p-12-13",
-              "label": "4.10. Concorrencia (p. 12-13)",
+              "label": "4.10. Concorrência (p. 12-13)",
               "depth": 3
             },
             {
               "id": "411-ligacao-entre-indicadores-e-conhecimentos-p-14",
-              "label": "4.11. Ligacao entre Indicadores e Conhecimentos (p. 14)",
+              "label": "4.11. Ligação entre Indicadores e Conhecimentos (p. 14)",
               "depth": 3
             },
             {
-              "id": "5-capitulo-3-diagnosticar-para-acertar-pp-15-20",
-              "label": "5. Capitulo 3: Diagnosticar para Acertar (pp. 15-20)",
+              "id": "5-diagnosticar-para-acertar-pp-15-20",
+              "label": "5. Diagnosticar para Acertar (pp. 15-20)",
               "depth": 2
             },
             {
               "id": "51-os-tres-erros-dos-chefes-nao-lideres",
-              "label": "5.1. Os Tres Erros dos Chefes (nao lideres)",
+              "label": "5.1. Os Três Erros dos Chefes (não líderes)",
               "depth": 3
             },
             {
               "id": "52-o-caminho-do-lider-treinador",
-              "label": "5.2. O Caminho do Lider Treinador",
+              "label": "5.2. O Caminho do Líder Treinador",
               "depth": 3
             },
             {
@@ -3558,17 +3577,17 @@
             },
             {
               "id": "55-prioridades-para-diagnostico-p-16",
-              "label": "5.5. Prioridades para Diagnostico (p. 16)",
+              "label": "5.5. Prioridades para Diagnóstico (p. 16)",
               "depth": 3
             },
             {
               "id": "56-diagnostico-de-conhecimento-teste-pp-16-18",
-              "label": "5.6. Diagnostico de Conhecimento -- Teste (pp. 16-18)",
+              "label": "5.6. Diagnóstico de Conhecimento -- Teste (pp. 16-18)",
               "depth": 3
             },
             {
               "id": "57-exemplos-de-questoes-para-diagnostico-p-17",
-              "label": "5.7. Exemplos de Questoes para Diagnostico (p. 17)",
+              "label": "5.7. Exemplos de Questões para Diagnóstico (p. 17)",
               "depth": 3
             },
             {
@@ -3578,32 +3597,32 @@
             },
             {
               "id": "59-diagnostico-de-conhecimento-sabatina-p-18",
-              "label": "5.9. Diagnostico de Conhecimento -- Sabatina (p. 18)",
+              "label": "5.9. Diagnóstico de Conhecimento -- Sabatina (p. 18)",
               "depth": 3
             },
             {
               "id": "510-niveis-de-conhecimento-dos-vendedores-pp-18-20",
-              "label": "5.10. Niveis de Conhecimento dos Vendedores (pp. 18-20)",
+              "label": "5.10. Níveis de Conhecimento dos Vendedores (pp. 18-20)",
               "depth": 3
             },
             {
               "id": "511-perfis-por-nivel-p-21",
-              "label": "5.11. Perfis por Nivel (p. 21)",
+              "label": "5.11. Perfis por Nível (p. 21)",
               "depth": 3
             },
             {
-              "id": "6-capitulo-4-transformando-conhecimento-em-resultados-pp-21-41",
-              "label": "6. Capitulo 4: Transformando Conhecimento em Resultados (pp. 21-41)",
+              "id": "6-transformando-conhecimento-em-resultados-pp-21-41",
+              "label": "6. Transformando Conhecimento em Resultados (pp. 21-41)",
               "depth": 2
             },
             {
               "id": "61-treinando-caracteristicas-p-21",
-              "label": "6.1. Treinando Caracteristicas (p. 21)",
+              "label": "6.1. Treinando Características (p. 21)",
               "depth": 3
             },
             {
               "id": "62-treinando-beneficios-p-22",
-              "label": "6.2. Treinando Beneficios (p. 22)",
+              "label": "6.2. Treinando Benefícios (p. 22)",
               "depth": 3
             },
             {
@@ -3613,7 +3632,7 @@
             },
             {
               "id": "64-caderno-de-beneficios-ao-perfil-do-cliente-pp-22-24",
-              "label": "6.4. Caderno de Beneficios ao Perfil do Cliente (pp. 22-24)",
+              "label": "6.4. Caderno de Benefícios ao Perfil do Cliente (pp. 22-24)",
               "depth": 3
             },
             {
@@ -3623,7 +3642,7 @@
             },
             {
               "id": "66-resultados-do-caderno-de-beneficios-p-24",
-              "label": "6.6. Resultados do Caderno de Beneficios (p. 24)",
+              "label": "6.6. Resultados do Caderno de Benefícios (p. 24)",
               "depth": 3
             },
             {
@@ -3633,7 +3652,7 @@
             },
             {
               "id": "68-jogo-de-caracteristicas-e-beneficios-p-25",
-              "label": "6.8. Jogo de Caracteristicas e Beneficios (p. 25)",
+              "label": "6.8. Jogo de Características e Benefícios (p. 25)",
               "depth": 3
             },
             {
@@ -3648,32 +3667,32 @@
             },
             {
               "id": "611-treinando-a-customizacao-de-beneficios-ao-perfil-do-cliente-pp-32-34",
-              "label": "6.11. Treinando a Customizacao de Beneficios ao Perfil do Cliente (pp. 32-34)",
+              "label": "6.11. Treinando a Customização de Benefícios ao Perfil do Cliente (pp. 32-34)",
               "depth": 3
             },
             {
               "id": "612-produtosservicos-novos-no-portfolio-p-35",
-              "label": "6.12. Produtos/Servicos Novos no Portfolio (p. 35)",
+              "label": "6.12. Produtos/Serviços Novos no Portfólio (p. 35)",
               "depth": 3
             },
             {
               "id": "613-vendedores-que-nao-praticam-pp-37-38",
-              "label": "6.13. Vendedores que Nao Praticam (pp. 37-38)",
+              "label": "6.13. Vendedores que Não Praticam (pp. 37-38)",
               "depth": 3
             },
             {
               "id": "614-ferramenta-fca-fato-causa-e-acao-pp-38-40",
-              "label": "6.14. Ferramenta FCA -- Fato, Causa e Acao (pp. 38-40)",
+              "label": "6.14. Ferramenta FCA -- Fato, Causa e Ação (pp. 38-40)",
               "depth": 3
             },
             {
               "id": "615-planejando-a-frequencia-de-treinamentos-p-41",
-              "label": "6.15. Planejando a Frequencia de Treinamentos (p. 41)",
+              "label": "6.15. Planejando a Frequência de Treinamentos (p. 41)",
               "depth": 3
             },
             {
-              "id": "7-capitulo-5-gestao-do-conhecimento-gestao-da-meta-p-42",
-              "label": "7. Capitulo 5: Gestao do Conhecimento + Gestao da Meta (p. 42)",
+              "id": "7-gestao-do-conhecimento-gestao-da-meta-p-42",
+              "label": "7. Gestão do Conhecimento + Gestão da Meta (p. 42)",
               "depth": 2
             },
             {
@@ -3683,121 +3702,111 @@
             },
             {
               "id": "9-todos-os-conceitos-e-definicoes-chave",
-              "label": "9. Todos os Conceitos e Definicoes-Chave",
+              "label": "9. Todos os Conceitos e Definições-Chave",
               "depth": 2
             },
             {
               "id": "10-todos-os-exercicios-praticos-acoes",
-              "label": "10. Todos os Exercicios Praticos / Acoes",
+              "label": "10. Todos os Exercícios Práticos / Ações",
               "depth": 2
             },
             {
               "id": "11-10-conhecimentos-basicos-necessarios-consolidado",
-              "label": "11. 10 Conhecimentos Basicos Necessarios (Consolidado)",
+              "label": "11. 10 Conhecimentos Básicos Necessários (Consolidado)",
               "depth": 2
             },
             {
               "id": "12-principios-e-frases-notaveis",
-              "label": "12. Principios e Frases Notaveis",
+              "label": "12. Princípios e Frases Notáveis",
               "depth": 2
-            },
-            {
-              "id": "13-dados-e-informacoes-sobre-o-autorempresa",
-              "label": "13. Dados e Informacoes sobre o Autor/Empresa",
-              "depth": 2
-            },
-            {
-              "id": "tiago-alves",
-              "label": "Tiago Alves",
-              "depth": 3
-            },
-            {
-              "id": "metta",
-              "label": "Metta",
-              "depth": 3
             },
             {
               "id": "14-conexoes-com-outros-livros-da-serie-quotas-6-gestoes-da-meta-batidaquot",
-              "label": "14. Conexoes com Outros Livros da Serie &quot;As 6 Gestoes da Meta Batida&quot;",
+              "label": "14. Conexões com Outros Livros da Série &quot;As 6 Gestões da Meta Batida&quot;",
               "depth": 2
             },
             {
               "id": "15-fluxo-completo-da-gestao-do-conhecimento-sintese",
-              "label": "15. Fluxo Completo da Gestao do Conhecimento (Sintese)",
+              "label": "15. Fluxo Completo da Gestão do Conhecimento (Síntese)",
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "gestao",
+          "parent": "seis-gestoes",
+          "ordem": 4,
+          "resumo": "Como desenvolver continuamente o domínio do time sobre produtos, serviços, mercado e concorrência.",
+          "tituloPagina": "Gestão do Conhecimento"
         },
         {
           "id": "gestao-meta",
           "label": "Gestão da Meta",
           "source": "metta/metodologia/Metta - Gestão da Meta.md",
-          "subgroup": "seis-gestoes",
           "h2s": [
             {
               "id": "1-visao-geral-resumo",
-              "label": "1. Visao Geral / Resumo",
+              "label": "1. Visão Geral / Resumo",
               "depth": 2
             },
             {
               "id": "sequencia-das-6-gestoes-da-meta-batida",
-              "label": "Sequencia das 6 Gestoes da Meta Batida",
+              "label": "Sequência das 6 Gestões da Meta Batida",
               "depth": 3
             },
             {
               "id": "2-capitulos-e-conteudo-completo",
-              "label": "2. Capitulos e Conteudo Completo",
+              "label": "2. Capítulos e Conteúdo Completo",
               "depth": 2
             },
             {
-              "id": "capitulo-1-por-que-e-preciso-construir-resultados-para-atingir-a-meta",
-              "label": "Capitulo 1: Por Que e Preciso Construir Resultados Para Atingir a Meta?",
+              "id": "por-que-e-preciso-construir-resultados-para-atingir-a-meta",
+              "label": "Por Que é Preciso Construir Resultados Para Atingir a Meta?",
               "depth": 3
             },
             {
-              "id": "capitulo-2-o-que-e-gestao-da-meta",
-              "label": "Capitulo 2: O Que e Gestao da Meta?",
+              "id": "o-que-e-gestao-da-meta",
+              "label": "O Que é Gestão da Meta?",
               "depth": 3
             },
             {
-              "id": "capitulo-3-gerir-qual-resultado",
-              "label": "Capitulo 3: Gerir Qual Resultado?",
+              "id": "gerir-qual-resultado",
+              "label": "Gerir Qual Resultado?",
               "depth": 3
             },
             {
-              "id": "capitulo-4-tornando-a-meta-atingivel",
-              "label": "Capitulo 4: Tornando a Meta Atingivel",
+              "id": "tornando-a-meta-atingivel",
+              "label": "Tornando a Meta Atingível",
               "depth": 3
             },
             {
-              "id": "capitulo-5-traduzindo-metas-em-objetivos-pessoais",
-              "label": "Capitulo 5: Traduzindo Metas em Objetivos Pessoais",
+              "id": "traduzindo-metas-em-objetivos-pessoais",
+              "label": "Traduzindo Metas em Objetivos Pessoais",
               "depth": 3
             },
             {
-              "id": "capitulo-6-fca-fato-causa-acao",
-              "label": "Capitulo 6: FCA (Fato, Causa, Acao)",
+              "id": "fca-fato-causa-acao",
+              "label": "FCA (Fato, Causa, Ação)",
               "depth": 3
             },
             {
-              "id": "capitulo-7-ensine-o-time-a-pensar-sobre-a-meta",
-              "label": "Capitulo 7: Ensine o Time a Pensar Sobre a Meta",
+              "id": "ensine-o-time-a-pensar-sobre-a-meta",
+              "label": "Ensine o Time a Pensar Sobre a Meta",
               "depth": 3
             },
             {
-              "id": "capitulo-8-reuniao-de-resultados-com-o-time",
-              "label": "Capitulo 8: Reuniao de Resultados com o Time",
+              "id": "reuniao-de-resultados-com-o-time",
+              "label": "Reunião de Resultados com o Time",
               "depth": 3
             },
             {
-              "id": "capitulo-9-reuniao-individual-de-resultados",
-              "label": "Capitulo 9: Reuniao Individual de Resultados",
+              "id": "reuniao-individual-de-resultados",
+              "label": "Reunião Individual de Resultados",
               "depth": 3
             },
             {
-              "id": "capitulo-10-todas-as-gestoes-mobilizadas-pela-meta",
-              "label": "Capitulo 10: Todas as Gestoes Mobilizadas pela Meta",
+              "id": "todas-as-gestoes-mobilizadas-pela-meta",
+              "label": "Todas as Gestões Mobilizadas pela Meta",
               "depth": 3
             },
             {
@@ -3807,32 +3816,32 @@
             },
             {
               "id": "framework-fca-fato-causa-acao",
-              "label": "Framework FCA (Fato, Causa, Acao)",
+              "label": "Framework FCA (Fato, Causa, Ação)",
               "depth": 3
             },
             {
               "id": "acrostico-metas",
-              "label": "Acrostico METAS",
+              "label": "Acróstico METAS",
               "depth": 3
             },
             {
               "id": "acrostico-atitude",
-              "label": "Acrostico ATITUDE",
+              "label": "Acróstico ATITUDE",
               "depth": 3
             },
             {
               "id": "tecnica-dos-5-porques",
-              "label": "Tecnica dos 5 Porques",
+              "label": "Técnica dos 5 Porquês",
               "depth": 3
             },
             {
               "id": "triade-cha-conhecimento-habilidade-atitude",
-              "label": "Triade CHA (Conhecimento, Habilidade, Atitude)",
+              "label": "Tríade CHA (Conhecimento, Habilidade, Atitude)",
               "depth": 3
             },
             {
               "id": "classificacao-de-indicadores-fim-meio-desenvolvimento",
-              "label": "Classificacao de Indicadores (Fim, Meio, Desenvolvimento)",
+              "label": "Classificação de Indicadores (Fim, Meio, Desenvolvimento)",
               "depth": 3
             },
             {
@@ -3852,32 +3861,32 @@
             },
             {
               "id": "caderno-de-caracteristicas-e-beneficios",
-              "label": "Caderno de Caracteristicas e Beneficios",
+              "label": "Caderno de Características e Benefícios",
               "depth": 3
             },
             {
               "id": "metodo-de-vendas-quota-vendaquot",
-              "label": "Metodo de Vendas &quot;A VENDA&quot;",
+              "label": "Método de Vendas &quot;A VENDA&quot;",
               "depth": 3
             },
             {
               "id": "cronograma-estrategico-de-vendedores",
-              "label": "Cronograma Estrategico de Vendedores",
+              "label": "Cronograma Estratégico de Vendedores",
               "depth": 3
             },
             {
               "id": "4-todos-os-conceitos-e-definicoes",
-              "label": "4. Todos os Conceitos e Definicoes",
+              "label": "4. Todos os Conceitos e Definições",
               "depth": 2
             },
             {
               "id": "5-exercicios-e-atividades-praticas",
-              "label": "5. Exercicios e Atividades Praticas",
+              "label": "5. Exercícios e Atividades Práticas",
               "depth": 2
             },
             {
               "id": "6-dados-estatisticas-e-citacoes",
-              "label": "6. Dados, Estatisticas e Citacoes",
+              "label": "6. Dados, Estatísticas e Citações",
               "depth": 2
             },
             {
@@ -3887,51 +3896,41 @@
             },
             {
               "id": "caso-pratico-lia-vs-adriana",
-              "label": "Caso Pratico Lia vs. Adriana",
-              "depth": 3
-            },
-            {
-              "id": "sobre-o-autor-tiago-alves",
-              "label": "Sobre o Autor (Tiago Alves)",
+              "label": "Caso Prático Lia vs. Adriana",
               "depth": 3
             },
             {
               "id": "7-principios-e-frases-notaveis",
-              "label": "7. Principios e Frases Notaveis",
+              "label": "7. Princípios e Frases Notáveis",
               "depth": 2
             },
             {
               "id": "8-conexoes-com-as-outras-gestoes",
-              "label": "8. Conexoes com as Outras Gestoes",
-              "depth": 2
-            },
-            {
-              "id": "9-sobre-a-metta",
-              "label": "9. Sobre a Metta",
+              "label": "8. Conexões com as Outras Gestões",
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "gestao",
+          "parent": "seis-gestoes",
+          "ordem": 5,
+          "resumo": "Como acompanhar os indicadores e corrigir a rota antes que o mês acabe.",
+          "tituloPagina": "Gestão da Meta"
         },
         {
           "id": "gestao-tempo",
           "label": "Gestão do Tempo",
           "source": "metta/metodologia/Metta - Gestão do Tempo.md",
-          "subgroup": "seis-gestoes",
           "h2s": [
             {
-              "id": "sumario-do-livro",
-              "label": "Sumario do Livro",
-              "depth": 2
-            },
-            {
               "id": "1-introducao",
-              "label": "1. Introducao",
+              "label": "1. Introdução",
               "depth": 2
             },
             {
               "id": "reflexao-sobre-o-tempo-de-vida",
-              "label": "Reflexao sobre o Tempo de Vida",
+              "label": "Reflexão sobre o Tempo de Vida",
               "depth": 3
             },
             {
@@ -3941,7 +3940,7 @@
             },
             {
               "id": "conceito-urgencia-de-agir",
-              "label": "Conceito: Urgencia de Agir",
+              "label": "Conceito: Urgência de Agir",
               "depth": 3
             },
             {
@@ -3951,82 +3950,82 @@
             },
             {
               "id": "multiplicacao-de-valor-na-lideranca",
-              "label": "Multiplicacao de Valor na Lideranca",
+              "label": "Multiplicação de Valor na Liderança",
               "depth": 3
             },
             {
               "id": "citacao-destaque",
-              "label": "Citacao Destaque",
+              "label": "Citação Destaque",
               "depth": 3
             },
             {
               "id": "3-os-mitos-da-gestao-do-tempo",
-              "label": "3. Os Mitos da Gestao do Tempo",
+              "label": "3. Os Mitos da Gestão do Tempo",
               "depth": 2
             },
             {
               "id": "mito-1-quotvida-pessoal-e-vida-profissional-nao-se-misturamquot",
-              "label": "Mito 1: &quot;Vida pessoal e vida profissional nao se misturam&quot;",
+              "label": "Mito 1: &quot;Vida pessoal e vida profissional não se misturam&quot;",
               "depth": 3
             },
             {
               "id": "mito-2-equilibrio-entre-vida-pessoal-e-profissional",
-              "label": "Mito 2: Equilibrio entre vida pessoal e profissional",
+              "label": "Mito 2: Equilíbrio entre vida pessoal e profissional",
               "depth": 3
             },
             {
               "id": "mito-3-quotfazer-gestao-do-tempo-engessa-a-rotinaquot",
-              "label": "Mito 3: &quot;Fazer gestao do tempo engessa a rotina&quot;",
+              "label": "Mito 3: &quot;Fazer gestão do tempo engessa a rotina&quot;",
               "depth": 3
             },
             {
               "id": "mito-4-quota-area-comercial-e-muito-volatilquot",
-              "label": "Mito 4: &quot;A area comercial e muito volatil&quot;",
+              "label": "Mito 4: &quot;A área comercial é muito volatil&quot;",
               "depth": 3
             },
             {
               "id": "mito-5-quoto-lider-precisa-estar-sempre-com-o-timequot",
-              "label": "Mito 5: &quot;O lider precisa estar sempre com o time&quot;",
+              "label": "Mito 5: &quot;O líder precisa estar sempre com o time&quot;",
               "depth": 3
             },
             {
               "id": "mito-6-quoto-lider-e-bom-quando-o-time-nao-precisa-delequot",
-              "label": "Mito 6: &quot;O lider e bom quando o time nao precisa dele&quot;",
+              "label": "Mito 6: &quot;O líder e bom quando o time não precisa dele&quot;",
               "depth": 3
             },
             {
               "id": "4-ativando-a-gestao-do-tempo",
-              "label": "4. Ativando a Gestao do Tempo",
+              "label": "4. Ativando a Gestão do Tempo",
               "depth": 2
             },
             {
               "id": "acronimo-atitude",
-              "label": "Acronimo ATITUDE",
+              "label": "Acrônimo ATITUDE",
               "depth": 3
             },
             {
               "id": "checklist-da-ativacao-na-gestao-do-tempo",
-              "label": "Checklist da AtivAcao na Gestao do Tempo",
+              "label": "Checklist da Ativação na Gestão do Tempo",
               "depth": 3
             },
             {
               "id": "exercicio-plano-de-acao-pos-checklist",
-              "label": "Exercicio: Plano de Acao pos-Checklist",
+              "label": "Exercício: Plano de Ação pós-Checklist",
               "depth": 3
             },
             {
               "id": "5-a-construcao-da-gestao-do-tempo",
-              "label": "5. A Construcao da Gestao do Tempo",
+              "label": "5. A Construção da Gestão do Tempo",
               "depth": 2
             },
             {
               "id": "como-as-5-gestoes-anteriores-impactam-a-gestao-do-tempo",
-              "label": "Como as 5 Gestoes Anteriores Impactam a Gestao do Tempo",
+              "label": "Como as 5 Gestões Anteriores Impactam a Gestão do Tempo",
               "depth": 3
             },
             {
               "id": "6-triade-da-gestao-do-tempo-em-vendas",
-              "label": "6. Triade da Gestao do Tempo em Vendas",
+              "label": "6. Tríade da Gestão do Tempo em Vendas",
               "depth": 2
             },
             {
@@ -4036,37 +4035,37 @@
             },
             {
               "id": "os-3-fatores-da-triade",
-              "label": "Os 3 Fatores da Triade",
+              "label": "Os 3 Fatores da Tríade",
               "depth": 3
             },
             {
               "id": "perfis-de-lider-pela-triade",
-              "label": "Perfis de Lider pela Triade",
+              "label": "Perfis de Líder pela Tríade",
               "depth": 3
             },
             {
               "id": "exemplos-de-lideres-completos-referencias-historicas",
-              "label": "Exemplos de Lideres Completos (Referencias Historicas)",
+              "label": "Exemplos de Líderes Completos (Referências Históricas)",
               "depth": 3
             },
             {
               "id": "proporcao-ideal-da-triade",
-              "label": "Proporcao Ideal da Triade",
+              "label": "Proporção Ideal da Tríade",
               "depth": 3
             },
             {
               "id": "diagnostico-da-gestao-do-tempo-checklist-de-autoavaliacao",
-              "label": "Diagnostico da Gestao do Tempo (Checklist de Autoavaliacao)",
+              "label": "Diagnóstico da Gestão do Tempo (Checklist de Autoavaliação)",
               "depth": 3
             },
             {
               "id": "classificacao-do-diagnostico",
-              "label": "Classificacao do Diagnostico",
+              "label": "Classificação do Diagnóstico",
               "depth": 3
             },
             {
               "id": "7-os-3-r39s-o-segredo-de-quem-transforma-intencao-em-acao",
-              "label": "7. Os 3 R&#39;s - O Segredo de Quem Transforma Intencao em Acao",
+              "label": "7. Os 3 R&#39;s - O Segredo de Quem Transforma Intenção em Ação",
               "depth": 2
             },
             {
@@ -4076,42 +4075,42 @@
             },
             {
               "id": "relacao-com-disciplina",
-              "label": "Relacao com Disciplina",
+              "label": "Relação com Disciplina",
               "depth": 3
             },
             {
               "id": "exemplo-didatico-crianca-aprendendo-a-escovar-os-dentes",
-              "label": "Exemplo Didatico: Crianca Aprendendo a Escovar os Dentes",
+              "label": "Exemplo Didático: Criança Aprendendo a Escovar os Dentes",
               "depth": 3
             },
             {
               "id": "gestao-do-tempo-operacional-com-os-3-r39s",
-              "label": "Gestao do Tempo Operacional com os 3 R&#39;s",
+              "label": "Gestão do Tempo Operacional com os 3 R&#39;s",
               "depth": 3
             },
             {
               "id": "gestao-do-tempo-comercial-com-os-3-r39s",
-              "label": "Gestao do Tempo Comercial com os 3 R&#39;s",
+              "label": "Gestão do Tempo Comercial com os 3 R&#39;s",
               "depth": 3
             },
             {
               "id": "mudanca-de-paradigma-nos-3-r39s",
-              "label": "Mudanca de Paradigma nos 3 R&#39;s",
+              "label": "Mudança de Paradigma nos 3 R&#39;s",
               "depth": 3
             },
             {
               "id": "exercicios-propostos-com-os-3-r39s",
-              "label": "Exercicios Propostos com os 3 R&#39;s",
+              "label": "Exercícios Propostos com os 3 R&#39;s",
               "depth": 3
             },
             {
               "id": "situacoes-sem-3-r39s-mas-que-nao-podem-ser-perdidas-de-vista",
-              "label": "Situacoes sem 3 R&#39;s, mas que nao podem ser perdidas de vista",
+              "label": "Situações sem 3 R&#39;s, mas que não podem ser perdidas de vista",
               "depth": 3
             },
             {
               "id": "gestao-do-tempo-tatico",
-              "label": "Gestao do Tempo Tatico",
+              "label": "Gestão do Tempo Tático",
               "depth": 3
             },
             {
@@ -4131,12 +4130,12 @@
             },
             {
               "id": "8-a-tecnologia-a-favor-da-gestao-do-tempo",
-              "label": "8. A Tecnologia a Favor da Gestao do Tempo",
+              "label": "8. A Tecnologia a Favor da Gestão do Tempo",
               "depth": 2
             },
             {
               "id": "principio",
-              "label": "Principio",
+              "label": "Princípio",
               "depth": 3
             },
             {
@@ -4151,7 +4150,7 @@
             },
             {
               "id": "9-fim-ou-comeco",
-              "label": "9. Fim ou Comeco?",
+              "label": "9. Fim ou Começo?",
               "depth": 2
             },
             {
@@ -4166,12 +4165,12 @@
             },
             {
               "id": "chamada-para-acao",
-              "label": "Chamada para Acao",
+              "label": "Chamada para Ação",
               "depth": 3
             },
             {
               "id": "citacoes-e-frases-notaveis",
-              "label": "Citacoes e Frases Notaveis",
+              "label": "Citações e Frases Notáveis",
               "depth": 2
             },
             {
@@ -4181,43 +4180,32 @@
             },
             {
               "id": "dados-e-referencias-citados",
-              "label": "Dados e Referencias Citados",
+              "label": "Dados e Referências Citados",
               "depth": 2
             },
             {
               "id": "conexoes-com-os-outros-livros-da-serie",
-              "label": "Conexoes com os Outros Livros da Serie",
+              "label": "Conexões com os Outros Livros da Série",
               "depth": 2
-            },
-            {
-              "id": "sobre-o-autor-e-a-empresa",
-              "label": "Sobre o Autor e a Empresa",
-              "depth": 2
-            },
-            {
-              "id": "tiago-alves",
-              "label": "Tiago Alves",
-              "depth": 3
-            },
-            {
-              "id": "metta",
-              "label": "Metta",
-              "depth": 3
             },
             {
               "id": "exercicios-praticos-do-livro-resumo",
-              "label": "Exercicios Praticos do Livro (Resumo)",
+              "label": "Exercícios Práticos do Livro (Resumo)",
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "gestao",
+          "parent": "seis-gestoes",
+          "ordem": 6,
+          "resumo": "Como o líder organiza a própria agenda para estar onde gera mais resultado.",
+          "tituloPagina": "Gestão do Tempo"
         },
         {
           "id": "aceleradores",
           "label": "Aceleradores da Meta Batida",
           "source": "metta/metodologia/Metta - Aceleradores da Meta Batida.md",
-          "subgroup": "frameworks",
-          "subgroupLabel": "Frameworks",
           "h2s": [
             {
               "id": "1-os-6-aceleradores-espelho-das-6-gestoes",
@@ -4255,13 +4243,17 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "formato",
+          "parent": "seis-gestoes",
+          "resumo": "O formato EAD das 6 Gestões: seis treinamentos intensivos que espelham uma gestão cada.",
+          "tituloPagina": "Aceleradores da Meta Batida"
         },
         {
           "id": "fca",
           "label": "FCA",
           "source": "metta/metodologia/Metta - FCA - Fato Causa Acao.md",
-          "subgroup": "frameworks",
           "h2s": [
             {
               "id": "1-estilo-de-comunicacao-e-personalidade",
@@ -4424,13 +4416,21 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "framework",
+          "parent": "protocolo",
+          "etapa": [
+            "2-e-estruturar-a-estrategia",
+            "5-a-acelerar-o-resultado"
+          ],
+          "resumo": "Fato, Causa e Ação: a ferramenta-mãe de diagnóstico, usada para estruturar a estratégia e na correção de rota semanal.",
+          "tituloPagina": "FCA — Fato, Causa, Ação"
         },
         {
           "id": "cha",
           "label": "CHA",
           "source": "metta/metodologia/Metta - CHA - Conhecimento Habilidade Atitude.md",
-          "subgroup": "frameworks",
           "h2s": [
             {
               "id": "1-os-3-fatores-da-competencia",
@@ -4483,13 +4483,20 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "framework",
+          "parent": "protocolo",
+          "etapa": [
+            "3-t-transformar-em-metodo"
+          ],
+          "resumo": "Conhecimento, Habilidade e Atitude: as três dimensões da competência que viram matéria-prima do método.",
+          "tituloPagina": "CHA — Conhecimento, Habilidade, Atitude"
         },
         {
           "id": "a-venda-4-0",
-          "label": "A VENDA 4.0",
+          "label": "A Venda 4.0",
           "source": "metta/metodologia/Metta - A Venda 4.0.md",
-          "subgroup": "frameworks",
           "h2s": [
             {
               "id": "1-da-venda-10-a-venda-40",
@@ -4737,7 +4744,16 @@
               "depth": 2
             }
           ],
-          "updatedAt": "2026-05-13T14:29:52-03:00"
+          "updatedAt": "2026-05-13T14:29:52-03:00",
+          "nivel": "sub",
+          "tipo": "framework",
+          "parent": "protocolo",
+          "etapa": [
+            "3-t-transformar-em-metodo"
+          ],
+          "resumo": "O método de vendas proprietário em seis etapas, construído sob medida na etapa T — Transformar em Método.",
+          "nomeCurto": "A Venda 4.0",
+          "tituloPagina": "A Venda 4.0"
         }
       ]
     },
@@ -5617,38 +5633,38 @@
               "depth": 2
             },
             {
-              "id": "e-ai-voce-comeca-a-entrar-num-parafuso",
-              "label": "E aí você começa a entrar num parafuso",
+              "id": "t-tecnica-mas-gao",
+              "label": "T técnica mas gão",
               "depth": 2
             },
             {
-              "id": "claro-sobre-como-voce-tem-que-evoluir-entao",
-              "label": "Claro sobre como você tem que evoluir então",
+              "id": "qual-foi-o-seu-resultado-do-mes-anterior",
+              "label": "Qual foi o seu resultado do mês anterior",
               "depth": 2
             },
             {
-              "id": "tudo-bem-entao-diante-deste-cenario-fato-quanto",
-              "label": "Tudo bem então diante deste cenário fato quanto",
+              "id": "entao-eu-tenho-fato",
+              "label": "Então eu tenho fato",
               "depth": 2
             },
             {
-              "id": "youtube-legal-e-voces-vao-poder-baixar-aqui",
-              "label": "YouTube legal e vocês vão poder baixar aqui",
+              "id": "ta-bom-estamos-junos-pedido-de-voces-e",
+              "label": "Tá bom estamos junos pedido de vocês é",
               "depth": 2
             },
             {
-              "id": "voce-sabe-disso-pergunte-cinco-vezes-o-porque",
-              "label": "Você sabe disso pergunte cinco vezes o porquê",
+              "id": "por-que-que-os-vendedores",
+              "label": "Por que que os vendedores",
               "depth": 2
             },
             {
-              "id": "fca-do-que-esta-acontecendo-da-para-construir",
-              "label": "FCA do que está acontecendo dá para construir",
+              "id": "fc-de-tudo-que-voce-imaginar",
+              "label": "FC de tudo que você imaginar",
               "depth": 2
             },
             {
-              "id": "cada-um-faz-quanto-que-quer-se-quer",
-              "label": "Cada um faz quanto que quer se quer",
+              "id": "gestao-do-tempo-o-lider-fica-muito-sobrecarregado",
+              "label": "Gestão do tempo o líder fica muito sobrecarregado",
               "depth": 2
             }
           ],
@@ -6118,8 +6134,8 @@
               "depth": 2
             },
             {
-              "id": "luna-quem-for-aluno-aqui-deixa",
-              "label": "Luna quem for aluno aqui deixa",
+              "id": "meta-batida-gestao-da-ativacao-e-a-capacidade",
+              "label": "Meta batida gestão da ativação é a capacidade",
               "depth": 2
             }
           ],
@@ -6284,13 +6300,13 @@
               "depth": 2
             },
             {
-              "id": "lider-treinadora-so",
-              "label": "Líder treinadora só",
+              "id": "lider-treinadora-so-isso-e-agora",
+              "label": "Líder treinadora só isso é agora",
               "depth": 2
             },
             {
-              "id": "eu-decidi-ser-feliz-fora-isso-na-gestao",
-              "label": "Eu decidi ser feliz fora isso na gestão",
+              "id": "desenvolvimento-que-a-sua-empresa-deveria-investir",
+              "label": "Desenvolvimento que a sua empresa deveria investir",
               "depth": 2
             }
           ],
@@ -7523,8 +7539,8 @@
               "depth": 2
             },
             {
-              "id": "entao-faca-isso-faca",
-              "label": "Então faça isso faça",
+              "id": "entao-faca-isso-faca-isso-e",
+              "label": "Então faça isso faça isso é",
               "depth": 2
             },
             {
@@ -7746,23 +7762,23 @@
               "depth": 2
             },
             {
-              "id": "eu-so-conto-para-voces-se-voces-compartilharem",
-              "label": "Eu só conto para vocês se vocês compartilharem",
+              "id": "teu-que-e-gestor-de-vendas-eh",
+              "label": "Teu que é gestor de vendas eh",
               "depth": 2
             },
             {
-              "id": "sera-que-essas-pessoas-estao-motivadas-sim",
-              "label": "Será que essas pessoas estão motivadas sim",
+              "id": "mateus-falou-aqui-o-sim",
+              "label": "Mateus falou aqui ó sim",
               "depth": 2
             },
             {
-              "id": "e-voce-como-lider-nao-vendeu-isso-ta",
-              "label": "E você como líder não vendeu isso tá",
+              "id": "e-nao-consegue-nem-entender-que-jogo",
+              "label": "E não consegue nem entender que jogo",
               "depth": 2
             },
             {
-              "id": "e-preciso-que",
-              "label": "É preciso que",
+              "id": "desenvolva-a-equipe-e-preciso-que-voce-aumente",
+              "label": "Desenvolva a equipe é preciso que você aumente",
               "depth": 2
             }
           ],
@@ -8504,38 +8520,38 @@
               "depth": 2
             },
             {
-              "id": "tem-clareza-ai-ta-na-hora-de-recrutar",
-              "label": "Tem clareza aí tá na hora de recrutar",
+              "id": "na-sua-marca-se-voce-nao-tem-eh",
+              "label": "Na sua marca se você não tem eh",
               "depth": 2
             },
             {
-              "id": "no",
-              "label": "No",
+              "id": "leao-por-dia-era-isso-que-a-gente",
+              "label": "Leão por dia era isso que a gente",
               "depth": 2
             },
             {
-              "id": "olha-que-legal-eu-queria-pedir-para-voces",
-              "label": "Olha que legal eu queria pedir para vocês",
+              "id": "ate-porque-quando-a-empresa-esver-muito-estabelecida",
+              "label": "Até porque quando a empresa esver muito estabelecida",
               "depth": 2
             },
             {
-              "id": "g-tora-de-rhh-ne",
-              "label": "G tora de rhh né",
+              "id": "onde-estao-essas-pessoas-mais-rapido-voce-atrai",
+              "label": "Onde estão essas pessoas mais rápido você atrai",
               "depth": 2
             },
             {
-              "id": "veio-muita-gente-boa",
-              "label": "Veio muita gente boa",
+              "id": "amarildo-entao-ele-passa-a-emocao-dele",
+              "label": "Amarildo então ele passa a emoção dele",
               "depth": 2
             },
             {
-              "id": "y-para-a-pessoa-escolher-em-forma",
-              "label": "Y para a pessoa escolher em forma",
+              "id": "tiago-e-o-seguinte-em-conhecimento-aplique-testes",
+              "label": "Tiago é o seguinte em conhecimento aplique testes",
               "depth": 2
             },
             {
-              "id": "e-verdade-e-olha-so-que-interessante",
-              "label": "É verdade e olha só que interessante",
+              "id": "dois",
+              "label": "Dois",
               "depth": 2
             }
           ],

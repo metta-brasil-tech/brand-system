@@ -17,7 +17,7 @@ tags:
   - usado-por/roteirizar-video
 formato_consumo: contexto-skill
 prioridade_carregamento: alta
-versao: "1.0"
+versão: "1.0"
 sucedido_por: null
 complementar_com: "[[Metta - Plataforma de Marca]]"
 summary: "A Metta combate a Era Jurássica da Gestão Comercial — o sistema antigo que confunde grito com liderança e talento com método — e afirma que resultado é consequência de inteligência comercial extraída de dentro da empresa."

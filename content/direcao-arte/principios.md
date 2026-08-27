@@ -9,14 +9,14 @@ tags:
   - tema/design
   - tema/marca
   - tema/fotografia
-  - tipo/direcao-arte
+  - tipo/direção-arte
   - tipo/referencia
   - usado-por/skill-marca-metta
   - usado-por/skill-design-metta
   - usado-por/skill-nano-banana
 formato_consumo: contexto-skill
 prioridade_carregamento: alta
-versao: "1.0"
+versão: "1.0"
 sucedido_por: null
 complementar_com: "[[Metta - PRD Identidade Visual]] · [[manual-de-marca]] · [[brand-system-spec]]"
 summary: "Direção fotográfica oficial da Metta. Define o DNA visual (luz, paleta, composição, mood, câmera, pós), 21 arquétipos editoriais com prompt templates pra geração via gpt-image-1, e regras claras de do/don't. Cada arquétipo tem prompt em inglês profissional pronto pra alimentar Codex CLI."
@@ -131,25 +131,25 @@ NUNCA: paleta arco-íris, múltiplos acentos competindo, amarelo decorativo (par
 
 ---
 
-## §2. Arquétipos editoriais ^arquetipos
+## §2. Arquétipos editoriais ^arquétipos
 
 Os arquétipos são **lentes de leitura**: dado um briefing, você identifica qual arquétipo serve, pega o prompt template, ajusta o briefing específico, alimenta o gpt-image-1. Isso garante que toda imagem nova respeite o DNA Metta.
 
 > **Onde está o catálogo vivo:** `output/brand-system/data/photo-index.json` — 156 fotos curadas, cada uma classificada num dos 21 arquétipos abaixo, com prompt completo. A galeria do mini-app permite copiar o prompt direto pra Codex CLI.
 
-### §2.1 Liderança ^arquetipos-lideranca
+### §2.1 Liderança ^arquétipos-liderança
 
 | ID | Nome | Quando usar |
 |---|---|---|
 | `executivo-em-decisao` | Executivo em decisão | Sujeito sozinho em momento analítico |
 | `mentoria-1-on-1` | Mentoria 1-on-1 | Conselho, transferência de método entre dois |
 | `reuniao-mesa-decisao` | Reunião de mesa — decisão | Time em mesa com líder no comando |
-| `lider-apresentando-time` | Líder apresentando ao time | Em pé, explicando, time sentado |
+| `líder-apresentando-time` | Líder apresentando ao time | Em pé, explicando, time sentado |
 | `palco-evento` | Palco / evento | Conferência, autoridade pública |
-| `feminina-lider-apresentando` | Liderança feminina apresentando | Executiva conduzindo apresentação |
+| `feminina-líder-apresentando` | Liderança feminina apresentando | Executiva conduzindo apresentação |
 | `businessman-thinking-laptop` | Empresário pensando — laptop | Pausa de pensamento em ambiente quente |
 
-### §2.2 Pessoas ^arquetipos-pessoas
+### §2.2 Pessoas ^arquétipos-pessoas
 
 | ID | Nome | Quando usar |
 |---|---|---|
@@ -158,14 +158,14 @@ Os arquétipos são **lentes de leitura**: dado um briefing, você identifica qu
 | `time-colaborando-laptops` | Time colaborando com laptops | Execução cotidiana, sintonia operacional |
 | `time-celebrando-resultado` | Time celebrando resultado | Comemoração controlada de meta batida |
 
-### §2.3 Resultados ^arquetipos-resultados
+### §2.3 Resultados ^arquétipos-resultados
 
 | ID | Nome | Quando usar |
 |---|---|---|
 | `analise-dados-tela` | Análise de dados na tela | Sujeito olhando dashboard, pensando |
 | `apresentacao-graficos` | Apresentação de gráficos | Time lendo resultado coletivamente |
 
-### §2.4 Escritório / Ambiente ^arquetipos-ambiente
+### §2.4 Escritório / Ambiente ^arquétipos-ambiente
 
 | ID | Nome | Quando usar |
 |---|---|---|
@@ -173,7 +173,7 @@ Os arquétipos são **lentes de leitura**: dado um briefing, você identifica qu
 | `escritorio-moderno-interior` | Escritório moderno — interior | Ambiente de trabalho organizado |
 | `home-office` | Home office | Disciplina profissional em casa |
 
-### §2.5 Branding / Mockups ^arquetipos-branding
+### §2.5 Branding / Mockups ^arquétipos-branding
 
 | ID | Nome | Quando usar |
 |---|---|---|
@@ -181,7 +181,7 @@ Os arquétipos são **lentes de leitura**: dado um briefing, você identifica qu
 | `mockup-papelaria-escura` | Mockup papelaria — escura | Versão premium, fundo escuro |
 | `objeto-conceitual-escuro` | Objeto conceitual escuro | Símbolo isolado (relógio, chave) |
 
-### §2.6 Texturas / Backgrounds ^arquetipos-texturas
+### §2.6 Texturas / Backgrounds ^arquétipos-texturas
 
 | ID | Nome | Quando usar |
 |---|---|---|
@@ -209,7 +209,7 @@ Todo prompt no `photo-index.json` segue a mesma estrutura. Quando for adaptar pr
 
 > Editorial portrait of a brazilian executive (40-55) in a moment of analytical decision, alone at a desk or modern office. Composed expression — no smile, no theatrics; the face shows the weight of choice. Side window light from the left, warm afternoon tone falling across the shoulder and document. Subject occupies right third, with significant negative space holding context. 50mm equivalent, f/2.8, focus on the eyes. Palette: charcoal suit, oak desk surface, cream wall, single yellow accent (mug, notebook, or backlit paper). Mid contrast, subtle film grain, no HDR. Documentary feel, no posed corporate-stock energy.
 
-### §3.1 Como adaptar pra briefing específico ^adaptacao
+### §3.1 Como adaptar pra briefing específico ^adaptação
 
 Mantém a base do template, adiciona instrução específica no início:
 
@@ -259,7 +259,7 @@ USUÁRIO: "preciso de uma foto pra um carrossel sobre liderança feminina decidi
           virada de método em uma indústria de bens de consumo"
 
 SKILL:
-  1. Identifica arquétipo: feminina-lider-apresentando
+  1. Identifica arquétipo: feminina-líder-apresentando
   2. Carrega prompt template do photo-index.json
   3. Adiciona briefing: "industrial setting", "consumer goods context"
   4. Adiciona ajuste de cena: "executiva 45+, ambiente fabril ao fundo desfocado"
@@ -272,7 +272,7 @@ A integração técnica vai no `output/brand-system/scripts/generate-image.mjs` 
 
 ---
 
-## §6. Manutenção ^manutencao
+## §6. Manutenção ^manutenção
 
 - **Quando adicionar foto nova ao banco:** rodar `node scripts/photo-curator.mjs` que reprocessa tudo. Adicionar entrada no `KEYWORD_MAP` se filename for novo padrão.
 - **Quando criar arquétipo novo:** adicionar em `ARCHETYPES` no `photo-curator.mjs`, escrever template, atualizar este doc na seção §2.
@@ -280,7 +280,7 @@ A integração técnica vai no `output/brand-system/scripts/generate-image.mjs` 
 
 ---
 
-## §7. Referências ^referencias
+## §7. Referências ^referências
 
 - [[brand-system-spec]] — onde este doc se encaixa no Brand System
 - [[Metta - PRD Identidade Visual]] — base do DS técnico

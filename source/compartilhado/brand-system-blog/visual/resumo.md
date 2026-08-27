@@ -11,7 +11,7 @@ tags:
   - usado-por/brand-system
 formato_consumo: blog
 prioridade_carregamento: alta
-versao: "2.0"
+versão: "2.0"
 created: 2026-05-09
 updated: 2026-05-09
 ---

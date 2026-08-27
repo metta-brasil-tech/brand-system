@@ -59,18 +59,18 @@ updated: 2026-04-28
 
 ## 1. Sobre a Marca [NORMATIVE]
 
-### Missao
-**"Profissionalizar o mercado de gestao comercial no Brasil."**
-Em outras palavras: extinguir o jeito jurassico de se fazer gestao comercial e bater meta no Brasil.
+### Missão
+**"Profissionalizar o mercado de gestão comercial no Brasil."**
+Em outras palavras: extinguir o jeito jurássico de se fazer gestão comercial e bater meta no Brasil.
 
 ### Posicionamento
-**"O ecossistema de inteligencia comercial para empresarios."**
+**"O ecossistema de inteligência comercial para empresários."**
 
 ### Proposta de Valor
-Solucoes para pessoas e empresas baterem metas de forma mais leve, facil e sustentavel.
+Soluções para pessoas e empresas baterem metas de forma mais leve, fácil e sustentável.
 
 ### Tagline do Logo
-**INTELIGENCIA COMERCIAL** (sempre acompanha o logotipo em versoes completas)
+**INTELIGÊNCIA COMERCIAL** (sempre acompanha o logotipo em versões completas)
 
 ---
 
@@ -78,88 +78,88 @@ Solucoes para pessoas e empresas baterem metas de forma mais leve, facil e suste
 
 ### 2.1 Estrutura do Logo
 O logotipo Metta e composto por:
-- **Simbolo (Icone)**: Elemento geometrico formado por arcos concentricos e circulos, nas cores amarela (#FFBE18) e variantes. Composto por sub-elementos: "C Menor", "C Maior", "Arco Menor" e "Arco Maior".
-- **Wordmark**: Tipografia customizada "METTA" baseada na fonte Inter, com ajustes especificos:
+- **Símbolo (Ícone)**: Elemento geométrico formado por arcos concêntricos e círculos, nas cores amarela (#FFBE18) e variantes. Composto por sub-elementos: "C Menor", "C Maior", "Arco Menor" e "Arco Maior".
+- **Wordmark**: Tipografia customizada "METTA" baseada na fonte Inter, com ajustes específicos:
   - **Cantos arredondados** nas letras
-  - **Adaptacao da letra T** (design custom)
+  - **Adaptação da letra T** (design custom)
   - **Ajuste de kerning** entre caracteres
-- **Tagline**: "INTELIGENCIA COMERCIAL" posicionada ao lado ou abaixo do wordmark, separada por uma linha vertical
+- **Tagline**: "INTELIGÊNCIA COMERCIAL" posicionada ao lado ou abaixo do wordmark, separada por uma linha vertical
 
-### 2.2 Versoes do Logo
-| Versao | Uso | Fundo |
+### 2.2 Versões do Logo
+| Versão | Uso | Fundo |
 |--------|-----|-------|
-| Logo completo (simbolo + wordmark + tagline) | Uso principal | Fundo escuro (#0C161B) ou claro (#FFFFFF) |
-| Logo horizontal (simbolo + wordmark) | Uso secundario | Ambos |
-| Simbolo isolado | Favicon, icones, espacos reduzidos | Ambos |
-| Wordmark isolado | Aplicacoes especificas | Ambos |
+| Logo completo (símbolo + wordmark + tagline) | Uso principal | Fundo escuro (#0C161B) ou claro (#FFFFFF) |
+| Logo horizontal (símbolo + wordmark) | Uso secundário | Ambos |
+| Símbolo isolado | Favicon, ícones, espaços reduzidos | Ambos |
+| Wordmark isolado | Aplicações especificas | Ambos |
 
-### 2.3 Versoes por Tamanho
+### 2.3 Versões por Tamanho
 - **Grande**: Logo completo com todos os elementos (sem sombra/glow — apenas o arquivo oficial do Drive)
-- **Medio**: Simbolo + wordmark + tagline em linha
-- **Pequeno**: Simbolo + wordmark compacto
-- **Minimo**: Apenas simbolo
+- **Médio**: Símbolo + wordmark + tagline em linha
+- **Pequeno**: Símbolo + wordmark compacto
+- **Mínimo**: Apenas símbolo
 
 ### 2.4 Cores do Logo
-- **Sobre fundo escuro (#0C161B)**: Simbolo em amarelo (#FFBE18/#FFB618), wordmark em branco (#FFFFFF)
-- **Sobre fundo claro (#FFFFFF)**: Simbolo em amarelo (#FFBE18), wordmark em azul noite (#0C161B)
+- **Sobre fundo escuro (#0C161B)**: Símbolo em amarelo (#FFBE18/#FFB618), wordmark em branco (#FFFFFF)
+- **Sobre fundo claro (#FFFFFF)**: Símbolo em amarelo (#FFBE18), wordmark em azul noite (#0C161B)
 - **Sobre fundo amarelo (#FFBE18)**: Wordmark em azul noite (#0C161B)
 
 ### 2.5 ~~Efeitos do Logo~~ [REMOVIDO]
-~~Versao com glow: `box-shadow: inset 0px 0px 43px 0px rgba(255, 190, 24, 0.24)`~~ **PROIBIDO** — glow/shadow no logo está banido pela regra absoluta de efeitos (ver seção "⚠️ REGRA ABSOLUTA — EFEITOS PROIBIDOS" na seção 6). Usar sempre o arquivo oficial do logo do Drive sem nenhum efeito adicional.
+~~Versão com glow: `box-shadow: inset 0px 0px 43px 0px rgba(255, 190, 24, 0.24)`~~ **PROIBIDO** — glow/shadow no logo está banido pela regra absoluta de efeitos (ver seção "⚠️ REGRA ABSOLUTA — EFEITOS PROIBIDOS" na seção 6). Usar sempre o arquivo oficial do logo do Drive sem nenhum efeito adicional.
 
 A versão ghost/outline também foi descontinuada. Se precisar de tratamento sutil do logo (ex: watermark de fundo), usar apenas o arquivo oficial em opacity baixa (15-25%) — sem stroke tracejado, sem fill ghost, sem box-shadow.
 
-### 2.6 Area de Protecao e Grid
-O logo foi construido sobre um grid tipografico preciso, com linhas de referencia para alinhamento vertical e horizontal. Manter area de protecao equivalente a altura do simbolo ao redor de todo o logo.
+### 2.6 Área de Proteção e Grid
+O logo foi construído sobre um grid tipográfico preciso, com linhas de referência para alinhamento vertical e horizontal. Manter área de proteção equivalente a altura do símbolo ao redor de todo o logo.
 
 ---
 
 ## 3. Paleta de Cores [NORMATIVE]
 > Tokens canônicos consolidados em [[metta-tokens]] §1. Esta seção mantém valores de referência semiótica.
 
-### 3.1 Cores Primarias
+### 3.1 Cores Primárias
 
 #### Amarelo (Cor Principal da Marca)
-| Variacao | HEX | Uso |
+| Variação | HEX | Uso |
 |----------|-----|-----|
-| Amarelo Principal | `#FFBE18` | Cor primaria, CTAs, simbolo, destaques |
-| Amarelo Claro | `#FFC531` | Strokes, elementos secundarios |
-| Amarelo Medio | `#FFCE50` | Backgrounds auxiliares, gradientes |
+| Amarelo Principal | `#FFBE18` | Cor primária, CTAs, símbolo, destaques |
+| Amarelo Claro | `#FFC531` | Strokes, elementos secundários |
+| Amarelo Médio | `#FFCE50` | Backgrounds auxiliares, gradientes |
 | Amarelo Suave | `#FFE4A1` | Backgrounds leves, hover states |
 
-**Associacoes semioticas**: Sol, Luz, Calor, Ouro, Prosperidade, Otimismo, Energia, Criatividade, Inteligencia, Atencao
+**Associações semióticas**: Sol, Luz, Calor, Ouro, Prosperidade, Otimismo, Energia, Criatividade, Inteligência, Atenção
 
 #### Azul Noite (Cor Base)
-| Variacao | HEX | Uso |
+| Variação | HEX | Uso |
 |----------|-----|-----|
 | Azul Noite | `#0C161B` | Backgrounds escuros, textos sobre fundo claro |
 | Azul Noite Profundo | `#0A1013` | Backgrounds muito escuros |
 
-**Associacoes semioticas**: Seriedade, Autoridade, Confianca, Estabilidade, Inteligencia, Calma, Profundidade
+**Associações semióticas**: Seriedade, Autoridade, Confiança, Estabilidade, Inteligência, Calma, Profundidade
 
-### 3.2 Cores Secundarias
+### 3.2 Cores Secundárias
 
 #### Branco Gelo
-| Variacao | HEX | Uso |
+| Variação | HEX | Uso |
 |----------|-----|-----|
 | Branco Puro | `#FFFFFF` | Backgrounds claros, textos sobre fundo escuro |
 | Branco Gelo | `#FAFCFD` | Backgrounds neutros, cards |
-| Gelo Azulado | `#EBF3F7` | Backgrounds secundarios |
-| Cinza Muito Claro | `#EFF3F5` | Backgrounds de secoes |
+| Gelo Azulado | `#EBF3F7` | Backgrounds secundários |
+| Cinza Muito Claro | `#EFF3F5` | Backgrounds de seções |
 | Cinza Claro | `#F0F0F0` | Backgrounds, divisores |
 | Cinza | `#EDEDED` | Backgrounds de contraste |
 
-**Associacoes semioticas**: Leveza, Amplitude, Neutralidade, Sofisticacao, Claridade, Frescor, Calma, Serenidade
+**Associações semióticas**: Leveza, Amplitude, Neutralidade, Sofisticação, Claridade, Frescor, Calma, Serenidade
 
 #### Azul Acinzentado
-| Variacao | HEX | Uso |
+| Variação | HEX | Uso |
 |----------|-----|-----|
-| Azul Acinzentado | `#435965` | Textos secundarios, labels, elementos de suporte |
-| Azul Acinzentado Claro | `#688594` | Textos terciarios, detalhes |
+| Azul Acinzentado | `#435965` | Textos secundários, labels, elementos de suporte |
+| Azul Acinzentado Claro | `#688594` | Textos terciários, detalhes |
 | Azul Acinzentado Suave | `#75919F` | Tags, labels, metadata |
 | Azul Acinzentado Muito Claro | `#A8B3B9` | Linhas de grid, divisores sutis |
 
-**Associacoes semioticas**: Solidez, Confianca, Neutralidade, Pragmatismo, Modernidade, Resistencia, Elegancia, Intelectual
+**Associações semióticas**: Solidez, Confiança, Neutralidade, Pragmatismo, Modernidade, Resistência, Elegância, Intelectual
 
 ### 3.3 Gradientes
 
@@ -175,7 +175,7 @@ O logo foi construido sobre um grid tipografico preciso, com linhas de referenci
 | Cor | Uso |
 |-----|-----|
 | `rgba(12, 22, 27, 0.2)` | Separadores, divisores sobre fundo claro |
-| `rgba(12, 22, 27, 0.6)` | Textos secundarios sobre fundo claro |
+| `rgba(12, 22, 27, 0.6)` | Textos secundários sobre fundo claro |
 | `rgba(255, 255, 255, 0.2)` | Separadores, divisores sobre fundo escuro |
 | `rgba(255, 190, 24, 0.1)` | Background sutil amarelo |
 | ~~`rgba(255, 190, 24, 0.24)` — Glow/sombra do logo~~ | **REMOVIDO** — glow no logo proibido |
@@ -405,16 +405,16 @@ METTA (marca mae)
 ```
 
 ### 5.2 Sistema de Logos de Produto
-Cada sub-marca segue o padrao:
-- **Simbolo Metta** (icone) + **Nome do produto/tier** + **Badge de tier**
-- Badges de tier sao pills/capsulas com borda branca e texto em caixa alta com tracking 12%
+Cada sub-marca segue o padrão:
+- **Símbolo Metta** (ícone) + **Nome do produto/tier** + **Badge de tier**
+- Badges de tier são pills/cápsulas com borda branca e texto em caixa alta com tracking 12%
 - Layout pode ser:
-  - Horizontal: simbolo | wordmark | badge
-  - Vertical/empilhado: simbolo em cima, wordmark + badge embaixo
-  - Compacto: simbolo + sigla (SMTM)
+  - Horizontal: símbolo | wordmark | badge
+  - Vertical/empilhado: símbolo em cima, wordmark + badge embaixo
+  - Compacto: símbolo + sigla (SMTM)
 
-### 5.3 Formatacao dos Nomes
-- **"SUPERE A META TODO MES"**: Inter, weight 870, ~25px, letter-spacing -3%
+### 5.3 Formatação dos Nomes
+- **"SUPERE A META TODO MÊS"**: Inter, weight 870, ~25px, letter-spacing -3%
 - **"MENTORIA"**: Inter, weight 540, ~12px, letter-spacing 12%, caixa alta
 - **Tier badges** (ELITE, EXCLUSIVE, PREMIUM): Inter, weight 540, ~13px, letter-spacing 12%, dentro de pill com border-radius ~33px
 
@@ -422,18 +422,18 @@ Cada sub-marca segue o padrao:
 
 ## 6. Elementos Gráficos [NORMATIVE]
 
-### 6.1 Simbolo / Icone
-O simbolo da Metta e composto por arcos concentricos que formam uma figura geometrica:
-- **Arco Maior**: Circulo externo com abertura
-- **Arco Menor**: Circulo interno com abertura
+### 6.1 Símbolo / Ícone
+O símbolo da Metta e composto por arcos concêntricos que formam uma figura geométrica:
+- **Arco Maior**: Círculo externo com abertura
+- **Arco Menor**: Círculo interno com abertura
 - **C Maior**: Forma de "C" externa
 - **C Menor**: Forma de "C" interna
 - Cores: Amarelo (#FFBE18) sobre fundos escuros, Azul noite (#0C161B) sobre fundos claros
 
 ### 6.2 Formas Decorativas
-- Uso de shapes organicos/curvilineos com gradientes em amarelo
-- Linhas divisorias finas (1px) com opacidade reduzida
-- Grids de construcao visiveis em apresentacoes tecnicas (linhas em cor F0F0F0 ou rgba com opacidade)
+- Uso de shapes orgânicos/curvilineos com gradientes em amarelo
+- Linhas divisórias finas (1px) com opacidade reduzida
+- Grids de construção visíveis em apresentações técnicas (linhas em cor F0F0F0 ou rgba com opacidade)
 
 ### 6.3 Cantos Arredondados
 - **Cards e containers**: border-radius ~12px
@@ -471,19 +471,19 @@ O simbolo da Metta e composto por arcos concentricos que formam uma figura geome
 
 ## 7. Fotografia e Imagens [NORMATIVE]
 
-### 7.1 Estilo Fotografico
+### 7.1 Estilo Fotográfico
 - Fotografias profissionais de alta qualidade
-- Retratos da equipe com iluminacao controlada
-- Ambientacao corporativa mas moderna
+- Retratos da equipe com iluminação controlada
+- Ambientação corporativa mas moderna
 
-### 7.2 Composicao de Cards Pessoais
+### 7.2 Composição de Cards Pessoais
 Cada membro da equipe tem um card visual com:
-- Foto profissional recortada em shape organico (arcos concentricos da marca)
-- Gradiente de sobreposicao (amarelo para a CEO/Head, escuro para gestores)
+- Foto profissional recortada em shape orgânico (arcos concêntricos da marca)
+- Gradiente de sobreposição (amarelo para a CEO/Head, escuro para gestores)
 - Nome em **Zalando Sans Expanded Heavy (870 + 132%)**, ~44px
 - Cargo em **Inter Book (400 + 100%)**, ~20-23px
 - Logo Metta no canto
-- Tagline "Inteligencia comercial para empresarios" em **Zalando Sans Expanded Heavy (870 + 132%)**, ~20px
+- Tagline "Inteligência comercial para empresários" em **Zalando Sans Expanded Heavy (870 + 132%)**, ~20px
 - Selo/badge de cor ao fundo
 
 ### 7.3 Equipe Identificada
@@ -491,33 +491,33 @@ Cada membro da equipe tem um card visual com:
 - **Vanessa Bilovus** - Head de Produto
 - **Kevin Santos** - Gestor de Projetos
 
-### 7.4 O que Evitar (Referencia da marca antiga)
+### 7.4 O que Evitar (Referência da marca antiga)
 - Formato arredondado excessivo (tipografia muito "fofa")
-- Imagens genericas (banco de imagem obvio)
-- Estilo amigavel / simpatico em excesso
+- Imagens genéricas (banco de imagem óbvio)
+- Estilo amigável / simpático em excesso
 - Falta de hierarquia visual
-- Falta de consistencia visual
+- Falta de consistência visual
 
 ---
 
 ## 8. Aplicações [NORMATIVE]
 
 ### 8.1 Formato Base
-- **Slides/Apresentacoes**: 1920 x 1080px
+- **Slides/Apresentações**: 1920 x 1080px
 - Backgrounds alternam entre escuro (#0C161B), claro (#FFFFFF), amarelo (#FFBE18) e cinzas
 
-### 8.2 Aplicacao Digital
+### 8.2 Aplicação Digital
 - Mockups de celular (iPhone) com interface da marca
 - Redes sociais: posts com tipografia bold, contrastes fortes
-- Tagline "O ecossistema de inteligencia comercial para empresarios" sempre presente
+- Tagline "O ecossistema de inteligência comercial para empresários" sempre presente
 
-### 8.3 Aplicacao Fisica
-- Totem de logo para recepcao/eventos
-- Sinalizacao e impressos
+### 8.3 Aplicação Física
+- Totem de logo para recepção/eventos
+- Sinalização e impressos
 
 ### 8.4 Redes Sociais
 - Badge "REDES SOCIAIS" em pill amarela com texto escuro
-- Posts com imagens reais (nao genericas)
+- Posts com imagens reais (não genéricas)
 - Headlines em **Zalando Sans Expanded Heavy (870 + 132%)**
 - Corpo em **Inter Book (400 + 100%)**
 
@@ -536,7 +536,7 @@ Cada membro da equipe tem um card visual com:
 - **Fundo claro**: Texto azul noite (#0C161B) + destaques amarelo (#FFBE18)
 - **Fundo amarelo**: Texto azul noite (#0C161B)
 
-### 9.3 Espacamento
+### 9.3 Espaçamento
 - Padding em badges: ~11px vertical, 9-20px horizontal
 - Gap entre elementos inline: ~13-18px
 - Linhas separadoras: 1px, cor com 20% opacidade
@@ -600,21 +600,21 @@ Cada membro da equipe tem um card visual com:
 
 Ao criar qualquer material visual para a Metta, verificar:
 
-- [ ] Assets obtidos do Google Drive (Secao 12) - nunca usar arquivos locais
-- [ ] Logo correto selecionado conforme guia de selecao (Secao 12.6)
-- [ ] Background correto selecionado conforme guia de selecao (Secao 12.6)
-- [ ] Fonte Zalando Sans Expanded em uso, com variacao nomeada correta (Secao 4.2) + fallbacks corretos por eixo (Zalando Sans Expanded pra Expanded · Inter pra Regular) — obrigatorios em PPTX/Google Slides (Secao 4.3)
+- [ ] Assets obtidos do Google Drive (Seção 12) - nunca usar arquivos locais
+- [ ] Logo correto selecionado conforme guia de seleção (Seção 12.6)
+- [ ] Background correto selecionado conforme guia de seleção (Seção 12.6)
+- [ ] Fonte Zalando Sans Expanded em uso, com variação nomeada correta (Seção 4.2) + fallbacks corretos por eixo (Zalando Sans Expanded pra Expanded · Inter pra Regular) — obrigatórios em PPTX/Google Slides (Seção 4.3)
 - [ ] Paleta de cores respeitada (amarelo, azul noite, branco gelo, azul acinzentado)
-- [ ] Logo na versao correta para o fundo utilizado
-- [ ] Hierarquia tipografica clara (display > heading > body > label)
+- [ ] Logo na versão correta para o fundo utilizado
+- [ ] Hierarquia tipográfica clara (display > heading > body > label)
 - [ ] Letter-spacing negativo em headlines, positivo em labels
-- [ ] Sem imagens genericas de banco
+- [ ] Sem imagens genéricas de banco
 - [ ] Cantos arredondados consistentes (~12px cards, ~33px pills)
-- [ ] Contraste adequado (texto legivel sobre qualquer fundo)
-- [ ] Tagline "INTELIGENCIA COMERCIAL" com tracking 9%+ em caixa alta
+- [ ] Contraste adequado (texto legível sobre qualquer fundo)
+- [ ] Tagline "INTELIGÊNCIA COMERCIAL" com tracking 9%+ em caixa alta
 - [ ] Badges de tier (ELITE/EXCLUSIVE/PREMIUM) em pills com borda e tracking 12%
-- [ ] Sem estilo "fofo" ou excessivamente amigavel - manter tom profissional e autoritativo
-- [ ] Gradientes seguem os padroes definidos (radial, angular, linear com as cores da paleta)
+- [ ] Sem estilo "fofo" ou excessivamente amigável - manter tom profissional e autoritativo
+- [ ] Gradientes seguem os padrões definidos (radial, angular, linear com as cores da paleta)
 - [ ] Preferir SVG para logos/backgrounds; PNG para templates de reels
 
 ---
@@ -624,7 +624,7 @@ Ao criar qualquer material visual para a Metta, verificar:
 
 > **Pasta raiz**: [Identidade Visual Metta](https://drive.google.com/drive/folders/1I7W7fYQw1NK4iVhMEkgnWIBjeZZtTQ7u)
 >
-> Todos os assets oficiais da marca estao centralizados no Google Drive. O agente de design deve buscar os arquivos diretamente do Drive usando os IDs abaixo. **Nunca usar arquivos locais.**
+> Todos os assets oficiais da marca estão centralizados no Google Drive. O agente de design deve buscar os arquivos diretamente do Drive usando os IDs abaixo. **Nunca usar arquivos locais.**
 
 ---
 
@@ -659,22 +659,22 @@ Ao criar qualquer material visual para a Metta, verificar:
 ### 12.2 Logo Metta
 **Pasta**: [Logo Metta](https://drive.google.com/drive/folders/1ut9l5T_ozyUbUjIqBDFPERRMIiEi6LuZ)
 
-#### Simbolos (Icone isolado)
+#### Símbolos (Ícone isolado)
 | Arquivo | Formato | ID do Drive | Cor |
 |---------|---------|-------------|-----|
-| Simbolo_metta_amarelo | PNG | `1L6yJ0gmxqKOsbGFg7MI3sc8JJZ-jdqzC` | Amarelo (#FFBE18) |
-| Simbolo_metta_amarelo | SVG | `1dwPSsS49LZWJR7hd3HoaNnvgLkWquJs4` | Amarelo (#FFBE18) |
-| Simbolo_metta_azul | PNG | `1Bnn6DVkar-nNVh6AWsi_Vktj3dViJtsv` | Azul noite (#0C161B) |
-| Simbolo_metta_azul | SVG | `1HDDsK0WPyINzOk_ogxRBlaX00yp9dYjP` | Azul noite (#0C161B) |
-| Simbolo_metta_azul2 | PNG | `1VBOJm_p8Yc2dc13DaTySh3sFORKMDP45` | Azul secundario |
-| Simbolo_metta_azul2 | SVG | `1wvZxTOkZbfeRbuLju17XH6RQ2XL95SYk` | Azul secundario |
-| Simbolo_metta_branco | PNG | `1b3tKx-ueGbHaAva3qVojXNlfiyK74Bbl` | Branco (#FFFFFF) |
-| Simbolo_metta_branco | SVG | `1y2E3_xpZAAtsp6-CgGYfP4AftaMIVu2s` | Branco (#FFFFFF) |
-| Simbolo_metta_cinza | PNG | `1it2DjVaJl5aVCFvyMU9pQdEEPyaXpmkU` | Cinza |
-| Simbolo_metta_cinza | SVG | `1ZV9SAmeMdRUq89iKWu-YRLaXuohWtn-U` | Cinza |
+| Símbolo_metta_amarelo | PNG | `1L6yJ0gmxqKOsbGFg7MI3sc8JJZ-jdqzC` | Amarelo (#FFBE18) |
+| Símbolo_metta_amarelo | SVG | `1dwPSsS49LZWJR7hd3HoaNnvgLkWquJs4` | Amarelo (#FFBE18) |
+| Símbolo_metta_azul | PNG | `1Bnn6DVkar-nNVh6AWsi_Vktj3dViJtsv` | Azul noite (#0C161B) |
+| Símbolo_metta_azul | SVG | `1HDDsK0WPyINzOk_ogxRBlaX00yp9dYjP` | Azul noite (#0C161B) |
+| Símbolo_metta_azul2 | PNG | `1VBOJm_p8Yc2dc13DaTySh3sFORKMDP45` | Azul secundário |
+| Símbolo_metta_azul2 | SVG | `1wvZxTOkZbfeRbuLju17XH6RQ2XL95SYk` | Azul secundário |
+| Símbolo_metta_branco | PNG | `1b3tKx-ueGbHaAva3qVojXNlfiyK74Bbl` | Branco (#FFFFFF) |
+| Símbolo_metta_branco | SVG | `1y2E3_xpZAAtsp6-CgGYfP4AftaMIVu2s` | Branco (#FFFFFF) |
+| Símbolo_metta_cinza | PNG | `1it2DjVaJl5aVCFvyMU9pQdEEPyaXpmkU` | Cinza |
+| Símbolo_metta_cinza | SVG | `1ZV9SAmeMdRUq89iKWu-YRLaXuohWtn-U` | Cinza |
 
-#### Logo Completo (Simbolo + Wordmark) - Horizontal (_h) e Vertical (_v)
-| Arquivo | Formato | ID do Drive | Cor | Orientacao |
+#### Logo Completo (Símbolo + Wordmark) - Horizontal (_h) e Vertical (_v)
+| Arquivo | Formato | ID do Drive | Cor | Orientação |
 |---------|---------|-------------|-----|------------|
 | Logo_metta_colorido_h | PNG | `1zdIiaQedxsWH0IJqmGKUSJPZ8lb16siY` | Colorido (amarelo + branco) | Horizontal |
 | Logo_metta_colorido_h | SVG | `1KJ4uiqHdX49Uhp2wg3E9HkzqawE7bYMQ` | Colorido (amarelo + branco) | Horizontal |
@@ -684,37 +684,37 @@ Ao criar qualquer material visual para a Metta, verificar:
 | Logo_metta_colorido_escuro_h | SVG | `1OoU3dGAEPR8S8g10ZuR-vlSyqEv3YDOi` | Colorido escuro (amarelo + azul) | Horizontal |
 | Logo_metta_colorido_escuro_v | PNG | `1WF7is4MRzYUBz144eVGFl70SKGzW8g6Z` | Colorido escuro (amarelo + azul) | Vertical |
 | Logo_metta_colorido_escuro_v | SVG | `1XBx0a3Zi0Gjf8in1Mk-_ynxCYsM834B_` | Colorido escuro (amarelo + azul) | Vertical |
-| Logo_metta_branco_h | PNG | `1dUkDiVqLASKO9b52rnVzlzXkG4LmP09F` | Branco monocromatico | Horizontal |
-| Logo_metta_branco_h | SVG | `1UAttnww1716VzMNZtGWkyEEuEepmVeR4` | Branco monocromatico | Horizontal |
-| Logo_metta_branco_v | PNG | `1726eRnBpslYqMi0DsVpm3NxcWGFvfND4` | Branco monocromatico | Vertical |
-| Logo_metta_branco_v | SVG | `14bfXYU44-Vi_GUzt2h9K93u-mQ4tM4km` | Branco monocromatico | Vertical |
-| Logo_metta_azul_h | PNG | `1DMqb6w8EMcsY7W8vja2unUkAJC_Oablm` | Azul noite monocromatico | Horizontal |
-| Logo_metta_azul_h | SVG | `13Dz57SxqWTj8bpUcyr8P7N88k3atp8wN` | Azul noite monocromatico | Horizontal |
-| Logo_metta_azul_v | PNG | `1pwxckpUPu_Wbvi2IPt6Cu_eJ06HvrT8E` | Azul noite monocromatico | Vertical |
-| Logo_metta_azul_v | SVG | `1ON4zqLTBqlDSvU9M_tsAskCQXQH0FL9i` | Azul noite monocromatico | Vertical |
-| Logo_metta_azul2_h | PNG | `1hbYDE0jvuksEdcI0Y8aU8AF80bPCsLrr` | Azul secundario monocromatico | Horizontal |
-| Logo_metta_azul2_h | SVG | `17g9sUtqsLwV1Pgi6aQD5o72v6WRV4tck` | Azul secundario monocromatico | Horizontal |
-| Logo_metta_azul2_v | PNG | `11t337xMRuUF2J8__dfxHgO9sXN4qHpr4` | Azul secundario monocromatico | Vertical |
-| Logo_metta_azul2_v | SVG | `1waBE3chmyV58bibddkSbWJMTqK7baBUi` | Azul secundario monocromatico | Vertical |
-| Logo_metta_cinza_h | PNG | `1KyPV4XPyPPGrrd3mLAQhvlZlz7pQUqhy` | Cinza monocromatico | Horizontal |
-| Logo_metta_cinza_h | SVG | `1hjaZujL9UExoBb7YH8xHd68kTHa3pm3Z` | Cinza monocromatico | Horizontal |
-| Logo_metta_cinza_v | PNG | `1N3yDA9CA8QonLnGwDKLcAXUYwtU-MWAz` | Cinza monocromatico | Vertical |
-| Logo_metta_cinza_v | SVG | `1qHpKB3NXwtLBN3LNhKEKnISw3lfQM4d1` | Cinza monocromatico | Vertical |
+| Logo_metta_branco_h | PNG | `1dUkDiVqLASKO9b52rnVzlzXkG4LmP09F` | Branco monocromático | Horizontal |
+| Logo_metta_branco_h | SVG | `1UAttnww1716VzMNZtGWkyEEuEepmVeR4` | Branco monocromático | Horizontal |
+| Logo_metta_branco_v | PNG | `1726eRnBpslYqMi0DsVpm3NxcWGFvfND4` | Branco monocromático | Vertical |
+| Logo_metta_branco_v | SVG | `14bfXYU44-Vi_GUzt2h9K93u-mQ4tM4km` | Branco monocromático | Vertical |
+| Logo_metta_azul_h | PNG | `1DMqb6w8EMcsY7W8vja2unUkAJC_Oablm` | Azul noite monocromático | Horizontal |
+| Logo_metta_azul_h | SVG | `13Dz57SxqWTj8bpUcyr8P7N88k3atp8wN` | Azul noite monocromático | Horizontal |
+| Logo_metta_azul_v | PNG | `1pwxckpUPu_Wbvi2IPt6Cu_eJ06HvrT8E` | Azul noite monocromático | Vertical |
+| Logo_metta_azul_v | SVG | `1ON4zqLTBqlDSvU9M_tsAskCQXQH0FL9i` | Azul noite monocromático | Vertical |
+| Logo_metta_azul2_h | PNG | `1hbYDE0jvuksEdcI0Y8aU8AF80bPCsLrr` | Azul secundário monocromático | Horizontal |
+| Logo_metta_azul2_h | SVG | `17g9sUtqsLwV1Pgi6aQD5o72v6WRV4tck` | Azul secundário monocromático | Horizontal |
+| Logo_metta_azul2_v | PNG | `11t337xMRuUF2J8__dfxHgO9sXN4qHpr4` | Azul secundário monocromático | Vertical |
+| Logo_metta_azul2_v | SVG | `1waBE3chmyV58bibddkSbWJMTqK7baBUi` | Azul secundário monocromático | Vertical |
+| Logo_metta_cinza_h | PNG | `1KyPV4XPyPPGrrd3mLAQhvlZlz7pQUqhy` | Cinza monocromático | Horizontal |
+| Logo_metta_cinza_h | SVG | `1hjaZujL9UExoBb7YH8xHd68kTHa3pm3Z` | Cinza monocromático | Horizontal |
+| Logo_metta_cinza_v | PNG | `1N3yDA9CA8QonLnGwDKLcAXUYwtU-MWAz` | Cinza monocromático | Vertical |
+| Logo_metta_cinza_v | SVG | `1qHpKB3NXwtLBN3LNhKEKnISw3lfQM4d1` | Cinza monocromático | Vertical |
 
 #### Logo com Tagline
-| Arquivo | Formato | ID do Drive | Descricao |
+| Arquivo | Formato | ID do Drive | Descrição |
 |---------|---------|-------------|-----------|
-| Logo_metta_tagline_colorida_h | SVG | `1ml7q5kY5hR_JBThjk11Q53kunxccGKSE` | Logo horizontal com tagline "Inteligencia Comercial" |
+| Logo_metta_tagline_colorida_h | SVG | `1ml7q5kY5hR_JBThjk11Q53kunxccGKSE` | Logo horizontal com tagline "Inteligência Comercial" |
 
-#### Assinaturas (Logo compacto para rodapes e aplicacoes reduzidas)
+#### Assinaturas (Logo compacto para rodapes e aplicações reduzidas)
 | Arquivo | Formato | ID do Drive | Cor |
 |---------|---------|-------------|-----|
 | assinatura_metta_amarelo | PNG | `1g2-Wb27NSAv7xyhqHK22vVnoBOGr8fdj` | Amarelo |
 | assinatura_metta_amarelo | SVG | `1O2ZBlXo1xkpEoo2fmwpP1Fo37RElRBlf` | Amarelo |
 | assinatura_metta_azul | PNG | `1Wv9qMgK7MXFfiRIyNjPKlmhsuGHBr6YP` | Azul noite |
 | assinatura_metta_azul | SVG | `1cwtzuv_pbdUXoZWQMeXOrsRXQcdtee7H` | Azul noite |
-| assinatura_metta_azul2 | PNG | `1C2R_m-JpLW0UaK3ToW0xa_O7Idyp8N_P` | Azul secundario |
-| assinatura_metta_azul2 | SVG | `1nfG03x-L8o3aXw6jVOVqesXJCNObiJ1d` | Azul secundario |
+| assinatura_metta_azul2 | PNG | `1C2R_m-JpLW0UaK3ToW0xa_O7Idyp8N_P` | Azul secundário |
+| assinatura_metta_azul2 | SVG | `1nfG03x-L8o3aXw6jVOVqesXJCNObiJ1d` | Azul secundário |
 | assinatura_metta_branco | PNG | `16t01tM7AQnwHHt2w2sCKl5OuDN0cZeaT` | Branco |
 | assinatura_metta_branco | SVG | `1UDca83ltIA640gTyzeFFkrCitf3nj_cq` | Branco |
 | assinatura_metta_cinza | PNG | `1CA4M3Jk0-Lg0vfaMM9f3Utl5ldLCerY4` | Cinza |
@@ -763,68 +763,68 @@ Templates visuais para reels numerados de 1 a 16:
 ### 12.5 Tipografia
 **Pasta**: [Tipografia](https://drive.google.com/drive/folders/1XQ2Sw51ZPxmNkArZDTp4Egt7P8Drhyrk)
 
-| Arquivo | ID do Drive | Descricao |
+| Arquivo | ID do Drive | Descrição |
 |---------|-------------|-----------|
 | fonts-legacy-removed-2026-05-27 | `1SDXY_sNrpM9wMxQ5F2_IHq_boVz8jXoB` | Fonte Zalando Sans Expanded (regular) |
-| Inter-Italic-Variable-Official.ttf | `1wuCfL7hwMpOvGJgZwxSyr-NPXMDfxaaL` | Fonte Zalando Sans Expanded (italico) |
+| Inter-Italic-Variable-Official.ttf | `1wuCfL7hwMpOvGJgZwxSyr-NPXMDfxaaL` | Fonte Zalando Sans Expanded (itálico) |
 
 ---
 
-### 12.6 Guia de Selecao de Assets
+### 12.6 Guia de Seleção de Assets
 
 #### Qual logo usar?
-| Situacao | Asset recomendado | Fundo |
+| Situação | Asset recomendado | Fundo |
 |----------|-------------------|-------|
 | Uso principal (destaque) | Logo_metta_colorido_h ou _v | Fundo escuro (#0C161B) |
 | Uso sobre fundo claro | Logo_metta_colorido_escuro_h ou _v | Fundo claro (#FFFFFF) |
-| Monocromatico sobre escuro | Logo_metta_branco_h ou _v | Fundo escuro |
-| Monocromatico sobre claro | Logo_metta_azul_h ou _v | Fundo claro |
-| Favicon, icone, espaco reduzido | Simbolo_metta_amarelo ou _branco | Qualquer |
-| Rodape, assinatura compacta | assinatura_metta_* | Conforme fundo |
+| Monocromático sobre escuro | Logo_metta_branco_h ou _v | Fundo escuro |
+| Monocromático sobre claro | Logo_metta_azul_h ou _v | Fundo claro |
+| Favicon, ícone, espaço reduzido | Símbolo_metta_amarelo ou _branco | Qualquer |
+| Rodapé, assinatura compacta | assinatura_metta_* | Conforme fundo |
 | Com tagline completa | Logo_metta_tagline_colorida_h | Fundo escuro |
 
 #### Qual background usar?
-| Situacao | Asset recomendado |
+| Situação | Asset recomendado |
 |----------|-------------------|
 | Fundo com profundidade premium | bg_gradiente_escuro_1 |
 | Fundo amarelo vibrante | bg_gradiente_amarelo_1 |
-| Fundo solido amarelo | bg_liso_amarelo_1, _2 ou _3 |
-| Fundo solido escuro | bg_liso_azul_1 ou _2 |
+| Fundo sólido amarelo | bg_liso_amarelo_1, _2 ou _3 |
+| Fundo sólido escuro | bg_liso_azul_1 ou _2 |
 | Fundo neutro claro | bg_liso_branco_gelo_1 ou bg_liso_cinza_gelo_1 |
-| Fundo cinza intermediario | bg_liso_cinza_1 |
+| Fundo cinza intermediário | bg_liso_cinza_1 |
 
 ---
 
-### 12.7 Instrucoes para o Agente
+### 12.7 Instruções para o Agente
 
 1. **Buscar assets do Drive**: Sempre usar os IDs do Google Drive listados acima para baixar/referenciar arquivos. Nunca usar caminhos locais.
-2. **Preferir SVG**: Para logos e backgrounds, preferir SVG quando disponivel (melhor qualidade em qualquer escala). Usar PNG quando SVG nao for suportado.
+2. **Preferir SVG**: Para logos e backgrounds, preferir SVG quando disponível (melhor qualidade em qualquer escala). Usar PNG quando SVG não for suportado.
 3. **Preferir PNG**: Para modelos de reels (pasta 12.4), usar os PNGs como base/template.
-4. **Atualizacao**: Esta secao deve ser atualizada sempre que novos arquivos forem adicionados a pasta do Drive.
+4. **Atualização**: Esta seção deve ser atualizada sempre que novos arquivos forem adicionados à pasta do Drive.
 
 ---
 
 ## 13. Composições Editoriais — Análise da Fonte (Rebranding) [REFERENCE]
 > Descreve o que **existe** na fonte Figma. Não autoriza efeitos proibidos por §6.4 — quando §13 menciona blur/glow/shadow, está documentando design legado a ser remediado.
 
-> **Nota:** as orientacoes de cores (secao 3) e tipografia (secao 4) permanecem inalteradas. Esta secao adiciona os padroes de COMPOSICAO e LAYOUT extraidos da analise direta dos frames das paginas "01. Playground" e "04.1 Metta" do arquivo Figma `Rebranding` — complementando o catalogo de estilos existente com especificacoes tecnicas de montagem.
+> **Nota:** as orientações de cores (seção 3) e tipografia (seção 4) permanecem inalteradas. Esta seção adiciona os padrões de COMPOSIÇÃO e LAYOUT extraídos da análise direta dos frames das páginas "01. Playground" e "04.1 Metta" do arquivo Figma `Rebranding` — complementando o catálogo de estilos existente com especificações técnicas de montagem.
 >
-> Fonte: [Figma — Rebranding](https://www.figma.com/design/dNVyxGVNxNbE6sA1F7OOXL/Rebranding) · paginas `01. Playground` (6:2) e `04.1 Metta` (427:81)
+> Fonte: [Figma — Rebranding](https://www.figma.com/design/dNVyxGVNxNbE6sA1F7OOXL/Rebranding) · páginas `01. Playground` (6:2) e `04.1 Metta` (427:81)
 
 ### 13.1 Formatos de Canvas Usados na Fonte
 
-| Formato | Dimensoes | Uso documentado na fonte |
+| Formato | Dimensões | Uso documentado na fonte |
 |---------|-----------|-------------------------|
-| Slide 16:9 | 1920x1080 | Apresentacoes comerciais, statements de valor, aplicacoes mockup |
+| Slide 16:9 | 1920x1080 | Apresentações comerciais, statements de valor, aplicações mockup |
 | Poster editorial | 2035x1414 | Posters institucionais print-scale (A5/A4) |
-| Feed Instagram | 1080x1350 | Anuncios feed (ja documentado) |
-| Story Instagram | 1080x1920 | Stories e reels cover (ja documentado) |
+| Feed Instagram | 1080x1350 | Anúncios feed (já documentado) |
+| Story Instagram | 1080x1920 | Stories e reels cover (já documentado) |
 
-**Nota:** o poster editorial 2035x1414 e uma escala nao documentada no catalogo anterior. E o canvas usado para os posters 4-8 do Playground.
+**Nota:** o poster editorial 2035x1414 e uma escala não documentada no catálogo anterior. E o canvas usado para os posters 4-8 do Playground.
 
 ### 13.2 Nomes Reais dos Estilos no Figma
 
-O arquivo Rebranding referencia as duas fontes através de **estilos nomeados** no painel de texto do Figma. Os nomes exatos a usar (e na API) são:
+O arquivo Rebranding referência as duas fontes através de **estilos nomeados** no painel de texto do Figma. Os nomes exatos a usar (e na API) são:
 
 **Display — Zalando Sans Expanded:**
 
@@ -848,41 +848,41 @@ O arquivo Rebranding referencia as duas fontes através de **estilos nomeados** 
 
 **Refator de 2026-05-27:** os estilos antigos `Inter / Expanded *` (e antes deles `Inter / Expanded *`) foram substituídos por `Zalando Sans Expanded / *` no Figma. A lógica de "1 fonte com dois eixos de largura via `font-stretch`" foi descontinuada — agora são duas famílias separadas, uma pra display, outra pra body. Em CSS basta `font-family: 'Zalando Sans Expanded'` ou `'Inter'`, sem ajuste de `font-stretch`.
 
-### 13.3 Padrao Editorial Poster
+### 13.3 Padrão Editorial Poster
 
-Padrao observado nos frames `poster 5` (221:402) e `poster 6` (222:809) do Playground. Layout de impacto editorial print-scale para aplicacoes institucionais.
+Padrão observado nos frames `poster 5` (221:402) e `poster 6` (222:809) do Playground. Layout de impacto editorial print-scale para aplicações institucionais.
 
 **Canvas:** 2035x1414
-**Backgrounds validados:** `#0C161B` (azul noite) ou `#435965` (steel-blue como bg primario)
+**Backgrounds validados:** `#0C161B` (azul noite) ou `#435965` (steel-blue como bg primário)
 
 **Camadas (bottom to top):**
 
-1. **Background solido** — cor do token
-2. **Wordmark rotado signature** — "metta" lowercase gigante, rotacao 90°, width = altura do canvas (~1415px), flush bleed na borda esquerda, cor em baixo contraste com o bg
+1. **Background sólido** — cor do token
+2. **Wordmark rotado signature** — "metta" lowercase gigante, rotação 90°, width = altura do canvas (~1415px), flush bleed na borda esquerda, cor em baixo contraste com o bg
 3. **Foto dominante** — rounded rectangle mask (~52px radius), ocupando 60-85% do canvas, rotacionada 90° quando o design pedir
 4. **Headline central** — Zalando Sans Expanded Semibold 650, **74-137px**, sentence case, cor `#FFFFFF` ou `#EBF3F7`, letter-spacing -5%, line-height 0.9
 5. **Sub-caption** (opcional) — Zalando Sans Expanded Semibold 650 em escala menor (~47px), cor `#435965` em bg claro ou card overlay
-6. **Pill tag list** — fileira horizontal de servicos (detalhe em 13.5)
+6. **Pill tag list** — fileira horizontal de serviços (detalhe em 13.5)
 7. **Yellow brand band** — faixa horizontal amarela em uma borda do canvas (detalhe em 13.6)
-8. **Logo stack compacto** — simbolo + wordmark, canto oposto a brand band (ex: top-right quando band esta bottom)
+8. **Logo stack compacto** — símbolo + wordmark, canto oposto a brand band (ex: top-right quando band está bottom)
 9. **URL footer** — `METTABRASIL.COM.BR` em Inter Medium 510, 18px, color `#435965`
 
-**Quando usar:** posters institucionais de evento, pecas de feira, material impresso premium, capas de apresentacao.
+**Quando usar:** posters institucionais de evento, peças de feira, material impresso premium, capas de apresentação.
 
-### 13.4 Padrao Slide Statement
+### 13.4 Padrão Slide Statement
 
-Padrao observado no frame `slide 3` (251:3723) do Playground. Layout de statement de valor comercial com footer de autoria persistente.
+Padrão observado no frame `slide 3` (251:3723) do Playground. Layout de statement de valor comercial com footer de autoria persistente.
 
 **Canvas:** 1920x1080
 **Background:** `#0C161B`
 
-**Area principal (y: 0-900):**
+**Área principal (y: 0-900):**
 - Headline centralizado horizontalmente em x=965 (center)
 - Tipografia: **Zalando Sans Expanded Regular 410 a 142.5px**, color `#EBF3F7` (ice-blue)
-- Mixed-weight inline: palavras enfaticas trocam para **Expanded Semibold 650** (ex: "parceria", "aumentar o lucro")
-- Mixed-color inline: palavras-chave coloridas em `#FFBE18` (amarelo) para destaque semantico
+- Mixed-weight inline: palavras enfáticas trocam para **Expanded Semibold 650** (ex: "parceria", "aumentar o lucro")
+- Mixed-color inline: palavras-chave coloridas em `#FFBE18` (amarelo) para destaque semântico
 - Line-height 0.82, letter-spacing -1%
-- Sentence case — NAO uppercase (ao contrario dos estilos de anuncio conversao A-L)
+- Sentence case — NÃO uppercase (ao contrário dos estilos de anúncio conversão A-L)
 
 **Divider (y: 910):**
 - Linha horizontal 1810x2px
@@ -891,33 +891,33 @@ Padrao observado no frame `slide 3` (251:3723) do Playground. Layout de statemen
 
 **Footer persistente (y: 940-1018) — 4 colunas:**
 
-| Col | Posicao | Conteudo | Especificacao |
+| Col | Posição | Conteúdo | Especificação |
 |---|---|---|---|
 | 1 | x=48 | Avatar + Name Stack | Ver 13.8 |
 | 2 | x=580 | Tagline da marca | "Performance em vendas pode ser mais leve." — Zalando Sans Expanded Medium 540, 19.9px, `#435965`, max-width ~314px |
 | 3 | x=1094 | Brand lockup pill | Ver 13.9 |
-| 4 | x=1809 | Arrow navigation | Circle 48.6x48.6, icon → (proximo slide) |
+| 4 | x=1809 | Arrow navigation | Circle 48.6x48.6, icon → (próximo slide) |
 
-**Quando usar:** apresentacoes comerciais, slides de abertura de capitulo, statements de valor com atribuicao de autor.
+**Quando usar:** apresentações comerciais, slides de abertura de capítulo, statements de valor com atribuição de autor.
 
-### 13.5 Pill Tag List (Componente Reusavel)
+### 13.5 Pill Tag List (Componente Reusável)
 
-Componente de tags horizontais para listar servicos/categorias. Encontrado em posters e cards.
+Componente de tags horizontais para listar serviços/categorias. Encontrado em posters e cards.
 
-**Especificacao do container (cada tag):**
+**Especificação do container (cada tag):**
 - Shape: rounded pill, radius `23.4px`
 - Background: cor do token (ex: `#435965` sobre bg `#0C161B`)
 - Border: `0.98px solid` mesma cor do background
 - Padding: `14.3px` horizontal x `7.7px` vertical
 
-**Especificacao do texto:**
+**Especificação do texto:**
 - Font: **Zalando Sans Expanded Medium 540**
 - Size: 9-11px (poster) ou escalar proporcional ao canvas
 - Color: contrastante com o bg da pill (ex: `#0C161B` sobre `#435965`)
 - Letter-spacing: `+12%` (0.12em)
 - Text-transform: UPPERCASE
 
-**Lista oficial de servicos (encontrada em poster 6):**
+**Lista oficial de serviços (encontrada em poster 6):**
 1. `LIVROS`
 2. `TREINAMENTOS`
 3. `FORMACOES`
@@ -927,49 +927,49 @@ Componente de tags horizontais para listar servicos/categorias. Encontrado em po
 
 **Layout:** horizontal, `inline-flex`, gap 0 ou sem gap entre pills adjacentes.
 
-**Quando usar:** representar o ecossistema de servicos Metta, navegacao por categorias, badges de area em posters/cards.
+**Quando usar:** representar o ecossistema de serviços Metta, navegação por categorias, badges de área em posters/cards.
 
-### 13.6 Yellow Brand Band (Componente Reusavel)
+### 13.6 Yellow Brand Band (Componente Reusável)
 
 Faixa horizontal full-width em `#FFBE18` que funciona como "assinatura de marca" em posters e layouts institucionais.
 
-**Especificacao:**
+**Especificação:**
 - Altura: ~138px (proporcional ao canvas)
 - Largura: full width do canvas
 - Background: `#FFBE18`
 - Padding: 162px horizontal, 35px vertical
 - Layout: `flex justify-between items-center`
 
-**Conteudo interno:**
-- **Left:** brand lockup stack vertical (simbolo 72x68 + wordmark "metta" 173x68)
+**Conteúdo interno:**
+- **Left:** brand lockup stack vertical (símbolo 72x68 + wordmark "metta" 173x68)
 - **Right:** label `INTELIGÊNCIA COMERCIAL` em Zalando Sans Expanded Regular 410, 23.4px, color `#0C161B`, letter-spacing -1%
 
 **Variante vertical:** rotacionar 90° para criar um spine na borda lateral do canvas (visto em Poster 6 rodando verticalmente com o logo lockup).
 
-**Quando usar:** ancora de marca em posters editoriais, separador entre areas de conteudo em slides, footer de impacto em material institucional.
+**Quando usar:** âncora de marca em posters editoriais, separador entre áreas de conteúdo em slides, footer de impacto em material institucional.
 
-### 13.7 Vertical Rotated Wordmark Fragment (Componente Reusavel)
+### 13.7 Vertical Rotated Wordmark Fragment (Componente Reusável)
 
-Padrao signature da marca Metta: wordmark "metta" rotacionado 90° e com crop/bleed na borda do canvas.
+Padrão signature da marca Metta: wordmark "metta" rotacionado 90° e com crop/bleed na borda do canvas.
 
-**Especificacao:**
-- Texto: wordmark "metta" (lowercase, Inter style) — usar SVG oficial do Drive quando possivel
-- Rotacao: exatamente 90° (vertical, leitura bottom-up)
-- Dimensao: width ~265-280px x height = altura do canvas (ex: 1414px em poster A4)
-- Posicao: flush bleed na borda **esquerda** do canvas (ou direita em variantes)
+**Especificação:**
+- Texto: wordmark "metta" (lowercase, Inter style) — usar SVG oficial do Drive quando possível
+- Rotação: exatamente 90° (vertical, leitura bottom-up)
+- Dimensão: width ~265-280px x height = altura do canvas (ex: 1414px em poster A4)
+- Posição: flush bleed na borda **esquerda** do canvas (ou direita em variantes)
 - Cor: low-contrast sobre o background
   - Sobre `#0C161B`: branco com opacity 80-100% (quando dominante) OR `#435965` (quando como textura)
   - Sobre `#FFBE18`: `#0C161B`
   - Sobre `#FFFFFF`: light gray #EBF3F7 ou azul #0C161B low opacity
-- Z-order: camada de fundo, atras do conteudo principal mas acima do background color
+- Z-order: camada de fundo, atrás do conteúdo principal mas acima do background color
 
-**Quando usar:** posters editoriais, aplicacoes print, slides de statement onde o wordmark vira textura de fundo e ancora de marca.
+**Quando usar:** posters editoriais, aplicações print, slides de statement onde o wordmark vira textura de fundo e ancora de marca.
 
-### 13.8 Avatar + Name Stack (Componente Reusavel)
+### 13.8 Avatar + Name Stack (Componente Reusável)
 
-Padrao de atribuicao/credito usado em slides de statement, business cards e lanyards de evento.
+Padrão de atribuição/crédito usado em slides de statement, business cards e lanyards de evento.
 
-**Especificacao:**
+**Especificação:**
 - **Avatar:** circular mask 72x72, foto da pessoa cropada e centralizada
 - **Stack textual ao lado direito:**
   - Nome: **Zalando Sans Expanded Heavy 870**, 32.6px, color `#435965` (em slide claro) ou `#FFFFFF` (em dark), letter-spacing -1%, line-height 0.82
@@ -982,7 +982,7 @@ Padrao de atribuicao/credito usado em slides de statement, business cards e lany
 - Business cards (poster 4 tipo "card 1")
 - Lanyards/crachas de evento (slide "7" mostra 3 exemplos)
 
-### 13.9 Brand Lockup Pill (Componente Reusavel)
+### 13.9 Brand Lockup Pill (Componente Reusável)
 
 Lockup compacto da marca em formato pill horizontal, usado como ancora de brand em footers de slide e material institucional.
 
@@ -992,24 +992,24 @@ Lockup compacto da marca em formato pill horizontal, usado como ancora de brand 
 [simbolo 43x41] [wordmark "metta" 93x18] [divider vertical 1x22] [label "INTELIGÊNCIA COMERCIAL"]
 ```
 
-**Especificacao do container:**
+**Especificação do container:**
 - Shape: rounded pill, radius `46.8px`
 - Padding: 16px horizontal, 13px vertical
 - Gap interno entre elementos: ~14px
 
 **Elementos:**
-- **Simbolo:** icon Metta (imagem do Drive)
+- **Símbolo:** icon Metta (imagem do Drive)
 - **Wordmark:** "metta" lowercase (imagem ou texto em Inter)
 - **Divider:** linha vertical 1x22px, color branco ou `#435965`
 - **Label:** `INTELIGÊNCIA COMERCIAL` — Zalando Sans Expanded Regular 410, 17px, white (em dark) ou `#0C161B` (em light), letter-spacing +12%, uppercase
 
-**Quando usar:** footer de slides, assinaturas de email signature, cards de credencial, watermarks institucionais, pop-ups de confirmacao.
+**Quando usar:** footer de slides, assinaturas de email signature, cards de credencial, watermarks institucionais, pop-ups de confirmação.
 
 ### 13.10 Tokens de Layout Confirmados na Fonte
 
-Coordenadas e medidas extraidas diretamente dos frames analisados. Usar como grid de referencia quando montar pecas novas na mesma linha visual.
+Coordenadas e medidas extraídas diretamente dos frames analisados. Usar como grid de referência quando montar peças novas na mesma linha visual.
 
-**Slide 1920x1080 — grid padrao:**
+**Slide 1920x1080 — grid padrão:**
 
 | Elemento | X | Y | W | H |
 |---|---|---|---|---|
@@ -1021,7 +1021,7 @@ Coordenadas e medidas extraidas diretamente dos frames analisados. Usar como gri
 | Brand lockup pill | 1094 | 942 | auto | 74 |
 | Arrow circle | 1809 | 955 | 48.6 | 48.6 |
 
-**Poster 2035x1414 — grid padrao:**
+**Poster 2035x1414 — grid padrão:**
 
 | Elemento | X | Y | W | H |
 |---|---|---|---|---|
@@ -1035,43 +1035,43 @@ Coordenadas e medidas extraidas diretamente dos frames analisados. Usar como gri
 
 ### 13.11 Escala de Headline por Canvas
 
-Tamanhos observados na fonte, usar como referencia de Display Hero:
+Tamanhos observados na fonte, usar como referência de Display Hero:
 
 | Canvas | Display Hero | Weight | Notas |
 |---|---|---|---|
 | 1920x1080 (slide) | **142.5px** | Exp Regular 410 + Semibold 650 inline | tracking -1%, line-height 0.82 |
-| 2035x1414 (poster) | 74-137px | Exp Semibold 650 | depende da area disponivel |
-| 1080x1350 (feed) | 96-120px | Exp Heavy 870 | ja documentado |
-| 1080x1920 (story) | 100-240px | Exp Heavy 870 | ja documentado |
+| 2035x1414 (poster) | 74-137px | Exp Semibold 650 | depende da área disponível |
+| 1080x1350 (feed) | 96-120px | Exp Heavy 870 | já documentado |
+| 1080x1920 (story) | 100-240px | Exp Heavy 870 | já documentado |
 
-**Correcao vs documentacao anterior:** slides 16:9 usam headlines ate 142.5px (nao 120-136 como citado em algumas tabelas). Posters editoriais podem chegar a 137px em headlines compactos.
+**Correção vs documentação anterior:** slides 16:9 usam headlines até 142.5px (não 120-136 como citado em algumas tabelas). Posters editoriais podem chegar a 137px em headlines compactos.
 
-### 13.12 Observacoes Finais e Diferencas vs Documentacao Anterior
+### 13.12 Observações Finais e Diferenças vs Documentação Anterior
 
-**Confirmacoes (alinhado com PRD existente):**
-- Paleta de cores primarias (#0C161B, #FFBE18, #FFFFFF, #EBF3F7, #435965)
-- Inter como familia tipografica unica
-- Wordmark como textura/decoracao
+**Confirmações (alinhado com PRD existente):**
+- Paleta de cores primárias (#0C161B, #FFBE18, #FFFFFF, #EBF3F7, #435965)
+- Inter como família tipográfica única
+- Wordmark como textura/decoração
 - Footer de slide com 4 colunas
-- Pills como navegacao de categoria
+- Pills como navegação de categoria
 - Yellow accent sobre dark
 
-**Novas descobertas (adicionar ao repertorio):**
-- Canvas editorial poster 2035x1414 (nao documentado antes)
-- Zalando Sans Expanded usa `wdth 132`, nao 130
-- Steel `#435965` como background PRIMARIO (nao apenas texto secundario)
+**Novas descobertas (adicionar ao repertório):**
+- Canvas editorial poster 2035x1414 (não documentado antes)
+- Zalando Sans Expanded usa `wdth 132`, não 130
+- Steel `#435965` como background PRIMÁRIO (não apenas texto secundário)
 - Tagline fixa: "Performance em vendas pode ser mais leve."
-- Lista oficial de 6 servicos em pill tags (LIVROS, TREINAMENTOS, FORMACOES, MBA, MENTORIA, CONSULTORIA)
-- Avatar + Name Stack como componente sistematico
+- Lista oficial de 6 serviços em pill tags (LIVROS, TREINAMENTOS, FORMAÇÕES, MBA, MENTORIA, CONSULTORIA)
+- Avatar + Name Stack como componente sistemático
 - Slide headline chega a 142.5px (maior que documentado)
-- Brand lockup pill tem estrutura exata: simbolo + wordmark + divider vertical + label
+- Brand lockup pill tem estrutura exata: símbolo + wordmark + divider vertical + label
 - Yellow brand band tem altura exata ~138px com padding 162/35
 
-**Para o fluxo de criacao dentro do Figma via MCP (use_figma), consultar a secao 19 do `Skill - Agente de Design` — contem especificacoes tecnicas de Plugin API, nomes corretos de fontes, padroes de codigo e pitfalls conhecidos.**
+**Para o fluxo de criação dentro do Figma via MCP (use_figma), consultar a seção 19 do `Skill - Agente de Design` — contem especificações técnicas de Plugin API, nomes corretos de fontes, padrões de código e pitfalls conhecidos.**
 
 ---
 
-*Documento gerado a partir da analise do arquivo Figma "Rebranding", pagina "04.1 Metta".*
+*Documento gerado a partir da análise do arquivo Figma "Rebranding", página "04.1 Metta".*
 *Fonte: https://www.figma.com/design/dNVyxGVNxNbE6sA1F7OOXL/Rebranding*
 *Assets: https://drive.google.com/drive/folders/1I7W7fYQw1NK4iVhMEkgnWIBjeZZtTQ7u*
 

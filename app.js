@@ -175,7 +175,11 @@ const BrandSystem = (() => {
           a.textContent = sec.label;
           if (sec.highlight) a.classList.add('highlight');
           if (sec.placeholder) a.classList.add('placeholder');
-          if (sec.subgroup) a.classList.add('subgroup-item');
+          // `nivel: raiz` é a metodologia-mãe (Protocolo M.E.T.T.A.): abre a lista
+          // em destaque. O menu fica plano de propósito — a hierarquia entre as
+          // metodologias é contada dentro das páginas, não por subcategoria aqui.
+          if (sec.nivel === 'raiz') a.classList.add('raiz');
+          else if (sec.subgroup) a.classList.add('subgroup-item');
           a.addEventListener('click', (e) => {
             e.preventDefault();
             navigate(tab.id, sec.id);
@@ -191,7 +195,10 @@ const BrandSystem = (() => {
 
   // ----------- ROUTING -----------
   function parseHash() {
-    const h = location.hash.replace(/^#\/?/, '').split('?')[0];
+    // O TOC grava a âncora no fim da hash (#/tab/secao#id). Recarregar essa URL
+    // sem cortar o segundo "#" fazia a section virar "protocolo#3-t-..." e a
+    // página abrir como "em construção".
+    const h = location.hash.replace(/^#\/?/, '').split('?')[0].split('#')[0];
     const [tabId, sectionId] = h.split('/');
     return { tabId: tabId || null, sectionId: sectionId || null };
   }
@@ -498,7 +505,9 @@ const BrandSystem = (() => {
               ${svgIcon('external', 14)}<span>Doc completa</span>
             </a>
           </div>
+          ${metodTopo(tab, sec)}
           ${html}
+          ${metodRodape(tab, sec)}
         </article>
         <aside class="prose-toc" id="prose-toc"></aside>
       </div>
@@ -511,6 +520,234 @@ const BrandSystem = (() => {
     attachSwatchCopy();
     attachMotionDemos();
     attachCopyLink();
+    attachMetodologia();
+  }
+
+  // ----------- METODOLOGIA — hierarquia Protocolo → submetodologias -----------
+  // O Protocolo M.E.T.T.A. é a metodologia proprietária da Metta; 6 Gestões,
+  // Aceleradores, FCA, CHA e A Venda 4.0 derivam dele. A árvore vem do nav.json
+  // (campos nivel/parent/etapa/resumo), não do conteúdo — o .md do vault segue intacto.
+  function metodRaizDe(tab) {
+    return tab.sections.find(s => s.nivel === 'raiz');
+  }
+  function metodSecDe(tab, id) {
+    return tab.sections.find(s => s.id === id);
+  }
+  function metodFilhosDe(tab, parentId) {
+    return tab.sections.filter(s => s.parent === parentId);
+  }
+  // Etapa aplicável: a da própria section ou, quando ela não declara, a da família mãe.
+  function metodEtapasDe(tab, sec) {
+    if (sec.etapa && sec.etapa.length) return sec.etapa;
+    const pai = sec.parent ? metodSecDe(tab, sec.parent) : null;
+    return (pai && pai.etapa) || [];
+  }
+  // Só os filhos diretos do protocolo entram nos chips da etapa: quem está dentro
+  // de uma família (as 6 gestões, os aceleradores) aparece na página da família.
+  function metodLigadasEtapa(tab, raiz, anchor) {
+    return tab.sections.filter(s => s.parent === raiz.id && (s.etapa || []).includes(anchor));
+  }
+  function metodEtapaInfo(raiz, anchor) {
+    return (raiz.etapas || []).find(e => e.anchor === anchor);
+  }
+  function metodEtapaLabel(etapa) {
+    return `${etapa.letra} — ${etapa.nome}`;
+  }
+  function metodLink(tabId, sec) {
+    return `#/${tabId}/${sec.id}`;
+  }
+  // Em chip, card e frase o nome curto lê melhor que o label do menu
+  // ("6 Gestões da Meta Batida" em vez de "6 Gestões: Visão Geral").
+  function metodNome(sec) {
+    return sec.nomeCurto || sec.label;
+  }
+
+  function metodTopo(tab, sec) {
+    if (!sec || !sec.nivel) return '';
+    const raiz = metodRaizDe(tab);
+    if (!raiz) return '';
+
+    if (sec.nivel === 'raiz') {
+      const filhos = metodFilhosDe(tab, sec.id);
+      const nomes = filhos.map(metodNome).join(', ');
+      return `
+        <div class="metod-selo">
+          <span class="metod-selo-icon">${svgIcon('target', 20)}</span>
+          <div>
+            <div class="metod-selo-kicker">Metodologia proprietária da Metta</div>
+            <p class="metod-selo-texto">Esta é a metodologia autoral da casa, a que engloba todas as outras.
+            ${nomes ? escapeHtml(nomes) + ' são submetodologias que existem dentro dela.' : ''}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Trilha: Protocolo › (família) › atual
+    const pai = sec.parent ? metodSecDe(tab, sec.parent) : null;
+    const trilha = [];
+    trilha.push(`<a class="metod-no" href="${metodLink(tab.id, raiz)}">${escapeHtml(metodNome(raiz))}</a>`);
+    if (pai && pai.id !== raiz.id) {
+      trilha.push(`<span class="metod-seta">›</span>`);
+      trilha.push(`<a class="metod-no" href="${metodLink(tab.id, pai)}">${escapeHtml(metodNome(pai))}</a>`);
+    }
+    trilha.push(`<span class="metod-seta">›</span>`);
+    trilha.push(`<span class="metod-atual">${escapeHtml(metodNome(sec))}</span>`);
+
+    const etapas = metodEtapasDe(tab, sec)
+      .map(a => metodEtapaInfo(raiz, a))
+      .filter(Boolean);
+    const acoes = etapas.map(e => `
+      <a class="metod-btn" href="#/${tab.id}/${raiz.id}?h=${e.anchor}" title="Ver esta etapa no ${escapeAttr(raiz.label)}">
+        ${svgIcon('arrowLeft', 12)}<span>Etapa ${escapeHtml(metodEtapaLabel(e))}</span>
+      </a>
+    `).join('');
+
+    return `
+      <div class="metod-context">
+        <div class="metod-context-trilha">${trilha.join('')}</div>
+        ${acoes ? `<div class="metod-context-acoes">${acoes}</div>` : ''}
+      </div>
+    `;
+  }
+
+  function metodCardsHtml(tab, filhos) {
+    return filhos.map(f => {
+      const ordem = f.ordem
+        ? `${f.ordem} de 6`
+        : (f.tipo === 'familia' ? 'Família' : (f.tipo === 'formato' ? 'Formato EAD' : 'Framework'));
+      return `
+        <a class="metod-card" href="${metodLink(tab.id, f)}">
+          <div class="metod-card-ordem">${escapeHtml(ordem)}</div>
+          <div class="metod-card-titulo">${escapeHtml(metodNome(f))}</div>
+          ${f.resumo ? `<p class="metod-card-resumo">${escapeHtml(f.resumo)}</p>` : ''}
+        </a>
+      `;
+    }).join('');
+  }
+
+  function metodRodape(tab, sec) {
+    if (!sec || !sec.nivel) return '';
+    const raiz = metodRaizDe(tab);
+    if (!raiz) return '';
+    const filhos = metodFilhosDe(tab, sec.id);
+
+    if (sec.nivel === 'raiz') {
+      if (!filhos.length) return '';
+      return `
+        <section class="metod-mapa">
+          <div class="metod-mapa-head">
+            <div class="metod-mapa-kicker">Todas as metodologias da Metta</div>
+            <h2 class="metod-mapa-titulo">O que sai deste protocolo</h2>
+            <p class="metod-mapa-sub">Cada uma existe dentro do Protocolo M.E.T.T.A. e responde por uma parte dele.</p>
+          </div>
+          <div class="metod-cards">${metodCardsHtml(tab, filhos)}</div>
+        </section>
+      `;
+    }
+
+    if (!filhos.length) return '';
+    return `
+      <section class="metod-mapa">
+        <div class="metod-mapa-head">
+          <div class="metod-mapa-kicker">Dentro desta metodologia</div>
+          <h2 class="metod-mapa-titulo">${escapeHtml(metodNome(sec))} por dentro</h2>
+        </div>
+        <div class="metod-cards">${metodCardsHtml(tab, filhos)}</div>
+      </section>
+    `;
+  }
+
+  // Toda página de metodologia abre igual: título, uma frase do que aquilo é, e só
+  // então o conteúdo. Uns docs já trazem esse subtítulo como citação (e ganham o
+  // mesmo estilo dos outros); os e-books não trazem nada, e recebem o resumo do nav.
+  function padronizaAberturaMetod(article, sec) {
+    const h1 = article.querySelector('h1');
+    if (!h1) return;
+    const proximo = h1.nextElementSibling;
+    if (proximo && proximo.tagName === 'BLOCKQUOTE') {
+      proximo.classList.add('metod-sub');
+      return;
+    }
+    if (!sec.resumo || (proximo && proximo.classList.contains('metod-sub'))) return;
+    const p = document.createElement('p');
+    p.className = 'metod-sub';
+    p.textContent = sec.resumo;
+    h1.insertAdjacentElement('afterend', p);
+  }
+
+  // As 5 etapas como índice navegável, logo na abertura do protocolo: quem chega
+  // entende o método inteiro antes de ler, e salta pra etapa ou pra submetodologia.
+  function metodEtapasIndiceHtml(tab, raiz) {
+    const etapas = (raiz.etapas || []).map(e => {
+      const ligadas = metodLigadasEtapa(tab, raiz, e.anchor);
+      const chips = ligadas.map(s => `
+        <a class="metod-chip" href="${metodLink(tab.id, s)}">${escapeHtml(metodNome(s))}</a>
+      `).join('');
+      return `
+        <div class="metod-etapa">
+          <div class="metod-etapa-letra">${escapeHtml(e.letra)}</div>
+          <div>
+            <a class="metod-etapa-nome" href="#/${tab.id}/${raiz.id}?h=${e.anchor}" data-metod-anchor="${e.anchor}">${escapeHtml(e.nome)}</a>
+            <p class="metod-etapa-resolve">${escapeHtml(e.resolve)}</p>
+            ${chips
+              ? `<div class="metod-chips"><span class="metod-chips-label">Nesta etapa</span>${chips}</div>`
+              : `<div class="metod-etapa-vazio">A etapa roda dentro do protocolo, sem submetodologia própria.</div>`}
+          </div>
+        </div>
+      `;
+    }).join('');
+    if (!etapas) return '';
+    return `
+      <section class="metod-indice">
+        <div class="metod-indice-label">As 5 etapas do protocolo</div>
+        <div class="metod-etapas">${etapas}</div>
+      </section>
+    `;
+  }
+
+  // Injeta os chips de submetodologia logo abaixo do H2 de cada etapa, dentro do
+  // próprio documento do protocolo — é onde a pessoa está lendo quando precisa do link.
+  function attachMetodologia() {
+    const article = document.querySelector('.prose');
+    if (!article) return;
+    const tab = nav.tabs.find(t => t.id === currentTabId);
+    if (!tab) return;
+    const sec = tab.sections.find(s => s.id === currentSectionId);
+    const raiz = metodRaizDe(tab);
+    if (!sec || !raiz || !sec.nivel) return;
+
+    padronizaAberturaMetod(article, sec);
+    if (sec.nivel !== 'raiz') return;
+
+    // Índice das etapas entra antes do primeiro H2 do documento.
+    if (!article.querySelector('.metod-indice')) {
+      const primeiroH2 = article.querySelector('h2');
+      const indice = metodEtapasIndiceHtml(tab, raiz);
+      if (primeiroH2 && indice) primeiroH2.insertAdjacentHTML('beforebegin', indice);
+    }
+
+    (raiz.etapas || []).forEach(e => {
+      const h2 = article.querySelector(`h2[id="${e.anchor}"]`);
+      if (!h2 || h2.nextElementSibling?.classList?.contains('metod-chips')) return;
+      const ligadas = metodLigadasEtapa(tab, raiz, e.anchor);
+      if (!ligadas.length) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'metod-chips';
+      wrap.innerHTML = `<span class="metod-chips-label">Nesta etapa</span>` + ligadas.map(s => `
+        <a class="metod-chip" href="${metodLink(tab.id, s)}">${escapeHtml(metodNome(s))}</a>
+      `).join('');
+      h2.insertAdjacentElement('afterend', wrap);
+    });
+
+    // Links pras etapas do próprio doc rolam na página, sem recarregar a section.
+    article.querySelectorAll('[data-metod-anchor]').forEach(a => {
+      a.addEventListener('click', (ev) => {
+        const alvo = document.getElementById(a.dataset.metodAnchor);
+        if (!alvo) return;
+        ev.preventDefault();
+        window.scrollTo({ top: alvo.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+      });
+    });
   }
 
   // ----------- COPY LINK -----------

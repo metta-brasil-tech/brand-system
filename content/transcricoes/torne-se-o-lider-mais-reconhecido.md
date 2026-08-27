@@ -5,9 +5,9 @@ aliases:
 tags:
   - marca/tiago
   - status/arquivo
-  - tema/lideranca
+  - tema/liderança
   - tipo/aula-ao-vivo
-  - tipo/transcricao
+  - tipo/transcrição
 summary: "Transcrição de live #23: reconhecimento via resultados, CHA, distância de performance."
 created: 2026-04-10
 updated: 2026-04-10

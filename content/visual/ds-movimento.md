@@ -11,7 +11,7 @@ tags:
   - usado-por/skill-design-metta
 formato_consumo: referencia-completa
 prioridade_carregamento: 1
-versao: 2.0
+versão: 2.0
 sucessor_de: _archive/refactor-2026-05-03-v2/metta-tokens-v1.md.bak
 summary: "Design tokens Metta seguindo arquitetura 3-tier (ref/sys/comp) inspirada no Material Design 3 do Google. Source of truth de cores, tipografia, espaçamento, shape, elevation, motion. Distribuível pra outras áreas (cloud, propostas comerciais, apresentações). PRD e skills referenciam este arquivo."
 created: 2026-04-28

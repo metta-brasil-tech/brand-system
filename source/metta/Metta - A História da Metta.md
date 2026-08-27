@@ -17,7 +17,7 @@ tags:
   - usado-por/roteirizar-video
 formato_consumo: contexto-skill
 prioridade_carregamento: media
-versao: "1.0"
+versão: "1.0"
 sucedido_por: null
 complementar_com: "[[Tiago - Marca Pessoal]] · [[Metta - Manifesto de Marca]]"
 summary: "Origem da Metta: trajetória pré-fundação do Tiago, queda do Chefe Rex, ruptura societária em 2020, nascimento na pandemia, virada de foco do time para o empresário e consolidação como ecossistema de inteligência comercial."

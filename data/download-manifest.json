@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-24T17:51:03.536Z",
-  "grandTotalBytes": 265853591,
+  "generatedAt": "2026-08-27T15:54:53.165Z",
+  "grandTotalBytes": 265861658,
   "grandTotalFiles": 1191,
   "grandTotalTabs": 21,
   "groups": [
@@ -20,10 +20,10 @@
                 {
                   "name": "manifesto.md",
                   "path": "content/marca/manifesto.md",
-                  "sizeBytes": 17905
+                  "sizeBytes": 17906
                 }
               ],
-              "totalBytes": 17905,
+              "totalBytes": 17906,
               "fileCount": 1
             },
             {
@@ -33,10 +33,10 @@
                 {
                   "name": "historia.md",
                   "path": "content/marca/historia.md",
-                  "sizeBytes": 17979
+                  "sizeBytes": 17980
                 }
               ],
-              "totalBytes": 17979,
+              "totalBytes": 17980,
               "fileCount": 1
             },
             {
@@ -46,10 +46,10 @@
                 {
                   "name": "plataforma.md",
                   "path": "content/marca/plataforma.md",
-                  "sizeBytes": 19976
+                  "sizeBytes": 19977
                 }
               ],
-              "totalBytes": 19976,
+              "totalBytes": 19977,
               "fileCount": 1
             },
             {
@@ -59,10 +59,10 @@
                 {
                   "name": "estrategia.md",
                   "path": "content/marca/estrategia.md",
-                  "sizeBytes": 27747
+                  "sizeBytes": 27749
                 }
               ],
-              "totalBytes": 27747,
+              "totalBytes": 27749,
               "fileCount": 1
             },
             {
@@ -72,10 +72,10 @@
                 {
                   "name": "narrativa.md",
                   "path": "content/marca/narrativa.md",
-                  "sizeBytes": 59700
+                  "sizeBytes": 59704
                 }
               ],
-              "totalBytes": 59700,
+              "totalBytes": 59704,
               "fileCount": 1
             },
             {
@@ -85,14 +85,14 @@
                 {
                   "name": "glossario.md",
                   "path": "content/marca/glossario.md",
-                  "sizeBytes": 48335
+                  "sizeBytes": 48336
                 }
               ],
-              "totalBytes": 48335,
+              "totalBytes": 48336,
               "fileCount": 1
             }
           ],
-          "totalBytes": 191642,
+          "totalBytes": 191652,
           "fileCount": 6
         },
         {
@@ -107,10 +107,10 @@
                 {
                   "name": "icp.md",
                   "path": "content/audiencia/icp.md",
-                  "sizeBytes": 51160
+                  "sizeBytes": 51162
                 }
               ],
-              "totalBytes": 51160,
+              "totalBytes": 51162,
               "fileCount": 1
             },
             {
@@ -120,10 +120,10 @@
                 {
                   "name": "mql.md",
                   "path": "content/audiencia/mql.md",
-                  "sizeBytes": 28685
+                  "sizeBytes": 28687
                 }
               ],
-              "totalBytes": 28685,
+              "totalBytes": 28687,
               "fileCount": 1
             },
             {
@@ -133,14 +133,14 @@
                 {
                   "name": "depoimentos.md",
                   "path": "content/audiencia/depoimentos.md",
-                  "sizeBytes": 24473
+                  "sizeBytes": 24480
                 }
               ],
-              "totalBytes": 24473,
+              "totalBytes": 24480,
               "fileCount": 1
             }
           ],
-          "totalBytes": 104318,
+          "totalBytes": 104329,
           "fileCount": 3
         },
         {
@@ -155,14 +155,14 @@
                 {
                   "name": "identidade-verbal.md",
                   "path": "content/verbal/identidade-verbal.md",
-                  "sizeBytes": 18197
+                  "sizeBytes": 18198
                 }
               ],
-              "totalBytes": 18197,
+              "totalBytes": 18198,
               "fileCount": 1
             }
           ],
-          "totalBytes": 18197,
+          "totalBytes": 18198,
           "fileCount": 1
         },
         {
@@ -177,10 +177,10 @@
                 {
                   "name": "identidade-marca.md",
                   "path": "content/visual/identidade-marca.md",
-                  "sizeBytes": 54647
+                  "sizeBytes": 55059
                 }
               ],
-              "totalBytes": 54647,
+              "totalBytes": 55059,
               "fileCount": 1
             },
             {
@@ -190,10 +190,10 @@
                 {
                   "name": "manual-marca.md",
                   "path": "content/visual/manual-marca.md",
-                  "sizeBytes": 11446
+                  "sizeBytes": 11450
                 }
               ],
-              "totalBytes": 11446,
+              "totalBytes": 11450,
               "fileCount": 1
             },
             {
@@ -203,10 +203,10 @@
                 {
                   "name": "logos.md",
                   "path": "content/visual/logos.md",
-                  "sizeBytes": 11464
+                  "sizeBytes": 11459
                 }
               ],
-              "totalBytes": 11464,
+              "totalBytes": 11459,
               "fileCount": 1
             },
             {
@@ -216,10 +216,10 @@
                 {
                   "name": "ds-tipografia.md",
                   "path": "content/visual/ds-tipografia.md",
-                  "sizeBytes": 29531
+                  "sizeBytes": 29532
                 }
               ],
-              "totalBytes": 29531,
+              "totalBytes": 29532,
               "fileCount": 1
             },
             {
@@ -229,10 +229,10 @@
                 {
                   "name": "ds-cores.md",
                   "path": "content/visual/ds-cores.md",
-                  "sizeBytes": 29531
+                  "sizeBytes": 29532
                 }
               ],
-              "totalBytes": 29531,
+              "totalBytes": 29532,
               "fileCount": 1
             },
             {
@@ -255,10 +255,10 @@
                 {
                   "name": "ds-formas-espacamento.md",
                   "path": "content/visual/ds-formas-espacamento.md",
-                  "sizeBytes": 29531
+                  "sizeBytes": 29532
                 }
               ],
-              "totalBytes": 29531,
+              "totalBytes": 29532,
               "fileCount": 1
             },
             {
@@ -268,10 +268,10 @@
                 {
                   "name": "ds-elevacao-estados.md",
                   "path": "content/visual/ds-elevacao-estados.md",
-                  "sizeBytes": 29531
+                  "sizeBytes": 29532
                 }
               ],
-              "totalBytes": 29531,
+              "totalBytes": 29532,
               "fileCount": 1
             },
             {
@@ -281,14 +281,14 @@
                 {
                   "name": "ds-movimento.md",
                   "path": "content/visual/ds-movimento.md",
-                  "sizeBytes": 29531
+                  "sizeBytes": 29532
                 }
               ],
-              "totalBytes": 29531,
+              "totalBytes": 29532,
               "fileCount": 1
             }
           ],
-          "totalBytes": 231318,
+          "totalBytes": 231734,
           "fileCount": 9
         },
         {
@@ -303,14 +303,14 @@
                 {
                   "name": "principios.md",
                   "path": "content/direcao-arte/principios.md",
-                  "sizeBytes": 13753
+                  "sizeBytes": 13772
                 }
               ],
-              "totalBytes": 13753,
+              "totalBytes": 13772,
               "fileCount": 1
             }
           ],
-          "totalBytes": 13753,
+          "totalBytes": 13772,
           "fileCount": 1
         },
         {
@@ -333,7 +333,7 @@
             },
             {
               "id": "seis-gestoes",
-              "label": "6 Gestões: Visão Geral",
+              "label": "6 Gestões da Meta Batida",
               "files": [
                 {
                   "name": "seis-gestoes.md",
@@ -351,10 +351,10 @@
                 {
                   "name": "gestao-mudanca.md",
                   "path": "content/metodologia/gestao-mudanca.md",
-                  "sizeBytes": 47572
+                  "sizeBytes": 48807
                 }
               ],
-              "totalBytes": 47572,
+              "totalBytes": 48807,
               "fileCount": 1
             },
             {
@@ -364,10 +364,10 @@
                 {
                   "name": "gestao-ativacao.md",
                   "path": "content/metodologia/gestao-ativacao.md",
-                  "sizeBytes": 56201
+                  "sizeBytes": 57815
                 }
               ],
-              "totalBytes": 56201,
+              "totalBytes": 57815,
               "fileCount": 1
             },
             {
@@ -377,10 +377,10 @@
                 {
                   "name": "gestao-metodo.md",
                   "path": "content/metodologia/gestao-metodo.md",
-                  "sizeBytes": 52558
+                  "sizeBytes": 53889
                 }
               ],
-              "totalBytes": 52558,
+              "totalBytes": 53889,
               "fileCount": 1
             },
             {
@@ -390,10 +390,10 @@
                 {
                   "name": "gestao-conhecimento.md",
                   "path": "content/metodologia/gestao-conhecimento.md",
-                  "sizeBytes": 50578
+                  "sizeBytes": 51979
                 }
               ],
-              "totalBytes": 50578,
+              "totalBytes": 51979,
               "fileCount": 1
             },
             {
@@ -403,10 +403,10 @@
                 {
                   "name": "gestao-meta.md",
                   "path": "content/metodologia/gestao-meta.md",
-                  "sizeBytes": 41923
+                  "sizeBytes": 43077
                 }
               ],
-              "totalBytes": 41923,
+              "totalBytes": 43077,
               "fileCount": 1
             },
             {
@@ -416,10 +416,10 @@
                 {
                   "name": "gestao-tempo.md",
                   "path": "content/metodologia/gestao-tempo.md",
-                  "sizeBytes": 39462
+                  "sizeBytes": 40581
                 }
               ],
-              "totalBytes": 39462,
+              "totalBytes": 40581,
               "fileCount": 1
             },
             {
@@ -429,10 +429,10 @@
                 {
                   "name": "aceleradores.md",
                   "path": "content/metodologia/aceleradores.md",
-                  "sizeBytes": 4856
+                  "sizeBytes": 4859
                 }
               ],
-              "totalBytes": 4856,
+              "totalBytes": 4859,
               "fileCount": 1
             },
             {
@@ -442,10 +442,10 @@
                 {
                   "name": "fca.md",
                   "path": "content/metodologia/fca.md",
-                  "sizeBytes": 23197
+                  "sizeBytes": 23200
                 }
               ],
-              "totalBytes": 23197,
+              "totalBytes": 23200,
               "fileCount": 1
             },
             {
@@ -455,27 +455,27 @@
                 {
                   "name": "cha.md",
                   "path": "content/metodologia/cha.md",
-                  "sizeBytes": 5738
+                  "sizeBytes": 5740
                 }
               ],
-              "totalBytes": 5738,
+              "totalBytes": 5740,
               "fileCount": 1
             },
             {
               "id": "a-venda-4-0",
-              "label": "A VENDA 4.0",
+              "label": "A Venda 4.0",
               "files": [
                 {
                   "name": "a-venda-4-0.md",
                   "path": "content/metodologia/a-venda-4-0.md",
-                  "sizeBytes": 21295
+                  "sizeBytes": 21296
                 }
               ],
-              "totalBytes": 21295,
+              "totalBytes": 21296,
               "fileCount": 1
             }
           ],
-          "totalBytes": 385312,
+          "totalBytes": 393175,
           "fileCount": 12
         },
         {
@@ -490,10 +490,10 @@
                 {
                   "name": "mentoria.md",
                   "path": "content/produtos/mentoria.md",
-                  "sizeBytes": 21627
+                  "sizeBytes": 21231
                 }
               ],
-              "totalBytes": 21627,
+              "totalBytes": 21231,
               "fileCount": 1
             },
             {
@@ -503,14 +503,14 @@
                 {
                   "name": "consultoria.md",
                   "path": "content/produtos/consultoria.md",
-                  "sizeBytes": 4112
+                  "sizeBytes": 4113
                 }
               ],
-              "totalBytes": 4112,
+              "totalBytes": 4113,
               "fileCount": 1
             }
           ],
-          "totalBytes": 25739,
+          "totalBytes": 25344,
           "fileCount": 2
         },
         {
@@ -577,10 +577,10 @@
                 {
                   "name": "ep-18-como-bater-meta-no-dia-das-mae.md",
                   "path": "content/transcricoes/ep-18-como-bater-meta-no-dia-das-mae.md",
-                  "sizeBytes": 38568
+                  "sizeBytes": 38571
                 }
               ],
-              "totalBytes": 38568,
+              "totalBytes": 38571,
               "fileCount": 1
             },
             {
@@ -590,10 +590,10 @@
                 {
                   "name": "bata-a-meta-no-mes-de-maio-como-superar-o-faturame.md",
                   "path": "content/transcricoes/bata-a-meta-no-mes-de-maio-como-superar-o-faturame.md",
-                  "sizeBytes": 35051
+                  "sizeBytes": 35055
                 }
               ],
-              "totalBytes": 35051,
+              "totalBytes": 35055,
               "fileCount": 1
             },
             {
@@ -603,10 +603,10 @@
                 {
                   "name": "bata-meta-na-ultima-semana-uma-estrategia-para-eng.md",
                   "path": "content/transcricoes/bata-meta-na-ultima-semana-uma-estrategia-para-eng.md",
-                  "sizeBytes": 60514
+                  "sizeBytes": 60516
                 }
               ],
-              "totalBytes": 60514,
+              "totalBytes": 60516,
               "fileCount": 1
             },
             {
@@ -616,10 +616,10 @@
                 {
                   "name": "como-aumentar-o-lucro-da-sua-empresa-em-junho.md",
                   "path": "content/transcricoes/como-aumentar-o-lucro-da-sua-empresa-em-junho.md",
-                  "sizeBytes": 42678
+                  "sizeBytes": 42680
                 }
               ],
-              "totalBytes": 42678,
+              "totalBytes": 42680,
               "fileCount": 1
             },
             {
@@ -629,10 +629,10 @@
                 {
                   "name": "como-bater-a-meta-na-ultima-semana-do-mes.md",
                   "path": "content/transcricoes/como-bater-a-meta-na-ultima-semana-do-mes.md",
-                  "sizeBytes": 36607
+                  "sizeBytes": 36613
                 }
               ],
-              "totalBytes": 36607,
+              "totalBytes": 36613,
               "fileCount": 1
             },
             {
@@ -642,10 +642,10 @@
                 {
                   "name": "como-bater-meta-em-abril-uma-estrategia-para-vende.md",
                   "path": "content/transcricoes/como-bater-meta-em-abril-uma-estrategia-para-vende.md",
-                  "sizeBytes": 36761
+                  "sizeBytes": 36766
                 }
               ],
-              "totalBytes": 36761,
+              "totalBytes": 36766,
               "fileCount": 1
             },
             {
@@ -655,10 +655,10 @@
                 {
                   "name": "como-bater-meta-em-dezembro.md",
                   "path": "content/transcricoes/como-bater-meta-em-dezembro.md",
-                  "sizeBytes": 44969
+                  "sizeBytes": 44970
                 }
               ],
-              "totalBytes": 44969,
+              "totalBytes": 44970,
               "fileCount": 1
             },
             {
@@ -668,10 +668,10 @@
                 {
                   "name": "como-bater-meta-em-novembro.md",
                   "path": "content/transcricoes/como-bater-meta-em-novembro.md",
-                  "sizeBytes": 48854
+                  "sizeBytes": 48859
                 }
               ],
-              "totalBytes": 48854,
+              "totalBytes": 48859,
               "fileCount": 1
             },
             {
@@ -681,10 +681,10 @@
                 {
                   "name": "como-bater-meta-em-outubro.md",
                   "path": "content/transcricoes/como-bater-meta-em-outubro.md",
-                  "sizeBytes": 45292
+                  "sizeBytes": 45294
                 }
               ],
-              "totalBytes": 45292,
+              "totalBytes": 45294,
               "fileCount": 1
             },
             {
@@ -694,10 +694,10 @@
                 {
                   "name": "como-bater-metas-no-mes-de-julho.md",
                   "path": "content/transcricoes/como-bater-metas-no-mes-de-julho.md",
-                  "sizeBytes": 48577
+                  "sizeBytes": 48581
                 }
               ],
-              "totalBytes": 48577,
+              "totalBytes": 48581,
               "fileCount": 1
             },
             {
@@ -707,10 +707,10 @@
                 {
                   "name": "como-motivar-seu-time-para-a-black-friday.md",
                   "path": "content/transcricoes/como-motivar-seu-time-para-a-black-friday.md",
-                  "sizeBytes": 49921
+                  "sizeBytes": 49925
                 }
               ],
-              "totalBytes": 49921,
+              "totalBytes": 49925,
               "fileCount": 1
             },
             {
@@ -720,10 +720,10 @@
                 {
                   "name": "esteja-armado-para-a-meta-de-setembro.md",
                   "path": "content/transcricoes/esteja-armado-para-a-meta-de-setembro.md",
-                  "sizeBytes": 30252
+                  "sizeBytes": 30253
                 }
               ],
-              "totalBytes": 30252,
+              "totalBytes": 30253,
               "fileCount": 1
             },
             {
@@ -746,10 +746,10 @@
                 {
                   "name": "ep-05-lideranca-inteligente.md",
                   "path": "content/transcricoes/ep-05-lideranca-inteligente.md",
-                  "sizeBytes": 40112
+                  "sizeBytes": 40113
                 }
               ],
-              "totalBytes": 40112,
+              "totalBytes": 40113,
               "fileCount": 1
             },
             {
@@ -759,10 +759,10 @@
                 {
                   "name": "ep-07-como-ser-um-lider-de-vendas-al.md",
                   "path": "content/transcricoes/ep-07-como-ser-um-lider-de-vendas-al.md",
-                  "sizeBytes": 51283
+                  "sizeBytes": 51286
                 }
               ],
-              "totalBytes": 51283,
+              "totalBytes": 51286,
               "fileCount": 1
             },
             {
@@ -772,10 +772,10 @@
                 {
                   "name": "ep-09-sua-atitude-define-sua-altitud.md",
                   "path": "content/transcricoes/ep-09-sua-atitude-define-sua-altitud.md",
-                  "sizeBytes": 58982
+                  "sizeBytes": 58983
                 }
               ],
-              "totalBytes": 58982,
+              "totalBytes": 58983,
               "fileCount": 1
             },
             {
@@ -785,10 +785,10 @@
                 {
                   "name": "ep-19-por-que-ex-vendedores-fracassa.md",
                   "path": "content/transcricoes/ep-19-por-que-ex-vendedores-fracassa.md",
-                  "sizeBytes": 50795
+                  "sizeBytes": 50798
                 }
               ],
-              "totalBytes": 50795,
+              "totalBytes": 50798,
               "fileCount": 1
             },
             {
@@ -798,10 +798,10 @@
                 {
                   "name": "ep-20-lideranca-persuasiva-como-conv.md",
                   "path": "content/transcricoes/ep-20-lideranca-persuasiva-como-conv.md",
-                  "sizeBytes": 52021
+                  "sizeBytes": 52024
                 }
               ],
-              "totalBytes": 52021,
+              "totalBytes": 52024,
               "fileCount": 1
             },
             {
@@ -824,10 +824,10 @@
                 {
                   "name": "a-atitude-do-lider-que-bate-meta.md",
                   "path": "content/transcricoes/a-atitude-do-lider-que-bate-meta.md",
-                  "sizeBytes": 31972
+                  "sizeBytes": 31974
                 }
               ],
-              "totalBytes": 31972,
+              "totalBytes": 31974,
               "fileCount": 1
             },
             {
@@ -837,10 +837,10 @@
                 {
                   "name": "como-ser-gestor-de-vendas-e-garantir-previsibilida.md",
                   "path": "content/transcricoes/como-ser-gestor-de-vendas-e-garantir-previsibilida.md",
-                  "sizeBytes": 25265
+                  "sizeBytes": 25269
                 }
               ],
-              "totalBytes": 25265,
+              "totalBytes": 25269,
               "fileCount": 1
             },
             {
@@ -850,10 +850,10 @@
                 {
                   "name": "liberando-tempo-na-agenda-de-um-lider-de-vendas-pa.md",
                   "path": "content/transcricoes/liberando-tempo-na-agenda-de-um-lider-de-vendas-pa.md",
-                  "sizeBytes": 42706
+                  "sizeBytes": 42707
                 }
               ],
-              "totalBytes": 42706,
+              "totalBytes": 42707,
               "fileCount": 1
             },
             {
@@ -863,10 +863,10 @@
                 {
                   "name": "liberando-tempo-para-bater-meta.md",
                   "path": "content/transcricoes/liberando-tempo-para-bater-meta.md",
-                  "sizeBytes": 45936
+                  "sizeBytes": 45939
                 }
               ],
-              "totalBytes": 45936,
+              "totalBytes": 45939,
               "fileCount": 1
             },
             {
@@ -876,10 +876,10 @@
                 {
                   "name": "liberando-tempo-para-bater-meta-2.md",
                   "path": "content/transcricoes/liberando-tempo-para-bater-meta-2.md",
-                  "sizeBytes": 44324
+                  "sizeBytes": 44325
                 }
               ],
-              "totalBytes": 44324,
+              "totalBytes": 44325,
               "fileCount": 1
             },
             {
@@ -889,10 +889,10 @@
                 {
                   "name": "lideranca-estrategica-comportamentos-para-deixar-e.md",
                   "path": "content/transcricoes/lideranca-estrategica-comportamentos-para-deixar-e.md",
-                  "sizeBytes": 40086
+                  "sizeBytes": 40090
                 }
               ],
-              "totalBytes": 40086,
+              "totalBytes": 40090,
               "fileCount": 1
             },
             {
@@ -902,10 +902,10 @@
                 {
                   "name": "resgatando-sua-motivacao-como-lider.md",
                   "path": "content/transcricoes/resgatando-sua-motivacao-como-lider.md",
-                  "sizeBytes": 19378
+                  "sizeBytes": 19381
                 }
               ],
-              "totalBytes": 19378,
+              "totalBytes": 19381,
               "fileCount": 1
             },
             {
@@ -941,10 +941,10 @@
                 {
                   "name": "torne-se-o-lider-mais-reconhecido.md",
                   "path": "content/transcricoes/torne-se-o-lider-mais-reconhecido.md",
-                  "sizeBytes": 25802
+                  "sizeBytes": 25805
                 }
               ],
-              "totalBytes": 25802,
+              "totalBytes": 25805,
               "fileCount": 1
             },
             {
@@ -967,10 +967,10 @@
                 {
                   "name": "ep-11-baixo-fluxo-de-clientes-manual.md",
                   "path": "content/transcricoes/ep-11-baixo-fluxo-de-clientes-manual.md",
-                  "sizeBytes": 47192
+                  "sizeBytes": 47193
                 }
               ],
-              "totalBytes": 47192,
+              "totalBytes": 47193,
               "fileCount": 1
             },
             {
@@ -980,10 +980,10 @@
                 {
                   "name": "ep-12-como-aumentar-30-de-vendas-em-.md",
                   "path": "content/transcricoes/ep-12-como-aumentar-30-de-vendas-em-.md",
-                  "sizeBytes": 57180
+                  "sizeBytes": 57181
                 }
               ],
-              "totalBytes": 57180,
+              "totalBytes": 57181,
               "fileCount": 1
             },
             {
@@ -993,10 +993,10 @@
                 {
                   "name": "ep-13-pilares-da-meta-batida.md",
                   "path": "content/transcricoes/ep-13-pilares-da-meta-batida.md",
-                  "sizeBytes": 63386
+                  "sizeBytes": 63388
                 }
               ],
-              "totalBytes": 63386,
+              "totalBytes": 63388,
               "fileCount": 1
             },
             {
@@ -1006,10 +1006,10 @@
                 {
                   "name": "ep-13-como-definir-metas-de-vendas.md",
                   "path": "content/transcricoes/ep-13-como-definir-metas-de-vendas.md",
-                  "sizeBytes": 46771
+                  "sizeBytes": 46773
                 }
               ],
-              "totalBytes": 46771,
+              "totalBytes": 46773,
               "fileCount": 1
             },
             {
@@ -1019,10 +1019,10 @@
                 {
                   "name": "ep-14-como-utilizar-a-inteligencia-a.md",
                   "path": "content/transcricoes/ep-14-como-utilizar-a-inteligencia-a.md",
-                  "sizeBytes": 58841
+                  "sizeBytes": 58845
                 }
               ],
-              "totalBytes": 58841,
+              "totalBytes": 58845,
               "fileCount": 1
             },
             {
@@ -1110,10 +1110,10 @@
                 {
                   "name": "qual-a-frequencia-ideal-de-treinamento.md",
                   "path": "content/transcricoes/qual-a-frequencia-ideal-de-treinamento.md",
-                  "sizeBytes": 1637
+                  "sizeBytes": 1638
                 }
               ],
-              "totalBytes": 1637,
+              "totalBytes": 1638,
               "fileCount": 1
             },
             {
@@ -1149,10 +1149,10 @@
                 {
                   "name": "sua-equipe-bate-meta-todo-mes.md",
                   "path": "content/transcricoes/sua-equipe-bate-meta-todo-mes.md",
-                  "sizeBytes": 996
+                  "sizeBytes": 997
                 }
               ],
-              "totalBytes": 996,
+              "totalBytes": 997,
               "fileCount": 1
             },
             {
@@ -1162,10 +1162,10 @@
                 {
                   "name": "supere-meta-todo-mes.md",
                   "path": "content/transcricoes/supere-meta-todo-mes.md",
-                  "sizeBytes": 1942
+                  "sizeBytes": 1943
                 }
               ],
-              "totalBytes": 1942,
+              "totalBytes": 1943,
               "fileCount": 1
             },
             {
@@ -1201,10 +1201,10 @@
                 {
                   "name": "venda-mais-com-as-5-emocoes-de-divertida-mente.md",
                   "path": "content/transcricoes/venda-mais-com-as-5-emocoes-de-divertida-mente.md",
-                  "sizeBytes": 37283
+                  "sizeBytes": 37287
                 }
               ],
-              "totalBytes": 37283,
+              "totalBytes": 37287,
               "fileCount": 1
             },
             {
@@ -1214,10 +1214,10 @@
                 {
                   "name": "ep-02-engajamento-100-como-ter-um-ti.md",
                   "path": "content/transcricoes/ep-02-engajamento-100-como-ter-um-ti.md",
-                  "sizeBytes": 39823
+                  "sizeBytes": 39830
                 }
               ],
-              "totalBytes": 39823,
+              "totalBytes": 39830,
               "fileCount": 1
             },
             {
@@ -1227,10 +1227,10 @@
                 {
                   "name": "ep-06-como-motivar-o-seu-time.md",
                   "path": "content/transcricoes/ep-06-como-motivar-o-seu-time.md",
-                  "sizeBytes": 56505
+                  "sizeBytes": 56507
                 }
               ],
-              "totalBytes": 56505,
+              "totalBytes": 56507,
               "fileCount": 1
             },
             {
@@ -1253,10 +1253,10 @@
                 {
                   "name": "ep-22-como-recuperar-um-time-desmoti.md",
                   "path": "content/transcricoes/ep-22-como-recuperar-um-time-desmoti.md",
-                  "sizeBytes": 41565
+                  "sizeBytes": 41570
                 }
               ],
-              "totalBytes": 41565,
+              "totalBytes": 41570,
               "fileCount": 1
             },
             {
@@ -1279,10 +1279,10 @@
                 {
                   "name": "como-fazer-o-seu-time-acreditar-na-meta.md",
                   "path": "content/transcricoes/como-fazer-o-seu-time-acreditar-na-meta.md",
-                  "sizeBytes": 25486
+                  "sizeBytes": 25488
                 }
               ],
-              "totalBytes": 25486,
+              "totalBytes": 25488,
               "fileCount": 1
             },
             {
@@ -1292,10 +1292,10 @@
                 {
                   "name": "como-fazer-seu-time-bater-meta-sem-depender-de-voc.md",
                   "path": "content/transcricoes/como-fazer-seu-time-bater-meta-sem-depender-de-voc.md",
-                  "sizeBytes": 32162
+                  "sizeBytes": 32164
                 }
               ],
-              "totalBytes": 32162,
+              "totalBytes": 32164,
               "fileCount": 1
             },
             {
@@ -1357,10 +1357,10 @@
                 {
                   "name": "time-bate-meta-sem-depender-de-voce.md",
                   "path": "content/transcricoes/time-bate-meta-sem-depender-de-voce.md",
-                  "sizeBytes": 33697
+                  "sizeBytes": 33702
                 }
               ],
-              "totalBytes": 33697,
+              "totalBytes": 33702,
               "fileCount": 1
             },
             {
@@ -1383,10 +1383,10 @@
                 {
                   "name": "ep-08-como-contratar-bons-vendedores.md",
                   "path": "content/transcricoes/ep-08-como-contratar-bons-vendedores.md",
-                  "sizeBytes": 59889
+                  "sizeBytes": 59891
                 }
               ],
-              "totalBytes": 59889,
+              "totalBytes": 59891,
               "fileCount": 1
             },
             {
@@ -1396,10 +1396,10 @@
                 {
                   "name": "ep-10-como-acelerar-a-performance-do.md",
                   "path": "content/transcricoes/ep-10-como-acelerar-a-performance-do.md",
-                  "sizeBytes": 36618
+                  "sizeBytes": 36621
                 }
               ],
-              "totalBytes": 36618,
+              "totalBytes": 36621,
               "fileCount": 1
             },
             {
@@ -1435,10 +1435,10 @@
                 {
                   "name": "clone-o-seu-melhor-vendedor-sem-gastar-r-1-real.md",
                   "path": "content/transcricoes/clone-o-seu-melhor-vendedor-sem-gastar-r-1-real.md",
-                  "sizeBytes": 41106
+                  "sizeBytes": 41109
                 }
               ],
-              "totalBytes": 41106,
+              "totalBytes": 41109,
               "fileCount": 1
             },
             {
@@ -1448,10 +1448,10 @@
                 {
                   "name": "clone-o-seu-melhor-vendedor-sem-gastar-r1.md",
                   "path": "content/transcricoes/clone-o-seu-melhor-vendedor-sem-gastar-r1.md",
-                  "sizeBytes": 42741
+                  "sizeBytes": 42746
                 }
               ],
-              "totalBytes": 42741,
+              "totalBytes": 42746,
               "fileCount": 1
             },
             {
@@ -1487,10 +1487,10 @@
                 {
                   "name": "como-fazer-diferentes-tipos-de-vendedores-baterem-.md",
                   "path": "content/transcricoes/como-fazer-diferentes-tipos-de-vendedores-baterem-.md",
-                  "sizeBytes": 40970
+                  "sizeBytes": 40973
                 }
               ],
-              "totalBytes": 40970,
+              "totalBytes": 40973,
               "fileCount": 1
             },
             {
@@ -1500,10 +1500,10 @@
                 {
                   "name": "como-selecionar-vendedores-que-batem-meta.md",
                   "path": "content/transcricoes/como-selecionar-vendedores-que-batem-meta.md",
-                  "sizeBytes": 72167
+                  "sizeBytes": 72177
                 }
               ],
-              "totalBytes": 72167,
+              "totalBytes": 72177,
               "fileCount": 1
             },
             {
@@ -1513,10 +1513,10 @@
                 {
                   "name": "domine-o-atendimento-e-dispare-suas-vendas.md",
                   "path": "content/transcricoes/domine-o-atendimento-e-dispare-suas-vendas.md",
-                  "sizeBytes": 30193
+                  "sizeBytes": 30194
                 }
               ],
-              "totalBytes": 30193,
+              "totalBytes": 30194,
               "fileCount": 1
             },
             {
@@ -1539,10 +1539,10 @@
                 {
                   "name": "quando-demitir-um-vendedor.md",
                   "path": "content/transcricoes/quando-demitir-um-vendedor.md",
-                  "sizeBytes": 42908
+                  "sizeBytes": 42910
                 }
               ],
-              "totalBytes": 42908,
+              "totalBytes": 42910,
               "fileCount": 1
             },
             {
@@ -1552,10 +1552,10 @@
                 {
                   "name": "vendedor-viciado-em-desconto.md",
                   "path": "content/transcricoes/vendedor-viciado-em-desconto.md",
-                  "sizeBytes": 1383
+                  "sizeBytes": 1384
                 }
               ],
-              "totalBytes": 1383,
+              "totalBytes": 1384,
               "fileCount": 1
             },
             {
@@ -1682,10 +1682,10 @@
                 {
                   "name": "empresario-preso.md",
                   "path": "content/transcricoes/empresario-preso.md",
-                  "sizeBytes": 1556
+                  "sizeBytes": 1557
                 }
               ],
-              "totalBytes": 1556,
+              "totalBytes": 1557,
               "fileCount": 1
             },
             {
@@ -1754,7 +1754,7 @@
               "fileCount": 1
             }
           ],
-          "totalBytes": 2167458,
+          "totalBytes": 2167600,
           "fileCount": 95
         }
       ]

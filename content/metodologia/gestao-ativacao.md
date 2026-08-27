@@ -6,7 +6,7 @@ aliases:
 tags:
   - marca/metta
   - status/referencia
-  - tema/motivacao
+  - tema/motivação
   - tipo/ebook
   - tipo/metodologia
 summary: "E-book completo da 2ª das 6 Gestões: CHA, ATITUDE, POMA, motivação vs. animação."
@@ -14,830 +14,830 @@ created: 2026-04-10
 updated: 2026-04-10
 ---
 
-# Gestao da Ativacao - E-book Completo
+# Gestão da Ativação - E-book Completo
 
-## [[Metta - As 6 Gestões da Meta Batida]] | Gestao #2
+## [[Metta - As 6 Gestões da Meta Batida]] | Gestão #2
 
 **Autor:** Tiago Alves - Fundador da Metta
 **Empresa:** Metta Brasil (mettabrasil.com.br)
-**Posicao no framework:** Segunda gestao das "6 Gestoes da Meta Batida" (apos a [[Metta - Gestão da Mudança|Gestao da Mudanca]])
+**Posição no framework:** Segunda gestão das "6 Gestões da Meta Batida" (após a [[Metta - Gestão da Mudança|Gestão da Mudança]])
 
-> **Navegacao entre as 6 Gestoes:**
-> [[Metta - Gestão da Mudança|← 1. Mudanca]] | **2. Ativacao** | [[Metta - Gestão do Método|3. Metodo →]]
+> **Navegação entre as 6 Gestões:**
+> [[Metta - Gestão da Mudança|← 1. Mudança]] | **2. Ativação** | [[Metta - Gestão do Método|3. Método →]]
 >
-> [[Metta - Gestão da Mudança|Mudanca]] · [[Metta - Gestão da Ativação|Ativacao]] · [[Metta - Gestão do Método|Metodo]] · [[Metta - Gestão do Conhecimento|Conhecimento]] · [[Metta - Gestão da Meta|Meta]] · [[Metta - Gestão do Tempo|Tempo]]
+> [[Metta - Gestão da Mudança|Mudança]] · [[Metta - Gestão da Ativação|Ativação]] · [[Metta - Gestão do Método|Método]] · [[Metta - Gestão do Conhecimento|Conhecimento]] · [[Metta - Gestão da Meta|Meta]] · [[Metta - Gestão do Tempo|Tempo]]
 
 ---
 
-## Sumario Original
+## Sumário Original
 
-1. Motivacao (p.03)
-2. Ativacao (p.06)
-3. Lider ativado (p.13)
-4. Ativacao do ambiente (p.36)
+1. Motivação (p.03)
+2. Ativação (p.06)
+3. Líder ativado (p.13)
+4. Ativação do ambiente (p.36)
 5. Time ativado (p.43)
-6. Diagnostico da ativacao (p.60)
+6. Diagnóstico da ativação (p.60)
 7. Vendedor ativado (p.63)
 8. Plano de desenvolvimento individual (p.76)
 
 ---
 
-## 1. VISAO GERAL / RESUMO
+## 1. VISÃO GERAL / RESUMO
 
-A Gestao da Ativacao e a segunda gestao do framework "As 6 Gestoes da Meta Batida" da Metta. Ela parte do principio de que, apos a Gestao da Mudanca (onde o time foi engajado na ideia de mudar), e preciso **ativar** o time -- ou seja, garantir que as atitudes certas sejam praticadas de forma regular e disciplinada para que as metas sejam atingidas.
+A Gestão da Ativação é a segunda gestão do framework "As 6 Gestões da Meta Batida" da Metta. Ela parte do princípio de que, após a Gestão da Mudança (onde o time foi engajado na ideia de mudar), é preciso **ativar** o time -- ou seja, garantir que as atitudes certas sejam praticadas de forma regular e disciplinada para que as metas sejam atingidas.
 
-O livro argumenta que concordar com uma ideia nao garante execucao. Para que mudancas acontecam, o time precisa estar **ativado** (Gestao da Ativacao) e saber **como** chegar ao resultado (Gestoes do Metodo, Conhecimento, Meta e Tempo).
+O livro argumenta que concordar com uma ideia não garante execução. Para que mudanças aconteçam, o time precisa estar **ativado** (Gestão da Ativação) e saber **como** chegar ao resultado (Gestões do Método, Conhecimento, Meta e Tempo).
 
-A obra cobre quatro dimensoes de ativacao:
-1. **Lider Ativado** - O lider precisa se ativar primeiro
-2. **Ativacao do Ambiente** - O ambiente de trabalho deve corresponder ao discurso
-3. **Time Ativado** - Vendendo e ensinando a ativacao para a equipe
+A obra cobre quatro dimensões de ativação:
+1. **Líder Ativado** - O líder precisa se ativar primeiro
+2. **Ativação do Ambiente** - O ambiente de trabalho deve corresponder ao discurso
+3. **Time Ativado** - Vendendo e ensinando a ativação para a equipe
 4. **Vendedor Ativado** - Desenvolvimento individual via feedback e acompanhamento
 
 ---
 
-## 2. CAPITULOS E CONTEUDO DETALHADO
+## 2. CAPÍTULOS E CONTEÚDO DETALHADO
 
-### 2.1 MOTIVACAO
+### 2.1 MOTIVAÇÃO
 
-#### O que e motivacao?
+#### O que é motivação?
 
-A palavra "motivacao" e composta por dois termos: **motiv** + **acao**.
+A palavra "motivação" e composta por dois termos: **motiv** + **ação**.
 
-> **Motivacao e a condicao gerada pela influencia de motivos que levam a uma acao.**
+> **Motivação é a condição gerada pela influência de motivos que levam a uma ação.**
 
-Para desenvolver motivacao, sao necessarios dois elementos:
+Para desenvolver motivação, são necessários dois elementos:
 
-- **Motivo** - Descobrir as razoes que nos movem e que promoverao energia para agir. Os motivos devem ser o foco e ponto de partida para decisoes, reflexoes, inspiracoes, pensamentos, proposito de vida.
-- **Acao** - Saber quais atos sao os mais adequados e conduzirao a realizacao dos motivos/sonhos. Nao adianta apenas ter algo em mente; alcançar objetivos demanda executar acoes que levem ate la.
+- **Motivo** - Descobrir as razões que nos movem e que promoverão energia para agir. Os motivos devem ser o foco e ponto de partida para decisões, reflexões, inspirações, pensamentos, propósito de vida.
+- **Ação** - Saber quais atos são os mais adequados e conduzirão a realização dos motivos/sonhos. Não adianta apenas ter algo em mente; alcançar objetivos demanda executar ações que levem até la.
 
-**Principio-chave:** "Muita energia e pouca estrategia e a formula para a desmotivacao, pois gera resultados insatisfatorios."
+**Princípio-chave:** "Muita energia e pouca estratégia é a fórmula para a desmotivação, pois gera resultados insatisfatórios."
 
-#### O papel do lider na motivacao
+#### O papel do líder na motivação
 
-- Cabe ao lider descobrir os **motivos de cada liderado** e orientar quais sao as atitudes necessarias para chegar a essas motivacoes
-- Quando apoiadas e direcionadas para a realizacao de suas metas e objetivos, as pessoas tendem a ter mais vontade de desenvolver habitos vitoriosos
-- Quanto mais as metas forem atingidas, maior sera o entusiasmo e a felicidade de todos
+- Cabe ao líder descobrir os **motivos de cada liderado** e orientar quais são as atitudes necessárias para chegar a essas motivações
+- Quando apoiadas e direcionadas para a realização de suas metas e objetivos, as pessoas tendem a ter mais vontade de desenvolver hábitos vitoriosos
+- Quanto mais as metas forem atingidas, maior será o entusiasmo e a felicidade de todos
 
-#### E possivel motivar alguem?
+#### É possível motivar alguém?
 
-**Nao.** Nao temos o poder de motivar alguem porque nao possuimos condicoes de encontrar dentro de cada pessoa os motivos responsaveis por faze-la dar um passo adiante. Tampouco somos capazes de garantir que ela ativara os movimentos necessarios.
+**Não.** Não temos o poder de motivar alguém porque não possuimos condições de encontrar dentro de cada pessoa os motivos responsáveis por fazê-la dar um passo adiante. Tampouco somos capazes de garantir que ela ativara os movimentos necessários.
 
 **Motivar-se e algo que cada um deve fazer por si mesmo.**
 
-O que o lider pode fazer:
+O que o líder pode fazer:
 - Incentivar
-- Criar condicoes
+- Criar condições
 - Instruir como encontrar o motivo
 - Instruir como agir
-- Acompanhar as realizacoes de cada liderado
+- Acompanhar as realizações de cada liderado
 - Orientar e inspirar as pessoas a ativarem as atitudes consigo
 
-#### O que NAO e motivacao?
+#### O que Não é motivação?
 
-**Citacao:** "Motivacao se refere aos fatores que provocam, canalizam e sustentam o comportamento de um individuo." -- Stoner e Freeman (professores de Administracao de Empresas)
+**Citação:** "Motivação se refere aos fatores que provocam, canalizam e sustentam o comportamento de um indivíduo." -- Stoner e Freeman (professores de Administração de Empresas)
 
-Interpretacao: se nao houver uma acao **focada** (canalizada) e que seja **mantida** (sustentavel), nao se trata de motivacao. Manifestacoes que nao apresentem essas caracteristicas sao apenas um **momento de animacao** -- algo com duracao curta e baixa efetividade.
+Interpretação: se não houver uma ação **focada** (canalizada) e que seja **mantida** (sustentável), não se trata de motivação. Manifestações que não apresentem essas características são apenas um **momento de animação** -- algo com duração curta e baixa efetividade.
 
-#### Teste: Animacao vs. Motivacao (Gabarito)
+#### Teste: Animação vs. Motivação (Gabarito)
 
-| Item | Classificacao |
+| Item | Classificação |
 |------|--------------|
-| Palestra motivacional | 1 (Animacao) |
-| Videos motivacionais | 1 (Animacao) |
-| Exercicios de reflexao acerca de como ativar as Atitudes na pratica | 2 (Motivacao) |
-| Campanha de incentivo | 1 (Animacao) |
-| Feedback individual do lider sobre como tem percebido a atitude do vendedor | 2 (Motivacao) |
-| Grito de guerra com o time | 1 (Animacao) |
-| Conversas individuais sobre como ativar as Atitudes na pratica | 2 (Motivacao) |
+| Palestra motivacional | 1 (Animação) |
+| Vídeos motivacionais | 1 (Animação) |
+| Exercícios de reflexão acerca de como ativar as Atitudes na prática | 2 (Motivação) |
+| Campanha de incentivo | 1 (Animação) |
+| Feedback individual do líder sobre como tem percebido a atitude do vendedor | 2 (Motivação) |
+| Grito de guerra com o time | 1 (Animação) |
+| Conversas individuais sobre como ativar as Atitudes na prática | 2 (Motivação) |
 
-**Criterios para diferenciar:** O evento provoca ou e focado em uma acao? Ele produz resultado sustentavel?
+**Critérios para diferenciar:** O evento provoca ou é focado em uma ação? Ele produz resultado sustentável?
 
-#### Perguntas de verificacao (apos assistir um video motivacional):
-1. Quais foram as acoes efetivas que voce tomou depois de assistir ao video?
-2. Caso tenha feito algo, a acao se repete ate hoje?
-3. Seu foco ainda esta voltado a isso?
-4. Quanto voce evoluiu apos ter passado a focar nessa acao?
-5. Quais mudancas foram ocasionadas a partir dessa acao?
-6. Qual e a probabilidade dessa mudanca se tornar permanente?
-7. Quanto essa mudanca de acao impactou nos seus resultados?
+#### Perguntas de verificação (após assistir um vídeo motivacional):
+1. Quais foram as ações efetivas que você tomou depois de assistir ao vídeo?
+2. Caso tenha feito algo, a ação se repete até hoje?
+3. Seu foco ainda está voltado a isso?
+4. Quanto você evoluiu após ter passado a focar nessa ação?
+5. Quais mudanças foram ocasionadas a partir dessa ação?
+6. Qual é a probabilidade dessa mudança se tornar permanente?
+7. Quanto essa mudança de ação impactou nos seus resultados?
 
 ---
 
-### 2.2 ATIVACAO
+### 2.2 ATIVAÇÃO
 
-> **Estar motivado e o passo inicial para qualquer realizacao, porem, nao pode parar nisso.** A maior parte das metas que almejamos atingir vem da repeticao permanente de determinadas atitudes.
+> **Estar motivado é o passo inicial para qualquer realização, porém, não pode parar nisso.** A maior parte das metas que almejamos atingir vem da repetição permanente de determinadas atitudes.
 
-**Pergunta central:** Como ativar, de forma regular e disciplinada, atitudes que levem ate a meta?
+**Pergunta central:** Como ativar, de forma regular e disciplinada, atitudes que levem até a meta?
 
 #### O problema identificado
 
-As pessoas, na pratica, nao sabem como:
-- Nao procrastinar
+As pessoas, na prática, não sabem como:
+- Não procrastinar
 - Ser mais felizes
-- Ter vigor pela manha
+- Ter vigor pela manhã
 - Planejar e executar
 - Aprender com seus erros
-- Remodelar seus habitos
-- Nao se contaminar com o pessimismo alheio ou vindo de si proprias
-- Aprender e desenvolver coragem e persistencia
+- Remodelar seus hábitos
+- Não se contaminar com o pessimismo alheio ou vindo de si próprias
+- Aprender e desenvolver coragem e persistência
 
-**Crenca limitante comum:** As pessoas acreditam que a falta de certas caracteristicas e algo predestinado, incutido desde o nascimento, OU que basta "apertar um botao interno" para o comportamento se modificar.
+**Crença limitante comum:** As pessoas acreditam que a falta de certas características e algo predestinado, incutido desde o nascimento, OU que basta "apertar um botão interno" para o comportamento se modificar.
 
-**Principio fundamental:** "Atitude pode e deve ser aprendida e, depois, ativada. Existe metodo para isso, o qual chamamos de: **Ativacao**."
+**Princípio fundamental:** "Atitude pode e deve ser aprendida e, depois, ativada. Existe método para isso, o qual chamamos de: **Ativação**."
 
-#### Ativacao e a Competencia
+#### Ativação e a Competência
 
-**Modelo CHA de Competencia** (baseado em artigo cientifico de Scott Parry, 1996):
+**Modelo CHA de Competência** (baseado em artigo científico de Scott Parry, 1996):
 
-> **Competencia = Saber + Fazer + Querer**
+> **Competência = Saber + Fazer + Querer**
 
 Ou seja:
 
 | Componente | Significado | Requisito |
 |-----------|------------|-----------|
-| **C** - Conhecimento | SABER o que e fundamental fazer para atingir a meta (teoria) | Estudar e exercitar de forma regular |
-| **H** - Habilidade | FAZER na pratica, diante de vendedores e clientes (transformar conhecimento em resultados) | Treinar continuamente |
+| **C** - Conhecimento | SABER o que é fundamental fazer para atingir a meta (teoria) | Estudar e exercitar de forma regular |
+| **H** - Habilidade | FAZER na prática, diante de vendedores e clientes (transformar conhecimento em resultados) | Treinar continuamente |
 | **A** - Atitude | QUERER FAZER diariamente o que conhece e o que tem habilidade, mesmo sem estar sendo observado | Ativar comportamentos |
 
-**Quando essas tres vertentes se unem = time competente.**
+**Quando essas três vertentes se unem = time competente.**
 
-#### Como desenvolver competencia nos vendedores?
+#### Como desenvolver competência nos vendedores?
 
 **Conhecimento (C) = Querer + Saber**
-- Ponto de partida e o QUERER (por isso a Gestao da Mudanca vem antes)
-- Na Gestao da Mudanca, o lider conversou individualmente sobre sonhos e traduziu em metas profissionais
-- Isso levou a conclusao de que e necessario saber mais
+- Ponto de partida é o QUERER (por isso a Gestão da Mudança vem antes)
+- Na Gestão da Mudança, o líder conversou individualmente sobre sonhos e traduziu em metas profissionais
+- Isso levou a conclusão de que é necessário saber mais
 
 **Habilidade (H) = Saber + Fazer**
-- Conhecimento que nao e colocado em pratica nao gera resultado
-- Em vendas: saber abordar positivamente, visualizar o cenario, encantar o cliente com solucoes, negociar de forma inteligente, decidir o fechamento e ampliar o relacionamento
+- Conhecimento que não é colocado em prática não gera resultado
+- Em vendas: saber abordar positivamente, visualizar o cenário, encantar o cliente com soluções, negociar de forma inteligente, decidir o fechamento e ampliar o relacionamento
 
 **Atitude (A) = Querer + Fazer**
-- Dois perfis problematicos:
-  - Nao sabem algo porque nao se interessam (tem condicoes, mas nao tem atitude para buscar)
-  - Sabem, mas nao implementam (adquiriu conhecimento, mas nao aplica sem cobranca)
-- Alem de saber, querer e fazer: necessidade de **manter esse ciclo de excelencia**
+- Dois perfis problemáticos:
+  - Não sabem algo porque não se interessam (tem condições, mas não tem atitude para buscar)
+  - Sabem, mas não implementam (adquiriu conhecimento, mas não aplica sem cobrança)
+- Além de saber, querer e fazer: necessidade de **manter esse ciclo de excelência**
 
-#### A questao da sustentabilidade
+#### A questão da sustentabilidade
 
-> A unica maneira de garantir o padrao de performance e manter as atitudes certas ativadas.
+> A única maneira de garantir o padrão de performance e manter as atitudes certas ativadas.
 
-Existe muita informacao sobre motivacao e pensamentos positivos, mas faltam respostas claras e um passo a passo detalhado de como transformar habitos e sustentar essa mudanca com regularidade.
+Existe muita informação sobre motivação e pensamentos positivos, mas faltam respostas claras e um passo a passo detalhado de como transformar hábitos e sustentar essa mudança com regularidade.
 
-#### As 6 Atitudes a serem ativadas (Metodologia AtivAcao)
+#### As 6 Atitudes a serem ativadas (Metodologia Ativação)
 
-Com base em estudo cientifico, analise aprofundada de bibliografias de pessoas de alto desempenho, e decadas de experiencia, Tiago Alves chegou as seguintes Atitudes:
+Com base em estudo científico, análise aprofundada de bibliografias de pessoas de alto desempenho, e décadas de experiência, Tiago Alves chegou as seguintes Atitudes:
 
-1. **A**credito na meta
-2. **T**enho habitos vitoriosos
+1. **A**crédito na meta
+2. **T**enho hábitos vitoriosos
 3. **I**nvisto tempo na prioridade
 4. **T**reino continuamente
-5. **U**no coragem e persistencia
+5. **U**no coragem e persistência
 6. **D**ecido ser feliz
 7. **E**ncaro a vida como aprendizado
 
-> Formam o acronimo: **ATITUDE**
+> Formam o acrônimo: **ATITUDE**
 
-Cada uma dessas atitudes contem conceitos e tecnicas que, ao serem compreendidos e colocados em pratica, "simplesmente transformam vidas".
+Cada uma dessas atitudes contem conceitos e técnicas que, ao serem compreendidos e colocados em prática, "simplesmente transformam vidas".
 
-**Formas de obter a formacao em AtivAcao:**
+**Formas de obter a formação em Ativação:**
 - Curso on-line (plataforma EAD da Metta)
-- E-book gratuito (mettabrasil.com.br/ebook-ativacao)
+- E-book gratuito (mettabrasil.com.br/ebook-ativação)
 
 ---
 
-### 2.3 LIDER ATIVADO
+### 2.3 LÍDER ATIVADO
 
-> "Se voce concorda que a sua equipe e o seu espelho, cuide da atitude!"
+> "Se você concorda que a sua equipe é o seu espelho, cuide da atitude!"
 
-As atitudes foram customizadas para a realidade do lider treinador.
+As atitudes foram customizadas para a realidade do líder treinador.
 
 #### Atitude 1: ACREDITO NA META
 
-**Ponto inicial da ativacao.** Sem crenca verdadeira na importancia, relevancia e beneficio de uma meta, dificilmente alguem permanece fiel a ela.
+**Ponto inicial da ativação.** Sem crença verdadeira na importância, relevância e benefício de uma meta, dificilmente alguém permanece fiel a ela.
 
-**Definicoes-chave:**
-- **Meta** - E um sonho que possui prazo. Responde: o que voce quer atingir, quando e quanto?
-- **Objetivo** - E o proposito, a explicacao do porque se quer chegar a uma meta, o motivo que a faz nascer.
+**Definições-chave:**
+- **Meta** - E um sonho que possui prazo. Responde: o que você quer atingir, quando e quanto?
+- **Objetivo** - E o propósito, a explicação do por que se quer chegar a uma meta, o motivo que a faz nascer.
 
-**Para crer em uma meta, ela deve causar uma transformacao favoravel e intensa.** A crenca deve estar focada na meta, mas pautada no objetivo que a originou.
+**Para crer em uma meta, ela deve causar uma transformação favorável e intensa.** A crença deve estar focada na meta, mas pautada no objetivo que a originou.
 
-**Exercicios praticos propostos:**
-1. Definir o plano e anotar data de conclusao
-2. Registrar onde as metas e objetivos ficarao visiveis
-3. Indicar quem estara ao lado neste caminho e como compartilhara o plano
-4. Definir como os sonhos podem ser vivenciados (experiencia pratica)
-5. Listar metas que dependem de remuneracao maior
-6. Calculos financeiros:
+**Exercícios práticos propostos:**
+1. Definir o plano e anotar data de conclusão
+2. Registrar onde as metas e objetivos ficarão visíveis
+3. Indicar quem estará ao lado neste caminho e como compartilhara o plano
+4. Definir como os sonhos podem ser vivenciados (experiência prática)
+5. Listar metas que dependem de remuneração maior
+6. Cálculos financeiros:
    - Custo de vida fixo atual
    - Renda atual
    - Quanto sobra (renda - custos)
-   - Em quanto tempo atingira a meta nesse ritmo
+   - Em quanto tempo atingirá a meta nesse ritmo
    - Se o tempo e ideal
 7. Recalculo com metas mais ambiciosas:
-   - Remuneracao necessaria para realizar metas
+   - Remuneração necessária para realizar metas
    - Resultados esperados nos indicadores da equipe
-   - Media de venda por vendedor
-   - Numero de vendas necessarias (baseado no ticket medio)
+   - Média de venda por vendedor
+   - Número de vendas necessárias (baseado no ticket médio)
 
-**Principio importante:**
-> "Tenha mais foco nas metas do time do que nas suas! Se todo o seu time atingir as metas individuais, consequentemente voce chegara as suas."
+**Princípio importante:**
+> "Tenha mais foco nas metas do time do que nas suas! Se todo o seu time atingir as metas individuais, consequentemente você chegará as suas."
 
-#### Atitude 2: TENHO HABITOS VITORIOSOS
+#### Atitude 2: TENHO HÁBITOS VITORIOSOS
 
-**Habitos sao comportamentos repetidos com regularidade e, muitas vezes, automaticamente.**
+**Hábitos são comportamentos repetidos com regularidade e, muitas vezes, automaticamente.**
 
-Importancia dos habitos: questao de regulacao de energia do cerebro -- quanto mais ele trabalha de forma autonoma, menos consumo de energia. Por isso o sistema nervoso transforma acoes em comportamentos automatizados. Pelo mesmo motivo, e tao dificil alterar habitos consolidados.
+Importância dos hábitos: questão de regulação de energia do cérebro -- quanto mais ele trabalha de forma autônoma, menos consumo de energia. Por isso o sistema nervoso transforma ações em comportamentos automatizados. Pelo mesmo motivo, e tão difícil alterar hábitos consolidados.
 
-**Mudar habitos nao depende somente de uma decisao.** Esta ligado a mentalidade, visao de mundo, crencas e, principalmente, atitude. E preciso valorizar a transformacao final e criar metas relevantes (metodologia METAS) com um plano regular.
+**Mudar hábitos não depende somente de uma decisão.** Está ligado a mentalidade, visão de mundo, crenças e, principalmente, atitude. É preciso valorizar a transformação final e criar metas relevantes (metodologia METAS) com um plano regular.
 
-**As metas de mudanca de habitos devem funcionar como verdadeiras recompensas para se tornarem inspiradoras.**
+**As metas de mudança de hábitos devem funcionar como verdadeiras recompensas para se tornarem inspiradoras.**
 
 **Exemplos:**
-- NAO funciona: "Consumir dois litros de agua porque faz bem a saude"
-- FUNCIONA: "Consumir dois litros de agua vai me fazer sentir bem e ter mais energia para encarar o dia com disposicao"
-- NAO funciona: "Evitar redes sociais porque e prejudicial"
-- FUNCIONA: "Evitar redes sociais para sobrar tempo para [atividades que levarao a resultados]"
+- NÃO funciona: "Consumir dois litros de água porque faz bem a saúde"
+- FUNCIONA: "Consumir dois litros de água vai me fazer sentir bem e ter mais energia para encarar o dia com disposição"
+- NÃO funciona: "Evitar redes sociais porque e prejudicial"
+- FUNCIONA: "Evitar redes sociais para sobrar tempo para [atividades que levarão a resultados]"
 
-**Dicas praticas:**
-1. Cuide da saude
-2. Pratique exercicios
-3. Faca listas
+**Dicas práticas:**
+1. Cuide da saúde
+2. Pratique exercícios
+3. Faça listas
 
-**Exercicios propostos:**
-- Identificar o que impede de ter habitos vitoriosos
-- Refletir sobre como cultivar habitos mais vitoriosos (O que / Como resolver / Quando)
-- Comecar a pratica de listas (onde, como, quando, qual aplicativo)
+**Exercícios propostos:**
+- Identificar o que impede de ter hábitos vitoriosos
+- Refletir sobre como cultivar hábitos mais vitoriosos (O que / Como resolver / Quando)
+- Começar a prática de listas (onde, como, quando, qual aplicativo)
 
 #### Atitude 3: INVISTO TEMPO NA PRIORIDADE
 
-(Detalhes aprofundados na Gestao do Tempo)
+(Detalhes aprofundados na Gestão do Tempo)
 
-**Eliminacao de desperdicadores de tempo.** Classificacao:
+**Eliminação de desperdiçadores de tempo.** Classificação:
 1. Tempo improdutivo
 2. Retrabalho
-3. Centralizacao
+3. Centralização
 
-**Exercicio:** Mapear desperdicadores de tempo e criar plano para elimina-los ou minimiza-los.
+**Exercício:** Mapear desperdiçadores de tempo e criar plano para elimina-los ou minimiza-los.
 
 > "Cada segundo conquistado no seu dia a dia pode ser revertido em uma chance de aumentar resultados."
 
-**Definicao de prioridades com base em OKRs** (Objective and Key Results / Objetivos e Resultados-chaves):
+**Definição de prioridades com base em OKRs** (Objective and Key Results / Objetivos e Resultados-chaves):
 
 Estrutura:
 1. Definir um objetivo audacioso e motivador, descrito de forma impactante para o time
 2. Elaborar os resultados-chaves que precisam ser atingidos para chegar ao objetivo
 
-**Exemplo de OKR em gestao de vendas:**
+**Exemplo de OKR em gestão de vendas:**
 
-| Elemento | Descricao |
+| Elemento | Descrição |
 |----------|-----------|
-| **Objetivo** | Ser o time numero 1 da empresa e fazer historia |
+| **Objetivo** | Ser o time número 1 da empresa e fazer história |
 | **Resultado-chave 1** | Fechar X vendas |
 | **Resultado-chave 2** | Vender com TKM de R$ X |
 | **Resultado-chave 3** | Elevar a produtividade dos vendedores para R$ X |
 
-**Subdivisao dos resultados-chaves:**
-- Fechar vendas: rotina de prospeccao, treino de tecnicas, resgate de clientes inativos, estudo de neutralizacao de objecoes
-- Vender com TKM: treinamento sobre produtos de maior valor, estudo de itens complementares, argumentacao de beneficios
-- Aumentar produtividade: compreensao das causas do baixo resultado e acoes taticas
+**Subdivisão dos resultados-chaves:**
+- Fechar vendas: rotina de prospecção, treino de técnicas, resgate de clientes inativos, estudo de neutralização de objeções
+- Vender com TKM: treinamento sobre produtos de maior valor, estudo de itens complementares, argumentação de benefícios
+- Aumentar produtividade: compreensão das causas do baixo resultado e ações táticas
 
-**Principio:** "Qualquer coisa que nao tenha foco em atingir o objetivo e, por consequencia, a meta, nao sera prioridade. Logo, se tornara um desperdicador de tempo."
+**Princípio:** "Qualquer coisa que não tenha foco em atingir o objetivo e, por consequência, a meta, não será prioridade. Logo, se tornara um desperdicador de tempo."
 
 **Plano de Voo:** Ferramenta para visualizar o OKR e o caminho para atingi-lo.
 
-**Exercicio:** Programar atividades de lazer para o tempo de bem-estar (quanto tempo, qual dia, qual duracao, como organizar na rotina).
+**Exercício:** Programar atividades de lazer para o tempo de bem-estar (quanto tempo, qual dia, qual duração, como organizar na rotina).
 
 #### Atitude 4: TREINO CONTINUAMENTE
 
-**Funcao principal de um lider de vendas:** Nao e vender produtos e servicos, mas **ideias**.
+**Função principal de um líder de vendas:** Não é vender produtos e serviços, mas **ideias**.
 
-Ideias que o lider precisa vender:
-- E possivel aumentar resultados
+Ideias que o líder precisa vender:
+- É possível aumentar resultados
 - Cada vendedor pode ser mais e melhor
 - As metas e objetivos podem ser atingidos
-- E possivel ganhar mercado
-- Desenvolvimento em Vendas pode levar o time a excelencia
+- É possível ganhar mercado
+- Desenvolvimento em Vendas pode levar o time a excelência
 
-> "As ideias somente resultarao em algo real se as pessoas praticarem o que esta sendo proposto -- sera exigido delas crer antes de ver."
+> "As ideias somente resultarão em algo real se as pessoas praticarem o que está sendo proposto -- será exigido delas crer antes de ver."
 
-**Materiais para vender ideias e entregar resultados:** Metodo de vendas da Metta, pratica da ativacao, e o livro As 6 Gestoes da Meta Batida.
+**Materiais para vender ideias e entregar resultados:** Método de vendas da Metta, prática da ativação, e o livro As 6 Gestões da Meta Batida.
 
-**O lider deve "vender A VENDA" para o time** -- fazer com que vejam os beneficios de ficar ao lado do lider.
+**O líder deve "vender A VENDA" para o time** -- fazer com que vejam os benefícios de ficar ao lado do líder.
 
-#### Tecnicas de vendas aplicadas a lideranca (Metodo A VENDA)
+#### Técnicas de vendas aplicadas a liderança (Método A VENDA)
 
 **A** - Aborde positivamente
-**V** - Visualize o cenario
-**E** - Encante com solucoes
-**N** - Negocie com inteligencia
+**V** - Visualize o cenário
+**E** - Encante com soluções
+**N** - Negocie com inteligência
 **D** - Decida o fechamento
 **A** - Amplie o relacionamento
 
-**Aplicacao pratica na lideranca:**
-- Faca uma abordagem positiva (abre portas e facilita o dialogo)
+**Aplicação prática na liderança:**
+- Faça uma abordagem positiva (abre portas e facilita o diálogo)
 - Sorria, seja gentil, demonstre simpatia e carisma
-- Chame-o pelo nome durante todo o dialogo
-- Neutralize possiveis objecoes
-- Pesquise nivel de relacionamento e satisfacao do liderado
+- Chame-o pelo nome durante todo o diálogo
+- Neutralize possíveis objeções
+- Pesquise nível de relacionamento e satisfação do liderado
 - Use perguntas abertas para identificar C, H e A
-- Investigue as necessidades do liderado para converter em ativacao
-- Descreva claramente as caracteristicas do que deseja (o que, como, quando, quanto)
-- Venda os beneficios de realizar a demanda
-- Customize os beneficios de acordo com o perfil de cada um
-- Perante objecoes, mantenha-se calmo
+- Investigue as necessidades do liderado para converter em ativação
+- Descreva claramente as características do que deseja (o que, como, quando, quanto)
+- Venda os benefícios de realizar a demanda
+- Customize os benefícios de acordo com o perfil de cada um
+- Perante objeções, mantenha-se calmo
 - Demonstre empatia
-- Devolva objecoes em forma de pergunta
-- Argumente valorizando os beneficios
+- Devolva objeções em forma de pergunta
+- Argumente valorizando os benefícios
 - Decida fechar compromissos com entregas objetivas e datas
-- Defina criterios concretos de avaliacao
-- Encerre em clima positivo, reforcando avanco e visao de ganhos futuros
-- Acompanhe a execucao dos acordos firmados
-- Amplie o relacionamento sempre que possivel
-- Faca com que o liderado deseje estar ao seu lado
+- Defina critérios concretos de avaliação
+- Encerre em clima positivo, reforçando avanço e visão de ganhos futuros
+- Acompanhe a execução dos acordos firmados
+- Amplie o relacionamento sempre que possível
+- Faça com que o liderado deseje estar ao seu lado
 
-**Contraste chefe vs. lider:**
-- **Chefe:** Ordens, sem dialogo. Pressuposto equivocado de que o comando automaticamente gera obediencia.
-- **Resultado de ordens:** Executam sem qualidade/empenho OU simplesmente nao fazem (com desculpas).
-- **Lider treinador:** Vende ideias ao inves de impor ordens.
+**Contraste chefe vs. líder:**
+- **Chefe:** Ordens, sem diálogo. Pressuposto equivocado de que o comando automaticamente gera obediência.
+- **Resultado de ordens:** Executam sem qualidade/empenho OU simplesmente não fazem (com desculpas).
+- **Líder treinador:** Vende ideias ao invés de impor ordens.
 
-#### Atitude 5: UNO CORAGEM E PERSISTENCIA
+#### Atitude 5: UNO CORAGEM E PERSISTÊNCIA
 
-**O medo e natural e necessario.** Esta presente em todos. A maior parte dos medos evidencia a falta de conhecimento.
+**O medo é natural e necessário.** Está presente em todos. A maior parte dos medos evidencia a falta de conhecimento.
 
 **Como fortalecer a coragem:**
 1. Mapeando os medos existentes no momento
 2. Investigando quais conhecimentos faltam para neutralizar as insegurancas
 3. Criando um plano de desenvolvimento individual (o que, como, quanto, quem, quando)
 
-#### Tecnica SAIDA (para lidar com medos)
+#### Técnica SAÍDA (para lidar com medos)
 
-| Passo | Acao |
+| Passo | Ação |
 |-------|------|
-| **Sa** - Saiba qual e o medo | Descricao objetiva de qual e o medo |
-| **I** - Identifique o medo | Descricao de quando e como ele e acionado |
-| **D** - Decida o que fazer | Conclusao de quais acoes concretas devem ser feitas para evitar o medo |
-| **A** - Aja | Descricao de um plano de acao (O que, Como, Quando, Quem) |
+| **Sa** - Saiba qual é o medo | Descrição objetiva de qual é o medo |
+| **I** - Identifique o medo | Descrição de quando e como ele é acionado |
+| **D** - Decida o que fazer | Conclusão de quais ações concretas devem ser feitas para evitar o medo |
+| **A** - Aja | Descrição de um plano de ação (O que, Como, Quando, Quem) |
 
-**Exemplo da tecnica SAIDA (caso do lider Marcos):**
-- **Sa (Saiba):** "Meu medo e ocasionar o nao atingimento de metas por colocar em risco o relacionamento com vendedores de alta performance."
-- **I (Identifique):** "O medo vem a tona quando desejam que eu faca concessoes indevidas ou quando demonstram posturas de imposicao ou intimidacao. Tambem aparece quando vejo que vendedores de baixa performance reagem ao nao atingirem suas metas."
-- **D (Decida):** "Tenho que treinar Felipe, Bruno e Joao para elevarem performance. Praticar As 6 Gestoes para evoluir todos os vendedores de baixo resultado. Me dedicar a acelerar o desempenho dos novos."
-- **A (Aja):** Plano de acao detalhado (O que, Como, Quando, Quem)
+**Exemplo da técnica SAÍDA (caso do líder Marcos):**
+- **Sa (Saiba):** "Meu medo e ocasionar o não atingimento de metas por colocar em risco o relacionamento com vendedores de alta performance."
+- **I (Identifique):** "O medo vem a tona quando desejam que eu faça concessões indevidas ou quando demonstram posturas de imposição ou intimidação. Também aparece quando vejo que vendedores de baixa performance reagem ao não atingirem suas metas."
+- **D (Decida):** "Tenho que treinar Felipe, Bruno e João para elevarem performance. Praticar As 6 Gestões para evoluir todos os vendedores de baixo resultado. Me dedicar a acelerar o desempenho dos novos."
+- **A (Aja):** Plano de ação detalhado (O que, Como, Quando, Quem)
 
-> "Quanto mais voce praticar a SAIDA, mais coragem sentira e menos o medo sera capaz de domina-lo."
+> "Quanto mais você praticar a SAÍDA, mais coragem sentira e menos o medo será capaz de domina-lo."
 
-**Persistencia vs. Insistencia:**
+**Persistência vs. Insistência:**
 - **Insistir** = fazer repetidamente do mesmo jeito, gerando resultados iguais e indesejados
 - **Persistir** = tentar de modos diferentes
 
-**Exercicios propostos:**
-- Listar razoes para nao desistir
+**Exercícios propostos:**
+- Listar razões para não desistir
 - Identificar momentos que fazem querer desistir
-- Planejar como evitar essas ocorrencias
-- Tabela: Qual e o problema? / Como tenho insistido? / Como persistir?
+- Planejar como evitar essas ocorrências
+- Tabela: Qual é o problema? / Como tenho insistido? / Como persistir?
 
 #### Atitude 6: DECIDO SER FELIZ
 
-**Diferenca entre alegria e felicidade:**
-- **Alegria:** Sensacao momentanea de contentamento, fruto de acontecimento especifico e pontual
-- **Felicidade:** Estado de espirito construido por atitudes -- e uma escolha
+**Diferença entre alegria e felicidade:**
+- **Alegria:** Sensação momentanea de contentamento, fruto de acontecimento específico e pontual
+- **Felicidade:** Estado de espírito construído por atitudes -- e uma escolha
 
-> "Felicidade e uma postura e decisao que produz entusiasmo."
+> "Felicidade é uma postura e decisão que produz entusiasmo."
 
 **Pessoas verdadeiramente felizes:**
-- Praticam a gratidao constantemente
-- Enxergam aprendizados e oportunidades diante de situacoes complexas
-- Nao criam expectativas a respeito dos outros
+- Praticam a gratidão constantemente
+- Enxergam aprendizados e oportunidades diante de situações complexas
+- Não criam expectativas a respeito dos outros
 - Veem mais vantagem em ceder do que em receber
-- Sentem-se satisfeitas com o que e necessario para viver
-- Celebram pequenas vitorias
+- Sentem-se satisfeitas com o que é necessário para viver
+- Celebram pequenas vitórias
 - Dedicam-se as amizades
 - Contribuem com o todo
 
-**Felicidade como consequencia das ativacoes anteriores (cadeia de ativacao):**
-Acredito na meta -> Habitos vitoriosos (mais disposicao e energia) -> Foco no tempo nas prioridades -> Treino continuo -> Coragem e persistencia -> **Entusiasmo e felicidade**
+**Felicidade como consequência das ativações anteriores (cadeia de ativação):**
+Acredito na meta -> Hábitos vitoriosos (mais disposição e energia) -> Foco no tempo nas prioridades -> Treino contínuo -> Coragem e persistência -> **Entusiasmo e felicidade**
 
-**Cadeia negativa:** Nao acredita na meta -> nao pratica habitos -> nao investe tempo -> nao treina -> nao persiste -> **sem entusiasmo**
+**Cadeia negativa:** Não acredita na meta -> não pratica hábitos -> não investe tempo -> não treina -> não persiste -> **sem entusiasmo**
 
-> "Quem espera que as circunstancias estejam favoraveis para se sentir bem, se torna refem do que e externo."
+> "Quem espera que as circunstâncias estejam favoráveis para se sentir bem, se torna refém do que é externo."
 
-**A autoativacao da felicidade e uma questao de construcao e maturidade, cujo principio e o otimismo.**
+**A autoativação da felicidade é uma questão de construção e maturidade, cujo princípio é o otimismo.**
 
 #### Atitude 7: ENCARO A VIDA COMO APRENDIZADO
 
-**Fontes de aprendizado para o lider:**
+**Fontes de aprendizado para o líder:**
 1. Aprenda com si mesmo
 2. Aprenda com os liderados
-3. Aprenda com outros lideres
+3. Aprenda com outros líderes
 4. Aprenda estudando
 
-**Exercicio:** Oficializar plano de estudo (O que / Como / Quando)
+**Exercício:** Oficializar plano de estudo (O que / Como / Quando)
 
 ---
 
-### 2.4 DIAGNOSTICO DO LIDER ATIVADO
+### 2.4 DIAGNÓSTICO DO LÍDER ATIVADO
 
-Um checklist completo de sim/nao para o lider avaliar seu nivel de ativacao em cada atitude:
+Um checklist completo de sim/não para o líder avaliar seu nível de ativação em cada atitude:
 
 #### Acredito na Meta
-- Metas tangíveis, especificas, com prazo?
-- Objetivos legitimos que pautam a meta?
-- Meta visivel?
-- Meta compartilhada com alguem de confianca?
+- Metas tangíveis, específicas, com prazo?
+- Objetivos legítimos que pautam a meta?
+- Meta visível?
+- Meta compartilhada com alguém de confiança?
 - Meta vivenciada de alguma forma (test drive, visitas etc.)?
 
-#### Tenho Habitos Vitoriosos
-- Analisou habitos diarios prejudiciais e planejou elimina-los?
-- Check-up medico no ultimo ano?
+#### Tenho Hábitos Vitoriosos
+- Analisou hábitos diários prejudiciais e planejou elimina-los?
+- Check-up médico no último ano?
 - Acompanhamento nutricional?
-- Exercicios regulares?
+- Exercícios regulares?
 - Qualidade do sono melhorada?
 - Fazendo listas para o dia seguinte?
 - Identificou o que desperta ansiedade?
 
 #### Invisto Tempo na Prioridade
 - Avaliou prioridades para investir tempo?
-- Plano para eliminar desperdicadores de tempo?
+- Plano para eliminar desperdiçadores de tempo?
 - Tempo separado para lazer?
 
 #### Treino Continuamente
-- Comecou a estudar sobre gestao?
-- Estuda otimizacao de processos?
-- Aproveita tempo para estudar a metodologia de gestao?
-- Mapeou atividades que geram retrabalho e planejou correcao?
+- Começou a estudar sobre gestão?
+- Estuda otimização de processos?
+- Aproveita tempo para estudar a metodologia de gestão?
+- Mapeou atividades que geram retrabalho e planejou correção?
 
-#### Uno Coragem e Persistencia
+#### Uno Coragem e Persistência
 - Medos descritos objetivamente?
 - Identificou como/quando se manifestam?
-- Definiu acoes concretas para evitar influencia do medo?
-- Esta agindo para eliminar medos?
-- Identificou razoes para nao desistir?
-- Identificou momentos de desistencia?
+- Definiu ações concretas para evitar influência do medo?
+- Está agindo para eliminar medos?
+- Identificou razões para não desistir?
+- Identificou momentos de desistência?
 - Sabe como persistir?
-- Conhece os valores que levam a nao desistir?
+- Conhece os valores que levam a não desistir?
 
 #### Decido Ser Feliz
-- Autoavaliacao sobre estado de espirito permanente de felicidade?
+- Autoavaliação sobre estado de espírito permanente de felicidade?
 - Reconhece atividades que fortalecem o entusiasmo?
 
 #### Encaro a Vida como Aprendizado
 - Determinou canais de aprendizagem?
-- Aprende com as licoes da vida?
+- Aprende com as lições da vida?
 - Busca aprender com o time?
 - Mapeou conhecimentos que faltam?
-- Contatou outros lideres para entender melhores praticas?
+- Contatou outros líderes para entender melhores práticas?
 - Procurou leituras/estudos relevantes?
 
-**Pos-diagnostico:** Criar plano de acao para todos os itens marcados como "nao", seguindo formato: O que / Como / Quando / Quem.
+**Pós-diagnóstico:** Criar plano de ação para todos os itens marcados como "não", seguindo formato: O que / Como / Quando / Quem.
 
 ---
 
-### 2.5 ATIVACAO DO AMBIENTE
+### 2.5 ATIVAÇÃO DO AMBIENTE
 
-> "Seria inutil promover treinamentos motivacionais/comportamentais sem que o ambiente correspondesse ao discurso."
+> "Seria inútil promover treinamentos motivacionais/comportamentais sem que o ambiente correspondesse ao discurso."
 
-#### Piramide de Maslow aplicada a vendas
+#### Pirâmide de Maslow aplicada a vendas
 
-**Referencia:** Abraham Maslow, psicologo americano que popularizou a motivacao como tema cientifico.
+**Referência:** Abraham Maslow, psicólogo americano que popularizou a motivação como tema científico.
 
-**Principio:** Existe uma ordem de prioridade nos motivos que levam a acao. Dificilmente alguem pensara em autorrealizacao se estiver passando necessidades fisiologicas. E primordial satisfazer a necessidade mais basica antes que o ser humano deseje algo maior.
+**Princípio:** Existe uma ordem de prioridade nos motivos que levam a ação. Dificilmente alguém pensara em autorrealização se estiver passando necessidades fisiológicas. E primordial satisfazer a necessidade mais básica antes que o ser humano deseje algo maior.
 
-**Aplicacao para o lider:** Ter consciencia dos niveis permite ativar as pessoas pouco a pouco, de estagio a estagio.
+**Aplicação para o líder:** Ter consciência dos níveis permite ativar as pessoas pouco a pouco, de estágio a estágio.
 
-#### Nivel 1: Necessidades Fisiologicas
+#### Nível 1: Necessidades Fisiológicas
 
-> "Quem necessita do basico tem dificuldades em fazer o excepcional."
+> "Quem necessita do básico tem dificuldades em fazer o excepcional."
 
-No contexto profissional: salarios e variaveis suficientes para sobreviver, descanso, intervalos para alimentacao, local de trabalho salubre.
+No contexto profissional: salários e variáveis suficientes para sobreviver, descanso, intervalos para alimentação, local de trabalho salubre.
 
 **Checklist do ambiente:**
-- [ ] Time ganha o necessario para saciar necessidades fisiologicas?
+- [ ] Time ganha o necessário para saciar necessidades fisiológicas?
 - [ ] Time se alimenta com qualidade?
 - [ ] Folgas e descansos semanais respeitados?
-- [ ] Intervalo de alimentacao cumprido?
-- [ ] Acesso facil e livre a agua potavel?
+- [ ] Intervalo de alimentação cumprido?
+- [ ] Acesso fácil e livre a água potável?
 - [ ] Acesso a banheiro limpo e organizado?
 - [ ] Todas as pessoas moram em local com conforto?
 
-#### Nivel 2: Necessidades de Seguranca
+#### Nível 2: Necessidades de Segurança
 
-> "Time que entra em campo inseguro ja esta derrotado antes que a partida comece."
+> "Time que entra em campo inseguro já está derrotado antes que a partida comece."
 
-**Analogia:** O medo e como cafe -- bom pela manha para manter alertas, mas em excesso tira o sono.
+**Analogia:** O medo e como café -- bom pela manhã para manter alertas, mas em excesso tira o sono.
 
-**Solucao:** Treinamento. A preparacao reduz o medo de nao conseguir pagar contas ou oferecer conforto a familia. Mais treinamento = equipe mais segura com a empresa, vendo futuro solido, estavel e promissor.
+**Solução:** Treinamento. A preparação reduz o medo de não conseguir pagar contas ou oferecer conforto a família. Mais treinamento = equipe mais segura com a empresa, vendo futuro sólido, estável e promissor.
 
 **Checklist:**
-- [ ] Vendedores expressam medo de demissao?
-- [ ] Time tem medo do lider?
+- [ ] Vendedores expressam medo de demissão?
+- [ ] Time tem medo do líder?
 - [ ] Time tem medo dos superiores?
 - [ ] Time seguro sobre possibilidade de crescimento?
 - [ ] Time seguro sobre futuro da empresa?
-- [ ] Time tem seguranca sobre o que vende?
+- [ ] Time tem segurança sobre o que vende?
 
-#### Nivel 3: Necessidades Sociais
+#### Nível 3: Necessidades Sociais
 
 > "Todas as pessoas, em maior ou menor grau, desejam fazer parte de um grupo."
 
-**Dado cientifico:** Pesquisas comprovam que individuos com menos amigos e poucas relacoes sociais tendem a viver menos.
+**Dado científico:** Pesquisas comprovam que individuos com menos amigos e poucas relações sociais tendem a viver menos.
 
 **O ambiente deve gerar:**
-- Troca de experiencias
+- Troca de experiências
 - Clima de parceria
 - Abertura para discutir problemas e incentivar apoio coletivo
-- Estimulo a manifestacao de novas ideias
-- Espaco para momentos com esses focos
+- Estímulo a manifestação de novas ideias
+- Espaço para momentos com esses focos
 
 **Checklist:**
-- [ ] Incentiva troca de experiencias entre o time?
+- [ ] Incentiva troca de experiências entre o time?
 - [ ] Incentiva clima de parceria?
 - [ ] Compartilha problemas e incentiva apoio coletivo?
-- [ ] Reune-se com o time com frequencia (presencial ou telepresencial)?
+- [ ] Reúne-se com o time com frequência (presencial ou telepresencial)?
 - [ ] Incentiva que o time apresente novas ideias?
 
-#### Nivel 4: Necessidades de Autoestima ou Status
+#### Nível 4: Necessidades de Autoestima ou Status
 
-> "Antes, e preciso acreditar em si, para que possa acreditar em todo o resto."
+> "Antes, é preciso acreditar em si, para que possa acreditar em todo o resto."
 
-**O lider deve:**
-- Oferecer treinamento para capacitacao
+**O líder deve:**
+- Oferecer treinamento para capacitação
 - Expor verbalmente e demonstrar que acredita no liderado
 - Valorizar cada progresso
-- Compartilhar boas praticas com todo o grupo
-- Comemorar grandes negociacoes
+- Compartilhar boas práticas com todo o grupo
+- Comemorar grandes negociações
 - Celebrar sonhos pessoais realizados
 - Valorizar conquistas cotidianas (meta batida por vendedor novo ou com dificuldades)
 
-> "Momentos assim ativam aquele que esta avancando, estimulam os demais e fortalecem o senso de equipe."
+> "Momentos assim ativam aquele que está avançando, estimulam os demais e fortalecem o senso de equipe."
 
 **Checklist:**
-- [ ] Identifica crencas limitantes no time em relacao ao atingimento de metas?
+- [ ] Identifica crenças limitantes no time em relação ao atingimento de metas?
 - [ ] Fala com sinceridade que acredita nos vendedores?
-- [ ] Valoriza avancos individuais e coletivos?
+- [ ] Valoriza avanços individuais e coletivos?
 - [ ] Compartilha quando um vendedor se sai muito bem?
-- [ ] Compartilha quando um vendedor alcanca um sonho pessoal?
-- [ ] Compartilha quando um vendedor bate meta (especialmente quando nao conseguia)?
+- [ ] Compartilha quando um vendedor alcança um sonho pessoal?
+- [ ] Compartilha quando um vendedor bate meta (especialmente quando não conseguia)?
 
-#### Nivel 5: Necessidades de Autorrealizacao
+#### Nível 5: Necessidades de Autorrealização
 
-> "Quando as pessoas solucionam as necessidades anteriores, surge o anseio pela autorrealizacao."
+> "Quando as pessoas solucionam as necessidades anteriores, surge o anseio pela autorrealização."
 
-Efeitos: esforco em ser mais eficiente, intencao de se tornar lider, vontade de atuar como treinador ou multiplicador. Fazer o que ama, amar o que faz.
+Efeitos: esforço em ser mais eficiente, intenção de se tornar líder, vontade de atuar como treinador ou multiplicador. Fazer o que ama, amar o que faz.
 
-**Citacao de Skinner:** "Quando nosso comportamento e reforcado positivamente, nos dizemos que gostamos do que estamos fazendo; dizemos que estamos felizes."
+**Citação de Skinner:** "Quando nosso comportamento é reforçado positivamente, nós dizemos que gostamos do que estamos fazendo; dizemos que estamos felizes."
 
-**Pos-checklists:** Para cada item marcado como "nao", criar plano de acao (O que / Como / Quando / Quem).
+**Pós-checklists:** Para cada item marcado como "não", criar plano de ação (O que / Como / Quando / Quem).
 
 ---
 
 ### 2.6 TIME ATIVADO
 
-> "Motivacao nao e algo que se impoe a ninguem, no entanto, voce pode ativar e treinar os vendedores com comportamentos que contribuem para o atingimento da meta."
+> "Motivação não é algo que se impõe a ninguém, no entanto, você pode ativar e treinar os vendedores com comportamentos que contribuem para o atingimento da meta."
 
-**Principio:** Quando o time perceber que o que esta sendo dito e praticado faz sentido e reverte em metas batidas, automaticamente a motivacao nascera.
+**Princípio:** Quando o time perceber que o que está sendo dito e praticado faz sentido e reverte em metas batidas, automaticamente a motivação nascera.
 
-#### Vendendo a Ativacao
+#### Vendendo a Ativação
 
-**Pre-requisito:** Para vender, e preciso antes ter comprado. O lider deve acreditar verdadeiramente na AtivAcao.
+**Pré-requisito:** Para vender, é preciso antes ter comprado. O líder deve acreditar verdadeiramente na Ativação.
 
-> "Voce nao precisa ser o exemplo impecavel de tudo o que diz, mas pode ser um retrato fidedigno de alguem que esta em permanente evolucao."
+> "Você não precisa ser o exemplo impecável de tudo o que diz, mas pode ser um retrato fidedigno de alguém que está em permanente evolução."
 
-**Passos para vender a AtivAcao:**
+**Passos para vender a Ativação:**
 
 1. **Domine as atitudes:** Estude e aplique em sua vida. Ative-se!
-2. **Agende uma reuniao com o time:** Marque compromisso, idealize clima positivo, planeje e prepare
-3. **Apresente a metodologia AtivAcao:** Os vendedores devem entender:
-   - Por que Atitude e tao importante para metas?
-   - Qual a importancia da Atitude para potencializar C e H?
+2. **Agende uma reunião com o time:** Marque compromisso, idealize clima positivo, planeje e prepare
+3. **Apresente a metodologia Ativação:** Os vendedores devem entender:
+   - Por que Atitude e tão importante para metas?
+   - Qual a importância da Atitude para potencializar C e H?
    - Por que pessoas de sucesso possuem atitude?
-   - Quais sao as atitudes fundamentais para o profissional de vendas?
+   - Quais são as atitudes fundamentais para o profissional de vendas?
 
 **Formas de apresentar:**
-1. Crie um discurso proprio, customizado para sua realidade
-2. Apresente o video oficial da Metta e comente apos
-3. Assista ao video e crie outro discurso inspirado nele
+1. Crie um discurso próprio, customizado para sua realidade
+2. Apresente o vídeo oficial da Metta e comente após
+3. Assista ao vídeo e crie outro discurso inspirado nele
 
-#### Ensinando a Ativacao
+#### Ensinando a Ativação
 
-**O primeiro contato deve ser impactante.** A percepcao sera fruto da capacidade de:
-1. Embasar as orientacoes em situacoes reconhecidas pelos vendedores
-2. Demonstrar que e possivel aplicar na pratica
-3. Comprovar que campeoes de vendas ja as praticam
+**O primeiro contato deve ser impactante.** A percepção será fruto da capacidade de:
+1. Embasar as orientações em situações reconhecidas pelos vendedores
+2. Demonstrar que é possível aplicar na prática
+3. Comprovar que campeões de vendas já as praticam
 
 **Regras para o ensino:**
-- Nao transfira ao EAD ou ao texto a missao de instruir -- seja o mediador
-- Trabalhe profundamente **uma AtivAcao por vez**
+- Não transfira ao EAD ou ao texto a missão de instruir -- seja o mediador
+- Trabalhe profundamente **uma Ativação por vez**
 - A cada Atitude estudada:
   - Debata o que entenderam
-  - Proponha exercicios praticos
+  - Proponha exercícios práticos
   - Mostre como aplicar na rotina
-  - Mostre como a AtivAcao pode aumentar os resultados
+  - Mostre como a Ativação pode aumentar os resultados
 
-**Exemplo de script de reuniao de ensino** (incluso no livro -- dialogo completo com perguntas abertas, envolvimento de vendedores por nome, conexao entre atitudes e indicadores).
+**Exemplo de script de reunião de ensino** (incluso no livro -- diálogo completo com perguntas abertas, envolvimento de vendedores por nome, conexão entre atitudes e indicadores).
 
-#### Ferramenta: Momento AtivAcao
+#### Ferramenta: Momento Ativação
 
-Ferramenta cuja finalidade e unir palavras de ativacao, fazer a integracao da equipe e promover alinhamento de foco. Objetivo maior: **garantir o resultado quando o time entrar em campo.**
+Ferramenta cuja finalidade e unir palavras de ativação, fazer a integração da equipe e promover alinhamento de foco. Objetivo maior: **garantir o resultado quando o time entrar em campo.**
 
-**Propositos do Momento AtivAcao:**
+**Propósitos do Momento Ativação:**
 - Vivenciar as Atitudes
 - Alinhar a rota para se ativar
 - Concentrar a equipe no dia de vendas com foco em vencer
 - Aumentar a produtividade da equipe
 
-**Diretrizes para conducao:**
+**Diretrizes para condução:**
 
 | Diretriz | Detalhamento |
 |----------|-------------|
-| **Seja a referencia** | As pessoas notam rapidamente mudancas de postura |
-| **Tenha dominio das Atitudes** | Decorar e diferente de dominar; praticar gera autoridade |
-| **Seja pratico** | Falar da realidade do time, como colocar em pratica |
+| **Seja a referência** | As pessoas notam rapidamente mudanças de postura |
+| **Tenha domínio das Atitudes** | Decorar é diferente de dominar; praticar gera autoridade |
+| **Seja prático** | Falar da realidade do time, como colocar em prática |
 | **Mais qualidade, menos quantidade** | 10 a 15 minutos, semanalmente |
-| **Mantenha o foco** | Nao misturar comunicacoes burocraticas, numeros, campanhas, cobrancas |
-| **Evite o improviso** | Planejar com antecedencia, elaborar mensagem com calma |
+| **Mantenha o foco** | Não misturar comunicações burocráticas, números, campanhas, cobranças |
+| **Evite o improviso** | Planejar com antecedência, elaborar mensagem com calma |
 
 #### Como preparar a mensagem
 
-**A conducao nao segue simplesmente a ordem das atitudes.** Analise qual e a atitude mais necessaria naquela ocasiao para o grupo, direcionando os encontros para as necessidades existentes.
+**A condução não segue simplesmente a ordem das atitudes.** Analise qual é a atitude mais necessária naquela ocasião para o grupo, direcionando os encontros para as necessidades existentes.
 
-**Funil de preparacao:**
-1. Qual e o problema ou necessidade principal neste momento?
-2. Qual e o principal indicador que precisa evoluir?
-3. Qual e a atitude que precisa ser ativada no time?
-4. Qual sera o tema utilizado para ilustrar a mensagem e seus possiveis subtemas?
-5. Quais objetivos pretendemos alcancar com este Momento AtivAcao?
+**Funil de preparação:**
+1. Qual é o problema ou necessidade principal neste momento?
+2. Qual é o principal indicador que precisa evoluir?
+3. Qual é a atitude que precisa ser ativada no time?
+4. Qual será o tema utilizado para ilustrar a mensagem e seus possíveis subtemas?
+5. Quais objetivos pretendemos alcançar com este Momento Ativação?
 
-**Cenario 1 (exemplo):**
+**Cenário 1 (exemplo):**
 - Problema: Falta de oferecimento de complementares por medo
-- Atitude: Uno coragem e persistencia
+- Atitude: Uno coragem e persistência
 - Assunto: Coragem em oferecer complementares
-- Subtema: Tecnica SAIDA
-- Objetivo: Aumentar o ticket medio
+- Subtema: Técnica SAÍDA
+- Objetivo: Aumentar o ticket médio
 
-**Cenario 2 (exemplo):**
-- Problema: Desperdicio de tempo, falta de prospeccao
+**Cenário 2 (exemplo):**
+- Problema: Desperdício de tempo, falta de prospecção
 - Atitude: Invisto tempo na prioridade
-- Assunto: Relacao entre metas/objetivos e administracao do tempo
+- Assunto: Relação entre metas/objetivos e administração do tempo
 - Subtema: OKR
 - Objetivo: Aumentar vendas e novos clientes
 
-#### 3 Modelos de formato para o Momento AtivAcao
+#### 3 Modelos de formato para o Momento Ativação
 
-**Modelo 1: Leitura e Reflexao**
-Praticas voltadas ao entendimento e sensibilizacao acerca do conteudo.
+**Modelo 1: Leitura e Reflexão**
+Práticas voltadas ao entendimento e sensibilização acerca do conteúdo.
 
 Estrutura do discurso:
 1. Fazendo a abordagem (clima positivo, identificar a Atitude)
-2. Chamando a atencao para o tema (perguntas sobre impacto em indicadores)
-3. Vendendo o objetivo (beneficios concretos)
+2. Chamando a atenção para o tema (perguntas sobre impacto em indicadores)
+3. Vendendo o objetivo (benefícios concretos)
 4. Citando a frase (mensagem de impacto)
 5. Refletindo com a equipe (perguntas direcionadas, envolvimento individual)
-6. Concluindo (acoes concretas: o que, como, onde, quando)
+6. Concluindo (ações concretas: o que, como, onde, quando)
 
-**Exemplo completo no livro:** Cenario de vendedores com dificuldade em fechar vendas. Atitude: Uno Coragem e Persistencia. Frase: "Sem disposicao e coragem para errar, nao ha criatividade. Sem criatividade, nao existem alternativas e solucoes inovadoras. Sem novas ideias, nao existem individuos persistentes."
+**Exemplo completo no livro:** Cenário de vendedores com dificuldade em fechar vendas. Atitude: Uno Coragem e Persistência. Frase: "Sem disposição e coragem para errar, não ha criatividade. Sem criatividade, não existem alternativas e soluções inovadoras. Sem novas ideias, não existem individuos persistentes."
 
 **Modelo 2: Case (Estudo de caso)**
-Historias reais do time.
+Histórias reais do time.
 
-Orientacoes:
-- Esteja atento a tudo que acontece (provas diarias de ativacao)
+Orientações:
+- Esteja atento a tudo que acontece (provas diárias de ativação)
 - Investigue junto aos vendedores de destaque o que os diferencia
-- Incentive todos a contarem suas historias
-- Experiencias de pessoas reais geram identificacao e conexao
+- Incentive todos a contarem suas histórias
+- Experiências de pessoas reais geram identificação e conexão
 
 **Ao usar um vendedor como case:**
-- Alinhar o foco da historia previamente com o vendedor
+- Alinhar o foco da história previamente com o vendedor
 - Trabalhar exemplos e sentimentos
-- Alinhar o tempo disponivel
-- O lider mostra especificamente quais Atitudes foram utilizadas
-- Verificar se todos estao planejando, se ha duvidas
+- Alinhar o tempo disponível
+- O líder mostra especificamente quais Atitudes foram utilizadas
+- Verificar se todos estão planejando, se ha dúvidas
 
-**Exemplo:** Vendedora que adquiriu casa propria apos elevar indicadores praticando o Metodo de Vendas. Atitude: Acredito na Meta.
+**Exemplo:** Vendedora que adquiriu casa própria após elevar indicadores praticando o Método de Vendas. Atitude: Acredito na Meta.
 
 **Modelo 3: Materiais de Apoio**
-Utilizacao de recursos audiovisuais.
+Utilização de recursos audiovisuais.
 
-Orientacoes:
-- Escolha conteudo curto e objetivo
-- Evite temas polemicos (religiao, politica)
+Orientações:
+- Escolha conteúdo curto e objetivo
+- Evite temas polêmicos (religião, política)
 - Vincule com as Atitudes
 
-**Exemplo completo no livro:** Cenario usando a frase de Aristoteles: "Somos o que repetidamente fazemos. A excelencia, portanto, nao e um feito, mas um habito." Atitude: Treino Continuamente. O lider conta a historia de uma cliente que elogiou o atendimento consistente.
+**Exemplo completo no livro:** Cenário usando a frase de Aristoteles: "Somos o que repetidamente fazemos. A excelência, portanto, não é um feito, mas um hábito." Atitude: Treino Continuamente. O líder conta a história de uma cliente que elogiou o atendimento consistente.
 
-#### Criando a apresentacao (checklist)
+#### Criando a apresentação (checklist)
 
 - Selecione uma frase ou texto curto representativo da atitude escolhida
-- Use mensagens de impacto, que abram margem para reflexao
-- Anote a frase utilizada para nao repetir
+- Use mensagens de impacto, que abram margem para reflexão
+- Anote a frase utilizada para não repetir
 - Reflita e elabore discurso conveniente ao momento
 - Pense em perguntas-chaves que estimulem debates
-- Incentive a troca de ideias e percepcoes
+- Incentive a troca de ideias e percepções
 - Fuja do monologo -- todos devem participar
 
-#### Momento AtivAcao com equipes externas
+#### Momento Ativação com equipes externas
 
-Formatos possiveis:
-- Videoconferencia (computador ou celular)
-- Teleconferencia (chamada de audio)
-- Videos gravados enviados por aplicativo de mensagens
+Formatos possíveis:
+- Videoconferência (computador ou celular)
+- Teleconferência (chamada de áudio)
+- Vídeos gravados enviados por aplicativo de mensagens
 
-**Dicas para distancia:**
-- Tornar mais dinamico com gestual, imagens e videos
+**Dicas para distância:**
+- Tornar mais dinâmico com gestual, imagens e vídeos
 - Compartilhar materiais antecipadamente por e-mail ou celular
-- A forma e detalhe; fundamental e o conteudo e a ativacao
+- A forma e detalhe; fundamental é o conteúdo e a ativação
 
-#### Conferencia de qualidade do Momento AtivAcao
+#### Conferência de qualidade do Momento Ativação
 
-Apos criar, verificar:
+Após criar, verificar:
 - A atitude escolhida resolve a raiz do problema?
-- Sao usadas estrategias de abordagem positiva?
+- São usadas estratégias de abordagem positiva?
 - Preparou perguntas inteligentes para envolver todos?
-- Existe exercicio especifico para praticarem a atitude?
+- Existe exercício específico para praticarem a atitude?
 - Incluiu chamada ao compromisso com atividades claras?
 
-#### Delegando o Momento AtivAcao para vendedores
+#### Delegando o Momento Ativação para vendedores
 
-Apos todos dominarem o conteudo, o lider pode delegar a criacao:
+Após todos dominarem o conteúdo, o líder pode delegar a criação:
 - Delegue nominalmente
 - Motive o liderado escolhido
 - Indique a atitude a ser trabalhada
 - Mostre a estrutura passo a passo
-- Encoraje uso de palavras e estilo proprios
-- Agende momento previo para planejar em conjunto
+- Encoraje uso de palavras e estilo próprios
+- Agende momento prévio para planejar em conjunto
 - Agradeca diante do grupo a iniciativa
-- Faca intermediacao com alinhamentos necessarios ao final
-- **Evite:** repetir o que foi dito, prolongar, "traduzir" como se o vendedor nao fosse claro
+- Faça intermediação com alinhamentos necessários ao final
+- **Evite:** repetir o que foi dito, prolongar, "traduzir" como se o vendedor não fosse claro
 
 ---
 
-### 2.7 DIAGNOSTICO DA ATIVACAO (do vendedor)
+### 2.7 DIAGNÓSTICO DA ATIVAÇÃO (do vendedor)
 
-Guia de comportamentos observaveis para diagnosticar as necessidades de ativacao de cada vendedor.
+Guia de comportamentos observáveis para diagnosticar as necessidades de ativação de cada vendedor.
 
 #### Perguntas por Atitude
 
 **Acredito na Meta:**
 - Transformou metas pessoais em profissionais?
-- Objetivos pessoais por tras das metas sao claros?
+- Objetivos pessoais por trás das metas são claros?
 - Utiliza esses objetivos para se autoativar?
-- Concentra-se na realizacao de suas metas?
-- Acompanha diariamente os proprios indicadores e faz novos calculos?
+- Concentra-se na realização de suas metas?
+- Acompanha diariamente os próprios indicadores e faz novos cálculos?
 
-**Tenho Habitos Vitoriosos:**
-- Cuidado observavel com vida pessoal (saude, familia, sono, alimentacao)?
-- Bom humor no inicio do trabalho?
-- Foco nas atividades de vendas desde o inicio do turno?
-- Visao otimista?
+**Tenho Hábitos Vitoriosos:**
+- Cuidado observável com vida pessoal (saúde, família, sono, alimentação)?
+- Bom humor no início do trabalho?
+- Foco nas atividades de vendas desde o início do turno?
+- Visão otimista?
 
 **Invisto Tempo na Prioridade:**
 - Nos momentos tranquilos, entra em contato com clientes para resgatar vendas?
-- Espontaneamente faz prospeccao de novos clientes?
-- Nos periodos de menor volume, empenha-se em aumentar ticket medio?
-- Investe tempo no que e prioridade?
+- Espontaneamente faz prospecção de novos clientes?
+- Nos períodos de menor volume, empenha-se em aumentar ticket médio?
+- Investe tempo no que é prioridade?
 
 **Treino Continuamente:**
-- Estuda tecnicas de vendas?
-- Estuda produtos/servicos?
-- Faz autoavaliacao sobre cada atendimento?
-- Desenvolve melhoria continua a partir do que e mapeado?
-- Discute objecoes comuns com colegas buscando solucoes?
-- Disponivel para treinar habilidades e simulacoes?
-- Pede que o lider acompanhe vendas reais e busca feedbacks?
+- Estuda técnicas de vendas?
+- Estuda produtos/serviços?
+- Faz autoavaliação sobre cada atendimento?
+- Desenvolve melhoria continua a partir do que é mapeado?
+- Discute objeções comuns com colegas buscando soluções?
+- Disponível para treinar habilidades e simulações?
+- Pede que o líder acompanhe vendas reais e busca feedbacks?
 
-**Uno Coragem e Persistencia:**
+**Uno Coragem e Persistência:**
 - Tenta vendas adicionais quando ha oportunidade?
 - Evita ceder desconto?
-- Atende qualquer perfil de cliente com seguranca?
+- Atende qualquer perfil de cliente com segurança?
 - Sugere produtos de maior valor agregado frequentemente?
-- Persiste em negociacoes?
+- Persiste em negociações?
 - Procura formas criativas para fechar vendas?
-- Debate situacoes complexas para encontrar solucoes?
-- Pensa em solucoes criativas diante de problemas?
+- Debate situações complexas para encontrar soluções?
+- Pensa em soluções criativas diante de problemas?
 
 **Decido Ser Feliz:**
-- Demonstra orgulho da profissao?
+- Demonstra orgulho da profissão?
 - Sorri durante cada atendimento?
-- Mantem resiliencia nos momentos de estresse?
+- Mantém resiliência nos momentos de estresse?
 - Envolve colegas com sua felicidade?
 
 **Encaro a Vida como Aprendizado:**
 - Estuda vantagens vs. concorrentes?
-- Troca experiencias com outros vendedores?
+- Troca experiências com outros vendedores?
 - Analisa indicadores para entender onde melhorar?
-- Ativa licoes aprendidas em momentos de feedback?
-- Aprende com as licoes do dia a dia?
+- Ativa lições aprendidas em momentos de feedback?
+- Aprende com as lições do dia a dia?
 
-#### Proxima Parada: Plano de Voo Atitudinal
+#### Próxima Parada: Plano de Voo Atitudinal
 
-Os primeiros passos do Plano de Voo foram desenhados na Gestao da Mudanca. A necessidade de melhoria em atitude e mais subjetiva que indicadores de vendas.
+Os primeiros passos do Plano de Voo foram desenhados na Gestão da Mudança. A necessidade de melhoria em atitude é mais subjetiva que indicadores de vendas.
 
-**Processo para alinhar visao:**
-1. Disponibilize o Diagnostico da AtivAcao para o vendedor (e preencha voce tambem)
+**Processo para alinhar visão:**
+1. Disponibilize o Diagnóstico da Ativação para o vendedor (e preencha você também)
 2. Venda a ideia
-3. Combine como sera o diagnostico
-4. Troque percepcoes
+3. Combine como será o diagnóstico
+4. Troque percepções
 5. Atualize o Plano de Voo do vendedor
 
 ---
@@ -846,423 +846,423 @@ Os primeiros passos do Plano de Voo foram desenhados na Gestao da Mudanca. A nec
 
 #### Feedback
 
-**Definicao:** Conversa de refinamento atitudinal dos vendedores.
+**Definição:** Conversa de refinamento atitudinal dos vendedores.
 
 **Finalidades:**
 1. Diagnosticar a causa
-2. Procurar uma solucao
-3. Projetar um plano de acao
-4. Dar suporte na execucao
+2. Procurar uma solução
+3. Projetar um plano de ação
+4. Dar suporte na execução
 
-**Observacao:** O feedback aqui descrito tem tom de informalidade, mas deve ser muito estruturado e executado com tecnica. Quem nao apresenta atitude tende a ser passivo ou reativo.
+**Observação:** O feedback aqui descrito tem tom de informalidade, mas deve ser muito estruturado e executado com técnica. Quem não apresenta atitude tende a ser passivo ou reativo.
 
 #### Por que fazer feedback?
 
-- Atitudes podem ser ensinadas via leitura, Momentos AtivAcao e exercicios
+- Atitudes podem ser ensinadas via leitura, Momentos Ativação e exercícios
 - Mas existe necessidade de trabalho individualizado
-- Util quando alguem nao entende ou nao consegue desempenhar algo designado
-- Quando a pessoa nao percebe em si mesma a carencia de desenvolvimento
+- Útil quando alguém não entende ou não consegue desempenhar algo designado
+- Quando a pessoa não percebe em si mesma a carência de desenvolvimento
 
 #### Quando fazer feedback? (Sinais por Atitude)
 
 **Acredito na Meta:**
-- Nao esta focado nos proprios indicadores
+- Não está focado nos próprios indicadores
 - Postura passiva perante desafios
-- Nao esboca ativacao para alcancar metas
+- Não esboca ativação para alcançar metas
 
-**Tenho Habitos Vitoriosos:**
+**Tenho Hábitos Vitoriosos:**
 - Atrasos frequentes
-- Esgotamento aparente ou reclamacoes de cansaco
-- Influencia negativa no time
+- Esgotamento aparente ou reclamações de cansaço
+- Influência negativa no time
 - Pessimismo e/ou mau humor
 
 **Invisto Tempo na Prioridade:**
-- Executa tarefas nao prioritarias antes das prioritarias
-- Desperdica o proprio tempo
-- Acoes improdutivas no lugar das que trazem resultados
-- Gasta mais tempo que os demais em acoes simples
+- Executa tarefas não prioritárias antes das prioritárias
+- Desperdiça o próprio tempo
+- Ações improdutivas no lugar das que trazem resultados
+- Gasta mais tempo que os demais em ações simples
 
 **Treino Continuamente:**
-- Reativo ao Metodo de Vendas
-- Nao estuda produtos/servicos
-- Nao se esforca para se aperfeicoar
-- Vende sem tecnica, prejudicando indicadores
+- Reativo ao Método de Vendas
+- Não estuda produtos/serviços
+- Não se esforça para se aperfeiçoar
+- Vende sem técnica, prejudicando indicadores
 
-**Uno Coragem e Persistencia:**
-- Nao oferece complementares/adicionais por falta de coragem
-- Esquiva-se frente a obstaculos
-- Evita iniciativas por inseguranca
-- Desiste facilmente diante de objecoes
+**Uno Coragem e Persistência:**
+- Não oferece complementares/adicionais por falta de coragem
+- Esquiva-se frente a obstáculos
+- Evita iniciativas por insegurança
+- Desiste facilmente diante de objeções
 - Insiste sem criatividade
-- Nao acredita que pode atingir niveis mais altos
+- Não acredita que pode atingir níveis mais altos
 
 **Decido Ser Feliz:**
 - Desanimo no dia a dia
-- Nao expressa carisma
-- Nao manifesta paixao pelo que faz
+- Não expressa carisma
+- Não manifesta paixão pelo que faz
 
 **Encaro a Vida como Aprendizado:**
 - Evita oportunidades de aprender
 - Fechado para feedbacks
-- Nao executa orientacoes, alegando nao ver necessidade
+- Não executa orientações, alegando não ver necessidade
 
-#### Como fazer feedback? (Metodo POMA)
+#### Como fazer feedback? (Método POMA)
 
-**Inicio:** Abordagem positiva, sempre com motivo real.
+**Início:** Abordagem positiva, sempre com motivo real.
 
 **Motivos para feedback:**
-- **Resultado:** Numeros abaixo do esperado (mas pode indicar falta de C ou H, nao so A)
+- **Resultado:** Números abaixo do esperado (mas pode indicar falta de C ou H, não só A)
 - **Atitude:** Comportamento fora do costume/esperado -- levantar fatos concretos
-- **Relacionamento:** Impacto no clima organizacional, troca de ideias e experiencias
+- **Relacionamento:** Impacto no clima organizacional, troca de ideias e experiências
 
 **4 Passos do Feedback:**
 
 **1. Pesquise o vendedor**
-- O que esta acontecendo
-- Por que esta acontecendo
+- O que está acontecendo
+- Por que está acontecendo
 
 **2. Oriente o vendedor**
-Possiveis causas da falta de ativacao:
-- Ausencia de conhecimento sobre as Atitudes
+Possíveis causas da falta de ativação:
+- Ausência de conhecimento sobre as Atitudes
 - Treinamento insuficiente
-- Inconsciencia sobre o que impede a ativacao
+- Inconsciência sobre o que impede a ativação
 
 Medidas indicadas:
 - Ensino das Atitudes
-- Treinamento de como ativar na pratica
-- Aplicacao do diagnostico da ativacao
+- Treinamento de como ativar na prática
+- Aplicação do diagnóstico da ativação
 
 **3. Mostre ao vendedor**
 - Pergunte o que entendeu para certificar-se
-- **Garantir o consenso** e fundamental:
-  - Se as visoes nao estiverem alinhadas, poucas chances de mudanca
-  - Enquanto houver divergencia, nao avance
-  - Volte a etapa anterior, investigue, encontre caminho intermediario
+- **Garantir o consenso** é fundamental:
+  - Se as visões não estiverem alinhadas, poucas chances de mudança
+  - Enquanto houver divergência, não avance
+  - Volte a etapa anterior, investigue, encontre caminho intermediário
   - Fale com base em fatos
 
 **Perguntas diretas para evitar passividade falsa:**
-- O que voce pensa sobre o que estamos conversando?
-- Voce concorda?
-- Voce fara o que estamos definindo?
+- O que você pensa sobre o que estamos conversando?
+- Você concorda?
+- Você fará o que estamos definindo?
 - O que acredita que pode dar errado?
 
-**Neutralizacao de objecoes no feedback:**
+**Neutralização de objeções no feedback:**
 
-| Objecao | Resposta |
+| Objeção | Resposta |
 |---------|----------|
-| Pensa ao contrario | O que o leva a pensar assim? Quais fatos comprovam? |
-| Nao concorda com a solucao | Qual seria sua opiniao? O que deveria ser feito? |
-| Diz que nao vai fazer | Por que? De que outra forma atingira o resultado? |
+| Pensa ao contrário | O que o leva a pensar assim? Quais fatos comprovam? |
+| Não concorda com a solução | Qual seria sua opinião? O que deveria ser feito? |
+| Diz que não vai fazer | Por que? De que outra forma atingirá o resultado? |
 | Acredita que pode dar errado | Como isso poderia ser evitado? O que podemos fazer para nos antecipar? |
 
 **4. Acompanhe o vendedor**
 
 Firmar compromisso: o que, como, quando, quanto, quem.
 
-**Pre-requisitos para acompanhamento eficiente:**
-- Plano de acao com acoes objetivas e mensuraveis
-- Lider organizado para acompanhar
+**Pré-requisitos para acompanhamento eficiente:**
+- Plano de ação com ações objetivas e mensuráveis
+- Líder organizado para acompanhar
 
-**Cenarios de acompanhamento:**
+**Cenários de acompanhamento:**
 
-**Se o vendedor apresentou evolucoes:** Valorize e continue.
+**Se o vendedor apresentou evoluções:** Valorize e continue.
 
-**Se nao apresentou evolucoes esperadas:**
+**Se não apresentou evoluções esperadas:**
 
-*Com esforcos mas sem resultado:*
-- Houve outras evolucoes (nao as desejadas): Valorize, mas lembre que nao chegaram a meta. Relembre acordos e ritmo.
-- Nenhuma evolucao: Verifique ritmo, plano, mensuracao (meta superdimensionada?)
+*Com esforços mas sem resultado:*
+- Houve outras evoluções (não as desejadas): Valorize, mas lembre que não chegaram a meta. Relembre acordos e ritmo.
+- Nenhuma evolução: Verifique ritmo, plano, mensuração (meta superdimensionada?)
 
-*Sem esforcos:*
-- Nao comprou a ideia? Venda novamente, de forma diferente. Ressalte beneficios valorizados pelo vendedor.
-- Plano mal estruturado e desistiu? Verifique por que nao alinhou com voce.
+*Sem esforços:*
+- Não comprou a ideia? Venda novamente, de forma diferente. Ressalte benefícios valorizados pelo vendedor.
+- Plano mal estruturado e desistiu? Verifique por que não alinhou com você.
 
 #### Elogio Minuto
 
-**Referencia:** Spencer Johnson, livro "O Gerente Minuto"
+**Referência:** Spencer Johnson, livro "O Gerente Minuto"
 
-**Caracteristicas do elogio eficaz:**
-- Pontual (no ato da situacao)
+**Características do elogio eficaz:**
+- Pontual (no ato da situação)
 - Breve e sem exageros
-- Acompanhado de referencia nitida a Atitude, tornando-a evidente
+- Acompanhado de referência nítida a Atitude, tornando-a evidente
 
 **Exemplo de elogio:**
-> "Carlos, parabens pela forma como esta neutralizando as objecoes dos clientes. Tenho percebido que voce sempre busca alternativas diferentes para fechar a venda e tenta resolver a negociacao diretamente com o cliente. E notei que, quando acontece de voce vir ate mim para pedir auxilio, ja traz sugestoes de solucao! Isso mostra que esta praticando a Atitude Uno Coragem e Persistencia! Se continuar assim, agindo com criatividade e foco na solucao, a sua casa tao sonhada vai ser conquistada! Parabens! Posso compartilhar seu exemplo com o time?"
+> "Carlos, parabéns pela forma como está neutralizando as objeções dos clientes. Tenho percebido que você sempre busca alternativas diferentes para fechar a venda e tenta resolver a negociação diretamente com o cliente. E notei que, quando acontece de você vir até mim para pedir auxílio, já traz sugestões de solução! Isso mostra que esta praticando a Atitude Uno Coragem e Persistência! Se continuar assim, agindo com criatividade e foco na solução, a sua casa tão sonhada vai ser conquistada! Parabéns! Posso compartilhar seu exemplo com o time?"
 
-**Efeito:** O vendedor percebe que o lider o valoriza, observa seu esforco e que esse e o caminho certo para atingir a meta.
+**Efeito:** O vendedor percebe que o líder o valoriza, observa seu esforço e que esse é o caminho certo para atingir a meta.
 
-#### Repreensao Minuto
+#### Repreensão Minuto
 
-**Principio:** Tanto lider quanto vendedor devem encarar repreensoes como **alinhamentos de rota**, jamais como agentes de desativacao.
+**Princípio:** Tanto líder quanto vendedor devem encarar repreensões como **alinhamentos de rota**, jamais como agentes de desativação.
 
-**Comparacao:**
+**Comparação:**
 
-| Alinhamento de Rota (correto) | Desativacao (incorreto) |
+| Alinhamento de Rota (correto) | Desativação (incorreto) |
 |-------------------------------|------------------------|
-| Conversa individual e em particular | Advertencia em publico |
-| Ligado a expectativas combinadas antecipadamente | Cobrancas surpresa, nao evidentes para o vendedor |
-| Feito preferencialmente no ato | Adiado, vendedor nao se recorda |
-| Orientado ao atingimento das metas | Foco no erro, critica sem vinculo com beneficio de acertar |
-| Palavras direcionam a realizacao de metas e objetivos | Palavras formam critica sobre o que nao esta bem |
+| Conversa individual e em particular | Advertência em público |
+| Ligado a expectativas combinadas antecipadamente | Cobranças surpresa, não evidentes para o vendedor |
+| Feito preferencialmente no ato | Adiado, vendedor não se recorda |
+| Orientado ao atingimento das metas | Foco no erro, crítica sem vínculo com benefício de acertar |
+| Palavras direcionam a realização de metas e objetivos | Palavras formam crítica sobre o que não esta bem |
 
-> "E perfeitamente possivel ser firme sem ser rude, basta utilizar as tecnicas mencionadas no alinhamento de rota."
+> "E perfeitamente possível ser firme sem ser rude, basta utilizar as técnicas mencionadas no alinhamento de rota."
 
 ---
 
 ### 2.9 PLANO DE DESENVOLVIMENTO INDIVIDUAL (PDI)
 
-Os aprendizados e exercicios da Gestao da Ativacao alimentam o **Plano de Desenvolvimento Individual**, desenhado junto com os liderados na aplicacao do Plano de Voo (Gestao da Mudanca).
+Os aprendizados e exercícios da Gestão da Ativação alimentam o **Plano de Desenvolvimento Individual**, desenhado junto com os liderados na aplicação do Plano de Voo (Gestão da Mudança).
 
-**Todos os planos de acao de ativacao devem fazer parte do PDI** dos liderados, para que todos tenham consciencia do que precisam ativar para atingir suas metas e objetivos.
+**Todos os planos de ação de ativação devem fazer parte do PDI** dos liderados, para que todos tenham consciência do que precisam ativar para atingir suas metas e objetivos.
 
-**O lider tambem deve alimentar seu proprio PDI** com as acoes que serao ativadas.
+**O líder também deve alimentar seu próprio PDI** com as ações que serão ativadas.
 
-#### Transicao para as proximas gestoes
+#### Transição para as próximas gestões
 
 > "E HORA DE SABER FAZER!"
 
-Apos a Gestao da Mudanca e Gestao da Ativacao: vendedores ja tem o desejo de se ativar. Agora e hora de:
-- **Gestao do Metodo** - Ampliar a qualidade tecnica do atendimento
-- **Gestao do Conhecimento** - Dominio das informacoes sobre o que vendem
+Após a Gestão da Mudança e Gestão da Ativação: vendedores já tem o desejo de se ativar. Agora e hora de:
+- **Gestão do Método** - Ampliar a qualidade técnica do atendimento
+- **Gestão do Conhecimento** - Domínio das informações sobre o que vendem
 
 ---
 
 ## 3. FRAMEWORKS, FERRAMENTAS E METODOLOGIAS
 
-### 3.1 Metodologia AtivAcao (acronimo ATITUDE)
-- **A**credito na meta
-- **T**enho habitos vitoriosos
+### 3.1 Metodologia Ativação (acrônimo ATITUDE)
+- **A**crédito na meta
+- **T**enho hábitos vitoriosos
 - **I**nvisto tempo na prioridade
 - **T**reino continuamente
-- **U**no coragem e persistencia
+- **U**no coragem e persistência
 - **D**ecido ser feliz
 - **E**ncaro a vida como aprendizado
 
-### 3.2 Modelo CHA de Competencia (Scott Parry, 1996)
+### 3.2 Modelo CHA de Competência (Scott Parry, 1996)
 - **C** = Conhecimento (Saber)
 - **H** = Habilidade (Fazer)
 - **A** = Atitude (Querer)
-- Competencia = C + H + A
+- Competência = C + H + A
 
-### 3.3 Metodo A VENDA (aplicado a lideranca)
+### 3.3 Método A VENDA (aplicado a liderança)
 - **A**borde positivamente
-- **V**isualize o cenario
-- **E**ncante com solucoes
-- **N**egocie com inteligencia
+- **V**isualize o cenário
+- **E**ncante com soluções
+- **N**egocie com inteligência
 - **D**ecida o fechamento
 - **A**mplie o relacionamento
 
-### 3.4 Tecnica SAIDA (para lidar com medos)
-- **Sa**iba qual e o medo
+### 3.4 Técnica SAÍDA (para lidar com medos)
+- **Sa**iba qual é o medo
 - **I**dentifique o medo (quando/como se manifesta)
 - **D**ecida o que fazer
-- **A**ja (plano de acao)
+- **A**já (plano de ação)
 
-### 3.5 Piramide de Maslow adaptada para vendas
-1. Necessidades fisiologicas (salario, descanso, alimentacao)
-2. Necessidades de seguranca (estabilidade, treinamento, futuro)
+### 3.5 Pirâmide de Maslow adaptada para vendas
+1. Necessidades fisiológicas (salário, descanso, alimentação)
+2. Necessidades de segurança (estabilidade, treinamento, futuro)
 3. Necessidades sociais (equipe, parceria, troca)
-4. Necessidades de autoestima/status (reconhecimento, valorizacao)
-5. Necessidades de autorrealizacao (fazer o que ama)
+4. Necessidades de autoestima/status (reconhecimento, valorização)
+5. Necessidades de autorrealização (fazer o que ama)
 
-### 3.6 Momento AtivAcao (ferramenta de reuniao semanal)
-- Duracao: 10-15 minutos
-- Frequencia: semanal
-- Proposito: vivenciar atitudes, alinhar rota, concentrar no dia de vendas, aumentar produtividade
-- 3 modelos: Leitura e Reflexao, Case, Materiais de Apoio
-- Funil de preparacao (5 etapas)
+### 3.6 Momento Ativação (ferramenta de reunião semanal)
+- Duração: 10-15 minutos
+- Frequência: semanal
+- Propósito: vivenciar atitudes, alinhar rota, concentrar no dia de vendas, aumentar produtividade
+- 3 modelos: Leitura e Reflexão, Case, Materiais de Apoio
+- Funil de preparação (5 etapas)
 
 ### 3.7 Feedback (4 passos - POMA)
 1. **P**esquise o vendedor (o que + por que)
-2. **O**riente o vendedor (ensino, treinamento, diagnostico)
+2. **O**riente o vendedor (ensino, treinamento, diagnóstico)
 3. **M**ostre ao vendedor (verificar entendimento, garantir consenso)
 4. **A**companhe o vendedor (compromisso, monitoramento, ajuste)
 
 ### 3.8 Elogio Minuto (baseado em Spencer Johnson)
 - Pontual, breve, sem exageros
-- Com referencia explicita a Atitude praticada
+- Com referência explícita a Atitude praticada
 
-### 3.9 Repreensao Minuto (Alinhamento de Rota)
+### 3.9 Repreensão Minuto (Alinhamento de Rota)
 - Individual, em particular, no ato
 - Ligado a expectativas previamente combinadas
-- Orientado a metas, nao ao erro
+- Orientado a metas, não ao erro
 
-### 3.10 Diagnostico da AtivAcao
-- Checklist de comportamentos observaveis por atitude
-- Aplicado pelo lider E pelo vendedor (troca de percepcoes)
+### 3.10 Diagnóstico da Ativação
+- Checklist de comportamentos observáveis por atitude
+- Aplicado pelo líder E pelo vendedor (troca de percepções)
 - Alimenta o Plano de Voo atitudinal
 
 ### 3.11 OKR (Objectives and Key Results)
 - Objetivo audacioso e motivador
-- Resultados-chaves mensuraveis
+- Resultados-chaves mensuráveis
 - Tudo fora do OKR = desperdicador de tempo
 
 ### 3.12 Plano de Voo
-- Ferramenta iniciada na Gestao da Mudanca
-- Atualizado com dados do Diagnostico da AtivAcao
+- Ferramenta iniciada na Gestão da Mudança
+- Atualizado com dados do Diagnóstico da Ativação
 - Inclui o PDI (Plano de Desenvolvimento Individual)
 
 ### 3.13 Metodologia METAS
-- Mencionada como ferramenta para definicao de metas
+- Mencionada como ferramenta para definição de metas
 - Metas de TER (bens, conquistas, resultados)
-- Metas de SER (o que e preciso desenvolver para TER)
-- Detalhes no e-book AtivAcao
+- Metas de SER (o que é preciso desenvolver para TER)
+- Detalhes no e-book Ativação
 
-### 3.14 Plano de Acao (formato padrao)
+### 3.14 Plano de Ação (formato padrão)
 | O que | Como | Quando | Quem |
 |-------|------|--------|------|
-| Descricao | Detalhamento | Data/hora | Responsavel |
+| Descrição | Detalhamento | Data/hora | Responsável |
 
 ---
 
-## 4. CONCEITOS E DEFINICOES-CHAVE
+## 4. CONCEITOS E DEFINIÇÕES-CHAVE
 
-| Conceito | Definicao |
+| Conceito | Definição |
 |----------|-----------|
-| **Motivacao** | Condicao gerada pela influencia de motivos que levam a uma acao |
-| **Animacao** | Manifestacao momentanea, sem acao focada nem resultado sustentavel |
-| **Ativacao** | Metodo para ativar atitudes de forma regular e disciplinada |
-| **Competencia** | Saber + Fazer + Querer (CHA) |
+| **Motivação** | Condição gerada pela influência de motivos que levam a uma ação |
+| **Animação** | Manifestação momentanea, sem ação focada nem resultado sustentável |
+| **Ativação** | Método para ativar atitudes de forma regular e disciplinada |
+| **Competência** | Saber + Fazer + Querer (CHA) |
 | **Meta** | Sonho que possui prazo (o que, quando, quanto) |
-| **Objetivo** | Proposito, explicacao do porque da meta |
-| **Habito** | Comportamento repetido com regularidade, muitas vezes automaticamente |
-| **Felicidade** | Estado de espirito construido por atitudes (diferente de alegria) |
-| **Alegria** | Sensacao momentanea de contentamento |
+| **Objetivo** | Propósito, explicação do porquê da meta |
+| **Hábito** | Comportamento repetido com regularidade, muitas vezes automaticamente |
+| **Felicidade** | Estado de espírito construído por atitudes (diferente de alegria) |
+| **Alegria** | Sensação momentanea de contentamento |
 | **Insistir** | Fazer repetidamente do mesmo jeito |
 | **Persistir** | Tentar de modos diferentes |
-| **Lider treinador** | Lider que ativa, orienta, incentiva e demonstra atitudes |
-| **Chefe** | Quem impoe ordens sem dialogo |
-| **Desperdicadores de tempo** | Tempo improdutivo, retrabalho, centralizacao |
+| **Líder treinador** | Líder que ativa, orienta, incentiva e demonstra atitudes |
+| **Chefe** | Quem impõe ordens sem diálogo |
+| **Desperdiçadores de tempo** | Tempo improdutivo, retrabalho, centralização |
 | **Feedback** | Conversa de refinamento atitudinal |
 | **Elogio Minuto** | Reconhecimento pontual, breve, vinculado a uma Atitude |
-| **Repreensao Minuto / Alinhamento de rota** | Correcao individual, no ato, orientada a metas |
-| **Desativacao** | Advertencia publica que desmotiva em vez de corrigir |
+| **Repreensão Minuto / Alinhamento de rota** | Correção individual, no ato, orientada a metas |
+| **Desativação** | Advertência publica que desmotiva em vez de corrigir |
 | **Plano de Voo** | Planejamento individual de desenvolvimento do vendedor |
 | **PDI** | Plano de Desenvolvimento Individual |
 
 ---
 
-## 5. EXERCICIOS E ACOES PRATICAS
+## 5. EXERCÍCIOS E AÇÕES PRÁTICAS
 
-### Para o Lider
+### Para o Líder
 
-1. **Acredito na Meta:** Definir metas, torna-las visiveis, compartilhar, vivenciar, calcular indicadores necessarios
-2. **Tenho Habitos Vitoriosos:** Identificar impedimentos, planejar resolucao (O que/Como/Quando), comecar a fazer listas
-3. **Invisto Tempo na Prioridade:** Mapear desperdicadores de tempo e criar plano de eliminacao, definir OKR com resultados-chaves, programar atividades de lazer
+1. **Acredito na Meta:** Definir metas, torna-las visíveis, compartilhar, vivenciar, calcular indicadores necessários
+2. **Tenho Hábitos Vitoriosos:** Identificar impedimentos, planejar resolução (O que/Como/Quando), começar a fazer listas
+3. **Invisto Tempo na Prioridade:** Mapear desperdiçadores de tempo e criar plano de eliminação, definir OKR com resultados-chaves, programar atividades de lazer
 4. **Treino Continuamente:** Indicar assuntos que precisa dominar para orientar liderados, oficializar plano de estudo
-5. **Uno Coragem e Persistencia:** Aplicar a tecnica SAIDA, listar razoes para nao desistir, identificar momentos de desistencia, tabela de insistencia vs. persistencia
+5. **Uno Coragem e Persistência:** Aplicar a técnica SAÍDA, listar razões para não desistir, identificar momentos de desistência, tabela de insistência vs. persistência
 6. **Decido Ser Feliz:** Identificar o que diminui a felicidade, identificar o que fortalece
 7. **Encaro a Vida como Aprendizado:** Oficializar plano de estudo (O que/Como/Quando)
-8. **Diagnostico completo:** Preencher checklist de todas as atitudes, criar plano de acao para cada "nao"
+8. **Diagnóstico completo:** Preencher checklist de todas as atitudes, criar plano de ação para cada "não"
 
 ### Para o Ambiente
 
-9. Preencher checklists da Piramide de Maslow (5 niveis)
-10. Criar plano de acao para cada "nao" identificado nos checklists
+9. Preencher checklists da Pirâmide de Maslow (5 níveis)
+10. Criar plano de ação para cada "não" identificado nos checklists
 
 ### Para o Time
 
-11. Vender a AtivAcao ao time (reuniao inicial)
-12. Ensinar uma AtivAcao por vez (com debates, exercicios, aplicacao pratica)
-13. Conduzir Momentos AtivAcao semanais
+11. Vender a Ativação ao time (reunião inicial)
+12. Ensinar uma Ativação por vez (com debates, exercícios, aplicação prática)
+13. Conduzir Momentos Ativação semanais
 14. Preparar Momentos usando o funil de 5 etapas
-15. Exercicio: diagnosticar atitude para cenario de falta de estudo de produtos/servicos
-16. Exercicio: criar Momento AtivAcao para cenario de vendedores desmotivados e com mau humor
-17. Exercicio: criar Momento AtivAcao para cenario de perda de dedicacao apos atingir sonhos
+15. Exercício: diagnosticar atitude para cenário de falta de estudo de produtos/serviços
+16. Exercício: criar Momento Ativação para cenário de vendedores desmotivados e com mau humor
+17. Exercício: criar Momento Ativação para cenário de perda de dedicação após atingir sonhos
 
 ### Para o Vendedor Individual
 
-18. Aplicar Diagnostico da AtivAcao (lider + vendedor, troca de percepcoes)
+18. Aplicar Diagnóstico da Ativação (líder + vendedor, troca de percepções)
 19. Atualizar Plano de Voo com dados atitudinais
-20. Exercicio completo de feedback: situacao, diagnostico, atitude, plano de acao, acompanhamento
-21. Exercicio de Elogio Minuto: descrever cenario e elogio com palavras de ativacao
-22. Exercicio de Repreensao Minuto: relatar situacao e desenvolver dialogo focado em Atitude
-23. Antecipar objecoes do vendedor ao diagnostico/plano e planejar neutralizacao
+20. Exercício completo de feedback: situação, diagnóstico, atitude, plano de ação, acompanhamento
+21. Exercício de Elogio Minuto: descrever cenário e elogio com palavras de ativação
+22. Exercício de Repreensão Minuto: relatar situação e desenvolver diálogo focado em Atitude
+23. Antecipar objeções do vendedor ao diagnóstico/plano e planejar neutralização
 
 ---
 
-## 6. DADOS, ESTATISTICAS E REFERENCIAS CIENTIFICAS
+## 6. DADOS, ESTATÍSTICAS E REFERÊNCIAS CIENTÍFICAS
 
-| Referencia | Contexto |
+| Referência | Contexto |
 |-----------|----------|
-| **Scott Parry (1996)** | Artigo cientifico que definiu competencia como CHA (Conhecimento, Habilidade, Atitude). Uma das definicoes mais utilizadas mundialmente. |
-| **Abraham Maslow** | Psicologo americano que popularizou a motivacao como tema cientifico. Piramide da hierarquia das necessidades. |
-| **Stoner e Freeman** | Professores de Administracao. Definicao: "Motivacao se refere aos fatores que provocam, canalizam e sustentam o comportamento de um individuo." |
-| **Spencer Johnson** | Autor best-seller norte-americano, livro "O Gerente Minuto". Base para tecnica de Elogio Minuto e Repreensao Minuto. |
-| **Skinner** | Citacao: "Quando nosso comportamento e reforcado positivamente, nos dizemos que gostamos do que estamos fazendo; dizemos que estamos felizes." |
-| **Aristoteles** | Citacao utilizada como exemplo de material de apoio: "Somos o que repetidamente fazemos. A excelencia, portanto, nao e um feito, mas um habito." |
-| **Pesquisas cientificas sobre relacoes sociais** | Individuos com menos amigos e poucas relacoes sociais tendem a viver menos. |
+| **Scott Parry (1996)** | Artigo científico que definiu competência como CHA (Conhecimento, Habilidade, Atitude). Uma das definições mais utilizadas mundialmente. |
+| **Abraham Maslow** | Psicólogo americano que popularizou a motivação como tema científico. Pirâmide da hierarquia das necessidades. |
+| **Stoner e Freeman** | Professores de Administração. Definição: "Motivação se refere aos fatores que provocam, canalizam e sustentam o comportamento de um indivíduo." |
+| **Spencer Johnson** | Autor best-seller norte-americano, livro "O Gerente Minuto". Base para técnica de Elogio Minuto e Repreensão Minuto. |
+| **Skinner** | Citação: "Quando nosso comportamento é reforçado positivamente, nós dizemos que gostamos do que estamos fazendo; dizemos que estamos felizes." |
+| **Aristoteles** | Citação utilizada como exemplo de material de apoio: "Somos o que repetidamente fazemos. A excelência, portanto, não é um feito, mas um hábito." |
+| **Pesquisas científicas sobre relações sociais** | Individuos com menos amigos e poucas relações sociais tendem a viver menos. |
 
 ---
 
-## 7. CITACOES E PRINCIPIOS NOTAVEIS
+## 7. CITAÇÕES E PRINCÍPIOS NOTÁVEIS
 
-### Principios fundamentais
+### Princípios fundamentais
 
-> "Concordar com uma ideia nao garante execucao."
+> "Concordar com uma ideia não garante execução."
 
 > "Motivar-se e algo que cada um deve fazer por si mesmo."
 
-> "Muita energia e pouca estrategia e a formula para a desmotivacao."
+> "Muita energia e pouca estratégia é a fórmula para a desmotivação."
 
 > "Atitude pode e deve ser aprendida e, depois, ativada."
 
 > "Tenha mais foco nas metas do time do que nas suas!"
 
-> "Se voce concorda que a sua equipe e o seu espelho, cuide da atitude!"
+> "Se você concorda que a sua equipe é o seu espelho, cuide da atitude!"
 
-> "Para vender, e preciso antes ter comprado."
+> "Para vender, é preciso antes ter comprado."
 
-> "Voce nao precisa ser o exemplo impecavel de tudo o que diz, mas pode ser um retrato fidedigno de alguem que esta em permanente evolucao."
+> "Você não precisa ser o exemplo impecável de tudo o que diz, mas pode ser um retrato fidedigno de alguém que está em permanente evolução."
 
-> "Qualquer coisa que nao tenha foco em atingir o objetivo e, por consequencia, a meta, nao sera prioridade. Logo, se tornara um desperdicador de tempo."
+> "Qualquer coisa que não tenha foco em atingir o objetivo e, por consequência, a meta, não será prioridade. Logo, se tornara um desperdicador de tempo."
 
-> "Quem necessita do basico tem dificuldades em fazer o excepcional."
+> "Quem necessita do básico tem dificuldades em fazer o excepcional."
 
-> "Time que entra em campo inseguro ja esta derrotado antes que a partida comece."
+> "Time que entra em campo inseguro já está derrotado antes que a partida comece."
 
-> "Antes, e preciso acreditar em si, para que possa acreditar em todo o resto."
+> "Antes, é preciso acreditar em si, para que possa acreditar em todo o resto."
 
-> "Felicidade e uma postura e decisao que produz entusiasmo."
+> "Felicidade é uma postura e decisão que produz entusiasmo."
 
-> "Quem espera que as circunstancias estejam favoraveis para se sentir bem, se torna refem do que e externo."
+> "Quem espera que as circunstâncias estejam favoráveis para se sentir bem, se torna refém do que é externo."
 
-> "E perfeitamente possivel ser firme sem ser rude."
+> "E perfeitamente possível ser firme sem ser rude."
 
-### Citacoes de terceiros utilizadas
+### Citações de terceiros utilizadas
 
-> "Motivacao se refere aos fatores que provocam, canalizam e sustentam o comportamento de um individuo." -- Stoner e Freeman
+> "Motivação se refere aos fatores que provocam, canalizam e sustentam o comportamento de um indivíduo." -- Stoner e Freeman
 
-> "Quando nosso comportamento e reforcado positivamente, nos dizemos que gostamos do que estamos fazendo; dizemos que estamos felizes." -- Skinner
+> "Quando nosso comportamento é reforçado positivamente, nós dizemos que gostamos do que estamos fazendo; dizemos que estamos felizes." -- Skinner
 
-> "Somos o que repetidamente fazemos. A excelencia, portanto, nao e um feito, mas um habito." -- Aristoteles
+> "Somos o que repetidamente fazemos. A excelência, portanto, não é um feito, mas um hábito." -- Aristoteles
 
-> "Sem disposicao e coragem para errar, nao ha criatividade. Sem criatividade, nao existem alternativas e solucoes inovadoras. Sem novas ideias, nao existem individuos persistentes." -- Usada como exemplo de frase para Momento AtivAcao
+> "Sem disposição e coragem para errar, não ha criatividade. Sem criatividade, não existem alternativas e soluções inovadoras. Sem novas ideias, não existem individuos persistentes." -- Usada como exemplo de frase para Momento Ativação
 
-> "Tenha fe na sua forca, na sua existencia e no seu potencial." -- Usada como exemplo de frase para Case
+> "Tenha fe na sua força, na sua existência e no seu potencial." -- Usada como exemplo de frase para Case
 
 ---
 
 ## 8. ESTRUTURA DO FRAMEWORK COMPLETO
 
-### As 6 Gestoes da Meta Batida (posicao deste livro no todo)
+### As 6 Gestões da Meta Batida (posição deste livro no todo)
 
-1. **Gestao da Mudanca** (livro anterior) - Engajamento do time
-2. **Gestao da Ativacao** (ESTE LIVRO) - Ativar atitudes no lider, ambiente e time
-3. **Gestao do Metodo** (proximo livro) - Qualidade tecnica do atendimento
-4. **Gestao do Conhecimento** - Dominio sobre produtos/servicos
-5. **Gestao da Meta** - Como chegar ao resultado
-6. **Gestao do Tempo** - Otimizacao de produtividade
+1. **Gestão da Mudança** (livro anterior) - Engajamento do time
+2. **Gestão da Ativação** (ESTE LIVRO) - Ativar atitudes no líder, ambiente e time
+3. **Gestão do Método** (próximo livro) - Qualidade técnica do atendimento
+4. **Gestão do Conhecimento** - Domínio sobre produtos/serviços
+5. **Gestão da Meta** - Como chegar ao resultado
+6. **Gestão do Tempo** - Otimização de produtividade
 
-### Fluxo da Gestao da Ativacao
+### Fluxo da Gestão da Ativação
 
 ```
-Lider Ativado -> Ativacao do Ambiente -> Time Ativado -> Vendedor Ativado -> PDI
+Líder Ativado -> Ativação do Ambiente -> Time Ativado -> Vendedor Ativado -> PDI
      |                    |                    |                  |
-  7 Atitudes       Piramide de         Momento AtivAcao    Feedback
+  7 Atitudes       Pirâmide de         Momento Ativação    Feedback
   do ATITUDE       Maslow adaptada     (3 modelos)         Elogio Minuto
-  Diagnostico      Checklists          Delegacao           Repreensao Minuto
-  Plano de acao    Plano de acao       Cenarios            Diagnostico
+  Diagnóstico      Checklists          Delegação           Repreensão Minuto
+  Plano de ação    Plano de ação       Cenários            Diagnóstico
                                                            Plano de Voo
 ```
 
@@ -1272,25 +1272,25 @@ Lider Ativado -> Ativacao do Ambiente -> Time Ativado -> Vendedor Ativado -> PDI
 
 **Tiago Alves**
 - Fundador da Metta
-- Quando crianca, vendia salgados na rua e frangos na feira
-- Formacao: Psicologia (FEPAR), MBA em Gestao Estrategica de Pessoas (FGV), GBA em Franchising (FGV)
+- Quando criança, vendia salgados na rua e frangos na feira
+- Formação: Psicologia (FEPAR), MBA em Gestão Estratégica de Pessoas (FGV), GBA em Franchising (FGV)
 - Professor em diversas universidades
-- Criador do MBA Gestao em Vendas - Enfase em Resultados
+- Criador do MBA Gestão em Vendas - Ênfase em Resultados
 - 17 anos em consultoria
 - Mais de 300 empresas orientadas
-- Autor de 8 livros sobre vendas e gestao
+- Autor de 8 livros sobre vendas e gestão
 - Redes sociais: @metta.brasil
 
 **Metta**
 - Especialistas em aumentar resultados
-- Solucoes com foco em potencializar conhecimentos, habilidades e atitudes de lideres e vendedores
-- Servicos: consultorias, treinamentos (presenciais e online), MBAs e livros
-- Crenca: "A meta pode ser atingida de forma mais leve, facil e sustentavel quando se desenvolve competencias."
+- Soluções com foco em potencializar conhecimentos, habilidades e atitudes de líderes e vendedores
+- Serviços: consultorias, treinamentos (presenciais e online), MBAs e livros
+- Crença: "A meta pode ser atingida de forma mais leve, fácil e sustentável quando se desenvolve competências."
 - Site: www.mettabrasil.com.br
 
 ---
 
-*Documento gerado a partir do e-book "Gestao da Ativacao" - As 6 Gestoes da Meta Batida, de Tiago Alves / Metta Brasil.*
+*Documento gerado a partir do e-book "Gestão da Ativação" - As 6 Gestões da Meta Batida, de Tiago Alves / Metta Brasil.*
 
 ---
 

@@ -11,7 +11,7 @@ tags:
   - tema/consultoria
 formato_consumo: referencia-pontual
 prioridade_carregamento: media
-versao: "1.0"
+versão: "1.0"
 summary: "Consultoria B2B Metta — frente voltada a operações de médio/grande porte. Modelo hands-on, presencial/híbrido, com Protocolo M.E.T.T.A.™ completo. Contratos a partir de R$ 300 mil. Não entra em copy de aquisição pública."
 created: 2026-05-09
 updated: 2026-05-09

@@ -9,10 +9,10 @@ tags:
   - status/vigente
   - tipo/framework
   - tipo/metodologia
-  - tema/competencia
+  - tema/competência
 formato_consumo: contexto-consulta
 prioridade_carregamento: alta
-versao: "1.0"
+versão: "1.0"
 summary: "Tríade de competência (Scott Parry, 1996) usada nas Gestões da Ativação, Método, Conhecimento e Meta."
 created: 2026-05-09
 updated: 2026-05-09

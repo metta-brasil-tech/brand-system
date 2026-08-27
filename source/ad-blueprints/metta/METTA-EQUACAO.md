@@ -1,5 +1,5 @@
 ---
-id: METTA-EQUACAO
+id: METTA-EQUAÇÃO
 display_name: "Equação editorial — termos com sinal = amarelo"
 marca: metta
 archetype: equation
@@ -10,7 +10,7 @@ formato_nativo: [feed, story]
 status: ativo
 ---
 
-# METTA-EQUACAO · encadeamento causal
+# METTA-EQUAÇÃO · encadeamento causal
 
 ## Intenção
 Statement de causa-e-efeito encadeado (banco: "LÍDER ESGOTADO = META NÃO BATIDA =

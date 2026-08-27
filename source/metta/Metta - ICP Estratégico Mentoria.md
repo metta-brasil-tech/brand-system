@@ -9,7 +9,7 @@ aliases:
 tags:
   - marca/metta
   - status/ativo
-  - tipo/audiencia
+  - tipo/audiência
   - tipo/documento-mestre
   - tipo/icp
   - tema/mentoria
@@ -25,7 +25,7 @@ tags:
   - usado-por/copy
 formato_consumo: playbook
 prioridade_carregamento: alta
-versao: "3.0"
+versão: "3.0"
 summary: "ICP vigente da Mentoria. Empresário 35-60a, R$200-600k/mês, Varejo/Serviço, 5+ vendedores, em ponto de inflexão. Vende-se IDENTIDADE NOVA (parar de ser o sistema, virar dono do sistema), não treinamento. Decisão é identitária, não técnica. SUPERSEDE Dossiê ICP v1, ICP+MQL v2 e ICP Detalhado v1."
 created: 2026-04-13
 updated: 2026-05-01

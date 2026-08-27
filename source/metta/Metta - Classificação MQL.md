@@ -5,12 +5,12 @@ aliases:
 tags:
   - marca/metta
   - status/obsoleto
-  - tipo/audiencia
+  - tipo/audiência
   - tipo/metodologia
   - tipo/mql
   - obsoleto/total
 sucedido_por: "[[Metta - MQL Estratégico Mentoria]]"
-versao: "2.0 (obsoleta)"
+versão: "2.0 (obsoleta)"
 formato_consumo: referencia-historica
 prioridade_carregamento: baixa
 summary: "⚠ DOC HISTÓRICO. Substituído por [[Metta - MQL Estratégico Mentoria]] (v3.0, maio/2026). A lógica de tribos demográficas (cargo/maturidade do profissional) foi abolida — em v3.0, MQL1/2/3 separam o mesmo Empresário ICP v3.0 por nível de PRONTIDÃO. Gerente/Diretor/Coordenador e dono <R$200k/mês ou <5 vendedores ficam FORA do funil."

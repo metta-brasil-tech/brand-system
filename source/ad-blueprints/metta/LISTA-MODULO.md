@@ -1,8 +1,8 @@
 ---
-id: LISTA-MODULO
+id: LISTA-MÓDULO
 display_name: "Lista Numerada — módulo (miolo do carrossel)"
 marca: metta
-archetype: modulo-num
+archetype: módulo-num
 params: { theme: dark, align: left, brand: none }
 slots: [num, headline, body]
 image: { required: true, treatment: "thumb pequena de apoio (não full-bleed)" }
@@ -11,7 +11,7 @@ dna_ref: "carrossel c1-metta-julho"
 status: ativo
 ---
 
-# LISTA-MODULO · módulo do sistema Lista Numerada
+# LISTA-MÓDULO · módulo do sistema Lista Numerada
 
 ## Intenção
 Miolo do carrossel "Lista Numerada" (= c1-metta-julho). Um módulo IDÊNTICO

@@ -22,7 +22,7 @@ tags:
   - usado-por/legendar
 formato_consumo: contexto-skill
 prioridade_carregamento: alta
-versao: "1.0"
+versão: "1.0"
 sucedido_por: null
 complementar_com: "[[Metta - Brandbook]]"
 summary: "Manual de identidade verbal Metta: arquétipos (Sábio+Governante), 4 pilares de tom (Direto, Humano, Especialista, Executor), vocabulário central, glossário, anti-padrões e mensagens-chave. Doc determinante de toda escrita Metta."

@@ -21,7 +21,7 @@ tags:
   - usado-por/copy
 formato_consumo: referencia
 prioridade_carregamento: alta
-versao: "1.0"
+versão: "1.0"
 summary: "3 planos SMTM em copy de marketing — Premium R$2.916/mês (R$200-400k/mês), Exclusive R$12.000/mês (+R$1M/mês), Elite R$19.000/mês (+R$2M/mês). Terminologia: 'programa de aceleração'. NUNCA expor preço em copy pública. CTA único: sessão estratégica gratuita."
 created: 2026-04-29
 updated: 2026-05-01

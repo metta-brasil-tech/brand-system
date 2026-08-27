@@ -4,7 +4,6 @@
 <p><strong>Arquitetura:</strong> 3-tier (ref/sys/comp) seguindo Material Design 3 do Google. Cada tier tem responsabilidade clara, naming consistente, retrocompatibilidade preservada via aliases bridge.</p>
 <p><strong>CSS canônico:</strong> <code>system-source/colors_and_type.css</code> é a tradução desta documentação em CSS importável.</p>
 </blockquote>
-<hr>
 <h2 id="tldr-consulta-rapida">TL;DR (consulta rápida)</h2>
 <pre><code class="language-css">/* COR */
 background: var(--metta-sys-color-primary);          /* #FFBE18 */
@@ -24,7 +23,6 @@ box-shadow: var(--metta-sys-elevation-2);
 /* MOTION */
 transition: all var(--metta-sys-motion-duration-medium) var(--metta-sys-motion-easing-standard);
 </code></pre>
-<hr>
 <h2 id="1-arquitetura-3-tiers">1. Arquitetura — 3 tiers</h2>
 <pre><code>TIER 3 — COMPONENT (--metta-comp-*)        tokens específicos por componente (CTA, card, label-pill)
                        ↑ aponta pra
@@ -38,7 +36,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 <li>Nunca importar <strong>ref</strong> direto em código de produto (exceto raríssimas exceções documentadas)</li>
 <li>Designer/dev: nova cor/tom → adiciona em <strong>ref</strong>, mapeia em <strong>sys</strong>, expõe em <strong>comp</strong></li>
 </ul>
-<hr>
 <h2 id="2-tier-1-reference-tokens">2. TIER 1 — Reference Tokens</h2>
 <h3 id="21-paleta-yellow-primary-brand-escala-tonal">2.1 Paleta Yellow (primary brand) — escala tonal</h3>
 <div class="table-wrap"><table>
@@ -258,7 +255,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 --metta-ref-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
 --metta-ref-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
 </code></pre>
-<hr>
 <h2 id="3-tier-2-system-tokens-light-theme-default">3. TIER 2 — System Tokens (light theme default)</h2>
 <h3 id="31-color-roles-brand">3.1 Color roles — Brand</h3>
 <div class="table-wrap"><table>
@@ -591,7 +587,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 <blockquote>
 <p>❌ <strong>REMOVIDOS:</strong> gradients cônicos (golden-conic, night-conic) e radial-yellow (tom amarromzado). Usar só lineares — controle previsível em qualquer composição.</p>
 </blockquote>
-<hr>
 <h2 id="4-tier-3-component-tokens">4. TIER 3 — Component Tokens</h2>
 <h3 id="41-cta-yellow-primario">4.1 CTA Yellow (primário)</h3>
 <pre><code class="language-css">--metta-comp-cta-yellow-container-color:           var(--metta-sys-color-primary);
@@ -708,7 +703,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 <pre><code class="language-css">--metta-comp-yellow-band-color:                    var(--metta-sys-color-primary);
 --metta-comp-yellow-band-height:                   6px;
 </code></pre>
-<hr>
 <h2 id="5-sys-color-roles-dark-theme">5. SYS Color Roles — Dark theme</h2>
 <pre><code class="language-css">[data-theme=&quot;dark&quot;] {
   --metta-sys-color-primary:               var(--metta-ref-palette-yellow-50);
@@ -737,7 +731,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
   --metta-sys-color-inverse-primary:    var(--metta-ref-palette-yellow-30);
 }
 </code></pre>
-<hr>
 <h2 id="6-aliases-bridge-retrocompatibilidade">6. Aliases bridge — retrocompatibilidade</h2>
 <p>Tokens v1 mantidos ativos via aliases pra não quebrar código legado. <strong>Em código novo, prefira sys/comp.</strong></p>
 <pre><code class="language-css">/* Brand v1 */
@@ -778,7 +771,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 --shadow-md:    var(--metta-sys-elevation-2);
 --shadow-lg:    var(--metta-sys-elevation-3);
 </code></pre>
-<hr>
 <h2 id="7-regras-duras-prd-64">7. REGRAS DURAS (PRD 6.4)</h2>
 <p>❌ <strong>PROIBIDO em qualquer aplicação:</strong></p>
 <ul>
@@ -794,7 +786,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 <li>Bouncy/spring motion</li>
 <li>Glow ambient atmosférico (atmosférico não é Metta)</li>
 </ul>
-<hr>
 <h2 id="8-mudancas-vs-v1">8. Mudanças vs v1</h2>
 <h3 id="estrutural">Estrutural</h3>
 <ul>
@@ -829,7 +820,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 <ul>
 <li>100% dos tokens v1 essenciais funcionando via §6 aliases bridge</li>
 </ul>
-<hr>
 <h2 id="10-motion-patterns-reveal-magnetic-counter-kenburns">10. Motion patterns — reveal, magnetic, counter, kenburns</h2>
 <blockquote>
 <p>Adicionado em 2.1 (2026-05-03). Patterns consagrados na LP Aplicação SMTM v5, agora ready-to-use no DS.</p>
@@ -924,7 +914,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 <td>Foto hero único — não em múltiplas imagens (cansativo)</td>
 </tr>
 </tbody></table></div>
-<hr>
 <h2 id="11-changelog">11. Changelog</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -955,7 +944,6 @@ TIER 1 — REFERENCE (--metta-ref-*)         valores crus (paleta tonal, typefac
 <td>Single-tier flat (legacy)</td>
 </tr>
 </tbody></table></div>
-<hr>
 <h2 id="documentos-relacionados">🔗 Documentos relacionados</h2>
 <ul>
 <li><span class="wikilink" data-target="Metta - PRD Identidade Visual">Metta - PRD Identidade Visual</span> — regras de aplicação, hierarquia</li>

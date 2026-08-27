@@ -123,7 +123,20 @@ function processTabs(md) {
 
 function postprocessHtml(html) {
   html = html.replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>');
-  return html;
+  return dedupeSeparadores(html);
+}
+
+/**
+ * No máximo UMA linha de separação entre blocos de conteúdo.
+ * O markdown do vault usa `---` antes de cada capítulo, mas H1 e H2 já desenham a
+ * própria linha (`border-top` em prose.css). O `<hr>` vira uma segunda linha logo
+ * acima da primeira. Aqui ele sai do HTML — o `---` segue no .md, que é do vault.
+ * `<hr>` antes de H3 fica: H3 não tem borda, então ali a linha é única.
+ */
+function dedupeSeparadores(html) {
+  return html
+    .replace(/(?:<hr\s*\/?>\s*)+(?=<h[12][\s>])/gi, '')   // hr colado em H1/H2
+    .replace(/(?:<hr\s*\/?>\s*){2,}/gi, '<hr>\n');        // hr repetido em sequência
 }
 
 function escapeHtml(s) {
@@ -145,7 +158,7 @@ function escapeHtml(s) {
  * Tudo o resto (TL;DR, capítulos, tabelas, referências científicas) é mantido.
  */
 function isJunkHeading(text) {
-  const t = String(text || '').toLowerCase().trim();
+  const t = String(text || '').toLowerCase().replace(/§/g, '').trim();
   // Metadados pra IA (TL;DR, Quando consultar) — não vão pro blog interno
   if (/^⚡?\s*tl;?dr/i.test(t)) return true;
   if (/^🎯?\s*quando consultar/i.test(t)) return true;
@@ -153,7 +166,27 @@ function isJunkHeading(text) {
   if (/documentos relacionados|documentos que referenciam|🔗|mapa de conex/.test(t)) return true;
   if (/^🔗 documentos/.test(t)) return true;
   if (/^relacionados$/.test(t)) return true;
+  // Artefatos de e-book: a página web não é o PDF. Some a ficha catalográfica
+  // (o H2 de breadcrumb leva junto autor, obra e a navegação entre volumes que
+  // vivem embaixo dele), o sumário com número de página e a bio de fim de livro.
+  // Tudo isso continua no .md e na Doc completa.
+  if (/\|\s*gest[aã]o\s*#\s*\d/.test(t)) return true;
+  if (/^\d*\.?\s*sum[aá]rio\b/.test(t)) return true;
+  if (/sobre (o autor|a metta|a empresa)|informa[cç][oõ]es sobre o autor/.test(t)) return true;
   return false;
+}
+
+// "3. Capitulo 1: O que e Metodo" → "3. O que e Metodo".
+// Numerar seção e capítulo ao mesmo tempo é herança do livro impresso.
+function limpaTituloDeCapitulo(md) {
+  return md.replace(/^(#{2,3}\s*(?:§?\d+[.)]\s*)?)cap[ií]tulo\s*\d+\s*[:\-–—]\s*/gim, '$1');
+}
+
+// Título da página vem do nav.json (`tituloPagina`) pra que os 12 documentos de
+// metodologia abram do mesmo jeito, com acento e sem "E-book Completo" no meio.
+function aplicaTituloCanonico(md, titulo) {
+  if (!titulo) return md;
+  return md.replace(/^#\s+.+$/m, `# ${titulo}`);
 }
 
 function cleanForBlog(tokens) {
@@ -440,7 +473,8 @@ async function buildSection(tab, sec) {
 
   // Transcrições passam por formatador (texto corrido → parágrafos + H2s)
   const isTrans = isTranscricaoSource(src);
-  const sourceContent = isTrans ? formatTranscricaoBody(parsed.content) : parsed.content;
+  let sourceContent = isTrans ? formatTranscricaoBody(parsed.content) : parsed.content;
+  sourceContent = aplicaTituloCanonico(limpaTituloDeCapitulo(sourceContent), sec.tituloPagina);
   const body = preprocessMd(sourceContent);
 
   // Versão FULL — tudo do .md original (pra "abrir doc completa")

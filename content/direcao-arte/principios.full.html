@@ -18,7 +18,6 @@
 <li>Pra calibrar peças que parecem &quot;fora da marca&quot; — quase sempre é um dos 7 elementos do DNA quebrado</li>
 <li>Antes de aprovar nova foto pro banco — comparar contra o DNA e os arquétipos</li>
 </ul>
-<hr>
 <h2 id="1-dna-visual-os-7-elementos">1. DNA Visual — os 7 elementos <span id="dna" class="block-anchor"></span></h2>
 <p>Toda imagem Metta passa por 7 dimensões. Não é checklist sequencial — é como mecânico abrindo o carro: você verifica todas, em qualquer ordem.</p>
 <h3 id="11-subject-o-que-esta-na-cena">1.1 Subject — o que está na cena <span id="subject" class="block-anchor"></span></h3>
@@ -99,13 +98,12 @@
 <li><strong>White balance neutro com warm shadow</strong> — base neutra, sombra ligeiramente quente</li>
 <li><strong>NÃO</strong>: HDR, color grading agressivo, saturação inflada, vinheta heavy, oversharp</li>
 </ul>
-<hr>
-<h2 id="2-arquetipos-editoriais">2. Arquétipos editoriais <span id="arquetipos" class="block-anchor"></span></h2>
+<h2 id="2-arquetipos-editoriais-arquetipos">2. Arquétipos editoriais ^arquétipos</h2>
 <p>Os arquétipos são <strong>lentes de leitura</strong>: dado um briefing, você identifica qual arquétipo serve, pega o prompt template, ajusta o briefing específico, alimenta o gpt-image-1. Isso garante que toda imagem nova respeite o DNA Metta.</p>
 <blockquote>
 <p><strong>Onde está o catálogo vivo:</strong> <code>output/brand-system/data/photo-index.json</code> — 156 fotos curadas, cada uma classificada num dos 21 arquétipos abaixo, com prompt completo. A galeria do mini-app permite copiar o prompt direto pra Codex CLI.</p>
 </blockquote>
-<h3 id="21-lideranca">2.1 Liderança <span id="arquetipos-lideranca" class="block-anchor"></span></h3>
+<h3 id="21-lideranca-arquetipos-lideranca">2.1 Liderança ^arquétipos-liderança</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -130,7 +128,7 @@
 <td>Time em mesa com líder no comando</td>
 </tr>
 <tr>
-<td><code>lider-apresentando-time</code></td>
+<td><code>líder-apresentando-time</code></td>
 <td>Líder apresentando ao time</td>
 <td>Em pé, explicando, time sentado</td>
 </tr>
@@ -140,7 +138,7 @@
 <td>Conferência, autoridade pública</td>
 </tr>
 <tr>
-<td><code>feminina-lider-apresentando</code></td>
+<td><code>feminina-líder-apresentando</code></td>
 <td>Liderança feminina apresentando</td>
 <td>Executiva conduzindo apresentação</td>
 </tr>
@@ -150,7 +148,7 @@
 <td>Pausa de pensamento em ambiente quente</td>
 </tr>
 </tbody></table></div>
-<h3 id="22-pessoas">2.2 Pessoas <span id="arquetipos-pessoas" class="block-anchor"></span></h3>
+<h3 id="22-pessoas-arquetipos-pessoas">2.2 Pessoas ^arquétipos-pessoas</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -180,7 +178,7 @@
 <td>Comemoração controlada de meta batida</td>
 </tr>
 </tbody></table></div>
-<h3 id="23-resultados">2.3 Resultados <span id="arquetipos-resultados" class="block-anchor"></span></h3>
+<h3 id="23-resultados-arquetipos-resultados">2.3 Resultados ^arquétipos-resultados</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -200,7 +198,7 @@
 <td>Time lendo resultado coletivamente</td>
 </tr>
 </tbody></table></div>
-<h3 id="24-escritorio-ambiente">2.4 Escritório / Ambiente <span id="arquetipos-ambiente" class="block-anchor"></span></h3>
+<h3 id="24-escritorio-ambiente-arquetipos-ambiente">2.4 Escritório / Ambiente ^arquétipos-ambiente</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -225,7 +223,7 @@
 <td>Disciplina profissional em casa</td>
 </tr>
 </tbody></table></div>
-<h3 id="25-branding-mockups">2.5 Branding / Mockups <span id="arquetipos-branding" class="block-anchor"></span></h3>
+<h3 id="25-branding-mockups-arquetipos-branding">2.5 Branding / Mockups ^arquétipos-branding</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -250,7 +248,7 @@
 <td>Símbolo isolado (relógio, chave)</td>
 </tr>
 </tbody></table></div>
-<h3 id="26-texturas-backgrounds">2.6 Texturas / Backgrounds <span id="arquetipos-texturas" class="block-anchor"></span></h3>
+<h3 id="26-texturas-backgrounds-arquetipos-texturas">2.6 Texturas / Backgrounds ^arquétipos-texturas</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -275,7 +273,6 @@
 <td>Fundo neutro com profundidade</td>
 </tr>
 </tbody></table></div>
-<hr>
 <h2 id="3-estrutura-do-prompt-receita-de-7-partes">3. Estrutura do prompt — receita de 7 partes <span id="estrutura-prompt" class="block-anchor"></span></h2>
 <p>Todo prompt no <code>photo-index.json</code> segue a mesma estrutura. Quando for adaptar pra um briefing específico, mantenha as 7 seções:</p>
 <pre><code>1. SUBJECT      — o que está na cena (sujeito + ação)
@@ -290,7 +287,7 @@
 <blockquote>
 <p>Editorial portrait of a brazilian executive (40-55) in a moment of analytical decision, alone at a desk or modern office. Composed expression — no smile, no theatrics; the face shows the weight of choice. Side window light from the left, warm afternoon tone falling across the shoulder and document. Subject occupies right third, with significant negative space holding context. 50mm equivalent, f/2.8, focus on the eyes. Palette: charcoal suit, oak desk surface, cream wall, single yellow accent (mug, notebook, or backlit paper). Mid contrast, subtle film grain, no HDR. Documentary feel, no posed corporate-stock energy.</p>
 </blockquote>
-<h3 id="31-como-adaptar-pra-briefing-especifico">3.1 Como adaptar pra briefing específico <span id="adaptacao" class="block-anchor"></span></h3>
+<h3 id="31-como-adaptar-pra-briefing-especifico-adaptacao">3.1 Como adaptar pra briefing específico ^adaptação</h3>
 <p>Mantém a base do template, adiciona instrução específica no início:</p>
 <pre><code>[BRIEF: este executivo é fundador de marmoraria, 50+, momento de virada de gestão]
 +
@@ -299,7 +296,6 @@
 [AJUSTE: ambiente é showroom de mármore com peças brancas e veias cinza, ao invés de office padrão]
 </code></pre>
 <p>A skill <code>/marca-metta</code> (CP6) faz essa fusão automaticamente.</p>
-<hr>
 <h2 id="4-do-don39t">4. Do / Don&#39;t <span id="do-dont" class="block-anchor"></span></h2>
 <h3 id="do">Do <span id="do" class="block-anchor"></span></h3>
 <ul>
@@ -322,14 +318,13 @@
 <li>❌ <strong>Sala de reunião perfeitamente alinhada e vazia de personalidade</strong> — boardroom Metta tem alma</li>
 <li>❌ <strong>Foto de homem branco de gravata sozinho como default genérico</strong> — diversidade é regra, não exceção</li>
 </ul>
-<hr>
 <h2 id="5-pipeline-de-geracao-via-ia">5. Pipeline de geração via IA <span id="pipeline-ia" class="block-anchor"></span></h2>
 <p>A skill <code>/marca-metta</code> (CP6) opera assim:</p>
 <pre><code>USUÁRIO: &quot;preciso de uma foto pra um carrossel sobre liderança feminina decidindo
           virada de método em uma indústria de bens de consumo&quot;
 
 SKILL:
-  1. Identifica arquétipo: feminina-lider-apresentando
+  1. Identifica arquétipo: feminina-líder-apresentando
   2. Carrega prompt template do photo-index.json
   3. Adiciona briefing: &quot;industrial setting&quot;, &quot;consumer goods context&quot;
   4. Adiciona ajuste de cena: &quot;executiva 45+, ambiente fabril ao fundo desfocado&quot;
@@ -338,15 +333,13 @@ SKILL:
   6. Salva em output/{slug}/ + retorna preview
 </code></pre>
 <p>A integração técnica vai no <code>output/brand-system/scripts/generate-image.mjs</code> (CP6).</p>
-<hr>
-<h2 id="6-manutencao">6. Manutenção <span id="manutencao" class="block-anchor"></span></h2>
+<h2 id="6-manutencao-manutencao">6. Manutenção ^manutenção</h2>
 <ul>
 <li><strong>Quando adicionar foto nova ao banco:</strong> rodar <code>node scripts/photo-curator.mjs</code> que reprocessa tudo. Adicionar entrada no <code>KEYWORD_MAP</code> se filename for novo padrão.</li>
 <li><strong>Quando criar arquétipo novo:</strong> adicionar em <code>ARCHETYPES</code> no <code>photo-curator.mjs</code>, escrever template, atualizar este doc na seção §2.</li>
 <li><strong>Quando ajustar tom geral:</strong> mudar a constante <code>METTA_DNA</code> no <code>photo-curator.mjs</code> e regenerar — afeta todos os prompts.</li>
 </ul>
-<hr>
-<h2 id="7-referencias">7. Referências <span id="referencias" class="block-anchor"></span></h2>
+<h2 id="7-referencias-referencias">7. Referências ^referências</h2>
 <ul>
 <li><span class="wikilink" data-target="brand-system-spec">brand-system-spec</span> — onde este doc se encaixa no Brand System</li>
 <li><span class="wikilink" data-target="Metta - PRD Identidade Visual">Metta - PRD Identidade Visual</span> — base do DS técnico</li>

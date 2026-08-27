@@ -9,10 +9,10 @@ tags:
   - status/vigente
   - tipo/framework
   - tipo/metodologia
-  - tema/gestao-meta
+  - tema/gestão-meta
 formato_consumo: contexto-consulta
 prioridade_carregamento: alta
-versao: "2.0"
+versão: "2.0"
 origem: "PDF oficial — FCA versão final, 2026-05-08"
 summary: "Método FCA completo na visão Metta — estilo de comunicação Mentor Direto + estrutura obrigatória de Fato, Causa e Ação."
 created: 2026-05-09
@@ -64,7 +64,7 @@ O analista atua como um **mentor experiente** — alguém que já viu muitos err
 
 O tom deve ser de quem:
 
-- Já passou por isso e sabe como resolver
+- Já passou por isso é sabe como resolver
 - Quer genuinamente que a pessoa acerte
 - Não tem tempo pra enrolação, mas tem paciência pra ensinar
 - Cobra resultado porque acredita no potencial da pessoa

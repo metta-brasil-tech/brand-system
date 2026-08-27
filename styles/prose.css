@@ -126,6 +126,27 @@
   border-top: 1px solid var(--metta-sys-color-outline-variant);
 }
 
+/* ---- No máximo UMA linha de separação entre blocos ----
+   O H2 já desenha a própria linha (border-top). Quando vem outra linha logo antes
+   dele (um <hr> do markdown, a borda do cabeçalho da página), o H2 não desenha a
+   segunda. O build (scripts/build.mjs) já tira o <hr> colado em H1/H2 do HTML novo;
+   estas regras cobrem conteúdo antigo e o visualizador full.html. */
+.prose hr + h2,
+.prose > h2:first-child,
+.prose > .prose-actions + h2,
+.prose > .metod-selo + h2,
+.prose > .metod-context + h2,
+.prose .trans-header + h2 {
+  border-top: none;
+  padding-top: 0;
+}
+.prose > h2:first-child,
+.prose > .prose-actions + h2,
+.prose .trans-header + h2 {
+  margin-top: 0;
+}
+.prose hr + hr { display: none; }
+
 .prose table {
   border-collapse: collapse;
   width: 100%;

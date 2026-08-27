@@ -8,7 +8,7 @@ tags:
   - status/arquivo
   - tema/vendas
   - tipo/aula-ao-vivo
-  - tipo/transcricao
+  - tipo/transcrição
 summary: "Transcrição de live: Distância de Performance, CHA, processo comercial."
 created: 2026-04-10
 updated: 2026-04-10
@@ -250,7 +250,7 @@ que é necessário desenvolver a equipe
 continuamente e chefes acabam preferindo
 reclamar em especial da sua
 equipe a estarem aqui com vocês se
-desenvolvendo e por isso e por isso que
+desenvolvendo e por isso é por isso que
 não geram grandes resultados olha só a
 Daniela falando aqui nada de curso na
 empresa não tem curso não tem formação e
@@ -375,7 +375,7 @@ didática através da venda o vendedor de
 alta performance ele aborda
 positivamente ele faz o cliente gostar
 dele ele quebra o gelo ele consegue
-abrir portas para que e depois ele possa
+abrir portas para que é depois ele possa
 visualizar o cenário ou seja fazer
 perguntas inteligentes para o cliente
 para ele compreender com mais
@@ -1056,7 +1056,7 @@ aumentarem o resultado na base do gogó e
 você precisa inverter este processo por
 quê para que você de fato possa superar
 os resultados você primeiro precisa ter
-um método segundo e fundamentalmente o
+um método segundo é fundamentalmente o
 segundo você precisa prisa saber engajar
 motivar e treinar o seu time quando você
 sabe dessas duas coisas saber eh ter um

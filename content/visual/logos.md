@@ -84,8 +84,6 @@ JPGs flat plates + gradients. 10 arquivos:
 
 ---
 
----
-
 ## §0. REGRAS ABSOLUTAS (PRD §6.4)
 
 ❌ **PROIBIDO:**

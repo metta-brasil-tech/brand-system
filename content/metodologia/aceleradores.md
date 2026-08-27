@@ -9,10 +9,10 @@ tags:
   - status/vigente
   - tipo/framework
   - tipo/produto
-  - tema/aceleracao
+  - tema/aceleração
 formato_consumo: contexto-consulta
 prioridade_carregamento: media
-versao: "1.0"
+versão: "1.0"
 summary: "Versão acelerada das 6 Gestões da Meta Batida em formato EAD/treinamento intensivo. Espelha as 6 gestões com foco em execução rápida."
 created: 2026-05-09
 updated: 2026-05-09
